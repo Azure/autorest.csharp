@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> The QueryType. </summary>
+    /// <summary> Specifies the syntax of the search query. The default is &apos;simple&apos;. Use &apos;full&apos; if your query uses the Lucene query syntax. </summary>
     public enum QueryType
     {
         /// <summary> simple. </summary>

@@ -1,103 +1,103 @@
-!<!CodeModel> 
-info: !<!Info> 
+!CodeModel 
+info: !Info 
   description: Test Infrastructure for AutoRest
   title: LRO With Paramaterized Endpoints
-schemas: !<!Schemas> 
+schemas: !Schemas 
   numbers:
-    - !<!NumberSchema> &ref_1
+    - !NumberSchema &ref_1
       type: integer
       precision: 32
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Integer
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   strings:
-    - !<!StringSchema> &ref_0
+    - !StringSchema &ref_0
       type: string
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: simple string
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_6
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Location
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_2
+      protocol: !Protocols {}
+    - !StringSchema &ref_2
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ErrorMessage
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> 
+      protocol: !Protocols {}
+    - !StringSchema 
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       defaultValue: host
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   constants:
-    - !<!ConstantSchema> &ref_4
+    - !ConstantSchema &ref_4
       type: constant
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: application/json
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Accept
           description: 'Accept: application/json'
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   objects:
-    - !<!ObjectSchema> &ref_7
+    - !ObjectSchema &ref_7
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       properties:
-        - !<!Property> 
+        - !Property 
           schema: *ref_1
           serializedName: status
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: status
               description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_2
           serializedName: message
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: message
               description: ''
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - exception
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Error
           description: ''
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
 globalParameters:
-  - !<!Parameter> &ref_3
+  - !Parameter &ref_3
     schema: *ref_0
     clientDefaultValue: host
     implementation: Client
@@ -109,24 +109,24 @@ globalParameters:
       x-name: host
       x-required: true
       x-type: string
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: Host
-        description: 'A string value that is used as a global part of the parameterized host. Pass in ''host:3000'' to pass test.'
+        description: A string value that is used as a global part of the parameterized host. Pass in 'host:3000' to pass test.
         serializedName: host
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: uri
 operationGroups:
-  - !<!OperationGroup> 
+  - !OperationGroup 
     $key: ''
     operations:
-      - !<!Operation> 
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
-          - !<!Parameter> &ref_5
+          - !Parameter &ref_5
             schema: *ref_0
             implementation: Method
             required: true
@@ -136,66 +136,66 @@ operationGroups:
               x-name: accountName
               x-required: true
               x-type: string
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: accountName
                 description: Account Name. Pass in 'local' to pass test.
                 serializedName: accountName
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: uri
           - *ref_3
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_4
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /lroParameterizedEndpoints
                 method: post
-                uri: 'http://{accountName}{host}'
+                uri: http://{accountName}{host}
         signatureParameters:
           - *ref_5
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_6
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Will return string 'success' if polling was a success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - '200'
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Accepted polling request
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_6
                     header: Location
                     language:
@@ -205,14 +205,14 @@ operationGroups:
                 statusCodes:
                   - '202'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_7
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
@@ -222,21 +222,21 @@ operationGroups:
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: location
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: PollWithParameterizedEndpoints
             description: Poll with method and client level parameters in endpoint
-        protocol: !<!Protocols> {}
-    language: !<!Languages> 
+        protocol: !Protocols {}
+    language: !Languages 
       default:
         name: ''
         description: ''
-    protocol: !<!Protocols> {}
-security: !<!Security> 
+    protocol: !Protocols {}
+security: !Security 
   authenticationRequired: false
-language: !<!Languages> 
+language: !Languages 
   default:
     name: LROWithParamaterizedEndpoints
     description: ''
-protocol: !<!Protocols> 
-  http: !<!HttpModel> {}
+protocol: !Protocols 
+  http: !HttpModel {}
