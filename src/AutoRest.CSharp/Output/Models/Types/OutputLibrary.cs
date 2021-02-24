@@ -217,11 +217,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var resourceModels = new Dictionary<Schema, TypeProvider>();
 
-            foreach (var schema in _allSchemas)
+            if (_context.Configuration.AzureArm)
             {
-                if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema.Name))
+                foreach (var schema in _allSchemas)
                 {
-                    resourceModels.Add(schema, BuildModel(schema));
+                    if (_operationGroups.ContainsKey(schema.Name))
+                    {
+                        resourceModels.Add(schema, BuildModel(schema));
+                    }
                 }
             }
             return resourceModels;
