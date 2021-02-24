@@ -11,6 +11,6 @@ input-file: $(this-folder)/TenantOnly.json
 namespace: Azure.OperationGroupMappings
 operation-group-to-resource-type:
    AvailableBalances : Microsoft.Billing/billingAccounts/availableBalance
-   Agreements: "providers/Microsoft.Billing/billingAccounts/agreements"
+   Agreements: "Microsoft.Billing/billingAccounts/agreements"
 
 ```
