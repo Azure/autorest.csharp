@@ -29,40 +29,21 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
+        private IEnumerable<Schema> _allSchemas;
 
-        private Dictionary<Schema, TypeProvider> SchemaMap
-        {
-            get
-            {
-                if (_models is null)
-                {
-                    BuildModels();
-                }
-#pragma warning disable CS8603 // Possible null reference return.
-                return _models;
-#pragma warning restore CS8603 // Possible null reference return.
-            }
-        }
+        private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
-        private Dictionary<Schema, TypeProvider> ResourceSchemaMap
-        {
-            get
-            {
-                if (_resourceModels is null)
-                {
-                    BuildModels();
-                }
-#pragma warning disable CS8603 // Possible null reference return.
-                return _resourceModels;
-#pragma warning restore CS8603 // Possible null reference return.
-            }
-        }
+        private Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildModels();
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
             _codeModel = codeModel;
             _context = context;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
+            _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
+                .Concat(_codeModel.Schemas.SealedChoices)
+                .Concat(_codeModel.Schemas.Objects)
+                .Concat(_codeModel.Schemas.Groups);
             if (context.Configuration.AzureArm)
             {
                 DecorateOperationGroup();
@@ -216,27 +197,34 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        private void BuildModels()
+
+        private Dictionary<Schema, TypeProvider> BuildModels()
         {
-            _models = new Dictionary<Schema, TypeProvider>();
-            _resourceModels = new Dictionary<Schema, TypeProvider>();
+            var models = new Dictionary<Schema, TypeProvider>();
 
-            var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
-                .Concat(_codeModel.Schemas.SealedChoices)
-                .Concat(_codeModel.Schemas.Objects)
-                .Concat(_codeModel.Schemas.Groups);
-
-            foreach (var schema in allSchemas)
+            foreach (var schema in _allSchemas)
             {
                 /*if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema.Name))
                 {
-                    _resourceModels.Add(schema, BuildModel(schema));
-                }
-                else
-                {*/
-                _models.Add(schema, BuildModel(schema));
-                //}
+                    continue;
+                }*/
+                models.Add(schema, BuildModel(schema));
             }
+            return models;
+        }
+
+        private Dictionary<Schema, TypeProvider> BuildResourceModels()
+        {
+            var resourceModels = new Dictionary<Schema, TypeProvider>();
+
+            foreach (var schema in _allSchemas)
+            {
+                if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema.Name))
+                {
+                    resourceModels.Add(schema, BuildModel(schema));
+                }
+            }
+            return resourceModels;
         }
 
         private TypeProvider BuildModel(Schema schema) => schema switch
