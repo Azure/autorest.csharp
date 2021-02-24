@@ -48,7 +48,8 @@ namespace AutoRest.CSharp.Output.Models
                 CreateDescription(requestParameter),
                 TypeFactory.GetInputType(type),
                 defaultValue,
-                isRequired);
+                isRequired,
+                requestParameter.Origin == "modelerfour:synthesized/api-version");
         }
 
         protected Constant ParseConstant(ConstantSchema constant) =>

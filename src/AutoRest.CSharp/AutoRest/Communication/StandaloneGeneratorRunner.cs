@@ -65,14 +65,13 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     writer.WriteEndArray();
 
                     writer.WriteStartArray(nameof(Configuration.CredentialScopes));
-                    if (configuration.CredentialScopes != null)
+                    foreach (var credentialTypes in configuration.CredentialScopes)
                     {
-                        foreach (var credentialTypes in configuration.CredentialScopes)
-                        {
-                            writer.WriteStringValue(credentialTypes);
-                        }
+                        writer.WriteStringValue(credentialTypes);
                     }
                     writer.WriteEndArray();
+
+                    writer.WriteString(nameof(Configuration.CredentialHeaderName), configuration.CredentialHeaderName);
 
                     writer.WriteEndObject();
                 }
@@ -121,7 +120,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean(),
                 CredentialTypes.ToArray(),
-                CredentialScopes.ToArray()
+                CredentialScopes.ToArray(),
+                root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString()
             );
         }
     }

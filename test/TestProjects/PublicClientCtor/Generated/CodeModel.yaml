@@ -11,6 +11,16 @@ schemas: !<!Schemas>
           name: String
           description: simple string
       protocol: !<!Protocols> {}
+    - !<!StringSchema> &ref_3
+      type: string
+      apiVersions:
+        - !<!ApiVersion> 
+          version: 1.0.0
+      language: !<!Languages> 
+        default:
+          name: String
+          description: ''
+      protocol: !<!Protocols> {}
     - !<!StringSchema> &ref_1
       type: string
       apiVersions:
@@ -35,6 +45,16 @@ schemas: !<!Schemas>
     - !<!ConstantSchema> &ref_4
       type: constant
       value: !<!ConstantValue> 
+        value: 1.0.0
+      valueType: *ref_0
+      language: !<!Languages> 
+        default:
+          name: ApiVersion10
+          description: Api Version (1.0.0)
+      protocol: !<!Protocols> {}
+    - !<!ConstantSchema> &ref_9
+      type: constant
+      value: !<!ConstantValue> 
         value: application/json
       valueType: *ref_0
       language: !<!Languages> 
@@ -43,7 +63,7 @@ schemas: !<!Schemas>
           description: Content Type 'application/json'
       protocol: !<!Protocols> {}
   objects:
-    - !<!ObjectSchema> &ref_5
+    - !<!ObjectSchema> &ref_10
       type: object
       apiVersions:
         - !<!ApiVersion> 
@@ -76,22 +96,66 @@ schemas: !<!Schemas>
           namespace: ''
       protocol: !<!Protocols> {}
 globalParameters:
-  - !<!Parameter> &ref_3
-    schema: *ref_0
-    clientDefaultValue: 'http://localhost:3000'
+  - !<!Parameter> &ref_6
+    schema: *ref_3
+    clientDefaultValue: value1
     implementation: Client
-    origin: 'modelerfour:synthesized/host'
-    required: true
     extensions:
-      x-ms-skip-url-encoding: true
+      x-ms-client-default: value1
+      x-ms-priority: 1
     language: !<!Languages> 
       default:
-        name: $host
-        description: server parameter
-        serializedName: $host
+        name: Param1
+        description: Tesing Param1
+        serializedName: Param1
+    protocol: !<!Protocols> 
+      http: !<!HttpParameter> 
+        in: header
+  - !<!Parameter> &ref_7
+    schema: *ref_3
+    implementation: Client
+    extensions:
+      x-ms-priority: 2
+    language: !<!Languages> 
+      default:
+        name: Param2
+        description: Testing Param2
+        serializedName: Param2
+    protocol: !<!Protocols> 
+      http: !<!HttpParameter> 
+        in: header
+  - !<!Parameter> &ref_5
+    schema: *ref_0
+    implementation: Client
+    required: true
+    extensions:
+      x-in: path
+      x-ms-priority: 3
+      x-ms-skip-url-encoding: true
+      x-name: Endpoint
+      x-required: true
+      x-type: string
+    language: !<!Languages> 
+      default:
+        name: Endpoint
+        description: server parameter.
+        serializedName: Endpoint
     protocol: !<!Protocols> 
       http: !<!HttpParameter> 
         in: uri
+  - !<!Parameter> &ref_8
+    schema: *ref_4
+    implementation: Client
+    origin: 'modelerfour:synthesized/api-version'
+    required: true
+    language: !<!Languages> 
+      default:
+        name: apiVersion
+        description: Api Version
+        serializedName: api-version
+    protocol: !<!Protocols> 
+      http: !<!HttpParameter> 
+        in: query
 operationGroups:
   - !<!OperationGroup> 
     $key: ''
@@ -101,12 +165,15 @@ operationGroups:
           - !<!ApiVersion> 
             version: 1.0.0
         parameters:
-          - *ref_3
+          - *ref_5
+          - *ref_6
+          - *ref_7
+          - *ref_8
         requests:
           - !<!Request> 
             parameters:
               - !<!Parameter> 
-                schema: *ref_4
+                schema: *ref_9
                 implementation: Method
                 origin: 'modelerfour:synthesized/content-type'
                 required: true
@@ -118,8 +185,8 @@ operationGroups:
                 protocol: !<!Protocols> 
                   http: !<!HttpParameter> 
                     in: header
-              - !<!Parameter> &ref_6
-                schema: *ref_5
+              - !<!Parameter> &ref_11
+                schema: *ref_10
                 implementation: Method
                 required: true
                 language: !<!Languages> 
@@ -131,7 +198,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_6
+              - *ref_11
             language: !<!Languages> 
               default:
                 name: ''
@@ -143,7 +210,7 @@ operationGroups:
                 knownMediaType: json
                 mediaTypes:
                   - application/json
-                uri: '{$host}'
+                uri: '{Endpoint}/publicclientctor/1.0.0'
         signatureParameters: []
         responses:
           - !<!Response> 
@@ -157,7 +224,7 @@ operationGroups:
                   - '200'
         language: !<!Languages> 
           default:
-            name: TestOperation
+            name: Operation
             description: ''
         protocol: !<!Protocols> {}
     language: !<!Languages> 

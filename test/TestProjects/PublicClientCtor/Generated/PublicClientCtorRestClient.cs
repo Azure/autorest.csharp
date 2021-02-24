@@ -17,7 +17,10 @@ namespace PublicClientCtor
 {
     internal partial class PublicClientCtorRestClient
     {
-        private Uri endpoint;
+        private string endpoint;
+        private string param1;
+        private string param2;
+        private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
@@ -25,24 +28,48 @@ namespace PublicClientCtor
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public PublicClientCtorRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <param name="param1"> Tesing Param1. </param>
+        /// <param name="param2"> Testing Param2. </param>
+        /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
+        public PublicClientCtorRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string param1 = "value1", string param2 = null, string apiVersion = "1.0.0")
         {
-            endpoint ??= new Uri("http://localhost:3000");
+            if (endpoint == null)
+            {
+                throw new ArgumentNullException(nameof(endpoint));
+            }
+            if (apiVersion == null)
+            {
+                throw new ArgumentNullException(nameof(apiVersion));
+            }
 
             this.endpoint = endpoint;
+            this.param1 = param1;
+            this.param2 = param2;
+            this.apiVersion = apiVersion;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateTestOperationRequest(TestModel value)
+        internal HttpMessage CreateOperationRequest(TestModel value)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
+            uri.AppendRaw(endpoint, false);
+            uri.AppendRaw("/publicclientctor/1.0.0", false);
             uri.AppendPath("/op", false);
+            uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
+            if (param1 != null)
+            {
+                request.Headers.Add("Param1", param1);
+            }
+            if (param2 != null)
+            {
+                request.Headers.Add("Param2", param2);
+            }
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(value);
@@ -53,14 +80,14 @@ namespace PublicClientCtor
         /// <param name="value"> The TestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public async Task<Response> TestOperationAsync(TestModel value, CancellationToken cancellationToken = default)
+        public async Task<Response> OperationAsync(TestModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var message = CreateTestOperationRequest(value);
+            using var message = CreateOperationRequest(value);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -74,14 +101,14 @@ namespace PublicClientCtor
         /// <param name="value"> The TestModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public Response TestOperation(TestModel value, CancellationToken cancellationToken = default)
+        public Response Operation(TestModel value, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var message = CreateTestOperationRequest(value);
+            using var message = CreateOperationRequest(value);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -5,10 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models
@@ -118,6 +120,55 @@ namespace AutoRest.CSharp.Output.Models
                         new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()));
                 }
             }
+        }
+
+        private IEnumerable<Parameter> GetRequiredParameters()
+        {
+            List<Parameter> parameters = new List<Parameter>();
+
+            if (RestClient.Parameters.TryGetRequiredParameters(out var requiredParameters))
+            {
+                parameters.AddRange(requiredParameters.Where(p=>p.DefaultValue == null));
+            }
+
+            return parameters;
+        }
+
+        private IEnumerable<Parameter> GetOptionalParameters()
+        {
+            List<Parameter> parameters = new List<Parameter>();
+
+            var requiredParams = GetRequiredParameters().ToArray();
+            foreach (var parameter in RestClient.Parameters)
+            {
+                if (requiredParams == null || !requiredParams.Contains(parameter))
+                {
+                    parameters.Add(parameter);
+                }
+            }
+
+            return parameters;
+        }
+
+        public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType)
+        {
+            List<Parameter> parameters = new List<Parameter>();
+
+            var requiredParameters = GetRequiredParameters().ToArray();
+            parameters.AddRange(requiredParameters);
+
+            var credentialParam = new Parameter(
+                "credential",
+                "A credential used to authenticate to an Azure Service.",
+                credentialType,
+                null,
+                true);
+            parameters.Add(credentialParam);
+
+            var optionalParameters = GetOptionalParameters().ToArray();
+            parameters.AddRange(optionalParameters.Where(p=>!p.IsApiVersionParameter));
+
+            return parameters;
         }
     }
 }

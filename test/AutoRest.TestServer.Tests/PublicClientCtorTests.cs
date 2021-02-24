@@ -1,21 +1,21 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AutoRest.TestServer.Tests.Infrastructure;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 using PublicClientCtor;
+using PublicClientCtor.Models;
 
 namespace AutoRest.TestServer.Tests
 {
-    public class PublicClientCtorTests : TestServerTestBase
+    public class PublicClientCtorTests : InProcTestBase
     {
-        public PublicClientCtorTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public void PublicClientCtorWithAzureKeyCredential()
         {
@@ -23,20 +23,32 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(2, constructors.Length);
 
             var ctor = constructors[0];
-            Assert.AreEqual(3, ctor.GetParameters().Length);
+            Assert.AreEqual(5, ctor.GetParameters().Length);
 
             var firstParam = TypeAsserts.HasParameter(ctor, "endpoint");
             Assert.NotNull(firstParam);
-            Assert.AreEqual(typeof(Uri), firstParam.ParameterType);
+            Assert.AreEqual(typeof(string), firstParam.ParameterType);
 
             var secondParam = TypeAsserts.HasParameter(ctor, "credential");
             Assert.NotNull(secondParam);
             Assert.AreEqual(typeof(AzureKeyCredential), secondParam.ParameterType);
 
-            var thirdParam = TypeAsserts.HasParameter(ctor, "options");
+            var thirdParam = TypeAsserts.HasParameter(ctor, "param1");
             Assert.NotNull(thirdParam);
-            Assert.AreEqual(typeof(PublicClientCtorClientOptions), thirdParam.ParameterType);
-            Assert.IsTrue(thirdParam.IsOptional);
+            Assert.AreEqual(typeof(string), thirdParam.ParameterType);
+            Assert.True(thirdParam.HasDefaultValue);
+            Assert.AreEqual("value1", thirdParam.DefaultValue);
+
+            var fourthParam = TypeAsserts.HasParameter(ctor, "param2");
+            Assert.NotNull(fourthParam);
+            Assert.AreEqual(typeof(string), fourthParam.ParameterType);
+            Assert.True(fourthParam.HasDefaultValue);
+            Assert.AreEqual(null, fourthParam.DefaultValue);
+
+            var fifthParam = TypeAsserts.HasParameter(ctor, "options");
+            Assert.NotNull(fifthParam);
+            Assert.AreEqual(typeof(PublicClientCtorClientOptions), fifthParam.ParameterType);
+            Assert.IsTrue(fifthParam.IsOptional);
         }
 
         [Test]
@@ -46,20 +58,50 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(2, constructors.Length);
 
             var ctor = constructors[1];
-            Assert.AreEqual(3, ctor.GetParameters().Length);
+            Assert.AreEqual(5, ctor.GetParameters().Length);
 
             var firstParam = TypeAsserts.HasParameter(ctor, "endpoint");
             Assert.NotNull(firstParam);
-            Assert.AreEqual(typeof(Uri), firstParam.ParameterType);
+            Assert.AreEqual(typeof(string), firstParam.ParameterType);
 
             var secondParam = TypeAsserts.HasParameter(ctor, "credential");
             Assert.NotNull(secondParam);
             Assert.AreEqual(typeof(TokenCredential), secondParam.ParameterType);
 
-            var thirdParam = TypeAsserts.HasParameter(ctor, "options");
+            var thirdParam = TypeAsserts.HasParameter(ctor, "param1");
             Assert.NotNull(thirdParam);
-            Assert.AreEqual(typeof(PublicClientCtorClientOptions), thirdParam.ParameterType);
-            Assert.IsTrue(thirdParam.IsOptional);
+            Assert.AreEqual(typeof(string), thirdParam.ParameterType);
+            Assert.True(thirdParam.HasDefaultValue);
+            Assert.AreEqual("value1", thirdParam.DefaultValue);
+
+            var fourthParam = TypeAsserts.HasParameter(ctor, "param2");
+            Assert.NotNull(fourthParam);
+            Assert.AreEqual(typeof(string), fourthParam.ParameterType);
+            Assert.True(fourthParam.HasDefaultValue);
+            Assert.AreEqual(null, fourthParam.DefaultValue);
+
+            var fifthParam = TypeAsserts.HasParameter(ctor, "options");
+            Assert.NotNull(fifthParam);
+            Assert.AreEqual(typeof(PublicClientCtorClientOptions), fifthParam.ParameterType);
+            Assert.IsTrue(fifthParam.IsOptional);
+        }
+
+        [Test]
+        public async Task CanSendHeadersWithAzureKeyCredential()
+        {
+            Dictionary<string, string> requestHeaders = null;
+            using var testServer = new InProcTestServer(async content =>
+            {
+                requestHeaders = content.Request.Headers.ToDictionary(h => h.Key, h => h.Value.ToString());
+                await content.Response.Body.FlushAsync();
+            });
+
+            var client = new PublicClientCtorClient(testServer.Address.AbsoluteUri, new AzureKeyCredential("fake"));
+
+            await client.OperationAsync(new TestModel());
+
+            Assert.True(requestHeaders.TryGetValue("fake-key", out var value) && value == "fake");
+            Assert.True(requestHeaders.TryGetValue("Param1", out value) && value == "value1");
         }
     }
 }
