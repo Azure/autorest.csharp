@@ -11,5 +11,7 @@ input-file: $(this-folder)/OperationGroupMappings.json
 namespace: Azure.OperationGroupMappings
 operation-group-to-resource-type:
    Operations: /providers/Microsoft.Compute/operations
-
+operation-group-to-resource:
+   Operations: Operation
+   AvailabilitySets: AvailabilitySet
 ```
