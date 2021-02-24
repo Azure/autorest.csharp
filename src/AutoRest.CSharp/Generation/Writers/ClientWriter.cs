@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
 
             var credentialTypes = context.Configuration.CredentialTypes;
-            var clientOptionsName = ClientOptionsWriter.GetClientOptionsPrefix(context.DefaultLibraryName);
+            var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
             if (credentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase))
             {
                 var ctorParams = client.GetClientConstructorParameters(typeof(AzureKeyCredential));

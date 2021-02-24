@@ -29,13 +29,13 @@ namespace AutoRest.CSharp.Output.Models
             _operationGroup = operationGroup;
             _context = context;
 
-            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
+            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, _context);
             DefaultName = clientPrefix + ClientSuffix;
             ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
         }
 
         public string ClientShortName { get; }
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name)));
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, _context)));
         public RestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
 

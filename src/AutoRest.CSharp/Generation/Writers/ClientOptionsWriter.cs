@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 
@@ -12,12 +13,9 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ClientOptionsWriter
     {
-        private const string ClientSuffixValue = "Client";
-        private const string OperationsSuffixValue = "Operations";
-
         public static void WriteClientOptions(CodeWriter writer, BuildContext context)
         {
-            var clientOptionsName = GetClientOptionsPrefix(context.DefaultLibraryName);
+            var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
             var @namespace = context.DefaultNamespace;
             var apiVersions = context.CodeModel.OperationGroups
                 .SelectMany(g => g.Operations.SelectMany(o => o.ApiVersions))
@@ -71,21 +69,6 @@ namespace AutoRest.CSharp.Generation.Writers
         private static string ToVersionProperty(string s)
         {
             return "V" + s.Replace(".", "_").Replace('-', '_');
-        }
-
-        public static string GetClientOptionsPrefix(string name)
-        {
-            if (name.EndsWith(OperationsSuffixValue) && name.Length >= OperationsSuffixValue.Length)
-            {
-                name = name.Substring(0, name.Length - OperationsSuffixValue.Length);
-            }
-
-            if (name.EndsWith(ClientSuffixValue) && name.Length >= ClientSuffixValue.Length)
-            {
-                name = name.Substring(0, name.Length - ClientSuffixValue.Length);
-            }
-
-            return name;
         }
     }
 }

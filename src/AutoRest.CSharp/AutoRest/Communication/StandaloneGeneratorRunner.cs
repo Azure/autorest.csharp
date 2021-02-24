@@ -90,22 +90,22 @@ namespace AutoRest.CSharp.AutoRest.Communication
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
             var sharedSourceFolders = new List<string>();
-            var CredentialTypes = new List<string>();
-            var CredentialScopes = new List<string>();
+            var credentialTypes = new List<string>();
+            var credentialScopes = new List<string>();
 
             foreach (var sharedSourceFolder in root.GetProperty(nameof(Configuration.SharedSourceFolders)).EnumerateArray())
             {
                 sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
             }
 
-            foreach (var credentialTypes in root.GetProperty(nameof(Configuration.CredentialTypes)).EnumerateArray())
+            foreach (var credentialType in root.GetProperty(nameof(Configuration.CredentialTypes)).EnumerateArray())
             {
-                CredentialTypes.Add(credentialTypes.ToString());
+                credentialTypes.Add(credentialType.ToString());
             }
 
-            foreach (var credentialScopes in root.GetProperty(nameof(Configuration.CredentialScopes)).EnumerateArray())
+            foreach (var credentialScope in root.GetProperty(nameof(Configuration.CredentialScopes)).EnumerateArray())
             {
-                CredentialScopes.Add(credentialScopes.ToString());
+                credentialScopes.Add(credentialScope.ToString());
             }
 
             return new Configuration(
@@ -119,8 +119,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.ModelNamespace)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean(),
-                CredentialTypes.ToArray(),
-                CredentialScopes.ToArray(),
+                credentialTypes.ToArray(),
+                credentialScopes.ToArray(),
                 root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString()
             );
         }

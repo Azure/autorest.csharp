@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var codeWriter = new CodeWriter();
                 ClientOptionsWriter.WriteClientOptions(codeWriter, context);
 
-                var clientOptionsName = ClientOptionsWriter.GetClientOptionsPrefix(context.DefaultLibraryName);
+                var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
                 project.AddGeneratedFile($"{clientOptionsName}ClientOptions.cs", codeWriter.ToString());
             }
 
@@ -118,7 +118,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
-            if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
+            if (string.IsNullOrEmpty(codeModelFileName))
+                throw new Exception("Generator did not receive the code model file.");
 
             var configuration = Configuration.GetConfiguration(autoRest);
 
@@ -131,9 +132,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             });
 
             if (configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase) &&
-                configuration.CredentialScopes.Length < 1 )
+                configuration.CredentialScopes.Length < 1)
             {
-               await autoRest.Fatal("You are using TokenCredential wihtout passing in any credential-scopes.");
+                await autoRest.Fatal("You are using TokenCredential wihtout passing in any credential-scopes.");
                 return false;
             }
 
