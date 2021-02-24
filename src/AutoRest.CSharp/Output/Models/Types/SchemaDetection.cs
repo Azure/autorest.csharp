@@ -14,11 +14,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             List<ServiceRequest>? output;
             operationGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out output);
-            return GetBodyParameter(output.First()).Schema;
+            return GetBodyParameter(output.First(), operationGroup).Schema;
             throw new Exception($"Schema not found! Please add the {operationGroup.Key} to its schema name mapping to readme.md.");
         }
 
-        private static RequestParameter GetBodyParameter(ServiceRequest request)
+        private static RequestParameter GetBodyParameter(ServiceRequest request, OperationGroup operationGroup)
         {
             foreach (var param in request.Parameters)
             {
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (httpParam?.In == ParameterLocation.Body)
                     return param;
             }
-            throw new Exception("No body param found! Please add the OperationGroup to its schema name mapping to readme.md.");
+            throw new Exception($"No body param found! Please add the {operationGroup.Key} to its schema name mapping to readme.md.");
         }
     }
 }
