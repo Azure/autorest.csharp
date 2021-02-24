@@ -125,7 +125,6 @@ namespace AutoRest.CSharp.Output.Models
         private IEnumerable<Parameter> GetRequiredParameters()
         {
             List<Parameter> parameters = new List<Parameter>();
-
             if (RestClient.Parameters.TryGetRequiredParameters(out var requiredParameters))
             {
                 parameters.AddRange(requiredParameters.Where(p=>p.DefaultValue == null));
@@ -137,11 +136,9 @@ namespace AutoRest.CSharp.Output.Models
         private IEnumerable<Parameter> GetOptionalParameters()
         {
             List<Parameter> parameters = new List<Parameter>();
-
-            var requiredParams = GetRequiredParameters().ToArray();
             foreach (var parameter in RestClient.Parameters)
             {
-                if (requiredParams == null || !requiredParams.Contains(parameter))
+                if (parameter.DefaultValue != null)
                 {
                     parameters.Add(parameter);
                 }
@@ -154,7 +151,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             List<Parameter> parameters = new List<Parameter>();
 
-            var requiredParameters = GetRequiredParameters().ToArray();
+            var requiredParameters = GetRequiredParameters();
             parameters.AddRange(requiredParameters);
 
             var credentialParam = new Parameter(
@@ -165,7 +162,7 @@ namespace AutoRest.CSharp.Output.Models
                 true);
             parameters.Add(credentialParam);
 
-            var optionalParameters = GetOptionalParameters().ToArray();
+            var optionalParameters = GetOptionalParameters();
             parameters.AddRange(optionalParameters.Where(p=>!p.IsApiVersionParameter));
 
             return parameters;

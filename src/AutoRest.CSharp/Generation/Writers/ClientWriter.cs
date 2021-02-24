@@ -220,26 +220,16 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
                     writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
                     var scopesParam = new CodeWriterDeclaration("scopes");
-                    var credentialScopes = context.Configuration.CredentialScopes;
-                    string scope = "";
-                    if (credentialScopes.Length == 1)
+                    writer.Append($"string[] {scopesParam:D} = ");
+                    writer.Append($"{{ ");
+                    foreach (var credentialScope in context.Configuration.CredentialScopes)
                     {
-                        scope = $"\"{credentialScopes[0]}\"";
+                        writer.Append($"{credentialScope:L}, ");
                     }
-                    else
-                    {
-                        writer.Append($"string[] {scopesParam:D} = ");
-                        writer.Append($"{{ ");
-                        foreach (var credentialScope in credentialScopes)
-                        {
-                          writer.Append($"{credentialScope:L}, ");
-                        }
-                        writer.RemoveTrailingComma();
-                        writer.Line($"}};");
-                        scope = scopesParam.ActualName;
-                    }
+                    writer.RemoveTrailingComma();
+                    writer.Line($"}};");
 
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({CredentialVariable}, {scope}));");
+                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({CredentialVariable}, {scopesParam}));");
                     writer.Append($"this.RestClient = new {client.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, ");
                     foreach (var parameter in client.RestClient.Parameters)
                     {
