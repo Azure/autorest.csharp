@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
-        private Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildModels();
+        private Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -187,12 +187,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         public TypeProvider FindTypeForSchema(Schema schema)
         {
             TypeProvider? result;
-            if (!SchemaMap.TryGetValue(schema, out result))
+            if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
             {
-                if (!ResourceSchemaMap.TryGetValue(schema, out result))
-                {
-                    throw new KeyNotFoundException($"{schema.Name} was not found in model or resource schema map");
-                }
+                throw new KeyNotFoundException($"{schema.Name} was not found in model or resource schema map");
             }
             return result;
         }
