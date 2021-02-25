@@ -294,8 +294,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
         }
-        }
-
+        
         private void AddOperationGroupToResourceMap(OperationGroup operationsGroup)
         {
             List<OperationGroup>? result;
@@ -305,5 +304,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _operationGroups.Add(operationsGroup.Resource, result);
             }
             result.Add(operationsGroup);
+        }
     }
 }
