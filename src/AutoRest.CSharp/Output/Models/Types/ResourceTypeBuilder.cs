@@ -8,7 +8,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Output.Models.Type.Decorate
 {
-    internal class ResourceTypeBuilder
+    internal static class ResourceTypeBuilder
     {
         public static string ConstructOperationResourseType(OperationGroup operationsGroup)
         {
@@ -36,29 +36,35 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
             var returnString = new StringBuilder();
             var insideBrace = false;
 
-            foreach (var ch in httpRequestUri)
+            for (int i = 0; i < httpRequestUri.Length; i++)
             {
+                char ch = httpRequestUri[i];
+                char lastChar = ch;
+
                 if (ch == '{')
                 {
+                    // non-constant-refernce pattern, need to custom defined in readme.md
+                    if (lastChar == '}')
+                    {
+                        return string.Empty;
+                    }
                     insideBrace = true;
                 }
                 else if (ch == '}')
                 {
                     insideBrace = false;
+                    i++;
                 }
                 else if (!insideBrace)
                 {
                     // non-constant-refernce pattern, need to custom defined in readme.md
-                    if (returnString[returnString.Length - 1] == '/')
-                    {
-                        return string.Empty;
-                    }
                     returnString.Append(ch);
                 }
+                lastChar = ch;
             }
             return returnString.ToString();
         }
-        
+
         private static HttpRequest? GetBestMethod(OperationGroup operationsGroup)
         {
             List<ServiceRequest>? requests;
