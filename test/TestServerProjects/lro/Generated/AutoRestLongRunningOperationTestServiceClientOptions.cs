@@ -11,7 +11,7 @@ using Azure.Core;
 namespace lro
 {
     /// <summary> Client options for AutoRestLongRunningOperationTestServiceClient. </summary>
-    public class AutoRestLongRunningOperationTestServiceClientOptions : ClientOptions
+    public partial class AutoRestLongRunningOperationTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace azure_special_properties
 {
     /// <summary> Client options for AutoRestAzureSpecialParametersTestClient. </summary>
-    public class AutoRestAzureSpecialParametersTestClientOptions : ClientOptions
+    public partial class AutoRestAzureSpecialParametersTestClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2015_07_01_preview;
 

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace additionalProperties
 {
     /// <summary> Client options for AdditionalPropertiesClient. </summary>
-    public class AdditionalPropertiesClientOptions : ClientOptions
+    public partial class AdditionalPropertiesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

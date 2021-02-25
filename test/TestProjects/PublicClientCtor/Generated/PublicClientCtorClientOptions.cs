@@ -11,7 +11,7 @@ using Azure.Core;
 namespace PublicClientCtor
 {
     /// <summary> Client options for PublicClientCtorClient. </summary>
-    public class PublicClientCtorClientOptions : ClientOptions
+    public partial class PublicClientCtorClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

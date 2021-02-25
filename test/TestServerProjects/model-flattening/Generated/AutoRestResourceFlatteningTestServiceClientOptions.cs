@@ -11,7 +11,7 @@ using Azure.Core;
 namespace model_flattening
 {
     /// <summary> Client options for AutoRestResourceFlatteningTestServiceClient. </summary>
-    public class AutoRestResourceFlatteningTestServiceClientOptions : ClientOptions
+    public partial class AutoRestResourceFlatteningTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace body_boolean
 {
     /// <summary> Client options for AutoRestBoolTestServiceClient. </summary>
-    public class AutoRestBoolTestServiceClientOptions : ClientOptions
+    public partial class AutoRestBoolTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

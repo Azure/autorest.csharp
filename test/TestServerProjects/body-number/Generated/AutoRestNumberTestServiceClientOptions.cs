@@ -11,7 +11,7 @@ using Azure.Core;
 namespace body_number
 {
     /// <summary> Client options for AutoRestNumberTestServiceClient. </summary>
-    public class AutoRestNumberTestServiceClientOptions : ClientOptions
+    public partial class AutoRestNumberTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

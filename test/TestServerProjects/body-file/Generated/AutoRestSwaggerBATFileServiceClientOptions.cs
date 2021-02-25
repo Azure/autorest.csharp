@@ -11,7 +11,7 @@ using Azure.Core;
 namespace body_file
 {
     /// <summary> Client options for AutoRestSwaggerBATFileServiceClient. </summary>
-    public class AutoRestSwaggerBATFileServiceClientOptions : ClientOptions
+    public partial class AutoRestSwaggerBATFileServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

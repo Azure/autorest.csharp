@@ -11,7 +11,7 @@ using Azure.Core;
 namespace JsonAsBinary
 {
     /// <summary> Client options for JsonAsBinaryClient. </summary>
-    public class JsonAsBinaryClientOptions : ClientOptions
+    public partial class JsonAsBinaryClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace ModelShapes
 {
     /// <summary> Client options for SchemaMappingClient. </summary>
-    public class SchemaMappingClientOptions : ClientOptions
+    public partial class SchemaMappingClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

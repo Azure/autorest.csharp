@@ -11,7 +11,7 @@ using Azure.Core;
 namespace xms_error_responses
 {
     /// <summary> Client options for XMSErrorResponseExtensionsClient. </summary>
-    public class XMSErrorResponseExtensionsClientOptions : ClientOptions
+    public partial class XMSErrorResponseExtensionsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V0_0_0;
 

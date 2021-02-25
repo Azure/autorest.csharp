@@ -11,7 +11,7 @@ using Azure.Core;
 namespace paging
 {
     /// <summary> Client options for AutoRestPagingTestServiceClient. </summary>
-    public class AutoRestPagingTestServiceClientOptions : ClientOptions
+    public partial class AutoRestPagingTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

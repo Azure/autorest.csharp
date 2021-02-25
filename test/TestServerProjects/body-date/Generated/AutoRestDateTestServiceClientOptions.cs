@@ -11,7 +11,7 @@ using Azure.Core;
 namespace body_date
 {
     /// <summary> Client options for AutoRestDateTestServiceClient. </summary>
-    public class AutoRestDateTestServiceClientOptions : ClientOptions
+    public partial class AutoRestDateTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

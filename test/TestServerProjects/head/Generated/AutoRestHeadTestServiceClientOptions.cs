@@ -11,7 +11,7 @@ using Azure.Core;
 namespace head
 {
     /// <summary> Client options for AutoRestHeadTestServiceClient. </summary>
-    public class AutoRestHeadTestServiceClientOptions : ClientOptions
+    public partial class AutoRestHeadTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

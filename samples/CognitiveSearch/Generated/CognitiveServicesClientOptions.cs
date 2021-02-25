@@ -11,7 +11,7 @@ using Azure.Core;
 namespace CognitiveSearch
 {
     /// <summary> Client options for CognitiveServicesClient. </summary>
-    public class CognitiveServicesClientOptions : ClientOptions
+    public partial class CognitiveServicesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2019_05_06_Preview;
 

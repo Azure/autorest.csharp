@@ -11,7 +11,7 @@ using Azure.Core;
 namespace azure_parameter_grouping
 {
     /// <summary> Client options for AutoRestParameterGroupingTestServiceClient. </summary>
-    public class AutoRestParameterGroupingTestServiceClientOptions : ClientOptions
+    public partial class AutoRestParameterGroupingTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

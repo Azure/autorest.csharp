@@ -11,7 +11,7 @@ using Azure.Core;
 namespace validation
 {
     /// <summary> Client options for AutoRestValidationTestClient. </summary>
-    public class AutoRestValidationTestClientOptions : ClientOptions
+    public partial class AutoRestValidationTestClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

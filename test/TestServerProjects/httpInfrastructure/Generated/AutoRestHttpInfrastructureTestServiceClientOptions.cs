@@ -11,7 +11,7 @@ using Azure.Core;
 namespace httpInfrastructure
 {
     /// <summary> Client options for AutoRestHttpInfrastructureTestServiceClient. </summary>
-    public class AutoRestHttpInfrastructureTestServiceClientOptions : ClientOptions
+    public partial class AutoRestHttpInfrastructureTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

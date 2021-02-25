@@ -11,7 +11,7 @@ using Azure.Core;
 namespace url_multi_collectionFormat
 {
     /// <summary> Client options for AutoRestUrlMutliCollectionFormatTestServiceClient. </summary>
-    public class AutoRestUrlMutliCollectionFormatTestServiceClientOptions : ClientOptions
+    public partial class AutoRestUrlMutliCollectionFormatTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

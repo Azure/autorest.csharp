@@ -11,7 +11,7 @@ using Azure.Core;
 namespace body_datetime_rfc1123
 {
     /// <summary> Client options for AutoRestRFC1123DateTimeTestServiceClient. </summary>
-    public class AutoRestRFC1123DateTimeTestServiceClientOptions : ClientOptions
+    public partial class AutoRestRFC1123DateTimeTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
