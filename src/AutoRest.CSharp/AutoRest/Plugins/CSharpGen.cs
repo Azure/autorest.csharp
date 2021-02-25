@@ -119,7 +119,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
-            if (string.IsNullOrEmpty(codeModelFileName)) throw new Exception("Generator did not receive the code model file.");
+            if (string.IsNullOrEmpty(codeModelFileName))
+                throw new Exception("Generator did not receive the code model file.");
 
             var configuration = Configuration.GetConfiguration(autoRest);
 
