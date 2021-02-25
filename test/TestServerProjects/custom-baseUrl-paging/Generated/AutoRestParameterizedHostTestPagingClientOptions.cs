@@ -11,7 +11,7 @@ using Azure.Core;
 namespace custom_baseUrl_paging
 {
     /// <summary> Client options for AutoRestParameterizedHostTestPagingClient. </summary>
-    public class AutoRestParameterizedHostTestPagingClientOptions : ClientOptions
+    public partial class AutoRestParameterizedHostTestPagingClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace extensible_enums_swagger
 {
     /// <summary> Client options for PetStoreIncClient. </summary>
-    public class PetStoreIncClientOptions : ClientOptions
+    public partial class PetStoreIncClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2016_07_07;
 

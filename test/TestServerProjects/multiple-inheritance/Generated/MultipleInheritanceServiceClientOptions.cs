@@ -11,7 +11,7 @@ using Azure.Core;
 namespace multiple_inheritance
 {
     /// <summary> Client options for MultipleInheritanceServiceClient. </summary>
-    public class MultipleInheritanceServiceClientOptions : ClientOptions
+    public partial class MultipleInheritanceServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V3_0_0;
 

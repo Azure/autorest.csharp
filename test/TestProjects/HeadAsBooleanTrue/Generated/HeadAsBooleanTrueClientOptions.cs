@@ -11,7 +11,7 @@ using Azure.Core;
 namespace HeadAsBooleanTrue
 {
     /// <summary> Client options for HeadAsBooleanTrueClient. </summary>
-    public class HeadAsBooleanTrueClientOptions : ClientOptions
+    public partial class HeadAsBooleanTrueClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

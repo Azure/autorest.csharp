@@ -11,7 +11,7 @@ using Azure.Core;
 namespace custom_baseUrl
 {
     /// <summary> Client options for AutoRestParameterizedHostTestClient. </summary>
-    public class AutoRestParameterizedHostTestClientOptions : ClientOptions
+    public partial class AutoRestParameterizedHostTestClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace NameConflicts
 {
     /// <summary> Client options for AutoRestParameterFlatteningClient. </summary>
-    public class AutoRestParameterFlatteningClientOptions : ClientOptions
+    public partial class AutoRestParameterFlatteningClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

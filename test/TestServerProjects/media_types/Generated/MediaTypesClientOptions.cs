@@ -11,7 +11,7 @@ using Azure.Core;
 namespace media_types
 {
     /// <summary> Client options for MediaTypesClient. </summary>
-    public class MediaTypesClientOptions : ClientOptions
+    public partial class MediaTypesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2_0_preview;
 

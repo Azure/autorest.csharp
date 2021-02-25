@@ -11,7 +11,7 @@ using Azure.Core;
 namespace constants
 {
     /// <summary> Client options for AutoRestSwaggerConstantServiceClient. </summary>
-    public class AutoRestSwaggerConstantServiceClientOptions : ClientOptions
+    public partial class AutoRestSwaggerConstantServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

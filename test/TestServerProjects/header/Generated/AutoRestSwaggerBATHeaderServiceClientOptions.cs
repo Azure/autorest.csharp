@@ -11,7 +11,7 @@ using Azure.Core;
 namespace header
 {
     /// <summary> Client options for AutoRestSwaggerBATHeaderServiceClient. </summary>
-    public class AutoRestSwaggerBATHeaderServiceClientOptions : ClientOptions
+    public partial class AutoRestSwaggerBATHeaderServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

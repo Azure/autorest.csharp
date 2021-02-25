@@ -11,7 +11,7 @@ using Azure.Core;
 namespace lro_parameterized_endpoints
 {
     /// <summary> Client options for LROWithParamaterizedEndpointsClient. </summary>
-    public class LROWithParamaterizedEndpointsClientOptions : ClientOptions
+    public partial class LROWithParamaterizedEndpointsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

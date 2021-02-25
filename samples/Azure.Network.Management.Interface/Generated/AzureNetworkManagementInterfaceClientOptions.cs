@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.Network.Management.Interface
 {
     /// <summary> Client options for AzureNetworkManagementInterfaceClient. </summary>
-    public class AzureNetworkManagementInterfaceClientOptions : ClientOptions
+    public partial class AzureNetworkManagementInterfaceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2019_11_01;
 

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace object_type
 {
     /// <summary> Client options for ObjectTypeClient. </summary>
-    public class ObjectTypeClientOptions : ClientOptions
+    public partial class ObjectTypeClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

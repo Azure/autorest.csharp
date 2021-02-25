@@ -11,7 +11,7 @@ using Azure.Core;
 namespace non_string_enum
 {
     /// <summary> Client options for NonStringEnumsClient. </summary>
-    public class NonStringEnumsClientOptions : ClientOptions
+    public partial class NonStringEnumsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2_0_preview;
 

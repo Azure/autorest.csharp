@@ -11,7 +11,7 @@ using Azure.Core;
 namespace AppConfiguration
 {
     /// <summary> Client options for AppConfigurationClient. </summary>
-    public class AppConfigurationClientOptions : ClientOptions
+    public partial class AppConfigurationClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0;
 

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace required_optional
 {
     /// <summary> Client options for AutoRestRequiredOptionalTestServiceClient. </summary>
-    public class AutoRestRequiredOptionalTestServiceClientOptions : ClientOptions
+    public partial class AutoRestRequiredOptionalTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

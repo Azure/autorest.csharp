@@ -11,7 +11,7 @@ using Azure.Core;
 namespace url
 {
     /// <summary> Client options for AutoRestUrlTestServiceClient. </summary>
-    public class AutoRestUrlTestServiceClientOptions : ClientOptions
+    public partial class AutoRestUrlTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

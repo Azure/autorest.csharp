@@ -11,7 +11,7 @@ using Azure.Core;
 namespace body_time
 {
     /// <summary> Client options for AutoRestTimeTestServiceClient. </summary>
-    public class AutoRestTimeTestServiceClientOptions : ClientOptions
+    public partial class AutoRestTimeTestServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

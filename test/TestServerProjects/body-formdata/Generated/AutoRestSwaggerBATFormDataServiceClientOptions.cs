@@ -11,7 +11,7 @@ using Azure.Core;
 namespace body_formdata
 {
     /// <summary> Client options for AutoRestSwaggerBATFormDataServiceClient. </summary>
-    public class AutoRestSwaggerBATFormDataServiceClientOptions : ClientOptions
+    public partial class AutoRestSwaggerBATFormDataServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

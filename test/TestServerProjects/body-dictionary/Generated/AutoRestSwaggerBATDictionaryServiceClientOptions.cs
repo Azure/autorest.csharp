@@ -11,7 +11,7 @@ using Azure.Core;
 namespace body_dictionary
 {
     /// <summary> Client options for AutoRestSwaggerBATDictionaryServiceClient. </summary>
-    public class AutoRestSwaggerBATDictionaryServiceClientOptions : ClientOptions
+    public partial class AutoRestSwaggerBATDictionaryServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

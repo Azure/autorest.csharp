@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.Storage.Tables
 {
     /// <summary> Client options for AzureStorageTablesClient. </summary>
-    public class AzureStorageTablesClientOptions : ClientOptions
+    public partial class AzureStorageTablesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2018_10_10;
 

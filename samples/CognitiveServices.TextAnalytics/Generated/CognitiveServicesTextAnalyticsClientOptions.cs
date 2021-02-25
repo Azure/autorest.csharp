@@ -11,7 +11,7 @@ using Azure.Core;
 namespace CognitiveServices.TextAnalytics
 {
     /// <summary> Client options for CognitiveServicesTextAnalyticsClient. </summary>
-    public class CognitiveServicesTextAnalyticsClientOptions : ClientOptions
+    public partial class CognitiveServicesTextAnalyticsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.Vv3_0_preview_1;
 

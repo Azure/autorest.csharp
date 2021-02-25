@@ -11,7 +11,7 @@ using Azure.Core;
 namespace HeaderCollectionPrefix
 {
     /// <summary> Client options for HeaderCollectionPrefixClient. </summary>
-    public class HeaderCollectionPrefixClientOptions : ClientOptions
+    public partial class HeaderCollectionPrefixClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace xml_service
 {
     /// <summary> Client options for AutoRestSwaggerBATXMLServiceClient. </summary>
-    public class AutoRestSwaggerBATXMLServiceClientOptions : ClientOptions
+    public partial class AutoRestSwaggerBATXMLServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 

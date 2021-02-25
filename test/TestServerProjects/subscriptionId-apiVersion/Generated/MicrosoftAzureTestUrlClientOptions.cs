@@ -11,7 +11,7 @@ using Azure.Core;
 namespace subscriptionId_apiVersion
 {
     /// <summary> Client options for MicrosoftAzureTestUrlClient. </summary>
-    public class MicrosoftAzureTestUrlClientOptions : ClientOptions
+    public partial class MicrosoftAzureTestUrlClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2014_04_01_preview;
 
