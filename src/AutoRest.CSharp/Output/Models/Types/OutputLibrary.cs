@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, RestClient>? _restClients;
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
+        private Dictionary<OperationGroup, ResourceData>? _resourceData;
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
@@ -59,6 +60,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
+
+        public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
         public IEnumerable<Client> Clients => EnsureClients().Values;
 
@@ -183,6 +186,24 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _resourceContainers;
         }
 
+        private Dictionary<OperationGroup, ResourceData> EnsureResourceData()
+        {
+            if (_resourceData != null)
+            {
+                return _resourceData;
+            }
+
+            _resourceData = new Dictionary<OperationGroup, ResourceData>();
+            foreach (var operations in _operationGroups.Values)
+            {
+                foreach (var operation in operations)
+                {
+                    _resourceData.Add(operation, new ResourceData(operation, _context));
+                }
+
+            }
+            return _resourceData;
+        }
 
         public TypeProvider FindTypeForSchema(Schema schema)
         {
@@ -194,17 +215,16 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-
         private Dictionary<Schema, TypeProvider> BuildModels()
         {
             var models = new Dictionary<Schema, TypeProvider>();
 
             foreach (var schema in _allSchemas)
             {
-                /*if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema.Name))
+                if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema.Name))
                 {
                     continue;
-                }*/
+                }
                 models.Add(schema, BuildModel(schema));
             }
             return models;

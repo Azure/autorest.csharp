@@ -15,6 +15,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -45,6 +46,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var headerModelModelWriter = new ResponseHeaderGroupWriter();
             var resourceOperationWriter = new ResourceOperationWriter();
             var resourceContainerWriter = new ResourceContainerWriter();
+            var resourceDataWriter = new ResourceDataWriter();
+            var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -100,6 +103,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     resourceContainerWriter.WriteClient(codeWriter, resourceContainer);
 
                     project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
+                }
+
+                foreach (var model in context.Library.ResourceData)
+                {
+                    var codeWriter = new CodeWriter();
+                    resourceDataWriter.WriteResourceData(codeWriter, model);
+
+                    var serializerCodeWriter = new CodeWriter();
+                    resourceDataSerializeWriter.WriteSerialization(serializerCodeWriter, model);
+
+                    var name = model.Type.Name;
+                    project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+                    project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
                 }
             }
             else
