@@ -59,6 +59,7 @@ namespace Azure.Core
         public static byte[] GetBytesFromBase64(in this JsonElement element, string format) => format switch
         {
             "U" => TypeFormatters.FromBase64UrlString(element.GetString()),
+            "D" => element.GetBytesFromBase64(),
             _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
         };
 

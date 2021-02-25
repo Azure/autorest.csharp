@@ -12,6 +12,17 @@
   <PropertyGroup>
     <NoWarn>$(NoWarn);NU5105</NoWarn>
   </PropertyGroup>
-  
+
+  <Target Name="_ValidateSourceFileNames"
+          BeforeTargets="CoreBuild">
+    <ItemGroup>
+      <!-- Prevent https://github.com/Azure/azure-sdk-for-net/issues/17164 from becoming an issue further in the build process -->
+      <_ContainsCurlyBraces Include="@(Compile)" Condition="$([MSBuild]::ValueOrDefault('%(Directory)%(Filename)', '').Contains('{')) or $([MSBuild]::ValueOrDefault('%(Directory)%(Filename)', '').Contains('}'))" />
+    </ItemGroup>
+    <Error
+      Text="File name '%(_ContainsCurlyBraces.FullPath)' cannot contain { or }; use OfT instead of {T} and disable SA1649 for the declaration, or elide {T} from file name entirely."
+      Condition="'@(_ContainsCurlyBraces)' != ''" />
+  </Target>
+
   <Import Project="eng\Versioning.targets" />
 </Project>

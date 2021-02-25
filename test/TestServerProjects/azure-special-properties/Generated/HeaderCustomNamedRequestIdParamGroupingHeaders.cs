@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace azure_special_properties
 {
-    internal class HeaderCustomNamedRequestIdParamGroupingHeaders
+    internal partial class HeaderCustomNamedRequestIdParamGroupingHeaders
     {
         private readonly Response _response;
         public HeaderCustomNamedRequestIdParamGroupingHeaders(Response response)

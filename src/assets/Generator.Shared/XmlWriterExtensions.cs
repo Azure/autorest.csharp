@@ -30,14 +30,7 @@ namespace Azure.Core
 
         public static void WriteValue(this XmlWriter writer, byte[] value, string format)
         {
-            switch (format)
-            {
-                case "U":
-                    writer.WriteValue(TypeFormatters.ToBase64UrlString(value));
-                    break;
-                default:
-                    throw new ArgumentException($"Format is not supported: '{format}'", nameof(format));
-            }
+            writer.WriteValue(TypeFormatters.ToString(value, format));
         }
     }
 }

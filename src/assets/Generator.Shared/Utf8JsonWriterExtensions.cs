@@ -33,6 +33,9 @@ namespace Azure.Core
                 case "U":
                     writer.WriteStringValue(TypeFormatters.ToBase64UrlString(value));
                     break;
+                case "D":
+                    writer.WriteBase64StringValue(value);
+                    break;
                 default:
                     throw new ArgumentException($"Format is not supported: '{format}'", nameof(format));
             }

@@ -842,5 +842,20 @@ namespace AutoRest.TestServer.Tests
             var pageable = new PagingClient(ClientDiagnostics, pipeline, host).GetSinglePagesFailure();
             Assert.Throws<RequestFailedException>(() => { foreach (var page in pageable.AsPages()) { } });
         });
+
+        [Test]
+        [IgnoreOnTestServer(TestServerVersion.V2, "No match.")]
+        public Task PagingFirstResponseEmpty() => Test(async (host, pipeline) =>
+        {
+            var result = new PagingClient(ClientDiagnostics, pipeline, host).FirstResponseEmptyAsync();
+            int count = 0;
+            await foreach (var product in result)
+            {
+                count++;
+                Assert.AreEqual(1, product.Properties.Id);
+                Assert.AreEqual("Product", product.Properties.Name);
+            }
+            Assert.AreEqual(1, count);
+        });
     }
 }

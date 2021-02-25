@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace azure_special_properties
 {
-    internal class HeaderCustomNamedRequestIdHeaders
+    internal partial class HeaderCustomNamedRequestIdHeaders
     {
         private readonly Response _response;
         public HeaderCustomNamedRequestIdHeaders(Response response)

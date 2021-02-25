@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro
 {
-    internal class LROsDelete202Retry200Headers
+    internal partial class LROsDelete202Retry200Headers
     {
         private readonly Response _response;
         public LROsDelete202Retry200Headers(Response response)

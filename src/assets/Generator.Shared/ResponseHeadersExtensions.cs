@@ -4,6 +4,7 @@
 #nullable enable
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
 
@@ -69,6 +70,21 @@ namespace Azure.Core
 
             value = null;
             return false;
+        }
+
+        public static bool TryGetValue(this ResponseHeaders headers, string prefix, out IDictionary<string, string> value)
+        {
+            value = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            foreach (HttpHeader item in headers)
+            {
+                if (item.Name.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                {
+                    value.Add(item.Name.Substring(prefix.Length), item.Value);
+                }
+            }
+
+            return true;
         }
     }
 }

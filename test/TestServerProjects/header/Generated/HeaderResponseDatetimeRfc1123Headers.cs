@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace header
 {
-    internal class HeaderResponseDatetimeRfc1123Headers
+    internal partial class HeaderResponseDatetimeRfc1123Headers
     {
         private readonly Response _response;
         public HeaderResponseDatetimeRfc1123Headers(Response response)
