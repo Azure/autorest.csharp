@@ -19,10 +19,12 @@ namespace azure_special_properties
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal XMsClientRequestIdRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of XMsClientRequestIdClient for mocking. </summary>
         protected XMsClientRequestIdClient()
         {
         }
+
         /// <summary> Initializes a new instance of XMsClientRequestIdClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

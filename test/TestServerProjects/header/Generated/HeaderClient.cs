@@ -20,10 +20,12 @@ namespace header
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal HeaderRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of HeaderClient for mocking. </summary>
         protected HeaderClient()
         {
         }
+
         /// <summary> Initializes a new instance of HeaderClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
