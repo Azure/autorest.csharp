@@ -7,7 +7,7 @@ using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Output.Models.Type.Decorate
 {
-    internal class TenantDetection
+    internal static class TenantDetection
     {
         public static bool IsTenantOnly(OperationGroup operationGroup)
         {

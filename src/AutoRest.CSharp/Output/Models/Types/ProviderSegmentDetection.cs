@@ -6,7 +6,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Output.Models.Type.Decorate
 {
-    internal class ProviderSegmentDetection
+    internal static class ProviderSegmentDetection
     {
         //Extensions algo will use same tokens ADO #5523
         public static List<ProviderSegment> GetProviderSegments(string path)
