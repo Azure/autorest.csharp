@@ -180,6 +180,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelShapes\\Generated"
     },
+    "ModelWithConverterUsage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelWithConverterUsage\\Generated"
+    },
     "multiple-inheritance": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\multiple-inheritance\\Generated"

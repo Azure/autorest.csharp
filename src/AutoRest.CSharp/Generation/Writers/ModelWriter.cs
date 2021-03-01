@@ -8,7 +8,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Text.Json.Serialization;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -51,7 +53,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 writer.WriteXmlDocumentationSummary(schema.Description);
-
+                if (schema.SchemaTypeUsage.HasFlag(SchemaTypeUsage.Converter))
+                {
+                    writer.Append($"[{typeof(JsonConverter)}(typeof({schema.Declaration.Name}Converter))]");
+                }
                 if (schema.IsStruct)
                 {
                     writer.Append($"{schema.Declaration.Accessibility} readonly partial struct {schema.Declaration.Name}");

@@ -4,8 +4,10 @@
 using System;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Linq;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -104,6 +106,30 @@ namespace AutoRest.CSharp.Generation.Writers
                                 throw new NotImplementedException(serialization.ToString());
                         }
                     }
+
+                    if (model.SchemaTypeUsage.HasFlag(SchemaTypeUsage.Converter))
+                    {
+                        WriteCustomJsonConverter(model, writer);
+                    }
+                }
+            }
+        }
+
+        private void WriteCustomJsonConverter(ObjectType model, CodeWriter writer)
+        {
+            writer.Append($"internal partial class {model.Declaration.Name}Converter : {typeof(JsonConverter)}<{model.Declaration.Name}>");
+            using (writer.Scope())
+            {
+                using (writer.Scope($"public override void  Write({typeof(Utf8JsonWriter)} writer, {model.Type} model, {typeof(JsonSerializerOptions)} options)"))
+                {
+                    writer.Line($"writer.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(model);");
+                }
+
+                using (writer.Scope($"public override {model.Type} Read(ref {typeof(Utf8JsonReader)} reader, {typeof(Type)} typeToConvert, {typeof(JsonSerializerOptions)} options)"))
+                {
+                    var document = new CodeWriterDeclaration("document");
+                    writer.Line($"using var {document:D} = {typeof(JsonDocument)}.Parse(reader.ValueSequence);");
+                    writer.Line($"return Deserialize{model.Declaration.Name}({document}.RootElement);");
                 }
             }
         }

@@ -86,6 +86,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 
+        public SchemaTypeUsage SchemaTypeUsage => _usage;
+
         public ObjectTypeProperty? AdditionalPropertiesProperty {
             get
             {
