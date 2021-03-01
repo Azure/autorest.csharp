@@ -84,6 +84,8 @@ namespace AutoRest.CSharp.Input
         }
 
         public string? HeaderCollectionPrefix => TryGetValue("x-ms-header-collection-prefix", out object? value) ? value?.ToString() : null;
+
+        public bool? BufferResponse => TryGetValue("x-csharp-buffer-response", out object? value) && value != null ? (bool?)Convert.ToBoolean(value) : null;
     }
 
     internal partial class ServiceResponse
