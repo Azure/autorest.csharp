@@ -118,7 +118,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/imds/data-plane/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/intune/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/283
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/iotcentral/data-plane/readme.md - https://github.com/Azure/autorest.modelerfour/issues/283
-https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/iotcentral/resource-manager/readme.md
+#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/iotcentral/resource-manager/readme.md - https://github.com/Azure/azure-rest-api-specs/issues/13147
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/iothub/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/iotspaces/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/keyvault/data-plane/readme.md
