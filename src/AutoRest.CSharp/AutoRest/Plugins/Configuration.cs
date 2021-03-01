@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using System.Reflection.Metadata;
 using AutoRest.CSharp.AutoRest.Communication;
 using System.Text.Json;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, JsonElement? operationGroupToResourceType = default, JsonElement? operationGroupToResource = default)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, string[] credentialTypes, string[] credentialScopes, string credentialHeaderName, JsonElement? operationGroupToResourceType = default, JsonElement? operationGroupToResource = default)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -23,6 +24,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ModelNamespace = modelNamespace;
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
+            CredentialTypes = credentialTypes;
+            CredentialScopes = credentialScopes;
+            CredentialHeaderName = credentialHeaderName;
             OperationGroupToResourceType = operationGroupToResourceType?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
             OperationGroupToResource = operationGroupToResource?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
         }
@@ -37,6 +41,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public bool ModelNamespace { get; }
         public bool HeadAsBoolean { get; }
         public bool SkipCSProjPackageReference { get; }
+        public string[] CredentialTypes { get; }
+        public string[] CredentialScopes { get; }
+        public string CredentialHeaderName { get; }
+
         public static string ProjectRelativeDirectory = "../";
         public Dictionary<string, string> OperationGroupToResourceType;
         public Dictionary<string, string> OperationGroupToResource;
@@ -54,10 +62,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
                 autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("skip-csproj-packagereference").GetAwaiter().GetResult() ?? false,
+                autoRest.GetValue<string[]?>("credential-types").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                autoRest.GetValue<string[]?>("credential-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                autoRest.GetValue<string?>("credential-header-name").GetAwaiter().GetResult() ?? "api-key",
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult()
             );
-
         }
 
         private static T GetRequiredOption<T>(IPluginCommunication autoRest, string name)

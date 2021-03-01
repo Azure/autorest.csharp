@@ -46,7 +46,8 @@ namespace AutoRest.CSharp.Output.Models
                 CreateDescription(requestParameter),
                 TypeFactory.GetInputType(type),
                 defaultValue,
-                isRequired);
+                isRequired,
+                requestParameter.Origin == "modelerfour:synthesized/api-version");
         }
 
         protected Constant ParseConstant(ConstantSchema constant) =>
@@ -82,9 +83,9 @@ namespace AutoRest.CSharp.Output.Models
                 BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
         }
 
-        protected string GetClientPrefix(string name)
+        public static string GetClientPrefix(string name, BuildContext context)
         {
-            name = string.IsNullOrEmpty(name) ? Context.CodeModel.Language.Default.Name : name.ToCleanName();
+            name = string.IsNullOrEmpty(name) ? context.CodeModel.Language.Default.Name : name.ToCleanName();
 
             if (name.EndsWith(OperationsSuffixValue) && name.Length >= OperationsSuffixValue.Length)
             {

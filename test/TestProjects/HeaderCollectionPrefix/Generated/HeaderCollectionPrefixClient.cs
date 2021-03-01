@@ -20,10 +20,12 @@ namespace HeaderCollectionPrefix
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal HeaderCollectionPrefixRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of HeaderCollectionPrefixClient for mocking. </summary>
         protected HeaderCollectionPrefixClient()
         {
         }
+
         /// <summary> Initializes a new instance of HeaderCollectionPrefixClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

@@ -20,10 +20,12 @@ namespace body_string
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal EnumRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of EnumClient for mocking. </summary>
         protected EnumClient()
         {
         }
+
         /// <summary> Initializes a new instance of EnumClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

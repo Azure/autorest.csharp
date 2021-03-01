@@ -5,10 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models
@@ -25,13 +27,13 @@ namespace AutoRest.CSharp.Output.Models
         {
             _operationGroup = operationGroup;
 
-            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
+            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, _context);
             DefaultName = clientPrefix + ClientSuffix;
             ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
         }
 
         public string ClientShortName { get; }
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name)));
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, Context)));
         public RestClient RestClient => _restClient ??= Context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
 
@@ -116,6 +118,53 @@ namespace AutoRest.CSharp.Output.Models
                         new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()));
                 }
             }
+        }
+
+        private IEnumerable<Parameter> GetRequiredParameters()
+        {
+            List<Parameter> parameters = new List<Parameter>();
+            foreach (var parameter in RestClient.Parameters)
+            {
+                if (parameter.DefaultValue == null)
+                {
+                    parameters.Add(parameter);
+                }
+            }
+
+            return parameters;
+        }
+
+        private IEnumerable<Parameter> GetOptionalParameters()
+        {
+            List<Parameter> parameters = new List<Parameter>();
+            foreach (var parameter in RestClient.Parameters)
+            {
+                if (parameter.DefaultValue != null && !parameter.IsApiVersionParameter)
+                {
+                    parameters.Add(parameter);
+                }
+            }
+
+            return parameters;
+        }
+
+        public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType)
+        {
+            List<Parameter> parameters = new List<Parameter>();
+
+            parameters.AddRange(GetRequiredParameters());
+
+            var credentialParam = new Parameter(
+                "credential",
+                "A credential used to authenticate to an Azure Service.",
+                credentialType,
+                null,
+                true);
+            parameters.Add(credentialParam);
+
+            parameters.AddRange(GetOptionalParameters());
+
+            return parameters;
         }
     }
 }

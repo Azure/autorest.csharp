@@ -21,10 +21,12 @@ namespace Azure.Network.Management.Interface
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal NetworkInterfacesRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of NetworkInterfacesClient for mocking. </summary>
         protected NetworkInterfacesClient()
         {
         }
+
         /// <summary> Initializes a new instance of NetworkInterfacesClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

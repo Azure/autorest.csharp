@@ -20,10 +20,12 @@ namespace CognitiveSearch
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal SynonymMapsRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of SynonymMapsClient for mocking. </summary>
         protected SynonymMapsClient()
         {
         }
+
         /// <summary> Initializes a new instance of SynonymMapsClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
