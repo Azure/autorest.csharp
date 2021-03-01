@@ -15,6 +15,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -107,9 +108,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 foreach (var client in context.Library.Clients)
                 {
                     var codeWriter = new CodeWriter();
-                    clientWriter.WriteClient(codeWriter, client, context.Configuration);
+                    clientWriter.WriteClient(codeWriter, client, context);
 
                     project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+                }
+
+                if (configuration.PublicClients && context.Library.Clients.Count() > 0)
+                {
+                    var codeWriter = new CodeWriter();
+                    ClientOptionsWriter.WriteClientOptions(codeWriter, context);
+
+                    var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
+                    project.AddGeneratedFile($"{clientOptionsName}ClientOptions.cs", codeWriter.ToString());
                 }
             }
 
@@ -131,6 +141,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 codeModelYaml = await autoRest.ReadFile(codeModelFileName);
                 return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
             });
+
+            if (configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase) &&
+                configuration.CredentialScopes.Length < 1)
+            {
+                await autoRest.Fatal("You are using TokenCredential wihtout passing in any credential-scopes.");
+                return false;
+            }
 
             if (!Path.IsPathRooted(configuration.OutputFolder))
             {

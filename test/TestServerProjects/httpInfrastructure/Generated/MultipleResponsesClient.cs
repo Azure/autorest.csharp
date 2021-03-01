@@ -20,10 +20,12 @@ namespace httpInfrastructure
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal MultipleResponsesRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of MultipleResponsesClient for mocking. </summary>
         protected MultipleResponsesClient()
         {
         }
+
         /// <summary> Initializes a new instance of MultipleResponsesClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

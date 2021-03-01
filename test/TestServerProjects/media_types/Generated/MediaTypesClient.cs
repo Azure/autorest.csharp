@@ -21,10 +21,12 @@ namespace media_types
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal MediaTypesRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of MediaTypesClient for mocking. </summary>
         protected MediaTypesClient()
         {
         }
+
         /// <summary> Initializes a new instance of MediaTypesClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
