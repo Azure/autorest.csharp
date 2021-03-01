@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     writer.WriteString(nameof(Configuration.CredentialHeaderName), configuration.CredentialHeaderName);
 
                     writer.WriteEndObject();
- 
+
                     writer.WriteStartObject(nameof(Configuration.OperationGroupToResourceType));
                     foreach (var keyval in configuration.OperationGroupToResourceType)
                     {

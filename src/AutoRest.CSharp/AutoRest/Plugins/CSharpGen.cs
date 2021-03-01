@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 foreach (var client in context.Library.Clients)
                 {
                     var codeWriter = new CodeWriter();
-                    clientWriter.WriteClient(codeWriter, client, context.Configuration);
+                    clientWriter.WriteClient(codeWriter, client, context);
 
                     project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
                 }

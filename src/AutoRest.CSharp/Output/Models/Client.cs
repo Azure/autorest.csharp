@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _operationGroup = operationGroup;
 
-            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, _context);
+            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, Context);
             DefaultName = clientPrefix + ClientSuffix;
             ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
         }
