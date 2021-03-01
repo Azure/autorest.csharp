@@ -38,6 +38,7 @@ namespace body_file
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
+            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
@@ -87,6 +88,7 @@ namespace body_file
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
+            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
@@ -136,6 +138,7 @@ namespace body_file
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
+            message.BufferResponse = false;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);

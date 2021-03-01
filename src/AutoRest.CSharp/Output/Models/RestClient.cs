@@ -380,6 +380,13 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
+            bool isStreamOnlyResponse = clientResponse.Count == 1 &&
+                                        clientResponse[0].ResponseBody is StreamResponseBody;
+
+            // Don't buffer stream-only responses
+            bool bufferResponse =
+                operation.Extensions?.BufferResponse ?? !isStreamOnlyResponse;
+
             return new RestClientMethod(
                 operationName,
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
@@ -387,7 +394,8 @@ namespace AutoRest.CSharp.Output.Models
                 request,
                 OrderParameters(methodParameters.Values),
                 clientResponse.ToArray(),
-                responseHeaderModel
+                responseHeaderModel,
+                bufferResponse
             );
         }
 
@@ -521,7 +529,8 @@ namespace AutoRest.CSharp.Output.Models
                 request,
                 parameters,
                 responses,
-                method.HeaderModel);
+                method.HeaderModel,
+                bufferResponse: true);
         }
 
         public RestClientMethod? GetNextOperationMethod(ServiceRequest request)
