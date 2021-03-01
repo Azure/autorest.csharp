@@ -11,39 +11,44 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using body_formdata_urlencoded.Models;
 
 namespace body_formdata_urlencoded
 {
-    internal partial class AutoRestSwaggerBATFormDataServiceRestClient
+    internal partial class FormdataurlencodedRestClient
     {
         private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of AutoRestSwaggerBATFormDataServiceRestClient. </summary>
+        /// <summary> Initializes a new instance of FormdataurlencodedRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public AutoRestSwaggerBATFormDataServiceRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        public FormdataurlencodedRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            endpoint ??= new Uri("");
+            endpoint ??= new Uri("http://localhost:3000");
 
             this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateUpdatePetWithFormRequest(string petId, string name, string status)
+        internal HttpMessage CreateUpdatePetWithFormRequest(int petId, PetType petType, PetFood petFood, int petAge, string name, string status)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
-            uri.AppendPath("/", false);
+            uri.AppendPath("/formsdataurlencoded/pet/add/", false);
+            uri.AppendPath(petId, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             var content = new FormUrlEncodedContent();
+            content.Add("pet_type", petType.ToSerialString());
+            content.Add("pet_food", petFood.ToString());
+            content.Add("pet_age", petAge.ToString());
             if (name != null)
             {
                 content.Add("name", name);
@@ -58,18 +63,15 @@ namespace body_formdata_urlencoded
 
         /// <summary> Updates a pet in the store with form data. </summary>
         /// <param name="petId"> ID of pet that needs to be updated. </param>
+        /// <param name="petType"> Can take a value of dog, or cat, or fish. </param>
+        /// <param name="petFood"> Can take a value of meat, or fish, or plant. </param>
+        /// <param name="petAge"> How many years is it old?. </param>
         /// <param name="name"> Updated name of the pet. </param>
         /// <param name="status"> Updated status of the pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
-        public async Task<Response> UpdatePetWithFormAsync(string petId, string name = null, string status = null, CancellationToken cancellationToken = default)
+        public async Task<Response> UpdatePetWithFormAsync(int petId, PetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
         {
-            if (petId == null)
-            {
-                throw new ArgumentNullException(nameof(petId));
-            }
-
-            using var message = CreateUpdatePetWithFormRequest(petId, name, status);
+            using var message = CreateUpdatePetWithFormRequest(petId, petType, petFood, petAge, name, status);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -83,18 +85,15 @@ namespace body_formdata_urlencoded
 
         /// <summary> Updates a pet in the store with form data. </summary>
         /// <param name="petId"> ID of pet that needs to be updated. </param>
+        /// <param name="petType"> Can take a value of dog, or cat, or fish. </param>
+        /// <param name="petFood"> Can take a value of meat, or fish, or plant. </param>
+        /// <param name="petAge"> How many years is it old?. </param>
         /// <param name="name"> Updated name of the pet. </param>
         /// <param name="status"> Updated status of the pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
-        public Response UpdatePetWithForm(string petId, string name = null, string status = null, CancellationToken cancellationToken = default)
+        public Response UpdatePetWithForm(int petId, PetType petType, PetFood petFood, int petAge, string name = null, string status = null, CancellationToken cancellationToken = default)
         {
-            if (petId == null)
-            {
-                throw new ArgumentNullException(nameof(petId));
-            }
-
-            using var message = CreateUpdatePetWithFormRequest(petId, name, status);
+            using var message = CreateUpdatePetWithFormRequest(petId, petType, petFood, petAge, name, status);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
