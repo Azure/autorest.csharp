@@ -71,7 +71,7 @@ namespace ModelWithConverterUsage.Models
             }
             public override ModelClass Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
-                using var document = JsonDocument.Parse(reader.ValueSequence);
+                using var document = JsonDocument.ParseValue(ref reader);
                 return DeserializeModelClass(document.RootElement);
             }
         }

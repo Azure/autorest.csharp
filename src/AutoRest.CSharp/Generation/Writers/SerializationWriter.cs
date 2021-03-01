@@ -122,13 +122,13 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 using (writer.Scope($"public override void  Write({typeof(Utf8JsonWriter)} writer, {model.Type} model, {typeof(JsonSerializerOptions)} options)"))
                 {
-                    writer.Line($"writer.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(model);");
+                    writer.Append($"writer.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(model);");
                 }
 
                 using (writer.Scope($"public override {model.Type} Read(ref {typeof(Utf8JsonReader)} reader, {typeof(Type)} typeToConvert, {typeof(JsonSerializerOptions)} options)"))
                 {
                     var document = new CodeWriterDeclaration("document");
-                    writer.Line($"using var {document:D} = {typeof(JsonDocument)}.Parse(reader.ValueSequence);");
+                    writer.Line($"using var {document:D} = {typeof(JsonDocument)}.ParseValue(ref reader);");
                     writer.Line($"return Deserialize{model.Declaration.Name}({document}.RootElement);");
                 }
             }

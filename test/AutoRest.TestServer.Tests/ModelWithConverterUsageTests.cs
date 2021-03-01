@@ -4,7 +4,7 @@
 using System;
 using NUnit.Framework;
 using ModelWithConverterUsage.Models;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -15,21 +15,41 @@ namespace AutoRest.TestServer.Tests
         {
             var model = new ModelClass(EnumProperty.A)
             {
-                StringProperty = "test_str"
+                StringProperty = "test_str",
+                ObjProperty = new Product("str")
             };
-            var jsonAsString = JsonConvert.SerializeObject(model);
-            Assert.AreEqual("{\"StringProperty\":\"test_str\",\"EnumProperty\":0,\"ObjProperty\":null}", jsonAsString);
+
+            var jsonAsString = JsonSerializer.Serialize(model);
+            Assert.AreEqual("{\"String_Property\":\"test_str\",\"Enum_Property\":\"A\",\"Obj_Property\":{\"constProperty\":\"str\"}}", jsonAsString);
         }
 
         [Test]
         public void DeserializeModelClass()
         {
-            string json = @"{""StringProperty"":""test_str"",""EnumProperty"":0,""ObjProperty"":null}";
+            string jsonString = @"{""String_Property"": ""test_str"",""Enum_Property"": ""A"", ""Obj_Property"": {""constProperty"": ""str""}}";
 
-            ModelClass model = JsonConvert.DeserializeObject<ModelClass>(json);
+            ModelClass model = JsonSerializer.Deserialize<ModelClass>(jsonString);
             Assert.AreEqual("test_str", model.StringProperty);
             Assert.AreEqual(EnumProperty.A, model.EnumProperty);
-            Assert.AreEqual(null, model.ObjProperty);
+            Assert.AreEqual("str", model.ObjProperty.ConstProperty);
+        }
+
+        [Test]
+        public void SerializeModelStruct()
+        {
+            var model = new ModelStruct("test_str");
+
+            var jsonAsString = JsonSerializer.Serialize(model);
+            Assert.AreEqual("{\"Model_Property\":\"test_str\"}", jsonAsString);
+        }
+
+        [Test]
+        public void DeserializeModelStruct()
+        {
+            string jsonString = @"{""Model_Property"": ""test_str""}";
+
+            var model = JsonSerializer.Deserialize<ModelStruct>(jsonString);
+            Assert.AreEqual("test_str", model.ModelProperty);
         }
     }
 }
