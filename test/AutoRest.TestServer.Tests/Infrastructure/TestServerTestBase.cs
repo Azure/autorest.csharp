@@ -33,34 +33,6 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             _coverageFile = coverageFile;
         }
 
-        [Test]
-        public void DefinesAllScenarios()
-        {
-            var scenarios = AdditionalKnownScenarios;
-            if (_coverageFile != null)
-            {
-                scenarios = TestServerV1.GetScenariosForRoute(_coverageFile).Concat(scenarios);
-            }
-
-            var methods = this.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Select(m => m.Name)
-                .ToArray();
-
-
-            HashSet<string> missingScenarios = new HashSet<string>(StringComparer.CurrentCultureIgnoreCase);
-            foreach (string scenario in scenarios)
-            {
-                if (!methods.Contains(scenario, StringComparer.CurrentCultureIgnoreCase))
-                {
-                    missingScenarios.Add(scenario);
-                }
-            }
-
-            if (missingScenarios.Any())
-            {
-                Assert.Fail("Expected scenarios " + string.Join(Environment.NewLine, missingScenarios.OrderBy(s=>s)) + " not defined");
-            }
-        }
-
         public virtual IEnumerable<string> AdditionalKnownScenarios { get; } = Array.Empty<string>();
 
         public Task TestStatus(Func<Uri, HttpPipeline, Response> test, bool ignoreScenario = false, bool useSimplePipeline = false)
