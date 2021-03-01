@@ -21,10 +21,12 @@ namespace required_optional
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ExplicitRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of ExplicitClient for mocking. </summary>
         protected ExplicitClient()
         {
         }
+
         /// <summary> Initializes a new instance of ExplicitClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
