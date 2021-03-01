@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class AdditionalPropertiesTest : TestServerTestBase
     {
-        public AdditionalPropertiesTest(TestServerVersion version) : base(version, "additionalProperties") { }
+        public AdditionalPropertiesTest(TestServerVersion version) : base(version) { }
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]

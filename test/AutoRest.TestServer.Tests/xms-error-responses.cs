@@ -12,7 +12,7 @@ namespace AutoRest.TestServer.Tests
     [IgnoreOnTestServer(TestServerVersion.V2, "Requests not matched")]
     public class XMsErrorResponsesTest : TestServerTestBase
     {
-        public XMsErrorResponsesTest(TestServerVersion version) : base(version, "errorStatusCodes") { }
+        public XMsErrorResponsesTest(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task AnimalNotFoundError() => Test((host, pipeline) =>

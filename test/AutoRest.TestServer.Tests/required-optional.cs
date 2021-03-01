@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class RequiredOptionalTest : TestServerTestBase
     {
-        public RequiredOptionalTest(TestServerVersion version) : base(version, "reqopt") { }
+        public RequiredOptionalTest(TestServerVersion version) : base(version) { }
 
         private void TestDefaultNullParameter(Type clientType, string methodName, string parameterName)
         {

@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyFormdataUrlEncodedTests : TestServerTestBase
     {
-        public BodyFormdataUrlEncodedTests(TestServerVersion version) : base(version, "formsdataurlencoded") { }
+        public BodyFormdataUrlEncodedTests(TestServerVersion version) : base(version) { }
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]

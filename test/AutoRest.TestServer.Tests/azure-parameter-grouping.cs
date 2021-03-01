@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class ParameterGroupingTests : TestServerTestBase
     {
-        public ParameterGroupingTests(TestServerVersion version) : base(version, "azureParameterGrouping") { }
+        public ParameterGroupingTests(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task PostParameterGroupingMultipleParameterGroups() => TestStatus(async (host, pipeline) =>

@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class PagingTests : TestServerTestBase
     {
-        public PagingTests(TestServerVersion version) : base(version, "paging") { }
+        public PagingTests(TestServerVersion version) : base(version) { }
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]

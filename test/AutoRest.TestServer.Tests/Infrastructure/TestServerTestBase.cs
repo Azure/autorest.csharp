@@ -20,17 +20,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
     public class TestServerTestBase
     {
         private readonly TestServerVersion _version;
-        private readonly string? _coverageFile;
         internal static ClientDiagnostics ClientDiagnostics = new ClientDiagnostics(new TestOptions());
 
-        public TestServerTestBase(TestServerVersion version): this(version, null)
-        {
-        }
-
-        public TestServerTestBase(TestServerVersion version, string? coverageFile)
+        public TestServerTestBase(TestServerVersion version)
         {
             _version = version;
-            _coverageFile = coverageFile;
         }
 
         public virtual IEnumerable<string> AdditionalKnownScenarios { get; } = Array.Empty<string>();
