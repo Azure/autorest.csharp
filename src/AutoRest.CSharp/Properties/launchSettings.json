@@ -80,6 +80,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-formdata\\Generated"
     },
+    "body-formdata-urlencoded": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-formdata-urlencoded\\Generated"
+    },
     "body-integer": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-integer\\Generated"

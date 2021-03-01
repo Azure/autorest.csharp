@@ -1,290 +1,290 @@
-!<!CodeModel> 
-info: !<!Info> 
+!CodeModel 
+info: !Info 
   description: Some cool documentation.
   title: Microsoft Azure Test Url
-schemas: !<!Schemas> 
+schemas: !Schemas 
   numbers:
-    - !<!NumberSchema> &ref_3
+    - !NumberSchema &ref_3
       type: integer
       precision: 32
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Integer
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   strings:
-    - !<!StringSchema> &ref_0
+    - !StringSchema &ref_0
       type: string
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: simple string
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_5
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 2014-04-01-preview
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_1
+      protocol: !Protocols {}
+    - !StringSchema &ref_1
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 2014-04-01-preview
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: SampleResourceGroupName
           description: resource group name 'testgroup101'
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_2
+      protocol: !Protocols {}
+    - !StringSchema &ref_2
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 2014-04-01-preview
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: SampleResourceGroupLocation
           description: resource group location 'West US'
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_4
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 2014-04-01-preview
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ErrorMessage
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   constants:
-    - !<!ConstantSchema> &ref_6
+    - !ConstantSchema &ref_6
       type: constant
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: 2014-04-01-preview
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ApiVersion20140401Preview
           description: Api Version (2014-04-01-preview)
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_10
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_10
       type: constant
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: application/json
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Accept
           description: 'Accept: application/json'
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   objects:
-    - !<!ObjectSchema> &ref_12
+    - !ObjectSchema &ref_12
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 2014-04-01-preview
       properties:
-        - !<!Property> 
+        - !Property 
           schema: *ref_1
           serializedName: name
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: name
               description: resource group name 'testgroup101'
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_2
           serializedName: location
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: location
               description: resource group location 'West US'
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - output
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: SampleResourceGroup
           description: ''
           namespace: ''
-      protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_13
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_13
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 2014-04-01-preview
       properties:
-        - !<!Property> 
+        - !Property 
           schema: *ref_3
           serializedName: code
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: code
               description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_4
           serializedName: message
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: message
               description: ''
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - exception
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Error
           description: ''
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
 globalParameters:
-  - !<!Parameter> &ref_8
+  - !Parameter &ref_8
     schema: *ref_5
     implementation: Client
     required: true
     extensions:
       x-ms-priority: 0
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: SubscriptionId
         description: Subscription Id.
         serializedName: subscriptionId
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: path
-  - !<!Parameter> &ref_7
+  - !Parameter &ref_7
     schema: *ref_0
-    clientDefaultValue: 'http://localhost:3000'
+    clientDefaultValue: http://localhost:3000
     implementation: Client
-    origin: 'modelerfour:synthesized/host'
+    origin: modelerfour:synthesized/host
     required: true
     extensions:
       x-ms-skip-url-encoding: true
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: $host
         description: server parameter
         serializedName: $host
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: uri
-  - !<!Parameter> &ref_9
+  - !Parameter &ref_9
     schema: *ref_6
     implementation: Client
-    origin: 'modelerfour:synthesized/api-version'
+    origin: modelerfour:synthesized/api-version
     required: true
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: apiVersion
         description: Api Version
         serializedName: api-version
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: query
 operationGroups:
-  - !<!OperationGroup> 
+  - !OperationGroup 
     $key: group
     operations:
-      - !<!Operation> 
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 2014-04-01-preview
         parameters:
           - *ref_7
           - *ref_8
-          - !<!Parameter> &ref_11
+          - !Parameter &ref_11
             schema: *ref_5
             implementation: Method
             required: true
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: resourceGroupName
                 description: Resource Group name 'testgroup101'.
                 serializedName: resourceGroupName
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: path
           - *ref_9
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_10
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
-                path: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}'
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}
                 method: get
                 uri: '{$host}'
         signatureParameters:
           - *ref_11
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_12
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: A sample resource group
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_13
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: GetSampleResourceGroup
             description: Provides a resouce group with name 'testgroup101' and location 'West US'.
-        protocol: !<!Protocols> {}
-    language: !<!Languages> 
+        protocol: !Protocols {}
+    language: !Languages 
       default:
         name: Group
         description: ''
-    protocol: !<!Protocols> {}
-security: !<!Security> 
+    protocol: !Protocols {}
+security: !Security 
   authenticationRequired: false
-language: !<!Languages> 
+language: !Languages 
   default:
     name: MicrosoftAzureTestUrl
     description: ''
-protocol: !<!Protocols> 
-  http: !<!HttpModel> {}
+protocol: !Protocols 
+  http: !HttpModel {}

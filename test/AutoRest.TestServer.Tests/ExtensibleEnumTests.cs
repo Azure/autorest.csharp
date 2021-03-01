@@ -8,7 +8,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class ExtensibleEnumTests : TestServerTestBase
     {
-        public ExtensibleEnumTests(TestServerVersion version) : base(version, "extensibleenums") { }
+        public ExtensibleEnumTests(TestServerVersion version) : base(version) { }
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Dynamic")]

@@ -12,7 +12,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class UrlQueryTests : TestServerTestBase
     {
-        public UrlQueryTests(TestServerVersion version) : base(version, "queries") { }
+        public UrlQueryTests(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task UrlQueriesBoolTrue() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetBooleanTrueAsync());

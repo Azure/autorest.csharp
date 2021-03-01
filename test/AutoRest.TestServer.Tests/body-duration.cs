@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyDurationTest: TestServerTestBase
     {
-        public BodyDurationTest(TestServerVersion version) : base(version, "duration") { }
+        public BodyDurationTest(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task GetDurationInvalid() => Test((host, pipeline) =>

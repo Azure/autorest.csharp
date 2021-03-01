@@ -11,7 +11,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyFileTests : TestServerTestBase
     {
-        public BodyFileTests(TestServerVersion version) : base(version, "files") { }
+        public BodyFileTests(TestServerVersion version) : base(version) { }
 
         private string SamplePngPath = Path.Combine(TestServerV2.GetBaseDirectory(), "routes", "sample.png");
 
