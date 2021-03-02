@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace paging.Models
 {
-    public partial class ProductResultValue
+    internal partial class ProductResultValue
     {
         internal static ProductResultValue DeserializeProductResultValue(JsonElement element)
         {

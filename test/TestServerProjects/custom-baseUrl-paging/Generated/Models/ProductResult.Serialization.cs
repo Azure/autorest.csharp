@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace custom_baseUrl_paging.Models
 {
-    public partial class ProductResult
+    internal partial class ProductResult
     {
         internal static ProductResult DeserializeProductResult(JsonElement element)
         {
