@@ -13,13 +13,13 @@ namespace Azure.Core
 {
     internal class FormUrlEncodedContent : RequestContent
     {
-        private List<KeyValuePair<string?, string?>> _values = new List<KeyValuePair<string?, string?>>();
+        private List<KeyValuePair<string, string>> _values = new List<KeyValuePair<string, string>>();
         private Encoding Latin1 = Encoding.GetEncoding("iso-8859-1");
-        private byte[] _bytes = new byte[0];
+        private byte[] _bytes = Array.Empty<byte>();
 
         public void Add (string parameter, string value)
         {
-            _values.Add(new KeyValuePair<string?, string?> (parameter, value));
+            _values.Add(new KeyValuePair<string, string> (parameter, value));
         }
 
         private void BuildIfNeeded ()
@@ -55,7 +55,7 @@ namespace Azure.Core
         }
 
         // Taken with love from https://github.com/dotnet/runtime/blob/master/src/libraries/System.Net.Http/src/System/Net/Http/FormUrlEncodedContent.cs#L21-L53
-        private byte[] GetContentByteArray(IEnumerable<KeyValuePair<string?, string?>> nameValueCollection)
+        private byte[] GetContentByteArray(IEnumerable<KeyValuePair<string, string>> nameValueCollection)
         {
             if (nameValueCollection == null)
             {
@@ -64,7 +64,7 @@ namespace Azure.Core
 
             // Encode and concatenate data
             StringBuilder builder = new StringBuilder();
-            foreach (KeyValuePair<string?, string?> pair in nameValueCollection)
+            foreach (KeyValuePair<string, string> pair in nameValueCollection)
             {
                 if (builder.Length > 0)
                 {
@@ -79,7 +79,7 @@ namespace Azure.Core
             return Latin1.GetBytes(builder.ToString());
         }
 
-        private static string Encode(string? data)
+        private static string Encode(string data)
         {
             if (string.IsNullOrEmpty(data))
             {
