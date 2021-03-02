@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, RestClient>? _restClients;
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
-        private Dictionary<OperationGroup, ResourceData>? _resourceData;
+        private Dictionary<string, ResourceData>? _resourceData;
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
-        private Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
+        public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -52,16 +52,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+        //public IEnumerable<TypeProvider> ResourceModels => ResourceSchemaMap.Values;
 
-        public IEnumerable<TypeProvider> ResourceModels => ResourceSchemaMap.Values;
+        public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
         public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
 
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
-
-        public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
         public IEnumerable<Client> Clients => EnsureClients().Values;
 
@@ -186,23 +185,43 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _resourceContainers;
         }
 
-        private Dictionary<OperationGroup, ResourceData> EnsureResourceData()
+        private Dictionary<string, ResourceData> EnsureResourceData()
         {
             if (_resourceData != null)
             {
                 return _resourceData;
             }
 
-            _resourceData = new Dictionary<OperationGroup, ResourceData>();
-            foreach (var operations in _operationGroups.Values)
+            _resourceData = new Dictionary<string, ResourceData>();
+            foreach (var entry in _operationGroups)
             {
-                foreach (var operation in operations)
+                var schema = GetResourceSchema(entry.Key);
+                if (schema != null)
                 {
-                    _resourceData.Add(operation, new ResourceData(operation, _context));
+                    foreach (var operation in entry.Value)
+                    {
+                        var resource = operation.Resource;
+                        if (!_resourceData.ContainsKey(operation.Resource))
+                        {
+                            _resourceData.Add(operation.Resource, new ResourceData(schema, operation, _context));
+                        }
+                    }
                 }
-
             }
             return _resourceData;
+        }
+
+        private Schema? GetResourceSchema(string name)
+        {
+            foreach (var entry in ResourceSchemaMap)
+            {
+                var resourceSchema = entry.Key;
+                if (resourceSchema.Name.Equals(name))
+                {
+                    return resourceSchema;
+                }
+            }
+            return null;
         }
 
         public TypeProvider FindTypeForSchema(Schema schema)
@@ -210,8 +229,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             TypeProvider? result;
             if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
             {
-                throw new KeyNotFoundException($"{schema.Name} was not found in model or resource schema map");
+                throw new KeyNotFoundException($"{schema.Name} was not found in model and resource schema map");
             }
+
             return result;
         }
 
@@ -226,6 +246,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     continue;
                 }
                 models.Add(schema, BuildModel(schema));
+
             }
             return models;
         }
@@ -238,9 +259,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var schema in _allSchemas)
                 {
+
                     if (_operationGroups.ContainsKey(schema.Name))
                     {
-                        resourceModels.Add(schema, BuildModel(schema));
+                        resourceModels.Add(schema, BuildResourceModel(schema));
+                        /*if (schema.Name.Contains("BlobContainer")) // Azure.Management.Storage.Models
+                        {
+                            Console.WriteLine("ddddddddddd");
+                        }*/
                     }
                 }
             }
@@ -252,6 +278,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
             ObjectSchema objectSchema => new ObjectType(objectSchema, _context),
+            _ => throw new NotImplementedException()
+        };
+
+        private TypeProvider BuildResourceModel(Schema schema) => schema switch
+        {
+            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
+            ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
+            ObjectSchema objectSchema => new ObjectType(objectSchema, _context, true),
             _ => throw new NotImplementedException()
         };
 

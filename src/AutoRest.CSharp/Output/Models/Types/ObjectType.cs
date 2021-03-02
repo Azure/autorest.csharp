@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
 
-        public ObjectType(ObjectSchema objectSchema, BuildContext context): base(context)
+        public ObjectType(ObjectSchema objectSchema, BuildContext context) : base(context)
         {
             _objectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
@@ -48,6 +48,46 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
             DefaultName = objectSchema.CSharpName();
+            if (objectSchema.Extensions?.Namespace is string namespaceExtension)
+            {
+                DefaultNamespace = namespaceExtension;
+            }
+            else if (context.Configuration.ModelNamespace)
+            {
+                DefaultNamespace = $"{context.DefaultNamespace}.Models";
+            }
+            else
+            {
+                DefaultNamespace = context.DefaultNamespace;
+            }
+            _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
+
+            // Update usage from code attribute
+            if (_sourceTypeMapping?.Usage != null)
+            {
+                foreach (var usage in _sourceTypeMapping.Usage)
+                {
+                    _usage |= Enum.Parse<SchemaTypeUsage>(usage, true);
+                }
+            }
+        }
+
+        public ObjectType(ObjectSchema objectSchema, BuildContext context, bool isDataType) : base(context)
+        {
+            _objectSchema = objectSchema;
+            _typeFactory = context.TypeFactory;
+            _serializationBuilder = new SerializationBuilder();
+            _usage = context.SchemaUsageProvider.GetUsage(_objectSchema);
+
+            var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
+
+            DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
+            Description = BuilderHelpers.CreateDescription(objectSchema);
+            DefaultName = objectSchema.CSharpName();
+            if (isDataType)
+            {
+                DefaultName = DefaultName + "Data";
+            }
             if (objectSchema.Extensions?.Namespace is string namespaceExtension)
             {
                 DefaultNamespace = namespaceExtension;
@@ -86,7 +126,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 
-        public ObjectTypeProperty? AdditionalPropertiesProperty {
+        public ObjectTypeProperty? AdditionalPropertiesProperty
+        {
             get
             {
                 if (_additionalPropertiesProperty != null || ImplementsDictionaryType == null)
@@ -280,7 +321,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             if (AdditionalPropertiesProperty != null &&
-                !defaultCtorInitializers.Any(i=> i.Property == AdditionalPropertiesProperty))
+                !defaultCtorInitializers.Any(i => i.Property == AdditionalPropertiesProperty))
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(TypeFactory.GetImplementationType(AdditionalPropertiesProperty.Declaration.Type))));
             }
@@ -419,14 +460,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            if (_sourceTypeMapping?.Formats is {} formatsDefinedInSource)
+            if (_sourceTypeMapping?.Formats is { } formatsDefinedInSource)
             {
                 foreach (var format in formatsDefinedInSource)
                 {
                     formats.Add(Enum.Parse<KnownMediaType>(format, true));
                 }
             }
-
             return formats.Distinct().Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
         }
 

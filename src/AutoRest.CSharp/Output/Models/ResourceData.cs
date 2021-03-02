@@ -12,11 +12,22 @@ namespace AutoRest.CSharp.Output.Models
     internal class ResourceData : ResourceOperation
     {
         private const string _suffixValue = "Data";
+        private BuildContext _context;
+        private ObjectTypeProperty[]? _properties;
+        private Schema _schema;
 
-        public ResourceData(OperationGroup operationGroup, BuildContext context) : base(operationGroup, context)
+        public ResourceData(Schema schema, OperationGroup operationGroup, BuildContext context) : base(operationGroup, context)
         {
+            _context = context;
+            _schema = schema;
+            DefaultNamespace = GetDefaultNamespace(schema, context);
+            var a = (ObjectType)_context.Library.ResourceSchemaMap[_schema];
+
         }
+
+        public ObjectTypeProperty[] Properties => _properties ??= BuildProperties();
         protected override string SuffixValue => _suffixValue;
+        protected override string DefaultNamespace { get; }
 
         protected override string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
@@ -24,6 +35,30 @@ namespace AutoRest.CSharp.Output.Models
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
                 $"A class representing the {clientPrefix} data model. " :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
+        }
+
+        private string GetDefaultNamespace(Schema schema, BuildContext context)
+        {
+            var result = "";
+            if (schema.Extensions?.Namespace is string namespaceExtension)
+            {
+                result = namespaceExtension;
+            }
+            else if (context.Configuration.ModelNamespace)
+            {
+                result = $"{context.DefaultNamespace}.Models";
+            }
+            else
+            {
+                result = context.DefaultNamespace;
+            }
+            return result;
+        }
+
+        private ObjectTypeProperty[] BuildProperties()
+        {
+            var resourceModel = (ObjectType)_context.Library.ResourceSchemaMap[_schema];
+            return resourceModel.Properties;
         }
     }
 }
