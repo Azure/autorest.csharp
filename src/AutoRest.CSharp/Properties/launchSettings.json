@@ -2,7 +2,7 @@
   "profiles": {
     "additionalProperties": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone d:\\github\\azure\\net\\sdk\\deviceupdate\\Azure.Iot.DeviceUpdate\\src\\Generated\\"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\additionalProperties\\Generated"
     },
     "AdditionalPropertiesEx": {
       "commandName": "Project",
