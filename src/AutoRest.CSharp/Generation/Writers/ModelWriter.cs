@@ -51,7 +51,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     implementsTypes.Add(schema.ImplementsDictionaryType);
                 }
-
                 writer.WriteXmlDocumentationSummary(schema.Description);
                 if (schema.IsStruct)
                 {
