@@ -66,10 +66,11 @@ if (!($Exclude -contains "TestServer"))
     {
         $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
         $projectDirectory = Join-Path $testServerDirectory $testName
+        $inputReadme = Join-Path $projectDirectory "readme.md"
         $swaggerDefinitions[$testName] = @{
             'projectName'=$testName;
             'output'=$projectDirectory;
-            'arguments'="--require=$configurationPath --input-file=$inputFile"
+            'arguments'="--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile"
         }
     }
 }
