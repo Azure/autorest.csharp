@@ -20,45 +20,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
     public class TestServerTestBase
     {
         private readonly TestServerVersion _version;
-        private readonly string? _coverageFile;
         internal static ClientDiagnostics ClientDiagnostics = new ClientDiagnostics(new TestOptions());
 
-        public TestServerTestBase(TestServerVersion version): this(version, null)
-        {
-        }
-
-        public TestServerTestBase(TestServerVersion version, string? coverageFile)
+        public TestServerTestBase(TestServerVersion version)
         {
             _version = version;
-            _coverageFile = coverageFile;
-        }
-
-        [Test]
-        public void DefinesAllScenarios()
-        {
-            var scenarios = AdditionalKnownScenarios;
-            if (_coverageFile != null)
-            {
-                scenarios = TestServerV1.GetScenariosForRoute(_coverageFile).Concat(scenarios);
-            }
-
-            var methods = this.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).Select(m => m.Name)
-                .ToArray();
-
-
-            HashSet<string> missingScenarios = new HashSet<string>(StringComparer.CurrentCultureIgnoreCase);
-            foreach (string scenario in scenarios)
-            {
-                if (!methods.Contains(scenario, StringComparer.CurrentCultureIgnoreCase))
-                {
-                    missingScenarios.Add(scenario);
-                }
-            }
-
-            if (missingScenarios.Any())
-            {
-                Assert.Fail("Expected scenarios " + string.Join(Environment.NewLine, missingScenarios.OrderBy(s=>s)) + " not defined");
-            }
         }
 
         public virtual IEnumerable<string> AdditionalKnownScenarios { get; } = Array.Empty<string>();

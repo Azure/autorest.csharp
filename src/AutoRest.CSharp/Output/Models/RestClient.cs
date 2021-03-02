@@ -158,6 +158,12 @@ namespace AutoRest.CSharp.Output.Models
             return _nextPageMethods;
         }
 
+        private string GetRequestParameterName (RequestParameter requestParameter)
+        {
+            string defaultName = requestParameter.Language.Default.Name;
+            return requestParameter.Language.Default.SerializedName ?? defaultName;
+        }
+
         private RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, ICollection<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
         {
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
@@ -173,8 +179,7 @@ namespace AutoRest.CSharp.Output.Models
             RequestParameter[] parameters = operation.Parameters.Concat(requestParameters).ToArray();
             foreach (RequestParameter requestParameter in parameters)
             {
-                string defaultName = requestParameter.Language.Default.Name;
-                string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
+                string serializedName = GetRequestParameterName(requestParameter);
                 ReferenceOrConstant constantOrReference;
                 Schema valueSchema = requestParameter.Schema;
 
@@ -286,6 +291,15 @@ namespace AutoRest.CSharp.Output.Models
                     }
                     body = new MultipartRequestBody(value.ToArray());
                 }
+                else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Form)
+                {
+                    UrlEncodedBody urlbody = new UrlEncodedBody();
+                    foreach (var (bodyRequestParameter, bodyParameterValue) in bodyParameters)
+                    {
+                        urlbody.Add(GetRequestParameterName(bodyRequestParameter), bodyParameterValue);
+                    }
+                    body = urlbody;
+                }
                 else
                 {
                     Debug.Assert(bodyParameters.Count == 1);
@@ -380,6 +394,13 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
+            bool isStreamOnlyResponse = clientResponse.Count == 1 &&
+                                        clientResponse[0].ResponseBody is StreamResponseBody;
+
+            // Don't buffer stream-only responses
+            bool bufferResponse =
+                operation.Extensions?.BufferResponse ?? !isStreamOnlyResponse;
+
             return new RestClientMethod(
                 operationName,
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
@@ -387,7 +408,8 @@ namespace AutoRest.CSharp.Output.Models
                 request,
                 OrderParameters(methodParameters.Values),
                 clientResponse.ToArray(),
-                responseHeaderModel
+                responseHeaderModel,
+                bufferResponse
             );
         }
 
@@ -521,7 +543,8 @@ namespace AutoRest.CSharp.Output.Models
                 request,
                 parameters,
                 responses,
-                method.HeaderModel);
+                method.HeaderModel,
+                bufferResponse: true);
         }
 
         public RestClientMethod? GetNextOperationMethod(ServiceRequest request)

@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> The AutocompleteMode. </summary>
+    /// <summary> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context in producing autocomplete terms. </summary>
     public enum AutocompleteMode
     {
         /// <summary> oneTerm. </summary>

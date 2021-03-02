@@ -59,19 +59,6 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         }
 
-        public static string[] GetScenariosForRoute(string name)
-        {
-            var scenarios = _scenariosRegex.Matches(File.ReadAllText(Path.Combine(GetBaseDirectory(), "legacy", "routes", name + ".js")))
-                .Select(m => m.Groups["name"].Value).ToArray();
-
-            if (!scenarios.Any())
-            {
-                throw new InvalidOperationException("No scenarios found");
-            }
-
-            return scenarios;
-        }
-
         private static string GetBaseDirectory()
         {
             var nodeModules = TestServerV2.FindNodeModulesDirectory();

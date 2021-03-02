@@ -10,7 +10,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class UrlPathItemsTests : TestServerTestBase
     {
-        public UrlPathItemsTests(TestServerVersion version) : base(version, "pathitem") { }
+        public UrlPathItemsTests(TestServerVersion version) : base(version) { }
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]

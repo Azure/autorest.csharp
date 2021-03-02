@@ -31,6 +31,7 @@ $testNames =
     'body-duration',
     'body-file',
     'body-formdata',
+    'body-formdata-urlencoded',
     'body-integer',
     'body-number',
     'body-string',
