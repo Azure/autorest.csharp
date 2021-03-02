@@ -121,7 +121,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean(),
                 credentialTypes.ToArray(),
                 credentialScopes.ToArray(),
-                root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString()
+                root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString(),
+                root.GetProperty(nameof(Configuration.LowLevelClient)).GetBoolean()
             );
         }
     }

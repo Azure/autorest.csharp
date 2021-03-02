@@ -42,6 +42,25 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" PrivateAssets=""All"" />
   </ItemGroup>
 ";
+
+        private string _csProjContentLowLevel = @"
+  <Project Sdk=""Microsoft.NET.Sdk"">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Nullable>annotations</Nullable>
+    <RestoreSources>$(RestoreSources);C:\Users\chhamo\nuget\;https://api.nuget.org/v3/index.json</RestoreSources>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include=""Azure.Core"" Version=""1.10.0-alpha.20210224.1"" />
+    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-alpha.20210224.1"" />
+  </ItemGroup>
+
+</Project>
+";
+
         internal static string GetVersion()
         {
             Assembly clientAssembly = Assembly.GetExecutingAssembly();
@@ -79,7 +98,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             string csProjContent;
             if (configuration.SkipCSProjPackageReference)
             {
+              if (configuration.LowLevelClient)
+              {
+                csProjContent = string.Format(_csProjContentLowLevel, "");
+              }
+              else
+              {
                 csProjContent = string.Format(_csProjContent, "");
+              }
             }
             else
             {

@@ -45,6 +45,26 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new ResponseHeaderGroupWriter();
 
+            if (context.Configuration.LowLevelClient)
+            {
+                foreach (var client in context.Library.Clients)
+                {
+                    var codeWriter = new CodeWriter();
+                    var lowLevelClientWriter = new LowLevelClientWriter ();
+                    lowLevelClientWriter.WriteClient(codeWriter, client, context);
+                    project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+                }
+                foreach (var model in context.Library.Models.Where(x => x.Type.Implementation is EnumType))
+                {
+                    var codeWriter = new CodeWriter();
+                    modelWriter.WriteModel(codeWriter, model);
+
+                    var name = model.Type.Name;
+                    project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+                }
+                return project;
+            }
+
             foreach (var model in context.Library.Models)
             {
                 var codeWriter = new CodeWriter();
