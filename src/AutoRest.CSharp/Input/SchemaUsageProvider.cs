@@ -134,7 +134,8 @@ namespace AutoRest.CSharp.Input
         Output = Input << 1,
 
         Model = Output << 1,
-        Error =  Model << 1,
+        Error = Model << 1,
         FattenedParameters = Error << 1,
+        Converter = FattenedParameters << 1
     }
 }
