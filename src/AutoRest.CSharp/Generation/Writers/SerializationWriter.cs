@@ -39,6 +39,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Namespace(model.Declaration.Namespace))
             {
+                if (model.IncludeConverter)
+                {
+                    writer.Append($"[{typeof(JsonConverter)}(typeof({model.Declaration.Name}Converter))]");
+                }
                 if (model.IsStruct)
                 {
                     writer.Append($"{model.Declaration.Accessibility} partial struct {model.Declaration.Name}");
@@ -107,7 +111,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    if (model.SchemaTypeUsage.HasFlag(SchemaTypeUsage.Converter))
+                    if (model.IncludeConverter)
                     {
                         WriteCustomJsonConverter(model, writer);
                     }
@@ -117,7 +121,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteCustomJsonConverter(ObjectType model, CodeWriter writer)
         {
-            writer.Append($"internal partial class {model.Declaration.Name}Converter : {typeof(JsonConverter)}<{model.Declaration.Name}>");
+            writer.Append($"internal partial class {model.Declaration.Name}Converter : {typeof(JsonConverter)}<{model.Type}>");
             using (writer.Scope())
             {
                 using (writer.Scope($"public override void  Write({typeof(Utf8JsonWriter)} writer, {model.Type} model, {typeof(JsonSerializerOptions)} options)"))

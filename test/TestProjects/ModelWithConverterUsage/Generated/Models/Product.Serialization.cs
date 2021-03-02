@@ -12,6 +12,7 @@ using Azure.Core;
 
 namespace ModelWithConverterUsage.Models
 {
+    [JsonConverter(typeof(ProductConverter))]
     public partial class Product : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)

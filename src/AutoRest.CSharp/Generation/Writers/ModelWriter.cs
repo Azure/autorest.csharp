@@ -53,10 +53,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 writer.WriteXmlDocumentationSummary(schema.Description);
-                if (schema.SchemaTypeUsage.HasFlag(SchemaTypeUsage.Converter))
-                {
-                    writer.Append($"[{typeof(JsonConverter)}(typeof({schema.Declaration.Name}Converter))]");
-                }
                 if (schema.IsStruct)
                 {
                     writer.Append($"{schema.Declaration.Accessibility} readonly partial struct {schema.Declaration.Name}");

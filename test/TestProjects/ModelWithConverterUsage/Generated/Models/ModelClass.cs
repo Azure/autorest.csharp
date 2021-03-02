@@ -5,12 +5,9 @@
 
 #nullable disable
 
-using System.Text.Json.Serialization;
-
 namespace ModelWithConverterUsage.Models
 {
     /// <summary> . </summary>
-    [JsonConverter(typeof(ModelClassConverter))]
     public partial class ModelClass
     {
         /// <summary> Initializes a new instance of ModelClass. </summary>

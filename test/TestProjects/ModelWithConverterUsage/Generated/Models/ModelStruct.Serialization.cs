@@ -12,6 +12,7 @@ using Azure.Core;
 
 namespace ModelWithConverterUsage.Models
 {
+    [JsonConverter(typeof(ModelStructConverter))]
     public partial struct ModelStruct : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)

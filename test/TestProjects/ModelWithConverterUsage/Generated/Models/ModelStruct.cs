@@ -6,12 +6,10 @@
 #nullable disable
 
 using System;
-using System.Text.Json.Serialization;
 
 namespace ModelWithConverterUsage.Models
 {
     /// <summary> The ModelStruct. </summary>
-    [JsonConverter(typeof(ModelStructConverter))]
     public readonly partial struct ModelStruct
     {
         /// <summary> Initializes a new instance of ModelStruct. </summary>

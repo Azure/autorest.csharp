@@ -6,12 +6,10 @@
 #nullable disable
 
 using System;
-using System.Text.Json.Serialization;
 
 namespace ModelWithConverterUsage.Models
 {
     /// <summary> The product documentation. </summary>
-    [JsonConverter(typeof(ProductConverter))]
     public partial class Product
     {
         /// <summary> Initializes a new instance of Product. </summary>
