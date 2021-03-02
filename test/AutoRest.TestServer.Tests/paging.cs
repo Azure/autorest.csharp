@@ -857,5 +857,11 @@ namespace AutoRest.TestServer.Tests
             }
             Assert.AreEqual(1, count);
         });
+
+        [Test]
+        public void PagingModelsAreHidden()
+        {
+            Assert.IsFalse(typeof(ProductResult).IsPublic);
+        }
     }
 }

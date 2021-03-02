@@ -11,7 +11,7 @@ using Azure.Core;
 namespace AppConfiguration.Models
 {
     /// <summary> The result of a list request. </summary>
-    public partial class LabelListResult
+    internal partial class LabelListResult
     {
         /// <summary> Initializes a new instance of LabelListResult. </summary>
         internal LabelListResult()
