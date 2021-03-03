@@ -37,24 +37,6 @@ namespace AutoRest.CSharp.Output.Models
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
-        private string GetDefaultNamespace(Schema schema, BuildContext context)
-        {
-            var result = "";
-            if (schema.Extensions?.Namespace is string namespaceExtension)
-            {
-                result = namespaceExtension;
-            }
-            else if (context.Configuration.ModelNamespace)
-            {
-                result = $"{context.DefaultNamespace}.Models";
-            }
-            else
-            {
-                result = context.DefaultNamespace;
-            }
-            return result;
-        }
-
         private ObjectTypeProperty[] BuildProperties()
         {
             var resourceModel = (ObjectType)_context.Library.ResourceSchemaMap[_schema];

@@ -36,40 +36,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
 
-        public ObjectType(ObjectSchema objectSchema, BuildContext context) : base(context)
+        public ObjectType(ObjectSchema objectSchema, BuildContext context) : this(objectSchema, context, false)
         {
-            _objectSchema = objectSchema;
-            _typeFactory = context.TypeFactory;
-            _serializationBuilder = new SerializationBuilder();
-            _usage = context.SchemaUsageProvider.GetUsage(_objectSchema);
-
-            var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
-
-            DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
-            Description = BuilderHelpers.CreateDescription(objectSchema);
-            DefaultName = objectSchema.CSharpName();
-            if (objectSchema.Extensions?.Namespace is string namespaceExtension)
-            {
-                DefaultNamespace = namespaceExtension;
-            }
-            else if (context.Configuration.ModelNamespace)
-            {
-                DefaultNamespace = $"{context.DefaultNamespace}.Models";
-            }
-            else
-            {
-                DefaultNamespace = context.DefaultNamespace;
-            }
-            _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
-
-            // Update usage from code attribute
-            if (_sourceTypeMapping?.Usage != null)
-            {
-                foreach (var usage in _sourceTypeMapping.Usage)
-                {
-                    _usage |= Enum.Parse<SchemaTypeUsage>(usage, true);
-                }
-            }
         }
 
         public ObjectType(ObjectSchema objectSchema, BuildContext context, bool isDataType) : base(context)
@@ -88,18 +56,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 DefaultName = DefaultName + "Data";
             }
-            if (objectSchema.Extensions?.Namespace is string namespaceExtension)
-            {
-                DefaultNamespace = namespaceExtension;
-            }
-            else if (context.Configuration.ModelNamespace)
-            {
-                DefaultNamespace = $"{context.DefaultNamespace}.Models";
-            }
-            else
-            {
-                DefaultNamespace = context.DefaultNamespace;
-            }
+
+            DefaultNamespace = GetDefaultNamespace(objectSchema, context);
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 
             // Update usage from code attribute

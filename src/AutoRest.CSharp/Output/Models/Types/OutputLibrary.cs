@@ -52,7 +52,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
-        //public IEnumerable<TypeProvider> ResourceModels => ResourceSchemaMap.Values;
 
         public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
@@ -193,35 +192,20 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             _resourceData = new Dictionary<string, ResourceData>();
-            foreach (var entry in _operationGroups)
+            foreach (var entry in ResourceSchemaMap)
             {
-                var schema = GetResourceSchema(entry.Key);
-                if (schema != null)
+                var schema = entry.Key;
+                var operations = _operationGroups[schema.Name];
+                foreach (var operation in operations)
                 {
-                    foreach (var operation in entry.Value)
+                    if (!_resourceData.ContainsKey(operation.Resource))
                     {
-                        var resource = operation.Resource;
-                        if (!_resourceData.ContainsKey(operation.Resource))
-                        {
-                            _resourceData.Add(operation.Resource, new ResourceData(schema, operation, _context));
-                        }
+                        _resourceData.Add(operation.Resource, new ResourceData(schema, operation, _context));
                     }
                 }
             }
-            return _resourceData;
-        }
 
-        private Schema? GetResourceSchema(string name)
-        {
-            foreach (var entry in ResourceSchemaMap)
-            {
-                var resourceSchema = entry.Key;
-                if (resourceSchema.Name.Equals(name))
-                {
-                    return resourceSchema;
-                }
-            }
-            return null;
+            return _resourceData;
         }
 
         public TypeProvider FindTypeForSchema(Schema schema)
@@ -259,14 +243,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var schema in _allSchemas)
                 {
-
                     if (_operationGroups.ContainsKey(schema.Name))
                     {
                         resourceModels.Add(schema, BuildResourceModel(schema));
-                        /*if (schema.Name.Contains("BlobContainer")) // Azure.Management.Storage.Models
-                        {
-                            Console.WriteLine("ddddddddddd");
-                        }*/
                     }
                 }
             }

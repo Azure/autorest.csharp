@@ -3,6 +3,7 @@
 
 using System;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using Microsoft.CodeAnalysis;
 
@@ -41,6 +42,24 @@ namespace AutoRest.CSharp.Output.Models.Types
                 DefaultAccessibility,
                 ExistingType,
                 existingTypeOverrides: TypeKind == TypeKind.Enum);
+        }
+
+        public string GetDefaultNamespace(Schema schema, BuildContext context)
+        {
+            var result = "";
+            if (schema.Extensions?.Namespace is string namespaceExtension)
+            {
+                result = namespaceExtension;
+            }
+            else if (context.Configuration.ModelNamespace)
+            {
+                result = $"{context.DefaultNamespace}.Models";
+            }
+            else
+            {
+                result = context.DefaultNamespace;
+            }
+            return result;
         }
     }
 }
