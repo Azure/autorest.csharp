@@ -15,7 +15,7 @@ namespace Azure.Management.Storage.Models
     {
         internal static ObjectReplicationPolicies DeserializeObjectReplicationPolicies(JsonElement element)
         {
-            Optional<IReadOnlyList<ObjectReplicationPolicy>> value = default;
+            Optional<IReadOnlyList<ObjectReplicationPolicyData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -25,10 +25,10 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<ObjectReplicationPolicy> array = new List<ObjectReplicationPolicy>();
+                    List<ObjectReplicationPolicyData> array = new List<ObjectReplicationPolicyData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(item));
+                        array.Add(ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(item));
                     }
                     value = array;
                     continue;

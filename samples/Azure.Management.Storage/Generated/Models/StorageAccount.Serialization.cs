@@ -68,7 +68,7 @@ namespace Azure.Management.Storage.Models
 
         internal static StorageAccount DeserializeStorageAccount(JsonElement element)
         {
-            Optional<Sku> sku = default;
+            Optional<SkuData> sku = default;
             Optional<Kind> kind = default;
             Optional<Identity> identity = default;
             Optional<IDictionary<string, string>> tags = default;
@@ -95,7 +95,7 @@ namespace Azure.Management.Storage.Models
             Optional<GeoReplicationStats> geoReplicationStats = default;
             Optional<bool> failoverInProgress = default;
             Optional<LargeFileSharesState> largeFileSharesState = default;
-            Optional<IReadOnlyList<PrivateEndpointConnection>> privateEndpointConnections = default;
+            Optional<IReadOnlyList<PrivateEndpointConnectionData>> privateEndpointConnections = default;
             Optional<RoutingPreference> routingPreference = default;
             Optional<BlobRestoreStatus> blobRestoreStatus = default;
             foreach (var property in element.EnumerateObject())
@@ -107,7 +107,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = Sku.DeserializeSku(property.Value);
+                    sku = SkuData.DeserializeSkuData(property.Value);
                     continue;
                 }
                 if (property.NameEquals("kind"))
@@ -361,10 +361,10 @@ namespace Azure.Management.Storage.Models
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            List<PrivateEndpointConnection> array = new List<PrivateEndpointConnection>();
+                            List<PrivateEndpointConnectionData> array = new List<PrivateEndpointConnectionData>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(PrivateEndpointConnection.DeserializePrivateEndpointConnection(item));
+                                array.Add(PrivateEndpointConnectionData.DeserializePrivateEndpointConnectionData(item));
                             }
                             privateEndpointConnections = array;
                             continue;
