@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationSummary(client.Description);
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
-                    WriteClientFields(writer, client);
+                    WriteClientFields(writer, client, context);
                     WriteClientCtors(writer, client);
 
                     foreach (var clientMethod in client.Methods)
@@ -144,13 +144,14 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string KeyCredentialVariable = "credential";
         private const string ProtocolOptions = "options";
 
-        private void WriteClientFields(CodeWriter writer, Client client)
+        private void WriteClientFields(CodeWriter writer, Client client, BuildContext context)
         {
             writer.AppendRaw($"public virtual string {EndpointProperty} {{ get; }}");
             writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-
-            // HACK - Where is this supposed to come from? Scope variable?
-            writer.Line($"private const string AuthorizationHeader = \"Ocp-Apim-Subscription-Key\";\n");
+            if (context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase))
+            {
+                writer.Line($"private const string AuthorizationHeader = \"{context.Configuration.CredentialHeaderName}\";\n");
+            }
         }
 
         private void WriteClientCtors(CodeWriter writer, Client client)
