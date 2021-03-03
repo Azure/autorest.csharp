@@ -136,7 +136,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        // TODO - Should be Endpoint with capital
         private const string EndpointProperty = "endpoint";
         private const string EndpointParameter = "endpoint";
         private const string PipelineVariable = "pipeline";
@@ -146,7 +145,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientFields(CodeWriter writer, Client client, BuildContext context)
         {
-            writer.AppendRaw($"public virtual string {EndpointProperty} {{ get; }}");
+            writer.Line($"private readonly string {EndpointProperty};");
             writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
             if (context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase))
             {
