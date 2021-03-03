@@ -1,1 +1,0 @@
-{"OutputFolder":".","Namespace":"compute","LibraryName":"compute","SharedSourceFolders":["..\\..\\..\\src\\assets\\Generator.Shared","..\\..\\..\\src\\assets\\Azure.Core.Shared"],"AzureArm":true,"PublicClients":true,"ModelNamespace":true, "HeadAsBoolean":false}
