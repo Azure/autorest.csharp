@@ -16,18 +16,18 @@ using Azure.Core.Pipeline;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Updates a virtual machine of a VM scale set. </summary>
-    public partial class VirtualMachineScaleSetVMsUpdateOperation : Operation<VirtualMachineScaleSetVM>, IOperationSource<VirtualMachineScaleSetVM>
+    public partial class VirtualMachineScaleSetVMsUpdateOperation : Operation<VirtualMachineScaleSetVMData>, IOperationSource<VirtualMachineScaleSetVMData>
     {
-        private readonly ArmOperationHelpers<VirtualMachineScaleSetVM> _operation;
+        private readonly ArmOperationHelpers<VirtualMachineScaleSetVMData> _operation;
         internal VirtualMachineScaleSetVMsUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<VirtualMachineScaleSetVM>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetVMsUpdateOperation");
+            _operation = new ArmOperationHelpers<VirtualMachineScaleSetVMData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetVMsUpdateOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override VirtualMachineScaleSetVM Value => _operation.Value;
+        public override VirtualMachineScaleSetVMData Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -45,21 +45,21 @@ namespace Azure.ResourceManager.Sample
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<VirtualMachineScaleSetVM>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<VirtualMachineScaleSetVMData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<VirtualMachineScaleSetVM>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<VirtualMachineScaleSetVMData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        VirtualMachineScaleSetVM IOperationSource<VirtualMachineScaleSetVM>.CreateResult(Response response, CancellationToken cancellationToken)
+        VirtualMachineScaleSetVMData IOperationSource<VirtualMachineScaleSetVMData>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return VirtualMachineScaleSetVM.DeserializeVirtualMachineScaleSetVM(document.RootElement);
+            return VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(document.RootElement);
         }
 
-        async ValueTask<VirtualMachineScaleSetVM> IOperationSource<VirtualMachineScaleSetVM>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<VirtualMachineScaleSetVMData> IOperationSource<VirtualMachineScaleSetVMData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return VirtualMachineScaleSetVM.DeserializeVirtualMachineScaleSetVM(document.RootElement);
+            return VirtualMachineScaleSetVMData.DeserializeVirtualMachineScaleSetVMData(document.RootElement);
         }
     }
 }

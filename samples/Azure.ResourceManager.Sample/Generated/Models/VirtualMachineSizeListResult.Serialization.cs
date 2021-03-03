@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample
     {
         internal static VirtualMachineSizeListResult DeserializeVirtualMachineSizeListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<VirtualMachineSize>> value = default;
+            Optional<IReadOnlyList<VirtualMachineSizeData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -25,10 +25,10 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<VirtualMachineSize> array = new List<VirtualMachineSize>();
+                    List<VirtualMachineSizeData> array = new List<VirtualMachineSizeData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineSize.DeserializeVirtualMachineSize(item));
+                        array.Add(VirtualMachineSizeData.DeserializeVirtualMachineSizeData(item));
                     }
                     value = array;
                     continue;
