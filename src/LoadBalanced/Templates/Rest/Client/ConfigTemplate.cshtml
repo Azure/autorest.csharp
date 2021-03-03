@@ -21,7 +21,7 @@ namespace @Settings.Namespace
         public ShouldRetryPredicate ShouldRetryPredicate { get; }
         public CustomCheckIsErrorResponse IsErrorResponse { get; }
 
-        protected LoadBalancingConfigBase(IEnumerable<string> baseUrls, int maxRetry = 3, CustomCheckIsErrorResponse isErrorResponse = null)
+        protected LoadBalancingConfigBase(IEnumerable<string> baseUrls, int maxRetry = 0, CustomCheckIsErrorResponse isErrorResponse = null)
         {
             UrlResourceManager = ResourceManager.Create(baseUrls);
             ShouldRetryPredicate = GetRetryCountPredicate(maxRetry);

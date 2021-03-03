@@ -490,4 +490,4 @@ return await this.SendWithRetry(_invocationId, async (attemptCount) =>
     }
 
     return _result;
-}, cancellationToken);
+}, cancellationToken).ConfigureAwait(false);

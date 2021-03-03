@@ -9,12 +9,26 @@ services:
     ### Get generated code to local to view .cs and .nupkg file
     ### you can change .nupkg to .zip to view generated .dll file inside the package
     # volumes:
-    #   - C:/New folder/output4:/app/output
+    #   - /Users/ranantawat/Documents/GenTest2:/app/output
+      # - /Users/ranantawat/Documents/Input:/app/input
+    #   - C:/New folder/input:/app/input
+    #   - C:/fx:/app/fx
     environment: 
-      ENV_YML_FILE_URL: ${SWAGGER_URL}
       ENV_OUTPUT_PATH: "/app/output"
+      # Comment these lines for test on local
+      ENV_YML_FILE_URL: ${SWAGGER_URL}
       ENV_NAMESPACE: ${NAMESPACE} 
       ENV_VERSION: ${VERSION}
       ENV_NUGET_KEY: ${NUGET_KEY}
       ENV_SHOULD_PUSH_NUGET: ${SHOULD_UPLOAD_TO_NUGET} 
+      ENV_USE_DATETIMEOFFSET: ${USE_DATETIMEOFFSET}
+      ENV_USE_OPENAPI_V3: ${USE_USE_OPENAPI_V3}
+      # Uncomment these lines to test on local
+      #ENV_YML_FILE_URL: ""
+      #ENV_NAMESPACE: 
+      #ENV_VERSION: 2.0.25
+      #ENV_NUGET_KEY: ""
+      #ENV_SHOULD_PUSH_NUGET: "false"
+      #ENV_USE_DATETIMEOFFSET: "false"
+      #ENV_USE_OPENAPI_V3: "true"
     command: /app/build/create-project.sh

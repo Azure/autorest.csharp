@@ -2,35 +2,28 @@
 
 OUTPUT_PATH=${ENV_OUTPUT_PATH}
 NAMESPACE=${ENV_NAMESPACE}
-INPUT_PATH=./input/swagger.yml
-INPUT_TMP=./input/swagger-tmp.yml
+INPUT_PATH=./input/swagger.yaml
 
 mkdir -p input
 rm -rf input/*
 rm -rf $OUTPUT_PATH/*
 curl -o $INPUT_PATH ${ENV_YML_FILE_URL}
 
-eolConverter "./input/swagger.yml"
+eolConverter "./input/swagger.yaml"
 
-line=$(head -n 1 $INPUT_PATH)
-
-if echo "$line" | grep -q -E '^openapi: 3'
-then
-	echo "Open api version 3 found. Convert to version 2"
-	npm install -g api-spec-converter
-	cp $INPUT_PATH $INPUT_TMP
-	api-spec-converter --from=openapi_3 --to=swagger_2 --syntax=yaml $INPUT_TMP > $INPUT_PATH
-	rm $INPUT_TMP
-elif echo "$line" | grep -q -E '\"apiVersion\":\"1.'
-then
-	echo "API version 1 found. Convert to version 2"
-	npm install -g api-spec-converter
-	cp $INPUT_PATH $INPUT_TMP
-	api-spec-converter --from=swagger_1 --to=swagger_2 --syntax=yaml $INPUT_TMP > $INPUT_PATH
-	rm $INPUT_TMP
+if [ "$ENV_USE_OPENAPI_V3" = "true" ]; then
+  if [ "$ENV_USE_DATETIMEOFFSET" = "true" ]; then
+    autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --use-datetimeoffset --version=3.0.6274
+  else
+    autorest --v3 --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --version=3.0.6274
+  fi
+else
+  if [ "$ENV_USE_DATETIMEOFFSET" = "true" ]; then
+    autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --use-datetimeoffset --legacy
+  else
+    autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials --legacy
+  fi
 fi
-
-autorest --use=/app --csharp --output-folder=$OUTPUT_PATH --namespace=$NAMESPACE --input-file=$INPUT_PATH --add-credentials
 
 dotnet new classlib -n $NAMESPACE -o $OUTPUT_PATH
 cat >NuGet.config <<EOL
@@ -57,13 +50,13 @@ EOL
 dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Newtonsoft.Json -v 11.0.2
 dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Microsoft.Rest.ClientRuntime -v 2.3.21
 dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Agoda.Frameworks.Http -v 3.0.75
-dotnet add $OUTPUT_PATH/$NAMESPACE.csproj package Microsoft.Extensions.Http.Polly
+
 rm $OUTPUT_PATH/Class1.cs
 
 dotnet pack $OUTPUT_PATH/$NAMESPACE.csproj -p:PackageVersion=$ENV_VERSION
 
 if [ "$ENV_SHOULD_PUSH_NUGET" = "true" ]; then
-  dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$ENV_VERSION.nupkg -k $ENV_NUGET_KEY -s https://bk-lib-nuget.agodadev.io/api/odata
+  dotnet nuget push $OUTPUT_PATH/bin/Debug/$NAMESPACE.$ENV_VERSION.nupkg -k $ENV_NUGET_KEY -s https://hk-lib-nuget.agodadev.io/api/odata
 else
   echo "Nuget is not pushed because ENV_SHOULD_PUSH_NUGET is set to $ENV_SHOULD_PUSH_NUGET"
 fi

@@ -5,53 +5,39 @@ This is the autorest extension for agoda which uses the roundrobin client.
 The [AutoRest](https://github.com/Azure/autorest) tool generates client libraries for accessing RESTful web services.
 
 ### Usage
+#### Test on Local
+- Clone this repo
+- Modify docker-compose.yml to
+```yaml
+version: "3"
 
-- Install nodejs > 10.11.5 on your machine
-- `npm install -g autorest`
-- `autorest --use=agoda-extension@1.0.2 --csharp --input-file=yourswagger.json --output-folder=./output-file-path --namespace=Agoda.Abc.YourName`
-
-#### AutoRest extension configuration
-
-``` yaml
-
-skip-simplifier-on-namespace: 
-  - System.Security.Permissions
-
-pipeline:
-  agoda-extension/emitter:
-    scope: scope-agoda-extension/emitter 
-    output-artifact: some-file-generated-by-agoda-extension
-  
-scope-agoda-extension/emitter:
-  input-artifact: some-file-generated-by-agoda-extension
-
-output-artifact:
-- some-file-generated-by-agoda-extension
+services:
+  autorest-gen: 
+    ### Following commented out lines are helpful for local testing
+    ### Build image from local docker file
+    build: .
+    ### Get generated code to local to view .cs and .nupkg file
+    ### you can change .nupkg to .zip to view generated .dll file inside the package
+    volumes:
+      - C:/xxxxxxxxxxx/output:/app/output
+      - C:/xxxxxxxxxxx/input:/app/input
+    environment: 
+      #ENV_YML_FILE_URL: ${SWAGGER_URL}
+      ENV_OUTPUT_PATH: "/app/output"
+      #ENV_NAMESPACE: ${NAMESPACE} 
+      #ENV_VERSION: ${VERSION}
+      #ENV_NUGET_KEY: ${NUGET_KEY}
+      #ENV_SHOULD_PUSH_NUGET: ${SHOULD_UPLOAD_TO_NUGET} 
+      #ENV_USE_DATETIMEOFFSET: ${USE_DATETIMEOFFSET}
+      #ENV_USE_OPENAPI_V3: ${USE_USE_OPENAPI_V3}
+      # To test on local
+      ENV_YML_FILE_URL: "url to swagger.json/yaml"
+      ENV_NAMESPACE: YourNamespace
+      ENV_VERSION: 2.0.25
+      ENV_NUGET_KEY: ""
+      ENV_SHOULD_PUSH_NUGET: "false"
+      ENV_USE_DATETIMEOFFSET: "false"
+    command: /app/build/create-project.sh
 ```
-
-### Contribution
-
-- Clone the repo. 
-- `npm install -g http-server`
-- `http-server -p 8085`
-- You can test the extension by making changes and running `./build/build.sh`
-- Use the above script because it clears the caches for you which may prevent changes from reflecting.
-
-### Pre-requisites to tests
-
-You need to have a working version of docker on your system.
-
-### Build
-
-```
-./build/start-test-server.sh
-# Linux (PowerShell)
-pwsh ./build/build.ps1
-```
-
-### Test
-```
-# Run build.ps1 before test
-./build/start-test-server.sh  
-dotnet test
-```
+- run docker-compose up --build
+- check the result at the location you set in the volume

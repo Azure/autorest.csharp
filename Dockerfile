@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y -q --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 10.15.0
+ENV NODE_VERSION 13.3.0
 
 # # Install nvm with node and npm
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | bash \
@@ -43,8 +43,8 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 RUN npm config set strict-ssl false
 RUN node -v
-RUN npm install npm@6.12.0 -g
-RUN npm install -g autorest
+RUN npm install npm -g
+RUN npm install -g autorest@latest
 RUN npm i -g eol-converter-cli
 
 COPY package.json /tmp/package.json

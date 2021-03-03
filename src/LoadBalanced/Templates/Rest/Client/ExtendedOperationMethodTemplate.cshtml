@@ -36,17 +36,13 @@ if (Model.SyncMethods == SyncMethodsGenerationMode.All || Model.SyncMethods == S
 @(Model.GetObsoleteAttribute())
 @:@((Model as MethodCs).AccessModifier) @Model.ReturnTypeString @(Model.Name)(@Model.GetSyncMethodParameterDeclaration(false))
 @:{
-    if (Model.ReturnType.Body != null)
+    if (Model.ReturnType.Body != null || Model.ReturnType.Headers != null)
     {
-    @:return @(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
-    }
-    else if (Model.ReturnType.Headers != null)
-    {
-    @:return @(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
+    @:return @(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).ConfigureAwait(false).GetAwaiter().GetResult();
     }
     else
     {
-    @:@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).GetAwaiter().GetResult();
+    @:@(Model.Name)Async(@(Model.SyncMethodInvocationArgs)).ConfigureAwait(false).GetAwaiter().GetResult();
     }
 @:}
 @EmptyLine
