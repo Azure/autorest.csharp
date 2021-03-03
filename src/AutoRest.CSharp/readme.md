@@ -44,7 +44,7 @@ help-content:
       description: Pass shared folder paths through here. Common values point to the shared generator assets and shared azure core assets in autorest.csharp
       type: string
     - key: public-clients
-      description: Whether to have your client public. Defaults to `false`.
+      description: Whether to generate public client. Defaults to `false`.
       type: bool
     - key: model-namespace
       description: Whether to add a separate namespace of Models, more specifically adding `{value-from-namespace-flag}.Models`. Defaults to `true`.
