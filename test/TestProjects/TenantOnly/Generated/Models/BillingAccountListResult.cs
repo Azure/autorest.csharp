@@ -16,20 +16,20 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of BillingAccountListResult. </summary>
         internal BillingAccountListResult()
         {
-            Value = new ChangeTrackingList<BillingAccount>();
+            Value = new ChangeTrackingList<BillingAccountData>();
         }
 
         /// <summary> Initializes a new instance of BillingAccountListResult. </summary>
         /// <param name="value"> The list of billing accounts. </param>
         /// <param name="nextLink"> The link (url) to the next page of results. </param>
-        internal BillingAccountListResult(IReadOnlyList<BillingAccount> value, string nextLink)
+        internal BillingAccountListResult(IReadOnlyList<BillingAccountData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of billing accounts. </summary>
-        public IReadOnlyList<BillingAccount> Value { get; }
+        public IReadOnlyList<BillingAccountData> Value { get; }
         /// <summary> The link (url) to the next page of results. </summary>
         public string NextLink { get; }
     }

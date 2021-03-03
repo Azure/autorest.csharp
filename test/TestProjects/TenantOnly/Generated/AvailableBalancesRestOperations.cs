@@ -65,7 +65,7 @@ namespace TenantOnly
         /// <param name="billingProfileName"> The ID that uniquely identifies a billing profile. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="billingProfileName"/> is null. </exception>
-        public async Task<Response<AvailableBalance>> GetAsync(string billingAccountName, string billingProfileName, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailableBalanceData>> GetAsync(string billingAccountName, string billingProfileName, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -82,9 +82,9 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        AvailableBalance value = default;
+                        AvailableBalanceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AvailableBalance.DeserializeAvailableBalance(document.RootElement);
+                        value = AvailableBalanceData.DeserializeAvailableBalanceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -97,7 +97,7 @@ namespace TenantOnly
         /// <param name="billingProfileName"> The ID that uniquely identifies a billing profile. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="billingProfileName"/> is null. </exception>
-        public Response<AvailableBalance> Get(string billingAccountName, string billingProfileName, CancellationToken cancellationToken = default)
+        public Response<AvailableBalanceData> Get(string billingAccountName, string billingProfileName, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -114,9 +114,9 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        AvailableBalance value = default;
+                        AvailableBalanceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AvailableBalance.DeserializeAvailableBalance(document.RootElement);
+                        value = AvailableBalanceData.DeserializeAvailableBalanceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
