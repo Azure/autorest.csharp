@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Output.Models
             return parameters;
         }
 
-        public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType)
+        public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType, bool includeProtocolOptions = false)
         {
             List<Parameter> parameters = new List<Parameter>();
 
@@ -163,6 +163,17 @@ namespace AutoRest.CSharp.Output.Models
                 null,
                 true);
             parameters.Add(credentialParam);
+
+            if (includeProtocolOptions)
+            {
+                var protocolParam = new Parameter(
+                    "options",
+                    "Options to control the underlying operations.",
+                    typeof(Azure.Core.ProtocolClientOptions),
+                    Constant.NewInstanceOf(typeof(Azure.Core.ProtocolClientOptions)),
+                    true);
+                parameters.Add(protocolParam);
+            }
 
             parameters.AddRange(GetOptionalParameters());
 

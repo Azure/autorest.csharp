@@ -8,6 +8,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -204,20 +205,20 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteSimplifiedConstructor (CodeWriter writer, Client client, bool keyCredential)
         {
+            var ctorParams = client.GetClientConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential));
+
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
-            foreach (Parameter parameter in client.RestClient.Parameters)
+            foreach (Parameter parameter in ctorParams)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
-            writer.WriteXmlDocumentationParameter(KeyCredentialVariable, "The credentials to use.");
 
             writer.Append($"public {client.Type.Name:D}(");
-            foreach (Parameter parameter in client.RestClient.Parameters)
+            foreach (Parameter parameter in ctorParams)
             {
                 writer.WriteParameter(parameter);
             }
             writer.RemoveTrailingComma();
-            writer.Append($", {(keyCredential ? "AzureKeyCredential" : "TokenCredential")} {KeyCredentialVariable}");
             writer.Line($") : this(endpoint, credential, new {typeof(Azure.Core.ProtocolClientOptions)}())");
             using (writer.Scope())
             {
@@ -227,22 +228,20 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteFullConstructor (CodeWriter writer, Client client, bool keyCredential)
         {
+            var ctorParams = client.GetClientConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential), true);
+
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
-            foreach (Parameter parameter in client.RestClient.Parameters)
+            foreach (Parameter parameter in ctorParams)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
-            writer.WriteXmlDocumentationParameter(KeyCredentialVariable, "The credentials to use.");
-            writer.WriteXmlDocumentationParameter(ProtocolOptions, "Options to control the underlying operations.");
 
             writer.Append($"internal {client.Type.Name:D}(");
-            foreach (Parameter parameter in client.RestClient.Parameters)
+            foreach (Parameter parameter in ctorParams)
             {
                 writer.WriteParameter(parameter);
             }
             writer.RemoveTrailingComma();
-            writer.Append($", {(keyCredential ? "AzureKeyCredential" : "TokenCredential")} {KeyCredentialVariable}");
-            writer.Append($", {typeof(Azure.Core.ProtocolClientOptions)} {ProtocolOptions}");
             writer.Line($")");
 
             using (writer.Scope())
