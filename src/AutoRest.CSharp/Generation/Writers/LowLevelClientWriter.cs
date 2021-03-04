@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
                     WriteClientFields(writer, client, context);
-                    WriteClientCtors(writer, client);
+                    WriteClientCtors(writer, client, context);
 
                     foreach (var clientMethod in client.Methods)
                     {
@@ -142,22 +142,55 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string PipelineField = "_" + PipelineVariable;
         private const string KeyCredentialVariable = "credential";
         private const string ProtocolOptions = "options";
+        private const string AuthorizationHeaderConstant = "AuthorizationHeader";
+        private const string ScopesConstant = "AuthorizationScopes";
+
+        private bool HasKeyAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase);
+        private bool HasTokenAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase);
 
         private void WriteClientFields(CodeWriter writer, Client client, BuildContext context)
         {
             writer.Line($"private readonly string {EndpointProperty};");
             writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-            if (context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase))
+            if (HasKeyAuth (context))
             {
-                writer.Line($"private const string AuthorizationHeader = \"{context.Configuration.CredentialHeaderName}\";\n");
+                writer.Line($"private const string {AuthorizationHeaderConstant} = \"{context.Configuration.CredentialHeaderName}\";");
             }
+            if (HasTokenAuth (context))
+            {
+                writer.Append($"private readonly string[] {ScopesConstant} = ");
+                writer.Append($"{{ ");
+                foreach (var credentialScope in context.Configuration.CredentialScopes)
+                {
+                    writer.Append($"{credentialScope:L}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.Line($"}};");
+            }
+            writer.Line();
         }
 
-        private void WriteClientCtors(CodeWriter writer, Client client)
+        private void WriteClientCtors(CodeWriter writer, Client client, BuildContext context)
         {
             WriteEmptyConstructor(writer, client);
-            WriteSimplifiedConstructor(writer, client);
-            WriteFullConstructor(writer, client);
+
+            bool hasKeyAuth = HasKeyAuth (context);
+            bool hasTokenAuth = HasTokenAuth (context);
+            if (!hasKeyAuth && !hasTokenAuth)
+            {
+                throw new InvalidOperationException ("Has neither Key or Token credential-types?");
+            }
+
+            if (hasKeyAuth)
+            {
+                WriteSimplifiedConstructor(writer, client, true);
+                WriteFullConstructor(writer, client, true);
+            }
+            if (hasTokenAuth)
+            {
+                WriteSimplifiedConstructor(writer, client, false);
+                WriteFullConstructor(writer, client, false);
+            }
         }
 
         private void WriteEmptyConstructor (CodeWriter writer, Client client)
@@ -169,7 +202,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteSimplifiedConstructor (CodeWriter writer, Client client)
+        private void WriteSimplifiedConstructor (CodeWriter writer, Client client, bool keyCredential)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             foreach (Parameter parameter in client.RestClient.Parameters)
@@ -184,7 +217,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteParameter(parameter);
             }
             writer.RemoveTrailingComma();
-            writer.Append($", AzureKeyCredential {KeyCredentialVariable}");
+            writer.Append($", {(keyCredential ? "AzureKeyCredential" : "TokenCredential")} {KeyCredentialVariable}");
             writer.Line($") : this(endpoint, credential, new {typeof(Azure.Core.ProtocolClientOptions)}())");
             using (writer.Scope())
             {
@@ -192,7 +225,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteFullConstructor (CodeWriter writer, Client client)
+        private void WriteFullConstructor (CodeWriter writer, Client client, bool keyCredential)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             foreach (Parameter parameter in client.RestClient.Parameters)
@@ -208,7 +241,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteParameter(parameter);
             }
             writer.RemoveTrailingComma();
-            writer.Append($", AzureKeyCredential {KeyCredentialVariable}");
+            writer.Append($", {(keyCredential ? "AzureKeyCredential" : "TokenCredential")} {KeyCredentialVariable}");
             writer.Append($", {typeof(Azure.Core.ProtocolClientOptions)} {ProtocolOptions}");
             writer.Line($")");
 
@@ -220,7 +253,14 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({KeyCredentialVariable}));");
                 }
                 writer.Line($"this.{EndpointProperty} = {EndpointParameter};");
-                writer.Line($"{PipelineField} =  {typeof(HttpPipelineBuilder)}.Build({ProtocolOptions}, new {typeof(AzureKeyCredentialPolicy)}({KeyCredentialVariable}, AuthorizationHeader));");
+                if (keyCredential)
+                {
+                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({ProtocolOptions}, new {typeof(AzureKeyCredentialPolicy)}({KeyCredentialVariable}, {AuthorizationHeaderConstant}));");
+                }
+                else
+                {
+                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({ProtocolOptions}, new {typeof(BearerTokenAuthenticationPolicy)}({KeyCredentialVariable}, {ScopesConstant}));");
+                }
             }
             writer.Line();
         }
