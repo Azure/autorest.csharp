@@ -394,6 +394,23 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
+            if (_context.Configuration.LowLevelClient)
+            {
+                methodParameters = new Dictionary<RequestParameter, Parameter>(methodParameters.Where(x => {
+                    if (x.Key.Protocol.Http is HttpParameter httpParameter)
+                    {
+                        switch (httpParameter.In)
+                        {
+                            case ParameterLocation.Header:
+                            case ParameterLocation.Query:
+                            case ParameterLocation.Path:
+                                return true;
+                        }
+                    }
+                    return false;
+                }));
+            }
+
             return new RestClientMethod(
                 operationName,
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),

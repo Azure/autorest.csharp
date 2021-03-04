@@ -56,6 +56,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async, bool useDynamic)
         {
+            var parameters = clientMethod.RestClientMethod.Parameters;
+
             CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
             string responseType = async ? "Task<DynamicResponse>" : "DynamicResponse";
 
@@ -66,20 +68,11 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.UseNamespace("Azure");
             writer.UseNamespace("Azure.Core");
 
-            var parameters = clientMethod.RestClientMethod.Parameters;
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
-
-            for (int i = 0 ; i < parameters.Length; ++i)
+            writer.WriteXmlDocumentationParameter("body", "The request body");
+            foreach (var parameter in parameters)
             {
-                if (i == 0)
-                {
-                    writer.WriteXmlDocumentationParameter("body", "The request body");
-                }
-                else
-                {
-                    Parameter parameter = parameters[i];
-                    writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-                }
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
@@ -87,25 +80,19 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
             writer.Append($"public virtual {asyncText} {responseType} {methodName}(");
+            writer.Append($"{(useDynamic ? "dynamic" : "JsonData")} body, ");
 
 
-            for (int i = 0 ; i < parameters.Length; ++i)
+            foreach (var parameter in parameters)
             {
-                if (i == 0)
-                {
-                    writer.Append($"{(useDynamic ? "dynamic" : "JsonData")} body, ");
-                }
-                else
-                {
-                    writer.WriteParameter(parameters[i]);
-                }
+                writer.WriteParameter(parameter);
             }
             writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
 
             using (writer.Scope())
             {
                 writer.Append($"DynamicRequest req = {RequestClientWriter.CreateRequestMethodName(clientMethod.Name)}(");
-                foreach (var parameter in clientMethod.RestClientMethod.Parameters.Skip(1))
+                foreach (var parameter in clientMethod.RestClientMethod.Parameters)
                 {
                      writer.Append($"{parameter.Name:I}, ");
                 }
