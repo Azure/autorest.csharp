@@ -10,5 +10,5 @@ namespace: Azure.CognitiveServices.TextAnalytics
 low-level-client: true
 credential-types: TokenCredential;AzureKeyCredential
 credential-header-name: Ocp-Apim-Subscription-Key
-credential-scopes: https://cognitiveservices.azure.com/
+credential-scopes: https://cognitiveservices.azure.com/scope
 ```
