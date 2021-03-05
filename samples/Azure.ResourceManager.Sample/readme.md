@@ -27,6 +27,9 @@ operation-group-to-resource:
    VirtualMachineSizes: VirtualMachineSize
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
    LogAnalytics: LogAnalyticsOperationResult
+resource-rename:
+   LogAnalyticsOperationResult: LogAnalytics
+   SshPublicKeyResource: SshPublicKey
 modelerfour:
   lenient-model-deduplication: true
 ```

@@ -178,7 +178,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string resourceGroupName, string sshPublicKeyName, SshPublicKeyResourceData parameters)
+        internal HttpMessage CreateCreateRequest(string resourceGroupName, string sshPublicKeyName, SshPublicKeyData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -207,7 +207,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="sshPublicKeyName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SshPublicKeyResourceData>> CreateAsync(string resourceGroupName, string sshPublicKeyName, SshPublicKeyResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SshPublicKeyData>> CreateAsync(string resourceGroupName, string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -229,9 +229,9 @@ namespace Azure.ResourceManager.Sample
                 case 200:
                 case 201:
                     {
-                        SshPublicKeyResourceData value = default;
+                        SshPublicKeyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SshPublicKeyResourceData.DeserializeSshPublicKeyResourceData(document.RootElement);
+                        value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -245,7 +245,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to create the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="sshPublicKeyName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SshPublicKeyResourceData> Create(string resourceGroupName, string sshPublicKeyName, SshPublicKeyResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<SshPublicKeyData> Create(string resourceGroupName, string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -267,9 +267,9 @@ namespace Azure.ResourceManager.Sample
                 case 200:
                 case 201:
                     {
-                        SshPublicKeyResourceData value = default;
+                        SshPublicKeyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SshPublicKeyResourceData.DeserializeSshPublicKeyResourceData(document.RootElement);
+                        value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -316,7 +316,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publicKey"> SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async Task<Response<SshPublicKeyResourceData>> UpdateAsync(string resourceGroupName, string sshPublicKeyName, IDictionary<string, string> tags = null, string publicKey = null, CancellationToken cancellationToken = default)
+        public async Task<Response<SshPublicKeyData>> UpdateAsync(string resourceGroupName, string sshPublicKeyName, IDictionary<string, string> tags = null, string publicKey = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -333,9 +333,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        SshPublicKeyResourceData value = default;
+                        SshPublicKeyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SshPublicKeyResourceData.DeserializeSshPublicKeyResourceData(document.RootElement);
+                        value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -350,7 +350,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publicKey"> SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        public Response<SshPublicKeyResourceData> Update(string resourceGroupName, string sshPublicKeyName, IDictionary<string, string> tags = null, string publicKey = null, CancellationToken cancellationToken = default)
+        public Response<SshPublicKeyData> Update(string resourceGroupName, string sshPublicKeyName, IDictionary<string, string> tags = null, string publicKey = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -367,9 +367,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        SshPublicKeyResourceData value = default;
+                        SshPublicKeyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SshPublicKeyResourceData.DeserializeSshPublicKeyResourceData(document.RootElement);
+                        value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -475,7 +475,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async Task<Response<SshPublicKeyResourceData>> GetAsync(string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public async Task<Response<SshPublicKeyData>> GetAsync(string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -492,9 +492,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        SshPublicKeyResourceData value = default;
+                        SshPublicKeyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SshPublicKeyResourceData.DeserializeSshPublicKeyResourceData(document.RootElement);
+                        value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -507,7 +507,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        public Response<SshPublicKeyResourceData> Get(string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public Response<SshPublicKeyData> Get(string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -524,9 +524,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        SshPublicKeyResourceData value = default;
+                        SshPublicKeyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SshPublicKeyResourceData.DeserializeSshPublicKeyResourceData(document.RootElement);
+                        value = SshPublicKeyData.DeserializeSshPublicKeyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
