@@ -179,6 +179,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
+                /*if (EnsureResourceData().ContainsKey(operationGroup.Resource))
+                {
+
+                }*/
                 _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
             }
 
@@ -302,6 +306,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
+                string? nameOverride;
+                if (_context.Configuration.ResourceRename.TryGetValue(operationsGroup.Resource, out nameOverride))
+                {
+                    operationsGroup.Resource = nameOverride;
+                }
             }
         }
 
