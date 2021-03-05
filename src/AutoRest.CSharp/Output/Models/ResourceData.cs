@@ -9,27 +9,33 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class ResourceData : ResourceOperation
+    internal class ResourceData : ObjectType
     {
         private const string _suffixValue = "Data";
         private BuildContext _context;
         private ObjectTypeProperty[]? _properties;
+        private string _prefix;
         private Schema _schema;
 
-        public ResourceData(Schema schema, OperationGroup operationGroup, BuildContext context) : base(operationGroup, context)
+        public ResourceData(ObjectSchema schema, OperationGroup operationGroup, BuildContext context, bool isResourceModel) : base(schema, context, isResourceModel)
         {
-            _context = context;
-            _schema = schema;
-            DefaultNamespace = GetDefaultNamespace(schema, context);
-            var a = (ObjectType)_context.Library.ResourceSchemaMap[_schema];
+            var nameOverride = schema.NameOverride;
+            if (nameOverride != null)
+            {
+                operationGroup.Resource = nameOverride;
+            }
 
+            _context = context;
+            _prefix = operationGroup.Resource;
+            _schema = schema;
+            Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, _prefix));
         }
 
-        public ObjectTypeProperty[] Properties => _properties ??= BuildProperties();
-        protected override string SuffixValue => _suffixValue;
-        protected override string DefaultNamespace { get; }
+        public new string? Description { get; }
 
-        protected override string CreateDescription(OperationGroup operationGroup, string clientPrefix)
+        public new ObjectTypeProperty[] Properties => _properties ??= BuildProperties();
+
+        protected string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
             StringBuilder summary = new StringBuilder();
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?

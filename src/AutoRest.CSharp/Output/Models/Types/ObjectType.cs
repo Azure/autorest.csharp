@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
         }
 
-        public ObjectType(ObjectSchema objectSchema, BuildContext context, bool isDataType) : base(context)
+        public ObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceModel) : base(context)
         {
             _objectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
@@ -51,8 +51,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            DefaultName = objectSchema.CSharpName();
-            if (isDataType)
+            DefaultName = objectSchema.NameOverride == null ? objectSchema.CSharpName() : objectSchema.NameOverride;
+            if (isResourceModel)
             {
                 DefaultName = DefaultName + "Data";
             }

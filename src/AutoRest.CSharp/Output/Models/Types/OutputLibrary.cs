@@ -201,7 +201,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (!_resourceData.ContainsKey(operation.Resource))
                     {
-                        _resourceData.Add(operation.Resource, new ResourceData(schema, operation, _context));
+                        _resourceData.Add(operation.Resource, new ResourceData((ObjectSchema)schema, operation, _context, true));
                     }
                 }
             }
