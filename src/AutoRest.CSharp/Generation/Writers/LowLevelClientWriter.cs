@@ -135,6 +135,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string ProtocolOptions = "options";
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
         private const string ScopesConstant = "AuthorizationScopes";
+        private const string APIConstant = "apiVersion";
 
         private bool HasKeyAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase);
         private bool HasTokenAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase);
@@ -143,6 +144,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             writer.Line($"private readonly string {EndpointProperty};");
             writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
+            var apiVersion = client.RestClient.Parameters.FirstOrDefault(x => x.IsApiVersionParameter);
+            if (apiVersion?.DefaultValue != null)
+            {
+                writer.Line($"private readonly string {APIConstant} = \"{apiVersion.DefaultValue!.Value.Value}\";");
+            }
+
             if (HasKeyAuth (context))
             {
                 writer.Line($"private const string {AuthorizationHeaderConstant} = \"{context.Configuration.CredentialHeaderName}\";");
