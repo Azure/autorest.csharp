@@ -21,10 +21,12 @@ namespace body_formdata
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal FormdataRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of FormdataClient for mocking. </summary>
         protected FormdataClient()
         {
         }
+
         /// <summary> Initializes a new instance of FormdataClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

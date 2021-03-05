@@ -20,10 +20,12 @@ namespace JsonAsBinary
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal JsonAsBinaryRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of JsonAsBinaryClient for mocking. </summary>
         protected JsonAsBinaryClient()
         {
         }
+
         /// <summary> Initializes a new instance of JsonAsBinaryClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

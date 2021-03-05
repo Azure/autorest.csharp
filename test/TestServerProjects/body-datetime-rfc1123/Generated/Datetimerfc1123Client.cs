@@ -19,10 +19,12 @@ namespace body_datetime_rfc1123
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal Datetimerfc1123RestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of Datetimerfc1123Client for mocking. </summary>
         protected Datetimerfc1123Client()
         {
         }
+
         /// <summary> Initializes a new instance of Datetimerfc1123Client. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
