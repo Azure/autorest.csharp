@@ -179,10 +179,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                /*if (EnsureResourceData().ContainsKey(operationGroup.Resource))
-                {
-
-                }*/
                 _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
             }
 
