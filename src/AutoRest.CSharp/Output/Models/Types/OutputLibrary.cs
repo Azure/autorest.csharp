@@ -48,6 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (context.Configuration.AzureArm)
             {
                 DecorateOperationGroup();
+                DecorateSchema();
             }
         }
 
@@ -262,8 +263,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private TypeProvider BuildResourceModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
-            ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
             ObjectSchema objectSchema => new ObjectType(objectSchema, _context, true),
             _ => throw new NotImplementedException()
         };
@@ -303,6 +302,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
+            }
+        }
+
+        private void DecorateSchema()
+        {
+            foreach (var schema in _allSchemas)
+            {
+                string? resourceName;
+                if (_context.Configuration.ResourceRename.TryGetValue(schema.Name, out resourceName))
+                {
+                    schema.NameOverride = resourceName;
+                }
             }
         }
 

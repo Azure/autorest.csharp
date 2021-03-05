@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, JsonElement? operationGroupToResourceType = default, JsonElement? operationGroupToResource = default)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, JsonElement? operationGroupToResourceType = default, JsonElement? operationGroupToResource = default, JsonElement? resourceRename = default)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             SkipCSProjPackageReference = skipCSProjPackageReference;
             OperationGroupToResourceType = operationGroupToResourceType?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
             OperationGroupToResource = operationGroupToResource?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
+            ResourceRename = resourceRename?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(resourceRename.ToString());
         }
 
         public string OutputFolder { get; }
@@ -40,6 +41,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static string ProjectRelativeDirectory = "../";
         public Dictionary<string, string> OperationGroupToResourceType;
         public Dictionary<string, string> OperationGroupToResource;
+        public Dictionary<string, string> ResourceRename;
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -55,7 +57,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<bool?>("skip-csproj-packagereference").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult()
+                autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
+                autoRest.GetValue<JsonElement?>("resource-rename").GetAwaiter().GetResult()
             );
 
         }

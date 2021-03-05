@@ -75,6 +75,15 @@ namespace AutoRest.CSharp.AutoRest.Communication
                         }
                         writer.WriteEndObject();
                     }
+                    if (configuration.ResourceRename.Count > 0)
+                    {
+                        writer.WriteStartObject(nameof(Configuration.ResourceRename));
+                        foreach (var keyval in configuration.ResourceRename)
+                        {
+                            writer.WriteString(keyval.Key, keyval.Value);
+                        }
+                        writer.WriteEndObject();
+                    }
                     writer.WriteEndObject();
                 }
 
@@ -110,7 +119,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.OperationGroupToResourceType)),
-                root.GetProperty(nameof(Configuration.OperationGroupToResource))
+                root.GetProperty(nameof(Configuration.OperationGroupToResource)),
+                root.GetProperty(nameof(Configuration.ResourceRename))
             );
         }
     }
