@@ -8,13 +8,14 @@ namespace AutoRest.CSharp.Output.Models.Shared
 {
     internal class Parameter
     {
-        public Parameter(string name, string? description, CSharpType type, Constant? defaultValue, bool validateNotNull)
+        public Parameter(string name, string? description, CSharpType type, Constant? defaultValue, bool validateNotNull, bool isApiVersionParameter = false)
         {
             Name = name;
             Description = description;
             Type = type;
             DefaultValue = defaultValue;
             ValidateNotNull = validateNotNull;
+            IsApiVersionParameter = isApiVersionParameter;
         }
 
         public CSharpType Type { get; }
@@ -22,5 +23,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public string? Description { get; }
         public Constant? DefaultValue { get; }
         public bool ValidateNotNull { get; }
+        public bool IsApiVersionParameter { get; }
     }
 }

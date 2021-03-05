@@ -20,10 +20,12 @@ namespace non_string_enum
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal FloatRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of FloatClient for mocking. </summary>
         protected FloatClient()
         {
         }
+
         /// <summary> Initializes a new instance of FloatClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

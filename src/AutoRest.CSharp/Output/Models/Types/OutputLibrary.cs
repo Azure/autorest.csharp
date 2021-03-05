@@ -297,7 +297,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 MapHttpMethodToOperation(operationsGroup);
                 string? resourceType;
-                operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ConstructOperationResourseType(operationsGroup);
+                operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ResourceTypeBuilder.ConstructOperationResourseType(operationsGroup);
                 operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
@@ -337,65 +337,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
             }
-        }
-
-        private string ConstructOperationResourseType(OperationGroup operationsGroup)
-        {
-            var method = GetBestMethod(operationsGroup);
-            if (method == null)
-            {
-                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key} 
-                                            Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
-            }
-            var indexOfProvider = method.Path.IndexOf(ProviderSegment.Providers);
-            if (indexOfProvider < 0)
-            {
-                throw new ArgumentException($"Could not set ResourceType for operations group {operationsGroup.Key}. No {ProviderSegment.Providers} string found in the URI");
-            }
-            var resourceType = ConstructResourceType(method.Path.Substring(indexOfProvider + ProviderSegment.Providers.Length));
-
-            return resourceType.ToString().TrimEnd('/');
-        }
-
-        private static string ConstructResourceType(string httpRequestUri)
-        {
-            var returnString = new StringBuilder();
-            var insideBrace = false;
-
-            foreach (var ch in httpRequestUri)
-            {
-                if (ch == '{')
-                {
-                    insideBrace = true;
-                }
-                else if (ch == '}')
-                {
-                    insideBrace = false;
-                }
-                else if (!insideBrace)
-                {
-                    returnString.Append(ch);
-                }
-            }
-            return returnString.ToString();
-        }
-
-        private HttpRequest? GetBestMethod(OperationGroup operationsGroup)
-        {
-            List<ServiceRequest>? requests;
-            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Delete, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Patch, out requests))
-            {
-                return (HttpRequest?)requests[0].Protocol?.Http;
-            }
-            return null;
         }
 
         private void AddOperationGroupToResourceMap(OperationGroup operationsGroup)

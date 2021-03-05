@@ -19,10 +19,12 @@ namespace azure_special_properties
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal SubscriptionInMethodRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of SubscriptionInMethodClient for mocking. </summary>
         protected SubscriptionInMethodClient()
         {
         }
+
         /// <summary> Initializes a new instance of SubscriptionInMethodClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
