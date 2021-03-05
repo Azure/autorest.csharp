@@ -7,8 +7,8 @@
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the BlobServiceProperties data model. </summary>
-    public partial class BlobServicePropertiesData
+    /// <summary> A class representing the BlobService data model. </summary>
+    public partial class BlobServiceData
     {
         /// <summary> Sku name and tier. </summary>
         public SkuData Sku { get; }

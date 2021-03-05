@@ -9,8 +9,8 @@ using System.Collections.Generic;
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the StorageAccountCreateParameters data model. </summary>
-    public partial class StorageAccountCreateParametersData
+    /// <summary> A class representing the StorageAccount data model. </summary>
+    public partial class StorageAccountData
     {
         /// <summary> Required. Gets or sets the SKU name. </summary>
         public SkuData Sku { get; }

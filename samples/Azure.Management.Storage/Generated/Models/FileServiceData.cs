@@ -7,8 +7,8 @@
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the FileServiceProperties data model. </summary>
-    public partial class FileServicePropertiesData
+    /// <summary> A class representing the FileService data model. </summary>
+    public partial class FileServiceData
     {
         /// <summary> Sku name and tier. </summary>
         public SkuData Sku { get; }
