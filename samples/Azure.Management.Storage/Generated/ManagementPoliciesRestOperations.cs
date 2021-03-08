@@ -77,7 +77,7 @@ namespace Azure.Management.Storage
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<ManagementPolicy>> GetAsync(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public async Task<Response<ManagementPolicyData>> GetAsync(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -94,9 +94,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ManagementPolicy value = default;
+                        ManagementPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
+                        value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -110,7 +110,7 @@ namespace Azure.Management.Storage
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<ManagementPolicy> Get(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public Response<ManagementPolicyData> Get(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -127,9 +127,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ManagementPolicy value = default;
+                        ManagementPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
+                        value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -156,7 +156,7 @@ namespace Azure.Management.Storage
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new ManagementPolicy()
+            var model = new ManagementPolicyData()
             {
                 Policy = policy
             };
@@ -173,7 +173,7 @@ namespace Azure.Management.Storage
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<ManagementPolicy>> CreateOrUpdateAsync(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ManagementPolicyData>> CreateOrUpdateAsync(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -190,9 +190,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ManagementPolicy value = default;
+                        ManagementPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
+                        value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -207,7 +207,7 @@ namespace Azure.Management.Storage
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<ManagementPolicy> CreateOrUpdate(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public Response<ManagementPolicyData> CreateOrUpdate(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -224,9 +224,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ManagementPolicy value = default;
+                        ManagementPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ManagementPolicy.DeserializeManagementPolicy(document.RootElement);
+                        value = ManagementPolicyData.DeserializeManagementPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

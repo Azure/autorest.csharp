@@ -147,7 +147,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer)
+        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -179,7 +179,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="blobContainer"/> is null. </exception>
-        public async Task<Response<BlobContainer>> CreateAsync(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobContainerData>> CreateAsync(string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -205,9 +205,9 @@ namespace Azure.Management.Storage
                 case 200:
                 case 201:
                     {
-                        BlobContainer value = default;
+                        BlobContainerData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -222,7 +222,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="blobContainer"/> is null. </exception>
-        public Response<BlobContainer> Create(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
+        public Response<BlobContainerData> Create(string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -248,9 +248,9 @@ namespace Azure.Management.Storage
                 case 200:
                 case 201:
                     {
-                        BlobContainer value = default;
+                        BlobContainerData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -258,7 +258,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer)
+        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -290,7 +290,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="blobContainer"/> is null. </exception>
-        public async Task<Response<BlobContainer>> UpdateAsync(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobContainerData>> UpdateAsync(string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -315,9 +315,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobContainer value = default;
+                        BlobContainerData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -332,7 +332,7 @@ namespace Azure.Management.Storage
         /// <param name="blobContainer"> Properties to update for the blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="blobContainer"/> is null. </exception>
-        public Response<BlobContainer> Update(string resourceGroupName, string accountName, string containerName, BlobContainer blobContainer, CancellationToken cancellationToken = default)
+        public Response<BlobContainerData> Update(string resourceGroupName, string accountName, string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -357,9 +357,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobContainer value = default;
+                        BlobContainerData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -394,7 +394,7 @@ namespace Azure.Management.Storage
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="containerName"/> is null. </exception>
-        public async Task<Response<BlobContainer>> GetAsync(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobContainerData>> GetAsync(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -415,9 +415,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobContainer value = default;
+                        BlobContainerData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -431,7 +431,7 @@ namespace Azure.Management.Storage
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="containerName"/> is null. </exception>
-        public Response<BlobContainer> Get(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
+        public Response<BlobContainerData> Get(string resourceGroupName, string accountName, string containerName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -452,9 +452,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobContainer value = default;
+                        BlobContainerData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BlobContainer.DeserializeBlobContainer(document.RootElement);
+                        value = BlobContainerData.DeserializeBlobContainerData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

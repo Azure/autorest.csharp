@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string hostGroupName, string hostName, DedicatedHost parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string hostGroupName, string hostName, DedicatedHostData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -81,7 +81,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, <paramref name="hostName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string hostGroupName, string hostName, DedicatedHost parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string hostGroupName, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, <paramref name="hostName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdate(string resourceGroupName, string hostGroupName, string hostName, DedicatedHost parameters, CancellationToken cancellationToken = default)
+        public Response CreateOrUpdate(string resourceGroupName, string hostGroupName, string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -365,7 +365,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="hostName"/> is null. </exception>
-        public async Task<Response<DedicatedHost>> GetAsync(string resourceGroupName, string hostGroupName, string hostName, CancellationToken cancellationToken = default)
+        public async Task<Response<DedicatedHostData>> GetAsync(string resourceGroupName, string hostGroupName, string hostName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -386,9 +386,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        DedicatedHost value = default;
+                        DedicatedHostData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = DedicatedHost.DeserializeDedicatedHost(document.RootElement);
+                        value = DedicatedHostData.DeserializeDedicatedHostData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -402,7 +402,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="hostName"> The name of the dedicated host. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="hostName"/> is null. </exception>
-        public Response<DedicatedHost> Get(string resourceGroupName, string hostGroupName, string hostName, CancellationToken cancellationToken = default)
+        public Response<DedicatedHostData> Get(string resourceGroupName, string hostGroupName, string hostName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -423,9 +423,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        DedicatedHost value = default;
+                        DedicatedHostData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = DedicatedHost.DeserializeDedicatedHost(document.RootElement);
+                        value = DedicatedHostData.DeserializeDedicatedHostData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

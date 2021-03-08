@@ -16,18 +16,18 @@ using Azure.Core.Pipeline;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Export logs that show total throttled Api requests for this subscription in the given time window. </summary>
-    public partial class LogAnalyticsExportThrottledRequestsOperation : Operation<LogAnalyticsOperationResult>, IOperationSource<LogAnalyticsOperationResult>
+    public partial class LogAnalyticsExportThrottledRequestsOperation : Operation<LogAnalyticsData>, IOperationSource<LogAnalyticsData>
     {
-        private readonly ArmOperationHelpers<LogAnalyticsOperationResult> _operation;
+        private readonly ArmOperationHelpers<LogAnalyticsData> _operation;
         internal LogAnalyticsExportThrottledRequestsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<LogAnalyticsOperationResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "LogAnalyticsExportThrottledRequestsOperation");
+            _operation = new ArmOperationHelpers<LogAnalyticsData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "LogAnalyticsExportThrottledRequestsOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override LogAnalyticsOperationResult Value => _operation.Value;
+        public override LogAnalyticsData Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -45,21 +45,21 @@ namespace Azure.ResourceManager.Sample
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<LogAnalyticsOperationResult>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<LogAnalyticsData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<LogAnalyticsOperationResult>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<LogAnalyticsData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        LogAnalyticsOperationResult IOperationSource<LogAnalyticsOperationResult>.CreateResult(Response response, CancellationToken cancellationToken)
+        LogAnalyticsData IOperationSource<LogAnalyticsData>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return LogAnalyticsOperationResult.DeserializeLogAnalyticsOperationResult(document.RootElement);
+            return LogAnalyticsData.DeserializeLogAnalyticsData(document.RootElement);
         }
 
-        async ValueTask<LogAnalyticsOperationResult> IOperationSource<LogAnalyticsOperationResult>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<LogAnalyticsData> IOperationSource<LogAnalyticsData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return LogAnalyticsOperationResult.DeserializeLogAnalyticsOperationResult(document.RootElement);
+            return LogAnalyticsData.DeserializeLogAnalyticsData(document.RootElement);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string availabilitySetName, AvailabilitySet parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -78,7 +78,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AvailabilitySet>> CreateOrUpdateAsync(string resourceGroupName, string availabilitySetName, AvailabilitySet parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailabilitySetData>> CreateOrUpdateAsync(string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -99,9 +99,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        AvailabilitySet value = default;
+                        AvailabilitySetData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AvailabilitySet.DeserializeAvailabilitySet(document.RootElement);
+                        value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -115,7 +115,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<AvailabilitySet> CreateOrUpdate(string resourceGroupName, string availabilitySetName, AvailabilitySet parameters, CancellationToken cancellationToken = default)
+        public Response<AvailabilitySetData> CreateOrUpdate(string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -136,9 +136,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        AvailabilitySet value = default;
+                        AvailabilitySetData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AvailabilitySet.DeserializeAvailabilitySet(document.RootElement);
+                        value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -175,7 +175,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AvailabilitySet>> UpdateAsync(string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailabilitySetData>> UpdateAsync(string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -196,9 +196,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        AvailabilitySet value = default;
+                        AvailabilitySetData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AvailabilitySet.DeserializeAvailabilitySet(document.RootElement);
+                        value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -212,7 +212,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Update Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<AvailabilitySet> Update(string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
+        public Response<AvailabilitySetData> Update(string resourceGroupName, string availabilitySetName, AvailabilitySetUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -233,9 +233,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        AvailabilitySet value = default;
+                        AvailabilitySetData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AvailabilitySet.DeserializeAvailabilitySet(document.RootElement);
+                        value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -341,7 +341,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public async Task<Response<AvailabilitySet>> GetAsync(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailabilitySetData>> GetAsync(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -358,9 +358,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        AvailabilitySet value = default;
+                        AvailabilitySetData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AvailabilitySet.DeserializeAvailabilitySet(document.RootElement);
+                        value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -373,7 +373,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public Response<AvailabilitySet> Get(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        public Response<AvailabilitySetData> Get(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -390,9 +390,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        AvailabilitySet value = default;
+                        AvailabilitySetData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AvailabilitySet.DeserializeAvailabilitySet(document.RootElement);
+                        value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

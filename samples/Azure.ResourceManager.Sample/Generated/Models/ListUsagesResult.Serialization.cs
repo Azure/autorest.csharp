@@ -15,16 +15,16 @@ namespace Azure.ResourceManager.Sample
     {
         internal static ListUsagesResult DeserializeListUsagesResult(JsonElement element)
         {
-            IReadOnlyList<Usage> value = default;
+            IReadOnlyList<UsageData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<Usage> array = new List<Usage>();
+                    List<UsageData> array = new List<UsageData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Usage.DeserializeUsage(item));
+                        array.Add(UsageData.DeserializeUsageData(item));
                     }
                     value = array;
                     continue;
