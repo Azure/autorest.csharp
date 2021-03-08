@@ -11,7 +11,7 @@ using Azure.Core;
 namespace TenantOnly
 {
     /// <summary> The list of billing instructions used during invoice generation. </summary>
-    public partial class InstructionListResult
+    internal partial class InstructionListResult
     {
         /// <summary> Initializes a new instance of InstructionListResult. </summary>
         internal InstructionListResult()

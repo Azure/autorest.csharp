@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineScaleSetExtensionListResult
+    internal partial class VirtualMachineScaleSetExtensionListResult
     {
         internal static VirtualMachineScaleSetExtensionListResult DeserializeVirtualMachineScaleSetExtensionListResult(JsonElement element)
         {

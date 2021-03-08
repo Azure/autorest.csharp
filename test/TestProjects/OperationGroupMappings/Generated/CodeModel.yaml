@@ -1,179 +1,179 @@
-!<!CodeModel> 
-info: !<!Info> 
+!CodeModel 
+info: !Info 
   description: OperationGroupsMappin Client.
   title: OperationGroupMappings
-schemas: !<!Schemas> 
+schemas: !Schemas 
   numbers:
-    - !<!NumberSchema> &ref_9
+    - !NumberSchema &ref_9
       type: integer
       precision: 32
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Integer
           description: Update Domain count.
-      protocol: !<!Protocols> {}
-    - !<!NumberSchema> &ref_10
+      protocol: !Protocols {}
+    - !NumberSchema &ref_10
       type: integer
       precision: 32
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Integer
           description: Fault Domain count.
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   strings:
-    - !<!StringSchema> &ref_0
+    - !StringSchema &ref_0
       type: string
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: simple string
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_1
+      protocol: !Protocols {}
+    - !StringSchema &ref_1
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ComputeOperationValueOrigin
           description: The origin of the compute operation.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_2
+      protocol: !Protocols {}
+    - !StringSchema &ref_2
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ComputeOperationValueName
           description: The name of the compute operation.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_3
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ComputeOperationValueDisplayOperation
           description: The display name of the compute operation.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_4
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ComputeOperationValueDisplayResource
           description: The display name of the resource the operation applies to.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_5
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ComputeOperationValueDisplayDescription
           description: The description of the operation.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_6
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ComputeOperationValueDisplayProvider
           description: The resource provider for the operation.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_25
+      protocol: !Protocols {}
+    - !StringSchema &ref_25
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_11
+      protocol: !Protocols {}
+    - !StringSchema &ref_11
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: SubResourceId
           description: Resource Id
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_13
+      protocol: !Protocols {}
+    - !StringSchema &ref_13
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: InstanceViewStatusCode
           description: The status code.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_15
+      protocol: !Protocols {}
+    - !StringSchema &ref_15
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: InstanceViewStatusDisplayStatus
           description: The short localizable label for the status.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_16
+      protocol: !Protocols {}
+    - !StringSchema &ref_16
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: InstanceViewStatusMessage
-          description: 'The detailed status message, including for alerts and error messages.'
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_8
+          description: The detailed status message, including for alerts and error messages.
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: AvailabilitySetSku
           description: sku
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_18
+      protocol: !Protocols {}
+    - !StringSchema &ref_18
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: AvailabilitySetListResultNextLink
           description: The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets.
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   sealedChoices:
-    - !<!SealedChoiceSchema> &ref_14
+    - !SealedChoiceSchema &ref_14
       choices:
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Info
           language:
             default:
               name: Info
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Warning
           language:
             default:
               name: Warning
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Error
           language:
             default:
@@ -181,352 +181,352 @@ schemas: !<!Schemas>
               description: ''
       type: sealed-choice
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
       choiceType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: StatusLevelTypes
           description: The level code.
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   constants:
-    - !<!ConstantSchema> &ref_26
+    - !ConstantSchema &ref_26
       type: constant
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: '2020-06-01'
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_29
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_29
       type: constant
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: application/json
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Accept
           description: 'Accept: application/json'
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   dateTimes:
-    - !<!DateTimeSchema> &ref_17
+    - !DateTimeSchema &ref_17
       type: date-time
       format: date-time
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: InstanceViewStatusTime
           description: The time of the status.
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   objects:
-    - !<!ObjectSchema> &ref_30
+    - !ObjectSchema &ref_30
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
       properties:
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_21
+        - !Property 
+          schema: !ArraySchema &ref_21
             type: array
             apiVersions:
-              - !<!ApiVersion> 
+              - !ApiVersion 
                 version: '2020-06-01'
-            elementType: !<!ObjectSchema> &ref_7
+            elementType: !ObjectSchema &ref_7
               type: object
               apiVersions:
-                - !<!ApiVersion> 
+                - !ApiVersion 
                   version: '2020-06-01'
               properties:
-                - !<!Property> 
+                - !Property 
                   schema: *ref_1
                   readOnly: true
                   serializedName: origin
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: origin
                       description: The origin of the compute operation.
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_2
                   readOnly: true
                   serializedName: name
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: name
                       description: The name of the compute operation.
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_3
                   flattenedNames:
                     - display
                     - operation
                   readOnly: true
                   serializedName: operation
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: operation
                       description: The display name of the compute operation.
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_4
                   flattenedNames:
                     - display
                     - resource
                   readOnly: true
                   serializedName: resource
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: resource
                       description: The display name of the resource the operation applies to.
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_5
                   flattenedNames:
                     - display
                     - description
                   readOnly: true
                   serializedName: description
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: description
                       description: The description of the operation.
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_6
                   flattenedNames:
                     - display
                     - provider
                   readOnly: true
                   serializedName: provider
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: provider
                       description: The resource provider for the operation.
-                  protocol: !<!Protocols> {}
+                  protocol: !Protocols {}
               serializationFormats:
                 - json
               usage:
                 - output
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: ComputeOperationValue
                   description: Describes the properties of a Compute Operation value.
                   namespace: ''
-              protocol: !<!Protocols> {}
-            language: !<!Languages> 
+              protocol: !Protocols {}
+            language: !Languages 
               default:
                 name: ComputeOperationListResultValue
                 description: The list of compute operations
-            protocol: !<!Protocols> {}
+            protocol: !Protocols {}
           readOnly: true
           serializedName: value
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: value
               description: The list of compute operations
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - output
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ComputeOperationListResult
           description: The List Compute Operation operation response.
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_7
-    - !<!ObjectSchema> &ref_33
+    - !ObjectSchema &ref_33
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '2020-06-01'
       properties:
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_24
+        - !Property 
+          schema: !ArraySchema &ref_24
             type: array
             apiVersions:
-              - !<!ApiVersion> 
+              - !ApiVersion 
                 version: '2020-06-01'
-            elementType: !<!ObjectSchema> &ref_19
+            elementType: !ObjectSchema &ref_19
               type: object
               apiVersions:
-                - !<!ApiVersion> 
+                - !ApiVersion 
                   version: '2020-06-01'
               properties:
-                - !<!Property> 
+                - !Property 
                   schema: *ref_8
                   serializedName: sku
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: sku
                       description: sku
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_9
                   flattenedNames:
                     - properties
                     - platformUpdateDomainCount
                   serializedName: platformUpdateDomainCount
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: platformUpdateDomainCount
                       description: Update Domain count.
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_10
                   flattenedNames:
                     - properties
                     - platformFaultDomainCount
                   serializedName: platformFaultDomainCount
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: platformFaultDomainCount
                       description: Fault Domain count.
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
-                  schema: !<!ArraySchema> &ref_22
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: !ArraySchema &ref_22
                     type: array
                     apiVersions:
-                      - !<!ApiVersion> 
+                      - !ApiVersion 
                         version: '2020-06-01'
-                    elementType: !<!ObjectSchema> &ref_12
+                    elementType: !ObjectSchema &ref_12
                       type: object
                       apiVersions:
-                        - !<!ApiVersion> 
+                        - !ApiVersion 
                           version: '2020-06-01'
                       properties:
-                        - !<!Property> 
+                        - !Property 
                           schema: *ref_11
                           serializedName: id
-                          language: !<!Languages> 
+                          language: !Languages 
                             default:
                               name: id
                               description: Resource Id
-                          protocol: !<!Protocols> {}
+                          protocol: !Protocols {}
                       serializationFormats:
                         - json
                       usage:
                         - output
                       extensions:
                         x-ms-azure-resource: true
-                      language: !<!Languages> 
+                      language: !Languages 
                         default:
                           name: SubResource
                           description: ''
                           namespace: ''
-                      protocol: !<!Protocols> {}
-                    language: !<!Languages> 
+                      protocol: !Protocols {}
+                    language: !Languages 
                       default:
                         name: AvailabilitySetPropertiesVirtualMachines
                         description: A list of references to all virtual machines in the availability set.
-                    protocol: !<!Protocols> {}
+                    protocol: !Protocols {}
                   flattenedNames:
                     - properties
                     - virtualMachines
                   serializedName: virtualMachines
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: virtualMachines
                       description: A list of references to all virtual machines in the availability set.
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_12
                   flattenedNames:
                     - properties
                     - proximityPlacementGroup
                   serializedName: proximityPlacementGroup
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: proximityPlacementGroup
                       description: 'Specifies information about the proximity placement group that the availability set should be assigned to. <br><br>Minimum api-version: 2018-04-01.'
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
-                  schema: !<!ArraySchema> &ref_23
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: !ArraySchema &ref_23
                     type: array
                     apiVersions:
-                      - !<!ApiVersion> 
+                      - !ApiVersion 
                         version: '2020-06-01'
-                    elementType: !<!ObjectSchema> &ref_20
+                    elementType: !ObjectSchema &ref_20
                       type: object
                       apiVersions:
-                        - !<!ApiVersion> 
+                        - !ApiVersion 
                           version: '2020-06-01'
                       properties:
-                        - !<!Property> 
+                        - !Property 
                           schema: *ref_13
                           serializedName: code
-                          language: !<!Languages> 
+                          language: !Languages 
                             default:
                               name: code
                               description: The status code.
-                          protocol: !<!Protocols> {}
-                        - !<!Property> 
+                          protocol: !Protocols {}
+                        - !Property 
                           schema: *ref_14
                           serializedName: level
-                          language: !<!Languages> 
+                          language: !Languages 
                             default:
                               name: level
                               description: The level code.
-                          protocol: !<!Protocols> {}
-                        - !<!Property> 
+                          protocol: !Protocols {}
+                        - !Property 
                           schema: *ref_15
                           serializedName: displayStatus
-                          language: !<!Languages> 
+                          language: !Languages 
                             default:
                               name: displayStatus
                               description: The short localizable label for the status.
-                          protocol: !<!Protocols> {}
-                        - !<!Property> 
+                          protocol: !Protocols {}
+                        - !Property 
                           schema: *ref_16
                           serializedName: message
-                          language: !<!Languages> 
+                          language: !Languages 
                             default:
                               name: message
-                              description: 'The detailed status message, including for alerts and error messages.'
-                          protocol: !<!Protocols> {}
-                        - !<!Property> 
+                              description: The detailed status message, including for alerts and error messages.
+                          protocol: !Protocols {}
+                        - !Property 
                           schema: *ref_17
                           serializedName: time
-                          language: !<!Languages> 
+                          language: !Languages 
                             default:
                               name: time
                               description: The time of the status.
-                          protocol: !<!Protocols> {}
+                          protocol: !Protocols {}
                       serializationFormats:
                         - json
                       usage:
                         - output
-                      language: !<!Languages> 
+                      language: !Languages 
                         default:
                           name: InstanceViewStatus
                           description: Instance view status.
                           namespace: ''
-                      protocol: !<!Protocols> {}
-                    language: !<!Languages> 
+                      protocol: !Protocols {}
+                    language: !Languages 
                       default:
                         name: AvailabilitySetPropertiesStatuses
                         description: The resource status information.
-                    protocol: !<!Protocols> {}
+                    protocol: !Protocols {}
                   flattenedNames:
                     - properties
                     - statuses
                   readOnly: true
                   serializedName: statuses
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: statuses
                       description: The resource status information.
-                  protocol: !<!Protocols> {}
+                  protocol: !Protocols {}
               serializationFormats:
                 - json
               usage:
                 - output
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: AvailabilitySet
                   description: >-
@@ -536,38 +536,38 @@ schemas: !<!Schemas>
                     see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br>
                     Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
                   namespace: ''
-              protocol: !<!Protocols> {}
-            language: !<!Languages> 
+              protocol: !Protocols {}
+            language: !Languages 
               default:
                 name: AvailabilitySetListResultValue
                 description: The list of availability sets
-            protocol: !<!Protocols> {}
+            protocol: !Protocols {}
           required: true
           serializedName: value
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: value
               description: The list of availability sets
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_18
           required: false
           serializedName: nextLink
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: nextLink
               description: The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets.
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - output
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: AvailabilitySetListResult
           description: The List Availability Set operation response.
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_19
     - *ref_12
     - *ref_20
@@ -577,96 +577,96 @@ schemas: !<!Schemas>
     - *ref_23
     - *ref_24
 globalParameters:
-  - !<!Parameter> &ref_31
+  - !Parameter &ref_31
     schema: *ref_25
     implementation: Client
     required: true
     extensions:
       x-ms-priority: 0
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: SubscriptionId
         description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
         serializedName: subscriptionId
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: path
-  - !<!Parameter> &ref_27
+  - !Parameter &ref_27
     schema: *ref_0
-    clientDefaultValue: 'https://management.azure.com'
+    clientDefaultValue: https://management.azure.com
     implementation: Client
-    origin: 'modelerfour:synthesized/host'
+    origin: modelerfour:synthesized/host
     required: true
     extensions:
       x-ms-skip-url-encoding: true
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: $host
         description: server parameter
         serializedName: $host
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: uri
-  - !<!Parameter> &ref_28
+  - !Parameter &ref_28
     schema: *ref_26
     implementation: Client
-    origin: 'modelerfour:synthesized/api-version'
+    origin: modelerfour:synthesized/api-version
     required: true
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: apiVersion
         description: Api Version
         serializedName: api-version
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: query
 operationGroups:
-  - !<!OperationGroup> 
+  - !OperationGroup 
     $key: Operations
     operations:
-      - !<!Operation> 
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_27
           - *ref_28
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_29
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /providers/Microsoft.Compute/operations
                 method: get
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_30
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: OK
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
@@ -675,78 +675,78 @@ operationGroups:
         extensions:
           x-ms-pageable:
             nextLinkName: null
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: List
             description: Gets a list of compute operations.
             paging:
               nextLinkName: null
-        protocol: !<!Protocols> {}
-    language: !<!Languages> 
+        protocol: !Protocols {}
+    language: !Languages 
       default:
         name: Operations
         description: ''
-    protocol: !<!Protocols> {}
-  - !<!OperationGroup> 
+    protocol: !Protocols {}
+  - !OperationGroup 
     $key: AvailabilitySets
     operations:
-      - !<!Operation> 
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_27
-          - !<!Parameter> &ref_32
+          - !Parameter &ref_32
             schema: *ref_25
             implementation: Method
             required: true
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: path
           - *ref_28
           - *ref_31
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_29
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets'
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
                 method: put
                 uri: '{$host}'
         signatureParameters:
           - *ref_32
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_33
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: OK
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
@@ -755,83 +755,83 @@ operationGroups:
         extensions:
           x-ms-pageable:
             nextLinkName: nextLink
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: List
             description: Lists all availability sets in a resource group.
             paging:
               nextLinkName: nextLink
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '2020-06-01'
         parameters:
           - *ref_27
-          - !<!Parameter> &ref_34
+          - !Parameter &ref_34
             schema: *ref_25
             implementation: Method
             required: true
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: resourceGroupName
                 description: The name of the resource group.
                 serializedName: resourceGroupName
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: path
-          - !<!Parameter> &ref_35
+          - !Parameter &ref_35
             schema: *ref_25
             implementation: Method
             required: true
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: availabilitySetName
                 description: The name of the availability set.
                 serializedName: availabilitySetName
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: path
           - *ref_28
           - *ref_31
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_29
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
-                path: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes'
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes
                 method: get
                 uri: '{$host}'
         signatureParameters:
           - *ref_34
           - *ref_35
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_30
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: OK
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
@@ -840,23 +840,23 @@ operationGroups:
         extensions:
           x-ms-pageable:
             nextLinkName: null
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: ListAvailableSizes
             description: Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.
             paging:
               nextLinkName: null
-        protocol: !<!Protocols> {}
-    language: !<!Languages> 
+        protocol: !Protocols {}
+    language: !Languages 
       default:
         name: AvailabilitySets
         description: ''
-    protocol: !<!Protocols> {}
-security: !<!Security> 
+    protocol: !Protocols {}
+security: !Security 
   authenticationRequired: true
-language: !<!Languages> 
+language: !Languages 
   default:
     name: OperationGroupMappings
     description: ''
-protocol: !<!Protocols> 
-  http: !<!HttpModel> {}
+protocol: !Protocols 
+  http: !HttpModel {}

@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class AvailabilitySetListResult
+    internal partial class AvailabilitySetListResult
     {
         internal static AvailabilitySetListResult DeserializeAvailabilitySetListResult(JsonElement element)
         {

@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace TenantOnly
 {
-    public partial class InvoiceSectionListWithCreateSubPermissionResult
+    internal partial class InvoiceSectionListWithCreateSubPermissionResult
     {
         internal static InvoiceSectionListWithCreateSubPermissionResult DeserializeInvoiceSectionListWithCreateSubPermissionResult(JsonElement element)
         {
