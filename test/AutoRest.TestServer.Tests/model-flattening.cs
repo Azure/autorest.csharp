@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class ModelFlatteningTests : TestServerTestBase
     {
-        public ModelFlatteningTests(TestServerVersion version) : base(version, "model-flatten") { }
+        public ModelFlatteningTests(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task GetModelFlattenArray() => Test(async (host, pipeline) =>

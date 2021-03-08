@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace paging.Models
 {
-    public partial class OdataProductResult
+    internal partial class OdataProductResult
     {
         internal static OdataProductResult DeserializeOdataProductResult(JsonElement element)
         {

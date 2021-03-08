@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace AppConfiguration.Models
 {
-    public partial class KeyValueListResult
+    internal partial class KeyValueListResult
     {
         internal static KeyValueListResult DeserializeKeyValueListResult(JsonElement element)
         {

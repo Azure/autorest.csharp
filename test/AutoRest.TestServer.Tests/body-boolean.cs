@@ -11,7 +11,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BooleanTests : TestServerTestBase
     {
-        public BooleanTests(TestServerVersion version) : base(version, "bool") { }
+        public BooleanTests(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task GetBoolFalse() => Test(async (host, pipeline) =>

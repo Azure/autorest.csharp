@@ -11,7 +11,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class custom_baseURL : TestServerTestBase
     {
-        public custom_baseURL(TestServerVersion version) : base(version, "customUri") { }
+        public custom_baseURL(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task CustomBaseUri() => TestStatus(async (host, pipeline) =>

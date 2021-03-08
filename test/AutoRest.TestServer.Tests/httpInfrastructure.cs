@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class HttpInfrastructureTests : TestServerTestBase
     {
-        public HttpInfrastructureTests(TestServerVersion version) : base(version, "httpResponses") { }
+        public HttpInfrastructureTests(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task HttpClientFailure400Delete() => Test((host, pipeline) =>

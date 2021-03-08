@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class AzureSpecialPropertiesTest : TestServerTestBase
     {
-        public AzureSpecialPropertiesTest(TestServerVersion version) : base(version, "azureSpecials") { }
+        public AzureSpecialPropertiesTest(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task AzureApiVersionMethodGlobalNotProvidedValid() => TestStatus(async (host, pipeline) => await new ApiVersionDefaultClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodGlobalNotProvidedValidAsync());

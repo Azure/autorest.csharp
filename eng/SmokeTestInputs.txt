@@ -90,7 +90,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/datamigration/resource-manager/readme.md:--modelerfour.lenient-model-deduplication
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/datashare/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/deploymentmanager/resource-manager/readme.md:--modelerfour.lenient-model-deduplication
-#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/desktopvirtualization/resource-manager/readme.md
+#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/desktopvirtualization/resource-manager/readme.md - https://github.com/Azure/autorest/issues/3921
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/deviceprovisioningservices/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/devops/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/devspaces/resource-manager/readme.md
@@ -112,13 +112,13 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/hdinsight/resource-manager/readme.md:--modelerfour.lenient-model-deduplication
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/healthcareapis/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/hybridcompute/resource-manager/readme.md:--modelerfour.lenient-model-deduplication
-#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/hybriddatamanager/resource-manager/readme.md
+#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/hybriddatamanager/resource-manager/readme.md - https://github.com/Azure/azure-rest-api-specs/issues/13147
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/hybridkubernetes/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/imagebuilder/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/imds/data-plane/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/intune/resource-manager/readme.md - https://github.com/Azure/autorest.modelerfour/issues/283
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/iotcentral/data-plane/readme.md - https://github.com/Azure/autorest.modelerfour/issues/283
-#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/iotcentral/resource-manager/readme.md
+#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/iotcentral/resource-manager/readme.md - https://github.com/Azure/azure-rest-api-specs/issues/13147
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/iothub/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/iotspaces/resource-manager/readme.md
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/keyvault/data-plane/readme.md
@@ -185,7 +185,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/servicefabric/resource-manager/readme.md:--modelerfour.lenient-model-deduplication
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/servicefabricmesh/resource-manager/readme.md:--modelerfour.lenient-model-deduplication
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/signalr/resource-manager/readme.md
-#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/softwareplan/resource-manager/readme.md
+#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/softwareplan/resource-manager/readme.md - https://github.com/Azure/autorest/issues/3921
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/sql/resource-manager/readme.md:--modelerfour.lenient-model-deduplication
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/sqlvirtualmachine/resource-manager/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/storage/data-plane/readme.md:--modelerfour.lenient-model-deduplication

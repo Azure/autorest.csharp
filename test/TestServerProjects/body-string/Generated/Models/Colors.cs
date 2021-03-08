@@ -7,7 +7,7 @@
 
 namespace body_string.Models
 {
-    /// <summary> The Colors. </summary>
+    /// <summary> Referenced Color Enum Description. </summary>
     public enum Colors
     {
         /// <summary> red color. </summary>

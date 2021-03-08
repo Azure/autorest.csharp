@@ -166,5 +166,52 @@ namespace AutoRest.CSharp.Output.Models
 
             return parameters;
         }
+
+        private IEnumerable<Parameter> GetRequiredParameters()
+        {
+            List<Parameter> parameters = new List<Parameter>();
+            foreach (var parameter in RestClient.Parameters)
+            {
+                if (parameter.DefaultValue == null)
+                {
+                    parameters.Add(parameter);
+                }
+            }
+
+            return parameters;
+        }
+
+        private IEnumerable<Parameter> GetOptionalParameters()
+        {
+            List<Parameter> parameters = new List<Parameter>();
+            foreach (var parameter in RestClient.Parameters)
+            {
+                if (parameter.DefaultValue != null && !parameter.IsApiVersionParameter)
+                {
+                    parameters.Add(parameter);
+                }
+            }
+
+            return parameters;
+        }
+
+        public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType)
+        {
+            List<Parameter> parameters = new List<Parameter>();
+
+            parameters.AddRange(GetRequiredParameters());
+
+            var credentialParam = new Parameter(
+                "credential",
+                "A credential used to authenticate to an Azure Service.",
+                credentialType,
+                null,
+                true);
+            parameters.Add(credentialParam);
+
+            parameters.AddRange(GetOptionalParameters());
+
+            return parameters;
+        }
     }
 }

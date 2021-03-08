@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class NumberTest : TestServerTestBase
     {
-        public NumberTest(TestServerVersion version) : base(version, "number") { }
+        public NumberTest(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task PutFloatBigScientificNotation() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigFloatAsync(3.402823e+20f));

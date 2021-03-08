@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
     [IgnoreOnTestServer(TestServerVersion.V2, "No record")]
     public class BodyTimeTest: TestServerTestBase
     {
-        public BodyTimeTest(TestServerVersion version) : base(version, "time") { }
+        public BodyTimeTest(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task BodyTimeGet() => Test(async (host, pipeline) =>

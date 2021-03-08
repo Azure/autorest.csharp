@@ -11,7 +11,7 @@ using Azure.Core;
 namespace AppConfiguration.Models
 {
     /// <summary> The result of a list request. </summary>
-    public partial class KeyValueListResult
+    internal partial class KeyValueListResult
     {
         /// <summary> Initializes a new instance of KeyValueListResult. </summary>
         internal KeyValueListResult()

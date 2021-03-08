@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyArray : TestServerTestBase
     {
-        public BodyArray(TestServerVersion version) : base(version, "array") { }
+        public BodyArray(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task GetArrayArrayEmpty() => Test(async (host, pipeline) =>

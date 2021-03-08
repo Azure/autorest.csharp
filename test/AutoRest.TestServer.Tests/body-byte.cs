@@ -12,7 +12,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyByte : TestServerTestBase
     {
-        public BodyByte(TestServerVersion version) : base(version, "byte") { }
+        public BodyByte(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task GetByteEmpty() => Test(async (host, pipeline) =>
