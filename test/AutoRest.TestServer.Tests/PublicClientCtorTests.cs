@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -27,7 +28,7 @@ namespace AutoRest.TestServer.Tests
 
             var firstParam = TypeAsserts.HasParameter(ctor, "endpoint");
             Assert.NotNull(firstParam);
-            Assert.AreEqual(typeof(string), firstParam.ParameterType);
+            Assert.AreEqual(typeof(Uri), firstParam.ParameterType);
 
             var secondParam = TypeAsserts.HasParameter(ctor, "credential");
             Assert.NotNull(secondParam);
@@ -62,7 +63,7 @@ namespace AutoRest.TestServer.Tests
 
             var firstParam = TypeAsserts.HasParameter(ctor, "endpoint");
             Assert.NotNull(firstParam);
-            Assert.AreEqual(typeof(string), firstParam.ParameterType);
+            Assert.AreEqual(typeof(Uri), firstParam.ParameterType);
 
             var secondParam = TypeAsserts.HasParameter(ctor, "credential");
             Assert.NotNull(secondParam);
@@ -96,7 +97,7 @@ namespace AutoRest.TestServer.Tests
                 await content.Response.Body.FlushAsync();
             });
 
-            var client = new PublicClientCtorClient(testServer.Address.AbsoluteUri, new AzureKeyCredential("fake"));
+            var client = new PublicClientCtorClient(testServer.Address, new AzureKeyCredential("fake"));
 
             await client.OperationAsync(new TestModel());
 
