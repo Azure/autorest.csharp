@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace paging.Models
 {
-    public partial class ProductResultValueWithXMSClientName
+    internal partial class ProductResultValueWithXMSClientName
     {
         internal static ProductResultValueWithXMSClientName DeserializeProductResultValueWithXMSClientName(JsonElement element)
         {

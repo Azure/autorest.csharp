@@ -16,7 +16,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyDictionary : TestServerTestBase
     {
-        public BodyDictionary(TestServerVersion version) : base(version, "dictionary") { }
+        public BodyDictionary(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task GetDictionaryArrayEmpty() => Test(async (host, pipeline) =>

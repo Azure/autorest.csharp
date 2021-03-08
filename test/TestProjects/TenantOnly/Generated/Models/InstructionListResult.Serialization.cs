@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace TenantOnly
 {
-    public partial class InstructionListResult
+    internal partial class InstructionListResult
     {
         internal static InstructionListResult DeserializeInstructionListResult(JsonElement element)
         {

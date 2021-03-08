@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class SshPublicKeysGroupListResult
+    internal partial class SshPublicKeysGroupListResult
     {
         internal static SshPublicKeysGroupListResult DeserializeSshPublicKeysGroupListResult(JsonElement element)
         {

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace TenantOnly
 {
     /// <summary> The list of billing accounts. </summary>
-    public partial class BillingAccountListResult
+    internal partial class BillingAccountListResult
     {
         /// <summary> Initializes a new instance of BillingAccountListResult. </summary>
         internal BillingAccountListResult()

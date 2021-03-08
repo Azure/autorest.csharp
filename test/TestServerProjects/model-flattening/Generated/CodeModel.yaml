@@ -1,239 +1,239 @@
-!<!CodeModel> 
-info: !<!Info> 
+!CodeModel 
+info: !Info 
   description: Resource Flattening for AutoRest
   title: AutoRest Resource Flattening Test Service
-schemas: !<!Schemas> 
+schemas: !Schemas 
   numbers:
-    - !<!NumberSchema> &ref_29
+    - !NumberSchema &ref_29
       type: integer
       precision: 32
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Integer
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   strings:
-    - !<!StringSchema> &ref_0
+    - !StringSchema &ref_0
       type: string
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: simple string
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_3
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ResourceId
           description: Resource Id
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_4
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ResourceType
           description: Resource Type
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_1
+      protocol: !Protocols {}
+    - !StringSchema &ref_1
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_6
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ResourceLocation
           description: Resource Location
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_7
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ResourceName
           description: Resource Name
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_30
+      protocol: !Protocols {}
+    - !StringSchema &ref_30
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ErrorMessage
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_9
+      protocol: !Protocols {}
+    - !StringSchema &ref_9
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: FlattenedProductPropertiesPName
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_10
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: FlattenedProductPropertiesType
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_12
+      protocol: !Protocols {}
+    - !StringSchema &ref_12
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: FlattenedProductPropertiesProvisioningState
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_32
+      protocol: !Protocols {}
+    - !StringSchema &ref_32
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: WrappedProductValue
           description: the product value
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_18
+      protocol: !Protocols {}
+    - !StringSchema &ref_18
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: SimpleProductPropertiesMaxProductDisplayName
           description: Display name of product.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_21
+      protocol: !Protocols {}
+    - !StringSchema &ref_21
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ProductUrlOdataValue
           description: URL value.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_20
+      protocol: !Protocols {}
+    - !StringSchema &ref_20
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: GenericUrlGenericValue
           description: Generic URL value.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_15
+      protocol: !Protocols {}
+    - !StringSchema &ref_15
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: BaseProductId
-          description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_16
+          description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+      protocol: !Protocols {}
+    - !StringSchema &ref_16
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: BaseProductDescription
           description: Description of product.
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   choices:
-    - !<!ChoiceSchema> &ref_11
+    - !ChoiceSchema &ref_11
       choices:
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Succeeded
           language:
             default:
               name: Succeeded
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Failed
           language:
             default:
               name: Failed
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: canceled
           language:
             default:
               name: Canceled
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Accepted
           language:
             default:
               name: Accepted
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Creating
           language:
             default:
               name: Creating
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Created
           language:
             default:
               name: Created
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Updating
           language:
             default:
               name: Updating
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Updated
           language:
             default:
               name: Updated
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Deleting
           language:
             default:
               name: Deleting
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: Deleted
           language:
             default:
               name: Deleted
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: OK
           language:
             default:
@@ -241,356 +241,356 @@ schemas: !<!Schemas>
               description: ''
       type: choice
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       choiceType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: FlattenedProductPropertiesProvisioningStateValues
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   constants:
-    - !<!ConstantSchema> &ref_40
+    - !ConstantSchema &ref_40
       type: constant
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: application/json
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ApplicationJson
           description: Content Type 'application/json'
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_42
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_42
       type: constant
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: application/json
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Accept
           description: 'Accept: application/json'
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_19
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_19
       type: constant
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: Large
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: SimpleProductPropertiesMaxProductCapacity
-          description: 'Capacity of product. For example, 4 people.'
-      protocol: !<!Protocols> {}
+          description: Capacity of product. For example, 4 people.
+      protocol: !Protocols {}
   dictionaries:
-    - !<!DictionarySchema> &ref_5
+    - !DictionarySchema &ref_5
       type: dictionary
       elementType: *ref_1
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ResourceTags
           description: Dictionary of <string>
-      protocol: !<!Protocols> {}
-    - !<!DictionarySchema> &ref_48
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_48
       type: dictionary
-      elementType: !<!ObjectSchema> &ref_2
+      elementType: !ObjectSchema &ref_2
         type: object
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
-        parents: !<!Relations> 
+        parents: !Relations 
           all:
-            - !<!ObjectSchema> &ref_8
+            - !ObjectSchema &ref_8
               type: object
               apiVersions:
-                - !<!ApiVersion> 
+                - !ApiVersion 
                   version: 1.0.0
-              children: !<!Relations> 
+              children: !Relations 
                 all:
                   - *ref_2
                 immediate:
                   - *ref_2
               properties:
-                - !<!Property> 
+                - !Property 
                   schema: *ref_3
                   readOnly: true
                   serializedName: id
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: id
                       description: Resource Id
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_4
                   readOnly: true
                   serializedName: type
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: type
                       description: Resource Type
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_5
                   serializedName: tags
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: tags
                       description: Dictionary of <string>
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_6
                   serializedName: location
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: location
                       description: Resource Location
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_7
                   readOnly: true
                   serializedName: name
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: name
                       description: Resource Name
-                  protocol: !<!Protocols> {}
+                  protocol: !Protocols {}
               serializationFormats:
                 - json
               usage:
                 - input
                 - output
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: Resource
                   description: ''
                   namespace: ''
-              protocol: !<!Protocols> {}
+              protocol: !Protocols {}
           immediate:
             - *ref_8
         properties:
-          - !<!Property> 
+          - !Property 
             schema: *ref_9
             flattenedNames:
               - properties
               - p.name
             serializedName: p.name
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: pName
                 description: ''
-            protocol: !<!Protocols> {}
-          - !<!Property> 
+            protocol: !Protocols {}
+          - !Property 
             schema: *ref_10
             flattenedNames:
               - properties
               - type
             serializedName: type
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: typePropertiesType
                 description: ''
-            protocol: !<!Protocols> {}
-          - !<!Property> 
+            protocol: !Protocols {}
+          - !Property 
             schema: *ref_11
             flattenedNames:
               - properties
               - provisioningStateValues
             readOnly: true
             serializedName: provisioningStateValues
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: provisioningStateValues
                 description: ''
-            protocol: !<!Protocols> {}
-          - !<!Property> 
+            protocol: !Protocols {}
+          - !Property 
             schema: *ref_12
             flattenedNames:
               - properties
               - provisioningState
             serializedName: provisioningState
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: provisioningState
                 description: ''
-            protocol: !<!Protocols> {}
+            protocol: !Protocols {}
         serializationFormats:
           - json
         usage:
           - output
           - input
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: FlattenedProduct
             description: Flattened product.
             namespace: ''
-        protocol: !<!Protocols> {}
-      language: !<!Languages> 
+        protocol: !Protocols {}
+      language: !Languages 
         default:
           name: DictionaryOfFlattenedProduct
           description: Dictionary of <FlattenedProduct>
-      protocol: !<!Protocols> {}
-    - !<!DictionarySchema> &ref_50
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_50
       type: dictionary
       elementType: *ref_2
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: DictionaryOfFlattenedProduct
           description: Dictionary of <FlattenedProduct>
-      protocol: !<!Protocols> {}
-    - !<!DictionarySchema> &ref_33
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_33
       type: dictionary
       elementType: *ref_2
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ResourceCollectionDictionaryofresources
           description: Dictionary of <FlattenedProduct>
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   groups:
-    - !<!GroupSchema> &ref_13
+    - !GroupSchema &ref_13
       type: group
       properties:
-        - !<!GroupProperty> 
+        - !GroupProperty 
           schema: *ref_1
           originalParameter:
-            - !<!Parameter> &ref_61
+            - !Parameter &ref_61
               schema: *ref_1
-              groupedBy: !<!Parameter> &ref_22
+              groupedBy: !Parameter &ref_22
                 schema: *ref_13
                 implementation: Method
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: flattenParameterGroup
                     description: Parameter group
-                protocol: !<!Protocols> {}
+                protocol: !Protocols {}
               implementation: Method
               required: true
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: name
                   description: Product name with value 'groupproduct'
                   serializedName: name
-              protocol: !<!Protocols> 
-                http: !<!HttpParameter> 
+              protocol: !Protocols 
+                http: !HttpParameter 
                   in: path
           required: true
           serializedName: name
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: name
               description: Product name with value 'groupproduct'
-          protocol: !<!Protocols> {}
-        - !<!GroupProperty> 
-          schema: !<!ObjectSchema> &ref_14
+          protocol: !Protocols {}
+        - !GroupProperty 
+          schema: !ObjectSchema &ref_14
             type: object
             apiVersions:
-              - !<!ApiVersion> 
+              - !ApiVersion 
                 version: 1.0.0
-            parents: !<!Relations> 
+            parents: !Relations 
               all:
-                - !<!ObjectSchema> &ref_17
+                - !ObjectSchema &ref_17
                   type: object
                   apiVersions:
-                    - !<!ApiVersion> 
+                    - !ApiVersion 
                       version: 1.0.0
-                  children: !<!Relations> 
+                  children: !Relations 
                     all:
                       - *ref_14
                     immediate:
                       - *ref_14
                   properties:
-                    - !<!Property> &ref_24
+                    - !Property &ref_24
                       schema: *ref_15
                       required: true
                       serializedName: base_product_id
-                      language: !<!Languages> 
+                      language: !Languages 
                         default:
                           name: productId
-                          description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
-                      protocol: !<!Protocols> {}
-                    - !<!Property> &ref_25
+                          description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+                      protocol: !Protocols {}
+                    - !Property &ref_25
                       schema: *ref_16
                       required: false
                       serializedName: base_product_description
-                      language: !<!Languages> 
+                      language: !Languages 
                         default:
                           name: description
                           description: Description of product.
-                      protocol: !<!Protocols> {}
+                      protocol: !Protocols {}
                   serializationFormats:
                     - json
                   usage:
                     - input
                     - output
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: BaseProduct
                       description: The product documentation.
                       namespace: ''
-                  protocol: !<!Protocols> {}
+                  protocol: !Protocols {}
               immediate:
                 - *ref_17
             properties:
-              - !<!Property> &ref_26
+              - !Property &ref_26
                 schema: *ref_18
                 flattenedNames:
                   - details
                   - max_product_display_name
                 serializedName: max_product_display_name
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: maxProductDisplayName
                     description: Display name of product.
-                protocol: !<!Protocols> {}
-              - !<!Property> &ref_55
+                protocol: !Protocols {}
+              - !Property &ref_55
                 schema: *ref_19
                 flattenedNames:
                   - details
                   - max_product_capacity
                 serializedName: max_product_capacity
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: capacity
-                    description: 'Capacity of product. For example, 4 people.'
-                protocol: !<!Protocols> {}
-              - !<!Property> &ref_27
+                    description: Capacity of product. For example, 4 people.
+                protocol: !Protocols {}
+              - !Property &ref_27
                 schema: *ref_20
                 flattenedNames:
                   - details
                   - max_product_image
                   - generic_value
                 serializedName: generic_value
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: genericValue
                     description: Generic URL value.
-                protocol: !<!Protocols> {}
-              - !<!Property> &ref_28
+                protocol: !Protocols {}
+              - !Property &ref_28
                 schema: *ref_21
                 flattenedNames:
                   - details
                   - max_product_image
                   - '@odata.value'
                 serializedName: '@odata.value'
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: odataValue
                     description: URL value.
-                protocol: !<!Protocols> {}
+                protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
               - input
               - output
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: SimpleProduct
                 description: The product documentation.
                 namespace: ''
-            protocol: !<!Protocols> {}
+            protocol: !Protocols {}
           originalParameter:
-            - !<!Parameter> &ref_23
+            - !Parameter &ref_23
               schema: *ref_14
               flattened: true
               groupedBy: *ref_22
@@ -598,25 +598,25 @@ schemas: !<!Schemas>
               required: false
               extensions:
                 x-ms-client-flatten: true
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: simpleBodyProduct
                   description: Simple body product to put
-              protocol: !<!Protocols> 
-                http: !<!HttpParameter> 
+              protocol: !Protocols 
+                http: !HttpParameter 
                   in: body
                   style: json
           required: false
           serializedName: SimpleBodyProduct
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: simpleBodyProduct
               description: Simple body product to put
-          protocol: !<!Protocols> {}
-        - !<!GroupProperty> 
+          protocol: !Protocols {}
+        - !GroupProperty 
           schema: *ref_15
           originalParameter:
-            - !<!VirtualParameter> &ref_62
+            - !VirtualParameter &ref_62
               schema: *ref_15
               groupedBy: *ref_22
               implementation: Method
@@ -624,22 +624,22 @@ schemas: !<!Schemas>
               pathToProperty: []
               required: true
               targetProperty: *ref_24
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: productId
-                  description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
-              protocol: !<!Protocols> {}
+                  description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+              protocol: !Protocols {}
           required: true
           serializedName: productId
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: productId
-              description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
-          protocol: !<!Protocols> {}
-        - !<!GroupProperty> 
+              description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+          protocol: !Protocols {}
+        - !GroupProperty 
           schema: *ref_16
           originalParameter:
-            - !<!VirtualParameter> &ref_63
+            - !VirtualParameter &ref_63
               schema: *ref_16
               groupedBy: *ref_22
               implementation: Method
@@ -647,145 +647,145 @@ schemas: !<!Schemas>
               pathToProperty: []
               required: false
               targetProperty: *ref_25
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: description
                   description: Description of product.
-              protocol: !<!Protocols> {}
+              protocol: !Protocols {}
           required: false
           serializedName: description
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: description
               description: Description of product.
-          protocol: !<!Protocols> {}
-        - !<!GroupProperty> 
+          protocol: !Protocols {}
+        - !GroupProperty 
           schema: *ref_18
           originalParameter:
-            - !<!VirtualParameter> &ref_64
+            - !VirtualParameter &ref_64
               schema: *ref_18
               groupedBy: *ref_22
               implementation: Method
               originalParameter: *ref_23
               pathToProperty: []
               targetProperty: *ref_26
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: maxProductDisplayName
                   description: Display name of product.
-              protocol: !<!Protocols> {}
+              protocol: !Protocols {}
           serializedName: max_product_display_name
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: maxProductDisplayName
               description: Display name of product.
-          protocol: !<!Protocols> {}
-        - !<!GroupProperty> 
+          protocol: !Protocols {}
+        - !GroupProperty 
           schema: *ref_20
           originalParameter:
-            - !<!VirtualParameter> &ref_65
+            - !VirtualParameter &ref_65
               schema: *ref_20
               groupedBy: *ref_22
               implementation: Method
               originalParameter: *ref_23
               pathToProperty: []
               targetProperty: *ref_27
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: genericValue
                   description: Generic URL value.
-              protocol: !<!Protocols> {}
+              protocol: !Protocols {}
           serializedName: generic_value
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: genericValue
               description: Generic URL value.
-          protocol: !<!Protocols> {}
-        - !<!GroupProperty> 
+          protocol: !Protocols {}
+        - !GroupProperty 
           schema: *ref_21
           originalParameter:
-            - !<!VirtualParameter> &ref_66
+            - !VirtualParameter &ref_66
               schema: *ref_21
               groupedBy: *ref_22
               implementation: Method
               originalParameter: *ref_23
               pathToProperty: []
               targetProperty: *ref_28
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: odataValue
                   description: URL value.
-              protocol: !<!Protocols> {}
+              protocol: !Protocols {}
           serializedName: '@odata.value'
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: odataValue
               description: URL value.
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       usage:
         - input
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: FlattenParameterGroup
           description: Parameter group
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   objects:
     - *ref_8
-    - !<!ObjectSchema> &ref_31
+    - !ObjectSchema &ref_31
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       properties:
-        - !<!Property> 
+        - !Property 
           schema: *ref_29
           serializedName: status
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: status
               description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_30
           serializedName: message
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: message
               description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_31
           serializedName: parentError
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: parentError
               description: ''
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - exception
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Error
           description: ''
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_2
-    - !<!ObjectSchema> &ref_36
+    - !ObjectSchema &ref_36
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       properties:
-        - !<!Property> 
+        - !Property 
           schema: *ref_32
           serializedName: value
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: value
               description: the product value
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
@@ -793,139 +793,139 @@ schemas: !<!Schemas>
         - output
       extensions:
         x-ms-flattened: true
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: WrappedProduct
           description: The wrapped produc.
           namespace: ''
-      protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_37
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_37
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       properties:
-        - !<!Property> 
+        - !Property 
           schema: *ref_32
           flattenedNames:
             - property
             - value
           serializedName: value
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: value
               description: the product value
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - output
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ProductWrapper
           description: The wrapped produc.
           namespace: ''
-      protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_51
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_51
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       properties:
-        - !<!Property> 
+        - !Property 
           schema: *ref_2
           serializedName: productresource
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: productresource
               description: Flattened product.
-          protocol: !<!Protocols> {}
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_38
+          protocol: !Protocols {}
+        - !Property 
+          schema: !ArraySchema &ref_38
             type: array
             apiVersions:
-              - !<!ApiVersion> 
+              - !ApiVersion 
                 version: 1.0.0
             elementType: *ref_2
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ResourceCollectionArrayofresources
                 description: Array of FlattenedProduct
-            protocol: !<!Protocols> {}
+            protocol: !Protocols {}
           serializedName: arrayofresources
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: arrayofresources
               description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_33
           serializedName: dictionaryofresources
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: dictionaryofresources
               description: Dictionary of <FlattenedProduct>
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - input
         - output
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ResourceCollection
           description: ''
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_14
-    - !<!ObjectSchema> &ref_34
+    - !ObjectSchema &ref_34
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      parents: !<!Relations> 
+      parents: !Relations 
         all:
-          - !<!ObjectSchema> &ref_35
+          - !ObjectSchema &ref_35
             type: object
             apiVersions:
-              - !<!ApiVersion> 
+              - !ApiVersion 
                 version: 1.0.0
-            children: !<!Relations> 
+            children: !Relations 
               all:
                 - *ref_34
               immediate:
                 - *ref_34
             properties:
-              - !<!Property> 
+              - !Property 
                 schema: *ref_20
                 serializedName: generic_value
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: genericValue
                     description: Generic URL value.
-                protocol: !<!Protocols> {}
+                protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
               - input
               - output
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: GenericUrl
                 description: The Generic URL.
                 namespace: ''
-            protocol: !<!Protocols> {}
+            protocol: !Protocols {}
         immediate:
           - *ref_35
       properties:
-        - !<!Property> 
+        - !Property 
           schema: *ref_21
           serializedName: '@odata.value'
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: odataValue
               description: URL value.
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
@@ -933,136 +933,136 @@ schemas: !<!Schemas>
         - output
       extensions:
         x-ms-flattened: true
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ProductUrl
           description: The product URL.
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_35
     - *ref_17
   arrays:
-    - !<!ArraySchema> &ref_41
+    - !ArraySchema &ref_41
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       elementType: *ref_8
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfResource
           description: Array of Resource
-      protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_44
+      protocol: !Protocols {}
+    - !ArraySchema &ref_44
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       elementType: *ref_2
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfFlattenedProduct
           description: Array of FlattenedProduct
-      protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_45
+      protocol: !Protocols {}
+    - !ArraySchema &ref_45
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       elementType: *ref_36
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfWrappedProduct
           description: Array of WrappedProduct
-      protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_47
+      protocol: !Protocols {}
+    - !ArraySchema &ref_47
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       elementType: *ref_37
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfProductWrapper
           description: Array of ProductWrapper
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_38
 globalParameters:
-  - !<!Parameter> &ref_39
+  - !Parameter &ref_39
     schema: *ref_0
-    clientDefaultValue: 'http://localhost:3000'
+    clientDefaultValue: http://localhost:3000
     implementation: Client
-    origin: 'modelerfour:synthesized/host'
+    origin: modelerfour:synthesized/host
     required: true
     extensions:
       x-ms-skip-url-encoding: true
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: $host
         description: server parameter
         serializedName: $host
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: uri
 operationGroups:
-  - !<!OperationGroup> 
+  - !OperationGroup 
     $key: ''
     operations:
-      - !<!Operation> 
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_40
                 implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
+                origin: modelerfour:synthesized/content-type
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: contentType
                     description: Body Parameter content-type
                     serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
-              - !<!Parameter> &ref_43
+              - !Parameter &ref_43
                 schema: *ref_41
                 implementation: Method
                 required: false
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: resourceArray
                     description: External Resource as an Array to put
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: body
                     style: json
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters:
               - *ref_43
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /model-flatten/array
                 method: put
                 knownMediaType: json
@@ -1071,155 +1071,155 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Successful Response
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: PutArray
             description: Put External Resource as an Array
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /model-flatten/array
                 method: get
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_44
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: External Resource as an Array from get
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: GetArray
             description: Get External Resource as an Array
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_40
                 implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
+                origin: modelerfour:synthesized/content-type
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: contentType
                     description: Body Parameter content-type
                     serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
-              - !<!Parameter> &ref_46
+              - !Parameter &ref_46
                 schema: *ref_45
                 implementation: Method
                 required: false
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: resourceArray
                     description: External Resource as an Array to put
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: body
                     style: json
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters:
               - *ref_46
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /model-flatten/wrappedarray
                 method: put
                 knownMediaType: json
@@ -1228,155 +1228,155 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Successful Response
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: PutWrappedArray
             description: No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /model-flatten/wrappedarray
                 method: get
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_47
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: External Resource as an Array from get
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: GetWrappedArray
             description: No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_40
                 implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
+                origin: modelerfour:synthesized/content-type
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: contentType
                     description: Body Parameter content-type
                     serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
-              - !<!Parameter> &ref_49
+              - !Parameter &ref_49
                 schema: *ref_48
                 implementation: Method
                 required: false
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: resourceDictionary
                     description: External Resource as a Dictionary to put
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: body
                     style: json
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters:
               - *ref_49
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /model-flatten/dictionary
                 method: put
                 knownMediaType: json
@@ -1385,155 +1385,155 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Successful Response
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: PutDictionary
             description: Put External Resource as a Dictionary
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /model-flatten/dictionary
                 method: get
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_50
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: External Resource as a Dictionary from get
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: GetDictionary
             description: Get External Resource as a Dictionary
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_40
                 implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
+                origin: modelerfour:synthesized/content-type
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: contentType
                     description: Body Parameter content-type
                     serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
-              - !<!Parameter> &ref_52
+              - !Parameter &ref_52
                 schema: *ref_51
                 implementation: Method
                 required: false
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: resourceComplexObject
                     description: External Resource as a ResourceCollection to put
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: body
                     style: json
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters:
               - *ref_52
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /model-flatten/resourcecollection
                 method: put
                 knownMediaType: json
@@ -1542,155 +1542,155 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Successful Response
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: PutResourceCollection
             description: Put External Resource as a ResourceCollection
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /model-flatten/resourcecollection
                 method: get
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_51
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: External Resource as a ResourceCollection from get
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: GetResourceCollection
             description: Get External Resource as a ResourceCollection
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_40
                 implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
+                origin: modelerfour:synthesized/content-type
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: contentType
                     description: Body Parameter content-type
                     serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
-              - !<!Parameter> &ref_53
+              - !Parameter &ref_53
                 schema: *ref_14
                 implementation: Method
                 required: false
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: simpleBodyProduct
                     description: Simple body product to put
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: body
                     style: json
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters:
               - *ref_53
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /model-flatten/customFlattening
                 method: put
                 knownMediaType: json
@@ -1699,168 +1699,168 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_14
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Successful Response
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: PutSimpleProduct
             description: Put Simple Product with client flattening true on the model
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_40
                 implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
+                origin: modelerfour:synthesized/content-type
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: contentType
                     description: Body Parameter content-type
                     serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
-              - !<!Parameter> &ref_54
+              - !Parameter &ref_54
                 schema: *ref_14
                 flattened: true
                 implementation: Method
                 required: false
                 extensions:
                   x-ms-client-flatten: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: simpleBodyProduct
                     description: Simple body product to post
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: body
                     style: json
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
-              - !<!VirtualParameter> &ref_56
+              - !VirtualParameter &ref_56
                 schema: *ref_15
                 implementation: Method
                 originalParameter: *ref_54
                 pathToProperty: []
                 required: true
                 targetProperty: *ref_24
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: productId
-                    description: 'Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.'
-                protocol: !<!Protocols> {}
-              - !<!VirtualParameter> &ref_57
+                    description: Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+                protocol: !Protocols {}
+              - !VirtualParameter &ref_57
                 schema: *ref_16
                 implementation: Method
                 originalParameter: *ref_54
                 pathToProperty: []
                 required: false
                 targetProperty: *ref_25
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: description
                     description: Description of product.
-                protocol: !<!Protocols> {}
-              - !<!VirtualParameter> &ref_58
+                protocol: !Protocols {}
+              - !VirtualParameter &ref_58
                 schema: *ref_18
                 implementation: Method
                 originalParameter: *ref_54
                 pathToProperty: []
                 targetProperty: *ref_26
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: maxProductDisplayName
                     description: Display name of product.
-                protocol: !<!Protocols> {}
-              - !<!VirtualParameter> 
+                protocol: !Protocols {}
+              - !VirtualParameter 
                 schema: *ref_19
                 implementation: Method
                 originalParameter: *ref_54
                 pathToProperty: []
                 targetProperty: *ref_55
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: capacity
-                    description: 'Capacity of product. For example, 4 people.'
-                protocol: !<!Protocols> {}
-              - !<!VirtualParameter> &ref_59
+                    description: Capacity of product. For example, 4 people.
+                protocol: !Protocols {}
+              - !VirtualParameter &ref_59
                 schema: *ref_20
                 implementation: Method
                 originalParameter: *ref_54
                 pathToProperty: []
                 targetProperty: *ref_27
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: genericValue
                     description: Generic URL value.
-                protocol: !<!Protocols> {}
-              - !<!VirtualParameter> &ref_60
+                protocol: !Protocols {}
+              - !VirtualParameter &ref_60
                 schema: *ref_21
                 implementation: Method
                 originalParameter: *ref_54
                 pathToProperty: []
                 targetProperty: *ref_28
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: odataValue
                     description: URL value.
-                protocol: !<!Protocols> {}
+                protocol: !Protocols {}
             signatureParameters:
               - *ref_56
               - *ref_57
               - *ref_58
               - *ref_59
               - *ref_60
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
                 path: /model-flatten/customFlattening
                 method: post
                 knownMediaType: json
@@ -1869,79 +1869,79 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_14
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Successful Response
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: PostFlattenedSimpleProduct
             description: Put Flattened Simple Product with client flattening true on the parameter
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: 1.0.0
         parameters:
           - *ref_39
           - *ref_61
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_40
                 implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
+                origin: modelerfour:synthesized/content-type
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: contentType
                     description: Body Parameter content-type
                     serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
               - *ref_23
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_42
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
               - *ref_62
               - *ref_63
               - *ref_64
-              - !<!VirtualParameter> 
+              - !VirtualParameter 
                 schema: *ref_19
                 implementation: Method
                 originalParameter: *ref_23
@@ -1950,23 +1950,23 @@ operationGroups:
                 extensions:
                   x-ms-parameter-grouping:
                     name: flatten-parameter-group
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: capacity
-                    description: 'Capacity of product. For example, 4 people.'
-                protocol: !<!Protocols> {}
+                    description: Capacity of product. For example, 4 people.
+                protocol: !Protocols {}
               - *ref_65
               - *ref_66
               - *ref_22
             signatureParameters:
               - *ref_22
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
-                path: '/model-flatten/customFlattening/parametergrouping/{name}/'
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /model-flatten/customFlattening/parametergrouping/{name}/
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -1974,48 +1974,48 @@ operationGroups:
                 uri: '{$host}'
         signatureParameters: []
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_14
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Successful Response
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_31
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Unexpected error
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 statusCodes:
                   - default
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: PutSimpleProductWithGrouping
             description: Put Simple Product with client flattening true on the model
-        protocol: !<!Protocols> {}
-    language: !<!Languages> 
+        protocol: !Protocols {}
+    language: !Languages 
       default:
         name: ''
         description: ''
-    protocol: !<!Protocols> {}
-security: !<!Security> 
+    protocol: !Protocols {}
+security: !Security 
   authenticationRequired: false
-language: !<!Languages> 
+language: !Languages 
   default:
     name: AutoRestResourceFlatteningTestService
     description: ''
-protocol: !<!Protocols> 
-  http: !<!HttpModel> {}
+protocol: !Protocols 
+  http: !HttpModel {}

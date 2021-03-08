@@ -174,7 +174,7 @@ namespace Azure.Core
             Request request = message.Request;
             request.Method = RequestMethod.Get;
 
-            if (Uri.TryCreate(link, UriKind.Absolute, out var nextLink))
+            if (Uri.TryCreate(link, UriKind.Absolute, out var nextLink) && nextLink.Scheme != "file")
             {
                 request.Uri.Reset(nextLink);
             }

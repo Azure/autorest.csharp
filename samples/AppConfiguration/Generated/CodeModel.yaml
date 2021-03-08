@@ -1,481 +1,481 @@
-!<!CodeModel> 
-info: !<!Info> 
+!CodeModel 
+info: !Info 
   title: AppConfiguration
-schemas: !<!Schemas> 
+schemas: !Schemas 
   booleans:
-    - !<!BooleanSchema> &ref_16
+    - !BooleanSchema &ref_16
       type: boolean
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Boolean
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   numbers:
-    - !<!NumberSchema> &ref_9
+    - !NumberSchema &ref_9
       type: integer
       precision: 32
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Integer
           description: The HTTP status code that the error maps to.
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   strings:
-    - !<!StringSchema> &ref_0
+    - !StringSchema &ref_0
       type: string
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: simple string
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_34
+      protocol: !Protocols {}
+    - !StringSchema &ref_34
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_2
+      protocol: !Protocols {}
+    - !StringSchema &ref_2
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyName
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_3
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyListResultNextLink
           description: The URI that can be used to request the next set of paged results.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_5
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ErrorType
           description: The type of the error.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_6
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ErrorTitle
           description: A brief summary of the error.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_7
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ErrorName
           description: The name of the parameter that resulted in the error.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_8
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ErrorDetail
           description: A detailed description of the error.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_45
+      protocol: !Protocols {}
+    - !StringSchema &ref_45
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_49
+      protocol: !Protocols {}
+    - !StringSchema &ref_49
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_10
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyValueKey
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_11
+      protocol: !Protocols {}
+    - !StringSchema &ref_11
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyValueLabel
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_12
+      protocol: !Protocols {}
+    - !StringSchema &ref_12
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyValueContentType
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_13
+      protocol: !Protocols {}
+    - !StringSchema &ref_13
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyValue
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_1
+      protocol: !Protocols {}
+    - !StringSchema &ref_1
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_17
+      protocol: !Protocols {}
+    - !StringSchema &ref_17
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyValueEtag
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_18
+      protocol: !Protocols {}
+    - !StringSchema &ref_18
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyValueListResultNextLink
           description: The URI that can be used to request the next set of paged results.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_64
+      protocol: !Protocols {}
+    - !StringSchema &ref_64
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_73
+      protocol: !Protocols {}
+    - !StringSchema &ref_73
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: ETag
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_74
+      protocol: !Protocols {}
+    - !StringSchema &ref_74
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Last-Modified
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_75
+      protocol: !Protocols {}
+    - !StringSchema &ref_75
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_82
+      protocol: !Protocols {}
+    - !StringSchema &ref_82
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: ETag
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_83
+      protocol: !Protocols {}
+    - !StringSchema &ref_83
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_87
+      protocol: !Protocols {}
+    - !StringSchema &ref_87
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: ETag
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_88
+      protocol: !Protocols {}
+    - !StringSchema &ref_88
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_89
+      protocol: !Protocols {}
+    - !StringSchema &ref_89
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_97
+      protocol: !Protocols {}
+    - !StringSchema &ref_97
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: ETag
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_98
+      protocol: !Protocols {}
+    - !StringSchema &ref_98
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Last-Modified
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_99
+      protocol: !Protocols {}
+    - !StringSchema &ref_99
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_20
+      protocol: !Protocols {}
+    - !StringSchema &ref_20
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: LabelName
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_21
+      protocol: !Protocols {}
+    - !StringSchema &ref_21
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: LabelListResultNextLink
           description: The URI that can be used to request the next set of paged results.
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_107
+      protocol: !Protocols {}
+    - !StringSchema &ref_107
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_113
+      protocol: !Protocols {}
+    - !StringSchema &ref_113
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_118
+      protocol: !Protocols {}
+    - !StringSchema &ref_118
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: ETag
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_119
+      protocol: !Protocols {}
+    - !StringSchema &ref_119
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_124
+      protocol: !Protocols {}
+    - !StringSchema &ref_124
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: ETag
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_125
+      protocol: !Protocols {}
+    - !StringSchema &ref_125
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_132
+      protocol: !Protocols {}
+    - !StringSchema &ref_132
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
           header: Sync-Token
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> 
+      protocol: !Protocols {}
+    - !StringSchema 
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   choices:
-    - !<!ChoiceSchema> &ref_24
+    - !ChoiceSchema &ref_24
       choices:
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: key
           language:
             default:
               name: Key
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: label
           language:
             default:
               name: Label
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: content_type
           language:
             default:
               name: ContentType
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: value
           language:
             default:
               name: Value
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: last_modified
           language:
             default:
               name: LastModified
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: tags
           language:
             default:
               name: Tags
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: locked
           language:
             default:
               name: Locked
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: etag
           language:
             default:
@@ -483,59 +483,59 @@ schemas: !<!Schemas>
               description: ''
       type: choice
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       choiceType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Get6ItemsItem
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!ChoiceSchema> &ref_26
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_26
       choices:
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: key
           language:
             default:
               name: Key
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: label
           language:
             default:
               name: Label
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: content_type
           language:
             default:
               name: ContentType
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: value
           language:
             default:
               name: Value
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: last_modified
           language:
             default:
               name: LastModified
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: tags
           language:
             default:
               name: Tags
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: locked
           language:
             default:
               name: Locked
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: etag
           language:
             default:
@@ -543,59 +543,59 @@ schemas: !<!Schemas>
               description: ''
       type: choice
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       choiceType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Head6ItemsItem
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!ChoiceSchema> &ref_27
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_27
       choices:
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: key
           language:
             default:
               name: Key
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: label
           language:
             default:
               name: Label
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: content_type
           language:
             default:
               name: ContentType
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: value
           language:
             default:
               name: Value
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: last_modified
           language:
             default:
               name: LastModified
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: tags
           language:
             default:
               name: Tags
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: locked
           language:
             default:
               name: Locked
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: etag
           language:
             default:
@@ -603,59 +603,59 @@ schemas: !<!Schemas>
               description: ''
       type: choice
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       choiceType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Get7ItemsItem
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!ChoiceSchema> &ref_28
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_28
       choices:
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: key
           language:
             default:
               name: Key
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: label
           language:
             default:
               name: Label
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: content_type
           language:
             default:
               name: ContentType
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: value
           language:
             default:
               name: Value
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: last_modified
           language:
             default:
               name: LastModified
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: tags
           language:
             default:
               name: Tags
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: locked
           language:
             default:
               name: Locked
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: etag
           language:
             default:
@@ -663,59 +663,59 @@ schemas: !<!Schemas>
               description: ''
       type: choice
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       choiceType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Head7ItemsItem
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!ChoiceSchema> &ref_32
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_32
       choices:
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: key
           language:
             default:
               name: Key
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: label
           language:
             default:
               name: Label
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: content_type
           language:
             default:
               name: ContentType
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: value
           language:
             default:
               name: Value
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: last_modified
           language:
             default:
               name: LastModified
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: tags
           language:
             default:
               name: Tags
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: locked
           language:
             default:
               name: Locked
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: etag
           language:
             default:
@@ -723,59 +723,59 @@ schemas: !<!Schemas>
               description: ''
       type: choice
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       choiceType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Enum4
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!ChoiceSchema> &ref_33
+      protocol: !Protocols {}
+    - !ChoiceSchema &ref_33
       choices:
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: key
           language:
             default:
               name: Key
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: label
           language:
             default:
               name: Label
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: content_type
           language:
             default:
               name: ContentType
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: value
           language:
             default:
               name: Value
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: last_modified
           language:
             default:
               name: LastModified
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: tags
           language:
             default:
               name: Tags
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: locked
           language:
             default:
               name: Locked
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: etag
           language:
             default:
@@ -783,543 +783,543 @@ schemas: !<!Schemas>
               description: ''
       type: choice
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       choiceType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Enum5
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   constants:
-    - !<!ConstantSchema> &ref_35
+    - !ConstantSchema &ref_35
       type: constant
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: '1.0'
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ApiVersion10
           description: Api Version (1.0)
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_39
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_39
       type: constant
-      value: !<!ConstantValue> 
-        value: 'application/vnd.microsoft.appconfig.keyset+json, application/json, application/problem+json'
+      value: !ConstantValue 
+        value: application/vnd.microsoft.appconfig.keyset+json, application/json, application/problem+json
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Accept
           description: 'Accept: application/vnd.microsoft.appconfig.keyset+json, application/json, application/problem+json'
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_51
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_51
       type: constant
-      value: !<!ConstantValue> 
-        value: 'application/vnd.microsoft.appconfig.kvset+json, application/json, application/problem+json'
+      value: !ConstantValue 
+        value: application/vnd.microsoft.appconfig.kvset+json, application/json, application/problem+json
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Accept1
           description: 'Accept: application/vnd.microsoft.appconfig.kvset+json, application/json, application/problem+json'
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_66
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_66
       type: constant
-      value: !<!ConstantValue> 
-        value: 'application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json'
+      value: !ConstantValue 
+        value: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Accept1
           description: 'Accept: application/vnd.microsoft.appconfig.kv+json, application/json, application/problem+json'
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_76
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_76
       type: constant
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: application/vnd.microsoft.appconfig.kv+json
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ApplicationVndMicrosoftAppconfigKvJson
           description: Content Type 'application/vnd.microsoft.appconfig.kv+json'
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_29
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_29
       type: constant
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: name
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Get5ItemsItem
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_101
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_101
       type: constant
-      value: !<!ConstantValue> 
-        value: 'application/vnd.microsoft.appconfig.labelset+json, application/json, application/problem+json'
+      value: !ConstantValue 
+        value: application/vnd.microsoft.appconfig.labelset+json, application/json, application/problem+json
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Accept1
           description: 'Accept: application/vnd.microsoft.appconfig.labelset+json, application/json, application/problem+json'
-      protocol: !<!Protocols> {}
-    - !<!ConstantSchema> &ref_31
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_31
       type: constant
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      value: !<!ConstantValue> 
+      value: !ConstantValue 
         value: name
       valueType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Head5ItemsItem
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   dictionaries:
-    - !<!DictionarySchema> &ref_15
+    - !DictionarySchema &ref_15
       type: dictionary
       elementType: *ref_1
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyValueTags
           description: Dictionary of <string>
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   dateTimes:
-    - !<!DateTimeSchema> &ref_14
+    - !DateTimeSchema &ref_14
       type: date-time
       format: date-time
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyValueLastModified
           description: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   objects:
-    - !<!ObjectSchema> &ref_43
+    - !ObjectSchema &ref_43
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       properties:
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_23
+        - !Property 
+          schema: !ArraySchema &ref_23
             type: array
             apiVersions:
-              - !<!ApiVersion> 
+              - !ApiVersion 
                 version: '1.0'
-            elementType: !<!ObjectSchema> &ref_4
+            elementType: !ObjectSchema &ref_4
               type: object
               apiVersions:
-                - !<!ApiVersion> 
+                - !ApiVersion 
                   version: '1.0'
               properties:
-                - !<!Property> 
+                - !Property 
                   schema: *ref_2
                   readOnly: true
                   serializedName: name
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: name
                       description: ''
-                  protocol: !<!Protocols> {}
+                  protocol: !Protocols {}
               serializationFormats:
                 - json
               usage:
                 - output
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: Key
                   description: ''
                   namespace: ''
-              protocol: !<!Protocols> {}
-            language: !<!Languages> 
+              protocol: !Protocols {}
+            language: !Languages 
               default:
                 name: KeyListResultItems
                 description: The collection value.
-            protocol: !<!Protocols> {}
+            protocol: !Protocols {}
           serializedName: items
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: items
               description: The collection value.
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_3
           serializedName: '@nextLink'
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: nextLink
               description: The URI that can be used to request the next set of paged results.
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - output
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyListResult
           description: The result of a list request.
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_4
-    - !<!ObjectSchema> &ref_44
+    - !ObjectSchema &ref_44
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       properties:
-        - !<!Property> 
+        - !Property 
           schema: *ref_5
           serializedName: type
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: type
               description: The type of the error.
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_6
           serializedName: title
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: title
               description: A brief summary of the error.
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_7
           serializedName: name
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: name
               description: The name of the parameter that resulted in the error.
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_8
           serializedName: detail
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: detail
               description: A detailed description of the error.
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_9
           serializedName: status
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: status
               description: The HTTP status code that the error maps to.
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - exception
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: Error
           description: Azure App Configuration error object.
           namespace: ''
-      protocol: !<!Protocols> {}
-    - !<!ObjectSchema> &ref_57
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_57
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       properties:
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_25
+        - !Property 
+          schema: !ArraySchema &ref_25
             type: array
             apiVersions:
-              - !<!ApiVersion> 
+              - !ApiVersion 
                 version: '1.0'
-            elementType: !<!ObjectSchema> &ref_19
+            elementType: !ObjectSchema &ref_19
               type: object
               apiVersions:
-                - !<!ApiVersion> 
+                - !ApiVersion 
                   version: '1.0'
               properties:
-                - !<!Property> 
+                - !Property 
                   schema: *ref_10
                   serializedName: key
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: key
                       description: ''
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_11
                   serializedName: label
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: label
                       description: ''
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_12
                   serializedName: content_type
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: contentType
                       description: ''
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_13
                   serializedName: value
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: value
                       description: ''
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_14
                   serializedName: last_modified
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: lastModified
                       description: ''
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_15
                   serializedName: tags
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: tags
                       description: Dictionary of <string>
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_16
                   serializedName: locked
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: locked
                       description: ''
-                  protocol: !<!Protocols> {}
-                - !<!Property> 
+                  protocol: !Protocols {}
+                - !Property 
                   schema: *ref_17
                   serializedName: etag
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: etag
                       description: ''
-                  protocol: !<!Protocols> {}
+                  protocol: !Protocols {}
               serializationFormats:
                 - json
               usage:
                 - output
                 - input
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: KeyValue
                   description: ''
                   namespace: ''
-              protocol: !<!Protocols> {}
-            language: !<!Languages> 
+              protocol: !Protocols {}
+            language: !Languages 
               default:
                 name: KeyValueListResultItems
                 description: The collection value.
-            protocol: !<!Protocols> {}
+            protocol: !Protocols {}
           serializedName: items
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: items
               description: The collection value.
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_18
           serializedName: '@nextLink'
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: nextLink
               description: The URI that can be used to request the next set of paged results.
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - output
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: KeyValueListResult
           description: The result of a list request.
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_19
-    - !<!ObjectSchema> &ref_106
+    - !ObjectSchema &ref_106
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       properties:
-        - !<!Property> 
-          schema: !<!ArraySchema> &ref_30
+        - !Property 
+          schema: !ArraySchema &ref_30
             type: array
             apiVersions:
-              - !<!ApiVersion> 
+              - !ApiVersion 
                 version: '1.0'
-            elementType: !<!ObjectSchema> &ref_22
+            elementType: !ObjectSchema &ref_22
               type: object
               apiVersions:
-                - !<!ApiVersion> 
+                - !ApiVersion 
                   version: '1.0'
               properties:
-                - !<!Property> 
+                - !Property 
                   schema: *ref_20
                   readOnly: true
                   serializedName: name
-                  language: !<!Languages> 
+                  language: !Languages 
                     default:
                       name: name
                       description: ''
-                  protocol: !<!Protocols> {}
+                  protocol: !Protocols {}
               serializationFormats:
                 - json
               usage:
                 - output
-              language: !<!Languages> 
+              language: !Languages 
                 default:
                   name: Label
                   description: ''
                   namespace: ''
-              protocol: !<!Protocols> {}
-            language: !<!Languages> 
+              protocol: !Protocols {}
+            language: !Languages 
               default:
                 name: LabelListResultItems
                 description: The collection value.
-            protocol: !<!Protocols> {}
+            protocol: !Protocols {}
           serializedName: items
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: items
               description: The collection value.
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_21
           serializedName: '@nextLink'
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: nextLink
               description: The URI that can be used to request the next set of paged results.
-          protocol: !<!Protocols> {}
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - output
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: LabelListResult
           description: The result of a list request.
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_22
   arrays:
     - *ref_23
-    - !<!ArraySchema> &ref_50
+    - !ArraySchema &ref_50
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       elementType: *ref_24
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfGet6ItemsItem
           description: Array of Get6ItemsItem
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_25
-    - !<!ArraySchema> &ref_58
+    - !ArraySchema &ref_58
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       elementType: *ref_26
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfHead6ItemsItem
           description: Array of Head6ItemsItem
-      protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_65
+      protocol: !Protocols {}
+    - !ArraySchema &ref_65
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       elementType: *ref_27
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfGet7ItemsItem
           description: Array of Get7ItemsItem
-      protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_90
+      protocol: !Protocols {}
+    - !ArraySchema &ref_90
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       elementType: *ref_28
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfHead7ItemsItem
           description: Array of Head7ItemsItem
-      protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_100
+      protocol: !Protocols {}
+    - !ArraySchema &ref_100
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       elementType: *ref_29
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfGet5ItemsItem
           description: Array of Get5ItemsItem
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
     - *ref_30
-    - !<!ArraySchema> &ref_108
+    - !ArraySchema &ref_108
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       elementType: *ref_31
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfHead5ItemsItem
           description: Array of Head5ItemsItem
-      protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_126
+      protocol: !Protocols {}
+    - !ArraySchema &ref_126
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       elementType: *ref_32
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfEnum4
           description: Array of Enum4
-      protocol: !<!Protocols> {}
-    - !<!ArraySchema> &ref_133
+      protocol: !Protocols {}
+    - !ArraySchema &ref_133
       type: array
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: '1.0'
       elementType: *ref_33
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: ArrayOfEnum5
           description: Array of Enum5
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
 globalParameters:
-  - !<!Parameter> &ref_37
+  - !Parameter &ref_37
     schema: *ref_34
     implementation: Client
     extensions:
       x-ms-priority: 0
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: SyncToken
         description: Used to guarantee real-time consistency between requests.
         serializedName: Sync-Token
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: header
-  - !<!Parameter> &ref_36
+  - !Parameter &ref_36
     schema: *ref_0
     implementation: Client
     required: true
@@ -1330,95 +1330,95 @@ globalParameters:
       x-name: endpoint
       x-required: true
       x-type: string
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: Endpoint
         description: The endpoint of the App Configuration instance to send requests to.
         serializedName: endpoint
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: uri
-  - !<!Parameter> &ref_38
+  - !Parameter &ref_38
     schema: *ref_35
     implementation: Client
-    origin: 'modelerfour:synthesized/api-version'
+    origin: modelerfour:synthesized/api-version
     required: true
-    language: !<!Languages> 
+    language: !Languages 
       default:
         name: apiVersion
         description: Api Version
         serializedName: api-version
-    protocol: !<!Protocols> 
-      http: !<!HttpParameter> 
+    protocol: !Protocols 
+      http: !HttpParameter 
         in: query
 operationGroups:
-  - !<!OperationGroup> 
+  - !OperationGroup 
     $key: ''
     operations:
-      - !<!Operation> 
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_40
+          - !Parameter &ref_40
             schema: *ref_34
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: name
                 description: A filter for the name of the returned keys.
                 serializedName: name
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_41
+          - !Parameter &ref_41
             schema: *ref_34
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: after
                 description: Instructs the server to return elements that appear after the element referred to by the specified token.
                 serializedName: After
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_42
+          - !Parameter &ref_42
             schema: *ref_34
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: acceptDatetime
                 description: Requests the server to respond with the state of the resource at the specified time.
                 serializedName: Accept-Datetime
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_39
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /keys
                 method: get
                 uri: '{endpoint}'
@@ -1427,16 +1427,16 @@ operationGroups:
           - *ref_41
           - *ref_42
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_43
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_34
                     header: Sync-Token
                     language:
@@ -1451,14 +1451,14 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_44
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.keyset+json
@@ -1471,7 +1471,7 @@ operationGroups:
             GetKeys:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
               responses:
                 '200':
                   body:
@@ -1483,7 +1483,7 @@ operationGroups:
           x-ms-pageable:
             itemName: items
             nextLinkName: '@nextLink'
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: GetKeys
             description: Gets a list of keys.
@@ -1491,56 +1491,56 @@ operationGroups:
               itemName: items
               nextLinkName: '@nextLink'
             summary: Gets a list of keys.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_46
+          - !Parameter &ref_46
             schema: *ref_45
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: name
                 description: A filter for the name of the returned keys.
                 serializedName: name
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_47
+          - !Parameter &ref_47
             schema: *ref_45
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: after
                 description: Instructs the server to return elements that appear after the element referred to by the specified token.
                 serializedName: After
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_48
+          - !Parameter &ref_48
             schema: *ref_45
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: acceptDatetime
                 description: Requests the server to respond with the state of the resource at the specified time.
                 serializedName: Accept-Datetime
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
         requests:
-          - !<!Request> 
-            language: !<!Languages> 
+          - !Request 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /keys
                 method: head
                 uri: '{endpoint}'
@@ -1549,15 +1549,15 @@ operationGroups:
           - *ref_47
           - *ref_48
         responses:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_45
                     header: Sync-Token
                     language:
@@ -1567,13 +1567,13 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 statusCodes:
                   - default
         extensions:
@@ -1581,104 +1581,104 @@ operationGroups:
             CheckKeys:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
               responses:
                 '200':
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.keyset+json
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: CheckKeys
             description: Requests the headers and status of the given resource.
             summary: Requests the headers and status of the given resource.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_52
+          - !Parameter &ref_52
             schema: *ref_49
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: key
                 description: A filter used to match keys.
                 serializedName: key
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_53
+          - !Parameter &ref_53
             schema: *ref_49
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: label
                 description: A filter used to match labels
                 serializedName: label
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_54
+          - !Parameter &ref_54
             schema: *ref_49
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: after
                 description: Instructs the server to return elements that appear after the element referred to by the specified token.
                 serializedName: After
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_55
+          - !Parameter &ref_55
             schema: *ref_49
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: acceptDatetime
                 description: Requests the server to respond with the state of the resource at the specified time.
                 serializedName: Accept-Datetime
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_56
+          - !Parameter &ref_56
             schema: *ref_50
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: select
                 description: Used to select what fields are present in the returned resource(s).
                 serializedName: $Select
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
                 style: form
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_51
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /kv
                 method: get
                 uri: '{endpoint}'
@@ -1689,16 +1689,16 @@ operationGroups:
           - *ref_55
           - *ref_56
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_57
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_49
                     header: Sync-Token
                     language:
@@ -1713,14 +1713,14 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_44
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kvset+json
@@ -1733,7 +1733,7 @@ operationGroups:
             GetKeyValues:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
               responses:
                 '200':
                   body:
@@ -1764,7 +1764,7 @@ operationGroups:
                         value: Hello World
                       - content_type: null
                         etag: fAFm4jkGNB1hsIr4o0S5hnhCCvY
-                        key: 'WebDemo:Settings:BackgroundColor'
+                        key: WebDemo:Settings:BackgroundColor
                         label: null
                         last_modified: '2019-06-20T15:48:01+00:00'
                         locked: false
@@ -1775,7 +1775,7 @@ operationGroups:
           x-ms-pageable:
             itemName: items
             nextLinkName: '@nextLink'
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: GetKeyValues
             description: Gets a list of key-values.
@@ -1783,79 +1783,79 @@ operationGroups:
               itemName: items
               nextLinkName: '@nextLink'
             summary: Gets a list of key-values.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_59
+          - !Parameter &ref_59
             schema: *ref_1
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: key
                 description: A filter used to match keys.
                 serializedName: key
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_60
+          - !Parameter &ref_60
             schema: *ref_1
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: label
                 description: A filter used to match labels
                 serializedName: label
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_61
+          - !Parameter &ref_61
             schema: *ref_1
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: after
                 description: Instructs the server to return elements that appear after the element referred to by the specified token.
                 serializedName: After
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_62
+          - !Parameter &ref_62
             schema: *ref_1
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: acceptDatetime
                 description: Requests the server to respond with the state of the resource at the specified time.
                 serializedName: Accept-Datetime
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_63
+          - !Parameter &ref_63
             schema: *ref_58
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: select
                 description: Used to select what fields are present in the returned resource(s).
                 serializedName: $Select
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
                 style: form
         requests:
-          - !<!Request> 
-            language: !<!Languages> 
+          - !Request 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /kv
                 method: head
                 uri: '{endpoint}'
@@ -1866,15 +1866,15 @@ operationGroups:
           - *ref_62
           - *ref_63
         responses:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_1
                     header: Sync-Token
                     language:
@@ -1884,13 +1884,13 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 statusCodes:
                   - default
         extensions:
@@ -1898,117 +1898,117 @@ operationGroups:
             CheckKeyValues:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
               responses:
                 '200':
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kvset+json
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: CheckKeyValues
             description: Requests the headers and status of the given resource.
             summary: Requests the headers and status of the given resource.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_67
+          - !Parameter &ref_67
             schema: *ref_64
             implementation: Method
             required: true
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: key
                 description: The key of the key-value to retrieve.
                 serializedName: key
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: path
-          - !<!Parameter> &ref_68
+          - !Parameter &ref_68
             schema: *ref_64
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: label
                 description: The label of the key-value to retrieve.
                 serializedName: label
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_69
+          - !Parameter &ref_69
             schema: *ref_64
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: acceptDatetime
                 description: Requests the server to respond with the state of the resource at the specified time.
                 serializedName: Accept-Datetime
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_70
+          - !Parameter &ref_70
             schema: *ref_64
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifMatch
                 description: Used to perform an operation only if the targeted resource's etag matches the value provided.
                 serializedName: If-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_71
+          - !Parameter &ref_71
             schema: *ref_64
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifNoneMatch
                 description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
                 serializedName: If-None-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_72
+          - !Parameter &ref_72
             schema: *ref_65
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: select
                 description: Used to select what fields are present in the returned resource(s).
                 serializedName: $Select
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
                 style: form
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
-                path: '/kv/{key}'
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /kv/{key}
                 method: get
                 uri: '{endpoint}'
         signatureParameters:
@@ -2019,30 +2019,30 @@ operationGroups:
           - *ref_71
           - *ref_72
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_19
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_64
                     header: Sync-Token
                     language:
                       default:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_73
                     header: ETag
                     language:
                       default:
                         name: ETag
                         description: An identifier representing the returned state of the resource.
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_74
                     header: Last-Modified
                     language:
@@ -2057,14 +2057,14 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_44
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kv+json
@@ -2077,7 +2077,7 @@ operationGroups:
             GetKeyValue:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -2093,13 +2093,13 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
             GetKeyValue_IfMatch:
               parameters:
                 If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -2115,13 +2115,13 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
             GetKeyValue_IfNoneMatch:
               parameters:
                 If-None-Match: L10qpBghN693OaxydgTkLmrBbV5
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -2137,117 +2137,117 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: GetKeyValue
             description: Gets a single key-value.
             summary: Gets a single key-value.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_78
+          - !Parameter &ref_78
             schema: *ref_75
             implementation: Method
             required: true
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: key
                 description: The key of the key-value to create.
                 serializedName: key
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: path
-          - !<!Parameter> &ref_79
+          - !Parameter &ref_79
             schema: *ref_75
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: label
                 description: The label of the key-value to create.
                 serializedName: label
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_80
+          - !Parameter &ref_80
             schema: *ref_75
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifMatch
                 description: Used to perform an operation only if the targeted resource's etag matches the value provided.
                 serializedName: If-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_81
+          - !Parameter &ref_81
             schema: *ref_75
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifNoneMatch
                 description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
                 serializedName: If-None-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_76
                 implementation: Method
-                origin: 'modelerfour:synthesized/content-type'
+                origin: modelerfour:synthesized/content-type
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: contentType
                     description: Body Parameter content-type
                     serializedName: Content-Type
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
-              - !<!Parameter> &ref_77
+              - !Parameter &ref_77
                 schema: *ref_19
                 implementation: Method
                 required: false
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: entity
                     description: The key-value to create.
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: body
                     style: json
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters:
               - *ref_77
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpWithBodyRequest> 
-                path: '/kv/{key}'
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /kv/{key}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -2264,23 +2264,23 @@ operationGroups:
           - *ref_80
           - *ref_81
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_19
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_75
                     header: Sync-Token
                     language:
                       default:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_82
                     header: ETag
                     language:
@@ -2295,14 +2295,14 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_44
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kv+json
@@ -2315,7 +2315,7 @@ operationGroups:
             PutKeyValue:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -2331,13 +2331,13 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"tnIHBkDYQwtdNMLoWtr5aybkKwL"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
             PutKeyValue_IfMatch:
               parameters:
                 If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -2353,80 +2353,80 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: PutKeyValue
             description: Creates a key-value.
             summary: Creates a key-value.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_84
+          - !Parameter &ref_84
             schema: *ref_83
             implementation: Method
             required: true
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: key
                 description: The key of the key-value to delete.
                 serializedName: key
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: path
-          - !<!Parameter> &ref_85
+          - !Parameter &ref_85
             schema: *ref_83
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: label
                 description: The label of the key-value to delete.
                 serializedName: label
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_86
+          - !Parameter &ref_86
             schema: *ref_83
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifMatch
                 description: Used to perform an operation only if the targeted resource's etag matches the value provided.
                 serializedName: If-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
-                path: '/kv/{key}'
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /kv/{key}
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
@@ -2434,23 +2434,23 @@ operationGroups:
           - *ref_85
           - *ref_86
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_19
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_83
                     header: Sync-Token
                     language:
                       default:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_87
                     header: ETag
                     language:
@@ -2464,15 +2464,15 @@ operationGroups:
                   - application/problem+json
                 statusCodes:
                   - '200'
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_88
                     header: Sync-Token
                     language:
@@ -2482,14 +2482,14 @@ operationGroups:
                 statusCodes:
                   - '204'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_44
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kv+json
@@ -2502,7 +2502,7 @@ operationGroups:
             DeleteKeyValue:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -2518,14 +2518,14 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
                 '204': {}
             DeleteKeyValue_IfMatch:
               parameters:
                 If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -2541,100 +2541,100 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
                 '204': {}
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: DeleteKeyValue
             description: Deletes a key-value.
             summary: Deletes a key-value.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_91
+          - !Parameter &ref_91
             schema: *ref_89
             implementation: Method
             required: true
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: key
                 description: The key of the key-value to retrieve.
                 serializedName: key
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: path
-          - !<!Parameter> &ref_92
+          - !Parameter &ref_92
             schema: *ref_89
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: label
                 description: The label of the key-value to retrieve.
                 serializedName: label
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_93
+          - !Parameter &ref_93
             schema: *ref_89
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: acceptDatetime
                 description: Requests the server to respond with the state of the resource at the specified time.
                 serializedName: Accept-Datetime
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_94
+          - !Parameter &ref_94
             schema: *ref_89
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifMatch
                 description: Used to perform an operation only if the targeted resource's etag matches the value provided.
                 serializedName: If-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_95
+          - !Parameter &ref_95
             schema: *ref_89
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifNoneMatch
                 description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
                 serializedName: If-None-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_96
+          - !Parameter &ref_96
             schema: *ref_90
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: select
                 description: Used to select what fields are present in the returned resource(s).
                 serializedName: $Select
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
                 style: form
         requests:
-          - !<!Request> 
-            language: !<!Languages> 
+          - !Request 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
-                path: '/kv/{key}'
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /kv/{key}
                 method: head
                 uri: '{endpoint}'
         signatureParameters:
@@ -2645,29 +2645,29 @@ operationGroups:
           - *ref_95
           - *ref_96
         responses:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_89
                     header: Sync-Token
                     language:
                       default:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_97
                     header: ETag
                     language:
                       default:
                         name: ETag
                         description: An identifier representing the returned state of the resource.
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_98
                     header: Last-Modified
                     language:
@@ -2677,13 +2677,13 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 statusCodes:
                   - default
         extensions:
@@ -2691,123 +2691,123 @@ operationGroups:
             CheckKeyValue:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
             CheckKeyValue_IfMatch:
               parameters:
                 If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
             CheckKeyValue_IfNoneMatch:
               parameters:
                 If-None-Match: L10qpBghN693OaxydgTkLmrBbV5
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"7XpB48ET4VAlB9068ft6fKMyA3m"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: CheckKeyValue
             description: Requests the headers and status of the given resource.
             summary: Requests the headers and status of the given resource.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_102
+          - !Parameter &ref_102
             schema: *ref_99
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: name
                 description: A filter for the name of the returned labels.
                 serializedName: name
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_103
+          - !Parameter &ref_103
             schema: *ref_99
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: after
                 description: Instructs the server to return elements that appear after the element referred to by the specified token.
                 serializedName: After
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_104
+          - !Parameter &ref_104
             schema: *ref_99
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: acceptDatetime
                 description: Requests the server to respond with the state of the resource at the specified time.
                 serializedName: Accept-Datetime
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_105
+          - !Parameter &ref_105
             schema: *ref_100
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: select
                 description: Used to select what fields are present in the returned resource(s).
                 serializedName: $Select
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
                 style: form
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_101
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /labels
                 method: get
                 uri: '{endpoint}'
@@ -2817,16 +2817,16 @@ operationGroups:
           - *ref_104
           - *ref_105
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_106
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_99
                     header: Sync-Token
                     language:
@@ -2841,14 +2841,14 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_44
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.labelset+json
@@ -2861,7 +2861,7 @@ operationGroups:
             GetLabels:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
               responses:
                 '200':
                   body:
@@ -2876,7 +2876,7 @@ operationGroups:
           x-ms-pageable:
             itemName: items
             nextLinkName: '@nextLink'
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: GetLabels
             description: Gets a list of labels.
@@ -2884,68 +2884,68 @@ operationGroups:
               itemName: items
               nextLinkName: '@nextLink'
             summary: Gets a list of labels.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_109
+          - !Parameter &ref_109
             schema: *ref_107
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: name
                 description: A filter for the name of the returned labels.
                 serializedName: name
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_110
+          - !Parameter &ref_110
             schema: *ref_107
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: after
                 description: Instructs the server to return elements that appear after the element referred to by the specified token.
                 serializedName: After
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_111
+          - !Parameter &ref_111
             schema: *ref_107
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: acceptDatetime
                 description: Requests the server to respond with the state of the resource at the specified time.
                 serializedName: Accept-Datetime
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_112
+          - !Parameter &ref_112
             schema: *ref_108
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: select
                 description: Used to select what fields are present in the returned resource(s).
                 serializedName: $Select
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
                 style: form
         requests:
-          - !<!Request> 
-            language: !<!Languages> 
+          - !Request 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /labels
                 method: head
                 uri: '{endpoint}'
@@ -2955,15 +2955,15 @@ operationGroups:
           - *ref_111
           - *ref_112
         responses:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_107
                     header: Sync-Token
                     language:
@@ -2973,13 +2973,13 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 statusCodes:
                   - default
         extensions:
@@ -2987,94 +2987,94 @@ operationGroups:
             CheckLabels:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
               responses:
                 '200':
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.labelset+json
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: CheckLabels
             description: Requests the headers and status of the given resource.
             summary: Requests the headers and status of the given resource.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_114
+          - !Parameter &ref_114
             schema: *ref_113
             implementation: Method
             required: true
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: key
                 description: The key of the key-value to lock.
                 serializedName: key
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: path
-          - !<!Parameter> &ref_115
+          - !Parameter &ref_115
             schema: *ref_113
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: label
-                description: 'The label, if any, of the key-value to lock.'
+                description: The label, if any, of the key-value to lock.
                 serializedName: label
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_116
+          - !Parameter &ref_116
             schema: *ref_113
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifMatch
                 description: Used to perform an operation only if the targeted resource's etag matches the value provided.
                 serializedName: If-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_117
+          - !Parameter &ref_117
             schema: *ref_113
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifNoneMatch
                 description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
                 serializedName: If-None-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
-                path: '/locks/{key}'
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /locks/{key}
                 method: put
                 uri: '{endpoint}'
         signatureParameters:
@@ -3083,23 +3083,23 @@ operationGroups:
           - *ref_116
           - *ref_117
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_19
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_113
                     header: Sync-Token
                     language:
                       default:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_118
                     header: ETag
                     language:
@@ -3114,14 +3114,14 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_44
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kv+json
@@ -3134,7 +3134,7 @@ operationGroups:
             PutLock:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -3150,13 +3150,13 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"L10qpBghN693OaxydgTkLmrBbV4"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
             PutLock_IfMatch:
               parameters:
                 If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -3172,91 +3172,91 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: PutLock
             description: Locks a key-value.
             summary: Locks a key-value.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_120
+          - !Parameter &ref_120
             schema: *ref_119
             implementation: Method
             required: true
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: key
                 description: The key of the key-value to unlock.
                 serializedName: key
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: path
-          - !<!Parameter> &ref_121
+          - !Parameter &ref_121
             schema: *ref_119
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: label
-                description: 'The label, if any, of the key-value to unlock.'
+                description: The label, if any, of the key-value to unlock.
                 serializedName: label
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_122
+          - !Parameter &ref_122
             schema: *ref_119
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifMatch
                 description: Used to perform an operation only if the targeted resource's etag matches the value provided.
                 serializedName: If-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_123
+          - !Parameter &ref_123
             schema: *ref_119
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ifNoneMatch
                 description: Used to perform an operation only if the targeted resource's etag does not match the value provided.
                 serializedName: If-None-Match
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_66
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
-                path: '/locks/{key}'
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /locks/{key}
                 method: delete
                 uri: '{endpoint}'
         signatureParameters:
@@ -3265,23 +3265,23 @@ operationGroups:
           - *ref_122
           - *ref_123
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_19
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_119
                     header: Sync-Token
                     language:
                       default:
                         name: SyncToken
                         description: Enables real-time consistency between requests by providing the returned value in the next request made to the server.
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_124
                     header: ETag
                     language:
@@ -3296,14 +3296,14 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_44
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kv+json
@@ -3316,7 +3316,7 @@ operationGroups:
             DeleteLock:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -3332,13 +3332,13 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"0BGYCoQ6iNdp5NtQ7N8shrobo6s"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
             DeleteLock_IfMatch:
               parameters:
                 If-Match: '"L10qpBghN693OaxydgTkLmrBbV5"'
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
                 key: Message
               responses:
                 '200':
@@ -3354,101 +3354,101 @@ operationGroups:
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kv+json
                     ETag: W/"L10qpBghN693OaxydgTkLmrBbV5"
-                    Last-Modified: 'Tue, 27 Aug 2019 16:52:32 GMT'
+                    Last-Modified: Tue, 27 Aug 2019 16:52:32 GMT
                     Sync-Token: zAJw6V16=NjotMSM3ODk3NjM=;sn=789763
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: DeleteLock
             description: Unlocks a key-value.
             summary: Unlocks a key-value.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_127
+          - !Parameter &ref_127
             schema: *ref_125
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: key
                 description: A filter used to match keys.
                 serializedName: key
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_128
+          - !Parameter &ref_128
             schema: *ref_125
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: label
                 description: A filter used to match labels
                 serializedName: label
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_129
+          - !Parameter &ref_129
             schema: *ref_125
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: after
                 description: Instructs the server to return elements that appear after the element referred to by the specified token.
                 serializedName: After
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_130
+          - !Parameter &ref_130
             schema: *ref_125
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: acceptDatetime
                 description: Requests the server to respond with the state of the resource at the specified time.
                 serializedName: Accept-Datetime
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_131
+          - !Parameter &ref_131
             schema: *ref_126
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: select
                 description: Used to select what fields are present in the returned resource(s).
                 serializedName: $Select
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
                 style: form
         requests:
-          - !<!Request> 
+          - !Request 
             parameters:
-              - !<!Parameter> 
+              - !Parameter 
                 schema: *ref_51
                 implementation: Method
-                origin: 'modelerfour:synthesized/accept'
+                origin: modelerfour:synthesized/accept
                 required: true
-                language: !<!Languages> 
+                language: !Languages 
                   default:
                     name: accept
                     description: Accept header
                     serializedName: Accept
-                protocol: !<!Protocols> 
-                  http: !<!HttpParameter> 
+                protocol: !Protocols 
+                  http: !HttpParameter 
                     in: header
             signatureParameters: []
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /revisions
                 method: get
                 uri: '{endpoint}'
@@ -3459,16 +3459,16 @@ operationGroups:
           - *ref_130
           - *ref_131
         responses:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_57
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_125
                     header: Sync-Token
                     language:
@@ -3483,14 +3483,14 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!SchemaResponse> 
+          - !SchemaResponse 
             schema: *ref_44
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 knownMediaType: json
                 mediaTypes:
                   - application/vnd.microsoft.appconfig.kvset+json
@@ -3503,7 +3503,7 @@ operationGroups:
             GetRevisions:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
               responses:
                 '200':
                   body:
@@ -3537,7 +3537,7 @@ operationGroups:
           x-ms-pageable:
             itemName: items
             nextLinkName: '@nextLink'
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: GetRevisions
             description: Gets a list of key-value revisions.
@@ -3545,79 +3545,79 @@ operationGroups:
               itemName: items
               nextLinkName: '@nextLink'
             summary: Gets a list of key-value revisions.
-        protocol: !<!Protocols> {}
-      - !<!Operation> 
+        protocol: !Protocols {}
+      - !Operation 
         apiVersions:
-          - !<!ApiVersion> 
+          - !ApiVersion 
             version: '1.0'
         parameters:
           - *ref_36
-          - !<!Parameter> &ref_134
+          - !Parameter &ref_134
             schema: *ref_132
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: key
                 description: A filter used to match keys.
                 serializedName: key
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_135
+          - !Parameter &ref_135
             schema: *ref_132
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: label
                 description: A filter used to match labels
                 serializedName: label
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
           - *ref_37
           - *ref_38
-          - !<!Parameter> &ref_136
+          - !Parameter &ref_136
             schema: *ref_132
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: after
                 description: Instructs the server to return elements that appear after the element referred to by the specified token.
                 serializedName: After
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
-          - !<!Parameter> &ref_137
+          - !Parameter &ref_137
             schema: *ref_132
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: acceptDatetime
                 description: Requests the server to respond with the state of the resource at the specified time.
                 serializedName: Accept-Datetime
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: header
-          - !<!Parameter> &ref_138
+          - !Parameter &ref_138
             schema: *ref_133
             implementation: Method
-            language: !<!Languages> 
+            language: !Languages 
               default:
                 name: select
                 description: Used to select what fields are present in the returned resource(s).
                 serializedName: $Select
-            protocol: !<!Protocols> 
-              http: !<!HttpParameter> 
+            protocol: !Protocols 
+              http: !HttpParameter 
                 in: query
                 style: form
         requests:
-          - !<!Request> 
-            language: !<!Languages> 
+          - !Request 
+            language: !Languages 
               default:
                 name: ''
                 description: ''
-            protocol: !<!Protocols> 
-              http: !<!HttpRequest> 
+            protocol: !Protocols 
+              http: !HttpRequest 
                 path: /revisions
                 method: head
                 uri: '{endpoint}'
@@ -3628,15 +3628,15 @@ operationGroups:
           - *ref_137
           - *ref_138
         responses:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Success
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 headers:
-                  - !<!HttpHeader> 
+                  - !HttpHeader 
                     schema: *ref_132
                     header: Sync-Token
                     language:
@@ -3646,13 +3646,13 @@ operationGroups:
                 statusCodes:
                   - '200'
         exceptions:
-          - !<!Response> 
-            language: !<!Languages> 
+          - !Response 
+            language: !Languages 
               default:
                 name: ''
                 description: Error response describing why the operation failed
-            protocol: !<!Protocols> 
-              http: !<!HttpResponse> 
+            protocol: !Protocols 
+              http: !HttpResponse 
                 statusCodes:
                   - default
         extensions:
@@ -3660,27 +3660,27 @@ operationGroups:
             CheckRevisions:
               parameters:
                 api-version: '1.0'
-                endpoint: 'https://{exampleAppConfigurationName}.azconfig.io'
+                endpoint: https://{exampleAppConfigurationName}.azconfig.io
               responses:
                 '200':
                   headers:
                     Content-Type: application/vnd.microsoft.appconfig.kvset+json
-        language: !<!Languages> 
+        language: !Languages 
           default:
             name: CheckRevisions
             description: Requests the headers and status of the given resource.
             summary: Requests the headers and status of the given resource.
-        protocol: !<!Protocols> {}
-    language: !<!Languages> 
+        protocol: !Protocols {}
+    language: !Languages 
       default:
         name: ''
         description: ''
-    protocol: !<!Protocols> {}
-security: !<!Security> 
+    protocol: !Protocols {}
+security: !Security 
   authenticationRequired: false
-language: !<!Languages> 
+language: !Languages 
   default:
     name: AppConfiguration
     description: ''
-protocol: !<!Protocols> 
-  http: !<!HttpModel> {}
+protocol: !Protocols 
+  http: !HttpModel {}

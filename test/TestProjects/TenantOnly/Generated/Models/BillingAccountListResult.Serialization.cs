@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace TenantOnly
 {
-    public partial class BillingAccountListResult
+    internal partial class BillingAccountListResult
     {
         internal static BillingAccountListResult DeserializeBillingAccountListResult(JsonElement element)
         {

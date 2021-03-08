@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class NetworkInterfaceTapConfigurationListResult
+    internal partial class NetworkInterfaceTapConfigurationListResult
     {
         internal static NetworkInterfaceTapConfigurationListResult DeserializeNetworkInterfaceTapConfigurationListResult(JsonElement element)
         {

@@ -156,6 +156,12 @@ namespace AutoRest.CSharp.Output.Models
             return _nextPageMethods;
         }
 
+        private string GetRequestParameterName (RequestParameter requestParameter)
+        {
+            string defaultName = requestParameter.Language.Default.Name;
+            return requestParameter.Language.Default.SerializedName ?? defaultName;
+        }
+
         private RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, ICollection<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
         {
             HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
@@ -171,8 +177,7 @@ namespace AutoRest.CSharp.Output.Models
             RequestParameter[] parameters = operation.Parameters.Concat(requestParameters).ToArray();
             foreach (RequestParameter requestParameter in parameters)
             {
-                string defaultName = requestParameter.Language.Default.Name;
-                string serializedName = requestParameter.Language.Default.SerializedName ?? defaultName;
+                string serializedName = GetRequestParameterName(requestParameter);
                 ReferenceOrConstant constantOrReference;
                 Schema valueSchema = requestParameter.Schema;
 
@@ -283,6 +288,15 @@ namespace AutoRest.CSharp.Output.Models
                         value.Add(new MultipartRequestBodyPart(parameter.Value.Reference.Name, requestBody));
                     }
                     body = new MultipartRequestBody(value.ToArray());
+                }
+                else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Form)
+                {
+                    UrlEncodedBody urlbody = new UrlEncodedBody();
+                    foreach (var (bodyRequestParameter, bodyParameterValue) in bodyParameters)
+                    {
+                        urlbody.Add(GetRequestParameterName(bodyRequestParameter), bodyParameterValue);
+                    }
+                    body = urlbody;
                 }
                 else
                 {

@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class XmlTests : TestServerTestBase
     {
-        public XmlTests(TestServerVersion version) : base(version, "xml") { }
+        public XmlTests(TestServerVersion version) : base(version) { }
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No match")]

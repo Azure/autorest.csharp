@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests
     [IgnoreOnTestServer(TestServerVersion.V2, "Requests not matched")]
     public class ObjectTypeTest : TestServerTestBase
     {
-        public ObjectTypeTest(TestServerVersion version) : base(version, "objectType") { }
+        public ObjectTypeTest(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task ObjectTypeErrorResponse() => Test((host, pipeline) =>

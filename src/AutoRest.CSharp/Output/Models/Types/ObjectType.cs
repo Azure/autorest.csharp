@@ -305,6 +305,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
         public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output);
+        public bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
 
         public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {

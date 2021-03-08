@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Output.Builders
                 case KnownMediaType.Xml:
                     return BuildXmlObjectSerialization(objectSchema, type);
                 default:
-                    throw new NotImplementedException(mediaType.ToString());
+                    throw new NotImplementedException($"BuildObject with {mediaType} from {objectSchema.Name}");
             }
         }
 

@@ -27,7 +27,23 @@ namespace AutoRest.CSharp.Input
                 {
                     foreach (var operationResponse in operation.Responses)
                     {
-                        Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
+                        var paging = operation.Language.Default.Paging;
+                        if (paging != null && operationResponse.ResponseSchema is ObjectSchema objectSchema)
+                        {
+                            Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Output);
+                            foreach (var property in objectSchema.Properties)
+                            {
+                                var itemName = paging.ItemName ?? "value";
+                                if (property.SerializedName == itemName)
+                                {
+                                    Apply(property.Schema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
+                        }
                     }
 
                     foreach (var operationResponse in operation.Exceptions)
@@ -134,7 +150,8 @@ namespace AutoRest.CSharp.Input
         Output = Input << 1,
 
         Model = Output << 1,
-        Error =  Model << 1,
+        Error = Model << 1,
         FattenedParameters = Error << 1,
+        Converter = FattenedParameters << 1
     }
 }

@@ -1,52 +1,52 @@
-!<!CodeModel> 
-info: !<!Info> 
+!CodeModel 
+info: !Info 
   description: Model Namespace
   title: ModelNamespace
-schemas: !<!Schemas> 
+schemas: !Schemas 
   strings:
-    - !<!StringSchema> &ref_1
+    - !StringSchema &ref_1
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: TestModelCode
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_2
+      protocol: !Protocols {}
+    - !StringSchema &ref_2
       type: string
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: TestModelStatus
           description: ''
-      protocol: !<!Protocols> {}
-    - !<!StringSchema> &ref_0
+      protocol: !Protocols {}
+    - !StringSchema &ref_0
       type: string
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: String
           description: simple string
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   choices:
-    - !<!ChoiceSchema> 
+    - !ChoiceSchema 
       choices:
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: A
           language:
             default:
               name: A
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: B
           language:
             default:
               name: B
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: C
           language:
             default:
@@ -54,30 +54,30 @@ schemas: !<!Schemas>
               description: ''
       type: choice
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       choiceType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: TestExtensibleEnum
           description: More Letters
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   sealedChoices:
-    - !<!SealedChoiceSchema> 
+    - !SealedChoiceSchema 
       choices:
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: A
           language:
             default:
               name: A
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: B
           language:
             default:
               name: B
               description: ''
-        - !<!ChoiceValue> 
+        - !ChoiceValue 
           value: C
           language:
             default:
@@ -85,49 +85,49 @@ schemas: !<!Schemas>
               description: ''
       type: sealed-choice
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       choiceType: *ref_0
-      language: !<!Languages> 
+      language: !Languages 
         default:
           name: TestNonExtensibleEnum
           description: More Letters
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
   objects:
-    - !<!ObjectSchema> 
+    - !ObjectSchema 
       type: object
       apiVersions:
-        - !<!ApiVersion> 
+        - !ApiVersion 
           version: 1.0.0
       properties:
-        - !<!Property> 
+        - !Property 
           schema: *ref_1
           serializedName: Code
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: code
               description: ''
-          protocol: !<!Protocols> {}
-        - !<!Property> 
+          protocol: !Protocols {}
+        - !Property 
           schema: *ref_2
           serializedName: Status
-          language: !<!Languages> 
+          language: !Languages 
             default:
               name: status
               description: ''
-          protocol: !<!Protocols> {}
-      language: !<!Languages> 
+          protocol: !Protocols {}
+      language: !Languages 
         default:
           name: TestModel
           description: .
           namespace: ''
-      protocol: !<!Protocols> {}
+      protocol: !Protocols {}
 operationGroups: []
-security: !<!Security> 
+security: !Security 
   authenticationRequired: false
-language: !<!Languages> 
+language: !Languages 
   default:
     name: ModelNamespace
     description: ''
-protocol: !<!Protocols> 
-  http: !<!HttpModel> {}
+protocol: !Protocols 
+  http: !HttpModel {}

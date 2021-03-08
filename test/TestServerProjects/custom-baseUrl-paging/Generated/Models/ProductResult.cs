@@ -11,7 +11,7 @@ using Azure.Core;
 namespace custom_baseUrl_paging.Models
 {
     /// <summary> The ProductResult. </summary>
-    public partial class ProductResult
+    internal partial class ProductResult
     {
         /// <summary> Initializes a new instance of ProductResult. </summary>
         internal ProductResult()

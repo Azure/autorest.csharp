@@ -84,6 +84,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-formdata\\Generated"
     },
+    "body-formdata-urlencoded": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-formdata-urlencoded\\Generated"
+    },
     "body-integer": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-integer\\Generated"
@@ -183,6 +187,10 @@
     "ModelShapes": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelShapes\\Generated"
+    },
+    "ModelWithConverterUsage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ModelWithConverterUsage\\Generated"
     },
     "multiple-inheritance": {
       "commandName": "Project",

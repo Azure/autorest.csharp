@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class PagingTests : TestServerTestBase
     {
-        public PagingTests(TestServerVersion version) : base(version, "paging") { }
+        public PagingTests(TestServerVersion version) : base(version) { }
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
@@ -857,5 +857,11 @@ namespace AutoRest.TestServer.Tests
             }
             Assert.AreEqual(1, count);
         });
+
+        [Test]
+        public void PagingModelsAreHidden()
+        {
+            Assert.IsFalse(typeof(ProductResult).IsPublic);
+        }
     }
 }

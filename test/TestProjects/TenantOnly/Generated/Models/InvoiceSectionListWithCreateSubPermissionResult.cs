@@ -11,7 +11,7 @@ using Azure.Core;
 namespace TenantOnly
 {
     /// <summary> The list of invoice section properties with create subscription permission. </summary>
-    public partial class InvoiceSectionListWithCreateSubPermissionResult
+    internal partial class InvoiceSectionListWithCreateSubPermissionResult
     {
         /// <summary> Initializes a new instance of InvoiceSectionListWithCreateSubPermissionResult. </summary>
         internal InvoiceSectionListWithCreateSubPermissionResult()

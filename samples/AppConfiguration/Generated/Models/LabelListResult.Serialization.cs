@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace AppConfiguration.Models
 {
-    public partial class LabelListResult
+    internal partial class LabelListResult
     {
         internal static LabelListResult DeserializeLabelListResult(JsonElement element)
         {

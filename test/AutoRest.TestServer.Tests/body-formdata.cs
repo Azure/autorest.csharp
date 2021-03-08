@@ -12,7 +12,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyFormdataTests : TestServerTestBase
     {
-        public BodyFormdataTests(TestServerVersion version) : base(version, "formData") { }
+        public BodyFormdataTests(TestServerVersion version) : base(version) { }
 
         private static MemoryStream MakeStream(string text)
         {

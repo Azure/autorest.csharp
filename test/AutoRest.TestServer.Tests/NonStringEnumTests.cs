@@ -12,7 +12,7 @@ namespace AutoRest.TestServer.Tests
     [IgnoreOnTestServer(TestServerVersion.V2, "No record")]
     public class NonStringEnumTests : TestServerTestBase
     {
-        public NonStringEnumTests(TestServerVersion version) : base(version, "nonStringEnums") { }
+        public NonStringEnumTests(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task NonStringEnumsGetFloat() => TestStatus(async (host, pipeline) =>
