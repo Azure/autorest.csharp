@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            DefaultName = objectSchema.NameOverride == null ? objectSchema.CSharpName() : objectSchema.NameOverride;
+            DefaultName = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
             if (isResourceModel)
             {
                 DefaultName = DefaultName + "Data";
