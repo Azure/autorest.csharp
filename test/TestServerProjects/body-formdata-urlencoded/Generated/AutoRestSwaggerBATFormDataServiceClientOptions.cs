@@ -10,8 +10,8 @@ using Azure.Core;
 
 namespace body_formdata_urlencoded
 {
-    /// <summary> Client options for BodyFormsDataURLEncodedClient. </summary>
-    public partial class BodyFormsDataURLEncodedClientOptions : ClientOptions
+    /// <summary> Client options for AutoRestSwaggerBATFormDataServiceClient. </summary>
+    public partial class AutoRestSwaggerBATFormDataServiceClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace body_formdata_urlencoded
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of BodyFormsDataURLEncodedClientOptions. </summary>
-        public BodyFormsDataURLEncodedClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of AutoRestSwaggerBATFormDataServiceClientOptions. </summary>
+        public AutoRestSwaggerBATFormDataServiceClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

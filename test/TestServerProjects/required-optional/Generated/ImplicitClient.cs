@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -176,42 +175,6 @@ namespace required_optional
             try
             {
                 return RestClient.PutOptionalBody(bodyParameter, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutOptionalBinaryBodyAsync(Stream bodyParameter = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalBinaryBody");
-            scope.Start();
-            try
-            {
-                return await RestClient.PutOptionalBinaryBodyAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutOptionalBinaryBody(Stream bodyParameter = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalBinaryBody");
-            scope.Start();
-            try
-            {
-                return RestClient.PutOptionalBinaryBody(bodyParameter, cancellationToken);
             }
             catch (Exception e)
             {

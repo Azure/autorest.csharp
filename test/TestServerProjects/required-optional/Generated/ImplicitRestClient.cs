@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -250,56 +249,6 @@ namespace required_optional
         public Response PutOptionalBody(string bodyParameter = null, CancellationToken cancellationToken = default)
         {
             using var message = CreatePutOptionalBodyRequest(bodyParameter);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreatePutOptionalBinaryBodyRequest(Stream bodyParameter)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Put;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/reqopt/implicit/optional/binary-body", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            if (bodyParameter != null)
-            {
-                request.Headers.Add("Content-Type", "application/octet-stream");
-                request.Content = RequestContent.Create(bodyParameter);
-            }
-            return message;
-        }
-
-        /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutOptionalBinaryBodyAsync(Stream bodyParameter = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreatePutOptionalBinaryBodyRequest(bodyParameter);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Test implicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutOptionalBinaryBody(Stream bodyParameter = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreatePutOptionalBinaryBodyRequest(bodyParameter);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

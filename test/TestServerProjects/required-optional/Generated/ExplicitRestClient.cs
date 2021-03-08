@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -34,115 +33,6 @@ namespace required_optional
             this.endpoint = endpoint;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
-        }
-
-        internal HttpMessage CreatePutOptionalBinaryBodyRequest(Stream bodyParameter)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Put;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/reqopt/explicit/optional/binary-body", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            if (bodyParameter != null)
-            {
-                request.Headers.Add("Content-Type", "application/octet-stream");
-                request.Content = RequestContent.Create(bodyParameter);
-            }
-            return message;
-        }
-
-        /// <summary> Test explicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutOptionalBinaryBodyAsync(Stream bodyParameter = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreatePutOptionalBinaryBodyRequest(bodyParameter);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Test explicitly optional body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutOptionalBinaryBody(Stream bodyParameter = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreatePutOptionalBinaryBodyRequest(bodyParameter);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreatePutRequiredBinaryBodyRequest(Stream bodyParameter)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Put;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/reqopt/explicit/required/binary-body", false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/octet-stream");
-            request.Content = RequestContent.Create(bodyParameter);
-            return message;
-        }
-
-        /// <summary> Test explicitly required body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        public async Task<Response> PutRequiredBinaryBodyAsync(Stream bodyParameter, CancellationToken cancellationToken = default)
-        {
-            if (bodyParameter == null)
-            {
-                throw new ArgumentNullException(nameof(bodyParameter));
-            }
-
-            using var message = CreatePutRequiredBinaryBodyRequest(bodyParameter);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return message.Response;
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Test explicitly required body parameter. </summary>
-        /// <param name="bodyParameter"> The binary to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="bodyParameter"/> is null. </exception>
-        public Response PutRequiredBinaryBody(Stream bodyParameter, CancellationToken cancellationToken = default)
-        {
-            if (bodyParameter == null)
-            {
-                throw new ArgumentNullException(nameof(bodyParameter));
-            }
-
-            using var message = CreatePutRequiredBinaryBodyRequest(bodyParameter);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return message.Response;
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
         }
 
         internal HttpMessage CreatePostRequiredIntegerParameterRequest(int bodyParameter)
