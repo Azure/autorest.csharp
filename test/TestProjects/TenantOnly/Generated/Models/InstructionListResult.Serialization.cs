@@ -15,7 +15,7 @@ namespace TenantOnly
     {
         internal static InstructionListResult DeserializeInstructionListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<Instruction>> value = default;
+            Optional<IReadOnlyList<InstructionData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -26,10 +26,10 @@ namespace TenantOnly
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<Instruction> array = new List<Instruction>();
+                    List<InstructionData> array = new List<InstructionData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Instruction.DeserializeInstruction(item));
+                        array.Add(InstructionData.DeserializeInstructionData(item));
                     }
                     value = array;
                     continue;

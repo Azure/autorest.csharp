@@ -126,7 +126,7 @@ namespace TenantOnly
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public async Task<Response<BillingAccount>> GetAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<BillingAccountData>> GetAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -139,9 +139,9 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        BillingAccount value = default;
+                        BillingAccountData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BillingAccount.DeserializeBillingAccount(document.RootElement);
+                        value = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -154,7 +154,7 @@ namespace TenantOnly
         /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> is null. </exception>
-        public Response<BillingAccount> Get(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<BillingAccountData> Get(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -167,9 +167,9 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        BillingAccount value = default;
+                        BillingAccountData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BillingAccount.DeserializeBillingAccount(document.RootElement);
+                        value = BillingAccountData.DeserializeBillingAccountData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -177,7 +177,7 @@ namespace TenantOnly
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string billingAccountName, BillingAccount parameters)
+        internal HttpMessage CreateUpdateRequest(string billingAccountName, BillingAccountData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -201,7 +201,7 @@ namespace TenantOnly
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string billingAccountName, BillingAccount parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> UpdateAsync(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -229,7 +229,7 @@ namespace TenantOnly
         /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="parameters"/> is null. </exception>
-        public Response Update(string billingAccountName, BillingAccount parameters, CancellationToken cancellationToken = default)
+        public Response Update(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {

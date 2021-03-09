@@ -24,7 +24,7 @@ namespace Azure.Management.Storage.Models
                 throw new ArgumentNullException(nameof(location));
             }
 
-            PrivateEndpointConnections = new ChangeTrackingList<PrivateEndpointConnection>();
+            PrivateEndpointConnections = new ChangeTrackingList<PrivateEndpointConnectionData>();
         }
 
         /// <summary> Initializes a new instance of StorageAccount. </summary>
@@ -58,7 +58,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="privateEndpointConnections"> List of private endpoint connection associated with the specified storage account. </param>
         /// <param name="routingPreference"> Maintains information about the network routing choice opted by the user for data transfer. </param>
         /// <param name="blobRestoreStatus"> Blob restore status. </param>
-        internal StorageAccount(string id, string name, string type, IDictionary<string, string> tags, string location, Sku sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnection> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus) : base(id, name, type, tags, location)
+        internal StorageAccount(string id, string name, string type, IDictionary<string, string> tags, string location, SkuData sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus) : base(id, name, type, tags, location)
         {
             Sku = sku;
             Kind = kind;
@@ -88,7 +88,7 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Gets the SKU. </summary>
-        public Sku Sku { get; }
+        public SkuData Sku { get; }
         /// <summary> Gets the Kind. </summary>
         public Kind? Kind { get; }
         /// <summary> The identity of the resource. </summary>
@@ -132,7 +132,7 @@ namespace Azure.Management.Storage.Models
         /// <summary> Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled. </summary>
         public LargeFileSharesState? LargeFileSharesState { get; set; }
         /// <summary> List of private endpoint connection associated with the specified storage account. </summary>
-        public IReadOnlyList<PrivateEndpointConnection> PrivateEndpointConnections { get; }
+        public IReadOnlyList<PrivateEndpointConnectionData> PrivateEndpointConnections { get; }
         /// <summary> Maintains information about the network routing choice opted by the user for data transfer. </summary>
         public RoutingPreference RoutingPreference { get; set; }
         /// <summary> Blob restore status. </summary>

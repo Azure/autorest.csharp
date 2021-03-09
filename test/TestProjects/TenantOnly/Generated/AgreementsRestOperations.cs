@@ -69,7 +69,7 @@ namespace TenantOnly
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="agreementName"/> is null. </exception>
-        public async Task<Response<Agreement>> GetAsync(string billingAccountName, string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<AgreementData>> GetAsync(string billingAccountName, string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -86,9 +86,9 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        Agreement value = default;
+                        AgreementData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = Agreement.DeserializeAgreement(document.RootElement);
+                        value = AgreementData.DeserializeAgreementData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -102,7 +102,7 @@ namespace TenantOnly
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/> or <paramref name="agreementName"/> is null. </exception>
-        public Response<Agreement> Get(string billingAccountName, string agreementName, string expand = null, CancellationToken cancellationToken = default)
+        public Response<AgreementData> Get(string billingAccountName, string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -119,9 +119,9 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        Agreement value = default;
+                        AgreementData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = Agreement.DeserializeAgreement(document.RootElement);
+                        value = AgreementData.DeserializeAgreementData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

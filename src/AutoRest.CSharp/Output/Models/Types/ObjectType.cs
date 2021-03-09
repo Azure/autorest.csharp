@@ -36,7 +36,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
 
-        public ObjectType(ObjectSchema objectSchema, BuildContext context): base(context)
+        public ObjectType(ObjectSchema objectSchema, BuildContext context) : this(objectSchema, context, false)
+        {
+        }
+
+        public ObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceModel) : base(context)
         {
             _objectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
@@ -47,19 +51,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            DefaultName = objectSchema.CSharpName();
-            if (objectSchema.Extensions?.Namespace is string namespaceExtension)
+            DefaultName = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
+            if (isResourceModel)
             {
-                DefaultNamespace = namespaceExtension;
+                DefaultName = DefaultName + "Data";
             }
-            else if (context.Configuration.ModelNamespace)
-            {
-                DefaultNamespace = $"{context.DefaultNamespace}.Models";
-            }
-            else
-            {
-                DefaultNamespace = context.DefaultNamespace;
-            }
+
+            DefaultNamespace = GetDefaultNamespace(objectSchema, context);
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 
             // Update usage from code attribute
@@ -86,7 +84,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 
-        public ObjectTypeProperty? AdditionalPropertiesProperty {
+        public ObjectTypeProperty? AdditionalPropertiesProperty
+        {
             get
             {
                 if (_additionalPropertiesProperty != null || ImplementsDictionaryType == null)
@@ -280,7 +279,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             if (AdditionalPropertiesProperty != null &&
-                !defaultCtorInitializers.Any(i=> i.Property == AdditionalPropertiesProperty))
+                !defaultCtorInitializers.Any(i => i.Property == AdditionalPropertiesProperty))
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(TypeFactory.GetImplementationType(AdditionalPropertiesProperty.Declaration.Type))));
             }
@@ -420,14 +419,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            if (_sourceTypeMapping?.Formats is {} formatsDefinedInSource)
+            if (_sourceTypeMapping?.Formats is { } formatsDefinedInSource)
             {
                 foreach (var format in formatsDefinedInSource)
                 {
                     formats.Add(Enum.Parse<KnownMediaType>(format, true));
                 }
             }
-
             return formats.Distinct().Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
         }
 
