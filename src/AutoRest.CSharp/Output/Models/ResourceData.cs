@@ -19,11 +19,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public ResourceData(ObjectSchema schema, OperationGroup operationGroup, BuildContext context, bool isResourceModel) : base(schema, context, isResourceModel)
         {
-            var nameOverride = schema.NameOverride;
-            if (nameOverride != null)
-            {
-                operationGroup.Resource = nameOverride;
-            }
+            //var nameOverride = schema.NameOverride;
+            //if (nameOverride != null)
+            //{
+            //    operationGroup.Resource = nameOverride;
+            //}
 
             _context = context;
             _prefix = operationGroup.Resource;
