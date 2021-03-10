@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Arm;
 
 namespace AutoRest.CSharp.Generation.Writers
 {

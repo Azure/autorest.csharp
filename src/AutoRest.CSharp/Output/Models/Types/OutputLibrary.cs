@@ -2,18 +2,13 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Text;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Arm;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Type.Decorate;
-using AutoRest.CSharp.Utilities;
-using Microsoft.VisualBasic;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
