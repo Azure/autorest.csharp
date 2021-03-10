@@ -1,1 +1,36 @@
-{"OutputFolder":".","Namespace":"Azure.Management.Storage","LibraryName":null,"SharedSourceFolders":["..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.0\\Generator.Shared","..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.0\\Azure.Core.Shared"],"AzureArm":true,"PublicClients":true,"ModelNamespace":true,"HeadAsBoolean":true,"SkipCSProjPackageReference":true,"CredentialTypes":[],"CredentialScopes":[],"CredentialHeaderName":"api-key","OperationGroupToResourceType":{"Operations":"Microsoft.Storage/operations","Skus":"Microsoft.Storage/skus","Usages":"Microsoft.Storage/locations/usages","PrivateLinkResources":"Microsoft.Storage/storageAccounts/privateLinkResources"},"OperationGroupToResource":{"Operations":"Operation","Skus":"Sku","Usages":"Usage","PrivateLinkResources":"PrivateLinkResource"},"ResourceRename":{"BlobServiceProperties":"BlobService","FileServiceProperties":"FileService","StorageAccountCreateParameters":"StorageAccount"}}
+{
+    "OutputFolder": ".",
+    "Namespace": "Azure.Management.Storage",
+    "LibraryName": null,
+    "SharedSourceFolders": [
+        "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.0\\Generator.Shared",
+        "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.0\\Azure.Core.Shared"
+    ],
+    "AzureArm": true,
+    "PublicClients": true,
+    "ModelNamespace": true,
+    "HeadAsBoolean": true,
+    "SkipCSProjPackageReference": true,
+    "CredentialTypes": [
+    ],
+    "CredentialScopes": [
+    ],
+    "CredentialHeaderName": "api-key",
+    "OperationGroupToResourceType": {
+        "Operations": "Microsoft.Storage/operations",
+        "Skus": "Microsoft.Storage/skus",
+        "Usages": "Microsoft.Storage/locations/usages",
+        "PrivateLinkResources": "Microsoft.Storage/storageAccounts/privateLinkResources"
+    },
+    "OperationGroupToResource": {
+        "Operations": "Operation",
+        "Skus": "Sku",
+        "Usages": "Usage",
+        "PrivateLinkResources": "PrivateLinkResource",
+        "StorageAccounts": "StorageAccount"
+    },
+    "ResourceRename": {
+        "BlobServiceProperties": "BlobService",
+        "FileServiceProperties": "FileService"
+    }
+}
