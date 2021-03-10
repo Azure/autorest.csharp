@@ -28,6 +28,7 @@ operation-group-to-resource:
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
    LogAnalytics: LogAnalyticsOperationResult
 resource-rename:
+   SshPublicKey : SshPublicKeyInfo
    LogAnalyticsOperationResult: LogAnalytics
    SshPublicKeyResource: SshPublicKey
 modelerfour:

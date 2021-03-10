@@ -7,8 +7,8 @@
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A Class representing a SshPublicKey along with the instance operations that can be performed on it. </summary>
-    public class SshPublicKey : SshPublicKeyOperations
+    /// <summary> A Class representing a Usage along with the instance operations that can be performed on it. </summary>
+    public class Usage : UsageOperations
     {
     }
 }
