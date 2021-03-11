@@ -5,14 +5,11 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Azure.Core;
 
 namespace ModelWithConverterUsage.Models
 {
-    [JsonConverter(typeof(ProductConverter))]
     public partial class Product : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -35,19 +32,6 @@ namespace ModelWithConverterUsage.Models
                 }
             }
             return new Product(constProperty);
-        }
-
-        internal partial class ProductConverter : JsonConverter<Product>
-        {
-            public override void Write(Utf8JsonWriter writer, Product model, JsonSerializerOptions options)
-            {
-                writer.WriteObjectValue(model);
-            }
-            public override Product Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
-                using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializeProduct(document.RootElement);
-            }
         }
     }
 }
