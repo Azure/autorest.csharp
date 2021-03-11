@@ -19,8 +19,17 @@ namespace AutoRest.CSharp.Input
                 if (usage != null)
                 {
                     var schemaTypeUsage = (SchemaTypeUsage)Enum.Parse(typeof(SchemaTypeUsage), usage, true);
-                    var recurse = schemaTypeUsage.HasFlag(SchemaTypeUsage.Converter) ? false : true;
-                    Apply(objectSchema, schemaTypeUsage, recurse);
+
+                    if (schemaTypeUsage.HasFlag(SchemaTypeUsage.Converter))
+                    {
+                        Apply(objectSchema, SchemaTypeUsage.Converter, false);
+                        schemaTypeUsage = schemaTypeUsage & ~SchemaTypeUsage.Converter;
+                    }
+
+                    if (!schemaTypeUsage.Equals(default(SchemaTypeUsage)))
+                    {
+                        Apply(objectSchema, schemaTypeUsage, true);
+                    }
                 }
             }
             foreach (var operationGroup in codeModel.OperationGroups)

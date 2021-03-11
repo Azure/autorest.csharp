@@ -15,23 +15,26 @@ namespace ModelWithConverterUsage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("constProperty");
-            writer.WriteStringValue(ConstProperty);
+            if (Optional.IsDefined(ConstProperty))
+            {
+                writer.WritePropertyName("Const_Property");
+                writer.WriteStringValue(ConstProperty);
+            }
             writer.WriteEndObject();
         }
 
         internal static Product DeserializeProduct(JsonElement element)
         {
-            string constProperty = default;
+            Optional<string> constProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("constProperty"))
+                if (property.NameEquals("Const_Property"))
                 {
                     constProperty = property.Value.GetString();
                     continue;
                 }
             }
-            return new Product(constProperty);
+            return new Product(constProperty.Value);
         }
     }
 }

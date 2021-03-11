@@ -95,11 +95,8 @@
         "Product": {
             "type": "object",
             "description": "The product documentation.",
-            "required": [
-                "constProperty"
-            ],
             "properties": {
-                "constProperty": {
+                "Const_Property": {
                     "type": "string",
                     "description": "Constant string"
                 }

@@ -127,8 +127,7 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_3
-                required: true
-                serializedName: constProperty
+                serializedName: Const_Property
                 language: !Languages 
                   default:
                     name: constProperty

@@ -20,13 +20,13 @@ namespace AutoRest.TestServer.Tests
             };
 
             var jsonAsString = JsonSerializer.Serialize(model);
-            Assert.AreEqual("{\"String_Property\":\"test_str\",\"Enum_Property\":\"A\",\"Obj_Property\":{\"constProperty\":\"str\"}}", jsonAsString);
+            Assert.AreEqual("{\"String_Property\":\"test_str\",\"Enum_Property\":\"A\",\"Obj_Property\":{\"Const_Property\":\"str\"}}", jsonAsString);
         }
 
         [Test]
         public void DeserializeModelClass()
         {
-            string jsonString = @"{""String_Property"": ""test_str"",""Enum_Property"": ""A"", ""Obj_Property"": {""constProperty"": ""str""}}";
+            string jsonString = @"{""String_Property"": ""test_str"",""Enum_Property"": ""A"", ""Obj_Property"": {""Const_Property"": ""str""}}";
 
             ModelClass model = JsonSerializer.Deserialize<ModelClass>(jsonString);
             Assert.AreEqual("test_str", model.StringProperty);
@@ -50,6 +50,24 @@ namespace AutoRest.TestServer.Tests
 
             var model = JsonSerializer.Deserialize<ModelStruct>(jsonString);
             Assert.AreEqual("test_str", model.ModelProperty);
+        }
+
+        [Test]
+        public void SerializeProductModel()
+        {
+            var model = new Product("test_str");
+
+            var jsonAsString = JsonSerializer.Serialize(model);
+            Assert.AreEqual("{\"ConstProperty\":\"test_str\"}", jsonAsString);
+        }
+
+        [Test]
+        public void DeserializeProductModel()
+        {
+            string jsonString = @"{""ConstProperty"": ""test_str""}";
+
+            var model = JsonSerializer.Deserialize<Product>(jsonString);
+            Assert.AreEqual("test_str", model.ConstProperty);
         }
     }
 }
