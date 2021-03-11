@@ -14,5 +14,21 @@ namespace Azure.ResourceManager.Sample
         protected VirtualMachineScaleSetVMExtensionsOperations()
         {
         }
+
+        /// <summary> Lists all available geo-locations. </summary>
+        /// <param name="CancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of location that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="System.InvalidOperationException"> The default subscription id is null. </exception>
+        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        {
+            return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
+        }
+
+        /// <summary> Lists all available geo-locations. </summary>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        {
+            return ListAvailableLocations(ResourceType);
+        }
     }
 }
