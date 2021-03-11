@@ -26,10 +26,7 @@ namespace AutoRest.CSharp.Input
                         schemaTypeUsage &= ~SchemaTypeUsage.Converter;
                     }
 
-                    if (!schemaTypeUsage.Equals(default(SchemaTypeUsage)))
-                    {
-                        Apply(objectSchema, schemaTypeUsage, true);
-                    }
+                    Apply(objectSchema, schemaTypeUsage, true);
                 }
             }
             foreach (var operationGroup in codeModel.OperationGroups)
