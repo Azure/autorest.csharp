@@ -33,6 +33,25 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {resourceOperation.Type.Name} for mocking.");
             using (writer.Scope($"protected {resourceOperation.Type.Name:D}()"))
             {
+
+            }
+            writer.Line();
+
+            writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
+            writer.WriteXmlDocumentationParameter("CancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P: System.Threading.CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns("An async collection of location that may take multiple service requests to iterate over.");
+            writer.WriteXmlDocumentationException(typeof(InvalidOperationException), "The default subscription id is null.");
+            using (writer.Scope($"public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)"))
+            {
+                writer.Line($"return await ListAvailableLocationsAsync(ResourceType, cancellationToken);");
+            }
+            writer.Line();
+
+            writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
+            writer.WriteXmlDocumentationReturns("A collection of location that may take multiple service requests to iterate over.");
+            using (writer.Scope($"public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)"))
+            {
+                writer.Line($"return ListAvailableLocations(ResourceType);");
             }
         }
     }
