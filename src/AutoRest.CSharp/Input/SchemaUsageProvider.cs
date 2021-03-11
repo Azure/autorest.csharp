@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Input
                     if (schemaTypeUsage.HasFlag(SchemaTypeUsage.Converter))
                     {
                         Apply(objectSchema, SchemaTypeUsage.Converter, false);
-                        schemaTypeUsage = schemaTypeUsage & ~SchemaTypeUsage.Converter;
+                        schemaTypeUsage &= ~SchemaTypeUsage.Converter;
                     }
 
                     if (!schemaTypeUsage.Equals(default(SchemaTypeUsage)))
