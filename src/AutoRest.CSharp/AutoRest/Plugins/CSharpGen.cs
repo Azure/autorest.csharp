@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     armResourceWriter.WriteResource(codeWriter, model);
 
                     var name = model.Type.Name;
-                    project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+                    project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
                 }
             }
             else
