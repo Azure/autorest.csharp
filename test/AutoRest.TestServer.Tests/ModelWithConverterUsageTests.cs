@@ -69,5 +69,40 @@ namespace AutoRest.TestServer.Tests
             var model = JsonSerializer.Deserialize<Product>(jsonString);
             Assert.AreEqual("test_str", model.ConstProperty);
         }
+
+        [Test]
+        public void SerializeInputModel()
+        {
+            var model = new InputModel()
+            {
+                InputModelProperty = "test_str",
+            };
+
+            var jsonAsString = JsonSerializer.Serialize(model);
+            Assert.AreEqual("{\"Input_Model_Property\":\"test_str\"}", jsonAsString);
+        }
+
+        [Test]
+        public void DeserializeInputModel()
+        {
+            string jsonString = @"{""Input_Model_Property"": ""test_str""}";
+            Assert.That(() => JsonSerializer.Deserialize<InputModel>(jsonString), Throws.InstanceOf<NotImplementedException>());
+        }
+
+        [Test]
+        public void SerializeOutputModel()
+        {
+            var model = new OutputModel("test_str");
+            Assert.That(() => JsonSerializer.Serialize(model), Throws.InstanceOf<NotImplementedException>());
+        }
+
+        [Test]
+        public void DeserializeOutputModel()
+        {
+            string jsonString = @"{""Output_Model_Property"": ""test_str""}";
+
+            var model = JsonSerializer.Deserialize<OutputModel>(jsonString);
+            Assert.AreEqual("test_str", model.OutputModelProperty);
+        }
     }
 }

@@ -7,7 +7,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Linq;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -126,14 +125,28 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 using (writer.Scope($"public override void  Write({typeof(Utf8JsonWriter)} writer, {model.Type} model, {typeof(JsonSerializerOptions)} options)"))
                 {
-                    writer.Append($"writer.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(model);");
+                    if (model.IncludeSerializer)
+                    {
+                        writer.Append($"writer.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(model);");
+                    }
+                    else
+                    {
+                        writer.Append($"throw new {typeof(NotImplementedException)}();");
+                    }
                 }
 
                 using (writer.Scope($"public override {model.Type} Read(ref {typeof(Utf8JsonReader)} reader, {typeof(Type)} typeToConvert, {typeof(JsonSerializerOptions)} options)"))
                 {
-                    var document = new CodeWriterDeclaration("document");
-                    writer.Line($"using var {document:D} = {typeof(JsonDocument)}.ParseValue(ref reader);");
-                    writer.Line($"return Deserialize{model.Declaration.Name}({document}.RootElement);");
+                    if (model.IncludeDeserializer)
+                    {
+                        var document = new CodeWriterDeclaration("document");
+                        writer.Line($"using var {document:D} = {typeof(JsonDocument)}.ParseValue(ref reader);");
+                        writer.Line($"return Deserialize{model.Declaration.Name}({document}.RootElement);");
+                    }
+                    else
+                    {
+                        writer.Append($"throw new {typeof(NotImplementedException)}();");
+                    }
                 }
             }
         }
