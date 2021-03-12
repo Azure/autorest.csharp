@@ -2,17 +2,13 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Text;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Type.Decorate;
-using AutoRest.CSharp.Utilities;
-using Microsoft.VisualBasic;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -26,6 +22,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<string, ResourceData>? _resourceData;
+        private Dictionary<string, ArmResource>? _armResource;
+
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
@@ -53,6 +51,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+
+        public IEnumerable<ArmResource> ArmResource => EnsureArmResource().Values;
 
         public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
@@ -207,6 +207,30 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return _resourceData;
+        }
+
+        private Dictionary<string, ArmResource> EnsureArmResource()
+        {
+            if (_armResource != null)
+            {
+                return _armResource;
+            }
+
+            _armResource = new Dictionary<string, ArmResource>();
+            foreach (var entry in ResourceSchemaMap)
+            {
+                var schema = entry.Key;
+                var operations = _operationGroups[schema.Name];
+                foreach (var operation in operations)
+                {
+                    if (!_armResource.ContainsKey(operation.Resource))
+                    {
+                        _armResource.Add(operation.Resource, new ArmResource(operation.Resource, _context));
+                    }
+                }
+            }
+
+            return _armResource;
         }
 
         public TypeProvider FindTypeForSchema(Schema schema)

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace Azure.Management.Storage.Models
@@ -12,33 +13,55 @@ namespace Azure.Management.Storage.Models
     /// <summary> A class representing the StorageAccount data model. </summary>
     public partial class StorageAccountData
     {
-        /// <summary> Required. Gets or sets the SKU name. </summary>
+        /// <summary> Gets the SKU. </summary>
         public SkuData Sku { get; }
-        /// <summary> Required. Indicates the type of storage account. </summary>
-        public Kind Kind { get; }
-        /// <summary> Required. Gets or sets the location of the resource. This will be one of the supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). The geo region of a resource cannot be changed once it is created, but if an identical geo region is specified on update, the request will succeed. </summary>
-        public string Location { get; }
-        /// <summary> Gets or sets a list of key value pairs that describe the resource. These tags can be used for viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key with a length no greater than 128 characters and a value with a length no greater than 256 characters. </summary>
-        public IDictionary<string, string> Tags { get; }
+        /// <summary> Gets the Kind. </summary>
+        public Kind? Kind { get; }
         /// <summary> The identity of the resource. </summary>
         public Identity Identity { get; set; }
-        /// <summary> User domain assigned to the storage account. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property. </summary>
-        public CustomDomain CustomDomain { get; set; }
-        /// <summary> Not applicable. Azure Storage encryption is enabled for all storage accounts and cannot be disabled. </summary>
-        public Encryption Encryption { get; set; }
-        /// <summary> Network rule set. </summary>
-        public NetworkRuleSet NetworkRuleSet { get; set; }
+        /// <summary> Gets the status of the storage account at the time the operation was called. </summary>
+        public ProvisioningState? ProvisioningState { get; }
+        /// <summary> Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object. Note that Standard_ZRS and Premium_LRS accounts only return the blob endpoint. </summary>
+        public Endpoints PrimaryEndpoints { get; }
+        /// <summary> Gets the location of the primary data center for the storage account. </summary>
+        public string PrimaryLocation { get; }
+        /// <summary> Gets the status indicating whether the primary location of the storage account is available or unavailable. </summary>
+        public AccountStatus? StatusOfPrimary { get; }
+        /// <summary> Gets the timestamp of the most recent instance of a failover to the secondary location. Only the most recent timestamp is retained. This element is not returned if there has never been a failover instance. Only available if the accountType is Standard_GRS or Standard_RAGRS. </summary>
+        public DateTimeOffset? LastGeoFailoverTime { get; }
+        /// <summary> Gets the location of the geo-replicated secondary for the storage account. Only available if the accountType is Standard_GRS or Standard_RAGRS. </summary>
+        public string SecondaryLocation { get; }
+        /// <summary> Gets the status indicating whether the secondary location of the storage account is available or unavailable. Only available if the SKU name is Standard_GRS or Standard_RAGRS. </summary>
+        public AccountStatus? StatusOfSecondary { get; }
+        /// <summary> Gets the creation date and time of the storage account in UTC. </summary>
+        public DateTimeOffset? CreationTime { get; }
+        /// <summary> Gets the custom domain the user assigned to this storage account. </summary>
+        public CustomDomain CustomDomain { get; }
+        /// <summary> Gets the URLs that are used to perform a retrieval of a public blob, queue, or table object from the secondary location of the storage account. Only available if the SKU name is Standard_RAGRS. </summary>
+        public Endpoints SecondaryEndpoints { get; }
+        /// <summary> Gets the encryption settings on the account. If unspecified, the account is unencrypted. </summary>
+        public Encryption Encryption { get; }
         /// <summary> Required for storage accounts where kind = BlobStorage. The access tier used for billing. </summary>
-        public AccessTier? AccessTier { get; set; }
+        public AccessTier? AccessTier { get; }
         /// <summary> Provides the identity based authentication settings for Azure Files. </summary>
         public AzureFilesIdentityBasedAuthentication AzureFilesIdentityBasedAuthentication { get; set; }
-        /// <summary> Allows https traffic only to storage service if sets to true. The default value is true since API version 2019-04-01. </summary>
+        /// <summary> Allows https traffic only to storage service if sets to true. </summary>
         public bool? EnableHttpsTrafficOnly { get; set; }
+        /// <summary> Network rule set. </summary>
+        public NetworkRuleSet NetworkRuleSet { get; }
         /// <summary> Account HierarchicalNamespace enabled if sets to true. </summary>
         public bool? IsHnsEnabled { get; set; }
+        /// <summary> Geo Replication Stats. </summary>
+        public GeoReplicationStats GeoReplicationStats { get; }
+        /// <summary> If the failover is in progress, the value will be true, otherwise, it will be null. </summary>
+        public bool? FailoverInProgress { get; }
         /// <summary> Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled. </summary>
         public LargeFileSharesState? LargeFileSharesState { get; set; }
+        /// <summary> List of private endpoint connection associated with the specified storage account. </summary>
+        public IReadOnlyList<PrivateEndpointConnectionData> PrivateEndpointConnections { get; }
         /// <summary> Maintains information about the network routing choice opted by the user for data transfer. </summary>
         public RoutingPreference RoutingPreference { get; set; }
+        /// <summary> Blob restore status. </summary>
+        public BlobRestoreStatus BlobRestoreStatus { get; }
     }
 }
