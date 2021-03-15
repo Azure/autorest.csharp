@@ -5,49 +5,36 @@
 
 #nullable disable
 
-using System;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Azure.Core;
 
 namespace ModelWithConverterUsage.Models
 {
-    [JsonConverter(typeof(ProductConverter))]
     public partial class Product : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("constProperty");
-            writer.WriteStringValue(ConstProperty);
+            if (Optional.IsDefined(ConstProperty))
+            {
+                writer.WritePropertyName("Const_Property");
+                writer.WriteStringValue(ConstProperty);
+            }
             writer.WriteEndObject();
         }
 
         internal static Product DeserializeProduct(JsonElement element)
         {
-            string constProperty = default;
+            Optional<string> constProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("constProperty"))
+                if (property.NameEquals("Const_Property"))
                 {
                     constProperty = property.Value.GetString();
                     continue;
                 }
             }
-            return new Product(constProperty);
-        }
-
-        internal partial class ProductConverter : JsonConverter<Product>
-        {
-            public override void Write(Utf8JsonWriter writer, Product model, JsonSerializerOptions options)
-            {
-                writer.WriteObjectValue(model);
-            }
-            public override Product Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-            {
-                using var document = JsonDocument.ParseValue(ref reader);
-                return DeserializeProduct(document.RootElement);
-            }
+            return new Product(constProperty.Value);
         }
     }
 }
