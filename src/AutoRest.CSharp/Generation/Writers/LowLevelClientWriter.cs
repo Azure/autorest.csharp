@@ -216,7 +216,23 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteParameter(parameter);
             }
             writer.RemoveTrailingComma();
-            writer.Line($") : this(endpoint, credential, new {typeof(Azure.Core.ProtocolClientOptions)}())");
+            writer.Append($")");
+
+            // The full ctor params can be in a different order, the options are not necessarily at the end
+            var fullCtorParams = client.GetClientConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential), true);
+            writer.Append($": this(");
+            foreach (Parameter parameter in fullCtorParams)
+            {
+                if (parameter.Type.Name != "ProtocolClientOptions") {
+                    writer.Append($"{parameter.Name:D}");
+                }
+                else {
+                    writer.Append($"new {typeof(Azure.Core.ProtocolClientOptions)}()");
+                }
+                writer.AppendRaw(", ");
+            }
+            writer.RemoveTrailingComma();
+            writer.Line($")");
             using (writer.Scope())
             {
             }
