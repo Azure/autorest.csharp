@@ -118,6 +118,10 @@ namespace AutoRest.CSharp.Output.Models
                         startMethod,
                         BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                         new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()));
+
+                    if (_context.Configuration.LowLevelClient) {
+                        break;
+                    }
                 }
             }
         }

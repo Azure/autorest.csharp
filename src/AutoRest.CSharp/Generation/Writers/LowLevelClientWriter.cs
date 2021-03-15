@@ -142,7 +142,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientFields(CodeWriter writer, Client client, BuildContext context)
         {
-            writer.Line($"private readonly string {EndpointProperty};");
+            // Endpoint can either be Uri or string
+            var endpointType = client.RestClient.Parameters.First(x => x.Name == EndpointParameter).Type;
+
+            writer.Line($"private readonly {endpointType.Name} {EndpointProperty};");
             writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
             var apiVersion = client.RestClient.Parameters.FirstOrDefault(x => x.IsApiVersionParameter);
             if (apiVersion?.DefaultValue != null)

@@ -107,6 +107,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var serviceRequest in operation.Requests)
                 {
+
                     if (!(serviceRequest.Protocol.Http is HttpRequest httpRequest))
                     {
                         continue;
@@ -114,6 +115,10 @@ namespace AutoRest.CSharp.Output.Models
 
                     var headerModel = _context.Library.FindHeaderModel(operation);
                     _requestMethods.Add(serviceRequest, BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel));
+
+                    if (_context.Configuration.LowLevelClient) {
+                        break;
+                    }
                 }
             }
 
