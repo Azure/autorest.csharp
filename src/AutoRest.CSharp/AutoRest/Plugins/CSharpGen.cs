@@ -149,10 +149,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
             }
 
-            var project = await ExecuteAsync(codeModelTask, configuration);
-            await foreach (var file in project.GetGeneratedFilesAsync())
+            try
             {
-                await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
+                var project = await ExecuteAsync(codeModelTask, configuration);
+                await foreach (var file in project.GetGeneratedFilesAsync())
+                {
+                    await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
+                }
+            }
+            catch (Exception e)
+            {
+                await autoRest.Fatal($"Internal error in AutoRest.CSharp - Please file an issue at https://github.com/Azure/autorest.csharp/issues/new with a swagger that reproduces.\nException: {e.Message}\n{e.StackTrace}");
             }
 
             return true;
