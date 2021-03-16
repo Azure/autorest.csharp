@@ -32,22 +32,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var clientMethod in client.Methods)
                     {
-                        WriteClientMethod(writer, clientMethod, true, false);
-                        WriteClientMethod(writer, clientMethod, true, true);
-                        WriteClientMethod(writer, clientMethod, false, false);
-                        WriteClientMethod(writer, clientMethod, false, true);
+                        WriteClientMethod(writer, clientMethod, true);
+                        WriteClientMethod(writer, clientMethod, false);
                         WriteClientMethodRequest(writer, clientMethod);
                     }
-
-                    writer.Line();
-                    writer.Line($"private static JsonData ToJsonData(object value)");
-                    writer.Line($"{{");
-                    writer.Line($"    if (value is JsonData)");
-                    writer.Line($"    {{");
-                    writer.Line($"        return (JsonData)value;");
-                    writer.Line($"    }}");
-                    writer.Line($"    return new JsonData(value);");
-                    writer.Line($"}}");
                 }
             }
         }
@@ -57,12 +45,12 @@ namespace AutoRest.CSharp.Generation.Writers
             RequestClientWriter.WriteRequestCreation(writer, clientMethod.RestClientMethod, lowLevel: true);
         }
 
-        private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async, bool useDynamic)
+        private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async)
         {
             var parameters = clientMethod.RestClientMethod.Parameters;
 
             CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
-            string responseType = async ? "Task<DynamicResponse>" : "DynamicResponse";
+            string responseType = async ? "Task<Response>" : "Response";
 
             if (async)
             {
@@ -82,9 +70,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public virtual {asyncText} {responseType} {methodName}(");
-            writer.Append($"{(useDynamic ? "dynamic" : "JsonData")} body, ");
-
+            writer.Append($"public virtual {asyncText} {responseType} {methodName}(RequestContent body, ");
 
             foreach (var parameter in parameters)
             {
@@ -94,7 +80,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.Append($"DynamicRequest req = {RequestClientWriter.CreateRequestMethodName(clientMethod.Name)}(");
+                writer.Append($"Request req = {RequestClientWriter.CreateRequestMethodName(clientMethod.Name)}(body, ");
+
                 foreach (var parameter in clientMethod.RestClientMethod.Parameters)
                 {
                      writer.Append($"{parameter.Name:I}, ");
@@ -103,22 +90,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($");");
                 writer.Line();
 
-                if (useDynamic)
-                {
-                    writer.Line($"req.Content = {typeof(Azure.Core.DynamicContent)}.Create(ToJsonData(body));");
-                }
-                else
-                {
-                    writer.Line($"req.Content = {typeof(Azure.Core.DynamicContent)}.Create(body);");
-                }
-
                 if (async)
                 {
-                    writer.Line($"return await req.SendAsync(cancellationToken).ConfigureAwait(false);");
+                    writer.Line($"return await {PipelineField:I}.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);");
                 }
                 else
                 {
-                    writer.Line($"return req.Send(cancellationToken);");
+                    writer.Line($"return {PipelineField:I}.SendRequest(req, cancellationToken);");
                 }
             }
 

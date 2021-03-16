@@ -25,9 +25,12 @@ namespace AutoRest.CSharp.Generation.Writers
             using var methodScope = writer.AmbientScope();
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
-            var returnType = lowLevel ? typeof(DynamicRequest) : typeof(HttpMessage);
-            var visibility = lowLevel ? "public" : "internal";
+            var returnType = lowLevel ? typeof(Azure.Core.Request) : typeof(HttpMessage);
+            var visibility = lowLevel ? "public" : "protected";
             writer.Append($"{visibility} {returnType} {methodName}(");
+            if (lowLevel) {
+                writer.Append($"RequestContent body, ");
+            }
             var parameters = clientMethod.Parameters;
             foreach (Parameter clientParameter in parameters)
             {
@@ -77,6 +80,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
+                if (lowLevel) {
+                    writer.Line($"{request}.Content = body;");
+                }
+
                 //TODO: Duplicate code between query and header parameter processing logic
                 foreach (var queryParameter in clientMethod.Request.Query)
                 {
@@ -90,7 +97,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (lowLevel)
                 {
                     RequestClientWriter.WriteHeaders(writer, clientMethod, request, content: true);
-                    writer.Line($"return new DynamicRequest({request}, _pipeline);");
+                    writer.Line($"return {request:I};");
                 }
                 else
                 {
