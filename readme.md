@@ -9,7 +9,6 @@ ___
 
 
 # C# code generator for AutoRest V3
-<!-- TOC depthfrom:2 -->
 
 - [Prerequisites](#prerequisites)
 - [Build](#build)
