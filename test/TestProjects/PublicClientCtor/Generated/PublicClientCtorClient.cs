@@ -33,7 +33,7 @@ namespace PublicClientCtor
         /// <param name="param1"> Tesing Param1. </param>
         /// <param name="param2"> Testing Param2. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public PublicClientCtorClient(string endpoint, AzureKeyCredential credential, string param1 = "value1", string param2 = null, PublicClientCtorClientOptions options = null)
+        public PublicClientCtorClient(Uri endpoint, AzureKeyCredential credential, string param1 = "value1", string param2 = null, PublicClientCtorClientOptions options = null)
         {
             if (endpoint == null)
             {
@@ -56,7 +56,7 @@ namespace PublicClientCtor
         /// <param name="param1"> Tesing Param1. </param>
         /// <param name="param2"> Testing Param2. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public PublicClientCtorClient(string endpoint, TokenCredential credential, string param1 = "value1", string param2 = null, PublicClientCtorClientOptions options = null)
+        public PublicClientCtorClient(Uri endpoint, TokenCredential credential, string param1 = "value1", string param2 = null, PublicClientCtorClientOptions options = null)
         {
             if (endpoint == null)
             {
@@ -81,7 +81,7 @@ namespace PublicClientCtor
         /// <param name="param1"> Tesing Param1. </param>
         /// <param name="param2"> Testing Param2. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        internal PublicClientCtorClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string param1 = "value1", string param2 = null, string apiVersion = "1.0.0")
+        internal PublicClientCtorClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string param1 = "value1", string param2 = null, string apiVersion = "1.0.0")
         {
             RestClient = new PublicClientCtorRestClient(clientDiagnostics, pipeline, endpoint, param1, param2, apiVersion);
             _clientDiagnostics = clientDiagnostics;

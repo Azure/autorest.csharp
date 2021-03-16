@@ -17,7 +17,7 @@ namespace PublicClientCtor
 {
     internal partial class PublicClientCtorRestClient
     {
-        private string endpoint;
+        private Uri endpoint;
         private string param1;
         private string param2;
         private string apiVersion;
@@ -32,7 +32,7 @@ namespace PublicClientCtor
         /// <param name="param2"> Testing Param2. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="apiVersion"/> is null. </exception>
-        public PublicClientCtorRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string endpoint, string param1 = "value1", string param2 = null, string apiVersion = "1.0.0")
+        public PublicClientCtorRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string param1 = "value1", string param2 = null, string apiVersion = "1.0.0")
         {
             if (endpoint == null)
             {
@@ -57,7 +57,7 @@ namespace PublicClientCtor
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
+            uri.Reset(endpoint);
             uri.AppendRaw("/publicclientctor/1.0.0", false);
             uri.AppendPath("/op", false);
             uri.AppendQuery("api-version", apiVersion, true);
