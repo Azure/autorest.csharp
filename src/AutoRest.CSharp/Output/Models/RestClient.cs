@@ -459,7 +459,18 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
-                yield return isLiteral ? TextSegment(text) : parameters[text];
+                if (isLiteral)
+                {
+                    yield return TextSegment(text);
+                }
+                else
+                {
+                    if (!parameters.ContainsKey (text))
+                    {
+                        throw new KeyNotFoundException ($"\n\nError while processing request {httpRequestUri}: key '{text}' was undefined.\nVerify that it is correctly defined, and if not please file an issue at https://github.com/Azure/autorest.csharp/issues/new with a swagger that reproduces.\n");
+                    }
+                    yield return parameters[text];
+                }
             }
         }
 
