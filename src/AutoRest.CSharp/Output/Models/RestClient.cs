@@ -467,7 +467,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     if (!parameters.ContainsKey (text))
                     {
-                        throw new KeyNotFoundException ($"\n\nError while processing request {httpRequestUri}: key '{text}' was undefined.\nVerify that it is correctly defined, and if not please file an issue at https://github.com/Azure/autorest.csharp/issues/new with a swagger that reproduces.\n");
+                        throw new KeyNotFoundException ($"\n\nError while processing request {httpRequestUri}\n  Parameter '{text}' is used in the path template but is not defined in the parameters collection.\n  '{text}' in URI path must have a matching definition in parameters block.\n");
                     }
                     yield return parameters[text];
                 }
