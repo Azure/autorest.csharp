@@ -160,6 +160,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             catch (Exception e)
             {
                 await autoRest.Fatal($"Internal error in AutoRest.CSharp - Please file an issue at https://github.com/Azure/autorest.csharp/issues/new with a swagger that reproduces.\nException: {e.Message}\n{e.StackTrace}");
+                return false;
             }
 
             return true;
