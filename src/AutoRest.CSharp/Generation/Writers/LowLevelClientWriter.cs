@@ -114,7 +114,6 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string ProtocolOptions = "options";
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
         private const string ScopesConstant = "AuthorizationScopes";
-        private const string APIConstant = "apiVersion";
 
         private bool HasKeyAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase);
         private bool HasTokenAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase);
@@ -129,7 +128,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var apiVersion = client.RestClient.Parameters.FirstOrDefault(x => x.IsApiVersionParameter);
             if (apiVersion?.DefaultValue != null)
             {
-                writer.Line($"private readonly string {APIConstant} = {apiVersion.DefaultValue!.Value.Value:L};");
+                writer.Line($"private readonly string {apiVersion.Name} = {apiVersion.DefaultValue!.Value.Value:L};");
             }
 
             if (HasKeyAuth (context))
