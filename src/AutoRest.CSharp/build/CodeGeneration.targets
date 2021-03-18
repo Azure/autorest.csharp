@@ -29,7 +29,7 @@
 
     <Error Text="Following GitHub URLs do not contain commit hash: @(GithubUrlsWithoutHash) please use permalinks for code generation inputs (see https://help.github.com/en/github/managing-files-in-a-repository/getting-permanent-links-to-files) " Condition="'@(GithubUrlsWithoutHash)' != ''" />
 
-    <Exec Command="npx autorest@$(AutoRestVersion) --skip-csproj --skip-upgrade-check --version=$(AutoRestCoreVersion) $(AutoRestInput) $(AutoRestAdditionalParameters) --use=$(MSBuildThisFileDirectory)../tools/netcoreapp3.0/any/ --output-folder=$(MSBuildProjectDirectory)/Generated --clear-output-folder=true --namespace=$(RootNamespace) --shared-source-folders=&quot;$(AzureCoreSharedCodeDirectory);$(AutoRestSharedCodeDirectory)&quot;" />
+    <Exec Command="npx autorest@$(AutoRestVersion) --skip-csproj --skip-upgrade-check --version=$(AutoRestCoreVersion) $(AutoRestInput) $(AutoRestAdditionalParameters) --use=$(MSBuildThisFileDirectory)../tools/netcoreapp3.1/any/ --output-folder=$(MSBuildProjectDirectory)/Generated --clear-output-folder=true --namespace=$(RootNamespace) --shared-source-folders=&quot;$(AzureCoreSharedCodeDirectory);$(AutoRestSharedCodeDirectory)&quot;" />
   </Target>
 
   <PropertyGroup Condition="'$(_GenerateCode)' == 'true'">

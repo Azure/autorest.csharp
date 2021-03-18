@@ -18,7 +18,15 @@ namespace AutoRest.CSharp.Input
 
                 if (usage != null)
                 {
-                    Apply(objectSchema, (SchemaTypeUsage) Enum.Parse(typeof(SchemaTypeUsage), usage, true));
+                    var schemaTypeUsage = (SchemaTypeUsage)Enum.Parse(typeof(SchemaTypeUsage), usage, true);
+
+                    if (schemaTypeUsage.HasFlag(SchemaTypeUsage.Converter))
+                    {
+                        Apply(objectSchema, SchemaTypeUsage.Converter, false);
+                        schemaTypeUsage &= ~SchemaTypeUsage.Converter;
+                    }
+
+                    Apply(objectSchema, schemaTypeUsage, true);
                 }
             }
             foreach (var operationGroup in codeModel.OperationGroups)
@@ -27,7 +35,23 @@ namespace AutoRest.CSharp.Input
                 {
                     foreach (var operationResponse in operation.Responses)
                     {
-                        Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
+                        var paging = operation.Language.Default.Paging;
+                        if (paging != null && operationResponse.ResponseSchema is ObjectSchema objectSchema)
+                        {
+                            Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Output);
+                            foreach (var property in objectSchema.Properties)
+                            {
+                                var itemName = paging.ItemName ?? "value";
+                                if (property.SerializedName == itemName)
+                                {
+                                    Apply(property.Schema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Apply(operationResponse.ResponseSchema, SchemaTypeUsage.Model | SchemaTypeUsage.Output);
+                        }
                     }
 
                     foreach (var operationResponse in operation.Exceptions)

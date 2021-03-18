@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class NetworkInterfaceLoadBalancerListResult
+    internal partial class NetworkInterfaceLoadBalancerListResult
     {
         internal static NetworkInterfaceLoadBalancerListResult DeserializeNetworkInterfaceLoadBalancerListResult(JsonElement element)
         {

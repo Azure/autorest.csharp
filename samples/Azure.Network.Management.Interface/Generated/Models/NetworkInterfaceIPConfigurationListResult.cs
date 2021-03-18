@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> Response for list ip configurations API service call. </summary>
-    public partial class NetworkInterfaceIPConfigurationListResult
+    internal partial class NetworkInterfaceIPConfigurationListResult
     {
         /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationListResult. </summary>
         internal NetworkInterfaceIPConfigurationListResult()

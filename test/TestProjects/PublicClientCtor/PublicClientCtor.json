@@ -89,6 +89,7 @@
     "Endpoint": {
       "name": "Endpoint",
       "description": "server parameter.",
+      "format": "url",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",

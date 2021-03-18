@@ -9,7 +9,6 @@ ___
 
 
 # C# code generator for AutoRest V3
-<!-- TOC depthfrom:2 -->
 
 - [Prerequisites](#prerequisites)
 - [Build](#build)
@@ -41,7 +40,7 @@ ___
 ## Prerequisites
 
 - [NodeJS (14.x.x)](https://nodejs.org/en/) 
-- [.NET Core SDK (3.1.301)](https://dotnet.microsoft.com/download/dotnet-core/3.1)
+- [.NET Core SDK (5.0.100)](https://dotnet.microsoft.com/download/dotnet-core/5.0)
 - [PowerShell Core 7](https://github.com/PowerShell/PowerShell/releases/latest)
 - [Java](https://www.java.com/en/download/) (for V2 testserver)
 - `npm install` (at root)
@@ -1001,9 +1000,9 @@ input-file: "swagger-document"
 
 ```yaml
 # autorest-core version
-version: 3.0.6371
+version: 3.1.3
 save-inputs: true
-use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.0/
+use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/
 clear-output-folder: true
 public-clients: true
 skip-csproj-packagereference: true

@@ -4,7 +4,7 @@
     <PackageId>Microsoft.Azure.AutoRest.CSharp</PackageId>
     <OutputType>Exe</OutputType>
     <Version>3.0.0</Version>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
@@ -64,7 +64,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <_GeneratedPropsFileLines Include="&lt;Project>" />      
+      <_GeneratedPropsFileLines Include="&lt;Project>" />
       <_GeneratedPropsFileLines Include="&lt;ItemGroup>" />
       <_GeneratedPropsFileLines Include="&lt;SourceRoot Include=&quot;%24([System.IO.Path]::GetFullPath('%24(MSBuildThisFileDirectory)..\contentFiles\any\$(TargetFramework)\'))&quot; SourceLinkUrl=&quot;$(_RawUrl)&quot;/>" />
       <_GeneratedPropsFileLines Include="&lt;/ItemGroup>" />
@@ -74,7 +74,7 @@
       <_GeneratedPropsFileLines Include="&lt;/PropertyGroup>" />
       <_GeneratedPropsFileLines Include="&lt;/Project>" />
     </ItemGroup>
-    
+
 
     <WriteLinesToFile Overwrite="true" File="$(_GeneratedPropsFilePath)" Lines="@(_GeneratedPropsFileLines)" />
 

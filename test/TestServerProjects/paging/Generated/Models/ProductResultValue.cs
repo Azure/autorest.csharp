@@ -11,7 +11,7 @@ using Azure.Core;
 namespace paging.Models
 {
     /// <summary> The ProductResultValue. </summary>
-    public partial class ProductResultValue
+    internal partial class ProductResultValue
     {
         /// <summary> Initializes a new instance of ProductResultValue. </summary>
         internal ProductResultValue()

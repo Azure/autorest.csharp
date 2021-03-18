@@ -171,103 +171,231 @@ namespace AutoRest.CSharp.Output.Models
 
         private RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, ICollection<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
         {
-            HttpWithBodyRequest? httpRequestWithBody = httpRequest as HttpWithBodyRequest;
-            Dictionary<string, PathSegment> uriParameters = new Dictionary<string, PathSegment>();
-            Dictionary<string, PathSegment> pathParameters = new Dictionary<string, PathSegment>();
-            List<QueryParameter> query = new List<QueryParameter>();
-            List<RequestHeader> headers = new List<RequestHeader>();
-            Dictionary<RequestParameter, ReferenceOrConstant> allParameters = new Dictionary<RequestParameter, ReferenceOrConstant>();
-            Dictionary<RequestParameter, Parameter> methodParameters = new Dictionary<RequestParameter, Parameter>();
+            Dictionary<RequestParameter, ConstructedParameter> allParameters = new ();
 
-            RequestBody? body = null;
-            Dictionary<RequestParameter, ReferenceOrConstant> bodyParameters = new Dictionary<RequestParameter, ReferenceOrConstant>();
-            RequestParameter[] parameters = operation.Parameters.Concat(requestParameters).ToArray();
+            List<RequestParameter> parameters = operation.Parameters.Concat(requestParameters).ToList();
+            // Remove ignored headers
+            parameters.RemoveAll(requestParameter =>
+                requestParameter.In == ParameterLocation.Header &&
+                IgnoredRequestHeader.Contains(GetRequestParameterName(requestParameter)));
+
+
             foreach (RequestParameter requestParameter in parameters)
             {
-                string serializedName = GetRequestParameterName(requestParameter);
-                ReferenceOrConstant constantOrReference;
-                Schema valueSchema = requestParameter.Schema;
+                allParameters.Add(requestParameter, CreateParameter(requestParameter));
+            }
 
-                if (requestParameter.Implementation == ImplementationLocation.Method)
-                {
-                    Parameter? parameter = null;
-                    // TODO: always generate virtual parameters
-                    if (requestParameter.Schema is ConstantSchema constant)
+            Request request = BuildRequest(httpRequest, parameters, allParameters);
+            Response[] responses = BuildResponses(operation, request, out var responseType);
+            Parameter[] methodParameters = BuildMethodParameters(parameters, allParameters);
+
+            if (_context.Configuration.LowLevelClient)
+            {
+                methodParameters = new Dictionary<RequestParameter, Parameter>(methodParameters.Where(x => {
+                    if (x.Key.Protocol.Http is HttpParameter httpParameter)
                     {
-                        constantOrReference = ParseConstant(constant);
-                        valueSchema = constant.ValueType;
-                    }
-                    else
-                    {
-                        parameter = BuildParameter(requestParameter);
-
-                        if (requestParameter.GroupedBy is RequestParameter groupedByParameter)
+                        switch (httpParameter.In)
                         {
-                            var groupModel = (ObjectType)_context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
-                            var property = groupModel.GetPropertyForGroupedParameter(requestParameter);
-
-                            constantOrReference = new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
-                        }
-                        else
-                        {
-                            constantOrReference = parameter;
+                            case ParameterLocation.Header:
+                            case ParameterLocation.Query:
+                            case ParameterLocation.Path:
+                                return true;
                         }
                     }
+                    return false;
+                }));
+            }
 
-                    allParameters.Add(requestParameter, constantOrReference);
+            return new RestClientMethod(
+                operation.CSharpName(),
+                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                responseType,
+                request,
+                methodParameters,
+                responses,
+                responseHeaderModel,
+                operation.Extensions?.BufferResponse ?? true
+            );
+        }
 
-                    if (parameter != null &&
-                        requestParameter.Flattened != true &&
-                        requestParameter.GroupedBy == null)
-                    {
-                        methodParameters.Add(requestParameter, parameter);
-                    }
-                }
-                else
+        private Response[] BuildResponses(Operation operation, Request request, out CSharpType? responseType)
+        {
+            List<Response> clientResponse = new List<Response>();
+
+            foreach (var response in operation.Responses)
+            {
+                List<StatusCodes> statusCodes = new List<StatusCodes>();
+                foreach (var statusCode in response.HttpResponse.IntStatusCodes)
                 {
-                    constantOrReference = _parameters[requestParameter.Language.Default.Name];
+                    statusCodes.Add(new StatusCodes(statusCode, null));
                 }
 
-                if (requestParameter.Protocol.Http is HttpParameter httpParameter)
+                clientResponse.Add(new Response(
+                    operation.IsLongRunning ? null : BuildResponseBody(response),
+                    statusCodes.ToArray()
+                ));
+            }
+
+            responseType = ReduceResponses(clientResponse);
+
+            if (request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean)
+            {
+                responseType = new CSharpType(typeof(bool));
+                clientResponse = new List<Response>()
                 {
-                    SerializationFormat serializationFormat = BuilderHelpers.GetSerializationFormat(valueSchema);
-                    bool skipEncoding = requestParameter.Extensions!.TryGetValue("x-ms-skip-url-encoding", out var value) && Convert.ToBoolean(value);
-                    switch (httpParameter.In)
+                    new Response(
+                        new ConstantResponseBody(new Constant(true, new CSharpType(typeof(bool)))),
+                        new[] {new StatusCodes(null, 2)}),
+                    new Response(
+                        new ConstantResponseBody(new Constant(false, new CSharpType(typeof(bool)))),
+                        new[] {new StatusCodes(null, 4)}),
+                };
+            }
+
+            return clientResponse.ToArray();
+        }
+
+        private Request BuildRequest(HttpRequest httpRequest, IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        {
+            RequestBody? body = null;
+            if (httpRequest is HttpWithBodyRequest httpWithBodyRequest)
+            {
+                body = BuildRequestBody(requestParameters, allParameters, httpWithBodyRequest.KnownMediaType);
+            }
+
+            RequestHeader[] headers = BuildHeaders(requestParameters, allParameters);
+            QueryParameter[] query = BuildQueryParameters(requestParameters, allParameters);
+            Dictionary<string, PathSegment> uriParameters = BuildUriParameters(requestParameters, allParameters);
+            Dictionary<string, PathSegment> pathParameters = BuildPathParameters(requestParameters, allParameters);
+
+            PathSegment[] pathSegments = GetPathSegments(httpRequest.Uri, uriParameters, isRaw: true)
+                .Concat(GetPathSegments(httpRequest.Path, pathParameters))
+                .ToArray();
+            Request request = new Request(
+                httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
+                pathSegments,
+                query.ToArray(),
+                headers.ToArray(),
+                body
+            );
+            return request;
+        }
+
+        private Dictionary<string, PathSegment> BuildPathParameters(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        {
+            Dictionary<string, PathSegment> path = new ();
+            foreach (var requestParameter in requestParameters)
+            {
+                if (requestParameter.In == ParameterLocation.Path)
+                {
+                    var (_, reference) = allParameters[requestParameter];
+                    var serializedName = GetRequestParameterName(requestParameter);
+                    path[serializedName] = new PathSegment(reference, !requestParameter.Extensions!.SkipEncoding, GetSerializationFormat(requestParameter));
+                }
+            }
+
+            return path;
+        }
+
+        private Dictionary<string, PathSegment> BuildUriParameters(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        {
+            Dictionary<string, PathSegment> uriParameters = new ();
+            foreach (var requestParameter in requestParameters)
+            {
+                if (requestParameter.In == ParameterLocation.Uri)
+                {
+                    var (_, reference) = allParameters[requestParameter];
+                    var serializedName = GetRequestParameterName(requestParameter);
+                    uriParameters.Add(serializedName, new PathSegment(
+                        reference,
+                        !requestParameter.Extensions!.SkipEncoding,
+                        GetSerializationFormat(requestParameter), isRaw: true));
+                }
+            }
+
+            return uriParameters;
+        }
+
+        private RequestHeader[] BuildHeaders(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        {
+            List<RequestHeader> headers = new ();
+            foreach (var requestParameter in requestParameters)
+            {
+                if (requestParameter.In == ParameterLocation.Header)
+                {
+                    var (_, reference) = allParameters[requestParameter];
+                    var serializedName = GetRequestParameterName(requestParameter);
+                    if (requestParameter.Extensions!.HeaderCollectionPrefix != null)
                     {
-                        case ParameterLocation.Header:
-                            if (IgnoredRequestHeader.Contains(serializedName))
-                            {
-                                methodParameters.Remove(requestParameter);
-                                continue;
-                            }
-
-                            if (requestParameter.Extensions.HeaderCollectionPrefix != null)
-                            {
-                                serializedName = requestParameter.Extensions.HeaderCollectionPrefix;
-                            }
-
-                            headers.Add(new RequestHeader(serializedName, constantOrReference, GetSerializationStyle(httpParameter, valueSchema), serializationFormat));
-                            break;
-                        case ParameterLocation.Query:
-                            query.Add(new QueryParameter(serializedName, constantOrReference, GetSerializationStyle(httpParameter, valueSchema), !skipEncoding, serializationFormat));
-                            break;
-                        case ParameterLocation.Path:
-                            pathParameters.Add(serializedName, new PathSegment(constantOrReference, !skipEncoding, serializationFormat));
-                            break;
-                        case ParameterLocation.Body:
-                            bodyParameters.Add(requestParameter, constantOrReference);
-                            break;
-                        case ParameterLocation.Uri:
-                            uriParameters.Add(serializedName, new PathSegment(constantOrReference, !skipEncoding, serializationFormat, isRaw: true));
-                            break;
+                        serializedName = requestParameter.Extensions.HeaderCollectionPrefix;
                     }
+                    headers.Add(new RequestHeader(serializedName,
+                        reference,
+                        GetSerializationStyle(requestParameter),
+                        GetSerializationFormat(requestParameter)));
+                }
+            }
+
+            return headers.ToArray();
+        }
+
+        private QueryParameter[] BuildQueryParameters(IList<RequestParameter> requestParameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        {
+            List<QueryParameter> query = new ();
+            foreach (var requestParameter in requestParameters)
+            {
+                if (requestParameter.In == ParameterLocation.Query)
+                {
+                    var (_, reference) = allParameters[requestParameter];
+                    query.Add(new QueryParameter(
+                        GetRequestParameterName(requestParameter),
+                        reference,
+                        GetSerializationStyle(requestParameter),
+                        !requestParameter.Extensions!.SkipEncoding,
+                        GetSerializationFormat(requestParameter)));
+                }
+            }
+
+            return query.ToArray();
+        }
+
+        private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        {
+            List<Parameter> methodParameters = new ();
+            foreach (var requestParameter in parameters)
+            {
+                var (parameter, _) = allParameters[requestParameter];
+                // Grouped and flattened parameters shouldn't be added to methods
+                if (parameter != null &&
+                    requestParameter.Flattened != true &&
+                    requestParameter.GroupedBy == null)
+                {
+                    methodParameters.Add(parameter);
+                }
+            }
+
+            return OrderParameters(methodParameters);
+        }
+
+        private RequestBody? BuildRequestBody(
+            IList<RequestParameter> requestParameters,
+            Dictionary<RequestParameter, ConstructedParameter> allParameters,
+            KnownMediaType mediaType)
+        {
+            RequestBody? body = null;
+
+            Dictionary<RequestParameter, ReferenceOrConstant> bodyParameters = new ();
+            foreach (var (requestParameter, (_, value)) in allParameters)
+            {
+                if (requestParameter.In == ParameterLocation.Body)
+                {
+                    bodyParameters[requestParameter] = value;
                 }
             }
 
             if (bodyParameters.Count > 0)
             {
-                Debug.Assert(httpRequestWithBody != null);
-                if (httpRequestWithBody.KnownMediaType == KnownMediaType.Multipart)
+                if (mediaType == KnownMediaType.Multipart)
                 {
                     List<MultipartRequestBodyPart> value = new List<MultipartRequestBodyPart>();
                     foreach (var parameter in bodyParameters)
@@ -294,42 +422,44 @@ namespace AutoRest.CSharp.Output.Models
 
                         value.Add(new MultipartRequestBodyPart(parameter.Value.Reference.Name, requestBody));
                     }
+
                     body = new MultipartRequestBody(value.ToArray());
                 }
-                else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Form)
+                else if (mediaType == KnownMediaType.Form)
                 {
                     UrlEncodedBody urlbody = new UrlEncodedBody();
                     foreach (var (bodyRequestParameter, bodyParameterValue) in bodyParameters)
                     {
                         urlbody.Add(GetRequestParameterName(bodyRequestParameter), bodyParameterValue);
                     }
+
                     body = urlbody;
                 }
                 else
                 {
                     Debug.Assert(bodyParameters.Count == 1);
                     var (bodyRequestParameter, bodyParameterValue) = bodyParameters.Single();
-                    if (httpRequestWithBody.KnownMediaType == KnownMediaType.Binary ||
+                    if (mediaType == KnownMediaType.Binary ||
                         // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/360
                         bodyRequestParameter.Schema is BinarySchema)
                     {
                         body = new BinaryRequestBody(bodyParameterValue);
                     }
-                    else if (httpRequestWithBody.KnownMediaType == KnownMediaType.Text)
+                    else if (mediaType == KnownMediaType.Text)
                     {
                         body = new TextRequestBody(bodyParameterValue);
                     }
                     else
                     {
                         var serialization = _serializationBuilder.Build(
-                            httpRequestWithBody.KnownMediaType,
+                            mediaType,
                             bodyRequestParameter.Schema,
                             bodyParameterValue.Type);
 
                         // This method has a flattened body
                         if (bodyRequestParameter.Flattened == true)
                         {
-                            var objectType = (ObjectType)_context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
+                            var objectType = (ObjectType) _context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
                             var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
 
                             List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
@@ -338,11 +468,11 @@ namespace AutoRest.CSharp.Output.Models
                                 if (virtualParameter.Schema is ConstantSchema)
                                     continue;
 
-                                var actualParameter = allParameters[virtualParameter];
+                                ConstructedParameter actualParameter = allParameters[virtualParameter];
 
                                 initializationMap.Add(new ObjectPropertyInitializer(
                                     objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true),
-                                    actualParameter));
+                                    actualParameter.Reference));
                             }
 
                             body = new FlattenedSchemaRequestBody(objectType, initializationMap.ToArray(), serialization);
@@ -355,77 +485,47 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            PathSegment[] pathSegments = GetPathSegments(httpRequest.Uri, uriParameters, isRaw: true)
-                .Concat(GetPathSegments(httpRequest.Path, pathParameters))
-                .ToArray();
-            Request request = new Request(
-                httpRequest.Method.ToCoreRequestMethod() ?? RequestMethod.Get,
-                pathSegments,
-                query.ToArray(),
-                headers.ToArray(),
-                body
-            );
+            return body;
+        }
 
-            string operationName = operation.CSharpName();
-
-            List<Response> clientResponse = new List<Response>();
-
-            foreach (var response in operation.Responses)
+        private ConstructedParameter CreateParameter(RequestParameter requestParameter)
+        {
+            Parameter? parameter = null;
+            ReferenceOrConstant constantOrReference;
+            if (requestParameter.Implementation == ImplementationLocation.Method)
             {
-                List<StatusCodes> statusCodes = new List<StatusCodes>();
-                foreach (var statusCode in response.HttpResponse.IntStatusCodes)
+                if (requestParameter.Schema is ConstantSchema constant)
                 {
-                    statusCodes.Add(new StatusCodes(statusCode, null));
+                    constantOrReference = ParseConstant(constant);
                 }
-                clientResponse.Add(new Response(
-                    operation.IsLongRunning ? null : BuildResponseBody(response),
-                    statusCodes.ToArray()
-                ));
-            }
-
-            var responseType = ReduceResponses(clientResponse);
-
-            if (request.HttpMethod == RequestMethod.Head && _context.Configuration.HeadAsBoolean)
-            {
-                responseType = new CSharpType(typeof(bool));
-                clientResponse = new List<Response>()
+                else
                 {
-                    new Response(
-                        new ConstantResponseBody(new Constant(true, new CSharpType(typeof(bool)))),
-                        new[] { new StatusCodes(null, 2) }),
-                    new Response(
-                        new ConstantResponseBody(new Constant(false, new CSharpType(typeof(bool)))),
-                        new[] { new StatusCodes(null, 4) }),
-                };
-            }
+                    parameter = BuildParameter(requestParameter);
 
-            if (_context.Configuration.LowLevelClient)
-            {
-                methodParameters = new Dictionary<RequestParameter, Parameter>(methodParameters.Where(x => {
-                    if (x.Key.Protocol.Http is HttpParameter httpParameter)
+                    if (requestParameter.GroupedBy is RequestParameter groupedByParameter)
                     {
-                        switch (httpParameter.In)
-                        {
-                            case ParameterLocation.Header:
-                            case ParameterLocation.Query:
-                            case ParameterLocation.Path:
-                                return true;
-                        }
+                        var groupModel = (ObjectType) _context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
+                        var property = groupModel.GetPropertyForGroupedParameter(requestParameter);
+
+                        constantOrReference = new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
                     }
-                    return false;
-                }));
+                    else
+                    {
+                        constantOrReference = parameter;
+                    }
+                }
+            }
+            else
+            {
+                constantOrReference = _parameters[requestParameter.Language.Default.Name];
             }
 
-            return new RestClientMethod(
-                operationName,
-                BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
-                responseType,
-                request,
-                OrderParameters(methodParameters.Values),
-                clientResponse.ToArray(),
-                responseHeaderModel,
-                operation.Extensions?.BufferResponse ?? true
-            );
+            return new ConstructedParameter(parameter, constantOrReference);
+        }
+
+        private SerializationFormat GetSerializationFormat(RequestParameter requestParameter)
+        {
+            return BuilderHelpers.GetSerializationFormat(GetValueSchema(requestParameter));
         }
 
         private ResponseBody? BuildResponseBody(ServiceResponse response)
@@ -451,9 +551,12 @@ namespace AutoRest.CSharp.Output.Models
             return null;
         }
 
-        private static RequestParameterSerializationStyle GetSerializationStyle(HttpParameter httpParameter, Schema valueSchema)
+        private static RequestParameterSerializationStyle GetSerializationStyle(RequestParameter requestParameter)
         {
-            Debug.Assert(httpParameter.In == ParameterLocation.Query || httpParameter.In == ParameterLocation.Header);
+            var valueSchema = GetValueSchema(requestParameter);
+            var httpParameter = requestParameter.Protocol.Http as HttpParameter;
+
+            Debug.Assert(httpParameter!.In == ParameterLocation.Query || httpParameter.In == ParameterLocation.Header);
 
             switch (httpParameter.Style)
             {
@@ -470,6 +573,18 @@ namespace AutoRest.CSharp.Output.Models
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        private static Schema GetValueSchema(RequestParameter requestParameter)
+        {
+            Schema valueSchema = requestParameter.Schema;
+
+            if (requestParameter.Schema is ConstantSchema constant)
+            {
+                valueSchema = constant.ValueType;
+            }
+
+            return valueSchema;
         }
 
         private static IEnumerable<PathSegment> GetPathSegments(string httpRequestUri, Dictionary<string, PathSegment> parameters, bool isRaw = false)
@@ -589,5 +704,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return parameter;
         }
+
+        private record ConstructedParameter(Parameter? Parameter, ReferenceOrConstant Reference);
     }
 }

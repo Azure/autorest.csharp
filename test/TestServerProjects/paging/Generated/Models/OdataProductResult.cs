@@ -11,7 +11,7 @@ using Azure.Core;
 namespace paging.Models
 {
     /// <summary> The OdataProductResult. </summary>
-    public partial class OdataProductResult
+    internal partial class OdataProductResult
     {
         /// <summary> Initializes a new instance of OdataProductResult. </summary>
         internal OdataProductResult()
