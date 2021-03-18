@@ -189,23 +189,6 @@ namespace AutoRest.CSharp.Output.Models
             Response[] responses = BuildResponses(operation, request, out var responseType);
             Parameter[] methodParameters = BuildMethodParameters(parameters, allParameters);
 
-            if (_context.Configuration.LowLevelClient)
-            {
-                methodParameters = new Dictionary<RequestParameter, Parameter>(methodParameters.Where(x => {
-                    if (x.Key.Protocol.Http is HttpParameter httpParameter)
-                    {
-                        switch (httpParameter.In)
-                        {
-                            case ParameterLocation.Header:
-                            case ParameterLocation.Query:
-                            case ParameterLocation.Path:
-                                return true;
-                        }
-                    }
-                    return false;
-                }));
-            }
-
             return new RestClientMethod(
                 operation.CSharpName(),
                 BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
@@ -370,6 +353,18 @@ namespace AutoRest.CSharp.Output.Models
                     requestParameter.Flattened != true &&
                     requestParameter.GroupedBy == null)
                 {
+                    if (_context.Configuration.LowLevelClient)
+                    {
+                        switch (requestParameter.In)
+                        {
+                            case ParameterLocation.Header:
+                            case ParameterLocation.Query:
+                            case ParameterLocation.Path:
+                                break;
+                            default:
+                                continue;
+                        }
+                    }
                     methodParameters.Add(parameter);
                 }
             }
