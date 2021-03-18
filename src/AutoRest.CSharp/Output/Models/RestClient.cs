@@ -582,7 +582,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     if (!parameters.ContainsKey (text))
                     {
-                        throw new KeyNotFoundException ($"\n\nError while processing request {httpRequestUri}\n  Parameter '{text}' is used in the path template but is not defined in the parameters collection.\n  '{text}' in URI path must have a matching definition in parameters block.\n");
+                        ErrorHelpers.ThrowError ($"\n\nError while processing request '{httpRequestUri}'\n\n  '{text}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
                     }
                     yield return parameters[text];
                 }

@@ -157,9 +157,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
                 }
             }
+            catch (ErrorHelpers.ErrorException e)
+            {
+                await autoRest.Fatal(e.ErrorText);
+                return false;
+            }
             catch (Exception e)
             {
-                await autoRest.Fatal($"Internal error in AutoRest.CSharp - Please file an issue at https://github.com/Azure/autorest.csharp/issues/new with a swagger that reproduces.\nException: {e.Message}\n{e.StackTrace}");
+                await autoRest.Fatal($"Internal error in AutoRest.CSharp - {ErrorHelpers.FileIssueText}\nException: {e.Message}\n{e.StackTrace}");
                 return false;
             }
 
