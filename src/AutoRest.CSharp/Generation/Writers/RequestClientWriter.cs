@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (lowLevel)
                 {
-                    writer.WriteParameter(clientParameter.Type, clientParameter.Name, clientParameter.DefaultValue);
+                    writer.WriteParameter(clientParameter);
                 }
                 else
                 {

@@ -3,6 +3,7 @@
 
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -50,7 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var parameters = clientMethod.RestClientMethod.Parameters;
 
             CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
-            string responseType = async ? "Task<Response>" : "Response";
+            var responseType = async ? new CSharpType(typeof(Task<Response>)) : new CSharpType(typeof(Response));
 
             if (async)
             {
@@ -80,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.Append($"Request req = {RequestClientWriter.CreateRequestMethodName(clientMethod.Name)}(body, ");
+                writer.Append($"{typeof(Request)} req = {RequestClientWriter.CreateRequestMethodName(clientMethod.Name)}(body, ");
 
                 foreach (var parameter in clientMethod.RestClientMethod.Parameters)
                 {
@@ -128,12 +129,12 @@ namespace AutoRest.CSharp.Generation.Writers
             var apiVersion = client.RestClient.Parameters.FirstOrDefault(x => x.IsApiVersionParameter);
             if (apiVersion?.DefaultValue != null)
             {
-                writer.Line($"private readonly string {APIConstant} = \"{apiVersion.DefaultValue!.Value.Value}\";");
+                writer.Line($"private readonly string {APIConstant} = {apiVersion.DefaultValue!.Value.Value:L};");
             }
 
             if (HasKeyAuth (context))
             {
-                writer.Line($"private const string {AuthorizationHeaderConstant} = \"{context.Configuration.CredentialHeaderName}\";");
+                writer.Line($"private const string {AuthorizationHeaderConstant} = {context.Configuration.CredentialHeaderName:L};");
             }
             if (HasTokenAuth (context))
             {

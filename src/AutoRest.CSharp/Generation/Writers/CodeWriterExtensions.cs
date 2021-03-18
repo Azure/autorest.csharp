@@ -33,18 +33,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool includeDefaultValue = true)
         {
-            writer.WriteParameter (clientParameter.Type, clientParameter.Name, clientParameter.DefaultValue, includeDefaultValue);
-        }
-
-        public static void WriteParameter(this CodeWriter writer, CSharpType type, string name, Constant? defaultValue, bool includeDefaultValue = true)
-        {
-            writer.Append($"{type} {name:D}");
-            if (includeDefaultValue && defaultValue != null)
+            writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
+            if (includeDefaultValue &&
+                clientParameter.DefaultValue != null)
             {
-                if (TypeFactory.CanBeInitializedInline(type, defaultValue))
+                if (TypeFactory.CanBeInitializedInline(clientParameter.Type, clientParameter.DefaultValue))
                 {
                     writer.Append($" = ");
-                    CodeWriterExtensions.WriteConstant(writer, defaultValue.Value);
+                    CodeWriterExtensions.WriteConstant(writer, clientParameter.DefaultValue.Value);
                 }
                 else
                 {
