@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class HighLevelClient
     {
-        public static void ExecuteAsync(GeneratedCodeWorkspace project, BuildContext context, Configuration configuration)
+        public static void Execute(GeneratedCodeWorkspace project, BuildContext context, Configuration configuration)
         {
             var modelWriter = new ModelWriter();
             var clientWriter = new ClientWriter();

@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class LowLevelClient
     {
-        public static void ExecuteAsync(GeneratedCodeWorkspace project, BuildContext context, Configuration configuration)
+        public static void Execute(GeneratedCodeWorkspace project, BuildContext context, Configuration configuration)
         {
             foreach (var client in context.Library.Clients)
             {

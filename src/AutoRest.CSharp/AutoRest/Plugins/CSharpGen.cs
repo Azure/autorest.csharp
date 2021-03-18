@@ -41,11 +41,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (configuration.LowLevelClient)
             {
-                LowLevelClient.ExecuteAsync (project, context, configuration);
+                LowLevelClient.Execute (project, context, configuration);
             }
             else
             {
-                HighLevelClient.ExecuteAsync (project, context, configuration);
+                HighLevelClient.Execute (project, context, configuration);
             }
             return project;
         }
