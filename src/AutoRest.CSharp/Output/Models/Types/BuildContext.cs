@@ -10,8 +10,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class BuildContext
     {
-        private OutputLibrary? _library;
         private TypeFactory? _typeFactory;
+        public OutputLibrary Library { get; private set; }
 
         public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel? sourceInputModel)
         {
@@ -19,11 +19,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             SchemaUsageProvider = new SchemaUsageProvider(codeModel);
             Configuration = configuration;
             SourceInputModel = sourceInputModel;
+
+            if (configuration.LowLevelClient)
+            {
+                Library = new LowLevelOutputLibrary(CodeModel, this);
+            }
+            else
+            {
+                Library = new HighLevelOutputLibrary(CodeModel, this);
+            }
         }
 
         public CodeModel CodeModel { get; }
         public SchemaUsageProvider SchemaUsageProvider { get; }
-        public OutputLibrary Library => _library ??= new OutputLibrary(CodeModel, this);
         public string DefaultNamespace => Configuration.Namespace ?? CodeModel.Language.Default.Name;
         public string DefaultLibraryName => Configuration.LibraryName ?? CodeModel.Language.Default.Name;
         public TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
