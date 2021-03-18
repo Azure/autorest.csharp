@@ -32,6 +32,13 @@ namespace Azure.Core
             _ => value.ToString(format, CultureInfo.InvariantCulture)
         };
 
+        public static string ToString(byte[] value, string format) => format switch
+        {
+            "U" => ToBase64UrlString(value),
+            "D" => Convert.ToBase64String(value),
+            _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
+        };
+
         public static string ToBase64UrlString(byte[] value)
         {
             var numWholeOrPartialInputBlocks = checked(value.Length + 2) / 3;
@@ -94,7 +101,6 @@ namespace Azure.Core
 
             return Convert.FromBase64CharArray(output, 0, output.Length);
         }
-
 
         private static int GetNumBase64PaddingCharsToAddForDecode(int inputLength)
         {

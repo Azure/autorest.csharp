@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo", "Demo.csproj", "{384
 		{3278371B-26DD-471E-8513-270401359D03} = {3278371B-26DD-471E-8513-270401359D03}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CognitiveSearch", "..\CognitiveSearch\CognitiveSearch.csproj", "{3278371B-26DD-471E-8513-270401359D03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CognitiveSearch", "..\CognitiveSearch.csproj", "{3278371B-26DD-471E-8513-270401359D03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [switch]$clean = $true, [String[]]$Exclude = "SmokeTests", $parallel = 5)
+param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
@@ -31,6 +31,7 @@ $testNames =
     'body-duration',
     'body-file',
     'body-formdata',
+    'body-formdata-urlencoded',
     'body-integer',
     'body-number',
     'body-string',
@@ -64,10 +65,12 @@ if (!($Exclude -contains "TestServer"))
     foreach ($testName in $testNames)
     {
         $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
+        $projectDirectory = Join-Path $testServerDirectory $testName
+        $inputReadme = Join-Path $projectDirectory "readme.md"
         $swaggerDefinitions[$testName] = @{
             'projectName'=$testName;
-            'output'=$testServerDirectory;
-            'arguments'="--require=$configurationPath --input-file=$inputFile"
+            'output'=$projectDirectory;
+            'arguments'="--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile"
         }
     }
 }
@@ -94,14 +97,13 @@ if (!($Exclude -contains "TestProjects"))
         }
         $swaggerDefinitions[$testName] = @{
             'projectName'=$testName;
-            'output'=$testSwaggerPath;
+            'output'=$directory;
             'arguments'=$testArguments
-            }
+        }
     }
 }
 # Sample configuration
 $projectNames =
-    'SignalR',
     'AppConfiguration',
     'CognitiveServices.TextAnalytics',
     'CognitiveSearch',
@@ -153,12 +155,10 @@ if ($updateLaunchSettings)
         'profiles' = [ordered]@{}
     };
 
-    $sharedSourceNormalized = $sharedSource.Replace($repoRoot, '$(SolutionDir)')
     foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
     {
         $definition = $swaggerDefinitions[$key];
-        $outputPath = (Join-Path $definition.output $key).Replace($repoRoot, '$(SolutionDir)')
-        $codeModel = Join-Path $outputPath 'CodeModel.yaml'
+        $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
 
         $settings.profiles[$key] = [ordered]@{
             'commandName'='Project';
@@ -196,6 +196,6 @@ if (![string]::IsNullOrWhiteSpace($filter))
 
 $keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
     Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-    Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:clean;
+    Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast;
 } -ThrottleLimit $parallel
 

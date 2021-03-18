@@ -44,10 +44,10 @@ namespace non_string_enum
             uri.Reset(endpoint);
             uri.AppendPath("/nonStringEnums/int/put", false);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
             if (input != null)
             {
+                request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStringValue(input.Value.ToString());
                 request.Content = content;

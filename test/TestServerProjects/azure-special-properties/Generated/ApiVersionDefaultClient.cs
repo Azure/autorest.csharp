@@ -19,10 +19,12 @@ namespace azure_special_properties
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ApiVersionDefaultRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of ApiVersionDefaultClient for mocking. </summary>
         protected ApiVersionDefaultClient()
         {
         }
+
         /// <summary> Initializes a new instance of ApiVersionDefaultClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

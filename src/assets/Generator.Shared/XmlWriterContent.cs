@@ -48,6 +48,7 @@ namespace Azure.Core
         {
             _content.Dispose();
             XmlWriter.Dispose();
+            _stream.Dispose();
         }
     }
 }

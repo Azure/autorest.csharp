@@ -16,7 +16,7 @@ namespace AutoRest.TestServer.Tests
     {
         private static readonly DateTimeOffset MinDate = new DateTimeOffset(0001, 1, 1, 0, 0, 0, TimeSpan.Zero);
         private static readonly DateTimeOffset ValidDate = new DateTimeOffset(2010, 1, 1, 12, 34, 56, TimeSpan.Zero);
-        public HeaderTests(TestServerVersion version) : base(version, "header") { }
+        public HeaderTests(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task HeaderParameterExistingKey() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamExistingKeyAsync( "overwrite"), ignoreScenario: false, useSimplePipeline: true);
@@ -65,6 +65,21 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task HeaderParameterLongPositive() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamLongAsync( scenario: "positive", 105));
+
+        [Test]
+        public async Task HeaderParameterLongPositiveMaxLong()
+        {
+            string value = null;
+            using var testServer = new InProcTestServer(async content =>
+            {
+                value = content.Request.Headers["value"];
+                await content.Response.Body.FlushAsync();
+            });
+
+            await new HeaderClient(ClientDiagnostics, InProcTestBase.HttpPipeline, testServer.Address).ParamLongAsync(scenario: "positive", long.MaxValue);
+
+            Assert.AreEqual(long.MaxValue.ToString("G"), value);
+        }
 
         [Test]
         public Task HeaderParameterLongNegative() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamLongAsync( scenario: "negative", -2));
@@ -282,20 +297,18 @@ namespace AutoRest.TestServer.Tests
         public Task HeaderParameterEnumNull() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamEnumAsync( scenario: "null", null));
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/339")]
         public Task HeaderResponseEnumValid() => TestStatus(async (host, pipeline) =>
         {
             var response = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.ResponseEnumAsync( scenario: "valid");
-            Assert.AreEqual("GREY", response.Headers.Value);
+            Assert.AreEqual(GreyscaleColors.Grey, response.Headers.Value);
             return response.GetRawResponse();
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/339")]
         public Task HeaderResponseEnumNull() => TestStatus(async (host, pipeline) =>
         {
             var response = await new HeaderClient(ClientDiagnostics, pipeline, host).RestClient.ResponseEnumAsync( scenario: "null");
-            Assert.AreEqual("", response.Headers.Value);
+            Assert.Throws<ArgumentOutOfRangeException>(() => _ = response.Headers.Value);
             return response.GetRawResponse();
         });
 

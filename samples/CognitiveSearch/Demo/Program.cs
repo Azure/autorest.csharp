@@ -10,7 +10,7 @@ using CognitiveSearch.Models;
 
 namespace Demo
 {
-    public static class Application
+    public static class Program
     {
         public static async Task Main()
         {

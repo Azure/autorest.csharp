@@ -52,8 +52,8 @@ namespace azure_parameter_grouping
             {
                 request.Headers.Add("customHeader", parameterGroupingPostRequiredParameters.CustomHeader);
             }
-            request.Headers.Add("Content-Type", "application/json");
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteNumberValue(parameterGroupingPostRequiredParameters.Body);
             request.Content = content;

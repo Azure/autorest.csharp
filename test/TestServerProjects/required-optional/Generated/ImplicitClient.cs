@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -19,10 +20,12 @@ namespace required_optional
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal ImplicitRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of ImplicitClient for mocking. </summary>
         protected ImplicitClient()
         {
         }
+
         /// <summary> Initializes a new instance of ImplicitClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
@@ -173,6 +176,42 @@ namespace required_optional
             try
             {
                 return RestClient.PutOptionalBody(bodyParameter, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Test implicitly optional body parameter. </summary>
+        /// <param name="bodyParameter"> The binary to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> PutOptionalBinaryBodyAsync(Stream bodyParameter = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalBinaryBody");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutOptionalBinaryBodyAsync(bodyParameter, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Test implicitly optional body parameter. </summary>
+        /// <param name="bodyParameter"> The binary to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response PutOptionalBinaryBody(Stream bodyParameter = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ImplicitClient.PutOptionalBinaryBody");
+            scope.Start();
+            try
+            {
+                return RestClient.PutOptionalBinaryBody(bodyParameter, cancellationToken);
             }
             catch (Exception e)
             {

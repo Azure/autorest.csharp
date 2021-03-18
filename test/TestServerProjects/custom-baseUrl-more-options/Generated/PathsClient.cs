@@ -19,10 +19,12 @@ namespace custom_baseUrl_more_options
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PathsRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()
         {
         }
+
         /// <summary> Initializes a new instance of PathsClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

@@ -4,8 +4,6 @@
 #nullable enable
 
 using System;
-using System.Globalization;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace Azure.Core
@@ -15,6 +13,7 @@ namespace Azure.Core
         public static byte[] GetBytesFromBase64Value(this XElement element, string format) => format switch
         {
             "U" => TypeFormatters.FromBase64UrlString(element.Value),
+            "D" => Convert.FromBase64String(element.Value),
             _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
         };
 

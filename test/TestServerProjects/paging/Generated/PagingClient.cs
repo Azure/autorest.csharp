@@ -21,10 +21,12 @@ namespace paging
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal PagingRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of PagingClient for mocking. </summary>
         protected PagingClient()
         {
         }
+
         /// <summary> Initializes a new instance of PagingClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
@@ -218,6 +220,80 @@ namespace paging
                 {
                     var response = RestClient.GetSinglePagesNextPage(nextLink, cancellationToken);
                     return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> FirstResponseEmptyAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<Product>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.FirstResponseEmpty");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.FirstResponseEmptyAsync(cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Product>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.FirstResponseEmpty");
+                scope.Start();
+                try
+                {
+                    var response = await RestClient.FirstResponseEmptyNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> FirstResponseEmpty(CancellationToken cancellationToken = default)
+        {
+            Page<Product> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.FirstResponseEmpty");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.FirstResponseEmpty(cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Product> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("PagingClient.FirstResponseEmpty");
+                scope.Start();
+                try
+                {
+                    var response = RestClient.FirstResponseEmptyNextPage(nextLink, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

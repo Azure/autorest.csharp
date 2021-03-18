@@ -9,7 +9,7 @@ using System;
 
 namespace xml_service.Models
 {
-    internal static class LeaseStateTypeExtensions
+    internal static partial class LeaseStateTypeExtensions
     {
         public static string ToSerialString(this LeaseStateType value) => value switch
         {

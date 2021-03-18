@@ -12,7 +12,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class IntegerTest : TestServerTestBase
     {
-        public IntegerTest(TestServerVersion version) : base(version, "int") { }
+        public IntegerTest(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task GetIntegerOverflow() => Test((host, pipeline) =>

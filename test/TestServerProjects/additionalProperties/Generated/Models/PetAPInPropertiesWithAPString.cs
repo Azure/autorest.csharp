@@ -67,23 +67,23 @@ namespace additionalProperties.Models
         public ICollection<string> Keys => MoreAdditionalProperties.Keys;
         /// <inheritdoc />
         public ICollection<string> Values => MoreAdditionalProperties.Values;
-        /// <inheritdoc />
+        /// <inheritdoc cref="ICollection{T}.Count"/>
         int ICollection<KeyValuePair<string, string>>.Count => MoreAdditionalProperties.Count;
         /// <inheritdoc />
         public void Add(string key, string value) => MoreAdditionalProperties.Add(key, value);
         /// <inheritdoc />
         public bool Remove(string key) => MoreAdditionalProperties.Remove(key);
-        /// <inheritdoc />
+        /// <inheritdoc cref="ICollection{T}.IsReadOnly"/>
         bool ICollection<KeyValuePair<string, string>>.IsReadOnly => MoreAdditionalProperties.IsReadOnly;
-        /// <inheritdoc />
+        /// <inheritdoc cref="ICollection{T}.Add"/>
         void ICollection<KeyValuePair<string, string>>.Add(KeyValuePair<string, string> value) => MoreAdditionalProperties.Add(value);
-        /// <inheritdoc />
+        /// <inheritdoc cref="ICollection{T}.Remove"/>
         bool ICollection<KeyValuePair<string, string>>.Remove(KeyValuePair<string, string> value) => MoreAdditionalProperties.Remove(value);
-        /// <inheritdoc />
+        /// <inheritdoc cref="ICollection{T}.Contains"/>
         bool ICollection<KeyValuePair<string, string>>.Contains(KeyValuePair<string, string> value) => MoreAdditionalProperties.Contains(value);
-        /// <inheritdoc />
+        /// <inheritdoc cref="ICollection{T}.CopyTo"/>
         void ICollection<KeyValuePair<string, string>>.CopyTo(KeyValuePair<string, string>[] destination, int offset) => MoreAdditionalProperties.CopyTo(destination, offset);
-        /// <inheritdoc />
+        /// <inheritdoc cref="ICollection{T}.Clear"/>
         void ICollection<KeyValuePair<string, string>>.Clear() => MoreAdditionalProperties.Clear();
         /// <inheritdoc />
         public string this[string key]

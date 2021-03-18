@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace lro
 {
-    internal class LROsPutAsyncNoRetrySucceededHeaders
+    internal partial class LROsPutAsyncNoRetrySucceededHeaders
     {
         private readonly Response _response;
         public LROsPutAsyncNoRetrySucceededHeaders(Response response)

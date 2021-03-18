@@ -19,10 +19,12 @@ namespace body_duration
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal DurationRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of DurationClient for mocking. </summary>
         protected DurationClient()
         {
         }
+
         /// <summary> Initializes a new instance of DurationClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>

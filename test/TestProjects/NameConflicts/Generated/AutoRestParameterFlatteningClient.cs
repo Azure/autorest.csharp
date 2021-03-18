@@ -21,10 +21,12 @@ namespace NameConflicts
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal AutoRestParameterFlatteningRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of AutoRestParameterFlatteningClient for mocking. </summary>
         protected AutoRestParameterFlatteningClient()
         {
         }
+
         /// <summary> Initializes a new instance of AutoRestParameterFlatteningClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
@@ -187,14 +189,8 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public virtual async Task<AutoRestParameterFlatteningAnalyzeBodyOperation> StartAnalyzeBodyAsync(Stream stringBody, CancellationToken cancellationToken = default)
+        public virtual async Task<AutoRestParameterFlatteningAnalyzeBodyOperation> StartAnalyzeBodyAsync(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
-            if (stringBody == null)
-            {
-                throw new ArgumentNullException(nameof(stringBody));
-            }
-
             using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
             scope0.Start();
             try
@@ -212,14 +208,8 @@ namespace NameConflicts
         /// <summary> Analyze body, that could be different media types. </summary>
         /// <param name="stringBody"> The binary to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="stringBody"/> is null. </exception>
-        public virtual AutoRestParameterFlatteningAnalyzeBodyOperation StartAnalyzeBody(Stream stringBody, CancellationToken cancellationToken = default)
+        public virtual AutoRestParameterFlatteningAnalyzeBodyOperation StartAnalyzeBody(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
-            if (stringBody == null)
-            {
-                throw new ArgumentNullException(nameof(stringBody));
-            }
-
             using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
             scope0.Start();
             try

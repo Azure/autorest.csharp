@@ -13,7 +13,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyDateTimeTest: TestServerTestBase
     {
-        public BodyDateTimeTest(TestServerVersion version) : base(version, "datetime") { }
+        public BodyDateTimeTest(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task GetDateTimeInvalid() => Test((host, pipeline) =>

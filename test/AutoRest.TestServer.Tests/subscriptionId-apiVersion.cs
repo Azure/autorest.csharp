@@ -10,7 +10,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class SubscriptionIdApiVersionTest: TestServerTestBase
     {
-        public SubscriptionIdApiVersionTest(TestServerVersion version) : base(version, "azureUrl") { }
+        public SubscriptionIdApiVersionTest(TestServerVersion version) : base(version) { }
 
         [Test]
         [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]

@@ -13,13 +13,13 @@ namespace AutoRest.CodeModel
 {
     internal static class Program
     {
-        private const string Path = "AutoRest.CSharp.V3/Input/Generated";
-        private static readonly string Namespace = "AutoRest.CSharp.V3.Input";
+        private const string Path = "AutoRest.CSharp/Input/Generated";
+        private static readonly string Namespace = "AutoRest.CSharp.Input";
 
         private static void Main()
         {
             using var webClient = new WebClient();
-            webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/perks/master/codemodel/.resources/all-in-one/json/code-model.json", "code-model.json");
+            webClient.DownloadFile(@"https://raw.githubusercontent.com/Azure/autorest/master/packages/libs/codemodel/.resources/all-in-one/json/code-model.json", "code-model.json");
 
             var schemaJson = File.ReadAllText("code-model.json")
                 // Makes Choices only have string values

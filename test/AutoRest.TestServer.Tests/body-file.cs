@@ -11,7 +11,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyFileTests : TestServerTestBase
     {
-        public BodyFileTests(TestServerVersion version) : base(version, "files") { }
+        public BodyFileTests(TestServerVersion version) : base(version) { }
 
         private string SamplePngPath = Path.Combine(TestServerV2.GetBaseDirectory(), "routes", "sample.png");
 
@@ -48,6 +48,7 @@ namespace AutoRest.TestServer.Tests
             }
 
             Assert.AreEqual(3000 * 1024 * 1024L, total);
+            Assert.False(stream.CanSeek);
             await result.Value.DisposeAsync().ConfigureAwait(false);
         }, ignoreScenario: false, useSimplePipeline: true);
 
@@ -58,6 +59,7 @@ namespace AutoRest.TestServer.Tests
             var result = new FilesClient(ClientDiagnostics, pipeline, host).GetFileLarge();
             var buffer = new byte[2 * 1024 * 1024L];
             var stream = result.Value;
+
             long total = 0;
             var count = stream.Read(buffer, 0, buffer.Length);
             while (count > 0)
@@ -67,6 +69,7 @@ namespace AutoRest.TestServer.Tests
             }
 
             Assert.AreEqual(3000 * 1024 * 1024L, total);
+            Assert.False(stream.CanSeek);
             result.Value.Dispose();
         }, ignoreScenario: false, useSimplePipeline: true);
     }

@@ -21,10 +21,12 @@ namespace xml_service
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
         internal XmlRestClient RestClient { get; }
+
         /// <summary> Initializes a new instance of XmlClient for mocking. </summary>
         protected XmlClient()
         {
         }
+
         /// <summary> Initializes a new instance of XmlClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
@@ -1074,6 +1076,146 @@ namespace xml_service
             try
             {
                 return RestClient.GetXMsText(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an XML document with binary property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<ModelWithByteProperty>> GetBytesAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetBytes");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetBytesAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an XML document with binary property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ModelWithByteProperty> GetBytes(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetBytes");
+            scope.Start();
+            try
+            {
+                return RestClient.GetBytes(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Put an XML document with binary property. </summary>
+        /// <param name="slideshow"> The ModelWithByteProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> PutBinaryAsync(ModelWithByteProperty slideshow, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutBinary");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutBinaryAsync(slideshow, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Put an XML document with binary property. </summary>
+        /// <param name="slideshow"> The ModelWithByteProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response PutBinary(ModelWithByteProperty slideshow, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutBinary");
+            scope.Start();
+            try
+            {
+                return RestClient.PutBinary(slideshow, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an XML document with uri property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<ModelWithUrlProperty>> GetUriAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetUri");
+            scope.Start();
+            try
+            {
+                return await RestClient.GetUriAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an XML document with uri property. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ModelWithUrlProperty> GetUri(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("XmlClient.GetUri");
+            scope.Start();
+            try
+            {
+                return RestClient.GetUri(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Put an XML document with uri property. </summary>
+        /// <param name="model"> The ModelWithUrlProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> PutUriAsync(ModelWithUrlProperty model, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutUri");
+            scope.Start();
+            try
+            {
+                return await RestClient.PutUriAsync(model, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Put an XML document with uri property. </summary>
+        /// <param name="model"> The ModelWithUrlProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response PutUri(ModelWithUrlProperty model, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("XmlClient.PutUri");
+            scope.Start();
+            try
+            {
+                return RestClient.PutUri(model, cancellationToken);
             }
             catch (Exception e)
             {

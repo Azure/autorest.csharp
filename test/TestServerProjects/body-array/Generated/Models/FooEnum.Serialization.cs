@@ -9,7 +9,7 @@ using System;
 
 namespace body_array.Models
 {
-    internal static class FooEnumExtensions
+    internal static partial class FooEnumExtensions
     {
         public static string ToSerialString(this FooEnum value) => value switch
         {

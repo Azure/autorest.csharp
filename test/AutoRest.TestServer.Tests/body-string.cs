@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyStringTest : TestServerTestBase
     {
-        public BodyStringTest(TestServerVersion version) : base(version, "string") { }
+        public BodyStringTest(TestServerVersion version) : base(version) { }
 
         [Test]
         public Task GetStringMultiByteCharacters() => Test(async (host, pipeline) =>
@@ -144,6 +145,24 @@ namespace AutoRest.TestServer.Tests
 
             var parameter = method.GetParameters().Single(p => p.Name == "stringBody");
             Assert.True(parameter.HasDefaultValue);
+        }
+
+        [Test]
+        public async Task DoesntSendContentHeadersWhenNoBody()
+        {
+            List<string> contentTypes = new List<string>();
+            using var testServer = new InProcTestServer(async content =>
+            {
+                contentTypes.Add(content.Request.ContentType);
+                await content.Response.Body.FlushAsync();
+            });
+
+            var client = new StringClient(ClientDiagnostics, InProcTestBase.HttpPipeline, testServer.Address);
+            await client.PutNullAsync(null);
+            await client.PutNullAsync("notNull");
+
+            Assert.AreEqual(null, contentTypes[0]);
+            Assert.AreEqual("application/json", contentTypes[1]);
         }
     }
 }
