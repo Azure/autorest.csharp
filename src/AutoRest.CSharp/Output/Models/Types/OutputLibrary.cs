@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected readonly CodeModel _codeModel;
         protected readonly BuildContext _context;
         private Dictionary<Schema, TypeProvider>? _models;
-        protected Dictionary<OperationGroup, RestClient>? _restClients;
 
         protected OutputLibrary (CodeModel codeModel, BuildContext context)
         {
@@ -60,21 +59,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
 
-        private Dictionary<OperationGroup, RestClient> EnsureRestClients()
-        {
-            if (_restClients != null)
-            {
-                return _restClients;
-            }
-
-            _restClients = new Dictionary<OperationGroup, RestClient>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
-            {
-                _restClients.Add(operationGroup, new RestClient(operationGroup, _context));
-            }
-
-            return _restClients;
-        }
+        protected abstract Dictionary<OperationGroup, RestClient> EnsureRestClients();
 
         public RestClient FindRestClient(OperationGroup operationGroup)
         {

@@ -169,16 +169,20 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
 
+        protected virtual void FilterMethodParameters (List<RequestParameter> parameters)
+        {
+            // Remove ignored headers
+            parameters.RemoveAll(requestParameter =>
+                requestParameter.In == ParameterLocation.Header &&
+                IgnoredRequestHeader.Contains(GetRequestParameterName(requestParameter)));
+        }
+
         private RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, ICollection<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new ();
 
             List<RequestParameter> parameters = operation.Parameters.Concat(requestParameters).ToList();
-            // Remove ignored headers
-            parameters.RemoveAll(requestParameter =>
-                requestParameter.In == ParameterLocation.Header &&
-                IgnoredRequestHeader.Contains(GetRequestParameterName(requestParameter)));
-
+            FilterMethodParameters(parameters);
 
             foreach (RequestParameter requestParameter in parameters)
             {
@@ -353,18 +357,6 @@ namespace AutoRest.CSharp.Output.Models
                     requestParameter.Flattened != true &&
                     requestParameter.GroupedBy == null)
                 {
-                    if (_context.Configuration.LowLevelClient)
-                    {
-                        switch (requestParameter.In)
-                        {
-                            case ParameterLocation.Header:
-                            case ParameterLocation.Query:
-                            case ParameterLocation.Path:
-                                break;
-                            default:
-                                continue;
-                        }
-                    }
                     methodParameters.Add(parameter);
                 }
             }

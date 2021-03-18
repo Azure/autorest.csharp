@@ -13,6 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class HighLevelOutputLibrary : OutputLibrary
     {
+        protected Dictionary<OperationGroup, RestClient>? _restClients;
         private Dictionary<OperationGroup, Client>? _clients;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
@@ -112,6 +113,22 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             EnsureHeaderModels().TryGetValue(operation, out var model);
             return model;
+        }
+
+        protected override Dictionary<OperationGroup, RestClient> EnsureRestClients()
+        {
+            if (_restClients != null)
+            {
+                return _restClients;
+            }
+
+            _restClients = new Dictionary<OperationGroup, RestClient>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                _restClients.Add(operationGroup, new RestClient(operationGroup, _context));
+            }
+
+            return _restClients;
         }
     }
 }

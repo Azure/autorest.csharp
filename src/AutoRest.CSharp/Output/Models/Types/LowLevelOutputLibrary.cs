@@ -13,8 +13,26 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class LowLevelOutputLibrary : OutputLibrary
     {
+        protected Dictionary<OperationGroup, RestClient>? _restClients;
+
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext context) : base(codeModel, context)
         {
+        }
+
+        protected override Dictionary<OperationGroup, RestClient> EnsureRestClients()
+        {
+            if (_restClients != null)
+            {
+                return _restClients;
+            }
+
+            _restClients = new Dictionary<OperationGroup, RestClient>();
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                _restClients.Add(operationGroup, new LowLevelRestClient(operationGroup, _context));
+            }
+
+            return _restClients;
         }
     }
 }
