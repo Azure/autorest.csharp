@@ -12,12 +12,13 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter
     {
-        public void WriteClient(CodeWriter writer, Client client, BuildContext context)
+        public void WriteClient(CodeWriter writer, RestClient client, BuildContext context)
         {
             var cs = client.Type;
             // Client type should have public constructor with equivalent parameters not taking ClientOptions type as last argument
@@ -41,16 +42,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteClientMethodRequest(CodeWriter writer, ClientMethod clientMethod)
+        private void WriteClientMethodRequest(CodeWriter writer, RestClientMethod clientMethod)
         {
-            RequestClientWriter.WriteRequestCreation(writer, clientMethod.RestClientMethod, lowLevel: true);
+            RequestClientWriter.WriteRequestCreation(writer, clientMethod, lowLevel: true);
         }
 
-        private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, bool async)
+        private void WriteClientMethod(CodeWriter writer, RestClientMethod clientMethod, bool async)
         {
-            var parameters = clientMethod.RestClientMethod.Parameters;
+            var parameters = clientMethod.Parameters;
 
-            CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
+            CSharpType? bodyType = clientMethod.ReturnType;
             var responseType = async ? new CSharpType(typeof(Task<Response>)) : new CSharpType(typeof(Response));
 
             if (async)
@@ -81,9 +82,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.Append($"{typeof(Request)} req = {RequestClientWriter.CreateRequestMethodName(clientMethod.Name)}(body, ");
+                writer.Append($"{typeof(Azure.Core.Request)} req = {RequestClientWriter.CreateRequestMethodName(clientMethod.Name)}(body, ");
 
-                foreach (var parameter in clientMethod.RestClientMethod.Parameters)
+                foreach (var parameter in clientMethod.Parameters)
                 {
                      writer.Append($"{parameter.Name:I}, ");
                 }
@@ -118,14 +119,14 @@ namespace AutoRest.CSharp.Generation.Writers
         private bool HasKeyAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase);
         private bool HasTokenAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase);
 
-        private void WriteClientFields(CodeWriter writer, Client client, BuildContext context)
+        private void WriteClientFields(CodeWriter writer, RestClient client, BuildContext context)
         {
             // Endpoint can either be Uri or string
-            var endpointType = client.RestClient.Parameters.First(x => x.Name == EndpointParameter).Type;
+            var endpointType = client.Parameters.First(x => x.Name == EndpointParameter).Type;
 
             writer.Line($"private readonly {endpointType.Name} {EndpointProperty};");
             writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-            var apiVersion = client.RestClient.Parameters.FirstOrDefault(x => x.IsApiVersionParameter);
+            var apiVersion = client.Parameters.FirstOrDefault(x => x.IsApiVersionParameter);
             if (apiVersion?.DefaultValue != null)
             {
                 writer.Line($"private readonly string {apiVersion.Name} = {apiVersion.DefaultValue!.Value.Value:L};");
@@ -149,7 +150,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteClientCtors(CodeWriter writer, Client client, BuildContext context)
+        private void WriteClientCtors(CodeWriter writer, RestClient client, BuildContext context)
         {
             WriteEmptyConstructor(writer, client);
 
@@ -172,7 +173,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteEmptyConstructor (CodeWriter writer, Client client)
+        private void WriteEmptyConstructor (CodeWriter writer, RestClient client)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
             using (writer.Scope($"protected {client.Type.Name:D}()"))
@@ -181,9 +182,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteSimplifiedConstructor (CodeWriter writer, Client client, bool keyCredential)
+        private void WriteSimplifiedConstructor (CodeWriter writer, RestClient client, bool keyCredential)
         {
-            var ctorParams = client.GetClientConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential));
+            var ctorParams = client.GetConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential));
 
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             foreach (Parameter parameter in ctorParams)
@@ -200,7 +201,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($")");
 
             // The full ctor params can be in a different order, the options are not necessarily at the end
-            var fullCtorParams = client.GetClientConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential), true);
+            var fullCtorParams = client.GetConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential), true);
             writer.Append($": this(");
             foreach (Parameter parameter in fullCtorParams)
             {
@@ -220,9 +221,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteFullConstructor (CodeWriter writer, Client client, bool keyCredential)
+        private void WriteFullConstructor (CodeWriter writer, RestClient client, bool keyCredential)
         {
-            var ctorParams = client.GetClientConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential), true);
+            var ctorParams = client.GetConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential), true);
 
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             foreach (Parameter parameter in ctorParams)
@@ -240,7 +241,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks (client.RestClient.Parameters);
+                writer.WriteParameterNullChecks (client.Parameters);
                 using (writer.Scope($"if ({KeyCredentialVariable} == null)"))
                 {
                     writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({KeyCredentialVariable}));");

@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public static void Execute(GeneratedCodeWorkspace project, BuildContext context, Configuration configuration)
         {
-            foreach (var client in context.Library.Clients)
+            foreach (var client in context.Library.RestClients)
             {
                 var codeWriter = new CodeWriter();
                 var lowLevelClientWriter = new LowLevelClientWriter ();

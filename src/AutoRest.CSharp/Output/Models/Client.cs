@@ -118,70 +118,13 @@ namespace AutoRest.CSharp.Output.Models
                         startMethod,
                         BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                         new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()));
-
-                    if (_context.Configuration.LowLevelClient) {
-                        break;
-                    }
                 }
             }
-        }
-
-        private IEnumerable<Parameter> GetRequiredParameters()
-        {
-            List<Parameter> parameters = new List<Parameter>();
-            foreach (var parameter in RestClient.Parameters)
-            {
-                if (parameter.DefaultValue == null)
-                {
-                    parameters.Add(parameter);
-                }
-            }
-
-            return parameters;
-        }
-
-        private IEnumerable<Parameter> GetOptionalParameters()
-        {
-            List<Parameter> parameters = new List<Parameter>();
-            foreach (var parameter in RestClient.Parameters)
-            {
-                if (parameter.DefaultValue != null && !parameter.IsApiVersionParameter)
-                {
-                    parameters.Add(parameter);
-                }
-            }
-
-            return parameters;
         }
 
         public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType, bool includeProtocolOptions = false)
         {
-            List<Parameter> parameters = new List<Parameter>();
-
-            parameters.AddRange(GetRequiredParameters());
-
-            var credentialParam = new Parameter(
-                "credential",
-                "A credential used to authenticate to an Azure Service.",
-                credentialType,
-                null,
-                true);
-            parameters.Add(credentialParam);
-
-            if (includeProtocolOptions)
-            {
-                var protocolParam = new Parameter(
-                    "options",
-                    "Options to control the underlying operations.",
-                    typeof(Azure.Core.ProtocolClientOptions),
-                    Constant.NewInstanceOf(typeof(Azure.Core.ProtocolClientOptions)),
-                    true);
-                parameters.Add(protocolParam);
-            }
-
-            parameters.AddRange(GetOptionalParameters());
-
-            return parameters;
+            return RestClient.GetConstructorParameters(credentialType, includeProtocolOptions);
         }
     }
 }
