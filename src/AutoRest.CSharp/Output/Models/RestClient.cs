@@ -366,7 +366,6 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-
             return OrderParameters(methodParameters);
         }
 
