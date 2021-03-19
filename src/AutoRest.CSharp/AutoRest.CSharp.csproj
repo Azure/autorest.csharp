@@ -15,7 +15,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.9.0" />
+    <PackageReference Include="Azure.Core" Version="1.10.0" />
+    <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210311.2" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.7.0" />
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
   </ItemGroup>
@@ -61,17 +62,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <_GeneratedPropsFileLines Include="&lt;Project>" />      
-      <_GeneratedPropsFileLines Include="&lt;ItemGroup>" />
-      <_GeneratedPropsFileLines Include="&lt;SourceRoot Include=&quot;%24([System.IO.Path]::GetFullPath('%24(MSBuildThisFileDirectory)..\contentFiles\any\$(TargetFramework)\'))&quot; SourceLinkUrl=&quot;$(_RawUrl)&quot;/>" />
-      <_GeneratedPropsFileLines Include="&lt;/ItemGroup>" />
-      <_GeneratedPropsFileLines Include="&lt;PropertyGroup>" />
-      <_GeneratedPropsFileLines Include="&lt;AutoRestVersion>$(_AutorestVersion)&lt;/AutoRestVersion>" />
-      <_GeneratedPropsFileLines Include="&lt;AutoRestCoreVersion>$(_CoreVersion)&lt;/AutoRestCoreVersion>" />
-      <_GeneratedPropsFileLines Include="&lt;/PropertyGroup>" />
-      <_GeneratedPropsFileLines Include="&lt;/Project>" />
+      <_GeneratedPropsFileLines Include="&lt;Project&gt;" />
+      <_GeneratedPropsFileLines Include="&lt;ItemGroup&gt;" />
+      <_GeneratedPropsFileLines Include="&lt;SourceRoot Include=&quot;%24([System.IO.Path]::GetFullPath('%24(MSBuildThisFileDirectory)..\contentFiles\any\$(TargetFramework)\'))&quot; SourceLinkUrl=&quot;$(_RawUrl)&quot;/&gt;" />
+      <_GeneratedPropsFileLines Include="&lt;/ItemGroup&gt;" />
+      <_GeneratedPropsFileLines Include="&lt;PropertyGroup&gt;" />
+      <_GeneratedPropsFileLines Include="&lt;AutoRestVersion&gt;$(_AutorestVersion)&lt;/AutoRestVersion&gt;" />
+      <_GeneratedPropsFileLines Include="&lt;AutoRestCoreVersion&gt;$(_CoreVersion)&lt;/AutoRestCoreVersion&gt;" />
+      <_GeneratedPropsFileLines Include="&lt;/PropertyGroup&gt;" />
+      <_GeneratedPropsFileLines Include="&lt;/Project&gt;" />
     </ItemGroup>
-    
+
 
     <WriteLinesToFile Overwrite="true" File="$(_GeneratedPropsFilePath)" Lines="@(_GeneratedPropsFileLines)" />
 
@@ -80,7 +81,7 @@
       <Content Include="$(_GeneratedPropsFilePath)" PackagePath="buildMultiTargeting\" />
     </ItemGroup>
 
-    <Message Text="##vso[task.setvariable variable=AutorestCSharpVersion;isOutput=true]$(Version)" Importance="High"/>
+    <Message Text="##vso[task.setvariable variable=AutorestCSharpVersion;isOutput=true]$(Version)" Importance="High" />
   </Target>
 
 </Project>
