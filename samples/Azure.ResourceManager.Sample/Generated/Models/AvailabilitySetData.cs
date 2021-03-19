@@ -6,11 +6,12 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the AvailabilitySet data model. </summary>
-    public partial class AvailabilitySetData
+    public partial class AvailabilitySetData : TrackedResource
     {
         /// <summary> Sku of the availability set, only name is required to be set. See AvailabilitySetSkuTypes for possible set of values. Use &apos;Aligned&apos; for virtual machines with managed disks and &apos;Classic&apos; for virtual machines with unmanaged disks. Default value is &apos;Classic&apos;. </summary>
         public Sku Sku { get; set; }

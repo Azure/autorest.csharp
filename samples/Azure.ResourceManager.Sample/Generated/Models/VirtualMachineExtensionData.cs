@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineExtension data model. </summary>
-    public partial class VirtualMachineExtensionData
+    public partial class VirtualMachineExtensionData : TrackedResource
     {
         /// <summary> How the extension handler should be forced to update even if the extension configuration has not changed. </summary>
         public string ForceUpdateTag { get; set; }

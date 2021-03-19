@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineExtensionImage data model. </summary>
-    public partial class VirtualMachineExtensionImageData
+    public partial class VirtualMachineExtensionImageData : TrackedResource
     {
         /// <summary> The operating system this extension supports. </summary>
         public string OperatingSystem { get; set; }

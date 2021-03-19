@@ -6,11 +6,12 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineScaleSetVM data model. </summary>
-    public partial class VirtualMachineScaleSetVMData
+    public partial class VirtualMachineScaleSetVMData : TrackedResource
     {
         /// <summary> The virtual machine instance ID. </summary>
         public string InstanceId { get; }

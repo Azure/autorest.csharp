@@ -7,11 +7,12 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the DedicatedHost data model. </summary>
-    public partial class DedicatedHostData
+    public partial class DedicatedHostData : TrackedResource
     {
         /// <summary> SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values. </summary>
         public Sku Sku { get; set; }
