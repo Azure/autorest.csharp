@@ -21,6 +21,12 @@ namespace paging
     {
         private readonly ArmOperationHelpers<AsyncPageable<Product>> _operation;
         private readonly Func<string, Task<Response>> _nextPageFunc;
+
+        /// <summary> Initializes a new instance of PagingGetMultiplePagesLROOperation for mocking. </summary>
+        protected PagingGetMultiplePagesLROOperation()
+        {
+        }
+
         internal PagingGetMultiplePagesLROOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, Func<string, Task<Response>> nextPageFunc)
         {
             _operation = new ArmOperationHelpers<AsyncPageable<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "PagingGetMultiplePagesLROOperation");

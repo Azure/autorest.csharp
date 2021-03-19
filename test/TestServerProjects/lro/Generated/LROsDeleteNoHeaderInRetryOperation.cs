@@ -18,6 +18,12 @@ namespace lro
     public partial class LROsDeleteNoHeaderInRetryOperation : Operation<Response>, IOperationSource<Response>
     {
         private readonly ArmOperationHelpers<Response> _operation;
+
+        /// <summary> Initializes a new instance of LROsDeleteNoHeaderInRetryOperation for mocking. </summary>
+        protected LROsDeleteNoHeaderInRetryOperation()
+        {
+        }
+
         internal LROsDeleteNoHeaderInRetryOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteNoHeaderInRetryOperation");

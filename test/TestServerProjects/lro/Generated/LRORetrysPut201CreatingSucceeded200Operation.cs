@@ -20,6 +20,12 @@ namespace lro
     public partial class LRORetrysPut201CreatingSucceeded200Operation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LRORetrysPut201CreatingSucceeded200Operation for mocking. </summary>
+        protected LRORetrysPut201CreatingSucceeded200Operation()
+        {
+        }
+
         internal LRORetrysPut201CreatingSucceeded200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LRORetrysPut201CreatingSucceeded200Operation");

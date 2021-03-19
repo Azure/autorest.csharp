@@ -19,6 +19,12 @@ namespace lro_parameterized_endpoints
     public partial class LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation : Operation<string>, IOperationSource<string>
     {
         private readonly ArmOperationHelpers<string> _operation;
+
+        /// <summary> Initializes a new instance of LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation for mocking. </summary>
+        protected LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation()
+        {
+        }
+
         internal LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<string>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation");

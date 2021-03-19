@@ -18,6 +18,12 @@ namespace lro
     public partial class LROsDeleteAsyncRetrySucceededOperation : Operation<Response>, IOperationSource<Response>
     {
         private readonly ArmOperationHelpers<Response> _operation;
+
+        /// <summary> Initializes a new instance of LROsDeleteAsyncRetrySucceededOperation for mocking. </summary>
+        protected LROsDeleteAsyncRetrySucceededOperation()
+        {
+        }
+
         internal LROsDeleteAsyncRetrySucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteAsyncRetrySucceededOperation");

@@ -20,6 +20,12 @@ namespace lro
     public partial class LrosaDsPutNonRetry201Creating400InvalidJsonOperation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LrosaDsPutNonRetry201Creating400InvalidJsonOperation for mocking. </summary>
+        protected LrosaDsPutNonRetry201Creating400InvalidJsonOperation()
+        {
+        }
+
         internal LrosaDsPutNonRetry201Creating400InvalidJsonOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPutNonRetry201Creating400InvalidJsonOperation");

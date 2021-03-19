@@ -20,6 +20,12 @@ namespace lro
     public partial class LrosaDsPutAsyncRelativeRetry400Operation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LrosaDsPutAsyncRelativeRetry400Operation for mocking. </summary>
+        protected LrosaDsPutAsyncRelativeRetry400Operation()
+        {
+        }
+
         internal LrosaDsPutAsyncRelativeRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPutAsyncRelativeRetry400Operation");

@@ -85,6 +85,14 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line($"private readonly {typeof(Func<string, Task<Response>>)} _nextPageFunc;");
                     }
 
+                    writer.Line();
+                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name} for mocking.");
+                    using (writer.Scope($"protected {cs.Name:D}()"))
+                    {
+                    }
+
+                    writer.Line();
+
                     writer.Append($"internal {cs.Name}({typeof(ClientDiagnostics)} clientDiagnostics, {typeof(HttpPipeline)} pipeline, {typeof(Request)} request, {typeof(Response)} response");
 
                     if (pagingResponse != null)
