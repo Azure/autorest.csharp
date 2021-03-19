@@ -13,6 +13,9 @@ using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Type.Decorate;
 using AutoRest.CSharp.Utilities;
 using Microsoft.VisualBasic;
+using AutoRest.CSharp.Generation.Types;
+using Azure.ResourceManager.Core;
+using System.Reflection;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -201,7 +204,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (!_resourceData.ContainsKey(operation.Resource))
                     {
-                        _resourceData.Add(operation.Resource, new ResourceData((ObjectSchema)schema, operation, _context, true));
+                        var resourceData = new ResourceData((ObjectSchema)schema, operation, _context, true);
+                        resourceData.OverrideInherits(typeof(TrackedResource));
+                        _resourceData.Add(operation.Resource, resourceData);
                     }
                 }
             }
