@@ -50,7 +50,7 @@ namespace Azure.Management.Storage
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScope encryptionScope)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScopeData encryptionScope)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -82,7 +82,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="encryptionScopeName"/>, or <paramref name="encryptionScope"/> is null. </exception>
-        public async Task<Response<EncryptionScope>> PutAsync(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScope encryptionScope, CancellationToken cancellationToken = default)
+        public async Task<Response<EncryptionScopeData>> PutAsync(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -108,9 +108,9 @@ namespace Azure.Management.Storage
                 case 200:
                 case 201:
                     {
-                        EncryptionScope value = default;
+                        EncryptionScopeData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                        value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -125,7 +125,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="encryptionScopeName"/>, or <paramref name="encryptionScope"/> is null. </exception>
-        public Response<EncryptionScope> Put(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScope encryptionScope, CancellationToken cancellationToken = default)
+        public Response<EncryptionScopeData> Put(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -151,9 +151,9 @@ namespace Azure.Management.Storage
                 case 200:
                 case 201:
                     {
-                        EncryptionScope value = default;
+                        EncryptionScopeData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                        value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -161,7 +161,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreatePatchRequest(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScope encryptionScope)
+        internal HttpMessage CreatePatchRequest(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScopeData encryptionScope)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -193,7 +193,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="encryptionScopeName"/>, or <paramref name="encryptionScope"/> is null. </exception>
-        public async Task<Response<EncryptionScope>> PatchAsync(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScope encryptionScope, CancellationToken cancellationToken = default)
+        public async Task<Response<EncryptionScopeData>> PatchAsync(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -218,9 +218,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        EncryptionScope value = default;
+                        EncryptionScopeData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                        value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -235,7 +235,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScope"> Encryption scope properties to be used for the update. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="encryptionScopeName"/>, or <paramref name="encryptionScope"/> is null. </exception>
-        public Response<EncryptionScope> Patch(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScope encryptionScope, CancellationToken cancellationToken = default)
+        public Response<EncryptionScopeData> Patch(string resourceGroupName, string accountName, string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -260,9 +260,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        EncryptionScope value = default;
+                        EncryptionScopeData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                        value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -297,7 +297,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="encryptionScopeName"/> is null. </exception>
-        public async Task<Response<EncryptionScope>> GetAsync(string resourceGroupName, string accountName, string encryptionScopeName, CancellationToken cancellationToken = default)
+        public async Task<Response<EncryptionScopeData>> GetAsync(string resourceGroupName, string accountName, string encryptionScopeName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -318,9 +318,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        EncryptionScope value = default;
+                        EncryptionScopeData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                        value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -334,7 +334,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="encryptionScopeName"/> is null. </exception>
-        public Response<EncryptionScope> Get(string resourceGroupName, string accountName, string encryptionScopeName, CancellationToken cancellationToken = default)
+        public Response<EncryptionScopeData> Get(string resourceGroupName, string accountName, string encryptionScopeName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -355,9 +355,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        EncryptionScope value = default;
+                        EncryptionScopeData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = EncryptionScope.DeserializeEncryptionScope(document.RootElement);
+                        value = EncryptionScopeData.DeserializeEncryptionScopeData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

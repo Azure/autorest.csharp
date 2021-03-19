@@ -149,7 +149,7 @@ namespace TenantOnly
         /// <param name="instructionName"> Instruction Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/>, <paramref name="billingProfileName"/>, or <paramref name="instructionName"/> is null. </exception>
-        public async Task<Response<Instruction>> GetAsync(string billingAccountName, string billingProfileName, string instructionName, CancellationToken cancellationToken = default)
+        public async Task<Response<InstructionData>> GetAsync(string billingAccountName, string billingProfileName, string instructionName, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -170,9 +170,9 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        Instruction value = default;
+                        InstructionData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = Instruction.DeserializeInstruction(document.RootElement);
+                        value = InstructionData.DeserializeInstructionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -186,7 +186,7 @@ namespace TenantOnly
         /// <param name="instructionName"> Instruction Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/>, <paramref name="billingProfileName"/>, or <paramref name="instructionName"/> is null. </exception>
-        public Response<Instruction> Get(string billingAccountName, string billingProfileName, string instructionName, CancellationToken cancellationToken = default)
+        public Response<InstructionData> Get(string billingAccountName, string billingProfileName, string instructionName, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -207,9 +207,9 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        Instruction value = default;
+                        InstructionData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = Instruction.DeserializeInstruction(document.RootElement);
+                        value = InstructionData.DeserializeInstructionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -217,7 +217,7 @@ namespace TenantOnly
             }
         }
 
-        internal HttpMessage CreatePutRequest(string billingAccountName, string billingProfileName, string instructionName, Instruction parameters)
+        internal HttpMessage CreatePutRequest(string billingAccountName, string billingProfileName, string instructionName, InstructionData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -247,7 +247,7 @@ namespace TenantOnly
         /// <param name="parameters"> The new instruction. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/>, <paramref name="billingProfileName"/>, <paramref name="instructionName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<Instruction>> PutAsync(string billingAccountName, string billingProfileName, string instructionName, Instruction parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<InstructionData>> PutAsync(string billingAccountName, string billingProfileName, string instructionName, InstructionData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -272,9 +272,9 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        Instruction value = default;
+                        InstructionData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = Instruction.DeserializeInstruction(document.RootElement);
+                        value = InstructionData.DeserializeInstructionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -289,7 +289,7 @@ namespace TenantOnly
         /// <param name="parameters"> The new instruction. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="billingAccountName"/>, <paramref name="billingProfileName"/>, <paramref name="instructionName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<Instruction> Put(string billingAccountName, string billingProfileName, string instructionName, Instruction parameters, CancellationToken cancellationToken = default)
+        public Response<InstructionData> Put(string billingAccountName, string billingProfileName, string instructionName, InstructionData parameters, CancellationToken cancellationToken = default)
         {
             if (billingAccountName == null)
             {
@@ -314,9 +314,9 @@ namespace TenantOnly
             {
                 case 200:
                     {
-                        Instruction value = default;
+                        InstructionData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = Instruction.DeserializeInstruction(document.RootElement);
+                        value = InstructionData.DeserializeInstructionData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

@@ -16,6 +16,8 @@ namespace AutoRest.CSharp.Output.Models
         private const string ClientSuffixValue = "Client";
         private const string OperationsSuffixValue = "Operations";
         private const string ContainerSuffixValue = "Container";
+        private const string DataSuffixValue = "Data";
+        private string _prefix;
 
         protected OperationGroup _operationGroup;
         protected RestClient? _restClient;
@@ -24,8 +26,8 @@ namespace AutoRest.CSharp.Output.Models
             : base(context)
         {
             _operationGroup = operationGroup;
-            string clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name);
-            DefaultName = clientPrefix + SuffixValue;
+            _prefix = operationGroup.Resource;
+            DefaultName = _prefix + SuffixValue;
         }
 
         public string ResourceName => _operationGroup.Resource;
@@ -36,31 +38,9 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override string DefaultAccessibility { get; } = "public";
 
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name)));
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, _prefix));
 
         public RestClient RestClient => _restClient ??= Context.Library.FindRestClient(_operationGroup);
-
-        protected string GetClientPrefix(string name)
-        {
-            name = string.IsNullOrEmpty(name) ? Context.CodeModel.Language.Default.Name : name.ToCleanName();
-
-            if (name.EndsWith(OperationsSuffixValue) && name.Length >= OperationsSuffixValue.Length)
-            {
-                name = name.Substring(0, name.Length - OperationsSuffixValue.Length);
-            }
-
-            if (name.EndsWith(ClientSuffixValue) && name.Length >= ClientSuffixValue.Length)
-            {
-                name = name.Substring(0, name.Length - ClientSuffixValue.Length);
-            }
-
-            if (name.EndsWith(ContainerSuffixValue) && name.Length >= ContainerSuffixValue.Length)
-            {
-                name = name.Substring(0, name.Length - ContainerSuffixValue.Length);
-            }
-
-            return name;
-        }
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

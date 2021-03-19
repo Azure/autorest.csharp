@@ -16,20 +16,20 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of InstructionListResult. </summary>
         internal InstructionListResult()
         {
-            Value = new ChangeTrackingList<Instruction>();
+            Value = new ChangeTrackingList<InstructionData>();
         }
 
         /// <summary> Initializes a new instance of InstructionListResult. </summary>
         /// <param name="value"> The list of billing instructions used during invoice generation. </param>
         /// <param name="nextLink"> The link (url) to the next page of results. </param>
-        internal InstructionListResult(IReadOnlyList<Instruction> value, string nextLink)
+        internal InstructionListResult(IReadOnlyList<InstructionData> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of billing instructions used during invoice generation. </summary>
-        public IReadOnlyList<Instruction> Value { get; }
+        public IReadOnlyList<InstructionData> Value { get; }
         /// <summary> The link (url) to the next page of results. </summary>
         public string NextLink { get; }
     }

@@ -147,7 +147,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string shareName, FileShare fileShare)
+        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, string shareName, FileShareData fileShare)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -179,7 +179,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="shareName"/>, or <paramref name="fileShare"/> is null. </exception>
-        public async Task<Response<FileShare>> CreateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
+        public async Task<Response<FileShareData>> CreateAsync(string resourceGroupName, string accountName, string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -205,9 +205,9 @@ namespace Azure.Management.Storage
                 case 200:
                 case 201:
                     {
-                        FileShare value = default;
+                        FileShareData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FileShare.DeserializeFileShare(document.RootElement);
+                        value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -222,7 +222,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="shareName"/>, or <paramref name="fileShare"/> is null. </exception>
-        public Response<FileShare> Create(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
+        public Response<FileShareData> Create(string resourceGroupName, string accountName, string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -248,9 +248,9 @@ namespace Azure.Management.Storage
                 case 200:
                 case 201:
                     {
-                        FileShare value = default;
+                        FileShareData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FileShare.DeserializeFileShare(document.RootElement);
+                        value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -258,7 +258,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string shareName, FileShare fileShare)
+        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string accountName, string shareName, FileShareData fileShare)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -290,7 +290,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="shareName"/>, or <paramref name="fileShare"/> is null. </exception>
-        public async Task<Response<FileShare>> UpdateAsync(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
+        public async Task<Response<FileShareData>> UpdateAsync(string resourceGroupName, string accountName, string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -315,9 +315,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileShare value = default;
+                        FileShareData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FileShare.DeserializeFileShare(document.RootElement);
+                        value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -332,7 +332,7 @@ namespace Azure.Management.Storage
         /// <param name="fileShare"> Properties to update for the file share. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="shareName"/>, or <paramref name="fileShare"/> is null. </exception>
-        public Response<FileShare> Update(string resourceGroupName, string accountName, string shareName, FileShare fileShare, CancellationToken cancellationToken = default)
+        public Response<FileShareData> Update(string resourceGroupName, string accountName, string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -357,9 +357,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileShare value = default;
+                        FileShareData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FileShare.DeserializeFileShare(document.RootElement);
+                        value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -395,7 +395,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="shareName"/> is null. </exception>
-        public async Task<Response<FileShare>> GetAsync(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
+        public async Task<Response<FileShareData>> GetAsync(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -416,9 +416,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileShare value = default;
+                        FileShareData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FileShare.DeserializeFileShare(document.RootElement);
+                        value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -432,7 +432,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="shareName"/> is null. </exception>
-        public Response<FileShare> Get(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
+        public Response<FileShareData> Get(string resourceGroupName, string accountName, string shareName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -453,9 +453,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileShare value = default;
+                        FileShareData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FileShare.DeserializeFileShare(document.RootElement);
+                        value = FileShareData.DeserializeFileShareData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

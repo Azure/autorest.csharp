@@ -26,4 +26,9 @@ operation-group-to-resource:
    Skus: Sku
    Usages: Usage
    PrivateLinkResources: PrivateLinkResource
+   StorageAccounts: StorageAccount
+resource-rename:
+   BlobServiceProperties: BlobService
+   FileServiceProperties: FileService
 ```
+

@@ -15,7 +15,7 @@ namespace TenantOnly
     {
         internal static BillingAccountListResult DeserializeBillingAccountListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<BillingAccount>> value = default;
+            Optional<IReadOnlyList<BillingAccountData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -26,10 +26,10 @@ namespace TenantOnly
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<BillingAccount> array = new List<BillingAccount>();
+                    List<BillingAccountData> array = new List<BillingAccountData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(BillingAccount.DeserializeBillingAccount(item));
+                        array.Add(BillingAccountData.DeserializeBillingAccountData(item));
                     }
                     value = array;
                     continue;

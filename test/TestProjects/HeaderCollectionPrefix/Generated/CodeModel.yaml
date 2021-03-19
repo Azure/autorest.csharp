@@ -4,14 +4,14 @@ info: !Info
   title: HeaderCollectionPrefix
 schemas: !Schemas 
   strings:
-    - !StringSchema &ref_0
+    - !StringSchema &ref_1
       type: string
       language: !Languages 
         default:
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_2
+    - !StringSchema &ref_0
       type: string
       apiVersions:
         - !ApiVersion 
@@ -21,9 +21,27 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
+  dictionaries:
+    - !DictionarySchema &ref_3
+      type: dictionary
+      elementType: *ref_0
+      language: !Languages 
+        default:
+          name: String
+          description: Dictionary of String
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_5
+      type: dictionary
+      elementType: *ref_0
+      language: !Languages 
+        default:
+          name: String
+          description: Dictionary of String
+          header: x-ms-meta
+      protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_1
-    schema: *ref_0
+  - !Parameter &ref_2
+    schema: *ref_1
     clientDefaultValue: http://localhost:3000
     implementation: Client
     origin: modelerfour:synthesized/host
@@ -47,16 +65,9 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_1
-          - !Parameter &ref_3
-            schema: !DictionarySchema 
-              type: dictionary
-              elementType: *ref_2
-              language: !Languages 
-                default:
-                  name: string
-                  description: ''
-              protocol: !Protocols {}
+          - *ref_2
+          - !Parameter &ref_4
+            schema: *ref_3
             implementation: Method
             extensions:
               x-ms-header-collection-prefix: x-ms-meta-
@@ -82,7 +93,7 @@ operationGroups:
                 method: put
                 uri: '{$host}'
         signatureParameters:
-          - *ref_3
+          - *ref_4
         responses:
           - !Response 
             language: !Languages 
@@ -93,15 +104,7 @@ operationGroups:
               http: !HttpResponse 
                 headers:
                   - !HttpHeader 
-                    schema: !DictionarySchema 
-                      type: dictionary
-                      elementType: *ref_2
-                      language: !Languages 
-                        default:
-                          name: string
-                          description: ''
-                          header: x-ms-meta
-                      protocol: !Protocols {}
+                    schema: *ref_5
                     header: x-ms-meta
                     extensions:
                       x-ms-header-collection-prefix: x-ms-meta-

@@ -2,17 +2,13 @@
 // Licensed under the MIT License.
 
 using System;
-using System.Text;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Type.Decorate;
-using AutoRest.CSharp.Utilities;
-using Microsoft.VisualBasic;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -25,6 +21,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, RestClient>? _restClients;
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
+        private Dictionary<string, ResourceData>? _resourceData;
+        private Dictionary<string, ArmResource>? _armResource;
+
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
@@ -33,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
-        private Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
+        public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -47,12 +46,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (context.Configuration.AzureArm)
             {
                 DecorateOperationGroup();
+                DecorateSchema();
             }
         }
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
-        public IEnumerable<TypeProvider> ResourceModels => ResourceSchemaMap.Values;
+        public IEnumerable<ArmResource> ArmResource => EnsureArmResource().Values;
+
+        public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
         public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
 
@@ -183,17 +185,64 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _resourceContainers;
         }
 
+        private Dictionary<string, ResourceData> EnsureResourceData()
+        {
+            if (_resourceData != null)
+            {
+                return _resourceData;
+            }
+
+            _resourceData = new Dictionary<string, ResourceData>();
+            foreach (var entry in ResourceSchemaMap)
+            {
+                var schema = entry.Key;
+                var operations = _operationGroups[schema.Name];
+                foreach (var operation in operations)
+                {
+                    if (!_resourceData.ContainsKey(operation.Resource))
+                    {
+                        _resourceData.Add(operation.Resource, new ResourceData((ObjectSchema)schema, operation, _context, true));
+                    }
+                }
+            }
+
+            return _resourceData;
+        }
+
+        private Dictionary<string, ArmResource> EnsureArmResource()
+        {
+            if (_armResource != null)
+            {
+                return _armResource;
+            }
+
+            _armResource = new Dictionary<string, ArmResource>();
+            foreach (var entry in ResourceSchemaMap)
+            {
+                var schema = entry.Key;
+                var operations = _operationGroups[schema.Name];
+                foreach (var operation in operations)
+                {
+                    if (!_armResource.ContainsKey(operation.Resource))
+                    {
+                        _armResource.Add(operation.Resource, new ArmResource(operation.Resource, _context));
+                    }
+                }
+            }
+
+            return _armResource;
+        }
 
         public TypeProvider FindTypeForSchema(Schema schema)
         {
             TypeProvider? result;
             if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
             {
-                throw new KeyNotFoundException($"{schema.Name} was not found in model or resource schema map");
+                throw new KeyNotFoundException($"{schema.Name} was not found in model and resource schema map");
             }
+
             return result;
         }
-
 
         private Dictionary<Schema, TypeProvider> BuildModels()
         {
@@ -201,11 +250,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var schema in _allSchemas)
             {
-                /*if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema.Name))
+                if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema.Name))
                 {
                     continue;
-                }*/
+                }
                 models.Add(schema, BuildModel(schema));
+
             }
             return models;
         }
@@ -220,7 +270,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (_operationGroups.ContainsKey(schema.Name))
                     {
-                        resourceModels.Add(schema, BuildModel(schema));
+                        resourceModels.Add(schema, BuildResourceModel(schema));
                     }
                 }
             }
@@ -232,6 +282,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
             ObjectSchema objectSchema => new ObjectType(objectSchema, _context),
+            _ => throw new NotImplementedException()
+        };
+
+        private TypeProvider BuildResourceModel(Schema schema) => schema switch
+        {
+            ObjectSchema objectSchema => new ObjectType(objectSchema, _context, true),
             _ => throw new NotImplementedException()
         };
 
@@ -270,6 +326,23 @@ namespace AutoRest.CSharp.Output.Models.Types
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
+                string? nameOverride;
+                if (_context.Configuration.ResourceRename.TryGetValue(operationsGroup.Resource, out nameOverride))
+                {
+                    operationsGroup.Resource = nameOverride;
+                }
+            }
+        }
+
+        private void DecorateSchema()
+        {
+            foreach (var schema in _allSchemas)
+            {
+                string? resourceName;
+                if (_context.Configuration.ResourceRename.TryGetValue(schema.Name, out resourceName))
+                {
+                    schema.NameOverride = resourceName;
+                }
             }
         }
 

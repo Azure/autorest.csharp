@@ -95,15 +95,36 @@
         "Product": {
             "type": "object",
             "description": "The product documentation.",
-            "required": [
-                "constProperty"
-            ],
             "properties": {
-                "constProperty": {
+                "Const_Property": {
                     "type": "string",
                     "description": "Constant string"
                 }
             }
+        },
+        "InputModel": {
+            "type": "object",
+            "description": "The product documentation.",
+            "properties": {
+                "Input_Model_Property": {
+                    "type": "string",
+                    "description": "Constant string"
+                }
+            },
+            "x-csharp-usage": "model,input,converter",
+            "x-csharp-formats": "json"
+        },
+        "OutputModel": {
+            "type": "object",
+            "description": "The product documentation.",
+            "properties": {
+                "Output_Model_Property": {
+                    "type": "string",
+                    "description": "Constant string"
+                }
+            },
+            "x-csharp-usage": "model,output,converter",
+            "x-csharp-formats": "json"
         },
         "ModelStruct": {
             "type": "object",

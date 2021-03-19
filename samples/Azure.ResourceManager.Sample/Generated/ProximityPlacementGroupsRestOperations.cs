@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Sample
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroup parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroup>> CreateOrUpdateAsync(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroup parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ProximityPlacementGroupData>> CreateOrUpdateAsync(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -101,9 +101,9 @@ namespace Azure.ResourceManager.Sample
                 case 200:
                 case 201:
                     {
-                        ProximityPlacementGroup value = default;
+                        ProximityPlacementGroupData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ProximityPlacementGroup.DeserializeProximityPlacementGroup(document.RootElement);
+                        value = ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -117,7 +117,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="parameters"> Parameters supplied to the Create Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="proximityPlacementGroupName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ProximityPlacementGroup> CreateOrUpdate(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroup parameters, CancellationToken cancellationToken = default)
+        public Response<ProximityPlacementGroupData> CreateOrUpdate(string resourceGroupName, string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -139,9 +139,9 @@ namespace Azure.ResourceManager.Sample
                 case 200:
                 case 201:
                     {
-                        ProximityPlacementGroup value = default;
+                        ProximityPlacementGroupData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ProximityPlacementGroup.DeserializeProximityPlacementGroup(document.RootElement);
+                        value = ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -184,7 +184,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> Resource tags. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroup>> UpdateAsync(string resourceGroupName, string proximityPlacementGroupName, IDictionary<string, string> tags = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ProximityPlacementGroupData>> UpdateAsync(string resourceGroupName, string proximityPlacementGroupName, IDictionary<string, string> tags = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -201,9 +201,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        ProximityPlacementGroup value = default;
+                        ProximityPlacementGroupData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ProximityPlacementGroup.DeserializeProximityPlacementGroup(document.RootElement);
+                        value = ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -217,7 +217,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> Resource tags. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public Response<ProximityPlacementGroup> Update(string resourceGroupName, string proximityPlacementGroupName, IDictionary<string, string> tags = null, CancellationToken cancellationToken = default)
+        public Response<ProximityPlacementGroupData> Update(string resourceGroupName, string proximityPlacementGroupName, IDictionary<string, string> tags = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -234,9 +234,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        ProximityPlacementGroup value = default;
+                        ProximityPlacementGroupData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ProximityPlacementGroup.DeserializeProximityPlacementGroup(document.RootElement);
+                        value = ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -345,7 +345,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public async Task<Response<ProximityPlacementGroup>> GetAsync(string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ProximityPlacementGroupData>> GetAsync(string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -362,9 +362,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        ProximityPlacementGroup value = default;
+                        ProximityPlacementGroupData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ProximityPlacementGroup.DeserializeProximityPlacementGroup(document.RootElement);
+                        value = ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -378,7 +378,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="proximityPlacementGroupName"/> is null. </exception>
-        public Response<ProximityPlacementGroup> Get(string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
+        public Response<ProximityPlacementGroupData> Get(string resourceGroupName, string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -395,9 +395,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        ProximityPlacementGroup value = default;
+                        ProximityPlacementGroupData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ProximityPlacementGroup.DeserializeProximityPlacementGroup(document.RootElement);
+                        value = ProximityPlacementGroupData.DeserializeProximityPlacementGroupData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

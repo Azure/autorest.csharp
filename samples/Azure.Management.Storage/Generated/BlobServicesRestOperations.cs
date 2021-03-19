@@ -134,7 +134,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateSetServicePropertiesRequest(string resourceGroupName, string accountName, BlobServiceProperties parameters)
+        internal HttpMessage CreateSetServicePropertiesRequest(string resourceGroupName, string accountName, BlobServiceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -165,7 +165,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<BlobServiceProperties>> SetServicePropertiesAsync(string resourceGroupName, string accountName, BlobServiceProperties parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobServiceData>> SetServicePropertiesAsync(string resourceGroupName, string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -186,9 +186,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobServiceProperties value = default;
+                        BlobServiceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
+                        value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -202,7 +202,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<BlobServiceProperties> SetServiceProperties(string resourceGroupName, string accountName, BlobServiceProperties parameters, CancellationToken cancellationToken = default)
+        public Response<BlobServiceData> SetServiceProperties(string resourceGroupName, string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -223,9 +223,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobServiceProperties value = default;
+                        BlobServiceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
+                        value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -259,7 +259,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<BlobServiceProperties>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobServiceData>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -276,9 +276,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobServiceProperties value = default;
+                        BlobServiceData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
+                        value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -291,7 +291,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<BlobServiceProperties> GetServiceProperties(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public Response<BlobServiceData> GetServiceProperties(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -308,9 +308,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        BlobServiceProperties value = default;
+                        BlobServiceData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = BlobServiceProperties.DeserializeBlobServiceProperties(document.RootElement);
+                        value = BlobServiceData.DeserializeBlobServiceData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
