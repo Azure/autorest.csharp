@@ -6,18 +6,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Responses;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class LowLevelOutputLibrary : OutputLibrary
     {
         private readonly CodeModel _codeModel;
-        private readonly BuildContext _context;
+        private readonly BuildContext<LowLevelOutputLibrary> _context;
         protected Dictionary<OperationGroup, RestClient>? _restClients;
 
-        public LowLevelOutputLibrary(CodeModel codeModel, BuildContext context) : base(codeModel, context)
+        public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
         {
             _codeModel = codeModel;
             _context = context;
