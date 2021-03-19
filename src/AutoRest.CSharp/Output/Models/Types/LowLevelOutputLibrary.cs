@@ -23,7 +23,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
         }
 
-        protected override Dictionary<OperationGroup, RestClient> EnsureRestClients()
+        public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
+
+        protected  Dictionary<OperationGroup, RestClient> EnsureRestClients()
         {
             if (_restClients != null)
             {

@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         protected override string DefaultAccessibility { get; } = "public";
 
-        public LowLevelRestClient(OperationGroup operationGroup, BuildContext context) : base(operationGroup, context, true)
+        public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context) : base(operationGroup, context, true)
         {
         }
 

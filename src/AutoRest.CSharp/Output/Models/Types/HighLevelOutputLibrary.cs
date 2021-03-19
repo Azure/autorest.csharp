@@ -26,9 +26,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             _codeModel = codeModel;
         }
 
-        public override IEnumerable<Client> Clients => EnsureClients().Values;
-        public override IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
-        public override IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
+        public IEnumerable<Client> Clients => EnsureClients().Values;
+        public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
+        public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
 
         private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
         {
@@ -99,26 +99,26 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _clients;
         }
 
-        public override LongRunningOperation? FindLongRunningOperation(Operation operation)
+        public LongRunningOperation? FindLongRunningOperation(Operation operation)
         {
             Debug.Assert(operation.IsLongRunning);
 
             return EnsureLongRunningOperations()[operation];
         }
 
-        public override Client? FindClient(OperationGroup operationGroup)
+        public Client? FindClient(OperationGroup operationGroup)
         {
             EnsureClients().TryGetValue(operationGroup, out var client);
             return client;
         }
 
-        public override ResponseHeaderGroupType? FindHeaderModel(Operation operation)
+        public ResponseHeaderGroupType? FindHeaderModel(Operation operation)
         {
             EnsureHeaderModels().TryGetValue(operation, out var model);
             return model;
         }
 
-        protected override Dictionary<OperationGroup, RestClient> EnsureRestClients()
+        protected Dictionary<OperationGroup, RestClient> EnsureRestClients()
         {
             if (_restClients != null)
             {
@@ -132,6 +132,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return _restClients;
+        }
+
+        public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
+
+        public RestClient FindRestClient(OperationGroup operationGroup)
+        {
+            return EnsureRestClients()[operationGroup];
         }
     }
 }

@@ -3,11 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Responses;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -23,13 +20,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
         }
 
-        public virtual IEnumerable<Client> Clients => Enumerable.Empty<Client>();
-        public virtual IEnumerable<LongRunningOperation> LongRunningOperations => Enumerable.Empty<LongRunningOperation>();
-        public virtual IEnumerable<ResponseHeaderGroupType> HeaderModels => Enumerable.Empty<ResponseHeaderGroupType>();
-
-        public virtual LongRunningOperation? FindLongRunningOperation(Operation operation) => null;
-        public virtual Client? FindClient(OperationGroup operationGroup) => null;
-        public virtual ResponseHeaderGroupType? FindHeaderModel(Operation operation) => null;
 
         protected Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
@@ -57,13 +47,5 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotImplementedException()
         };
 
-        public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
-
-        protected abstract Dictionary<OperationGroup, RestClient> EnsureRestClients();
-
-        public RestClient FindRestClient(OperationGroup operationGroup)
-        {
-            return EnsureRestClients()[operationGroup];
-        }
     }
 }
