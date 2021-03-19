@@ -46,6 +46,10 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.Line();
 
+            writer.Line($"private static readonly ResourceType ResourceType = \"\";");
+            writer.Line($"protected override ResourceType ValidResourceType => ResourceType;");
+            writer.Line();
+
             writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
             writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P: System.Threading.CancellationToken.None\" />.");
             writer.WriteXmlDocumentationReturns("An async collection of location that may take multiple service requests to iterate over.");
