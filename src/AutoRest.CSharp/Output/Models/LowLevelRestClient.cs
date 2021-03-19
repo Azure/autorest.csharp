@@ -27,14 +27,22 @@ namespace AutoRest.CSharp.Output.Models
         {
         }
 
-        protected override void FilterMethodParameters (List<RequestParameter> parameters)
+        protected override IEnumerable<RequestParameter> FilterMethodParameters(IEnumerable<RequestParameter> parameters)
         {
-            base.FilterMethodParameters(parameters);
+            foreach (RequestParameter p in parameters)
+            {
+                switch (p.In)
+                {
+                    case ParameterLocation.Header:
+                    case ParameterLocation.Query:
+                    case ParameterLocation.Path:
+                        yield return p;
+                        break;
+                    default:
+                        break;
+                }
 
-            parameters.RemoveAll(requestParameter =>
-                requestParameter.In != ParameterLocation.Header &&
-                requestParameter.In != ParameterLocation.Query &&
-                requestParameter.In !=ParameterLocation.Path);
+            }
         }
     }
 }

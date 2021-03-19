@@ -76,6 +76,11 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     RestClientMethod method = GetOperationMethod(serviceRequest);
                     yield return method;
+
+                    if (_context.Configuration.LowLevelClient)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -107,7 +112,6 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var serviceRequest in operation.Requests)
                 {
-
                     if (!(serviceRequest.Protocol.Http is HttpRequest httpRequest))
                     {
                         continue;
@@ -169,20 +173,15 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
 
-        protected virtual void FilterMethodParameters (List<RequestParameter> parameters)
-        {
-            // Remove ignored headers
-            parameters.RemoveAll(requestParameter =>
-                requestParameter.In == ParameterLocation.Header &&
-                IgnoredRequestHeader.Contains(GetRequestParameterName(requestParameter)));
-        }
-
         private RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, ICollection<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new ();
 
             List<RequestParameter> parameters = operation.Parameters.Concat(requestParameters).ToList();
-            FilterMethodParameters(parameters);
+            // Remove ignored headers
+            parameters.RemoveAll(requestParameter =>
+                requestParameter.In == ParameterLocation.Header &&
+                IgnoredRequestHeader.Contains(GetRequestParameterName(requestParameter)));
 
             foreach (RequestParameter requestParameter in parameters)
             {
@@ -346,10 +345,16 @@ namespace AutoRest.CSharp.Output.Models
             return query.ToArray();
         }
 
-        private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        protected virtual IEnumerable<RequestParameter> FilterMethodParameters(IEnumerable<RequestParameter> parameters)
+        {
+            return parameters;
+        }
+
+        protected virtual Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             List<Parameter> methodParameters = new ();
-            foreach (var requestParameter in parameters)
+
+            foreach (var requestParameter in FilterMethodParameters(parameters))
             {
                 var (parameter, _) = allParameters[requestParameter];
                 // Grouped and flattened parameters shouldn't be added to methods
@@ -360,6 +365,7 @@ namespace AutoRest.CSharp.Output.Models
                     methodParameters.Add(parameter);
                 }
             }
+
 
             return OrderParameters(methodParameters);
         }
@@ -692,7 +698,7 @@ namespace AutoRest.CSharp.Output.Models
             return parameter;
         }
 
-        private record ConstructedParameter(Parameter? Parameter, ReferenceOrConstant Reference);
+        protected record ConstructedParameter(Parameter? Parameter, ReferenceOrConstant Reference);
 
         private IEnumerable<Parameter> GetRequiredParameters()
         {
