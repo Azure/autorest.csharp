@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsCustomHeaderPutAsyncRetrySucceededOperation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LROsCustomHeaderPutAsyncRetrySucceededOperation for mocking. </summary>
+        protected LROsCustomHeaderPutAsyncRetrySucceededOperation()
+        {
+        }
+
         internal LROsCustomHeaderPutAsyncRetrySucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsCustomHeaderPutAsyncRetrySucceededOperation");

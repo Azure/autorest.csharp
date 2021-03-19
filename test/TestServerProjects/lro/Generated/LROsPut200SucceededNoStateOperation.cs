@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsPut200SucceededNoStateOperation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LROsPut200SucceededNoStateOperation for mocking. </summary>
+        protected LROsPut200SucceededNoStateOperation()
+        {
+        }
+
         internal LROsPut200SucceededNoStateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPut200SucceededNoStateOperation");

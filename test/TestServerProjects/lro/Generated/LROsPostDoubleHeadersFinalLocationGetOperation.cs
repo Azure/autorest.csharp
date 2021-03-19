@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsPostDoubleHeadersFinalLocationGetOperation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LROsPostDoubleHeadersFinalLocationGetOperation for mocking. </summary>
+        protected LROsPostDoubleHeadersFinalLocationGetOperation()
+        {
+        }
+
         internal LROsPostDoubleHeadersFinalLocationGetOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPostDoubleHeadersFinalLocationGetOperation");

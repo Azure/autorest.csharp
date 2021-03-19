@@ -21,6 +21,12 @@ namespace lro
     public partial class LROsPost202ListOperation : Operation<IReadOnlyList<Product>>, IOperationSource<IReadOnlyList<Product>>
     {
         private readonly ArmOperationHelpers<IReadOnlyList<Product>> _operation;
+
+        /// <summary> Initializes a new instance of LROsPost202ListOperation for mocking. </summary>
+        protected LROsPost202ListOperation()
+        {
+        }
+
         internal LROsPost202ListOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<IReadOnlyList<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202ListOperation");
