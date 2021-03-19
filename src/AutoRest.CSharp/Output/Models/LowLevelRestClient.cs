@@ -23,7 +23,9 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class LowLevelRestClient : RestClient
     {
-        public LowLevelRestClient(OperationGroup operationGroup, BuildContext context) : base(operationGroup, context)
+        protected override string DefaultAccessibility { get; } = "public";
+
+        public LowLevelRestClient(OperationGroup operationGroup, BuildContext context) : base(operationGroup, context, true)
         {
         }
 
@@ -42,6 +44,14 @@ namespace AutoRest.CSharp.Output.Models
                         break;
                 }
 
+            }
+        }
+
+        protected override IEnumerable<ServiceRequest> FilterServiceRequests(IEnumerable<ServiceRequest> requests)
+        {
+            if (requests.Any())
+            {
+                yield return requests.First();
             }
         }
     }
