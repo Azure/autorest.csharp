@@ -126,7 +126,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, StorageAccountData parameters)
+        internal HttpMessage CreateCreateRequest(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -155,7 +155,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateAsync(string resourceGroupName, string accountName, StorageAccountData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateAsync(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -188,7 +188,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response Create(string resourceGroupName, string accountName, StorageAccountData parameters, CancellationToken cancellationToken = default)
+        public Response Create(string resourceGroupName, string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -318,7 +318,7 @@ namespace Azure.Management.Storage
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<StorageAccount>> GetPropertiesAsync(string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<StorageAccountData>> GetPropertiesAsync(string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -335,9 +335,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        StorageAccount value = default;
+                        StorageAccountData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = StorageAccount.DeserializeStorageAccount(document.RootElement);
+                        value = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -351,7 +351,7 @@ namespace Azure.Management.Storage
         /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<StorageAccount> GetProperties(string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
+        public Response<StorageAccountData> GetProperties(string resourceGroupName, string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -368,9 +368,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        StorageAccount value = default;
+                        StorageAccountData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = StorageAccount.DeserializeStorageAccount(document.RootElement);
+                        value = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -407,7 +407,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the updated account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<StorageAccount>> UpdateAsync(string resourceGroupName, string accountName, StorageAccountUpdateParameters parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<StorageAccountData>> UpdateAsync(string resourceGroupName, string accountName, StorageAccountUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -428,9 +428,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        StorageAccount value = default;
+                        StorageAccountData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = StorageAccount.DeserializeStorageAccount(document.RootElement);
+                        value = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -444,7 +444,7 @@ namespace Azure.Management.Storage
         /// <param name="parameters"> The parameters to provide for the updated account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<StorageAccount> Update(string resourceGroupName, string accountName, StorageAccountUpdateParameters parameters, CancellationToken cancellationToken = default)
+        public Response<StorageAccountData> Update(string resourceGroupName, string accountName, StorageAccountUpdateParameters parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -465,9 +465,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        StorageAccount value = default;
+                        StorageAccountData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = StorageAccount.DeserializeStorageAccount(document.RootElement);
+                        value = StorageAccountData.DeserializeStorageAccountData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

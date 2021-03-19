@@ -47,6 +47,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resourceOperationWriter = new ResourceOperationWriter();
             var resourceContainerWriter = new ResourceContainerWriter();
             var resourceDataWriter = new ResourceDataWriter();
+            var armResourceWriter = new ArmResourceWriter();
             var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
 
             foreach (var model in context.Library.Models)
@@ -116,6 +117,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     var name = model.Type.Name;
                     project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
                     project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                }
+
+                foreach (var model in context.Library.ArmResource)
+                {
+                    var codeWriter = new CodeWriter();
+                    armResourceWriter.WriteResource(codeWriter, model);
+
+                    var name = model.Type.Name;
+                    project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
                 }
             }
             else

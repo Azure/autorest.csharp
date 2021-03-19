@@ -5,23 +5,20 @@
 
 #nullable disable
 
-using System;
-
 namespace ModelWithConverterUsage.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class Product
     {
         /// <summary> Initializes a new instance of Product. </summary>
-        /// <param name="constProperty"> Constant string. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="constProperty"/> is null. </exception>
-        public Product(string constProperty)
+        public Product()
         {
-            if (constProperty == null)
-            {
-                throw new ArgumentNullException(nameof(constProperty));
-            }
+        }
 
+        /// <summary> Initializes a new instance of Product. </summary>
+        /// <param name="constProperty"> Constant string. </param>
+        internal Product(string constProperty)
+        {
             ConstProperty = constProperty;
         }
 

@@ -4,13 +4,6 @@ info: !Info
   title: PublicClientCtor
 schemas: !Schemas 
   strings:
-    - !StringSchema &ref_0
-      type: string
-      language: !Languages 
-        default:
-          name: String
-          description: simple string
-      protocol: !Protocols {}
     - !StringSchema &ref_3
       type: string
       apiVersions:
@@ -20,6 +13,13 @@ schemas: !Schemas
         default:
           name: String
           description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_0
+      type: string
+      language: !Languages 
+        default:
+          name: String
+          description: simple string
       protocol: !Protocols {}
     - !StringSchema &ref_1
       type: string
@@ -42,7 +42,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_4
+    - !ConstantSchema &ref_5
       type: constant
       value: !ConstantValue 
         value: 1.0.0
@@ -52,7 +52,7 @@ schemas: !Schemas
           name: ApiVersion10
           description: Api Version (1.0.0)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_9
+    - !ConstantSchema &ref_10
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -62,8 +62,26 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
+  uris:
+    - !UriSchema &ref_4
+      type: uri
+      language: !Languages 
+        default:
+          name: Endpoint
+          description: ''
+      protocol: !Protocols {}
+    - !UriSchema 
+      type: uri
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: Uri
+          description: ''
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_10
+    - !ObjectSchema &ref_11
       type: object
       apiVersions:
         - !ApiVersion 
@@ -96,7 +114,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_6
+  - !Parameter &ref_7
     schema: *ref_3
     clientDefaultValue: value1
     implementation: Client
@@ -111,7 +129,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: header
-  - !Parameter &ref_7
+  - !Parameter &ref_8
     schema: *ref_3
     implementation: Client
     extensions:
@@ -124,11 +142,12 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: header
-  - !Parameter &ref_5
-    schema: *ref_0
+  - !Parameter &ref_6
+    schema: *ref_4
     implementation: Client
     required: true
     extensions:
+      x-format: url
       x-in: path
       x-ms-priority: 3
       x-ms-skip-url-encoding: true
@@ -143,8 +162,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_8
-    schema: *ref_4
+  - !Parameter &ref_9
+    schema: *ref_5
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -165,15 +184,15 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_5
           - *ref_6
           - *ref_7
           - *ref_8
+          - *ref_9
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_9
+                schema: *ref_10
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -185,8 +204,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_11
-                schema: *ref_10
+              - !Parameter &ref_12
+                schema: *ref_11
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -198,7 +217,7 @@ operationGroups:
                     in: body
                     style: json
             signatureParameters:
-              - *ref_11
+              - *ref_12
             language: !Languages 
               default:
                 name: ''
