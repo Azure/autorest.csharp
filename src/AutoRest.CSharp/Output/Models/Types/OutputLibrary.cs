@@ -13,8 +13,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal abstract class OutputLibrary
     {
-        protected readonly CodeModel _codeModel;
-        protected readonly BuildContext _context;
+        private  readonly CodeModel _codeModel;
+        private readonly BuildContext _context;
         private Dictionary<Schema, TypeProvider>? _models;
 
         protected OutputLibrary (CodeModel codeModel, BuildContext context)

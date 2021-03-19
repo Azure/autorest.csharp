@@ -6,13 +6,16 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class HighLevelClient
     {
-        public static void Execute(GeneratedCodeWorkspace project, BuildContext context, Configuration configuration)
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
         {
+            BuildContext<HighLevelOutputLibrary> context = new BuildContext<HighLevelOutputLibrary>(codeModel, configuration, sourceInputModel);
             var modelWriter = new ModelWriter();
             var clientWriter = new ClientWriter();
             var restClientWriter = new RestClientWriter();

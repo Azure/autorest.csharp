@@ -17,11 +17,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, Client>? _clients;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
+        private BuildContext<HighLevelOutputLibrary> _context;
+        private CodeModel _codeModel;
 
-        public HighLevelOutputLibrary(CodeModel codeModel, BuildContext context) : base(codeModel, context)
+        public HighLevelOutputLibrary(CodeModel codeModel, BuildContext<HighLevelOutputLibrary> context) : base(codeModel, context)
         {
+            _context = context;
+            _codeModel = codeModel;
         }
-
 
         public override IEnumerable<Client> Clients => EnsureClients().Values;
         public override IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;

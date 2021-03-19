@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
             "x-ms-request-id"
         };
 
-        public ResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext context) : base(context)
+        public ResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext<HighLevelOutputLibrary> context) : base(context)
         {
             ResponseHeader CreateResponseHeader(HttpResponseHeader header)
             {
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "internal";
 
-        public static ResponseHeaderGroupType? TryCreate(OperationGroup operationGroup, Operation operation, BuildContext context)
+        public static ResponseHeaderGroupType? TryCreate(OperationGroup operationGroup, Operation operation, BuildContext<HighLevelOutputLibrary> context)
         {
             var httpResponseHeaders = operation.Responses.SelectMany(r => r.HttpResponse.Headers)
                 .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))

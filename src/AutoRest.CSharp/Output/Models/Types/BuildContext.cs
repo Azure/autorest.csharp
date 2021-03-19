@@ -10,9 +10,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class BuildContext
     {
-        private TypeFactory? _typeFactory;
-        public OutputLibrary Library { get; private set; }
-
         public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel? sourceInputModel)
         {
             CodeModel = codeModel;
@@ -20,22 +17,35 @@ namespace AutoRest.CSharp.Output.Models.Types
             Configuration = configuration;
             SourceInputModel = sourceInputModel;
 
-            if (configuration.LowLevelClient)
-            {
-                Library = new LowLevelOutputLibrary(CodeModel, this);
-            }
-            else
-            {
-                Library = new HighLevelOutputLibrary(CodeModel, this);
-            }
         }
 
         public CodeModel CodeModel { get; }
         public SchemaUsageProvider SchemaUsageProvider { get; }
         public string DefaultNamespace => Configuration.Namespace ?? CodeModel.Language.Default.Name;
         public string DefaultLibraryName => Configuration.LibraryName ?? CodeModel.Language.Default.Name;
-        public TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
         public Configuration Configuration { get; }
         public SourceInputModel? SourceInputModel { get; }
+        public virtual TypeFactory TypeFactory { get; } = null!;
+    }
+
+    internal class BuildContext<T> : BuildContext where T: OutputLibrary
+    {
+        private TypeFactory? _typeFactory;
+
+        public T Library { get; private set; }
+
+        public BuildContext(CodeModel codeModel, Configuration configuration, SourceInputModel? sourceInputModel): base(codeModel, configuration, sourceInputModel)
+        {
+            if (configuration.LowLevelClient)
+            {
+                Library = (T)(object)new LowLevelOutputLibrary(codeModel, this);
+            }
+            else
+            {
+                Library = (T)(object)new HighLevelOutputLibrary(codeModel, (BuildContext<HighLevelOutputLibrary>)(object)this);
+            }
+        }
+
+        public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
     }
 }

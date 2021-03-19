@@ -33,18 +33,18 @@ namespace AutoRest.CSharp.Output.Models
         protected string RestClientSuffix { get; }
 
         private readonly OperationGroup _operationGroup;
-        private readonly BuildContext _context;
+        private readonly BuildContext<HighLevelOutputLibrary> _context;
         private readonly Dictionary<string, Parameter> _parameters;
         private readonly SerializationBuilder _serializationBuilder;
         private Dictionary<ServiceRequest, RestClientMethod>? _requestMethods;
         private Dictionary<ServiceRequest, RestClientMethod>? _nextPageMethods;
         private RestClientMethod[]? _allMethods;
 
-        public RestClient(OperationGroup operationGroup, BuildContext context) : this(operationGroup, context, false)
+        public RestClient(OperationGroup operationGroup, BuildContext<HighLevelOutputLibrary> context) : this(operationGroup, context, false)
         {
         }
 
-        protected RestClient(OperationGroup operationGroup, BuildContext context, bool skipRestSuffix) : base(context)
+        protected RestClient(OperationGroup operationGroup, BuildContext<HighLevelOutputLibrary> context, bool skipRestSuffix) : base(context)
         {
             _operationGroup = operationGroup;
             _context = context;

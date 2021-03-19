@@ -13,10 +13,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class LowLevelOutputLibrary : OutputLibrary
     {
+        private readonly CodeModel _codeModel;
+        private readonly BuildContext _context;
         protected Dictionary<OperationGroup, RestClient>? _restClients;
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext context) : base(codeModel, context)
         {
+            _codeModel = codeModel;
+            _context = context;
         }
 
         protected override Dictionary<OperationGroup, RestClient> EnsureRestClients()

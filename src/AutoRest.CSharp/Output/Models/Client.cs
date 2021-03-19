@@ -18,13 +18,13 @@ namespace AutoRest.CSharp.Output.Models
     internal class Client: ClientBase
     {
         private readonly OperationGroup _operationGroup;
-        private readonly BuildContext _context;
+        private readonly BuildContext<HighLevelOutputLibrary> _context;
         private PagingMethod[]? _pagingMethods;
         private ClientMethod[]? _methods;
         private LongRunningOperationMethod[]? _longRunningOperationMethods;
         private RestClient? _restClient;
 
-        public Client(OperationGroup operationGroup, BuildContext context): base(context)
+        public Client(OperationGroup operationGroup, BuildContext<HighLevelOutputLibrary> context): base(context)
         {
             _operationGroup = operationGroup;
             _context = context;

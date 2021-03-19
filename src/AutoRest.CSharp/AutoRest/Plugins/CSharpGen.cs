@@ -37,15 +37,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
-            var context = new BuildContext(await codeModelTask, configuration, sourceInputModel);
+            var codeModel = await codeModelTask;
 
             if (configuration.LowLevelClient)
             {
-                LowLevelClient.Execute (project, context, configuration);
+                LowLevelClient.Execute (project, codeModel, sourceInputModel, configuration);
             }
             else
             {
-                HighLevelClient.Execute (project, context, configuration);
+                HighLevelClient.Execute (project, codeModel, sourceInputModel, configuration);
             }
             return project;
         }

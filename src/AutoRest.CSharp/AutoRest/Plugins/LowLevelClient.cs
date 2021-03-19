@@ -4,13 +4,16 @@
 using System.Linq;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class LowLevelClient
     {
-        public static void Execute(GeneratedCodeWorkspace project, BuildContext context, Configuration configuration)
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
         {
+            var context = new BuildContext<LowLevelOutputLibrary>(codeModel, configuration, sourceInputModel);
             foreach (var client in context.Library.RestClients)
             {
                 var codeWriter = new CodeWriter();
