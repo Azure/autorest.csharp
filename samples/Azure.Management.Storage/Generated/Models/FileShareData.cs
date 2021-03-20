@@ -7,11 +7,12 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the FileShare data model. </summary>
-    public partial class FileShareData
+    public partial class FileShareData : ResourceManager.Core.TrackedResource
     {
         /// <summary> Returns the date and time the share was last modified. </summary>
         public DateTimeOffset? LastModifiedTime { get; }

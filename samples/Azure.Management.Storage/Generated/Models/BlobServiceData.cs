@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the BlobService data model. </summary>
-    public partial class BlobServiceData
+    public partial class BlobServiceData : ResourceManager.Core.TrackedResource
     {
         /// <summary> Sku name and tier. </summary>
         public SkuData Sku { get; }

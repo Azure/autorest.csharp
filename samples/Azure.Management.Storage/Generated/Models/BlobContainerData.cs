@@ -7,11 +7,12 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the BlobContainer data model. </summary>
-    public partial class BlobContainerData
+    public partial class BlobContainerData : ResourceManager.Core.TrackedResource
     {
         /// <summary> Default the container to use specified encryption scope for all writes. </summary>
         public string DefaultEncryptionScope { get; set; }

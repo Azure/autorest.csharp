@@ -6,11 +6,12 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the PrivateLinkResource data model. </summary>
-    public partial class PrivateLinkResourceData
+    public partial class PrivateLinkResourceData : ResourceManager.Core.TrackedResource
     {
         /// <summary> The private link resource group id. </summary>
         public string GroupId { get; }

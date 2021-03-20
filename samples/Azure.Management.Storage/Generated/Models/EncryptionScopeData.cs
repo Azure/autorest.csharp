@@ -6,11 +6,12 @@
 #nullable disable
 
 using System;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the EncryptionScope data model. </summary>
-    public partial class EncryptionScopeData
+    public partial class EncryptionScopeData : ResourceManager.Core.TrackedResource
     {
         /// <summary> The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault. </summary>
         public EncryptionScopeSource? Source { get; set; }

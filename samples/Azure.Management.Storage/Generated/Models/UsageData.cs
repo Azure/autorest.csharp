@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the Usage data model. </summary>
-    public partial class UsageData
+    public partial class UsageData : ResourceManager.Core.TrackedResource
     {
         /// <summary> Gets the unit of measurement. </summary>
         public UsageUnit? Unit { get; }

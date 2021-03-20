@@ -7,11 +7,12 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the ObjectReplicationPolicy data model. </summary>
-    public partial class ObjectReplicationPolicyData
+    public partial class ObjectReplicationPolicyData : ResourceManager.Core.TrackedResource
     {
         /// <summary> A unique id for object replication policy. </summary>
         public string PolicyId { get; }

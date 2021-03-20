@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the Operation data model. </summary>
-    public partial class OperationData
+    public partial class OperationData : ResourceManager.Core.TrackedResource
     {
         /// <summary> Operation name: {provider}/{resource}/{operation}. </summary>
         public string Name { get; }

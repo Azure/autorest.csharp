@@ -7,11 +7,12 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the StorageAccount data model. </summary>
-    public partial class StorageAccountData
+    public partial class StorageAccountData : ResourceManager.Core.TrackedResource
     {
         /// <summary> Gets the SKU. </summary>
         public SkuData Sku { get; }

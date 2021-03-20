@@ -6,11 +6,12 @@
 #nullable disable
 
 using System;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the ManagementPolicy data model. </summary>
-    public partial class ManagementPolicyData
+    public partial class ManagementPolicyData : ResourceManager.Core.TrackedResource
     {
         /// <summary> Returns the date and time the ManagementPolicies was last modified. </summary>
         public DateTimeOffset? LastModifiedTime { get; }
