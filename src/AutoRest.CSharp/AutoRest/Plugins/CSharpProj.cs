@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
               }
               else
               {
-                csProjContent = string.Format(_csProjContent, "");
+                csProjContent = _csProjContent;
               }
             }
             else

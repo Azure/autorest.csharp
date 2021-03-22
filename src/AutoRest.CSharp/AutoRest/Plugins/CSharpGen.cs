@@ -41,11 +41,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (configuration.LowLevelClient)
             {
-                LowLevelTarget.Execute (project, codeModel, sourceInputModel, configuration);
+                LowLevelTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
             else
             {
-                DataPlaneTarget.Execute (project, codeModel, sourceInputModel, configuration);
+                DataPlaneTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
             return project;
         }
