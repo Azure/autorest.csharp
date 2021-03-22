@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter
     {
-        public void WriteClient(CodeWriter writer, RestClient client, BuildContext context)
+        public void WriteClient(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             var cs = client.Type;
             // Client type should have public constructor with equivalent parameters not taking ClientOptions type as last argument
@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private bool HasKeyAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase);
         private bool HasTokenAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase);
 
-        private void WriteClientFields(CodeWriter writer, RestClient client, BuildContext context)
+        private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             // Endpoint can either be Uri or string
             var endpointType = client.Parameters.First(x => x.Name == EndpointParameter).Type;
@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteClientCtors(CodeWriter writer, RestClient client, BuildContext context)
+        private void WriteClientCtors(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             WriteEmptyConstructor(writer, client);
 
@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteEmptyConstructor (CodeWriter writer, RestClient client)
+        private void WriteEmptyConstructor (CodeWriter writer, LowLevelRestClient client)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");
             using (writer.Scope($"protected {client.Type.Name:D}()"))
@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteSimplifiedConstructor (CodeWriter writer, RestClient client, bool keyCredential)
+        private void WriteSimplifiedConstructor (CodeWriter writer, LowLevelRestClient client, bool keyCredential)
         {
             var ctorParams = client.GetConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential));
 
@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteFullConstructor (CodeWriter writer, RestClient client, bool keyCredential)
+        private void WriteFullConstructor (CodeWriter writer, LowLevelRestClient client, bool keyCredential)
         {
             var ctorParams = client.GetConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential), true);
 
