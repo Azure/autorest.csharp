@@ -268,7 +268,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var schema in _allSchemas)
                 {
-                    if (_operationGroups.ContainsKey(schema.Name))
+                    if (_operationGroups.ContainsKey(schema.NameOverride))
                     {
                         resourceModels.Add(schema, BuildResourceModel(schema));
                     }
@@ -339,10 +339,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var schema in _allSchemas)
             {
                 string? resourceName;
-                if (_context.Configuration.ResourceRename.TryGetValue(schema.Name, out resourceName))
-                {
-                    schema.NameOverride = resourceName;
-                }
+                schema.NameOverride = _context.Configuration.ResourceRename.TryGetValue(schema.Name, out resourceName) ? resourceName : schema.Name;
             }
         }
 

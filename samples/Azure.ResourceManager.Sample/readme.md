@@ -31,6 +31,7 @@ resource-rename:
    SshPublicKey : SshPublicKeyInfo
    LogAnalyticsOperationResult: LogAnalytics
    SshPublicKeyResource: SshPublicKey
+   RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
 modelerfour:
   lenient-model-deduplication: true
 ```

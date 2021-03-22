@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"return ListAvailableLocations(ResourceType);");
             }
 
-            using (writer.Scope($"public override ArmResponse<{resourceOperation.ResourceName}> Get(CancellationToken cancellationToken = default)"))
+            using (writer.Scope($"public override ArmResponse<{resourceOperation.ResourceName}> Get()"))
             {
                 writer.Line($"throw new NotImplementedException();");
             }
