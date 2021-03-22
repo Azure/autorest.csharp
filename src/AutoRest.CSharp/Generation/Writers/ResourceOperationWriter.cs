@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.Line();
 
-            writer.Line($"private static readonly ResourceType ResourceType = \"\";");
+            writer.Line($"private static readonly ResourceType ResourceType = \"{resourceOperation.Type.Namespace}/{resourceOperation.Type.Name}\";");
             writer.Line($"protected override ResourceType ValidResourceType => ResourceType;");
             writer.Line();
 
