@@ -23,17 +23,6 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal static class RestClientHelpers
     {
-        internal static IEnumerable<ServiceRequest> AllRequests(this OperationGroup operationGroup)
-        {
-            foreach (var operation in operationGroup.Operations)
-            {
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    yield return serviceRequest;
-                }
-            }
-        }
-
         private static IEnumerable<Parameter> GetRequiredParameters(Parameter[] parameters)
         {
             List<Parameter> requiredParameters = new List<Parameter>();
