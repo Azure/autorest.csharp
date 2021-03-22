@@ -19,18 +19,10 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class RestClient : ClientBase
     {
-        private static readonly HashSet<string> IgnoredRequestHeader = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "x-ms-client-request-id",
-            "tracestate",
-            "traceparent"
-        };
-
-        protected string RestClientSuffix { get; }
-
-        private RestClientBuilder<HighLevelOutputLibrary> _builder;
         private readonly OperationGroup _operationGroup;
+        private RestClientBuilder<HighLevelOutputLibrary> _builder;
         private readonly BuildContext<HighLevelOutputLibrary> _context;
+
         private Dictionary<ServiceRequest, RestClientMethod>? _requestMethods;
         private Dictionary<ServiceRequest, RestClientMethod>? _nextPageMethods;
         private RestClientMethod[]? _allMethods;
@@ -55,6 +47,7 @@ namespace AutoRest.CSharp.Output.Models
             Description = "";
         }
 
+        protected string RestClientSuffix { get; }
         public Parameter[] Parameters { get; }
         public string Description { get; }
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
