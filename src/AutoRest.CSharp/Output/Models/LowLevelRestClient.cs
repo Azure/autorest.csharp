@@ -101,8 +101,7 @@ namespace AutoRest.CSharp.Output.Models
                         continue;
                     }
 
-                    var headerModel = _context.Library.FindHeaderModel(operation);
-                    _requestMethods.Add(serviceRequest, BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel));
+                    _requestMethods.Add(serviceRequest, BuildMethod(operation, httpRequest, serviceRequest.Parameters));
                 }
             }
 
@@ -115,7 +114,7 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
 
-        private RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, ICollection<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
+        private RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, ICollection<RequestParameter> requestParameters)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new ();
 
@@ -141,7 +140,7 @@ namespace AutoRest.CSharp.Output.Models
                 request,
                 methodParameters,
                 responses,
-                responseHeaderModel,
+                null,
                 operation.Extensions?.BufferResponse ?? true
             );
         }

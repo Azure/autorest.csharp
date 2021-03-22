@@ -15,7 +15,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
         protected Dictionary<OperationGroup, LowLevelRestClient>? _restClients;
-        private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
         {
@@ -39,31 +38,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return _restClients;
-        }
-
-        public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
-
-        private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
-        {
-            if (_headerModels != null)
-            {
-                return _headerModels;
-            }
-
-            _headerModels = new Dictionary<Operation, ResponseHeaderGroupType>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    var headers = ResponseHeaderGroupType.TryCreate(operationGroup, operation, _context);
-                    if (headers != null)
-                    {
-                        _headerModels.Add(operation, headers);
-                    }
-                }
-            }
-
-            return _headerModels;
         }
     }
 }
