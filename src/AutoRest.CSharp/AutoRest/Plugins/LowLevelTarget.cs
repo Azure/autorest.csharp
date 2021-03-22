@@ -9,7 +9,7 @@ using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
-    internal class LowLevelClient
+    internal class LowLevelTarget
     {
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
         {

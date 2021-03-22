@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string ClientSuffixValue = "ManagementClient";
         private const string OperationsSuffixValue = "Operations";
 
-        public static void WriteAggregateClient(CodeWriter writer, BuildContext<HighLevelOutputLibrary> context)
+        public static void WriteAggregateClient(CodeWriter writer, BuildContext<DataPlaneOutputLibrary> context)
         {
             var title = GetManagementClientPrefix(context.DefaultLibraryName);
             using (writer.Scope($"namespace {context.Configuration.Namespace ?? context.DefaultNamespace}"))

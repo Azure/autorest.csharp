@@ -11,11 +11,11 @@ using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
-    internal class HighLevelClient
+    internal class DataPlaneTarget
     {
         public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel, Configuration configuration)
         {
-            BuildContext<HighLevelOutputLibrary> context = new BuildContext<HighLevelOutputLibrary>(codeModel, configuration, sourceInputModel);
+            BuildContext<DataPlaneOutputLibrary> context = new BuildContext<DataPlaneOutputLibrary>(codeModel, configuration, sourceInputModel);
             var modelWriter = new ModelWriter();
             var clientWriter = new ClientWriter();
             var restClientWriter = new RestClientWriter();

@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class RestClientWriter
     {
-        public void WriteClient(CodeWriter writer, RestClient restClient)
+        public void WriteClient(CodeWriter writer, DataPlaneRestClient restClient)
         {
             var cs = restClient.Type;
             var @namespace = cs.Namespace;
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string PipelineVariable = "pipeline";
         private const string PipelineField = "_" + PipelineVariable;
 
-        private void WriteClientFields(CodeWriter writer, RestClient restClient)
+        private void WriteClientFields(CodeWriter writer, DataPlaneRestClient restClient)
         {
             foreach (Parameter clientParameter in restClient.Parameters)
             {
@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)
+        private void WriteClientCtor(CodeWriter writer, DataPlaneRestClient restClient, CSharpType cs)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
             writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, "The handler for diagnostic messaging in the client.");

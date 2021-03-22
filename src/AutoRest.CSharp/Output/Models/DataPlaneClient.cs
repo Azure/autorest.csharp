@@ -15,16 +15,16 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class Client: ClientBase
+    internal class DataPlaneClient : ClientBase
     {
         private readonly OperationGroup _operationGroup;
-        private readonly BuildContext<HighLevelOutputLibrary> _context;
+        private readonly BuildContext<DataPlaneOutputLibrary> _context;
         private PagingMethod[]? _pagingMethods;
         private ClientMethod[]? _methods;
         private LongRunningOperationMethod[]? _longRunningOperationMethods;
-        private RestClient? _restClient;
+        private DataPlaneRestClient? _restClient;
 
-        public Client(OperationGroup operationGroup, BuildContext<HighLevelOutputLibrary> context): base(context)
+        public DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context): base(context)
         {
             _operationGroup = operationGroup;
             _context = context;
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public string ClientShortName { get; }
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, _context)));
-        public RestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
+        public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();

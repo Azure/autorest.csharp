@@ -17,25 +17,25 @@ using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class RestClient : ClientBase
+    internal class DataPlaneRestClient : ClientBase
     {
         private readonly OperationGroup _operationGroup;
-        private RestClientBuilder<HighLevelOutputLibrary> _builder;
-        private readonly BuildContext<HighLevelOutputLibrary> _context;
+        private RestClientBuilder<DataPlaneOutputLibrary> _builder;
+        private readonly BuildContext<DataPlaneOutputLibrary> _context;
 
         private Dictionary<ServiceRequest, RestClientMethod>? _requestMethods;
         private Dictionary<ServiceRequest, RestClientMethod>? _nextPageMethods;
         private RestClientMethod[]? _allMethods;
 
-        public RestClient(OperationGroup operationGroup, BuildContext<HighLevelOutputLibrary> context) : this(operationGroup, context, false)
+        public DataPlaneRestClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context) : this(operationGroup, context, false)
         {
         }
 
-        protected RestClient(OperationGroup operationGroup, BuildContext<HighLevelOutputLibrary> context, bool skipRestSuffix) : base(context)
+        protected DataPlaneRestClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context, bool skipRestSuffix) : base(context)
         {
             _operationGroup = operationGroup;
             _context = context;
-            _builder = new RestClientBuilder<HighLevelOutputLibrary> (operationGroup, context, null);
+            _builder = new RestClientBuilder<DataPlaneOutputLibrary> (operationGroup, context, null);
 
             Parameters = _builder.GetOrderedParameters ();
 

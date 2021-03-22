@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ClientWriter
     {
-        public void WriteClient(CodeWriter writer, Client client, BuildContext context)
+        public void WriteClient(CodeWriter writer, DataPlaneClient client, BuildContext context)
         {
             var cs = client.Type;
             var @namespace = cs.Namespace;
@@ -134,14 +134,14 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string CredentialVariable = "credential";
         private const string OptionsVariable = "options";
 
-        private void WriteClientFields(CodeWriter writer, Client client)
+        private void WriteClientFields(CodeWriter writer, DataPlaneClient client)
         {
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
             writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
             writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
         }
 
-        private void WriteClientCtors(CodeWriter writer, Client client, BuildContext context)
+        private void WriteClientCtors(CodeWriter writer, DataPlaneClient client, BuildContext context)
         {
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name} for mocking.");

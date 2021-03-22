@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             else
             {
-                Library = (T)(object)new HighLevelOutputLibrary(codeModel, (BuildContext<HighLevelOutputLibrary>)(object)this);
+                Library = (T)(object)new DataPlaneOutputLibrary(codeModel, (BuildContext<DataPlaneOutputLibrary>)(object)this);
             }
         }
 

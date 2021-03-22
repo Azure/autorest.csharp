@@ -11,22 +11,22 @@ using AutoRest.CSharp.Output.Models.Responses;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class HighLevelOutputLibrary : OutputLibrary
+    internal class DataPlaneOutputLibrary : OutputLibrary
     {
-        protected Dictionary<OperationGroup, RestClient>? _restClients;
-        private Dictionary<OperationGroup, Client>? _clients;
+        protected Dictionary<OperationGroup, DataPlaneRestClient>? _restClients;
+        private Dictionary<OperationGroup, DataPlaneClient>? _clients;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
-        private BuildContext<HighLevelOutputLibrary> _context;
+        private BuildContext<DataPlaneOutputLibrary> _context;
         private CodeModel _codeModel;
 
-        public HighLevelOutputLibrary(CodeModel codeModel, BuildContext<HighLevelOutputLibrary> context) : base(codeModel, context)
+        public DataPlaneOutputLibrary(CodeModel codeModel, BuildContext<DataPlaneOutputLibrary> context) : base(codeModel, context)
         {
             _context = context;
             _codeModel = codeModel;
         }
 
-        public IEnumerable<Client> Clients => EnsureClients().Values;
+        public IEnumerable<DataPlaneClient> Clients => EnsureClients().Values;
         public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
         public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
 
@@ -79,20 +79,20 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _operations;
         }
 
-        private Dictionary<OperationGroup, Client> EnsureClients()
+        private Dictionary<OperationGroup, DataPlaneClient> EnsureClients()
         {
             if (_clients != null)
             {
                 return _clients;
             }
 
-            _clients = new Dictionary<OperationGroup, Client>();
+            _clients = new Dictionary<OperationGroup, DataPlaneClient>();
 
             if (_context.Configuration.PublicClients)
             {
                 foreach (var operationGroup in _codeModel.OperationGroups)
                 {
-                    _clients.Add(operationGroup, new Client(operationGroup, _context));
+                    _clients.Add(operationGroup, new DataPlaneClient(operationGroup, _context));
                 }
             }
 
@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return EnsureLongRunningOperations()[operation];
         }
 
-        public Client? FindClient(OperationGroup operationGroup)
+        public DataPlaneClient? FindClient(OperationGroup operationGroup)
         {
             EnsureClients().TryGetValue(operationGroup, out var client);
             return client;
@@ -118,25 +118,25 @@ namespace AutoRest.CSharp.Output.Models.Types
             return model;
         }
 
-        protected Dictionary<OperationGroup, RestClient> EnsureRestClients()
+        protected Dictionary<OperationGroup, DataPlaneRestClient> EnsureRestClients()
         {
             if (_restClients != null)
             {
                 return _restClients;
             }
 
-            _restClients = new Dictionary<OperationGroup, RestClient>();
+            _restClients = new Dictionary<OperationGroup, DataPlaneRestClient>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                _restClients.Add(operationGroup, new RestClient(operationGroup, _context));
+                _restClients.Add(operationGroup, new DataPlaneRestClient(operationGroup, _context));
             }
 
             return _restClients;
         }
 
-        public IEnumerable<RestClient> RestClients => EnsureRestClients().Values;
+        public IEnumerable<DataPlaneRestClient> RestClients => EnsureRestClients().Values;
 
-        public RestClient FindRestClient(OperationGroup operationGroup)
+        public DataPlaneRestClient FindRestClient(OperationGroup operationGroup)
         {
             return EnsureRestClients()[operationGroup];
         }
