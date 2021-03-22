@@ -68,6 +68,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
 
+        private static HashSet<string> ResourceTypes = new HashSet<string>
+        {
+            {"resourceGroups"},
+            {"subscriptions"}
+        };
+
+
         private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
         {
             if (_headerModels != null)
@@ -322,7 +329,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 MapHttpMethodToOperation(operationsGroup);
                 string? resourceType;
                 operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ResourceTypeBuilder.ConstructOperationResourseType(operationsGroup);
+                ResourceTypes.Add(operationsGroup.ResourceType);
                 operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
+                operationsGroup.IsExtensionResource = ExtensionDetection.IsExtension(operationsGroup);
+                operationsGroup.Parent = (operationsGroup.IsTenantResource || operationsGroup.IsExtensionResource) ? null : ParentDetection.GetParent(operationsGroup);
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
@@ -332,6 +342,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                     operationsGroup.Resource = nameOverride;
                 }
             }
+            //now that resolved all operations groups to resource types above, can try solve for the parent
+            foreach (var operationsGroup in _codeModel.OperationGroups)
+            {
+                if (operationsGroup.Parent != null && !ResourceTypes.Contains(operationsGroup.Parent))
+                {
+                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.ResourceType}. Please add to readme.md");
+                }
+            }
+
         }
 
         private void DecorateSchema()

@@ -12,6 +12,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         internal string TokenValue { get; set; }
         internal bool HadSpecialReference { get; set; }
         internal bool IsLastProvider { get; set; }
+        public int IndexFoundAt {get; set;}
         internal ProviderSegment()
         {
             TokenValue = string.Empty;
