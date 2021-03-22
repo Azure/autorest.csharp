@@ -4,10 +4,11 @@
     <_DefaultInputName Condition="Exists('$(MSBuildProjectDirectory)/autorest.md')">$(MSBuildProjectDirectory)/autorest.md</_DefaultInputName>
     <AutoRestInput Condition="'$(AutoRestInput)' == ''">$(_DefaultInputName)</AutoRestInput>
     <!--
+      <AutoRestAdditionalParameters></AutoRestAdditionalParameters>
+     
       Allows passing additional AutoRest command line arguments, for example to run in interactive mode 
       use the following command line (remove the space between minus minus): dotnet msbuild /t:GenerateCode /p:AutoRestAdditionalParameters="- -interactive"
     -->
-    <AutoRestAdditionalParameters></AutoRestAdditionalParameters>
     
     <IncludeAzureCoreSharedCode Condition="'$(IncludeAzureCoreSharedCode)' == ''">true</IncludeAzureCoreSharedCode>
     <AzureCoreSharedCodeDirectory Condition="'$(AzureCoreSharedCodeDirectory)' == ''">$(MSBuildThisFileDirectory)../content/Azure.Core.Shared/</AzureCoreSharedCodeDirectory>

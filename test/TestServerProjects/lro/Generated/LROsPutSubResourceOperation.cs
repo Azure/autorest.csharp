@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsPutSubResourceOperation : Operation<SubProduct>, IOperationSource<SubProduct>
     {
         private readonly ArmOperationHelpers<SubProduct> _operation;
+
+        /// <summary> Initializes a new instance of LROsPutSubResourceOperation for mocking. </summary>
+        protected LROsPutSubResourceOperation()
+        {
+        }
+
         internal LROsPutSubResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<SubProduct>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutSubResourceOperation");

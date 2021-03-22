@@ -18,6 +18,12 @@ namespace lro
     public partial class LrosaDsPost202RetryInvalidHeaderOperation : Operation<Response>, IOperationSource<Response>
     {
         private readonly ArmOperationHelpers<Response> _operation;
+
+        /// <summary> Initializes a new instance of LrosaDsPost202RetryInvalidHeaderOperation for mocking. </summary>
+        protected LrosaDsPost202RetryInvalidHeaderOperation()
+        {
+        }
+
         internal LrosaDsPost202RetryInvalidHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPost202RetryInvalidHeaderOperation");

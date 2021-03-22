@@ -473,7 +473,18 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach ((string text, bool isLiteral) in StringExtensions.GetPathParts(httpRequestUri))
             {
-                yield return isLiteral ? TextSegment(text) : parameters[text];
+                if (isLiteral)
+                {
+                    yield return TextSegment(text);
+                }
+                else
+                {
+                    if (!parameters.ContainsKey (text))
+                    {
+                        ErrorHelpers.ThrowError ($"\n\nError while processing request '{httpRequestUri}'\n\n  '{text}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
+                    }
+                    yield return parameters[text];
+                }
             }
         }
 
