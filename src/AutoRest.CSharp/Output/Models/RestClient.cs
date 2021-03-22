@@ -693,62 +693,9 @@ namespace AutoRest.CSharp.Output.Models
 
         protected record ConstructedParameter(Parameter? Parameter, ReferenceOrConstant Reference);
 
-        private IEnumerable<Parameter> GetRequiredParameters()
-        {
-            List<Parameter> parameters = new List<Parameter>();
-            foreach (var parameter in Parameters)
-            {
-                if (parameter.DefaultValue == null)
-                {
-                    parameters.Add(parameter);
-                }
-            }
-
-            return parameters;
-        }
-
-        private IEnumerable<Parameter> GetOptionalParameters()
-        {
-            List<Parameter> parameters = new List<Parameter>();
-            foreach (var parameter in Parameters)
-            {
-                if (parameter.DefaultValue != null && !parameter.IsApiVersionParameter)
-                {
-                    parameters.Add(parameter);
-                }
-            }
-
-            return parameters;
-        }
-
         public IReadOnlyCollection<Parameter> GetConstructorParameters(CSharpType credentialType, bool includeProtocolOptions = false)
         {
-            List<Parameter> parameters = new List<Parameter>();
-
-            parameters.AddRange(GetRequiredParameters());
-
-            var credentialParam = new Parameter(
-                "credential",
-                "A credential used to authenticate to an Azure Service.",
-                credentialType,
-                null,
-                true);
-            parameters.Add(credentialParam);
-
-            if (includeProtocolOptions)
-            {
-                var protocolParam = new Parameter(
-                    "options",
-                    "Options to control the underlying operations.",
-                    typeof(Azure.Core.ProtocolClientOptions),
-                    Constant.NewInstanceOf(typeof(Azure.Core.ProtocolClientOptions)),
-                    true);
-                parameters.Add(protocolParam);
-            }
-
-            parameters.AddRange(GetOptionalParameters());
-
-            return parameters;
+            return RestClientHelpers.GetConstructorParameters (Parameters, credentialType, includeProtocolOptions);
         }
     }
 }
