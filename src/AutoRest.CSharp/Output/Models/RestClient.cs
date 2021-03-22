@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _operationGroup = operationGroup;
             _context = context;
-            _builder = new RestClientBuilder<HighLevelOutputLibrary> (operationGroup, context);
+            _builder = new RestClientBuilder<HighLevelOutputLibrary> (operationGroup, context, null);
 
             Parameters = _builder.GetOrderedParameters ();
 
@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var serviceRequest in operation.Requests)
                 {
-                    // See also LowLevelRestClient::EnsureNormalMethods if changing 
+                    // See also LowLevelRestClient::EnsureNormalMethods if changing
                     if (!(serviceRequest.Protocol.Http is HttpRequest httpRequest))
                     {
                         continue;

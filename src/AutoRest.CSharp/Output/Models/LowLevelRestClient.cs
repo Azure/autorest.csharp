@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _operationGroup = operationGroup;
             _context = context;
-            _builder = new RestClientBuilder<LowLevelOutputLibrary> (operationGroup, context);
+            _builder = new RestClientBuilder<LowLevelOutputLibrary> (operationGroup, context, FilterMethodParameters);
 
             Parameters = _builder.GetOrderedParameters ();
             ClientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, context);
@@ -48,6 +48,8 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     RestClientMethod method = GetOperationMethod(serviceRequest);
                     yield return method;
+                    // Only return the first request
+                    break;
                 }
             }
         }
@@ -70,7 +72,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var serviceRequest in operation.Requests)
                 {
-                    // See also RestClient::EnsureNormalMethods if changing 
+                    // See also RestClient::EnsureNormalMethods if changing
                     if (!(serviceRequest.Protocol.Http is HttpRequest httpRequest))
                     {
                         continue;
@@ -81,6 +83,19 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             return _requestMethods;
+        }
+
+        private bool FilterMethodParameters(RequestParameter parameter)
+        {
+            switch (parameter.In)
+            {
+                case ParameterLocation.Header:
+                case ParameterLocation.Query:
+                case ParameterLocation.Path:
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         public IReadOnlyCollection<Parameter> GetConstructorParameters(CSharpType credentialType, bool includeProtocolOptions = false)

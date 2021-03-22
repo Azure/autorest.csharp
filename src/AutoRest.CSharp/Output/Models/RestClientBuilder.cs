@@ -26,11 +26,13 @@ namespace AutoRest.CSharp.Output.Models
         private readonly SerializationBuilder _serializationBuilder;
         private readonly BuildContext<T> _context;
         private readonly Dictionary<string, Parameter> _parameters;
+        private readonly Func<RequestParameter, bool> _methodFilter;
 
-        public RestClientBuilder (OperationGroup operationGroup, BuildContext<T> context)
+        public RestClientBuilder (OperationGroup operationGroup, BuildContext<T> context, Func<RequestParameter, bool>? methodFilter)
         {
             _serializationBuilder = new SerializationBuilder ();
             _context = context;
+            _methodFilter = methodFilter ?? new Func<RequestParameter, bool>(p => true);
 
             _parameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
@@ -231,18 +233,13 @@ namespace AutoRest.CSharp.Output.Models
             return query.ToArray();
         }
 
-        protected virtual IEnumerable<RequestParameter> FilterMethodParameters(IEnumerable<RequestParameter> parameters)
-        {
-            return parameters;
-        }
-
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
         protected virtual Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             List<Parameter> methodParameters = new ();
 
-            foreach (var requestParameter in FilterMethodParameters(parameters))
+            foreach (var requestParameter in parameters.Where(_methodFilter))
             {
                 var (parameter, _) = allParameters[requestParameter];
                 // Grouped and flattened parameters shouldn't be added to methods
