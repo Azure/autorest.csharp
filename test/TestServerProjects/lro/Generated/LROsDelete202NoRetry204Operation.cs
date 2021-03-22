@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsDelete202NoRetry204Operation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LROsDelete202NoRetry204Operation for mocking. </summary>
+        protected LROsDelete202NoRetry204Operation()
+        {
+        }
+
         internal LROsDelete202NoRetry204Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDelete202NoRetry204Operation");

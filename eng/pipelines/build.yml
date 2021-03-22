@@ -44,7 +44,7 @@ stages:
               npm ci
             displayName: "Install packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp   
-          - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror'
+          - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
             name: Package
             displayName: 'Package'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
@@ -79,7 +79,7 @@ stages:
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
             - pwsh: > 
                 ./eng/PublishRelease.ps1
-                -WorkingDirectory ./artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.0/
+                -WorkingDirectory ./artifacts/bin/AutoRest.CSharp/Release/netcoreapp3.1/
                 -GitHubToken $(azuresdk-github-pat)
                 -NpmToken $(azure-sdk-npm-token)
                 -BuildNumber $(Build.BuildNumber)
