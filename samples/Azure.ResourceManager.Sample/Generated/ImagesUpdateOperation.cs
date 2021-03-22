@@ -19,6 +19,12 @@ namespace Azure.ResourceManager.Sample
     public partial class ImagesUpdateOperation : Operation<ImageData>, IOperationSource<ImageData>
     {
         private readonly ArmOperationHelpers<ImageData> _operation;
+
+        /// <summary> Initializes a new instance of ImagesUpdateOperation for mocking. </summary>
+        protected ImagesUpdateOperation()
+        {
+        }
+
         internal ImagesUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<ImageData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ImagesUpdateOperation");
