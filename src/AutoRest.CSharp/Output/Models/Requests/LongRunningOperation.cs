@@ -9,7 +9,6 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Requests
@@ -48,12 +47,12 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 {
                     NextPageMethod = Client.RestClient.GetNextOperationMethod(operation.Requests.Single());
                     PagingResponse = new PagingResponseInfo(paging, ResultType);
-                    ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
+                    ResultType = new CSharpType(typeof(Azure.AsyncPageable<>), PagingResponse.ItemType);
                 }
             }
             else
             {
-                ResultType = typeof(Response);
+                ResultType = typeof(Azure.Response);
             }
 
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
