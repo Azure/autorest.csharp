@@ -16,9 +16,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.10.0" />
+    <PackageReference Include="Azure.Core" Version="1.11.0-alpha.20210316.1" />
+    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-alpha.20210316.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.7.0" />
-
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
   </ItemGroup>
 

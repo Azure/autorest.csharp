@@ -6,6 +6,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 
+#pragma warning disable SA1402
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class BuildContext
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (configuration.LowLevelClient)
             {
-                Library = (T)(object)new LowLevelOutputLibrary(codeModel, this);
+                Library = (T)(object)new LowLevelOutputLibrary(codeModel, (BuildContext<LowLevelOutputLibrary>)(object)this);
             }
             else
             {

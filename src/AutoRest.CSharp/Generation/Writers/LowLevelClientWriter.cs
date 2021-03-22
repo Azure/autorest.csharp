@@ -205,10 +205,12 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($": this(");
             foreach (Parameter parameter in fullCtorParams)
             {
-                if (parameter.Type.Name != "ProtocolClientOptions") {
+                if (parameter.Type.Name != "ProtocolClientOptions")
+                {
                     writer.Append($"{parameter.Name:D}");
                 }
-                else {
+                else
+                {
                     writer.Append($"new {typeof(Azure.Core.ProtocolClientOptions)}()");
                 }
                 writer.AppendRaw(", ");
