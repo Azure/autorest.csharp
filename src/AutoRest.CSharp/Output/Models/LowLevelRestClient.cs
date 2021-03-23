@@ -92,6 +92,7 @@ namespace AutoRest.CSharp.Output.Models
                 case ParameterLocation.Header:
                 case ParameterLocation.Query:
                 case ParameterLocation.Path:
+                case ParameterLocation.Uri:
                     return true;
                 default:
                     return false;
@@ -100,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyCollection<Parameter> GetConstructorParameters(CSharpType credentialType, bool includeProtocolOptions = false)
         {
-            return RestClientHelpers.GetConstructorParameters (Parameters, credentialType, includeProtocolOptions);
+            return RestClientHelpers.GetConstructorParameters (Parameters, credentialType, includeProtocolOptions, true);
         }
     }
 }

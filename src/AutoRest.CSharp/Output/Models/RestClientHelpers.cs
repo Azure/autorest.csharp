@@ -37,12 +37,12 @@ namespace AutoRest.CSharp.Output.Models
             return requiredParameters;
         }
 
-        private static IEnumerable<Parameter> GetOptionalParameters(Parameter[] parameters)
+        private static IEnumerable<Parameter> GetOptionalParameters(Parameter[] parameters, bool includeAPIVersion = false)
         {
             List<Parameter> optionalParameters = new List<Parameter>();
             foreach (var parameter in parameters)
             {
-                if (parameter.DefaultValue != null && !parameter.IsApiVersionParameter)
+                if (parameter.DefaultValue != null && (includeAPIVersion || !parameter.IsApiVersionParameter))
                 {
                     optionalParameters.Add(parameter);
                 }
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
             return optionalParameters;
         }
 
-        public static IReadOnlyCollection<Parameter> GetConstructorParameters(Parameter[] parameters, CSharpType credentialType, bool includeProtocolOptions = false)
+        public static IReadOnlyCollection<Parameter> GetConstructorParameters(Parameter[] parameters, CSharpType credentialType, bool includeProtocolOptions = false, bool includeAPIVersion = false)
         {
             List<Parameter> constructorParameters = new List<Parameter>();
 
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
                 constructorParameters.Add(protocolParam);
             }
 
-            constructorParameters.AddRange(GetOptionalParameters(parameters));
+            constructorParameters.AddRange(GetOptionalParameters(parameters, includeAPIVersion));
 
             return constructorParameters;
         }
