@@ -121,16 +121,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
-            // Endpoint can either be Uri or string
-            var endpointType = client.Parameters.First(x => x.Name == EndpointParameter).Type;
-
-            writer.Line($"private readonly {endpointType.Name} {EndpointProperty};");
             writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-            var apiVersion = client.Parameters.FirstOrDefault(x => x.IsApiVersionParameter);
-            if (apiVersion?.DefaultValue != null)
-            {
-                writer.Line($"private readonly string {apiVersion.Name} = {apiVersion.DefaultValue!.Value.Value:L};");
-            }
 
             if (HasKeyAuth (context))
             {
@@ -146,6 +137,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 writer.RemoveTrailingComma();
                 writer.Line($"}};");
+            }
+            foreach (Parameter clientParameter in client.Parameters)
+            {
+                writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
             }
             writer.Line();
         }
@@ -248,7 +243,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({KeyCredentialVariable}));");
                 }
-                writer.Line($"this.{EndpointProperty} = {EndpointParameter};");
+
                 if (keyCredential)
                 {
                     writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({ProtocolOptions}, new {typeof(AzureKeyCredentialPolicy)}({KeyCredentialVariable}, {AuthorizationHeaderConstant}));");
@@ -256,6 +251,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 else
                 {
                     writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({ProtocolOptions}, new {typeof(BearerTokenAuthenticationPolicy)}({KeyCredentialVariable}, {ScopesConstant}));");
+                }
+
+                foreach (Parameter clientParameter in client.Parameters)
+                {
+                    writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
                 }
             }
             writer.Line();
