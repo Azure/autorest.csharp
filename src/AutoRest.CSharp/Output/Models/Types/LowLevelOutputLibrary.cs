@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
-        protected Dictionary<OperationGroup, LowLevelRestClient>? _restClients;
+        private Dictionary<OperationGroup, LowLevelRestClient>? _restClients;
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
         {
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IEnumerable<LowLevelRestClient> RestClients => EnsureRestClients().Values;
 
-        protected Dictionary<OperationGroup, LowLevelRestClient> EnsureRestClients()
+        private Dictionary<OperationGroup, LowLevelRestClient> EnsureRestClients()
         {
             if (_restClients != null)
             {

@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
         }
 
-        protected Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
+        private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
         public TypeProvider FindTypeForSchema(Schema schema)
@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return SchemaMap[schema];
         }
 
-        protected Dictionary<Schema, TypeProvider> BuildModels()
+        private Dictionary<Schema, TypeProvider> BuildModels()
         {
             var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return allSchemas.ToDictionary(schema => schema, BuildModel);
         }
 
-        protected TypeProvider BuildModel(Schema schema) => schema switch
+        private TypeProvider BuildModel(Schema schema) => schema switch
         {
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
