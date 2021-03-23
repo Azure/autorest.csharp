@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
 
         private static string ParseMethodForParent(ProviderSegment fullProvider, string path, string resourceType)
         {
-            //case 1: 
+            //case 1:
             // Microsoft.Network/virtualNetworks/ == lastFullProvider
             // resourceType = Microsoft.Network/virtualNetworks
             //
