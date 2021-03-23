@@ -30,6 +30,32 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
         public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
 
+        public LongRunningOperation? FindLongRunningOperation(Operation operation)
+        {
+            Debug.Assert(operation.IsLongRunning);
+
+            return EnsureLongRunningOperations()[operation];
+        }
+
+        public DataPlaneClient? FindClient(OperationGroup operationGroup)
+        {
+            EnsureClients().TryGetValue(operationGroup, out var client);
+            return client;
+        }
+
+        public ResponseHeaderGroupType? FindHeaderModel(Operation operation)
+        {
+            EnsureHeaderModels().TryGetValue(operation, out var model);
+            return model;
+        }
+
+        public IEnumerable<DataPlaneRestClient> RestClients => EnsureRestClients().Values;
+
+        public DataPlaneRestClient FindRestClient(OperationGroup operationGroup)
+        {
+            return EnsureRestClients()[operationGroup];
+        }
+
         private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
         {
             if (_headerModels != null)
@@ -99,25 +125,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _clients;
         }
 
-        public LongRunningOperation? FindLongRunningOperation(Operation operation)
-        {
-            Debug.Assert(operation.IsLongRunning);
-
-            return EnsureLongRunningOperations()[operation];
-        }
-
-        public DataPlaneClient? FindClient(OperationGroup operationGroup)
-        {
-            EnsureClients().TryGetValue(operationGroup, out var client);
-            return client;
-        }
-
-        public ResponseHeaderGroupType? FindHeaderModel(Operation operation)
-        {
-            EnsureHeaderModels().TryGetValue(operation, out var model);
-            return model;
-        }
-
         private Dictionary<OperationGroup, DataPlaneRestClient> EnsureRestClients()
         {
             if (_restClients != null)
@@ -132,13 +139,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return _restClients;
-        }
-
-        public IEnumerable<DataPlaneRestClient> RestClients => EnsureRestClients().Values;
-
-        public DataPlaneRestClient FindRestClient(OperationGroup operationGroup)
-        {
-            return EnsureRestClients()[operationGroup];
         }
     }
 }

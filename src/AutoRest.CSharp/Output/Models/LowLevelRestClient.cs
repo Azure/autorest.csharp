@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        public RestClientMethod GetOperationMethod(ServiceRequest request)
+        private RestClientMethod GetOperationMethod(ServiceRequest request)
         {
             return EnsureNormalMethods()[request];
         }
@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyCollection<Parameter> GetConstructorParameters(CSharpType credentialType, bool includeProtocolOptions = false)
         {
-            return RestClientHelpers.GetConstructorParameters (Parameters, credentialType, includeProtocolOptions, true);
+            return RestClientHelpers.GetConstructorParameters(Parameters, credentialType, includeProtocolOptions, true);
         }
     }
 }

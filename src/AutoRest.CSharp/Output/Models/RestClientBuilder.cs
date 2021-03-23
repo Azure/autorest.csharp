@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Output.Models
             "traceparent"
         };
 
-        protected record ConstructedParameter(Parameter? Parameter, ReferenceOrConstant Reference);
+        private record ConstructedParameter(Parameter? Parameter, ReferenceOrConstant Reference);
 
         private string GetRequestParameterName (RequestParameter requestParameter)
         {
@@ -235,7 +235,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
-        protected virtual Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             List<Parameter> methodParameters = new ();
 
@@ -547,7 +547,7 @@ namespace AutoRest.CSharp.Output.Models
             return requiredParameters;
         }
 
-        protected Parameter BuildParameter(RequestParameter requestParameter)
+        private Parameter BuildParameter(RequestParameter requestParameter)
         {
             CSharpType type = _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
 
@@ -572,7 +572,7 @@ namespace AutoRest.CSharp.Output.Models
                 requestParameter.Origin == "modelerfour:synthesized/api-version");
         }
 
-        protected Constant ParseConstant(ConstantSchema constant) =>
+        private Constant ParseConstant(ConstantSchema constant) =>
             BuilderHelpers.ParseConstant(constant.Value.Value, _context.TypeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
 
         private Constant? ParseConstant(RequestParameter parameter)
@@ -591,7 +591,7 @@ namespace AutoRest.CSharp.Output.Models
             return null;
         }
 
-        protected static string CreateDescription(OperationGroup operationGroup, string clientPrefix)
+        private static string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
                 $"The {clientPrefix} service client." :
