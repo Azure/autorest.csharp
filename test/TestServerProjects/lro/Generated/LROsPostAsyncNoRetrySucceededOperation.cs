@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsPostAsyncNoRetrySucceededOperation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LROsPostAsyncNoRetrySucceededOperation for mocking. </summary>
+        protected LROsPostAsyncNoRetrySucceededOperation()
+        {
+        }
+
         internal LROsPostAsyncNoRetrySucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPostAsyncNoRetrySucceededOperation");

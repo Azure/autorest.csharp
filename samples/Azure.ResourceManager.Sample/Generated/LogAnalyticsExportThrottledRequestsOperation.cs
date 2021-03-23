@@ -19,6 +19,12 @@ namespace Azure.ResourceManager.Sample
     public partial class LogAnalyticsExportThrottledRequestsOperation : Operation<LogAnalyticsData>, IOperationSource<LogAnalyticsData>
     {
         private readonly ArmOperationHelpers<LogAnalyticsData> _operation;
+
+        /// <summary> Initializes a new instance of LogAnalyticsExportThrottledRequestsOperation for mocking. </summary>
+        protected LogAnalyticsExportThrottledRequestsOperation()
+        {
+        }
+
         internal LogAnalyticsExportThrottledRequestsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<LogAnalyticsData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "LogAnalyticsExportThrottledRequestsOperation");

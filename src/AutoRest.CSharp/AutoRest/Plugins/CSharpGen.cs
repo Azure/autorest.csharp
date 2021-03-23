@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase) &&
                 configuration.CredentialScopes.Length < 1)
             {
-                await autoRest.Fatal("You are using TokenCredential wihtout passing in any credential-scopes.");
+                await autoRest.Fatal("You are using TokenCredential without passing in any credential-scopes.");
                 return false;
             }
 
@@ -185,10 +185,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
             }
 
-            var project = await ExecuteAsync(codeModelTask, configuration);
-            await foreach (var file in project.GetGeneratedFilesAsync())
+            try
             {
-                await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
+                var project = await ExecuteAsync(codeModelTask, configuration);
+                await foreach (var file in project.GetGeneratedFilesAsync())
+                {
+                    await autoRest.WriteFile(file.Name, file.Text, "source-file-csharp");
+                }
+            }
+            catch (ErrorHelpers.ErrorException e)
+            {
+                await autoRest.Fatal(e.ErrorText);
+                return false;
+            }
+            catch (Exception e)
+            {
+                await autoRest.Fatal($"Internal error in AutoRest.CSharp - {ErrorHelpers.FileIssueText}\nException: {e.Message}\n{e.StackTrace}");
+                return false;
             }
 
             return true;

@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsDeleteProvisioning202Accepted200SucceededOperation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LROsDeleteProvisioning202Accepted200SucceededOperation for mocking. </summary>
+        protected LROsDeleteProvisioning202Accepted200SucceededOperation()
+        {
+        }
+
         internal LROsDeleteProvisioning202Accepted200SucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteProvisioning202Accepted200SucceededOperation");
