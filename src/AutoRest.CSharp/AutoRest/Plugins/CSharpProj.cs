@@ -100,11 +100,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
               if (configuration.LowLevelClient)
               {
-                csProjContent = string.Format(_csProjContentLowLevel, "");
+                csProjContent = _csProjContentLowLevel;
               }
               else
               {
-                csProjContent = _csProjContent;
+                csProjContent = string.Format(_csProjContent, "");
               }
             }
             else
