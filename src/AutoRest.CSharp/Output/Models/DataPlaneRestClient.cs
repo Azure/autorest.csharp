@@ -27,11 +27,7 @@ namespace AutoRest.CSharp.Output.Models
         private Dictionary<ServiceRequest, RestClientMethod>? _nextPageMethods;
         private RestClientMethod[]? _allMethods;
 
-        public DataPlaneRestClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context) : this(operationGroup, context, false)
-        {
-        }
-
-        protected DataPlaneRestClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context, bool skipRestSuffix) : base(context)
+        public DataPlaneRestClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context) : base(context)
         {
             _operationGroup = operationGroup;
             _context = context;
@@ -42,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models
             var mainClient = context.Library.FindClient(operationGroup);
 
             ClientPrefix = GetClientPrefix(mainClient?.Declaration.Name ?? operationGroup.Language.Default.Name, context);
-            RestClientSuffix = (skipRestSuffix ? "" : "Rest") + ClientSuffix;
+            RestClientSuffix = "Rest" + ClientSuffix;
             DefaultName = ClientPrefix + RestClientSuffix;
             Description = "";
         }
