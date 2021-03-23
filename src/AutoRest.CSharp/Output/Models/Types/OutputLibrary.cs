@@ -332,7 +332,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ResourceTypes.Add(operationsGroup.ResourceType);
                 operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
                 operationsGroup.IsExtensionResource = ExtensionDetection.IsExtension(operationsGroup);
-                operationsGroup.Parent = (operationsGroup.IsTenantResource || operationsGroup.IsExtensionResource) ? null : ParentDetection.GetParent(operationsGroup);
+                string? parent;
+                operationsGroup.Parent = _context.Configuration.ResourceToParent.TryGetValue(operationsGroup.Key, out parent) ? parent : ((operationsGroup.IsTenantResource || operationsGroup.IsExtensionResource) ? null : ParentDetection.GetParent(operationsGroup));
+                if (parent != null)
+                    ResourceTypes.Add(parent);
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
@@ -341,13 +344,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     operationsGroup.Resource = nameOverride;
                 }
+
             }
             //now that we resolved all operations groups to resource types above, can try to solve for the parent
             foreach (var operationsGroup in _codeModel.OperationGroups)
             {
                 if (operationsGroup.Parent != null && !ResourceTypes.Contains(operationsGroup.Parent))
                 {
-                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.ResourceType}. Please add to readme.md");
+                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.Parent}. key Please add to readme.md");
                 }
             }
 

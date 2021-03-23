@@ -31,6 +31,11 @@ resource-rename:
    SshPublicKey : SshPublicKeyInfo
    LogAnalyticsOperationResult: LogAnalytics
    SshPublicKeyResource: SshPublicKey
+resource-to-parent:
+   LogAnalytics: subscriptions
+   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
+   VirtualMachineImages: Microsoft.Compute/locations
+   VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
 modelerfour:
   lenient-model-deduplication: true
 ```

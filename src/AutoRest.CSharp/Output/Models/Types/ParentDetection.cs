@@ -14,18 +14,18 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
             var method = GetBestMethod(operationGroup.OperationHttpMethodMapping);
             if (method == null)
             {
-                throw new ArgumentException($"Could not set parent for operations group {operationGroup.ResourceType}. Please add to readme.md");
+                throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
             }
 
             var fullProvider = GetFullProvider(method.ProviderSegments);
             if (fullProvider == null)
             {
-                throw new ArgumentException($"Could not set parent for operations group {operationGroup.ResourceType}. Please add to readme.md");
+                throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
             }
             var canidateParent = ParseMethodForParent(fullProvider, method.Path, operationGroup.ResourceType);
             if (canidateParent == string.Empty)
             {
-                throw new ArgumentException($"Could not set parent for operations group {operationGroup.ResourceType}. Please add to readme.md");
+                throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
             }
             return canidateParent;
         }
