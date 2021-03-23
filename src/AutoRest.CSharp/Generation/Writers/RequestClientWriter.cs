@@ -15,7 +15,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class RequestClientWriter
+    internal static class RequestWriterHelpers
     {
         private const string PipelineVariable = "pipeline";
         private const string PipelineField = "_" + PipelineVariable;
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (lowLevel)
                 {
-                    RequestClientWriter.WriteHeaders(writer, clientMethod, request, content: true);
+                    RequestWriterHelpers.WriteHeaders(writer, clientMethod, request, content: true);
                     writer.Line($"return {request:I};");
                 }
                 else

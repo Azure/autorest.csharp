@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             SchemaUsageProvider = new SchemaUsageProvider(codeModel);
             Configuration = configuration;
             SourceInputModel = sourceInputModel;
-
         }
 
         public CodeModel CodeModel { get; }

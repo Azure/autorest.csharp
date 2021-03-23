@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             BuildContext<DataPlaneOutputLibrary> context = new BuildContext<DataPlaneOutputLibrary>(codeModel, configuration, sourceInputModel);
             var modelWriter = new ModelWriter();
-            var clientWriter = new ClientWriter();
+            var clientWriter = new DataPlaneClientWriter();
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new ResponseHeaderGroupWriter();

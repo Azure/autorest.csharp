@@ -14,12 +14,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly BuildContext _context;
         private Dictionary<Schema, TypeProvider>? _models;
 
-        protected OutputLibrary (CodeModel codeModel, BuildContext context)
+        protected OutputLibrary(CodeModel codeModel, BuildContext context)
         {
             _codeModel = codeModel;
             _context = context;
         }
-
 
         protected Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;

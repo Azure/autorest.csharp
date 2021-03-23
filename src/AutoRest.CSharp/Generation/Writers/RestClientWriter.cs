@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod)
         {
-            RequestClientWriter.WriteRequestCreation (writer, clientMethod, lowLevel: false);
+            RequestWriterHelpers.WriteRequestCreation (writer, clientMethod, lowLevel: false);
         }
 
         private void WriteOperation(CodeWriter writer, RestClientMethod operation, bool async)
@@ -148,7 +148,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteParameterNullChecks(parameters);
 
                 var messageVariable = new CodeWriterDeclaration("message");
-                var requestMethodName = RequestClientWriter.CreateRequestMethodName(operation.Name);
+                var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
                 writer.Append($"using var {messageVariable:D} = {requestMethodName}(");
 
                 foreach (Parameter parameter in parameters)

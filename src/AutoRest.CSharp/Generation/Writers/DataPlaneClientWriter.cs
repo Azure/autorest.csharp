@@ -20,7 +20,7 @@ using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class ClientWriter
+    internal class DataPlaneClientWriter
     {
         public void WriteClient(CodeWriter writer, DataPlaneClient client, BuildContext context)
         {

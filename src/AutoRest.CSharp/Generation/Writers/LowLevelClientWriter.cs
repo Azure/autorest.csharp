@@ -44,22 +44,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientMethodRequest(CodeWriter writer, RestClientMethod clientMethod)
         {
-            RequestClientWriter.WriteRequestCreation(writer, clientMethod, lowLevel: true);
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true);
         }
 
         private void WriteClientMethod(CodeWriter writer, RestClientMethod clientMethod, bool async)
         {
             var parameters = clientMethod.Parameters;
 
-            CSharpType? bodyType = clientMethod.ReturnType;
             var responseType = async ? new CSharpType(typeof(Task<Response>)) : new CSharpType(typeof(Response));
-
-            if (async)
-            {
-                writer.UseNamespace("System.Threading.Tasks");
-            }
-            writer.UseNamespace("Azure");
-            writer.UseNamespace("Azure.Core");
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
             writer.WriteXmlDocumentationParameter("body", "The request body");
@@ -72,7 +64,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public virtual {asyncText} {responseType} {methodName}(RequestContent body, ");
+            writer.Append($"public virtual {asyncText} {responseType} {methodName}({typeof(RequestContent)} body, ");
 
             foreach (var parameter in parameters)
             {
@@ -82,7 +74,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.Append($"{typeof(Azure.Core.Request)} req = {RequestClientWriter.CreateRequestMethodName(clientMethod.Name)}(body, ");
+                writer.Append($"{typeof(Azure.Core.Request)} req = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(body, ");
 
                 foreach (var parameter in clientMethod.Parameters)
                 {

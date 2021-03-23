@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class DataPlaneOutputLibrary : OutputLibrary
     {
-        protected Dictionary<OperationGroup, DataPlaneRestClient>? _restClients;
+        private Dictionary<OperationGroup, DataPlaneRestClient>? _restClients;
         private Dictionary<OperationGroup, DataPlaneClient>? _clients;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return model;
         }
 
-        protected Dictionary<OperationGroup, DataPlaneRestClient> EnsureRestClients()
+        private Dictionary<OperationGroup, DataPlaneRestClient> EnsureRestClients()
         {
             if (_restClients != null)
             {
