@@ -342,7 +342,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     operationsGroup.Resource = nameOverride;
                 }
             }
-            //now that resolved all operations groups to resource types above, can try solve for the parent
+            //now that we resolved all operations groups to resource types above, can try to solve for the parent
             foreach (var operationsGroup in _codeModel.OperationGroups)
             {
                 if (operationsGroup.Parent != null && !ResourceTypes.Contains(operationsGroup.Parent))
