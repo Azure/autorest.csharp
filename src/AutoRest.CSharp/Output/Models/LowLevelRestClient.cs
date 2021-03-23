@@ -44,12 +44,10 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var operation in _operationGroup.Operations)
             {
-                foreach (var serviceRequest in operation.Requests)
+                ServiceRequest serviceRequest = operation.Requests.FirstOrDefault();
+                if (serviceRequest != null)
                 {
-                    RestClientMethod method = GetOperationMethod(serviceRequest);
-                    yield return method;
-                    // Only return the first request
-                    break;
+                    yield return GetOperationMethod(serviceRequest);
                 }
             }
         }
