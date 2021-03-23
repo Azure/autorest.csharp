@@ -26,13 +26,11 @@ namespace AutoRest.CSharp.Output.Models
         private readonly SerializationBuilder _serializationBuilder;
         private readonly BuildContext<T> _context;
         private readonly Dictionary<string, Parameter> _parameters;
-        private readonly Func<RequestParameter, bool> _methodFilter;
 
-        public RestClientBuilder (OperationGroup operationGroup, BuildContext<T> context, Func<RequestParameter, bool>? methodFilter)
+        public RestClientBuilder (OperationGroup operationGroup, BuildContext<T> context)
         {
             _serializationBuilder = new SerializationBuilder ();
             _context = context;
-            _methodFilter = methodFilter ?? new Func<RequestParameter, bool>(p => true);
 
             _parameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
@@ -61,8 +59,10 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
 
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, ICollection<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
+        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, ICollection<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel, Func<RequestParameter, bool>? methodFilter)
         {
+            methodFilter = methodFilter ?? new Func<RequestParameter, bool>(p => true);
+
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new ();
 
             List<RequestParameter> parameters = operation.Parameters.Concat(requestParameters).ToList();
@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models
 
             Request request = BuildRequest(httpRequest, parameters, allParameters);
             Response[] responses = BuildResponses(operation, request, out var responseType);
-            Parameter[] methodParameters = BuildMethodParameters(parameters, allParameters);
+            Parameter[] methodParameters = BuildMethodParameters(parameters, allParameters, methodFilter);
 
             return new RestClientMethod(
                 operation.CSharpName(),
@@ -235,11 +235,11 @@ namespace AutoRest.CSharp.Output.Models
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
-        private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
+        private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters, Func<RequestParameter, bool>? methodFilter)
         {
             List<Parameter> methodParameters = new ();
 
-            foreach (var requestParameter in parameters.Where(_methodFilter))
+            foreach (var requestParameter in parameters.Where(methodFilter))
             {
                 var (parameter, _) = allParameters[requestParameter];
                 // Grouped and flattened parameters shouldn't be added to methods

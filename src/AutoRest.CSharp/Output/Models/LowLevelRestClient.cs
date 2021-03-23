@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _operationGroup = operationGroup;
             _context = context;
-            _builder = new RestClientBuilder<LowLevelOutputLibrary> (operationGroup, context, FilterMethodParameters);
+            _builder = new RestClientBuilder<LowLevelOutputLibrary> (operationGroup, context);
 
             Parameters = _builder.GetOrderedParameters ();
             ClientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, context);
@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models
                         continue;
                     }
 
-                    _requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null));
+                    _requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, FilterMethodParameters));
                 }
             }
 

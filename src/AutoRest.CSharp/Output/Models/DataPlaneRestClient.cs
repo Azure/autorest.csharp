@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _operationGroup = operationGroup;
             _context = context;
-            _builder = new RestClientBuilder<DataPlaneOutputLibrary> (operationGroup, context, null);
+            _builder = new RestClientBuilder<DataPlaneOutputLibrary> (operationGroup, context);
 
             Parameters = _builder.GetOrderedParameters ();
 
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Output.Models
                         continue;
                     }
                     var headerModel = _context.Library.FindHeaderModel(operation);
-                    _requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel));
+                    _requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel, null));
                 }
             }
 
