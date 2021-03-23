@@ -214,10 +214,5 @@ namespace AutoRest.CSharp.Output.Models
 
             return parameter;
         }
-
-        public IReadOnlyCollection<Parameter> GetConstructorParameters(CSharpType credentialType, bool includeProtocolOptions = false)
-        {
-            return RestClientHelpers.GetConstructorParameters(Parameters, credentialType, includeProtocolOptions, false);
-        }
     }
 }
