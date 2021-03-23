@@ -87,8 +87,15 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     }
                     writer.WriteEndObject();
 
-                    writer.WriteStartObject(nameof(Configuration.ResourceRename));
-                    foreach (var keyval in configuration.ResourceRename)
+                    writer.WriteStartObject(nameof(Configuration.ModelToResource));
+                    foreach (var keyval in configuration.ModelToResource)
+                    {
+                        writer.WriteString(keyval.Key, keyval.Value);
+                    }
+                    writer.WriteEndObject();
+
+                    writer.WriteStartObject(nameof(Configuration.ModelRename));
+                    foreach (var keyval in configuration.ModelRename)
                     {
                         writer.WriteString(keyval.Key, keyval.Value);
                     }
@@ -145,7 +152,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString(),
                 root.GetProperty(nameof(Configuration.OperationGroupToResourceType)),
                 root.GetProperty(nameof(Configuration.OperationGroupToResource)),
-                root.GetProperty(nameof(Configuration.ResourceRename))
+                root.GetProperty(nameof(Configuration.ModelToResource)),
+                root.GetProperty(nameof(Configuration.ModelRename))
             );
         }
     }
