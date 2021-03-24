@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models
 
                         yield return new LongRunningOperationMethod(
                             name,
-                            _context.Library.FindLongRunningOperation(operation)!,
+                            _context.Library.FindLongRunningOperation(operation),
                             startMethod,
                             new Diagnostic($"{Declaration.Name}.Start{name}")
                         );

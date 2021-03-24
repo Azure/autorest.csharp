@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
         public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
 
-        public LongRunningOperation? FindLongRunningOperation(Operation operation)
+        public LongRunningOperation FindLongRunningOperation(Operation operation)
         {
             Debug.Assert(operation.IsLongRunning);
 
