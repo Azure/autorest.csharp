@@ -12,12 +12,11 @@
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     <PackAsTool>true</PackAsTool>
     <RollForward>Minor</RollForward>
-    <RestoreSources>$(RestoreSources);C:\Users\chhamo\nuget\;https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.11.0-alpha.20210322.1" />
-    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-alpha.20210322.1" />
+    <PackageReference Include="Azure.Core" Version="1.11.0" />
+    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.11" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.7.0" />
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
   </ItemGroup>

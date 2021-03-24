@@ -54,8 +54,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.11.0-alpha.20210322.1"" />
-    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-alpha.20210322.1"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.11.0"" />
+    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.11"" />
   </ItemGroup>
 
 </Project>
