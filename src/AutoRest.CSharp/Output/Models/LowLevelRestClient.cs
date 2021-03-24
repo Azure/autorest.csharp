@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         continue;
                     }
-                    var requestParameters = serviceRequest.Parameters.Where (p => {
+                    IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where (p => {
                         switch (p.In)
                         {
                             case ParameterLocation.Header:
@@ -75,20 +75,6 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     yield return requestMethods[serviceRequest];
                 }
-            }
-        }
-
-        private bool FilterMethodParameters(RequestParameter parameter)
-        {
-            switch (parameter.In)
-            {
-                case ParameterLocation.Header:
-                case ParameterLocation.Query:
-                case ParameterLocation.Path:
-                case ParameterLocation.Uri:
-                    return true;
-                default:
-                    return false;
             }
         }
 
