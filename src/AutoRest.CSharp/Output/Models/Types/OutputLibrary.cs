@@ -3,13 +3,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Type.Decorate;
+using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Core;
+using Microsoft.VisualBasic;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -24,12 +30,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<string, ResourceData>? _resourceData;
         private Dictionary<string, ArmResource>? _armResource;
-
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
         private IEnumerable<Schema> _allSchemas;
+        public static IList<System.Type> ReferenceClassCollection = GetReferenceClassCollection();
 
         private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
@@ -51,6 +57,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
+        public void RebuildModelInheritance()
+        {
+            var typeOverrideMap = new Dictionary<CSharpType, CSharpType>();
+
+            RebuildExactModelInheritance(SchemaMap);
+            RebuildExactModelInheritance(ResourceSchemaMap);
+        }
+
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
         public IEnumerable<ArmResource> ArmResource => EnsureArmResource().Values;
@@ -68,6 +82,99 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
         public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
+
+        private static IList<System.Type> GetReferenceClassCollection()
+        {
+            var assembly = Assembly.GetAssembly(typeof(AzureResourceManagerClient));
+            if (assembly is null)
+            {
+                return new List<System.Type>();
+            }
+            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ReferenceTypeAttribute)).Count() > 0).ToList();
+        }
+
+        private void RebuildExactModelInheritance(Dictionary<Schema, TypeProvider> map)
+        {
+            foreach (var kval in map)
+            {
+                if (kval.Key is ObjectSchema objectSchema)
+                {
+                    var childObjectType = (ObjectType)kval.Value;
+                    var typeToReplace = childObjectType?.Inherits?.Implementation as ObjectType;
+                    if (typeToReplace is null)
+                    {
+                        continue;
+                    }
+
+                    var parent = GetExactMatch(typeToReplace.Type);
+                    if (parent != null)
+                    {
+                        childObjectType?.OverrideInherits(parent);
+                    }
+                }
+            }
+        }
+
+        private CSharpType? GetExactMatch(CSharpType childType)
+        {
+            foreach (System.Type parentType in ReferenceClassCollection)
+            {
+                if (IsEqual(childType, parentType))
+                {
+                    return parentType;
+                }
+            }
+            return null;
+        }
+
+        private bool IsEqual(CSharpType childType, System.Type parentType)
+        {
+            var childProperties = ((ObjectType)(childType.Implementation)).Properties.ToList();
+            List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
+
+            if (parentProperties.Count > childProperties.Count)
+            {
+                return false;
+            }
+
+            Dictionary<string, PropertyInfo> parentDict = new Dictionary<string, PropertyInfo>();
+            foreach (var parentProperty in parentProperties)
+            {
+                parentDict.Add(parentProperty.Name, parentProperty);
+            }
+
+            foreach (var childProperty in childProperties)
+            {
+                PropertyInfo? parentProperty;
+                CSharpType childPropertyType = childProperty.Declaration.Type;
+                if (parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
+                {
+                    if (parentProperty.PropertyType.IsGenericType)
+                    {
+                        if (!childPropertyType.Equals(new CSharpType(parentProperty.PropertyType)))
+                            return false;
+                    }
+                    else if (parentProperty.PropertyType.FullName != $"{childPropertyType.Namespace}.{childPropertyType.Name}" &&
+                        !IsAssignable(parentProperty.PropertyType, childPropertyType))
+                    {
+                        //TODO(ADO item 5712): deal with protected setter
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
+        {
+            return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&
+                m.ReturnType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" &&
+                m.GetParameters().First().ParameterType == parentPropertyType).Count() > 0;
+        }
 
         private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
         {
@@ -203,7 +310,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                     if (!_resourceData.ContainsKey(operation.Resource))
                     {
                         var resourceData = new ResourceData((ObjectSchema)schema, operation, _context, true);
-                        resourceData.OverrideInherits(typeof(TrackedResource));
+                        CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
+                        if (!(inherits is null))
+                        {
+                            resourceData.OverrideInherits(inherits);
+                        }
                         _resourceData.Add(operation.Resource, resourceData);
                     }
                 }

@@ -50,6 +50,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var armResourceWriter = new ArmResourceWriter();
             var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
 
+            if (context.Configuration.AzureArm)
+            {
+                context.Library.RebuildModelInheritance();
+            }
+
             foreach (var model in context.Library.Models)
             {
                 var codeWriter = new CodeWriter();
