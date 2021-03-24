@@ -19,6 +19,12 @@ namespace Azure.ResourceManager.Sample
     public partial class DedicatedHostsCreateOrUpdateOperation : Operation<DedicatedHostData>, IOperationSource<DedicatedHostData>
     {
         private readonly ArmOperationHelpers<DedicatedHostData> _operation;
+
+        /// <summary> Initializes a new instance of DedicatedHostsCreateOrUpdateOperation for mocking. </summary>
+        protected DedicatedHostsCreateOrUpdateOperation()
+        {
+        }
+
         internal DedicatedHostsCreateOrUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<DedicatedHostData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DedicatedHostsCreateOrUpdateOperation");

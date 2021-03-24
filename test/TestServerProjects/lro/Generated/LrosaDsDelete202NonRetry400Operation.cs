@@ -18,6 +18,12 @@ namespace lro
     public partial class LrosaDsDelete202NonRetry400Operation : Operation<Response>, IOperationSource<Response>
     {
         private readonly ArmOperationHelpers<Response> _operation;
+
+        /// <summary> Initializes a new instance of LrosaDsDelete202NonRetry400Operation for mocking. </summary>
+        protected LrosaDsDelete202NonRetry400Operation()
+        {
+        }
+
         internal LrosaDsDelete202NonRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsDelete202NonRetry400Operation");

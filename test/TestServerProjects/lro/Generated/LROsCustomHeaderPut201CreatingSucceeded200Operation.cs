@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsCustomHeaderPut201CreatingSucceeded200Operation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LROsCustomHeaderPut201CreatingSucceeded200Operation for mocking. </summary>
+        protected LROsCustomHeaderPut201CreatingSucceeded200Operation()
+        {
+        }
+
         internal LROsCustomHeaderPut201CreatingSucceeded200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsCustomHeaderPut201CreatingSucceeded200Operation");

@@ -19,6 +19,12 @@ namespace TenantOnly
     public partial class BillingAccountsUpdateOperation : Operation<BillingAccountData>, IOperationSource<BillingAccountData>
     {
         private readonly ArmOperationHelpers<BillingAccountData> _operation;
+
+        /// <summary> Initializes a new instance of BillingAccountsUpdateOperation for mocking. </summary>
+        protected BillingAccountsUpdateOperation()
+        {
+        }
+
         internal BillingAccountsUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<BillingAccountData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "BillingAccountsUpdateOperation");
