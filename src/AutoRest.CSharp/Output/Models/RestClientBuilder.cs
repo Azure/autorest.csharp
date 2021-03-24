@@ -249,8 +249,6 @@ namespace AutoRest.CSharp.Output.Models
             return OrderParameters(methodParameters);
         }
 
-        private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
-
         private RequestBody? BuildRequestBody(
             IList<RequestParameter> requestParameters,
             Dictionary<RequestParameter, ConstructedParameter> allParameters,
@@ -484,6 +482,8 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
         }
+
+        private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
         // Merges operations without response types types together
         private CSharpType? ReduceResponses(List<Response> responses)
