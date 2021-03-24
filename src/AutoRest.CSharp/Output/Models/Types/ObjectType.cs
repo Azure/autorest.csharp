@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -116,6 +117,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public void OverrideInherits(CSharpType cSharpType)
         {
             _inheritsType = cSharpType;
+            _properties = null;
         }
 
         private IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -447,11 +449,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/261
-            var existingProperties = EnumerateHierarchy()
-                .Skip(1)
-                .SelectMany(type => type.Properties)
-                .Select(p => p.SchemaProperty?.Language.Default.Name)
-                .ToHashSet();
+            var existingProperties = GetParentProperties();
 
             foreach (var objectSchema in GetCombinedSchemas())
             {
@@ -534,6 +532,45 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 yield return additionalPropertiesProperty;
             }
+        }
+
+        protected virtual HashSet<string?> GetParentProperties()
+        {
+            HashSet<string?> result = new HashSet<string?>();
+            CSharpType? type = Inherits;
+            while (type != null)
+            {
+                if (type.IsFrameworkType == false)
+                {
+                    if (type.Implementation is ObjectType objType)
+                    {
+                        result.UnionWith(objType.Properties.Select(p => p.SchemaProperty?.Language.Default.Name));
+                        type = objType.Inherits;
+                    }
+                    else
+                    {
+                        type = null;
+                    }
+                }
+                else
+                {
+                    result.UnionWith(GetPropertiesFromSystemType(type.FrameworkType));
+                    type = null;
+                }
+            }
+            return result;
+        }
+
+        private IEnumerable<string> GetPropertiesFromSystemType(System.Type systemType)
+        {
+            return systemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
+                .Select(p =>
+                {
+                    StringBuilder builder = new StringBuilder();
+                    builder.Append(char.ToLower(p.Name[0]));
+                    builder.Append(p.Name.Substring(1));
+                    return builder.ToString();
+                });
         }
 
         private CSharpType GetDefaultPropertyType(Property property)
