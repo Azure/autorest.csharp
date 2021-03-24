@@ -231,12 +231,9 @@ namespace AutoRest.CSharp.Output.Models
             return query.ToArray();
         }
 
-        private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
-
         private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             List<Parameter> methodParameters = new ();
-
             foreach (var requestParameter in parameters)
             {
                 var (parameter, _) = allParameters[requestParameter];
@@ -251,6 +248,8 @@ namespace AutoRest.CSharp.Output.Models
 
             return OrderParameters(methodParameters);
         }
+
+        private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
         private RequestBody? BuildRequestBody(
             IList<RequestParameter> requestParameters,
