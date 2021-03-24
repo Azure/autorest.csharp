@@ -61,6 +61,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
+                // Do note there is a subtle difference here, the lines are not identical
                 if (lowLevel)
                 {
                     writer.Line($"var {request:D} = {PipelineField}.CreateRequest();");
@@ -70,6 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"var {message:D} = {PipelineField}.CreateMessage();");
                     writer.Line($"var {request:D} = {message}.Request;");
                 }
+
                 var method = clientMethod.Request.HttpMethod;
                 if (!clientMethod.BufferResponse)
                 {
