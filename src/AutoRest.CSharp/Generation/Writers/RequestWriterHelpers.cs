@@ -23,6 +23,17 @@ namespace AutoRest.CSharp.Generation.Writers
         public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, bool lowLevel)
         {
             using var methodScope = writer.AmbientScope();
+            var parameters = clientMethod.Parameters;
+
+            if (lowLevel)
+            {
+                writer.WriteXmlDocumentationSummary($"Create Request for '{clientMethod.Name}' operation.");
+                writer.WriteXmlDocumentationParameter("body", "The request body");
+                foreach (Parameter parameter in parameters)
+                {
+                    writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                }
+            }
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
             var returnType = lowLevel ? typeof(Azure.Core.Request) : typeof(HttpMessage);
@@ -31,7 +42,6 @@ namespace AutoRest.CSharp.Generation.Writers
             if (lowLevel) {
                 writer.Append($"RequestContent body, ");
             }
-            var parameters = clientMethod.Parameters;
             foreach (Parameter clientParameter in parameters)
             {
                 if (lowLevel)
