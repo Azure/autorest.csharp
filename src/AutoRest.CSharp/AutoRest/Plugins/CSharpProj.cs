@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 {0}
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.9.0"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.11.0"" />
   </ItemGroup>
 
 </Project>
@@ -43,22 +43,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </ItemGroup>
 ";
 
-        private string _csProjContentLowLevel = @"
-  <Project Sdk=""Microsoft.NET.Sdk"">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Nullable>annotations</Nullable>
-    <RestoreSources>$(RestoreSources);C:\Users\chhamo\nuget\;https://api.nuget.org/v3/index.json</RestoreSources>
-  </PropertyGroup>
-
+        private string _lowLevelExperimentalReference = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.11.0"" />
     <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.11"" />
   </ItemGroup>
-
-</Project>
 ";
 
         internal static string GetVersion()
@@ -100,7 +88,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
               if (configuration.LowLevelClient)
               {
-                csProjContent = _csProjContentLowLevel;
+                csProjContent = string.Format(_csProjContent, _lowLevelExperimentalReference);
               }
               else
               {
