@@ -9,13 +9,14 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class LongRunningOperation: TypeProvider
     {
-        public LongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext<DataPlaneOutputLibrary> context) : base(context)
+        public LongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext<DataPlaneOutputLibrary> context) : base(context)
         {
             Debug.Assert(operation.IsLongRunning);
 
@@ -47,12 +48,12 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 {
                     NextPageMethod = Client.RestClient.GetNextOperationMethod(operation.Requests.Single());
                     PagingResponse = new PagingResponseInfo(paging, ResultType);
-                    ResultType = new CSharpType(typeof(Azure.AsyncPageable<>), PagingResponse.ItemType);
+                    ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
                 }
             }
             else
             {
-                ResultType = typeof(Azure.Response);
+                ResultType = typeof(Response);
             }
 
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
