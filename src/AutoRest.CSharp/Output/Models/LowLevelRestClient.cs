@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly BuildContext<LowLevelOutputLibrary> _context;
         private RestClientBuilder<LowLevelOutputLibrary> _builder;
 
-        private Dictionary<ServiceRequest, RestClientMethod>? _requestMethods;
         private RestClientMethod[]? _allMethods;
 
         protected override string DefaultAccessibility { get; } = "public";
@@ -42,29 +41,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<RestClientMethod> BuildAllMethods()
         {
-            foreach (var operation in _operationGroup.Operations)
-            {
-                ServiceRequest serviceRequest = operation.Requests.FirstOrDefault();
-                if (serviceRequest != null)
-                {
-                    yield return GetOperationMethod(serviceRequest);
-                }
-            }
-        }
-
-        private RestClientMethod GetOperationMethod(ServiceRequest request)
-        {
-            return EnsureNormalMethods()[request];
-        }
-
-        private Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
-        {
-            if (_requestMethods != null)
-            {
-                return _requestMethods;
-            }
-
-            _requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
+            var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
 
             foreach (var operation in _operationGroup.Operations)
             {
@@ -76,11 +53,18 @@ namespace AutoRest.CSharp.Output.Models
                         continue;
                     }
 
-                    _requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, FilterMethodParameters));
+                    requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, FilterMethodParameters));
                 }
             }
 
-            return _requestMethods;
+            foreach (var operation in _operationGroup.Operations)
+            {
+                ServiceRequest serviceRequest = operation.Requests.FirstOrDefault();
+                if (serviceRequest != null)
+                {
+                    yield return requestMethods[serviceRequest];
+                }
+            }
         }
 
         private bool FilterMethodParameters(RequestParameter parameter)
