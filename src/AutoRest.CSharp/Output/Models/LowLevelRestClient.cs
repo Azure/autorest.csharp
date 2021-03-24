@@ -52,8 +52,19 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         continue;
                     }
-
-                    requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, FilterMethodParameters));
+                    var requestParameters = serviceRequest.Parameters.Where (p => {
+                        switch (p.In)
+                        {
+                            case ParameterLocation.Header:
+                            case ParameterLocation.Query:
+                            case ParameterLocation.Path:
+                            case ParameterLocation.Uri:
+                                return true;
+                            default:
+                                return false;
+                        }
+                    });
+                    requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, requestParameters, null));
                 }
             }
 

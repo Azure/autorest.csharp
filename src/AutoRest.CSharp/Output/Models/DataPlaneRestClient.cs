@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Output.Models
                         continue;
                     }
                     var headerModel = _context.Library.FindHeaderModel(operation);
-                    _requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel, null));
+                    _requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel));
                 }
             }
 

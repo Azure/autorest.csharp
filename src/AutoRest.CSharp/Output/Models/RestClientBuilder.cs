@@ -59,10 +59,8 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
 
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, ICollection<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel, Func<RequestParameter, bool>? methodFilter)
+        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
         {
-            methodFilter = methodFilter ?? new Func<RequestParameter, bool>(p => true);
-
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new ();
 
             List<RequestParameter> parameters = operation.Parameters.Concat(requestParameters).ToList();
@@ -78,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
 
             Request request = BuildRequest(httpRequest, parameters, allParameters);
             Response[] responses = BuildResponses(operation, request, out var responseType);
-            Parameter[] methodParameters = BuildMethodParameters(parameters, allParameters, methodFilter);
+            Parameter[] methodParameters = BuildMethodParameters(parameters, allParameters);
 
             return new RestClientMethod(
                 operation.CSharpName(),
@@ -235,11 +233,11 @@ namespace AutoRest.CSharp.Output.Models
 
         private static Parameter[] OrderParameters(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.DefaultValue != null).ToArray();
 
-        private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters, Func<RequestParameter, bool>? methodFilter)
+        private Parameter[] BuildMethodParameters(IList<RequestParameter> parameters, Dictionary<RequestParameter, ConstructedParameter> allParameters)
         {
             List<Parameter> methodParameters = new ();
 
-            foreach (var requestParameter in parameters.Where(methodFilter))
+            foreach (var requestParameter in parameters)
             {
                 var (parameter, _) = allParameters[requestParameter];
                 // Grouped and flattened parameters shouldn't be added to methods
