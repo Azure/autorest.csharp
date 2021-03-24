@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // Client type should have public constructor with equivalent parameters not taking ClientOptions type as last argument
             writer.Line ($"#pragma warning disable AZC0007\n");
 
-            using (writer.Namespace(cs.Namespace + ".Protocol"))
+            using (writer.Namespace(cs.Namespace))
             {
                 writer.WriteXmlDocumentationSummary(client.Description);
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
