@@ -61,20 +61,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                if (lowLevel)
+                writer.Line($"var {message:D} = {PipelineField}.CreateMessage();");
+                if (!lowLevel)
                 {
-                    writer.Line($"var {request:D} = {PipelineField}.CreateRequest();");
-                }
-                else
-                {
-                    writer.Line($"var {message:D} = {PipelineField}.CreateMessage();");
                     writer.Line($"var {request:D} = {message}.Request;");
                 }
-                var method = clientMethod.Request.HttpMethod;
+
                 if (!clientMethod.BufferResponse)
                 {
                     writer.Line($"{message}.BufferResponse = false;");
                 }
+
+                var method = clientMethod.Request.HttpMethod;
                 writer.Line($"{request}.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
                 writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
