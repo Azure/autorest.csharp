@@ -145,7 +145,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString(),
                 root.GetProperty(nameof(Configuration.OperationGroupToResourceType)),
                 root.GetProperty(nameof(Configuration.OperationGroupToResource)),
-                root.GetProperty(nameof(Configuration.ResourceRename))
+                root.GetProperty(nameof(Configuration.ResourceRename)),
+                root.GetProperty(nameof(Configuration.ResourceToParent))
             );
         }
     }
