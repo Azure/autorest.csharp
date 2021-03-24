@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (lowLevel)
             {
-                writer.WriteXmlDocumentationSummary($"Create Request for '{clientMethod.Name}' operation.");
+                writer.WriteXmlDocumentationSummary($"Create Request for <see cref=\"{clientMethod.Name}\"/> and <see cref=\"{clientMethod.Name}Async\"/> operations.");
                 writer.WriteXmlDocumentationParameter("body", "The request body");
                 foreach (Parameter parameter in parameters)
                 {
