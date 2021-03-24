@@ -86,7 +86,8 @@ namespace AutoRest.CSharp.Output.Models
                 methodParameters,
                 responses,
                 responseHeaderModel,
-                operation.Extensions?.BufferResponse ?? true
+                operation.Extensions?.BufferResponse ?? true,
+                isVisible: true
             );
         }
 

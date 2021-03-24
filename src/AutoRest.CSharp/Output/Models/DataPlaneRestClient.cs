@@ -184,7 +184,8 @@ namespace AutoRest.CSharp.Output.Models
                 parameters,
                 responses,
                 method.HeaderModel,
-                bufferResponse: true);
+                bufferResponse: true,
+                isVisible: false);
         }
 
         public RestClientMethod? GetNextOperationMethod(ServiceRequest request)

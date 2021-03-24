@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
             var returnType = lowLevel ? typeof(Azure.Core.Request) : typeof(HttpMessage);
-            var visibility = lowLevel ? "public" : "internal";
+            var visibility = clientMethod.IsVisible ? "public" : "internal";
             writer.Append($"{visibility} {returnType} {methodName}(");
             if (lowLevel) {
                 writer.Append($"RequestContent body, ");
