@@ -120,8 +120,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private string CreateRequestMethodName(string name) => $"Create{name}Request";
-
         private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
@@ -422,7 +420,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     writer.Line($"cancellationToken){configureText};");
 
-                    writer.Append($"return new {lroMethod.Operation.Type}({ClientDiagnosticsField}, {PipelineField}, RestClient.{CreateRequestMethodName(originalMethod.Name)}(");
+                    writer.Append($"return new {lroMethod.Operation.Type}({ClientDiagnosticsField}, {PipelineField}, RestClient.{RequestWriterHelpers.CreateRequestMethodName(originalMethod.Name)}(");
                     foreach (Parameter parameter in parameters)
                     {
                         writer.Append($"{parameter.Name}, ");
