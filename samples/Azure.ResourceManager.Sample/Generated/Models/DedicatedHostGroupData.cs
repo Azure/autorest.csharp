@@ -6,12 +6,11 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the DedicatedHostGroup data model. </summary>
-    public partial class DedicatedHostGroupData : TrackedResource
+    public partial class DedicatedHostGroupData
     {
         /// <summary> Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone. </summary>
         public IList<string> Zones { get; }

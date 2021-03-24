@@ -6,12 +6,11 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineImage data model. </summary>
-    public partial class VirtualMachineImageData : TrackedResource
+    public partial class VirtualMachineImageData
     {
         /// <summary> Used for establishing the purchase context of any 3rd Party artifact through MarketPlace. </summary>
         public PurchasePlan Plan { get; set; }

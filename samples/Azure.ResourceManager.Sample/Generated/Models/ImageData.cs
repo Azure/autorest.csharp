@@ -5,12 +5,10 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
-
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the Image data model. </summary>
-    public partial class ImageData : TrackedResource
+    public partial class ImageData
     {
         /// <summary> The source virtual machine from which Image is created. </summary>
         public SubResource SourceVirtualMachine { get; set; }

@@ -6,12 +6,11 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineScaleSetExtension data model. </summary>
-    public partial class VirtualMachineScaleSetExtensionData : TrackedResource
+    public partial class VirtualMachineScaleSetExtensionData
     {
         /// <summary> The name of the extension. </summary>
         public string Name { get; set; }

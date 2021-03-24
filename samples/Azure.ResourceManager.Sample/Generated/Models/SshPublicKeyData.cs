@@ -5,12 +5,10 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
-
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the SshPublicKey data model. </summary>
-    public partial class SshPublicKeyData : TrackedResource
+    public partial class SshPublicKeyData
     {
         /// <summary> SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format. </summary>
         public string PublicKey { get; set; }

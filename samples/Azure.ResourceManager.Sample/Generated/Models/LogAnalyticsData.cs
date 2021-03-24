@@ -5,12 +5,10 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
-
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the LogAnalytics data model. </summary>
-    public partial class LogAnalyticsData : TrackedResource
+    public partial class LogAnalyticsData
     {
         /// <summary> LogAnalyticsOutput. </summary>
         public LogAnalyticsOutput Properties { get; }

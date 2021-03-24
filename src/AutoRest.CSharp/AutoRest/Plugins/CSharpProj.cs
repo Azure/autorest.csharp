@@ -4,7 +4,6 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
@@ -26,7 +25,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 {0}
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.9.0"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.10.0"" />
+    <PackageReference Include=""Azure.ResourceManager.Core"" Version=""1.0.0-alpha.20210323.1"" />
   </ItemGroup>
 
 </Project>

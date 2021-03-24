@@ -5,12 +5,10 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
-
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineSize data model. </summary>
-    public partial class VirtualMachineSizeData : TrackedResource
+    public partial class VirtualMachineSizeData
     {
         /// <summary> The name of the virtual machine size. </summary>
         public string Name { get; }
