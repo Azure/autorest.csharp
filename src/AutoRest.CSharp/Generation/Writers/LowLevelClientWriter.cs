@@ -99,8 +99,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        private const string EndpointProperty = "endpoint";
-        private const string EndpointParameter = "endpoint";
         private const string PipelineVariable = "pipeline";
         private const string PipelineField = "_" + PipelineVariable;
         private const string KeyCredentialVariable = "credential";
