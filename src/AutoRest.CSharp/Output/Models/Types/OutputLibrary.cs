@@ -339,7 +339,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.Parent}. key Please add to readme.md");
                 }
-                operationsGroup.Parent = parent ?? (operationsGroup.IsExtensionResource ? "tenant" :  ParentDetection.GetParent(operationsGroup));
+                operationsGroup.Parent = parent ?? (operationsGroup.IsTenantResource ? "tenant" :  ParentDetection.GetParent(operationsGroup));
 
                 // If overriden, add parent to known types list (trusting user input)
                 if (parent != null)
