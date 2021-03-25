@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
 
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel)
+        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel, bool isVisible)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new ();
 
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models
                 responses,
                 responseHeaderModel,
                 operation.Extensions?.BufferResponse ?? true,
-                isVisible: true
+                isVisible: isVisible
             );
         }
 
