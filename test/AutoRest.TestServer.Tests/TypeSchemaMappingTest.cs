@@ -127,13 +127,12 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void ObjectTypePropertiesSerializedAsNull()
+        public void ObjectTypePropertiesSerializedAsDefault()
         {
             var inputModel = new RenamedThirdModel();
 
-            JsonAsserts.AssertSerialization(
-                @"{""ETag"":""\u003Cnull\u003E"",""CreatedAt"":" + JsonSerializer.Serialize(new DateTime()) + "}",
-                inputModel);
+            Assert.AreEqual(default(ETag), inputModel.CustomizedETagProperty);
+            Assert.AreEqual(default(DateTime), inputModel.CustomizedCreatedAtProperty);
         }
 
         [Test]
