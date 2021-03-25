@@ -70,11 +70,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static HashSet<string> ResourceTypes = new HashSet<string>
         {
-            {"resourceGroups"},
-            {"subscriptions"},
-            {"tenant"}
+            "resourceGroups",
+            "subscriptions",
+            "tenant"
         };
-
 
         private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
         {
@@ -336,15 +335,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 // TODO better support for extension resources
                 string? parent;
-                if (!_context.Configuration.ResourceToParent.TryGetValue(operationsGroup.Key, out parent) && operationsGroup.IsExtensionResource)
+                if (_context.Configuration.ResourceToParent.TryGetValue(operationsGroup.Key, out parent))
                 {
-                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.Parent}. key Please add to readme.md {_codeModel.Info.Description} ");
-                }
-                operationsGroup.Parent = parent ?? (operationsGroup.IsTenantResource ? "tenant" :  ParentDetection.GetParent(operationsGroup));
-
-                // If overriden, add parent to known types list (trusting user input)
-                if (parent != null)
+                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
+                }
+                operationsGroup.Parent = parent ?? ParentDetection.GetParent(operationsGroup);
 
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
@@ -357,14 +353,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             //now that we have resolved all operations groups to resource types above, can try to solve for the parent
-            foreach (var operationsGroup in _codeModel.OperationGroups)
-            {
-                if (operationsGroup.Parent != null && !ResourceTypes.Contains(operationsGroup.Parent))
-                {
-                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.Parent}. key Please add to readme.md");
-                }
-            }
-
+            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes);
         }
 
         private void DecorateSchema()

@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Input
         public string Resource { get; set; }
         public bool IsTenantResource { get; set; }
         public bool IsExtensionResource { get; set; }
-        public string? Parent { get; set; }
+        public string Parent { get; set; }
         public Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping { get; set; }
     }
 

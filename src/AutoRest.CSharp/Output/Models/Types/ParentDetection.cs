@@ -11,6 +11,14 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
     {
         public static string GetParent(OperationGroup operationGroup)
         {
+            if (operationGroup.IsTenantResource)
+            {
+                return TenantDetection.TenantName;
+            }
+            if (operationGroup.IsExtensionResource)
+            {
+                throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. This an extensions resource, please add to readme.md");
+            }
             var method = GetBestMethod(operationGroup.OperationHttpMethodMapping);
             if (method == null)
             {
@@ -88,7 +96,17 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
             // expected path to be: Microsoft.Network/virtualNetworks/{}/constant/{}/constant/.... (verfied in construction of type provider)
             //
             return resourceType.StartsWith(fullProvider.TokenValue) ? resourceType.Substring(0, resourceType.LastIndexOf('/')) : string.Empty;
+        }
 
+        public static void VerfiyParents(System.Collections.Generic.ICollection<OperationGroup> operationGroups, HashSet<string> ResourceTypes)
+        {
+            foreach (var operationsGroup in operationGroups)
+            {
+                if (operationsGroup.Parent != null && !ResourceTypes.Contains(operationsGroup.Parent))
+                {
+                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.Parent}. key Please add to readme.md");
+                }
+            }
         }
     }
 }
