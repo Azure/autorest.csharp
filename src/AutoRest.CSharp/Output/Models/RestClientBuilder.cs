@@ -531,20 +531,6 @@ namespace AutoRest.CSharp.Output.Models
             return parameter;
         }
 
-        private static IEnumerable<Parameter> GetRequiredParameters(Parameter[] parameters)
-        {
-            List<Parameter> requiredParameters = new List<Parameter>();
-            foreach (var parameter in parameters)
-            {
-                if (parameter.DefaultValue == null)
-                {
-                    requiredParameters.Add(parameter);
-                }
-            }
-
-            return requiredParameters;
-        }
-
         private Parameter BuildParameter(RequestParameter requestParameter)
         {
             CSharpType type = _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.IsNullable || !requestParameter.IsRequired);
@@ -601,6 +587,64 @@ namespace AutoRest.CSharp.Output.Models
             return string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :
                 BuilderHelpers.EscapeXmlDescription(requestParameter.Language.Default.Description);
+        }
+
+        private static IEnumerable<Parameter> GetRequiredParameters(Parameter[] parameters)
+        {
+            List<Parameter> requiredParameters = new List<Parameter>();
+            foreach (var parameter in parameters)
+            {
+                if (parameter.DefaultValue == null)
+                {
+                    requiredParameters.Add(parameter);
+                }
+            }
+
+            return requiredParameters;
+        }
+
+        private static IEnumerable<Parameter> GetOptionalParameters(Parameter[] parameters, bool includeAPIVersion = false)
+        {
+            List<Parameter> optionalParameters = new List<Parameter>();
+            foreach (var parameter in parameters)
+            {
+                if (parameter.DefaultValue != null && (includeAPIVersion || !parameter.IsApiVersionParameter))
+                {
+                    optionalParameters.Add(parameter);
+                }
+            }
+
+            return optionalParameters;
+        }
+
+        public static IReadOnlyCollection<Parameter> GetConstructorParameters(Parameter[] parameters, CSharpType credentialType, bool includeProtocolOptions = false, bool includeAPIVersion = false)
+        {
+            List<Parameter> constructorParameters = new List<Parameter>();
+
+            constructorParameters.AddRange(GetRequiredParameters(parameters));
+
+            var credentialParam = new Parameter(
+                "credential",
+                "A credential used to authenticate to an Azure Service.",
+                credentialType,
+                null,
+                true);
+            constructorParameters.Add(credentialParam);
+
+            if (includeProtocolOptions)
+            {
+                var protocolParam = new Parameter(
+                    "options",
+                    "Options to control the underlying operations.",
+                    typeof(Azure.Core.ProtocolClientOptions),
+                    Constant.NewInstanceOf(typeof(Azure.Core.ProtocolClientOptions)),
+                    true);
+                constructorParameters.Add(protocolParam);
+            }
+
+            constructorParameters.AddRange(GetOptionalParameters(parameters, includeAPIVersion));
+
+            return constructorParameters;
         }
     }
 }
