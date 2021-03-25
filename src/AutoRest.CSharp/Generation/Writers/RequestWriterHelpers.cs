@@ -25,23 +25,10 @@ namespace AutoRest.CSharp.Generation.Writers
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
 
-            if (lowLevel)
-            {
-                writer.WriteXmlDocumentationSummary($"Create Request for <see cref=\"{clientMethod.Name}\"/> and <see cref=\"{clientMethod.Name}Async\"/> operations.");
-                writer.WriteXmlDocumentationParameter("body", "The request body");
-                foreach (Parameter parameter in parameters)
-                {
-                    writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-                }
-            }
-
             var methodName = CreateRequestMethodName(clientMethod.Name);
             var returnType = lowLevel ? typeof(Azure.Core.Request) : typeof(HttpMessage);
             var visibility = clientMethod.IsVisible ? "public" : "internal";
             writer.Append($"{visibility} {returnType} {methodName}(");
-            if (lowLevel) {
-                writer.Append($"RequestContent body, ");
-            }
             foreach (Parameter clientParameter in parameters)
             {
                 if (lowLevel)

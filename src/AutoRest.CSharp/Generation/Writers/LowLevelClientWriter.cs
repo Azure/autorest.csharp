@@ -44,6 +44,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientMethodRequest(CodeWriter writer, RestClientMethod clientMethod)
         {
+            writer.WriteXmlDocumentationSummary($"Create Request for <see cref=\"{clientMethod.Name}\"/> and <see cref=\"{clientMethod.Name}Async\"/> operations.");
+            foreach (Parameter parameter in clientMethod.Parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
             RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true);
         }
 
@@ -54,7 +59,6 @@ namespace AutoRest.CSharp.Generation.Writers
             var responseType = async ? new CSharpType(typeof(Task<Response>)) : new CSharpType(typeof(Response));
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
-            writer.WriteXmlDocumentationParameter("body", "The request body");
             foreach (var parameter in parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
@@ -64,7 +68,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public virtual {asyncText} {responseType} {methodName}({typeof(RequestContent)} body, ");
+            writer.Append($"public virtual {asyncText} {responseType} {methodName}(");
 
             foreach (var parameter in parameters)
             {
@@ -74,7 +78,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.Append($"{typeof(Azure.Core.Request)} req = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(body, ");
+                writer.Append($"{typeof(Azure.Core.Request)} req = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
 
                 foreach (var parameter in clientMethod.Parameters)
                 {

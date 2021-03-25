@@ -49,7 +49,11 @@ namespace AutoRest.CSharp.Output.Models
                 if (serviceRequest != null)
                 {
                     IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where (FilterServiceParamaters);
-                    yield return _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null);
+                    RestClientMethod method = _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null);
+                    // Inject the body parameter
+                    List<Parameter> parameters = method.Parameters.ToList();
+                    parameters.Insert (0, new Parameter ("body", "The request body", typeof(Azure.Core.RequestContent), null, true));
+                    yield return new RestClientMethod (method.Name, method.Description, method.ReturnType, method.Request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.IsVisible);
                 }
             }
         }
