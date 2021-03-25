@@ -5,13 +5,27 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
-
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the Sku data model. </summary>
-    public partial class SkuData : ResourceManager.Core.TrackedResource
+    public partial class SkuData
     {
+        /// <summary> Initializes a new instance of SkuData. </summary>
+        /// <param name="name"> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </param>
+        public SkuData(SkuName name)
+        {
+            Name = name;
+        }
+
+        /// <summary> Initializes a new instance of SkuData. </summary>
+        /// <param name="name"> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </param>
+        /// <param name="tier"> The SKU tier. This is based on the SKU name. </param>
+        internal SkuData(SkuName name, SkuTier? tier)
+        {
+            Name = name;
+            Tier = tier;
+        }
+
         /// <summary> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </summary>
         public SkuName Name { get; set; }
         /// <summary> The SKU tier. This is based on the SKU name. </summary>
