@@ -79,10 +79,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                if (lowLevel) {
-                    writer.Line($"{request}.Content = body;");
-                }
-
                 //TODO: Duplicate code between query and header parameter processing logic
                 foreach (var queryParameter in clientMethod.Request.Query)
                 {
@@ -93,130 +89,127 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 WriteHeaders(writer, clientMethod, request, content: false);
 
-                if (lowLevel)
+                switch (clientMethod.Request.Body)
                 {
-                    RequestWriterHelpers.WriteHeaders(writer, clientMethod, request, content: true);
-                    writer.Line($"return {request:I};");
-                }
-                else
-                {
-                    switch (clientMethod.Request.Body)
-                    {
-                        case SchemaRequestBody body:
-                            using (WriteValueNullCheck(writer, body.Value))
-                            {
-                                WriteHeaders(writer, clientMethod, request, content: true);
-                                WriteSerializeContent(
-                                    writer,
-                                    request,
-                                    body.Serialization,
-                                    w => WriteConstantOrParameter(w, body.Value, ignoreNullability: true));
-                            }
-
-                            break;
-                        case BinaryRequestBody binaryBody:
-                            using (WriteValueNullCheck(writer, binaryBody.Value))
-                            {
-                                WriteHeaders(writer, clientMethod, request, content: true);
-                                writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
-                                WriteConstantOrParameter(writer, binaryBody.Value);
-                                writer.Line($");");
-                            }
-                            break;
-                        case TextRequestBody textBody:
-                            using (WriteValueNullCheck(writer, textBody.Value))
-                            {
-                                WriteHeaders(writer, clientMethod, request, content: true);
-                                writer.Append($"{request}.Content = new {typeof(StringRequestContent)}(");
-                                WriteConstantOrParameter(writer, textBody.Value);
-                                writer.Line($");");
-                            }
-                            break;
-                        case MultipartRequestBody multipartRequestBody:
+                    case RequestContentRequestBody body:
+                        WriteHeaders(writer, clientMethod, request, content: true);
+                        writer.Line($"{request}.Content = {body.Parameter:I};");
+                        writer.Line($"return {request:I};");
+                        break;
+                    case SchemaRequestBody body:
+                        using (WriteValueNullCheck(writer, body.Value))
+                        {
                             WriteHeaders(writer, clientMethod, request, content: true);
-
-                            var multipartContent = new CodeWriterDeclaration("content");
-                            writer.Line($"var {multipartContent:D} = new {typeof(MultipartFormDataContent)}();");
-
-                            foreach (var bodyParameter in multipartRequestBody.RequestBodyParts)
-                            {
-                                switch (bodyParameter.Content)
-                                {
-                                    case BinaryRequestBody binaryBody:
-                                        using (WriteValueNullCheck(writer, binaryBody.Value))
-                                        {
-                                            writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create(");
-                                            WriteConstantOrParameter(writer, binaryBody.Value);
-                                            writer.Line($"), {bodyParameter.Name:L}, null);");
-                                        }
-                                        break;
-                                    case TextRequestBody textBody:
-                                        using (WriteValueNullCheck(writer, textBody.Value))
-                                        {
-                                            writer.Append($"{multipartContent}.Add(new {typeof(StringRequestContent)}(");
-                                            WriteConstantOrParameter(writer, textBody.Value);
-                                            writer.Line($"), {bodyParameter.Name:L}, null);");
-                                        }
-                                        break;
-                                    case BinaryCollectionRequestBody collectionBody:
-                                        var collectionItemVariable = new CodeWriterDeclaration("value");
-                                        using (writer.Scope($"foreach (var {collectionItemVariable:D} in {collectionBody.Value.Reference.Name})"))
-                                        {
-                                            writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}), {bodyParameter.Name:L}, null);");
-                                        }
-                                        break;
-                                    default:
-                                        throw new NotImplementedException(bodyParameter.Content?.GetType().FullName);
-                                }
-                            }
-                            writer.Line($"{multipartContent}.ApplyToRequest({request});");
-                            break;
-                        case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
-                            WriteHeaders(writer, clientMethod, request, content: true);
-
-                            var initializers = new List<PropertyInitializer>();
-                            foreach (var initializer in flattenedSchemaRequestBody.Initializers)
-                            {
-                                initializers.Add(new PropertyInitializer(initializer.Property, w => w.WriteReferenceOrConstant(initializer.Value)));
-                            }
-                            var modelVariable = new CodeWriterDeclaration("model");
-                            writer.WriteInitialization(
-                                    (w, v) => w.Line($"var {modelVariable:D} = {v};"),
-                                    flattenedSchemaRequestBody.ObjectType,
-                                    flattenedSchemaRequestBody.ObjectType.InitializationConstructor,
-                                    initializers);
-
                             WriteSerializeContent(
                                 writer,
                                 request,
-                                flattenedSchemaRequestBody.Serialization,
-                                w => w.Append(modelVariable));
-                            break;
-                        case UrlEncodedBody urlEncodedRequestBody:
-                            var urlContent = new CodeWriterDeclaration("content");
+                                body.Serialization,
+                                w => WriteConstantOrParameter(w, body.Value, ignoreNullability: true));
+                        }
 
+                        break;
+                    case BinaryRequestBody binaryBody:
+                        using (WriteValueNullCheck(writer, binaryBody.Value))
+                        {
                             WriteHeaders(writer, clientMethod, request, content: true);
-                            writer.Line($"var {urlContent:D} = new {typeof(FormUrlEncodedContent)}();");
+                            writer.Append($"{request}.Content = {typeof(RequestContent)}.Create(");
+                            WriteConstantOrParameter(writer, binaryBody.Value);
+                            writer.Line($");");
+                        }
+                        break;
+                    case TextRequestBody textBody:
+                        using (WriteValueNullCheck(writer, textBody.Value))
+                        {
+                            WriteHeaders(writer, clientMethod, request, content: true);
+                            writer.Append($"{request}.Content = new {typeof(StringRequestContent)}(");
+                            WriteConstantOrParameter(writer, textBody.Value);
+                            writer.Line($");");
+                        }
+                        break;
+                    case MultipartRequestBody multipartRequestBody:
+                        WriteHeaders(writer, clientMethod, request, content: true);
 
-                            foreach (var (name, value) in urlEncodedRequestBody.Values)
+                        var multipartContent = new CodeWriterDeclaration("content");
+                        writer.Line($"var {multipartContent:D} = new {typeof(MultipartFormDataContent)}();");
+
+                        foreach (var bodyParameter in multipartRequestBody.RequestBodyParts)
+                        {
+                            switch (bodyParameter.Content)
                             {
-                                using (WriteValueNullCheck(writer, value))
-                                {
-                                    writer.Append($"{urlContent}.Add({name:L},");
-                                    WriteConstantOrParameterAsString(writer, value);
-                                    writer.Line($");");
-                                }
+                                case BinaryRequestBody binaryBody:
+                                    using (WriteValueNullCheck(writer, binaryBody.Value))
+                                    {
+                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create(");
+                                        WriteConstantOrParameter(writer, binaryBody.Value);
+                                        writer.Line($"), {bodyParameter.Name:L}, null);");
+                                    }
+                                    break;
+                                case TextRequestBody textBody:
+                                    using (WriteValueNullCheck(writer, textBody.Value))
+                                    {
+                                        writer.Append($"{multipartContent}.Add(new {typeof(StringRequestContent)}(");
+                                        WriteConstantOrParameter(writer, textBody.Value);
+                                        writer.Line($"), {bodyParameter.Name:L}, null);");
+                                    }
+                                    break;
+                                case BinaryCollectionRequestBody collectionBody:
+                                    var collectionItemVariable = new CodeWriterDeclaration("value");
+                                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {collectionBody.Value.Reference.Name})"))
+                                    {
+                                        writer.Append($"{multipartContent}.Add({typeof(RequestContent)}.Create({collectionItemVariable}), {bodyParameter.Name:L}, null);");
+                                    }
+                                    break;
+                                default:
+                                    throw new NotImplementedException(bodyParameter.Content?.GetType().FullName);
                             }
-                            writer.Line($"{request}.Content = {urlContent};");
-                            break;
-                        case null:
-                            break;
-                        default:
-                            throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
-                    }
+                        }
+                        writer.Line($"{multipartContent}.ApplyToRequest({request});");
+                        break;
+                    case FlattenedSchemaRequestBody flattenedSchemaRequestBody:
+                        WriteHeaders(writer, clientMethod, request, content: true);
 
-                    writer.Line($"return {message};");
+                        var initializers = new List<PropertyInitializer>();
+                        foreach (var initializer in flattenedSchemaRequestBody.Initializers)
+                        {
+                            initializers.Add(new PropertyInitializer(initializer.Property, w => w.WriteReferenceOrConstant(initializer.Value)));
+                        }
+                        var modelVariable = new CodeWriterDeclaration("model");
+                        writer.WriteInitialization(
+                                (w, v) => w.Line($"var {modelVariable:D} = {v};"),
+                                flattenedSchemaRequestBody.ObjectType,
+                                flattenedSchemaRequestBody.ObjectType.InitializationConstructor,
+                                initializers);
+
+                        WriteSerializeContent(
+                            writer,
+                            request,
+                            flattenedSchemaRequestBody.Serialization,
+                            w => w.Append(modelVariable));
+                        break;
+                    case UrlEncodedBody urlEncodedRequestBody:
+                        var urlContent = new CodeWriterDeclaration("content");
+
+                        WriteHeaders(writer, clientMethod, request, content: true);
+                        writer.Line($"var {urlContent:D} = new {typeof(FormUrlEncodedContent)}();");
+
+                        foreach (var (name, value) in urlEncodedRequestBody.Values)
+                        {
+                            using (WriteValueNullCheck(writer, value))
+                            {
+                                writer.Append($"{urlContent}.Add({name:L},");
+                                WriteConstantOrParameterAsString(writer, value);
+                                writer.Line($");");
+                            }
+                        }
+                        writer.Line($"{request}.Content = {urlContent};");
+                        break;
+                    case null:
+                        break;
+                    default:
+                        throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
                 }
+
+                writer.Line($"return {message};");
             }
             writer.Line();
         }
