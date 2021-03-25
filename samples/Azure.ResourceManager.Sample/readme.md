@@ -31,7 +31,7 @@ resource-rename:
    SshPublicKey : SshPublicKeyInfo
    LogAnalyticsOperationResult: LogAnalytics
    SshPublicKeyResource: SshPublicKey
-resource-to-parent:
+operation-group-to-parent:
    LogAnalytics: subscriptions
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
    VirtualMachineImages: Microsoft.Compute/locations

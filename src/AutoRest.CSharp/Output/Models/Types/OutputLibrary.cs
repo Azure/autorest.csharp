@@ -335,7 +335,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 // TODO better support for extension resources
                 string? parent;
-                if (_context.Configuration.ResourceToParent.TryGetValue(operationsGroup.Key, out parent))
+                if (_context.Configuration.OperationGroupToParent.TryGetValue(operationsGroup.Key, out parent))
                 {
                      // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);

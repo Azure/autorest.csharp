@@ -16,6 +16,6 @@ operation-group-to-resource:
    BillingAccounts: BillingAccount
    AvailableBalances: AvailableBalance
    Agreements: Agreement
-resource-to-parent:
+operation-group-to-parent:
    Instructions: Microsoft.Billing/billingAccounts/billingProfiles
 ```

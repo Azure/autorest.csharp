@@ -30,7 +30,7 @@ operation-group-to-resource:
 resource-rename:
    BlobServiceProperties: BlobService
    FileServiceProperties: FileService
-resource-to-parent:
+operation-group-to-parent:
     BlobContainers: Microsoft.Storage/storageAccounts
     FileShares: Microsoft.Storage/storageAccounts
     Usages: subscriptions
