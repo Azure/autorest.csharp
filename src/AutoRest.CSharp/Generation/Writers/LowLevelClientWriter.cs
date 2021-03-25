@@ -130,6 +130,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.RemoveTrailingComma();
                 writer.Line($"}};");
             }
+
             foreach (Parameter clientParameter in client.Parameters)
             {
                 writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
@@ -230,11 +231,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.WriteParameterNullChecks (client.Parameters);
-                using (writer.Scope($"if ({KeyCredentialVariable} == null)"))
-                {
-                    writer.Line($"throw new {typeof(ArgumentNullException)}(nameof({KeyCredentialVariable}));");
-                }
+                writer.WriteParameterNullChecks (ctorParams);
 
                 if (keyCredential)
                 {
