@@ -34,5 +34,6 @@ resource-to-parent:
     BlobContainers: Microsoft.Storage/storageAccounts
     FileShares: Microsoft.Storage/storageAccounts
     Usages: subscriptions
+    StorageAccounts: any
 ```
 

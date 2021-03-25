@@ -71,7 +71,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static HashSet<string> ResourceTypes = new HashSet<string>
         {
             {"resourceGroups"},
-            {"subscriptions"}
+            {"subscriptions"},
+            {"tenant"}
         };
 
 
@@ -337,7 +338,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 string? parent;
                 if (!_context.Configuration.ResourceToParent.TryGetValue(operationsGroup.Key, out parent) && operationsGroup.IsExtensionResource)
                 {
-                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.Parent}. key Please add to readme.md");
+                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.Parent}. key Please add to readme.md {_codeModel.Info.Description} ");
                 }
                 operationsGroup.Parent = parent ?? (operationsGroup.IsTenantResource ? "tenant" :  ParentDetection.GetParent(operationsGroup));
 

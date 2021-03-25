@@ -13,9 +13,9 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
         {
             foreach (var keyValue in operationGroup.OperationHttpMethodMapping)
             {
-                bool providerBefore = false;
                 foreach (var httpRequest in keyValue.Value)
                 {
+                    bool providerBefore = false;
                     var providerSegmentsList = ((HttpRequest?)httpRequest?.Protocol?.Http)?.ProviderSegments;
                     for (int i = 0; i < providerSegmentsList?.Count; i++)
                     {
