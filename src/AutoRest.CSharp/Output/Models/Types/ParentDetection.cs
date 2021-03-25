@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Input;
+using System.Linq;
 
 namespace AutoRest.CSharp.Output.Models.Type.Decorate
 {
@@ -63,14 +64,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
 
         private static ProviderSegment? GetFullProvider(List<ProviderSegment> providerSegments)
         {
-            for (int i = providerSegments.Count - 1; i > -1; i--)
-            {
-                if (providerSegments[i].IsFullProvider)
-                {
-                    return providerSegments[i];
-                }
-            }
-            return null;
+            return providerSegments.Last().IsFullProvider ? providerSegments.Last() : null;
         }
 
         private static string ParseMethodForParent(ProviderSegment fullProvider, string path, string resourceType)
