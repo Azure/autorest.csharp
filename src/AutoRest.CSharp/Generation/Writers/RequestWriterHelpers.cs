@@ -93,9 +93,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     case RequestContentRequestBody body:
                         WriteHeaders(writer, clientMethod, request, content: true);
-                        writer.Line($"{request}.Content = {body.Parameter:I};");
+                        writer.Line($"{request}.Content = {body.Parameter.Name};");
                         writer.Line($"return {request:I};");
-                        break;
+                        // Early return not break as we've already returned in generated code
+                        return;
                     case SchemaRequestBody body:
                         using (WriteValueNullCheck(writer, body.Value))
                         {
