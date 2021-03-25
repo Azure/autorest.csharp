@@ -45,36 +45,26 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var operation in _operationGroup.Operations)
             {
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    // See also RestClient::EnsureNormalMethods if changing
-                    if (!(serviceRequest.Protocol.Http is HttpRequest httpRequest))
-                    {
-                        continue;
-                    }
-                    IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where (p => {
-                        switch (p.In)
-                        {
-                            case ParameterLocation.Header:
-                            case ParameterLocation.Query:
-                            case ParameterLocation.Path:
-                            case ParameterLocation.Uri:
-                                return true;
-                            default:
-                                return false;
-                        }
-                    });
-                    requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, requestParameters, null));
-                }
-            }
-
-            foreach (var operation in _operationGroup.Operations)
-            {
-                ServiceRequest serviceRequest = operation.Requests.FirstOrDefault();
+                ServiceRequest serviceRequest = operation.Requests.FirstOrDefault(r => r.Protocol.Http is HttpRequest);
                 if (serviceRequest != null)
                 {
-                    yield return requestMethods[serviceRequest];
+                    IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where (FilterServiceParamaters);
+                    yield return _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null);
                 }
+            }
+        }
+
+        private bool FilterServiceParamaters (RequestParameter p)
+        {
+            switch (p.In)
+            {
+                case ParameterLocation.Header:
+                case ParameterLocation.Query:
+                case ParameterLocation.Path:
+                case ParameterLocation.Uri:
+                    return true;
+                default:
+                    return false;
             }
         }
 
