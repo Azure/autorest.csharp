@@ -332,10 +332,20 @@ namespace AutoRest.CSharp.Output.Models.Types
                 ResourceTypes.Add(operationsGroup.ResourceType);
                 operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
                 operationsGroup.IsExtensionResource = ExtensionDetection.IsExtension(operationsGroup);
+
+                // TODO better support for extension resources
                 string? parent;
-                operationsGroup.Parent = _context.Configuration.ResourceToParent.TryGetValue(operationsGroup.Key, out parent) ? parent : ((operationsGroup.IsTenantResource || operationsGroup.IsExtensionResource) ? null : ParentDetection.GetParent(operationsGroup));
+                if (!_context.Configuration.ResourceToParent.TryGetValue(operationsGroup.Key, out parent) && operationsGroup.IsExtensionResource)
+                {
+                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.Parent}. key Please add to readme.md");
+                }
+        
+                operationsGroup.Parent = parent ?? (operationsGroup.IsExtensionResource ? "tenant" :  ParentDetection.GetParent(operationsGroup));
+
+                // If overriden, add parent to known types list (trusting user input)
                 if (parent != null)
                     ResourceTypes.Add(parent);
+                
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
@@ -344,8 +354,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     operationsGroup.Resource = nameOverride;
                 }
-
             }
+            
             //now that we have resolved all operations groups to resource types above, can try to solve for the parent
             foreach (var operationsGroup in _codeModel.OperationGroups)
             {
