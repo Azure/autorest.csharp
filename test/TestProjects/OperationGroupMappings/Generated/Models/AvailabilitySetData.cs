@@ -6,12 +6,37 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace OperationGroupMappings
 {
     /// <summary> A class representing the AvailabilitySet data model. </summary>
     public partial class AvailabilitySetData
     {
+        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        internal AvailabilitySetData()
+        {
+            VirtualMachines = new ChangeTrackingList<SubResource>();
+            Statuses = new ChangeTrackingList<InstanceViewStatus>();
+        }
+
+        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <param name="sku"> sku. </param>
+        /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
+        /// <param name="platformFaultDomainCount"> Fault Domain count. </param>
+        /// <param name="virtualMachines"> A list of references to all virtual machines in the availability set. </param>
+        /// <param name="proximityPlacementGroup"> Specifies information about the proximity placement group that the availability set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01. </param>
+        /// <param name="statuses"> The resource status information. </param>
+        internal AvailabilitySetData(string sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IReadOnlyList<SubResource> virtualMachines, SubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses)
+        {
+            Sku = sku;
+            PlatformUpdateDomainCount = platformUpdateDomainCount;
+            PlatformFaultDomainCount = platformFaultDomainCount;
+            VirtualMachines = virtualMachines;
+            ProximityPlacementGroup = proximityPlacementGroup;
+            Statuses = statuses;
+        }
+
         /// <summary> sku. </summary>
         public string Sku { get; }
         /// <summary> Update Domain count. </summary>

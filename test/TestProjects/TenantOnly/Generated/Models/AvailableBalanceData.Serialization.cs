@@ -6,15 +6,50 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace TenantOnly
 {
-    /// <summary> A class representing the AvailableBalance data model. </summary>
-    public partial class AvailableBalanceData
+    public partial class AvailableBalanceData : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
         internal static AvailableBalanceData DeserializeAvailableBalanceData(JsonElement element)
         {
-            return new AvailableBalanceData();
+            Optional<Amount> amount = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("properties"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("amount"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            amount = Amount.DeserializeAmount(property0.Value);
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new AvailableBalanceData(amount.Value);
         }
     }
 }

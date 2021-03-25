@@ -6,15 +6,57 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace TenantOnly
 {
-    /// <summary> A class representing the BillingAccount data model. </summary>
-    public partial class BillingAccountData
+    public partial class BillingAccountData : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
         internal static BillingAccountData DeserializeBillingAccountData(JsonElement element)
         {
-            return new BillingAccountData();
+            Optional<string> id = default;
+            Optional<string> name = default;
+            Optional<string> type = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("properties"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("id"))
+                        {
+                            id = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("name"))
+                        {
+                            name = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("type"))
+                        {
+                            type = property0.Value.GetString();
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new BillingAccountData(id.Value, name.Value, type.Value);
         }
     }
 }
