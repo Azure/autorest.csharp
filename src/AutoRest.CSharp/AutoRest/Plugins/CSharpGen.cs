@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (context.Configuration.AzureArm)
             {
-                context.Library.RebuildModelInheritance();
+                new InheritanceChoser().RebuildModelInheritance(context.Library.SchemaMap, context.Library.ResourceSchemaMap);
             }
 
             foreach (var model in context.Library.Models)
