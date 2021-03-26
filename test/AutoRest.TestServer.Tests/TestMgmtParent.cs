@@ -21,19 +21,13 @@ namespace AutoRest.TestServer.Tests
     internal class TestMgmtParent
     {
         [Test]
-        public async Task TestParent()
+        public async Task TestParentComputer()
         {
-            StandaloneGeneratorRunner runner = new StandaloneGeneratorRunner();
             string[] args = {"--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.Sample\\Generated"};
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "samples", "Azure.Management.Storage", "Generated");
-            TestContext.Progress.WriteLine(basePath);
-            JsonDocument doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
-            var root = doc.RootElement;
-            TestContext.Progress.WriteLine(root.ValueKind);
+            basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "samples", "Azure.ResourceManager.Sample", "Generated");
             var configuration = StandaloneGeneratorRunner.LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
-            //Directory.CreateDirectory(configuration.OutputFolder);
             var projectDirectory = Path.Combine(configuration.OutputFolder, Configuration.ProjectRelativeDirectory);
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
@@ -43,6 +37,18 @@ namespace AutoRest.TestServer.Tests
             foreach (var operations in model.OperationGroups)
             {
                 Assert.IsNotNull(operations.Parent);
+                if (operations.Key.Equals("VirtualMachineExtensionImages"))
+                {
+                    Assert.IsTrue(operations.Parent.Equals("Microsoft.Compute/locations/publishers"));
+                }
+                else if (operations.Key.Equals("AvailabilitySets"))
+                {
+                   Assert.IsTrue(operations.Parent.Equals("resourceGroups"));
+                }
+                else if (operations.Key.Equals("DedicatedHosts"))
+                {
+                    Assert.IsTrue(operations.Parent.Equals("Microsoft.Compute/hostGroups"));
+                }
             }
         }
     }
