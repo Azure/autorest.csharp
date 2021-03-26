@@ -183,13 +183,13 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientMethod? GetNextOperationMethod(ServiceRequest request)
         {
-            EnsureGetNextPageMethods().TryGetValue(request, out RestClientMethod? value);
+            _nextPageMethods.TryGetValue(request, out RestClientMethod? value);
             return value;
         }
 
         public RestClientMethod GetOperationMethod(ServiceRequest request)
         {
-            return EnsureNormalMethods()[request];
+            return _requestMethods[request];
         }
 
         private Parameter BuildClientParameter(RequestParameter requestParameter)
