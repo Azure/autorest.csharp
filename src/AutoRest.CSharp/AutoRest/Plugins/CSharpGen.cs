@@ -37,81 +37,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
-            var context = new BuildContext(await codeModelTask, configuration, sourceInputModel);
+            var codeModel = await codeModelTask;
 
-            var modelWriter = new ModelWriter();
-            var clientWriter = new ClientWriter();
-            var restClientWriter = new RestClientWriter();
-            var serializeWriter = new SerializationWriter();
-            var headerModelModelWriter = new ResponseHeaderGroupWriter();
-
-            foreach (var model in context.Library.Models)
+            if (configuration.LowLevelClient)
             {
-                var codeWriter = new CodeWriter();
-                modelWriter.WriteModel(codeWriter, model);
-
-                var serializerCodeWriter = new CodeWriter();
-                serializeWriter.WriteSerialization(serializerCodeWriter, model);
-
-                var name = model.Type.Name;
-                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
-                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                LowLevelTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
-
-            foreach (var client in context.Library.RestClients)
+            else
             {
-                var restCodeWriter = new CodeWriter();
-                restClientWriter.WriteClient(restCodeWriter, client);
-
-                project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
+                DataPlaneTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
-
-            foreach (ResponseHeaderGroupType responseHeaderModel in context.Library.HeaderModels)
-            {
-                var headerModelCodeWriter = new CodeWriter();
-                headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
-
-                project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
-            }
-
-            if (configuration.PublicClients && !configuration.AzureArm && context.Library.Clients.Count() > 0)
-            {
-                var codeWriter = new CodeWriter();
-                ClientOptionsWriter.WriteClientOptions(codeWriter, context);
-
-                var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
-                project.AddGeneratedFile($"{clientOptionsName}ClientOptions.cs", codeWriter.ToString());
-            }
-
-            foreach (var client in context.Library.Clients)
-            {
-                var codeWriter = new CodeWriter();
-                clientWriter.WriteClient(codeWriter, client, context);
-
-                project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
-            }
-
-            foreach (var operation in context.Library.LongRunningOperations)
-            {
-                var codeWriter = new CodeWriter();
-                LongRunningOperationWriter.Write(codeWriter, operation);
-
-                project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
-            }
-
-            if (context.Configuration.AzureArm)
-            {
-                var codeWriter = new CodeWriter();
-                ManagementClientWriter.WriteClientOptions(codeWriter, context);
-                var libraryName = ManagementClientWriter.GetManagementClientPrefix(context.DefaultLibraryName);
-                project.AddGeneratedFile($"{libraryName}ManagementClientOptions.cs", codeWriter.ToString());
-
-                var clientCodeWriter = new CodeWriter();
-                ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
-                project.AddGeneratedFile($"{libraryName}ManagementClient.cs", clientCodeWriter.ToString());
-
-            }
-
             return project;
         }
 
