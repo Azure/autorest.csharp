@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.TestServer.Tests
 {
