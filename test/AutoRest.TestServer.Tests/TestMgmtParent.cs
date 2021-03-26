@@ -33,7 +33,7 @@ namespace AutoRest.TestServer.Tests
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
             var context = new BuildContext(model, configuration, sourceInputModel);
-            var lib = context.Library;
+            _ = context.Library;
             foreach (var operations in model.OperationGroups)
             {
                 Assert.IsNotNull(operations.Parent);
