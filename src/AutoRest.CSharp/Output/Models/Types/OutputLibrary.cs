@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
         }
 
-        protected Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
+        internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
         public virtual TypeProvider FindTypeForSchema(Schema schema)

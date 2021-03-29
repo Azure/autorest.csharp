@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Output.Models
     {
         private const string _suffixValue = "Data";
         private BuildContext<MgmtOutputLibrary> _context;
-        private ObjectTypeProperty[]? _properties;
         private string _prefix;
         private ObjectSchema _schema;
 
