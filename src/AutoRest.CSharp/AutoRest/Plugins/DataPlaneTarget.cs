@@ -21,6 +21,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new ResponseHeaderGroupWriter();
+            var resourceOperationWriter = new ResourceOperationWriter();
+            var resourceContainerWriter = new ResourceContainerWriter();
+            var resourceDataWriter = new ResourceDataWriter();
+            var armResourceWriter = new ArmResourceWriter();
+            var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -51,23 +56,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
-            if (configuration.PublicClients && !configuration.AzureArm && context.Library.Clients.Count() > 0)
-            {
-                var codeWriter = new CodeWriter();
-                ClientOptionsWriter.WriteClientOptions(codeWriter, context);
-
-                var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
-                project.AddGeneratedFile($"{clientOptionsName}ClientOptions.cs", codeWriter.ToString());
-            }
-
-            foreach (var client in context.Library.Clients)
-            {
-                var codeWriter = new CodeWriter();
-                clientWriter.WriteClient(codeWriter, client, context);
-
-                project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
-            }
-
             foreach (var operation in context.Library.LongRunningOperations)
             {
                 var codeWriter = new CodeWriter();
@@ -76,17 +64,65 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
+
             if (context.Configuration.AzureArm)
             {
-                var codeWriter = new CodeWriter();
-                ManagementClientWriter.WriteClientOptions(codeWriter, context);
-                var libraryName = ManagementClientWriter.GetManagementClientPrefix(context.DefaultLibraryName);
-                project.AddGeneratedFile($"{libraryName}ManagementClientOptions.cs", codeWriter.ToString());
+                foreach (var resourceOperation in context.Library.ResourceOperations)
+                {
+                    var codeWriter = new CodeWriter();
+                    resourceOperationWriter.WriteClient(codeWriter, resourceOperation);
 
-                var clientCodeWriter = new CodeWriter();
-                ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
-                project.AddGeneratedFile($"{libraryName}ManagementClient.cs", clientCodeWriter.ToString());
+                    project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
+                }
 
+                foreach (var resourceContainer in context.Library.ResourceContainers)
+                {
+                    var codeWriter = new CodeWriter();
+                    resourceContainerWriter.WriteClient(codeWriter, resourceContainer);
+
+                    project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
+                }
+
+                foreach (var model in context.Library.ResourceData)
+                {
+                    var codeWriter = new CodeWriter();
+                    resourceDataWriter.WriteResourceData(codeWriter, model);
+
+                    var serializerCodeWriter = new CodeWriter();
+                    resourceDataSerializeWriter.WriteSerialization(serializerCodeWriter, model);
+
+                    var name = model.Type.Name;
+                    project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
+                    project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                }
+
+                foreach (var model in context.Library.ArmResource)
+                {
+                    var codeWriter = new CodeWriter();
+                    armResourceWriter.WriteResource(codeWriter, model);
+
+                    var name = model.Type.Name;
+                    project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
+                }
+            }
+            else
+            {
+                foreach (var client in context.Library.Clients)
+                {
+                    var codeWriter = new CodeWriter();
+                    clientWriter.WriteClient(codeWriter, client, context);
+
+                    project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
+                }
+
+                if (configuration.PublicClients && context.Library.Clients.Count() > 0)
+                {
+                    var codeWriter = new CodeWriter();
+                    ClientOptionsWriter.WriteClientOptions(codeWriter, context);
+
+                    var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
+                    project.AddGeneratedFile($"{clientOptionsName}ClientOptions.cs", codeWriter.ToString());
+                }
             }
         }
     }
