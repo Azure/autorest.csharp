@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 {0}
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.9.0"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.11.0"" />
   </ItemGroup>
 
 </Project>
@@ -42,6 +42,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" PrivateAssets=""All"" />
   </ItemGroup>
 ";
+
+        private string _lowLevelExperimentalReference = @"
+  <ItemGroup>
+    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.11"" />
+  </ItemGroup>
+";
+
         internal static string GetVersion()
         {
             Assembly clientAssembly = Assembly.GetExecutingAssembly();
@@ -79,7 +86,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             string csProjContent;
             if (configuration.SkipCSProjPackageReference)
             {
+              if (configuration.LowLevelClient)
+              {
+                csProjContent = string.Format(_csProjContent, _lowLevelExperimentalReference);
+              }
+              else
+              {
                 csProjContent = string.Format(_csProjContent, "");
+              }
             }
             else
             {
