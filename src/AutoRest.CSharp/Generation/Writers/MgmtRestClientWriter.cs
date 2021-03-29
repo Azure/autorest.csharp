@@ -24,9 +24,9 @@ using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class RestClientWriter
+    internal class MgmtRestClientWriter
     {
-        public void WriteClient(CodeWriter writer, DataPlaneRestClient restClient)
+        public void WriteClient(CodeWriter writer, MgmtRestClient restClient)
         {
             var cs = restClient.Type;
             var @namespace = cs.Namespace;
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string PipelineVariable = "pipeline";
         private const string PipelineField = "_" + PipelineVariable;
 
-        private void WriteClientFields(CodeWriter writer, DataPlaneRestClient restClient)
+        private void WriteClientFields(CodeWriter writer, MgmtRestClient restClient)
         {
             foreach (Parameter clientParameter in restClient.Parameters)
             {
@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteClientCtor(CodeWriter writer, DataPlaneRestClient restClient, CSharpType cs)
+        private void WriteClientCtor(CodeWriter writer, MgmtRestClient restClient, CSharpType cs)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
             writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, "The handler for diagnostic messaging in the client.");

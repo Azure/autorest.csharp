@@ -12,12 +12,12 @@ namespace AutoRest.CSharp.Output.Models
     internal class ResourceData : ObjectType
     {
         private const string _suffixValue = "Data";
-        private BuildContext _context;
+        private BuildContext<MgmtOutputLibrary> _context;
         private ObjectTypeProperty[]? _properties;
         private string _prefix;
         private Schema _schema;
 
-        public ResourceData(ObjectSchema schema, OperationGroup operationGroup, BuildContext context, bool isResourceModel) : base(schema, context, isResourceModel)
+        public ResourceData(ObjectSchema schema, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool isResourceModel) : base(schema, context, isResourceModel)
         {
             _context = context;
             _prefix = operationGroup.Resource;

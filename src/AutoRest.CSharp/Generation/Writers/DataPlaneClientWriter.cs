@@ -381,7 +381,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperationMethod lroMethod, bool async)
+        private void WriteStartOperationOperation(CodeWriter writer, DataPlaneLongRunningOperationMethod lroMethod, bool async)
         {
             RestClientMethod originalMethod = lroMethod.StartMethod;
             CSharpType returnType = async ? new CSharpType(typeof(Task<>), lroMethod.Operation.Type) : lroMethod.Operation.Type;

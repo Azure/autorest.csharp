@@ -12,7 +12,7 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Responses
 {
-    internal class ResponseHeaderGroupType: TypeProvider
+    internal abstract class ResponseHeaderGroupType: TypeProvider
     {
         private static string[] _knownResponseHeaders = new[]
         {
@@ -21,48 +21,33 @@ namespace AutoRest.CSharp.Output.Models.Responses
             "x-ms-client-request-id",
             "x-ms-request-id"
         };
+        private readonly HttpResponseHeader[] _httpResponseHeaders;
 
-        public ResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context) : base(context)
+        public ResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, string clientName, BuildContext context) : base(context)
         {
-            ResponseHeader CreateResponseHeader(HttpResponseHeader header)
-            {
-                CSharpType type = context.TypeFactory.CreateType(header.Schema, true);
-
-                return new ResponseHeader(
-                    header.CSharpName(),
-                    header.Extensions?.HeaderCollectionPrefix ?? header.Header,
-                    type,
-                    BuilderHelpers.EscapeXmlDescription(header.Language!.Default.Description));
-            }
-
             string operationName = operation.CSharpName();
-            var clientName = context.Library.FindRestClient(operationGroup).ClientPrefix;
 
             DefaultName = clientName + operationName + "Headers";
             Description = $"Header model for {operationName}";
-            Headers = httpResponseHeaders.Select(CreateResponseHeader).ToArray();
+            _httpResponseHeaders = httpResponseHeaders;
+        }
+
+        protected abstract CSharpType GetCsharpType(Schema schema, bool isNullable);
+
+        protected ResponseHeader CreateResponseHeader(HttpResponseHeader header)
+        {
+            CSharpType type = GetCsharpType(header.Schema, true);
+
+            return new ResponseHeader(
+                header.CSharpName(),
+                header.Extensions?.HeaderCollectionPrefix ?? header.Header,
+                type,
+                BuilderHelpers.EscapeXmlDescription(header.Language!.Default.Description));
         }
 
         public string Description { get; }
-        public ResponseHeader[] Headers { get; }
+        public ResponseHeader[] Headers => _httpResponseHeaders.Select(CreateResponseHeader).ToArray();
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "internal";
-
-        public static ResponseHeaderGroupType? TryCreate(OperationGroup operationGroup, Operation operation, BuildContext<DataPlaneOutputLibrary> context)
-        {
-            var httpResponseHeaders = operation.Responses.SelectMany(r => r.HttpResponse.Headers)
-                .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))
-                .GroupBy(h => h.Header)
-                // Take first header definition with any particular name
-                .Select(h => h.First())
-                .ToArray();
-
-            if (!httpResponseHeaders.Any())
-            {
-                return null;
-            }
-
-            return new ResponseHeaderGroupType(operationGroup, operation, httpResponseHeaders, context);
-        }
     }
 }

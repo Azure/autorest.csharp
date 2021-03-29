@@ -43,6 +43,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 LowLevelTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
+            else if (configuration.AzureArm)
+            {
+                MgmtTarget.Execute(project, codeModel, sourceInputModel, configuration);
+            }
             else
             {
                 DataPlaneTarget.Execute(project, codeModel, sourceInputModel, configuration);

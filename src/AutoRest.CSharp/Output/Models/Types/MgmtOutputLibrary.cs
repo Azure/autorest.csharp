@@ -18,15 +18,15 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CodeModel _codeModel;
 
         private Dictionary<OperationGroup, MgmtClient>? _clients;
-        private Dictionary<OperationGroup, DataPlaneRestClient>? _restClients;
+        private Dictionary<OperationGroup, MgmtRestClient>? _restClients;
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<string, ResourceData>? _resourceData;
         private Dictionary<string, ArmResource>? _armResource;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
-        private Dictionary<Operation, LongRunningOperation>? _operations;
-        private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
+        private Dictionary<Operation, MgmtLongRunningOperation>? _operations;
+        private Dictionary<Operation, MgmtResponseHeaderGroupType>? _headerModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
         private IEnumerable<Schema> _allSchemas;
 
@@ -52,31 +52,31 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
-        public IEnumerable<DataPlaneRestClient> RestClients => EnsureRestClients().Values;
+        public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values;
 
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
-        public IEnumerable<DataPlaneClient> Clients => EnsureClients().Values;
+        public IEnumerable<MgmtClient> Clients => EnsureClients().Values;
 
-        public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
+        public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
-        public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
+        public IEnumerable<MgmtResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
 
-        private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
+        private Dictionary<Operation, MgmtResponseHeaderGroupType> EnsureHeaderModels()
         {
             if (_headerModels != null)
             {
                 return _headerModels;
             }
 
-            _headerModels = new Dictionary<Operation, ResponseHeaderGroupType>();
+            _headerModels = new Dictionary<Operation, MgmtResponseHeaderGroupType>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    var headers = ResponseHeaderGroupType.TryCreate(operationGroup, operation, _context);
+                    var headers = MgmtResponseHeaderGroupType.TryCreate(operationGroup, operation, _context);
                     if (headers != null)
                     {
                         _headerModels.Add(operation, headers);
@@ -87,14 +87,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _headerModels;
         }
 
-        private Dictionary<Operation, LongRunningOperation> EnsureLongRunningOperations()
+        private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()
         {
             if (_operations != null)
             {
                 return _operations;
             }
 
-            _operations = new Dictionary<Operation, LongRunningOperation>();
+            _operations = new Dictionary<Operation, MgmtLongRunningOperation>();
 
             if (_context.Configuration.PublicClients)
             {
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         if (operation.IsLongRunning)
                         {
-                            _operations.Add(operation, new LongRunningOperation(operationGroup, operation, _context));
+                            _operations.Add(operation, new MgmtLongRunningOperation(operationGroup, operation, _context));
                         }
                     }
                 }
@@ -133,17 +133,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _clients;
         }
 
-        private Dictionary<OperationGroup, DataPlaneRestClient> EnsureRestClients()
+        private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
             if (_restClients != null)
             {
                 return _restClients;
             }
 
-            _restClients = new Dictionary<OperationGroup, DataPlaneRestClient>();
+            _restClients = new Dictionary<OperationGroup, MgmtRestClient>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                _restClients.Add(operationGroup, new DataPlaneRestClient(operationGroup, _context));
+                _restClients.Add(operationGroup, new MgmtRestClient(operationGroup, _context));
             }
 
             return _restClients;
@@ -287,25 +287,25 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotImplementedException()
         };
 
-        public LongRunningOperation FindLongRunningOperation(Operation operation)
+        public MgmtLongRunningOperation FindLongRunningOperation(Operation operation)
         {
             Debug.Assert(operation.IsLongRunning);
 
             return EnsureLongRunningOperations()[operation];
         }
 
-        public DataPlaneClient? FindClient(OperationGroup operationGroup)
+        public MgmtClient? FindClient(OperationGroup operationGroup)
         {
             EnsureClients().TryGetValue(operationGroup, out var client);
             return client;
         }
 
-        public DataPlaneRestClient FindRestClient(OperationGroup operationGroup)
+        public MgmtRestClient FindRestClient(OperationGroup operationGroup)
         {
             return EnsureRestClients()[operationGroup];
         }
 
-        public ResponseHeaderGroupType? FindHeaderModel(Operation operation)
+        public MgmtResponseHeaderGroupType? FindHeaderModel(Operation operation)
         {
             EnsureHeaderModels().TryGetValue(operation, out var model);
             return model;

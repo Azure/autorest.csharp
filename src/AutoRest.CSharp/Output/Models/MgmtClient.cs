@@ -20,8 +20,8 @@ namespace AutoRest.CSharp.Output.Models
         private readonly OperationGroup _operationGroup;
         private PagingMethod[]? _pagingMethods;
         private ClientMethod[]? _methods;
-        private LongRunningOperationMethod[]? _longRunningOperationMethods;
-        private DataPlaneRestClient? _restClient;
+        private MgmtLongRunningOperationMethod[]? _longRunningOperationMethods;
+        private MgmtRestClient? _restClient;
         private readonly BuildContext<MgmtOutputLibrary> _context;
 
         public MgmtClient(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context) : base(context)
@@ -35,12 +35,12 @@ namespace AutoRest.CSharp.Output.Models
 
         public string ClientShortName { get; }
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, Context)));
-        public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
+        public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
 
-        public LongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
+        public MgmtLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
 
         protected override string DefaultName { get; }
 
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LongRunningOperationMethod> BuildLongRunningOperationMethods()
+        private IEnumerable<MgmtLongRunningOperationMethod> BuildLongRunningOperationMethods()
         {
             foreach (var operation in _operationGroup.Operations)
             {
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models
                         var name = operation.CSharpName();
                         RestClientMethod startMethod = RestClient.GetOperationMethod(serviceRequest);
 
-                        yield return new LongRunningOperationMethod(
+                        yield return new MgmtLongRunningOperationMethod(
                             name,
                             _context.Library.FindLongRunningOperation(operation),
                             startMethod,

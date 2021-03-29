@@ -21,7 +21,7 @@ using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class RestClientBuilder<T> where T: OutputLibrary
+    internal class RestClientBuilder<T> where T : OutputLibrary
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly BuildContext<T> _context;

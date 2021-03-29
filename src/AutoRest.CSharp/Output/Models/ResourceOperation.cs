@@ -18,13 +18,15 @@ namespace AutoRest.CSharp.Output.Models
         private const string ContainerSuffixValue = "Container";
         private const string DataSuffixValue = "Data";
         private string _prefix;
+        private BuildContext<MgmtOutputLibrary> _context;
 
         protected OperationGroup _operationGroup;
-        protected RestClient? _restClient;
+        protected MgmtRestClient? _restClient;
 
-        public ResourceOperation(OperationGroup operationGroup, BuildContext context)
+        public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(context)
         {
+            _context = context;
             _operationGroup = operationGroup;
             _prefix = operationGroup.Resource;
             DefaultName = _prefix + SuffixValue;
@@ -38,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, _prefix));
 
-        public RestClient RestClient => _restClient ??= Context.Library.FindRestClient(_operationGroup);
+        public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
