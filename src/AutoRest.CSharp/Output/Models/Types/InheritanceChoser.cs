@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class InheritanceChoser
+    internal static class InheritanceChoser
     {
         public static IList<System.Type> ReferenceClassCollection = GetReferenceClassCollection();
 
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ReferenceTypeAttribute)).Count() > 0).ToList();
         }
 
-        public void RebuildModelInheritance(Dictionary<Schema, TypeProvider> schemaMap, Dictionary<Schema, TypeProvider> resourceSchemaMap)
+        public static void RebuildModelInheritance(Dictionary<Schema, TypeProvider> schemaMap, Dictionary<Schema, TypeProvider> resourceSchemaMap)
         {
             var typeOverrideMap = new Dictionary<CSharpType, CSharpType>();
 
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             RebuildExactModelInheritance(resourceSchemaMap);
         }
 
-        private void RebuildExactModelInheritance(Dictionary<Schema, TypeProvider> map)
+        private static void RebuildExactModelInheritance(Dictionary<Schema, TypeProvider> map)
         {
             foreach (var kval in map)
             {
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private CSharpType? GetExactMatch(CSharpType childType)
+        private static CSharpType? GetExactMatch(CSharpType childType)
         {
             foreach (System.Type parentType in ReferenceClassCollection)
             {
@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        private bool IsEqual(CSharpType childType, System.Type parentType)
+        private static bool IsEqual(CSharpType childType, System.Type parentType)
         {
             var childProperties = ((ObjectType)(childType.Implementation)).Properties.ToList();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return true;
         }
 
-        private bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
+        private static bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
         {
             return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&
                 m.ReturnType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" &&

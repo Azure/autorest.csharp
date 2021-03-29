@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -194,7 +195,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (!_resourceData.ContainsKey(operation.Resource))
                     {
-                        _resourceData.Add(operation.Resource, new ResourceData((ObjectSchema)schema, operation, _context, true));
+                        var resourceData = new ResourceData((ObjectSchema)schema, operation, _context, true);
+                        CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
+                        if (!(inherits is null))
+                        {
+                            resourceData.OverrideInherits(inherits);
+                        }
+                        _resourceData.Add(operation.Resource, resourceData);
                     }
                 }
             }
