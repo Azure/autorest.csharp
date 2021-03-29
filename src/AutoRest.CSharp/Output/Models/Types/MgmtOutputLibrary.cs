@@ -41,11 +41,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
-            if (context.Configuration.AzureArm)
-            {
-                DecorateOperationGroup();
-                DecorateSchema();
-            }
+            DecorateOperationGroup();
+            DecorateSchema();
         }
 
         public IEnumerable<ArmResource> ArmResource => EnsureArmResource().Values;
@@ -240,13 +237,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result;
         }
 
-        private Dictionary<Schema, TypeProvider> BuildModels()
+        protected override Dictionary<Schema, TypeProvider> BuildModels()
         {
             var models = new Dictionary<Schema, TypeProvider>();
 
             foreach (var schema in _allSchemas)
             {
-                if (_context.Configuration.AzureArm && _operationGroups.ContainsKey(schema.Name))
+                if (_operationGroups.ContainsKey(schema.Name))
                 {
                     continue;
                 }

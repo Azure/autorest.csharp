@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
-            if (configuration.PublicClients && !configuration.AzureArm && context.Library.Clients.Count() > 0)
+            if (configuration.PublicClients && context.Library.Clients.Count() > 0)
             {
                 var codeWriter = new CodeWriter();
                 ClientOptionsWriter.WriteClientOptions(codeWriter, context);

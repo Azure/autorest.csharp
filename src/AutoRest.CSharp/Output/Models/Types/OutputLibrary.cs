@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return SchemaMap[schema];
         }
 
-        private Dictionary<Schema, TypeProvider> BuildModels()
+        protected virtual Dictionary<Schema, TypeProvider> BuildModels()
         {
             var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
