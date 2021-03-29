@@ -12,7 +12,7 @@ using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class ManagementClientWriter
+    internal class MgmtClientWriter
     {
         private const string ClientDiagnosticsField = "_clientDiagnostics";
         private const string PipelineField = "_pipeline";
@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string ClientSuffixValue = "ManagementClient";
         private const string OperationsSuffixValue = "Operations";
 
-        public static void WriteAggregateClient(CodeWriter writer, BuildContext<DataPlaneOutputLibrary> context)
+        public static void WriteAggregateClient(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
         {
             var title = GetManagementClientPrefix(context.DefaultLibraryName);
             using (writer.Scope($"namespace {context.Configuration.Namespace ?? context.DefaultNamespace}"))
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 Dictionary<string, Parameter> allParameters = new Dictionary<string, Parameter>();
                 foreach (var parameter in context.Library.Clients.SelectMany(p => p.RestClient.Parameters))
                 {
-                    if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
+                    if (MgmtClientWriterHelpers.IsApiVersionParameter(parameter))
                     {
                         continue;
                     }
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of {title}ManagementClient");
                     foreach (Parameter parameter in allParameters.Values)
                     {
-                        if (ManagementClientWriterHelpers.IsEndpointParameter(parameter))
+                        if (MgmtClientWriterHelpers.IsEndpointParameter(parameter))
                         {
                             continue;
                         }
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Append($"public {title}ManagementClient(");
                     foreach (Parameter parameter in allParameters.Values)
                     {
-                        if (ManagementClientWriterHelpers.IsEndpointParameter(parameter))
+                        if (MgmtClientWriterHelpers.IsEndpointParameter(parameter))
                         {
                             continue;
                         }
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     foreach (Parameter parameter in allParameters.Values)
                     {
                         // Pass the default host
-                        if (ManagementClientWriterHelpers.IsEndpointParameter(parameter))
+                        if (MgmtClientWriterHelpers.IsEndpointParameter(parameter))
                         {
                             writer.Append($"null, ");
                             continue;
@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"new {client.Type}({ClientDiagnosticsField}, {PipelineField}, ");
                         foreach (var parameter in client.RestClient.Parameters)
                         {
-                            if (ManagementClientWriterHelpers.IsApiVersionParameter(parameter))
+                            if (MgmtClientWriterHelpers.IsApiVersionParameter(parameter))
                             {
                                 continue;
                             }
