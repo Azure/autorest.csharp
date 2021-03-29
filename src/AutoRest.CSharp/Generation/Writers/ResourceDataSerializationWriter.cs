@@ -10,20 +10,8 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public void WriteSerialization(CodeWriter writer, ResourceData resourceData)
         {
-            var cs = resourceData.Type;
-            var @namespace = cs.Namespace;
-            var declarationName = resourceData.Declaration.Name;
-            using (writer.Namespace(@namespace))
-            {
-                writer.WriteXmlDocumentationSummary(resourceData.Description);
-                using (writer.Scope($"{resourceData.Declaration.Accessibility} partial class {cs.Name}"))
-                {
-                    using (writer.Scope($"internal static {cs} Deserialize{declarationName}({typeof(JsonElement)} element)"))
-                    {
-                        writer.Append($"return new {cs}();");
-                    }
-                }
-            }
+            var serializationWriter = new SerializationWriter();
+            serializationWriter.WriteSerialization(writer, resourceData);
         }
     }
 }

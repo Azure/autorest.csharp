@@ -17,6 +17,7 @@
   <ItemGroup>
     <PackageReference Include="Azure.Core" Version="1.11.0" />
     <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.11" />
+    <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210325.1" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.7.0" />
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
   </ItemGroup>
@@ -62,7 +63,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <_GeneratedPropsFileLines Include="&lt;Project&gt;" />      
+      <_GeneratedPropsFileLines Include="&lt;Project&gt;" />
       <_GeneratedPropsFileLines Include="&lt;ItemGroup&gt;" />
       <_GeneratedPropsFileLines Include="&lt;SourceRoot Include=&quot;%24([System.IO.Path]::GetFullPath('%24(MSBuildThisFileDirectory)..\contentFiles\any\$(TargetFramework)\'))&quot; SourceLinkUrl=&quot;$(_RawUrl)&quot;/&gt;" />
       <_GeneratedPropsFileLines Include="&lt;/ItemGroup&gt;" />
@@ -72,7 +73,7 @@
       <_GeneratedPropsFileLines Include="&lt;/PropertyGroup&gt;" />
       <_GeneratedPropsFileLines Include="&lt;/Project&gt;" />
     </ItemGroup>
-    
+
 
     <WriteLinesToFile Overwrite="true" File="$(_GeneratedPropsFilePath)" Lines="@(_GeneratedPropsFileLines)" />
 

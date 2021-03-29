@@ -7,12 +7,39 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace TenantOnly
 {
     /// <summary> A class representing the Agreement data model. </summary>
-    public partial class AgreementData
+    public partial class AgreementData : Azure.ResourceManager.Core.Resource
     {
+        /// <summary> Initializes a new instance of AgreementData. </summary>
+        public AgreementData()
+        {
+            Participants = new ChangeTrackingList<Participants>();
+        }
+
+        /// <summary> Initializes a new instance of AgreementData. </summary>
+        /// <param name="agreementLink"> The URL to download the agreement. </param>
+        /// <param name="category"> The category of the agreement signed by a customer. </param>
+        /// <param name="acceptanceMode"> The mode of acceptance for an agreement. </param>
+        /// <param name="effectiveDate"> The date from which the agreement is effective. </param>
+        /// <param name="expirationDate"> The date when the agreement expires. </param>
+        /// <param name="participants"> The list of participants that participates in acceptance of an agreement. </param>
+        /// <param name="status"> The current status of the agreement. </param>
+        internal AgreementData(string agreementLink, Category? category, AcceptanceMode? acceptanceMode, DateTimeOffset? effectiveDate, DateTimeOffset? expirationDate, IList<Participants> participants, string status)
+        {
+            AgreementLink = agreementLink;
+            Category = category;
+            AcceptanceMode = acceptanceMode;
+            EffectiveDate = effectiveDate;
+            ExpirationDate = expirationDate;
+            Participants = participants;
+            Status = status;
+        }
+
         /// <summary> The URL to download the agreement. </summary>
         public string AgreementLink { get; }
         /// <summary> The category of the agreement signed by a customer. </summary>

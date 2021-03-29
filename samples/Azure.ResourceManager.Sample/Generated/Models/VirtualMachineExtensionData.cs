@@ -5,11 +5,43 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineExtension data model. </summary>
-    public partial class VirtualMachineExtensionData
+    public partial class VirtualMachineExtensionData : TrackedResource
     {
+        /// <summary> Initializes a new instance of VirtualMachineExtensionData. </summary>
+        public VirtualMachineExtensionData()
+        {
+        }
+
+        /// <summary> Initializes a new instance of VirtualMachineExtensionData. </summary>
+        /// <param name="forceUpdateTag"> How the extension handler should be forced to update even if the extension configuration has not changed. </param>
+        /// <param name="publisher"> The name of the extension handler publisher. </param>
+        /// <param name="typePropertiesType"> Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;. </param>
+        /// <param name="typeHandlerVersion"> Specifies the version of the script handler. </param>
+        /// <param name="autoUpgradeMinorVersion"> Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true. </param>
+        /// <param name="enableAutomaticUpgrade"> Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available. </param>
+        /// <param name="settings"> Json formatted public settings for the extension. </param>
+        /// <param name="protectedSettings"> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </param>
+        /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
+        /// <param name="instanceView"> The virtual machine extension instance view. </param>
+        internal VirtualMachineExtensionData(string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState, VirtualMachineExtensionInstanceView instanceView)
+        {
+            ForceUpdateTag = forceUpdateTag;
+            Publisher = publisher;
+            TypePropertiesType = typePropertiesType;
+            TypeHandlerVersion = typeHandlerVersion;
+            AutoUpgradeMinorVersion = autoUpgradeMinorVersion;
+            EnableAutomaticUpgrade = enableAutomaticUpgrade;
+            Settings = settings;
+            ProtectedSettings = protectedSettings;
+            ProvisioningState = provisioningState;
+            InstanceView = instanceView;
+        }
+
         /// <summary> How the extension handler should be forced to update even if the extension configuration has not changed. </summary>
         public string ForceUpdateTag { get; set; }
         /// <summary> The name of the extension handler publisher. </summary>

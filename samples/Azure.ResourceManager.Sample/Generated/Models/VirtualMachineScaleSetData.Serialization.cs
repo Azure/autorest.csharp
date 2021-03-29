@@ -5,16 +5,319 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the VirtualMachineScaleSet data model. </summary>
-    public partial class VirtualMachineScaleSetData
+    public partial class VirtualMachineScaleSetData : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Sku))
+            {
+                writer.WritePropertyName("sku");
+                writer.WriteObjectValue(Sku);
+            }
+            if (Optional.IsDefined(Plan))
+            {
+                writer.WritePropertyName("plan");
+                writer.WriteObjectValue(Plan);
+            }
+            if (Optional.IsDefined(Identity))
+            {
+                writer.WritePropertyName("identity");
+                writer.WriteObjectValue(Identity);
+            }
+            if (Optional.IsCollectionDefined(Zones))
+            {
+                writer.WritePropertyName("zones");
+                writer.WriteStartArray();
+                foreach (var item in Zones)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
+            if (Optional.IsDefined(UpgradePolicy))
+            {
+                writer.WritePropertyName("upgradePolicy");
+                writer.WriteObjectValue(UpgradePolicy);
+            }
+            if (Optional.IsDefined(AutomaticRepairsPolicy))
+            {
+                writer.WritePropertyName("automaticRepairsPolicy");
+                writer.WriteObjectValue(AutomaticRepairsPolicy);
+            }
+            if (Optional.IsDefined(VirtualMachineProfile))
+            {
+                writer.WritePropertyName("virtualMachineProfile");
+                writer.WriteObjectValue(VirtualMachineProfile);
+            }
+            if (Optional.IsDefined(Overprovision))
+            {
+                writer.WritePropertyName("overprovision");
+                writer.WriteBooleanValue(Overprovision.Value);
+            }
+            if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVMs))
+            {
+                writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs");
+                writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVMs.Value);
+            }
+            if (Optional.IsDefined(SinglePlacementGroup))
+            {
+                writer.WritePropertyName("singlePlacementGroup");
+                writer.WriteBooleanValue(SinglePlacementGroup.Value);
+            }
+            if (Optional.IsDefined(ZoneBalance))
+            {
+                writer.WritePropertyName("zoneBalance");
+                writer.WriteBooleanValue(ZoneBalance.Value);
+            }
+            if (Optional.IsDefined(PlatformFaultDomainCount))
+            {
+                writer.WritePropertyName("platformFaultDomainCount");
+                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+            }
+            if (Optional.IsDefined(ProximityPlacementGroup))
+            {
+                writer.WritePropertyName("proximityPlacementGroup");
+                writer.WriteObjectValue(ProximityPlacementGroup);
+            }
+            if (Optional.IsDefined(HostGroup))
+            {
+                writer.WritePropertyName("hostGroup");
+                writer.WriteObjectValue(HostGroup);
+            }
+            if (Optional.IsDefined(AdditionalCapabilities))
+            {
+                writer.WritePropertyName("additionalCapabilities");
+                writer.WriteObjectValue(AdditionalCapabilities);
+            }
+            if (Optional.IsDefined(ScaleInPolicy))
+            {
+                writer.WritePropertyName("scaleInPolicy");
+                writer.WriteObjectValue(ScaleInPolicy);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
         internal static VirtualMachineScaleSetData DeserializeVirtualMachineScaleSetData(JsonElement element)
         {
-            return new VirtualMachineScaleSetData();
+            Optional<Sku> sku = default;
+            Optional<Plan> plan = default;
+            Optional<VirtualMachineScaleSetIdentity> identity = default;
+            Optional<IList<string>> zones = default;
+            Optional<UpgradePolicy> upgradePolicy = default;
+            Optional<AutomaticRepairsPolicy> automaticRepairsPolicy = default;
+            Optional<VirtualMachineScaleSetVMProfile> virtualMachineProfile = default;
+            Optional<string> provisioningState = default;
+            Optional<bool> overprovision = default;
+            Optional<bool> doNotRunExtensionsOnOverprovisionedVMs = default;
+            Optional<string> uniqueId = default;
+            Optional<bool> singlePlacementGroup = default;
+            Optional<bool> zoneBalance = default;
+            Optional<int> platformFaultDomainCount = default;
+            Optional<SubResource> proximityPlacementGroup = default;
+            Optional<SubResource> hostGroup = default;
+            Optional<AdditionalCapabilities> additionalCapabilities = default;
+            Optional<ScaleInPolicy> scaleInPolicy = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("sku"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    sku = Sku.DeserializeSku(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("plan"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    plan = Plan.DeserializePlan(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("identity"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    identity = VirtualMachineScaleSetIdentity.DeserializeVirtualMachineScaleSetIdentity(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("zones"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    zones = array;
+                    continue;
+                }
+                if (property.NameEquals("properties"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("upgradePolicy"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            upgradePolicy = UpgradePolicy.DeserializeUpgradePolicy(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("automaticRepairsPolicy"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            automaticRepairsPolicy = AutomaticRepairsPolicy.DeserializeAutomaticRepairsPolicy(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("virtualMachineProfile"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            virtualMachineProfile = VirtualMachineScaleSetVMProfile.DeserializeVirtualMachineScaleSetVMProfile(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("provisioningState"))
+                        {
+                            provisioningState = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("overprovision"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            overprovision = property0.Value.GetBoolean();
+                            continue;
+                        }
+                        if (property0.NameEquals("doNotRunExtensionsOnOverprovisionedVMs"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            doNotRunExtensionsOnOverprovisionedVMs = property0.Value.GetBoolean();
+                            continue;
+                        }
+                        if (property0.NameEquals("uniqueId"))
+                        {
+                            uniqueId = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("singlePlacementGroup"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            singlePlacementGroup = property0.Value.GetBoolean();
+                            continue;
+                        }
+                        if (property0.NameEquals("zoneBalance"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            zoneBalance = property0.Value.GetBoolean();
+                            continue;
+                        }
+                        if (property0.NameEquals("platformFaultDomainCount"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            platformFaultDomainCount = property0.Value.GetInt32();
+                            continue;
+                        }
+                        if (property0.NameEquals("proximityPlacementGroup"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            proximityPlacementGroup = SubResource.DeserializeSubResource(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("hostGroup"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            hostGroup = SubResource.DeserializeSubResource(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("additionalCapabilities"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("scaleInPolicy"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            scaleInPolicy = ScaleInPolicy.DeserializeScaleInPolicy(property0.Value);
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new VirtualMachineScaleSetData(sku.Value, plan.Value, identity.Value, Optional.ToList(zones), upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, provisioningState.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVMs), uniqueId.Value, Optional.ToNullable(singlePlacementGroup), Optional.ToNullable(zoneBalance), Optional.ToNullable(platformFaultDomainCount), proximityPlacementGroup.Value, hostGroup.Value, additionalCapabilities.Value, scaleInPolicy.Value);
         }
     }
 }

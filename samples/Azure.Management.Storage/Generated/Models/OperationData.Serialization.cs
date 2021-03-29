@@ -6,15 +6,64 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the Operation data model. </summary>
     public partial class OperationData
     {
         internal static OperationData DeserializeOperationData(JsonElement element)
         {
-            return new OperationData();
+            Optional<string> name = default;
+            Optional<OperationDisplay> display = default;
+            Optional<string> origin = default;
+            Optional<ServiceSpecification> serviceSpecification = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("display"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    display = OperationDisplay.DeserializeOperationDisplay(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("origin"))
+                {
+                    origin = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("properties"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("serviceSpecification"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            serviceSpecification = ServiceSpecification.DeserializeServiceSpecification(property0.Value);
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new OperationData(name.Value, display.Value, origin.Value, serviceSpecification.Value);
         }
     }
 }

@@ -6,15 +6,43 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the Sku data model. </summary>
-    public partial class SkuData
+    public partial class SkuData : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name");
+            writer.WriteStringValue(Name.ToString());
+            writer.WriteEndObject();
+        }
+
         internal static SkuData DeserializeSkuData(JsonElement element)
         {
-            return new SkuData();
+            SkuName name = default;
+            Optional<SkuTier> tier = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"))
+                {
+                    name = new SkuName(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("tier"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    tier = property.Value.GetString().ToSkuTier();
+                    continue;
+                }
+            }
+            return new SkuData(name, Optional.ToNullable(tier));
         }
     }
 }
