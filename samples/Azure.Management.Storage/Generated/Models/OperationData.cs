@@ -10,6 +10,24 @@ namespace Azure.Management.Storage.Models
     /// <summary> A class representing the Operation data model. </summary>
     public partial class OperationData
     {
+        /// <summary> Initializes a new instance of OperationData. </summary>
+        internal OperationData()
+        {
+        }
+
+        /// <summary> Initializes a new instance of OperationData. </summary>
+        /// <param name="name"> Operation name: {provider}/{resource}/{operation}. </param>
+        /// <param name="display"> Display metadata associated with the operation. </param>
+        /// <param name="origin"> The origin of operations. </param>
+        /// <param name="serviceSpecification"> One property of operation, include metric specifications. </param>
+        internal OperationData(string name, OperationDisplay display, string origin, ServiceSpecification serviceSpecification)
+        {
+            Name = name;
+            Display = display;
+            Origin = origin;
+            ServiceSpecification = serviceSpecification;
+        }
+
         /// <summary> Operation name: {provider}/{resource}/{operation}. </summary>
         public string Name { get; }
         /// <summary> Display metadata associated with the operation. </summary>

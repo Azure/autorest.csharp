@@ -1,7 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
@@ -13,9 +16,8 @@ namespace AutoRest.CSharp.Output.Models
     {
         private const string _suffixValue = "Data";
         private BuildContext _context;
-        private ObjectTypeProperty[]? _properties;
         private string _prefix;
-        private Schema _schema;
+        private ObjectSchema _schema;
 
         public ResourceData(ObjectSchema schema, OperationGroup operationGroup, BuildContext context, bool isResourceModel) : base(schema, context, isResourceModel)
         {
@@ -27,8 +29,6 @@ namespace AutoRest.CSharp.Output.Models
 
         public new string? Description { get; }
 
-        public new ObjectTypeProperty[] Properties => _properties ??= BuildProperties();
-
         protected string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
             StringBuilder summary = new StringBuilder();
@@ -37,10 +37,28 @@ namespace AutoRest.CSharp.Output.Models
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
-        private ObjectTypeProperty[] BuildProperties()
+        protected override HashSet<string?> GetParentProperties()
         {
-            var resourceModel = (ObjectType)_context.Library.ResourceSchemaMap[_schema];
-            return resourceModel.Properties;
+            if (Inherits?.IsFrameworkType == false)
+            {
+                return base.GetParentProperties();
+            }
+
+            System.Type type = Inherits?.FrameworkType!;
+            if (type is null)
+            {
+                return new HashSet<string?>();
+            }
+
+            return type.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
+                .Select(p =>
+                {
+                    StringBuilder builder = new StringBuilder();
+                    builder.Append(char.ToLower(p.Name[0]));
+                    builder.Append(p.Name.Substring(1));
+                    return builder.ToString();
+                })
+                .ToHashSet<string?>();
         }
     }
 }

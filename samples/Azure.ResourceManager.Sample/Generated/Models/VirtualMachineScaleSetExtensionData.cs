@@ -6,12 +6,49 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineScaleSetExtension data model. </summary>
-    public partial class VirtualMachineScaleSetExtensionData
+    public partial class VirtualMachineScaleSetExtensionData : SubResourceReadOnly
     {
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>
+        public VirtualMachineScaleSetExtensionData()
+        {
+            ProvisionAfterExtensions = new ChangeTrackingList<string>();
+        }
+
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>
+        /// <param name="id"> Resource Id. </param>
+        /// <param name="name"> The name of the extension. </param>
+        /// <param name="type"> Resource type. </param>
+        /// <param name="forceUpdateTag"> If a value is provided and is different from the previous value, the extension handler will be forced to update even if the extension configuration has not changed. </param>
+        /// <param name="publisher"> The name of the extension handler publisher. </param>
+        /// <param name="typePropertiesType"> Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;. </param>
+        /// <param name="typeHandlerVersion"> Specifies the version of the script handler. </param>
+        /// <param name="autoUpgradeMinorVersion"> Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true. </param>
+        /// <param name="enableAutomaticUpgrade"> Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available. </param>
+        /// <param name="settings"> Json formatted public settings for the extension. </param>
+        /// <param name="protectedSettings"> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </param>
+        /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
+        /// <param name="provisionAfterExtensions"> Collection of extension names after which this extension needs to be provisioned. </param>
+        internal VirtualMachineScaleSetExtensionData(string id, string name, string type, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id)
+        {
+            Name = name;
+            Type = type;
+            ForceUpdateTag = forceUpdateTag;
+            Publisher = publisher;
+            TypePropertiesType = typePropertiesType;
+            TypeHandlerVersion = typeHandlerVersion;
+            AutoUpgradeMinorVersion = autoUpgradeMinorVersion;
+            EnableAutomaticUpgrade = enableAutomaticUpgrade;
+            Settings = settings;
+            ProtectedSettings = protectedSettings;
+            ProvisioningState = provisioningState;
+            ProvisionAfterExtensions = provisionAfterExtensions;
+        }
+
         /// <summary> The name of the extension. </summary>
         public string Name { get; set; }
         /// <summary> Resource type. </summary>

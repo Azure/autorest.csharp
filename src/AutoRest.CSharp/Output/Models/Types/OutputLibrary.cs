@@ -3,12 +3,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Type.Decorate;
+using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager.Core;
+using Microsoft.VisualBasic;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -23,16 +30,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<string, ResourceData>? _resourceData;
         private Dictionary<string, ArmResource>? _armResource;
-
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
         private IEnumerable<Schema> _allSchemas;
-
-        private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
-
-        public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
 
         public OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -49,6 +51,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 DecorateSchema();
             }
         }
+
+        public Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
+
+        public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
@@ -201,7 +207,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (!_resourceData.ContainsKey(operation.Resource))
                     {
-                        _resourceData.Add(operation.Resource, new ResourceData((ObjectSchema)schema, operation, _context, true));
+                        var resourceData = new ResourceData((ObjectSchema)schema, operation, _context, true);
+                        CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
+                        if (!(inherits is null))
+                        {
+                            resourceData.OverrideInherits(inherits);
+                        }
+                        _resourceData.Add(operation.Resource, resourceData);
                     }
                 }
             }

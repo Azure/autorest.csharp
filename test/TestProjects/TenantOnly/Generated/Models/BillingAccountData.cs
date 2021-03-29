@@ -5,11 +5,29 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace TenantOnly
 {
     /// <summary> A class representing the BillingAccount data model. </summary>
-    public partial class BillingAccountData
+    public partial class BillingAccountData : Azure.ResourceManager.Core.Resource
     {
+        /// <summary> Initializes a new instance of BillingAccountData. </summary>
+        public BillingAccountData()
+        {
+        }
+
+        /// <summary> Initializes a new instance of BillingAccountData. </summary>
+        /// <param name="idPropertiesId"> Resource Id. </param>
+        /// <param name="namePropertiesName"> Resource name. </param>
+        /// <param name="typePropertiesType"> Resource type. </param>
+        internal BillingAccountData(string idPropertiesId, string namePropertiesName, string typePropertiesType)
+        {
+            IdPropertiesId = idPropertiesId;
+            NamePropertiesName = namePropertiesName;
+            TypePropertiesType = typePropertiesType;
+        }
+
         /// <summary> Resource Id. </summary>
         public string IdPropertiesId { get; }
         /// <summary> Resource name. </summary>

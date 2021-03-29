@@ -36,9 +36,6 @@ namespace Azure.Management.Storage.Models
         {
             Optional<IDictionary<string, string>> tags = default;
             string location = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"))
@@ -61,23 +58,8 @@ namespace Azure.Management.Storage.Models
                     location = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
-                    continue;
-                }
             }
-            return new TrackedResource(id.Value, name.Value, type.Value, Optional.ToDictionary(tags), location);
+            return new TrackedResource(Optional.ToDictionary(tags), location);
         }
     }
 }
