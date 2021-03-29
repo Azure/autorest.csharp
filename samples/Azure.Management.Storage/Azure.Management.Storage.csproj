@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.11.0" />
+    <PackageReference Include="Azure.Core" Version="1.10.0" />
     <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210325.1" />
   </ItemGroup>
 
