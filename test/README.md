@@ -2,9 +2,9 @@
 
 Azure services define their web APIs using [swagger files](https://github.com/azure/azure-rest-api-specs).
 
-To bind those into an SDK, Azure SDK uses [Autorest](https://github.com/Azure/autorest) to parse the swagger definitions into boilerplate networking and serialization code.
+To bind those into an SDK, Azure SDK uses [Autorest](https://github.com/Azure/autorest) to parse the swagger definitions into boilerplate networking and serialization code. 
 
-As the Azure SDK has multiple supported languages, Autorest uses plugins for each languages backend. This repository is the C# platform support plugin.
+As the Azure SDK has multiple supported languages, Autorest uses plugins for each languages backend. This repository is the C# platform support plugin. 
 
 During autorest execution, the plugin is passed a YAML intermediate representation (IR) of the API definition.
 
@@ -12,7 +12,7 @@ During autorest execution, the plugin is passed a YAML intermediate representati
 
 The plugin is normally called via JSON RPC but there is a standalone mode that can process the intermediate yaml from disk.
 
-autorest uses a markdown based configuration system (autorest.md) to determine what swagger files to process.
+autorest uses a markdown based configuration system (autorest.md) to determine what swagger files to process. 
 
 The C# backend also has an associated csproj next to autorest.md that is both:
 
@@ -39,9 +39,9 @@ Example: Many APIs have paging, where a request will only return the first 100, 
 
 Today that pipeline lives in a [separate repository]( https://github.com/Azure/autorest.modelerfour/) but very likely to end up in [autorest proper]( https://github.com/Azure/autorest) long term.
 
-The c# autorest plugin/generator has three major components:
+The c# autorest plugin/generator has three major components: 
 
-- A model layer that builds up a representation of the desired output based upon the YAML IR
+- A model layer that builds up a representation of the desired output based upon the YAML IR 
   - These are C# specific modelling decisisons
   - The input project can customize the generated code by having partial classes defined. Those are read by the C# backend and modify the generated code.
   - Generated code is output in a folder named 'Generated' next to the csproj
