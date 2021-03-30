@@ -3,10 +3,7 @@
 
 using System.IO;
 using System.Threading.Tasks;
-using AutoRest.TestServer.Tests.Infrastructure;
-using body_file;
 using NUnit.Framework;
-using System.Linq;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.AutoRest.Plugins;
@@ -32,7 +29,7 @@ namespace AutoRest.TestServer.Tests
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
             var context = new BuildContext<MgmtOutputLibrary>(model, configuration, sourceInputModel);
-            _ = context.Library;
+            _ = context.Library; // gen lib
             foreach (var operations in model.OperationGroups)
             {
                 Assert.IsNotNull(operations.Parent);
@@ -57,7 +54,7 @@ namespace AutoRest.TestServer.Tests
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
             var context = new BuildContext<MgmtOutputLibrary>(model, configuration, sourceInputModel);
-            _ = context.Library;
+            _ = context.Library; // gen lib
             foreach (var operations in model.OperationGroups)
             {
                 Assert.IsNotNull(operations.Parent);
