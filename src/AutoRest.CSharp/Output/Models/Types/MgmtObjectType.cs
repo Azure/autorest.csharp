@@ -27,6 +27,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             return isResourceType ? name + "Data" : name;
         }
 
+        public void OverrideInherits(CSharpType cSharpType)
+        {
+            _inheritsType = cSharpType;
+            _properties = null;
+        }
+
         protected override HashSet<string?> GetParentProperties()
         {
             HashSet<string?> result = new HashSet<string?>();

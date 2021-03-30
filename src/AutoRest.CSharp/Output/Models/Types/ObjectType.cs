@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -16,7 +15,6 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using Azure.ResourceManager.Core;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -28,9 +26,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly TypeFactory _typeFactory;
         private readonly SchemaTypeUsage _usage;
 
-        private ObjectTypeProperty[]? _properties;
+        protected ObjectTypeProperty[]? _properties;
         private ObjectTypeDiscriminator? _discriminator;
-        private CSharpType? _inheritsType;
+        protected CSharpType? _inheritsType;
         private CSharpType? _implementsDictionaryType;
         private ObjectSerialization[]? _serializations;
         private readonly ModelTypeMapping? _sourceTypeMapping;
@@ -104,12 +102,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
-
-        public void OverrideInherits(CSharpType cSharpType)
-        {
-            _inheritsType = cSharpType;
-            _properties = null;
-        }
 
         private IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
@@ -532,18 +524,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 .SelectMany(type => type.Properties)
                 .Select(p => p.SchemaProperty?.Language.Default.Name)
                 .ToHashSet();
-        }
-
-        private IEnumerable<string> GetPropertiesFromSystemType(System.Type systemType)
-        {
-            return systemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
-                .Select(p =>
-                {
-                    StringBuilder builder = new StringBuilder();
-                    builder.Append(char.ToLower(p.Name[0]));
-                    builder.Append(p.Name.Substring(1));
-                    return builder.ToString();
-                });
         }
 
         private CSharpType GetDefaultPropertyType(Property property)
