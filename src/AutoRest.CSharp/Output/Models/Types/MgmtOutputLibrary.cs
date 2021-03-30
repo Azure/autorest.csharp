@@ -3,12 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Type.Decorate;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -26,7 +23,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<string, ArmResource>? _armResource;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
-        private Dictionary<Operation, MgmtLongRunningOperation>? _operations;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
         private IEnumerable<Schema> _allSchemas;
 
@@ -56,34 +52,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
         public IEnumerable<MgmtClient> Clients => EnsureClients().Values;
-
-        public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
-
-        private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()
-        {
-            if (_operations != null)
-            {
-                return _operations;
-            }
-
-            _operations = new Dictionary<Operation, MgmtLongRunningOperation>();
-
-            if (_context.Configuration.PublicClients)
-            {
-                foreach (var operationGroup in _codeModel.OperationGroups)
-                {
-                    foreach (var operation in operationGroup.Operations)
-                    {
-                        if (operation.IsLongRunning)
-                        {
-                            _operations.Add(operation, new MgmtLongRunningOperation(operationGroup, operation, _context));
-                        }
-                    }
-                }
-            }
-
-            return _operations;
-        }
 
         private Dictionary<OperationGroup, MgmtClient> EnsureClients()
         {
@@ -265,12 +233,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotImplementedException()
         };
 
-        public MgmtLongRunningOperation FindLongRunningOperation(Operation operation)
-        {
-            Debug.Assert(operation.IsLongRunning);
-
-            return EnsureLongRunningOperations()[operation];
-        }
 
         public MgmtClient? FindClient(OperationGroup operationGroup)
         {
