@@ -1,74 +1,30 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Diagnostics;
 using System.Linq;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure;
-using Azure.Core;
+using Operation = AutoRest.CSharp.Input.Operation;
 
 namespace AutoRest.CSharp.Output.Models.Requests
 {
-    internal class MgmtLongRunningOperation: TypeProvider
+    internal class MgmtLongRunningOperation: LongRunningOperation
     {
-        public MgmtLongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext<MgmtOutputLibrary> context) : base(context)
+        private readonly Operation _operation;
+        private readonly MgmtClient _clientClass;
+
+        public MgmtLongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext<MgmtOutputLibrary> context) : base(operation, context)
         {
-            Debug.Assert(operation.IsLongRunning);
+            _operation = operation;
+            _clientClass = context.Library.FindClient(operationGroup)!;
 
-            var clientClass = context.Library.FindClient(operationGroup);
-
-            Debug.Assert(clientClass != null, "clientClass != null, LROs should be disabled when public clients are disables");
-
-            Client = clientClass;
-            DefaultName = clientClass.RestClient.ClientPrefix + operation.CSharpName() + "Operation";
-            FinalStateVia = operation.LongRunningFinalStateVia switch
-            {
-                "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
-                "location" => OperationFinalStateVia.Location,
-                "original-uri" => OperationFinalStateVia.OriginalUri,
-                null => OperationFinalStateVia.Location,
-                _ => throw new ArgumentException($"Unknown final-state-via value: {operation.LongRunningFinalStateVia}")
-            };
-
-            var finalResponse = operation.LongRunningFinalResponse;
-            Schema? finalResponseSchema = finalResponse.ResponseSchema;
-
-            if (finalResponseSchema != null)
-            {
-                ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(finalResponseSchema, false));
-                ResultSerialization = new SerializationBuilder().Build(finalResponse.HttpResponse.KnownMediaType, finalResponseSchema, ResultType);
-
-                Paging? paging = operation.Language.Default.Paging;
-                if (paging != null)
-                {
-                    NextPageMethod = Client.RestClient.GetNextOperationMethod(operation.Requests.Single());
-                    PagingResponse = new PagingResponseInfo(paging, ResultType);
-                    ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
-                }
-            }
-            else
-            {
-                ResultType = typeof(Response);
-            }
-
-            Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
-            DefaultAccessibility = clientClass.Declaration.Accessibility;
+            Debug.Assert(_clientClass != null, "clientClass != null, LROs should be disabled when public clients are disables");
         }
 
-        public CSharpType ResultType { get; }
-        public MgmtClient Client { get; }
-        public OperationFinalStateVia FinalStateVia { get; }
-        public Diagnostic Diagnostics => new Diagnostic(Declaration.Name);
-        public ObjectSerialization? ResultSerialization { get; }
-        public RestClientMethod? NextPageMethod { get; }
-        public PagingResponseInfo? PagingResponse { get; }
-        public string Description { get; }
-        protected override string DefaultName { get; }
-        protected override string DefaultAccessibility { get; }
+        protected override string DefaultName => _clientClass.RestClient.ClientPrefix + _operation.CSharpName() + "Operation";
+        protected override string DefaultAccessibility => _clientClass.Declaration.Accessibility;
+        public override RestClientMethod? NextPageMethod => _clientClass.RestClient.GetNextOperationMethod(_operation.Requests.First());
     }
 }

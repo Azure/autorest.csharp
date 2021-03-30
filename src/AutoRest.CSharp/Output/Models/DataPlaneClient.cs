@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly BuildContext<DataPlaneOutputLibrary> _context;
         private PagingMethod[]? _pagingMethods;
         private ClientMethod[]? _methods;
-        private DataPlaneLongRunningOperationMethod[]? _longRunningOperationMethods;
+        private LongRunningOperationMethod[]? _longRunningOperationMethods;
         private DataPlaneRestClient? _restClient;
 
         public DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context): base(context)
@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
 
-        public DataPlaneLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
+        public LongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
 
         protected override string DefaultName { get; }
 
@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<DataPlaneLongRunningOperationMethod> BuildLongRunningOperationMethods()
+        private IEnumerable<LongRunningOperationMethod> BuildLongRunningOperationMethods()
         {
             foreach (var operation in _operationGroup.Operations)
             {
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models
                         var name = operation.CSharpName();
                         RestClientMethod startMethod = RestClient.GetOperationMethod(serviceRequest);
 
-                        yield return new DataPlaneLongRunningOperationMethod(
+                        yield return new LongRunningOperationMethod(
                             name,
                             _context.Library.FindLongRunningOperation(operation),
                             startMethod,
