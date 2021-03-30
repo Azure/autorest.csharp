@@ -24,13 +24,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
         public virtual TypeProvider FindTypeForSchema(Schema schema)
-        private static HashSet<string> ResourceTypes = new HashSet<string>
-        {
-            "resourceGroups",
-            "subscriptions",
-            "tenant"
-        };
-
         {
             return SchemaMap[schema];
         }
@@ -53,20 +46,5 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotImplementedException()
         };
 
-                ResourceTypes.Add(operationsGroup.ResourceType);
-                operationsGroup.IsExtensionResource = ExtensionDetection.IsExtension(operationsGroup);
-
-                // TODO better support for extension resources
-                string? parent;
-                if (_context.Configuration.OperationGroupToParent.TryGetValue(operationsGroup.Key, out parent))
-                {
-                     // If overriden, add parent to known types list (trusting user input)
-                    ResourceTypes.Add(parent);
-                }
-                operationsGroup.Parent = parent ?? ParentDetection.GetParent(operationsGroup);
-
-
-            //now that we have resolved all operations groups to resource types above, can try to solve for the parent
-            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes);
     }
 }
