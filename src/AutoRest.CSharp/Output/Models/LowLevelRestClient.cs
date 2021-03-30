@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -30,11 +31,10 @@ namespace AutoRest.CSharp.Output.Models
             Parameters = _builder.GetOrderedParameters ();
             ClientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, context);
             DefaultName = ClientPrefix + ClientSuffix;
-            Description = "";
         }
 
         public Parameter[] Parameters { get; }
-        public string Description { get; }
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, _context)));
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }
