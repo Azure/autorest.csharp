@@ -9,13 +9,13 @@ namespace AutoRest.TestServer.Tests
 {
     public class ResourceOperationsTests
     {
-        [TestCase (typeof(AgreementsOperations))]
+        //[TestCase (typeof(AgreementsOperations))]
         public void ValidateBaseClass(Type type)
         {
             Assert.AreEqual(typeof(ResourceOperationsBase), type.BaseType);
         }
 
-        [TestCase(typeof(AgreementsOperations))]
+        //[TestCase(typeof(AgreementsOperations))]
         public void ValiateListAvailableLocations(Type type)
         {
             var method = type.GetMethod("ListAvailableLocations");
