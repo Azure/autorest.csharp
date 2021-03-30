@@ -299,6 +299,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                 }
             }
+            // add operation to result
             return resourceModels;
         }
 
