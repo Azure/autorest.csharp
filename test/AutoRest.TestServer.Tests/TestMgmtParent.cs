@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
-            var context = new BuildContext(model, configuration, sourceInputModel);
+            var context = new BuildContext<MgmtOutputLibrary>(model, configuration, sourceInputModel);
             _ = context.Library;
             foreach (var operations in model.OperationGroups)
             {
@@ -56,7 +56,7 @@ namespace AutoRest.TestServer.Tests
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
             var model = await codeModelTask;
-            var context = new BuildContext(model, configuration, sourceInputModel);
+            var context = new BuildContext<MgmtOutputLibrary>(model, configuration, sourceInputModel);
             _ = context.Library;
             foreach (var operations in model.OperationGroups)
             {
