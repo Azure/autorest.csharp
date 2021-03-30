@@ -27,7 +27,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<Operation, MgmtLongRunningOperation>? _operations;
-        private Dictionary<Operation, MgmtResponseHeaderGroupType>? _headerModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
         private IEnumerable<Schema> _allSchemas;
 
@@ -59,31 +58,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<MgmtClient> Clients => EnsureClients().Values;
 
         public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
-
-        public IEnumerable<MgmtResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
-
-        private Dictionary<Operation, MgmtResponseHeaderGroupType> EnsureHeaderModels()
-        {
-            if (_headerModels != null)
-            {
-                return _headerModels;
-            }
-
-            _headerModels = new Dictionary<Operation, MgmtResponseHeaderGroupType>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    var headers = MgmtResponseHeaderGroupType.TryCreate(operationGroup, operation, _context);
-                    if (headers != null)
-                    {
-                        _headerModels.Add(operation, headers);
-                    }
-                }
-            }
-
-            return _headerModels;
-        }
 
         private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()
         {
@@ -307,12 +281,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public MgmtRestClient FindRestClient(OperationGroup operationGroup)
         {
             return EnsureRestClients()[operationGroup];
-        }
-
-        public MgmtResponseHeaderGroupType? FindHeaderModel(Operation operation)
-        {
-            EnsureHeaderModels().TryGetValue(operation, out var model);
-            return model;
         }
 
         private void DecorateOperationGroup()

@@ -48,9 +48,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public string CredentialHeaderName { get; }
 
         public static string ProjectRelativeDirectory = "../";
-        public IReadOnlyDictionary<string, string> OperationGroupToResourceType;
-        public IReadOnlyDictionary<string, string> OperationGroupToResource;
-        public IReadOnlyDictionary<string, string> ResourceRename;
+        public IReadOnlyDictionary<string, string> OperationGroupToResourceType { get; }
+        public IReadOnlyDictionary<string, string> OperationGroupToResource { get; }
+        public IReadOnlyDictionary<string, string> ResourceRename { get; }
         public bool LowLevelClient { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
