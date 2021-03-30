@@ -6,15 +6,82 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the FileService data model. </summary>
-    public partial class FileServiceData
+    public partial class FileServiceData : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Cors))
+            {
+                writer.WritePropertyName("cors");
+                writer.WriteObjectValue(Cors);
+            }
+            if (Optional.IsDefined(ShareDeleteRetentionPolicy))
+            {
+                writer.WritePropertyName("shareDeleteRetentionPolicy");
+                writer.WriteObjectValue(ShareDeleteRetentionPolicy);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
         internal static FileServiceData DeserializeFileServiceData(JsonElement element)
         {
-            return new FileServiceData();
+            Optional<SkuData> sku = default;
+            Optional<CorsRules> cors = default;
+            Optional<DeleteRetentionPolicy> shareDeleteRetentionPolicy = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("sku"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    sku = SkuData.DeserializeSkuData(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("properties"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("cors"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            cors = CorsRules.DeserializeCorsRules(property0.Value);
+                            continue;
+                        }
+                        if (property0.NameEquals("shareDeleteRetentionPolicy"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            shareDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new FileServiceData(sku.Value, cors.Value, shareDeleteRetentionPolicy.Value);
         }
     }
 }

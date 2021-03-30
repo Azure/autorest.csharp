@@ -6,15 +6,42 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the Usage data model. </summary>
     public partial class UsageData
     {
         internal static UsageData DeserializeUsageData(JsonElement element)
         {
-            return new UsageData();
+            string unit = default;
+            int currentValue = default;
+            long limit = default;
+            UsageName name = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("unit"))
+                {
+                    unit = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("currentValue"))
+                {
+                    currentValue = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("limit"))
+                {
+                    limit = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = UsageName.DeserializeUsageName(property.Value);
+                    continue;
+                }
+            }
+            return new UsageData(unit, currentValue, limit, name);
         }
     }
 }

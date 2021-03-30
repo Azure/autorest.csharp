@@ -5,9 +5,9 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models.Requests
 {
-    internal class LongRunningOperationMethod
+    internal class MgmtLongRunningOperationMethod
     {
-        public LongRunningOperationMethod(string name, LongRunningOperation operation, RestClientMethod startMethod, Diagnostic diagnostics)
+        public MgmtLongRunningOperationMethod(string name, MgmtLongRunningOperation operation, RestClientMethod startMethod, Diagnostic diagnostics)
         {
             Operation = operation;
             StartMethod = startMethod;
@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
 
         public string Name { get; }
-        public LongRunningOperation Operation { get; }
+        public MgmtLongRunningOperation Operation { get; }
 
         public RestClientMethod StartMethod { get; }
 

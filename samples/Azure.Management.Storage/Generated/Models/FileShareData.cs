@@ -7,12 +7,51 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the FileShare data model. </summary>
-    public partial class FileShareData
+    public partial class FileShareData : AzureEntityResource
     {
+        /// <summary> Initializes a new instance of FileShareData. </summary>
+        public FileShareData()
+        {
+            Metadata = new ChangeTrackingDictionary<string, string>();
+        }
+
+        /// <summary> Initializes a new instance of FileShareData. </summary>
+        /// <param name="etag"> Resource Etag. </param>
+        /// <param name="lastModifiedTime"> Returns the date and time the share was last modified. </param>
+        /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
+        /// <param name="shareQuota"> The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400. </param>
+        /// <param name="enabledProtocols"> The authentication protocol that is used for the file share. Can only be specified when creating a share. </param>
+        /// <param name="rootSquash"> The property is for NFS share only. The default is NoRootSquash. </param>
+        /// <param name="version"> The version of the share. </param>
+        /// <param name="deleted"> Indicates whether the share was deleted. </param>
+        /// <param name="deletedTime"> The deleted time if the share was deleted. </param>
+        /// <param name="remainingRetentionDays"> Remaining retention days for share that was soft deleted. </param>
+        /// <param name="accessTier"> Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium. </param>
+        /// <param name="accessTierChangeTime"> Indicates the last modification time for share access tier. </param>
+        /// <param name="accessTierStatus"> Indicates if there is a pending transition for access tier. </param>
+        /// <param name="shareUsageBytes"> The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files. </param>
+        internal FileShareData(string etag, DateTimeOffset? lastModifiedTime, IDictionary<string, string> metadata, int? shareQuota, EnabledProtocols? enabledProtocols, RootSquashType? rootSquash, string version, bool? deleted, DateTimeOffset? deletedTime, int? remainingRetentionDays, ShareAccessTier? accessTier, DateTimeOffset? accessTierChangeTime, string accessTierStatus, int? shareUsageBytes) : base(etag)
+        {
+            LastModifiedTime = lastModifiedTime;
+            Metadata = metadata;
+            ShareQuota = shareQuota;
+            EnabledProtocols = enabledProtocols;
+            RootSquash = rootSquash;
+            Version = version;
+            Deleted = deleted;
+            DeletedTime = deletedTime;
+            RemainingRetentionDays = remainingRetentionDays;
+            AccessTier = accessTier;
+            AccessTierChangeTime = accessTierChangeTime;
+            AccessTierStatus = accessTierStatus;
+            ShareUsageBytes = shareUsageBytes;
+        }
+
         /// <summary> Returns the date and time the share was last modified. </summary>
         public DateTimeOffset? LastModifiedTime { get; }
         /// <summary> A name-value pair to associate with the share as metadata. </summary>

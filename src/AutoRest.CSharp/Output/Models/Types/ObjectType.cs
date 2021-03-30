@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -14,13 +16,14 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager.Core;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectType : TypeProvider
     {
-        private readonly ObjectSchema _objectSchema;
+        protected readonly ObjectSchema _objectSchema;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly SchemaTypeUsage _usage;
@@ -36,11 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
 
-        public ObjectType(ObjectSchema objectSchema, BuildContext context) : this(objectSchema, context, false)
-        {
-        }
-
-        public ObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceModel) : base(context)
+        public ObjectType(ObjectSchema objectSchema, BuildContext context) : base(context)
         {
             _objectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
@@ -51,11 +50,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            DefaultName = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
-            if (isResourceModel)
-            {
-                DefaultName = DefaultName + "Data";
-            }
 
             DefaultNamespace = GetDefaultNamespace(objectSchema, context);
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
@@ -71,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public bool IsStruct => ExistingType?.IsValueType == true;
-        protected override string DefaultName { get; }
+        protected override string DefaultName => _objectSchema.CSharpName();
         protected override string DefaultAccessibility { get; } = "public";
         protected override string DefaultNamespace { get; }
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
@@ -110,6 +104,12 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
+
+        public void OverrideInherits(CSharpType cSharpType)
+        {
+            _inheritsType = cSharpType;
+            _properties = null;
+        }
 
         private IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
@@ -440,11 +440,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/261
-            var existingProperties = EnumerateHierarchy()
-                .Skip(1)
-                .SelectMany(type => type.Properties)
-                .Select(p => p.SchemaProperty?.Language.Default.Name)
-                .ToHashSet();
+            var existingProperties = GetParentProperties();
 
             foreach (var objectSchema in GetCombinedSchemas())
             {
@@ -527,6 +523,27 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 yield return additionalPropertiesProperty;
             }
+        }
+
+        protected virtual HashSet<string?> GetParentProperties()
+        {
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.SchemaProperty?.Language.Default.Name)
+                .ToHashSet();
+        }
+
+        private IEnumerable<string> GetPropertiesFromSystemType(System.Type systemType)
+        {
+            return systemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
+                .Select(p =>
+                {
+                    StringBuilder builder = new StringBuilder();
+                    builder.Append(char.ToLower(p.Name[0]));
+                    builder.Append(p.Name.Substring(1));
+                    return builder.ToString();
+                });
         }
 
         private CSharpType GetDefaultPropertyType(Property property)

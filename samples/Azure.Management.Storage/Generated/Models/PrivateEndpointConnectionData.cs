@@ -5,11 +5,29 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the PrivateEndpointConnection data model. </summary>
-    public partial class PrivateEndpointConnectionData
+    public partial class PrivateEndpointConnectionData : ResourceManager.Core.Resource
     {
+        /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
+        public PrivateEndpointConnectionData()
+        {
+        }
+
+        /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
+        /// <param name="privateEndpoint"> The resource of private end point. </param>
+        /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
+        /// <param name="provisioningState"> The provisioning state of the private endpoint connection resource. </param>
+        internal PrivateEndpointConnectionData(PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, PrivateEndpointConnectionProvisioningState? provisioningState)
+        {
+            PrivateEndpoint = privateEndpoint;
+            PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
+            ProvisioningState = provisioningState;
+        }
+
         /// <summary> The resource of private end point. </summary>
         public PrivateEndpoint PrivateEndpoint { get; set; }
         /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>

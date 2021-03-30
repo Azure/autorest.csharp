@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class RestClientMethod
     {
-        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, ResponseHeaderGroupType? headerModel, bool bufferResponse)
+        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, ResponseHeaderGroupType? headerModel, bool bufferResponse, bool isVisible)
         {
             Name = name;
             Request = request;
@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             ReturnType = returnType;
             HeaderModel = headerModel;
             BufferResponse = bufferResponse;
+            IsVisible = isVisible;
         }
 
         public string Name { get; }
@@ -29,5 +30,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public ResponseHeaderGroupType? HeaderModel { get; }
         public bool BufferResponse { get; }
         public CSharpType? ReturnType { get; }
+        public bool IsVisible { get; }
     }
 }

@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         private const string _suffixValue = "Container";
 
-        public ResourceContainer(OperationGroup operationGroup, BuildContext context)
+        public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context)
         {
         }

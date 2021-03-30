@@ -14,9 +14,9 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Requests
 {
-    internal class LongRunningOperation: TypeProvider
+    internal class MgmtLongRunningOperation: TypeProvider
     {
-        public LongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext context) : base(context)
+        public MgmtLongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             Debug.Assert(operation.IsLongRunning);
 
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         }
 
         public CSharpType ResultType { get; }
-        public Client Client { get; }
+        public MgmtClient Client { get; }
         public OperationFinalStateVia FinalStateVia { get; }
         public Diagnostic Diagnostics => new Diagnostic(Declaration.Name);
         public ObjectSerialization? ResultSerialization { get; }

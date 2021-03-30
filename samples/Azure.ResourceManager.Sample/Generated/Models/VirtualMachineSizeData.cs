@@ -10,6 +10,28 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the VirtualMachineSize data model. </summary>
     public partial class VirtualMachineSizeData
     {
+        /// <summary> Initializes a new instance of VirtualMachineSizeData. </summary>
+        internal VirtualMachineSizeData()
+        {
+        }
+
+        /// <summary> Initializes a new instance of VirtualMachineSizeData. </summary>
+        /// <param name="name"> The name of the virtual machine size. </param>
+        /// <param name="numberOfCores"> The number of cores supported by the virtual machine size. </param>
+        /// <param name="osDiskSizeInMB"> The OS disk size, in MB, allowed by the virtual machine size. </param>
+        /// <param name="resourceDiskSizeInMB"> The resource disk size, in MB, allowed by the virtual machine size. </param>
+        /// <param name="memoryInMB"> The amount of memory, in MB, supported by the virtual machine size. </param>
+        /// <param name="maxDataDiskCount"> The maximum number of data disks that can be attached to the virtual machine size. </param>
+        internal VirtualMachineSizeData(string name, int? numberOfCores, int? osDiskSizeInMB, int? resourceDiskSizeInMB, int? memoryInMB, int? maxDataDiskCount)
+        {
+            Name = name;
+            NumberOfCores = numberOfCores;
+            OsDiskSizeInMB = osDiskSizeInMB;
+            ResourceDiskSizeInMB = resourceDiskSizeInMB;
+            MemoryInMB = memoryInMB;
+            MaxDataDiskCount = maxDataDiskCount;
+        }
+
         /// <summary> The name of the virtual machine size. </summary>
         public string Name { get; }
         /// <summary> The number of cores supported by the virtual machine size. </summary>

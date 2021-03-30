@@ -15,31 +15,32 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class Client: ClientBase
+    internal class DataPlaneClient : ClientBase
     {
         private readonly OperationGroup _operationGroup;
+        private readonly BuildContext<DataPlaneOutputLibrary> _context;
         private PagingMethod[]? _pagingMethods;
         private ClientMethod[]? _methods;
-        private LongRunningOperationMethod[]? _longRunningOperationMethods;
-        private RestClient? _restClient;
+        private DataPlaneLongRunningOperationMethod[]? _longRunningOperationMethods;
+        private DataPlaneRestClient? _restClient;
 
-        public Client(OperationGroup operationGroup, BuildContext context): base(context)
+        public DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context): base(context)
         {
             _operationGroup = operationGroup;
-
+            _context = context;
             var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, Context);
             DefaultName = clientPrefix + ClientSuffix;
             ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
         }
 
         public string ClientShortName { get; }
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, Context)));
-        public RestClient RestClient => _restClient ??= Context.Library.FindRestClient(_operationGroup);
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, _context)));
+        public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
 
-        public LongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
+        public DataPlaneLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
 
         protected override string DefaultName { get; }
 
@@ -75,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LongRunningOperationMethod> BuildLongRunningOperationMethods()
+        private IEnumerable<DataPlaneLongRunningOperationMethod> BuildLongRunningOperationMethods()
         {
             foreach (var operation in _operationGroup.Operations)
             {
@@ -86,9 +87,9 @@ namespace AutoRest.CSharp.Output.Models
                         var name = operation.CSharpName();
                         RestClientMethod startMethod = RestClient.GetOperationMethod(serviceRequest);
 
-                        yield return new LongRunningOperationMethod(
+                        yield return new DataPlaneLongRunningOperationMethod(
                             name,
-                            Context.Library.FindLongRunningOperation(operation),
+                            _context.Library.FindLongRunningOperation(operation),
                             startMethod,
                             new Diagnostic($"{Declaration.Name}.Start{name}")
                         );
@@ -120,51 +121,9 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<Parameter> GetRequiredParameters()
-        {
-            List<Parameter> parameters = new List<Parameter>();
-            foreach (var parameter in RestClient.Parameters)
-            {
-                if (parameter.DefaultValue == null)
-                {
-                    parameters.Add(parameter);
-                }
-            }
-
-            return parameters;
-        }
-
-        private IEnumerable<Parameter> GetOptionalParameters()
-        {
-            List<Parameter> parameters = new List<Parameter>();
-            foreach (var parameter in RestClient.Parameters)
-            {
-                if (parameter.DefaultValue != null && !parameter.IsApiVersionParameter)
-                {
-                    parameters.Add(parameter);
-                }
-            }
-
-            return parameters;
-        }
-
         public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType)
         {
-            List<Parameter> parameters = new List<Parameter>();
-
-            parameters.AddRange(GetRequiredParameters());
-
-            var credentialParam = new Parameter(
-                "credential",
-                "A credential used to authenticate to an Azure Service.",
-                credentialType,
-                null,
-                true);
-            parameters.Add(credentialParam);
-
-            parameters.AddRange(GetOptionalParameters());
-
-            return parameters;
+            return RestClientBuilder<DataPlaneOutputLibrary>.GetConstructorParameters(RestClient.Parameters, credentialType, false, false);
         }
     }
 }
