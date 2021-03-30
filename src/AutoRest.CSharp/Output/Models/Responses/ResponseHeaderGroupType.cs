@@ -14,16 +14,17 @@ namespace AutoRest.CSharp.Output.Models.Responses
 {
     internal abstract class ResponseHeaderGroupType: TypeProvider
     {
-        private static string[] _knownResponseHeaders = new[]
+        protected static string[] _knownResponseHeaders = new[]
         {
             "Date",
             "ETag",
             "x-ms-client-request-id",
             "x-ms-request-id"
         };
+
         private readonly HttpResponseHeader[] _httpResponseHeaders;
 
-        public ResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, string clientName, BuildContext context) : base(context)
+        public ResponseHeaderGroupType(Operation operation, HttpResponseHeader[] httpResponseHeaders, string clientName, BuildContext context) : base(context)
         {
             string operationName = operation.CSharpName();
 

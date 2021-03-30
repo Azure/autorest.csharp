@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectType : TypeProvider
     {
-        private readonly ObjectSchema _objectSchema;
+        protected readonly ObjectSchema _objectSchema;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly SchemaTypeUsage _usage;
@@ -39,11 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
 
-        public ObjectType(ObjectSchema objectSchema, BuildContext context) : this(objectSchema, context, false)
-        {
-        }
-
-        public ObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceModel) : base(context)
+        public ObjectType(ObjectSchema objectSchema, BuildContext context) : base(context)
         {
             _objectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
@@ -54,11 +50,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            DefaultName = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
-            if (isResourceModel)
-            {
-                DefaultName = DefaultName + "Data";
-            }
 
             DefaultNamespace = GetDefaultNamespace(objectSchema, context);
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
@@ -74,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public bool IsStruct => ExistingType?.IsValueType == true;
-        protected override string DefaultName { get; }
+        protected override string DefaultName => _objectSchema.CSharpName();
         protected override string DefaultAccessibility { get; } = "public";
         protected override string DefaultNamespace { get; }
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
@@ -536,29 +527,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected virtual HashSet<string?> GetParentProperties()
         {
-            HashSet<string?> result = new HashSet<string?>();
-            CSharpType? type = Inherits;
-            while (type != null)
-            {
-                if (type.IsFrameworkType == false)
-                {
-                    if (type.Implementation is ObjectType objType)
-                    {
-                        result.UnionWith(objType.Properties.Select(p => p.SchemaProperty?.Language.Default.Name));
-                        type = objType.Inherits;
-                    }
-                    else
-                    {
-                        type = null;
-                    }
-                }
-                else
-                {
-                    result.UnionWith(GetPropertiesFromSystemType(type.FrameworkType));
-                    type = null;
-                }
-            }
-            return result;
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.SchemaProperty?.Language.Default.Name)
+                .ToHashSet();
         }
 
         private IEnumerable<string> GetPropertiesFromSystemType(System.Type systemType)

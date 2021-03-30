@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Nullable>annotations</Nullable>
   </PropertyGroup>
-{0}
+
   <ItemGroup>
     <PackageReference Include=""Azure.Core"" Version=""1.10.0"" />
     <PackageReference Include=""Azure.ResourceManager.Core"" Version=""1.0.0-alpha.20210325.1"" />
@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else
                 {
-                    csProjContent = configuration.AzureArm ? string.Format(_armCsProjContent, "") : string.Format(_csProjContent, "");
+                    csProjContent = configuration.AzureArm ? _armCsProjContent : string.Format(_csProjContent, "");
                 }
             }
             else

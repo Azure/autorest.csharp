@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public string GetDefaultNamespace(Schema schema, BuildContext context)
         {
-            var result = "";
+            var result = context.DefaultNamespace;
             if (schema.Extensions?.Namespace is string namespaceExtension)
             {
                 result = namespaceExtension;
@@ -54,10 +54,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             else if (context.Configuration.ModelNamespace)
             {
                 result = $"{context.DefaultNamespace}.Models";
-            }
-            else
-            {
-                result = context.DefaultNamespace;
             }
             return result;
         }

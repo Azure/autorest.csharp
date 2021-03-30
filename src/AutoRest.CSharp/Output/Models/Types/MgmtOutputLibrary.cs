@@ -195,7 +195,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (!_resourceData.ContainsKey(operation.Resource))
                     {
-                        var resourceData = new ResourceData((ObjectSchema)schema, operation, _context, true);
+                        var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
                         CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
                         if (!(inherits is null))
                         {
@@ -281,13 +281,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => new ObjectType(objectSchema, _context),
+            ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context, false),
             _ => throw new NotImplementedException()
         };
 
         private TypeProvider BuildResourceModel(Schema schema) => schema switch
         {
-            ObjectSchema objectSchema => new ObjectType(objectSchema, _context, true),
+            ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context, true),
             _ => throw new NotImplementedException()
         };
 

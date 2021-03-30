@@ -14,18 +14,10 @@ namespace AutoRest.CSharp.Output.Models.Responses
 {
     internal class DataPlaneResponseHeaderGroupType: ResponseHeaderGroupType
     {
-        private static string[] _knownResponseHeaders = new[]
-        {
-            "Date",
-            "ETag",
-            "x-ms-client-request-id",
-            "x-ms-request-id"
-        };
-
         private readonly BuildContext<DataPlaneOutputLibrary> _context;
 
         public DataPlaneResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context)
-            : base(operationGroup, operation, httpResponseHeaders, context.Library.FindRestClient(operationGroup).ClientPrefix, context)
+            : base(operation, httpResponseHeaders, context.Library.FindRestClient(operationGroup).ClientPrefix, context)
         {
             _context = context;
         }
@@ -49,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
 
         protected override CSharpType GetCsharpType(Schema schema, bool isNullable)
         {
-            return _context.TypeFactory.CreateType(schema, true);
+            return _context.TypeFactory.CreateType(schema, isNullable);
         }
     }
 }
