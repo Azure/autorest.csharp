@@ -16,13 +16,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation)
         {
-            writer.Line($"using Azure;");
-            //writer.Line($"using Azure.ResourceManager.Compute;");
-            writer.Line($"using Azure.ResourceManager.Core;");
-            writer.Line($"using System.Collections.Generic;");
-            writer.Line($"using System;");
-            writer.Line($"using System.Threading;");
-            writer.Line($"using System.Threading.Tasks;");
+            string[] Libraries = { "System", "System.Collections.Generic", "System.Threading", "System.Threading.Tasks", "Azure.ResourceManager.Core" };
+            foreach (string lib in Libraries)
+            {
+                writer.Line($"using {lib};");
+            }
             writer.Line();
 
             var cs = resourceOperation.Type;
@@ -33,6 +31,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.Scope($"{resourceOperation.Declaration.Accessibility} partial class {cs.Name} : ResourceOperationsBase<{resourceOperation.ResourceName}>"))
                 {
                     WriteClientCtors(writer, resourceOperation);
+                    WriteClientProperties(writer, resourceOperation);
+                    WriteClientMethods(writer, resourceOperation);
                 }
             }
         }
@@ -44,12 +44,40 @@ namespace AutoRest.CSharp.Generation.Writers
             {
 
             }
-            writer.Line();
+        }
 
+        private void WriteClientProperties(CodeWriter writer, ResourceOperation resourceOperation)
+        {
+            writer.Line();
             writer.Line($"private static readonly ResourceType ResourceType = \"{resourceOperation.Type.Namespace}/{resourceOperation.Type.Name}\";");
             writer.Line($"protected override ResourceType ValidResourceType => ResourceType;");
-            writer.Line();
+        }
 
+        private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation)
+        {
+            writer.Line();
+            writer.WriteXmlDocumentationInheritDoc();
+            using (writer.Scope($"public override ArmResponse<{resourceOperation.ResourceName}> Get(CancellationToken cancellationToken = default)"))
+            {
+                writer.Line($"throw new NotImplementedException();");
+            }
+
+            writer.Line();
+            writer.WriteXmlDocumentationInheritDoc();
+            using (writer.Scope($"public override Task<ArmResponse<{resourceOperation.ResourceName}>> GetAsync(CancellationToken cancellationToken = default)"))
+            {
+                writer.Line($"throw new NotImplementedException();");
+            }
+
+            writer.Line();
+            writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
+            writer.WriteXmlDocumentationReturns("A collection of location that may take multiple service requests to iterate over.");
+            using (writer.Scope($"public IEnumerable<LocationData> ListAvailableLocations()"))
+            {
+                writer.Line($"return ListAvailableLocations(ResourceType);");
+            }
+
+            writer.Line();
             writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
             writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P: System.Threading.CancellationToken.None\" />.");
             writer.WriteXmlDocumentationReturns("An async collection of location that may take multiple service requests to iterate over.");
@@ -59,23 +87,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"return await ListAvailableLocationsAsync(ResourceType, cancellationToken);");
             }
             writer.Line();
-
-            writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
-            writer.WriteXmlDocumentationReturns("A collection of location that may take multiple service requests to iterate over.");
-            using (writer.Scope($"public IEnumerable<LocationData> ListAvailableLocations()"))
-            {
-                writer.Line($"return ListAvailableLocations(ResourceType);");
-            }
-
-            using (writer.Scope($"public override ArmResponse<{resourceOperation.ResourceName}> Get(CancellationToken cancellationToken = default)"))
-            {
-                writer.Line($"throw new NotImplementedException();");
-            }
-
-            using (writer.Scope($"public override Task<ArmResponse<{resourceOperation.ResourceName}>> GetAsync(CancellationToken cancellationToken = default)"))
-            {
-                writer.Line($"throw new NotImplementedException();");
-            }
         }
     }
 }
