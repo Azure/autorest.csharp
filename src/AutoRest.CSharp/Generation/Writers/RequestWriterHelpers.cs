@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
             var returnType = lowLevel ? typeof(Azure.Core.Request) : typeof(HttpMessage);
-            var visibility = clientMethod.IsVisible ? "public" : "internal";
+            var visibility = clientMethod.IsVisible ? "protected" : "internal";
             writer.Append($"{visibility} {returnType} {methodName}(");
             foreach (Parameter clientParameter in parameters)
             {
