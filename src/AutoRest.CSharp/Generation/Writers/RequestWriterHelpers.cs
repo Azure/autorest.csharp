@@ -17,8 +17,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        private const string PipelineVariable = "pipeline";
-        private const string PipelineField = "_" + PipelineVariable;
+        private static string GetPipeline (bool lowLevel) => lowLevel ? "Pipeline" : "_pipeline";
 
         public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, bool lowLevel)
         {
@@ -51,11 +50,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 // Do note there is a subtle difference here, the lines are not identical
                 if (lowLevel)
                 {
-                    writer.Line($"var {request:D} = {PipelineField}.CreateRequest();");
+                    writer.Line($"var {request:D} = {GetPipeline(lowLevel)}.CreateRequest();");
                 }
                 else
                 {
-                    writer.Line($"var {message:D} = {PipelineField}.CreateMessage();");
+                    writer.Line($"var {message:D} = {GetPipeline(lowLevel)}.CreateMessage();");
                     writer.Line($"var {request:D} = {message}.Request;");
                 }
 
