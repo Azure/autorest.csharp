@@ -43,17 +43,17 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType FindTypeForSchema(Schema schema)
         {
-            CSharpType type = base.FindTypeForSchema(schema);
             switch (schema.Type)
             {
                 case AllSchemaTypes.Choice:
+                    return _context.TypeFactory.CreateType(((ChoiceSchema)schema).ChoiceType, false);
                 case AllSchemaTypes.SealedChoice:
-                {
-                    return ((EnumType)type.Implementation).BaseType;
-                }
+                    return _context.TypeFactory.CreateType(((SealedChoiceSchema)schema).ChoiceType, false);
                 default:
-                    return type;
+                    throw new InvalidOperationException ($"FindTypeForSchema of invalid schema {schema.Name} in LowLevelOutputLibrary");
             }
         }
+
+        public override CSharpType? FindTypeByName(string name) => null;
     }
 }

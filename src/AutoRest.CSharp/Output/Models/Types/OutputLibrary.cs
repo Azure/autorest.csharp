@@ -13,7 +13,6 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext _context;
-        private Dictionary<Schema, TypeProvider>? _models;
 
         protected OutputLibrary(CodeModel codeModel, BuildContext context)
         {
@@ -21,31 +20,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
         }
 
-        private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
-        public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+        public abstract CSharpType FindTypeForSchema(Schema schema);
 
-        public virtual CSharpType FindTypeForSchema(Schema schema)
-        {
-            return SchemaMap[schema].Type;
-        }
-
-        private Dictionary<Schema, TypeProvider> BuildModels()
-        {
-            var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
-                .Concat(_codeModel.Schemas.SealedChoices)
-                .Concat(_codeModel.Schemas.Objects)
-                .Concat(_codeModel.Schemas.Groups);
-
-            return allSchemas.ToDictionary(schema => schema, BuildModel);
-        }
-
-        private TypeProvider BuildModel(Schema schema) => schema switch
-        {
-            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
-            ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
-            ObjectSchema objectSchema => new ObjectType(objectSchema, _context),
-            _ => throw new NotImplementedException()
-        };
-
+        public abstract CSharpType? FindTypeByName(string name);
     }
 }

@@ -250,14 +250,7 @@ namespace AutoRest.CSharp.Generation.Types
             }
             else
             {
-                foreach (var model in _library.Models)
-                {
-                    if (namedTypeSymbol.Name == model.Type.Name)
-                    {
-                        type = model.Type;
-                        break;
-                    }
-                }
+                type = _library.FindTypeByName(namedTypeSymbol.Name);
             }
 
             if (type == null)

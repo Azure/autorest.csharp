@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -17,6 +18,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, DataPlaneClient>? _clients;
         private Dictionary<Operation, LongRunningOperation>? _operations;
         private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
+        private Dictionary<Schema, TypeProvider>? _models;
         private BuildContext<DataPlaneOutputLibrary> _context;
         private CodeModel _codeModel;
 
@@ -26,9 +28,47 @@ namespace AutoRest.CSharp.Output.Models.Types
             _codeModel = codeModel;
         }
 
+
         public IEnumerable<DataPlaneClient> Clients => EnsureClients().Values;
         public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
         public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
+        private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
+        public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+
+        public override CSharpType FindTypeForSchema(Schema schema)
+        {
+            return SchemaMap[schema].Type;
+        }
+
+        public override CSharpType? FindTypeByName(string name)
+        {
+            foreach (var model in Models)
+            {
+                if (name == model.Type.Name)
+                {
+                    return model.Type;
+                }
+            }
+            return null;
+        }
+
+        private Dictionary<Schema, TypeProvider> BuildModels()
+        {
+            var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
+                .Concat(_codeModel.Schemas.SealedChoices)
+                .Concat(_codeModel.Schemas.Objects)
+                .Concat(_codeModel.Schemas.Groups);
+
+            return allSchemas.ToDictionary(schema => schema, BuildModel);
+        }
+
+        private TypeProvider BuildModel(Schema schema) => schema switch
+        {
+            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
+            ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
+            ObjectSchema objectSchema => new ObjectType(objectSchema, _context),
+            _ => throw new NotImplementedException()
+        };
 
         public LongRunningOperation FindLongRunningOperation(Operation operation)
         {
