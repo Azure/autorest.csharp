@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsPost200WithPayloadOperation : Operation<Sku>, IOperationSource<Sku>
     {
         private readonly ArmOperationHelpers<Sku> _operation;
+
+        /// <summary> Initializes a new instance of LROsPost200WithPayloadOperation for mocking. </summary>
+        protected LROsPost200WithPayloadOperation()
+        {
+        }
+
         internal LROsPost200WithPayloadOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Sku>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost200WithPayloadOperation");

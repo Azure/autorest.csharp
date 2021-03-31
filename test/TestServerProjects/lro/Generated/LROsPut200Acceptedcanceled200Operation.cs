@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsPut200Acceptedcanceled200Operation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LROsPut200Acceptedcanceled200Operation for mocking. </summary>
+        protected LROsPut200Acceptedcanceled200Operation()
+        {
+        }
+
         internal LROsPut200Acceptedcanceled200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPut200Acceptedcanceled200Operation");

@@ -20,6 +20,12 @@ namespace lro
     public partial class LrosaDsPutError201NoProvisioningStatePayloadOperation : Operation<Product>, IOperationSource<Product>
     {
         private readonly ArmOperationHelpers<Product> _operation;
+
+        /// <summary> Initializes a new instance of LrosaDsPutError201NoProvisioningStatePayloadOperation for mocking. </summary>
+        protected LrosaDsPutError201NoProvisioningStatePayloadOperation()
+        {
+        }
+
         internal LrosaDsPutError201NoProvisioningStatePayloadOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPutError201NoProvisioningStatePayloadOperation");

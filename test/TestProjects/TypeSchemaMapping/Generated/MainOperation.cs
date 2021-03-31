@@ -18,6 +18,12 @@ namespace CustomNamespace
     internal partial class MainOperation : Operation<CustomizedModel>, IOperationSource<CustomizedModel>
     {
         private readonly ArmOperationHelpers<CustomizedModel> _operation;
+
+        /// <summary> Initializes a new instance of MainOperation for mocking. </summary>
+        protected MainOperation()
+        {
+        }
+
         internal MainOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<CustomizedModel>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "MainOperation");

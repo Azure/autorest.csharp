@@ -18,6 +18,12 @@ namespace lro
     public partial class LROsPost202Retry200Operation : Operation<Response>, IOperationSource<Response>
     {
         private readonly ArmOperationHelpers<Response> _operation;
+
+        /// <summary> Initializes a new instance of LROsPost202Retry200Operation for mocking. </summary>
+        protected LROsPost202Retry200Operation()
+        {
+        }
+
         internal LROsPost202Retry200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202Retry200Operation");

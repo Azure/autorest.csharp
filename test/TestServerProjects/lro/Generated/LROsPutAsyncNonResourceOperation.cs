@@ -20,6 +20,12 @@ namespace lro
     public partial class LROsPutAsyncNonResourceOperation : Operation<Sku>, IOperationSource<Sku>
     {
         private readonly ArmOperationHelpers<Sku> _operation;
+
+        /// <summary> Initializes a new instance of LROsPutAsyncNonResourceOperation for mocking. </summary>
+        protected LROsPutAsyncNonResourceOperation()
+        {
+        }
+
         internal LROsPutAsyncNonResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new ArmOperationHelpers<Sku>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutAsyncNonResourceOperation");
