@@ -30,20 +30,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
 </Project>
 ";
-        private string _armCsProjContent = @"<Project Sdk=""Microsoft.NET.Sdk"">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <Nullable>annotations</Nullable>
-  </PropertyGroup>
-
+        private string _armCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.10.0"" />
     <PackageReference Include=""Azure.ResourceManager.Core"" Version=""1.0.0-alpha.20210325.1"" />
   </ItemGroup>
-
-</Project>
 ";
         private string _csProjPackageReference = @"
   <PropertyGroup>
@@ -106,7 +96,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
                 else
                 {
-                    csProjContent = configuration.AzureArm ? _armCsProjContent : string.Format(_csProjContent, "");
+                    csProjContent = string.Format(_csProjContent, configuration.AzureArm ? _armCsProjContent : string.Empty);
                 }
             }
             else
