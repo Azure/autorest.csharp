@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Output.Models
             Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, operationGroup.Resource));
         }
 
-        protected override string DefaultName => GetDefaultName(_objectSchema, true);
+        protected override string DefaultName => GetDefaultName(OjectSchema, true);
 
         public new string? Description { get; }
 
