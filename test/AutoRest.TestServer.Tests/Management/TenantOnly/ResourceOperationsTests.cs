@@ -9,16 +9,32 @@ namespace AutoRest.TestServer.Tests
 {
     public class ResourceOperationsTests
     {
-        //[TestCase (typeof(AgreementsOperations))]
+        [TestCase(typeof(AgreementOperations))]
+        [TestCase(typeof(AvailableBalanceOperations))]
+        [TestCase(typeof(BillingAccountOperations))]
+        [TestCase(typeof(InstructionOperations))]
         public void ValidateBaseClass(Type type)
         {
-            Assert.AreEqual(typeof(ResourceOperationsBase), type.BaseType);
+            Assert.AreEqual(typeof(ResourceOperationsBase), type.BaseType.BaseType);
         }
 
-        //[TestCase(typeof(AgreementsOperations))]
-        public void ValiateListAvailableLocations(Type type)
+        [TestCase(typeof(AgreementOperations))]
+        [TestCase(typeof(AvailableBalanceOperations))]
+        [TestCase(typeof(BillingAccountOperations))]
+        [TestCase(typeof(InstructionOperations))]
+        public void ValidateListAvailableLocations(Type type)
         {
             var method = type.GetMethod("ListAvailableLocations");
+            Assert.NotNull(method);
+        }
+
+        [TestCase(typeof(AgreementOperations))]
+        [TestCase(typeof(AvailableBalanceOperations))]
+        [TestCase(typeof(BillingAccountOperations))]
+        [TestCase(typeof(InstructionOperations))]
+        public void ValidateListAvailableLocationsAsync(Type type)
+        {
+            var method = type.GetMethod("ListAvailableLocationsAsync");
             Assert.NotNull(method);
         }
     }
