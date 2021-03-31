@@ -61,6 +61,9 @@ namespace Azure.Core
                 case byte[] bytes:
                     writer.WriteStringValue(Convert.ToBase64String(bytes));
                     break;
+                case BinaryData bytes:
+                    writer.WriteStringValue(Convert.ToBase64String(bytes));
+                    break;
                 case int i:
                     writer.WriteNumberValue(i);
                     break;
