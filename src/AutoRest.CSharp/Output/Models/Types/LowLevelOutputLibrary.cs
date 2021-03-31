@@ -50,7 +50,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 case AllSchemaTypes.SealedChoice:
                     return _context.TypeFactory.CreateType(((SealedChoiceSchema)schema).ChoiceType, false);
                 default:
-                    throw new InvalidOperationException ($"FindTypeForSchema of invalid schema {schema.Name} in LowLevelOutputLibrary");
+                    // This is technically invalid behavior, we are hitting this in generating responses we throw away.
+                    // https://github.com/Azure/autorest.csharp/issues/1108
+                    // throw new InvalidOperationException($"FindTypeForSchema of invalid schema {schema.Name} in LowLevelOutputLibrary");
+                    return new CSharpType(typeof(object));
             }
         }
 
