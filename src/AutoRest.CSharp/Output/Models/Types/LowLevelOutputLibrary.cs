@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Responses;
 
@@ -38,6 +39,21 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return _restClients;
+        }
+
+        public override CSharpType FindTypeForSchema(Schema schema)
+        {
+            CSharpType type = base.FindTypeForSchema(schema);
+            switch (schema.Type)
+            {
+                case AllSchemaTypes.Choice:
+                case AllSchemaTypes.SealedChoice:
+                {
+                    return ((EnumType)type.Implementation).BaseType;
+                }
+                default:
+                    return type;
+            }
         }
     }
 }

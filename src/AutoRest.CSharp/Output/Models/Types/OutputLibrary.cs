@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -23,9 +24,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
-        public TypeProvider FindTypeForSchema(Schema schema)
+        public virtual CSharpType FindTypeForSchema(Schema schema)
         {
-            return SchemaMap[schema];
+            return SchemaMap[schema].Type;
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()

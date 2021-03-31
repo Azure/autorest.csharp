@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Generation.Types
             CredentialSchema credentialSchema => new CSharpType(typeof(string), isNullable),
             NumberSchema number => new CSharpType(ToFrameworkNumericType(number), isNullable),
             _ when ToFrameworkType(schema.Type) is Type type => new CSharpType(type, isNullable),
-            _ => _library.FindTypeForSchema(schema).Type.WithNullable(isNullable)
+            _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
 
         public static CSharpType GetImplementationType(CSharpType type)
