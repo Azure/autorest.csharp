@@ -57,6 +57,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        public override CSharpType? FindTypeByName(string name) => null;
+        public override CSharpType? FindTypeByName(string originalName) => null;
     }
 }

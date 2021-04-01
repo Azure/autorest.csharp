@@ -40,11 +40,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return SchemaMap[schema].Type;
         }
 
-        public override CSharpType? FindTypeByName(string name)
+        public override CSharpType? FindTypeByName(string originalName)
         {
             foreach (var model in Models)
             {
-                if (name == model.Type.Name)
+                if (originalName == model.Type.Name)
                 {
                     return model.Type;
                 }

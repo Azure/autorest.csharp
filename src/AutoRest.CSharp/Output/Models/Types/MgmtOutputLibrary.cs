@@ -190,16 +190,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return result.Type;
         }
 
-        public override CSharpType? FindTypeByName(string name)
+        public override CSharpType? FindTypeByName(string originalName)
         {
-            foreach (var model in Models)
-            {
-                if (name == model.Type.Name)
-                {
-                    return model.Type;
-                }
-            }
-            return null;
+            TypeProvider? provider = Models.FirstOrDefault (m => m.Type.Name == originalName);
+            provider ??= ResourceSchemaMap.Values.FirstOrDefault (m => m.Type.Name == originalName);
+            return provider?.Type;
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()
