@@ -20743,6 +20743,32 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            SearchServiceListSynonymMaps:
+              parameters:
+                api-version: 2019-05-06-Preview
+                endpoint: https://myservice.search.windows.net
+              responses:
+                '200':
+                  body:
+                    value:
+                      - name: mysynonymmap
+                        format: solr
+                        encryptionKey:
+                          accessCredentials: null
+                          keyVaultKeyName: myKeyName
+                          keyVaultKeyVersion: myKeyVersion
+                          keyVaultUri: https://myKeyVault.vault.azure.net
+                        synonyms: |-
+                          United States, United States of America, USA
+                          Washington, Wash. => WA
+                      - name: myothersynonymmap
+                        format: solr
+                        encryptionKey: null
+                        synonyms: |-
+                          couch, sofa, chesterfield
+                          pop, soda
+                          toque, hat
           x-ms-request-id: request-id
         language: !Languages 
           default:
@@ -20844,39 +20870,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            SearchServiceCreateSynonymMap:
-              parameters:
-                api-version: 2019-05-06-Preview
-                endpoint: https://myservice.search.windows.net
-                synonymMap:
-                  name: mysynonymmap
-                  format: solr
-                  encryptionKey:
-                    accessCredentials:
-                      applicationId: 00000000-0000-0000-0000-000000000000
-                      applicationSecret: myApplicationSecret
-                    keyVaultKeyName: myUserManagedEncryptionKey-createdinAzureKeyVault
-                    keyVaultKeyVersion: myKeyVersion-32charAlphaNumericString
-                    keyVaultUri: https://myKeyVault.vault.azure.net
-                  synonyms: |-
-                    United States, United States of America, USA
-                    Washington, Wash. => WA
-              responses:
-                '201':
-                  body:
-                    name: mysynonymmap
-                    format: solr
-                    encryptionKey:
-                      accessCredentials:
-                        applicationId: 00000000-0000-0000-0000-000000000000
-                        applicationSecret: null
-                      keyVaultKeyName: myUserManagedEncryptionKey-createdinAzureKeyVault
-                      keyVaultKeyVersion: myKeyVersion-32charAlphaNumericString
-                      keyVaultUri: https://myKeyVault.vault.azure.net
-                    synonyms: |-
-                      United States, United States of America, USA
-                      Washington, Wash. => WA
           x-ms-request-id: request-id
         language: !Languages 
           default:

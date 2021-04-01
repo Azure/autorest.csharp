@@ -21,15 +21,14 @@ namespace AutoRest.CSharp.Output.Models
         private readonly BuildContext<DataPlaneOutputLibrary> _context;
         private PagingMethod[]? _pagingMethods;
         private ClientMethod[]? _methods;
-        private LongRunningOperationMethod[]? _longRunningOperationMethods;
+        private DataPlaneLongRunningOperationMethod[]? _longRunningOperationMethods;
         private DataPlaneRestClient? _restClient;
 
         public DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context): base(context)
         {
             _operationGroup = operationGroup;
             _context = context;
-
-            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, _context);
+            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, Context);
             DefaultName = clientPrefix + ClientSuffix;
             ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
         }
@@ -41,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
 
-        public LongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
+        public DataPlaneLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
 
         protected override string DefaultName { get; }
 
@@ -77,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<LongRunningOperationMethod> BuildLongRunningOperationMethods()
+        private IEnumerable<DataPlaneLongRunningOperationMethod> BuildLongRunningOperationMethods()
         {
             foreach (var operation in _operationGroup.Operations)
             {
@@ -88,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models
                         var name = operation.CSharpName();
                         RestClientMethod startMethod = RestClient.GetOperationMethod(serviceRequest);
 
-                        yield return new LongRunningOperationMethod(
+                        yield return new DataPlaneLongRunningOperationMethod(
                             name,
                             _context.Library.FindLongRunningOperation(operation),
                             startMethod,

@@ -17,14 +17,12 @@ namespace AutoRest.CSharp.Output.Models
         private const string OperationsSuffixValue = "Operations";
         protected string ClientSuffix { get; }
 
-        private readonly BuildContext _context;
         private readonly TypeFactory _typeFactory;
 
         protected ClientBase(BuildContext context): base(context)
         {
             ClientSuffix = context.Configuration.AzureArm ? OperationsSuffixValue : ClientSuffixValue;
             _typeFactory = context.TypeFactory;
-            _context = context;
         }
 
         protected Parameter BuildParameter(RequestParameter requestParameter)
@@ -53,13 +51,13 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         protected Constant ParseConstant(ConstantSchema constant) =>
-            BuilderHelpers.ParseConstant(constant.Value.Value, _context.TypeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
+            BuilderHelpers.ParseConstant(constant.Value.Value, Context.TypeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
 
         private Constant? ParseConstant(RequestParameter parameter)
         {
             if (parameter.ClientDefaultValue != null)
             {
-                CSharpType constantTypeReference = _context.TypeFactory.CreateType(parameter.Schema, parameter.IsNullable);
+                CSharpType constantTypeReference = Context.TypeFactory.CreateType(parameter.Schema, parameter.IsNullable);
                 return BuilderHelpers.ParseConstant(parameter.ClientDefaultValue, constantTypeReference);
             }
 

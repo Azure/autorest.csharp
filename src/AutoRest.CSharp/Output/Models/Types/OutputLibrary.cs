@@ -20,15 +20,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             _context = context;
         }
 
-        private Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
+        internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
-        public TypeProvider FindTypeForSchema(Schema schema)
+        public virtual TypeProvider FindTypeForSchema(Schema schema)
         {
             return SchemaMap[schema];
         }
 
-        private Dictionary<Schema, TypeProvider> BuildModels()
+        protected virtual Dictionary<Schema, TypeProvider> BuildModels()
         {
             var allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)

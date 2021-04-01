@@ -15,7 +15,7 @@ namespace Azure.Management.Storage.Models
     {
         internal static OperationListResult DeserializeOperationListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<Operation>> value = default;
+            Optional<IReadOnlyList<OperationData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -25,10 +25,10 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<Operation> array = new List<Operation>();
+                    List<OperationData> array = new List<OperationData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Operation.DeserializeOperation(item));
+                        array.Add(OperationData.DeserializeOperationData(item));
                     }
                     value = array;
                     continue;

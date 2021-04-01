@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The resource model definition for a Azure Resource Manager resource with an etag. </summary>
-    public partial class AzureEntityResource : Resource
+    public partial class AzureEntityResource : ResourceManager.Core.Resource
     {
         /// <summary> Initializes a new instance of AzureEntityResource. </summary>
         public AzureEntityResource()
@@ -16,11 +18,8 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of AzureEntityResource. </summary>
-        /// <param name="id"> Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
-        /// <param name="name"> The name of the resource. </param>
-        /// <param name="type"> The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts. </param>
         /// <param name="etag"> Resource Etag. </param>
-        internal AzureEntityResource(string id, string name, string type, string etag) : base(id, name, type)
+        internal AzureEntityResource(string etag)
         {
             Etag = etag;
         }
