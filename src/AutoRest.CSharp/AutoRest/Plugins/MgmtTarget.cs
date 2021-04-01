@@ -17,10 +17,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             BuildContext<MgmtOutputLibrary> context = new BuildContext<MgmtOutputLibrary>(codeModel, configuration, sourceInputModel);
             var modelWriter = new ModelWriter();
-            var clientWriter = new MgmtClientWriter();
             var restClientWriter = new MgmtRestClientWriter();
             var serializeWriter = new SerializationWriter();
-            var headerModelModelWriter = new MgmtResponseHeaderGroupWriter();
             var resourceOperationWriter = new ResourceOperationWriter();
             var resourceContainerWriter = new ResourceContainerWriter();
             var resourceDataWriter = new ResourceDataWriter();
@@ -49,23 +47,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
             }
-
-            foreach (MgmtResponseHeaderGroupType responseHeaderModel in context.Library.HeaderModels)
-            {
-                var headerModelCodeWriter = new CodeWriter();
-                headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
-
-                project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
-            }
-
-            foreach (var operation in context.Library.LongRunningOperations)
-            {
-                var codeWriter = new CodeWriter();
-                MgmtLongRunningOperationWriter.Write(codeWriter, operation);
-
-                project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
-            }
-
 
             foreach (var resourceOperation in context.Library.ResourceOperations)
             {

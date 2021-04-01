@@ -2,25 +2,49 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Responses
 {
-    internal class DataPlaneResponseHeaderGroupType: ResponseHeaderGroupType
+    internal class DataPlaneResponseHeaderGroupType: TypeProvider
     {
-        private readonly BuildContext<DataPlaneOutputLibrary> _context;
-
-        public DataPlaneResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context)
-            : base(operation, httpResponseHeaders, context.Library.FindRestClient(operationGroup).ClientPrefix, context)
+        private static string[] _knownResponseHeaders = new[]
         {
-            _context = context;
+            "Date",
+            "ETag",
+            "x-ms-client-request-id",
+            "x-ms-request-id"
+        };
+
+        public DataPlaneResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context) : base(context)
+        {
+            ResponseHeader CreateResponseHeader(HttpResponseHeader header)
+            {
+                CSharpType type = context.TypeFactory.CreateType(header.Schema, true);
+
+                return new ResponseHeader(
+                    header.CSharpName(),
+                    header.Extensions?.HeaderCollectionPrefix ?? header.Header,
+                    type,
+                    BuilderHelpers.EscapeXmlDescription(header.Language!.Default.Description));
+            }
+
+            string operationName = operation.CSharpName();
+            var clientName = context.Library.FindRestClient(operationGroup).ClientPrefix;
+
+            DefaultName = clientName + operationName + "Headers";
+            Description = $"Header model for {operationName}";
+            Headers = httpResponseHeaders.Select(CreateResponseHeader).ToArray();
         }
+
+        public string Description { get; }
+        public ResponseHeader[] Headers { get; }
+        protected override string DefaultName { get; }
+        protected override string DefaultAccessibility { get; } = "internal";
 
         public static DataPlaneResponseHeaderGroupType? TryCreate(OperationGroup operationGroup, Operation operation, BuildContext<DataPlaneOutputLibrary> context)
         {
@@ -37,11 +61,6 @@ namespace AutoRest.CSharp.Output.Models.Responses
             }
 
             return new DataPlaneResponseHeaderGroupType(operationGroup, operation, httpResponseHeaders, context);
-        }
-
-        protected override CSharpType GetCsharpType(Schema schema, bool isNullable)
-        {
-            return _context.TypeFactory.CreateType(schema, isNullable);
         }
     }
 }

@@ -21,8 +21,6 @@ namespace AutoRest.CSharp.Output.Models
     {
         private readonly OperationGroup _operationGroup;
         private RestClientBuilder<MgmtOutputLibrary> _builder;
-        private readonly BuildContext<MgmtOutputLibrary> _context;
-
         private Dictionary<ServiceRequest, RestClientMethod>? _requestMethods;
         private Dictionary<ServiceRequest, RestClientMethod>? _nextPageMethods;
         private RestClientMethod[]? _allMethods;
@@ -30,7 +28,6 @@ namespace AutoRest.CSharp.Output.Models
         public MgmtRestClient(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context) : base(context)
         {
             _operationGroup = operationGroup;
-            _context = context;
             _builder = new RestClientBuilder<MgmtOutputLibrary> (operationGroup, context);
 
             Parameters = _builder.GetOrderedParameters ();
@@ -94,8 +91,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         continue;
                     }
-                    var headerModel = _context.Library.FindHeaderModel(operation);
-                    _requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel, false));
+                    _requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, false));
                 }
             }
 
@@ -197,23 +193,6 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientMethod GetOperationMethod(ServiceRequest request)
         {
             return EnsureNormalMethods()[request];
-        }
-
-        private Parameter BuildClientParameter(RequestParameter requestParameter)
-        {
-            var parameter = BuildParameter(requestParameter);
-            if (requestParameter.Origin == "modelerfour:synthesized/host")
-            {
-                parameter = new Parameter(
-                    "endpoint",
-                    parameter.Description,
-                    typeof(Uri),
-                    parameter.DefaultValue,
-                    parameter.ValidateNotNull
-                );
-            }
-
-            return parameter;
         }
     }
 }

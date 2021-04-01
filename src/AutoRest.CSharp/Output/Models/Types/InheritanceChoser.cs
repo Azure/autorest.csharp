@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (kval.Key is ObjectSchema objectSchema)
                 {
-                    var childObjectType = (ObjectType)kval.Value;
+                    var childObjectType = (MgmtObjectType)kval.Value;
                     var typeToReplace = childObjectType?.Inherits?.Implementation as ObjectType;
                     if (typeToReplace is null)
                     {
@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static bool IsEqual(CSharpType childType, System.Type parentType)
         {
-            var childProperties = ((ObjectType)(childType.Implementation)).Properties.ToList();
+            var childProperties = ((MgmtObjectType)(childType.Implementation)).Properties.ToList();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
             if (parentProperties.Count > childProperties.Count)

@@ -15,7 +15,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
             Name = name;
         }
 
-
         public string Name { get; }
         public DataPlaneLongRunningOperation Operation { get; }
 

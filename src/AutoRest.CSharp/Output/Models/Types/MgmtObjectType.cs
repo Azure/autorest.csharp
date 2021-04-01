@@ -19,12 +19,18 @@ namespace AutoRest.CSharp.Output.Models.Types
             _isResourceType = isResourceType;
         }
 
-        protected override string DefaultName => GetDefaultName(_objectSchema, _isResourceType);
+        protected override string DefaultName => GetDefaultName(OjectSchema, _isResourceType);
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
             var name = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
             return isResourceType ? name + "Data" : name;
+        }
+
+        public void OverrideInherits(CSharpType cSharpType)
+        {
+            _inheritsType = cSharpType;
+            _properties = null;
         }
 
         protected override HashSet<string?> GetParentProperties()

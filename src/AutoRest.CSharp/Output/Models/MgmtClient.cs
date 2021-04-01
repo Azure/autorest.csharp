@@ -18,9 +18,6 @@ namespace AutoRest.CSharp.Output.Models
     internal class MgmtClient : ClientBase
     {
         private readonly OperationGroup _operationGroup;
-        private PagingMethod[]? _pagingMethods;
-        private ClientMethod[]? _methods;
-        private MgmtLongRunningOperationMethod[]? _longRunningOperationMethods;
         private MgmtRestClient? _restClient;
         private readonly BuildContext<MgmtOutputLibrary> _context;
 
@@ -36,91 +33,10 @@ namespace AutoRest.CSharp.Output.Models
         public string ClientShortName { get; }
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, Context)));
         public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
-        public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
-
-        public PagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
-
-        public MgmtLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
 
         protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility { get; } = "public";
-
-        private IEnumerable<PagingMethod> BuildPagingMethods()
-        {
-            foreach (var operation in _operationGroup.Operations)
-            {
-                Paging? paging = operation.Language.Default.Paging;
-                if (paging == null || operation.IsLongRunning)
-                {
-                    continue;
-                }
-
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    RestClientMethod method = RestClient.GetOperationMethod(serviceRequest);
-                    RestClientMethod? nextPageMethod = RestClient.GetNextOperationMethod(serviceRequest);
-
-                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
-                    {
-                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
-                    }
-
-                    yield return new PagingMethod(
-                        method,
-                        nextPageMethod,
-                        method.Name,
-                        new Diagnostic($"{Declaration.Name}.{method.Name}"),
-                        new PagingResponseInfo(paging, objectResponseBody.Type));
-                }
-            }
-        }
-
-        private IEnumerable<MgmtLongRunningOperationMethod> BuildLongRunningOperationMethods()
-        {
-            foreach (var operation in _operationGroup.Operations)
-            {
-                if (operation.IsLongRunning)
-                {
-                    foreach (var serviceRequest in operation.Requests)
-                    {
-                        var name = operation.CSharpName();
-                        RestClientMethod startMethod = RestClient.GetOperationMethod(serviceRequest);
-
-                        yield return new MgmtLongRunningOperationMethod(
-                            name,
-                            _context.Library.FindLongRunningOperation(operation),
-                            startMethod,
-                            new Diagnostic($"{Declaration.Name}.Start{name}")
-                        );
-                    }
-                }
-            }
-        }
-
-        private IEnumerable<ClientMethod> BuildMethods()
-        {
-            foreach (var operation in _operationGroup.Operations)
-            {
-                if (operation.IsLongRunning || operation.Language.Default.Paging != null)
-                {
-                    continue;
-                }
-
-                foreach (var request in operation.Requests)
-                {
-                    var name = operation.CSharpName();
-                    RestClientMethod startMethod = RestClient.GetOperationMethod(request);
-
-                    yield return new ClientMethod(
-                        name,
-                        startMethod,
-                        BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
-                        new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()));
-                }
-            }
-        }
-
         private IEnumerable<Parameter> GetRequiredParameters()
         {
             List<Parameter> parameters = new List<Parameter>();

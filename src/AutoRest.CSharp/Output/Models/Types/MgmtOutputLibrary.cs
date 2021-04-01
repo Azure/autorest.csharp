@@ -3,12 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Type.Decorate;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -26,16 +23,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<string, ArmResource>? _armResource;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
-        private Dictionary<Operation, MgmtLongRunningOperation>? _operations;
-        private Dictionary<Operation, MgmtResponseHeaderGroupType>? _headerModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
         private IEnumerable<Schema> _allSchemas;
-        private static HashSet<string> ResourceTypes = new HashSet<string>
-        {
-            "resourceGroups",
-            "subscriptions",
-            "tenant"
-        };
 
         public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
 
@@ -63,59 +52,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
         public IEnumerable<MgmtClient> Clients => EnsureClients().Values;
-
-        public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
-
-        public IEnumerable<MgmtResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
-
-        private Dictionary<Operation, MgmtResponseHeaderGroupType> EnsureHeaderModels()
-        {
-            if (_headerModels != null)
-            {
-                return _headerModels;
-            }
-
-            _headerModels = new Dictionary<Operation, MgmtResponseHeaderGroupType>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
-            {
-                foreach (var operation in operationGroup.Operations)
-                {
-                    var headers = MgmtResponseHeaderGroupType.TryCreate(operationGroup, operation, _context);
-                    if (headers != null)
-                    {
-                        _headerModels.Add(operation, headers);
-                    }
-                }
-            }
-
-            return _headerModels;
-        }
-
-        private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()
-        {
-            if (_operations != null)
-            {
-                return _operations;
-            }
-
-            _operations = new Dictionary<Operation, MgmtLongRunningOperation>();
-
-            if (_context.Configuration.PublicClients)
-            {
-                foreach (var operationGroup in _codeModel.OperationGroups)
-                {
-                    foreach (var operation in operationGroup.Operations)
-                    {
-                        if (operation.IsLongRunning)
-                        {
-                            _operations.Add(operation, new MgmtLongRunningOperation(operationGroup, operation, _context));
-                        }
-                    }
-                }
-            }
-
-            return _operations;
-        }
 
         private Dictionary<OperationGroup, MgmtClient> EnsureClients()
         {
@@ -297,12 +233,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotImplementedException()
         };
 
-        public MgmtLongRunningOperation FindLongRunningOperation(Operation operation)
-        {
-            Debug.Assert(operation.IsLongRunning);
-
-            return EnsureLongRunningOperations()[operation];
-        }
 
         public MgmtClient? FindClient(OperationGroup operationGroup)
         {
@@ -313,12 +243,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public MgmtRestClient FindRestClient(OperationGroup operationGroup)
         {
             return EnsureRestClients()[operationGroup];
-        }
-
-        public MgmtResponseHeaderGroupType? FindHeaderModel(Operation operation)
-        {
-            EnsureHeaderModels().TryGetValue(operation, out var model);
-            return model;
         }
 
         private void DecorateOperationGroup()
@@ -341,7 +265,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                     ResourceTypes.Add(parent);
                 }
                 operationsGroup.Parent = parent ?? ParentDetection.GetParent(operationsGroup);
-                //now that we have resolved all operations groups to resource types above, can try to solve for the parent
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
                 string? nameOverride;

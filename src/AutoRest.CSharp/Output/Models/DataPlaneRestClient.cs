@@ -11,6 +11,7 @@ using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
@@ -23,8 +24,8 @@ namespace AutoRest.CSharp.Output.Models
         private RestClientBuilder<DataPlaneOutputLibrary> _builder;
         private readonly BuildContext<DataPlaneOutputLibrary> _context;
 
-        private Dictionary<ServiceRequest, RestClientMethod>? _requestMethods;
-        private Dictionary<ServiceRequest, RestClientMethod>? _nextPageMethods;
+        private CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
+        private CachedDictionary<ServiceRequest, RestClientMethod> _nextPageMethods;
         private RestClientMethod[]? _allMethods;
 
         public DataPlaneRestClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context) : base(context)
@@ -41,6 +42,8 @@ namespace AutoRest.CSharp.Output.Models
             RestClientSuffix = "Rest" + ClientSuffix;
             DefaultName = ClientPrefix + RestClientSuffix;
             Description = "";
+            _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod> (EnsureNormalMethods);
+            _nextPageMethods = new CachedDictionary<ServiceRequest, RestClientMethod> (EnsureGetNextPageMethods);
         }
 
         protected string RestClientSuffix { get; }
@@ -78,12 +81,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
         {
-            if (_requestMethods != null)
-            {
-                return _requestMethods;
-            }
-
-            _requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
+            var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
 
             foreach (var operation in _operationGroup.Operations)
             {
@@ -95,21 +93,16 @@ namespace AutoRest.CSharp.Output.Models
                         continue;
                     }
                     var headerModel = _context.Library.FindHeaderModel(operation);
-                    _requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel, false));
+                    requestMethods.Add(serviceRequest, _builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, headerModel, false));
                 }
             }
 
-            return _requestMethods;
+            return requestMethods;
         }
 
         private Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()
         {
-            if (_nextPageMethods != null)
-            {
-                return _nextPageMethods;
-            }
-
-            _nextPageMethods = new Dictionary<ServiceRequest, RestClientMethod>();
+            var nextPageMethods = new Dictionary<ServiceRequest, RestClientMethod>();
             foreach (var operation in _operationGroup.Operations)
             {
                 var paging = operation.Language.Default.Paging;
@@ -132,12 +125,12 @@ namespace AutoRest.CSharp.Output.Models
 
                     if (nextMethod != null)
                     {
-                        _nextPageMethods.Add(serviceRequest, nextMethod);
+                        nextPageMethods.Add(serviceRequest, nextMethod);
                     }
                 }
             }
 
-            return _nextPageMethods;
+            return nextPageMethods;
         }
 
         private static RestClientMethod BuildNextPageMethod(RestClientMethod method, Operation operation)
@@ -190,13 +183,13 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientMethod? GetNextOperationMethod(ServiceRequest request)
         {
-            EnsureGetNextPageMethods().TryGetValue(request, out RestClientMethod? value);
+            _nextPageMethods.TryGetValue(request, out RestClientMethod? value);
             return value;
         }
 
         public RestClientMethod GetOperationMethod(ServiceRequest request)
         {
-            return EnsureNormalMethods()[request];
+            return _requestMethods[request];
         }
 
         private Parameter BuildClientParameter(RequestParameter requestParameter)

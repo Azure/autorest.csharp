@@ -15,7 +15,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             List<ServiceRequest>? output;
             operationGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out output);
             return GetBodyParameter(output.First(), operationGroup).Schema;
-            throw new Exception($"Schema not found! Please add the {operationGroup.Key} to its schema name mapping to readme.md.");
         }
 
         private static RequestParameter GetBodyParameter(ServiceRequest request, OperationGroup operationGroup)
