@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Utilities;
 using YamlDotNet.Serialization;
+using AutoRest.CSharp.Output.Models.Requests;
 
 #pragma warning disable SA1649
 #pragma warning disable SA1402
@@ -64,7 +65,7 @@ namespace AutoRest.CSharp.Input
 
     internal partial class DictionaryOfAny
     {
-        private static char[] _formatSplitChar = new[] {',', ' '};
+        private static char[] _formatSplitChar = new[] { ',', ' ' };
 
         public string? Accessibility => TryGetValue("x-accessibility", out object? value) ? value?.ToString() : null;
         public string? Namespace => TryGetValue("x-namespace", out object? value) ? value?.ToString() : null;
@@ -88,6 +89,19 @@ namespace AutoRest.CSharp.Input
         public bool? BufferResponse => TryGetValue("x-csharp-buffer-response", out object? value) && value != null ? (bool?)Convert.ToBoolean(value) : null;
 
         public bool SkipEncoding => TryGetValue("x-ms-skip-url-encoding", out var value) && Convert.ToBoolean(value);
+    }
+
+    internal partial class OperationGroup
+    {
+        public string ResourceType { get; set; }
+        public string Resource { get; set; }
+        public bool IsTenantResource { get; set; }
+        public Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping { get; set; }
+    }
+
+    internal partial class HttpRequest : Protocol
+    {
+        public List<ProviderSegment> ProviderSegments;
     }
 
     internal partial class ServiceResponse
@@ -147,6 +161,7 @@ namespace AutoRest.CSharp.Input
     {
         public string? XmlName => Serialization?.Xml?.Name;
         public string Name => Language.Default.Name;
+        public string? NameOverride;
     }
 
     internal partial class HTTPSecurityScheme : Dictionary<string, object>

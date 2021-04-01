@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -20,14 +21,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectType : TypeProvider
     {
-        private readonly ObjectSchema _objectSchema;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly SchemaTypeUsage _usage;
 
-        private ObjectTypeProperty[]? _properties;
+        protected ObjectTypeProperty[]? _properties;
         private ObjectTypeDiscriminator? _discriminator;
-        private CSharpType? _inheritsType;
+        protected CSharpType? _inheritsType;
         private CSharpType? _implementsDictionaryType;
         private ObjectSerialization[]? _serializations;
         private readonly ModelTypeMapping? _sourceTypeMapping;
@@ -36,30 +36,19 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
 
-        public ObjectType(ObjectSchema objectSchema, BuildContext context): base(context)
+        public ObjectType(ObjectSchema objectSchema, BuildContext context) : base(context)
         {
-            _objectSchema = objectSchema;
+            OjectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
             _serializationBuilder = new SerializationBuilder();
-            _usage = context.SchemaUsageProvider.GetUsage(_objectSchema);
+            _usage = context.SchemaUsageProvider.GetUsage(OjectSchema);
 
             var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            DefaultName = objectSchema.CSharpName();
-            if (objectSchema.Extensions?.Namespace is string namespaceExtension)
-            {
-                DefaultNamespace = namespaceExtension;
-            }
-            else if (context.Configuration.ModelNamespace)
-            {
-                DefaultNamespace = $"{context.DefaultNamespace}.Models";
-            }
-            else
-            {
-                DefaultNamespace = context.DefaultNamespace;
-            }
+
+            DefaultNamespace = GetDefaultNamespace(objectSchema, context);
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 
             // Update usage from code attribute
@@ -72,8 +61,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
+        protected ObjectSchema OjectSchema { get; }
+
         public bool IsStruct => ExistingType?.IsValueType == true;
-        protected override string DefaultName { get; }
+        protected override string DefaultName => OjectSchema.CSharpName();
         protected override string DefaultAccessibility { get; } = "public";
         protected override string DefaultNamespace { get; }
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
@@ -86,7 +77,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 
-        public ObjectTypeProperty? AdditionalPropertiesProperty {
+        public ObjectTypeProperty? AdditionalPropertiesProperty
+        {
             get
             {
                 if (_additionalPropertiesProperty != null || ImplementsDictionaryType == null)
@@ -280,7 +272,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             if (AdditionalPropertiesProperty != null &&
-                !defaultCtorInitializers.Any(i=> i.Property == AdditionalPropertiesProperty))
+                !defaultCtorInitializers.Any(i => i.Property == AdditionalPropertiesProperty))
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(AdditionalPropertiesProperty, Constant.NewInstanceOf(TypeFactory.GetImplementationType(AdditionalPropertiesProperty.Declaration.Type))));
             }
@@ -311,7 +303,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {_objectSchema.Name}");
+                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {OjectSchema.Name}");
             }
 
             return objectProperty;
@@ -321,7 +313,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {_objectSchema.Name}");
+                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {OjectSchema.Name}");
             }
 
             return objectProperty;
@@ -333,7 +325,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 p => (p.SchemaProperty as GroupProperty)?.OriginalParameter.Contains(groupedParameter) == true,
                 out ObjectTypeProperty? objectProperty, includeParents))
             {
-                throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameter.Language.Default.Name} in schema {_objectSchema.Name}");
+                throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameter.Language.Default.Name} in schema {OjectSchema.Name}");
             }
 
             return objectProperty;
@@ -375,13 +367,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ObjectTypeDiscriminator? BuildDiscriminator()
         {
-            Discriminator? schemaDiscriminator = _objectSchema.Discriminator;
+            Discriminator? schemaDiscriminator = OjectSchema.Discriminator;
             ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
             Constant? value = null;
 
             if (schemaDiscriminator == null)
             {
-                schemaDiscriminator = _objectSchema.Parents!.All.OfType<ObjectSchema>().FirstOrDefault(p => p.Discriminator != null)?.Discriminator;
+                schemaDiscriminator = OjectSchema.Parents!.All.OfType<ObjectSchema>().FirstOrDefault(p => p.Discriminator != null)?.Discriminator;
 
                 if (schemaDiscriminator == null)
                 {
@@ -395,9 +387,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var property = GetPropertyForSchemaProperty(schemaDiscriminator.Property, includeParents: true);
 
-            if (_objectSchema.DiscriminatorValue != null)
+            if (OjectSchema.DiscriminatorValue != null)
             {
-                value = BuilderHelpers.ParseConstant(_objectSchema.DiscriminatorValue, property.Declaration.Type);
+                value = BuilderHelpers.ParseConstant(OjectSchema.DiscriminatorValue, property.Declaration.Type);
             }
 
             return new ObjectTypeDiscriminator(
@@ -410,25 +402,24 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ObjectSerialization[] BuildSerializations()
         {
-            var formats = _objectSchema.SerializationFormats;
+            var formats = OjectSchema.SerializationFormats;
 
-            if (_objectSchema.Extensions != null)
+            if (OjectSchema.Extensions != null)
             {
-                foreach (var format in _objectSchema.Extensions.Formats)
+                foreach (var format in OjectSchema.Extensions.Formats)
                 {
                     formats.Add(Enum.Parse<KnownMediaType>(format, true));
                 }
             }
 
-            if (_sourceTypeMapping?.Formats is {} formatsDefinedInSource)
+            if (_sourceTypeMapping?.Formats is { } formatsDefinedInSource)
             {
                 foreach (var format in formatsDefinedInSource)
                 {
                     formats.Add(Enum.Parse<KnownMediaType>(format, true));
                 }
             }
-
-            return formats.Distinct().Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
+            return formats.Distinct().Select(type => _serializationBuilder.BuildObject(type, OjectSchema, this)).ToArray();
         }
 
         private ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)
@@ -442,11 +433,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/261
-            var existingProperties = EnumerateHierarchy()
-                .Skip(1)
-                .SelectMany(type => type.Properties)
-                .Select(p => p.SchemaProperty?.Language.Default.Name)
-                .ToHashSet();
+            var existingProperties = GetParentProperties();
 
             foreach (var objectSchema in GetCombinedSchemas())
             {
@@ -531,6 +518,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
+        protected virtual HashSet<string?> GetParentProperties()
+        {
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.SchemaProperty?.Language.Default.Name)
+                .ToHashSet();
+        }
+
         private CSharpType GetDefaultPropertyType(Property property)
         {
             var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable);
@@ -547,9 +543,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
         private IEnumerable<ObjectSchema> GetCombinedSchemas()
         {
-            yield return _objectSchema;
+            yield return OjectSchema;
 
-            foreach (var parent in _objectSchema.Parents!.All)
+            foreach (var parent in OjectSchema.Parents!.All)
             {
                 if (parent is ObjectSchema objectParent)
                 {
@@ -569,7 +565,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return baseType;
             }
 
-            var objectSchemas = _objectSchema.Parents!.Immediate.OfType<ObjectSchema>().ToArray();
+            var objectSchemas = OjectSchema.Parents!.Immediate.OfType<ObjectSchema>().ToArray();
 
             ObjectSchema? selectedSchema = null;
 
@@ -596,7 +592,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private CSharpType? CreateInheritedDictionaryType()
         {
-            foreach (ComplexSchema complexSchema in _objectSchema.Parents!.Immediate)
+            foreach (ComplexSchema complexSchema in OjectSchema.Parents!.Immediate)
             {
                 if (complexSchema is DictionarySchema dictionarySchema)
                 {

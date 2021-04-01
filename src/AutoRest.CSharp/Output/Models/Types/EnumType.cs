@@ -14,7 +14,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class EnumType : TypeProvider
     {
-        private readonly BuildContext _context;
         private readonly IEnumerable<ChoiceValue> _choices;
         private readonly ModelTypeMapping? _typeMapping;
         private IList<EnumTypeValue>? _values;
@@ -31,7 +30,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private EnumType(Schema schema, BuildContext context, Schema baseType, IEnumerable<ChoiceValue> choices, bool isExtendable) : base(context)
         {
-            _context = context;
             _choices = choices;
 
             DefaultName = schema.CSharpName();
@@ -89,7 +87,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var name = BuilderHelpers.DisambiguateName(Type, c.CSharpName());
                 var memberMapping = _typeMapping?.GetForMember(name);
                 values.Add(new EnumTypeValue(
-                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, _context.TypeFactory),
+                    BuilderHelpers.CreateMemberDeclaration(name, Type, "public", memberMapping?.ExistingMember, Context.TypeFactory),
                     CreateDescription(c),
                     BuilderHelpers.ParseConstant(c.Value, BaseType)));
             }

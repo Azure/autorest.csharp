@@ -21,7 +21,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public abstract CSharpType FindTypeForSchema(Schema schema);
-
         public abstract CSharpType? FindTypeByName(string name);
     }
 }

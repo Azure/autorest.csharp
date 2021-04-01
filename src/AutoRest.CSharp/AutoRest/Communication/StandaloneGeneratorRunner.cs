@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
     {
         public static async Task RunAsync(string[] args)
         {
-            var basePath = args.Single(a=> !a.StartsWith("--"));
+            var basePath = args.Single(a => !a.StartsWith("--"));
 
             var configuration = LoadConfiguration(basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
@@ -74,6 +74,27 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
                     writer.WriteString(nameof(Configuration.CredentialHeaderName), configuration.CredentialHeaderName);
 
+                    writer.WriteStartObject(nameof(Configuration.OperationGroupToResourceType));
+                    foreach (var keyval in configuration.OperationGroupToResourceType)
+                    {
+                        writer.WriteString(keyval.Key, keyval.Value);
+                    }
+                    writer.WriteEndObject();
+
+                    writer.WriteStartObject(nameof(Configuration.OperationGroupToResource));
+                    foreach (var keyval in configuration.OperationGroupToResource)
+                    {
+                        writer.WriteString(keyval.Key, keyval.Value);
+                    }
+                    writer.WriteEndObject();
+
+                    writer.WriteStartObject(nameof(Configuration.ResourceRename));
+                    foreach (var keyval in configuration.ResourceRename)
+                    {
+                        writer.WriteString(keyval.Key, keyval.Value);
+                    }
+                    writer.WriteEndObject();
+
                     writer.WriteEndObject();
                 }
 
@@ -123,7 +144,10 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 credentialTypes.ToArray(),
                 credentialScopes.ToArray(),
                 root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString(),
-                root.GetProperty(nameof(Configuration.LowLevelClient)).GetBoolean()
+                root.GetProperty(nameof(Configuration.LowLevelClient)).GetBoolean(),
+                root.GetProperty(nameof(Configuration.OperationGroupToResourceType)),
+                root.GetProperty(nameof(Configuration.OperationGroupToResource)),
+                root.GetProperty(nameof(Configuration.ResourceRename))
             );
         }
     }

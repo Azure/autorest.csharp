@@ -162,7 +162,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteConstructor(CodeWriter writer, ObjectType schema)
+        public static void WriteConstructor(CodeWriter writer, ObjectType schema)
         {
             foreach (var constructor in schema.Constructors)
             {
