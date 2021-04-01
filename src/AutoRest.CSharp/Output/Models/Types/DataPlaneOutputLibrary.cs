@@ -28,9 +28,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _codeModel = codeModel;
         }
 
-
         public IEnumerable<DataPlaneClient> Clients => EnsureClients().Values;
-
         public IEnumerable<DataPlaneLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
         public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
 
