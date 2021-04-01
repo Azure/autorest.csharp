@@ -53,6 +53,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IEnumerable<MgmtClient> Clients => EnsureClients().Values;
 
+        private Dictionary<Schema, TypeProvider>? _models;
+        internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
+        public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+
         private Dictionary<OperationGroup, MgmtClient> EnsureClients()
         {
             if (_clients != null)
@@ -175,7 +179,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _armResource;
         }
 
-        public override TypeProvider FindTypeForSchema(Schema schema)
+        public override CSharpType FindTypeForSchema(Schema schema)
         {
             TypeProvider? result;
             if (!SchemaMap.TryGetValue(schema, out result) && !ResourceSchemaMap.TryGetValue(schema, out result))
@@ -183,10 +187,17 @@ namespace AutoRest.CSharp.Output.Models.Types
                 throw new KeyNotFoundException($"{schema.Name} was not found in model and resource schema map");
             }
 
-            return result;
+            return result.Type;
         }
 
-        protected override Dictionary<Schema, TypeProvider> BuildModels()
+        public override CSharpType? FindTypeByName(string originalName)
+        {
+            TypeProvider? provider = Models.FirstOrDefault (m => m.Type.Name == originalName);
+            provider ??= ResourceSchemaMap.Values.FirstOrDefault (m => m.Type.Name == originalName);
+            return provider?.Type;
+        }
+
+        private Dictionary<Schema, TypeProvider> BuildModels()
         {
             var models = new Dictionary<Schema, TypeProvider>();
 
@@ -251,7 +262,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 MapHttpMethodToOperation(operationsGroup);
                 string? resourceType;
-                operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ResourceTypeBuilder.ConstructOperationResourseType(operationsGroup);
+                operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
                 operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
                 string? resource;
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
