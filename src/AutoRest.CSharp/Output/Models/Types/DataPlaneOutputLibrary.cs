@@ -15,8 +15,8 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private Dictionary<OperationGroup, DataPlaneRestClient>? _restClients;
         private Dictionary<OperationGroup, DataPlaneClient>? _clients;
-        private Dictionary<Operation, LongRunningOperation>? _operations;
-        private Dictionary<Operation, ResponseHeaderGroupType>? _headerModels;
+        private Dictionary<Operation, DataPlaneLongRunningOperation>? _operations;
+        private Dictionary<Operation, DataPlaneResponseHeaderGroupType>? _headerModels;
         private BuildContext<DataPlaneOutputLibrary> _context;
         private CodeModel _codeModel;
 
@@ -27,10 +27,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public IEnumerable<DataPlaneClient> Clients => EnsureClients().Values;
-        public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
-        public IEnumerable<ResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
+        public IEnumerable<DataPlaneLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
+        public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => (_headerModels ??= EnsureHeaderModels()).Values;
 
-        public LongRunningOperation FindLongRunningOperation(Operation operation)
+        public DataPlaneLongRunningOperation FindLongRunningOperation(Operation operation)
         {
             Debug.Assert(operation.IsLongRunning);
 
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return client;
         }
 
-        public ResponseHeaderGroupType? FindHeaderModel(Operation operation)
+        public DataPlaneResponseHeaderGroupType? FindHeaderModel(Operation operation)
         {
             EnsureHeaderModels().TryGetValue(operation, out var model);
             return model;
@@ -56,19 +56,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             return EnsureRestClients()[operationGroup];
         }
 
-        private Dictionary<Operation, ResponseHeaderGroupType> EnsureHeaderModels()
+        private Dictionary<Operation, DataPlaneResponseHeaderGroupType> EnsureHeaderModels()
         {
             if (_headerModels != null)
             {
                 return _headerModels;
             }
 
-            _headerModels = new Dictionary<Operation, ResponseHeaderGroupType>();
+            _headerModels = new Dictionary<Operation, DataPlaneResponseHeaderGroupType>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
                 foreach (var operation in operationGroup.Operations)
                 {
-                    var headers = ResponseHeaderGroupType.TryCreate(operationGroup, operation, _context);
+                    var headers = DataPlaneResponseHeaderGroupType.TryCreate(operationGroup, operation, _context);
                     if (headers != null)
                     {
                         _headerModels.Add(operation, headers);
@@ -79,14 +79,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _headerModels;
         }
 
-        private Dictionary<Operation, LongRunningOperation> EnsureLongRunningOperations()
+        private Dictionary<Operation, DataPlaneLongRunningOperation> EnsureLongRunningOperations()
         {
             if (_operations != null)
             {
                 return _operations;
             }
 
-            _operations = new Dictionary<Operation, LongRunningOperation>();
+            _operations = new Dictionary<Operation, DataPlaneLongRunningOperation>();
 
             if (_context.Configuration.PublicClients)
             {
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         if (operation.IsLongRunning)
                         {
-                            _operations.Add(operation, new LongRunningOperation(operationGroup, operation, _context));
+                            _operations.Add(operation, new DataPlaneLongRunningOperation(operationGroup, operation, _context));
                         }
                     }
                 }

@@ -21,7 +21,7 @@ using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class RestClientBuilder<T> where T: OutputLibrary
+    internal class RestClientBuilder<T> where T : OutputLibrary
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly BuildContext<T> _context;
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
 
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, ResponseHeaderGroupType? responseHeaderModel, bool isVisible)
+        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, bool isVisible)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new ();
 

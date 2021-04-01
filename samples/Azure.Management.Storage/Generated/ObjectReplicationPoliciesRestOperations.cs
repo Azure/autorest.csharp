@@ -161,7 +161,7 @@ namespace Azure.Management.Storage
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="objectReplicationPolicyId"/> is null. </exception>
-        public async Task<Response<ObjectReplicationPolicy>> GetAsync(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public async Task<Response<ObjectReplicationPolicyData>> GetAsync(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -182,9 +182,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ObjectReplicationPolicy value = default;
+                        ObjectReplicationPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(document.RootElement);
+                        value = ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -198,7 +198,7 @@ namespace Azure.Management.Storage
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="objectReplicationPolicyId"/> is null. </exception>
-        public Response<ObjectReplicationPolicy> Get(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public Response<ObjectReplicationPolicyData> Get(string resourceGroupName, string accountName, string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -219,9 +219,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ObjectReplicationPolicy value = default;
+                        ObjectReplicationPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(document.RootElement);
+                        value = ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -229,7 +229,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicy properties)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicyData properties)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -261,7 +261,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="objectReplicationPolicyId"/>, or <paramref name="properties"/> is null. </exception>
-        public async Task<Response<ObjectReplicationPolicy>> CreateOrUpdateAsync(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicy properties, CancellationToken cancellationToken = default)
+        public async Task<Response<ObjectReplicationPolicyData>> CreateOrUpdateAsync(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -286,9 +286,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ObjectReplicationPolicy value = default;
+                        ObjectReplicationPolicyData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(document.RootElement);
+                        value = ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -303,7 +303,7 @@ namespace Azure.Management.Storage
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="objectReplicationPolicyId"/>, or <paramref name="properties"/> is null. </exception>
-        public Response<ObjectReplicationPolicy> CreateOrUpdate(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicy properties, CancellationToken cancellationToken = default)
+        public Response<ObjectReplicationPolicyData> CreateOrUpdate(string resourceGroupName, string accountName, string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -328,9 +328,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        ObjectReplicationPolicy value = default;
+                        ObjectReplicationPolicyData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ObjectReplicationPolicy.DeserializeObjectReplicationPolicy(document.RootElement);
+                        value = ObjectReplicationPolicyData.DeserializeObjectReplicationPolicyData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

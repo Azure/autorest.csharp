@@ -18,9 +18,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             BuildContext<DataPlaneOutputLibrary> context = new BuildContext<DataPlaneOutputLibrary>(codeModel, configuration, sourceInputModel);
             var modelWriter = new ModelWriter();
             var clientWriter = new DataPlaneClientWriter();
-            var restClientWriter = new RestClientWriter();
+            var restClientWriter = new DataPlaneRestClientWriter();
             var serializeWriter = new SerializationWriter();
-            var headerModelModelWriter = new ResponseHeaderGroupWriter();
+            var headerModelModelWriter = new DataPlaneResponseHeaderGroupWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
             }
 
-            foreach (ResponseHeaderGroupType responseHeaderModel in context.Library.HeaderModels)
+            foreach (DataPlaneResponseHeaderGroupType responseHeaderModel in context.Library.HeaderModels)
             {
                 var headerModelCodeWriter = new CodeWriter();
                 headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
-            if (configuration.PublicClients && !configuration.AzureArm && context.Library.Clients.Count() > 0)
+            if (configuration.PublicClients && context.Library.Clients.Count() > 0)
             {
                 var codeWriter = new CodeWriter();
                 ClientOptionsWriter.WriteClientOptions(codeWriter, context);
@@ -71,22 +71,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var operation in context.Library.LongRunningOperations)
             {
                 var codeWriter = new CodeWriter();
-                LongRunningOperationWriter.Write(codeWriter, operation);
+                DataPlaneLongRunningOperationWriter.Write(codeWriter, operation);
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
-            }
-
-            if (context.Configuration.AzureArm)
-            {
-                var codeWriter = new CodeWriter();
-                ManagementClientWriter.WriteClientOptions(codeWriter, context);
-                var libraryName = ManagementClientWriter.GetManagementClientPrefix(context.DefaultLibraryName);
-                project.AddGeneratedFile($"{libraryName}ManagementClientOptions.cs", codeWriter.ToString());
-
-                var clientCodeWriter = new CodeWriter();
-                ManagementClientWriter.WriteAggregateClient(clientCodeWriter, context);
-                project.AddGeneratedFile($"{libraryName}ManagementClient.cs", clientCodeWriter.ToString());
-
             }
         }
     }
