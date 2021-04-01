@@ -114,8 +114,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
-            writer.Append($"protected {typeof(HttpPipeline)} {PipelineField}");
-            writer.AppendRaw("{ get; }\n");
+            writer.Line($"protected readonly {typeof(HttpPipeline)} {PipelineField};");
 
             if (HasKeyAuth (context))
             {
