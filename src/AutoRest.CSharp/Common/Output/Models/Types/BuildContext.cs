@@ -18,6 +18,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             SourceInputModel = sourceInputModel;
         }
 
+        public OutputLibrary? BaseLibrary { get; protected set; }
+
         public CodeModel CodeModel { get; }
         public SchemaUsageProvider SchemaUsageProvider { get; }
         public string DefaultNamespace => Configuration.Namespace ?? CodeModel.Language.Default.Name;

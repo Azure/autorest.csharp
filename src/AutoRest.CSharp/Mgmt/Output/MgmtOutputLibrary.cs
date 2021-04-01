@@ -15,7 +15,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private BuildContext<MgmtOutputLibrary> _context;
         private CodeModel _codeModel;
 
-        private Dictionary<OperationGroup, MgmtClient>? _clients;
         private Dictionary<OperationGroup, MgmtRestClient>? _restClients;
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
@@ -50,28 +49,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
-
-        public IEnumerable<MgmtClient> Clients => EnsureClients().Values;
-
-        private Dictionary<OperationGroup, MgmtClient> EnsureClients()
-        {
-            if (_clients != null)
-            {
-                return _clients;
-            }
-
-            _clients = new Dictionary<OperationGroup, MgmtClient>();
-
-            if (_context.Configuration.PublicClients)
-            {
-                foreach (var operationGroup in _codeModel.OperationGroups)
-                {
-                    _clients.Add(operationGroup, new MgmtClient(operationGroup, _context));
-                }
-            }
-
-            return _clients;
-        }
 
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
@@ -233,12 +210,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotImplementedException()
         };
 
-
-        public MgmtClient? FindClient(OperationGroup operationGroup)
-        {
-            EnsureClients().TryGetValue(operationGroup, out var client);
-            return client;
-        }
 
         public MgmtRestClient FindRestClient(OperationGroup operationGroup)
         {

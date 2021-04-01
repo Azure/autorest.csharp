@@ -21,16 +21,18 @@ using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class RestClientBuilder<T> where T : OutputLibrary
+    internal class RestClientBuilder
     {
         private readonly SerializationBuilder _serializationBuilder;
-        private readonly BuildContext<T> _context;
+        private readonly BuildContext _context;
+        private readonly OutputLibrary _library;
         private readonly Dictionary<string, Parameter> _parameters;
 
-        public RestClientBuilder (OperationGroup operationGroup, BuildContext<T> context)
+        public RestClientBuilder (OperationGroup operationGroup, BuildContext context)
         {
             _serializationBuilder = new SerializationBuilder ();
             _context = context;
+            _library = context.BaseLibrary!;
 
             _parameters = operationGroup.Operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
@@ -332,7 +334,7 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Flattened == true)
                         {
-                            var objectType = (ObjectType) _context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
+                            var objectType = (ObjectType)_library.FindTypeForSchema(bodyRequestParameter.Schema);
                             var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
 
                             List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();

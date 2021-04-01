@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 Library = (T)(object)new DataPlaneOutputLibrary(codeModel, (BuildContext<DataPlaneOutputLibrary>)(object)this);
             }
+            BaseLibrary = Library;
         }
 
         public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
