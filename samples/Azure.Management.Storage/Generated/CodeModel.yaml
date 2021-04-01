@@ -13373,6 +13373,29 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            UpdateShares:
+              parameters:
+                accountName: sto328
+                api-version: '2019-06-01'
+                fileShare:
+                  properties:
+                    metadata:
+                      type: image
+                monitor: 'true'
+                resourceGroupName: res3376
+                shareName: share6185
+                subscriptionId: '{subscription-id}'
+              responses:
+                '200':
+                  body:
+                    name: share6185
+                    type: Microsoft.Storage/storageAccounts/fileServices/shares
+                    id: /subscriptions/{subscription-id}/resourceGroups/res3376/providers/Microsoft.Storage/storageAccounts/sto328/fileServices/default/shares/share6185
+                    properties:
+                      metadata:
+                        type: image
         language: !Languages 
           default:
             name: Update
@@ -18930,6 +18953,92 @@ operationGroups:
                     tags:
                       key1: value1
                       key2: value2
+            StorageAccountUpdate:
+              parameters:
+                accountName: sto8596
+                api-version: '2019-06-01'
+                monitor: 'true'
+                parameters:
+                  properties:
+                    encryption:
+                      keySource: Microsoft.Storage
+                      services:
+                        blob:
+                          enabled: true
+                          keyType: Account
+                        file:
+                          enabled: true
+                          keyType: Account
+                    networkAcls:
+                      defaultAction: Allow
+                    routingPreference:
+                      publishInternetEndpoints: true
+                      publishMicrosoftEndpoints: true
+                      routingChoice: MicrosoftRouting
+                resourceGroupName: res9407
+                subscriptionId: '{subscription-id}'
+              responses:
+                '200':
+                  body:
+                    name: sto8596
+                    type: Microsoft.Storage/storageAccounts
+                    id: /subscriptions/{subscription-id}/resourceGroups/res9407/providers/Microsoft.Storage/storageAccounts/sto8596
+                    kind: Storage
+                    location: eastus2(stage)
+                    properties:
+                      creationTime: '2017-06-01T02:42:41.7633306Z'
+                      encryption:
+                        keySource: Microsoft.Storage
+                        services:
+                          blob:
+                            enabled: true
+                            keyType: Account
+                            lastEnabledTime: '2019-12-11T20:49:31.7036140Z'
+                          file:
+                            enabled: true
+                            keyType: Account
+                            lastEnabledTime: '2019-12-11T20:49:31.7036140Z'
+                      isHnsEnabled: true
+                      networkAcls:
+                        bypass: AzureServices
+                        defaultAction: Allow
+                        ipRules: []
+                        virtualNetworkRules: []
+                      primaryEndpoints:
+                        blob: https://sto8596.blob.core.windows.net/
+                        dfs: https://sto8596.dfs.core.windows.net/
+                        file: https://sto8596.file.core.windows.net/
+                        internetEndpoints:
+                          blob: https://sto8596-internetrouting.blob.core.windows.net/
+                          dfs: https://sto8596-internetrouting.dfs.core.windows.net/
+                          file: https://sto8596-internetrouting.file.core.windows.net/
+                          web: https://sto8596-internetrouting.web.core.windows.net/
+                        microsoftEndpoints:
+                          blob: https://sto8596-microsoftrouting.blob.core.windows.net/
+                          dfs: https://sto8596-microsoftrouting.dfs.core.windows.net/
+                          file: https://sto8596-microsoftrouting.file.core.windows.net/
+                          queue: https://sto8596-microsoftrouting.queue.core.windows.net/
+                          table: https://sto8596-microsoftrouting.table.core.windows.net/
+                          web: https://sto8596-microsoftrouting.web.core.windows.net/
+                        queue: https://sto8596.queue.core.windows.net/
+                        table: https://sto8596.table.core.windows.net/
+                        web: https://sto8596.web.core.windows.net/
+                      primaryLocation: eastus2(stage)
+                      provisioningState: Succeeded
+                      routingPreference:
+                        publishInternetEndpoints: true
+                        publishMicrosoftEndpoints: true
+                        routingChoice: MicrosoftRouting
+                      secondaryLocation: northcentralus(stage)
+                      statusOfPrimary: available
+                      statusOfSecondary: available
+                      supportsHttpsTrafficOnly: false
+                    sku:
+                      name: Standard_GRS
+                      tier: Standard
+                    tags:
+                      key1: value1
+                      key2: value2
         language: !Languages 
           default:
             name: Update
@@ -19461,6 +19570,25 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            StorageAccountListKeys:
+              parameters:
+                accountName: sto2220
+                api-version: '2019-06-01'
+                monitor: 'true'
+                resourceGroupName: res418
+                subscriptionId: '{subscription-id}'
+              responses:
+                '200':
+                  body:
+                    keys:
+                      - keyName: key1
+                        permissions: Full
+                        value: nVF7aKIvr9mV/RM5lOD0sYoi8ThXTRHQP7o66hvUmjCDkPKR3qxPu/otJcNciz2aQdqPuzJH3ECG4TU2yZjQ7Q==
+                      - keyName: key2
+                        permissions: Full
+                        value: dNJvKnULO586Ji3nFzB7987TJs4ovnGZhyGXeiVQ75HZGPhBmBfe8lXrI7EfyATff6S5ucxffCoEAQOWbmPK/Q==
         language: !Languages 
           default:
             name: ListKeys
@@ -19607,6 +19735,25 @@ operationGroups:
                       - keyName: kerb1
                         permissions: Full
                         value: 34EzDQuCw1lYBXCGioUybN9dCWSLLzQPdAbYRcLhM957Fy/6IlO/SkaeR9QXKhVgCt8anDq4wYmDcaZ5VXr2Tg==
+            StorageAccountRegenerateKey:
+              parameters:
+                accountName: sto3539
+                api-version: '2019-06-01'
+                monitor: 'true'
+                regenerateKey:
+                  keyName: key2
+                resourceGroupName: res4167
+                subscriptionId: '{subscription-id}'
+              responses:
+                '200':
+                  body:
+                    keys:
+                      - keyName: key1
+                        permissions: Full
+                        value: 7xl+yQ4MrVpZCHspveCfy4f8jgTY1wv42gHO8k4bAX+EPvN4hY5uPau/bpofgeye+K9FtgvjkadkLISPfOxlMw==
+                      - keyName: key2
+                        permissions: Full
+                        value: uC+kyJ9/gT81E/+9I1Go4xtOe8sW5rdIm3n6PNIyQ5kGO5OpFq69aWnrn3jLeFIyItzpln9P392U0353RYKvbg==
         language: !Languages 
           default:
             name: RegenerateKey
