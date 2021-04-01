@@ -25,8 +25,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<string, List<OperationGroup>> _operationGroups;
         private IEnumerable<Schema> _allSchemas;
 
-        public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
-
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             _codeModel = codeModel;
@@ -49,6 +47,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
+
+        private Dictionary<Schema, TypeProvider>? _models;
+
+        public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
+
+        internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
+
+        public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
