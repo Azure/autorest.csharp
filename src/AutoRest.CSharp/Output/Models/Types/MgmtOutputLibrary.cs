@@ -52,6 +52,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
         public IEnumerable<MgmtClient> Clients => EnsureClients().Values;
+        private static HashSet<string> ResourceTypes = new HashSet<string>
+        {
+            "resourceGroups",
+            "subscriptions",
+            "tenant"
+        };
 
         private Dictionary<OperationGroup, MgmtClient> EnsureClients()
         {
