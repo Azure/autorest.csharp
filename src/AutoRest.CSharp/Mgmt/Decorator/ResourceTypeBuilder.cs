@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
 {
     internal static class ResourceTypeBuilder
     {
-        public static string ConstructOperationResourseType(OperationGroup operationsGroup)
+        public static string ConstructOperationResourceType(OperationGroup operationsGroup)
         {
             var method = GetBestMethod(operationsGroup);
             if (method == null)

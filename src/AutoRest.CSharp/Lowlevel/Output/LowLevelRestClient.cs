@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models
                     RestClientMethod method = _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null, true);
                     // Inject the body parameter
                     List<Parameter> parameters = method.Parameters.ToList();
-                    Parameter bodyParam = new Parameter ("body", "The request body", typeof(Azure.Core.RequestContent), null, true);
+                    Parameter bodyParam = new Parameter ("requestBody", "The request body", typeof(Azure.Core.RequestContent), null, true);
                     parameters.Insert (0, bodyParam);
                     RequestBody body = new RequestContentRequestBody (bodyParam);
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, method.Request.Headers, body);

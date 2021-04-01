@@ -21,16 +21,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 lowLevelClientWriter.WriteClient(codeWriter, client, context);
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
             }
-
-            foreach (var model in context.Library.Models.Where(x => x.Type.Implementation is EnumType))
-            {
-                var codeWriter = new CodeWriter();
-                var modelWriter = new ModelWriter();
-                modelWriter.WriteModel(codeWriter, model);
-
-                var name = model.Type.Name;
-                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
-            }
         }
     }
 }
