@@ -135,6 +135,22 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
+        [Test]
+        public async Task UrlQueriesLongMaxValue()
+        {
+            string queryValue = null;
+            using var testServer = new InProcTestServer(async content =>
+            {
+                queryValue = content.Request.Query["longQuery"];
+                await content.Response.Body.FlushAsync();
+            });
+
+            var client = new QueriesClient(ClientDiagnostics, InProcTestBase.HttpPipeline, testServer.Address);
+            await client.GetLongNullAsync(long.MaxValue);
+
+            Assert.AreEqual("9223372036854775807", queryValue);
+        }
+
         public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[]
         {
             "UrlQueriesBoolFalse",
