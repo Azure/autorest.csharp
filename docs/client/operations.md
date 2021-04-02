@@ -11,8 +11,7 @@ is part of operation group `application`), you would access the operation throug
 would be `ApplicationClient.List(...)`.
 
 If there's no operation group, as in [this][mixin_example] case, you would access the operation directly from the main client
-itself, i.e. `PetsClient.GetDog()`. Our responses are returned as responses of `T`, so if we want to access the value, we call `.Value`
-on the response object.
+itself, i.e. `PetsClient.GetDog()`. Our responses are returned as responses of `T`. To access the value, we call `.Value` on the response object or use the implicit conversion from `Response<T>` to `T`.
 
 ## Regular Operations
 
@@ -27,7 +26,13 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 
 var client = new PetsClient(endpoint);
-Dog dog = client.GetDog().Value;
+
+// Option #1 - Explicit response use
+Response<Dog> dogOperation = client.GetDog();
+Dog dog = dogOperation.Value;
+
+// Option #2 - Implicit response use
+Dog doc = client.GetDog();
 ```
 
 ### Async Operations
@@ -44,7 +49,13 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 
 var client = new PetsClient(endpoint);
-Dog dog = (await client.GetDogAsync()).Value;
+
+// Option #1 - Explicit response use
+Response<Dog> dogResponse = await client.GetDogAsync();
+Dog dog = dogResponse.Value;
+
+// Option #2 - Implicit response use
+Dog dog = await client.GetDogAsync();
 ```
 
 ## Long Running Operations
@@ -67,7 +78,7 @@ using Azure.Lro.Models;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-string endpoint = "http://localhost:3000";
+const string endpoint = "http://localhost:3000";
 var client = new PollingPagingExampleClient(endpoint);
 
 var product = new Product
@@ -149,7 +160,7 @@ using Azure.Paging;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-string endpoint = "http://localhost:3000";
+const string endpoint = "http://localhost:3000";
 var client = new PollingPagingExampleClient(endpoint);
 
 var pageableAsync = client.BasicPagingAsync();
