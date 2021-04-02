@@ -51,7 +51,7 @@ Dog dog = (await client.GetDogAsync()).Value;
 
 Long-running operations are operations which consist of an initial request sent to the service to start an operation, followed by polling the service at intervals to determine whether the operation has completed or failed, and if it has succeeded, to get the result.
 
-In concurrence with our [.NET guidelines][poller_guidelines], all of our long running operations are prefixed with `Start`, to signify the starting of the long running operation.
+In concurrence with our [.NET guidelines][poller_guidelines], all long running operations are prefixed with `Start`, to signify the starting of a long running operation.
 
 For our example, we will use the long running operation generated from [this][polling_paging_swagger] swagger. Let's say we generated this swagger with namespace `Azure.Lro`.
 
