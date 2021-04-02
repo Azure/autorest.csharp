@@ -13,7 +13,7 @@ using Azure.Pets;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-string endpoint = "http://localhost:3000";
+const string endpoint = "http://localhost:3000";
 var client = new PetsClient(endpoint);
 ```
 
@@ -28,7 +28,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Identity;
 
-string endpoint = "http://localhost:3000";
+const string endpoint = "http://localhost:3000";
 var credential = new DefaultAzureCredential()
 var client = new PetsClient(endpoint, credential);
 ```
