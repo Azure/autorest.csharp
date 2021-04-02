@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private const string PipelineField = "Pipeline";
         private const string KeyCredentialVariable = "credential";
-        private const string ProtocolOptions = "options";
+        private const string OptionsVariable = "options";
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
         private const string ScopesConstant = "AuthorizationScopes";
 
@@ -153,13 +153,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (hasKeyAuth)
             {
-                WriteSimplifiedConstructor(writer, client, true);
-                WriteFullConstructor(writer, client, true);
+                WriteConstructor(writer, client, true, context);
             }
             if (hasTokenAuth)
             {
-                WriteSimplifiedConstructor(writer, client, false);
-                WriteFullConstructor(writer, client, false);
+                WriteConstructor(writer, client, false, context);
             }
         }
 
@@ -172,7 +170,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteSimplifiedConstructor (CodeWriter writer, LowLevelRestClient client, bool keyCredential)
+        private void WriteConstructor (CodeWriter writer, LowLevelRestClient client, bool keyCredential, BuildContext context)
         {
             var ctorParams = client.GetConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential));
 
@@ -181,67 +179,30 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
+            writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
 
-            writer.Append($"public {client.Type.Name:D}(");
-            foreach (Parameter parameter in ctorParams)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.RemoveTrailingComma();
-            writer.Append($")");
-
-            // The full ctor params can be in a different order, the options are not necessarily at the end
-            var fullCtorParams = client.GetConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential), true);
-            writer.Append($": this(");
-            foreach (Parameter parameter in fullCtorParams)
-            {
-                if (parameter.Type.Name != "ProtocolClientOptions")
-                {
-                    writer.Append($"{parameter.Name:D}");
-                }
-                else
-                {
-                    writer.Append($"new {typeof(Azure.Core.ProtocolClientOptions)}()");
-                }
-                writer.AppendRaw(", ");
-            }
-            writer.RemoveTrailingComma();
-            writer.Line($")");
-            using (writer.Scope())
-            {
-            }
-            writer.Line();
-        }
-
-        private void WriteFullConstructor (CodeWriter writer, LowLevelRestClient client, bool keyCredential)
-        {
-            var ctorParams = client.GetConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential), true);
-
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
-            foreach (Parameter parameter in ctorParams)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-            }
-
+            var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
             writer.Append($"internal {client.Type.Name:D}(");
             foreach (Parameter parameter in ctorParams)
             {
                 writer.WriteParameter(parameter);
             }
-            writer.RemoveTrailingComma();
-            writer.Line($")");
+            writer.Append($" {clientOptionsName}ClientOptions {OptionsVariable} = null)");
 
             using (writer.Scope())
             {
                 writer.WriteParameterNullChecks (ctorParams);
+                writer.Line();
+
+                writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
 
                 if (keyCredential)
                 {
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({ProtocolOptions}, new {typeof(AzureKeyCredentialPolicy)}({KeyCredentialVariable}, {AuthorizationHeaderConstant}));");
+                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({KeyCredentialVariable}, {AuthorizationHeaderConstant}));");
                 }
                 else
                 {
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({ProtocolOptions}, new {typeof(BearerTokenAuthenticationPolicy)}({KeyCredentialVariable}, {ScopesConstant}));");
+                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({KeyCredentialVariable}, {ScopesConstant}));");
                 }
 
                 foreach (Parameter clientParameter in client.Parameters)

@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType)
         {
-            return RestClientBuilder<DataPlaneOutputLibrary>.GetConstructorParameters(RestClient.Parameters, credentialType, false, false);
+            return RestClientBuilder<DataPlaneOutputLibrary>.GetConstructorParameters(RestClient.Parameters, credentialType, false);
         }
     }
 }
