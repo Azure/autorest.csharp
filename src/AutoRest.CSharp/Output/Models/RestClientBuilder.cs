@@ -332,7 +332,7 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Flattened == true)
                         {
-                            var objectType = (ObjectType) _context.Library.FindTypeForSchema(bodyRequestParameter.Schema);
+                            var objectType = (ObjectType) _context.Library.FindTypeForSchema(bodyRequestParameter.Schema).Implementation;
                             var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
 
                             List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();

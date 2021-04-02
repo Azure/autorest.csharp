@@ -103,8 +103,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        private const string PipelineVariable = "pipeline";
-        private const string PipelineField = "_" + PipelineVariable;
+        private const string PipelineField = "Pipeline";
         private const string KeyCredentialVariable = "credential";
         private const string ProtocolOptions = "options";
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
@@ -115,7 +114,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
-            writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
+            writer.Append($"protected {typeof(HttpPipeline)} {PipelineField}");
+            writer.AppendRaw("{ get; }\n");
 
             if (HasKeyAuth (context))
             {
