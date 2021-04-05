@@ -32,15 +32,8 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> Initializes a new instance of DocumentTranslationClient. </summary>
         /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public DocumentTranslationClient(string endpoint, AzureKeyCredential credential) : this(endpoint, credential, new ProtocolClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of DocumentTranslationClient. </summary>
-        /// <param name="endpoint"> Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com). </param>
-        /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="options"> Options to control the underlying operations. </param>
-        internal DocumentTranslationClient(string endpoint, AzureKeyCredential credential, ProtocolClientOptions options = null)
+        /// <param name="options"> The options for configuring the client. </param>
+        internal DocumentTranslationClient(string endpoint, AzureKeyCredential credential, AzureAIDocumentTranslationClientOptions options = null)
         {
             if (endpoint == null)
             {
@@ -50,8 +43,8 @@ namespace Azure.AI.DocumentTranslation
             {
                 throw new ArgumentNullException(nameof(credential));
             }
-            options ??= new ProtocolClientOptions();
 
+            options ??= new AzureAIDocumentTranslationClientOptions();
             Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
             this.endpoint = endpoint;
         }
