@@ -24,6 +24,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ModelNamespace = modelNamespace;
             HeadAsBoolean = headAsBoolean;
             SkipCSProjPackageReference = skipCSProjPackageReference;
+            LowLevelClient = lowLevelClient;
             CredentialTypes = credentialTypes;
             CredentialScopes = credentialScopes;
             CredentialHeaderName = credentialHeaderName;

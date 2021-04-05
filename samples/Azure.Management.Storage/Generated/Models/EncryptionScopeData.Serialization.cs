@@ -5,16 +5,111 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the EncryptionScope data model. </summary>
-    public partial class EncryptionScopeData
+    public partial class EncryptionScopeData : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Source))
+            {
+                writer.WritePropertyName("source");
+                writer.WriteStringValue(Source.Value.ToString());
+            }
+            if (Optional.IsDefined(State))
+            {
+                writer.WritePropertyName("state");
+                writer.WriteStringValue(State.Value.ToString());
+            }
+            if (Optional.IsDefined(KeyVaultProperties))
+            {
+                writer.WritePropertyName("keyVaultProperties");
+                writer.WriteObjectValue(KeyVaultProperties);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
         internal static EncryptionScopeData DeserializeEncryptionScopeData(JsonElement element)
         {
-            return new EncryptionScopeData();
+            Optional<EncryptionScopeSource> source = default;
+            Optional<EncryptionScopeState> state = default;
+            Optional<DateTimeOffset> creationTime = default;
+            Optional<DateTimeOffset> lastModifiedTime = default;
+            Optional<EncryptionScopeKeyVaultProperties> keyVaultProperties = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("properties"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("source"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            source = new EncryptionScopeSource(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("state"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            state = new EncryptionScopeState(property0.Value.GetString());
+                            continue;
+                        }
+                        if (property0.NameEquals("creationTime"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            creationTime = property0.Value.GetDateTimeOffset("O");
+                            continue;
+                        }
+                        if (property0.NameEquals("lastModifiedTime"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            lastModifiedTime = property0.Value.GetDateTimeOffset("O");
+                            continue;
+                        }
+                        if (property0.NameEquals("keyVaultProperties"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            keyVaultProperties = EncryptionScopeKeyVaultProperties.DeserializeEncryptionScopeKeyVaultProperties(property0.Value);
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new EncryptionScopeData(Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToNullable(creationTime), Optional.ToNullable(lastModifiedTime), keyVaultProperties.Value);
         }
     }
 }

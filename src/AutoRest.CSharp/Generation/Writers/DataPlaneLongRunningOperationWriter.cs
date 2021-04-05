@@ -16,9 +16,9 @@ using Request = Azure.Core.Request;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class LongRunningOperationWriter
+    internal class DataPlaneLongRunningOperationWriter
     {
-        public static void Write(CodeWriter writer, LongRunningOperation operation)
+        public static void Write(CodeWriter writer, DataPlaneLongRunningOperation operation)
         {
             var responseVariable = "response";
             var pagingResponse = operation.PagingResponse;

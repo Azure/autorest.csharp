@@ -87,6 +87,11 @@ namespace Azure.Core
             builder.AppendQuery(name, value.ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture), escape);
         }
 
+        public static void AppendQuery(this RequestUriBuilder builder, string name, long value, bool escape = true)
+        {
+            builder.AppendQuery(name, value.ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture), escape);
+        }
+
         public static void AppendQuery(this RequestUriBuilder builder, string name, TimeSpan value, bool escape = true)
         {
             builder.AppendQuery(name, XmlConvert.ToString(value), escape);

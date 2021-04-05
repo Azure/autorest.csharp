@@ -21,9 +21,6 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of FileShareItem. </summary>
-        /// <param name="id"> Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
-        /// <param name="name"> The name of the resource. </param>
-        /// <param name="type"> The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts. </param>
         /// <param name="etag"> Resource Etag. </param>
         /// <param name="lastModifiedTime"> Returns the date and time the share was last modified. </param>
         /// <param name="metadata"> A name-value pair to associate with the share as metadata. </param>
@@ -38,7 +35,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="accessTierChangeTime"> Indicates the last modification time for share access tier. </param>
         /// <param name="accessTierStatus"> Indicates if there is a pending transition for access tier. </param>
         /// <param name="shareUsageBytes"> The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files. </param>
-        internal FileShareItem(string id, string name, string type, string etag, DateTimeOffset? lastModifiedTime, IDictionary<string, string> metadata, int? shareQuota, EnabledProtocols? enabledProtocols, RootSquashType? rootSquash, string version, bool? deleted, DateTimeOffset? deletedTime, int? remainingRetentionDays, ShareAccessTier? accessTier, DateTimeOffset? accessTierChangeTime, string accessTierStatus, int? shareUsageBytes) : base(id, name, type, etag)
+        internal FileShareItem(string etag, DateTimeOffset? lastModifiedTime, IDictionary<string, string> metadata, int? shareQuota, EnabledProtocols? enabledProtocols, RootSquashType? rootSquash, string version, bool? deleted, DateTimeOffset? deletedTime, int? remainingRetentionDays, ShareAccessTier? accessTier, DateTimeOffset? accessTierChangeTime, string accessTierStatus, int? shareUsageBytes) : base(etag)
         {
             LastModifiedTime = lastModifiedTime;
             Metadata = metadata;

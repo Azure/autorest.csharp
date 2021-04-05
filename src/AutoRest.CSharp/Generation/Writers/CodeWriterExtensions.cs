@@ -58,14 +58,14 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
                 {
-                    if (TypeFactory.IsStruct(parameter.Type))
+                    writer.Append($"{parameter.Name} ??= ");
+                    if (TypeFactory.IsStruct(parameter.Type) || parameter.DefaultValue.Value.Type.Equals(parameter.Type))
                     {
-                        writer.Append($"{parameter.Name} ??= ");
                         WriteConstant(writer, parameter.DefaultValue.Value);
                     }
                     else
                     {
-                        writer.Append($"{parameter.Name} ??= new {parameter.Type}(");
+                        writer.Append($"new {parameter.Type}(");
                         WriteConstant(writer, parameter.DefaultValue.Value);
                         writer.Append($")");
                     }

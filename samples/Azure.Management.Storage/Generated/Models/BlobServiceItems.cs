@@ -16,17 +16,17 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of BlobServiceItems. </summary>
         internal BlobServiceItems()
         {
-            Value = new ChangeTrackingList<BlobServiceData>();
+            Value = new ChangeTrackingList<BlobServicePropertiesData>();
         }
 
         /// <summary> Initializes a new instance of BlobServiceItems. </summary>
         /// <param name="value"> List of blob services returned. </param>
-        internal BlobServiceItems(IReadOnlyList<BlobServiceData> value)
+        internal BlobServiceItems(IReadOnlyList<BlobServicePropertiesData> value)
         {
             Value = value;
         }
 
         /// <summary> List of blob services returned. </summary>
-        public IReadOnlyList<BlobServiceData> Value { get; }
+        public IReadOnlyList<BlobServicePropertiesData> Value { get; }
     }
 }

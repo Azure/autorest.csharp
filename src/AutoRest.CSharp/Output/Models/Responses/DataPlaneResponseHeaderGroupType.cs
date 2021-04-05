@@ -2,17 +2,15 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Responses
 {
-    internal class ResponseHeaderGroupType: TypeProvider
+    internal class DataPlaneResponseHeaderGroupType: TypeProvider
     {
         private static string[] _knownResponseHeaders = new[]
         {
@@ -22,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
             "x-ms-request-id"
         };
 
-        public ResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext context) : base(context)
+        public DataPlaneResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context) : base(context)
         {
             ResponseHeader CreateResponseHeader(HttpResponseHeader header)
             {
@@ -48,7 +46,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; } = "internal";
 
-        public static ResponseHeaderGroupType? TryCreate(OperationGroup operationGroup, Operation operation, BuildContext context)
+        public static DataPlaneResponseHeaderGroupType? TryCreate(OperationGroup operationGroup, Operation operation, BuildContext<DataPlaneOutputLibrary> context)
         {
             var httpResponseHeaders = operation.Responses.SelectMany(r => r.HttpResponse.Headers)
                 .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))
@@ -62,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
                 return null;
             }
 
-            return new ResponseHeaderGroupType(operationGroup, operation, httpResponseHeaders, context);
+            return new DataPlaneResponseHeaderGroupType(operationGroup, operation, httpResponseHeaders, context);
         }
     }
 }

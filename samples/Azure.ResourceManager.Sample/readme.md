@@ -20,18 +20,20 @@ operation-group-to-resource-type:
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades
    LogAnalytics: Microsoft.Compute/locations/logAnalytics
 operation-group-to-resource:
-   Operations: Operation    
+   Operations: RestApi    
    VirtualMachineExtensionImages: VirtualMachineExtensionImage
    VirtualMachineImages: VirtualMachineImage
    Usage: Usage
    VirtualMachineSizes: VirtualMachineSize
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
    LogAnalytics: LogAnalyticsOperationResult
-resource-rename:
+model-rename:
    SshPublicKey : SshPublicKeyInfo
    LogAnalyticsOperationResult: LogAnalytics
    SshPublicKeyResource: SshPublicKey
+model-to-resource:
+   ComputeOperationValue : RestApi
    RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
 modelerfour:
-  lenient-model-deduplication: true
+   lenient-model-deduplication: true    
 ```

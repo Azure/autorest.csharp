@@ -21,9 +21,6 @@ namespace Azure.Management.Storage.Models
         internal static AzureEntityResource DeserializeAzureEntityResource(JsonElement element)
         {
             Optional<string> etag = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"))
@@ -31,23 +28,8 @@ namespace Azure.Management.Storage.Models
                     etag = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
-                    continue;
-                }
             }
-            return new AzureEntityResource(id.Value, name.Value, type.Value, etag.Value);
+            return new AzureEntityResource(etag.Value);
         }
     }
 }

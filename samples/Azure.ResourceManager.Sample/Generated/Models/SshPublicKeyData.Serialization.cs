@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the SshPublicKey data model. </summary>
+    /// <summary> A class representing the SshPublicKeyResource data model. </summary>
     public partial class SshPublicKeyData
     {
         internal static SshPublicKeyData DeserializeSshPublicKeyData(JsonElement element)

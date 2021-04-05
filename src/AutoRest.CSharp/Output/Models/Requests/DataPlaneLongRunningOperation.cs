@@ -14,9 +14,9 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Requests
 {
-    internal class LongRunningOperation: TypeProvider
+    internal class DataPlaneLongRunningOperation: TypeProvider
     {
-        public LongRunningOperation(OperationGroup operationGroup, Operation operation, BuildContext context) : base(context)
+        public DataPlaneLongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext<DataPlaneOutputLibrary> context) : base(context)
         {
             Debug.Assert(operation.IsLongRunning);
 
@@ -24,7 +24,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
             Debug.Assert(clientClass != null, "clientClass != null, LROs should be disabled when public clients are disables");
 
-            Client = clientClass;
             DefaultName = clientClass.RestClient.ClientPrefix + operation.CSharpName() + "Operation";
             FinalStateVia = operation.LongRunningFinalStateVia switch
             {
@@ -46,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 Paging? paging = operation.Language.Default.Paging;
                 if (paging != null)
                 {
-                    NextPageMethod = Client.RestClient.GetNextOperationMethod(operation.Requests.Single());
+                    NextPageMethod = clientClass.RestClient.GetNextOperationMethod(operation.Requests.Single());
                     PagingResponse = new PagingResponseInfo(paging, ResultType);
                     ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
                 }
@@ -61,7 +60,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         }
 
         public CSharpType ResultType { get; }
-        public Client Client { get; }
         public OperationFinalStateVia FinalStateVia { get; }
         public Diagnostic Diagnostics => new Diagnostic(Declaration.Name);
         public ObjectSerialization? ResultSerialization { get; }

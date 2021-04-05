@@ -7,7 +7,7 @@
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the LogAnalytics data model. </summary>
+    /// <summary> A class representing the LogAnalyticsOperationResult data model. </summary>
     public partial class LogAnalyticsData
     {
         /// <summary> LogAnalyticsOutput. </summary>

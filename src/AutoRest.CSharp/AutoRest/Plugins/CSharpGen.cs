@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
 
-            var context = new BuildContext(await codeModelTask, configuration, sourceInputModel);
+            var codeModel = await codeModelTask;
 
             var modelWriter = new ModelWriter();
             var clientWriter = new ClientWriter();
@@ -52,31 +52,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var model in context.Library.Models)
             {
-                var codeWriter = new CodeWriter();
-                modelWriter.WriteModel(codeWriter, model);
-
-                var serializerCodeWriter = new CodeWriter();
-                serializeWriter.WriteSerialization(serializerCodeWriter, model);
-
-                var name = model.Type.Name;
-                project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
-                project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+                LowLevelTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
-
-            foreach (var client in context.Library.RestClients)
+            else if (configuration.AzureArm)
             {
-                var restCodeWriter = new CodeWriter();
-                restClientWriter.WriteClient(restCodeWriter, client);
-
-                project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
+                MgmtTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
-
-            foreach (ResponseHeaderGroupType responseHeaderModel in context.Library.HeaderModels)
+            else
             {
-                var headerModelCodeWriter = new CodeWriter();
-                headerModelModelWriter.WriteHeaderModel(headerModelCodeWriter, responseHeaderModel);
-
-                project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
+                DataPlaneTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
 
             foreach (var operation in context.Library.LongRunningOperations)

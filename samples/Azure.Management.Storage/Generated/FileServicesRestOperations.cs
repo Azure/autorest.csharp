@@ -153,7 +153,7 @@ namespace Azure.Management.Storage
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new FileServiceData()
+            var model = new FileServicePropertiesData()
             {
                 Cors = cors,
                 ShareDeleteRetentionPolicy = shareDeleteRetentionPolicy
@@ -171,7 +171,7 @@ namespace Azure.Management.Storage
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<FileServiceData>> SetServicePropertiesAsync(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FileServicePropertiesData>> SetServicePropertiesAsync(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -188,9 +188,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileServiceData value = default;
+                        FileServicePropertiesData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FileServiceData.DeserializeFileServiceData(document.RootElement);
+                        value = FileServicePropertiesData.DeserializeFileServicePropertiesData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -205,7 +205,7 @@ namespace Azure.Management.Storage
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<FileServiceData> SetServiceProperties(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public Response<FileServicePropertiesData> SetServiceProperties(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -222,9 +222,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileServiceData value = default;
+                        FileServicePropertiesData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FileServiceData.DeserializeFileServiceData(document.RootElement);
+                        value = FileServicePropertiesData.DeserializeFileServicePropertiesData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -258,7 +258,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<FileServiceData>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<FileServicePropertiesData>> GetServicePropertiesAsync(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -275,9 +275,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileServiceData value = default;
+                        FileServicePropertiesData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = FileServiceData.DeserializeFileServiceData(document.RootElement);
+                        value = FileServicePropertiesData.DeserializeFileServicePropertiesData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -290,7 +290,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<FileServiceData> GetServiceProperties(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
+        public Response<FileServicePropertiesData> GetServiceProperties(string resourceGroupName, string accountName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -307,9 +307,9 @@ namespace Azure.Management.Storage
             {
                 case 200:
                     {
-                        FileServiceData value = default;
+                        FileServicePropertiesData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = FileServiceData.DeserializeFileServiceData(document.RootElement);
+                        value = FileServicePropertiesData.DeserializeFileServicePropertiesData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

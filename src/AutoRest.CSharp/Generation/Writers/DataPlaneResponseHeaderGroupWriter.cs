@@ -10,12 +10,12 @@ using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class ResponseHeaderGroupWriter
+    internal class DataPlaneResponseHeaderGroupWriter
     {
         private const string ResponseParameter = "response";
         private const string ResponseField = "_" + ResponseParameter;
 
-        public void WriteHeaderModel(CodeWriter writer, ResponseHeaderGroupType responseHeaderGroup)
+        public void WriteHeaderModel(CodeWriter writer, DataPlaneResponseHeaderGroupType responseHeaderGroup)
         {
             using (writer.Namespace(responseHeaderGroup.Declaration.Namespace))
             {
@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($"private readonly {typeof(Response)} {ResponseField};");
         }
 
-        private void WriteConstructor(CodeWriter writer, ResponseHeaderGroupType responseHeaderGroup)
+        private void WriteConstructor(CodeWriter writer, DataPlaneResponseHeaderGroupType responseHeaderGroup)
         {
             using (writer.Scope($"public {responseHeaderGroup.Declaration.Name}({typeof(Response)} {ResponseParameter})"))
             {

@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -12,7 +12,7 @@ using AutoRest.CSharp.Output.Models.Type.Decorate;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class OutputLibrary
+    internal abstract class OutputLibrary
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext _context;
@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
 
-        public OutputLibrary(CodeModel codeModel, BuildContext context)
+        protected OutputLibrary(CodeModel codeModel, BuildContext context)
         {
             _codeModel = codeModel;
             _context = context;

@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 
 namespace Azure.Core
@@ -59,7 +60,10 @@ namespace Azure.Core
                     writer.WriteObjectValue(serializable);
                     break;
                 case byte[] bytes:
-                    writer.WriteStringValue(Convert.ToBase64String(bytes));
+                    writer.WriteBase64StringValue(bytes);
+                    break;
+                case BinaryData bytes:
+                    writer.WriteBase64StringValue(bytes);
                     break;
                 case int i:
                     writer.WriteNumberValue(i);
@@ -86,7 +90,7 @@ namespace Azure.Core
                     writer.WriteStringValue(g);
                     break;
                 case DateTimeOffset dateTimeOffset:
-                    writer.WriteStringValue(dateTimeOffset,"O");
+                    writer.WriteStringValue(dateTimeOffset, "O");
                     break;
                 case DateTime dateTime:
                     writer.WriteStringValue(dateTime, "O");
