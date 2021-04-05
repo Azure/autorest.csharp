@@ -1,6 +1,6 @@
 # <img align="center" src="../images/logo.png">  Generating C# Clients with AutoRest
 
-Most of the information you'll need to generate a Python client can be found in the general docs [here][general]. In these docs, we go over a couple C#-specific scenarios.
+Most of the information you'll need to generate a C# client can be found in the general docs [here][general]. In these docs, we go over a couple C#-specific scenarios.
 
 * [Generating in the azure-sdk-for-net repo][generate_with_sdk_repo]
 * [Generating outside of the azure-sdk-for-net repo][generate_without_sdk_repo]
