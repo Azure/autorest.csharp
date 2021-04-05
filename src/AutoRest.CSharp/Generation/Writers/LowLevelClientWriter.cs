@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
-            writer.WriteXmlDocumentation(PipelineField, "The HTTP pipeline for sending and receiving REST requests and responses.");
+            writer.WriteXmlDocumentationSummary("The HTTP pipeline for sending and receiving REST requests and responses.");
             writer.Append($"protected {typeof(HttpPipeline)} {PipelineField}");
             writer.AppendRaw("{ get; }\n");
 
