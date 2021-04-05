@@ -6,6 +6,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -21,6 +22,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 lowLevelClientWriter.WriteClient(codeWriter, client, context);
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
             }
+
+            var optionsWriter = new CodeWriter();
+            ClientOptionsWriter.WriteClientOptions(optionsWriter, context);
+
+            var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
+            project.AddGeneratedFile($"{clientOptionsName}ClientOptions.cs", optionsWriter.ToString());
         }
     }
 }
