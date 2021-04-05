@@ -75,6 +75,29 @@ if (!($Exclude -contains "TestServer"))
     }
 }
 
+$testServerLowLevelDirectory = Join-Path $repoRoot 'test' 'TestServerProjectsLowLevel'
+$testNamesLowLevel =
+    'body-complex',
+    'body-string',
+    'header',
+    'url',
+    'url-multi-collectionFormat';
+
+if (!($Exclude -contains "TestServerLowLevel"))
+{
+    foreach ($testName in $testNamesLowLevel)
+    {
+        $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
+        $projectDirectory = Join-Path $testServerLowLevelDirectory $testName
+        $inputReadme = Join-Path $projectDirectory "readme.md"
+        $swaggerDefinitions[$testName] = @{
+            'projectName'=$testName;
+            'output'=$projectDirectory;
+            'arguments'="--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile --low-level-client=true --credential-types=AzureKeyCredential --credential-header-name=Fake-Subscription-Key"
+        }
+    }
+}
+
 
 if (!($Exclude -contains "TestProjects"))
 {
