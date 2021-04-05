@@ -15,6 +15,9 @@
 
     Add --legacy flag to the command line to get the previous V2 behavior.
 
+3. What flags does AutoRest C# accept?
+
+    See [here](https://github.com/Azure/autorest/blob/master/docs/generate/flags.md#net-flags) for the full listing.
 
 <!-- LINKS -->
 [generate_with_sdk_repo]: https://github.com/Azure/autorest.csharp#use-in-azure-sdk-net-repo
