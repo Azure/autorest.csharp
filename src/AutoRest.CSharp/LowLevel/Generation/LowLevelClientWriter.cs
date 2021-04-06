@@ -106,6 +106,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string PipelineField = "Pipeline";
         private const string KeyCredentialVariable = "credential";
         private const string OptionsVariable = "options";
+        private const string APIVersionField = "apiVersion";
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
         private const string ScopesConstant = "AuthorizationScopes";
 
@@ -137,6 +138,9 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
             }
+
+            writer.Line($"private readonly string {APIVersionField};");
+
             writer.Line();
         }
 
@@ -209,6 +213,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
                 }
+                writer.Line($"this.{APIVersionField} = {OptionsVariable}.Version;");
             }
             writer.Line();
         }
