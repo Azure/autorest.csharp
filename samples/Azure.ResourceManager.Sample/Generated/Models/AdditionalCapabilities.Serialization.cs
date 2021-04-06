@@ -10,7 +10,11 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
+<<<<<<< HEAD:samples/Azure.ResourceManager.Sample/Generated/Models/AdditionalCapabilities.Serialization.cs
     public partial class AdditionalCapabilities : IUtf8JsonSerializable
+=======
+    public partial class SkuData : IUtf8JsonSerializable
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/SkuData.Serialization.cs
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -23,7 +27,11 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
+<<<<<<< HEAD:samples/Azure.ResourceManager.Sample/Generated/Models/AdditionalCapabilities.Serialization.cs
         internal static AdditionalCapabilities DeserializeAdditionalCapabilities(JsonElement element)
+=======
+        internal static SkuData DeserializeSkuData(JsonElement element)
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/SkuData.Serialization.cs
         {
             Optional<bool> ultraSSDEnabled = default;
             foreach (var property in element.EnumerateObject())
@@ -39,7 +47,11 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
+<<<<<<< HEAD:samples/Azure.ResourceManager.Sample/Generated/Models/AdditionalCapabilities.Serialization.cs
             return new AdditionalCapabilities(Optional.ToNullable(ultraSSDEnabled));
+=======
+            return new SkuData(name, Optional.ToNullable(tier));
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/SkuData.Serialization.cs
         }
     }
 }

@@ -10,7 +10,11 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
+<<<<<<< HEAD:samples/Azure.Management.Storage/Generated/Models/FileServiceData.Serialization.cs
     public partial class VirtualMachineScaleSetUpdatePublicIPAddressConfiguration : IUtf8JsonSerializable
+=======
+    public partial class ManagementPolicyData : IUtf8JsonSerializable
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/ManagementPolicyData.Serialization.cs
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -36,6 +40,7 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
+<<<<<<< HEAD:samples/Azure.Management.Storage/Generated/Models/FileServiceData.Serialization.cs
         internal static VirtualMachineScaleSetUpdatePublicIPAddressConfiguration DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(JsonElement element)
         {
             Optional<string> name = default;
@@ -48,6 +53,14 @@ namespace Azure.ResourceManager.Sample
                     name = property.Value.GetString();
                     continue;
                 }
+=======
+        internal static ManagementPolicyData DeserializeManagementPolicyData(JsonElement element)
+        {
+            Optional<DateTimeOffset> lastModifiedTime = default;
+            Optional<ManagementPolicySchema> policy = default;
+            foreach (var property in element.EnumerateObject())
+            {
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/ManagementPolicyData.Serialization.cs
                 if (property.NameEquals("properties"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -81,7 +94,11 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
+<<<<<<< HEAD:samples/Azure.Management.Storage/Generated/Models/FileServiceData.Serialization.cs
             return new VirtualMachineScaleSetUpdatePublicIPAddressConfiguration(name.Value, Optional.ToNullable(idleTimeoutInMinutes), dnsSettings.Value);
+=======
+            return new ManagementPolicyData(Optional.ToNullable(lastModifiedTime), policy.Value);
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/ManagementPolicyData.Serialization.cs
         }
     }
 }

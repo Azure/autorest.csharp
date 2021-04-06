@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, string[] credentialTypes, string[] credentialScopes, string credentialHeaderName, JsonElement? operationGroupToResourceType = default, JsonElement? operationGroupToResource = default, JsonElement? modelToResource = default, JsonElement? modelRename = default)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, string[] credentialTypes, string[] credentialScopes, string credentialHeaderName, bool lowLevelClient, JsonElement? operationGroupToResourceType = default, JsonElement? operationGroupToResource = default, JsonElement? modelToResource = default, JsonElement? modelRename = default)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -49,10 +49,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public string CredentialHeaderName { get; }
 
         public static string ProjectRelativeDirectory = "../";
-        public Dictionary<string, string> OperationGroupToResourceType;
-        public Dictionary<string, string> OperationGroupToResource;
-        public Dictionary<string, string> ModelToResource;
-        public Dictionary<string, string> ModelRename;
+        public IReadOnlyDictionary<string, string> OperationGroupToResourceType { get; }
+        public IReadOnlyDictionary<string, string> OperationGroupToResource { get; }
+        public IReadOnlyDictionary<string, string> ModelToResource { get; }
+        public IReadOnlyDictionary<string, string> ModelRename { get; }
+        public bool LowLevelClient { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -70,6 +71,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<string[]?>("credential-types").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("credential-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string?>("credential-header-name").GetAwaiter().GetResult() ?? "api-key",
+                autoRest.GetValue<bool?>("low-level-client").GetAwaiter().GetResult() ?? false, 
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("model-to-resource").GetAwaiter().GetResult(),

@@ -1,46 +1,47 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class ResourceData : ObjectType
+    internal class ResourceData : MgmtObjectType
     {
-        private const string _suffixValue = "Data";
-        private BuildContext _context;
-        private ObjectTypeProperty[]? _properties;
-        private string _prefix;
-        private Schema _schema;
-
-        public ResourceData(ObjectSchema schema, OperationGroup operationGroup, BuildContext context, bool isResourceModel) : base(schema, context, isResourceModel)
+        public ResourceData(ObjectSchema schema, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context) : base(schema, context, true)
         {
-            _context = context;
-            _prefix = operationGroup.Resource;
-            _schema = schema;
-            Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, _prefix));
+            Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, operationGroup.Resource));
         }
+
+        protected override string DefaultName => GetDefaultName(OjectSchema, true);
 
         public new string? Description { get; }
 
-        public new ObjectTypeProperty[] Properties => _properties ??= BuildProperties();
-
         protected string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
-            StringBuilder summary = new StringBuilder();
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
                 $"A class representing the {clientPrefix} data model. " :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
-        private ObjectTypeProperty[] BuildProperties()
+        protected override HashSet<string?> GetParentProperties()
         {
-            var resourceModel = (ObjectType)_context.Library.ResourceSchemaMap[_schema];
-            return resourceModel.Properties;
+            if (Inherits?.IsFrameworkType == false)
+            {
+                return base.GetParentProperties();
+            }
+
+            System.Type type = Inherits?.FrameworkType!;
+            if (type is null)
+            {
+                return new HashSet<string?>();
+            }
+
+            return GetPropertiesFromSystemType(type).ToHashSet<string?>();
         }
     }
 }

@@ -18,6 +18,7 @@ namespace AutoRest.CSharp.Output.Models
     internal class DataPlaneClient : ClientBase
     {
         private readonly OperationGroup _operationGroup;
+        private readonly BuildContext<DataPlaneOutputLibrary> _context;
         private PagingMethod[]? _pagingMethods;
         private ClientMethod[]? _methods;
         private DataPlaneLongRunningOperationMethod[]? _longRunningOperationMethods;
@@ -26,15 +27,15 @@ namespace AutoRest.CSharp.Output.Models
         public DataPlaneClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context): base(context)
         {
             _operationGroup = operationGroup;
-
+            _context = context;
             var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, Context);
             DefaultName = clientPrefix + ClientSuffix;
             ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
         }
 
         public string ClientShortName { get; }
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, Context)));
-        public RestClient RestClient => _restClient ??= Context.Library.FindRestClient(_operationGroup);
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, _context)));
+        public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
@@ -88,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models
 
                         yield return new DataPlaneLongRunningOperationMethod(
                             name,
-                            Context.Library.FindLongRunningOperation(operation),
+                            _context.Library.FindLongRunningOperation(operation),
                             startMethod,
                             new Diagnostic($"{Declaration.Name}.Start{name}")
                         );
@@ -122,7 +123,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType)
         {
-            return RestClientBuilder<DataPlaneOutputLibrary>.GetConstructorParameters(RestClient.Parameters, credentialType, false, false);
+            return RestClientBuilder<DataPlaneOutputLibrary>.GetConstructorParameters(RestClient.Parameters, credentialType, false);
         }
     }
 }

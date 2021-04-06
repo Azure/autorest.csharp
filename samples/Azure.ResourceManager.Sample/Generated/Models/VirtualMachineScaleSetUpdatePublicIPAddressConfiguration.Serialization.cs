@@ -10,7 +10,11 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
+<<<<<<< HEAD:samples/Azure.ResourceManager.Sample/Generated/Models/VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.Serialization.cs
     public partial class VirtualMachineScaleSetUpdatePublicIPAddressConfiguration : IUtf8JsonSerializable
+=======
+    public partial class FileServiceData : IUtf8JsonSerializable
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/FileServiceData.Serialization.cs
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -36,6 +40,7 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
+<<<<<<< HEAD:samples/Azure.ResourceManager.Sample/Generated/Models/VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.Serialization.cs
         internal static VirtualMachineScaleSetUpdatePublicIPAddressConfiguration DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(JsonElement element)
         {
             Optional<string> name = default;
@@ -46,6 +51,23 @@ namespace Azure.ResourceManager.Sample
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
+=======
+        internal static FileServiceData DeserializeFileServiceData(JsonElement element)
+        {
+            Optional<SkuData> sku = default;
+            Optional<CorsRules> cors = default;
+            Optional<DeleteRetentionPolicy> shareDeleteRetentionPolicy = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("sku"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    sku = SkuData.DeserializeSkuData(property.Value);
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/FileServiceData.Serialization.cs
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -81,7 +103,11 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
+<<<<<<< HEAD:samples/Azure.ResourceManager.Sample/Generated/Models/VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.Serialization.cs
             return new VirtualMachineScaleSetUpdatePublicIPAddressConfiguration(name.Value, Optional.ToNullable(idleTimeoutInMinutes), dnsSettings.Value);
+=======
+            return new FileServiceData(sku.Value, cors.Value, shareDeleteRetentionPolicy.Value);
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/FileServiceData.Serialization.cs
         }
     }
 }

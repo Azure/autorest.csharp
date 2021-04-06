@@ -36,11 +36,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
 
-        public ObjectType(ObjectSchema objectSchema, BuildContext context) : this(objectSchema, context, false)
-        {
-        }
-
-        public ObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceModel) : base(context)
+        public ObjectType(ObjectSchema objectSchema, BuildContext context) : base(context)
         {
             OjectSchema = objectSchema;
             _typeFactory = context.TypeFactory;
@@ -51,11 +47,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
             Description = BuilderHelpers.CreateDescription(objectSchema);
-            DefaultName = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
-            if (isResourceModel)
-            {
-                DefaultName = DefaultName + "Data";
-            }
 
             DefaultNamespace = GetDefaultNamespace(objectSchema, context);
             _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
@@ -428,7 +419,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     formats.Add(Enum.Parse<KnownMediaType>(format, true));
                 }
             }
-            return formats.Distinct().Select(type => _serializationBuilder.BuildObject(type, _objectSchema, this)).ToArray();
+            return formats.Distinct().Select(type => _serializationBuilder.BuildObject(type, OjectSchema, this)).ToArray();
         }
 
         private ObjectTypeDiscriminatorImplementation[] CreateDiscriminatorImplementations(Discriminator schemaDiscriminator)

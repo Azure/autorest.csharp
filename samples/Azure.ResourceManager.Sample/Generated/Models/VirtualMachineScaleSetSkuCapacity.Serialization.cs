@@ -10,9 +10,15 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
+<<<<<<< HEAD:samples/Azure.ResourceManager.Sample/Generated/Models/VirtualMachineScaleSetSkuCapacity.Serialization.cs
     public partial class VirtualMachineScaleSetSkuCapacity
     {
         internal static VirtualMachineScaleSetSkuCapacity DeserializeVirtualMachineScaleSetSkuCapacity(JsonElement element)
+=======
+    public partial class UsageData
+    {
+        internal static UsageData DeserializeUsageData(JsonElement element)
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/UsageData.Serialization.cs
         {
             Optional<long> minimum = default;
             Optional<long> maximum = default;
@@ -61,7 +67,11 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
+<<<<<<< HEAD:samples/Azure.ResourceManager.Sample/Generated/Models/VirtualMachineScaleSetSkuCapacity.Serialization.cs
             return new VirtualMachineScaleSetSkuCapacity(Optional.ToNullable(minimum), Optional.ToNullable(maximum), Optional.ToNullable(defaultCapacity), Optional.ToNullable(scaleType));
+=======
+            return new UsageData(Optional.ToNullable(unit), Optional.ToNullable(currentValue), Optional.ToNullable(limit), name.Value);
+>>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/UsageData.Serialization.cs
         }
     }
 }

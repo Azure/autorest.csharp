@@ -35,5 +35,5 @@ model-to-resource:
    ComputeOperationValue : RestApi
    RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
 modelerfour:
-   lenient-model-deduplication: true    
+  lenient-model-deduplication: true
 ```
