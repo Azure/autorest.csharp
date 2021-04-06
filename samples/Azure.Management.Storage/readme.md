@@ -27,7 +27,7 @@ operation-group-to-resource:
    Usages: Usage
    PrivateLinkResources: PrivateLinkResource
    StorageAccounts: StorageAccount
-resource-rename:
+model-rename:
    BlobServiceProperties: BlobService
    FileServiceProperties: FileService
 ```

@@ -6,15 +6,50 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the SshPublicKeyResource data model. </summary>
-    public partial class SshPublicKeyData
+    public partial class SshPublicKeyData : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PublicKey))
+            {
+                writer.WritePropertyName("publicKey");
+                writer.WriteStringValue(PublicKey);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
         internal static SshPublicKeyData DeserializeSshPublicKeyData(JsonElement element)
         {
-            return new SshPublicKeyData();
+            Optional<string> publicKey = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("properties"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("publicKey"))
+                        {
+                            publicKey = property0.Value.GetString();
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new SshPublicKeyData(publicKey.Value);
         }
     }
 }

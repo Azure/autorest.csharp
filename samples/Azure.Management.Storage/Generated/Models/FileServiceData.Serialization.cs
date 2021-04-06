@@ -8,59 +8,46 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.Management.Storage.Models
 {
-<<<<<<< HEAD:samples/Azure.Management.Storage/Generated/Models/FileServiceData.Serialization.cs
-    public partial class VirtualMachineScaleSetUpdatePublicIPAddressConfiguration : IUtf8JsonSerializable
-=======
-    public partial class ManagementPolicyData : IUtf8JsonSerializable
->>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/ManagementPolicyData.Serialization.cs
+    public partial class FileServiceData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
-            if (Optional.IsDefined(IdleTimeoutInMinutes))
+            if (Optional.IsDefined(Cors))
             {
-                writer.WritePropertyName("idleTimeoutInMinutes");
-                writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
+                writer.WritePropertyName("cors");
+                writer.WriteObjectValue(Cors);
             }
-            if (Optional.IsDefined(DnsSettings))
+            if (Optional.IsDefined(ShareDeleteRetentionPolicy))
             {
-                writer.WritePropertyName("dnsSettings");
-                writer.WriteObjectValue(DnsSettings);
+                writer.WritePropertyName("shareDeleteRetentionPolicy");
+                writer.WriteObjectValue(ShareDeleteRetentionPolicy);
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-<<<<<<< HEAD:samples/Azure.Management.Storage/Generated/Models/FileServiceData.Serialization.cs
-        internal static VirtualMachineScaleSetUpdatePublicIPAddressConfiguration DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(JsonElement element)
+        internal static FileServiceData DeserializeFileServiceData(JsonElement element)
         {
-            Optional<string> name = default;
-            Optional<int> idleTimeoutInMinutes = default;
-            Optional<VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings> dnsSettings = default;
+            Optional<SkuData> sku = default;
+            Optional<CorsRules> cors = default;
+            Optional<DeleteRetentionPolicy> shareDeleteRetentionPolicy = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("sku"))
                 {
-                    name = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    sku = SkuData.DeserializeSkuData(property.Value);
                     continue;
                 }
-=======
-        internal static ManagementPolicyData DeserializeManagementPolicyData(JsonElement element)
-        {
-            Optional<DateTimeOffset> lastModifiedTime = default;
-            Optional<ManagementPolicySchema> policy = default;
-            foreach (var property in element.EnumerateObject())
-            {
->>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/ManagementPolicyData.Serialization.cs
                 if (property.NameEquals("properties"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -70,35 +57,31 @@ namespace Azure.ResourceManager.Sample
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("idleTimeoutInMinutes"))
+                        if (property0.NameEquals("cors"))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            idleTimeoutInMinutes = property0.Value.GetInt32();
+                            cors = CorsRules.DeserializeCorsRules(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("dnsSettings"))
+                        if (property0.NameEquals("shareDeleteRetentionPolicy"))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
                                 property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
-                            dnsSettings = VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.DeserializeVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(property0.Value);
+                            shareDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
                             continue;
                         }
                     }
                     continue;
                 }
             }
-<<<<<<< HEAD:samples/Azure.Management.Storage/Generated/Models/FileServiceData.Serialization.cs
-            return new VirtualMachineScaleSetUpdatePublicIPAddressConfiguration(name.Value, Optional.ToNullable(idleTimeoutInMinutes), dnsSettings.Value);
-=======
-            return new ManagementPolicyData(Optional.ToNullable(lastModifiedTime), policy.Value);
->>>>>>> 540b82afdf3620059a53181d81adac3166d4a2b4:samples/Azure.Management.Storage/Generated/Models/ManagementPolicyData.Serialization.cs
+            return new FileServiceData(sku.Value, cors.Value, shareDeleteRetentionPolicy.Value);
         }
     }
 }

@@ -16,17 +16,17 @@ namespace OperationGroupMappings
         /// <summary> Initializes a new instance of ComputeOperationListResult. </summary>
         internal ComputeOperationListResult()
         {
-            Value = new ChangeTrackingList<ComputeOperationValue>();
+            Value = new ChangeTrackingList<RestApiData>();
         }
 
         /// <summary> Initializes a new instance of ComputeOperationListResult. </summary>
         /// <param name="value"> The list of compute operations. </param>
-        internal ComputeOperationListResult(IReadOnlyList<ComputeOperationValue> value)
+        internal ComputeOperationListResult(IReadOnlyList<RestApiData> value)
         {
             Value = value;
         }
 
         /// <summary> The list of compute operations. </summary>
-        public IReadOnlyList<ComputeOperationValue> Value { get; }
+        public IReadOnlyList<RestApiData> Value { get; }
     }
 }

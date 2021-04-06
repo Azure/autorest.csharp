@@ -6,15 +6,104 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the VirtualMachineExtensionImage data model. </summary>
-    public partial class VirtualMachineExtensionImageData
+    public partial class VirtualMachineExtensionImageData : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
+            if (Optional.IsDefined(OperatingSystem))
+            {
+                writer.WritePropertyName("operatingSystem");
+                writer.WriteStringValue(OperatingSystem);
+            }
+            if (Optional.IsDefined(ComputeRole))
+            {
+                writer.WritePropertyName("computeRole");
+                writer.WriteStringValue(ComputeRole);
+            }
+            if (Optional.IsDefined(HandlerSchema))
+            {
+                writer.WritePropertyName("handlerSchema");
+                writer.WriteStringValue(HandlerSchema);
+            }
+            if (Optional.IsDefined(VmScaleSetEnabled))
+            {
+                writer.WritePropertyName("vmScaleSetEnabled");
+                writer.WriteBooleanValue(VmScaleSetEnabled.Value);
+            }
+            if (Optional.IsDefined(SupportsMultipleExtensions))
+            {
+                writer.WritePropertyName("supportsMultipleExtensions");
+                writer.WriteBooleanValue(SupportsMultipleExtensions.Value);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
         internal static VirtualMachineExtensionImageData DeserializeVirtualMachineExtensionImageData(JsonElement element)
         {
-            return new VirtualMachineExtensionImageData();
+            Optional<string> operatingSystem = default;
+            Optional<string> computeRole = default;
+            Optional<string> handlerSchema = default;
+            Optional<bool> vmScaleSetEnabled = default;
+            Optional<bool> supportsMultipleExtensions = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("properties"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("operatingSystem"))
+                        {
+                            operatingSystem = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("computeRole"))
+                        {
+                            computeRole = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("handlerSchema"))
+                        {
+                            handlerSchema = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("vmScaleSetEnabled"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            vmScaleSetEnabled = property0.Value.GetBoolean();
+                            continue;
+                        }
+                        if (property0.NameEquals("supportsMultipleExtensions"))
+                        {
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            supportsMultipleExtensions = property0.Value.GetBoolean();
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new VirtualMachineExtensionImageData(operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions));
         }
     }
 }

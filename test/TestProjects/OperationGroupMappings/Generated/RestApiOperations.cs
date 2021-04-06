@@ -11,27 +11,27 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
-namespace Azure.Management.Storage
+namespace OperationGroupMappings
 {
-    /// <summary> A class representing the operations that can be performed over a specific BlobServiceProperties. </summary>
-    public partial class BlobServicePropertiesOperations : ResourceOperationsBase<BlobServiceProperties>
+    /// <summary> A class representing the operations that can be performed over a specific RestApi. </summary>
+    public partial class RestApiOperations : ResourceOperationsBase<RestApi>
     {
-        /// <summary> Initializes a new instance of BlobServicePropertiesOperations for mocking. </summary>
-        protected BlobServicePropertiesOperations()
+        /// <summary> Initializes a new instance of RestApiOperations for mocking. </summary>
+        protected RestApiOperations()
         {
         }
 
-        private static readonly ResourceType ResourceType = "Azure.Management.Storage/BlobServicePropertiesOperations";
+        private static readonly ResourceType ResourceType = "OperationGroupMappings/RestApiOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<BlobServiceProperties> Get(CancellationToken cancellationToken = default)
+        public override ArmResponse<RestApi> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<BlobServiceProperties>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<ArmResponse<RestApi>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

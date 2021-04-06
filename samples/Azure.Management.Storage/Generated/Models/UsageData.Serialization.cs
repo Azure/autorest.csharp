@@ -6,15 +6,62 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the Usage data model. </summary>
     public partial class UsageData
     {
         internal static UsageData DeserializeUsageData(JsonElement element)
         {
-            return new UsageData();
+            Optional<UsageUnit> unit = default;
+            Optional<int> currentValue = default;
+            Optional<int> limit = default;
+            Optional<UsageName> name = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("unit"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    unit = property.Value.GetString().ToUsageUnit();
+                    continue;
+                }
+                if (property.NameEquals("currentValue"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    currentValue = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("limit"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    limit = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    name = UsageName.DeserializeUsageName(property.Value);
+                    continue;
+                }
+            }
+            return new UsageData(Optional.ToNullable(unit), Optional.ToNullable(currentValue), Optional.ToNullable(limit), name.Value);
         }
     }
 }

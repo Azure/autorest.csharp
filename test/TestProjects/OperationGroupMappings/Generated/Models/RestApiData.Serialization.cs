@@ -8,11 +8,11 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace OperationGroupMappings
 {
-    public partial class ComputeOperationValue
+    public partial class RestApiData
     {
-        internal static ComputeOperationValue DeserializeComputeOperationValue(JsonElement element)
+        internal static RestApiData DeserializeRestApiData(JsonElement element)
         {
             Optional<string> origin = default;
             Optional<string> name = default;
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new ComputeOperationValue(origin.Value, name.Value, operation.Value, resource.Value, description.Value, provider.Value);
+            return new RestApiData(origin.Value, name.Value, operation.Value, resource.Value, description.Value, provider.Value);
         }
     }
 }

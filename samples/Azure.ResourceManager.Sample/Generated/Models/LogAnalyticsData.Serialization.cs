@@ -6,15 +6,29 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the LogAnalyticsOperationResult data model. </summary>
     public partial class LogAnalyticsData
     {
         internal static LogAnalyticsData DeserializeLogAnalyticsData(JsonElement element)
         {
-            return new LogAnalyticsData();
+            Optional<LogAnalyticsOutput> properties = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("properties"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    properties = LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
+                    continue;
+                }
+            }
+            return new LogAnalyticsData(properties.Value);
         }
     }
 }
