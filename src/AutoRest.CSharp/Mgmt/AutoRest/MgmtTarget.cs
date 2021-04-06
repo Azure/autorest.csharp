@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resourceDataWriter = new ResourceDataWriter();
             var armResourceWriter = new ArmResourceWriter();
             var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
+            var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
 
             InheritanceChoser.RebuildModelInheritance(context.Library.SchemaMap, context.Library.ResourceSchemaMap);
 
@@ -82,6 +83,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var name = model.Type.Name;
                 project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
             }
+
+            var extensionsWriter = new CodeWriter();
+            var resources = context.Library.ArmResource;
+            var operations = context.Library.ResourceOperations;
+            var containers = context.Library.ResourceContainers;
+            resourceGroupExtensionsWriter.WriteExtension(extensionsWriter, resources, operations, containers);
+            project.AddGeneratedFile("ResourceGroupExtensions.cs", extensionsWriter.ToString());
         }
     }
 }
