@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
+
 using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -73,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
             // Microsoft.Network/virtualNetworks/ == lastFullProvider
             // resourceType = Microsoft.Network/virtualNetworks
             //
-            if (fullProvider.TokenValue.Trim('/').Equals(resourceType))
+            if (fullProvider.TokenValue.Equals(resourceType))
             {
                 var lastSlash = path.LastIndexOf('/', fullProvider.IndexFoundAt - 1); //ok because tenant only resources should never get here.
                 var lastClosedBrace = path.LastIndexOf('}', lastSlash);
