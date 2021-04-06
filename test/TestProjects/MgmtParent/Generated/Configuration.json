@@ -1,0 +1,25 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtParent",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "AzureArm": true,
+  "PublicClients": true,
+  "ModelNamespace": false,
+  "HeadAsBoolean": false,
+  "SkipCSProjPackageReference": true,
+  "LowLevelClient": false,
+  "OperationGroupToResourceType": {
+    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension"
+  },
+  "OperationGroupToResource": {
+    "VirtualMachineExtensionImages": "VirtualMachineExtensionImage"
+  },
+  "ResourceRename": {},
+  "OperationGroupToParent": {
+    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers"
+  }
+}

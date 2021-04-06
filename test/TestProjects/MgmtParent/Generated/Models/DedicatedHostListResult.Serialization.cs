@@ -9,22 +9,22 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace OperationGroupMappings
+namespace MgmtParent
 {
-    internal partial class AvailabilitySetListResult
+    internal partial class DedicatedHostListResult
     {
-        internal static AvailabilitySetListResult DeserializeAvailabilitySetListResult(JsonElement element)
+        internal static DedicatedHostListResult DeserializeDedicatedHostListResult(JsonElement element)
         {
-            IReadOnlyList<AvailabilitySetData> value = default;
+            IReadOnlyList<DedicatedHostData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<AvailabilitySetData> array = new List<AvailabilitySetData>();
+                    List<DedicatedHostData> array = new List<DedicatedHostData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AvailabilitySetData.DeserializeAvailabilitySetData(item));
+                        array.Add(DedicatedHostData.DeserializeDedicatedHostData(item));
                     }
                     value = array;
                     continue;
@@ -35,7 +35,7 @@ namespace OperationGroupMappings
                     continue;
                 }
             }
-            return new AvailabilitySetListResult(value, nextLink.Value);
+            return new DedicatedHostListResult(value, nextLink.Value);
         }
     }
 }

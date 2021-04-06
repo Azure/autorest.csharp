@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models
             _context = context;
             _builder = new RestClientBuilder (operationGroup, context);
 
-            Parameters = _builder.GetOrderedParameters ();
+            Parameters = _builder.GetOrderedParameters ().Where (p => !p.IsApiVersionParameter).ToArray();
             ClientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, context);
             DefaultName = ClientPrefix + ClientSuffix;
         }

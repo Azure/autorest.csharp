@@ -40,7 +40,9 @@ namespace AutoRest.CSharp.AutoRest.Communication
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (Utf8JsonWriter writer = new Utf8JsonWriter(memoryStream))
+                JsonWriterOptions options = new JsonWriterOptions();
+                options.Indented = true;
+                using (Utf8JsonWriter writer = new Utf8JsonWriter(memoryStream, options))
                 {
                     writer.WriteStartObject();
                     writer.WriteString(nameof(Configuration.OutputFolder), Path.GetRelativePath(configuration.OutputFolder, configuration.OutputFolder));
@@ -59,26 +61,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     writer.WriteBoolean(nameof(Configuration.SkipCSProjPackageReference), configuration.SkipCSProjPackageReference);
                     writer.WriteBoolean(nameof(Configuration.LowLevelClient), configuration.LowLevelClient);
 
-                    writer.WriteStartObject(nameof(Configuration.OperationGroupToResourceType));
-                    foreach (var keyval in configuration.OperationGroupToResourceType)
-                    {
-                        writer.WriteString(keyval.Key, keyval.Value);
-                    }
-                    writer.WriteEndObject();
-
-                    writer.WriteStartObject(nameof(Configuration.OperationGroupToResource));
-                    foreach (var keyval in configuration.OperationGroupToResource)
-                    {
-                        writer.WriteString(keyval.Key, keyval.Value);
-                    }
-                    writer.WriteEndObject();
-
-                    writer.WriteStartObject(nameof(Configuration.ResourceRename));
-                    foreach (var keyval in configuration.ResourceRename)
-                    {
-                        writer.WriteString(keyval.Key, keyval.Value);
-                    }
-                    writer.WriteEndObject();
+                    configuration.MgmtConfiguration.SaveConfiguration(writer);
 
                     writer.WriteEndObject();
                 }
@@ -92,7 +75,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder);
         }
 
-        private static Configuration LoadConfiguration(string basePath, string json)
+        internal static Configuration LoadConfiguration(string basePath, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
@@ -115,9 +98,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.LowLevelClient)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.OperationGroupToResourceType)),
-                root.GetProperty(nameof(Configuration.OperationGroupToResource)),
-                root.GetProperty(nameof(Configuration.ResourceRename))
+                MgmtConfiguration.LoadConfiguration(root)
             );
         }
     }

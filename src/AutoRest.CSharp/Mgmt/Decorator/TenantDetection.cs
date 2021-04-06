@@ -9,6 +9,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
 {
     internal static class TenantDetection
     {
+        internal static readonly string TenantName = "tenant";
         public static bool IsTenantOnly(OperationGroup operationGroup)
         {
             bool foundTenant = false;

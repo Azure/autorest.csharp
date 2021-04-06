@@ -1,1 +1,23 @@
-{"OutputFolder":".","Namespace":"OperationGroupMappings","LibraryName":null,"SharedSourceFolders":["..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared","..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"],"AzureArm":true,"PublicClients":true,"ModelNamespace":false,"HeadAsBoolean":true,"SkipCSProjPackageReference":true,"LowLevelClient":false,"OperationGroupToResourceType":{"Operations":"/providers/Microsoft.Compute/operations"},"OperationGroupToResource":{"Operations":"Operation","AvailabilitySets":"AvailabilitySet"},"ResourceRename":{}}
+{
+  "OutputFolder": ".",
+  "Namespace": "OperationGroupMappings",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "AzureArm": true,
+  "PublicClients": true,
+  "ModelNamespace": false,
+  "HeadAsBoolean": true,
+  "SkipCSProjPackageReference": true,
+  "LowLevelClient": false,
+  "OperationGroupToResourceType": {
+    "AvailabilitySets": "Microsoft.Compute/availabilitySets"
+  },
+  "OperationGroupToResource": {
+    "AvailabilitySets": "AvailabilitySet"
+  },
+  "ResourceRename": {},
+  "OperationGroupToParent": {}
+}

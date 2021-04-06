@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OperationGroupMappings
+namespace MgmtParent
 {
     /// <summary> The List Availability Set operation response. </summary>
     internal partial class AvailabilitySetListResult
