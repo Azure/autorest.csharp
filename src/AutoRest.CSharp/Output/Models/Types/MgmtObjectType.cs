@@ -2,20 +2,25 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class MgmtObjectType : ObjectType
     {
+        private readonly TypeFactory _typeFactory;
         private bool _isResourceType;
+        private ObjectTypeProperty[]? _myProperties;
 
         public MgmtObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceType) : base(objectSchema, context)
         {
+            _typeFactory = context.TypeFactory;
             _isResourceType = isResourceType;
         }
 
@@ -26,6 +31,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             var name = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
             return isResourceType ? name + "Data" : name;
         }
+
+        public new CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
+
+        public ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
 
         public void OverrideInherits(CSharpType cSharpType)
         {
@@ -70,6 +79,48 @@ namespace AutoRest.CSharp.Output.Models.Types
                     builder.Append(p.Name.Substring(1));
                     return builder.ToString();
                 });
+        }
+
+        private CSharpType? CreateInheritedType()
+        {
+            CSharpType? inheritedType = null;
+
+            var sourceBaseType = ExistingType?.BaseType;
+            if (sourceBaseType != null &&
+                sourceBaseType.SpecialType != SpecialType.System_ValueType &&
+                sourceBaseType.SpecialType != SpecialType.System_Object &&
+                _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
+            {
+                inheritedType = baseType;
+            }
+            else
+            {
+                var objectSchemas = OjectSchema.Parents!.Immediate.OfType<ObjectSchema>().ToArray();
+
+                ObjectSchema? selectedSchema = null;
+
+                foreach (var objectSchema in objectSchemas)
+                {
+                    // Take first schema or the one with discriminator
+                    selectedSchema ??= objectSchema;
+
+                    if (objectSchema.Discriminator != null)
+                    {
+                        selectedSchema = objectSchema;
+                        break;
+                    }
+                }
+
+                if (selectedSchema != null)
+                {
+                    CSharpType type = _typeFactory.CreateType(selectedSchema, false);
+                    Debug.Assert(!type.IsFrameworkType);
+                    inheritedType = type;
+                }
+            }
+
+            inheritedType ??= InheritanceChoser.GetExactMatch(this);
+            return inheritedType == null ? InheritanceChoser.GetSupersetMatch(this) : inheritedType;
         }
     }
 }

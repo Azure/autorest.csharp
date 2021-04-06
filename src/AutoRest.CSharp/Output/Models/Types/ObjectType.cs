@@ -430,10 +430,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             )).ToArray();
         }
 
-        private IEnumerable<ObjectTypeProperty> BuildProperties()
+        protected IEnumerable<ObjectTypeProperty> BuildProperties(bool includeParent = true)
         {
             // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/261
-            var existingProperties = GetParentProperties();
+            var existingProperties = includeParent ? GetParentProperties() : new HashSet<string?>();
 
             foreach (var objectSchema in GetCombinedSchemas())
             {

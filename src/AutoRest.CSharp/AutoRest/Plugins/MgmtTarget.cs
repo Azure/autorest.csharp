@@ -25,8 +25,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var armResourceWriter = new ArmResourceWriter();
             var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
 
-            InheritanceChoser.RebuildModelInheritance(context.Library.SchemaMap, context.Library.ResourceSchemaMap);
-
             foreach (var model in context.Library.Models)
             {
                 var codeWriter = new CodeWriter();
