@@ -40,7 +40,9 @@ namespace AutoRest.CSharp.AutoRest.Communication
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (Utf8JsonWriter writer = new Utf8JsonWriter(memoryStream))
+                JsonWriterOptions options = new JsonWriterOptions();
+                options.Indented = true;
+                using (Utf8JsonWriter writer = new Utf8JsonWriter(memoryStream, options))
                 {
                     writer.WriteStartObject();
                     writer.WriteString(nameof(Configuration.OutputFolder), Path.GetRelativePath(configuration.OutputFolder, configuration.OutputFolder));
@@ -74,40 +76,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
                     writer.WriteString(nameof(Configuration.CredentialHeaderName), configuration.CredentialHeaderName);
 
-                    writer.WriteStartObject(nameof(Configuration.OperationGroupToResourceType));
-                    foreach (var keyval in configuration.OperationGroupToResourceType)
-                    {
-                        writer.WriteString(keyval.Key, keyval.Value);
-                    }
-                    writer.WriteEndObject();
-
-                    writer.WriteStartObject(nameof(Configuration.OperationGroupToResource));
-                    foreach (var keyval in configuration.OperationGroupToResource)
-                    {
-                        writer.WriteString(keyval.Key, keyval.Value);
-                    }
-                    writer.WriteEndObject();
-
-                    writer.WriteStartObject(nameof(Configuration.ModelToResource));
-                    foreach (var keyval in configuration.ModelToResource)
-                    {
-                        writer.WriteString(keyval.Key, keyval.Value);
-                    }
-                    writer.WriteEndObject();
-
-                    writer.WriteStartObject(nameof(Configuration.ModelRename));
-                    foreach (var keyval in configuration.ModelRename)
-                    {
-                        writer.WriteString(keyval.Key, keyval.Value);
-                    }
-                    writer.WriteEndObject();
-
-                    writer.WriteStartObject(nameof(Configuration.OperationGroupToParent));
-                    foreach (var keyval in configuration.OperationGroupToParent)
-                    {
-                        writer.WriteString(keyval.Key, keyval.Value);
-                    }
-                    writer.WriteEndObject();
+                    configuration.MgmtConfiguration.SaveConfiguration(writer);
 
                     writer.WriteEndObject();
                 }
@@ -159,11 +128,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 credentialScopes.ToArray(),
                 root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString(),
                 root.GetProperty(nameof(Configuration.LowLevelClient)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.OperationGroupToResourceType)),
-                root.GetProperty(nameof(Configuration.OperationGroupToResource)),
-                root.GetProperty(nameof(Configuration.ModelToResource)),
-                root.GetProperty(nameof(Configuration.ModelRename)),
-                root.GetProperty(nameof(Configuration.OperationGroupToParent))
+                MgmtConfiguration.LoadConfiguration(root)
             );
         }
     }

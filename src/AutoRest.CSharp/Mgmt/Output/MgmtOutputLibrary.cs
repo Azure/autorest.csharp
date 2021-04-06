@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Type.Decorate;
@@ -14,6 +15,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private BuildContext<MgmtOutputLibrary> _context;
         private CodeModel _codeModel;
+        private MgmtConfiguration _mgmtConfiguration;
 
         private Dictionary<OperationGroup, MgmtRestClient>? _restClients;
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
@@ -29,6 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _codeModel = codeModel;
             _context = context;
+            _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
@@ -264,7 +267,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 MapHttpMethodToOperation(operationsGroup);
                 string? resourceType;
-                operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
+                operationsGroup.ResourceType = _mgmtConfiguration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
                 operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
                 string? resource;
                 ResourceTypes.Add(operationsGroup.ResourceType);
@@ -272,16 +275,16 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 // TODO better support for extension resources
                 string? parent;
-                if (_context.Configuration.OperationGroupToParent.TryGetValue(operationsGroup.Key, out parent))
+                if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationsGroup.Key, out parent))
                 {
                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
                 operationsGroup.Parent = parent ?? ParentDetection.GetParent(operationsGroup);
-                operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
+                operationsGroup.Resource = _mgmtConfiguration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
                 string? nameOverride;
-                if (_context.Configuration.ModelRename.TryGetValue(operationsGroup.Resource, out nameOverride))
+                if (_mgmtConfiguration.ModelRename.TryGetValue(operationsGroup.Resource, out nameOverride))
                 {
                     operationsGroup.Resource = nameOverride;
                 }
@@ -294,11 +297,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var schema in _allSchemas)
             {
                 string? name;
-                if (_context.Configuration.ModelToResource.TryGetValue(schema.Name, out name))
+                if (_mgmtConfiguration.ModelToResource.TryGetValue(schema.Name, out name))
                 {
                     schema.NameOverride = name;
                 }
-                else if (_context.Configuration.ModelRename.TryGetValue(schema.Name, out name))
+                else if (_mgmtConfiguration.ModelRename.TryGetValue(schema.Name, out name))
                 {
                     schema.NameOverride = name;
                 }

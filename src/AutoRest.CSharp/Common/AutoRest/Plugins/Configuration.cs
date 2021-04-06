@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, string[] credentialTypes, string[] credentialScopes, string credentialHeaderName, bool lowLevelClient, JsonElement? operationGroupToResourceType = default, JsonElement? operationGroupToResource = default, JsonElement? modelToResource = default, JsonElement? modelRename = default, JsonElement? operationGroupToParent = default)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, string[] credentialTypes, string[] credentialScopes, string credentialHeaderName, bool lowLevelClient, MgmtConfiguration mgmtConfiguration)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -28,11 +28,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             CredentialTypes = credentialTypes;
             CredentialScopes = credentialScopes;
             CredentialHeaderName = credentialHeaderName;
-            OperationGroupToResourceType = operationGroupToResourceType?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
-            OperationGroupToResource = operationGroupToResource?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
-            ModelToResource = modelToResource?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(modelToResource.ToString());
-            ModelRename = modelRename?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(modelRename.ToString());
-            OperationGroupToParent = operationGroupToParent?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
+            MgmtConfiguration = mgmtConfiguration;
         }
 
         public string OutputFolder { get; }
@@ -48,19 +44,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public string[] CredentialTypes { get; }
         public string[] CredentialScopes { get; }
         public string CredentialHeaderName { get; }
-
         public static string ProjectRelativeDirectory = "../";
-        public IReadOnlyDictionary<string, string> OperationGroupToResourceType { get; }
-        public IReadOnlyDictionary<string, string> OperationGroupToResource { get; }
-        public IReadOnlyDictionary<string, string> ModelToResource { get; }
-        public IReadOnlyDictionary<string, string> ModelRename { get; }
         public bool LowLevelClient { get; }
-        public IReadOnlyDictionary<string, string> OperationGroupToParent { get; }
+        public MgmtConfiguration MgmtConfiguration { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
             return new Configuration(
-                    TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
+                TrimFileSuffix(GetRequiredOption<string>(autoRest, "output-folder")),
                 autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult(),
                 autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
                 GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
@@ -74,11 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<string[]?>("credential-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string?>("credential-header-name").GetAwaiter().GetResult() ?? "api-key",
                 autoRest.GetValue<bool?>("low-level-client").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("model-to-resource").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("model-rename").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult()
+                MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
 
