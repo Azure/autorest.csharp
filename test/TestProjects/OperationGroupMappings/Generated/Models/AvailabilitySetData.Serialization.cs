@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
@@ -15,93 +14,22 @@ namespace OperationGroupMappings
     {
         internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element)
         {
+            Optional<string> foo = default;
             Optional<string> sku = default;
-            Optional<int> platformUpdateDomainCount = default;
-            Optional<int> platformFaultDomainCount = default;
-            Optional<IReadOnlyList<SubResource>> virtualMachines = default;
-            Optional<SubResource> proximityPlacementGroup = default;
-            Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("foo"))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("sku"))
                 {
                     sku = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("properties"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.NameEquals("platformUpdateDomainCount"))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            platformUpdateDomainCount = property0.Value.GetInt32();
-                            continue;
-                        }
-                        if (property0.NameEquals("platformFaultDomainCount"))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            platformFaultDomainCount = property0.Value.GetInt32();
-                            continue;
-                        }
-                        if (property0.NameEquals("virtualMachines"))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            List<SubResource> array = new List<SubResource>();
-                            foreach (var item in property0.Value.EnumerateArray())
-                            {
-                                array.Add(SubResource.DeserializeSubResource(item));
-                            }
-                            virtualMachines = array;
-                            continue;
-                        }
-                        if (property0.NameEquals("proximityPlacementGroup"))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            proximityPlacementGroup = SubResource.DeserializeSubResource(property0.Value);
-                            continue;
-                        }
-                        if (property0.NameEquals("statuses"))
-                        {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            List<InstanceViewStatus> array = new List<InstanceViewStatus>();
-                            foreach (var item in property0.Value.EnumerateArray())
-                            {
-                                array.Add(InstanceViewStatus.DeserializeInstanceViewStatus(item));
-                            }
-                            statuses = array;
-                            continue;
-                        }
-                    }
-                    continue;
-                }
             }
-            return new AvailabilitySetData(sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup.Value, Optional.ToList(statuses));
+            return new AvailabilitySetData(foo.Value, sku.Value);
         }
     }
 }

@@ -16,10 +16,9 @@
   "CredentialScopes": [],
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {
-    "Operations": "Microsoft.Compute/operations"
+    "AvailabilitySets": "Microsoft.Compute/availabilitySets"
   },
   "OperationGroupToResource": {
-    "Operations": "Operation",
     "AvailabilitySets": "AvailabilitySet"
   },
   "ResourceRename": {},
