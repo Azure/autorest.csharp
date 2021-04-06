@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
 
             var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
-            writer.Append($"internal {client.Type.Name:D}(");
+            writer.Append($"public {client.Type.Name:D}(");
             foreach (Parameter parameter in ctorParams)
             {
                 writer.WriteParameter(parameter);
