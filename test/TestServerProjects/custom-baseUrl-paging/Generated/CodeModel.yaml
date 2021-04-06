@@ -557,6 +557,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: AutoRestParameterizedHostTestPagingClient

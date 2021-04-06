@@ -2191,12 +2191,73 @@
         "authenticationRequired": {
           "description": "indicates that the API surface requires authentication",
           "type": "boolean"
+        },
+        "schemes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityScheme"
+          }
         }
       },
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "authenticationRequired"
+        "authenticationRequired",
+        "schemes"
+      ]
+    },
+    "SecurityScheme": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ]
+    },
+    "AADTokenSecurityScheme": {
+      "type": "object",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "scopes",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityScheme"
+        }
+      ]
+    },
+    "AzureKeySecurityScheme": {
+      "type": "object",
+      "properties": {
+        "headerName": {
+          "type": "string"
+        }
+      },
+      "defaultProperties": [],
+      "additionalProperties": false,
+      "required": [
+        "headerName",
+        "type"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecurityScheme"
+        }
       ]
     },
     "Example": {
@@ -2573,25 +2634,6 @@
         }
       ]
     },
-    "SecurityScheme": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/BearerHTTPSecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/NonBearerHTTPSecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/OAuth2SecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/APIKeySecurityScheme"
-        },
-        {
-          "$ref": "#/definitions/OpenIdConnectSecurityScheme"
-        }
-      ]
-    },
     "APIKeySecurityScheme": {
       "type": "object",
       "properties": {
@@ -2930,10 +2972,10 @@
         },
         "knownMediaType": {
           "$ref": "#/definitions/KnownMediaType",
-          "description": "canonical response type (ie, 'json')"
+          "description": "canonical response type (ie, 'json')."
         },
         "mediaTypes": {
-          "description": "the possible media types that this response MUST match one of",
+          "description": "The possible media types that this response MUST match one of.",
           "type": "array",
           "items": {
             "type": "string"
@@ -2957,8 +2999,6 @@
       "defaultProperties": [],
       "additionalProperties": false,
       "required": [
-        "knownMediaType",
-        "mediaTypes",
         "statusCodes"
       ],
       "allOf": [
@@ -2982,8 +3022,6 @@
       "additionalProperties": false,
       "required": [
         "binary",
-        "knownMediaType",
-        "mediaTypes",
         "statusCodes"
       ],
       "allOf": [

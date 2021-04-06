@@ -169,11 +169,6 @@ namespace AutoRest.CSharp.Input
 
     }
 
-    internal partial class SecurityScheme : Dictionary<string, object>
-    {
-
-    }
-
     internal partial class Paging
     {
         [YamlMember(Alias = "group")]

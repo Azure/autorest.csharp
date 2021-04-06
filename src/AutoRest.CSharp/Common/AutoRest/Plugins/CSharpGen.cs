@@ -70,13 +70,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
             });
 
-            if (configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase) &&
-                configuration.CredentialScopes.Length < 1)
-            {
-                await autoRest.Fatal("You are using TokenCredential without passing in any credential-scopes.");
-                return false;
-            }
-
             if (!Path.IsPathRooted(configuration.OutputFolder))
             {
                 await autoRest.Warning("output-folder path should be an absolute path");

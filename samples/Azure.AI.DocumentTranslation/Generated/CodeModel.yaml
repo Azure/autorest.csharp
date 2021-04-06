@@ -4020,6 +4020,10 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
+  schemes:
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: Ocp-Apim-Subscription-Key
 language: !Languages 
   default:
     name: AzureAIDocumentTranslation

@@ -2195,6 +2195,11 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
+  schemes:
+    - !AADTokenSecurityScheme 
+      type: AADToken
+      scopes:
+        - https://management.azure.com/.default
 language: !Languages 
   default:
     name: OperationGroupMappings

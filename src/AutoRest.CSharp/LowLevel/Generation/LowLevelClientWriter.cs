@@ -13,6 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -109,28 +110,32 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
         private const string ScopesConstant = "AuthorizationScopes";
 
-        private bool HasKeyAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase);
-        private bool HasTokenAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase);
+        private bool HasKeyAuth (BuildContext context) => context.CodeModel.Security.Schemes.Any(x => x is AzureKeySecurityScheme);
+        private bool HasTokenAuth (BuildContext context) => context.CodeModel.Security.Schemes.Any(x => x is AADTokenSecurityScheme);
 
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             writer.Append($"protected {typeof(HttpPipeline)} {PipelineField}");
             writer.AppendRaw("{ get; }\n");
 
-            if (HasKeyAuth (context))
+            var schemes = context.CodeModel.Security.Schemes;
+            foreach (var scheme in schemes)
             {
-                writer.Line($"private const string {AuthorizationHeaderConstant} = {context.Configuration.CredentialHeaderName:L};");
-            }
-            if (HasTokenAuth (context))
-            {
-                writer.Append($"private readonly string[] {ScopesConstant} = ");
-                writer.Append($"{{ ");
-                foreach (var credentialScope in context.Configuration.CredentialScopes)
+                if (scheme is AzureKeySecurityScheme azureKeySecurityScheme)
                 {
-                    writer.Append($"{credentialScope:L}, ");
+                    writer.Line($"private const string {AuthorizationHeaderConstant} = {azureKeySecurityScheme.HeaderName:L};");
                 }
-                writer.RemoveTrailingComma();
-                writer.Line($"}};");
+                else if (scheme is AADTokenSecurityScheme aadTokenSecurityScheme)
+                {
+                    writer.Append($"private readonly string[] {ScopesConstant} = ");
+                    writer.Append($"{{ ");
+                    foreach (var credentialScope in aadTokenSecurityScheme.Scopes)
+                    {
+                        writer.Append($"{credentialScope:L}, ");
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.Line($"}};");
+                }
             }
 
             foreach (Parameter clientParameter in client.Parameters)
