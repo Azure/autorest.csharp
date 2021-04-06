@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,23 +9,17 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
-using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
-using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
-    internal class MgmtRestClientWriter
+    internal class RestClientWriter
     {
-        public void WriteClient(CodeWriter writer, MgmtRestClient restClient)
+        public void WriteClient(CodeWriter writer, RestClient restClient)
         {
             var cs = restClient.Type;
             var @namespace = cs.Namespace;
@@ -54,7 +47,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string PipelineVariable = "pipeline";
         private const string PipelineField = "_" + PipelineVariable;
 
-        private void WriteClientFields(CodeWriter writer, MgmtRestClient restClient)
+        private void WriteClientFields(CodeWriter writer, RestClient restClient)
         {
             foreach (Parameter clientParameter in restClient.Parameters)
             {
@@ -66,7 +59,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteClientCtor(CodeWriter writer, MgmtRestClient restClient, CSharpType cs)
+        private void WriteClientCtor(CodeWriter writer, RestClient restClient, CSharpType cs)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name}");
             writer.WriteXmlDocumentationParameter(ClientDiagnosticsVariable, "The handler for diagnostic messaging in the client.");

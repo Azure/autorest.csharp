@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         private readonly OperationGroup _operationGroup;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private RestClientBuilder<LowLevelOutputLibrary> _builder;
+        private RestClientBuilder _builder;
 
         private RestClientMethod[]? _allMethods;
 
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _operationGroup = operationGroup;
             _context = context;
-            _builder = new RestClientBuilder<LowLevelOutputLibrary> (operationGroup, context);
+            _builder = new RestClientBuilder (operationGroup, context);
 
             Parameters = _builder.GetOrderedParameters ();
             ClientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, context);
@@ -77,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public IReadOnlyCollection<Parameter> GetConstructorParameters(CSharpType credentialType)
         {
-            return RestClientBuilder<LowLevelOutputLibrary>.GetConstructorParameters(Parameters, credentialType, true);
+            return RestClientBuilder.GetConstructorParameters(Parameters, credentialType, true);
         }
     }
 }
