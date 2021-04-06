@@ -49,79 +49,7 @@ namespace OperationGroupMappings
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Put;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/resourceGroups/", false);
-            uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets", false);
-            uri.AppendQuery("api-version", apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        /// <summary> Lists all availability sets in a resource group. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<AvailabilitySetListResult>> ListAsync(string resourceGroupName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-
-            using var message = CreateListRequest(resourceGroupName);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        AvailabilitySetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Lists all availability sets in a resource group. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<AvailabilitySetListResult> List(string resourceGroupName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-
-            using var message = CreateListRequest(resourceGroupName);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        AvailabilitySetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateListAvailableSizesRequest(string resourceGroupName, string availabilitySetName)
+        internal HttpMessage CreateGetRequest(string resourceGroupName, string availabilitySetName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -134,19 +62,18 @@ namespace OperationGroupMappings
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
             uri.AppendPath(availabilitySetName, true);
-            uri.AppendPath("/vmSizes", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        /// <summary> Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set. </summary>
+        /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public async Task<Response<ComputeOperationListResult>> ListAvailableSizesAsync(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailabilitySetData>> GetAsync(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -157,15 +84,15 @@ namespace OperationGroupMappings
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var message = CreateListAvailableSizesRequest(resourceGroupName, availabilitySetName);
+            using var message = CreateGetRequest(resourceGroupName, availabilitySetName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        ComputeOperationListResult value = default;
+                        AvailabilitySetData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ComputeOperationListResult.DeserializeComputeOperationListResult(document.RootElement);
+                        value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -173,12 +100,12 @@ namespace OperationGroupMappings
             }
         }
 
-        /// <summary> Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set. </summary>
+        /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public Response<ComputeOperationListResult> ListAvailableSizes(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        public Response<AvailabilitySetData> Get(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -189,92 +116,15 @@ namespace OperationGroupMappings
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var message = CreateListAvailableSizesRequest(resourceGroupName, availabilitySetName);
+            using var message = CreateGetRequest(resourceGroupName, availabilitySetName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        ComputeOperationListResult value = default;
+                        AvailabilitySetData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ComputeOperationListResult.DeserializeComputeOperationListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Get;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(endpoint);
-            uri.AppendRawNextLink(nextLink, false);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        /// <summary> Lists all availability sets in a resource group. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public async Task<Response<AvailabilitySetListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        AvailabilitySetListResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Lists all availability sets in a resource group. </summary>
-        /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="resourceGroupName"/> is null. </exception>
-        public Response<AvailabilitySetListResult> ListNextPage(string nextLink, string resourceGroupName, CancellationToken cancellationToken = default)
-        {
-            if (nextLink == null)
-            {
-                throw new ArgumentNullException(nameof(nextLink));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-
-            using var message = CreateListNextPageRequest(nextLink, resourceGroupName);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        AvailabilitySetListResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AvailabilitySetListResult.DeserializeAvailabilitySetListResult(document.RootElement);
+                        value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
