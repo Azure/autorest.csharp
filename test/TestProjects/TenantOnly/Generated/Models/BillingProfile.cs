@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace TenantOnly
 {
     /// <summary> A billing profile. </summary>
-    public partial class BillingProfile : Resource
+    public partial class BillingProfile : Azure.ResourceManager.Core.Resource
     {
         /// <summary> Initializes a new instance of BillingProfile. </summary>
         public BillingProfile()
@@ -16,13 +18,10 @@ namespace TenantOnly
         }
 
         /// <summary> Initializes a new instance of BillingProfile. </summary>
-        /// <param name="id"> Resource Id. </param>
-        /// <param name="name"> Resource name. </param>
-        /// <param name="type"> Resource type. </param>
         /// <param name="idPropertiesId"> Resource Id. </param>
         /// <param name="namePropertiesName"> Resource name. </param>
         /// <param name="typePropertiesType"> Resource type. </param>
-        internal BillingProfile(string id, string name, string type, string idPropertiesId, string namePropertiesName, string typePropertiesType) : base(id, name, type)
+        internal BillingProfile(string idPropertiesId, string namePropertiesName, string typePropertiesType)
         {
             IdPropertiesId = idPropertiesId;
             NamePropertiesName = namePropertiesName;

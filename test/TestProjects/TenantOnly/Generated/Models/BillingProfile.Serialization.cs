@@ -26,9 +26,6 @@ namespace TenantOnly
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
-            Optional<string> id0 = default;
-            Optional<string> name0 = default;
-            Optional<string> type0 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("properties"))
@@ -42,24 +39,24 @@ namespace TenantOnly
                     {
                         if (property0.NameEquals("id"))
                         {
-                            id0 = property0.Value.GetString();
+                            id = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("name"))
                         {
-                            name0 = property0.Value.GetString();
+                            name = property0.Value.GetString();
                             continue;
                         }
                         if (property0.NameEquals("type"))
                         {
-                            type0 = property0.Value.GetString();
+                            type = property0.Value.GetString();
                             continue;
                         }
                     }
                     continue;
                 }
             }
-            return new BillingProfile(id.Value, name.Value, type.Value, id0.Value, name0.Value, type0.Value);
+            return new BillingProfile(id.Value, name.Value, type.Value);
         }
     }
 }
