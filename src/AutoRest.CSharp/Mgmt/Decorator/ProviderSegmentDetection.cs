@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
             currentToken.NoPredecessor = offset == 0;
             do
             {
+                currentToken.IndexFoundAt = offset;
                 offset += ProviderSegment.Providers.Length;
                 nextReference = path.IndexOf('{', offset);
                 currentToken.HasReferenceSuccessor = nextReference > -1;
