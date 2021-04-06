@@ -228,7 +228,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var schema in _allSchemas)
             {
-                if (_context.Configuration.AzureArm && (_operationGroups.ContainsKey(schema.Name) || _operationGroups.ContainsKey(schema.NameOverride!)))
+                if (_operationGroups.ContainsKey(schema.Name) || _operationGroups.ContainsKey(schema.NameOverride!))
                 {
                     continue;
                 }
@@ -242,14 +242,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var resourceModels = new Dictionary<Schema, TypeProvider>();
 
-            if (_context.Configuration.AzureArm)
+            foreach (var schema in _allSchemas)
             {
-                foreach (var schema in _allSchemas)
+                if (_operationGroups.ContainsKey(schema.Name) || _operationGroups.ContainsKey(schema.NameOverride!))
                 {
-                    if (_operationGroups.ContainsKey(schema.Name) || _operationGroups.ContainsKey(schema.NameOverride!))
-                    {
-                        resourceModels.Add(schema, BuildResourceModel(schema));
-                    }
+                    resourceModels.Add(schema, BuildResourceModel(schema));
                 }
             }
             return resourceModels;
