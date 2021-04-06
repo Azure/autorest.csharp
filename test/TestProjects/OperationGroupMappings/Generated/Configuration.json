@@ -1,1 +1,30 @@
-{"OutputFolder":".","Namespace":"OperationGroupMappings","LibraryName":null,"SharedSourceFolders":["..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared","..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"],"AzureArm":true,"PublicClients":true,"ModelNamespace":false,"HeadAsBoolean":true,"SkipCSProjPackageReference":true,"LowLevelClient":false,"CredentialTypes":[],"CredentialScopes":[],"CredentialHeaderName":"api-key","OperationGroupToResourceType":{"Operations":"Microsoft.Compute/operations"},"OperationGroupToResource":{"Operations":"RestApi","AvailabilitySets":"AvailabilitySet"},"ModelToResource":{"ComputeOperationValue":"RestApi"},"ModelRename":{},"OperationGroupToParent":{}}
+{
+  "OutputFolder": ".",
+  "Namespace": "OperationGroupMappings",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "AzureArm": true,
+  "PublicClients": true,
+  "ModelNamespace": false,
+  "HeadAsBoolean": true,
+  "SkipCSProjPackageReference": true,
+  "LowLevelClient": false,
+  "CredentialTypes": [],
+  "CredentialScopes": [],
+  "CredentialHeaderName": "api-key",
+  "OperationGroupToResourceType": {
+    "Operations": "Microsoft.Compute/operations"
+  },
+  "OperationGroupToResource": {
+    "Operations": "RestApi",
+    "AvailabilitySets": "AvailabilitySet"
+  },
+  "ModelRename": {},
+  "OperationGroupToParent": {},
+  "ModelToResource": {
+    "ComputeOperationValue": "RestApi"
+  }
+}
