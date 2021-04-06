@@ -136,19 +136,32 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                var operations = _operationGroups[schema.Name];
-                foreach (var operation in operations)
+                //TODO: find a way to not need to duplicate this
+                List<OperationGroup>? operations = null;
+                if (!_operationGroups.TryGetValue(schema.Name, out operations))
                 {
-                    if (!_resourceData.ContainsKey(operation.Resource))
+                    _operationGroups.TryGetValue(schema.NameOverride!, out operations);
+                }
+
+                if (operations != null)
+                {
+                    foreach (var operation in operations)
                     {
-                        var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
-                        CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
-                        if (!(inherits is null))
+                        if (!_resourceData.ContainsKey(operation.Resource))
                         {
-                            resourceData.OverrideInherits(inherits);
+                            var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
+                            CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
+                            if (!(inherits is null))
+                            {
+                                resourceData.OverrideInherits(inherits);
+                            }
+                            _resourceData.Add(operation.Resource, resourceData);
                         }
-                        _resourceData.Add(operation.Resource, resourceData);
                     }
+                }
+                else
+                {
+                    throw new Exception($"Neither {schema.Name} nor {schema.NameOverride} were found in the operations dictionary");
                 }
             }
 
@@ -166,13 +179,25 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                var operations = _operationGroups[schema.Name];
-                foreach (var operation in operations)
+                List<OperationGroup>? operations = null;
+                if (!_operationGroups.TryGetValue(schema.Name, out operations))
                 {
-                    if (!_armResource.ContainsKey(operation.Resource))
+                    _operationGroups.TryGetValue(schema.NameOverride!, out operations);
+                }
+
+                if (operations != null)
+                {
+                    foreach (var operation in operations)
                     {
-                        _armResource.Add(operation.Resource, new ArmResource(operation.Resource, _context));
+                        if (!_armResource.ContainsKey(operation.Resource))
+                        {
+                            _armResource.Add(operation.Resource, new ArmResource(operation.Resource, _context));
+                        }
                     }
+                }
+                else
+                {
+                    throw new Exception($"Neither {schema.Name} nor {schema.NameOverride} were found in the operations dictionary");
                 }
             }
 
@@ -203,7 +228,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var schema in _allSchemas)
             {
-                if (_operationGroups.ContainsKey(schema.Name))
+                if (_context.Configuration.AzureArm && (_operationGroups.ContainsKey(schema.Name) || _operationGroups.ContainsKey(schema.NameOverride!)))
                 {
                     continue;
                 }
@@ -221,7 +246,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var schema in _allSchemas)
                 {
-                    if (_operationGroups.ContainsKey(schema.Name))
+                    if (_operationGroups.ContainsKey(schema.Name) || _operationGroups.ContainsKey(schema.NameOverride!))
                     {
                         resourceModels.Add(schema, BuildResourceModel(schema));
                     }
@@ -268,7 +293,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
                 string? nameOverride;
-                if (_context.Configuration.ResourceRename.TryGetValue(operationsGroup.Resource, out nameOverride))
+                if (_context.Configuration.ModelRename.TryGetValue(operationsGroup.Resource, out nameOverride))
                 {
                     operationsGroup.Resource = nameOverride;
                 }
@@ -279,10 +304,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             foreach (var schema in _allSchemas)
             {
-                string? resourceName;
-                if (_context.Configuration.ResourceRename.TryGetValue(schema.Name, out resourceName))
+                string? name;
+                if (_context.Configuration.ModelToResource.TryGetValue(schema.Name, out name))
                 {
-                    schema.NameOverride = resourceName;
+                    schema.NameOverride = name;
+                }
+                else if (_context.Configuration.ModelRename.TryGetValue(schema.Name, out name))
+                {
+                    schema.NameOverride = name;
+                }
+                else
+                {
+                    schema.NameOverride = schema.Name;
                 }
             }
         }

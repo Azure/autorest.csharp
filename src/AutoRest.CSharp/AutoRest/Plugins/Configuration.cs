@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<string[]?>("credential-types").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("credential-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string?>("credential-header-name").GetAwaiter().GetResult() ?? "api-key",
-                autoRest.GetValue<bool?>("low-level-client").GetAwaiter().GetResult() ?? false, 
+                autoRest.GetValue<bool?>("low-level-client").GetAwaiter().GetResult() ?? false,
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("model-to-resource").GetAwaiter().GetResult(),
