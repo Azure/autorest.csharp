@@ -34,6 +34,11 @@ model-rename:
 model-to-resource:
    ComputeOperationValue : RestApi
    RollingUpgradeStatusInfo: VirtualMachineScaleSetRollingUpgrade
+operation-group-to-parent:
+   LogAnalytics: subscriptions
+   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
+   VirtualMachineImages: Microsoft.Compute/locations
+   VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
 modelerfour:
   lenient-model-deduplication: true
 ```

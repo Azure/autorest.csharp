@@ -48,6 +48,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
+        private static HashSet<string> ResourceTypes = new HashSet<string>
+        {
+            "resourceGroups",
+            "subscriptions",
+            "tenant"
+        };
+
         private Dictionary<Schema, TypeProvider>? _models;
 
         public Dictionary<Schema, TypeProvider> ResourceSchemaMap => _resourceModels ??= BuildResourceModels();
@@ -260,6 +267,17 @@ namespace AutoRest.CSharp.Output.Models.Types
                 operationsGroup.ResourceType = _context.Configuration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
                 operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
                 string? resource;
+                ResourceTypes.Add(operationsGroup.ResourceType);
+                operationsGroup.IsExtensionResource = ExtensionDetection.IsExtension(operationsGroup);
+
+                // TODO better support for extension resources
+                string? parent;
+                if (_context.Configuration.OperationGroupToParent.TryGetValue(operationsGroup.Key, out parent))
+                {
+                    // If overriden, add parent to known types list (trusting user input)
+                    ResourceTypes.Add(parent);
+                }
+                operationsGroup.Parent = parent ?? ParentDetection.GetParent(operationsGroup);
                 operationsGroup.Resource = _context.Configuration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
                 string? nameOverride;
@@ -268,6 +286,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     operationsGroup.Resource = nameOverride;
                 }
             }
+            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes);
         }
 
         private void DecorateSchema()

@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, string[] credentialTypes, string[] credentialScopes, string credentialHeaderName, bool lowLevelClient, JsonElement? operationGroupToResourceType = default, JsonElement? operationGroupToResource = default, JsonElement? modelToResource = default, JsonElement? modelRename = default)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, string[] credentialTypes, string[] credentialScopes, string credentialHeaderName, bool lowLevelClient, JsonElement? operationGroupToResourceType = default, JsonElement? operationGroupToResource = default, JsonElement? modelToResource = default, JsonElement? modelRename = default, JsonElement? operationGroupToParent = default)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -32,6 +32,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupToResource = operationGroupToResource?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
             ModelToResource = modelToResource?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(modelToResource.ToString());
             ModelRename = modelRename?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(modelRename.ToString());
+            OperationGroupToParent = operationGroupToParent?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
         }
 
         public string OutputFolder { get; }
@@ -54,6 +55,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyDictionary<string, string> ModelToResource { get; }
         public IReadOnlyDictionary<string, string> ModelRename { get; }
         public bool LowLevelClient { get; }
+        public IReadOnlyDictionary<string, string> OperationGroupToParent { get; }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -75,7 +77,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("model-to-resource").GetAwaiter().GetResult(),
-                autoRest.GetValue<JsonElement?>("model-rename").GetAwaiter().GetResult()
+                autoRest.GetValue<JsonElement?>("model-rename").GetAwaiter().GetResult(),
+                autoRest.GetValue<JsonElement?>("operation-group-to-parent").GetAwaiter().GetResult()
             );
         }
 

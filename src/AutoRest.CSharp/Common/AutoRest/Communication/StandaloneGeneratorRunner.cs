@@ -102,6 +102,13 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     }
                     writer.WriteEndObject();
 
+                    writer.WriteStartObject(nameof(Configuration.OperationGroupToParent));
+                    foreach (var keyval in configuration.OperationGroupToParent)
+                    {
+                        writer.WriteString(keyval.Key, keyval.Value);
+                    }
+                    writer.WriteEndObject();
+
                     writer.WriteEndObject();
                 }
 
@@ -114,7 +121,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder);
         }
 
-        private static Configuration LoadConfiguration(string basePath, string json)
+        internal static Configuration LoadConfiguration(string basePath, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
@@ -155,7 +162,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.OperationGroupToResourceType)),
                 root.GetProperty(nameof(Configuration.OperationGroupToResource)),
                 root.GetProperty(nameof(Configuration.ModelToResource)),
-                root.GetProperty(nameof(Configuration.ModelRename))
+                root.GetProperty(nameof(Configuration.ModelRename)),
+                root.GetProperty(nameof(Configuration.OperationGroupToParent))
             );
         }
     }

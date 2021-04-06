@@ -7,33 +7,29 @@ using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Output.Models.Type.Decorate
 {
-    internal static class TenantDetection
+    internal static class ExtensionDetection
     {
-        internal static readonly string TenantName = "tenant";
-        public static bool IsTenantOnly(OperationGroup operationGroup)
+        public static bool IsExtension(OperationGroup operationGroup)
         {
-            bool foundTenant = false;
             foreach (var keyValue in operationGroup.OperationHttpMethodMapping)
             {
                 foreach (var httpRequest in keyValue.Value)
                 {
+                    bool providerBefore = false;
                     var providerSegmentsList = ((HttpRequest?)httpRequest?.Protocol?.Http)?.ProviderSegments;
                     for (int i = 0; i < providerSegmentsList?.Count; i++)
                     {
                         var segment = providerSegmentsList[i];
-                        if (segment.TokenValue.Equals(operationGroup.ResourceType) && segment.IsFullProvider)
+                        var areEqual = segment.TokenValue.Equals(operationGroup.ResourceType);
+                        if (areEqual && segment.IsFullProvider && (segment.HadSpecialReference || providerBefore))
                         {
-                            foundTenant = foundTenant || segment.NoPredecessor;
-                            if (!segment.NoPredecessor)
-                            {
-                                return false;
-                            }
-                            break;
+                            return true;
                         }
+                        providerBefore = providerBefore || (segment.HasReferenceSuccessor && !areEqual);
                     }
                 }
             }
-            return foundTenant;
+            return false;
         }
     }
 }

@@ -1,0 +1,207 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "ComputeManagementClient",
+        "description": "The Compute Management Client.",
+        "version": "2020-06-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "paths": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{sshPublicKeyName}": {
+            "put": {
+                "tags": [
+                    "SshPublicKeys"
+                ],
+                "operationId": "SshPublicKeys_Create",
+                "description": "Creates a new SSH public key resource.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "sshPublicKeyName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the SSH public key."
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SshPublicKeyResource"
+                        },
+                        "description": "Parameters supplied to create the SSH public key."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SshPublicKeyResource"
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/SshPublicKeyResource"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Create a new SSH public key resource.": {
+                        "$ref": "./examples/CreateAnSshPublicKey.json"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "SshPublicKeys"
+                ],
+                "operationId": "SshPublicKeys_Delete",
+                "description": "Delete an SSH public key.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "sshPublicKeyName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the SSH public key."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "SshPublicKeys"
+                ],
+                "operationId": "SshPublicKeys_Get",
+                "description": "Retrieves information about an SSH public key.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "sshPublicKeyName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the SSH public key."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SshPublicKeyResource"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get an ssh public key.": {
+                        "$ref": "./examples/GetAnSshPublicKey.json"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "SshPublicKeyResource": {
+            "properties": {
+                "path": {
+                    "type": "string",
+                    "description": "Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys"
+                },
+                "keyData": {
+                    "type": "string",
+                    "description": "SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
+                }
+            },
+            "description": "Contains information about SSH certificate public key and the path on the Linux VM where the public key is placed."
+        }
+    },
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+        },
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
+        }
+    }
+}

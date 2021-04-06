@@ -30,5 +30,10 @@ operation-group-to-resource:
 model-rename:
    BlobServiceProperties: BlobService
    FileServiceProperties: FileService
+operation-group-to-parent:
+    BlobContainers: Microsoft.Storage/storageAccounts
+    FileShares: Microsoft.Storage/storageAccounts
+    Usages: subscriptions
+    StorageAccounts: any
 ```
 
