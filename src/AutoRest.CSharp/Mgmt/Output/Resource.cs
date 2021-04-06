@@ -4,11 +4,11 @@
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ArmResource : TypeProvider
+    internal class Resource : TypeProvider
     {
-        public ArmResource(string resourceName, BuildContext context)
+        public Resource(string resourceName, BuildContext context)
             : base(context)
         {
             DefaultName = resourceName;

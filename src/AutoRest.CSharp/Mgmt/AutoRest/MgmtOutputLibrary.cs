@@ -6,9 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Models.Type.Decorate;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Types;
 
-namespace AutoRest.CSharp.Output.Models.Types
+#nullable enable
+
+namespace AutoRest.CSharp.Mgmt.AutoRest
 {
     internal class MgmtOutputLibrary : OutputLibrary
     {
@@ -19,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<string, ResourceData>? _resourceData;
-        private Dictionary<string, ArmResource>? _armResource;
+        private Dictionary<string, Resource>? _armResource;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
@@ -38,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DecorateSchema();
         }
 
-        public IEnumerable<ArmResource> ArmResource => EnsureArmResource().Values;
+        public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
 
         public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
@@ -141,14 +145,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _resourceData;
         }
 
-        private Dictionary<string, ArmResource> EnsureArmResource()
+        private Dictionary<string, Resource> EnsureArmResource()
         {
             if (_armResource != null)
             {
                 return _armResource;
             }
 
-            _armResource = new Dictionary<string, ArmResource>();
+            _armResource = new Dictionary<string, Resource>();
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
@@ -157,7 +161,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (!_armResource.ContainsKey(operation.Resource))
                     {
-                        _armResource.Add(operation.Resource, new ArmResource(operation.Resource, _context));
+                        _armResource.Add(operation.Resource, new Resource(operation.Resource, _context));
                     }
                 }
             }

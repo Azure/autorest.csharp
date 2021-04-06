@@ -7,8 +7,11 @@ using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Types;
 
-namespace AutoRest.CSharp.Output.Models.Types
+#nullable enable
+
+namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtObjectType : ObjectType
     {
