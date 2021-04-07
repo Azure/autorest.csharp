@@ -1,1 +1,27 @@
-{"OutputFolder":".","Namespace":"TenantOnly","LibraryName":null,"SharedSourceFolders":["..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared","..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"],"AzureArm":true,"PublicClients":true,"ModelNamespace":false,"HeadAsBoolean":true,"SkipCSProjPackageReference":true,"LowLevelClient":false,"CredentialTypes":[],"CredentialScopes":[],"CredentialHeaderName":"api-key","OperationGroupToResourceType":{"Agreements":"Microsoft.Billing/billingAccounts/agreements"},"OperationGroupToResource":{"BillingAccounts":"BillingAccount","Agreements":"Agreement"},"ResourceRename":{},"OperationGroupToParent":{}}
+{
+  "OutputFolder": ".",
+  "Namespace": "TenantOnly",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "AzureArm": true,
+  "PublicClients": true,
+  "ModelNamespace": false,
+  "HeadAsBoolean": true,
+  "SkipCSProjPackageReference": true,
+  "LowLevelClient": false,
+  "CredentialTypes": [],
+  "CredentialScopes": [],
+  "CredentialHeaderName": "api-key",
+  "OperationGroupToResourceType": {
+    "Agreements": "Microsoft.Billing/billingAccounts/agreements"
+  },
+  "OperationGroupToResource": {
+    "BillingAccounts": "BillingAccount",
+    "Agreements": "Agreement"
+  },
+  "ResourceRename": {},
+  "OperationGroupToParent": {}
+}

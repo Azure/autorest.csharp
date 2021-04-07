@@ -106,6 +106,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string PipelineField = "Pipeline";
         private const string KeyCredentialVariable = "credential";
         private const string OptionsVariable = "options";
+        private const string APIVersionField = "apiVersion";
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
         private const string ScopesConstant = "AuthorizationScopes";
 
@@ -114,6 +115,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
+            writer.WriteXmlDocumentationSummary("The HTTP pipeline for sending and receiving REST requests and responses.");
             writer.Append($"protected {typeof(HttpPipeline)} {PipelineField}");
             writer.AppendRaw("{ get; }\n");
 
@@ -137,6 +139,9 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.Line($"private {clientParameter.Type} {clientParameter.Name};");
             }
+
+            writer.Line($"private readonly string {APIVersionField};");
+
             writer.Line();
         }
 
@@ -182,7 +187,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
 
             var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
-            writer.Append($"internal {client.Type.Name:D}(");
+            writer.Append($"public {client.Type.Name:D}(");
             foreach (Parameter parameter in ctorParams)
             {
                 writer.WriteParameter(parameter);
@@ -209,6 +214,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Line($"this.{clientParameter.Name} = {clientParameter.Name};");
                 }
+                writer.Line($"this.{APIVersionField} = {OptionsVariable}.Version;");
             }
             writer.Line();
         }
