@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     for (int i = 0; i < providerSegmentsList?.Count; i++)
                     {
                         var segment = providerSegmentsList[i];
-                        if (segment.TokenValue.Equals(operationGroup.ResourceType) && segment.IsFullProvider)
+                        if (segment.TokenValue.Trim('/').Equals(operationGroup.ResourceType) && segment.IsFullProvider)
                         {
                             foundTenant = foundTenant || segment.NoPredecessor;
                             if (!segment.NoPredecessor)

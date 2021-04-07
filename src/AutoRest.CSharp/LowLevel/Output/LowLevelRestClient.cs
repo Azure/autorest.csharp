@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models
             _context = context;
             _builder = new RestClientBuilder (operationGroup, context);
 
-            Parameters = _builder.GetOrderedParameters ();
+            Parameters = _builder.GetOrderedParameters ().Where (p => !p.IsApiVersionParameter).ToArray();
             ClientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, context);
             DefaultName = ClientPrefix + ClientSuffix;
         }
@@ -48,13 +48,23 @@ namespace AutoRest.CSharp.Output.Models
                 ServiceRequest serviceRequest = operation.Requests.FirstOrDefault(r => r.Protocol.Http is HttpRequest);
                 if (serviceRequest != null)
                 {
+                    // Prepare our parameter list. If there were any parameters that should be passed in the body of the request,
+                    // we want to generate a single parameter of type `RequestContent` named `requestBody` at the start of the
+                    // parameter list instead of creating a seperate parameter for each of them.
+
                     IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where (FilterServiceParamaters);
                     RestClientMethod method = _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null, true);
-                    // Inject the body parameter
                     List<Parameter> parameters = method.Parameters.ToList();
-                    Parameter bodyParam = new Parameter ("requestBody", "The request body", typeof(Azure.Core.RequestContent), null, true);
-                    parameters.Insert (0, bodyParam);
-                    RequestBody body = new RequestContentRequestBody (bodyParam);
+                    RequestBody? body = null;
+
+                    if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body))
+                    {
+                        // The service request had some parameters for the body, so create a parameter for the body and inject it into the list of parameters.
+                        Parameter bodyParam = new Parameter("requestBody", "The request body", typeof(Azure.Core.RequestContent), null, true);
+                        parameters.Insert(0, bodyParam);
+                        body = new RequestContentRequestBody(bodyParam);
+                    }
+
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, method.Request.Headers, body);
                     yield return new RestClientMethod (method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.IsVisible);
                 }

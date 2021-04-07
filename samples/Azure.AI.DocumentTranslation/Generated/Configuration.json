@@ -1,1 +1,24 @@
-{"OutputFolder":".","Namespace":"Azure.AI.DocumentTranslation","LibraryName":null,"SharedSourceFolders":["..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared","..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"],"AzureArm":false,"PublicClients":true,"ModelNamespace":true,"HeadAsBoolean":false,"SkipCSProjPackageReference":true,"LowLevelClient":true,"CredentialTypes":["AzureKeyCredential"],"CredentialScopes":[],"CredentialHeaderName":"Ocp-Apim-Subscription-Key","OperationGroupToResourceType":{},"OperationGroupToResource":{},"ResourceRename":{},"OperationGroupToParent":{}}
+{
+  "OutputFolder": ".",
+  "Namespace": "Azure.AI.DocumentTranslation",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "AzureArm": false,
+  "PublicClients": true,
+  "ModelNamespace": true,
+  "HeadAsBoolean": false,
+  "SkipCSProjPackageReference": true,
+  "LowLevelClient": true,
+  "CredentialTypes": [
+    "AzureKeyCredential"
+  ],
+  "CredentialScopes": [],
+  "CredentialHeaderName": "Ocp-Apim-Subscription-Key",
+  "OperationGroupToResourceType": {},
+  "OperationGroupToResource": {},
+  "ResourceRename": {},
+  "OperationGroupToParent": {}
+}

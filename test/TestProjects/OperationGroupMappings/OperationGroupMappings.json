@@ -1,325 +1,107 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "OperationGroupsMapping",
-    "description": "OperationGroupsMappin Client.",
-    "version": "2020-06-01"
-  },
-  "host": "management.azure.com",
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "security": [
-    {
-      "azure_auth": [
-        "user_impersonation"
-      ]
-    }
-  ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
+    "swagger": "2.0",
+    "info": {
+        "title": "OperationGroupsMapping",
+        "description": "OperationGroupsMappin Client.",
+        "version": "2020-06-01"
+    },
+    "host": "management.azure.com",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "security": [
+        {
+            "azure_auth": [
+                "user_impersonation"
+            ]
+        }
+    ],
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "flow": "implicit",
+            "description": "Azure Active Directory OAuth2 Flow",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
     "paths": {
-    "/providers/Microsoft.Compute/operations": {
-      "get": {
-        "tags": [
-          "ComputeOperations"
-        ],
-        "operationId": "Operations_List",
-        "description": "Gets a list of compute operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ComputeOperationListResult"
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": {
+            "get": {
+                "tags": [
+                    "AvailabilitySets"
+                ],
+                "operationId": "AvailabilitySets_Get",
+                "description": "Retrieves information about an availability set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "availabilitySetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the availability set."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AvailabilitySet"
+                        }
+                    }
+                }
             }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
-      }
     },
-   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets": {
-      "put": {
-        "tags": [
-          "AvailabilitySets"
-        ],
-        "operationId": "AvailabilitySets_List",
-        "description": "Lists all availability sets in a resource group.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/AvailabilitySetListResult"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+    "definitions": {
+        "AvailabilitySet": {
+            "properties": {
+                "foo": {
+                    "type": "string"
+                },
+                "sku": {
+                    "type": "string",
+                    "description": "sku"
+                }
+            },
+            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
         }
-      }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/vmSizes": {
-      "get": {
-        "tags": [
-          "AvailabilitySets"
-        ],
-        "operationId": "AvailabilitySets_ListAvailableSizes",
-        "description": "Lists all available virtual machine sizes that can be used to create a new virtual machine in an existing availability set.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
+    "parameters": {
+        "SubscriptionIdParameter": {
+            "name": "subscriptionId",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "availabilitySetName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the availability set."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ComputeOperationListResult"
-            }
-          }
+            "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
+        "ApiVersionParameter": {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Client Api Version."
         }
-      }
     }
-  },
-   "definitions": {
-    "ComputeOperationListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ComputeOperationValue"
-          },
-          "description": "The list of compute operations"
-        }
-      },
-      "description": "The List Compute Operation operation response."
-    },
-    "ComputeOperationValue": {
-      "properties": {
-        "origin": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The origin of the compute operation."
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the compute operation."
-        },
-        "display": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ComputeOperationValueDisplay"
-        }
-      },
-      "description": "Describes the properties of a Compute Operation value."
-    },
-    "ComputeOperationValueDisplay": {
-      "properties": {
-        "operation": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the compute operation."
-        },
-        "resource": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the resource the operation applies to."
-        },
-        "description": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The description of the operation."
-        },
-        "provider": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource provider for the operation."
-        }
-      },
-      "description": "Describes the properties of a Compute Operation Value Display."
-    },
-    "InstanceViewStatus": {
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The status code."
-        },
-        "level": {
-          "type": "string",
-          "description": "The level code.",
-          "enum": [
-            "Info",
-            "Warning",
-            "Error"
-          ],
-          "x-ms-enum": {
-            "name": "StatusLevelTypes",
-            "modelAsString": false
-          }
-        },
-        "displayStatus": {
-          "type": "string",
-          "description": "The short localizable label for the status."
-        },
-        "message": {
-          "type": "string",
-          "description": "The detailed status message, including for alerts and error messages."
-        },
-        "time": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time of the status."
-        }
-      },
-      "description": "Instance view status."
-    },
-     "AvailabilitySetProperties": {
-      "properties": {
-        "platformUpdateDomainCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Update Domain count."
-        },
-        "platformFaultDomainCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Fault Domain count."
-        },
-        "virtualMachines": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubResource"
-          },
-          "description": "A list of references to all virtual machines in the availability set."
-        },
-        "proximityPlacementGroup": {
-          "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the proximity placement group that the availability set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
-        },
-        "statuses": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstanceViewStatus"
-          },
-          "description": "The resource status information."
-        }
-      },
-      "description": "The instance view of a resource."
-    },
-    "AvailabilitySet": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AvailabilitySetProperties"
-        },
-        "sku": {
-          "type": "string",
-          "description": "sku"
-        }
-      },
-      "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
-    },
-    "AvailabilitySetListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AvailabilitySet"
-          },
-          "description": "The list of availability sets"
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List Availability Set operation response."
-    },
-          "SubResource": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Resource Id"
-          }
-        },
-        "x-ms-azure-resource": true
-      }
-  },
-      "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    }
-  }
 }
