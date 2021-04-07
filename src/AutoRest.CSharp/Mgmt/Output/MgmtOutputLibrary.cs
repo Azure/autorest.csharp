@@ -56,6 +56,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
+        public ResourceGroupExtensions ResourceGroupExtensions => new ResourceGroupExtensions(_context);
+
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
             if (_restClients != null)

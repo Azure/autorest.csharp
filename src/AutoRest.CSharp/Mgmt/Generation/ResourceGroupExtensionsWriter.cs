@@ -11,11 +11,11 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ResourceGroupExtensionsWriter
     {
-        public void WriteExtension(CodeWriter writer, IEnumerable<ArmResource> armResources, IEnumerable<ResourceOperation> resourceOperations, IEnumerable<ResourceContainer> resourceContainers )
+        public void WriteExtension(CodeWriter writer, ResourceGroupExtensions resourceGroupExtensions, IEnumerable<ArmResource> armResources)
         {
-            var resourceGroupExtensions = new ResourceGroupExtensions();
             var cs = resourceGroupExtensions.Type;
             var @namespace = cs.Namespace;
+            writer.UseNamespace(@"Azure.ResourceManager.Core");
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(resourceGroupExtensions.Description);
@@ -23,30 +23,23 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (var item in armResources)
                     {
-                        writer.LineRaw($"#region {item.Type.Name}");
-                        WriteGetOperations(writer, item);
+                        writer.Line($"#region {item.Type.Name:D}s");
+                        WriteGetContainers(writer, item);
+                        writer.LineRaw("#endregion");
+                        writer.Line();
                     }
-                    
                 }
             }
         }
 
-        private void WriteGetOperations(CodeWriter writer, ArmResource armResource)
+        private void WriteGetContainers(CodeWriter writer, ArmResource armResource)
         {
-            writer.WriteXmlDocumentationSummary($"Gets an object representing the operations that can be performed over a specific {armResource.Type.Name}");
+            writer.WriteXmlDocumentationSummary($"Gets an object representing a {armResource.Type.Name:D}Container along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter("resourceGroup", "The <see cref=\"ResourceGroupOperations\" /> instance the method will execute against.");
-            //writer.WriteXmlDocumentationParameter(item.Type.)
-            //writer.WriteXmlDocumentationRequiredParametersException()
-            using (writer.Scope($"public static {armResource.Type.Name:D}(this ResourceGroupOperations resourceGroup, string vmName)"))
+            writer.WriteXmlDocumentation("return", $"Returns an <see cref=\"{armResource.Type.Name:D}Container\" /> object.");
+            using (writer.Scope($"public static {armResource.Type.Name:D}Container Get{armResource.Type.Name:D}s (this ResourceGroupOperations resourceGroup)"))
             {
-            }
-        }
-
-        private void WriteGetContainers(CodeWriter writer, ResourceGroupExtensions resourceOperation)
-        {
-            writer.WriteXmlDocumentationSummary($"Gets an object representing {resourceOperation.Type.Name} for mocking.");
-            using (writer.Scope($"public static {resourceOperation.Type.Name:D}()"))
-            {
+                writer.Line($"return new {armResource.Type.Name:D}Container(resourceGroup);");
             }
         }
     }

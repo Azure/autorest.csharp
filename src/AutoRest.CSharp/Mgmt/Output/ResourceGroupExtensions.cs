@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using AutoRest.CSharp.Input;
@@ -9,27 +12,17 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class ResourceGroupExtensions : TypeProvider
     {
-        protected OperationGroup _operationGroup;
-
-        public ResourceGroupExtensions(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        public ResourceGroupExtensions(BuildContext<MgmtOutputLibrary> context)
             : base(context)
         {
             DefaultName = "ResourceGroupExtensions";
-            _operationGroup = operationGroup;
+            Description = "A class to add extension methods to ResourceGroup.";
         }
 
         protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility { get; } = "public";
 
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, ""));
-
-        protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
-        {
-            StringBuilder summary = new StringBuilder();
-            return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
-                $"A class to add extension methods to ResourceGroup." :
-                BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
-        }
+        public string Description { get; }
     }
 }
