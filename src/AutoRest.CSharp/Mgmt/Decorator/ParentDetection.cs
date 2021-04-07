@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
                 {
                     return string.Empty;
                 }
-                return lastClosedBrace > -1 ? path.Substring(lastClosedBrace + 1, lastSlash - lastClosedBrace).Trim('/') : path.Substring(lastClosedBrace + 1, lastSlash).Trim('/');
+                return lastClosedBrace > -1 ? path.Substring(lastClosedBrace + 1, lastSlash - lastClosedBrace) : path.Substring(lastClosedBrace + 1, lastSlash);
 
             }
             //case 2:
