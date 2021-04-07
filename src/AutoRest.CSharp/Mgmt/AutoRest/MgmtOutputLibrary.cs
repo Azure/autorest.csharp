@@ -10,8 +10,6 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
-#nullable enable
-
 namespace AutoRest.CSharp.Mgmt.AutoRest
 {
     internal class MgmtOutputLibrary : OutputLibrary

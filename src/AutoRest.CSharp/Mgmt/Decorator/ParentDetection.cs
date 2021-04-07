@@ -7,8 +7,6 @@ using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 
-#nullable enable
-
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ParentDetection

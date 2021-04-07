@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
 
-#nullable enable
-
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class SchemaDetection

@@ -3,8 +3,6 @@
 
 using AutoRest.CSharp.Input;
 
-#nullable enable
-
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ExtensionDetection

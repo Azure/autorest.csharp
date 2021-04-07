@@ -9,8 +9,6 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Models.Types;
 
-#nullable enable
-
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTarget

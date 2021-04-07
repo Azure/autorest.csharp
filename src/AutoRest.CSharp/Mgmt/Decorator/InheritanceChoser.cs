@@ -10,8 +10,6 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
 
-#nullable enable
-
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class InheritanceChoser

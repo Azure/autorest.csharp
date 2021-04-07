@@ -7,8 +7,6 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 
-#nullable enable
-
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceOperation : TypeProvider
