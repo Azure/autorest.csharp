@@ -12,6 +12,10 @@
             "commandName": "Project",
             "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\Generated"
         },
+        "Azure.AI.DocumentTranslation": {
+            "commandName": "Project",
+            "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.DocumentTranslation\\Generated"
+        },
         "Azure.AI.FormRecognizer": {
             "commandName": "Project",
             "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Generated"
@@ -180,6 +184,10 @@
             "commandName": "Project",
             "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\media_types\\Generated"
         },
+        "MgmtParent": {
+            "commandName": "Project",
+            "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtParent\\Generated"
+        },
         "model-flattening": {
             "commandName": "Project",
             "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\model-flattening\\Generated"
@@ -227,6 +235,10 @@
         "required-optional": {
             "commandName": "Project",
             "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\required-optional\\Generated"
+        },
+        "ResourceRename": {
+            "commandName": "Project",
+            "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ResourceRename\\Generated"
         },
         "subscriptionId-apiVersion": {
             "commandName": "Project",
