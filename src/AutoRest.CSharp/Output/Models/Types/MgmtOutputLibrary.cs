@@ -138,11 +138,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                     if (!_resourceData.ContainsKey(operation.Resource))
                     {
                         var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
-                        CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
-                        if (!(inherits is null))
-                        {
-                            resourceData.OverrideInherits(inherits);
-                        }
+                        //CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
+                        //if (!(inherits is null))
+                        //{
+                        //    resourceData.OverrideInherits(inherits);
+                        //}
                         _resourceData.Add(operation.Resource, resourceData);
                     }
                 }

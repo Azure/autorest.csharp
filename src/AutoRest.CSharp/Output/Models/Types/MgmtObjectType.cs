@@ -36,11 +36,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
 
-        public void OverrideInherits(CSharpType cSharpType)
-        {
-            _inheritsType = cSharpType;
-            _properties = null;
-        }
+        //public void OverrideInherits(CSharpType cSharpType)
+        //{
+        //    _inheritsType = cSharpType;
+        //    _properties = null;
+        //}
 
         protected override HashSet<string?> GetParentProperties()
         {
@@ -119,7 +119,16 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            inheritedType ??= InheritanceChoser.GetExactMatch(this);
+            var typeToReplace = inheritedType?.Implementation as ObjectType;
+            if (typeToReplace != null)
+            {
+                var match = InheritanceChoser.GetExactMatch((MgmtObjectType)typeToReplace);
+                if (match != null)
+                {
+                    inheritedType = match;
+                }
+            }
+            //inheritedType ??= InheritanceChoser.GetExactMatch(this);
             return inheritedType == null ? InheritanceChoser.GetSupersetMatch(this) : inheritedType;
         }
     }
