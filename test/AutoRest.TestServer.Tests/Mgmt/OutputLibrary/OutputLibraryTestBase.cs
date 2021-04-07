@@ -11,7 +11,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
-namespace AutoRest.TestServer.Tests.Mgmt
+namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
     internal abstract class OutputLibraryTestBase
     {

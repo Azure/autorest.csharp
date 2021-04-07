@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
-namespace AutoRest.TestServer.Tests.Mgmt
+namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
     internal class MgmtParentTests : OutputLibraryTestBase
     {
