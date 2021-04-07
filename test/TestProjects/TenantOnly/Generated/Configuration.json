@@ -16,17 +16,13 @@
   "CredentialScopes": [],
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {
-    "AvailableBalances": "Microsoft.Billing/billingAccounts/billingProfiles/availableBalance",
     "Agreements": "Microsoft.Billing/billingAccounts/agreements"
   },
   "OperationGroupToResource": {
     "BillingAccounts": "BillingAccount",
-    "AvailableBalances": "AvailableBalance",
     "Agreements": "Agreement"
   },
   "ModelRename": {},
-  "OperationGroupToParent": {
-    "Instructions": "Microsoft.Billing/billingAccounts/billingProfiles"
-  },
+  "OperationGroupToParent": {},
   "ModelToResource": {}
 }

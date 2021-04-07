@@ -47,16 +47,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                // Do note there is a subtle difference here, the lines are not identical
-                if (lowLevel)
-                {
-                    writer.Line($"var {request:D} = {GetPipeline(lowLevel)}.CreateRequest();");
-                }
-                else
-                {
-                    writer.Line($"var {message:D} = {GetPipeline(lowLevel)}.CreateMessage();");
-                    writer.Line($"var {request:D} = {message}.Request;");
-                }
+                writer.Line($"var {message:D} = {GetPipeline(lowLevel)}.CreateMessage();");
+                writer.Line($"var {request:D} = {message}.Request;");
 
                 var method = clientMethod.Request.HttpMethod;
                 if (!clientMethod.BufferResponse)
@@ -93,9 +85,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     case RequestContentRequestBody body:
                         WriteHeaders(writer, clientMethod, request, content: true);
                         writer.Line($"{request}.Content = {body.Parameter.Name};");
-                        writer.Line($"return {request:I};");
-                        // Early return not break as we've already returned in generated code
-                        return;
+                        break;
                     case SchemaRequestBody body:
                         using (WriteValueNullCheck(writer, body.Value))
                         {
@@ -209,7 +199,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
                 }
 
-                writer.Line($"return {message};");
+                writer.Line($"return {(lowLevel ? request : message)};");
             }
             writer.Line();
         }

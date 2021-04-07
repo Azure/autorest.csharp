@@ -1,25 +1,8 @@
 !CodeModel 
 info: !Info 
   description: Billing client provides access to billing resources for Azure subscriptions.
-  title: OperationGroupMappings
+  title: TenantOnly
 schemas: !Schemas 
-  numbers:
-    - !NumberSchema &ref_5
-      type: number
-      precision: 32
-      language: !Languages 
-        default:
-          name: Number
-          description: The amount budgeted for this billing instruction.
-      protocol: !Protocols {}
-    - !NumberSchema &ref_4
-      type: number
-      precision: 32
-      language: !Languages 
-        default:
-          name: Number
-          description: Amount value.
-      protocol: !Protocols {}
   strings:
     - !StringSchema &ref_0
       type: string
@@ -28,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_47
+    - !StringSchema &ref_7
       type: string
       apiVersions:
         - !ApiVersion 
@@ -38,115 +21,25 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_18
+    - !StringSchema &ref_1
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       language: !Languages 
         default:
-          name: ResourceId
-          description: Resource Id.
+          name: BillingAccountBar
+          description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_19
+    - !StringSchema &ref_2
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       language: !Languages 
         default:
-          name: ResourceName
-          description: Resource name.
-      protocol: !Protocols {}
-    - !StringSchema &ref_20
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: ResourceType
-          description: Resource type.
-      protocol: !Protocols {}
-    - !StringSchema &ref_25
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: BillingAccountListResultNextLink
-          description: The link (url) to the next page of results.
-      protocol: !Protocols {}
-    - !StringSchema &ref_26
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: ErrorDetailsCode
-          description: Error code.
-      protocol: !Protocols {}
-    - !StringSchema &ref_27
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: ErrorDetailsMessage
-          description: Error message indicating why the operation failed.
-      protocol: !Protocols {}
-    - !StringSchema &ref_28
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: ErrorDetailsTarget
-          description: The target of the particular error.
-      protocol: !Protocols {}
-    - !StringSchema &ref_29
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: ErrorSubDetailsItemCode
-          description: Error code.
-      protocol: !Protocols {}
-    - !StringSchema &ref_30
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: ErrorSubDetailsItemMessage
-          description: Error message indicating why the operation failed.
-      protocol: !Protocols {}
-    - !StringSchema &ref_31
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: ErrorSubDetailsItemTarget
-          description: The target of the particular error.
-      protocol: !Protocols {}
-    - !StringSchema &ref_34
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: InvoiceSectionListWithCreateSubPermissionResultNextLink
-          description: The link (url) to the next page of results.
+          name: ErrorResponseError
+          description: The details of the error.
       protocol: !Protocols {}
     - !StringSchema &ref_3
       type: string
@@ -155,172 +48,11 @@ schemas: !Schemas
           version: '2020-05-01'
       language: !Languages 
         default:
-          name: AmountCurrency
-          description: The currency for the amount value.
-      protocol: !Protocols {}
-    - !StringSchema &ref_37
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: InstructionListResultNextLink
-          description: The link (url) to the next page of results.
-      protocol: !Protocols {}
-    - !StringSchema &ref_9
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: AgreementPropertiesAgreementLink
-          description: The URL to download the agreement.
-      protocol: !Protocols {}
-    - !StringSchema &ref_14
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: ParticipantsStatus
-          description: The acceptance status of the participant.
-      protocol: !Protocols {}
-    - !StringSchema &ref_16
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: ParticipantsEmail
-          description: The email address of the participant.
-      protocol: !Protocols {}
-    - !StringSchema &ref_17
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: AgreementPropertiesStatus
-          description: The current status of the agreement.
-      protocol: !Protocols {}
-    - !StringSchema 
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: Action
-          description: The action the caller is allowed to perform.
-      protocol: !Protocols {}
-    - !StringSchema 
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: NotAction
-          description: The set of actions that the caller is not allowed to perform.
-      protocol: !Protocols {}
-  choices:
-    - !ChoiceSchema &ref_10
-      choices:
-        - !ChoiceValue 
-          value: MicrosoftCustomerAgreement
-          language:
-            default:
-              name: MicrosoftCustomerAgreement
-              description: ''
-        - !ChoiceValue 
-          value: AffiliatePurchaseTerms
-          language:
-            default:
-              name: AffiliatePurchaseTerms
-              description: ''
-        - !ChoiceValue 
-          value: Other
-          language:
-            default:
-              name: Other
-              description: ''
-      type: choice
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      choiceType: *ref_0
-      language: !Languages 
-        default:
-          name: Category
-          description: The category of the agreement signed by a customer.
-      protocol: !Protocols {}
-    - !ChoiceSchema &ref_11
-      choices:
-        - !ChoiceValue 
-          value: ClickToAccept
-          language:
-            default:
-              name: ClickToAccept
-              description: ''
-        - !ChoiceValue 
-          value: ESignEmbedded
-          language:
-            default:
-              name: ESignEmbedded
-              description: ''
-        - !ChoiceValue 
-          value: ESignOffline
-          language:
-            default:
-              name: ESignOffline
-              description: ''
-      type: choice
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      choiceType: *ref_0
-      language: !Languages 
-        default:
-          name: AcceptanceMode
-          description: The mode of acceptance for an agreement.
-      protocol: !Protocols {}
-    - !ChoiceSchema 
-      choices:
-        - !ChoiceValue 
-          value: USGov
-          language:
-            default:
-              name: USGov
-              description: ''
-        - !ChoiceValue 
-          value: USNat
-          language:
-            default:
-              name: USNat
-              description: ''
-        - !ChoiceValue 
-          value: USSec
-          language:
-            default:
-              name: USSec
-              description: ''
-      type: choice
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      choiceType: *ref_0
-      language: !Languages 
-        default:
-          name: TargetCloud
-          description: Possible cloud environments.
+          name: AgreementFoo
+          description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_44
+    - !ConstantSchema &ref_4
       type: constant
       value: !ConstantValue 
         value: '2020-05-01'
@@ -330,7 +62,7 @@ schemas: !Schemas
           name: ApiVersion20200501
           description: Api Version (2020-05-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_48
+    - !ConstantSchema &ref_8
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -340,7 +72,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_54
+    - !ConstantSchema &ref_13
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -350,692 +82,40 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-  dateTimes:
-    - !DateTimeSchema &ref_6
-      type: date-time
-      format: date-time
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: InstructionPropertiesStartDate
-          description: The date this billing instruction goes into effect.
-      protocol: !Protocols {}
-    - !DateTimeSchema &ref_7
-      type: date-time
-      format: date-time
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: InstructionPropertiesEndDate
-          description: The date this billing instruction is no longer in effect.
-      protocol: !Protocols {}
-    - !DateTimeSchema &ref_8
-      type: date-time
-      format: date-time
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: InstructionPropertiesCreationDate
-          description: The date this billing instruction was created.
-      protocol: !Protocols {}
-    - !DateTimeSchema &ref_12
-      type: date-time
-      format: date-time
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: AgreementPropertiesEffectiveDate
-          description: The date from which the agreement is effective.
-      protocol: !Protocols {}
-    - !DateTimeSchema &ref_13
-      type: date-time
-      format: date-time
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: AgreementPropertiesExpirationDate
-          description: The date when the agreement expires.
-      protocol: !Protocols {}
-    - !DateTimeSchema &ref_15
-      type: date-time
-      format: date-time
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      language: !Languages 
-        default:
-          name: ParticipantsStatusDate
-          description: The date when the status got changed.
-      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_50
+    - !ObjectSchema &ref_11
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_39
-            type: array
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-05-01'
-            elementType: !ObjectSchema &ref_1
-              type: object
-              apiVersions:
-                - !ApiVersion 
-                  version: '2020-05-01'
-              parents: !Relations 
-                all:
-                  - !ObjectSchema &ref_2
-                    type: object
-                    apiVersions:
-                      - !ApiVersion 
-                        version: '2020-05-01'
-                    children: !Relations 
-                      all:
-                        - *ref_1
-                        - !ObjectSchema &ref_21
-                          type: object
-                          apiVersions:
-                            - !ApiVersion 
-                              version: '2020-05-01'
-                          parents: !Relations 
-                            all:
-                              - *ref_2
-                            immediate:
-                              - *ref_2
-                          properties:
-                            - !Property 
-                              schema: !ObjectSchema &ref_36
-                                type: object
-                                apiVersions:
-                                  - !ApiVersion 
-                                    version: '2020-05-01'
-                                properties:
-                                  - !Property 
-                                    schema: *ref_3
-                                    readOnly: true
-                                    serializedName: currency
-                                    language: !Languages 
-                                      default:
-                                        name: currency
-                                        description: The currency for the amount value.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_4
-                                    serializedName: value
-                                    language: !Languages 
-                                      default:
-                                        name: value
-                                        description: Amount value.
-                                    protocol: !Protocols {}
-                                serializationFormats:
-                                  - json
-                                usage:
-                                  - output
-                                  - input
-                                language: !Languages 
-                                  default:
-                                    name: Amount
-                                    description: The amount.
-                                    namespace: ''
-                                protocol: !Protocols {}
-                              flattenedNames:
-                                - properties
-                                - amount
-                              readOnly: true
-                              serializedName: amount
-                              language: !Languages 
-                                default:
-                                  name: amount
-                                  description: Balance amount.
-                              protocol: !Protocols {}
-                          serializationFormats:
-                            - json
-                          usage:
-                            - output
-                            - input
-                          language: !Languages 
-                            default:
-                              name: AvailableBalance
-                              description: The latest Azure credit balance. This is the balance available for pay now.
-                              namespace: ''
-                          protocol: !Protocols {}
-                        - !ObjectSchema &ref_22
-                          type: object
-                          apiVersions:
-                            - !ApiVersion 
-                              version: '2020-05-01'
-                          parents: !Relations 
-                            all:
-                              - *ref_2
-                            immediate:
-                              - *ref_2
-                          properties:
-                            - !Property 
-                              schema: *ref_5
-                              flattenedNames:
-                                - properties
-                                - amount
-                              serializedName: amount
-                              language: !Languages 
-                                default:
-                                  name: amount
-                                  description: The amount budgeted for this billing instruction.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: *ref_6
-                              flattenedNames:
-                                - properties
-                                - startDate
-                              serializedName: startDate
-                              language: !Languages 
-                                default:
-                                  name: startDate
-                                  description: The date this billing instruction goes into effect.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: *ref_7
-                              flattenedNames:
-                                - properties
-                                - endDate
-                              serializedName: endDate
-                              language: !Languages 
-                                default:
-                                  name: endDate
-                                  description: The date this billing instruction is no longer in effect.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: *ref_8
-                              flattenedNames:
-                                - properties
-                                - creationDate
-                              serializedName: creationDate
-                              language: !Languages 
-                                default:
-                                  name: creationDate
-                                  description: The date this billing instruction was created.
-                              protocol: !Protocols {}
-                          serializationFormats:
-                            - json
-                          usage:
-                            - output
-                            - input
-                          language: !Languages 
-                            default:
-                              name: Instruction
-                              description: An instruction.
-                              namespace: ''
-                          protocol: !Protocols {}
-                        - !ObjectSchema &ref_23
-                          type: object
-                          apiVersions:
-                            - !ApiVersion 
-                              version: '2020-05-01'
-                          parents: !Relations 
-                            all:
-                              - *ref_2
-                            immediate:
-                              - *ref_2
-                          properties:
-                            - !Property 
-                              schema: *ref_9
-                              flattenedNames:
-                                - properties
-                                - agreementLink
-                              readOnly: true
-                              serializedName: agreementLink
-                              language: !Languages 
-                                default:
-                                  name: agreementLink
-                                  description: The URL to download the agreement.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: *ref_10
-                              flattenedNames:
-                                - properties
-                                - category
-                              readOnly: true
-                              serializedName: category
-                              language: !Languages 
-                                default:
-                                  name: category
-                                  description: The category of the agreement signed by a customer.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: *ref_11
-                              flattenedNames:
-                                - properties
-                                - acceptanceMode
-                              readOnly: true
-                              serializedName: acceptanceMode
-                              language: !Languages 
-                                default:
-                                  name: acceptanceMode
-                                  description: The mode of acceptance for an agreement.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: *ref_12
-                              flattenedNames:
-                                - properties
-                                - effectiveDate
-                              readOnly: true
-                              serializedName: effectiveDate
-                              language: !Languages 
-                                default:
-                                  name: effectiveDate
-                                  description: The date from which the agreement is effective.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: *ref_13
-                              flattenedNames:
-                                - properties
-                                - expirationDate
-                              readOnly: true
-                              serializedName: expirationDate
-                              language: !Languages 
-                                default:
-                                  name: expirationDate
-                                  description: The date when the agreement expires.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: !ArraySchema &ref_43
-                                type: array
-                                apiVersions:
-                                  - !ApiVersion 
-                                    version: '2020-05-01'
-                                elementType: !ObjectSchema &ref_38
-                                  type: object
-                                  apiVersions:
-                                    - !ApiVersion 
-                                      version: '2020-05-01'
-                                  properties:
-                                    - !Property 
-                                      schema: *ref_14
-                                      readOnly: true
-                                      serializedName: status
-                                      language: !Languages 
-                                        default:
-                                          name: status
-                                          description: The acceptance status of the participant.
-                                      protocol: !Protocols {}
-                                    - !Property 
-                                      schema: *ref_15
-                                      readOnly: true
-                                      serializedName: statusDate
-                                      language: !Languages 
-                                        default:
-                                          name: statusDate
-                                          description: The date when the status got changed.
-                                      protocol: !Protocols {}
-                                    - !Property 
-                                      schema: *ref_16
-                                      readOnly: true
-                                      serializedName: email
-                                      language: !Languages 
-                                        default:
-                                          name: email
-                                          description: The email address of the participant.
-                                      protocol: !Protocols {}
-                                  serializationFormats:
-                                    - json
-                                  usage:
-                                    - output
-                                    - input
-                                  language: !Languages 
-                                    default:
-                                      name: Participants
-                                      description: The details about a participant.
-                                      namespace: ''
-                                  protocol: !Protocols {}
-                                language: !Languages 
-                                  default:
-                                    name: AgreementPropertiesParticipants
-                                    description: The list of participants that participates in acceptance of an agreement.
-                                protocol: !Protocols {}
-                              flattenedNames:
-                                - properties
-                                - participants
-                              serializedName: participants
-                              language: !Languages 
-                                default:
-                                  name: participants
-                                  description: The list of participants that participates in acceptance of an agreement.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: *ref_17
-                              flattenedNames:
-                                - properties
-                                - status
-                              readOnly: true
-                              serializedName: status
-                              language: !Languages 
-                                default:
-                                  name: status
-                                  description: The current status of the agreement.
-                              protocol: !Protocols {}
-                          serializationFormats:
-                            - json
-                          usage:
-                            - output
-                            - input
-                          language: !Languages 
-                            default:
-                              name: Agreement
-                              description: An agreement.
-                              namespace: ''
-                          protocol: !Protocols {}
-                        - !ObjectSchema &ref_24
-                          type: object
-                          apiVersions:
-                            - !ApiVersion 
-                              version: '2020-05-01'
-                          parents: !Relations 
-                            all:
-                              - *ref_2
-                            immediate:
-                              - *ref_2
-                          properties:
-                            - !Property 
-                              schema: *ref_18
-                              flattenedNames:
-                                - properties
-                                - id
-                              readOnly: true
-                              serializedName: id
-                              language: !Languages 
-                                default:
-                                  name: idPropertiesId
-                                  description: Resource Id.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: *ref_19
-                              flattenedNames:
-                                - properties
-                                - name
-                              readOnly: true
-                              serializedName: name
-                              language: !Languages 
-                                default:
-                                  name: namePropertiesName
-                                  description: Resource name.
-                              protocol: !Protocols {}
-                            - !Property 
-                              schema: *ref_20
-                              flattenedNames:
-                                - properties
-                                - type
-                              readOnly: true
-                              serializedName: type
-                              language: !Languages 
-                                default:
-                                  name: typePropertiesType
-                                  description: Resource type.
-                              protocol: !Protocols {}
-                          serializationFormats:
-                            - json
-                          usage:
-                            - output
-                            - input
-                          language: !Languages 
-                            default:
-                              name: BillingProfile
-                              description: A billing profile.
-                              namespace: ''
-                          protocol: !Protocols {}
-                      immediate:
-                        - *ref_1
-                        - *ref_21
-                        - *ref_22
-                        - *ref_23
-                        - *ref_24
-                    properties:
-                      - !Property 
-                        schema: *ref_18
-                        readOnly: true
-                        serializedName: id
-                        language: !Languages 
-                          default:
-                            name: id
-                            description: Resource Id.
-                        protocol: !Protocols {}
-                      - !Property 
-                        schema: *ref_19
-                        readOnly: true
-                        serializedName: name
-                        language: !Languages 
-                          default:
-                            name: name
-                            description: Resource name.
-                        protocol: !Protocols {}
-                      - !Property 
-                        schema: *ref_20
-                        readOnly: true
-                        serializedName: type
-                        language: !Languages 
-                          default:
-                            name: type
-                            description: Resource type.
-                        protocol: !Protocols {}
-                    serializationFormats:
-                      - json
-                    usage:
-                      - output
-                      - input
-                    extensions:
-                      x-ms-azure-resource: true
-                      x-ms-flattened: true
-                    language: !Languages 
-                      default:
-                        name: Resource
-                        description: The Resource model definition.
-                        namespace: ''
-                    protocol: !Protocols {}
-                immediate:
-                  - *ref_2
-              properties:
-                - !Property 
-                  schema: *ref_18
-                  flattenedNames:
-                    - properties
-                    - id
-                  readOnly: true
-                  serializedName: id
-                  language: !Languages 
-                    default:
-                      name: idPropertiesId
-                      description: Resource Id.
-                  protocol: !Protocols {}
-                - !Property 
-                  schema: *ref_19
-                  flattenedNames:
-                    - properties
-                    - name
-                  readOnly: true
-                  serializedName: name
-                  language: !Languages 
-                    default:
-                      name: namePropertiesName
-                      description: Resource name.
-                  protocol: !Protocols {}
-                - !Property 
-                  schema: *ref_20
-                  flattenedNames:
-                    - properties
-                    - type
-                  readOnly: true
-                  serializedName: type
-                  language: !Languages 
-                    default:
-                      name: typePropertiesType
-                      description: Resource type.
-                  protocol: !Protocols {}
-              serializationFormats:
-                - json
-              usage:
-                - output
-                - input
-              language: !Languages 
-                default:
-                  name: BillingAccount
-                  description: A billing account.
-                  namespace: ''
-              protocol: !Protocols {}
-            language: !Languages 
-              default:
-                name: BillingAccountListResultValue
-                description: The list of billing accounts.
-            protocol: !Protocols {}
-          readOnly: true
-          serializedName: value
+          schema: *ref_1
+          serializedName: bar
           language: !Languages 
             default:
-              name: value
-              description: The list of billing accounts.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_25
-          readOnly: true
-          serializedName: nextLink
-          language: !Languages 
-            default:
-              name: nextLink
-              description: The link (url) to the next page of results.
+              name: bar
+              description: ''
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - output
+        - input
       language: !Languages 
         default:
-          name: BillingAccountListResult
-          description: The list of billing accounts.
+          name: BillingAccount
+          description: A billing account.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_1
-    - *ref_2
-    - !ObjectSchema &ref_51
+    - !ObjectSchema &ref_12
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_32
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-05-01'
-            properties:
-              - !Property 
-                schema: *ref_26
-                readOnly: true
-                serializedName: code
-                language: !Languages 
-                  default:
-                    name: code
-                    description: Error code.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_27
-                readOnly: true
-                serializedName: message
-                language: !Languages 
-                  default:
-                    name: message
-                    description: Error message indicating why the operation failed.
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_28
-                readOnly: true
-                serializedName: target
-                language: !Languages 
-                  default:
-                    name: target
-                    description: The target of the particular error.
-                protocol: !Protocols {}
-              - !Property 
-                schema: !ArraySchema &ref_40
-                  type: array
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-05-01'
-                  elementType: !ObjectSchema &ref_33
-                    type: object
-                    apiVersions:
-                      - !ApiVersion 
-                        version: '2020-05-01'
-                    properties:
-                      - !Property 
-                        schema: *ref_29
-                        readOnly: true
-                        serializedName: code
-                        language: !Languages 
-                          default:
-                            name: code
-                            description: Error code.
-                        protocol: !Protocols {}
-                      - !Property 
-                        schema: *ref_30
-                        readOnly: true
-                        serializedName: message
-                        language: !Languages 
-                          default:
-                            name: message
-                            description: Error message indicating why the operation failed.
-                        protocol: !Protocols {}
-                      - !Property 
-                        schema: *ref_31
-                        readOnly: true
-                        serializedName: target
-                        language: !Languages 
-                          default:
-                            name: target
-                            description: The target of the particular error.
-                        protocol: !Protocols {}
-                    serializationFormats:
-                      - json
-                    usage:
-                      - exception
-                    language: !Languages 
-                      default:
-                        name: ErrorSubDetailsItem
-                        description: ''
-                        namespace: ''
-                    protocol: !Protocols {}
-                  language: !Languages 
-                    default:
-                      name: ErrorSubDetails
-                      description: Array of ErrorSubDetailsItem
-                  protocol: !Protocols {}
-                readOnly: true
-                serializedName: details
-                language: !Languages 
-                  default:
-                    name: details
-                    description: The sub details of the error.
-                protocol: !Protocols {}
-            serializationFormats:
-              - json
-            usage:
-              - exception
-            language: !Languages 
-              default:
-                name: ErrorDetails
-                description: The details of the error.
-                namespace: ''
-            protocol: !Protocols {}
+          schema: *ref_2
           serializedName: error
           language: !Languages 
             default:
@@ -1052,94 +132,19 @@ schemas: !Schemas
           description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_32
-    - *ref_33
-    - !ObjectSchema &ref_58
+    - !ObjectSchema &ref_19
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_41
-            type: array
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-05-01'
-            elementType: !ObjectSchema &ref_35
-              type: object
-              apiVersions:
-                - !ApiVersion 
-                  version: '2020-05-01'
-              properties:
-                - !Property 
-                  schema: *ref_5
-                  required: true
-                  serializedName: amount
-                  language: !Languages 
-                    default:
-                      name: amount
-                      description: The amount budgeted for this billing instruction.
-                  protocol: !Protocols {}
-                - !Property 
-                  schema: *ref_6
-                  required: true
-                  serializedName: startDate
-                  language: !Languages 
-                    default:
-                      name: startDate
-                      description: The date this billing instruction goes into effect.
-                  protocol: !Protocols {}
-                - !Property 
-                  schema: *ref_7
-                  required: true
-                  serializedName: endDate
-                  language: !Languages 
-                    default:
-                      name: endDate
-                      description: The date this billing instruction is no longer in effect.
-                  protocol: !Protocols {}
-                - !Property 
-                  schema: *ref_8
-                  required: false
-                  serializedName: creationDate
-                  language: !Languages 
-                    default:
-                      name: creationDate
-                      description: The date this billing instruction was created.
-                  protocol: !Protocols {}
-              serializationFormats:
-                - json
-              usage:
-                - output
-                - input
-              extensions:
-                x-ms-flattened: true
-              language: !Languages 
-                default:
-                  name: InstructionProperties
-                  description: A billing instruction used during invoice generation.
-                  namespace: ''
-              protocol: !Protocols {}
-            language: !Languages 
-              default:
-                name: InvoiceSectionListWithCreateSubPermissionResultValue
-                description: The list of invoice section properties with create subscription permission.
-            protocol: !Protocols {}
-          serializedName: value
+          schema: *ref_3
+          serializedName: foo
           language: !Languages 
             default:
-              name: value
-              description: The list of invoice section properties with create subscription permission.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_34
-          readOnly: true
-          serializedName: nextLink
-          language: !Languages 
-            default:
-              name: nextLink
-              description: The link (url) to the next page of results.
+              name: foo
+              description: ''
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -1147,69 +152,12 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: InvoiceSectionListWithCreateSubPermissionResult
-          description: The list of invoice section properties with create subscription permission.
+          name: Agreement
+          description: An agreement.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_35
-    - *ref_21
-    - *ref_36
-    - !ObjectSchema &ref_63
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-05-01'
-      properties:
-        - !Property 
-          schema: !ArraySchema &ref_42
-            type: array
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-05-01'
-            elementType: *ref_22
-            language: !Languages 
-              default:
-                name: InstructionListResultValue
-                description: The list of billing instructions used during invoice generation.
-            protocol: !Protocols {}
-          readOnly: true
-          serializedName: value
-          language: !Languages 
-            default:
-              name: value
-              description: The list of billing instructions used during invoice generation.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_37
-          readOnly: true
-          serializedName: nextLink
-          language: !Languages 
-            default:
-              name: nextLink
-              description: The link (url) to the next page of results.
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - output
-      language: !Languages 
-        default:
-          name: InstructionListResult
-          description: The list of billing instructions used during invoice generation.
-          namespace: ''
-      protocol: !Protocols {}
-    - *ref_22
-    - *ref_23
-    - *ref_38
-    - *ref_24
-  arrays:
-    - *ref_39
-    - *ref_40
-    - *ref_41
-    - *ref_42
-    - *ref_43
 globalParameters:
-  - !Parameter &ref_45
+  - !Parameter &ref_5
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -1225,8 +173,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_46
-    schema: *ref_44
+  - !Parameter &ref_6
+    schema: *ref_4
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -1247,94 +195,10 @@ operationGroups:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
-          - *ref_45
-          - *ref_46
-          - !Parameter &ref_49
-            schema: *ref_47
-            implementation: Method
-            language: !Languages 
-              default:
-                name: expand
-                description: May be used to expand the soldTo, invoice sections and billing profiles.
-                serializedName: $expand
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_48
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Billing/billingAccounts
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_49
-        responses:
-          - !SchemaResponse 
-            schema: *ref_50
-            language: !Languages 
-              default:
-                name: ''
-                description: OK. The request has succeeded.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_51
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-pageable:
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: List
-            description: Lists the billing accounts that a user has access to.
-            paging:
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-05-01'
-        parameters:
-          - *ref_45
-          - *ref_46
-          - !Parameter &ref_52
-            schema: *ref_47
+          - *ref_5
+          - *ref_6
+          - !Parameter &ref_9
+            schema: *ref_7
             implementation: Method
             required: true
             language: !Languages 
@@ -1345,8 +209,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_53
-            schema: *ref_47
+          - !Parameter &ref_10
+            schema: *ref_7
             implementation: Method
             language: !Languages 
               default:
@@ -1360,7 +224,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_48
+                schema: *ref_8
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1383,11 +247,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_52
-          - *ref_53
+          - *ref_9
+          - *ref_10
         responses:
           - !SchemaResponse 
-            schema: *ref_1
+            schema: *ref_11
             language: !Languages 
               default:
                 name: ''
@@ -1401,7 +265,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_12
             language: !Languages 
               default:
                 name: ''
@@ -1423,10 +287,10 @@ operationGroups:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
-          - *ref_45
-          - *ref_46
-          - !Parameter &ref_56
-            schema: *ref_47
+          - *ref_5
+          - *ref_6
+          - !Parameter &ref_15
+            schema: *ref_7
             implementation: Method
             required: true
             language: !Languages 
@@ -1441,7 +305,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_54
+                schema: *ref_13
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1453,8 +317,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_55
-                schema: *ref_1
+              - !Parameter &ref_14
+                schema: *ref_11
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1466,7 +330,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_48
+                schema: *ref_8
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1479,7 +343,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_55
+              - *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -1493,10 +357,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_56
+          - *ref_15
         responses:
           - !SchemaResponse 
-            schema: *ref_1
+            schema: *ref_11
             language: !Languages 
               default:
                 name: ''
@@ -1519,7 +383,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_12
             language: !Languages 
               default:
                 name: ''
@@ -1540,544 +404,9 @@ operationGroups:
             name: Update
             description: Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
         protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-05-01'
-        parameters:
-          - *ref_45
-          - *ref_46
-          - !Parameter &ref_57
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: billingAccountName
-                description: The ID that uniquely identifies a billing account.
-                serializedName: billingAccountName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_48
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission
-                method: post
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_57
-        responses:
-          - !SchemaResponse 
-            schema: *ref_58
-            language: !Languages 
-              default:
-                name: ''
-                description: OK. The request has succeeded.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_51
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-pageable:
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: ListInvoiceSectionsByCreateSubscriptionPermission
-            description: Lists the invoice sections for which the user has permission to create Azure subscriptions. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.
-            paging:
-              nextLinkName: nextLink
-        protocol: !Protocols {}
     language: !Languages 
       default:
         name: BillingAccounts
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: AvailableBalances
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-05-01'
-        parameters:
-          - *ref_45
-          - !Parameter &ref_59
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: billingAccountName
-                description: The ID that uniquely identifies a billing account.
-                serializedName: billingAccountName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_60
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: billingProfileName
-                description: The ID that uniquely identifies a billing profile.
-                serializedName: billingProfileName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_46
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_48
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/availableBalance/default
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_59
-          - *ref_60
-        responses:
-          - !SchemaResponse 
-            schema: *ref_21
-            language: !Languages 
-              default:
-                name: ''
-                description: OK. The request has succeeded.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_51
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: Get
-            description: >-
-              The available credit balance for a billing profile. This is the balance that can be used for pay now to settle due or past due invoices. The operation is supported only for billing accounts with agreement type Microsoft
-              Customer Agreement.
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: AvailableBalances
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: Instructions
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-05-01'
-        parameters:
-          - *ref_45
-          - !Parameter &ref_61
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: billingAccountName
-                description: The ID that uniquely identifies a billing account.
-                serializedName: billingAccountName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_62
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: billingProfileName
-                description: The ID that uniquely identifies a billing profile.
-                serializedName: billingProfileName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_46
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_48
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_61
-          - *ref_62
-        responses:
-          - !SchemaResponse 
-            schema: *ref_63
-            language: !Languages 
-              default:
-                name: ''
-                description: OK. The request has succeeded.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_51
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-pageable:
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: ListByBillingProfile
-            description: Lists the instructions by billing profile id.
-            paging:
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-05-01'
-        parameters:
-          - *ref_45
-          - *ref_46
-          - !Parameter &ref_64
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: billingAccountName
-                description: The ID that uniquely identifies a billing account.
-                serializedName: billingAccountName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_65
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: billingProfileName
-                description: The ID that uniquely identifies a billing profile.
-                serializedName: billingProfileName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_66
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: instructionName
-                description: Instruction Name.
-                serializedName: instructionName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_48
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions/{instructionName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_64
-          - *ref_65
-          - *ref_66
-        responses:
-          - !SchemaResponse 
-            schema: *ref_22
-            language: !Languages 
-              default:
-                name: ''
-                description: OK. The request has succeeded.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_51
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: Get
-            description: Get the instruction by name. These are custom billing instructions and are only applicable for certain customers.
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-05-01'
-        parameters:
-          - *ref_45
-          - *ref_46
-          - !Parameter &ref_68
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: billingAccountName
-                description: The ID that uniquely identifies a billing account.
-                serializedName: billingAccountName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_69
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: billingProfileName
-                description: The ID that uniquely identifies a billing profile.
-                serializedName: billingProfileName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_70
-            schema: *ref_47
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: instructionName
-                description: Instruction Name.
-                serializedName: instructionName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_54
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_67
-                schema: *ref_22
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: The new instruction.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_48
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_67
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/instructions/{instructionName}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_68
-          - *ref_69
-          - *ref_70
-        responses:
-          - !SchemaResponse 
-            schema: *ref_22
-            language: !Languages 
-              default:
-                name: ''
-                description: OK. The request has succeeded.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_51
-            language: !Languages 
-              default:
-                name: ''
-                description: Error response describing why the operation failed.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - default
-        language: !Languages 
-          default:
-            name: Put
-            description: Creates or updates an instruction. These are custom billing instructions and are only applicable for certain customers.
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: Instructions
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
@@ -2088,10 +417,10 @@ operationGroups:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
-          - *ref_45
-          - *ref_46
-          - !Parameter &ref_71
-            schema: *ref_47
+          - *ref_5
+          - *ref_6
+          - !Parameter &ref_16
+            schema: *ref_7
             implementation: Method
             required: true
             language: !Languages 
@@ -2102,8 +431,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_72
-            schema: *ref_47
+          - !Parameter &ref_17
+            schema: *ref_7
             implementation: Method
             required: true
             language: !Languages 
@@ -2114,8 +443,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_73
-            schema: *ref_47
+          - !Parameter &ref_18
+            schema: *ref_7
             implementation: Method
             language: !Languages 
               default:
@@ -2129,7 +458,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_48
+                schema: *ref_8
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2152,12 +481,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_71
-          - *ref_72
-          - *ref_73
+          - *ref_16
+          - *ref_17
+          - *ref_18
         responses:
           - !SchemaResponse 
-            schema: *ref_23
+            schema: *ref_19
             language: !Languages 
               default:
                 name: ''
@@ -2171,7 +500,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_12
             language: !Languages 
               default:
                 name: ''
@@ -2197,7 +526,7 @@ security: !Security
   authenticationRequired: true
 language: !Languages 
   default:
-    name: OperationGroupMappings
+    name: TenantOnly
     description: ''
 protocol: !Protocols 
   http: !HttpModel {}
