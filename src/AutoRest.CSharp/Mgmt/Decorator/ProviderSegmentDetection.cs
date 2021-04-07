@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
                 currentToken.HasReferenceSuccessor = nextReference > -1;
                 currentToken.IsFullProvider = offset != nextReference;
                 var tokenLength = nextReference > -1 ? nextReference - offset : pathLen - offset;
-                currentToken.TokenValue = path.Substring(offset, Math.Max(0, tokenLength - 1));
+                currentToken.TokenValue = path.Substring(offset, tokenLength);
                 tokens.Add(currentToken);
                 offset = path.IndexOf(ProviderSegment.Providers, offset + tokenLength);
                 currentToken = new ProviderSegment();

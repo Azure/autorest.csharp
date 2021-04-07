@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
             // Microsoft.Network/virtualNetworks/ == lastFullProvider
             // resourceType = Microsoft.Network/virtualNetworks
             //
-            if (fullProvider.TokenValue.Equals(resourceType))
+            if (fullProvider.TokenValue.Trim('/').Equals(resourceType))
             {
                 var lastSlash = path.LastIndexOf('/', fullProvider.IndexFoundAt - 1); //ok because tenant only resources should never get here.
                 var lastClosedBrace = path.LastIndexOf('}', lastSlash);
@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
                 {
                     return string.Empty;
                 }
-                return lastClosedBrace > -1 ? path.Substring(lastClosedBrace + 1, lastSlash - lastClosedBrace) : path.Substring(lastClosedBrace + 1, lastSlash);
+                return lastClosedBrace > -1 ? path.Substring(lastClosedBrace + 1, lastSlash - lastClosedBrace).Trim('/') : path.Substring(lastClosedBrace + 1, lastSlash).Trim('/');
 
             }
             //case 2:
