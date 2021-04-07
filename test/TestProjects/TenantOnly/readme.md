@@ -1,21 +1,17 @@
-# ModelNamespace
+# TenantOnly
 ### AutoRest Configuration
 > see https://aka.ms/autorest
 
 ``` yaml
-title: OperationGroupMappings
+title: TenantOnly
 require: $(this-folder)/../../../readme.md
 azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/TenantOnly.json
-namespace: Azure.OperationGroupMappings
+namespace: Azure.TenantOnly
 operation-group-to-resource-type:
-   AvailableBalances : Microsoft.Billing/billingAccounts/billingProfiles/availableBalance
    Agreements: "Microsoft.Billing/billingAccounts/agreements"
 operation-group-to-resource:
    BillingAccounts: BillingAccount
-   AvailableBalances: AvailableBalance
    Agreements: Agreement
-operation-group-to-parent:
-   Instructions: Microsoft.Billing/billingAccounts/billingProfiles
 ```

@@ -14,17 +14,12 @@ namespace TenantOnly
     {
         internal static ErrorResponse DeserializeErrorResponse(JsonElement element)
         {
-            Optional<ErrorDetails> error = default;
+            Optional<string> error = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("error"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    error = ErrorDetails.DeserializeErrorDetails(property.Value);
+                    error = property.Value.GetString();
                     continue;
                 }
             }
