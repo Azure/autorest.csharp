@@ -13,10 +13,10 @@ namespace AutoRest.TestServer.Tests
         public UrlPathItemsTests(TestServerVersion version) : base(version) { }
 
         [Test]
-        public Task UrlPathItemGetAll() => TestStatus(async (host, key) =>
+        public Task UrlPathItemGetAll() => TestStatus(async (host) =>
             await new PathItemsClient(globalStringPath: "globalStringPath",
                     globalStringQuery: "globalStringQuery",
-                    credential: key,
+                    credential: Key,
                     endpoint: host)
                 .GetAllWithValuesAsync(
                     pathItemStringPath: "pathItemStringPath",
@@ -25,10 +25,10 @@ namespace AutoRest.TestServer.Tests
                     localStringQuery: "localStringQuery"));
 
         [Test]
-        public Task UrlPathItemGetPathItemAndLocalNull() => TestStatus(async (host, key) =>
+        public Task UrlPathItemGetPathItemAndLocalNull() => TestStatus(async (host) =>
             await new PathItemsClient(globalStringPath: "globalStringPath",
                     globalStringQuery: "globalStringQuery",
-                    credential: key,
+                    credential: Key,
                     endpoint: host)
                 .GetLocalPathItemQueryNullAsync(
                     pathItemStringPath: "pathItemStringPath",
@@ -37,10 +37,10 @@ namespace AutoRest.TestServer.Tests
                     localStringQuery: null));
 
         [Test]
-        public Task UrlPathItemGetGlobalNull() => TestStatus(async (host, key) =>
+        public Task UrlPathItemGetGlobalNull() => TestStatus(async (host) =>
             await new PathItemsClient(globalStringPath: "globalStringPath",
                     endpoint: host,
-                    credential: key,
+                    credential: Key,
                     globalStringQuery: null)
                 .GetGlobalQueryNullAsync(
                     pathItemStringPath: "pathItemStringPath",
@@ -49,11 +49,11 @@ namespace AutoRest.TestServer.Tests
                     localStringQuery: "localStringQuery"));
 
         [Test]
-        public Task UrlPathItemGetGlobalAndLocalNull() => TestStatus(async (host, key) =>
+        public Task UrlPathItemGetGlobalAndLocalNull() => TestStatus(async (host) =>
             await new PathItemsClient(
                     globalStringPath: "globalStringPath",
                     endpoint: host,
-                    credential: key,
+                    credential: Key,
                     globalStringQuery: null)
                 .GetGlobalAndLocalQueryNullAsync(
                 pathItemStringPath: "pathItemStringPath",

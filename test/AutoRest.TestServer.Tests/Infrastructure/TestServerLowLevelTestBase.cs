@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
     public class TestServerLowLevelTestBase
     {
         private readonly TestServerVersion _version;
-        internal AzureKeyCredential Key = new AzureKeyCredential("NOT-A-VALID-KEY");
+        protected static AzureKeyCredential Key = new AzureKeyCredential("NOT-A-VALID-KEY");
 
         public TestServerLowLevelTestBase(TestServerVersion version)
         {
@@ -27,37 +27,37 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         public virtual IEnumerable<string> AdditionalKnownScenarios { get; } = Array.Empty<string>();
 
-        public Task TestStatus(Func<Uri, AzureKeyCredential, Response> test, bool ignoreScenario = false)
+        public Task TestStatus(Func<Uri, Response> test, bool ignoreScenario = false)
         {
-            return TestStatus((host, key) => Task.FromResult(test(host, key)), ignoreScenario);
+            return TestStatus(host => Task.FromResult(test(host)), ignoreScenario);
         }
 
-        public Task TestStatus(Func<Uri, AzureKeyCredential, Task<Response>> test, bool ignoreScenario = false)
+        public Task TestStatus(Func<Uri, Task<Response>> test, bool ignoreScenario = false)
         {
             return TestStatus(GetScenarioName(), test, ignoreScenario);
         }
 
-        private Task TestStatus(string scenario, Func<Uri, AzureKeyCredential, Task<Response>> test, bool ignoreScenario = false) => Test(scenario, async (host, key) =>
+        private Task TestStatus(string scenario, Func<Uri, Task<Response>> test, bool ignoreScenario = false) => Test(scenario, async host =>
         {
-            var response = await test(host, key);
+            var response = await test(host);
             Assert.That(response.Status, Is.EqualTo(200).Or.EqualTo(201).Or.EqualTo(202).Or.EqualTo(204), "Unexpected response " + response.ReasonPhrase);
         }, ignoreScenario);
 
-        public Task Test(Action<Uri, AzureKeyCredential> test, bool ignoreScenario = false)
+        public Task Test(Action<Uri> test, bool ignoreScenario = false)
         {
-            return Test(GetScenarioName(), (host, key) =>
+            return Test(GetScenarioName(), host =>
             {
-                test(host, key);
+                test(host);
                 return Task.CompletedTask;
             }, ignoreScenario);
         }
 
-        public Task Test(Func<Uri, AzureKeyCredential, Task> test, bool ignoreScenario = false)
+        public Task Test(Func<Uri, Task> test, bool ignoreScenario = false)
         {
             return Test(GetScenarioName(), test, ignoreScenario);
         }
 
-        private async Task Test(string scenario, Func<Uri, AzureKeyCredential, Task> test, bool ignoreScenario = false)
+        private async Task Test(string scenario, Func<Uri, Task> test, bool ignoreScenario = false)
         {
             var scenarioParameter = ignoreScenario ? new string[0] : new[] {scenario};
             var server = TestServerSession.Start(scenario, _version, false, scenarioParameter);
@@ -72,7 +72,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 };
                 testClientOptions.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
 
-                await test(server.Host, Key);
+                await test(server.Host);
             }
             catch (Exception ex)
             {
