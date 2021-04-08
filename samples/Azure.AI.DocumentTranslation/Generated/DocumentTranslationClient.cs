@@ -21,7 +21,7 @@ namespace Azure.AI.DocumentTranslation
     public partial class DocumentTranslationClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
         private string endpoint;
         private readonly string apiVersion;
@@ -108,7 +108,7 @@ namespace Azure.AI.DocumentTranslation
 
         /// <summary> Create Request for <see cref="SubmitBatchRequest"/> and <see cref="SubmitBatchRequestAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreateSubmitBatchRequestRequest(RequestContent requestBody)
+        private Request CreateSubmitBatchRequestRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -347,7 +347,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        protected Request CreateGetOperationsRequest(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
+        private Request CreateGetOperationsRequest(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -416,7 +416,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> Create Request for <see cref="GetDocumentStatus"/> and <see cref="GetDocumentStatusAsync"/> operations. </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
-        protected Request CreateGetDocumentStatusRequest(Guid id, Guid documentId)
+        private Request CreateGetDocumentStatusRequest(Guid id, Guid documentId)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -461,7 +461,7 @@ namespace Azure.AI.DocumentTranslation
 
         /// <summary> Create Request for <see cref="GetOperationStatus"/> and <see cref="GetOperationStatusAsync"/> operations. </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
-        protected Request CreateGetOperationStatusRequest(Guid id)
+        private Request CreateGetOperationStatusRequest(Guid id)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -516,7 +516,7 @@ namespace Azure.AI.DocumentTranslation
 
         /// <summary> Create Request for <see cref="CancelOperation"/> and <see cref="CancelOperationAsync"/> operations. </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
-        protected Request CreateCancelOperationRequest(Guid id)
+        private Request CreateCancelOperationRequest(Guid id)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -745,7 +745,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        protected Request CreateGetOperationDocumentsStatusRequest(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
+        private Request CreateGetOperationDocumentsStatusRequest(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -818,7 +818,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Create Request for <see cref="GetDocumentFormats"/> and <see cref="GetDocumentFormatsAsync"/> operations. </summary>
-        protected Request CreateGetDocumentFormatsRequest()
+        private Request CreateGetDocumentFormatsRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -857,7 +857,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Create Request for <see cref="GetGlossaryFormats"/> and <see cref="GetGlossaryFormatsAsync"/> operations. </summary>
-        protected Request CreateGetGlossaryFormatsRequest()
+        private Request CreateGetGlossaryFormatsRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -888,7 +888,7 @@ namespace Azure.AI.DocumentTranslation
         }
 
         /// <summary> Create Request for <see cref="GetDocumentStorageSource"/> and <see cref="GetDocumentStorageSourceAsync"/> operations. </summary>
-        protected Request CreateGetDocumentStorageSourceRequest()
+        private Request CreateGetDocumentStorageSourceRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
