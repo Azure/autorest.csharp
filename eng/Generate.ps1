@@ -84,6 +84,8 @@ if (!($Exclude -contains "TestServer"))
     }
 }
 
+$llcArgs = "--low-level-client=true --credential-types=AzureKeyCredential --credential-header-name=Fake-Subscription-Key"
+
 $testServerLowLevelDirectory = Join-Path $repoRoot 'test' 'TestServerProjectsLowLevel'
 $testNamesLowLevel =
     'body-complex',
@@ -94,13 +96,13 @@ $testNamesLowLevel =
 
 if (!($Exclude -contains "TestServerLowLevel"))
 {
-    $llcArgs = "--low-level-client=true --credential-types=AzureKeyCredential --credential-header-name=Fake-Subscription-Key"
     foreach ($testName in $testNamesLowLevel)
     {
         Add-TestServer-Swagger "$testName-LowLevel" $testName $testServerLowLevelDirectory $llcArgs
     }
 }
 
+$llcTestProjects = @();
 
 if (!($Exclude -contains "TestProjects"))
 {
@@ -123,6 +125,11 @@ if (!($Exclude -contains "TestProjects"))
         }
 
         Add-Swagger $testName $testName $directory $testArguments
+        if ($llcTestProjects -contains $testName)
+        {
+            $directory = Join-Path $directory "llc"
+            Add-Swagger "$testName-LowLevel" $testName $directory "$testArguments $llcArgs"
+        }
     }
 }
 # Sample configuration
