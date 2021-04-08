@@ -102,8 +102,6 @@ if (!($Exclude -contains "TestServerLowLevel"))
     }
 }
 
-$llcTestProjects = @();
-
 if (!($Exclude -contains "TestProjects"))
 {
     # Local test projects
@@ -125,11 +123,6 @@ if (!($Exclude -contains "TestProjects"))
         }
 
         Add-Swagger $testName $testName $directory $testArguments
-        if ($llcTestProjects -contains $testName)
-        {
-            $directory = Join-Path $directory "llc"
-            Add-Swagger "$testName-LowLevel" $testName $directory "$testArguments $llcArgs"
-        }
     }
 }
 # Sample configuration
