@@ -160,13 +160,13 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\header\\Generated"
     },
-    "header-LowLevel": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\header\\Generated"
-    },
     "HeaderCollectionPrefix": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeaderCollectionPrefix\\Generated"
+    },
+    "header-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\header\\Generated"
     },
     "httpInfrastructure": {
       "commandName": "Project",
