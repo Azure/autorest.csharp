@@ -12,6 +12,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         private string _projectName;
 
+        public TestProjectTests()
+        {
+            _projectName = "";
+        }
+
         public TestProjectTests(string projectName)
         {
             _projectName = projectName;
