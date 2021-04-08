@@ -20,7 +20,7 @@ namespace body_complex
     public partial class PrimitiveClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
@@ -65,7 +65,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetInt"/> and <see cref="GetIntAsync"/> operations. </summary>
-        protected Request CreateGetIntRequest()
+        private Request CreateGetIntRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -98,7 +98,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutInt"/> and <see cref="PutIntAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutIntRequest(RequestContent requestBody)
+        private Request CreatePutIntRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -130,7 +130,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetLong"/> and <see cref="GetLongAsync"/> operations. </summary>
-        protected Request CreateGetLongRequest()
+        private Request CreateGetLongRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -163,7 +163,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutLong"/> and <see cref="PutLongAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutLongRequest(RequestContent requestBody)
+        private Request CreatePutLongRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -195,7 +195,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetFloat"/> and <see cref="GetFloatAsync"/> operations. </summary>
-        protected Request CreateGetFloatRequest()
+        private Request CreateGetFloatRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -228,7 +228,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutFloat"/> and <see cref="PutFloatAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutFloatRequest(RequestContent requestBody)
+        private Request CreatePutFloatRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -260,7 +260,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetDouble"/> and <see cref="GetDoubleAsync"/> operations. </summary>
-        protected Request CreateGetDoubleRequest()
+        private Request CreateGetDoubleRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -293,7 +293,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutDouble"/> and <see cref="PutDoubleAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutDoubleRequest(RequestContent requestBody)
+        private Request CreatePutDoubleRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -325,7 +325,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetBool"/> and <see cref="GetBoolAsync"/> operations. </summary>
-        protected Request CreateGetBoolRequest()
+        private Request CreateGetBoolRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -358,7 +358,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutBool"/> and <see cref="PutBoolAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutBoolRequest(RequestContent requestBody)
+        private Request CreatePutBoolRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -390,7 +390,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetString"/> and <see cref="GetStringAsync"/> operations. </summary>
-        protected Request CreateGetStringRequest()
+        private Request CreateGetStringRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -423,7 +423,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutString"/> and <see cref="PutStringAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutStringRequest(RequestContent requestBody)
+        private Request CreatePutStringRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -455,7 +455,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetDate"/> and <see cref="GetDateAsync"/> operations. </summary>
-        protected Request CreateGetDateRequest()
+        private Request CreateGetDateRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -488,7 +488,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutDate"/> and <see cref="PutDateAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutDateRequest(RequestContent requestBody)
+        private Request CreatePutDateRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -520,7 +520,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetDateTime"/> and <see cref="GetDateTimeAsync"/> operations. </summary>
-        protected Request CreateGetDateTimeRequest()
+        private Request CreateGetDateTimeRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -553,7 +553,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutDateTime"/> and <see cref="PutDateTimeAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutDateTimeRequest(RequestContent requestBody)
+        private Request CreatePutDateTimeRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -585,7 +585,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetDateTimeRfc1123"/> and <see cref="GetDateTimeRfc1123Async"/> operations. </summary>
-        protected Request CreateGetDateTimeRfc1123Request()
+        private Request CreateGetDateTimeRfc1123Request()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -618,7 +618,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutDateTimeRfc1123"/> and <see cref="PutDateTimeRfc1123Async"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutDateTimeRfc1123Request(RequestContent requestBody)
+        private Request CreatePutDateTimeRfc1123Request(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -650,7 +650,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetDuration"/> and <see cref="GetDurationAsync"/> operations. </summary>
-        protected Request CreateGetDurationRequest()
+        private Request CreateGetDurationRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -683,7 +683,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutDuration"/> and <see cref="PutDurationAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutDurationRequest(RequestContent requestBody)
+        private Request CreatePutDurationRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -715,7 +715,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetByte"/> and <see cref="GetByteAsync"/> operations. </summary>
-        protected Request CreateGetByteRequest()
+        private Request CreateGetByteRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -748,7 +748,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutByte"/> and <see cref="PutByteAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutByteRequest(RequestContent requestBody)
+        private Request CreatePutByteRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

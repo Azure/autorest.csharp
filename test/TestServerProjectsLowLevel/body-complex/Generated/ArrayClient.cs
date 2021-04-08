@@ -20,7 +20,7 @@ namespace body_complex
     public partial class ArrayClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
@@ -65,7 +65,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetValid"/> and <see cref="GetValidAsync"/> operations. </summary>
-        protected Request CreateGetValidRequest()
+        private Request CreateGetValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -98,7 +98,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutValid"/> and <see cref="PutValidAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutValidRequest(RequestContent requestBody)
+        private Request CreatePutValidRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -130,7 +130,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetEmpty"/> and <see cref="GetEmptyAsync"/> operations. </summary>
-        protected Request CreateGetEmptyRequest()
+        private Request CreateGetEmptyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -163,7 +163,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutEmpty"/> and <see cref="PutEmptyAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutEmptyRequest(RequestContent requestBody)
+        private Request CreatePutEmptyRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -195,7 +195,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetNotProvided"/> and <see cref="GetNotProvidedAsync"/> operations. </summary>
-        protected Request CreateGetNotProvidedRequest()
+        private Request CreateGetNotProvidedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

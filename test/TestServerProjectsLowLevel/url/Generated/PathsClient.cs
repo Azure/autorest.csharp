@@ -21,7 +21,7 @@ namespace url
     public partial class PathsClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
@@ -66,7 +66,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetBooleanTrue"/> and <see cref="GetBooleanTrueAsync"/> operations. </summary>
-        protected Request CreateGetBooleanTrueRequest()
+        private Request CreateGetBooleanTrueRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -97,7 +97,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetBooleanFalse"/> and <see cref="GetBooleanFalseAsync"/> operations. </summary>
-        protected Request CreateGetBooleanFalseRequest()
+        private Request CreateGetBooleanFalseRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -128,7 +128,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetIntOneMillion"/> and <see cref="GetIntOneMillionAsync"/> operations. </summary>
-        protected Request CreateGetIntOneMillionRequest()
+        private Request CreateGetIntOneMillionRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -159,7 +159,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetIntNegativeOneMillion"/> and <see cref="GetIntNegativeOneMillionAsync"/> operations. </summary>
-        protected Request CreateGetIntNegativeOneMillionRequest()
+        private Request CreateGetIntNegativeOneMillionRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -190,7 +190,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetTenBillion"/> and <see cref="GetTenBillionAsync"/> operations. </summary>
-        protected Request CreateGetTenBillionRequest()
+        private Request CreateGetTenBillionRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -221,7 +221,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetNegativeTenBillion"/> and <see cref="GetNegativeTenBillionAsync"/> operations. </summary>
-        protected Request CreateGetNegativeTenBillionRequest()
+        private Request CreateGetNegativeTenBillionRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -252,7 +252,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="FloatScientificPositive"/> and <see cref="FloatScientificPositiveAsync"/> operations. </summary>
-        protected Request CreateFloatScientificPositiveRequest()
+        private Request CreateFloatScientificPositiveRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -283,7 +283,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="FloatScientificNegative"/> and <see cref="FloatScientificNegativeAsync"/> operations. </summary>
-        protected Request CreateFloatScientificNegativeRequest()
+        private Request CreateFloatScientificNegativeRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -314,7 +314,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="DoubleDecimalPositive"/> and <see cref="DoubleDecimalPositiveAsync"/> operations. </summary>
-        protected Request CreateDoubleDecimalPositiveRequest()
+        private Request CreateDoubleDecimalPositiveRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -345,7 +345,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="DoubleDecimalNegative"/> and <see cref="DoubleDecimalNegativeAsync"/> operations. </summary>
-        protected Request CreateDoubleDecimalNegativeRequest()
+        private Request CreateDoubleDecimalNegativeRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -376,7 +376,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="StringUnicode"/> and <see cref="StringUnicodeAsync"/> operations. </summary>
-        protected Request CreateStringUnicodeRequest()
+        private Request CreateStringUnicodeRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -407,7 +407,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="StringUrlEncoded"/> and <see cref="StringUrlEncodedAsync"/> operations. </summary>
-        protected Request CreateStringUrlEncodedRequest()
+        private Request CreateStringUrlEncodedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -438,7 +438,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="StringUrlNonEncoded"/> and <see cref="StringUrlNonEncodedAsync"/> operations. </summary>
-        protected Request CreateStringUrlNonEncodedRequest()
+        private Request CreateStringUrlNonEncodedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -469,7 +469,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="StringEmpty"/> and <see cref="StringEmptyAsync"/> operations. </summary>
-        protected Request CreateStringEmptyRequest()
+        private Request CreateStringEmptyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -503,7 +503,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="StringNull"/> and <see cref="StringNullAsync"/> operations. </summary>
         /// <param name="stringPath"> null string value. </param>
-        protected Request CreateStringNullRequest(string stringPath)
+        private Request CreateStringNullRequest(string stringPath)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -537,7 +537,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="EnumValid"/> and <see cref="EnumValidAsync"/> operations. </summary>
         /// <param name="enumPath"> send the value green. </param>
-        protected Request CreateEnumValidRequest(string enumPath)
+        private Request CreateEnumValidRequest(string enumPath)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -571,7 +571,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="EnumNull"/> and <see cref="EnumNullAsync"/> operations. </summary>
         /// <param name="enumPath"> send null should throw. </param>
-        protected Request CreateEnumNullRequest(string enumPath)
+        private Request CreateEnumNullRequest(string enumPath)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -605,7 +605,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ByteMultiByte"/> and <see cref="ByteMultiByteAsync"/> operations. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        protected Request CreateByteMultiByteRequest(byte[] bytePath)
+        private Request CreateByteMultiByteRequest(byte[] bytePath)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -636,7 +636,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="ByteEmpty"/> and <see cref="ByteEmptyAsync"/> operations. </summary>
-        protected Request CreateByteEmptyRequest()
+        private Request CreateByteEmptyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -670,7 +670,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ByteNull"/> and <see cref="ByteNullAsync"/> operations. </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
-        protected Request CreateByteNullRequest(byte[] bytePath)
+        private Request CreateByteNullRequest(byte[] bytePath)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -701,7 +701,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="DateValid"/> and <see cref="DateValidAsync"/> operations. </summary>
-        protected Request CreateDateValidRequest()
+        private Request CreateDateValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -735,7 +735,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="DateNull"/> and <see cref="DateNullAsync"/> operations. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
-        protected Request CreateDateNullRequest(DateTimeOffset datePath)
+        private Request CreateDateNullRequest(DateTimeOffset datePath)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -766,7 +766,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="DateTimeValid"/> and <see cref="DateTimeValidAsync"/> operations. </summary>
-        protected Request CreateDateTimeValidRequest()
+        private Request CreateDateTimeValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -800,7 +800,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="DateTimeNull"/> and <see cref="DateTimeNullAsync"/> operations. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
-        protected Request CreateDateTimeNullRequest(DateTimeOffset dateTimePath)
+        private Request CreateDateTimeNullRequest(DateTimeOffset dateTimePath)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -834,7 +834,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="Base64Url"/> and <see cref="Base64UrlAsync"/> operations. </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
-        protected Request CreateBase64UrlRequest(byte[] base64UrlPath)
+        private Request CreateBase64UrlRequest(byte[] base64UrlPath)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -868,7 +868,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ArrayCsvInPath"/> and <see cref="ArrayCsvInPathAsync"/> operations. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        protected Request CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath)
+        private Request CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -902,7 +902,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="UnixTimeUrl"/> and <see cref="UnixTimeUrlAsync"/> operations. </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        protected Request CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath)
+        private Request CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

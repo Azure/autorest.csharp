@@ -21,7 +21,7 @@ namespace url_multi_collectionFormat
     public partial class QueriesClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
@@ -69,7 +69,7 @@ namespace url_multi_collectionFormat
 
         /// <summary> Create Request for <see cref="ArrayStringMultiNull"/> and <see cref="ArrayStringMultiNullAsync"/> operations. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
-        protected Request CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery = null)
+        private Request CreateArrayStringMultiNullRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -106,7 +106,7 @@ namespace url_multi_collectionFormat
 
         /// <summary> Create Request for <see cref="ArrayStringMultiEmpty"/> and <see cref="ArrayStringMultiEmptyAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
-        protected Request CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery = null)
+        private Request CreateArrayStringMultiEmptyRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -143,7 +143,7 @@ namespace url_multi_collectionFormat
 
         /// <summary> Create Request for <see cref="ArrayStringMultiValid"/> and <see cref="ArrayStringMultiValidAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
-        protected Request CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery = null)
+        private Request CreateArrayStringMultiValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

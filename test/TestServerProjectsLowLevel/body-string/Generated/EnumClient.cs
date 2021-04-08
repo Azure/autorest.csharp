@@ -20,7 +20,7 @@ namespace body_string
     public partial class EnumClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
@@ -65,7 +65,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetNotExpandable"/> and <see cref="GetNotExpandableAsync"/> operations. </summary>
-        protected Request CreateGetNotExpandableRequest()
+        private Request CreateGetNotExpandableRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -98,7 +98,7 @@ namespace body_string
 
         /// <summary> Create Request for <see cref="PutNotExpandable"/> and <see cref="PutNotExpandableAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutNotExpandableRequest(RequestContent requestBody)
+        private Request CreatePutNotExpandableRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -130,7 +130,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetReferenced"/> and <see cref="GetReferencedAsync"/> operations. </summary>
-        protected Request CreateGetReferencedRequest()
+        private Request CreateGetReferencedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -163,7 +163,7 @@ namespace body_string
 
         /// <summary> Create Request for <see cref="PutReferenced"/> and <see cref="PutReferencedAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutReferencedRequest(RequestContent requestBody)
+        private Request CreatePutReferencedRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -195,7 +195,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetReferencedConstant"/> and <see cref="GetReferencedConstantAsync"/> operations. </summary>
-        protected Request CreateGetReferencedConstantRequest()
+        private Request CreateGetReferencedConstantRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -228,7 +228,7 @@ namespace body_string
 
         /// <summary> Create Request for <see cref="PutReferencedConstant"/> and <see cref="PutReferencedConstantAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutReferencedConstantRequest(RequestContent requestBody)
+        private Request CreatePutReferencedConstantRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

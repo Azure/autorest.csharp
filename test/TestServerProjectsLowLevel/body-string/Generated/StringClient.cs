@@ -20,7 +20,7 @@ namespace body_string
     public partial class StringClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
@@ -65,7 +65,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetNull"/> and <see cref="GetNullAsync"/> operations. </summary>
-        protected Request CreateGetNullRequest()
+        private Request CreateGetNullRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -98,7 +98,7 @@ namespace body_string
 
         /// <summary> Create Request for <see cref="PutNull"/> and <see cref="PutNullAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutNullRequest(RequestContent requestBody)
+        private Request CreatePutNullRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -130,7 +130,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetEmpty"/> and <see cref="GetEmptyAsync"/> operations. </summary>
-        protected Request CreateGetEmptyRequest()
+        private Request CreateGetEmptyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -163,7 +163,7 @@ namespace body_string
 
         /// <summary> Create Request for <see cref="PutEmpty"/> and <see cref="PutEmptyAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutEmptyRequest(RequestContent requestBody)
+        private Request CreatePutEmptyRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -195,7 +195,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetMbcs"/> and <see cref="GetMbcsAsync"/> operations. </summary>
-        protected Request CreateGetMbcsRequest()
+        private Request CreateGetMbcsRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -228,7 +228,7 @@ namespace body_string
 
         /// <summary> Create Request for <see cref="PutMbcs"/> and <see cref="PutMbcsAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutMbcsRequest(RequestContent requestBody)
+        private Request CreatePutMbcsRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -260,7 +260,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetWhitespace"/> and <see cref="GetWhitespaceAsync"/> operations. </summary>
-        protected Request CreateGetWhitespaceRequest()
+        private Request CreateGetWhitespaceRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -293,7 +293,7 @@ namespace body_string
 
         /// <summary> Create Request for <see cref="PutWhitespace"/> and <see cref="PutWhitespaceAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutWhitespaceRequest(RequestContent requestBody)
+        private Request CreatePutWhitespaceRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -325,7 +325,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetNotProvided"/> and <see cref="GetNotProvidedAsync"/> operations. </summary>
-        protected Request CreateGetNotProvidedRequest()
+        private Request CreateGetNotProvidedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -355,7 +355,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetBase64Encoded"/> and <see cref="GetBase64EncodedAsync"/> operations. </summary>
-        protected Request CreateGetBase64EncodedRequest()
+        private Request CreateGetBase64EncodedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -385,7 +385,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetBase64UrlEncoded"/> and <see cref="GetBase64UrlEncodedAsync"/> operations. </summary>
-        protected Request CreateGetBase64UrlEncodedRequest()
+        private Request CreateGetBase64UrlEncodedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -418,7 +418,7 @@ namespace body_string
 
         /// <summary> Create Request for <see cref="PutBase64UrlEncoded"/> and <see cref="PutBase64UrlEncodedAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutBase64UrlEncodedRequest(RequestContent requestBody)
+        private Request CreatePutBase64UrlEncodedRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -450,7 +450,7 @@ namespace body_string
         }
 
         /// <summary> Create Request for <see cref="GetNullBase64UrlEncoded"/> and <see cref="GetNullBase64UrlEncodedAsync"/> operations. </summary>
-        protected Request CreateGetNullBase64UrlEncodedRequest()
+        private Request CreateGetNullBase64UrlEncodedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

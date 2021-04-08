@@ -20,7 +20,7 @@ namespace body_complex
     public partial class FlattencomplexClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
@@ -63,7 +63,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetValid"/> and <see cref="GetValidAsync"/> operations. </summary>
-        protected Request CreateGetValidRequest()
+        private Request CreateGetValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

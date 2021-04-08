@@ -21,7 +21,7 @@ namespace url
     public partial class QueriesClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
@@ -66,7 +66,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetBooleanTrue"/> and <see cref="GetBooleanTrueAsync"/> operations. </summary>
-        protected Request CreateGetBooleanTrueRequest()
+        private Request CreateGetBooleanTrueRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -97,7 +97,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetBooleanFalse"/> and <see cref="GetBooleanFalseAsync"/> operations. </summary>
-        protected Request CreateGetBooleanFalseRequest()
+        private Request CreateGetBooleanFalseRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -131,7 +131,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="GetBooleanNull"/> and <see cref="GetBooleanNullAsync"/> operations. </summary>
         /// <param name="boolQuery"> null boolean value. </param>
-        protected Request CreateGetBooleanNullRequest(bool? boolQuery = null)
+        private Request CreateGetBooleanNullRequest(bool? boolQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -165,7 +165,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetIntOneMillion"/> and <see cref="GetIntOneMillionAsync"/> operations. </summary>
-        protected Request CreateGetIntOneMillionRequest()
+        private Request CreateGetIntOneMillionRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -196,7 +196,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetIntNegativeOneMillion"/> and <see cref="GetIntNegativeOneMillionAsync"/> operations. </summary>
-        protected Request CreateGetIntNegativeOneMillionRequest()
+        private Request CreateGetIntNegativeOneMillionRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -230,7 +230,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="GetIntNull"/> and <see cref="GetIntNullAsync"/> operations. </summary>
         /// <param name="intQuery"> null integer value. </param>
-        protected Request CreateGetIntNullRequest(int? intQuery = null)
+        private Request CreateGetIntNullRequest(int? intQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -264,7 +264,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetTenBillion"/> and <see cref="GetTenBillionAsync"/> operations. </summary>
-        protected Request CreateGetTenBillionRequest()
+        private Request CreateGetTenBillionRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -295,7 +295,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="GetNegativeTenBillion"/> and <see cref="GetNegativeTenBillionAsync"/> operations. </summary>
-        protected Request CreateGetNegativeTenBillionRequest()
+        private Request CreateGetNegativeTenBillionRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -329,7 +329,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="GetLongNull"/> and <see cref="GetLongNullAsync"/> operations. </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
-        protected Request CreateGetLongNullRequest(long? longQuery = null)
+        private Request CreateGetLongNullRequest(long? longQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -363,7 +363,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="FloatScientificPositive"/> and <see cref="FloatScientificPositiveAsync"/> operations. </summary>
-        protected Request CreateFloatScientificPositiveRequest()
+        private Request CreateFloatScientificPositiveRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -394,7 +394,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="FloatScientificNegative"/> and <see cref="FloatScientificNegativeAsync"/> operations. </summary>
-        protected Request CreateFloatScientificNegativeRequest()
+        private Request CreateFloatScientificNegativeRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -428,7 +428,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="FloatNull"/> and <see cref="FloatNullAsync"/> operations. </summary>
         /// <param name="floatQuery"> null numeric value. </param>
-        protected Request CreateFloatNullRequest(float? floatQuery = null)
+        private Request CreateFloatNullRequest(float? floatQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -462,7 +462,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="DoubleDecimalPositive"/> and <see cref="DoubleDecimalPositiveAsync"/> operations. </summary>
-        protected Request CreateDoubleDecimalPositiveRequest()
+        private Request CreateDoubleDecimalPositiveRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -493,7 +493,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="DoubleDecimalNegative"/> and <see cref="DoubleDecimalNegativeAsync"/> operations. </summary>
-        protected Request CreateDoubleDecimalNegativeRequest()
+        private Request CreateDoubleDecimalNegativeRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -527,7 +527,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="DoubleNull"/> and <see cref="DoubleNullAsync"/> operations. </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
-        protected Request CreateDoubleNullRequest(double? doubleQuery = null)
+        private Request CreateDoubleNullRequest(double? doubleQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -561,7 +561,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="StringUnicode"/> and <see cref="StringUnicodeAsync"/> operations. </summary>
-        protected Request CreateStringUnicodeRequest()
+        private Request CreateStringUnicodeRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -592,7 +592,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="StringUrlEncoded"/> and <see cref="StringUrlEncodedAsync"/> operations. </summary>
-        protected Request CreateStringUrlEncodedRequest()
+        private Request CreateStringUrlEncodedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -623,7 +623,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="StringEmpty"/> and <see cref="StringEmptyAsync"/> operations. </summary>
-        protected Request CreateStringEmptyRequest()
+        private Request CreateStringEmptyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -657,7 +657,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="StringNull"/> and <see cref="StringNullAsync"/> operations. </summary>
         /// <param name="stringQuery"> null string value. </param>
-        protected Request CreateStringNullRequest(string stringQuery = null)
+        private Request CreateStringNullRequest(string stringQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -694,7 +694,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="EnumValid"/> and <see cref="EnumValidAsync"/> operations. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
-        protected Request CreateEnumValidRequest(string enumQuery = null)
+        private Request CreateEnumValidRequest(string enumQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -731,7 +731,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="EnumNull"/> and <see cref="EnumNullAsync"/> operations. </summary>
         /// <param name="enumQuery"> null string value. </param>
-        protected Request CreateEnumNullRequest(string enumQuery = null)
+        private Request CreateEnumNullRequest(string enumQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -768,7 +768,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ByteMultiByte"/> and <see cref="ByteMultiByteAsync"/> operations. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        protected Request CreateByteMultiByteRequest(byte[] byteQuery = null)
+        private Request CreateByteMultiByteRequest(byte[] byteQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -802,7 +802,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="ByteEmpty"/> and <see cref="ByteEmptyAsync"/> operations. </summary>
-        protected Request CreateByteEmptyRequest()
+        private Request CreateByteEmptyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -836,7 +836,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ByteNull"/> and <see cref="ByteNullAsync"/> operations. </summary>
         /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
-        protected Request CreateByteNullRequest(byte[] byteQuery = null)
+        private Request CreateByteNullRequest(byte[] byteQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -870,7 +870,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="DateValid"/> and <see cref="DateValidAsync"/> operations. </summary>
-        protected Request CreateDateValidRequest()
+        private Request CreateDateValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -904,7 +904,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="DateNull"/> and <see cref="DateNullAsync"/> operations. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
-        protected Request CreateDateNullRequest(DateTimeOffset? dateQuery = null)
+        private Request CreateDateNullRequest(DateTimeOffset? dateQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -938,7 +938,7 @@ namespace url
         }
 
         /// <summary> Create Request for <see cref="DateTimeValid"/> and <see cref="DateTimeValidAsync"/> operations. </summary>
-        protected Request CreateDateTimeValidRequest()
+        private Request CreateDateTimeValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -972,7 +972,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="DateTimeNull"/> and <see cref="DateTimeNullAsync"/> operations. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
-        protected Request CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery = null)
+        private Request CreateDateTimeNullRequest(DateTimeOffset? dateTimeQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1009,7 +1009,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ArrayStringCsvValid"/> and <see cref="ArrayStringCsvValidAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        protected Request CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery = null)
+        private Request CreateArrayStringCsvValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1046,7 +1046,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ArrayStringCsvNull"/> and <see cref="ArrayStringCsvNullAsync"/> operations. </summary>
         /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
-        protected Request CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery = null)
+        private Request CreateArrayStringCsvNullRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1083,7 +1083,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ArrayStringCsvEmpty"/> and <see cref="ArrayStringCsvEmptyAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
-        protected Request CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery = null)
+        private Request CreateArrayStringCsvEmptyRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1120,7 +1120,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ArrayStringNoCollectionFormatEmpty"/> and <see cref="ArrayStringNoCollectionFormatEmptyAsync"/> operations. </summary>
         /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
-        protected Request CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery = null)
+        private Request CreateArrayStringNoCollectionFormatEmptyRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1157,7 +1157,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ArrayStringSsvValid"/> and <see cref="ArrayStringSsvValidAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
-        protected Request CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery = null)
+        private Request CreateArrayStringSsvValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1194,7 +1194,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ArrayStringTsvValid"/> and <see cref="ArrayStringTsvValidAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
-        protected Request CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery = null)
+        private Request CreateArrayStringTsvValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1231,7 +1231,7 @@ namespace url
 
         /// <summary> Create Request for <see cref="ArrayStringPipesValid"/> and <see cref="ArrayStringPipesValidAsync"/> operations. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
-        protected Request CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery = null)
+        private Request CreateArrayStringPipesValidRequest(IEnumerable<string> arrayQuery = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

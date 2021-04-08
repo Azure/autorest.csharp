@@ -20,7 +20,7 @@ namespace header
     public partial class HeaderClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
@@ -68,7 +68,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ParamExistingKey"/> and <see cref="ParamExistingKeyAsync"/> operations. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
-        protected Request CreateParamExistingKeyRequest(string userAgent)
+        private Request CreateParamExistingKeyRequest(string userAgent)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -99,7 +99,7 @@ namespace header
         }
 
         /// <summary> Create Request for <see cref="ResponseExistingKey"/> and <see cref="ResponseExistingKeyAsync"/> operations. </summary>
-        protected Request CreateResponseExistingKeyRequest()
+        private Request CreateResponseExistingKeyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -132,7 +132,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ParamProtectedKey"/> and <see cref="ParamProtectedKeyAsync"/> operations. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
-        protected Request CreateParamProtectedKeyRequest(string contentType)
+        private Request CreateParamProtectedKeyRequest(string contentType)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -162,7 +162,7 @@ namespace header
         }
 
         /// <summary> Create Request for <see cref="ResponseProtectedKey"/> and <see cref="ResponseProtectedKeyAsync"/> operations. </summary>
-        protected Request CreateResponseProtectedKeyRequest()
+        private Request CreateResponseProtectedKeyRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -198,7 +198,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamInteger"/> and <see cref="ParamIntegerAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
-        protected Request CreateParamIntegerRequest(string scenario, int value)
+        private Request CreateParamIntegerRequest(string scenario, int value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -233,7 +233,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseInteger"/> and <see cref="ResponseIntegerAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        protected Request CreateResponseIntegerRequest(string scenario)
+        private Request CreateResponseIntegerRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -270,7 +270,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamLong"/> and <see cref="ParamLongAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
-        protected Request CreateParamLongRequest(string scenario, long value)
+        private Request CreateParamLongRequest(string scenario, long value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -305,7 +305,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseLong"/> and <see cref="ResponseLongAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        protected Request CreateResponseLongRequest(string scenario)
+        private Request CreateResponseLongRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -342,7 +342,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamFloat"/> and <see cref="ParamFloatAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
-        protected Request CreateParamFloatRequest(string scenario, float value)
+        private Request CreateParamFloatRequest(string scenario, float value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -377,7 +377,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseFloat"/> and <see cref="ResponseFloatAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        protected Request CreateResponseFloatRequest(string scenario)
+        private Request CreateResponseFloatRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -414,7 +414,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamDouble"/> and <see cref="ParamDoubleAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
-        protected Request CreateParamDoubleRequest(string scenario, double value)
+        private Request CreateParamDoubleRequest(string scenario, double value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -449,7 +449,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseDouble"/> and <see cref="ResponseDoubleAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        protected Request CreateResponseDoubleRequest(string scenario)
+        private Request CreateResponseDoubleRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -486,7 +486,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamBool"/> and <see cref="ParamBoolAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
-        protected Request CreateParamBoolRequest(string scenario, bool value)
+        private Request CreateParamBoolRequest(string scenario, bool value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -521,7 +521,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseBool"/> and <see cref="ResponseBoolAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        protected Request CreateResponseBoolRequest(string scenario)
+        private Request CreateResponseBoolRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -558,7 +558,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamString"/> and <see cref="ParamStringAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
-        protected Request CreateParamStringRequest(string scenario, string value = null)
+        private Request CreateParamStringRequest(string scenario, string value = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -596,7 +596,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseString"/> and <see cref="ResponseStringAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        protected Request CreateResponseStringRequest(string scenario)
+        private Request CreateResponseStringRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -633,7 +633,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamDate"/> and <see cref="ParamDateAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
-        protected Request CreateParamDateRequest(string scenario, DateTimeOffset value)
+        private Request CreateParamDateRequest(string scenario, DateTimeOffset value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -668,7 +668,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseDate"/> and <see cref="ResponseDateAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        protected Request CreateResponseDateRequest(string scenario)
+        private Request CreateResponseDateRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -705,7 +705,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamDatetime"/> and <see cref="ParamDatetimeAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
-        protected Request CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
+        private Request CreateParamDatetimeRequest(string scenario, DateTimeOffset value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -740,7 +740,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseDatetime"/> and <see cref="ResponseDatetimeAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        protected Request CreateResponseDatetimeRequest(string scenario)
+        private Request CreateResponseDatetimeRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -777,7 +777,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamDatetimeRfc1123"/> and <see cref="ParamDatetimeRfc1123Async"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
-        protected Request CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value = null)
+        private Request CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -815,7 +815,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseDatetimeRfc1123"/> and <see cref="ResponseDatetimeRfc1123Async"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        protected Request CreateResponseDatetimeRfc1123Request(string scenario)
+        private Request CreateResponseDatetimeRfc1123Request(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -852,7 +852,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamDuration"/> and <see cref="ParamDurationAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
-        protected Request CreateParamDurationRequest(string scenario, TimeSpan value)
+        private Request CreateParamDurationRequest(string scenario, TimeSpan value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -887,7 +887,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseDuration"/> and <see cref="ResponseDurationAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        protected Request CreateResponseDurationRequest(string scenario)
+        private Request CreateResponseDurationRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -924,7 +924,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamByte"/> and <see cref="ParamByteAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
-        protected Request CreateParamByteRequest(string scenario, byte[] value)
+        private Request CreateParamByteRequest(string scenario, byte[] value)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -959,7 +959,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseByte"/> and <see cref="ResponseByteAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        protected Request CreateResponseByteRequest(string scenario)
+        private Request CreateResponseByteRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -996,7 +996,7 @@ namespace header
         /// <summary> Create Request for <see cref="ParamEnum"/> and <see cref="ParamEnumAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
-        protected Request CreateParamEnumRequest(string scenario, string value = null)
+        private Request CreateParamEnumRequest(string scenario, string value = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1034,7 +1034,7 @@ namespace header
 
         /// <summary> Create Request for <see cref="ResponseEnum"/> and <see cref="ResponseEnumAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        protected Request CreateResponseEnumRequest(string scenario)
+        private Request CreateResponseEnumRequest(string scenario)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1065,7 +1065,7 @@ namespace header
         }
 
         /// <summary> Create Request for <see cref="CustomRequestId"/> and <see cref="CustomRequestIdAsync"/> operations. </summary>
-        protected Request CreateCustomRequestIdRequest()
+        private Request CreateCustomRequestIdRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

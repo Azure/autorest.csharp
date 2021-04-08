@@ -20,7 +20,7 @@ namespace body_complex
     public partial class PolymorphismClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
@@ -65,7 +65,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetValid"/> and <see cref="GetValidAsync"/> operations. </summary>
-        protected Request CreateGetValidRequest()
+        private Request CreateGetValidRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -98,7 +98,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutValid"/> and <see cref="PutValidAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutValidRequest(RequestContent requestBody)
+        private Request CreatePutValidRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -130,7 +130,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetDotSyntax"/> and <see cref="GetDotSyntaxAsync"/> operations. </summary>
-        protected Request CreateGetDotSyntaxRequest()
+        private Request CreateGetDotSyntaxRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -160,7 +160,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetComposedWithDiscriminator"/> and <see cref="GetComposedWithDiscriminatorAsync"/> operations. </summary>
-        protected Request CreateGetComposedWithDiscriminatorRequest()
+        private Request CreateGetComposedWithDiscriminatorRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -190,7 +190,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetComposedWithoutDiscriminator"/> and <see cref="GetComposedWithoutDiscriminatorAsync"/> operations. </summary>
-        protected Request CreateGetComposedWithoutDiscriminatorRequest()
+        private Request CreateGetComposedWithoutDiscriminatorRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -220,7 +220,7 @@ namespace body_complex
         }
 
         /// <summary> Create Request for <see cref="GetComplicated"/> and <see cref="GetComplicatedAsync"/> operations. </summary>
-        protected Request CreateGetComplicatedRequest()
+        private Request CreateGetComplicatedRequest()
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -253,7 +253,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutComplicated"/> and <see cref="PutComplicatedAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutComplicatedRequest(RequestContent requestBody)
+        private Request CreatePutComplicatedRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -288,7 +288,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutMissingDiscriminator"/> and <see cref="PutMissingDiscriminatorAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutMissingDiscriminatorRequest(RequestContent requestBody)
+        private Request CreatePutMissingDiscriminatorRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -323,7 +323,7 @@ namespace body_complex
 
         /// <summary> Create Request for <see cref="PutValidMissingRequired"/> and <see cref="PutValidMissingRequiredAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreatePutValidMissingRequiredRequest(RequestContent requestBody)
+        private Request CreatePutValidMissingRequiredRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
