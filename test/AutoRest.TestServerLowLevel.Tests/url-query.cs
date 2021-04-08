@@ -133,45 +133,5 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public void UrlQueriesArrayMultiValid() => TestStatus(async (host) => await new url_multi_collectionFormat.QueriesClient(Key, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
-
-        public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[]
-        {
-            "UrlQueriesBoolFalse",
-            "UrlQueriesBoolTrue",
-            "UrlQueriesBoolNull",
-            "UrlQueriesIntPositive",
-            "UrlQueriesIntNegative",
-            "UrlQueriesIntNull",
-            "UrlQueriesLongPositive",
-            "UrlQueriesLongNegative",
-            "UrlQueriesLongNull",
-            "UrlQueriesFloatPositive",
-            "UrlQueriesFloatNegative",
-            "UrlQueriesFloatNull",
-            "UrlQueriesDoublePositive",
-            "UrlQueriesDoubleNegative",
-            "UrlQueriesDoubleNull",
-            "UrlQueriesStringUrlEncoded",
-            "UrlQueriesStringEmpty",
-            "UrlQueriesStringNull",
-            "UrlQueriesEnumValid",
-            "UrlQueriesEnumNull",
-            "UrlQueriesByteMultiByte",
-            "UrlQueriesByteEmpty",
-            "UrlQueriesByteNull",
-            "UrlQueriesDateValid",
-            "UrlQueriesDateNull",
-            "UrlQueriesDateTimeValid",
-            "UrlQueriesDateTimeNull",
-            "UrlQueriesArrayCsvNull",
-            "UrlQueriesArrayCsvEmpty",
-            "UrlQueriesArrayCsvValid",
-            "UrlQueriesArrayMultiNull",
-            "UrlQueriesArrayMultiEmpty",
-            "UrlQueriesArrayMultiValid",
-            "UrlQueriesArraySsvValid",
-            "UrlQueriesArrayPipesValid",
-            "UrlQueriesArrayTsvValid",
-        };
     }
 }

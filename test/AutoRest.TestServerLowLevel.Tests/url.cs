@@ -93,28 +93,5 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task UrlPathsDoublePositive() => TestStatus(async (host) => await new PathsClient(Key, host).DoubleDecimalPositiveAsync());
-
-        public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[] {"UrlPathsBoolFalse",
-            "UrlPathsBoolTrue",
-            "UrlPathsIntPositive",
-            "UrlPathsIntNegative",
-            "UrlPathsLongPositive",
-            "UrlPathsLongNegative",
-            "UrlPathsFloatPositive",
-            "UrlPathsFloatNegative",
-            "UrlPathsDoublePositive",
-            "UrlPathsDoubleNegative",
-            "UrlPathsStringUrlEncoded",
-            "UrlPathsStringUrlNonEncoded",
-            "UrlPathsStringEmpty",
-            "UrlPathsEnumValid",
-            "UrlPathsByteMultiByte",
-            "UrlPathsByteEmpty",
-            "UrlPathsDateValid",
-            "UrlPathsDateTimeValid",
-            "UrlPathsStringBase64Url",
-            "UrlPathsArrayCSVInPath",
-            "UrlPathsIntUnixTime"
-        };
     }
 }

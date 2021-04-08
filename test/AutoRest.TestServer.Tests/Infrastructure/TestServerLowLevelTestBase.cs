@@ -25,8 +25,6 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             _version = version;
         }
 
-        public virtual IEnumerable<string> AdditionalKnownScenarios { get; } = Array.Empty<string>();
-
         public Task TestStatus(Func<Uri, Response> test, bool ignoreScenario = false)
         {
             return TestStatus(host => Task.FromResult(test(host)), ignoreScenario);

@@ -150,45 +150,5 @@ namespace AutoRest.TestServer.Tests
 
             Assert.AreEqual("9223372036854775807", queryValue);
         }
-
-        public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[]
-        {
-            "UrlQueriesBoolFalse",
-            "UrlQueriesBoolTrue",
-            "UrlQueriesBoolNull",
-            "UrlQueriesIntPositive",
-            "UrlQueriesIntNegative",
-            "UrlQueriesIntNull",
-            "UrlQueriesLongPositive",
-            "UrlQueriesLongNegative",
-            "UrlQueriesLongNull",
-            "UrlQueriesFloatPositive",
-            "UrlQueriesFloatNegative",
-            "UrlQueriesFloatNull",
-            "UrlQueriesDoublePositive",
-            "UrlQueriesDoubleNegative",
-            "UrlQueriesDoubleNull",
-            "UrlQueriesStringUrlEncoded",
-            "UrlQueriesStringEmpty",
-            "UrlQueriesStringNull",
-            "UrlQueriesEnumValid",
-            "UrlQueriesEnumNull",
-            "UrlQueriesByteMultiByte",
-            "UrlQueriesByteEmpty",
-            "UrlQueriesByteNull",
-            "UrlQueriesDateValid",
-            "UrlQueriesDateNull",
-            "UrlQueriesDateTimeValid",
-            "UrlQueriesDateTimeNull",
-            "UrlQueriesArrayCsvNull",
-            "UrlQueriesArrayCsvEmpty",
-            "UrlQueriesArrayCsvValid",
-            "UrlQueriesArrayMultiNull",
-            "UrlQueriesArrayMultiEmpty",
-            "UrlQueriesArrayMultiValid",
-            "UrlQueriesArraySsvValid",
-            "UrlQueriesArrayPipesValid",
-            "UrlQueriesArrayTsvValid",
-        };
     }
 }
