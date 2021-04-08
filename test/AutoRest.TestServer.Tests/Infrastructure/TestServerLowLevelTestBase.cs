@@ -15,7 +15,7 @@ using NUnit.Framework;
 namespace AutoRest.TestServer.Tests.Infrastructure
 {
     [TestFixture(TestServerVersion.V1)]
-    public class TestServerLowLevelTestBase
+    public abstract class TestServerLowLevelTestBase
     {
         private readonly TestServerVersion _version;
         protected static AzureKeyCredential Key = new AzureKeyCredential("NOT-A-VALID-KEY");

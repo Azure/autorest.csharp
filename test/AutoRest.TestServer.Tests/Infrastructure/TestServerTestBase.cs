@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
     [Parallelizable(ParallelScope.Fixtures)]
     [TestFixture(TestServerVersion.V1)]
     [TestFixture(TestServerVersion.V2)]
-    public class TestServerTestBase
+    public abstract class TestServerTestBase
     {
         private readonly TestServerVersion _version;
         internal static ClientDiagnostics ClientDiagnostics = new ClientDiagnostics(new TestOptions());
