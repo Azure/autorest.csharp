@@ -21,7 +21,7 @@ namespace Azure.AI.DocumentTranslation
     public partial class DocumentTranslationClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
         private string endpoint;
         private readonly string apiVersion;
