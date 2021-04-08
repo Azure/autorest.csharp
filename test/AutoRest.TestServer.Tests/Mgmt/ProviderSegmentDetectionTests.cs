@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
 
-using AutoRest.CSharp.Output.Models.Type.Decorate;
+using AutoRest.CSharp.Mgmt.Decorator;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt

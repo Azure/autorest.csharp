@@ -1,13 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.Output;
 
-namespace AutoRest.CSharp.Generation.Writers
+namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class ArmResourceWriter
+    internal class ResourceWriter
     {
-        public void WriteResource(CodeWriter writer, ArmResource resource)
+        public void WriteResource(CodeWriter writer, Resource resource)
         {
             var cs = resource.Type;
 
