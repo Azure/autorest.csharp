@@ -14,50 +14,45 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
 {
-    [Parallelizable(ParallelScope.Fixtures)]
     [TestFixture(TestServerVersion.V1)]
-    [TestFixture(TestServerVersion.V2)]
-    public abstract class TestServerTestBase
+    public abstract class TestServerLowLevelTestBase
     {
         private readonly TestServerVersion _version;
-        internal static ClientDiagnostics ClientDiagnostics = new ClientDiagnostics(new TestOptions());
+        protected static AzureKeyCredential Key = new AzureKeyCredential("NOT-A-VALID-KEY");
 
-        public TestServerTestBase(TestServerVersion version)
+        public TestServerLowLevelTestBase(TestServerVersion version)
         {
             _version = version;
         }
 
-        public Task TestStatus(Func<Uri, HttpPipeline, Response> test, bool ignoreScenario = false, bool useSimplePipeline = false)
+        public Task TestStatus(Func<Uri, Response> test, bool ignoreScenario = false)
         {
-            return TestStatus((host, pipeline) => Task.FromResult(test(host, pipeline)), ignoreScenario, useSimplePipeline);
+            return TestStatus(host => Task.FromResult(test(host)), ignoreScenario);
         }
 
-        public Task TestStatus(Func<Uri, HttpPipeline, Task<Response>> test, bool ignoreScenario = false, bool useSimplePipeline = false)
+        public Task TestStatus(Func<Uri, Task<Response>> test, bool ignoreScenario = false)
         {
-            return TestStatus(GetScenarioName(), test, ignoreScenario, useSimplePipeline);
+            return TestStatus(GetScenarioName(), test, ignoreScenario);
         }
 
-        private Task TestStatus(string scenario, Func<Uri, HttpPipeline, Task<Response>> test, bool ignoreScenario = false, bool useSimplePipeline = false) => Test(scenario, async (host, pipeline) =>
+        private Task TestStatus(string scenario, Func<Uri, Task<Response>> test, bool ignoreScenario = false) => Test(scenario, async host =>
         {
-            var response = await test(host, pipeline);
+            var response = await test(host);
             Assert.That(response.Status, Is.EqualTo(200).Or.EqualTo(201).Or.EqualTo(202).Or.EqualTo(204), "Unexpected response " + response.ReasonPhrase);
-        }, ignoreScenario, useSimplePipeline);
+        }, ignoreScenario);
 
-        public Task Test(Action<Uri, HttpPipeline> test, bool ignoreScenario = false, bool useSimplePipeline = false)
+        public Task Test(Action<Uri> test, bool ignoreScenario = false) => Test(GetScenarioName(), host =>
         {
-            return Test(GetScenarioName(), (host, pipeline) =>
-            {
-                test(host, pipeline);
-                return Task.CompletedTask;
-            }, ignoreScenario, useSimplePipeline);
+            test(host);
+            return Task.CompletedTask;
+        }, ignoreScenario);
+
+        public Task Test(Func<Uri, Task> test, bool ignoreScenario = false)
+        {
+            return Test(GetScenarioName(), test, ignoreScenario);
         }
 
-        public Task Test(Func<Uri, HttpPipeline, Task> test, bool ignoreScenario = false, bool useSimplePipeline = false)
-        {
-            return Test(GetScenarioName(), test, ignoreScenario, useSimplePipeline);
-        }
-
-        private async Task Test(string scenario, Func<Uri, HttpPipeline, Task> test, bool ignoreScenario = false, bool useSimplePipeline = false)
+        private async Task Test(string scenario, Func<Uri, Task> test, bool ignoreScenario = false)
         {
             var scenarioParameter = ignoreScenario ? new string[0] : new[] {scenario};
             var server = TestServerSession.Start(scenario, _version, false, scenarioParameter);
@@ -72,11 +67,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 };
                 testClientOptions.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
 
-                var pipeline = useSimplePipeline
-                    ? new HttpPipeline(transport)
-                    : HttpPipelineBuilder.Build(testClientOptions);
-
-                await test(server.Host, pipeline);
+                await test(server.Host);
             }
             catch (Exception ex)
             {
