@@ -94,9 +94,9 @@ $testNamesLowLevel =
 
 if (!($Exclude -contains "TestServerLowLevel"))
 {
+    $llcArgs = "--low-level-client=true --credential-types=AzureKeyCredential --credential-header-name=Fake-Subscription-Key"
     foreach ($testName in $testNamesLowLevel)
     {
-        $llcArgs = "--low-level-client=true --credential-types=AzureKeyCredential --credential-header-name=Fake-Subscription-Key"
         Add-TestServer-Swagger "$testName-LowLevel" $testName $testServerLowLevelDirectory $llcArgs
     }
 }
@@ -121,11 +121,8 @@ if (!($Exclude -contains "TestProjects"))
             $inputFile = Join-Path $directory "$testName.json"
             $testArguments ="--require=$configurationPath --input-file=$inputFile"
         }
-        $swaggerDefinitions[$testName] = @{
-            'projectName'=$testName;
-            'output'=$directory;
-            'arguments'=$testArguments
-        }
+
+        Add-Swagger $testName $testName $directory $testArguments
     }
 }
 # Sample configuration
@@ -146,11 +143,7 @@ if (!($Exclude -contains "Samples"))
     {
         $projectDirectory = Join-Path $repoRoot 'samples' $projectName
         $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
-        $swaggerDefinitions[$projectName] = @{
-            'projectName'=$projectName;
-            'output'=$projectDirectory;
-            'arguments'="--require=$sampleConfigurationPath"
-        }
+        Add-Swagger $projectName $projectName $projectDirectory "--require=$sampleConfigurationPath"
     }
 }
 
@@ -167,11 +160,7 @@ if (!($Exclude -contains "SmokeTests"))
 
             $projectDirectory = Join-Path $repoRoot 'samples' 'smoketests' $projectName
 
-            $swaggerDefinitions[$projectName] = @{
-                'projectName'=$projectName;
-                'output'=$projectDirectory;
-                'arguments'="--require=$configurationPath $args $input"
-            }
+            Add-Swagger $projectName $projectName $projectDirectory "--require=$configurationPath $args $input"
         }
     }
 }
