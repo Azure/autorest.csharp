@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
+
 using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -25,6 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
             currentToken.NoPredecessor = offset == 0;
             do
             {
+                currentToken.IndexFoundAt = offset;
                 offset += ProviderSegment.Providers.Length;
                 nextReference = path.IndexOf('{', offset);
                 currentToken.HasReferenceSuccessor = nextReference > -1;

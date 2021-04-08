@@ -1,1 +1,22 @@
-{"OutputFolder":".","Namespace":"body_file","LibraryName":null,"SharedSourceFolders":["..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared","..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"],"AzureArm":false,"PublicClients":true,"ModelNamespace":true,"HeadAsBoolean":false,"SkipCSProjPackageReference":true,"LowLevelClient":false,"CredentialTypes":[],"CredentialScopes":[],"CredentialHeaderName":"api-key","OperationGroupToResourceType":{},"OperationGroupToResource":{},"ResourceRename":{}}
+{
+  "OutputFolder": ".",
+  "Namespace": "body_file",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "AzureArm": false,
+  "PublicClients": true,
+  "ModelNamespace": true,
+  "HeadAsBoolean": false,
+  "SkipCSProjPackageReference": true,
+  "LowLevelClient": false,
+  "CredentialTypes": [],
+  "CredentialScopes": [],
+  "CredentialHeaderName": "api-key",
+  "OperationGroupToResourceType": {},
+  "OperationGroupToResource": {},
+  "ResourceRename": {},
+  "OperationGroupToParent": {}
+}

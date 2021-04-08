@@ -1,4 +1,4 @@
-# ModelNamespace
+# OperationGroupMappings
 ### AutoRest Configuration
 > see https://aka.ms/autorest
 
@@ -10,8 +10,7 @@ model-namespace: false
 input-file: $(this-folder)/OperationGroupMappings.json
 namespace: Azure.OperationGroupMappings
 operation-group-to-resource-type:
-   Operations: /providers/Microsoft.Compute/operations
+   AvailabilitySets: Microsoft.Compute/availabilitySets
 operation-group-to-resource:
-   Operations: Operation
    AvailabilitySets: AvailabilitySet
 ```

@@ -17,12 +17,12 @@ namespace TenantOnly
 
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         /// <param name="error"> The details of the error. </param>
-        internal ErrorResponse(ErrorDetails error)
+        internal ErrorResponse(string error)
         {
             Error = error;
         }
 
         /// <summary> The details of the error. </summary>
-        public ErrorDetails Error { get; }
+        public string Error { get; }
     }
 }

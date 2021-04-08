@@ -15,48 +15,26 @@ namespace TenantOnly
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties");
-            writer.WriteStartObject();
-            writer.WriteEndObject();
+            if (Optional.IsDefined(Bar))
+            {
+                writer.WritePropertyName("bar");
+                writer.WriteStringValue(Bar);
+            }
             writer.WriteEndObject();
         }
 
         internal static BillingAccountData DeserializeBillingAccountData(JsonElement element)
         {
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
+            Optional<string> bar = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("bar"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.NameEquals("id"))
-                        {
-                            id = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("name"))
-                        {
-                            name = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("type"))
-                        {
-                            type = property0.Value.GetString();
-                            continue;
-                        }
-                    }
+                    bar = property.Value.GetString();
                     continue;
                 }
             }
-            return new BillingAccountData(id.Value, name.Value, type.Value);
+            return new BillingAccountData(bar.Value);
         }
     }
 }
