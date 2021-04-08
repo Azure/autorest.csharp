@@ -20,9 +20,11 @@ namespace url
     /// <summary> The Queries service client. </summary>
     public partial class QueriesClient
     {
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         protected HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
+        private readonly string apiVersion;
 
         /// <summary> Initializes a new instance of QueriesClient for mocking. </summary>
         protected QueriesClient()
@@ -33,7 +35,7 @@ namespace url
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        internal QueriesClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientOptions options = null)
+        public QueriesClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestUrlTestServiceClientOptions options = null)
         {
             if (credential == null)
             {
@@ -44,6 +46,7 @@ namespace url
             options ??= new AutoRestUrlTestServiceClientOptions();
             Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
             this.endpoint = endpoint;
+            apiVersion = options.Version;
         }
 
         /// <summary> Get true Boolean value on path. </summary>

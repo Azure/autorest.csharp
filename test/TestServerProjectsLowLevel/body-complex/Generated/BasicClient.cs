@@ -19,10 +19,11 @@ namespace body_complex
     /// <summary> The Basic service client. </summary>
     public partial class BasicClient
     {
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         protected HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
-        private string apiVersion;
+        private readonly string apiVersion;
 
         /// <summary> Initializes a new instance of BasicClient for mocking. </summary>
         protected BasicClient()
@@ -32,24 +33,19 @@ namespace body_complex
         /// <summary> Initializes a new instance of BasicClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <param name="apiVersion"> Api Version. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        internal BasicClient(AzureKeyCredential credential, Uri endpoint = null, string apiVersion = "2016-02-29", AutoRestComplexTestServiceClientOptions options = null)
+        public BasicClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
             if (credential == null)
             {
                 throw new ArgumentNullException(nameof(credential));
             }
             endpoint ??= new Uri("http://localhost:3000");
-            if (apiVersion == null)
-            {
-                throw new ArgumentNullException(nameof(apiVersion));
-            }
 
             options ??= new AutoRestComplexTestServiceClientOptions();
             Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
             this.endpoint = endpoint;
-            this.apiVersion = apiVersion;
+            apiVersion = options.Version;
         }
 
         /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>

@@ -19,9 +19,11 @@ namespace header
     /// <summary> The Header service client. </summary>
     public partial class HeaderClient
     {
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         protected HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
+        private readonly string apiVersion;
 
         /// <summary> Initializes a new instance of HeaderClient for mocking. </summary>
         protected HeaderClient()
@@ -32,7 +34,7 @@ namespace header
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        internal HeaderClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATHeaderServiceClientOptions options = null)
+        public HeaderClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATHeaderServiceClientOptions options = null)
         {
             if (credential == null)
             {
@@ -43,6 +45,7 @@ namespace header
             options ??= new AutoRestSwaggerBATHeaderServiceClientOptions();
             Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
             this.endpoint = endpoint;
+            apiVersion = options.Version;
         }
 
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>

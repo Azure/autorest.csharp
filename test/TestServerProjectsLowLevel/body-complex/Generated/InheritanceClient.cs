@@ -19,9 +19,11 @@ namespace body_complex
     /// <summary> The Inheritance service client. </summary>
     public partial class InheritanceClient
     {
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         protected HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
+        private readonly string apiVersion;
 
         /// <summary> Initializes a new instance of InheritanceClient for mocking. </summary>
         protected InheritanceClient()
@@ -32,7 +34,7 @@ namespace body_complex
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        internal InheritanceClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
+        public InheritanceClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
         {
             if (credential == null)
             {
@@ -43,6 +45,7 @@ namespace body_complex
             options ??= new AutoRestComplexTestServiceClientOptions();
             Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
             this.endpoint = endpoint;
+            apiVersion = options.Version;
         }
 
         /// <summary> Get complex types that extend others. </summary>

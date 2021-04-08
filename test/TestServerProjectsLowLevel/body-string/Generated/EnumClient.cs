@@ -19,9 +19,11 @@ namespace body_string
     /// <summary> The Enum service client. </summary>
     public partial class EnumClient
     {
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         protected HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
+        private readonly string apiVersion;
 
         /// <summary> Initializes a new instance of EnumClient for mocking. </summary>
         protected EnumClient()
@@ -32,7 +34,7 @@ namespace body_string
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        internal EnumClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATServiceClientOptions options = null)
+        public EnumClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestSwaggerBATServiceClientOptions options = null)
         {
             if (credential == null)
             {
@@ -43,6 +45,7 @@ namespace body_string
             options ??= new AutoRestSwaggerBATServiceClientOptions();
             Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
             this.endpoint = endpoint;
+            apiVersion = options.Version;
         }
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>

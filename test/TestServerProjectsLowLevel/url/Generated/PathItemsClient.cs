@@ -19,11 +19,13 @@ namespace url
     /// <summary> The PathItems service client. </summary>
     public partial class PathItemsClient
     {
+        /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         protected HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private string globalStringPath;
         private Uri endpoint;
         private string globalStringQuery;
+        private readonly string apiVersion;
 
         /// <summary> Initializes a new instance of PathItemsClient for mocking. </summary>
         protected PathItemsClient()
@@ -36,7 +38,7 @@ namespace url
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="globalStringQuery"> should contain value null. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        internal PathItemsClient(string globalStringPath, AzureKeyCredential credential, Uri endpoint = null, string globalStringQuery = null, AutoRestUrlTestServiceClientOptions options = null)
+        public PathItemsClient(string globalStringPath, AzureKeyCredential credential, Uri endpoint = null, string globalStringQuery = null, AutoRestUrlTestServiceClientOptions options = null)
         {
             if (globalStringPath == null)
             {
@@ -53,6 +55,7 @@ namespace url
             this.globalStringPath = globalStringPath;
             this.endpoint = endpoint;
             this.globalStringQuery = globalStringQuery;
+            apiVersion = options.Version;
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
