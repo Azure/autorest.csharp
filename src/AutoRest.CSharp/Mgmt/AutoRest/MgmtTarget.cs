@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var extensionsWriter = new CodeWriter();
             var resourceGroupExtensions = context.Library.ResourceGroupExtensions;
-            var resources = context.Library.ArmResource;
+            var resources = context.Library.ResourceGroupExtensionResource;
             resourceGroupExtensionsWriter.WriteExtension(extensionsWriter, resourceGroupExtensions, resources);
             project.AddGeneratedFile("ResourceGroupExtensions.cs", extensionsWriter.ToString());
         }

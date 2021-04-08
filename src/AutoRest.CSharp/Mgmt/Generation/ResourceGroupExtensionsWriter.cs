@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using Azure.Core.Pipeline;
 
@@ -11,10 +12,11 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ResourceGroupExtensionsWriter
     {
-        public void WriteExtension(CodeWriter writer, ResourceGroupExtensions resourceGroupExtensions, IEnumerable<ArmResource> armResources)
+        public void WriteExtension(CodeWriter writer, ResourceGroupExtensions resourceGroupExtensions, IDictionary<OperationGroup, ArmResource> armResources)
         {
             var cs = resourceGroupExtensions.Type;
             var @namespace = cs.Namespace;
+            writer.UseNamespace(@"System");
             writer.UseNamespace(@"Azure.ResourceManager.Core");
             using (writer.Namespace(@namespace))
             {
@@ -23,10 +25,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (var item in armResources)
                     {
-                        writer.Line($"#region {item.Type.Name:D}s");
-                        WriteGetContainers(writer, item);
-                        writer.LineRaw("#endregion");
-                        writer.Line();
+                        if (item.Key.Parent.Equals("resourceGroups"))
+                        {
+                            writer.Line($"#region {item.Value.Type.Name:D}s");
+                            WriteGetContainers(writer, item.Value);
+                            writer.LineRaw("#endregion");
+                            writer.Line();
+                        }
                     }
                 }
             }
@@ -39,7 +44,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentation("return", $"Returns an <see cref=\"{armResource.Type.Name:D}Container\" /> object.");
             using (writer.Scope($"public static {armResource.Type.Name:D}Container Get{armResource.Type.Name:D}s (this ResourceGroupOperations resourceGroup)"))
             {
-                writer.Line($"return new {armResource.Type.Name:D}Container(resourceGroup);");
+                // TODO: Bring this back after container class implemented
+                // writer.Line($"return new {armResource.Type.Name:D}Container(resourceGroup);");
+                writer.LineRaw("throw new NotImplementedException();");
             }
         }
     }
