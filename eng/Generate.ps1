@@ -16,6 +16,22 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
+
+function Add-Swagger ([string]$name, [string]$projectName, [string]$output, [string]$arguments) {
+    $swaggerDefinitions[$name] = @{
+        'projectName'=$projectName;
+        'output'=$output;
+        'arguments'=$arguments
+    }
+}
+
+function Add-TestServer-Swagger ([string]$name, [string]$testName, [string]$testServerDirectory, [string]$additionalArgs="") {
+    $projectDirectory = Join-Path $testServerDirectory $testName
+    $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
+    $inputReadme = Join-Path $projectDirectory "readme.md"
+    Add-Swagger $name $testName $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
+}
+
 $testNames =
     'additionalProperties',
     'azure-parameter-grouping',
@@ -64,14 +80,7 @@ if (!($Exclude -contains "TestServer"))
 {
     foreach ($testName in $testNames)
     {
-        $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
-        $projectDirectory = Join-Path $testServerDirectory $testName
-        $inputReadme = Join-Path $projectDirectory "readme.md"
-        $swaggerDefinitions[$testName] = @{
-            'projectName'=$testName;
-            'output'=$projectDirectory;
-            'arguments'="--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile"
-        }
+        Add-TestServer-Swagger $testName $testName $testServerDirectory
     }
 }
 
@@ -87,14 +96,8 @@ if (!($Exclude -contains "TestServerLowLevel"))
 {
     foreach ($testName in $testNamesLowLevel)
     {
-        $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
-        $projectDirectory = Join-Path $testServerLowLevelDirectory $testName
-        $inputReadme = Join-Path $projectDirectory "readme.md"
-        $swaggerDefinitions[$testName + "-LowLevel"] = @{
-            'projectName'=$testName;
-            'output'=$projectDirectory;
-            'arguments'="--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile --low-level-client=true --credential-types=AzureKeyCredential --credential-header-name=Fake-Subscription-Key"
-        }
+        $llcArgs = "--low-level-client=true --credential-types=AzureKeyCredential --credential-header-name=Fake-Subscription-Key"
+        Add-TestServer-Swagger "$testName-LowLevel" $testName $testServerLowLevelDirectory $llcArgs
     }
 }
 
