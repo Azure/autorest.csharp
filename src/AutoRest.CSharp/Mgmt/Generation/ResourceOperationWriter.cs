@@ -2,8 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
+using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -14,13 +18,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation)
         {
-            string[] Libraries = { "System", "System.Collections.Generic", "System.Threading", "System.Threading.Tasks", "Azure.ResourceManager.Core" };
-            foreach (string lib in Libraries)
-            {
-                writer.Line($"using {lib};");
-            }
-            writer.Line();
-
             var cs = resourceOperation.Type;
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
@@ -47,31 +44,31 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteClientProperties(CodeWriter writer, ResourceOperation resourceOperation)
         {
             writer.Line();
-            writer.Line($"private static readonly ResourceType ResourceType = \"{resourceOperation.Type.Namespace}/{resourceOperation.Type.Name}\";");
-            writer.Line($"protected override ResourceType ValidResourceType => ResourceType;");
+            writer.Line($"private static readonly {typeof(ResourceType)} ResourceType = \"{resourceOperation.Type.Namespace}/{resourceOperation.Type.Name}\";");
+            writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
             }
 
         private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation)
         {
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public override ArmResponse<{resourceOperation.ResourceName}> Get(CancellationToken cancellationToken = default)"))
+            using (writer.Scope($"public override {typeof(ArmResponse)}<{resourceOperation.ResourceName}> Get({typeof(CancellationToken)} cancellationToken = default)"))
             {
-                writer.Line($"throw new NotImplementedException();");
+                writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
 
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public override Task<ArmResponse<{resourceOperation.ResourceName}>> GetAsync(CancellationToken cancellationToken = default)"))
+            using (writer.Scope($"public override Task<ArmResponse<{resourceOperation.ResourceName}>> GetAsync({typeof(CancellationToken)} cancellationToken = default)"))
             {
-                writer.Line($"throw new NotImplementedException();");
+                writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
 
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
             writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P: System.Threading.CancellationToken.None\" />.");
             writer.WriteXmlDocumentationReturns("A collection of location that may take multiple service requests to iterate over.");
-            using (writer.Scope($"public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)"))
+            using (writer.Scope($"public {typeof(IEnumerable<LocationData>)} ListAvailableLocations({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Line($"return ListAvailableLocations(ResourceType);");
             }
@@ -81,7 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P: System.Threading.CancellationToken.None\" />.");
             writer.WriteXmlDocumentationReturns("An async collection of location that may take multiple service requests to iterate over.");
             writer.WriteXmlDocumentationException(typeof(InvalidOperationException), "The default subscription id is null.");
-            using (writer.Scope($"public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)"))
+            using (writer.Scope($"public async {typeof(Task<IEnumerable<LocationData>>)} ListAvailableLocationsAsync({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Line($"return await ListAvailableLocationsAsync(ResourceType, cancellationToken);");
             }
