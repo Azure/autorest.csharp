@@ -41,14 +41,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             Assert.That(response.Status, Is.EqualTo(200).Or.EqualTo(201).Or.EqualTo(202).Or.EqualTo(204), "Unexpected response " + response.ReasonPhrase);
         }, ignoreScenario);
 
-        public Task Test(Action<Uri> test, bool ignoreScenario = false)
+        public Task Test(Action<Uri> test, bool ignoreScenario = false) => Test(GetScenarioName(), host =>
         {
-            return Test(GetScenarioName(), host =>
-            {
-                test(host);
-                return Task.CompletedTask;
-            }, ignoreScenario);
-        }
+            test(host);
+            return Task.CompletedTask;
+        }, ignoreScenario);
 
         public Task Test(Func<Uri, Task> test, bool ignoreScenario = false)
         {
