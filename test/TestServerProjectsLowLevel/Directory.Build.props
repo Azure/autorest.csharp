@@ -1,0 +1,11 @@
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Include="../../../src/assets/**/*.cs" />
+  </ItemGroup>
+  <PropertyGroup>
+    <IncludeStyleCopAnalyzers>true</IncludeStyleCopAnalyzers>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+  <Import Project="..\..\Directory.Build.props" />
+</Project>
