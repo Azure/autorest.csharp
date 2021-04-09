@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 #pragma warning disable AZC0007
 
-namespace body_complex
+namespace body_complex_LowLevel
 {
     /// <summary> The Polymorphicrecursive service client. </summary>
     public partial class PolymorphicrecursiveClient
