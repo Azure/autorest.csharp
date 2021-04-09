@@ -47,12 +47,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </ItemGroup>
 ";
 
-        private string _lowLevelExperimentalReference = @"
-  <ItemGroup>
-    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.11"" />
-  </ItemGroup>
-";
-
         internal static string GetVersion()
         {
             Assembly clientAssembly = Assembly.GetExecutingAssembly();
@@ -90,14 +84,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             string csProjContent;
             if (configuration.SkipCSProjPackageReference)
             {
-                if (configuration.LowLevelClient)
-                {
-                    csProjContent = string.Format(_csProjContent, _lowLevelExperimentalReference);
-                }
-                else
-                {
-                    csProjContent = string.Format(_csProjContent, configuration.AzureArm ? _armCsProjContent : string.Empty);
-                }
+              csProjContent = string.Format(_csProjContent, configuration.AzureArm ? _armCsProjContent : string.Empty);
             }
             else
             {
