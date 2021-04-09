@@ -175,22 +175,5 @@ namespace AutoRest.TestServer.Tests
             var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetUtcUppercaseMaxDateTimeAsync();
             Assert.AreEqual(DateTimeOffset.Parse("9999-12-31 23:59:59.999+00:00"), response.Value);
         });
-
-        public override IEnumerable<string> AdditionalKnownScenarios { get; } = new[]
-        {
-            "getDateTimeNull",
-            "getDateTimeInvalid",
-            "getDateTimeOverflow",
-            "getDateTimeUnderflow",
-            "getDateTimeMaxUtcLowercase",
-            "getDateTimeMaxUtcUppercase",
-            "getDateTimeMaxLocalPositiveOffsetLowercase",
-            "getDateTimeMaxLocalPositiveOffsetUppercase",
-            "getDateTimeMaxLocalNegativeOffsetLowercase",
-            "getDateTimeMaxLocalNegativeOffsetUppercase",
-            "getDateTimeMinUtc",
-            "getDateTimeMinLocalPositiveOffset",
-            "getDateTimeMinLocalNegativeOffset"
-        };
     }
 }

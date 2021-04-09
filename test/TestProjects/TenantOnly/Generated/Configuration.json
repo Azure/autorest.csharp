@@ -22,6 +22,7 @@
     "BillingAccounts": "BillingAccount",
     "Agreements": "Agreement"
   },
-  "ResourceRename": {},
-  "OperationGroupToParent": {}
+  "ModelRename": {},
+  "OperationGroupToParent": {},
+  "ModelToResource": {}
 }

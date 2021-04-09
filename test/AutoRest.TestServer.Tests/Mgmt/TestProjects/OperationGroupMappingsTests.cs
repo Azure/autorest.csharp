@@ -7,10 +7,12 @@ using System.Text;
 using NUnit.Framework;
 using OperationGroupMappings;
 
-namespace AutoRest.TestServer.Tests.Mgmt
+namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class OperationGroupMappingsTests
+    public class OperationGroupMappingsTests : TestProjectTests
     {
+        public OperationGroupMappingsTests() : base("OperationGroupMappings") { }
+
         [Test]
         public void NewResourceTypesExist()
         {

@@ -46,6 +46,11 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.WriteDocumentationLines($"<exception cref=\"{exception.FullName}\">", "</exception>", description, skipWhenEmpty: false);
         }
 
+        public static CodeWriter WriteXmlDocumentationReturns(this CodeWriter writer, string text)
+        {
+            return writer.WriteDocumentationLines($"<returns>", $"</returns>", text);
+        }
+
         public static CodeWriter WriteXmlDocumentationRequiredParametersException(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
         {
             if (parameters.TryGetRequiredParameters(out var requiredParameters))
