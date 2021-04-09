@@ -7,6 +7,7 @@ using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -16,8 +17,6 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var cs = resourceGroupExtensions.Type;
             var @namespace = cs.Namespace;
-            writer.UseNamespace(@"System");
-            writer.UseNamespace(@"Azure.ResourceManager.Core");
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(resourceGroupExtensions.Description);
@@ -40,13 +39,13 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteGetContainers(CodeWriter writer, ArmResource armResource)
         {
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {armResource.Type.Name:D}Container along with the instance operations that can be performed on it.");
-            writer.WriteXmlDocumentationParameter("resourceGroup", "The <see cref=\"ResourceGroupOperations\" /> instance the method will execute against.");
+            writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentation("return", $"Returns an <see cref=\"{armResource.Type.Name:D}Container\" /> object.");
-            using (writer.Scope($"public static {armResource.Type.Name:D}Container Get{armResource.Type.Name:D}s (this ResourceGroupOperations resourceGroup)"))
+            using (writer.Scope($"public static {armResource.Type.Name:D}Container Get{armResource.Type.Name:D}s (this {typeof(ResourceGroupOperations)} resourceGroup)"))
             {
                 // TODO: Bring this back after container class implemented
                 // writer.Line($"return new {armResource.Type.Name:D}Container(resourceGroup);");
-                writer.LineRaw("throw new NotImplementedException();");
+                writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
         }
     }
