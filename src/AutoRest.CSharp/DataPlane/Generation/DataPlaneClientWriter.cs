@@ -76,7 +76,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public virtual {asyncText} {responseType} {methodName}(");
+            var accessibility = clientMethod.Accessibility ?? "public";
+            writer.Append($"{accessibility} virtual {asyncText} {responseType} {methodName}(");
 
             foreach (Parameter parameter in parameters)
             {
