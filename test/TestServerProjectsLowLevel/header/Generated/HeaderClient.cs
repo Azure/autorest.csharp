@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 #pragma warning disable AZC0007
 
-namespace header
+namespace header_LowLevel
 {
     /// <summary> The Header service client. </summary>
     public partial class HeaderClient

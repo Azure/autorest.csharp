@@ -17,19 +17,19 @@ $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 
-function Add-Swagger ([string]$name, [string]$projectName, [string]$output, [string]$arguments) {
+function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
-        'projectName'=$projectName;
+        'projectName'=$name;
         'output'=$output;
         'arguments'=$arguments
     }
 }
 
-function Add-TestServer-Swagger ([string]$name, [string]$testName, [string]$testServerDirectory, [string]$additionalArgs="") {
+function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [string]$testServerDirectory, [string]$additionalArgs="") {
     $projectDirectory = Join-Path $testServerDirectory $testName
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $inputReadme = Join-Path $projectDirectory "readme.md"
-    Add-Swagger $name $testName $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
+    Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
 }
 
 $testNames =
@@ -80,7 +80,7 @@ if (!($Exclude -contains "TestServer"))
 {
     foreach ($testName in $testNames)
     {
-        Add-TestServer-Swagger $testName $testName $testServerDirectory
+        Add-TestServer-Swagger $testName "" $testServerDirectory
     }
 }
 
@@ -98,7 +98,7 @@ if (!($Exclude -contains "TestServerLowLevel"))
 {
     foreach ($testName in $testNamesLowLevel)
     {
-        Add-TestServer-Swagger "$testName-LowLevel" $testName $testServerLowLevelDirectory $llcArgs
+        Add-TestServer-Swagger $testName "-LowLevel" $testServerLowLevelDirectory $llcArgs
     }
 }
 
@@ -122,7 +122,7 @@ if (!($Exclude -contains "TestProjects"))
             $testArguments ="--require=$configurationPath --input-file=$inputFile"
         }
 
-        Add-Swagger $testName $testName $directory $testArguments
+        Add-Swagger $testName $directory $testArguments
     }
 }
 # Sample configuration
@@ -143,7 +143,7 @@ if (!($Exclude -contains "Samples"))
     {
         $projectDirectory = Join-Path $repoRoot 'samples' $projectName
         $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
-        Add-Swagger $projectName $projectName $projectDirectory "--require=$sampleConfigurationPath"
+        Add-Swagger $projectName $projectDirectory "--require=$sampleConfigurationPath"
     }
 }
 
@@ -160,7 +160,7 @@ if (!($Exclude -contains "SmokeTests"))
 
             $projectDirectory = Join-Path $repoRoot 'samples' 'smoketests' $projectName
 
-            Add-Swagger $projectName $projectName $projectDirectory "--require=$configurationPath $args $input"
+            Add-Swagger $projectName $projectDirectory "--require=$configurationPath $args $input"
         }
     }
 }
