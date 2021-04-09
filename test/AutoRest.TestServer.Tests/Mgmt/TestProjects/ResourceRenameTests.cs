@@ -4,10 +4,12 @@ using System.Text;
 using NUnit.Framework;
 using ResourceRename;
 
-namespace AutoRest.TestServer.Tests.Mgmt
+namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class ResourceRenameTests
+    public class ResourceRenameTests : TestProjectTests
     {
+        public ResourceRenameTests() : base("ResourceRename") { }
+
         [Test]
         public void RenamedModelExists()
         {

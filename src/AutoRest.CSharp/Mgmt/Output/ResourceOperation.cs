@@ -30,6 +30,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultName = _prefix + SuffixValue;
         }
 
+        public string ResourceName => _operationGroup.Resource;
+
         protected virtual string SuffixValue => OperationsSuffixValue;
 
         protected override string DefaultName { get; }

@@ -15,7 +15,7 @@ namespace Azure.ResourceManager.Sample
     {
         internal static ComputeOperationListResult DeserializeComputeOperationListResult(JsonElement element)
         {
-            Optional<IReadOnlyList<ComputeOperationValue>> value = default;
+            Optional<IReadOnlyList<RestApiData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
@@ -25,10 +25,10 @@ namespace Azure.ResourceManager.Sample
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    List<ComputeOperationValue> array = new List<ComputeOperationValue>();
+                    List<RestApiData> array = new List<RestApiData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(ComputeOperationValue.DeserializeComputeOperationValue(item));
+                        array.Add(RestApiData.DeserializeRestApiData(item));
                     }
                     value = array;
                     continue;
