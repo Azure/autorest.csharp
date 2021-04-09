@@ -23,6 +23,7 @@
   "CredentialHeaderName": "fake-key",
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {},
-  "ResourceRename": {},
-  "OperationGroupToParent": {}
+  "ModelRename": {},
+  "OperationGroupToParent": {},
+  "ModelToResource": {}
 }

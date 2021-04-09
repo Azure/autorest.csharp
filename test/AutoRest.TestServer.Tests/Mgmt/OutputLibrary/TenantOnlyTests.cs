@@ -7,7 +7,7 @@ using System.Text;
 using AutoRest.CSharp.Input;
 using NUnit.Framework;
 
-namespace AutoRest.TestServer.Tests.Mgmt
+namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
     internal class TenantOnlyTests : OutputLibraryTestBase
     {

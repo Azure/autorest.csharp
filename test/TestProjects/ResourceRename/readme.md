@@ -11,7 +11,7 @@ model-namespace: false
 public-clients: false
 head-as-boolean: false
 payload-flattening-threshold: 2
-resource-rename:
+model-rename:
    SshPublicKeyResource : SshPublicKeyInfo
 modelerfour:
   lenient-model-deduplication: true
