@@ -60,6 +60,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-complex\\Generated"
     },
+    "body-complex-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-complex\\Generated"
+    },
     "body-date": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-date\\Generated"
@@ -103,6 +107,10 @@
     "body-string": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-string\\Generated"
+    },
+    "body-string-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\body-string\\Generated"
     },
     "body-time": {
       "commandName": "Project",
@@ -155,6 +163,10 @@
     "HeaderCollectionPrefix": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeaderCollectionPrefix\\Generated"
+    },
+    "header-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\header\\Generated"
     },
     "httpInfrastructure": {
       "commandName": "Project",
@@ -256,9 +268,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url\\Generated"
     },
+    "url-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\url\\Generated"
+    },
     "url-multi-collectionFormat": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url-multi-collectionFormat\\Generated"
+    },
+    "url-multi-collectionFormat-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\url-multi-collectionFormat\\Generated"
     },
     "validation": {
       "commandName": "Project",

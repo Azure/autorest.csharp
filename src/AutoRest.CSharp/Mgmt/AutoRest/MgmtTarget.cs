@@ -4,6 +4,9 @@
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -19,7 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resourceOperationWriter = new ResourceOperationWriter();
             var resourceContainerWriter = new ResourceContainerWriter();
             var resourceDataWriter = new ResourceDataWriter();
-            var armResourceWriter = new ArmResourceWriter();
+            var armResourceWriter = new ResourceWriter();
             var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
 

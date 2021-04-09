@@ -28,7 +28,7 @@
     "PrivateLinkResources": "PrivateLinkResource",
     "StorageAccounts": "StorageAccount"
   },
-  "ResourceRename": {
+  "ModelRename": {
     "BlobServiceProperties": "BlobService",
     "FileServiceProperties": "FileService"
   },
@@ -37,5 +37,6 @@
     "FileShares": "Microsoft.Storage/storageAccounts",
     "Usages": "subscriptions",
     "StorageAccounts": "any"
-  }
+  },
+  "ModelToResource": {}
 }

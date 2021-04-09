@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
     [Parallelizable(ParallelScope.Fixtures)]
     [TestFixture(TestServerVersion.V1)]
     [TestFixture(TestServerVersion.V2)]
-    public class TestServerTestBase
+    public abstract class TestServerTestBase
     {
         private readonly TestServerVersion _version;
         internal static ClientDiagnostics ClientDiagnostics = new ClientDiagnostics(new TestOptions());
@@ -26,8 +26,6 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         {
             _version = version;
         }
-
-        public virtual IEnumerable<string> AdditionalKnownScenarios { get; } = Array.Empty<string>();
 
         public Task TestStatus(Func<Uri, HttpPipeline, Response> test, bool ignoreScenario = false, bool useSimplePipeline = false)
         {

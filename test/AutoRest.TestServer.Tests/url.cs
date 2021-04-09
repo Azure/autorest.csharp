@@ -120,28 +120,5 @@ namespace AutoRest.TestServer.Tests
             // modelAsString
             Assert.True(typeof(UriColor).IsEnum);
         }
-
-        public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[] {"UrlPathsBoolFalse",
-            "UrlPathsBoolTrue",
-            "UrlPathsIntPositive",
-            "UrlPathsIntNegative",
-            "UrlPathsLongPositive",
-            "UrlPathsLongNegative",
-            "UrlPathsFloatPositive",
-            "UrlPathsFloatNegative",
-            "UrlPathsDoublePositive",
-            "UrlPathsDoubleNegative",
-            "UrlPathsStringUrlEncoded",
-            "UrlPathsStringUrlNonEncoded",
-            "UrlPathsStringEmpty",
-            "UrlPathsEnumValid",
-            "UrlPathsByteMultiByte",
-            "UrlPathsByteEmpty",
-            "UrlPathsDateValid",
-            "UrlPathsDateTimeValid",
-            "UrlPathsStringBase64Url",
-            "UrlPathsArrayCSVInPath",
-            "UrlPathsIntUnixTime"
-        };
     }
 }

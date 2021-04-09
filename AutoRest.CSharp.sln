@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Shared.Tests", "test\AutoRest.Shared.Tests\AutoRest.Shared.Tests.csproj", "{7F2F833D-A55C-431D-A695-FE739CE899B8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.TestServerLowLevel.Tests", "test\AutoRest.TestServerLowLevel.Tests\AutoRest.TestServerLowLevel.Tests.csproj", "{B07A9571-CC0F-4AD1-AA84-0D2D567BABE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7F2F833D-A55C-431D-A695-FE739CE899B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F2F833D-A55C-431D-A695-FE739CE899B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F2F833D-A55C-431D-A695-FE739CE899B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B07A9571-CC0F-4AD1-AA84-0D2D567BABE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B07A9571-CC0F-4AD1-AA84-0D2D567BABE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B07A9571-CC0F-4AD1-AA84-0D2D567BABE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B07A9571-CC0F-4AD1-AA84-0D2D567BABE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
