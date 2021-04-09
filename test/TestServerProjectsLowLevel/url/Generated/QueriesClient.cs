@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 
 #pragma warning disable AZC0007
 
-namespace url
+namespace url_LowLevel
 {
     /// <summary> The Queries service client. </summary>
     public partial class QueriesClient

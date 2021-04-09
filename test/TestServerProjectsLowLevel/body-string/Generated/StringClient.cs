@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 #pragma warning disable AZC0007
 
-namespace body_string
+namespace body_string_LowLevel
 {
     /// <summary> The String service client. </summary>
     public partial class StringClient
