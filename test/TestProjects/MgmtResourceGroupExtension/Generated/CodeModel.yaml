@@ -1,0 +1,1179 @@
+!CodeModel 
+info: !Info 
+  description: The Compute Management Client.
+  title: ComputeManagementClient
+schemas: !Schemas 
+  numbers:
+    - !NumberSchema &ref_40
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      precision: 32
+      language: !Languages 
+        default:
+          name: Integer
+          description: ''
+      protocol: !Protocols {}
+  strings:
+    - !StringSchema &ref_0
+      type: string
+      language: !Languages 
+        default:
+          name: String
+          description: simple string
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_1
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AvailabilitySetBar
+          description: specifies the bar
+      protocol: !Protocols {}
+    - !StringSchema &ref_2
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AvailabilitySetUpdateUpdator
+          description: specifies the updator
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AvailabilitySetListResultNextLink
+          description: The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets.
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: VirtualMachineExtensionImageBar
+          description: specifies the bar
+      protocol: !Protocols {}
+  constants:
+    - !ConstantSchema &ref_9
+      type: constant
+      value: !ConstantValue 
+        value: '2020-06-01'
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApiVersion20200601
+          description: Api Version (2020-06-01)
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_13
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_14
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !Protocols {}
+  objects:
+    - !ObjectSchema &ref_3
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property &ref_16
+          schema: *ref_1
+          serializedName: bar
+          language: !Languages 
+            default:
+              name: bar
+              description: specifies the bar
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !Languages 
+        default:
+          name: AvailabilitySet
+          description: >-
+            Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
+            information about availability sets, see [Manage the availability of virtual
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see
+            [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM
+            can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_20
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property &ref_22
+          schema: *ref_2
+          serializedName: updator
+          language: !Languages 
+            default:
+              name: updator
+              description: specifies the updator
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: AvailabilitySetUpdate
+          description: >-
+            Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
+            information about availability sets, see [Manage the availability of virtual
+            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see
+            [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM
+            can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_31
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_6
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: *ref_3
+            language: !Languages 
+              default:
+                name: AvailabilitySetListResultValue
+                description: The list of availability sets
+            protocol: !Protocols {}
+          required: true
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: The list of availability sets
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_4
+          required: false
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: AvailabilitySetListResult
+          description: The List Availability Set operation response.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_7
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_5
+          serializedName: bar
+          language: !Languages 
+            default:
+              name: bar
+              description: specifies the bar
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: VirtualMachineExtensionImage
+          description: The VirtualMachineExtensionImage.
+          namespace: ''
+      protocol: !Protocols {}
+  arrays:
+    - *ref_6
+    - !ArraySchema &ref_39
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      elementType: *ref_7
+      language: !Languages 
+        default:
+          name: ArrayOfVirtualMachineExtensionImage
+          description: Array of VirtualMachineExtensionImage
+      protocol: !Protocols {}
+    - !ArraySchema &ref_47
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      elementType: *ref_7
+      language: !Languages 
+        default:
+          name: ArrayOfVirtualMachineExtensionImage
+          description: Array of VirtualMachineExtensionImage
+      protocol: !Protocols {}
+globalParameters:
+  - !Parameter &ref_12
+    schema: *ref_8
+    implementation: Client
+    required: true
+    extensions:
+      x-ms-priority: 0
+    language: !Languages 
+      default:
+        name: SubscriptionId
+        description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+        serializedName: subscriptionId
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: path
+  - !Parameter &ref_10
+    schema: *ref_0
+    clientDefaultValue: https://management.azure.com
+    implementation: Client
+    origin: modelerfour:synthesized/host
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language: !Languages 
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: uri
+  - !Parameter &ref_11
+    schema: *ref_9
+    implementation: Client
+    origin: modelerfour:synthesized/api-version
+    required: true
+    language: !Languages 
+      default:
+        name: apiVersion
+        description: Api Version
+        serializedName: api-version
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: query
+operationGroups:
+  - !OperationGroup 
+    $key: AvailabilitySets
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_10
+          - !Parameter &ref_18
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_19
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetName
+                description: The name of the availability set.
+                serializedName: availabilitySetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_11
+          - *ref_12
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_13
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_15
+                schema: *ref_3
+                flattened: true
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters supplied to the Create Availability Set operation.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !VirtualParameter &ref_17
+                schema: *ref_1
+                implementation: Method
+                originalParameter: *ref_15
+                pathToProperty: []
+                targetProperty: *ref_16
+                language: !Languages 
+                  default:
+                    name: bar
+                    description: specifies the bar
+                protocol: !Protocols {}
+            signatureParameters:
+              - *ref_17
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_18
+          - *ref_19
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Create or update an availability set.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_10
+          - !Parameter &ref_24
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_25
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetName
+                description: The name of the availability set.
+                serializedName: availabilitySetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_11
+          - *ref_12
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_13
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_21
+                schema: *ref_20
+                flattened: true
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters supplied to the Update Availability Set operation.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !VirtualParameter &ref_23
+                schema: *ref_2
+                implementation: Method
+                originalParameter: *ref_21
+                pathToProperty: []
+                targetProperty: *ref_22
+                language: !Languages 
+                  default:
+                    name: updator
+                    description: specifies the updator
+                protocol: !Protocols {}
+            signatureParameters:
+              - *ref_23
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_24
+          - *ref_25
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Update
+            description: Update an availability set.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_10
+          - !Parameter &ref_26
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_27
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetName
+                description: The name of the availability set.
+                serializedName: availabilitySetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_11
+          - *ref_12
+        requests:
+          - !Request 
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+                method: delete
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_26
+          - *ref_27
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: No Content
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '204'
+        language: !Languages 
+          default:
+            name: Delete
+            description: Delete an availability set.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_10
+          - !Parameter &ref_28
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_29
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetName
+                description: The name of the availability set.
+                serializedName: availabilitySetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_11
+          - *ref_12
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_28
+          - *ref_29
+        responses:
+          - !SchemaResponse 
+            schema: *ref_3
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Retrieves information about an availability set.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_10
+          - *ref_11
+          - *ref_12
+          - !Parameter &ref_30
+            schema: *ref_8
+            implementation: Method
+            language: !Languages 
+              default:
+                name: expand
+                description: The expand expression to apply to the operation. Allowed values are 'instanceView'.
+                serializedName: $expand
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_30
+        responses:
+          - !SchemaResponse 
+            schema: *ref_31
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: ListBySubscription
+            description: Lists all availability sets in a subscription.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_10
+          - !Parameter &ref_32
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_11
+          - *ref_12
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_32
+        responses:
+          - !SchemaResponse 
+            schema: *ref_31
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: List
+            description: Lists all availability sets in a resource group.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: AvailabilitySets
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: VirtualMachineExtensionImages
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_10
+          - !Parameter &ref_33
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: location
+                description: The name of a supported Azure region.
+                serializedName: location
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_34
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: publisherName
+                description: ''
+                serializedName: publisherName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_35
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: type
+                description: ''
+                serializedName: type
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_36
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: version
+                description: ''
+                serializedName: version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_11
+          - *ref_12
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_33
+          - *ref_34
+          - *ref_35
+          - *ref_36
+        responses:
+          - !SchemaResponse 
+            schema: *ref_7
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: Gets a virtual machine extension image.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_10
+          - !Parameter &ref_37
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: location
+                description: The name of a supported Azure region.
+                serializedName: location
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_38
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: publisherName
+                description: ''
+                serializedName: publisherName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_11
+          - *ref_12
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_37
+          - *ref_38
+        responses:
+          - !SchemaResponse 
+            schema: *ref_39
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: ListTypes
+            description: Gets a list of virtual machine extension image types.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_10
+          - !Parameter &ref_41
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: location
+                description: The name of a supported Azure region.
+                serializedName: location
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_42
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: publisherName
+                description: ''
+                serializedName: publisherName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_43
+            schema: *ref_8
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: type
+                description: ''
+                serializedName: type
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_44
+            schema: *ref_8
+            implementation: Method
+            language: !Languages 
+              default:
+                name: filter
+                description: The filter to apply on the operation.
+                serializedName: $filter
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_45
+            schema: *ref_40
+            implementation: Method
+            language: !Languages 
+              default:
+                name: top
+                description: ''
+                serializedName: $top
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - !Parameter &ref_46
+            schema: *ref_8
+            implementation: Method
+            language: !Languages 
+              default:
+                name: orderby
+                description: ''
+                serializedName: $orderby
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: query
+          - *ref_11
+          - *ref_12
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_14
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_41
+          - *ref_42
+          - *ref_43
+          - *ref_44
+          - *ref_45
+          - *ref_46
+        responses:
+          - !SchemaResponse 
+            schema: *ref_47
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-odata: '#/components/schemas/VirtualMachineExtensionImage'
+        language: !Languages 
+          default:
+            name: ListVersions
+            description: Gets a list of virtual machine extension image versions.
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: VirtualMachineExtensionImages
+        description: ''
+    protocol: !Protocols {}
+security: !Security 
+  authenticationRequired: true
+language: !Languages 
+  default:
+    name: ComputeManagementClient
+    description: ''
+protocol: !Protocols 
+  http: !HttpModel {}
