@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
-using url;
+using url_LowLevel;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -126,12 +126,12 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayPipesValid() => TestStatus(async (host) => await new QueriesClient(Key, host).ArrayStringPipesValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public void UrlQueriesArrayMultiNull() => TestStatus(async (host) => await new url_multi_collectionFormat.QueriesClient(Key, host).ArrayStringMultiNullAsync( null));
+        public void UrlQueriesArrayMultiNull() => TestStatus(async (host) => await new url_multi_collectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiNullAsync( null));
 
         [Test]
-        public void UrlQueriesArrayMultiEmpty() => TestStatus(async (host) => await new url_multi_collectionFormat.QueriesClient(Key, host).ArrayStringMultiEmptyAsync( new string[] { }));
+        public void UrlQueriesArrayMultiEmpty() => TestStatus(async (host) => await new url_multi_collectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiEmptyAsync( new string[] { }));
 
         [Test]
-        public void UrlQueriesArrayMultiValid() => TestStatus(async (host) => await new url_multi_collectionFormat.QueriesClient(Key, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
+        public void UrlQueriesArrayMultiValid() => TestStatus(async (host) => await new url_multi_collectionFormat_LowLevel.QueriesClient(Key, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
     }
 }
