@@ -5,10 +5,12 @@ using AutoRest.CSharp.Input;
 using NUnit.Framework;
 using MgmtResourceGroupExtension;
 
-namespace AutoRest.TestServer.Tests.Mgmt
+namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
-    public class MgmtResourceGroupExtensionTests
+    public class MgmtResourceGroupExtensionTests : TestProjectTests
     {
+        public MgmtResourceGroupExtensionTests() : base("MgmtResourceGroupExtension") { }
+
         [Test]
         public void TestResourceGroupExtensionTests()
         {

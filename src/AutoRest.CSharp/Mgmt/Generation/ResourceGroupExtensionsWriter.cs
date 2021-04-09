@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
@@ -13,7 +14,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ResourceGroupExtensionsWriter
     {
-        public void WriteExtension(CodeWriter writer, ResourceGroupExtensions resourceGroupExtensions, IDictionary<OperationGroup, ArmResource> armResources)
+        public void WriteExtension(CodeWriter writer, ResourceGroupExtensions resourceGroupExtensions, IDictionary<OperationGroup, Mgmt.Output.Resource> armResources)
         {
             var cs = resourceGroupExtensions.Type;
             var @namespace = cs.Namespace;
@@ -36,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteGetContainers(CodeWriter writer, ArmResource armResource)
+        private void WriteGetContainers(CodeWriter writer, Mgmt.Output.Resource armResource)
         {
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {armResource.Type.Name:D}Container along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");

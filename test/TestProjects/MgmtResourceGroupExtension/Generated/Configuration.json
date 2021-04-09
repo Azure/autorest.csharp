@@ -16,28 +16,14 @@
   "CredentialScopes": [],
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {
-    "Operations": "Microsoft.Compute/operations",
-    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension",
-    "VirtualMachineImages": "Microsoft.Compute/locations/publishers/vmimage",
-    "Usage": "Microsoft.Compute/locations/usages",
-    "VirtualMachineSizes": "Microsoft.Compute/locations/vmSizes",
-    "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades",
-    "LogAnalytics": "Microsoft.Compute/locations/logAnalytics"
+    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension"
   },
   "OperationGroupToResource": {
-    "Operations": "Operation",
-    "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
-    "VirtualMachineImages": "VirtualMachineImage",
-    "Usage": "Usage",
-    "VirtualMachineSizes": "VirtualMachineSize",
-    "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
-    "LogAnalytics": "LogAnalyticsOperationResult"
+    "VirtualMachineExtensionImages": "VirtualMachineExtensionImage"
   },
-  "ResourceRename": {},
+  "ModelRename": {},
   "OperationGroupToParent": {
-    "LogAnalytics": "subscriptions",
-    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
-    "VirtualMachineImages": "Microsoft.Compute/locations",
-    "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets"
-  }
+    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers"
+  },
+  "ModelToResource": {}
 }
