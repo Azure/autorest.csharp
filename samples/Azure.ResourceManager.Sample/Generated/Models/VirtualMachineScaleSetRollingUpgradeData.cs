@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineScaleSetRollingUpgrade data model. </summary>
-    public partial class VirtualMachineScaleSetRollingUpgradeData : TrackedResource
+    public partial class VirtualMachineScaleSetRollingUpgradeData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgradeData. </summary>
         public VirtualMachineScaleSetRollingUpgradeData()

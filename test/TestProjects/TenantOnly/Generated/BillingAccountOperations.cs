@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace TenantOnly
 {
     /// <summary> A class representing the operations that can be performed over a specific BillingAccount. </summary>
-    public partial class BillingAccountOperations : ResourceOperationsBase<BillingAccount>
+    public partial class BillingAccountOperations : ResourceOperationsBase<TenantResourceIdentifier, BillingAccount>
     {
         /// <summary> Initializes a new instance of BillingAccountOperations for mocking. </summary>
         protected BillingAccountOperations()
