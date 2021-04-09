@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineImage. </summary>
-    public partial class VirtualMachineImageOperations : ResourceOperationsBase<VirtualMachineImage>
+    public partial class VirtualMachineImageOperations : ResourceOperationsBase<TenantResourceIdentifier, VirtualMachineImage>
     {
         /// <summary> Initializes a new instance of VirtualMachineImageOperations for mocking. </summary>
         protected VirtualMachineImageOperations()

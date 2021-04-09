@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific FileShare. </summary>
-    public partial class FileShareOperations : ResourceOperationsBase<FileShare>
+    public partial class FileShareOperations : ResourceOperationsBase<TenantResourceIdentifier, FileShare>
     {
         /// <summary> Initializes a new instance of FileShareOperations for mocking. </summary>
         protected FileShareOperations()

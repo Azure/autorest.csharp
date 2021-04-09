@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachine data model. </summary>
-    public partial class VirtualMachineData : TrackedResource
+    public partial class VirtualMachineData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of VirtualMachineData. </summary>
         public VirtualMachineData()

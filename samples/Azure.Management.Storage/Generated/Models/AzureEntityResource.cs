@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The resource model definition for a Azure Resource Manager resource with an etag. </summary>
-    public partial class AzureEntityResource : ResourceManager.Core.Resource
+    public partial class AzureEntityResource : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of AzureEntityResource. </summary>
         public AzureEntityResource()

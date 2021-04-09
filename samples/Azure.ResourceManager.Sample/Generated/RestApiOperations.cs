@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific RestApi. </summary>
-    public partial class RestApiOperations : ResourceOperationsBase<RestApi>
+    public partial class RestApiOperations : ResourceOperationsBase<TenantResourceIdentifier, RestApi>
     {
         /// <summary> Initializes a new instance of RestApiOperations for mocking. </summary>
         protected RestApiOperations()

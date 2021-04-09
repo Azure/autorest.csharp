@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific ProximityPlacementGroup. </summary>
-    public partial class ProximityPlacementGroupOperations : ResourceOperationsBase<ProximityPlacementGroup>
+    public partial class ProximityPlacementGroupOperations : ResourceOperationsBase<TenantResourceIdentifier, ProximityPlacementGroup>
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupOperations for mocking. </summary>
         protected ProximityPlacementGroupOperations()

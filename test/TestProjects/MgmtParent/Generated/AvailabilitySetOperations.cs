@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtParent
 {
     /// <summary> A class representing the operations that can be performed over a specific AvailabilitySet. </summary>
-    public partial class AvailabilitySetOperations : ResourceOperationsBase<AvailabilitySet>
+    public partial class AvailabilitySetOperations : ResourceOperationsBase<TenantResourceIdentifier, AvailabilitySet>
     {
         /// <summary> Initializes a new instance of AvailabilitySetOperations for mocking. </summary>
         protected AvailabilitySetOperations()

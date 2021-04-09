@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific BlobContainer. </summary>
-    public partial class BlobContainerOperations : ResourceOperationsBase<BlobContainer>
+    public partial class BlobContainerOperations : ResourceOperationsBase<TenantResourceIdentifier, BlobContainer>
     {
         /// <summary> Initializes a new instance of BlobContainerOperations for mocking. </summary>
         protected BlobContainerOperations()

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
@@ -18,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static IList<System.Type> GetReferenceClassCollection()
         {
-            var assembly = Assembly.GetAssembly(typeof(AzureResourceManagerClient));
+            var assembly = Assembly.GetAssembly(typeof(ArmClient));
             if (assembly is null)
             {
                 return new List<System.Type>();
@@ -62,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsEqual(childType, parentType))
                 {
-                    return parentType;
+                    return parentType.MakeGenericType(childType.GetResourceIdentifierType());
                 }
             }
             return null;
@@ -96,7 +97,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             return false;
                     }
                     else if (parentProperty.PropertyType.FullName != $"{childPropertyType.Namespace}.{childPropertyType.Name}" &&
-                        !IsAssignable(parentProperty.PropertyType, childPropertyType))
+                        !IsAssignable(parentProperty.PropertyType, childPropertyType) &&
+                        !(parentProperty.PropertyType.IsGenericParameter && IsAssignable(parentProperty.PropertyType.BaseType!, childPropertyType)))
                     {
                         //TODO(ADO item 5712): deal with protected setter
                         return false;
@@ -113,8 +115,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
         {
             return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&
-                m.ReturnType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" &&
-                m.GetParameters().First().ParameterType == parentPropertyType).Count() > 0;
+                m.ReturnType == parentPropertyType &&
+                m.GetParameters().First().ParameterType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}").Count() > 0;
         }
     }
 }
