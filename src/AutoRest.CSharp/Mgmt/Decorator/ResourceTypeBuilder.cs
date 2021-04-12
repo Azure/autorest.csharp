@@ -2,8 +2,10 @@
 // Licensed under the MIT License
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 
@@ -11,7 +13,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceTypeBuilder
     {
-        public static string ConstructOperationResourceType(OperationGroup operationsGroup)
+        private static ConcurrentDictionary<string, string> _valueCache = new ConcurrentDictionary<string, string>();
+
+        public static string ResourceType(this OperationGroup operationsGroup, MgmtConfiguration config)
+        {
+            string? result = null;
+            if (_valueCache.TryGetValue(operationsGroup.Key, out result))
+                return result;
+
+            if (!config.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out result))
+            {
+                result = ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
+            }
+
+            _valueCache.TryAdd(operationsGroup.Key, result);
+            return result;
+        }
+
+        private static string ConstructOperationResourceType(OperationGroup operationsGroup)
         {
             var method = GetBestMethod(operationsGroup);
             if (method == null)
@@ -31,6 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             return resourceType.ToString().TrimEnd('/');
         }
+
 
         private static string ConstructResourceType(string httpRequestUri)
         {
@@ -69,15 +89,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static HttpRequest? GetBestMethod(OperationGroup operationsGroup)
         {
             List<ServiceRequest>? requests;
-            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out requests))
+            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Put, out requests))
             {
                 return (HttpRequest?)requests[0].Protocol?.Http;
             }
-            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Delete, out requests))
+            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Delete, out requests))
             {
                 return (HttpRequest?)requests[0].Protocol?.Http;
             }
-            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Patch, out requests))
+            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Patch, out requests))
             {
                 return (HttpRequest?)requests[0].Protocol?.Http;
             }

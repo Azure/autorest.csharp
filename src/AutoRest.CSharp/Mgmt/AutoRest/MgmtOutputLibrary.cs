@@ -40,7 +40,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
             DecorateOperationGroup();
-            DecorateSchema();
         }
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
@@ -128,17 +127,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 var schema = entry.Key;
                 //TODO: find a way to not need to duplicate this
-                List<OperationGroup>? operations = null;
-                if (!_operationGroups.TryGetValue(schema.Name, out operations))
-                {
-                    _operationGroups.TryGetValue(schema.NameOverride!, out operations);
-                }
+                List<OperationGroup> operations = _operationGroups[schema.MgmtName(_mgmtConfiguration)];
 
                 if (operations != null)
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_resourceData.ContainsKey(operation.Resource))
+                        if (!_resourceData.ContainsKey(operation.Resource(_mgmtConfiguration)))
                         {
                             var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
                             CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
@@ -146,13 +141,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             {
                                 resourceData.OverrideInherits(inherits);
                             }
-                            _resourceData.Add(operation.Resource, resourceData);
+                            _resourceData.Add(operation.Resource(_mgmtConfiguration), resourceData);
                         }
                     }
-                }
-                else
-                {
-                    throw new Exception($"Neither {schema.Name} nor {schema.NameOverride} were found in the operations dictionary");
                 }
             }
 
@@ -170,25 +161,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                List<OperationGroup>? operations = null;
-                if (!_operationGroups.TryGetValue(schema.Name, out operations))
-                {
-                    _operationGroups.TryGetValue(schema.NameOverride!, out operations);
-                }
+                List<OperationGroup> operations = _operationGroups[schema.MgmtName(_mgmtConfiguration)];
 
                 if (operations != null)
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_armResource.ContainsKey(operation.Resource))
+                        if (!_armResource.ContainsKey(operation.Resource(_mgmtConfiguration)))
                         {
-                            _armResource.Add(operation.Resource, new Resource(operation.Resource, _context));
+                            _armResource.Add(operation.Resource(_mgmtConfiguration), new Resource(operation.Resource(_mgmtConfiguration), _context));
                         }
                     }
-                }
-                else
-                {
-                    throw new Exception($"Neither {schema.Name} nor {schema.NameOverride} were found in the operations dictionary");
                 }
             }
 
@@ -219,7 +202,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                if (_operationGroups.ContainsKey(schema.Name) || _operationGroups.ContainsKey(schema.NameOverride!))
+                if (_operationGroups.ContainsKey(schema.MgmtName(_mgmtConfiguration)!))
                 {
                     continue;
                 }
@@ -235,7 +218,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                if (_operationGroups.ContainsKey(schema.Name) || _operationGroups.ContainsKey(schema.NameOverride!))
+                if (_operationGroups.ContainsKey(schema.MgmtName(_mgmtConfiguration)!))
                 {
                     resourceModels.Add(schema, BuildResourceModel(schema));
                 }
@@ -267,13 +250,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             foreach (var operationsGroup in _codeModel.OperationGroups)
             {
-                MapHttpMethodToOperation(operationsGroup);
-                string? resourceType;
-                operationsGroup.ResourceType = _mgmtConfiguration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
-                operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
-                string? resource;
-                ResourceTypes.Add(operationsGroup.ResourceType);
-                operationsGroup.IsExtensionResource = ExtensionDetection.IsExtension(operationsGroup);
+                ResourceTypes.Add(operationsGroup.ResourceType(_mgmtConfiguration));
 
                 // TODO better support for extension resources
                 string? parent;
@@ -282,67 +259,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
-                operationsGroup.Parent = parent ?? ParentDetection.GetParent(operationsGroup);
-                operationsGroup.Resource = _mgmtConfiguration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
-                string? nameOverride;
-                if (_mgmtConfiguration.ModelRename.TryGetValue(operationsGroup.Resource, out nameOverride))
-                {
-                    operationsGroup.Resource = nameOverride;
-                }
             }
-            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes);
-        }
-
-        private void DecorateSchema()
-        {
-            foreach (var schema in _allSchemas)
-            {
-                string? name;
-                if (_mgmtConfiguration.ModelToResource.TryGetValue(schema.Name, out name))
-                {
-                    schema.NameOverride = name;
-                }
-                else if (_mgmtConfiguration.ModelRename.TryGetValue(schema.Name, out name))
-                {
-                    schema.NameOverride = name;
-                }
-                else
-                {
-                    schema.NameOverride = schema.Name;
-                }
-            }
-        }
-
-        private void MapHttpMethodToOperation(OperationGroup operationsGroup)
-        {
-            operationsGroup.OperationHttpMethodMapping = new Dictionary<HttpMethod, List<ServiceRequest>>();
-            foreach (var operation in operationsGroup.Operations)
-            {
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
-                    {
-                        httpRequest.ProviderSegments = ProviderSegmentDetection.GetProviderSegments(httpRequest.Path);
-                        List<ServiceRequest>? list;
-                        if (!operationsGroup.OperationHttpMethodMapping.TryGetValue(httpRequest.Method, out list))
-                        {
-                            list = new List<ServiceRequest>();
-                            operationsGroup.OperationHttpMethodMapping.Add(httpRequest.Method, list);
-                        }
-                        list.Add(serviceRequest);
-                    }
-                }
-            }
+            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }
 
         private void AddOperationGroupToResourceMap(OperationGroup operationsGroup)
         {
             List<OperationGroup>? result;
-            if (!_operationGroups.TryGetValue(operationsGroup.Resource, out result))
+            if (!_operationGroups.TryGetValue(operationsGroup.Resource(_mgmtConfiguration), out result))
             {
                 result = new List<OperationGroup>();
-                _operationGroups.Add(operationsGroup.Resource, result);
+                _operationGroups.Add(operationsGroup.Resource(_mgmtConfiguration), result);
             }
             result.Add(operationsGroup);
         }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -24,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
-            var name = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
+            var name = objectSchema.MgmtName(Context.Configuration.MgmtConfiguration) is null ? objectSchema.CSharpName() : objectSchema.MgmtName(Context.Configuration.MgmtConfiguration);
             return isResourceType ? name + "Data" : name;
         }
 
