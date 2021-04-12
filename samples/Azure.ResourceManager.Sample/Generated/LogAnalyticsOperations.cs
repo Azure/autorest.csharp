@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific LogAnalytics. </summary>
-    public partial class LogAnalyticsOperations : ResourceOperationsBase<LogAnalytics>
+    public partial class LogAnalyticsOperations : ResourceOperationsBase<TenantResourceIdentifier, LogAnalytics>
     {
         /// <summary> Initializes a new instance of LogAnalyticsOperations for mocking. </summary>
         protected LogAnalyticsOperations()

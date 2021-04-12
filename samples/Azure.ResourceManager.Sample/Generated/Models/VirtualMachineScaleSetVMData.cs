@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineScaleSetVM data model. </summary>
-    public partial class VirtualMachineScaleSetVMData : TrackedResource
+    public partial class VirtualMachineScaleSetVMData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMData. </summary>
         public VirtualMachineScaleSetVMData()

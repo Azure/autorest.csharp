@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the DedicatedHostGroup data model. </summary>
-    public partial class DedicatedHostGroupData : TrackedResource
+    public partial class DedicatedHostGroupData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
         public DedicatedHostGroupData()

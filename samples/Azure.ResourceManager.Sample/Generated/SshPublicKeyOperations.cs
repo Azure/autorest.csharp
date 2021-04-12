@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific SshPublicKey. </summary>
-    public partial class SshPublicKeyOperations : ResourceOperationsBase<SshPublicKey>
+    public partial class SshPublicKeyOperations : ResourceOperationsBase<TenantResourceIdentifier, SshPublicKey>
     {
         /// <summary> Initializes a new instance of SshPublicKeyOperations for mocking. </summary>
         protected SshPublicKeyOperations()

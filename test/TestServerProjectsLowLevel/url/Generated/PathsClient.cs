@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 
 #pragma warning disable AZC0007
 
-namespace url
+namespace url_LowLevel
 {
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient

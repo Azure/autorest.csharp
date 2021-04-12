@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific ObjectReplicationPolicy. </summary>
-    public partial class ObjectReplicationPolicyOperations : ResourceOperationsBase<ObjectReplicationPolicy>
+    public partial class ObjectReplicationPolicyOperations : ResourceOperationsBase<TenantResourceIdentifier, ObjectReplicationPolicy>
     {
         /// <summary> Initializes a new instance of ObjectReplicationPolicyOperations for mocking. </summary>
         protected ObjectReplicationPolicyOperations()

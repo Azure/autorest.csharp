@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtParent
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineExtensionImage. </summary>
-    public partial class VirtualMachineExtensionImageOperations : ResourceOperationsBase<VirtualMachineExtensionImage>
+    public partial class VirtualMachineExtensionImageOperations : ResourceOperationsBase<TenantResourceIdentifier, VirtualMachineExtensionImage>
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageOperations for mocking. </summary>
         protected VirtualMachineExtensionImageOperations()

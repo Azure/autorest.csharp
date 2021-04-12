@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(resourceOperation.Description);
-                using (writer.Scope($"{resourceOperation.Declaration.Accessibility} partial class {cs.Name} : ResourceOperationsBase<{resourceOperation.ResourceName}>"))
+                using (writer.Scope($"{resourceOperation.Declaration.Accessibility} partial class {cs.Name} : ResourceOperationsBase<{resourceOperation.ResourceIdentifierType}, {resourceOperation.ResourceName}>"))
                 {
                     WriteClientCtors(writer, resourceOperation);
                     WriteClientProperties(writer, resourceOperation);

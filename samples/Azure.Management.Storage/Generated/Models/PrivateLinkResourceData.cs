@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the PrivateLinkResource data model. </summary>
-    public partial class PrivateLinkResourceData : ResourceManager.Core.Resource
+    public partial class PrivateLinkResourceData : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
         public PrivateLinkResourceData()

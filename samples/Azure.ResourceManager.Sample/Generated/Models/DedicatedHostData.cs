@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the DedicatedHost data model. </summary>
-    public partial class DedicatedHostData : TrackedResource
+    public partial class DedicatedHostData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
         /// <param name="sku"> SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values. </param>

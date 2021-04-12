@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the SshPublicKey data model. </summary>
-    public partial class SshPublicKeyData : TrackedResource
+    public partial class SshPublicKeyData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SshPublicKeyData. </summary>
         public SshPublicKeyData()

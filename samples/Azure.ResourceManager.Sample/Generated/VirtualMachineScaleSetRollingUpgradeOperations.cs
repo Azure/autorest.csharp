@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineScaleSetRollingUpgrade. </summary>
-    public partial class VirtualMachineScaleSetRollingUpgradeOperations : ResourceOperationsBase<VirtualMachineScaleSetRollingUpgrade>
+    public partial class VirtualMachineScaleSetRollingUpgradeOperations : ResourceOperationsBase<TenantResourceIdentifier, VirtualMachineScaleSetRollingUpgrade>
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgradeOperations for mocking. </summary>
         protected VirtualMachineScaleSetRollingUpgradeOperations()
