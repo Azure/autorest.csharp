@@ -19,15 +19,14 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private static string GetPipeline (bool lowLevel) => lowLevel ? "Pipeline" : "_pipeline";
 
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, bool lowLevel)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, bool lowLevel, string methodAccessibility)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
             var returnType = lowLevel ? typeof(Azure.Core.Request) : typeof(HttpMessage);
-            var visibility = clientMethod.Accessibility ?? (lowLevel ? "private" : "internal");
-            writer.Append($"{visibility} {returnType} {methodName}(");
+            writer.Append($"{methodAccessibility} {returnType} {methodName}(");
             foreach (Parameter clientParameter in parameters)
             {
                 if (lowLevel)

@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
-            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true);
+            RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private");
         }
 
         private void WriteClientMethod(CodeWriter writer, RestClientMethod clientMethod, bool async)
@@ -68,8 +68,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
-            var visibility = clientMethod.Accessibility ?? "public";
-            writer.Append($"{visibility} virtual {asyncText} {responseType} {methodName}(");
+            writer.Append($"{clientMethod.Accessibility} virtual {asyncText} {responseType} {methodName}(");
 
             foreach (var parameter in parameters)
             {

@@ -53,7 +53,8 @@ namespace AutoRest.CSharp.Output.Models
                     // parameter list instead of creating a seperate parameter for each of them.
 
                     IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where (FilterServiceParamaters);
-                    RestClientMethod method = _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null, operation.Accessibility);
+                    var accessibility = operation.Accessibility ?? "public";
+                    RestClientMethod method = _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null, accessibility);
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
 
@@ -66,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
 
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, method.Request.Headers, body);
-                    yield return new RestClientMethod (method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility);
+                    yield return new RestClientMethod (method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, accessibility);
                 }
             }
         }

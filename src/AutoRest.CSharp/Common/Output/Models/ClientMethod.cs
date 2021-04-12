@@ -7,7 +7,7 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class ClientMethod
     {
-        public ClientMethod(string name, RestClientMethod restClientMethod, string? description, Diagnostic diagnostics, string? accessibility)
+        public ClientMethod(string name, RestClientMethod restClientMethod, string? description, Diagnostic diagnostics, string accessibility)
         {
             Name = name;
             RestClientMethod = restClientMethod;
@@ -20,6 +20,6 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientMethod RestClientMethod { get; }
         public string? Description { get; }
         public Diagnostic Diagnostics { get; }
-        public string? Accessibility { get; }
+        public string Accessibility { get; }
     }
 }

@@ -98,7 +98,7 @@ namespace Accessibility_LowLevel
 
         /// <summary> Create Request for <see cref="OperationInternal"/> and <see cref="OperationInternalAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        internal Request CreateOperationInternalRequest(RequestContent requestBody)
+        private Request CreateOperationInternalRequest(RequestContent requestBody)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;

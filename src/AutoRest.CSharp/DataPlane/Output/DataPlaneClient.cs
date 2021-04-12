@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Output.Models
                         startMethod,
                         BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                         new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
-                        operation.Accessibility);
+                        operation.Accessibility ?? "public");
                 }
             }
         }

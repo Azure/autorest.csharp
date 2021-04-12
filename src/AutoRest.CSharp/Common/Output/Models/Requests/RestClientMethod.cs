@@ -9,7 +9,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class RestClientMethod
     {
-        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string? accessibility)
+        public RestClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility)
         {
             Name = name;
             Request = request;
@@ -30,6 +30,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public DataPlaneResponseHeaderGroupType? HeaderModel { get; }
         public bool BufferResponse { get; }
         public CSharpType? ReturnType { get; }
-        public string? Accessibility { get; }
+        public string Accessibility { get; }
     }
 }
