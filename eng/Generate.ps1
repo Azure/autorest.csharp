@@ -121,10 +121,6 @@ if (!($Exclude -contains "TestProjects"))
             $inputFile = Join-Path $directory "$testName.json"
             $testArguments ="--require=$configurationPath --input-file=$inputFile"
         }
-        if ($directory -Match "-LowLevel")
-        {
-            $testArguments = "$testArguments $llcArgs";
-        }
 
         Add-Swagger $testName $directory $testArguments
     }
