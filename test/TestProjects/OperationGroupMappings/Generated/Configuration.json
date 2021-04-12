@@ -23,9 +23,5 @@
     "Operations": "RestApi",
     "AvailabilitySets": "AvailabilitySet"
   },
-  "ModelRename": {},
-  "OperationGroupToParent": {},
-  "ModelToResource": {
-    "ComputeOperationValue": "RestApi"
-  }
+  "OperationGroupToParent": {}
 }
