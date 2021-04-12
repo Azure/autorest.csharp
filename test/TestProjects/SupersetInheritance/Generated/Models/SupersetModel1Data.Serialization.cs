@@ -10,8 +10,19 @@ using Azure.Core;
 
 namespace SupersetInheritance
 {
-    public partial class SupersetModel1Data
+    public partial class SupersetModel1Data : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(New))
+            {
+                writer.WritePropertyName("new");
+                writer.WriteStringValue(New);
+            }
+            writer.WriteEndObject();
+        }
+
         internal static SupersetModel1Data DeserializeSupersetModel1Data(JsonElement element)
         {
             Optional<string> @new = default;

@@ -11,23 +11,26 @@ namespace SupersetInheritance
     public partial class SupersetModel3Data
     {
         /// <summary> Initializes a new instance of SupersetModel3Data. </summary>
-        internal SupersetModel3Data()
+        public SupersetModel3Data()
         {
         }
 
         /// <summary> Initializes a new instance of SupersetModel3Data. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
+        /// <param name="type"> . </param>
         /// <param name="new"> . </param>
-        internal SupersetModel3Data(string id, string name, string @new)
+        internal SupersetModel3Data(int? id, string name, string type, string @new)
         {
             Id = id;
             Name = name;
+            Type = type;
             New = @new;
         }
 
-        public string Id { get; }
-        public string Name { get; }
-        public string New { get; }
+        public int? Id { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string New { get; set; }
     }
 }

@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var childProperties = childType.MyProperties.ToList();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
-            if (parentProperties.Count > childProperties.Count)
+            if (parentProperties.Count != childProperties.Count)
             {
                 return false;
             }

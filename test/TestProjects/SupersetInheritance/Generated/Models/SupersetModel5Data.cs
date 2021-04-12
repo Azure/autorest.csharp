@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Collections.Generic;
-using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
@@ -15,26 +13,17 @@ namespace SupersetInheritance
     public partial class SupersetModel5Data : Resource
     {
         /// <summary> Initializes a new instance of SupersetModel5Data. </summary>
-        internal SupersetModel5Data()
+        public SupersetModel5Data()
         {
-            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of SupersetModel5Data. </summary>
-        /// <param name="location"> The geo-location where the resource lives. </param>
-        /// <param name="tags"> Resource tags. </param>
         /// <param name="new"> . </param>
-        internal SupersetModel5Data(string location, IReadOnlyDictionary<string, string> tags, string @new)
+        internal SupersetModel5Data(string @new)
         {
-            Location = location;
-            Tags = tags;
             New = @new;
         }
 
-        /// <summary> The geo-location where the resource lives. </summary>
-        public string Location { get; }
-        /// <summary> Resource tags. </summary>
-        public IReadOnlyDictionary<string, string> Tags { get; }
-        public string New { get; }
+        public string New { get; set; }
     }
 }

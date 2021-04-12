@@ -11,7 +11,7 @@ namespace SupersetInheritance
     public partial class SupersetModel2Data
     {
         /// <summary> Initializes a new instance of SupersetModel2Data. </summary>
-        internal SupersetModel2Data()
+        public SupersetModel2Data()
         {
         }
 
@@ -28,9 +28,9 @@ namespace SupersetInheritance
             New = @new;
         }
 
-        public string ID { get; }
-        public string Name { get; }
-        public string Type { get; }
-        public string New { get; }
+        public string ID { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string New { get; set; }
     }
 }

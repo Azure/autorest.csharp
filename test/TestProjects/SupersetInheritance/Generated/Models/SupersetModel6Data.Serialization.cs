@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SupersetInheritance
 {
-    public partial class SupersetModel3Data : IUtf8JsonSerializable
+    public partial class SupersetModel6Data : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -18,7 +18,7 @@ namespace SupersetInheritance
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
-                writer.WriteNumberValue(Id.Value);
+                writer.WriteStringValue(Id);
             }
             if (Optional.IsDefined(Name))
             {
@@ -30,30 +30,19 @@ namespace SupersetInheritance
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(Type);
             }
-            if (Optional.IsDefined(New))
-            {
-                writer.WritePropertyName("new");
-                writer.WriteStringValue(New);
-            }
             writer.WriteEndObject();
         }
 
-        internal static SupersetModel3Data DeserializeSupersetModel3Data(JsonElement element)
+        internal static SupersetModel6Data DeserializeSupersetModel6Data(JsonElement element)
         {
-            Optional<int> id = default;
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
-            Optional<string> @new = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    id = property.Value.GetInt32();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -66,13 +55,8 @@ namespace SupersetInheritance
                     type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("new"))
-                {
-                    @new = property.Value.GetString();
-                    continue;
-                }
             }
-            return new SupersetModel3Data(Optional.ToNullable(id), name.Value, type.Value, @new.Value);
+            return new SupersetModel6Data(type.Value, id.Value, name.Value);
         }
     }
 }

@@ -33,27 +33,32 @@
         }
     },
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup1/{availabilitySetName}": {
-            "get": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup1/{operationGroup1Name}": {
+            "put": {
                 "tags": [
                     "OperationGroup1"
                 ],
-                "operationId": "OperationGroup1_Get",
-                "description": "Retrieves information about an availability set.",
+                "operationId": "OperationGroup1_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                        "type": "string"
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "operationGroup1Name",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the availability set."
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel1"
+                        }
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -72,27 +77,32 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup2/{availabilitySetName}": {
-            "get": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup2/{operationGroup2Name}": {
+            "put": {
                 "tags": [
                     "OperationGroup2"
                 ],
-                "operationId": "OperationGroup2_Get",
-                "description": "Retrieves information about an availability set.",
+                "operationId": "OperationGroup2_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                        "type": "string"
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "operationGroup2Name",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the availability set."
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel2"
+                        }
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -111,27 +121,32 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup3/{availabilitySetName}": {
-            "get": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup3/{operationGroup3Name}": {
+            "put": {
                 "tags": [
                     "OperationGroup3"
                 ],
-                "operationId": "OperationGroup3_Get",
-                "description": "Retrieves information about an availability set.",
+                "operationId": "OperationGroup3_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                        "type": "string"
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "operationGroup3Name",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the availability set."
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel3"
+                        }
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -150,27 +165,32 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup4/{availabilitySetName}": {
-            "get": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup4/{operationGroup4Name}": {
+            "put": {
                 "tags": [
                     "OperationGroup4"
                 ],
-                "operationId": "OperationGroup4_Get",
-                "description": "Retrieves information about an availability set.",
+                "operationId": "OperationGroup4_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                        "type": "string"
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "operationGroup4Name",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the availability set."
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel4"
+                        }
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -189,27 +209,32 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup5/{availabilitySetName}": {
-            "get": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup5/{operationGroup5Name}": {
+            "put": {
                 "tags": [
                     "OperationGroup5"
                 ],
-                "operationId": "OperationGroup5_Get",
-                "description": "Retrieves information about an availability set.",
+                "operationId": "OperationGroup5_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the resource group."
+                        "type": "string"
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "operationGroup5Name",
                         "in": "path",
                         "required": true,
-                        "type": "string",
-                        "description": "The name of the availability set."
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel5"
+                        }
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -223,6 +248,50 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/SupersetModel5"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup6/{operationGroup6Name}": {
+            "put": {
+                "tags": [
+                    "OperationGroup6"
+                ],
+                "operationId": "OperationGroup6_Put",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "operationGroup6Name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel6"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel6"
                         }
                     }
                 }
@@ -244,8 +313,7 @@
                 "new": {
                     "type": "string"
                 }
-            },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            }
         },
         "SupersetModel2": {
             "properties": {
@@ -261,24 +329,9 @@
                 "new": {
                     "type": "string"
                 }
-            },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            }
         },
         "SupersetModel3": {
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "new": {
-                    "type": "string"
-                }
-            },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
-        },
-        "SupersetModel4": {
             "properties": {
                 "id": {
                     "type": "integer"
@@ -292,10 +345,9 @@
                 "new": {
                     "type": "string"
                 }
-            },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            }
         },
-        "SupersetModel5": {
+        "SupersetModel4": {
             "properties": {
                 "id": {
                     "type": "string"
@@ -307,30 +359,52 @@
                     "type": "string"
                 },
                 "location": {
-                    "type": "string",
-                    "x-ms-mutability": [
-                        "read",
-                        "create"
-                    ],
-                    "description": "The geo-location where the resource lives."
+                    "type": "string"
                 },
                 "tags": {
                     "type": "object",
                     "additionalProperties": {
                         "type": "string"
-                    },
-                    "x-ms-mutability": [
-                        "read",
-                        "create",
-                        "update"
-                    ],
-                    "description": "Resource tags."
+                    }
                 },
                 "new": {
                     "type": "string"
                 }
+            }
+        },
+        "SupersetModel5": {
+            "properties": {
+                "new": {
+                    "type": "string"
+                }
             },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SupersetModel6"
+                }
+            ]
+        },
+        "SupersetModel6": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SupersetModel7"
+                }
+            ]
+        },
+        "SupersetModel7": {
+            "properties": {
+                "type": {
+                    "type": "string"
+                }
+            }
         }
     },
     "parameters": {
@@ -338,15 +412,13 @@
             "name": "subscriptionId",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+            "type": "string"
         },
         "ApiVersionParameter": {
             "name": "api-version",
             "in": "query",
             "required": true,
-            "type": "string",
-            "description": "Client Api Version."
+            "type": "string"
         }
     }
 }

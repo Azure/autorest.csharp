@@ -13,7 +13,7 @@ namespace SupersetInheritance
     public partial class SupersetModel1Data : Resource
     {
         /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
-        internal SupersetModel1Data()
+        public SupersetModel1Data()
         {
         }
 
@@ -24,6 +24,6 @@ namespace SupersetInheritance
             New = @new;
         }
 
-        public string New { get; }
+        public string New { get; set; }
     }
 }

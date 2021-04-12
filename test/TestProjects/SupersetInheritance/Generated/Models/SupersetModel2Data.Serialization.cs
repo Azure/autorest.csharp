@@ -10,8 +10,34 @@ using Azure.Core;
 
 namespace SupersetInheritance
 {
-    public partial class SupersetModel2Data
+    public partial class SupersetModel2Data : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(ID))
+            {
+                writer.WritePropertyName("iD");
+                writer.WriteStringValue(ID);
+            }
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name");
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type");
+                writer.WriteStringValue(Type);
+            }
+            if (Optional.IsDefined(New))
+            {
+                writer.WritePropertyName("new");
+                writer.WriteStringValue(New);
+            }
+            writer.WriteEndObject();
+        }
+
         internal static SupersetModel2Data DeserializeSupersetModel2Data(JsonElement element)
         {
             Optional<string> iD = default;

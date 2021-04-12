@@ -5,48 +5,36 @@
 
 #nullable disable
 
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
 namespace SupersetInheritance
 {
-    public partial class SupersetModel5Data
+    public partial class SupersetModel5Data : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(New))
+            {
+                writer.WritePropertyName("new");
+                writer.WriteStringValue(New);
+            }
+            writer.WriteEndObject();
+        }
+
         internal static SupersetModel5Data DeserializeSupersetModel5Data(JsonElement element)
         {
-            Optional<string> location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
             Optional<string> @new = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("location"))
-                {
-                    location = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("tags"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        dictionary.Add(property0.Name, property0.Value.GetString());
-                    }
-                    tags = dictionary;
-                    continue;
-                }
                 if (property.NameEquals("new"))
                 {
                     @new = property.Value.GetString();
                     continue;
                 }
             }
-            return new SupersetModel5Data(location.Value, Optional.ToDictionary(tags), @new.Value);
+            return new SupersetModel5Data(@new.Value);
         }
     }
 }

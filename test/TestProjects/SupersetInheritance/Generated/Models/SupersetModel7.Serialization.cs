@@ -10,31 +10,31 @@ using Azure.Core;
 
 namespace SupersetInheritance
 {
-    public partial class SupersetModel4Data : IUtf8JsonSerializable
+    public partial class SupersetModel7 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(New))
+            if (Optional.IsDefined(Type))
             {
-                writer.WritePropertyName("new");
-                writer.WriteStringValue(New);
+                writer.WritePropertyName("type");
+                writer.WriteStringValue(Type);
             }
             writer.WriteEndObject();
         }
 
-        internal static SupersetModel4Data DeserializeSupersetModel4Data(JsonElement element)
+        internal static SupersetModel7 DeserializeSupersetModel7(JsonElement element)
         {
-            Optional<string> @new = default;
+            Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("new"))
+                if (property.NameEquals("type"))
                 {
-                    @new = property.Value.GetString();
+                    type = property.Value.GetString();
                     continue;
                 }
             }
-            return new SupersetModel4Data(@new.Value);
+            return new SupersetModel7(type.Value);
         }
     }
 }

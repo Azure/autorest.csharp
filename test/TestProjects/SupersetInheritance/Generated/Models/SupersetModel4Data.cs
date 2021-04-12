@@ -5,32 +5,25 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace SupersetInheritance
 {
     /// <summary> A class representing the SupersetModel4 data model. </summary>
-    public partial class SupersetModel4Data
+    public partial class SupersetModel4Data : TrackedResource
     {
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
-        internal SupersetModel4Data()
+        public SupersetModel4Data()
         {
         }
 
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
         /// <param name="new"> . </param>
-        internal SupersetModel4Data(int? id, string name, string type, string @new)
+        internal SupersetModel4Data(string @new)
         {
-            Id = id;
-            Name = name;
-            Type = type;
             New = @new;
         }
 
-        public int? Id { get; }
-        public string Name { get; }
-        public string Type { get; }
-        public string New { get; }
+        public string New { get; set; }
     }
 }
