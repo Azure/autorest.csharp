@@ -2338,12 +2338,11 @@ namespace AutoRest.CSharp.Input
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<StatusCodes> StatusCodes { get; set; } = new System.Collections.ObjectModel.Collection<StatusCodes>();
 
-        /// <summary>canonical response type (ie, 'json')</summary>
+        /// <summary>canonical response type (ie, 'json').</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "knownMediaType")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public KnownMediaType KnownMediaType { get; set; }
+        public KnownMediaType? KnownMediaType { get; set; }
 
-        /// <summary>the possible media types that this response MUST match one of</summary>
+        /// <summary>The possible media types that this response MUST match one of.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "mediaTypes")]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<string> MediaTypes { get; set; } = new System.Collections.ObjectModel.Collection<string>();
