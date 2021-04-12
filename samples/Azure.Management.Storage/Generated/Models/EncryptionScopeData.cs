@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the EncryptionScope data model. </summary>
-    public partial class EncryptionScopeData : ResourceManager.Core.Resource
+    public partial class EncryptionScopeData : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of EncryptionScopeData. </summary>
         public EncryptionScopeData()

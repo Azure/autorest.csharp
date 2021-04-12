@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace ResourceRename
 {
     /// <summary> A class representing the operations that can be performed over a specific SshPublicKeyInfo. </summary>
-    public partial class SshPublicKeyInfoOperations : ResourceOperationsBase<SshPublicKeyInfo>
+    public partial class SshPublicKeyInfoOperations : ResourceOperationsBase<TenantResourceIdentifier, SshPublicKeyInfo>
     {
         /// <summary> Initializes a new instance of SshPublicKeyInfoOperations for mocking. </summary>
         protected SshPublicKeyInfoOperations()

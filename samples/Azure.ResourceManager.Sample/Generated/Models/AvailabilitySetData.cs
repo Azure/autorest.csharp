@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the AvailabilitySet data model. </summary>
-    public partial class AvailabilitySetData : TrackedResource
+    public partial class AvailabilitySetData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
         public AvailabilitySetData()

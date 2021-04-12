@@ -4,6 +4,7 @@
 using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -41,6 +42,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, _prefix));
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
+
+        public string ResourceIdentifierType => _operationGroup.GetResourceIdentifierType();
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The resource model definition for a ARM tracked top level resource. </summary>
-    public partial class TrackedResource : ResourceManager.Core.Resource
+    public partial class TrackedResource : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="location"> The geo-location where the resource lives. </param>

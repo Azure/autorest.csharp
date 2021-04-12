@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the ManagementPolicy data model. </summary>
-    public partial class ManagementPolicyData : ResourceManager.Core.Resource
+    public partial class ManagementPolicyData : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ManagementPolicyData. </summary>
         public ManagementPolicyData()

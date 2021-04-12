@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtParent
 {
     /// <summary> A class representing the operations that can be performed over a specific DedicatedHostGroup. </summary>
-    public partial class DedicatedHostGroupOperations : ResourceOperationsBase<DedicatedHostGroup>
+    public partial class DedicatedHostGroupOperations : ResourceOperationsBase<TenantResourceIdentifier, DedicatedHostGroup>
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupOperations for mocking. </summary>
         protected DedicatedHostGroupOperations()

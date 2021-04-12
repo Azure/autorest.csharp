@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the Image data model. </summary>
-    public partial class ImageData : TrackedResource
+    public partial class ImageData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ImageData. </summary>
         public ImageData()

@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the ProximityPlacementGroup data model. </summary>
-    public partial class ProximityPlacementGroupData : TrackedResource
+    public partial class ProximityPlacementGroupData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupData. </summary>
         public ProximityPlacementGroupData()

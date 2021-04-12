@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
@@ -49,8 +50,9 @@ namespace AutoRest.CSharp.Output.Models
                 if (serviceRequest != null)
                 {
                     // Prepare our parameter list. If there were any parameters that should be passed in the body of the request,
-                    // we want to generate a single parameter of type `RequestContent` named `requestBody` at the start of the
-                    // parameter list instead of creating a seperate parameter for each of them.
+                    // we want to generate a single parameter of type `RequestContent` named `requestBody` paramter. We want that
+                    // parameter to be the last required parameter in the method signature (so any required path or query parameters
+                    // will show up first.
 
                     IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where (FilterServiceParamaters);
                     var accessibility = operation.Accessibility ?? "public";
@@ -60,9 +62,15 @@ namespace AutoRest.CSharp.Output.Models
 
                     if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body))
                     {
-                        // The service request had some parameters for the body, so create a parameter for the body and inject it into the list of parameters.
+                        // The service request had some parameters for the body, so create a parameter for the body and inject it into the list of parameters,
+                        // right before the first optional parameter.
                         Parameter bodyParam = new Parameter("requestBody", "The request body", typeof(Azure.Core.RequestContent), null, true);
-                        parameters.Insert(0, bodyParam);
+                        int firstOptionalParameterIndex = parameters.FindIndex(p => p.DefaultValue != null);
+                        if (firstOptionalParameterIndex == -1)
+                        {
+                            firstOptionalParameterIndex = parameters.Count;
+                        }
+                        parameters.Insert(firstOptionalParameterIndex, bodyParam);
                         body = new RequestContentRequestBody(bodyParam);
                     }
 

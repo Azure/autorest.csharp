@@ -1,0 +1,56 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Body and Path Client",
+      "description": "Some cool documentation.",
+      "version": "2014-04-01-preview"
+    },
+    "host": "localhost:3000",
+    "schemes": [
+      "http"
+    ],
+    "produces": [ "application/json" ],
+    "consumes": [ "application/json" ],
+    "paths": {
+      "/{itemName}": {
+        "post": {
+          "operationId": "create",
+          "summary": "Create products",
+          "description": "Resets products.",
+          "parameters": [
+            {
+              "name": "itemName",
+              "in": "path",
+              "description": "item name.",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "bodyParameter",
+              "in": "body",
+              "description": "body Parameter",
+              "required": true,
+              "schema": {}
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "ok"
+            }
+          }
+        }
+      }      
+    },
+    "definitions": {},
+    "parameters": {
+      "SubscriptionIdParamterer": {
+        "name": "subscriptionId",
+        "in": "path",
+        "description": "Subscription ID.",
+        "required": true,
+        "type": "string",
+        "enum": [ "123456" ]
+      }
+    }
+}
+  
