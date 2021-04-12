@@ -980,11 +980,10 @@ public virtual async Task<Response> OperationAsync(string body = null, Cancellat
 
 ```
 directive:
-  from: swagger-document
-  where: $.definitions.*
+- from: swagger-document
+  where: $..[?(@.operationId=='Operation')]
   transform: >
-    $["x-namespace"] = "Azure.Search.Documents.Indexes.Models"
-    $["x-accessibility"] = "internal"
+    $["x-accessibility"] = "internal";
 ```
 
 **Generated code after (Generated/Client.cs):**
