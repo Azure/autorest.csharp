@@ -17,9 +17,7 @@
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {},
-  "ModelRename": {
-    "SshPublicKeyResource": "SshPublicKeyInfo"
-  },
+  "ModelRename": {},
   "OperationGroupToParent": {},
   "ModelToResource": {}
 }
