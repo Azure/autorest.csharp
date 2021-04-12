@@ -15,5 +15,7 @@ credential-header-name: Fake-Subscription-Key
 directive:
 - from: swagger-document
   where: $..[?(@.operationId=='Operation')]
-  transform: $["x-accessibility"] = "internal";
+  transform: >
+    $['x-accessibility'] = "internal";
+    $lib.log($);
 ```
