@@ -21,9 +21,7 @@
   "OperationGroupToResource": {
     "VirtualMachineExtensionImages": "VirtualMachineExtensionImage"
   },
-  "ModelRename": {},
   "OperationGroupToParent": {
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers"
-  },
-  "ModelToResource": {}
+  }
 }

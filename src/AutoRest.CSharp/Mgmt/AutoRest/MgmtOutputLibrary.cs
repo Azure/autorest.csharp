@@ -40,7 +40,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
             DecorateOperationGroup();
-            DecorateSchema();
         }
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
@@ -128,11 +127,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 var schema = entry.Key;
                 //TODO: find a way to not need to duplicate this
-                List<OperationGroup>? operations = null;
-                if (!_operationGroups.TryGetValue(schema.Name, out operations))
-                {
-                    _operationGroups.TryGetValue(schema.NameOverride!, out operations);
-                }
+                List<OperationGroup>? operations = _operationGroups[schema.Name];
 
                 if (operations != null)
                 {
@@ -150,10 +145,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         }
                     }
                 }
-                else
-                {
-                    throw new Exception($"Neither {schema.Name} nor {schema.NameOverride} were found in the operations dictionary");
-                }
             }
 
             return _resourceData;
@@ -170,11 +161,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                List<OperationGroup>? operations = null;
-                if (!_operationGroups.TryGetValue(schema.Name, out operations))
-                {
-                    _operationGroups.TryGetValue(schema.NameOverride!, out operations);
-                }
+                List<OperationGroup>? operations = _operationGroups[schema.Name];
 
                 if (operations != null)
                 {
@@ -185,10 +172,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             _armResource.Add(operation.Resource, new Resource(operation.Resource, _context));
                         }
                     }
-                }
-                else
-                {
-                    throw new Exception($"Neither {schema.Name} nor {schema.NameOverride} were found in the operations dictionary");
                 }
             }
 
@@ -219,7 +202,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                if (_operationGroups.ContainsKey(schema.Name) || _operationGroups.ContainsKey(schema.NameOverride!))
+                if (_operationGroups.ContainsKey(schema.Name))
                 {
                     continue;
                 }
@@ -235,7 +218,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                if (_operationGroups.ContainsKey(schema.Name) || _operationGroups.ContainsKey(schema.NameOverride!))
+                if (_operationGroups.ContainsKey(schema.Name))
                 {
                     resourceModels.Add(schema, BuildResourceModel(schema));
                 }
@@ -285,33 +268,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 operationsGroup.Parent = parent ?? ParentDetection.GetParent(operationsGroup);
                 operationsGroup.Resource = _mgmtConfiguration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
-                string? nameOverride;
-                if (_mgmtConfiguration.ModelRename.TryGetValue(operationsGroup.Resource, out nameOverride))
-                {
-                    operationsGroup.Resource = nameOverride;
-                }
             }
             ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes);
-        }
-
-        private void DecorateSchema()
-        {
-            foreach (var schema in _allSchemas)
-            {
-                string? name;
-                if (_mgmtConfiguration.ModelToResource.TryGetValue(schema.Name, out name))
-                {
-                    schema.NameOverride = name;
-                }
-                else if (_mgmtConfiguration.ModelRename.TryGetValue(schema.Name, out name))
-                {
-                    schema.NameOverride = name;
-                }
-                else
-                {
-                    schema.NameOverride = schema.Name;
-                }
-            }
         }
 
         private void MapHttpMethodToOperation(OperationGroup operationsGroup)
