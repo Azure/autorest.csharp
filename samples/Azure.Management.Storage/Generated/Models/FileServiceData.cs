@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the FileService data model. </summary>
-    public partial class FileServiceData : ResourceManager.Core.Resource
+    public partial class FileServiceData : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of FileServiceData. </summary>
         public FileServiceData()

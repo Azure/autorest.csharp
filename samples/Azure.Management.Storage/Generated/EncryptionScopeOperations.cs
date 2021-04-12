@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific EncryptionScope. </summary>
-    public partial class EncryptionScopeOperations : ResourceOperationsBase<EncryptionScope>
+    public partial class EncryptionScopeOperations : ResourceOperationsBase<TenantResourceIdentifier, EncryptionScope>
     {
         /// <summary> Initializes a new instance of EncryptionScopeOperations for mocking. </summary>
         protected EncryptionScopeOperations()

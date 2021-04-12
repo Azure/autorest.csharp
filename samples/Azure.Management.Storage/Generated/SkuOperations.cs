@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific Sku. </summary>
-    public partial class SkuOperations : ResourceOperationsBase<Sku>
+    public partial class SkuOperations : ResourceOperationsBase<TenantResourceIdentifier, Sku>
     {
         /// <summary> Initializes a new instance of SkuOperations for mocking. </summary>
         protected SkuOperations()

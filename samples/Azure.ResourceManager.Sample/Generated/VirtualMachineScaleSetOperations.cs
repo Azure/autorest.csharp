@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineScaleSet. </summary>
-    public partial class VirtualMachineScaleSetOperations : ResourceOperationsBase<VirtualMachineScaleSet>
+    public partial class VirtualMachineScaleSetOperations : ResourceOperationsBase<TenantResourceIdentifier, VirtualMachineScaleSet>
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetOperations for mocking. </summary>
         protected VirtualMachineScaleSetOperations()

@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific Image. </summary>
-    public partial class ImageOperations : ResourceOperationsBase<Image>
+    public partial class ImageOperations : ResourceOperationsBase<TenantResourceIdentifier, Image>
     {
         /// <summary> Initializes a new instance of ImageOperations for mocking. </summary>
         protected ImageOperations()

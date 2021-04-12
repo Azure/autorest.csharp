@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific PrivateEndpointConnection. </summary>
-    public partial class PrivateEndpointConnectionOperations : ResourceOperationsBase<PrivateEndpointConnection>
+    public partial class PrivateEndpointConnectionOperations : ResourceOperationsBase<TenantResourceIdentifier, PrivateEndpointConnection>
     {
         /// <summary> Initializes a new instance of PrivateEndpointConnectionOperations for mocking. </summary>
         protected PrivateEndpointConnectionOperations()

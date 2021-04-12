@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific ManagementPolicy. </summary>
-    public partial class ManagementPolicyOperations : ResourceOperationsBase<ManagementPolicy>
+    public partial class ManagementPolicyOperations : ResourceOperationsBase<TenantResourceIdentifier, ManagementPolicy>
     {
         /// <summary> Initializes a new instance of ManagementPolicyOperations for mocking. </summary>
         protected ManagementPolicyOperations()

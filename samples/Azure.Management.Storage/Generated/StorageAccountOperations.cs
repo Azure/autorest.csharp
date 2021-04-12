@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific StorageAccount. </summary>
-    public partial class StorageAccountOperations : ResourceOperationsBase<StorageAccount>
+    public partial class StorageAccountOperations : ResourceOperationsBase<TenantResourceIdentifier, StorageAccount>
     {
         /// <summary> Initializes a new instance of StorageAccountOperations for mocking. </summary>
         protected StorageAccountOperations()
