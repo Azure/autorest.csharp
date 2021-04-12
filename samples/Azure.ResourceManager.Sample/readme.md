@@ -26,7 +26,7 @@ operation-group-to-resource:
    Usage: Usage
    VirtualMachineSizes: VirtualMachineSize
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
-   LogAnalytics: LogAnalyticsOperationResult
+   LogAnalytics: LogAnalytics
 model-rename:
    SshPublicKey : SshPublicKeyInfo
    LogAnalyticsOperationResult: LogAnalytics
