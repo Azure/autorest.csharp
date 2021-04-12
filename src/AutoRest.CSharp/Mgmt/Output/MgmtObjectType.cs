@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return isResourceType ? name + "Data" : name;
         }
 
-        public new CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
+        public override CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
 
         public ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
 
@@ -130,6 +130,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
             //inheritedType ??= InheritanceChoser.GetExactMatch(this);
             return inheritedType == null ? InheritanceChoser.GetSupersetMatch(this) : inheritedType;
+            //return inheritedType;
         }
     }
 }

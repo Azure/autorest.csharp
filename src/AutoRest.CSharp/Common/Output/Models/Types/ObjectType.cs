@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public string? Description { get; }
 
-        public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
+        public virtual CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
 
         public ObjectSerialization[] Serializations => _serializations ??= BuildSerializations();
 
