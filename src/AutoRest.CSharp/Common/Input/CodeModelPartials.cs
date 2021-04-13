@@ -165,7 +165,6 @@ namespace AutoRest.CSharp.Input
     {
         public string? XmlName => Serialization?.Xml?.Name;
         public string Name => Language.Default.Name;
-        public string? NameOverride;
     }
 
     internal partial class HTTPSecurityScheme : Dictionary<string, object>
