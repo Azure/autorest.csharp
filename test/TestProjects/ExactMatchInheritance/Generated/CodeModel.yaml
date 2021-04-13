@@ -1,9 +1,9 @@
 !CodeModel 
 info: !Info 
-  title: SupersetInheritance
+  title: ExactMatchInheritance
 schemas: !Schemas 
   numbers:
-    - !NumberSchema &ref_11
+    - !NumberSchema &ref_21
       type: integer
       precision: 32
       language: !Languages 
@@ -29,14 +29,14 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_2
+    - !StringSchema &ref_7
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SupersetModel1Id
+          name: ExactMatchModel1New
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_3
@@ -46,7 +46,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SupersetModel1Name
+          name: ExactMatchModel6Id
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_4
@@ -56,7 +56,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SupersetModel1Type
+          name: ExactMatchModel6Name
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_5
@@ -66,67 +66,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SupersetModel2ID
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_6
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: SupersetModel2Name
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_7
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: SupersetModel2Type
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_8
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: SupersetModel3Id
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_9
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: SupersetModel3Name
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_10
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: SupersetModel3New
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_12
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: SupersetModel4Name
+          name: ExactMatchModel6Type
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_13
@@ -136,17 +76,47 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SupersetModel4Type
+          name: ExactMatchModel2New
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SupersetModel5Id
+          name: ExactMatchModel7ID
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel7Name
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_11
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel7Type
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_19
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel3New
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_15
@@ -156,7 +126,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SupersetModel5Name
+          name: ExactMatchModel8Id
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_16
@@ -166,7 +136,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SupersetModel5Type
+          name: ExactMatchModel8Name
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_17
@@ -174,17 +144,83 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      extensions:
-        x-ms-mutability:
-          - read
-          - create
       language: !Languages 
         default:
-          name: SupersetModel5Location
-          description: The geo-location where the resource lives.
+          name: ExactMatchModel8NEW
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_25
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel4New
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_22
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel9Name
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_23
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel9Type
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_33
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel5New
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_31
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel10Location
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_28
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel11Name
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_29
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel11Type
+          description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_19
+    - !ConstantSchema &ref_34
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -194,7 +230,17 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_23
+    - !ConstantSchema &ref_38
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_39
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -205,129 +251,73 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_18
+    - !DictionarySchema &ref_32
       type: dictionary
       elementType: *ref_1
       language: !Languages 
         default:
-          name: SupersetModel5Tags
-          description: Resource tags.
+          name: ExactMatchModel10Tags
+          description: Dictionary of <string>
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_26
+    - !ObjectSchema &ref_2
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
+      parents: !Relations 
+        all:
+          - !ObjectSchema &ref_6
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            children: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: *ref_3
+                serializedName: id
+                language: !Languages 
+                  default:
+                    name: id
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_4
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_5
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: ''
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: ExactMatchModel6
+                description: ''
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_6
       properties:
-        - !Property 
-          schema: *ref_2
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_3
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_4
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: ''
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - output
-      language: !Languages 
-        default:
-          name: SupersetModel1
-          description: >-
-            Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
-            information about availability sets, see [Manage the availability of virtual
-            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see
-            [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM
-            can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_29
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      properties:
-        - !Property 
-          schema: *ref_5
-          serializedName: iD
-          language: !Languages 
-            default:
-              name: iD
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_6
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
         - !Property 
           schema: *ref_7
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: ''
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - output
-      language: !Languages 
-        default:
-          name: SupersetModel2
-          description: >-
-            Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
-            information about availability sets, see [Manage the availability of virtual
-            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see
-            [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM
-            can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_32
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      properties:
-        - !Property 
-          schema: *ref_8
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_9
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_10
           serializedName: new
           language: !Languages 
             default:
@@ -337,126 +327,366 @@ schemas: !Schemas
       serializationFormats:
         - json
       usage:
+        - input
         - output
       language: !Languages 
         default:
-          name: SupersetModel3
-          description: >-
-            Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
-            information about availability sets, see [Manage the availability of virtual
-            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see
-            [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM
-            can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
+          name: ExactMatchModel1
+          description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_35
+    - *ref_6
+    - !ObjectSchema &ref_8
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
+      parents: !Relations 
+        all:
+          - !ObjectSchema &ref_12
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            children: !Relations 
+              all:
+                - *ref_8
+              immediate:
+                - *ref_8
+            properties:
+              - !Property 
+                schema: *ref_9
+                serializedName: iD
+                language: !Languages 
+                  default:
+                    name: iD
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_10
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_11
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: ''
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: ExactMatchModel7
+                description: ''
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_12
       properties:
-        - !Property 
-          schema: *ref_11
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_12
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
         - !Property 
           schema: *ref_13
-          serializedName: type
+          serializedName: new
           language: !Languages 
             default:
-              name: type
+              name: new
               description: ''
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
+        - input
         - output
       language: !Languages 
         default:
-          name: SupersetModel4
-          description: >-
-            Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
-            information about availability sets, see [Manage the availability of virtual
-            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see
-            [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM
-            can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
+          name: ExactMatchModel2
+          description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_38
+    - *ref_12
+    - !ObjectSchema &ref_14
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
+      parents: !Relations 
+        all:
+          - !ObjectSchema &ref_18
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            children: !Relations 
+              all:
+                - *ref_14
+              immediate:
+                - *ref_14
+            properties:
+              - !Property 
+                schema: *ref_15
+                serializedName: id
+                language: !Languages 
+                  default:
+                    name: id
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_16
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_17
+                serializedName: NEW
+                language: !Languages 
+                  default:
+                    name: NEW
+                    description: ''
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: ExactMatchModel8
+                description: ''
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_18
       properties:
         - !Property 
-          schema: *ref_14
-          serializedName: id
+          schema: *ref_19
+          serializedName: new
           language: !Languages 
             default:
-              name: id
+              name: new
               description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_15
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_16
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_17
-          serializedName: location
-          language: !Languages 
-            default:
-              name: location
-              description: The geo-location where the resource lives.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_18
-          serializedName: tags
-          language: !Languages 
-            default:
-              name: tags
-              description: Resource tags.
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
+        - input
         - output
       language: !Languages 
         default:
-          name: SupersetModel5
-          description: >-
-            Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
-            information about availability sets, see [Manage the availability of virtual
-            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see
-            [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM
-            can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
+          name: ExactMatchModel3
+          description: ''
           namespace: ''
       protocol: !Protocols {}
+    - *ref_18
+    - !ObjectSchema &ref_20
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      parents: !Relations 
+        all:
+          - !ObjectSchema &ref_24
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            children: !Relations 
+              all:
+                - *ref_20
+              immediate:
+                - *ref_20
+            properties:
+              - !Property 
+                schema: *ref_21
+                serializedName: id
+                language: !Languages 
+                  default:
+                    name: id
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_22
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_23
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: ''
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: ExactMatchModel9
+                description: ''
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_24
+      properties:
+        - !Property 
+          schema: *ref_25
+          serializedName: new
+          language: !Languages 
+            default:
+              name: new
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !Languages 
+        default:
+          name: ExactMatchModel4
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_24
+    - !ObjectSchema &ref_26
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      parents: !Relations 
+        all:
+          - !ObjectSchema &ref_27
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            children: !Relations 
+              all:
+                - *ref_26
+              immediate:
+                - *ref_26
+            parents: !Relations 
+              all:
+                - !ObjectSchema &ref_30
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  children: !Relations 
+                    all:
+                      - *ref_27
+                      - *ref_26
+                    immediate:
+                      - *ref_27
+                  properties:
+                    - !Property 
+                      schema: *ref_28
+                      serializedName: name
+                      language: !Languages 
+                        default:
+                          name: name
+                          description: ''
+                      protocol: !Protocols {}
+                    - !Property 
+                      schema: *ref_29
+                      serializedName: type
+                      language: !Languages 
+                        default:
+                          name: type
+                          description: ''
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  language: !Languages 
+                    default:
+                      name: ExactMatchModel11
+                      description: ''
+                      namespace: ''
+                  protocol: !Protocols {}
+              immediate:
+                - *ref_30
+            properties:
+              - !Property 
+                schema: *ref_21
+                serializedName: id
+                language: !Languages 
+                  default:
+                    name: id
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_31
+                serializedName: location
+                language: !Languages 
+                  default:
+                    name: location
+                    description: ''
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_32
+                serializedName: tags
+                language: !Languages 
+                  default:
+                    name: tags
+                    description: Dictionary of <string>
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: ExactMatchModel10
+                description: ''
+                namespace: ''
+            protocol: !Protocols {}
+          - *ref_30
+        immediate:
+          - *ref_27
+      properties:
+        - !Property 
+          schema: *ref_33
+          serializedName: new
+          language: !Languages 
+            default:
+              name: new
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !Languages 
+        default:
+          name: ExactMatchModel5
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_27
+    - *ref_30
 globalParameters:
-  - !Parameter &ref_22
+  - !Parameter &ref_37
     schema: *ref_1
     implementation: Client
     required: true
@@ -465,12 +695,12 @@ globalParameters:
     language: !Languages 
       default:
         name: SubscriptionId
-        description: Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+        description: ''
         serializedName: subscriptionId
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_20
+  - !Parameter &ref_35
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -486,8 +716,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_21
-    schema: *ref_19
+  - !Parameter &ref_36
+    schema: *ref_34
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -508,38 +738,63 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_20
-          - !Parameter &ref_24
+          - *ref_35
+          - !Parameter &ref_41
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
                 name: resourceGroupName
-                description: The name of the resource group.
+                description: ''
                 serializedName: resourceGroupName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_25
+          - !Parameter &ref_42
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: availabilitySetName
-                description: The name of the availability set.
-                serializedName: availabilitySetName
+                name: operationGroup1Name
+                description: ''
+                serializedName: operationGroup1Name
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_21
-          - *ref_22
+          - *ref_36
+          - *ref_37
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_38
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_40
+                schema: *ref_2
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_39
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -551,19 +806,491 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-            signatureParameters: []
+            signatureParameters:
+              - *ref_40
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup1/{availabilitySetName}
-                method: get
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup1/{operationGroup1Name}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_24
-          - *ref_25
+          - *ref_41
+          - *ref_42
+        responses:
+          - !SchemaResponse 
+            schema: *ref_2
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: OperationGroup1
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: OperationGroup2
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_35
+          - !Parameter &ref_44
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_45
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: operationGroup2Name
+                description: ''
+                serializedName: operationGroup2Name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_36
+          - *ref_37
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_38
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_43
+                schema: *ref_8
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_43
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup2/{operationGroup2Name}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_44
+          - *ref_45
+        responses:
+          - !SchemaResponse 
+            schema: *ref_8
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: OperationGroup2
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: OperationGroup3
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_35
+          - !Parameter &ref_47
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_48
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: operationGroup3Name
+                description: ''
+                serializedName: operationGroup3Name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_36
+          - *ref_37
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_38
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_46
+                schema: *ref_14
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_46
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup3/{operationGroup3Name}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_47
+          - *ref_48
+        responses:
+          - !SchemaResponse 
+            schema: *ref_14
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: OperationGroup3
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: OperationGroup4
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_35
+          - !Parameter &ref_50
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_51
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: operationGroup4Name
+                description: ''
+                serializedName: operationGroup4Name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_36
+          - *ref_37
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_38
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_49
+                schema: *ref_20
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_49
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup4/{operationGroup4Name}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_50
+          - *ref_51
+        responses:
+          - !SchemaResponse 
+            schema: *ref_20
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: OperationGroup4
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: OperationGroup5
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_35
+          - !Parameter &ref_53
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_54
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: operationGroup5Name
+                description: ''
+                serializedName: operationGroup5Name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_36
+          - *ref_37
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_38
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_52
+                schema: *ref_26
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_52
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup5/{operationGroup5Name}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_53
+          - *ref_54
         responses:
           - !SchemaResponse 
             schema: *ref_26
@@ -580,360 +1307,8 @@ operationGroups:
                   - '200'
         language: !Languages 
           default:
-            name: Get
-            description: Retrieves information about an availability set.
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: OperationGroup1
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: OperationGroup2
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_20
-          - !Parameter &ref_27
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_28
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetName
-                description: The name of the availability set.
-                serializedName: availabilitySetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_21
-          - *ref_22
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_23
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup2/{availabilitySetName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_27
-          - *ref_28
-        responses:
-          - !SchemaResponse 
-            schema: *ref_29
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: Retrieves information about an availability set.
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: OperationGroup2
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: OperationGroup3
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_20
-          - !Parameter &ref_30
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_31
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetName
-                description: The name of the availability set.
-                serializedName: availabilitySetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_21
-          - *ref_22
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_23
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup3/{availabilitySetName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_30
-          - *ref_31
-        responses:
-          - !SchemaResponse 
-            schema: *ref_32
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: Retrieves information about an availability set.
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: OperationGroup3
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: OperationGroup4
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_20
-          - !Parameter &ref_33
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_34
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetName
-                description: The name of the availability set.
-                serializedName: availabilitySetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_21
-          - *ref_22
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_23
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup4/{availabilitySetName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_33
-          - *ref_34
-        responses:
-          - !SchemaResponse 
-            schema: *ref_35
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: Retrieves information about an availability set.
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: OperationGroup4
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: OperationGroup5
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_20
-          - !Parameter &ref_36
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_37
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: availabilitySetName
-                description: The name of the availability set.
-                serializedName: availabilitySetName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_21
-          - *ref_22
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_23
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup5/{availabilitySetName}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_36
-          - *ref_37
-        responses:
-          - !SchemaResponse 
-            schema: *ref_38
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: Retrieves information about an availability set.
+            name: Put
+            description: ''
         protocol: !Protocols {}
     language: !Languages 
       default:
@@ -944,7 +1319,7 @@ security: !Security
   authenticationRequired: true
 language: !Languages 
   default:
-    name: SupersetInheritance
+    name: ExactMatchInheritance
     description: ''
 protocol: !Protocols 
   http: !HttpModel {}

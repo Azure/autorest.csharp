@@ -10,9 +10,30 @@ using Azure.Core;
 
 namespace ExactMatchInheritance
 {
-    public partial class SupersetModel2Data
+    public partial class ExactMatchModel7 : IUtf8JsonSerializable
     {
-        internal static SupersetModel2Data DeserializeSupersetModel2Data(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(ID))
+            {
+                writer.WritePropertyName("iD");
+                writer.WriteStringValue(ID);
+            }
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name");
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(Type))
+            {
+                writer.WritePropertyName("type");
+                writer.WriteStringValue(Type);
+            }
+            writer.WriteEndObject();
+        }
+
+        internal static ExactMatchModel7 DeserializeExactMatchModel7(JsonElement element)
         {
             Optional<string> iD = default;
             Optional<string> name = default;
@@ -35,7 +56,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new SupersetModel2Data(iD.Value, name.Value, type.Value);
+            return new ExactMatchModel7(iD.Value, name.Value, type.Value);
         }
     }
 }
