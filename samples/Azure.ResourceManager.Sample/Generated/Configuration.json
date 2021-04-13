@@ -25,27 +25,18 @@
     "LogAnalytics": "Microsoft.Compute/locations/logAnalytics"
   },
   "OperationGroupToResource": {
-    "Operations": "RestApi",
     "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
     "VirtualMachineImages": "VirtualMachineImage",
     "Usage": "Usage",
     "VirtualMachineSizes": "VirtualMachineSize",
     "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
-    "LogAnalytics": "LogAnalyticsOperationResult"
-  },
-  "ModelRename": {
-    "SshPublicKey": "SshPublicKeyInfo",
-    "LogAnalyticsOperationResult": "LogAnalytics",
-    "SshPublicKeyResource": "SshPublicKey"
+    "LogAnalytics": "LogAnalytics",
+    "Operations": "RestApi"
   },
   "OperationGroupToParent": {
     "LogAnalytics": "subscriptions",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
     "VirtualMachineImages": "Microsoft.Compute/locations",
     "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets"
-  },
-  "ModelToResource": {
-    "ComputeOperationValue": "RestApi",
-    "RollingUpgradeStatusInfo": "VirtualMachineScaleSetRollingUpgrade"
   }
 }

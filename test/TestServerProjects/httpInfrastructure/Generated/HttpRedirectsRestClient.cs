@@ -104,7 +104,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue<IReadOnlyList<string>, HttpRedirectsGet300Headers>(null, headers, message.Response);
+                    return ResponseWithHeaders.FromValue((IReadOnlyList<string>)null, headers, message.Response);
                 case 300:
                     {
                         IReadOnlyList<string> value = default;
@@ -132,7 +132,7 @@ namespace httpInfrastructure
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue<IReadOnlyList<string>, HttpRedirectsGet300Headers>(null, headers, message.Response);
+                    return ResponseWithHeaders.FromValue((IReadOnlyList<string>)null, headers, message.Response);
                 case 300:
                     {
                         IReadOnlyList<string> value = default;

@@ -19,7 +19,5 @@
   "CredentialHeaderName": "Fake-Subscription-Key",
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {},
-  "ModelRename": {},
-  "OperationGroupToParent": {},
-  "ModelToResource": {}
+  "OperationGroupToParent": {}
 }
