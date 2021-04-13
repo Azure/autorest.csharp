@@ -4905,7 +4905,7 @@ schemas: !Schemas
                             - output
                           language: !Languages 
                             default:
-                              name: FileServiceProperties
+                              name: FileService
                               description: The properties of File services in storage account.
                               namespace: ''
                           protocol: !Protocols {}
@@ -7378,7 +7378,7 @@ schemas: !Schemas
                 - output
               language: !Languages 
                 default:
-                  name: BlobServiceProperties
+                  name: BlobService
                   description: The properties of a storage account’s Blob service.
                   namespace: ''
               protocol: !Protocols {}

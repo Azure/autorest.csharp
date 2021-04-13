@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
-            var name = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
+            var name = objectSchema.CSharpName();
             return isResourceType ? name + "Data" : name;
         }
 
