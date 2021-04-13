@@ -16,8 +16,16 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the operations that can be performed over a specific Usage. </summary>
     public partial class UsageOperations : ResourceOperationsBase<TenantResourceIdentifier, Usage>
     {
-        /// <summary> Initializes a new instance of UsageOperations for mocking. </summary>
-        protected UsageOperations()
+        /// <summary> Initializes a new instance of the <see cref="UsageOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        internal UsageOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="UsageOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected UsageOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
         }
 

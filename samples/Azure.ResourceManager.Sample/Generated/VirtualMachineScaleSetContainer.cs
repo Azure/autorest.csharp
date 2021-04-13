@@ -5,14 +5,159 @@
 
 #nullable disable
 
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core.Pipeline;
+using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core.Resources;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineScaleSet and their operations over a [ParentResource]. </summary>
-    public partial class VirtualMachineScaleSetContainer
+    public partial class VirtualMachineScaleSetContainer : ResourceContainerBase<TenantResourceIdentifier, VirtualMachineScaleSet, VirtualMachineScaleSetData>
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetContainer for mocking. </summary>
-        protected VirtualMachineScaleSetContainer()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetContainer class. </summary>
+        /// <param name="resourceGroup"> The parent resource group. </param>
+        internal VirtualMachineScaleSetContainer(ResourceGroupOperations resourceGroup) : base(resourceGroup)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = new HttpPipeline(ClientOptions.Transport);
         }
+
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
+
+        /// <summary> Represents the REST operations. </summary>
+        private VirtualMachineScaleSetsRestOperations Operations => new VirtualMachineScaleSetsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+
+        /// <summary> Typed Resource Identifier for the container. </summary>
+        // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
+        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
+
+        /// <inheritdoc />
+        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+
+        // Container level operations.
+
+        /// <inheritdoc />
+        /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
+        /// <param name="parameters"> The scale set object. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override ArmResponse<VirtualMachineScaleSet> CreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        {
+            return StartCreateOrUpdate(vmScaleSetName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
+        }
+
+        /// <inheritdoc />
+        /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
+        /// <param name="parameters"> The scale set object. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<ArmResponse<VirtualMachineScaleSet>> CreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        {
+            var operation = await StartCreateOrUpdateAsync(vmScaleSetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+            return operation.WaitForCompletion();
+        }
+
+        /// <inheritdoc />
+        /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
+        /// <param name="parameters"> The scale set object. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override ArmOperation<VirtualMachineScaleSet> StartCreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken: cancellationToken);
+            var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(
+            _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+            Id.ResourceGroupName, vmScaleSetName, parameters).Request,
+            originalResponse);
+            return new ArmOperation<VirtualMachineScaleSet, VirtualMachineScaleSetData>(
+            operation,
+            data => new VirtualMachineScaleSet(Parent, data));
+        }
+
+        /// <inheritdoc />
+        /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
+        /// <param name="parameters"> The scale set object. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<ArmOperation<VirtualMachineScaleSet>> StartCreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(
+            _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+            Id.ResourceGroupName, vmScaleSetName, parameters).Request,
+            originalResponse);
+            return new ArmOperation<VirtualMachineScaleSet, VirtualMachineScaleSetData>(
+            operation,
+            data => new VirtualMachineScaleSet(Parent, data));
+        }
+
+        /// <inheritdoc />
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override ArmResponse<VirtualMachineScaleSet> Get(string vmScaleSetName, CancellationToken cancellationToken = default)
+        {
+            return new ArmResponse<VirtualMachineScaleSet, VirtualMachineScaleSetData>(
+            Operations.Get(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken),
+            data => new VirtualMachineScaleSet(Parent, data));
+        }
+
+        /// <inheritdoc />
+        /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<ArmResponse<VirtualMachineScaleSet>> GetAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
+        {
+            return new ArmResponse<VirtualMachineScaleSet, VirtualMachineScaleSetData>(
+            await Operations.GetAsync(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken),
+            data => new VirtualMachineScaleSet(Parent, data));
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
+        public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var filters = new ResourceFilterCollection(VirtualMachineScaleSetData.ResourceType);
+            filters.SubstringFilter = nameFilter;
+            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var filters = new ResourceFilterCollection(VirtualMachineScaleSetData.ResourceType);
+            filters.SubstringFilter = nameFilter;
+            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of todo: availability set that may take multiple service requests to iterate over. </returns>
+        public Pageable<VirtualMachineScaleSet> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, VirtualMachineScaleSet>(results, genericResource => new VirtualMachineScaleSetOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of todo: availability set that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<VirtualMachineScaleSet> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineScaleSet>(results, genericResource => new VirtualMachineScaleSetOperations(genericResource).Get().Value);
+        }
+
+        // Builders.
+        // public ArmBuilder<TenantResourceIdentifier, VirtualMachineScaleSet, VirtualMachineScaleSetData> Construct() { }
     }
 }

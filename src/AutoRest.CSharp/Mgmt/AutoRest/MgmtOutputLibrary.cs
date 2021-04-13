@@ -191,8 +191,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType? FindTypeByName(string originalName)
         {
-            TypeProvider? provider = Models.FirstOrDefault (m => m.Type.Name == originalName);
-            provider ??= ResourceSchemaMap.Values.FirstOrDefault (m => m.Type.Name == originalName);
+            TypeProvider? provider = Models.FirstOrDefault(m => m.Type.Name == originalName);
+            provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
         }
 
@@ -244,6 +244,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public MgmtRestClient FindRestClient(OperationGroup operationGroup)
         {
             return EnsureRestClients()[operationGroup];
+        }
+
+        /// <summary>
+        /// Looks up a resource data object by resource name.
+        /// </summary>
+        /// <param name="resourceName">Name of the resource.</param>
+        /// <returns></returns>
+        public ResourceData FindResourceData(string resourceName)
+        {
+            return EnsureResourceData()[resourceName];
         }
 
         private void DecorateOperationGroup()

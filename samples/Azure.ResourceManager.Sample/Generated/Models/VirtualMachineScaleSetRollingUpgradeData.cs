@@ -30,6 +30,9 @@ namespace Azure.ResourceManager.Sample
             Error = error;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> The rolling upgrade policies applied for this upgrade. </summary>
         public RollingUpgradePolicy Policy { get; }
         /// <summary> Information about the current running state of the overall upgrade. </summary>

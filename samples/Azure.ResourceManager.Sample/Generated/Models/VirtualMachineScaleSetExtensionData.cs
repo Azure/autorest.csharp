@@ -7,6 +7,7 @@
 
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -48,6 +49,9 @@ namespace Azure.ResourceManager.Sample
             ProvisioningState = provisioningState;
             ProvisionAfterExtensions = provisionAfterExtensions;
         }
+
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> The name of the extension. </summary>
         public string Name { get; set; }

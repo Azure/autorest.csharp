@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineSize data model. </summary>
@@ -31,6 +33,9 @@ namespace Azure.ResourceManager.Sample
             MemoryInMB = memoryInMB;
             MaxDataDiskCount = maxDataDiskCount;
         }
+
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> The name of the virtual machine size. </summary>
         public string Name { get; }

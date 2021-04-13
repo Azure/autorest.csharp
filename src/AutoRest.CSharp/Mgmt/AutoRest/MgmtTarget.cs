@@ -24,8 +24,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resourceDataWriter = new ResourceDataWriter();
             var armResourceWriter = new ResourceWriter();
             var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
+            var lroWriter = new MgmtPlaneLongRunningOperationWriter();
 
-            InheritanceChoser.RebuildModelInheritance(context.Library.SchemaMap, context.Library.ResourceSchemaMap);
+            InheritanceChoser.RebuildModelInheritance(context.Library.SchemaMap, context.Library.ResourceSchemaMap, codeModel);
 
             foreach (var model in context.Library.Models)
             {
@@ -84,6 +85,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                 var name = model.Type.Name;
                 project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
+            }
+
+            foreach (var operationGroup in codeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    if (operation.IsLongRunning)
+                    {
+                        var codeWriter = new CodeWriter();
+                        lroWriter.Write(codeWriter, operationGroup, operation, context);
+                        project.AddGeneratedFile($"{operationGroup.Resource}{operation.Language.Default.Name}Operation.cs", codeWriter.ToString());
+                    }
+                }
             }
         }
     }

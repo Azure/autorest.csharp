@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -42,6 +43,9 @@ namespace Azure.ResourceManager.Sample
             Limit = limit;
             Name = name;
         }
+
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> An enum describing the unit of usage measurement. </summary>
         public string Unit { get; }

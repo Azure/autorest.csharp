@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the RestApi data model. </summary>
@@ -31,6 +33,9 @@ namespace Azure.ResourceManager.Sample
             Description = description;
             Provider = provider;
         }
+
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> The origin of the compute operation. </summary>
         public string Origin { get; }

@@ -52,6 +52,9 @@ namespace Azure.ResourceManager.Sample
             InstanceView = instanceView;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values. </summary>
         public Sku Sku { get; set; }
         /// <summary> Fault domain of the dedicated host within a dedicated host group. </summary>

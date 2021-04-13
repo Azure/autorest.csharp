@@ -18,6 +18,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation)
         {
+            writer.UseNamespace(typeof(Task).Namespace!);
+
             var cs = resourceOperation.Type;
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
@@ -34,10 +36,58 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation)
         {
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {resourceOperation.Type.Name} for mocking.");
-            using (writer.Scope($"protected {resourceOperation.Type.Name:D}()"))
-            {
+            var typeOfThis = resourceOperation.Type.Name;
 
+            // write "generic resource" constructor
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis:D}\"/> class.");
+            writer.WriteXmlDocumentationParameter("genericOperations", @"An instance of <see cref=""GenericResourceOperations""/> that has an id for a {todo: availability set}.");
+            using (writer.Scope($"internal {typeOfThis:D}({typeof(GenericResourceOperations)} genericOperations) : base(genericOperations, genericOperations.Id)"))
+            { }
+
+            // write "resource + id" constructor
+            writer.Line();
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis:D}\"/> class.");
+            writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
+            writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
+            using (writer.Scope($"protected {typeOfThis:D}(ResourceOperationsBase options, {resourceOperation.ResourceIdentifierType} id) : base(options, id)"))
+            {
+            }
+        }
+
+        private void WriteValidResourceType(CodeWriter writer, ResourceOperation resourceOperation)
+        {
+            writer.Line();
+            writer.WriteXmlDocumentationInheritDoc();
+            // todo: do not throw
+            writer.Line($"protected override ResourceType ValidResourceType => throw new System.NotImplementedException();");
+        }
+
+        private void WriteOperations(CodeWriter writer, ResourceOperation resourceOperation)
+        {
+            writeGet(writer, resourceOperation);
+            writeGetAsync(writer, resourceOperation);
+        }
+
+        private void writeGet(CodeWriter writer, ResourceOperation resourceOperation)
+        {
+            writer.Line();
+            writer.WriteXmlDocumentationInheritDoc();
+            using (writer.Scope($"public override ArmResponse<{resourceOperation.ResourceDefaultName}> Get({typeof(CancellationToken)} cancellationToken = default)"))
+            {
+                // todo: do not throw
+                writer.Line($"throw new System.NotImplementedException();");
+            }
+        }
+
+        private void writeGetAsync(CodeWriter writer, ResourceOperation resourceOperation)
+        {
+            writer.Line();
+            writer.WriteXmlDocumentationInheritDoc();
+            using (writer.Scope($"public async override Task<ArmResponse<{resourceOperation.ResourceDefaultName}>> GetAsync({typeof(CancellationToken)} cancellationToken = default)"))
+            {
+                writer.Line($"await Task.Run(() => {{}});");
+                // todo: do not throw
+                writer.Line($"throw new System.NotImplementedException();");
             }
         }
 
@@ -46,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
             writer.Line($"private static readonly {typeof(ResourceType)} ResourceType = \"{resourceOperation.Type.Namespace}/{resourceOperation.Type.Name}\";");
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
-            }
+        }
 
         private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation)
         {

@@ -11,6 +11,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using YamlDotNet.Serialization;
 using AutoRest.CSharp.Output.Models.Requests;
+using Azure.ResourceManager.Core;
 
 #pragma warning disable SA1649
 #pragma warning disable SA1402
@@ -100,6 +101,14 @@ namespace AutoRest.CSharp.Input
         public bool IsExtensionResource { get; set; }
         public string Parent { get; set; }
         public Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping { get; set; }
+
+        /// <summary>
+        /// Get the concret class of the resource identifier related to the operation group.
+        /// Either it's a tenant level resource ID, or a subscription level, or a resource group level.
+        /// Todo: stop hard coding after correct parenting relationship is set up.
+        /// </summary>
+        /// <returns></returns>
+        public System.Type ResourceIdentifierType => typeof(ResourceGroupResourceIdentifier);
     }
 
     internal partial class HttpRequest : Protocol

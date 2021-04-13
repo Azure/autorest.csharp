@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210407.1" />
+    <ProjectReference Include="C:\Users\yeliu\code\azure-sdk-for-net\sdk\resourcemanager\Azure.ResourceManager.Core\src\Azure.ResourceManager.Core.csproj" />
+    <!-- <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210407.1" /> -->
   </ItemGroup>
 
   <ItemGroup>

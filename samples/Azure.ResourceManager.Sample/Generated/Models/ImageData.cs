@@ -30,6 +30,9 @@ namespace Azure.ResourceManager.Sample
             HyperVGeneration = hyperVGeneration;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> The source virtual machine from which Image is created. </summary>
         public SubResource SourceVirtualMachine { get; set; }
         /// <summary> Specifies the storage settings for the virtual machine disks. </summary>

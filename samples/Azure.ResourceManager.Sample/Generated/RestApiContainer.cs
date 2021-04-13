@@ -5,14 +5,117 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core.Pipeline;
+using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core.Resources;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of RestApi and their operations over a [ParentResource]. </summary>
-    public partial class RestApiContainer
+    public partial class RestApiContainer : ResourceContainerBase<TenantResourceIdentifier, RestApi, RestApiData>
     {
-        /// <summary> Initializes a new instance of RestApiContainer for mocking. </summary>
-        protected RestApiContainer()
+        /// <summary> Initializes a new instance of RestApiContainer class. </summary>
+        /// <param name="resourceGroup"> The parent resource group. </param>
+        internal RestApiContainer(ResourceGroupOperations resourceGroup) : base(resourceGroup)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = new HttpPipeline(ClientOptions.Transport);
         }
+
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
+
+        /// <summary> Represents the REST operations. </summary>
+        private RestOperations Operations => new RestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+
+        /// <summary> Typed Resource Identifier for the container. </summary>
+        // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
+        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
+
+        /// <inheritdoc />
+        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+
+        // Container level operations.
+
+        /// <inheritdoc />
+        public override ArmResponse<RestApi> CreateOrUpdate(string name, RestApiData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmResponse<RestApi>> CreateOrUpdateAsync(string name, RestApiData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override ArmOperation<RestApi> StartCreateOrUpdate(string name, RestApiData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmOperation<RestApi>> StartCreateOrUpdateAsync(string name, RestApiData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
+        public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var filters = new ResourceFilterCollection(RestApiData.ResourceType);
+            filters.SubstringFilter = nameFilter;
+            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var filters = new ResourceFilterCollection(RestApiData.ResourceType);
+            filters.SubstringFilter = nameFilter;
+            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of todo: availability set that may take multiple service requests to iterate over. </returns>
+        public Pageable<RestApi> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, RestApi>(results, genericResource => new RestApiOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of todo: availability set that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<RestApi> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, RestApi>(results, genericResource => new RestApiOperations(genericResource).Get().Value);
+        }
+
+        // Builders.
+        // public ArmBuilder<TenantResourceIdentifier, RestApi, RestApiData> Construct() { }
     }
 }

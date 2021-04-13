@@ -27,15 +27,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ReferenceTypeAttribute)).Count() > 0).ToList();
         }
 
-        public static void RebuildModelInheritance(Dictionary<Schema, TypeProvider> schemaMap, Dictionary<Schema, TypeProvider> resourceSchemaMap)
+        public static void RebuildModelInheritance(Dictionary<Schema, TypeProvider> schemaMap, Dictionary<Schema, TypeProvider> resourceSchemaMap, CodeModel codeModel)
         {
             var typeOverrideMap = new Dictionary<CSharpType, CSharpType>();
 
-            RebuildExactModelInheritance(schemaMap);
-            RebuildExactModelInheritance(resourceSchemaMap);
+            RebuildExactModelInheritance(schemaMap, codeModel);
+            RebuildExactModelInheritance(resourceSchemaMap, codeModel);
         }
 
-        private static void RebuildExactModelInheritance(Dictionary<Schema, TypeProvider> map)
+        private static void RebuildExactModelInheritance(Dictionary<Schema, TypeProvider> map, CodeModel codeModel)
         {
             foreach (var kval in map)
             {
@@ -43,12 +43,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     var childObjectType = (MgmtObjectType)kval.Value;
                     var typeToReplace = childObjectType?.Inherits?.Implementation as ObjectType;
-                    if (typeToReplace is null)
+                    if (childObjectType is null || typeToReplace is null)
                     {
                         continue;
                     }
 
-                    var parent = GetExactMatch(typeToReplace.Type);
+                    var parent = GetExactMatch(childObjectType.Type, typeToReplace.Type, codeModel);
                     if (parent != null)
                     {
                         childObjectType?.OverrideInherits(parent);
@@ -57,12 +57,31 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
         }
 
-        private static CSharpType? GetExactMatch(CSharpType childType)
+        private static CSharpType? GetExactMatch(CSharpType childObjectType, CSharpType childType, CodeModel codeModel)
         {
             foreach (System.Type parentType in ReferenceClassCollection)
             {
                 if (IsEqual(childType, parentType))
                 {
+                    // // RollingUpgradeStatusInfo does not have an operation group, why?
+                    // // if (childObjectType.Name == "RollingUpgradeStatusInfo") {
+                    // //     return parentType.MakeGenericType(typeof(ResourceGroupResourceIdentifier));
+                    // // }
+
+                    // // if parentType contains generic parameters we need to fill in the concret types
+                    // if (parentType.ContainsGenericParameters && parentType.GetTypeInfo().GenericTypeParameters.First()?.BaseType == typeof(TenantResourceIdentifier))
+                    // {
+                    //     // find corresponding operation group and get identifier type
+                    //     // todo: how not to hard code "Data"?
+                    //     var operationGroup = codeModel.OperationGroups.FirstOrDefault(operationGroup => $"{operationGroup.Resource}Data".Equals(childObjectType.Name));
+                    //     return (operationGroup == null) ?
+                    //         parentType :
+                    //         parentType.MakeGenericType(operationGroup.ResourceIdentifierType);
+                    // }
+                    // else
+                    // {
+                    //     return parentType;
+                    // }
                     return parentType.MakeGenericType(childType.GetResourceIdentifierType());
                 }
             }
@@ -100,8 +119,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         !IsAssignable(parentProperty.PropertyType, childPropertyType) &&
                         !(parentProperty.PropertyType.IsGenericParameter && IsAssignable(parentProperty.PropertyType.BaseType!, childPropertyType)))
                     {
-                        //TODO(ADO item 5712): deal with protected setter
-                        return false;
+                        if (parentProperty.PropertyType.ContainsGenericParameters && parentProperty.PropertyType.BaseType != null && IsAssignable(parentProperty.PropertyType.BaseType, childPropertyType))
+                        {
+                            // Generic property, but base type is assignable => good to go
+                            // For example `TIdentifier where TIdentifier : TenantResourceIdentifier`
+                        }
+                        else
+                        {
+                            //TODO(ADO item 5712): deal with protected setter
+                            return false;
+                        }
                     }
                 }
                 else
@@ -112,6 +139,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return true;
         }
 
+        /// <summary>
+        /// Tells if <paramref name="childPropertyType" /> can be assigned to <paramref name="parentPropertyType" />
+        /// by checking if there's an implicit type convertor in <paramref name="parentPropertyType" />.
+        /// Todo: should we check childPropertyType as well since an implicit can be defined in either classes?
+        /// </summary>
+        /// <param name="parentPropertyType">The type to be assigned to.</param>
+        /// <param name="childPropertyType">The type to assign.</param>
+        /// <returns></returns>
         private static bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
         {
             return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&

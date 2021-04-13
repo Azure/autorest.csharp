@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the LogAnalytics data model. </summary>
@@ -21,6 +23,9 @@ namespace Azure.ResourceManager.Sample
         {
             Properties = properties;
         }
+
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> LogAnalyticsOutput. </summary>
         public LogAnalyticsOutput Properties { get; }
