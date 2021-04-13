@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<string, ResourceData>? _resourceData;
-        private Dictionary<OperationGroup, Resource>? _armResource;
+        private Dictionary<string, Resource>? _armResource;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
@@ -66,10 +66,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
-
-        public ResourceGroupExtensions ResourceGroupExtensions => new ResourceGroupExtensions(_context);
-
-        public Dictionary<OperationGroup, Resource> ResourceGroupExtensionResource => EnsureArmResource();
 
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
@@ -154,14 +150,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _resourceData;
         }
 
-        private Dictionary<OperationGroup, Resource> EnsureArmResource()
+        private Dictionary<string, Resource> EnsureArmResource()
         {
             if (_armResource != null)
             {
                 return _armResource;
             }
 
-            _armResource = new Dictionary<OperationGroup, Resource>();
+            _armResource = new Dictionary<string, Resource>();
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
@@ -171,9 +167,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_armResource.ContainsKey(operation))
+                        if (!_armResource.ContainsKey(operation.Resource))
                         {
-                            _armResource.Add(operation, new Resource(operation.Resource, _context));
+                            _armResource.Add(operation.Resource, new Resource(operation, _context));
                         }
                     }
                 }

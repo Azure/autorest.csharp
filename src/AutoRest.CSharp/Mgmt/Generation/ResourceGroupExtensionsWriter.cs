@@ -7,6 +7,7 @@ using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
@@ -14,21 +15,23 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class ResourceGroupExtensionsWriter
     {
-        public void WriteExtension(CodeWriter writer, ResourceGroupExtensions resourceGroupExtensions, IDictionary<OperationGroup, Mgmt.Output.Resource> armResources)
+        protected string Description = "A class to add extension methods to ResourceGroup.";
+        protected string Accessibility = "public";
+        protected string Type = "ResourceGroupExtensions";
+
+        public void WriteExtension(string @namespace, CodeWriter writer, IEnumerable<Resource> armResources)
         {
-            var cs = resourceGroupExtensions.Type;
-            var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary(resourceGroupExtensions.Description);
-                using (writer.Scope($"{resourceGroupExtensions.Declaration.Accessibility} static class {cs.Name}"))
+                writer.WriteXmlDocumentationSummary(Description);
+                using (writer.Scope($"{Accessibility} static class {Type}"))
                 {
                     foreach (var item in armResources)
                     {
-                        if (item.Key.Parent.Equals("resourceGroups"))
+                        if (item.OperationGroup.Parent.Equals("resourceGroups"))
                         {
-                            writer.Line($"#region {item.Value.Type.Name:D}s");
-                            WriteGetContainers(writer, item.Value);
+                            writer.Line($"#region {item.Type.Name:D}s");
+                            WriteGetContainers(writer, item);
                             writer.LineRaw("#endregion");
                             writer.Line();
                         }
