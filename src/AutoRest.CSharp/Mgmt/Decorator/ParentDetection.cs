@@ -13,12 +13,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ParentDetection
     {
-        private static ConcurrentDictionary<string, string> _valueCache = new ConcurrentDictionary<string, string>();
+        private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
         public static string Parent(this OperationGroup operationGroup, MgmtConfiguration config)
         {
             string? result = null;
-            if (_valueCache.TryGetValue(operationGroup.Key, out result))
+            if (_valueCache.TryGetValue(operationGroup, out result))
                 return result;
 
             if (!config.OperationGroupToParent.TryGetValue(operationGroup.Key, out result))
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 result = ParentDetection.GetParent(operationGroup, config);
             }
 
-            _valueCache.TryAdd(operationGroup.Key, result);
+            _valueCache.TryAdd(operationGroup, result);
             return result;
         }
 

@@ -12,16 +12,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class OperationHttpMethodMapper
     {
-        private static ConcurrentDictionary<string, Dictionary<HttpMethod, List<ServiceRequest>>> _valueCache = new ConcurrentDictionary<string, Dictionary<HttpMethod, List<ServiceRequest>>>();
+        private static ConcurrentDictionary<OperationGroup, Dictionary<HttpMethod, List<ServiceRequest>>> _valueCache = new ConcurrentDictionary<OperationGroup, Dictionary<HttpMethod, List<ServiceRequest>>>();
 
         public static Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping(this OperationGroup operationGroup)
         {
             Dictionary<HttpMethod, List<ServiceRequest>>? result;
-            if (_valueCache.TryGetValue(operationGroup.Key, out result))
+            if (_valueCache.TryGetValue(operationGroup, out result))
                 return result;
 
             result = MapHttpMethodToOperation(operationGroup);
-            _valueCache.TryAdd(operationGroup.Key, result);
+            _valueCache.TryAdd(operationGroup, result);
             return result;
         }
 

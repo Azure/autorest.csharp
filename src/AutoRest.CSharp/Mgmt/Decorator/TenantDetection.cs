@@ -10,16 +10,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     internal static class TenantDetection
     {
         internal static readonly string TenantName = "tenant";
-        private static ConcurrentDictionary<string, bool> _valueCache = new ConcurrentDictionary<string, bool>();
+        private static ConcurrentDictionary<OperationGroup, bool> _valueCache = new ConcurrentDictionary<OperationGroup, bool>();
 
         public static bool IsTenantResource(this OperationGroup operationGroup, MgmtConfiguration config)
         {
             bool result;
-            if (_valueCache.TryGetValue(operationGroup.Key, out result))
+            if (_valueCache.TryGetValue(operationGroup, out result))
                 return result;
 
             result = IsTenantOnly(operationGroup, config);
-            _valueCache.TryAdd(operationGroup.Key, result);
+            _valueCache.TryAdd(operationGroup, result);
             return result;
         }
 

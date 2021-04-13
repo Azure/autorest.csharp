@@ -13,12 +13,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceTypeBuilder
     {
-        private static ConcurrentDictionary<string, string> _valueCache = new ConcurrentDictionary<string, string>();
+        private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
         public static string ResourceType(this OperationGroup operationsGroup, MgmtConfiguration config)
         {
             string? result = null;
-            if (_valueCache.TryGetValue(operationsGroup.Key, out result))
+            if (_valueCache.TryGetValue(operationsGroup, out result))
                 return result;
 
             if (!config.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out result))
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 result = ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
             }
 
-            _valueCache.TryAdd(operationsGroup.Key, result);
+            _valueCache.TryAdd(operationsGroup, result);
             return result;
         }
 
