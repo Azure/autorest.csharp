@@ -127,7 +127,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 var schema = entry.Key;
                 //TODO: find a way to not need to duplicate this
-                List<OperationGroup> operations = _operationGroups[schema.MgmtName(_mgmtConfiguration)];
+                List<OperationGroup>? operations = _operationGroups[schema.Name];
 
                 if (operations != null)
                 {
@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                List<OperationGroup> operations = _operationGroups[schema.MgmtName(_mgmtConfiguration)];
+                List<OperationGroup>? operations = _operationGroups[schema.Name];
 
                 if (operations != null)
                 {
@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                if (_operationGroups.ContainsKey(schema.MgmtName(_mgmtConfiguration)!))
+                if (_operationGroups.ContainsKey(schema.Name))
                 {
                     continue;
                 }
@@ -218,7 +218,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (var schema in _allSchemas)
             {
-                if (_operationGroups.ContainsKey(schema.MgmtName(_mgmtConfiguration)!))
+                if (_operationGroups.ContainsKey(schema.Name))
                 {
                     resourceModels.Add(schema, BuildResourceModel(schema));
                 }
