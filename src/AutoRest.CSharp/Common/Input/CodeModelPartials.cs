@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.Input
         // For some reason, booleans in dictionaries are deserialized as string instead of bool.
         public bool IsLongRunning => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
         public string? LongRunningFinalStateVia => Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("final-state-via");
+        public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse
         {

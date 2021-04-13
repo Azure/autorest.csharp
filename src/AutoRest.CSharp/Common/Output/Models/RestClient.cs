@@ -88,7 +88,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         continue;
                     }
-                    _requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, false));
+                    _requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public"));
                 }
             }
 
@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.Output.Models
                 responses,
                 method.HeaderModel,
                 bufferResponse: true,
-                isVisible: false);
+                accessibility: "internal");
         }
 
         public virtual RestClientMethod? GetNextOperationMethod(ServiceRequest request)

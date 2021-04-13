@@ -21,5 +21,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public RestClientMethod StartMethod { get; }
 
         public Diagnostic Diagnostics { get; }
+        public string Accessibility => "public";
     }
 }
