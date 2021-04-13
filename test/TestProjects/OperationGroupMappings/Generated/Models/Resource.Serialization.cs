@@ -11,12 +11,10 @@ using Azure.Core;
 
 namespace OperationGroupMappings
 {
-    public partial class AvailabilitySetData
+    public partial class Resource
     {
-        internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element)
+        internal static Resource DeserializeResource(JsonElement element)
         {
-            Optional<string> foo = default;
-            Optional<string> sku = default;
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
@@ -24,16 +22,6 @@ namespace OperationGroupMappings
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("foo"))
-                {
-                    foo = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("sku"))
-                {
-                    sku = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("id"))
                 {
                     id = property.Value.GetString();
@@ -70,7 +58,7 @@ namespace OperationGroupMappings
                     continue;
                 }
             }
-            return new AvailabilitySetData(id.Value, name.Value, type.Value, location, Optional.ToDictionary(tags), foo.Value, sku.Value);
+            return new Resource(id.Value, name.Value, type.Value, location, Optional.ToDictionary(tags));
         }
     }
 }

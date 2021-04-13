@@ -21,6 +21,13 @@ namespace Azure.Management.Storage
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref = "OperationOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected OperationOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        {
+        }
+
         private static readonly ResourceType ResourceType = "Azure.Management.Storage/OperationOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 

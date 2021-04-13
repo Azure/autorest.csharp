@@ -55,5 +55,28 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 }
             }
         }
+
+        [TestCase("GetResource")]
+        public void ValidateResourceMethods(string methodName)
+        {
+            foreach (var resource in FindAllResources())
+            {
+                Assert.IsNotNull(resource.GetMethod(methodName));
+            }
+        }
+
+        private IEnumerable<Type> FindAllResources()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                if (t.BaseType is not null && t.BaseType.Name.Contains("Operations") && !t.BaseType.Name.Contains("RestOperations") && !t.BaseType.Name.Contains("Tests") && t.Namespace == _projectName)
+                {
+                    // Only [Resource]Operations types for the specified test project are going to be tested.
+                    yield return t;
+                }
+            }
+        }
     }
 }

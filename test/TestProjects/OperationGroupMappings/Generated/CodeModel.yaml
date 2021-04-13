@@ -11,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_3
+    - !StringSchema &ref_1
       type: string
       apiVersions:
         - !ApiVersion 
@@ -21,7 +21,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_1
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -31,7 +31,7 @@ schemas: !Schemas
           name: AvailabilitySetFoo
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_2
+    - !StringSchema &ref_10
       type: string
       apiVersions:
         - !ApiVersion 
@@ -41,8 +41,48 @@ schemas: !Schemas
           name: AvailabilitySetSku
           description: sku
       protocol: !Protocols {}
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceId
+          description: Resource Id
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceName
+          description: Resource name
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceType
+          description: Resource type
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceLocation
+          description: Resource location
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_4
+    - !ConstantSchema &ref_11
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -52,7 +92,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_8
+    - !ConstantSchema &ref_15
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -62,15 +102,99 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
+  dictionaries:
+    - !DictionarySchema &ref_7
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: ResourceTags
+          description: Resource tags
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_11
+    - !ObjectSchema &ref_2
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
+      parents: !Relations 
+        all:
+          - !ObjectSchema &ref_8
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            children: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: *ref_3
+                readOnly: true
+                required: false
+                serializedName: id
+                language: !Languages 
+                  default:
+                    name: id
+                    description: Resource Id
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_4
+                readOnly: true
+                required: false
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: Resource name
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_5
+                readOnly: true
+                required: false
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: Resource type
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_6
+                required: true
+                serializedName: location
+                language: !Languages 
+                  default:
+                    name: location
+                    description: Resource location
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_7
+                required: false
+                serializedName: tags
+                language: !Languages 
+                  default:
+                    name: tags
+                    description: Resource tags
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - output
+            extensions:
+              x-ms-azure-resource: true
+            language: !Languages 
+              default:
+                name: Resource
+                description: The Resource model definition.
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_8
       properties:
         - !Property 
-          schema: *ref_1
+          schema: *ref_9
           serializedName: foo
           language: !Languages 
             default:
@@ -78,7 +202,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_2
+          schema: *ref_10
           serializedName: sku
           language: !Languages 
             default:
@@ -100,9 +224,10 @@ schemas: !Schemas
             can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
           namespace: ''
       protocol: !Protocols {}
+    - *ref_8
 globalParameters:
-  - !Parameter &ref_7
-    schema: *ref_3
+  - !Parameter &ref_14
+    schema: *ref_1
     implementation: Client
     required: true
     extensions:
@@ -115,7 +240,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_5
+  - !Parameter &ref_12
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -131,8 +256,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_6
-    schema: *ref_4
+  - !Parameter &ref_13
+    schema: *ref_11
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -153,9 +278,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_5
-          - !Parameter &ref_9
-            schema: *ref_3
+          - *ref_12
+          - !Parameter &ref_16
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -166,8 +291,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_10
-            schema: *ref_3
+          - !Parameter &ref_17
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -178,13 +303,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_6
-          - *ref_7
+          - *ref_13
+          - *ref_14
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_8
+                schema: *ref_15
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -207,11 +332,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_9
-          - *ref_10
+          - *ref_16
+          - *ref_17
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''

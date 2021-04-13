@@ -21,6 +21,13 @@ namespace Azure.Management.Storage
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref = "ObjectReplicationPolicyOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected ObjectReplicationPolicyOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        {
+        }
+
         private static readonly ResourceType ResourceType = "Azure.Management.Storage/ObjectReplicationPolicyOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
