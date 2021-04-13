@@ -4,6 +4,7 @@
 using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
@@ -27,11 +28,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             _context = context;
             _operationGroup = operationGroup;
-            _prefix = operationGroup.Resource;
+            _prefix = operationGroup.Resource(context.Configuration.MgmtConfiguration);
             DefaultName = _prefix + SuffixValue;
         }
 
-        public string ResourceName => _operationGroup.Resource;
+        public string ResourceName => _operationGroup.Resource(_context.Configuration.MgmtConfiguration);
 
         protected virtual string SuffixValue => OperationsSuffixValue;
 

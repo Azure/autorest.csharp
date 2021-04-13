@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 
