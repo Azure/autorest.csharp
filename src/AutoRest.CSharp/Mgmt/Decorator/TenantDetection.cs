@@ -1,11 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
-using System;
-using System.Collections.Generic;
-using AutoRest.CSharp.Output.Models.Requests;
+
 using AutoRest.CSharp.Input;
 
-namespace AutoRest.CSharp.Output.Models.Type.Decorate
+namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class TenantDetection
     {
@@ -21,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
                     for (int i = 0; i < providerSegmentsList?.Count; i++)
                     {
                         var segment = providerSegmentsList[i];
-                        if (segment.TokenValue.Equals(operationGroup.ResourceType) && segment.IsFullProvider)
+                        if (segment.TokenValue.Trim('/').Equals(operationGroup.ResourceType) && segment.IsFullProvider)
                         {
                             foundTenant = foundTenant || segment.NoPredecessor;
                             if (!segment.NoPredecessor)

@@ -28,10 +28,6 @@
     "PrivateLinkResources": "PrivateLinkResource",
     "StorageAccounts": "StorageAccount"
   },
-  "ResourceRename": {
-    "BlobServiceProperties": "BlobService",
-    "FileServiceProperties": "FileService"
-  },
   "OperationGroupToParent": {
     "BlobContainers": "Microsoft.Storage/storageAccounts",
     "FileShares": "Microsoft.Storage/storageAccounts",

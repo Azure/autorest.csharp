@@ -1,10 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
+
 using System;
 using System.Collections.Generic;
-using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Mgmt.Output;
 
-namespace AutoRest.CSharp.Output.Models.Type.Decorate
+namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ProviderSegmentDetection
     {

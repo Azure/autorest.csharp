@@ -64,7 +64,7 @@ namespace httpInfrastructure
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue<MyException>(null, message.Response);
+                    return Response.FromValue((MyException)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -86,7 +86,7 @@ namespace httpInfrastructure
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue<MyException>(null, message.Response);
+                    return Response.FromValue((MyException)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -121,7 +121,7 @@ namespace httpInfrastructure
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue<MyException>(null, message.Response);
+                    return Response.FromValue((MyException)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -143,7 +143,7 @@ namespace httpInfrastructure
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue<MyException>(null, message.Response);
+                    return Response.FromValue((MyException)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -178,7 +178,7 @@ namespace httpInfrastructure
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue<MyException>(null, message.Response);
+                    return Response.FromValue((MyException)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -200,7 +200,7 @@ namespace httpInfrastructure
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue<MyException>(null, message.Response);
+                    return Response.FromValue((MyException)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -235,7 +235,7 @@ namespace httpInfrastructure
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue<MyException>(null, message.Response);
+                    return Response.FromValue((MyException)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -257,7 +257,7 @@ namespace httpInfrastructure
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue<MyException>(null, message.Response);
+                    return Response.FromValue((MyException)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
@@ -292,7 +292,7 @@ namespace httpInfrastructure
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue<MyException>(null, message.Response);
+                    return Response.FromValue((MyException)null, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -314,7 +314,7 @@ namespace httpInfrastructure
                         return Response.FromValue(value, message.Response);
                     }
                 case 204:
-                    return Response.FromValue<MyException>(null, message.Response);
+                    return Response.FromValue((MyException)null, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

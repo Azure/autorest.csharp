@@ -1,15 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
 using System.Text;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceOperation : TypeProvider
     {
@@ -32,6 +31,8 @@ namespace AutoRest.CSharp.Output.Models
             DefaultName = _prefix + SuffixValue;
         }
 
+        public string ResourceName => _operationGroup.Resource;
+
         protected virtual string SuffixValue => OperationsSuffixValue;
 
         protected override string DefaultName { get; }
@@ -41,6 +42,8 @@ namespace AutoRest.CSharp.Output.Models
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, _prefix));
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
+
+        public string ResourceIdentifierType => _operationGroup.GetResourceIdentifierType();
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

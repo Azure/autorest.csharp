@@ -623,7 +623,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 case 204:
-                    return ResponseWithHeaders.FromValue<KeyValue, AppConfigurationDeleteKeyValueHeaders>(null, headers, message.Response);
+                    return ResponseWithHeaders.FromValue((KeyValue)null, headers, message.Response);
                 default:
                     throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -655,7 +655,7 @@ namespace AppConfiguration
                         return ResponseWithHeaders.FromValue(value, headers, message.Response);
                     }
                 case 204:
-                    return ResponseWithHeaders.FromValue<KeyValue, AppConfigurationDeleteKeyValueHeaders>(null, headers, message.Response);
+                    return ResponseWithHeaders.FromValue((KeyValue)null, headers, message.Response);
                 default:
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }

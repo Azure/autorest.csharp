@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis;
 
-namespace AutoRest.CSharp.Output.Models.Types
+namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtObjectType : ObjectType
     {
@@ -28,19 +30,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
-            var name = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
+            var name = objectSchema.CSharpName();
             return isResourceType ? name + "Data" : name;
         }
 
         public override CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
 
         public ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
-
-        //public void OverrideInherits(CSharpType cSharpType)
-        //{
-        //    _inheritsType = cSharpType;
-        //    _properties = null;
-        //}
 
         protected override HashSet<string?> GetParentProperties()
         {
@@ -128,9 +124,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     inheritedType = match;
                 }
             }
-            //inheritedType ??= InheritanceChoser.GetExactMatch(this);
             return inheritedType == null ? InheritanceChoser.GetSupersetMatch(this) : inheritedType;
-            //return inheritedType;
         }
     }
 }
