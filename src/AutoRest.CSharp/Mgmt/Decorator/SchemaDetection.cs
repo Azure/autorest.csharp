@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             if (!config.OperationGroupToResource.TryGetValue(operationGroup.Key, out result))
             {
-                result = SchemaDetection.GetSchema(operationGroup).MgmtName(config);
+                result = SchemaDetection.GetSchema(operationGroup).Name;
             }
 
             _valueCache.TryAdd(operationGroup.Key, result);
