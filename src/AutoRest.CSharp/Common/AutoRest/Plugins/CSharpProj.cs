@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 {0}
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.13.0"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.12.0"" />
   </ItemGroup>
 
 </Project>
