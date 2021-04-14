@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             DecorateOperationGroup();
         }
 
-        public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
+        public Dictionary<OperationGroup, Resource> ArmResource => EnsureArmResource();
 
         public IEnumerable<ResourceData> ResourceData => EnsureResourceData().Values;
 
@@ -66,8 +66,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
-
-        public Dictionary<OperationGroup, Resource> ResourceGroupExtensionResource => EnsureArmResource();
 
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {

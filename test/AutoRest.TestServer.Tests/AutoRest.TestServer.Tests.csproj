@@ -25,23 +25,6 @@
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
     <Compile Include="../TestProjects/**/*.cs" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\AvailabilitySet.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\AvailabilitySetContainer.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\AvailabilitySetOperations.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\AvailabilitySetsRestOperations.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\Extensions\ResourceGroupExtensions.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\Models\AvailabilitySetData.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\Models\AvailabilitySetData.Serialization.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\Models\AvailabilitySetListResult.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\Models\AvailabilitySetListResult.Serialization.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\Models\AvailabilitySetUpdate.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\Models\AvailabilitySetUpdate.Serialization.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\Models\VirtualMachineExtensionImageData.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\Models\VirtualMachineExtensionImageData.Serialization.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\VirtualMachineExtensionImage.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\VirtualMachineExtensionImageContainer.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\VirtualMachineExtensionImageOperations.cs" />
-    <Compile Remove="..\TestProjects\MgmtResourceGroupExtension\Generated\VirtualMachineExtensionImagesRestOperations.cs" />
     <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs">
       <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs</Link>
     </Compile>

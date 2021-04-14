@@ -81,14 +81,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var model in context.Library.ArmResource)
             {
                 var codeWriter = new CodeWriter();
-                armResourceWriter.WriteResource(codeWriter, model);
+                armResourceWriter.WriteResource(codeWriter, model.Value);
 
-                var name = model.Type.Name;
+                var name = model.Value.Type.Name;
                 project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
             }
 
             var extensionsWriter = new CodeWriter();
-            var resources = context.Library.ResourceGroupExtensionResource;
+            var resources = context.Library.ArmResource;
             var mgmtConfiguration = context.Configuration.MgmtConfiguration;
             var @namespace = context.DefaultNamespace;
             resourceGroupExtensionsWriter.WriteExtension(@namespace, mgmtConfiguration, extensionsWriter, resources);
