@@ -133,8 +133,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
-                        _resourceData.Add(operation.Resource, resourceData);
+                        if (!_resourceData.ContainsKey(operation.Resource))
+                        {
+                            var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
+                            _resourceData.Add(operation.Resource, resourceData);
+                        }
                     }
                 }
             }
@@ -183,8 +186,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType? FindTypeByName(string originalName)
         {
-            TypeProvider? provider = Models.FirstOrDefault (m => m.Type.Name == originalName);
-            provider ??= ResourceSchemaMap.Values.FirstOrDefault (m => m.Type.Name == originalName);
+            TypeProvider? provider = Models.FirstOrDefault(m => m.Type.Name == originalName);
+            provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
         }
 
