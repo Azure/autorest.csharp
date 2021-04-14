@@ -70,12 +70,12 @@ namespace Azure.Core
 
         public Response GetRawResponse() => _rawResponse;
 
-        public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
+        public virtual ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
         {
             return WaitForCompletionAsync(DefaultPollingInterval, cancellationToken);
         }
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        public virtual async ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
         {
             while (true)
             {
@@ -143,16 +143,16 @@ namespace Azure.Core
             return GetRawResponse();
         }
 
-        public async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => await UpdateStatusAsync(async: true, cancellationToken).ConfigureAwait(false);
+        public virtual async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => await UpdateStatusAsync(async: true, cancellationToken).ConfigureAwait(false);
 
-        public Response UpdateStatus(CancellationToken cancellationToken = default) => UpdateStatusAsync(async: false, cancellationToken).EnsureCompleted();
+        public virtual Response UpdateStatus(CancellationToken cancellationToken = default) => UpdateStatusAsync(async: false, cancellationToken).EnsureCompleted();
 
 #pragma warning disable CA1822
         //TODO: This is currently unused.
-        public string Id => throw new NotImplementedException();
+        public virtual string Id => throw new NotImplementedException();
 #pragma warning restore CA1822
 
-        public T Value
+        public virtual T Value
         {
             get
             {
@@ -165,8 +165,8 @@ namespace Azure.Core
             }
         }
 
-        public bool HasCompleted => _hasCompleted;
-        public bool HasValue => _hasValue;
+        public virtual bool HasCompleted => _hasCompleted;
+        public virtual bool HasValue => _hasValue;
 
         private HttpMessage CreateRequest(string link)
         {
