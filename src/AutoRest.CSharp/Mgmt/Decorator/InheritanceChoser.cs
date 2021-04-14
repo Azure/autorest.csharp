@@ -29,7 +29,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static List<System.Type> GetOrderedList()
         {
-            var trees = GetTrees(GetReferenceClassCollection());
+            var referenceClasses = ConvertGenericType(GetReferenceClassCollection());
+            var trees = GetTrees(referenceClasses);
             var output = new List<System.Type>();
             foreach (var root in trees)
             {
@@ -55,6 +56,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 output.AddRange(treeNodes);
             }
             return output;
+        }
+
+        private static IList<System.Type> ConvertGenericType(IList<System.Type> referenceClassCollection)
+        {
+            for (int i = 0; i < referenceClassCollection.Count; i++)
+            {
+                referenceClassCollection[i] = referenceClassCollection[i].MakeGenericType(referenceClassCollection[i].GetResourceIdentifierType());
+            }
+            return referenceClassCollection;
         }
 
         private static List<Node> GetTrees(IList<System.Type> referenceClassCollection)
@@ -86,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsEqual(childType, parentType))
                 {
-                    return parentType.MakeGenericType(childType.GetResourceIdentifierType());
+                    return parentType;
                 }
             }
             return null;
