@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="og">Operation group.</param>
         /// <param name="config">Management plane configuration.</param>
         /// <returns></returns>
-        public static bool ShouldSkipGeneration(this OperationGroup og, MgmtConfiguration config)
+        public static bool IsResource(this OperationGroup og, MgmtConfiguration config)
         {
             return og switch
             {
@@ -65,6 +65,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             };
         }
 
-        private const string KeywordToSkipGeneration = "SKIP";
+        private const string KeywordToSkipGeneration = "NonResource";
     }
 }

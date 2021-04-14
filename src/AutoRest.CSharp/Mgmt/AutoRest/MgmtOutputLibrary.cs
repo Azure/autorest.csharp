@@ -91,7 +91,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             _resourceOperations = new Dictionary<OperationGroup, ResourceOperation>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+            foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
                 _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
             }
@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+            foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
                 _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
             }
@@ -126,7 +126,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                //TODO: find a way to not need to duplicate this
                 List<OperationGroup>? operations = _operationGroups[schema.Name];
 
                 if (operations != null)
@@ -303,7 +302,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
-                AddOperationGroupToResourceMap(operationsGroup);
+                if (operationsGroup.IsResource(_mgmtConfiguration))
+                    AddOperationGroupToResourceMap(operationsGroup);
             }
             ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }

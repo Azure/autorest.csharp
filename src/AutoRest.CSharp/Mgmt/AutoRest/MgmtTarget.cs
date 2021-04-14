@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
-            foreach (var client in context.Library.RestClients.Where(client => !context.Library.FindOperationGroup(client).ShouldSkipGeneration(configuration.MgmtConfiguration)))
+            foreach (var client in context.Library.RestClients)
             {
                 var restCodeWriter = new CodeWriter();
                 restClientWriter.WriteClient(restCodeWriter, client);
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{client.Type.Name}.cs", restCodeWriter.ToString());
             }
 
-            foreach (var resourceOperation in context.Library.ResourceOperations.Where(op => !context.Library.FindOperationGroup(op).ShouldSkipGeneration(configuration.MgmtConfiguration)))
+            foreach (var resourceOperation in context.Library.ResourceOperations)
             {
                 var codeWriter = new CodeWriter();
                 resourceOperationWriter.WriteClient(codeWriter, resourceOperation);
@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
             }
 
-            foreach (var resourceContainer in context.Library.ResourceContainers.Where(container => !context.Library.FindOperationGroup(container).ShouldSkipGeneration(configuration.MgmtConfiguration)))
+            foreach (var resourceContainer in context.Library.ResourceContainers)
             {
                 var codeWriter = new CodeWriter();
                 resourceContainerWriter.WriteClient(codeWriter, resourceContainer);
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
             }
 
-            foreach (var model in context.Library.ResourceData.Where(resourceData => !context.Library.FindOperationGroup(resourceData).ShouldSkipGeneration(configuration.MgmtConfiguration)))
+            foreach (var model in context.Library.ResourceData)
             {
                 var codeWriter = new CodeWriter();
                 resourceDataWriter.WriteResourceData(codeWriter, model);
@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
-            foreach (var model in context.Library.ArmResource.Where(resource => !context.Library.FindOperationGroup(resource).ShouldSkipGeneration(configuration.MgmtConfiguration)))
+            foreach (var model in context.Library.ArmResource)
             {
                 var codeWriter = new CodeWriter();
                 armResourceWriter.WriteResource(codeWriter, model);

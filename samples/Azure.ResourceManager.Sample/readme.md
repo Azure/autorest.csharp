@@ -23,10 +23,10 @@ operation-group-to-resource:
    Operations: RestApi
    VirtualMachineExtensionImages: VirtualMachineExtensionImage
    VirtualMachineImages: VirtualMachineImage
-   Usage: SKIP
+   Usage: NonResource
    VirtualMachineSizes: VirtualMachineSize
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
-   LogAnalytics: SKIP
+   LogAnalytics: NonResource
 operation-group-to-parent:
    LogAnalytics: subscriptions
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
