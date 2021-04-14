@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Azure.ResourceManager.Sample
+namespace OperationGroupMappings
 {
     /// <summary> The List Usages operation response. </summary>
     internal partial class ListUsagesResult

@@ -3,6 +3,23 @@ info: !Info
   description: OperationGroupsMappin Client.
   title: OperationGroupMappings
 schemas: !Schemas 
+  numbers:
+    - !NumberSchema &ref_4
+      type: integer
+      precision: 32
+      language: !Languages 
+        default:
+          name: Integer
+          description: The current usage of the resource.
+      protocol: !Protocols {}
+    - !NumberSchema &ref_5
+      type: integer
+      precision: 64
+      language: !Languages 
+        default:
+          name: Integer
+          description: The maximum permitted usage of the resource.
+      protocol: !Protocols {}
   strings:
     - !StringSchema &ref_0
       type: string
@@ -11,7 +28,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_3
+    - !StringSchema &ref_12
       type: string
       apiVersions:
         - !ApiVersion 
@@ -41,8 +58,49 @@ schemas: !Schemas
           name: AvailabilitySetSku
           description: sku
       protocol: !Protocols {}
+    - !StringSchema &ref_21
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      pattern: ^[-\w\._]+$
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: UsageNameValue
+          description: The name of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: UsageNameLocalizedValue
+          description: The localized name of the resource.
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ListUsagesResultNextLink
+          description: The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information.
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_4
+    - !ConstantSchema &ref_13
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -52,7 +110,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_8
+    - !ConstantSchema &ref_17
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -62,8 +120,21 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
+    - !ConstantSchema &ref_3
+      type: constant
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      value: !ConstantValue 
+        value: Count
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: UsageUnit
+          description: An enum describing the unit of usage measurement.
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_11
+    - !ObjectSchema &ref_20
       type: object
       apiVersions:
         - !ApiVersion 
@@ -100,9 +171,139 @@ schemas: !Schemas
             can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
           namespace: ''
       protocol: !Protocols {}
+    - !ObjectSchema &ref_23
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_11
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            elementType: !ObjectSchema &ref_9
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2020-06-01'
+              properties:
+                - !Property 
+                  schema: *ref_3
+                  required: true
+                  serializedName: unit
+                  language: !Languages 
+                    default:
+                      name: unit
+                      description: An enum describing the unit of usage measurement.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_4
+                  required: true
+                  serializedName: currentValue
+                  language: !Languages 
+                    default:
+                      name: currentValue
+                      description: The current usage of the resource.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_5
+                  required: true
+                  serializedName: limit
+                  language: !Languages 
+                    default:
+                      name: limit
+                      description: The maximum permitted usage of the resource.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: !ObjectSchema &ref_10
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: '2020-06-01'
+                    properties:
+                      - !Property 
+                        schema: *ref_6
+                        serializedName: value
+                        language: !Languages 
+                          default:
+                            name: value
+                            description: The name of the resource.
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_7
+                        serializedName: localizedValue
+                        language: !Languages 
+                          default:
+                            name: localizedValue
+                            description: The localized name of the resource.
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - output
+                    language: !Languages 
+                      default:
+                        name: UsageName
+                        description: The Usage Names.
+                        namespace: ''
+                    protocol: !Protocols {}
+                  required: true
+                  serializedName: name
+                  language: !Languages 
+                    default:
+                      name: name
+                      description: The name of the type of usage.
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - output
+              language: !Languages 
+                default:
+                  name: Usage
+                  description: Describes Compute Resource Usage.
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: ListUsagesResultValue
+                description: The list of compute resource usages.
+            protocol: !Protocols {}
+          required: true
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: The list of compute resource usages.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_8
+          required: false
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: ListUsagesResult
+          description: The List Usages operation response.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_9
+    - *ref_10
+  arrays:
+    - *ref_11
 globalParameters:
-  - !Parameter &ref_7
-    schema: *ref_3
+  - !Parameter &ref_16
+    schema: *ref_12
     implementation: Client
     required: true
     extensions:
@@ -115,7 +316,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_5
+  - !Parameter &ref_14
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -131,8 +332,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_6
-    schema: *ref_4
+  - !Parameter &ref_15
+    schema: *ref_13
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -153,9 +354,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_5
-          - !Parameter &ref_9
-            schema: *ref_3
+          - *ref_14
+          - !Parameter &ref_18
+            schema: *ref_12
             implementation: Method
             required: true
             language: !Languages 
@@ -166,8 +367,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_10
-            schema: *ref_3
+          - !Parameter &ref_19
+            schema: *ref_12
             implementation: Method
             required: true
             language: !Languages 
@@ -178,13 +379,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_6
-          - *ref_7
+          - *ref_15
+          - *ref_16
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_8
+                schema: *ref_17
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -207,11 +408,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_9
-          - *ref_10
+          - *ref_18
+          - *ref_19
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_20
             language: !Languages 
               default:
                 name: ''
@@ -231,6 +432,86 @@ operationGroups:
     language: !Languages 
       default:
         name: AvailabilitySets
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: Usage
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_14
+          - !Parameter &ref_22
+            schema: *ref_21
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: location
+                description: The location for which resource usage is queried.
+                serializedName: location
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_15
+          - *ref_16
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_17
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_22
+        responses:
+          - !SchemaResponse 
+            schema: *ref_23
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        extensions:
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: List
+            description: Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: Usage
         description: ''
     protocol: !Protocols {}
 security: !Security 

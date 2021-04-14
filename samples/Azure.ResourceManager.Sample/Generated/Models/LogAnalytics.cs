@@ -7,17 +7,17 @@
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the LogAnalytics data model. </summary>
-    public partial class LogAnalyticsData
+    /// <summary> LogAnalytics operation status response. </summary>
+    public partial class LogAnalytics
     {
-        /// <summary> Initializes a new instance of LogAnalyticsData. </summary>
-        internal LogAnalyticsData()
+        /// <summary> Initializes a new instance of LogAnalytics. </summary>
+        internal LogAnalytics()
         {
         }
 
-        /// <summary> Initializes a new instance of LogAnalyticsData. </summary>
+        /// <summary> Initializes a new instance of LogAnalytics. </summary>
         /// <param name="properties"> LogAnalyticsOutput. </param>
-        internal LogAnalyticsData(LogAnalyticsOutput properties)
+        internal LogAnalytics(LogAnalyticsOutput properties)
         {
             Properties = properties;
         }
