@@ -370,7 +370,7 @@
         "ExactMatchModel10": {
             "properties": {
                 "id": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "location": {
                     "type": "string"

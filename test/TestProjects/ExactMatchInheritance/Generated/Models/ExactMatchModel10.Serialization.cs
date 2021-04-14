@@ -19,7 +19,7 @@ namespace ExactMatchInheritance
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
-                writer.WriteNumberValue(Id.Value);
+                writer.WriteStringValue(Id);
             }
             if (Optional.IsDefined(Location))
             {
@@ -52,7 +52,7 @@ namespace ExactMatchInheritance
 
         internal static ExactMatchModel10 DeserializeExactMatchModel10(JsonElement element)
         {
-            Optional<int> id = default;
+            Optional<string> id = default;
             Optional<string> location = default;
             Optional<IDictionary<string, string>> tags = default;
             Optional<string> name = default;
@@ -61,12 +61,7 @@ namespace ExactMatchInheritance
             {
                 if (property.NameEquals("id"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    id = property.Value.GetInt32();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -100,7 +95,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel10(name.Value, type.Value, Optional.ToNullable(id), location.Value, Optional.ToDictionary(tags));
+            return new ExactMatchModel10(name.Value, type.Value, id.Value, location.Value, Optional.ToDictionary(tags));
         }
     }
 }

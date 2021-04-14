@@ -25,14 +25,14 @@ namespace ExactMatchInheritance
         /// <param name="id"> . </param>
         /// <param name="location"> . </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
-        internal ExactMatchModel10(string name, string type, int? id, string location, IDictionary<string, string> tags) : base(name, type)
+        internal ExactMatchModel10(string name, string type, string id, string location, IDictionary<string, string> tags) : base(name, type)
         {
             Id = id;
             Location = location;
             Tags = tags;
         }
 
-        public int? Id { get; set; }
+        public string Id { get; set; }
         public string Location { get; set; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IDictionary<string, string> Tags { get; }

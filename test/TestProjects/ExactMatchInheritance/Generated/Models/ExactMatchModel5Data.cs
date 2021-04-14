@@ -5,12 +5,12 @@
 
 #nullable disable
 
-using System.Collections.Generic;
+using Azure.ResourceManager.Core;
 
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing the ExactMatchModel5 data model. </summary>
-    public partial class ExactMatchModel5Data : ExactMatchModel10
+    public partial class ExactMatchModel5Data : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
         public ExactMatchModel5Data()
@@ -18,13 +18,8 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
-        /// <param name="id"> . </param>
-        /// <param name="location"> . </param>
-        /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="new"> . </param>
-        internal ExactMatchModel5Data(string name, string type, int? id, string location, IDictionary<string, string> tags, string @new) : base(name, type, id, location, tags)
+        internal ExactMatchModel5Data(string @new)
         {
             New = @new;
         }
