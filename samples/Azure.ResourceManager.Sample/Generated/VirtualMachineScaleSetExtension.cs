@@ -22,8 +22,15 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary> Gets or sets the VirtualMachineScaleSetExtensionData. </summary>
-        public VirtualMachineScaleSetExtensionData Data { get; private set; }
+        /// <summary>
+        /// Gets or sets the global::Azure.ResourceManager.Sample.VirtualMachineScaleSetExtensionData
+        /// 
+        /// .
+        /// </summary>
+        public VirtualMachineScaleSetExtensionData
+
+         Data
+        { get; private set; }
 
         /// <inheritdoc />
         protected override VirtualMachineScaleSetExtension GetResource()

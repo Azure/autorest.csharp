@@ -7,6 +7,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -22,8 +23,15 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary> Gets or sets the FileShareData. </summary>
-        public FileShareData Data { get; private set; }
+        /// <summary>
+        /// Gets or sets the global::Azure.Management.Storage.Models.FileShareData
+        /// 
+        /// .
+        /// </summary>
+        public FileShareData
+
+         Data
+        { get; private set; }
 
         /// <inheritdoc />
         protected override FileShare GetResource()

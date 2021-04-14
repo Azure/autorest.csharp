@@ -22,8 +22,15 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary> Gets or sets the UsageData. </summary>
-        public UsageData Data { get; private set; }
+        /// <summary>
+        /// Gets or sets the global::Azure.ResourceManager.Sample.UsageData
+        /// 
+        /// .
+        /// </summary>
+        public UsageData
+
+         Data
+        { get; private set; }
 
         /// <inheritdoc />
         protected override Usage GetResource()

@@ -7,6 +7,7 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -22,8 +23,15 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary> Gets or sets the UsageData. </summary>
-        public UsageData Data { get; private set; }
+        /// <summary>
+        /// Gets or sets the global::Azure.Management.Storage.Models.UsageData
+        /// 
+        /// .
+        /// </summary>
+        public UsageData
+
+         Data
+        { get; private set; }
 
         /// <inheritdoc />
         protected override Usage GetResource()

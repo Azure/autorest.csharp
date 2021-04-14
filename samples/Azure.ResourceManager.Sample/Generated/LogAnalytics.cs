@@ -22,8 +22,15 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary> Gets or sets the LogAnalyticsData. </summary>
-        public LogAnalyticsData Data { get; private set; }
+        /// <summary>
+        /// Gets or sets the global::Azure.ResourceManager.Sample.LogAnalyticsData
+        /// 
+        /// .
+        /// </summary>
+        public LogAnalyticsData
+
+         Data
+        { get; private set; }
 
         /// <inheritdoc />
         protected override LogAnalytics GetResource()

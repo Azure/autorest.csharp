@@ -10,14 +10,25 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class UsageData
+    public partial class UsageData : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("unit");
+            writer.WriteStringValue(Unit);
+            writer.WritePropertyName("currentValue");
+            writer.WriteNumberValue(CurrentValue);
+            writer.WritePropertyName("limit");
+            writer.WriteNumberValue(Limit);
+            writer.WriteEndObject();
+        }
+
         internal static UsageData DeserializeUsageData(JsonElement element)
         {
             string unit = default;
             int currentValue = default;
             long limit = default;
-            UsageName name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("unit"))
@@ -35,13 +46,8 @@ namespace Azure.ResourceManager.Sample
                     limit = property.Value.GetInt64();
                     continue;
                 }
-                if (property.NameEquals("name"))
-                {
-                    name = UsageName.DeserializeUsageName(property.Value);
-                    continue;
-                }
             }
-            return new UsageData(unit, currentValue, limit, name);
+            return new UsageData(unit, currentValue, limit);
         }
     }
 }

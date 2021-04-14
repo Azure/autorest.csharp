@@ -22,11 +22,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<OperationGroup, MgmtRestClient>? _restClients;
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
-        private Dictionary<string, ResourceData>? _resourceData;
+        private Dictionary<OperationGroup, ResourceData>? _resourceData;
         private Dictionary<string, Resource>? _armResource;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
+
+        internal ResourceData GetResourceData(OperationGroup operationGroup)
+        {
+            EnsureResourceData();
+            return _resourceData![operationGroup];
+        }
+
         private IEnumerable<Schema> _allSchemas;
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
@@ -115,14 +122,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _resourceContainers;
         }
 
-        private Dictionary<string, ResourceData> EnsureResourceData()
+        private Dictionary<OperationGroup, ResourceData> EnsureResourceData()
         {
             if (_resourceData != null)
             {
                 return _resourceData;
             }
 
-            _resourceData = new Dictionary<string, ResourceData>();
+            _resourceData = new Dictionary<OperationGroup, ResourceData>();
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
@@ -133,7 +140,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_resourceData.ContainsKey(operation.Resource))
+                        if (!_resourceData.ContainsKey(operation) && (operation.Key != "SKIP"))
                         {
                             var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
                             CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
@@ -141,7 +148,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                             {
                                 resourceData.OverrideInherits(inherits);
                             }
-                            _resourceData.Add(operation.Resource, resourceData);
+                            _resourceData.Add(operation, resourceData);
                         }
                     }
                 }
@@ -169,7 +176,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     {
                         if (!_armResource.ContainsKey(operation.Resource))
                         {
-                            _armResource.Add(operation.Resource, new Resource(operation.Resource, _context));
+                            _armResource.Add(operation.Resource, new Resource(operation, _context));
                         }
                     }
                 }

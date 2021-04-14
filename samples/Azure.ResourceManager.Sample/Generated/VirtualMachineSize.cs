@@ -22,8 +22,15 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary> Gets or sets the VirtualMachineSizeData. </summary>
-        public VirtualMachineSizeData Data { get; private set; }
+        /// <summary>
+        /// Gets or sets the global::Azure.ResourceManager.Sample.VirtualMachineSizeData
+        /// 
+        /// .
+        /// </summary>
+        public VirtualMachineSizeData
+
+         Data
+        { get; private set; }
 
         /// <inheritdoc />
         protected override VirtualMachineSize GetResource()

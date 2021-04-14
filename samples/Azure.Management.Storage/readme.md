@@ -24,7 +24,7 @@ operation-group-to-resource-type:
 operation-group-to-resource:
    Operations: Operation
    Skus: Sku
-   Usages: Usage
+   Usages: SKIP
    PrivateLinkResources: PrivateLinkResource
    StorageAccounts: StorageAccount
 operation-group-to-parent:

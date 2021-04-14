@@ -22,8 +22,15 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary> Gets or sets the VirtualMachineScaleSetRollingUpgradeData. </summary>
-        public VirtualMachineScaleSetRollingUpgradeData Data { get; private set; }
+        /// <summary>
+        /// Gets or sets the global::Azure.ResourceManager.Sample.VirtualMachineScaleSetRollingUpgradeData
+        /// 
+        /// .
+        /// </summary>
+        public VirtualMachineScaleSetRollingUpgradeData
+
+         Data
+        { get; private set; }
 
         /// <inheritdoc />
         protected override VirtualMachineScaleSetRollingUpgrade GetResource()

@@ -22,8 +22,15 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary> Gets or sets the DedicatedHostData. </summary>
-        public DedicatedHostData Data { get; private set; }
+        /// <summary>
+        /// Gets or sets the global::Azure.ResourceManager.Sample.DedicatedHostData
+        /// 
+        /// .
+        /// </summary>
+        public DedicatedHostData
+
+         Data
+        { get; private set; }
 
         /// <inheritdoc />
         protected override DedicatedHost GetResource()

@@ -57,6 +57,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase("GetResource")]
+        [TestCase("GetResourceAsync")]
+        [TestCase("get_Data")]
+        [TestCase("set_Data")]
         public void ValidateResourceMethods(string methodName)
         {
             foreach (var resource in FindAllResources())

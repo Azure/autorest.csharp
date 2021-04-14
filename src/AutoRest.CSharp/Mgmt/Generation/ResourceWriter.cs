@@ -25,20 +25,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class.");
                     writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
                     writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
-                    using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {cs.Name}Data resource) : base(options, resource.Id)"))
+                    using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resource.ResourceDataObject.Type} resource) : base(options, resource.Id)"))
                     {
                         writer.LineRaw("Data = resource;");
                     }
 
                     // write Data
                     writer.Line();
-                    writer.WriteXmlDocumentationSummary($"Gets or sets the {cs.Name}Data.");
-                    writer.LineRaw("public " + cs.Name + "Data Data {get; private set;} ");
+                    writer.WriteXmlDocumentationSummary($"Gets or sets the {resource.ResourceDataObject.Type}.");
+                    writer.LineRaw($"public {resource.ResourceDataObject.Type} Data" + "{get; private set;}");
 
                     // protected override GetResource
                     writer.Line();
                     writer.WriteXmlDocumentationInheritDoc();
-                    using (writer.Scope($"protected override {cs.Name} GetResource()"))
+                    using (writer.Scope($"protected override {cs.Name} GetResource({typeof(CancellationToken)} cancellation = default)"))
                     {
                         writer.LineRaw("return this;");
                     }

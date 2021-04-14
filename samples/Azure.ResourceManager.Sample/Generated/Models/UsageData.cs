@@ -5,51 +5,39 @@
 
 #nullable disable
 
-using System;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the Usage data model. </summary>
-    public partial class UsageData
+    public partial class UsageData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of UsageData. </summary>
         /// <param name="currentValue"> The current usage of the resource. </param>
         /// <param name="limit"> The maximum permitted usage of the resource. </param>
-        /// <param name="name"> The name of the type of usage. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal UsageData(int currentValue, long limit, UsageName name)
+        public UsageData(int currentValue, long limit)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
             Unit = "Count";
             CurrentValue = currentValue;
             Limit = limit;
-            Name = name;
         }
 
         /// <summary> Initializes a new instance of UsageData. </summary>
         /// <param name="unit"> An enum describing the unit of usage measurement. </param>
         /// <param name="currentValue"> The current usage of the resource. </param>
         /// <param name="limit"> The maximum permitted usage of the resource. </param>
-        /// <param name="name"> The name of the type of usage. </param>
-        internal UsageData(string unit, int currentValue, long limit, UsageName name)
+        internal UsageData(string unit, int currentValue, long limit)
         {
             Unit = unit;
             CurrentValue = currentValue;
             Limit = limit;
-            Name = name;
         }
 
         /// <summary> An enum describing the unit of usage measurement. </summary>
-        public string Unit { get; }
+        public string Unit { get; set; }
         /// <summary> The current usage of the resource. </summary>
-        public int CurrentValue { get; }
+        public int CurrentValue { get; set; }
         /// <summary> The maximum permitted usage of the resource. </summary>
-        public long Limit { get; }
-        /// <summary> The name of the type of usage. </summary>
-        public UsageName Name { get; }
+        public long Limit { get; set; }
     }
 }

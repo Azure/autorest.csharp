@@ -22,8 +22,15 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary> Gets or sets the VirtualMachineImageData. </summary>
-        public VirtualMachineImageData Data { get; private set; }
+        /// <summary>
+        /// Gets or sets the global::Azure.ResourceManager.Sample.VirtualMachineImageData
+        /// 
+        /// .
+        /// </summary>
+        public VirtualMachineImageData
+
+         Data
+        { get; private set; }
 
         /// <inheritdoc />
         protected override VirtualMachineImage GetResource()
