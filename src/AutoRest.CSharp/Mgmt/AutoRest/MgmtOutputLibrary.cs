@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
         private Dictionary<OperationGroup, ResourceData>? _resourceData;
-        private Dictionary<string, Resource>? _armResource;
+        private Dictionary<OperationGroup, Resource>? _armResource;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             _resourceOperations = new Dictionary<OperationGroup, ResourceOperation>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+            foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
                 _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
             }
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+            foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
                 _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
             }
@@ -133,14 +133,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                //TODO: find a way to not need to duplicate this
                 List<OperationGroup>? operations = _operationGroups[schema.Name];
 
                 if (operations != null)
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_resourceData.ContainsKey(operation) && (operation.Key != "SKIP"))
+                        if (!_resourceData.ContainsKey(operation))
                         {
                             var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
                             CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
@@ -157,14 +156,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _resourceData;
         }
 
-        private Dictionary<string, Resource> EnsureArmResource()
+        private Dictionary<OperationGroup, Resource> EnsureArmResource()
         {
             if (_armResource != null)
             {
                 return _armResource;
             }
 
-            _armResource = new Dictionary<string, Resource>();
+            _armResource = new Dictionary<OperationGroup, Resource>();
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
@@ -174,9 +173,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_armResource.ContainsKey(operation.Resource))
+                        if (!_armResource.ContainsKey(operation))
                         {
-                            _armResource.Add(operation.Resource, new Resource(operation, _context));
+                            _armResource.Add(operation, new Resource(operation.Resource(_mgmtConfiguration), _context));
                         }
                     }
                 }
@@ -247,7 +246,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _ => throw new NotImplementedException()
         };
 
-
         public MgmtRestClient FindRestClient(OperationGroup operationGroup)
         {
             return EnsureRestClients()[operationGroup];
@@ -257,13 +255,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             foreach (var operationsGroup in _codeModel.OperationGroups)
             {
-                MapHttpMethodToOperation(operationsGroup);
-                string? resourceType;
-                operationsGroup.ResourceType = _mgmtConfiguration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
-                operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
-                string? resource;
-                ResourceTypes.Add(operationsGroup.ResourceType);
-                operationsGroup.IsExtensionResource = ExtensionDetection.IsExtension(operationsGroup);
+                ResourceTypes.Add(operationsGroup.ResourceType(_mgmtConfiguration));
 
                 // TODO better support for extension resources
                 string? parent;
@@ -272,42 +264,19 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
-                operationsGroup.Parent = parent ?? ParentDetection.GetParent(operationsGroup);
-                operationsGroup.Resource = _mgmtConfiguration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
-                AddOperationGroupToResourceMap(operationsGroup);
+                if (operationsGroup.IsResource(_mgmtConfiguration))
+                    AddOperationGroupToResourceMap(operationsGroup);
             }
-            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes);
-        }
-
-        private void MapHttpMethodToOperation(OperationGroup operationsGroup)
-        {
-            operationsGroup.OperationHttpMethodMapping = new Dictionary<HttpMethod, List<ServiceRequest>>();
-            foreach (var operation in operationsGroup.Operations)
-            {
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
-                    {
-                        httpRequest.ProviderSegments = ProviderSegmentDetection.GetProviderSegments(httpRequest.Path);
-                        List<ServiceRequest>? list;
-                        if (!operationsGroup.OperationHttpMethodMapping.TryGetValue(httpRequest.Method, out list))
-                        {
-                            list = new List<ServiceRequest>();
-                            operationsGroup.OperationHttpMethodMapping.Add(httpRequest.Method, list);
-                        }
-                        list.Add(serviceRequest);
-                    }
-                }
-            }
+            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }
 
         private void AddOperationGroupToResourceMap(OperationGroup operationsGroup)
         {
             List<OperationGroup>? result;
-            if (!_operationGroups.TryGetValue(operationsGroup.Resource, out result))
+            if (!_operationGroups.TryGetValue(operationsGroup.Resource(_mgmtConfiguration), out result))
             {
                 result = new List<OperationGroup>();
-                _operationGroups.Add(operationsGroup.Resource, result);
+                _operationGroups.Add(operationsGroup.Resource(_mgmtConfiguration), result);
             }
             result.Add(operationsGroup);
         }

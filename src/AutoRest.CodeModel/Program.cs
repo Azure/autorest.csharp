@@ -13,7 +13,7 @@ namespace AutoRest.CodeModel
 {
     internal static class Program
     {
-        private const string Path = "AutoRest.CSharp/Input/Generated";
+        private const string Path = "AutoRest.CSharp/Common/Input/Generated";
         private static readonly string Namespace = "AutoRest.CSharp.Input";
 
         private static void Main()

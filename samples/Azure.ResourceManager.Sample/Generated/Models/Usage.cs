@@ -9,24 +9,27 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the Usage data model. </summary>
-    public partial class UsageData : TrackedResource<TenantResourceIdentifier>
+    /// <summary> Describes Compute Resource Usage. </summary>
+    public partial class Usage
     {
-        /// <summary> Initializes a new instance of UsageData. </summary>
+        /// <summary> Initializes a new instance of Usage. </summary>
         /// <param name="currentValue"> The current usage of the resource. </param>
         /// <param name="limit"> The maximum permitted usage of the resource. </param>
-        public UsageData(int currentValue, long limit)
+        /// <param name="name"> The name of the type of usage. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        internal Usage(int currentValue, long limit, UsageName name)
         {
             Unit = "Count";
             CurrentValue = currentValue;
             Limit = limit;
         }
 
-        /// <summary> Initializes a new instance of UsageData. </summary>
+        /// <summary> Initializes a new instance of Usage. </summary>
         /// <param name="unit"> An enum describing the unit of usage measurement. </param>
         /// <param name="currentValue"> The current usage of the resource. </param>
         /// <param name="limit"> The maximum permitted usage of the resource. </param>
-        internal UsageData(string unit, int currentValue, long limit)
+        /// <param name="name"> The name of the type of usage. </param>
+        internal Usage(string unit, int currentValue, long limit, UsageName name)
         {
             Unit = unit;
             CurrentValue = currentValue;
