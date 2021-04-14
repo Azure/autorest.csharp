@@ -25,13 +25,13 @@
     "LogAnalytics": "Microsoft.Compute/locations/logAnalytics"
   },
   "OperationGroupToResource": {
+    "Operations": "RestApi",
     "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
     "VirtualMachineImages": "VirtualMachineImage",
     "Usage": "Usage",
     "VirtualMachineSizes": "VirtualMachineSize",
     "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
-    "LogAnalytics": "LogAnalytics",
-    "Operations": "RestApi"
+    "LogAnalytics": "LogAnalytics"
   },
   "OperationGroupToParent": {
     "LogAnalytics": "subscriptions",

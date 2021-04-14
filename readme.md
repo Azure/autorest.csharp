@@ -32,7 +32,8 @@ ___
     - [Rename a client](#rename-a-client)
     - [Replace any generated member](#replace-any-generated-member)
     - [Remove any generated member](#remove-any-generated-member)
-    - [Change model namespace or accessability in bulk](#change-model-namespace-or-accessability-in-bulk)
+    - [Change model namespace or accessibility in bulk](#change-model-namespace-or-accessibility-in-bulk)
+    - [Change operation accessibility in bulk](#change-operation-accessibility-in-bulk)
     - [Exclude models from namespace](#exclude-models-from-namespace)
 
 <!-- /TOC -->
@@ -918,7 +919,7 @@ namespace Azure.Service.Models
 
 </details>
 
-### Change model namespace or accessability in bulk
+### Change model namespace or accessibility in bulk
 
 <details>
 
@@ -963,6 +964,34 @@ directive:
 ```
 
 </details>
+
+### Change operation accessibility in bulk
+
+<details>
+
+**Generated code before (Generated/Client.cs):**
+
+``` C#
+public virtual Response Operation(string body = null, CancellationToken cancellationToken = default)
+public virtual async Task<Response> OperationAsync(string body = null, CancellationToken cancellationToken = default)
+```
+
+**Add autorest.md transformation**
+
+```
+directive:
+- from: swagger-document
+  where: $..[?(@.operationId=='Operation')]
+  transform: >
+    $["x-accessibility"] = "internal";
+```
+
+**Generated code after (Generated/Client.cs):**
+
+``` C#
+internal virtual Response Operation(string body = null, CancellationToken cancellationToken = default)
+internal virtual async Task<Response> OperationAsync(string body = null, CancellationToken cancellationToken = default)
+```
 
 ### Exclude models from namespace
 

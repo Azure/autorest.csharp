@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.Input
         // For some reason, booleans in dictionaries are deserialized as string instead of bool.
         public bool IsLongRunning => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
         public string? LongRunningFinalStateVia => Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("final-state-via");
+        public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse
         {
@@ -90,21 +91,6 @@ namespace AutoRest.CSharp.Input
         public bool? BufferResponse => TryGetValue("x-csharp-buffer-response", out object? value) && value != null ? (bool?)Convert.ToBoolean(value) : null;
 
         public bool SkipEncoding => TryGetValue("x-ms-skip-url-encoding", out var value) && Convert.ToBoolean(value);
-    }
-
-    internal partial class OperationGroup
-    {
-        public string ResourceType { get; set; }
-        public string Resource { get; set; }
-        public bool IsTenantResource { get; set; }
-        public bool IsExtensionResource { get; set; }
-        public string Parent { get; set; }
-        public Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping { get; set; }
-    }
-
-    internal partial class HttpRequest : Protocol
-    {
-        public List<ProviderSegment> ProviderSegments;
     }
 
     internal partial class ServiceResponse

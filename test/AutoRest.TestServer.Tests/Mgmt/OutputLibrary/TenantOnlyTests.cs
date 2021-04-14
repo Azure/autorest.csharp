@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
@@ -14,16 +15,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void TestTenant()
         {
-            CodeModel model = Generate("TenantOnly").Result;
+            var result = Generate("TenantOnly").Result;
+            var model = result.Model;
+            var context = result.Context;
             foreach (var operations in model.OperationGroups)
             {
-                Assert.IsNotNull(operations.Parent);
+                Assert.IsNotNull(operations.Parent(context.Configuration.MgmtConfiguration));
                 if (operations.Key.Equals("AvailableBalances") || operations.Key.Equals("Instructions"))
-                    Assert.IsTrue(operations.Parent.Equals("Microsoft.Billing/billingAccounts/billingProfiles"));
+                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("Microsoft.Billing/billingAccounts/billingProfiles"));
                 else if (operations.Key.Equals("Agreements"))
-                    Assert.IsTrue(operations.Parent.Equals("Microsoft.Billing/billingAccounts"));
+                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("Microsoft.Billing/billingAccounts"));
                 else
-                    Assert.IsTrue(operations.Parent.Equals("tenant"));
+                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("tenant"));
             }
         }
     }
