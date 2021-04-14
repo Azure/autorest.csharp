@@ -239,51 +239,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _ => throw new NotImplementedException()
         };
 
-        /// <summary>
-        /// Looks for an <see cref="OperationGroup" /> by a <see cref="MgmtRestClient" />.
-        /// </summary>
-        /// <param name="restClient">The <see cref="MgmtRestClient" /> instance which is built from the operation group.</param>
-        /// <returns>The operation group. `null` if not found.</returns>
-        public OperationGroup FindOperationGroup(MgmtRestClient restClient) {
-            return EnsureRestClients().FirstOrDefault(ogToClient => ogToClient.Value == restClient).Key;
-        }
-
-        /// <summary>
-        /// Looks for an <see cref="OperationGroup" /> by a <see cref="ResourceOperation" />.
-        /// </summary>
-        /// <param name="resourceOperation">The <see cref="ResourceOperation" /> instance which is built from the operation group.</param>
-        /// <returns>The operation group. `null` if not found.</returns>
-        public OperationGroup FindOperationGroup(ResourceOperation resourceOperation) {
-            return EnsureResourceOperations().FirstOrDefault(ogToOperation => ogToOperation.Value == resourceOperation).Key;
-        }
-
-        /// <summary>
-        /// Looks for an <see cref="OperationGroup" /> by <see cref="ResourceContainer" />.
-        /// </summary>
-        /// <param name="container">The <see cref="ResourceContainer" /> instance which is built from the operation group.</param>
-        /// <returns>The operation group. `null` if not found.</returns>
-        public OperationGroup FindOperationGroup(ResourceContainer container) {
-            return EnsureResourceContainers().FirstOrDefault(ogToContainer => ogToContainer.Value == container).Key;
-        }
-
-        /// <summary>
-        /// Looks for an <see cref="OperationGroup" /> by <see cref="ResourceData" />.
-        /// </summary>
-        /// <param name="resourceData">The <see cref="ResourceData" /> instance which is built from the operation group.</param>
-        /// <returns>The operation group. `null` if not found.</returns>
-        public OperationGroup FindOperationGroup(ResourceData resourceData) {
-            return EnsureResourceData().FirstOrDefault(ogToData => ogToData.Value == resourceData).Key;
-        }
-
-        /// <summary>
-        /// Looks for an <see cref="OperationGroup" /> by <see cref="Resource" />.
-        /// </summary>
-        /// <param name="resource">The <see cref="Resource" /> instance which is built from the operation group.</param>
-        /// <returns>The operation group. `null` if not found.</returns>
-        public OperationGroup FindOperationGroup(Resource resource) {
-            return EnsureArmResource().FirstOrDefault(ogToResource => ogToResource.Value == resource).Key;
-        }
-
         public MgmtRestClient FindRestClient(OperationGroup operationGroup)
         {
             return EnsureRestClients()[operationGroup];
