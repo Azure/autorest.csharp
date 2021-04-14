@@ -62,7 +62,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             for (int i = 0; i < referenceClassCollection.Count; i++)
             {
-                referenceClassCollection[i] = referenceClassCollection[i].MakeGenericType(referenceClassCollection[i].GetResourceIdentifierType());
+                if (referenceClassCollection[i].IsGenericType)
+                {
+                    var attributeObj = referenceClassCollection[i].GetCustomAttributes().First() as ReferenceTypeAttribute;
+                    referenceClassCollection[i] = referenceClassCollection[i].MakeGenericType(attributeObj!.GenericType);
+                }
             }
             return referenceClassCollection;
         }
