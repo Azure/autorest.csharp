@@ -33,12 +33,10 @@
     "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
     "LogAnalytics": "LogAnalyticsOperationResult"
   },
-  "ModelRename": {},
   "OperationGroupToParent": {
     "LogAnalytics": "subscriptions",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
     "VirtualMachineImages": "Microsoft.Compute/locations",
     "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets"
-  },
-  "ModelToResource": {}
+  }
 }

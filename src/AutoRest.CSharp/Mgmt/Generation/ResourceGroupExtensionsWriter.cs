@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Generation.Writers
         protected string Accessibility = "public";
         protected string Type = "ResourceGroupExtensions";
 
-        public void WriteExtension(string @namespace, CodeWriter writer, IEnumerable<Resource> armResources)
+        public void WriteExtension(string @namespace, CodeWriter writer, Dictionary<OperationGroup, Resource> armResources)
         {
             using (writer.Namespace(@namespace))
             {
@@ -28,10 +28,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (var item in armResources)
                     {
-                        if (item.OperationGroup.Parent.Equals("resourceGroups"))
+                        if (item.Key.Parent.Equals("resourceGroups"))
                         {
-                            writer.Line($"#region {item.Type.Name:D}s");
-                            WriteGetContainers(writer, item);
+                            writer.Line($"#region {item.Value.Type.Name:D}s");
+                            WriteGetContainers(writer, item.Value);
                             writer.LineRaw("#endregion");
                             writer.Line();
                         }
@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteGetContainers(CodeWriter writer, Mgmt.Output.Resource armResource)
         {
+            // TODO: Find a solution to convert from single to plural
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {armResource.Type.Name:D}Container along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentation("return", $"Returns an <see cref=\"{armResource.Type.Name:D}Container\" /> object.");

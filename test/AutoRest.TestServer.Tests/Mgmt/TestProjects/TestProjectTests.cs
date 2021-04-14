@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using Azure.ResourceManager.Core;
 using NUnit.Framework;
@@ -39,6 +41,51 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             {
                 var method = type.GetMethod(methodName);
                 Assert.NotNull(method, $"{type.Name} does not implement the method.");
+            }
+        }
+
+        [Test]
+        public void ValidateResourceGroupExtensions()
+        {
+            if (_projectName.Equals(""))
+            {
+                return;
+            }
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            Type resourceExtensions = allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
+            Assert.NotNull(resourceExtensions);
+
+            // TODO: Bring below tests back after container deploy
+            //var resourceType = ResourceGroupOperations.ResourceType;
+            //foreach (var type in FindAllContainers())
+            //{
+            //    var obj = Activator.CreateInstance(resourceExtensions.Assembly.FullName, type.Name, true,
+            //        BindingFlags.CreateInstance | BindingFlags.NonPublic, null, null, CultureInfo.CurrentCulture, null);
+            //    var validResourceType = obj.GetType().GetProperty("ValidResourceType").GetValue(obj) as string;
+            //    if (resourceType.Equals(validResourceType))
+            //    {
+            //        var getContainerMethod = resourceExtensions.GetMethod($"Get{type.Name.Substring(0, type.Name.IndexOf("Container"))}s");
+            //        Assert.NotNull(getContainerMethod);
+            //    }
+            //    else
+            //    {
+            //        var getContainerMethod = resourceExtensions.GetMethod($"Get{type.Name.Substring(0, type.Name.IndexOf("Container"))}s");
+            //        Assert.IsNull(getContainerMethod);
+            //    }
+            //}
+        }
+
+        private IEnumerable<Type> FindAllContainers()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                if (t.Name.Contains("Containers") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                {
+                    yield return t;
+                }
             }
         }
 

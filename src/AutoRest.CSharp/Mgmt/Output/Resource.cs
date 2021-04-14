@@ -9,16 +9,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class Resource : TypeProvider
     {
-        public Resource(OperationGroup operationGroup, BuildContext context)
+        public Resource(string resourceName, BuildContext context)
             : base(context)
         {
-            OperationGroup = operationGroup;
-            DefaultName = operationGroup.Resource;
+            DefaultName = resourceName;
             Description = BuilderHelpers.EscapeXmlDescription(
                 $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.");
         }
-
-        public OperationGroup OperationGroup { get; }
 
         protected override string DefaultName { get; }
 
