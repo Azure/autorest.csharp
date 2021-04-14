@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_resourceData.ContainsKey(operation.Resource))
+                        if (!_resourceData.ContainsKey(operation.Resource(_mgmtConfiguration)))
                         {
                             var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
                             _resourceData.Add(operation.Resource, resourceData);
@@ -162,9 +162,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_armResource.ContainsKey(operation.Resource))
+                        if (!_armResource.ContainsKey(operation.Resource(_mgmtConfiguration)))
                         {
-                            _armResource.Add(operation.Resource, new Resource(operation.Resource, _context));
+                            _armResource.Add(operation.Resource(_mgmtConfiguration), new Resource(operation.Resource(_mgmtConfiguration), _context));
                         }
                     }
                 }
@@ -245,13 +245,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             foreach (var operationsGroup in _codeModel.OperationGroups)
             {
-                MapHttpMethodToOperation(operationsGroup);
-                string? resourceType;
-                operationsGroup.ResourceType = _mgmtConfiguration.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out resourceType) ? resourceType : ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
-                operationsGroup.IsTenantResource = TenantDetection.IsTenantOnly(operationsGroup);
-                string? resource;
-                ResourceTypes.Add(operationsGroup.ResourceType);
-                operationsGroup.IsExtensionResource = ExtensionDetection.IsExtension(operationsGroup);
+                ResourceTypes.Add(operationsGroup.ResourceType(_mgmtConfiguration));
 
                 // TODO better support for extension resources
                 string? parent;
@@ -260,42 +254,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
-                operationsGroup.Parent = parent ?? ParentDetection.GetParent(operationsGroup);
-                operationsGroup.Resource = _mgmtConfiguration.OperationGroupToResource.TryGetValue(operationsGroup.Key, out resource) ? resource : SchemaDetection.GetSchema(operationsGroup).Name;
                 AddOperationGroupToResourceMap(operationsGroup);
             }
-            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes);
-        }
-
-        private void MapHttpMethodToOperation(OperationGroup operationsGroup)
-        {
-            operationsGroup.OperationHttpMethodMapping = new Dictionary<HttpMethod, List<ServiceRequest>>();
-            foreach (var operation in operationsGroup.Operations)
-            {
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    if (serviceRequest.Protocol.Http is HttpRequest httpRequest)
-                    {
-                        httpRequest.ProviderSegments = ProviderSegmentDetection.GetProviderSegments(httpRequest.Path);
-                        List<ServiceRequest>? list;
-                        if (!operationsGroup.OperationHttpMethodMapping.TryGetValue(httpRequest.Method, out list))
-                        {
-                            list = new List<ServiceRequest>();
-                            operationsGroup.OperationHttpMethodMapping.Add(httpRequest.Method, list);
-                        }
-                        list.Add(serviceRequest);
-                    }
-                }
-            }
+            ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }
 
         private void AddOperationGroupToResourceMap(OperationGroup operationsGroup)
         {
             List<OperationGroup>? result;
-            if (!_operationGroups.TryGetValue(operationsGroup.Resource, out result))
+            if (!_operationGroups.TryGetValue(operationsGroup.Resource(_mgmtConfiguration), out result))
             {
                 result = new List<OperationGroup>();
-                _operationGroups.Add(operationsGroup.Resource, result);
+                _operationGroups.Add(operationsGroup.Resource(_mgmtConfiguration), result);
             }
             result.Add(operationsGroup);
         }

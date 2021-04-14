@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public virtual {asyncText} {responseType} {methodName}(");
+            writer.Append($"{clientMethod.Accessibility} virtual {asyncText} {responseType} {methodName}(");
 
             foreach (Parameter parameter in parameters)
             {
@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
 
-            writer.Append($"public virtual {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
+            writer.Append($"{pagingMethod.Accessibility} virtual {responseType} {CreateMethodName(pagingMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
             {
                 writer.WriteParameter(parameter);
@@ -397,7 +397,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
 
             string asyncText = async ? "async " : string.Empty;
-            writer.Append($"public virtual {asyncText}{returnType} {CreateStartOperationName(lroMethod.Name, async)}(");
+            writer.Append($"{lroMethod.Accessibility} virtual {asyncText}{returnType} {CreateStartOperationName(lroMethod.Name, async)}(");
             foreach (Parameter parameter in parameters)
             {
                 writer.WriteParameter(parameter);

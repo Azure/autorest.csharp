@@ -32,7 +32,8 @@ ___
     - [Rename a client](#rename-a-client)
     - [Replace any generated member](#replace-any-generated-member)
     - [Remove any generated member](#remove-any-generated-member)
-    - [Change model namespace or accessability in bulk](#change-model-namespace-or-accessability-in-bulk)
+    - [Change model namespace or accessibility in bulk](#change-model-namespace-or-accessibility-in-bulk)
+    - [Change operation accessibility in bulk](#change-operation-accessibility-in-bulk)
     - [Exclude models from namespace](#exclude-models-from-namespace)
 
 <!-- /TOC -->
@@ -115,6 +116,18 @@ Note:
 2. If you don't want to override the `.csproj` after the first generation, you can pass `--skip-csproj` flag with the autorest command.
 
 For more details please refer [these](https://github.com/Azure/autorest/tree/master/docs/generate) docs to generate code from your OpenAPI definition using AutoRest.
+
+## Debugging transforms
+
+Many customizations can be done as a transform in readme.md, however getting it right can be tricky.
+
+One useful trick is to use `$lib.log` to output the state of the object either before of after transform:
+
+```
+  transform: >
+    $['x-accessibility'] = "internal";
+    $lib.log($);
+```
 
 ## Customizing the generated code
 
@@ -918,7 +931,7 @@ namespace Azure.Service.Models
 
 </details>
 
-### Change model namespace or accessability in bulk
+### Change model namespace or accessibility in bulk
 
 <details>
 
@@ -964,6 +977,34 @@ directive:
 
 </details>
 
+### Change operation accessibility in bulk
+
+<details>
+
+**Generated code before (Generated/Client.cs):**
+
+``` C#
+public virtual Response Operation(string body = null, CancellationToken cancellationToken = default)
+public virtual async Task<Response> OperationAsync(string body = null, CancellationToken cancellationToken = default)
+```
+
+**Add autorest.md transformation**
+
+```
+directive:
+- from: swagger-document
+  where: $..[?(@.operationId=='Operation')]
+  transform: >
+    $["x-accessibility"] = "internal";
+```
+
+**Generated code after (Generated/Client.cs):**
+
+``` C#
+internal virtual Response Operation(string body = null, CancellationToken cancellationToken = default)
+internal virtual async Task<Response> OperationAsync(string body = null, CancellationToken cancellationToken = default)
+```
+
 ### Exclude models from namespace
 
 <details>
@@ -1000,7 +1041,7 @@ input-file: "swagger-document"
 
 ```yaml
 # autorest-core version
-version: 3.1.3
+version: 3.3.1
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/
 clear-output-folder: true

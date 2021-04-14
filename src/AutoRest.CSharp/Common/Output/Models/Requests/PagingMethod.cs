@@ -20,5 +20,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public RestClientMethod? NextPageMethod { get; }
         public PagingResponseInfo PagingResponse { get; }
         public Diagnostic Diagnostics { get; }
+        public string Accessibility => "public";
     }
 }

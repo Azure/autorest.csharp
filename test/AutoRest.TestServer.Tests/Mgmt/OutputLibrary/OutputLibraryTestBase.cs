@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
     internal abstract class OutputLibraryTestBase
     {
-        protected static async Task<CodeModel> Generate(string testProject)
+        protected static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject)
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, "Generated");
@@ -29,7 +29,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var model = await codeModelTask;
             var context = new BuildContext<MgmtOutputLibrary>(model, configuration, sourceInputModel);
             _ = context.Library; // gen lib
-            return model;
+            return (model, context);
         }
     }
 }

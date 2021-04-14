@@ -12,6 +12,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
@@ -20,16 +21,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         [Test]
         public void TestParentComputer()
         {
-            CodeModel model = Generate("MgmtParent").Result;
+            var result = Generate("MgmtParent").Result;
+            var model = result.Model;
+            var context = result.Context;
             foreach (var operations in model.OperationGroups)
             {
-                Assert.IsNotNull(operations.Parent);
+                Assert.IsNotNull(operations.Parent(context.Configuration.MgmtConfiguration));
                 if (operations.Key.Equals("VirtualMachineExtensionImages"))
-                    Assert.IsTrue(operations.Parent.Equals("Microsoft.Compute/locations/publishers"));
+                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/locations/publishers"));
                 else if (operations.Key.Equals("AvailabilitySets"))
-                    Assert.IsTrue(operations.Parent.Equals("resourceGroups"));
+                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("resourceGroups"));
                 else if (operations.Key.Equals("DedicatedHosts"))
-                    Assert.IsTrue(operations.Parent.Equals("Microsoft.Compute/hostGroups"));
+                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/hostGroups"));
             }
         }
     }
