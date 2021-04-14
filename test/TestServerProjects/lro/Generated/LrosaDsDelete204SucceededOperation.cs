@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
     public partial class LrosaDsDelete204SucceededOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationHelpers<Response> _operation;
 
         /// <summary> Initializes a new instance of LrosaDsDelete204SucceededOperation for mocking. </summary>
         protected LrosaDsDelete204SucceededOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LrosaDsDelete204SucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsDelete204SucceededOperation");
+            _operation = new OperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsDelete204SucceededOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

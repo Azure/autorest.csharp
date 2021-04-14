@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var interfaceType = new CSharpType(typeof(IOperationSource<>), operation.ResultType);
                 var baseType = new CSharpType(typeof(Operation<>), operation.ResultType);
                 var waitForCompletionType = new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), operation.ResultType));
-                var helperType = new CSharpType(typeof(ArmOperationHelpers<>), operation.ResultType);
+                var helperType = new CSharpType(typeof(OperationHelpers<>), operation.ResultType);
 
                 using (writer.Scope($"{operation.Declaration.Accessibility} partial class {cs.Name}: {baseType}, {interfaceType}"))
                 {

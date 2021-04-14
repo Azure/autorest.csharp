@@ -20,7 +20,7 @@ namespace lro
     /// <summary> Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ &apos;id&apos;: &apos;100&apos;, &apos;name&apos;: &apos;foo&apos; }]. </summary>
     public partial class LROsPost202ListOperation : Operation<IReadOnlyList<Product>>, IOperationSource<IReadOnlyList<Product>>
     {
-        private readonly ArmOperationHelpers<IReadOnlyList<Product>> _operation;
+        private readonly OperationHelpers<IReadOnlyList<Product>> _operation;
 
         /// <summary> Initializes a new instance of LROsPost202ListOperation for mocking. </summary>
         protected LROsPost202ListOperation()
@@ -29,7 +29,7 @@ namespace lro
 
         internal LROsPost202ListOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<IReadOnlyList<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202ListOperation");
+            _operation = new OperationHelpers<IReadOnlyList<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202ListOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
     public partial class LrosaDsPost202RetryInvalidHeaderOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationHelpers<Response> _operation;
 
         /// <summary> Initializes a new instance of LrosaDsPost202RetryInvalidHeaderOperation for mocking. </summary>
         protected LrosaDsPost202RetryInvalidHeaderOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LrosaDsPost202RetryInvalidHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPost202RetryInvalidHeaderOperation");
+            _operation = new OperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPost202RetryInvalidHeaderOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

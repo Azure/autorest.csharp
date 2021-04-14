@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
     public partial class LROsPutAsyncNoHeaderInRetryOperation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly ArmOperationHelpers<Product> _operation;
+        private readonly OperationHelpers<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsPutAsyncNoHeaderInRetryOperation for mocking. </summary>
         protected LROsPutAsyncNoHeaderInRetryOperation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LROsPutAsyncNoHeaderInRetryOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutAsyncNoHeaderInRetryOperation");
+            _operation = new OperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutAsyncNoHeaderInRetryOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

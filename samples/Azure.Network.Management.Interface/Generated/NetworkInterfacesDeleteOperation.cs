@@ -17,7 +17,7 @@ namespace Azure.Network.Management.Interface
     /// <summary> Deletes the specified network interface. </summary>
     public partial class NetworkInterfacesDeleteOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationHelpers<Response> _operation;
 
         /// <summary> Initializes a new instance of NetworkInterfacesDeleteOperation for mocking. </summary>
         protected NetworkInterfacesDeleteOperation()
@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface
 
         internal NetworkInterfacesDeleteOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "NetworkInterfacesDeleteOperation");
+            _operation = new OperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "NetworkInterfacesDeleteOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
     public partial class LrosaDsDeleteAsyncRelativeRetryInvalidHeaderOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationHelpers<Response> _operation;
 
         /// <summary> Initializes a new instance of LrosaDsDeleteAsyncRelativeRetryInvalidHeaderOperation for mocking. </summary>
         protected LrosaDsDeleteAsyncRelativeRetryInvalidHeaderOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LrosaDsDeleteAsyncRelativeRetryInvalidHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsDeleteAsyncRelativeRetryInvalidHeaderOperation");
+            _operation = new OperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsDeleteAsyncRelativeRetryInvalidHeaderOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

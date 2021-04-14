@@ -19,7 +19,7 @@ namespace paging
     /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
     public partial class PagingGetMultiplePagesLROOperation : Operation<AsyncPageable<Product>>, IOperationSource<AsyncPageable<Product>>
     {
-        private readonly ArmOperationHelpers<AsyncPageable<Product>> _operation;
+        private readonly OperationHelpers<AsyncPageable<Product>> _operation;
         private readonly Func<string, Task<Response>> _nextPageFunc;
 
         /// <summary> Initializes a new instance of PagingGetMultiplePagesLROOperation for mocking. </summary>
@@ -29,7 +29,7 @@ namespace paging
 
         internal PagingGetMultiplePagesLROOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, Func<string, Task<Response>> nextPageFunc)
         {
-            _operation = new ArmOperationHelpers<AsyncPageable<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "PagingGetMultiplePagesLROOperation");
+            _operation = new OperationHelpers<AsyncPageable<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "PagingGetMultiplePagesLROOperation");
             _nextPageFunc = nextPageFunc;
         }
         /// <inheritdoc />
