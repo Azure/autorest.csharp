@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace SupersetInheritance
 {
     /// <summary> A class representing the SupersetModel4 data model. </summary>
-    public partial class SupersetModel4Data : TrackedResource
+    public partial class SupersetModel4Data : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
         public SupersetModel4Data()
