@@ -308,4 +308,5 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\xms-error-responses\\Generated"
     }
+  }
 }
