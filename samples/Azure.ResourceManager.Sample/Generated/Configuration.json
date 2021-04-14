@@ -28,10 +28,10 @@
     "Operations": "RestApi",
     "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
     "VirtualMachineImages": "VirtualMachineImage",
-    "Usage": "Usage",
+    "Usage": "SKIP",
     "VirtualMachineSizes": "VirtualMachineSize",
     "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
-    "LogAnalytics": "LogAnalytics"
+    "LogAnalytics": "SKIP"
   },
   "OperationGroupToParent": {
     "LogAnalytics": "subscriptions",
