@@ -4,7 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
@@ -19,7 +21,7 @@ namespace AutoRest.CSharp.Generation.Writers
         protected string Accessibility = "public";
         protected string Type = "ResourceGroupExtensions";
 
-        public void WriteExtension(string @namespace, CodeWriter writer, Dictionary<OperationGroup, Resource> armResources)
+        public void WriteExtension(string @namespace, MgmtConfiguration mgmtConfiguration, CodeWriter writer, Dictionary<OperationGroup, Resource> armResources)
         {
             using (writer.Namespace(@namespace))
             {
@@ -28,7 +30,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (var item in armResources)
                     {
-                        if (item.Key.Parent.Equals("resourceGroups"))
+                        if (item.Key.Parent(mgmtConfiguration).Equals("resourceGroups"))
                         {
                             writer.Line($"#region {item.Value.Type.Name:D}s");
                             WriteGetContainers(writer, item.Value);
