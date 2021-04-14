@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using OperationGroupMappings;
@@ -29,12 +30,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void OldResourceTypesDoNotExist()
         {
-            var type = typeof(AvailabilitySet);
-            var assembly = type.Assembly;
-            Assert.Null(assembly.GetType("AvailabilitySets"));
-            Assert.Null(assembly.GetType("AvailabilitySetsData"));
-            Assert.Null(assembly.GetType("AvailabilitySetsOperations"));
-            Assert.Null(assembly.GetType("AvailabilitySetsContainer"));
+            Assert.Null(GetType("AvailabilitySets"));
+            Assert.Null(GetType("AvailabilitySetsData"));
+            Assert.Null(GetType("AvailabilitySetsOperations"));
+            Assert.Null(GetType("AvailabilitySetsContainer"));
+        }
+
+        [Test]
+        public void ValidateNonResource()
+        {
+            Assert.Null(GetType("UsageData"));
+            Assert.Null(GetType("UsageOperations"));
+            Assert.Null(GetType("UsageContainer"));
+
+            Assert.NotNull(GetType("Usage"));
+            Assert.NotNull(GetType("UsageRestOperations"));
         }
     }
 }
