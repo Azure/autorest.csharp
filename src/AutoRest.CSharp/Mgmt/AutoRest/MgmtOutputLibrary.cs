@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (!_resourceData.ContainsKey(operation.Resource(_mgmtConfiguration)))
                         {
                             var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
-                            _resourceData.Add(operation.Resource, resourceData);
+                            _resourceData.Add(operation.Resource(_mgmtConfiguration), resourceData);
                         }
                     }
                 }
