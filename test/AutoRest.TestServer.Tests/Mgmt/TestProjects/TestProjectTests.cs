@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Azure.ResourceManager.Core;
@@ -14,15 +13,25 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         private string _projectName;
 
-        public TestProjectTests()
+        public TestProjectTests() : this("")
         {
-            _projectName = "";
         }
 
         public TestProjectTests(string projectName)
         {
             _projectName = projectName;
         }
+
+        protected IEnumerable<Type> MyTypes()
+        {
+            foreach (var type in GetType().Assembly.GetTypes())
+            {
+                if (type.Namespace == _projectName)
+                    yield return type;
+            }
+        }
+
+        protected Type? GetType(string name) => MyTypes().FirstOrDefault(t => t.Name == name);
 
         [Test]
         public void ValidateBaseClass()

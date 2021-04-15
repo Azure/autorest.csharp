@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Output;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -47,5 +48,19 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             throw new Exception($"No body param found! Please add the {operationGroup.Key} to its schema name mapping to readme.md.");
         }
+
+        /// <summary>
+        /// Indicates if the given operation group should skip generation or not.
+        /// If the operation group is marked as "SKIP" in configuration, will return false indicating the corresponding container, data... classes should not be generated.
+        /// </summary>
+        /// <param name="og">Operation group.</param>
+        /// <param name="config">Management plane configuration.</param>
+        /// <returns></returns>
+        public static bool IsResource(this OperationGroup og, MgmtConfiguration config)
+        {
+            return !og.Resource(config).Equals(KeywordToSkipGeneration);
+        }
+
+        private const string KeywordToSkipGeneration = "NonResource";
     }
 }

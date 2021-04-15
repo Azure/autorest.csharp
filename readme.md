@@ -117,6 +117,18 @@ Note:
 
 For more details please refer [these](https://github.com/Azure/autorest/tree/master/docs/generate) docs to generate code from your OpenAPI definition using AutoRest.
 
+## Debugging transforms
+
+Many customizations can be done as a transform in readme.md, however getting it right can be tricky.
+
+One useful trick is to use `$lib.log` to output the state of the object either before of after transform:
+
+```
+  transform: >
+    $['x-accessibility'] = "internal";
+    $lib.log($);
+```
+
 ## Customizing the generated code
 
 ### Make a model internal
@@ -1029,7 +1041,7 @@ input-file: "swagger-document"
 
 ```yaml
 # autorest-core version
-version: 3.1.3
+version: 3.3.1
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/
 clear-output-folder: true

@@ -8,28 +8,20 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the StorageAccount data model. </summary>
-    public partial class StorageAccountData : TrackedResource
+    public partial class StorageAccountData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of StorageAccountData. </summary>
-        /// <param name="location"> The geo-location where the resource lives. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public StorageAccountData(string location) : base(location)
+        public StorageAccountData()
         {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
             PrivateEndpointConnections = new ChangeTrackingList<PrivateEndpointConnectionData>();
         }
 
         /// <summary> Initializes a new instance of StorageAccountData. </summary>
-        /// <param name="tags"> Resource tags. </param>
-        /// <param name="location"> The geo-location where the resource lives. </param>
         /// <param name="sku"> Gets the SKU. </param>
         /// <param name="kind"> Gets the Kind. </param>
         /// <param name="identity"> The identity of the resource. </param>
@@ -55,7 +47,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="privateEndpointConnections"> List of private endpoint connection associated with the specified storage account. </param>
         /// <param name="routingPreference"> Maintains information about the network routing choice opted by the user for data transfer. </param>
         /// <param name="blobRestoreStatus"> Blob restore status. </param>
-        internal StorageAccountData(IDictionary<string, string> tags, string location, SkuData sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus) : base(tags, location)
+        internal StorageAccountData(SkuData sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus)
         {
             Sku = sku;
             Kind = kind;

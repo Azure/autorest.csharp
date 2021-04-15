@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class InheritanceChoser
     {
-        public static IList<System.Type> ReferenceClassCollection = GetReferenceClassCollection();
+        public static IList<System.Type> ReferenceClassCollection = GetOrderedList();
 
         private static IList<System.Type> GetReferenceClassCollection()
         {
@@ -27,54 +27,103 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ReferenceTypeAttribute)).Count() > 0).ToList();
         }
 
-        public static void RebuildModelInheritance(Dictionary<Schema, TypeProvider> schemaMap, Dictionary<Schema, TypeProvider> resourceSchemaMap)
+        private static List<System.Type> GetOrderedList()
         {
-            var typeOverrideMap = new Dictionary<CSharpType, CSharpType>();
-
-            RebuildExactModelInheritance(schemaMap);
-            RebuildExactModelInheritance(resourceSchemaMap);
-        }
-
-        private static void RebuildExactModelInheritance(Dictionary<Schema, TypeProvider> map)
-        {
-            foreach (var kval in map)
+            var referenceClasses = ConvertGenericType(GetReferenceClassCollection());
+            var trees = GetTrees(referenceClasses);
+            var output = new List<System.Type>();
+            foreach (var root in trees)
             {
-                if (kval.Key is ObjectSchema objectSchema)
+                var treeNodes = new List<System.Type>();
+                Queue<Node> queue = new Queue<Node>();
+                queue.Enqueue(root);
+                while (queue.Count != 0)
                 {
-                    var childObjectType = (MgmtObjectType)kval.Value;
-                    var typeToReplace = childObjectType?.Inherits?.Implementation as ObjectType;
-                    if (typeToReplace is null)
+                    Node tempNode = queue.Dequeue();
+                    treeNodes.Add(tempNode.type);
+                    List<Node> tempChilren = tempNode.children;
+                    if (tempChilren != null)
                     {
-                        continue;
-                    }
-
-                    var parent = GetExactMatch(typeToReplace.Type);
-                    if (parent != null)
-                    {
-                        childObjectType?.OverrideInherits(parent);
+                        int childNum = tempChilren.Count;
+                        while (childNum > 0)
+                        {
+                            queue.Enqueue(tempChilren[childNum - 1]);
+                            childNum--;
+                        }
                     }
                 }
+                treeNodes.Reverse();
+                output.AddRange(treeNodes);
             }
+            return output;
         }
 
-        private static CSharpType? GetExactMatch(CSharpType childType)
+        private static IList<System.Type> ConvertGenericType(IList<System.Type> referenceClassCollection)
+        {
+            for (int i = 0; i < referenceClassCollection.Count; i++)
+            {
+                if (referenceClassCollection[i].IsGenericType)
+                {
+                    var attributeObj = referenceClassCollection[i].GetCustomAttributes().First() as ReferenceTypeAttribute;
+                    referenceClassCollection[i] = referenceClassCollection[i].MakeGenericType(attributeObj!.GenericType);
+                }
+            }
+            return referenceClassCollection;
+        }
+
+        private static List<Node> GetTrees(IList<System.Type> referenceClassCollection)
+        {
+            List<Node> trees = new List<Node>();
+            var added = new Dictionary<System.Type, Node>();
+            foreach (System.Type reference in referenceClassCollection)
+            {
+                if (!added.ContainsKey(reference))
+                {
+                    Node node = new Node(reference);
+                    if (reference.BaseType != null && added.ContainsKey(reference.BaseType))
+                    {
+                        added[reference.BaseType].children.Add(node);
+                    }
+                    else
+                    {
+                        trees.Add(node);
+                    }
+                    added.Add(reference, node);
+                }
+            }
+            return trees;
+        }
+
+        public static CSharpType? GetExactMatch(MgmtObjectType childType)
         {
             foreach (System.Type parentType in ReferenceClassCollection)
             {
                 if (IsEqual(childType, parentType))
                 {
-                    return parentType.MakeGenericType(childType.GetResourceIdentifierType());
+                    return parentType;
                 }
             }
             return null;
         }
 
-        private static bool IsEqual(CSharpType childType, System.Type parentType)
+        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType)
         {
-            var childProperties = ((MgmtObjectType)(childType.Implementation)).Properties.ToList();
+            foreach (System.Type parentType in ReferenceClassCollection)
+            {
+                if (IsSuperset(originalType, parentType))
+                {
+                    return parentType;
+                }
+            }
+            return null;
+        }
+
+        private static bool IsEqual(MgmtObjectType childType, System.Type parentType)
+        {
+            var childProperties = childType.MyProperties.ToList();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
-            if (parentProperties.Count > childProperties.Count)
+            if (parentProperties.Count != childProperties.Count)
             {
                 return false;
             }
@@ -117,6 +166,52 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&
                 m.ReturnType == parentPropertyType &&
                 m.GetParameters().First().ParameterType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}").Count() > 0;
+        }
+
+        private static bool IsSuperset(MgmtObjectType childType, System.Type parentType)
+        {
+            var childProperties = childType.MyProperties.ToList();
+            List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
+
+            if (parentProperties.Count >= childProperties.Count)
+            {
+                return false;
+            }
+
+            Dictionary<string, PropertyInfo> parentDict = new Dictionary<string, PropertyInfo>();
+            int matchCount = 0;
+            foreach (var parentProperty in parentProperties)
+            {
+                parentDict.Add(parentProperty.Name, parentProperty);
+            }
+
+            foreach (var childProperty in childProperties)
+            {
+                if (parentProperties.Count == matchCount)
+                {
+                    break;
+                }
+
+                PropertyInfo? parentProperty;
+                CSharpType childPropertyType = childProperty.Declaration.Type;
+                if (parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
+                {
+                    if (parentProperty.PropertyType.IsGenericType)
+                    {
+                        if (childPropertyType.Equals(new CSharpType(parentProperty.PropertyType)))
+                        {
+                            matchCount++;
+                        }
+                    }
+                    else if (parentProperty.PropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" ||
+                        IsAssignable(parentProperty.PropertyType, childPropertyType))
+                    {
+                        //TODO(ADO item 5712): deal with protected setter
+                        matchCount++;
+                    }
+                }
+            }
+            return parentProperties.Count == matchCount;
         }
     }
 }

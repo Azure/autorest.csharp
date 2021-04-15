@@ -11,27 +11,27 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace SupersetInheritance
 {
-    /// <summary> A class representing the operations that can be performed over a specific LogAnalytics. </summary>
-    public partial class LogAnalyticsOperations : ResourceOperationsBase<TenantResourceIdentifier, LogAnalytics>
+    /// <summary> A class representing the operations that can be performed over a specific SupersetModel4. </summary>
+    public partial class SupersetModel4Operations : ResourceOperationsBase<TenantResourceIdentifier, SupersetModel4>
     {
-        /// <summary> Initializes a new instance of LogAnalyticsOperations for mocking. </summary>
-        protected LogAnalyticsOperations()
+        /// <summary> Initializes a new instance of SupersetModel4Operations for mocking. </summary>
+        protected SupersetModel4Operations()
         {
         }
 
-        private static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/LogAnalyticsOperations";
+        private static readonly ResourceType ResourceType = "SupersetInheritance/SupersetModel4Operations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<LogAnalytics> Get(CancellationToken cancellationToken = default)
+        public override ArmResponse<SupersetModel4> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<LogAnalytics>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<ArmResponse<SupersetModel4>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
