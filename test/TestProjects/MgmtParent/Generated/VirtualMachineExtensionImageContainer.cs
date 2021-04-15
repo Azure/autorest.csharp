@@ -11,7 +11,7 @@ namespace MgmtParent
     public partial class VirtualMachineExtensionImageContainer
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageContainer for mocking. </summary>
-        protected VirtualMachineExtensionImageContainer()
+        internal VirtualMachineExtensionImageContainer()
         {
         }
     }

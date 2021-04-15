@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample
     public partial class AvailabilitySetContainer
     {
         /// <summary> Initializes a new instance of AvailabilitySetContainer for mocking. </summary>
-        protected AvailabilitySetContainer()
+        internal AvailabilitySetContainer()
         {
         }
     }

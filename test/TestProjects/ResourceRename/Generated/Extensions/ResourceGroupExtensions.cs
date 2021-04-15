@@ -5,13 +5,12 @@
 
 #nullable disable
 
-using System;
 using Azure.ResourceManager.Core;
 
 namespace ResourceRename
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
-    public static class ResourceGroupExtensions
+    public static partial class ResourceGroupExtensions
     {
         #region SshPublicKeyInfos
         /// <summary> Gets an object representing a SshPublicKeyInfoContainer along with the instance operations that can be performed on it. </summary>
@@ -19,7 +18,7 @@ namespace ResourceRename
         /// <return> Returns an <see cref="SshPublicKeyInfoContainer" /> object. </return>
         public static SshPublicKeyInfoContainer GetSshPublicKeyInfos(this ResourceGroupOperations resourceGroup)
         {
-            throw new NotImplementedException();
+            return new SshPublicKeyInfoContainer();
         }
         #endregion
     }

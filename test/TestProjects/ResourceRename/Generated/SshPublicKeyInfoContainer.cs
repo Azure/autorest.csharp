@@ -11,7 +11,7 @@ namespace ResourceRename
     public partial class SshPublicKeyInfoContainer
     {
         /// <summary> Initializes a new instance of SshPublicKeyInfoContainer for mocking. </summary>
-        protected SshPublicKeyInfoContainer()
+        internal SshPublicKeyInfoContainer()
         {
         }
     }

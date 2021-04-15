@@ -8,7 +8,7 @@
 namespace TenantOnly
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
-    public static class ResourceGroupExtensions
+    public static partial class ResourceGroupExtensions
     {
     }
 }

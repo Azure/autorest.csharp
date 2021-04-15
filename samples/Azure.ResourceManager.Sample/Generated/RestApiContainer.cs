@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample
     public partial class RestApiContainer
     {
         /// <summary> Initializes a new instance of RestApiContainer for mocking. </summary>
-        protected RestApiContainer()
+        internal RestApiContainer()
         {
         }
     }

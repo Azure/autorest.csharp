@@ -5,13 +5,12 @@
 
 #nullable disable
 
-using System;
 using Azure.ResourceManager.Core;
 
 namespace MgmtParent
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
-    public static class ResourceGroupExtensions
+    public static partial class ResourceGroupExtensions
     {
         #region AvailabilitySets
         /// <summary> Gets an object representing a AvailabilitySetContainer along with the instance operations that can be performed on it. </summary>
@@ -19,7 +18,7 @@ namespace MgmtParent
         /// <return> Returns an <see cref="AvailabilitySetContainer" /> object. </return>
         public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroupOperations resourceGroup)
         {
-            throw new NotImplementedException();
+            return new AvailabilitySetContainer();
         }
         #endregion
 
@@ -29,7 +28,7 @@ namespace MgmtParent
         /// <return> Returns an <see cref="DedicatedHostGroupContainer" /> object. </return>
         public static DedicatedHostGroupContainer GetDedicatedHostGroups(this ResourceGroupOperations resourceGroup)
         {
-            throw new NotImplementedException();
+            return new DedicatedHostGroupContainer();
         }
         #endregion
     }

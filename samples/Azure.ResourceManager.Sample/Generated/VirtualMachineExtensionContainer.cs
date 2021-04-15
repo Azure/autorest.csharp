@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample
     public partial class VirtualMachineExtensionContainer
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionContainer for mocking. </summary>
-        protected VirtualMachineExtensionContainer()
+        internal VirtualMachineExtensionContainer()
         {
         }
     }

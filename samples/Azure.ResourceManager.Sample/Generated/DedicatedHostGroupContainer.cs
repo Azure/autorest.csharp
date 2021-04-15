@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample
     public partial class DedicatedHostGroupContainer
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupContainer for mocking. </summary>
-        protected DedicatedHostGroupContainer()
+        internal DedicatedHostGroupContainer()
         {
         }
     }

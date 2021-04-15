@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
@@ -21,38 +22,42 @@ namespace AutoRest.CSharp.Generation.Writers
         protected string Accessibility = "public";
         protected string Type = "ResourceGroupExtensions";
 
-        public void WriteExtension(string @namespace, MgmtConfiguration mgmtConfiguration, CodeWriter writer, Dictionary<OperationGroup, Resource> armResources)
+        public void WriteExtension(BuildContext<MgmtOutputLibrary> context, CodeWriter writer)
         {
-            using (writer.Namespace(@namespace))
+            using (writer.Namespace(context.DefaultNamespace))
             {
                 writer.WriteXmlDocumentationSummary(Description);
-                using (writer.Scope($"{Accessibility} static class {Type}"))
+                using (writer.Scope($"{Accessibility} static partial class {Type}"))
                 {
-                    foreach (var item in armResources)
+                    foreach (var resource in context.Library.ArmResource)
                     {
-                        if (item.Key.Parent(mgmtConfiguration).Equals("resourceGroups"))
+                        if (resource.OperationGroup.Parent(context.Configuration.MgmtConfiguration).Equals("resourceGroups"))
                         {
-                            writer.Line($"#region {item.Value.Type.Name:D}s");
-                            WriteGetContainers(writer, item.Value);
-                            writer.LineRaw("#endregion");
-                            writer.Line();
+                            foreach (var container in context.Library.ResourceContainers)
+                            {
+                                if (container.ResourceName == resource.Type.Name)
+                                {
+                                    writer.Line($"#region {resource.Type.Name}s");
+                                    WriteGetContainers(writer, resource, container);
+                                    writer.LineRaw("#endregion");
+                                    writer.Line();
+                                }
+                            }
                         }
                     }
                 }
             }
         }
 
-        private void WriteGetContainers(CodeWriter writer, Mgmt.Output.Resource armResource)
+        private void WriteGetContainers(CodeWriter writer, Mgmt.Output.Resource armResource, ResourceContainer container)
         {
             // TODO: Find a solution to convert from single to plural
-            writer.WriteXmlDocumentationSummary($"Gets an object representing a {armResource.Type.Name:D}Container along with the instance operations that can be performed on it.");
+            writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");
-            writer.WriteXmlDocumentation("return", $"Returns an <see cref=\"{armResource.Type.Name:D}Container\" /> object.");
-            using (writer.Scope($"public static {armResource.Type.Name:D}Container Get{armResource.Type.Name:D}s (this {typeof(ResourceGroupOperations)} resourceGroup)"))
+            writer.WriteXmlDocumentation("return", $"Returns an <see cref=\"{container.Type.Name}\" /> object.");
+            using (writer.Scope($"public static {container.Type.Name} Get{armResource.Type.Name}s (this {typeof(ResourceGroupOperations)} resourceGroup)"))
             {
-                // TODO: Bring this back after container class implemented
-                // writer.Line($"return new {armResource.Type.Name:D}Container(resourceGroup);");
-                writer.Line($"throw new {typeof(NotImplementedException)}();");
+                writer.Line($"return new {container.Type.Name:D}();");
             }
         }
     }

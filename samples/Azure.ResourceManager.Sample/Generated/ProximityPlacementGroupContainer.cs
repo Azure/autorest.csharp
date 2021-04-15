@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample
     public partial class ProximityPlacementGroupContainer
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupContainer for mocking. </summary>
-        protected ProximityPlacementGroupContainer()
+        internal ProximityPlacementGroupContainer()
         {
         }
     }

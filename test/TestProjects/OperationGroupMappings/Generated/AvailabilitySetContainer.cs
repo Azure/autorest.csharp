@@ -11,7 +11,7 @@ namespace OperationGroupMappings
     public partial class AvailabilitySetContainer
     {
         /// <summary> Initializes a new instance of AvailabilitySetContainer for mocking. </summary>
-        protected AvailabilitySetContainer()
+        internal AvailabilitySetContainer()
         {
         }
     }
