@@ -34,28 +34,10 @@ namespace Azure.ResourceManager.Sample
 
         internal static Resource DeserializeResource(JsonElement element)
         {
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("location"))
                 {
                     location = property.Value.GetString();
@@ -77,7 +59,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new Resource(id.Value, name.Value, type.Value, location, Optional.ToDictionary(tags));
+            return new Resource(location, Optional.ToDictionary(tags));
         }
     }
 }

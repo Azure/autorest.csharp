@@ -73,7 +73,7 @@
       <_GeneratedPropsFileLines Include="&lt;/PropertyGroup&gt;" />
       <_GeneratedPropsFileLines Include="&lt;/Project&gt;" />
     </ItemGroup>
-    
+
 
     <WriteLinesToFile Overwrite="true" File="$(_GeneratedPropsFilePath)" Lines="@(_GeneratedPropsFileLines)" />
 

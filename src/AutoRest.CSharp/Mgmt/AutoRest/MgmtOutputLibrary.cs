@@ -142,11 +142,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (!_resourceData.ContainsKey(operation))
                         {
                             var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
-                            CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
-                            if (!(inherits is null))
-                            {
-                                resourceData.OverrideInherits(inherits);
-                            }
                             _resourceData.Add(operation, resourceData);
                         }
                     }
@@ -198,8 +193,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType? FindTypeByName(string originalName)
         {
-            TypeProvider? provider = Models.FirstOrDefault (m => m.Type.Name == originalName);
-            provider ??= ResourceSchemaMap.Values.FirstOrDefault (m => m.Type.Name == originalName);
+            TypeProvider? provider = Models.FirstOrDefault(m => m.Type.Name == originalName);
+            provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
         }
 
