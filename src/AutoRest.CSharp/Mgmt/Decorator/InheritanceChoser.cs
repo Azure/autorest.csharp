@@ -213,5 +213,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             return parentProperties.Count == matchCount;
         }
+
+        private class Node
+        {
+            public System.Type type;
+            public List<Node> children;
+            public Node(System.Type type)
+            {
+                this.type = type;
+                this.children = new List<Node>();
+            }
+        }
     }
 }
