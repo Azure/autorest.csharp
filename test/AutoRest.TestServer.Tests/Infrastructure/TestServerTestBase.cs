@@ -46,7 +46,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 case 204:
                     return;
                 default:
-                    string content = System.Text.Encoding.ASCII.GetString(r.Content);
+                    string content = r.Content.ToString();
                     string trimmedContent = content.Substring(0, Math.Min(content.Length, 2000));
                     string message = $"Unexpected response in test.\n Status: {r.Status}\n Reason: {r.ReasonPhrase}\nContent: {trimmedContent}";
                     Assert.Fail (message);
