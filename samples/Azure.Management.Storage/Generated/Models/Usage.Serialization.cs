@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class UsageData
+    public partial class Usage
     {
-        internal static UsageData DeserializeUsageData(JsonElement element)
+        internal static Usage DeserializeUsage(JsonElement element)
         {
             Optional<UsageUnit> unit = default;
             Optional<int> currentValue = default;
@@ -61,7 +61,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new UsageData(Optional.ToNullable(unit), Optional.ToNullable(currentValue), Optional.ToNullable(limit), name.Value);
+            return new Usage(Optional.ToNullable(unit), Optional.ToNullable(currentValue), Optional.ToNullable(limit), name.Value);
         }
     }
 }

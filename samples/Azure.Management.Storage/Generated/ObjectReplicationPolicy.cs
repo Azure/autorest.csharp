@@ -23,18 +23,11 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.Management.Storage.Models.ObjectReplicationPolicyData
-        /// 
-        /// .
-        /// </summary>
-        public ObjectReplicationPolicyData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the ObjectReplicationPolicyData. </summary>
+        public ObjectReplicationPolicyData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override ObjectReplicationPolicy GetResource()
+        protected override ObjectReplicationPolicy GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

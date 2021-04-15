@@ -32,8 +32,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     // write Data
                     writer.Line();
-                    writer.WriteXmlDocumentationSummary($"Gets or sets the {resource.ResourceDataObject.Type}.");
-                    writer.LineRaw($"public {resource.ResourceDataObject.Type} Data" + "{get; private set;}");
+                    writer.WriteXmlDocumentationSummary($"Gets or sets the {resource.ResourceDataObject.Type.Name}.");
+                    writer.LineRaw("public " + resource.ResourceDataObject.Type.Name + " Data {get; private set;}");
 
                     // protected override GetResource
                     writer.Line();

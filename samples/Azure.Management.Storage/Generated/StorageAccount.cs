@@ -23,18 +23,11 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.Management.Storage.Models.StorageAccountData
-        /// 
-        /// .
-        /// </summary>
-        public StorageAccountData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the StorageAccountData. </summary>
+        public StorageAccountData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override StorageAccount GetResource()
+        protected override StorageAccount GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

@@ -22,18 +22,11 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.ResourceManager.Sample.VirtualMachineData
-        /// 
-        /// .
-        /// </summary>
-        public VirtualMachineData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the VirtualMachineData. </summary>
+        public VirtualMachineData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override VirtualMachine GetResource()
+        protected override VirtualMachine GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

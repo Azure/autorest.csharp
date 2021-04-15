@@ -22,18 +22,11 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.ResourceManager.Sample.ImageData
-        /// 
-        /// .
-        /// </summary>
-        public ImageData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the ImageData. </summary>
+        public ImageData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override Image GetResource()
+        protected override Image GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

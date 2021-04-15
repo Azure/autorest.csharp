@@ -23,18 +23,11 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.Management.Storage.Models.PrivateEndpointConnectionData
-        /// 
-        /// .
-        /// </summary>
-        public PrivateEndpointConnectionData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the PrivateEndpointConnectionData. </summary>
+        public PrivateEndpointConnectionData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override PrivateEndpointConnection GetResource()
+        protected override PrivateEndpointConnection GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

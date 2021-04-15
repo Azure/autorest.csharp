@@ -23,18 +23,11 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.Management.Storage.Models.BlobServiceData
-        /// 
-        /// .
-        /// </summary>
-        public BlobServiceData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the BlobServiceData. </summary>
+        public BlobServiceData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override BlobService GetResource()
+        protected override BlobService GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

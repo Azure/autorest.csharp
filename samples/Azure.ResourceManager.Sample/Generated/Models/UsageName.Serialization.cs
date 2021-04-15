@@ -10,24 +10,8 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class UsageName : IUtf8JsonSerializable
+    public partial class UsageName
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            if (Optional.IsDefined(Value))
-            {
-                writer.WritePropertyName("value");
-                writer.WriteStringValue(Value);
-            }
-            if (Optional.IsDefined(LocalizedValue))
-            {
-                writer.WritePropertyName("localizedValue");
-                writer.WriteStringValue(LocalizedValue);
-            }
-            writer.WriteEndObject();
-        }
-
         internal static UsageName DeserializeUsageName(JsonElement element)
         {
             Optional<string> value = default;

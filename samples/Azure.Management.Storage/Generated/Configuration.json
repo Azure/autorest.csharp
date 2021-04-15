@@ -24,7 +24,7 @@
   "OperationGroupToResource": {
     "Operations": "Operation",
     "Skus": "Sku",
-    "Usages": "Usage",
+    "Usages": "SKIP",
     "PrivateLinkResources": "PrivateLinkResource",
     "StorageAccounts": "StorageAccount"
   },

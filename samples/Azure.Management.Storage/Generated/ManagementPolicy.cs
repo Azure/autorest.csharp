@@ -23,18 +23,11 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.Management.Storage.Models.ManagementPolicyData
-        /// 
-        /// .
-        /// </summary>
-        public ManagementPolicyData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the ManagementPolicyData. </summary>
+        public ManagementPolicyData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override ManagementPolicy GetResource()
+        protected override ManagementPolicy GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

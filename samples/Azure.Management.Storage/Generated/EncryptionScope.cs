@@ -23,18 +23,11 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.Management.Storage.Models.EncryptionScopeData
-        /// 
-        /// .
-        /// </summary>
-        public EncryptionScopeData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the EncryptionScopeData. </summary>
+        public EncryptionScopeData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override EncryptionScope GetResource()
+        protected override EncryptionScope GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

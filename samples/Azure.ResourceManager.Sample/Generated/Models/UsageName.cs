@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample
     public partial class UsageName
     {
         /// <summary> Initializes a new instance of UsageName. </summary>
-        public UsageName()
+        internal UsageName()
         {
         }
 
@@ -25,8 +25,8 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> The name of the resource. </summary>
-        public string Value { get; set; }
+        public string Value { get; }
         /// <summary> The localized name of the resource. </summary>
-        public string LocalizedValue { get; set; }
+        public string LocalizedValue { get; }
     }
 }

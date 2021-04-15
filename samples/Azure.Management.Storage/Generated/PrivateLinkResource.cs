@@ -23,18 +23,11 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.Management.Storage.Models.PrivateLinkResourceData
-        /// 
-        /// .
-        /// </summary>
-        public PrivateLinkResourceData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the PrivateLinkResourceData. </summary>
+        public PrivateLinkResourceData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override PrivateLinkResource GetResource()
+        protected override PrivateLinkResource GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

@@ -22,18 +22,11 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.ResourceManager.Sample.AvailabilitySetData
-        /// 
-        /// .
-        /// </summary>
-        public AvailabilitySetData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the AvailabilitySetData. </summary>
+        public AvailabilitySetData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override AvailabilitySet GetResource()
+        protected override AvailabilitySet GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

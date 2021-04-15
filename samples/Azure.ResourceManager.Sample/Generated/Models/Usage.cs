@@ -5,7 +5,7 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
+using System;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -19,9 +19,15 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Usage(int currentValue, long limit, UsageName name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
             Unit = "Count";
             CurrentValue = currentValue;
             Limit = limit;
+            Name = name;
         }
 
         /// <summary> Initializes a new instance of Usage. </summary>
@@ -34,13 +40,16 @@ namespace Azure.ResourceManager.Sample
             Unit = unit;
             CurrentValue = currentValue;
             Limit = limit;
+            Name = name;
         }
 
         /// <summary> An enum describing the unit of usage measurement. </summary>
-        public string Unit { get; set; }
+        public string Unit { get; }
         /// <summary> The current usage of the resource. </summary>
-        public int CurrentValue { get; set; }
+        public int CurrentValue { get; }
         /// <summary> The maximum permitted usage of the resource. </summary>
-        public long Limit { get; set; }
+        public long Limit { get; }
+        /// <summary> The name of the type of usage. </summary>
+        public UsageName Name { get; }
     }
 }

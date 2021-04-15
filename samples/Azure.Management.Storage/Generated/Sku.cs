@@ -23,18 +23,11 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.Management.Storage.Models.SkuData
-        /// 
-        /// .
-        /// </summary>
-        public SkuData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the SkuData. </summary>
+        public SkuData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override Sku GetResource()
+        protected override Sku GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

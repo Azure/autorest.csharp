@@ -23,18 +23,11 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.Management.Storage.Models.FileShareData
-        /// 
-        /// .
-        /// </summary>
-        public FileShareData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the FileShareData. </summary>
+        public FileShareData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override FileShare GetResource()
+        protected override FileShare GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

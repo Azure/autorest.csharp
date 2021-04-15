@@ -17,6 +17,7 @@ namespace Azure.ResourceManager.Sample
             string unit = default;
             int currentValue = default;
             long limit = default;
+            UsageName name = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("unit"))
@@ -32,6 +33,11 @@ namespace Azure.ResourceManager.Sample
                 if (property.NameEquals("limit"))
                 {
                     limit = property.Value.GetInt64();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = UsageName.DeserializeUsageName(property.Value);
                     continue;
                 }
             }

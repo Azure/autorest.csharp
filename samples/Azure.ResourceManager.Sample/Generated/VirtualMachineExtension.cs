@@ -22,18 +22,11 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.ResourceManager.Sample.VirtualMachineExtensionData
-        /// 
-        /// .
-        /// </summary>
-        public VirtualMachineExtensionData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the VirtualMachineExtensionData. </summary>
+        public VirtualMachineExtensionData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override VirtualMachineExtension GetResource()
+        protected override VirtualMachineExtension GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

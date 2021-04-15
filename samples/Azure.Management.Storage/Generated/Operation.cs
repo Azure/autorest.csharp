@@ -23,18 +23,11 @@ namespace Azure.Management.Storage
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.Management.Storage.Models.OperationData
-        /// 
-        /// .
-        /// </summary>
-        public OperationData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the OperationData. </summary>
+        public OperationData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override Operation GetResource()
+        protected override Operation GetResource(CancellationToken cancellation = default)
         {
             return this;
         }

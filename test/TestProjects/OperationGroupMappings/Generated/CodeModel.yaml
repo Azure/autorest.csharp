@@ -4,7 +4,7 @@ info: !Info
   title: OperationGroupMappings
 schemas: !Schemas 
   numbers:
-    - !NumberSchema &ref_4
+    - !NumberSchema &ref_12
       type: integer
       precision: 32
       language: !Languages 
@@ -12,7 +12,7 @@ schemas: !Schemas
           name: Integer
           description: The current usage of the resource.
       protocol: !Protocols {}
-    - !NumberSchema &ref_5
+    - !NumberSchema &ref_13
       type: integer
       precision: 64
       language: !Languages 
@@ -28,7 +28,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_1
       type: string
       apiVersions:
         - !ApiVersion 
@@ -58,7 +58,47 @@ schemas: !Schemas
           name: AvailabilitySetSku
           description: sku
       protocol: !Protocols {}
-    - !StringSchema &ref_21
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceId
+          description: Resource Id
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceName
+          description: Resource name
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceType
+          description: Resource type
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceLocation
+          description: Resource location
+      protocol: !Protocols {}
+    - !StringSchema &ref_27
       type: string
       apiVersions:
         - !ApiVersion 
@@ -69,7 +109,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_6
+    - !StringSchema &ref_14
       type: string
       apiVersions:
         - !ApiVersion 
@@ -79,7 +119,7 @@ schemas: !Schemas
           name: UsageNameValue
           description: The name of the resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_7
+    - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
@@ -89,7 +129,7 @@ schemas: !Schemas
           name: UsageNameLocalizedValue
           description: The localized name of the resource.
       protocol: !Protocols {}
-    - !StringSchema &ref_8
+    - !StringSchema &ref_16
       type: string
       apiVersions:
         - !ApiVersion 
@@ -100,7 +140,7 @@ schemas: !Schemas
           description: The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_13
+    - !ConstantSchema &ref_20
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -110,7 +150,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_17
+    - !ConstantSchema &ref_24
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -120,7 +160,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_3
+    - !ConstantSchema &ref_11
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -133,15 +173,99 @@ schemas: !Schemas
           name: UsageUnit
           description: An enum describing the unit of usage measurement.
       protocol: !Protocols {}
+  dictionaries:
+    - !DictionarySchema &ref_7
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: ResourceTags
+          description: Resource tags
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_20
+    - !ObjectSchema &ref_2
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
+      parents: !Relations 
+        all:
+          - !ObjectSchema &ref_8
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            children: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: *ref_3
+                readOnly: true
+                required: false
+                serializedName: id
+                language: !Languages 
+                  default:
+                    name: id
+                    description: Resource Id
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_4
+                readOnly: true
+                required: false
+                serializedName: name
+                language: !Languages 
+                  default:
+                    name: name
+                    description: Resource name
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_5
+                readOnly: true
+                required: false
+                serializedName: type
+                language: !Languages 
+                  default:
+                    name: type
+                    description: Resource type
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_6
+                required: true
+                serializedName: location
+                language: !Languages 
+                  default:
+                    name: location
+                    description: Resource location
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_7
+                required: false
+                serializedName: tags
+                language: !Languages 
+                  default:
+                    name: tags
+                    description: Resource tags
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - output
+            extensions:
+              x-ms-azure-resource: true
+            language: !Languages 
+              default:
+                name: Resource
+                description: The Resource model definition.
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_8
       properties:
         - !Property 
-          schema: *ref_1
+          schema: *ref_9
           serializedName: foo
           language: !Languages 
             default:
@@ -171,26 +295,27 @@ schemas: !Schemas
             can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_23
+    - *ref_8
+    - !ObjectSchema &ref_29
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_11
+          schema: !ArraySchema &ref_19
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: !ObjectSchema &ref_9
+            elementType: !ObjectSchema &ref_17
               type: object
               apiVersions:
                 - !ApiVersion 
                   version: '2020-06-01'
               properties:
                 - !Property 
-                  schema: *ref_3
+                  schema: *ref_11
                   required: true
                   serializedName: unit
                   language: !Languages 
@@ -199,7 +324,7 @@ schemas: !Schemas
                       description: An enum describing the unit of usage measurement.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_4
+                  schema: *ref_12
                   required: true
                   serializedName: currentValue
                   language: !Languages 
@@ -208,7 +333,7 @@ schemas: !Schemas
                       description: The current usage of the resource.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_5
+                  schema: *ref_13
                   required: true
                   serializedName: limit
                   language: !Languages 
@@ -217,14 +342,14 @@ schemas: !Schemas
                       description: The maximum permitted usage of the resource.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_10
+                  schema: !ObjectSchema &ref_18
                     type: object
                     apiVersions:
                       - !ApiVersion 
                         version: '2020-06-01'
                     properties:
                       - !Property 
-                        schema: *ref_6
+                        schema: *ref_14
                         serializedName: value
                         language: !Languages 
                           default:
@@ -232,7 +357,7 @@ schemas: !Schemas
                             description: The name of the resource.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_7
+                        schema: *ref_15
                         serializedName: localizedValue
                         language: !Languages 
                           default:
@@ -279,7 +404,7 @@ schemas: !Schemas
               description: The list of compute resource usages.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_8
+          schema: *ref_16
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -297,13 +422,13 @@ schemas: !Schemas
           description: The List Usages operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_9
-    - *ref_10
+    - *ref_17
+    - *ref_18
   arrays:
-    - *ref_11
+    - *ref_19
 globalParameters:
-  - !Parameter &ref_16
-    schema: *ref_12
+  - !Parameter &ref_23
+    schema: *ref_1
     implementation: Client
     required: true
     extensions:
@@ -316,7 +441,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_14
+  - !Parameter &ref_21
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -332,8 +457,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_15
-    schema: *ref_13
+  - !Parameter &ref_22
+    schema: *ref_20
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -354,9 +479,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_14
-          - !Parameter &ref_18
-            schema: *ref_12
+          - *ref_21
+          - !Parameter &ref_25
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -367,8 +492,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_19
-            schema: *ref_12
+          - !Parameter &ref_26
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -379,13 +504,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_15
-          - *ref_16
+          - *ref_22
+          - *ref_23
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_17
+                schema: *ref_24
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -408,11 +533,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_18
-          - *ref_19
+          - *ref_25
+          - *ref_26
         responses:
           - !SchemaResponse 
-            schema: *ref_20
+            schema: *ref_2
             language: !Languages 
               default:
                 name: ''
@@ -442,9 +567,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_14
-          - !Parameter &ref_22
-            schema: *ref_21
+          - *ref_21
+          - !Parameter &ref_28
+            schema: *ref_27
             implementation: Method
             required: true
             language: !Languages 
@@ -455,13 +580,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_15
-          - *ref_16
+          - *ref_22
+          - *ref_23
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_17
+                schema: *ref_24
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -484,10 +609,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_22
+          - *ref_28
         responses:
           - !SchemaResponse 
-            schema: *ref_23
+            schema: *ref_29
             language: !Languages 
               default:
                 name: ''

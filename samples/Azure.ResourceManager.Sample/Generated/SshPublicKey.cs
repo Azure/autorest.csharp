@@ -22,18 +22,11 @@ namespace Azure.ResourceManager.Sample
             Data = resource;
         }
 
-        /// <summary>
-        /// Gets or sets the global::Azure.ResourceManager.Sample.SshPublicKeyData
-        /// 
-        /// .
-        /// </summary>
-        public SshPublicKeyData
-
-         Data
-        { get; private set; }
+        /// <summary> Gets or sets the SshPublicKeyData. </summary>
+        public SshPublicKeyData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override SshPublicKey GetResource()
+        protected override SshPublicKey GetResource(CancellationToken cancellation = default)
         {
             return this;
         }
