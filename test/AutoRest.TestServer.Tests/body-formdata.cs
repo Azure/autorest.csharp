@@ -12,15 +12,12 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyFormdataTests : TestServerTestBase
     {
-        public BodyFormdataTests(TestServerVersion version) : base(version) { }
-
         private static MemoryStream MakeStream(string text)
         {
             return new MemoryStream(Encoding.UTF8.GetBytes(text));
         }
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task FormdataStreamUploadFile() => Test(async (host, pipeline) =>
         {
             var client = new FormdataClient(ClientDiagnostics, pipeline, host);
@@ -32,7 +29,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task StreamUploadFile() => Test(async  (host, pipeline) =>
         {
             var client = new FormdataClient(ClientDiagnostics, pipeline, host);

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
 {
-    public class TestServerV1 : IDisposable, ITestServer
+    public class TestServerV1 : IDisposable
     {
         private static readonly Regex _scenariosRegex = new Regex("(coverage|optionalCoverage|optCoverage)\\[(\"|')(?<name>\\w+)(\"|')\\]", RegexOptions.Compiled);
 
@@ -59,9 +59,28 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         }
 
-        private static string GetBaseDirectory()
+        public static string FindNodeModulesDirectory()
         {
-            var nodeModules = TestServerV2.FindNodeModulesDirectory();
+            var assemblyFile = new DirectoryInfo(typeof(TestServerV1).Assembly.Location);
+            var directory = assemblyFile.Parent;
+
+            do
+            {
+                var testServerDirectory = Path.Combine(directory.FullName, "node_modules");
+                if (Directory.Exists(testServerDirectory))
+                {
+                    return testServerDirectory;
+                }
+
+                directory = directory.Parent;
+            } while (directory != null);
+
+            throw new InvalidOperationException($"Cannot find 'node_modules' in parent directories of {typeof(TestServerV1).Assembly.Location}.");
+        }
+
+        internal static string GetBaseDirectory()
+        {
+            var nodeModules = FindNodeModulesDirectory();
             return Path.Combine(nodeModules, "@microsoft.azure", "autorest.testserver");
         }
 

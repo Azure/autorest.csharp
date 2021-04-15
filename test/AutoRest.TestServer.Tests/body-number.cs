@@ -13,8 +13,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class NumberTest : TestServerTestBase
     {
-        public NumberTest(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task PutFloatBigScientificNotation() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigFloatAsync(3.402823e+20f));
 
@@ -28,11 +26,9 @@ namespace AutoRest.TestServer.Tests
         public Task PutDoubleBigScientificNotation() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigDoubleAsync(2.5976931e+101d));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task PutDecimalBigPositiveDecimal() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigDecimalPositiveDecimalAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task PutDecimalBig() => Test((host, pipeline) =>
         {
             // Value 2.5976931e+101m is out of range of C# decimal
@@ -41,11 +37,9 @@ namespace AutoRest.TestServer.Tests
         }, ignoreScenario: true);
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task PutDecimalBigNegativeDecimal() => TestStatus(async (host, pipeline) => await new NumberClient(ClientDiagnostics, pipeline, host).PutBigDecimalNegativeDecimalAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task PutDecimalSmall() => Test((host, pipeline) =>
         {
             // Value 2.5976931e-101m is out of range of C# decimal

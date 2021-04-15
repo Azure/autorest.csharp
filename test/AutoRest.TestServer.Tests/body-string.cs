@@ -15,8 +15,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyStringTest : TestServerTestBase
     {
-        public BodyStringTest(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task GetStringMultiByteCharacters() => Test(async (host, pipeline) =>
         {

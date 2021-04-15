@@ -12,8 +12,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class IntegerTest : TestServerTestBase
     {
-        public IntegerTest(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task GetIntegerOverflow() => Test((host, pipeline) =>
         {
@@ -76,18 +74,15 @@ namespace AutoRest.TestServer.Tests
         public Task PutIntegerMax() => TestStatus(async (host, pipeline) => await new IntClient(ClientDiagnostics, pipeline, host).PutMax32Async( int.MaxValue));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Match too strict")]
         public Task PutLongMax() => TestStatus(async (host, pipeline) => await new IntClient(ClientDiagnostics, pipeline, host).PutMax64Async( long.MaxValue));
 
         [Test]
         public Task PutIntegerMin() => TestStatus(async (host, pipeline) => await new IntClient(ClientDiagnostics, pipeline, host).PutMin32Async( int.MinValue));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Match too strict")]
         public Task PutLongMin() => TestStatus(async (host, pipeline) => await new IntClient(ClientDiagnostics, pipeline, host).PutMin64Async( long.MinValue));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutUnixTime() => TestStatus(async (host, pipeline) => await new IntClient(ClientDiagnostics, pipeline, host).PutUnixTimeDateAsync( DateTimeOffset.FromUnixTimeSeconds(1460505600)));
     }
 }

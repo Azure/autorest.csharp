@@ -9,11 +9,8 @@ using xms_error_responses;
 
 namespace AutoRest.TestServer.Tests
 {
-    [IgnoreOnTestServer(TestServerVersion.V2, "Requests not matched")]
     public class XMsErrorResponsesTest : TestServerTestBase
     {
-        public XMsErrorResponsesTest(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task AnimalNotFoundError() => Test((host, pipeline) =>
         {
@@ -90,7 +87,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match.")]
         public Task SendErrorWithParamNameModels() => Test((host, pipeline) =>
         {
             var content = "{\"actionResponse\":\"grrrr\",\"errorType\":\"PetSadError\",\"errorMessage\":\"casper aint happy\",\"reason\":\"need more treats\"}";
