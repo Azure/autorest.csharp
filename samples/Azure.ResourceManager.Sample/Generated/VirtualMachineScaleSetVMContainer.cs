@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample
     public partial class VirtualMachineScaleSetVMContainer
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMContainer for mocking. </summary>
-        internal VirtualMachineScaleSetVMContainer()
+        protected VirtualMachineScaleSetVMContainer()
         {
         }
     }

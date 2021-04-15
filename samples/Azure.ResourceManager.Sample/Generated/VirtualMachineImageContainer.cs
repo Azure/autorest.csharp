@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample
     public partial class VirtualMachineImageContainer
     {
         /// <summary> Initializes a new instance of VirtualMachineImageContainer for mocking. </summary>
-        internal VirtualMachineImageContainer()
+        protected VirtualMachineImageContainer()
         {
         }
     }

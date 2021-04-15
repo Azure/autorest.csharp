@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.ResourceManager.Core;
 
 namespace MgmtParent
@@ -18,7 +19,7 @@ namespace MgmtParent
         /// <return> Returns an <see cref="AvailabilitySetContainer" /> object. </return>
         public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroupOperations resourceGroup)
         {
-            return new AvailabilitySetContainer();
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -28,7 +29,7 @@ namespace MgmtParent
         /// <return> Returns an <see cref="DedicatedHostGroupContainer" /> object. </return>
         public static DedicatedHostGroupContainer GetDedicatedHostGroups(this ResourceGroupOperations resourceGroup)
         {
-            return new DedicatedHostGroupContainer();
+            throw new NotImplementedException();
         }
         #endregion
     }

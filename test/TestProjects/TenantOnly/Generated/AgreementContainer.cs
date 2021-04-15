@@ -11,7 +11,7 @@ namespace TenantOnly
     public partial class AgreementContainer
     {
         /// <summary> Initializes a new instance of AgreementContainer for mocking. </summary>
-        internal AgreementContainer()
+        protected AgreementContainer()
         {
         }
     }

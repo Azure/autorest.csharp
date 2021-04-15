@@ -11,7 +11,7 @@ namespace MgmtParent
     public partial class DedicatedHostGroupContainer
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupContainer for mocking. </summary>
-        internal DedicatedHostGroupContainer()
+        protected DedicatedHostGroupContainer()
         {
         }
     }

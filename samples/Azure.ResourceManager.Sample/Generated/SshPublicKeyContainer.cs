@@ -11,7 +11,7 @@ namespace Azure.ResourceManager.Sample
     public partial class SshPublicKeyContainer
     {
         /// <summary> Initializes a new instance of SshPublicKeyContainer for mocking. </summary>
-        internal SshPublicKeyContainer()
+        protected SshPublicKeyContainer()
         {
         }
     }

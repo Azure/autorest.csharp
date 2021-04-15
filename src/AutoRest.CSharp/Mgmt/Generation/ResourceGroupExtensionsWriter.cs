@@ -57,7 +57,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentation("return", $"Returns an <see cref=\"{container.Type.Name}\" /> object.");
             using (writer.Scope($"public static {container.Type.Name} Get{armResource.Type.Name}s (this {typeof(ResourceGroupOperations)} resourceGroup)"))
             {
-                writer.Line($"return new {container.Type.Name:D}();");
+                // TODO: Bring this back after container class implemented
+                // writer.Line($"return new {armResource.Type.Name:D}Container(resourceGroup);");
+                writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
         }
     }

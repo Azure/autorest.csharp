@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteClientCtors(CodeWriter writer, ResourceContainer resourceContainer)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {resourceContainer.Type.Name} for mocking.");
-            using (writer.Scope($"internal {resourceContainer.Type.Name:D}()"))
+            using (writer.Scope($"protected {resourceContainer.Type.Name:D}()"))
             {
             }
         }

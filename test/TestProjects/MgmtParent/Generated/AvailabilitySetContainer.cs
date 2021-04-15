@@ -11,7 +11,7 @@ namespace MgmtParent
     public partial class AvailabilitySetContainer
     {
         /// <summary> Initializes a new instance of AvailabilitySetContainer for mocking. </summary>
-        internal AvailabilitySetContainer()
+        protected AvailabilitySetContainer()
         {
         }
     }

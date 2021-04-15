@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -18,7 +19,7 @@ namespace Azure.ResourceManager.Sample
         /// <return> Returns an <see cref="AvailabilitySetContainer" /> object. </return>
         public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroupOperations resourceGroup)
         {
-            return new AvailabilitySetContainer();
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -28,7 +29,7 @@ namespace Azure.ResourceManager.Sample
         /// <return> Returns an <see cref="ProximityPlacementGroupContainer" /> object. </return>
         public static ProximityPlacementGroupContainer GetProximityPlacementGroups(this ResourceGroupOperations resourceGroup)
         {
-            return new ProximityPlacementGroupContainer();
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -38,7 +39,7 @@ namespace Azure.ResourceManager.Sample
         /// <return> Returns an <see cref="DedicatedHostGroupContainer" /> object. </return>
         public static DedicatedHostGroupContainer GetDedicatedHostGroups(this ResourceGroupOperations resourceGroup)
         {
-            return new DedicatedHostGroupContainer();
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -48,7 +49,7 @@ namespace Azure.ResourceManager.Sample
         /// <return> Returns an <see cref="SshPublicKeyContainer" /> object. </return>
         public static SshPublicKeyContainer GetSshPublicKeys(this ResourceGroupOperations resourceGroup)
         {
-            return new SshPublicKeyContainer();
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -58,7 +59,7 @@ namespace Azure.ResourceManager.Sample
         /// <return> Returns an <see cref="VirtualMachineContainer" /> object. </return>
         public static VirtualMachineContainer GetVirtualMachines(this ResourceGroupOperations resourceGroup)
         {
-            return new VirtualMachineContainer();
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -68,7 +69,7 @@ namespace Azure.ResourceManager.Sample
         /// <return> Returns an <see cref="ImageContainer" /> object. </return>
         public static ImageContainer GetImages(this ResourceGroupOperations resourceGroup)
         {
-            return new ImageContainer();
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -78,7 +79,7 @@ namespace Azure.ResourceManager.Sample
         /// <return> Returns an <see cref="VirtualMachineScaleSetContainer" /> object. </return>
         public static VirtualMachineScaleSetContainer GetVirtualMachineScaleSets(this ResourceGroupOperations resourceGroup)
         {
-            return new VirtualMachineScaleSetContainer();
+            throw new NotImplementedException();
         }
         #endregion
     }

@@ -11,7 +11,7 @@ namespace TenantOnly
     public partial class BillingAccountContainer
     {
         /// <summary> Initializes a new instance of BillingAccountContainer for mocking. </summary>
-        internal BillingAccountContainer()
+        protected BillingAccountContainer()
         {
         }
     }
