@@ -9,11 +9,8 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
-    [IgnoreOnTestServer(TestServerVersion.V2, "Requests not matched")]
     public class MultipleInheritanceTest : TestServerTestBase
     {
-        public MultipleInheritanceTest(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task MultipleInheritanceCatGet() => Test(async (host, pipeline) =>
         {

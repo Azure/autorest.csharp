@@ -10,8 +10,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class UrlPathItemsTests : TestServerLowLevelTestBase
     {
-        public UrlPathItemsTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task UrlPathItemGetAll() => TestStatus(async (host) =>
             await new PathItemsClient(globalStringPath: "globalStringPath",

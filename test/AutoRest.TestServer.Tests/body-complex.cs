@@ -19,8 +19,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyComplexTest: TestServerTestBase
     {
-        public BodyComplexTest(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task GetComplexBasicValid() => Test(async (host, pipeline) =>
         {
@@ -255,7 +253,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "404 response not found")]
         public Task PutComplexPrimitiveDateTime() => TestStatus(async (host, pipeline) =>
         {
             var value = new DatetimeWrapper
@@ -541,7 +538,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphismValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new Salmon(1)
@@ -624,7 +620,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphismComplicated() => TestStatus(async (host, pipeline) =>
         {
             var value = new SmartSalmon(1)
@@ -664,7 +659,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphismNoDiscriminator() => TestStatus(async (host, pipeline) =>
         {
             var value = new Salmon(1)
@@ -736,7 +730,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetComplexPolymorphismDotSyntax() => Test(async (host, pipeline) =>
         {
             var result = await new PolymorphismClient(ClientDiagnostics, pipeline, host).GetDotSyntaxAsync();
@@ -749,7 +742,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetComplexPolymorphismDotSyntax_Sync() => Test((host, pipeline) =>
         {
             var result = new PolymorphismClient(ClientDiagnostics, pipeline, host).GetDotSyntax();
@@ -762,7 +754,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetComposedWithDiscriminator() => Test(async (host, pipeline) =>
         {
             var result = await new PolymorphismClient(ClientDiagnostics, pipeline, host).GetComposedWithDiscriminatorAsync();
@@ -809,7 +800,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetComposedWithoutDiscriminator() => Test(async (host, pipeline) =>
         {
             var result = await new PolymorphismClient(ClientDiagnostics, pipeline, host).GetComposedWithoutDiscriminatorAsync();
@@ -915,7 +905,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutComplexPolymorphicRecursiveValid() => TestStatus(async (host, pipeline) =>
         {
             var sawshark = new Sawshark(10, DateTimeOffset.Parse("1900-01-05T01:00:00Z"))
@@ -978,7 +967,6 @@ namespace AutoRest.TestServer.Tests
         }, true);
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No response found")]
         public Task PutComplexReadOnlyPropertyValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new ReadonlyObj();

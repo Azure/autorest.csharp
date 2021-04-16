@@ -14,10 +14,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyFormdataUrlEncodedTests : TestServerTestBase
     {
-        public BodyFormdataUrlEncodedTests(TestServerVersion version) : base(version) { }
-
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task UpdatePetWithForm() => TestStatus(async (host, pipeline) =>
             await new FormdataurlencodedClient(ClientDiagnostics, pipeline, host)
                 .UpdatePetWithFormAsync(1, PetType.Dog, "meat", 42, "Fido"));

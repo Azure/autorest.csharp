@@ -8,10 +8,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class ExtensibleEnumTests : TestServerTestBase
     {
-        public ExtensibleEnumTests(TestServerVersion version) : base(version) { }
-
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Dynamic")]
         public Task RoundTripEnum() => TestStatus(async (host, pipeline) =>
         {
             var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet(IntEnum.Two)
@@ -28,7 +25,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Dynamic")]
         public Task RoundTripEnum_Custom() => TestStatus(async (host, pipeline) =>
         {
             var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet("77")
@@ -45,7 +41,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Dynamic")]
         public Task RoundTripEnum_Null() => TestStatus(async (host, pipeline) =>
         {
             var response = await new PetClient(ClientDiagnostics, pipeline, host).AddPetAsync( new Pet("77")

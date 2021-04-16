@@ -15,8 +15,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class AzureSpecialPropertiesTest : TestServerTestBase
     {
-        public AzureSpecialPropertiesTest(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task AzureApiVersionMethodGlobalNotProvidedValid() => TestStatus(async (host, pipeline) => await new ApiVersionDefaultClient(ClientDiagnostics, pipeline, host).RestClient.GetMethodGlobalNotProvidedValidAsync());
 
@@ -85,7 +83,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Doesn't fail (as expected) on V2")]
         public Task AzureRequestClientIdInError() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<RequestFailedException>(async () => await new XMsClientRequestIdClient(ClientDiagnostics, pipeline, host).RestClient.GetAsync());

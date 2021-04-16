@@ -15,8 +15,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class RequiredOptionalTest : TestServerTestBase
     {
-        public RequiredOptionalTest(TestServerVersion version) : base(version) { }
-
         private void TestDefaultNullParameter(Type clientType, string methodName, string parameterName)
         {
             var parameters = clientType.GetMethod(methodName)?.GetParameters() ?? Array.Empty<ParameterInfo>();
@@ -43,7 +41,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredArrayHeader() => Test((host, pipeline) =>
         {
             var value = Enumerable.Empty<string>();
@@ -60,7 +57,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredArrayParameter() => Test((host, pipeline) =>
         {
             var value = Enumerable.Empty<string>();
@@ -77,7 +73,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredArrayProperty() => Test((host, pipeline) =>
         {
             var value = new ArrayWrapper(Enumerable.Empty<string>());
@@ -94,7 +89,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredClassParameter() => Test((host, pipeline) =>
         {
             var value = new Product(0)
@@ -114,7 +108,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredClassProperty() => Test((host, pipeline) =>
         {
             var value = new ClassWrapper(new Product(0)
@@ -145,7 +138,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredGlobalQuery() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<RequestFailedException>(async () => await new ImplicitClient(ClientDiagnostics, pipeline, string.Empty, string.Empty, host).RestClient.GetRequiredGlobalQueryAsync());
@@ -180,7 +172,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredPath() => Test((host, pipeline) =>
         {
             var value = string.Empty;
@@ -190,7 +181,6 @@ namespace AutoRest.TestServer.Tests
         }, ignoreScenario: true);
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredGlobalPath() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<RequestFailedException>(async () => await new ImplicitClient(ClientDiagnostics, pipeline, string.Empty, string.Empty, host).RestClient.GetRequiredGlobalPathAsync());
@@ -206,7 +196,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredIntegerHeader() => Test((host, pipeline) =>
         {
             var value = 0;
@@ -223,7 +212,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredIntegerParameter() => Test((host, pipeline) =>
         {
             var value = 0;
@@ -240,7 +228,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredIntegerProperty() => Test((host, pipeline) =>
         {
             var value = new IntWrapper(0);
@@ -257,7 +244,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredStringHeader() => Test((host, pipeline) =>
         {
             var value = string.Empty;
@@ -274,7 +260,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredStringParameter() => Test((host, pipeline) =>
         {
             var value = string.Empty;
@@ -291,7 +276,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Not matched")]
         public Task RequiredStringProperty() => Test((host, pipeline) =>
         {
             var value = new StringWrapper(string.Empty);

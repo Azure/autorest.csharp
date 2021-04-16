@@ -14,8 +14,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class UrlTests : TestServerTestBase
     {
-        public UrlTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task UrlPathsStringEmpty() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).StringEmptyAsync());
 
@@ -26,7 +24,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsStringUrlEncoded() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).StringUrlEncodedAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task UrlPathsStringUrlNonEncoded() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).StringUrlNonEncodedAsync());
 
         [Test]
@@ -36,7 +33,6 @@ namespace AutoRest.TestServer.Tests
         }, ignoreScenario: true);
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task UrlPathsStringUnicode() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).StringUnicodeAsync());
 
         [Test]
@@ -73,11 +69,9 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsDateValid() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).DateValidAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Too strict")]
         public Task UrlPathsDateTimeValid() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).DateTimeValidAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlPathsLongPositive() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).GetTenBillionAsync());
 
         [Test]
@@ -96,15 +90,12 @@ namespace AutoRest.TestServer.Tests
         public Task UrlPathsBoolFalse() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).GetBooleanFalseAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlPathsLongNegative() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).GetNegativeTenBillionAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Too strict")]
         public Task UrlPathsFloatPositive() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).FloatScientificPositiveAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Too strict")]
         public Task UrlPathsFloatNegative() => TestStatus(async (host, pipeline) => await new PathsClient(ClientDiagnostics, pipeline, host).FloatScientificNegativeAsync());
 
         [Test]

@@ -10,10 +10,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class SubscriptionIdApiVersionTest: TestServerTestBase
     {
-        public SubscriptionIdApiVersionTest(TestServerVersion version) : base(version) { }
-
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
         public Task SubscriptionIdAndApiVersion() => Test(async (host, pipeline) =>
         {
             var result = await new GroupClient(ClientDiagnostics, pipeline, "sub", host, "2014-04-01-preview").GetSampleResourceGroupAsync("testgroup101");

@@ -19,8 +19,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyComplexTest: TestServerLowLevelTestBase
     {
-        public BodyComplexTest(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task GetComplexBasicValid() => Test(async (host) =>
         {

@@ -15,11 +15,8 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
-    [IgnoreOnTestServer(TestServerVersion.V2, "LRO tests are not supported yet")]
     public class LroTest: TestServerTestBase
     {
-        public LroTest(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task CustomHeaderPostAsyncSucceded() => TestStatus(async (host, pipeline) =>
         {
