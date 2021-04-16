@@ -15,8 +15,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class HttpInfrastructureTests : TestServerTestBase
     {
-        public HttpInfrastructureTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task HttpClientFailure400Delete() => Test((host, pipeline) =>
         {
@@ -36,7 +34,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Test not matched")]
         public Task HttpClientFailure400Options() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(ClientDiagnostics, pipeline, host).Options400Async());
@@ -79,7 +76,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Test not matched")]
         public Task HttpClientFailure403Options() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(ClientDiagnostics, pipeline, host).Options403Async());
@@ -134,7 +130,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Test not matched")]
         public Task HttpClientFailure412Options() => Test((host, pipeline) =>
         {
             Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(ClientDiagnostics, pipeline, host).Options412Async());
@@ -185,7 +180,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "404 error")]
         public Task HttpRedirect300Head() => TestStatus(async (host, pipeline) =>
             await new HttpRedirectsClient(ClientDiagnostics, pipeline, host).Head300Async());
 
@@ -624,7 +618,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task ResponsesScenarioNoModelEmptyBody() => Test((host, pipeline) =>
         {
             var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpFailureClient(ClientDiagnostics, pipeline, host).GetNoModelEmptyAsync());

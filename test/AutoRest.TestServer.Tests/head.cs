@@ -11,8 +11,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class HeadRequestTests : TestServerTestBase
     {
-        public HeadRequestTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task HttpSuccess200Head() => Test(async (host, pipeline) =>
         {

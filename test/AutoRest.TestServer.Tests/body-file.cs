@@ -11,9 +11,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyFileTests : TestServerTestBase
     {
-        public BodyFileTests(TestServerVersion version) : base(version) { }
-
-        private string SamplePngPath = Path.Combine(TestServerV2.GetBaseDirectory(), "routes", "sample.png");
+        private string SamplePngPath = Path.Combine(TestServerV1.GetBaseDirectory(), "routes", "sample.png");
 
         [Test]
         public Task FileStreamEmpty() => Test(async (host, pipeline) =>
@@ -33,7 +31,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task FileStreamVeryLarge() => Test(async (host, pipeline) =>
         {
             var result = await new FilesClient(ClientDiagnostics, pipeline, host).GetFileLargeAsync();
@@ -53,7 +50,6 @@ namespace AutoRest.TestServer.Tests
         }, ignoreScenario: false, useSimplePipeline: true);
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task FileStreamVeryLarge_Sync() => Test((host, pipeline) =>
         {
             var result = new FilesClient(ClientDiagnostics, pipeline, host).GetFileLarge();

@@ -10,64 +10,42 @@ namespace AutoRest.TestServer.Tests.Infrastructure
     public class TestServerSession : IAsyncDisposable
     {
         private static readonly object _serverCacheLock = new object();
-        private static ITestServer _serverV1Cache;
-        private static ITestServer _serverV2Cache;
+        private static TestServerV1 _serverV1Cache;
 
         private readonly string _scenario;
-        private readonly TestServerVersion _version;
         private readonly bool _allowUnmatched;
         private readonly string[] _expectedCoverage;
 
-        public ITestServer Server { get; private set; }
+        public TestServerV1 Server { get; private set; }
         public Uri Host => Server.Host;
 
-        private TestServerSession(string scenario, TestServerVersion version, bool allowUnmatched, string[] expectedCoverage)
+        private TestServerSession(string scenario, bool allowUnmatched, string[] expectedCoverage)
         {
             _scenario = scenario;
-            _version = version;
             _allowUnmatched = allowUnmatched;
             _expectedCoverage = expectedCoverage;
             Server = GetServer();
         }
 
-        public static TestServerSession Start(string scenario, TestServerVersion version, bool allowUnmatched = false, params string[] expectedCoverage)
+        public static TestServerSession Start(string scenario, bool allowUnmatched = false, params string[] expectedCoverage)
         {
-            if (version == TestServerVersion.V2)
-            {
-                // we only use v1 for coverage
-                expectedCoverage = Array.Empty<string>();
-            }
-            var server = new TestServerSession(scenario, version, allowUnmatched, expectedCoverage);
+            var server = new TestServerSession(scenario, allowUnmatched, expectedCoverage);
             return server;
         }
 
-        private ref ITestServer GetServerCache()
+        private ref TestServerV1 GetServerCache()
         {
-            switch (_version)
-            {
-                case TestServerVersion.V1:
-                    return ref _serverV1Cache;
-                case TestServerVersion.V2:
-                    return ref _serverV2Cache;
-            }
-            throw new NotImplementedException();
+            return ref _serverV1Cache;
         }
 
-        private ITestServer CreateServer()
+        private TestServerV1 CreateServer()
         {
-            switch (_version)
-            {
-                case TestServerVersion.V1:
-                    return new TestServerV1();
-                case TestServerVersion.V2:
-                    return new TestServerV2();
-            }
-            throw new NotImplementedException();
+            return new TestServerV1();
         }
 
-        private ITestServer GetServer()
+        private TestServerV1 GetServer()
         {
-            ITestServer server;
+            TestServerV1 server;
             lock (_serverCacheLock)
             {
                 ref var cache = ref GetServerCache();
