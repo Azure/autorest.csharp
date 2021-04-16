@@ -9,20 +9,26 @@ using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
 {
-    /// <summary> The SupersetModel1. </summary>
+    /// <summary> A class representing the SupersetModel1 data model. </summary>
     public partial class SupersetModel1Data : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
-        public SupersetModel1Data()
+        /// <param name="Id"> . </param>
+        /// <param name="Name"> . </param>
+        /// <param name="Type"> . </param>
+        public SupersetModel1Data(TenantResourceIdentifier Id, string Name, ResourceType Type) : base(Id, Name, Type)
         {
         }
 
         /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
+        /// <param name="Id"> . </param>
+        /// <param name="Name"> . </param>
+        /// <param name="Type"> . </param>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="type"> . </param>
         /// <param name="new"> . </param>
-        internal SupersetModel1Data(string id, string name, string type, string @new)
+        internal SupersetModel1Data(TenantResourceIdentifier Id, string Name, ResourceType Type, string id, string name, string type, string @new) : base(Id, Name, Type)
         {
             Id = id;
             Name = name;

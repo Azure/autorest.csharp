@@ -37,13 +37,15 @@ namespace AutoRest.CSharp.Generation.Types
             IsValueType = type.IsValueType;
         }
 
-        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false)
+        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false, CSharpType[]? arguments = default)
         {
             _implementation = implementation;
             Name = name;
             IsValueType = isValueType;
             IsNullable = isNullable;
             Namespace = ns;
+            if (arguments is not null)
+                Arguments = arguments;
         }
 
         public string Namespace { get; }

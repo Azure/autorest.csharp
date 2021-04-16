@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, operationGroup.Resource(context.Configuration.MgmtConfiguration)));
         }
 
-        protected override string DefaultName => GetDefaultName(ObjectSchema, true);
+        public override string DefaultName => GetDefaultName(ObjectSchema, true);
 
         protected string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

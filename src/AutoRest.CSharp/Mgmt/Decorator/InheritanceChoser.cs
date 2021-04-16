@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -100,11 +101,23 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsEqual(childType, parentType))
                 {
-                    var systemObjectType = new SystemObjectType(parentType, childType.Context);
-                    return new CSharpType(systemObjectType, parentType.Namespace ?? childType.Context.DefaultNamespace, parentType.Name);
+                    return GetCSharpTypeFromSystemType(childType, parentType);
                 }
             }
             return null;
+        }
+
+        private static CSharpType GetCSharpTypeFromSystemType(MgmtObjectType childType, Type parentType)
+        {
+            var genericTypes = parentType.GetGenericArguments().Select<Type, CSharpType>(t => new CSharpType(t));
+            var systemObjectType = new SystemObjectType(parentType, childType.Context);
+            return new CSharpType(
+                systemObjectType,
+                parentType.Namespace ?? childType.Context.DefaultNamespace,
+                systemObjectType.DefaultName,
+                false,
+                false,
+                genericTypes.ToArray());
         }
 
         public static CSharpType? GetSupersetMatch(MgmtObjectType originalType)
@@ -113,8 +126,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsSuperset(originalType, parentType))
                 {
-                    var systemObjectType = new SystemObjectType(parentType, originalType.Context);
-                    return new CSharpType(systemObjectType, parentType.Namespace ?? originalType.Context.DefaultNamespace, parentType.Name);
+                    return GetCSharpTypeFromSystemType(originalType, parentType);
                 }
             }
             return null;

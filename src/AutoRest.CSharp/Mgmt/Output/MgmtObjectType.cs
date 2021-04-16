@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _isResourceType = isResourceType;
         }
 
-        protected override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
+        public override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {

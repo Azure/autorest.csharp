@@ -67,7 +67,7 @@ namespace SupersetInheritance
                     continue;
                 }
             }
-            return new SupersetModel1Data(id.Value, name.Value, type.Value, @new.Value);
+            return new SupersetModel1Data(, , , id.Value, name.Value, type.Value, @new.Value);
         }
     }
 }

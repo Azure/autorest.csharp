@@ -228,7 +228,7 @@ namespace AutoRest.CSharp.Generation.Writers
             this CodeWriter writer,
             Action<CodeWriter, CodeWriterDelegate> valueCallback,
             ObjectType objectType,
-            ObjectTypeConstructor constructor,
+            ObjectTypeConstructor? constructor,
             IEnumerable<PropertyInitializer> initializers)
         {
             PropertyInitializer? FindInitializerForParameter(ObjectTypeConstructor constructor, Parameter constructorParameter)
@@ -238,16 +238,19 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             // Checks if constructor parameters can be satisfied by the provided initializer list
-            List<PropertyInitializer>? TryGetParameters(ObjectTypeConstructor constructor)
+            List<PropertyInitializer>? TryGetParameters(ObjectTypeConstructor? constructor)
             {
                 List<PropertyInitializer> constructorInitializers = new List<PropertyInitializer>();
-                foreach (var constructorParameter in constructor.Parameters)
+                if (constructor is not null)
                 {
-                    var objectPropertyInitializer = FindInitializerForParameter(constructor, constructorParameter);
-                    if (objectPropertyInitializer == null)
-                        return null;
+                    foreach (var constructorParameter in constructor.Parameters)
+                    {
+                        var objectPropertyInitializer = FindInitializerForParameter(constructor, constructorParameter);
+                        if (objectPropertyInitializer == null)
+                            return null;
 
-                    constructorInitializers.Add(objectPropertyInitializer.Value);
+                        constructorInitializers.Add(objectPropertyInitializer.Value);
+                    }
                 }
 
                 return constructorInitializers;

@@ -11,23 +11,29 @@ using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
 {
-    /// <summary> The SupersetModel4. </summary>
+    /// <summary> A class representing the SupersetModel4 data model. </summary>
     public partial class SupersetModel4Data : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
-        public SupersetModel4Data()
+        /// <param name="Tags"> . </param>
+        /// <param name="Location"> . </param>
+        /// <param name="Id"> . </param>
+        public SupersetModel4Data(IDictionary<string, string> Tags, LocationData Location, TenantResourceIdentifier Id) : base(Tags, Location, Id)
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
+        /// <param name="Tags"> . </param>
+        /// <param name="Location"> . </param>
+        /// <param name="Id"> . </param>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="type"> . </param>
         /// <param name="location"> . </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
         /// <param name="new"> . </param>
-        internal SupersetModel4Data(string id, string name, string type, string location, IDictionary<string, string> tags, string @new)
+        internal SupersetModel4Data(IDictionary<string, string> Tags, LocationData Location, TenantResourceIdentifier Id, string id, string name, string type, string location, IDictionary<string, string> tags, string @new) : base(Tags, Location, Id)
         {
             Id = id;
             Name = name;

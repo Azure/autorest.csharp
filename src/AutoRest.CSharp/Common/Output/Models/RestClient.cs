@@ -26,6 +26,7 @@ namespace AutoRest.CSharp.Output.Models
         public RestClient(OperationGroup operationGroup, BuildContext context, string? clientName) : base(context)
         {
             OperationGroup = operationGroup;
+            DefaultAccessibility = "internal";
             Builder = new RestClientBuilder(operationGroup, context);
 
             _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod> (EnsureNormalMethods);
@@ -46,8 +47,7 @@ namespace AutoRest.CSharp.Output.Models
         public string Description { get; }
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
-        protected override string DefaultName { get; }
-        protected override string DefaultAccessibility { get; } = "internal";
+        public override string DefaultName { get; }
 
         private IEnumerable<RestClientMethod> BuildAllMethods()
         {

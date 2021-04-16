@@ -72,8 +72,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType BaseType { get; }
         public bool IsExtendable { get; }
         public string? Description { get; }
-        protected override string DefaultName { get; }
-        protected override string DefaultAccessibility { get; }
+        public override string DefaultName { get; }
         protected override string DefaultNamespace { get; }
         protected override TypeKind TypeKind => IsExtendable ? TypeKind.Struct : TypeKind.Enum;
 

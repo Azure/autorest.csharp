@@ -14,11 +14,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultName = resourceName;
             Description = BuilderHelpers.EscapeXmlDescription(
                 $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.");
+            DefaultAccessibility = "public";
         }
 
-        protected override string DefaultName { get; }
-
-        protected override string DefaultAccessibility => "public";
+        public override string DefaultName { get; }
 
         public string Description { get; }
     }

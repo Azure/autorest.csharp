@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
 
         public DataPlaneResponseHeaderGroupType(OperationGroup operationGroup, Operation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context) : base(context)
         {
+            DefaultAccessibility = "internal";
             ResponseHeader CreateResponseHeader(HttpResponseHeader header)
             {
                 CSharpType type = context.TypeFactory.CreateType(header.Schema, true);
@@ -43,8 +44,7 @@ namespace AutoRest.CSharp.Output.Models.Responses
 
         public string Description { get; }
         public ResponseHeader[] Headers { get; }
-        protected override string DefaultName { get; }
-        protected override string DefaultAccessibility { get; } = "internal";
+        public override string DefaultName { get; }
 
         public static DataPlaneResponseHeaderGroupType? TryCreate(OperationGroup operationGroup, Operation operation, BuildContext<DataPlaneOutputLibrary> context)
         {

@@ -106,7 +106,7 @@ namespace SupersetInheritance
                     continue;
                 }
             }
-            return new SupersetModel4Data(id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), @new.Value);
+            return new SupersetModel4Data(, , , id.Value, name.Value, type.Value, location.Value, Optional.ToDictionary(tags), @new.Value);
         }
     }
 }

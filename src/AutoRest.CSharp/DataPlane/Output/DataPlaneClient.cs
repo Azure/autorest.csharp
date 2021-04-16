@@ -28,6 +28,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _operationGroup = operationGroup;
             _context = context;
+            DefaultAccessibility = "public";
             var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, Context);
             DefaultName = clientPrefix + ClientSuffix;
             ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
@@ -42,9 +43,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public DataPlaneLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
 
-        protected override string DefaultName { get; }
-
-        protected override string DefaultAccessibility { get; } = "public";
+        public override string DefaultName { get; }
 
         private IEnumerable<PagingMethod> BuildPagingMethods()
         {

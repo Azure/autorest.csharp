@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
         public virtual CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
-        public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
+        public ObjectTypeConstructor? SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
         public ObjectSerialization[] Serializations => _serializations ??= BuildSerializations();
@@ -52,11 +52,45 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract ObjectSerialization[] BuildSerializations();
         protected abstract ObjectTypeConstructor BuildInitializationConstructor();
         protected abstract CSharpType? CreateInheritedDictionaryType();
-        protected abstract ObjectTypeConstructor BuildSerializationConstructor();
+        protected abstract ObjectTypeConstructor? BuildSerializationConstructor();
         protected abstract CSharpType? CreateInheritedType();
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
-        protected abstract IEnumerable<ObjectTypeConstructor> BuildConstructors();
-        public abstract IEnumerable<ObjectType> EnumerateHierarchy();
+
+        public IEnumerable<ObjectType> EnumerateHierarchy()
+        {
+            ObjectType? type = this;
+            while (type != null)
+            {
+                yield return type;
+
+                if (type.Inherits?.IsFrameworkType == false && type.Inherits.Implementation is ObjectType o)
+                {
+                    type = o;
+                }
+                else
+                {
+                    type = null;
+                }
+            }
+        }
+
+        protected IEnumerable<ObjectTypeConstructor> BuildConstructors()
+        {
+            yield return InitializationConstructor;
+
+            if (!IncludeDeserializer)
+            {
+                yield break;
+            }
+
+            // Skip serialization ctor if they are the same
+            if (!InitializationConstructor.Parameters
+                .Select(p => p.Type)
+                .SequenceEqual(SerializationConstructor!.Parameters.Select(p => p.Type)))
+            {
+                yield return SerializationConstructor;
+            }
+        }
 
         public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {

@@ -21,14 +21,12 @@ namespace AutoRest.CSharp.Output.Models
 
         private RestClientMethod[]? _allMethods;
 
-        protected override string DefaultAccessibility { get; } = "public";
-
         public LowLevelRestClient(OperationGroup operationGroup, BuildContext<LowLevelOutputLibrary> context) : base(context)
         {
             _operationGroup = operationGroup;
             _context = context;
             _builder = new RestClientBuilder (operationGroup, context);
-
+            DefaultAccessibility = "public";
             Parameters = _builder.GetOrderedParameters ().Where (p => !p.IsApiVersionParameter).ToArray();
             ClientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, context);
             DefaultName = ClientPrefix + ClientSuffix;
@@ -38,7 +36,7 @@ namespace AutoRest.CSharp.Output.Models
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, _context)));
         public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
-        protected override string DefaultName { get; }
+        public override string DefaultName { get; }
 
         private IEnumerable<RestClientMethod> BuildAllMethods()
         {
