@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private readonly TypeFactory _typeFactory;
         private bool _isResourceType;
-        private ObjectTypeProperty[]? _myProperties;
+        //private ObjectTypeProperty[]? _myProperties;
 
         public MgmtObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceType) : base(objectSchema, context)
         {
@@ -36,46 +36,46 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
 
-        public ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
+        //public ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
 
-        protected override HashSet<string?> GetParentProperties()
-        {
-            HashSet<string?> result = new HashSet<string?>();
-            CSharpType? type = Inherits;
-            while (type != null)
-            {
-                if (type.IsFrameworkType == false)
-                {
-                    if (type.Implementation is ObjectType objType)
-                    {
-                        result.UnionWith(objType.Properties.Select(p => p.SchemaProperty?.Language.Default.Name));
-                        type = objType.Inherits;
-                    }
-                    else
-                    {
-                        type = null;
-                    }
-                }
-                else
-                {
-                    result.UnionWith(GetPropertiesFromSystemType(type.FrameworkType));
-                    type = null;
-                }
-            }
-            return result;
-        }
+        //protected override HashSet<string?> GetParentProperties()
+        //{
+        //    HashSet<string?> result = new HashSet<string?>();
+        //    CSharpType? type = Inherits;
+        //    while (type != null)
+        //    {
+        //        if (type.IsFrameworkType == false)
+        //        {
+        //            if (type.Implementation is ObjectType objType)
+        //            {
+        //                result.UnionWith(objType.Properties.Select(p => p.SchemaProperty?.Language.Default.Name));
+        //                type = objType.Inherits;
+        //            }
+        //            else
+        //            {
+        //                type = null;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            result.UnionWith(GetPropertiesFromSystemType(type.FrameworkType));
+        //            type = null;
+        //        }
+        //    }
+        //    return result;
+        //}
 
-        protected IEnumerable<string> GetPropertiesFromSystemType(System.Type systemType)
-        {
-            return systemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
-                .Select(p =>
-                {
-                    StringBuilder builder = new StringBuilder();
-                    builder.Append(char.ToLower(p.Name[0]));
-                    builder.Append(p.Name.Substring(1));
-                    return builder.ToString();
-                });
-        }
+        //protected IEnumerable<string> GetPropertiesFromSystemType(System.Type systemType)
+        //{
+        //    return systemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
+        //        .Select(p =>
+        //        {
+        //            StringBuilder builder = new StringBuilder();
+        //            builder.Append(char.ToLower(p.Name[0]));
+        //            builder.Append(p.Name.Substring(1));
+        //            return builder.ToString();
+        //        });
+        //}
 
         private CSharpType? CreateInheritedType()
         {

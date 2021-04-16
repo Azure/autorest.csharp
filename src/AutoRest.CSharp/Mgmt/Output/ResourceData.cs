@@ -29,20 +29,20 @@ namespace AutoRest.CSharp.Mgmt.Output
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
-        protected override HashSet<string?> GetParentProperties()
-        {
-            if (Inherits?.IsFrameworkType == false)
-            {
-                return base.GetParentProperties();
-            }
+        //protected override HashSet<string?> GetParentProperties()
+        //{
+        //    if (Inherits?.IsFrameworkType == false)
+        //    {
+        //        return base.GetParentProperties();
+        //    }
 
-            System.Type type = Inherits?.FrameworkType!;
-            if (type is null)
-            {
-                return new HashSet<string?>();
-            }
+        //    System.Type type = Inherits?.FrameworkType!;
+        //    if (type is null)
+        //    {
+        //        return new HashSet<string?>();
+        //    }
 
-            return GetPropertiesFromSystemType(type).ToHashSet<string?>();
-        }
+        //    return GetPropertiesFromSystemType(type).ToHashSet<string?>();
+        //}
     }
 }

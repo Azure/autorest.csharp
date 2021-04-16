@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
 {
-    /// <summary> A class representing the SupersetModel1 data model. </summary>
+    /// <summary> The SupersetModel1. </summary>
     public partial class SupersetModel1Data : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
@@ -18,12 +18,21 @@ namespace SupersetInheritance
         }
 
         /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
+        /// <param name="id"> . </param>
+        /// <param name="name"> . </param>
+        /// <param name="type"> . </param>
         /// <param name="new"> . </param>
-        internal SupersetModel1Data(string @new)
+        internal SupersetModel1Data(string id, string name, string type, string @new)
         {
+            Id = id;
+            Name = name;
+            Type = type;
             New = @new;
         }
 
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
         public string New { get; set; }
     }
 }

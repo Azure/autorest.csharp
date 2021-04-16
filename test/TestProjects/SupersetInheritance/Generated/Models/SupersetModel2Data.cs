@@ -7,7 +7,7 @@
 
 namespace SupersetInheritance
 {
-    /// <summary> A class representing the SupersetModel2 data model. </summary>
+    /// <summary> The SupersetModel2. </summary>
     public partial class SupersetModel2Data
     {
         /// <summary> Initializes a new instance of SupersetModel2Data. </summary>

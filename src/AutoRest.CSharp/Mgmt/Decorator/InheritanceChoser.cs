@@ -100,7 +100,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsEqual(childType, parentType))
                 {
-                    return parentType;
+                    var systemObjectType = new SystemObjectType(parentType, childType.OjectSchema, childType.Context);
+                    return new CSharpType(systemObjectType, parentType.Namespace ?? childType.Context.DefaultNamespace, parentType.Name);
                 }
             }
             return null;
@@ -112,7 +113,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsSuperset(originalType, parentType))
                 {
-                    return parentType;
+                    var systemObjectType = new SystemObjectType(parentType, originalType.OjectSchema, originalType.Context);
+                    return new CSharpType(systemObjectType, parentType.Namespace ?? originalType.Context.DefaultNamespace, parentType.Name);
                 }
             }
             return null;
@@ -120,7 +122,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static bool IsEqual(MgmtObjectType childType, System.Type parentType)
         {
-            var childProperties = childType.MyProperties.ToList();
+            var childProperties = childType.Properties.ToList();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
             if (parentProperties.Count != childProperties.Count)
@@ -170,7 +172,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static bool IsSuperset(MgmtObjectType childType, System.Type parentType)
         {
-            var childProperties = childType.MyProperties.ToList();
+            var childProperties = childType.Properties.ToList();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
             if (parentProperties.Count >= childProperties.Count)
@@ -192,7 +194,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     break;
                 }
 
-                PropertyInfo? parentProperty;
+                PropertyInfo? parentProperty = null;
                 CSharpType childPropertyType = childProperty.Declaration.Type;
                 if (parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
                 {

@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             TypeKind == TypeKind.Struct || TypeKind == TypeKind.Enum);
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
-        protected BuildContext Context { get; private set; }
+        internal BuildContext Context { get; private set; }
         protected abstract string DefaultName { get; }
         protected virtual string DefaultNamespace => Context.DefaultNamespace;
         protected abstract string DefaultAccessibility { get; }
