@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentation("return", $"Returns an <see cref=\"{container.Type}\" /> object.");
-            using (writer.Scope($"public static {container.Type.Name} Get{armResource.Type.Name}s (this {typeof(ResourceGroupOperations)} resourceGroup)"))
+            using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name}s (this {typeof(ResourceGroupOperations)} resourceGroup)"))
             {
                 // TODO: Bring this back after container class implemented
                 // writer.Line($"return new {armResource.Type.Name:D}Container(resourceGroup);");
