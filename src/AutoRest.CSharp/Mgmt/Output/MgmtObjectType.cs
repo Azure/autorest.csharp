@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtObjectType : ObjectType
+    internal class MgmtObjectType : SchemaObjectType
     {
         private readonly TypeFactory _typeFactory;
         private bool _isResourceType;
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _isResourceType = isResourceType;
         }
 
-        protected override string DefaultName => GetDefaultName(OjectSchema, _isResourceType);
+        protected override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
@@ -34,86 +34,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             return isResourceType ? name + "Data" : name;
         }
 
-        public override CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
-
-        //public ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
-
-        //protected override HashSet<string?> GetParentProperties()
-        //{
-        //    HashSet<string?> result = new HashSet<string?>();
-        //    CSharpType? type = Inherits;
-        //    while (type != null)
-        //    {
-        //        if (type.IsFrameworkType == false)
-        //        {
-        //            if (type.Implementation is ObjectType objType)
-        //            {
-        //                result.UnionWith(objType.Properties.Select(p => p.SchemaProperty?.Language.Default.Name));
-        //                type = objType.Inherits;
-        //            }
-        //            else
-        //            {
-        //                type = null;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            result.UnionWith(GetPropertiesFromSystemType(type.FrameworkType));
-        //            type = null;
-        //        }
-        //    }
-        //    return result;
-        //}
-
-        //protected IEnumerable<string> GetPropertiesFromSystemType(System.Type systemType)
-        //{
-        //    return systemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
-        //        .Select(p =>
-        //        {
-        //            StringBuilder builder = new StringBuilder();
-        //            builder.Append(char.ToLower(p.Name[0]));
-        //            builder.Append(p.Name.Substring(1));
-        //            return builder.ToString();
-        //        });
-        //}
-
-        private CSharpType? CreateInheritedType()
+        protected override CSharpType? CreateInheritedType()
         {
-            CSharpType? inheritedType = null;
-
-            var sourceBaseType = ExistingType?.BaseType;
-            if (sourceBaseType != null &&
-                sourceBaseType.SpecialType != SpecialType.System_ValueType &&
-                sourceBaseType.SpecialType != SpecialType.System_Object &&
-                _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
-            {
-                inheritedType = baseType;
-            }
-            else
-            {
-                var objectSchemas = OjectSchema.Parents!.Immediate.OfType<ObjectSchema>().ToArray();
-
-                ObjectSchema? selectedSchema = null;
-
-                foreach (var objectSchema in objectSchemas)
-                {
-                    // Take first schema or the one with discriminator
-                    selectedSchema ??= objectSchema;
-
-                    if (objectSchema.Discriminator != null)
-                    {
-                        selectedSchema = objectSchema;
-                        break;
-                    }
-                }
-
-                if (selectedSchema != null)
-                {
-                    CSharpType type = _typeFactory.CreateType(selectedSchema, false);
-                    Debug.Assert(!type.IsFrameworkType);
-                    inheritedType = type;
-                }
-            }
+            CSharpType? inheritedType = base.CreateInheritedType();
 
             var typeToReplace = inheritedType?.Implementation as ObjectType;
             if (typeToReplace != null)

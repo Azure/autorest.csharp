@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsEqual(childType, parentType))
                 {
-                    var systemObjectType = new SystemObjectType(parentType, childType.OjectSchema, childType.Context);
+                    var systemObjectType = new SystemObjectType(parentType, childType.Context);
                     return new CSharpType(systemObjectType, parentType.Namespace ?? childType.Context.DefaultNamespace, parentType.Name);
                 }
             }
@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsSuperset(originalType, parentType))
                 {
-                    var systemObjectType = new SystemObjectType(parentType, originalType.OjectSchema, originalType.Context);
+                    var systemObjectType = new SystemObjectType(parentType, originalType.Context);
                     return new CSharpType(systemObjectType, parentType.Namespace ?? originalType.Context.DefaultNamespace, parentType.Name);
                 }
             }

@@ -21,13 +21,89 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal abstract class ObjectType : TypeProvider
     {
         private ObjectTypeConstructor[]? _constructors;
+        protected ObjectTypeProperty[]? _properties;
+        private CSharpType? _inheritsType;
+        private ObjectTypeConstructor? _serializationConstructor;
+        private CSharpType? _implementsDictionaryType;
+        private ObjectTypeConstructor? _initializationConstructor;
+        private ObjectSerialization[]? _serializations;
+        private ObjectTypeDiscriminator? _discriminator;
 
         public ObjectType(BuildContext context) : base(context)
         {
         }
 
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
+        public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
+        public virtual CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
+        public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
+        public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
+        public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
+        public ObjectSerialization[] Serializations => _serializations ??= BuildSerializations();
+        public bool IsStruct => ExistingType?.IsValueType == true;
+        public virtual string? Description { get; protected set; }
+        public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
+        public abstract bool IncludeSerializer { get; }
+        public abstract bool IncludeDeserializer { get; }
+        public abstract bool IncludeConverter { get; }
+        public abstract ObjectTypeProperty? AdditionalPropertiesProperty { get; }
+        protected abstract ObjectTypeDiscriminator? BuildDiscriminator();
+        protected abstract ObjectSerialization[] BuildSerializations();
+        protected abstract ObjectTypeConstructor BuildInitializationConstructor();
+        protected abstract CSharpType? CreateInheritedDictionaryType();
+        protected abstract ObjectTypeConstructor BuildSerializationConstructor();
+        protected abstract CSharpType? CreateInheritedType();
+        protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
         protected abstract IEnumerable<ObjectTypeConstructor> BuildConstructors();
+        public abstract IEnumerable<ObjectType> EnumerateHierarchy();
+
+        public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {DefaultName}");
+            }
+
+            return objectProperty;
+        }
+
+        public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {DefaultName}");
+            }
+
+            return objectProperty;
+        }
+
+        public ObjectTypeProperty GetPropertyForGroupedParameter(RequestParameter groupedParameter, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(
+                p => (p.SchemaProperty as GroupProperty)?.OriginalParameter.Contains(groupedParameter) == true,
+                out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameter.Language.Default.Name} in schema {DefaultName}");
+            }
+
+            return objectProperty;
+        }
+
+        private bool TryGetPropertyForSchemaProperty(Func<ObjectTypeProperty, bool> propertySelector, [NotNullWhen(true)] out ObjectTypeProperty? objectProperty, bool includeParents = false)
+        {
+            objectProperty = null;
+
+            foreach (var type in EnumerateHierarchy())
+            {
+                objectProperty = type.Properties.SingleOrDefault(propertySelector);
+                if (objectProperty != null || !includeParents)
+                {
+                    break;
+                }
+            }
+
+            return objectProperty != null;
+        }
     }
 }
