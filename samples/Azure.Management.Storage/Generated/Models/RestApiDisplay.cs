@@ -8,19 +8,19 @@
 namespace Azure.Management.Storage.Models
 {
     /// <summary> Display metadata associated with the operation. </summary>
-    public partial class OperationDisplay
+    public partial class RestApiDisplay
     {
-        /// <summary> Initializes a new instance of OperationDisplay. </summary>
-        internal OperationDisplay()
+        /// <summary> Initializes a new instance of RestApiDisplay. </summary>
+        internal RestApiDisplay()
         {
         }
 
-        /// <summary> Initializes a new instance of OperationDisplay. </summary>
+        /// <summary> Initializes a new instance of RestApiDisplay. </summary>
         /// <param name="provider"> Service provider: Microsoft Storage. </param>
         /// <param name="resource"> Resource on which the operation is performed etc. </param>
         /// <param name="operation"> Type of operation: get, read, delete, etc. </param>
         /// <param name="description"> Description of the operation. </param>
-        internal OperationDisplay(string provider, string resource, string operation, string description)
+        internal RestApiDisplay(string provider, string resource, string operation, string description)
         {
             Provider = provider;
             Resource = resource;

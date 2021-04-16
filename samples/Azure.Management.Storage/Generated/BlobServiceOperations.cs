@@ -24,7 +24,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of <see cref = "BlobServiceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected BlobServiceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected BlobServiceOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
         }
 

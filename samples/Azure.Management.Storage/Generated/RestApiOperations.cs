@@ -13,32 +13,32 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing the operations that can be performed over a specific SKIP. </summary>
-    public partial class SKIPOperations : ResourceOperationsBase<TenantResourceIdentifier, SKIP>
+    /// <summary> A class representing the operations that can be performed over a specific RestApi. </summary>
+    public partial class RestApiOperations : ResourceOperationsBase<TenantResourceIdentifier, RestApi>
     {
-        /// <summary> Initializes a new instance of SKIPOperations for mocking. </summary>
-        protected SKIPOperations()
+        /// <summary> Initializes a new instance of RestApiOperations for mocking. </summary>
+        protected RestApiOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "SKIPOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of <see cref = "RestApiOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected SKIPOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected RestApiOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
         }
 
-        private static readonly ResourceType ResourceType = "Azure.Management.Storage/SKIPOperations";
+        private static readonly ResourceType ResourceType = "Azure.Management.Storage/RestApiOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<SKIP> Get(CancellationToken cancellationToken = default)
+        public override ArmResponse<RestApi> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<SKIP>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<ArmResponse<RestApi>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

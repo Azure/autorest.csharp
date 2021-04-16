@@ -10,12 +10,12 @@ using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class OperationData
+    public partial class RestApiData
     {
-        internal static OperationData DeserializeOperationData(JsonElement element)
+        internal static RestApiData DeserializeRestApiData(JsonElement element)
         {
             Optional<string> name = default;
-            Optional<OperationDisplay> display = default;
+            Optional<RestApiDisplay> display = default;
             Optional<string> origin = default;
             Optional<ServiceSpecification> serviceSpecification = default;
             foreach (var property in element.EnumerateObject())
@@ -32,7 +32,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    display = OperationDisplay.DeserializeOperationDisplay(property.Value);
+                    display = RestApiDisplay.DeserializeRestApiDisplay(property.Value);
                     continue;
                 }
                 if (property.NameEquals("origin"))
@@ -63,7 +63,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new OperationData(name.Value, display.Value, origin.Value, serviceSpecification.Value);
+            return new RestApiData(name.Value, display.Value, origin.Value, serviceSpecification.Value);
         }
     }
 }

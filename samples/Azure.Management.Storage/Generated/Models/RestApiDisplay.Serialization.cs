@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class OperationDisplay
+    public partial class RestApiDisplay
     {
-        internal static OperationDisplay DeserializeOperationDisplay(JsonElement element)
+        internal static RestApiDisplay DeserializeRestApiDisplay(JsonElement element)
         {
             Optional<string> provider = default;
             Optional<string> resource = default;
@@ -41,7 +41,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new OperationDisplay(provider.Value, resource.Value, operation.Value, description.Value);
+            return new RestApiDisplay(provider.Value, resource.Value, operation.Value, description.Value);
         }
     }
 }

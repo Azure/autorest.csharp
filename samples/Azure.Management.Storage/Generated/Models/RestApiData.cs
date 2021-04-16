@@ -7,20 +7,20 @@
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the Operation data model. </summary>
-    public partial class OperationData
+    /// <summary> A class representing the RestApi data model. </summary>
+    public partial class RestApiData
     {
-        /// <summary> Initializes a new instance of OperationData. </summary>
-        internal OperationData()
+        /// <summary> Initializes a new instance of RestApiData. </summary>
+        internal RestApiData()
         {
         }
 
-        /// <summary> Initializes a new instance of OperationData. </summary>
+        /// <summary> Initializes a new instance of RestApiData. </summary>
         /// <param name="name"> Operation name: {provider}/{resource}/{operation}. </param>
         /// <param name="display"> Display metadata associated with the operation. </param>
         /// <param name="origin"> The origin of operations. </param>
         /// <param name="serviceSpecification"> One property of operation, include metric specifications. </param>
-        internal OperationData(string name, OperationDisplay display, string origin, ServiceSpecification serviceSpecification)
+        internal RestApiData(string name, RestApiDisplay display, string origin, ServiceSpecification serviceSpecification)
         {
             Name = name;
             Display = display;
@@ -31,7 +31,7 @@ namespace Azure.Management.Storage.Models
         /// <summary> Operation name: {provider}/{resource}/{operation}. </summary>
         public string Name { get; }
         /// <summary> Display metadata associated with the operation. </summary>
-        public OperationDisplay Display { get; }
+        public RestApiDisplay Display { get; }
         /// <summary> The origin of operations. </summary>
         public string Origin { get; }
         /// <summary> One property of operation, include metric specifications. </summary>

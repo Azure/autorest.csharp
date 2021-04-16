@@ -17,9 +17,6 @@ namespace OperationGroupMappings
         {
             Optional<string> foo = default;
             Optional<string> sku = default;
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
             string location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             foreach (var property in element.EnumerateObject())
@@ -32,21 +29,6 @@ namespace OperationGroupMappings
                 if (property.NameEquals("sku"))
                 {
                     sku = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("location"))
@@ -70,7 +52,7 @@ namespace OperationGroupMappings
                     continue;
                 }
             }
-            return new AvailabilitySetData(id.Value, name.Value, type.Value, location, Optional.ToDictionary(tags), foo.Value, sku.Value);
+            return new AvailabilitySetData(location, Optional.ToDictionary(tags), foo.Value, sku.Value);
         }
     }
 }

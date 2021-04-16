@@ -8,11 +8,12 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace OperationGroupMappings
 {
     /// <summary> The Resource model definition. </summary>
-    public partial class Resource
+    public partial class Resource : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of Resource. </summary>
         /// <param name="location"> Resource location. </param>
@@ -29,26 +30,14 @@ namespace OperationGroupMappings
         }
 
         /// <summary> Initializes a new instance of Resource. </summary>
-        /// <param name="id"> Resource Id. </param>
-        /// <param name="name"> Resource name. </param>
-        /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal Resource(string id, string name, string type, string location, IReadOnlyDictionary<string, string> tags)
+        internal Resource(string location, IReadOnlyDictionary<string, string> tags)
         {
-            Id = id;
-            Name = name;
-            Type = type;
             Location = location;
             Tags = tags;
         }
 
-        /// <summary> Resource Id. </summary>
-        public string Id { get; }
-        /// <summary> Resource name. </summary>
-        public string Name { get; }
-        /// <summary> Resource type. </summary>
-        public string Type { get; }
         /// <summary> Resource location. </summary>
         public string Location { get; }
         /// <summary> Resource tags. </summary>

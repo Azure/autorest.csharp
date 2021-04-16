@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref = \"{resourceOperation.Type.Name}\"/> class.");
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
             writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
-            using (writer.Scope($"protected {resourceOperation.Type.Name:D}({typeof(ResourceOperationsBase)} options, {typeof(ResourceGroupResourceIdentifier)} id) : base(options, id)"))
+            using (writer.Scope($"protected {resourceOperation.Type.Name:D}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : base(options, id)"))
             {
 
             }

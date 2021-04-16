@@ -33,7 +33,7 @@ namespace Azure.Management.Storage.Models
 
         internal static FileServiceData DeserializeFileServiceData(JsonElement element)
         {
-            Optional<SkuData> sku = default;
+            Optional<Sku> sku = default;
             Optional<CorsRules> cors = default;
             Optional<DeleteRetentionPolicy> shareDeleteRetentionPolicy = default;
             foreach (var property in element.EnumerateObject())
@@ -45,7 +45,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = SkuData.DeserializeSkuData(property.Value);
+                    sku = Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("properties"))

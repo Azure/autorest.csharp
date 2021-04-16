@@ -12,28 +12,28 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A Class representing a Operation along with the instance operations that can be performed on it. </summary>
-    public class Operation : OperationOperations
+    /// <summary> A Class representing a RestApi along with the instance operations that can be performed on it. </summary>
+    public class RestApi : RestApiOperations
     {
-        /// <summary> Initializes a new instance of the <see cref = "Operation"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "RestApi"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal Operation(ResourceOperationsBase options, OperationData resource) : base(options, resource.Id)
+        internal RestApi(ResourceOperationsBase options, RestApiData resource) : base(options, resource.Id)
         {
             Data = resource;
         }
 
-        /// <summary> Gets or sets the OperationData. </summary>
-        public OperationData Data { get; private set; }
+        /// <summary> Gets or sets the RestApiData. </summary>
+        public RestApiData Data { get; private set; }
 
         /// <inheritdoc />
-        protected override Operation GetResource(CancellationToken cancellation = default)
+        protected override RestApi GetResource(CancellationToken cancellation = default)
         {
             return this;
         }
 
         /// <inheritdoc />
-        protected override Task<Operation> GetResourceAsync(CancellationToken cancellation = default)
+        protected override Task<RestApi> GetResourceAsync(CancellationToken cancellation = default)
         {
             return Task.FromResult(this);
         }

@@ -55,7 +55,7 @@ namespace Azure.Management.Storage.Models
 
         internal static StorageAccountData DeserializeStorageAccountData(JsonElement element)
         {
-            Optional<SkuData> sku = default;
+            Optional<Sku> sku = default;
             Optional<Kind> kind = default;
             Optional<Identity> identity = default;
             Optional<ProvisioningState> provisioningState = default;
@@ -89,7 +89,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = SkuData.DeserializeSkuData(property.Value);
+                    sku = Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("kind"))
