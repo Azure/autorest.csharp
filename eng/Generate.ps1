@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [String[]]$Exclude = "SmokeTests", $parallel = 5)
+param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
@@ -165,26 +165,23 @@ if (!($Exclude -contains "SmokeTests"))
     }
 }
 
-if ($updateLaunchSettings)
+$launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
+$settings = @{
+    'profiles' = [ordered]@{}
+};
+
+foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
 {
-    $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
-    $settings = @{
-        'profiles' = [ordered]@{}
-    };
+    $definition = $swaggerDefinitions[$key];
+    $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
 
-    foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
-    {
-        $definition = $swaggerDefinitions[$key];
-        $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
-
-        $settings.profiles[$key] = [ordered]@{
-            'commandName'='Project';
-            'commandLineArgs'="--standalone $outputPath"
-        }
+    $settings.profiles[$key] = [ordered]@{
+        'commandName'='Project';
+        'commandLineArgs'="--standalone $outputPath"
     }
-
-    $settings | ConvertTo-Json | Out-File $launchSettings
 }
+
+$settings | ConvertTo-Json | Out-File $launchSettings
 
 if ($reset -or $env:TF_BUILD)
 {
