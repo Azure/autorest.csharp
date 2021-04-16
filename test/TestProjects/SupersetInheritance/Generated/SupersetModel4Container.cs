@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel4 and their operations over a [ParentResource]. </summary>
@@ -14,5 +16,8 @@ namespace SupersetInheritance
         protected SupersetModel4Container()
         {
         }
+
+        /// <summary> Gets the valid resource type for this object. </summary>
+        protected ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
     }
 }

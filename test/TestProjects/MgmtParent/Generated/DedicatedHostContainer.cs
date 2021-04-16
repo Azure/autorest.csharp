@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace MgmtParent
 {
     /// <summary> A class representing collection of DedicatedHost and their operations over a [ParentResource]. </summary>
@@ -14,5 +16,8 @@ namespace MgmtParent
         protected DedicatedHostContainer()
         {
         }
+
+        /// <summary> Gets the valid resource type for this object. </summary>
+        protected ResourceType ValidResourceType => DedicatedHostGroupOperations.ResourceType;
     }
 }

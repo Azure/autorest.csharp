@@ -66,5 +66,29 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 }
             }
         }
+
+        [TestCase("ValidResourceType")]
+        public void ValidateContainerPropertyExists(string propertyName)
+        {
+            foreach (var type in FindAllContainers())
+            {
+                var propertyInfo = type.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic);
+                Assert.NotNull(propertyInfo, $"Property '{type.Name}' is not found");
+                Assert.AreEqual(typeof(ResourceType), propertyInfo.PropertyType);
+            }
+        }
+
+        private IEnumerable<Type> FindAllContainers()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                if (t.Name.Contains("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                {
+                    yield return t;
+                }
+            }
+        }
     }
 }
