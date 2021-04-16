@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // TODO: Find a solution to convert from single to plural
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");
-            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type}\" /> object.");
+            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type.Name}\" /> object.");
             using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name}s (this {typeof(ResourceGroupOperations)} resourceGroup)"))
             {
                 // TODO: Bring this back after container class implemented
