@@ -14,16 +14,9 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
 {
-    [TestFixture(TestServerVersion.V1)]
     public abstract class TestServerLowLevelTestBase
     {
-        private readonly TestServerVersion _version;
         protected static AzureKeyCredential Key = new AzureKeyCredential("NOT-A-VALID-KEY");
-
-        public TestServerLowLevelTestBase(TestServerVersion version)
-        {
-            _version = version;
-        }
 
         public Task TestStatus(Func<Uri, Response> test, bool ignoreScenario = false)
         {
@@ -54,7 +47,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         private async Task Test(string scenario, Func<Uri, Task> test, bool ignoreScenario = false)
         {
             var scenarioParameter = ignoreScenario ? new string[0] : new[] {scenario};
-            var server = TestServerSession.Start(scenario, _version, false, scenarioParameter);
+            var server = TestServerSession.Start(scenario, false, scenarioParameter);
 
             try
             {

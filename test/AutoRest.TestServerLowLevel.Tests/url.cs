@@ -13,8 +13,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class UrlTests : TestServerLowLevelTestBase
     {
-        public UrlTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task UrlPathsStringEmpty() => TestStatus(async (host) => await new PathsClient(Key, host).StringEmptyAsync());
 

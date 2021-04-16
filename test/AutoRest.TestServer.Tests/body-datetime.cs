@@ -13,8 +13,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyDateTimeTest: TestServerTestBase
     {
-        public BodyDateTimeTest(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task GetDateTimeInvalid() => Test((host, pipeline) =>
         {
@@ -61,7 +59,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task GetDateTimeMaxUtc7MSUppercase() => Test(async (host, pipeline) =>
         {
             var result = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetUtcUppercaseMaxDateTime7DigitsAsync();
@@ -69,7 +66,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task PutDateTimeMaxUtc7MS() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("9999-12-31T23:59:59.9999999Z");
@@ -85,7 +81,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task PutDateTimeMaxLocalPositiveOffset() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("9999-12-31T09:59:59.9999999Z");
@@ -93,7 +88,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task PutDateTimeMaxUtc() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("9999-12-31T23:59:59.9999999Z");
@@ -101,7 +95,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task PutDateTimeMinLocalNegativeOffset() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("0001-01-01T00:00:00-14:00");
@@ -117,7 +110,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched")]
         public Task PutDateTimeMinUtc() => TestStatus(async (host, pipeline) =>
         {
             var value = DateTimeOffset.Parse("0001-01-01T00:00:00Z");
@@ -125,7 +117,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "V1 and V2 tests are out of sync")]
         public Task GetDateTimeMinLocalNoOffset() => Test(async (host, pipeline) =>
         {
             var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalNoOffsetMinDateTimeAsync();
@@ -145,7 +136,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "V1 and V2 tests are out of sync")]
         public Task GetDateTimeMaxLocalPositiveOffsetLowercase() => Test(async (host, pipeline) =>
         {
             var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalPositiveOffsetLowercaseMaxDateTimeAsync();
@@ -153,7 +143,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "V1 and V2 tests are out of sync")]
         public Task GetDateTimeMaxLocalPositiveOffsetUppercase() => Test(async (host, pipeline) =>
         {
             var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetLocalPositiveOffsetUppercaseMaxDateTimeAsync();
@@ -161,7 +150,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "V1 and V2 tests are out of sync")]
         public Task GetDateTimeMaxUtcLowercase() => Test(async (host, pipeline) =>
         {
             var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetUtcLowercaseMaxDateTimeAsync();
@@ -169,7 +157,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "V1 and V2 tests are out of sync")]
         public Task GetDateTimeMaxUtcUppercase() => Test(async (host, pipeline) =>
         {
             var response = await new DatetimeClient(ClientDiagnostics, pipeline, host).GetUtcUppercaseMaxDateTimeAsync();

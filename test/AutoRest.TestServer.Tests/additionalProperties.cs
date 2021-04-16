@@ -15,10 +15,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class AdditionalPropertiesTest : TestServerTestBase
     {
-        public AdditionalPropertiesTest(TestServerVersion version) : base(version) { }
-
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesInProperties() => Test(async (host, pipeline) =>
         {
             var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPInPropertiesAsync(new PetAPInProperties(4)
@@ -41,7 +38,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesInPropertiesWithAPTypeString() => Test(async (host, pipeline) =>
         {
             PetAPInPropertiesWithAPString parameter = new PetAPInPropertiesWithAPString(5, "westus")
@@ -75,7 +71,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesSubclass() => Test(async (host, pipeline) =>
         {
             CatAPTrue catAPTrue = new CatAPTrue(1)
@@ -102,7 +97,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesTrue() => Test(async (host, pipeline) =>
         {
             PetAPTrue catAPTrue = new PetAPTrue(1)
@@ -127,7 +121,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task AdditionalPropertiesTypeObject() => Test(async (host, pipeline) =>
         {
             PetAPObject petAPObject = new PetAPObject(1)

@@ -17,10 +17,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class PagingTests : TestServerTestBase
     {
-        public PagingTests(TestServerVersion version) : base(version) { }
-
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingCustomUrlPartialNextLink() => Test(async (endpoint, pipeline) =>
         {
             var id = 1;
@@ -79,7 +76,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingCustomUrlPartialOperationNextLink() => Test(async (endpoint, pipeline) =>
         {
             var id = 1;
@@ -138,7 +134,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingFragment() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -197,7 +192,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
         public Task PagingMultiple_Continuation() => Test(async (host, pipeline) =>
         {
             var client = new PagingClient(ClientDiagnostics, pipeline, host);
@@ -227,7 +221,6 @@ namespace AutoRest.TestServer.Tests
         }, ignoreScenario: true);
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
         public Task PagingMultiple() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -288,7 +281,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
         public Task PagingMultipleWithQueryParameters() => Test(async (host, pipeline) =>
         {
             var value = 100;
@@ -430,7 +422,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No recording.")]
         public Task PagingMultipleLRO() => Test(async (host, pipeline) =>
         {
             var lro = await new PagingClient(ClientDiagnostics, pipeline, host).StartGetMultiplePagesLROAsync("id", new PagingGetMultiplePagesLroOptions());
@@ -453,7 +444,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
         public Task PagingMultiplePath() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -536,7 +526,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Retry times out.")]
         public Task PagingMultipleRetryFirst() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -597,7 +586,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Retry times out.")]
         public Task PagingMultipleRetrySecond() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -664,7 +652,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingNextLinkNameNull() => Test(async (host, pipeline) =>
         {
             var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetNullNextLinkNamePagesAsync();
@@ -691,7 +678,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingNoItemName() => Test(async (host, pipeline) =>
         {
             var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetNoItemNamePagesAsync();
@@ -718,7 +704,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task PagingReturnModelWithXMSClientName() => Test(async (host, pipeline) =>
         {
             var result = await new PagingClient(ClientDiagnostics, pipeline, host).RestClient.GetPagingModelWithItemNameWithXMSClientNameAsync();
@@ -745,7 +730,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Refused connection.")]
         public Task PagingOdataMultiple() => Test(async (host, pipeline) =>
         {
             var id = 1;
@@ -844,7 +828,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match.")]
         public Task PagingFirstResponseEmpty() => Test(async (host, pipeline) =>
         {
             var result = new PagingClient(ClientDiagnostics, pipeline, host).FirstResponseEmptyAsync();

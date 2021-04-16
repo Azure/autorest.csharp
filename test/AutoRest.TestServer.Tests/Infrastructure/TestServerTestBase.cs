@@ -15,17 +15,9 @@ using NUnit.Framework;
 namespace AutoRest.TestServer.Tests.Infrastructure
 {
     [Parallelizable(ParallelScope.Fixtures)]
-    [TestFixture(TestServerVersion.V1)]
-    [TestFixture(TestServerVersion.V2)]
     public abstract class TestServerTestBase
     {
-        private readonly TestServerVersion _version;
         internal static ClientDiagnostics ClientDiagnostics = new ClientDiagnostics(new TestOptions());
-
-        public TestServerTestBase(TestServerVersion version)
-        {
-            _version = version;
-        }
 
         public Task TestStatus(Func<Uri, HttpPipeline, Response> test, bool ignoreScenario = false, bool useSimplePipeline = false)
         {
@@ -76,7 +68,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         private async Task Test(string scenario, Func<Uri, HttpPipeline, Task> test, bool ignoreScenario = false, bool useSimplePipeline = false)
         {
             var scenarioParameter = ignoreScenario ? new string[0] : new[] {scenario};
-            var server = TestServerSession.Start(scenario, _version, false, scenarioParameter);
+            var server = TestServerSession.Start(scenario, false, scenarioParameter);
 
             try
             {

@@ -10,10 +10,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class UrlPathItemsTests : TestServerTestBase
     {
-        public UrlPathItemsTests(TestServerVersion version) : base(version) { }
-
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
         public Task UrlPathItemGetAll() => TestStatus(async (host, pipeline) =>
             await new PathItemsClient(ClientDiagnostics,
                     pipeline,
@@ -41,7 +38,6 @@ namespace AutoRest.TestServer.Tests
                     localStringQuery: null));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
         public Task UrlPathItemGetGlobalNull() => TestStatus(async (host, pipeline) =>
             await new PathItemsClient(
                     ClientDiagnostics,

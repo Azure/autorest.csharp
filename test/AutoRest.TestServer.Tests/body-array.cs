@@ -17,8 +17,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyArray : TestServerTestBase
     {
-        public BodyArray(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task GetArrayArrayEmpty() => Test(async (host, pipeline) =>
         {
@@ -327,7 +325,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "no match")]
         public Task GetArrayEnumValid() => Test(async (host, pipeline) =>
         {
             var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetEnumValidAsync();
@@ -409,7 +406,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "no match")]
         public Task GetArrayStringEnumValid() => Test(async (host, pipeline) =>
         {
             var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetStringEnumValidAsync();
@@ -488,7 +484,6 @@ namespace AutoRest.TestServer.Tests
             }));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "no match")]
         public Task PutArrayDateTimeValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutDateTimeValidAsync(
             new[] {
                 DateTimeOffset.Parse("2000-12-01 00:00:01+00:00"),
@@ -514,7 +509,6 @@ namespace AutoRest.TestServer.Tests
             }));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "no match")]
         public Task PutArrayDoubleValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutDoubleValidAsync(
             new[] { 0, -0.01, -1.2e20 }));
 
@@ -530,12 +524,10 @@ namespace AutoRest.TestServer.Tests
             new string[] { }));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "no match")]
         public Task PutArrayEnumValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutEnumValidAsync(
             new[] { FooEnum.Foo1, FooEnum.Foo2, FooEnum.Foo3 }));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "no match")]
         public Task PutArrayFloatValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutFloatValidAsync(
             new[] { 0, -0.01f, -1.2e20f }));
 
@@ -548,7 +540,6 @@ namespace AutoRest.TestServer.Tests
            new[] { 1, -1, 3, 300L }));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "no match")]
         public Task PutArrayStringEnumValid() => TestStatus(async (host, pipeline) => await new ArrayClient(ClientDiagnostics, pipeline, host).PutStringEnumValidAsync(
             new[]
             {
