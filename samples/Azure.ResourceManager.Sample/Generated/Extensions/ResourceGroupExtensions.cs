@@ -16,7 +16,7 @@ namespace Azure.ResourceManager.Sample
         #region AvailabilitySets
         /// <summary> Gets an object representing a AvailabilitySetContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <return> Returns an <see cref="AvailabilitySetContainer" /> object. </return>
+        /// <returns> Returns a <see cref="AvailabilitySetContainer" /> object. </returns>
         public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroupOperations resourceGroup)
         {
             throw new NotImplementedException();
@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample
         #region ProximityPlacementGroups
         /// <summary> Gets an object representing a ProximityPlacementGroupContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <return> Returns an <see cref="ProximityPlacementGroupContainer" /> object. </return>
+        /// <returns> Returns a <see cref="ProximityPlacementGroupContainer" /> object. </returns>
         public static ProximityPlacementGroupContainer GetProximityPlacementGroups(this ResourceGroupOperations resourceGroup)
         {
             throw new NotImplementedException();
@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         #region DedicatedHostGroups
         /// <summary> Gets an object representing a DedicatedHostGroupContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <return> Returns an <see cref="DedicatedHostGroupContainer" /> object. </return>
+        /// <returns> Returns a <see cref="DedicatedHostGroupContainer" /> object. </returns>
         public static DedicatedHostGroupContainer GetDedicatedHostGroups(this ResourceGroupOperations resourceGroup)
         {
             throw new NotImplementedException();
@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Sample
         #region SshPublicKeys
         /// <summary> Gets an object representing a SshPublicKeyContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <return> Returns an <see cref="SshPublicKeyContainer" /> object. </return>
+        /// <returns> Returns a <see cref="SshPublicKeyContainer" /> object. </returns>
         public static SshPublicKeyContainer GetSshPublicKeys(this ResourceGroupOperations resourceGroup)
         {
             throw new NotImplementedException();
@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample
         #region VirtualMachines
         /// <summary> Gets an object representing a VirtualMachineContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <return> Returns an <see cref="VirtualMachineContainer" /> object. </return>
+        /// <returns> Returns a <see cref="VirtualMachineContainer" /> object. </returns>
         public static VirtualMachineContainer GetVirtualMachines(this ResourceGroupOperations resourceGroup)
         {
             throw new NotImplementedException();
@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample
         #region Images
         /// <summary> Gets an object representing a ImageContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <return> Returns an <see cref="ImageContainer" /> object. </return>
+        /// <returns> Returns a <see cref="ImageContainer" /> object. </returns>
         public static ImageContainer GetImages(this ResourceGroupOperations resourceGroup)
         {
             throw new NotImplementedException();
@@ -76,7 +76,7 @@ namespace Azure.ResourceManager.Sample
         #region VirtualMachineScaleSets
         /// <summary> Gets an object representing a VirtualMachineScaleSetContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <return> Returns an <see cref="VirtualMachineScaleSetContainer" /> object. </return>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetContainer" /> object. </returns>
         public static VirtualMachineScaleSetContainer GetVirtualMachineScaleSets(this ResourceGroupOperations resourceGroup)
         {
             throw new NotImplementedException();

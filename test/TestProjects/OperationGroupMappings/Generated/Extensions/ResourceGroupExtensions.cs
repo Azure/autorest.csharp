@@ -16,7 +16,7 @@ namespace OperationGroupMappings
         #region AvailabilitySets
         /// <summary> Gets an object representing a AvailabilitySetContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <return> Returns an <see cref="AvailabilitySetContainer" /> object. </return>
+        /// <returns> Returns a <see cref="AvailabilitySetContainer" /> object. </returns>
         public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroupOperations resourceGroup)
         {
             throw new NotImplementedException();
