@@ -18,6 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private BuildContext<MgmtOutputLibrary> _context;
         private const string ResourceGroupOperationsResourceType = "ResourceGroupOperations.ResourceType";
         private const string SubscriptionOperationsResourceType = "SubscriptionOperations.ResourceType";
+        private const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
 
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context)
@@ -49,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 case ResourceTypeBuilder.Subscriptions:
                     return SubscriptionOperationsResourceType;
                 case ResourceTypeBuilder.Tenant:
-                    return ResourceIdentifier.RootResourceIdentifier;
+                    return TenantResourceType;
                 default:
                     return FindParentFromRp(parentResourceType);
             }

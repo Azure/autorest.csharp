@@ -18,6 +18,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected ResourceType ValidResourceType => "";
+        protected ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
     }
 }
