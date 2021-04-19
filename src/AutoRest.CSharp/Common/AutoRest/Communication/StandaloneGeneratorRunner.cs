@@ -128,7 +128,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 credentialScopes.ToArray(),
                 root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString(),
                 root.GetProperty(nameof(Configuration.LowLevelClient)).GetBoolean(),
-                MgmtConfiguration.LoadConfiguration(root)
+                MgmtConfiguration.LoadConfiguration(root),
+                root.GetProperty(nameof(Configuration.CSharpWaitForDebugAttach)).GetBoolean()
             );
         }
     }

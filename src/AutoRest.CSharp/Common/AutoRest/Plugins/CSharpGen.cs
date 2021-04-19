@@ -32,6 +32,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(Task<CodeModel> codeModelTask, Configuration configuration)
         {
+            DebugAttachIfSet(configuration);
+
             Directory.CreateDirectory(configuration.OutputFolder);
             var projectDirectory = Path.Combine(configuration.OutputFolder, Configuration.ProjectRelativeDirectory);
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
@@ -61,6 +63,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 throw new Exception("Generator did not receive the code model file.");
 
             var configuration = Configuration.GetConfiguration(autoRest);
+
+            DebugAttachIfSet(configuration);
 
             string codeModelYaml = string.Empty;
 
@@ -108,6 +112,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             return true;
+        }
+
+        private static void DebugAttachIfSet(Configuration configuration)
+        {
+            if (configuration.CSharpWaitForDebugAttach)
+            {
+                Console.Error.WriteLine("Attempting to attach debugger.");
+                Debugger.Launch();
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class Configuration
     {
-        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, string[] credentialTypes, string[] credentialScopes, string credentialHeaderName, bool lowLevelClient, MgmtConfiguration mgmtConfiguration)
+        public Configuration(string outputFolder, string? ns, string? name, string[] sharedSourceFolders, bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference, string[] credentialTypes, string[] credentialScopes, string credentialHeaderName, bool lowLevelClient, MgmtConfiguration mgmtConfiguration, bool csharpWaitForDebugAttach)
         {
             OutputFolder = outputFolder;
             Namespace = ns;
@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             CredentialScopes = credentialScopes;
             CredentialHeaderName = credentialHeaderName;
             MgmtConfiguration = mgmtConfiguration;
+            CSharpWaitForDebugAttach = csharpWaitForDebugAttach;
         }
 
         public string OutputFolder { get; }
@@ -47,6 +48,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static string ProjectRelativeDirectory = "../";
         public bool LowLevelClient { get; }
         public MgmtConfiguration MgmtConfiguration { get; }
+        public bool CSharpWaitForDebugAttach { get;  }
 
         public static Configuration GetConfiguration(IPluginCommunication autoRest)
         {
@@ -65,7 +67,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<string[]?>("credential-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string?>("credential-header-name").GetAwaiter().GetResult() ?? "api-key",
                 autoRest.GetValue<bool?>("low-level-client").GetAwaiter().GetResult() ?? false,
-                MgmtConfiguration.GetConfiguration(autoRest)
+                MgmtConfiguration.GetConfiguration(autoRest),
+                autoRest.GetValue<bool?>("csharp-wait-for-debug-attach").GetAwaiter().GetResult() ?? false
             );
         }
 
