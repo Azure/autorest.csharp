@@ -21,7 +21,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        private static readonly ResourceType ResourceType = "Azure.Management.Storage/FileServiceOperations";
+        public static readonly ResourceType ResourceType = "Azure.Management.Storage/FileServiceOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

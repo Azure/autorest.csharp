@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of Operation and their operations over a [ParentResource]. </summary>
@@ -14,5 +16,8 @@ namespace Azure.Management.Storage
         protected OperationContainer()
         {
         }
+
+        /// <summary> Gets the valid resource type for this object. </summary>
+        protected ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
     }
 }

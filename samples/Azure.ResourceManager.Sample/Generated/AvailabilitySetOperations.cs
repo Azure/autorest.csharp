@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        private static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/AvailabilitySetOperations";
+        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/AvailabilitySetOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

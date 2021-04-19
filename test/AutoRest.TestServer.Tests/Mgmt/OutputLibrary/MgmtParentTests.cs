@@ -26,13 +26,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var context = result.Context;
             foreach (var operations in model.OperationGroups)
             {
-                Assert.IsNotNull(operations.Parent(context.Configuration.MgmtConfiguration));
+                Assert.IsNotNull(operations.ParentResourceType(context.Configuration.MgmtConfiguration));
                 if (operations.Key.Equals("VirtualMachineExtensionImages"))
-                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/locations/publishers"));
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/locations/publishers"));
                 else if (operations.Key.Equals("AvailabilitySets"))
-                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("resourceGroups"));
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("resourceGroups"));
                 else if (operations.Key.Equals("DedicatedHosts"))
-                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/hostGroups"));
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/hostGroups"));
             }
         }
     }

@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
-        public static string Parent(this OperationGroup operationGroup, MgmtConfiguration config)
+        public static string ParentResourceType(this OperationGroup operationGroup, MgmtConfiguration config)
         {
             string? result = null;
             if (_valueCache.TryGetValue(operationGroup, out result))
@@ -116,9 +116,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             foreach (var operationsGroup in operationGroups)
             {
-                if (operationsGroup.Parent(config) != null && !ResourceTypes.Contains(operationsGroup.Parent(config)))
+                if (operationsGroup.ParentResourceType(config) != null && !ResourceTypes.Contains(operationsGroup.ParentResourceType(config)))
                 {
-                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.Parent(config)}. key Please add to readme.md");
+                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.ParentResourceType(config)}. key Please add to readme.md");
                 }
             }
         }
