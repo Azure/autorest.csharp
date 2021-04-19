@@ -11,27 +11,27 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.Management.Storage
 {
-    /// <summary> A class representing the operations that can be performed over a specific VirtualMachineImage. </summary>
-    public partial class VirtualMachineImageOperations : ResourceOperationsBase<TenantResourceIdentifier, VirtualMachineImage>
+    /// <summary> A class representing the operations that can be performed over a specific Sku. </summary>
+    public partial class SkuOperations : ResourceOperationsBase<TenantResourceIdentifier, Sku>
     {
-        /// <summary> Initializes a new instance of VirtualMachineImageOperations for mocking. </summary>
-        protected VirtualMachineImageOperations()
+        /// <summary> Initializes a new instance of SkuOperations for mocking. </summary>
+        protected SkuOperations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/VirtualMachineImageOperations";
+        public static readonly ResourceType ResourceType = "Azure.Management.Storage/SkuOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<VirtualMachineImage> Get(CancellationToken cancellationToken = default)
+        public override ArmResponse<Sku> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<VirtualMachineImage>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<ArmResponse<Sku>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

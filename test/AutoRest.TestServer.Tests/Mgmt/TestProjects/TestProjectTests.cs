@@ -67,27 +67,25 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase("GetResource")]
-        [TestCase("GetResourceAsync")]
-        [TestCase("get_Data")]
-        [TestCase("set_Data")]
-        public void ValidateResourceMethods(string methodName)
+        [TestCase("ValidResourceType")]
+        public void ValidateContainerPropertyExists(string propertyName)
         {
-            foreach (var resource in FindAllResources())
+            foreach (var type in FindAllContainers())
             {
-                Assert.IsNotNull(resource.GetMethod(methodName));
+                var propertyInfo = type.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic);
+                Assert.NotNull(propertyInfo, $"Property '{type.Name}' is not found");
+                Assert.AreEqual(typeof(ResourceType), propertyInfo.PropertyType);
             }
         }
 
-        private IEnumerable<Type> FindAllResources()
+        private IEnumerable<Type> FindAllContainers()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
             foreach (Type t in allTypes)
             {
-                if (t.BaseType is not null && t.BaseType.Name.Contains("Operations") && !t.BaseType.Name.Contains("RestOperations") && !t.BaseType.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (t.Name.Contains("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
                 {
-                    // Only [Resource]Operations types for the specified test project are going to be tested.
                     yield return t;
                 }
             }

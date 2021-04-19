@@ -7,13 +7,13 @@
 
 using Azure.ResourceManager.Core;
 
-namespace TenantOnly
+namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of BillingAccount and their operations over a [ParentResource]. </summary>
-    public partial class BillingAccountContainer
+    /// <summary> A class representing collection of RestApi and their operations over a [ParentResource]. </summary>
+    public partial class RestApiContainer
     {
-        /// <summary> Initializes a new instance of BillingAccountContainer for mocking. </summary>
-        protected BillingAccountContainer()
+        /// <summary> Initializes a new instance of RestApiContainer for mocking. </summary>
+        protected RestApiContainer()
         {
         }
 

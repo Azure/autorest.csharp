@@ -7,13 +7,13 @@
 
 using Azure.ResourceManager.Core;
 
-namespace TenantOnly
+namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of BillingAccount and their operations over a [ParentResource]. </summary>
-    public partial class BillingAccountContainer
+    /// <summary> A class representing collection of Operation and their operations over a [ParentResource]. </summary>
+    public partial class OperationContainer
     {
-        /// <summary> Initializes a new instance of BillingAccountContainer for mocking. </summary>
-        protected BillingAccountContainer()
+        /// <summary> Initializes a new instance of OperationContainer for mocking. </summary>
+        protected OperationContainer()
         {
         }
 

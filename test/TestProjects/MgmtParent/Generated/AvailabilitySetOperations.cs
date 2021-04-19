@@ -21,7 +21,7 @@ namespace MgmtParent
         {
         }
 
-        private static readonly ResourceType ResourceType = "MgmtParent/AvailabilitySetOperations";
+        public static readonly ResourceType ResourceType = "MgmtParent/AvailabilitySetOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

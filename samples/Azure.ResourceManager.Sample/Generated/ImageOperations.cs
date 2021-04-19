@@ -21,14 +21,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "ImageOperations"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected ImageOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
-        {
-        }
-
-        private static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/ImageOperations";
+        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/ImageOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

@@ -20,13 +20,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var context = result.Context;
             foreach (var operations in model.OperationGroups)
             {
-                Assert.IsNotNull(operations.Parent(context.Configuration.MgmtConfiguration));
+                Assert.IsNotNull(operations.ParentResourceType(context.Configuration.MgmtConfiguration));
                 if (operations.Key.Equals("AvailableBalances") || operations.Key.Equals("Instructions"))
-                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("Microsoft.Billing/billingAccounts/billingProfiles"));
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("Microsoft.Billing/billingAccounts/billingProfiles"));
                 else if (operations.Key.Equals("Agreements"))
-                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("Microsoft.Billing/billingAccounts"));
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("Microsoft.Billing/billingAccounts"));
                 else
-                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("tenant"));
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("tenant"));
             }
         }
     }

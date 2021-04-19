@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace OperationGroupMappings
 {
     /// <summary> A class representing collection of AvailabilitySet and their operations over a [ParentResource]. </summary>
@@ -14,5 +16,8 @@ namespace OperationGroupMappings
         protected AvailabilitySetContainer()
         {
         }
+
+        /// <summary> Gets the valid resource type for this object. </summary>
+        protected ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
     }
 }

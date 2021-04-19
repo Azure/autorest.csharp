@@ -57,6 +57,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
+        public ResourceOperation GetResourceOperation(OperationGroup operationGroup) => EnsureResourceOperations()[operationGroup];
+
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
         private static HashSet<string> ResourceTypes = new HashSet<string>
