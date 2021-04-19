@@ -22,7 +22,7 @@ operation-group-to-resource-type:
    Usages: Microsoft.Storage/locations/usages
    PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
 operation-group-to-resource:
-   Operations: RestApi
+   Operations: NonResource
    Skus: NonResource
    Usages: NonResource
    PrivateLinkResources: PrivateLinkResource

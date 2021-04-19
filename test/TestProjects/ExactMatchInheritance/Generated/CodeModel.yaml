@@ -86,7 +86,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel7ID
+          name: ExactMatchModel7Id
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_10
@@ -366,10 +366,10 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_9
-                serializedName: iD
+                serializedName: id
                 language: !Languages 
                   default:
-                    name: iD
+                    name: id
                     description: ''
                 protocol: !Protocols {}
               - !Property 

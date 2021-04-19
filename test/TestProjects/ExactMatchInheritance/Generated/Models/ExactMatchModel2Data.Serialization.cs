@@ -20,30 +20,12 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("new");
                 writer.WriteStringValue(New);
             }
-            if (Optional.IsDefined(ID))
-            {
-                writer.WritePropertyName("iD");
-                writer.WriteStringValue(ID);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             writer.WriteEndObject();
         }
 
         internal static ExactMatchModel2Data DeserializeExactMatchModel2Data(JsonElement element)
         {
             Optional<string> @new = default;
-            Optional<string> iD = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"))
@@ -51,23 +33,8 @@ namespace ExactMatchInheritance
                     @new = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("iD"))
-                {
-                    iD = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("type"))
-                {
-                    type = property.Value.GetString();
-                    continue;
-                }
             }
-            return new ExactMatchModel2Data(iD.Value, name.Value, type.Value, @new.Value);
+            return new ExactMatchModel2Data(@new.Value);
         }
     }
 }

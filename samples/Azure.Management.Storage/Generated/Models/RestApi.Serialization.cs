@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class RestApiData
+    public partial class RestApi
     {
-        internal static RestApiData DeserializeRestApiData(JsonElement element)
+        internal static RestApi DeserializeRestApi(JsonElement element)
         {
             Optional<string> name = default;
             Optional<RestApiDisplay> display = default;
@@ -63,7 +63,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new RestApiData(name.Value, display.Value, origin.Value, serviceSpecification.Value);
+            return new RestApi(name.Value, display.Value, origin.Value, serviceSpecification.Value);
         }
     }
 }

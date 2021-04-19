@@ -20,7 +20,7 @@ operation-group-to-resource-type:
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades
    LogAnalytics: Microsoft.Compute/locations/logAnalytics
 operation-group-to-resource:
-   Operations: RestApi
+   Operations: NonResource
    VirtualMachineExtensionImages: VirtualMachineExtensionImage
    VirtualMachineImages: VirtualMachineImage
    Usage: NonResource

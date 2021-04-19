@@ -32,6 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     // write Data
                     writer.Line();
+                    var x = resource.ResourceDataObject.GetType();
                     writer.WriteXmlDocumentationSummary($"Gets or sets the {resource.ResourceDataObject.Type.Name}.");
                     writer.LineRaw("public " + resource.ResourceDataObject.Type.Name + " Data {get; private set;}");
 

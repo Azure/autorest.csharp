@@ -22,7 +22,7 @@
     "PrivateLinkResources": "Microsoft.Storage/storageAccounts/privateLinkResources"
   },
   "OperationGroupToResource": {
-    "Operations": "RestApi",
+    "Operations": "NonResource",
     "Skus": "NonResource",
     "Usages": "NonResource",
     "PrivateLinkResources": "PrivateLinkResource",

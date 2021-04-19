@@ -16,17 +16,17 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of OperationListResult. </summary>
         internal OperationListResult()
         {
-            Value = new ChangeTrackingList<RestApiData>();
+            Value = new ChangeTrackingList<RestApi>();
         }
 
         /// <summary> Initializes a new instance of OperationListResult. </summary>
         /// <param name="value"> List of Storage operations supported by the Storage resource provider. </param>
-        internal OperationListResult(IReadOnlyList<RestApiData> value)
+        internal OperationListResult(IReadOnlyList<RestApi> value)
         {
             Value = value;
         }
 
         /// <summary> List of Storage operations supported by the Storage resource provider. </summary>
-        public IReadOnlyList<RestApiData> Value { get; }
+        public IReadOnlyList<RestApi> Value { get; }
     }
 }

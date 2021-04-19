@@ -7,20 +7,20 @@
 
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the RestApi data model. </summary>
-    public partial class RestApiData
+    /// <summary> Storage REST API operation definition. </summary>
+    public partial class RestApi
     {
-        /// <summary> Initializes a new instance of RestApiData. </summary>
-        internal RestApiData()
+        /// <summary> Initializes a new instance of RestApi. </summary>
+        internal RestApi()
         {
         }
 
-        /// <summary> Initializes a new instance of RestApiData. </summary>
+        /// <summary> Initializes a new instance of RestApi. </summary>
         /// <param name="name"> Operation name: {provider}/{resource}/{operation}. </param>
         /// <param name="display"> Display metadata associated with the operation. </param>
         /// <param name="origin"> The origin of operations. </param>
         /// <param name="serviceSpecification"> One property of operation, include metric specifications. </param>
-        internal RestApiData(string name, RestApiDisplay display, string origin, ServiceSpecification serviceSpecification)
+        internal RestApi(string name, RestApiDisplay display, string origin, ServiceSpecification serviceSpecification)
         {
             Name = name;
             Display = display;

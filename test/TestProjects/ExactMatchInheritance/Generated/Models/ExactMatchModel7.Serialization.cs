@@ -15,10 +15,10 @@ namespace ExactMatchInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(ID))
+            if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("iD");
-                writer.WriteStringValue(ID);
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(Id);
             }
             if (Optional.IsDefined(Name))
             {
@@ -35,14 +35,14 @@ namespace ExactMatchInheritance
 
         internal static ExactMatchModel7 DeserializeExactMatchModel7(JsonElement element)
         {
-            Optional<string> iD = default;
+            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("iD"))
+                if (property.NameEquals("id"))
                 {
-                    iD = property.Value.GetString();
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("name"))
@@ -56,7 +56,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel7(iD.Value, name.Value, type.Value);
+            return new ExactMatchModel7(id.Value, name.Value, type.Value);
         }
     }
 }

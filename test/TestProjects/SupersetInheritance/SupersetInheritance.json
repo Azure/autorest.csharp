@@ -229,7 +229,7 @@
         },
         "SupersetModel2": {
             "properties": {
-                "iD": {
+                "id": {
                     "type": "string"
                 },
                 "name": {

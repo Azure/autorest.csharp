@@ -16,6 +16,8 @@
   "CredentialScopes": [],
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
+  "OperationGroupToResource": {
+    "SupersetModel3": "NonResource"
+  },
   "OperationGroupToParent": {}
 }

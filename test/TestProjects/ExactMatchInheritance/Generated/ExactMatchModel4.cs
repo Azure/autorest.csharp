@@ -5,10 +5,36 @@
 
 #nullable disable
 
+using System.Threading;
+using System.Threading.Tasks;
+using Azure.ResourceManager.Core;
+
 namespace ExactMatchInheritance
 {
     /// <summary> A Class representing a ExactMatchModel4 along with the instance operations that can be performed on it. </summary>
     public class ExactMatchModel4 : ExactMatchModel4Operations
     {
+        /// <summary> Initializes a new instance of the <see cref = "ExactMatchModel4"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="resource"> The resource that is the target of operations. </param>
+        internal ExactMatchModel4(ResourceOperationsBase options, ExactMatchModel4Data resource) : base(options, resource.Id)
+        {
+            Data = resource;
+        }
+
+        /// <summary> Gets or sets the ExactMatchModel4Data. </summary>
+        public ExactMatchModel4Data Data { get; private set; }
+
+        /// <inheritdoc />
+        protected override ExactMatchModel4 GetResource(CancellationToken cancellation = default)
+        {
+            return this;
+        }
+
+        /// <inheritdoc />
+        protected override Task<ExactMatchModel4> GetResourceAsync(CancellationToken cancellation = default)
+        {
+            return Task.FromResult(this);
+        }
     }
 }

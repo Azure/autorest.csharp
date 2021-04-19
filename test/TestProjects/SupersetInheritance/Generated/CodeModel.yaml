@@ -76,7 +76,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SupersetModel2ID
+          name: SupersetModel2Id
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_7
@@ -287,10 +287,10 @@ schemas: !Schemas
       properties:
         - !Property 
           schema: *ref_6
-          serializedName: iD
+          serializedName: id
           language: !Languages 
             default:
-              name: iD
+              name: id
               description: ''
           protocol: !Protocols {}
         - !Property 
