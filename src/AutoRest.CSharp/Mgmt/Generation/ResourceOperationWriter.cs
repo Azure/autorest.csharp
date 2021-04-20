@@ -2,12 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Output;
 using Azure.ResourceManager.Core;
+using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Mgmt.AutoRest;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -16,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private const string ClientDiagnosticsVariable = "clientDiagnostics";
         private const string PipelineVariable = "pipeline";
 
-        public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation)
+        public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
             var cs = resourceOperation.Type;
             var @namespace = cs.Namespace;
@@ -27,7 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteClientCtors(writer, resourceOperation);
                     WriteClientProperties(writer, resourceOperation);
-                    WriteClientMethods(writer, resourceOperation);
+                    WriteClientMethods(writer, resourceOperation, context);
                 }
             }
         }
@@ -48,7 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
             }
 
-        private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation)
+        private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
@@ -83,6 +87,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"return await ListAvailableLocationsAsync(ResourceType, cancellationToken);");
             }
             writer.Line();
+
+            foreach (var item in context.Library.ChildParent)
+            {
+                var parent = item.Value;
+                if (parent.Value.ResourceName.Equals(resourceOperation.ResourceName))
+                {
+                    var child = item.Key;
+                    var container = context.Library.ResourceContainers.First(x => x.ResourceName.Equals(child.Value.ResourceName));
+                    using (writer.Scope($"public {container.Type} Get{container.ResourceName}()"))
+                    {
+                        // TODO: Bring this back after container class implemented
+                        // writer.Line($"return new {container.Type}(this);");
+                        writer.Line($"throw new {typeof(NotImplementedException)}();");
+                    }
+                    writer.Line();
+                }
+            }
         }
     }
 }

@@ -52,5 +52,25 @@ namespace Azure.ResourceManager.Sample
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
+
+        public VirtualMachineScaleSetExtensionContainer GetVirtualMachineScaleSetExtension()
+        {
+            throw new NotImplementedException();
+        }
+
+        public VirtualMachineScaleSetRollingUpgradeContainer GetVirtualMachineScaleSetRollingUpgrade()
+        {
+            throw new NotImplementedException();
+        }
+
+        public VirtualMachineExtensionContainer GetVirtualMachineExtension()
+        {
+            throw new NotImplementedException();
+        }
+
+        public VirtualMachineScaleSetVMContainer GetVirtualMachineScaleSetVM()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

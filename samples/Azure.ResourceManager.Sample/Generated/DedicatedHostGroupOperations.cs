@@ -52,5 +52,10 @@ namespace Azure.ResourceManager.Sample
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
+
+        public DedicatedHostContainer GetDedicatedHost()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

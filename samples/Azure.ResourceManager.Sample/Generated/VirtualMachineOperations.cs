@@ -52,5 +52,10 @@ namespace Azure.ResourceManager.Sample
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
+
+        public VirtualMachineExtensionContainer GetVirtualMachineExtension()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
