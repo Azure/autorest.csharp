@@ -21,11 +21,6 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(Subnet))
@@ -95,7 +90,6 @@ namespace Azure.ResourceManager.Sample
         internal static VirtualMachineScaleSetUpdateIPConfiguration DeserializeVirtualMachineScaleSetUpdateIPConfiguration(JsonElement element)
         {
             Optional<string> name = default;
-            Optional<string> id = default;
             Optional<ApiEntityReference> subnet = default;
             Optional<bool> primary = default;
             Optional<VirtualMachineScaleSetUpdatePublicIPAddressConfiguration> publicIPAddressConfiguration = default;
@@ -109,11 +103,6 @@ namespace Azure.ResourceManager.Sample
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -175,7 +164,7 @@ namespace Azure.ResourceManager.Sample
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DeserializeSubResource(item));
+                                array.Add(SubResource.DeserializeSubResource(item));
                             }
                             applicationGatewayBackendAddressPools = array;
                             continue;
@@ -190,7 +179,7 @@ namespace Azure.ResourceManager.Sample
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DeserializeSubResource(item));
+                                array.Add(SubResource.DeserializeSubResource(item));
                             }
                             applicationSecurityGroups = array;
                             continue;
@@ -205,7 +194,7 @@ namespace Azure.ResourceManager.Sample
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DeserializeSubResource(item));
+                                array.Add(SubResource.DeserializeSubResource(item));
                             }
                             loadBalancerBackendAddressPools = array;
                             continue;
@@ -220,7 +209,7 @@ namespace Azure.ResourceManager.Sample
                             List<SubResource> array = new List<SubResource>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(DeserializeSubResource(item));
+                                array.Add(SubResource.DeserializeSubResource(item));
                             }
                             loadBalancerInboundNatPools = array;
                             continue;
@@ -229,7 +218,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetUpdateIPConfiguration(id.Value, name.Value, subnet.Value, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(applicationSecurityGroups), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatPools));
+            return new VirtualMachineScaleSetUpdateIPConfiguration(name.Value, subnet.Value, Optional.ToNullable(primary), publicIPAddressConfiguration.Value, Optional.ToNullable(privateIPAddressVersion), Optional.ToList(applicationGatewayBackendAddressPools), Optional.ToList(applicationSecurityGroups), Optional.ToList(loadBalancerBackendAddressPools), Optional.ToList(loadBalancerInboundNatPools));
         }
     }
 }

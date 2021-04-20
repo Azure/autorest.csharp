@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> The SubResourceWithColocationStatus. </summary>
-    public partial class SubResourceWithColocationStatus : SubResource
+    public partial class SubResourceWithColocationStatus : Core.SubResource
     {
         /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
         public SubResourceWithColocationStatus()
@@ -16,9 +18,8 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
-        /// <param name="id"> Resource Id. </param>
         /// <param name="colocationStatus"> Describes colocation status of a resource in the Proximity Placement Group. </param>
-        internal SubResourceWithColocationStatus(string id, InstanceViewStatus colocationStatus) : base(id)
+        internal SubResourceWithColocationStatus(InstanceViewStatus colocationStatus)
         {
             ColocationStatus = colocationStatus;
         }

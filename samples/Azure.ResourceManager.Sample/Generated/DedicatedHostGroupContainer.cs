@@ -5,19 +5,150 @@
 
 #nullable disable
 
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of DedicatedHostGroup and their operations over a [ParentResource]. </summary>
-    public partial class DedicatedHostGroupContainer
+    public partial class DedicatedHostGroupContainer : ResourceContainerBase<TenantResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData>
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupContainer for mocking. </summary>
-        protected DedicatedHostGroupContainer()
+        /// <summary> Initializes a new instance of DedicatedHostGroupContainer class. </summary>
+        /// <param name="resourceGroup"> The parent resource group. </param>
+        internal DedicatedHostGroupContainer(ResourceGroupOperations resourceGroup) : base(resourceGroup)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = new HttpPipeline(ClientOptions.Transport);
         }
 
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
+
+        /// <summary> Represents the REST operations. </summary>
+        private DedicatedHostGroupsRestOperations Operations => new DedicatedHostGroupsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+
+        /// <summary> Typed Resource Identifier for the container. </summary>
+        // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
+        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+
+        // Container level operations.
+
+        /// <inheritdoc />
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override ArmResponse<DedicatedHostGroup> CreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        {
+            return StartCreateOrUpdate(hostGroupName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<DedicatedHostGroup>;
+        }
+
+        /// <inheritdoc />
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<ArmResponse<DedicatedHostGroup>> CreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        {
+            var operation = await StartCreateOrUpdateAsync(hostGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+            return operation.WaitForCompletion() as ArmResponse<DedicatedHostGroup>;
+        }
+
+        /// <inheritdoc />
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override ArmOperation<DedicatedHostGroup> StartCreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken: cancellationToken);
+            return new PhArmOperation<DedicatedHostGroup, DedicatedHostGroupData>(
+            originalResponse,
+            data => new DedicatedHostGroup(Parent, data));
+        }
+
+        /// <inheritdoc />
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<ArmOperation<DedicatedHostGroup>> StartCreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        {
+            var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+            return new PhArmOperation<DedicatedHostGroup, DedicatedHostGroupData>(
+            originalResponse,
+            data => new DedicatedHostGroup(Parent, data));
+        }
+
+        /// <inheritdoc />
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override ArmResponse<DedicatedHostGroup> Get(string hostGroupName, CancellationToken cancellationToken = default)
+        {
+            return new PhArmResponse<DedicatedHostGroup, DedicatedHostGroupData>(
+            Operations.Get(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken),
+            data => new DedicatedHostGroup(Parent, data));
+        }
+
+        /// <inheritdoc />
+        /// <param name="hostGroupName"> The name of the dedicated host group. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<ArmResponse<DedicatedHostGroup>> GetAsync(string hostGroupName, CancellationToken cancellationToken = default)
+        {
+            return new PhArmResponse<DedicatedHostGroup, DedicatedHostGroupData>(
+            await Operations.GetAsync(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken),
+            data => new DedicatedHostGroup(Parent, data));
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
+        public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var filters = new ResourceFilterCollection(DedicatedHostGroupData.ResourceType);
+            filters.SubstringFilter = nameFilter;
+            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var filters = new ResourceFilterCollection(DedicatedHostGroupData.ResourceType);
+            filters.SubstringFilter = nameFilter;
+            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of todo: availability set that may take multiple service requests to iterate over. </returns>
+        public Pageable<DedicatedHostGroup> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, DedicatedHostGroup>(results, genericResource => new DedicatedHostGroupOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of todo: availability set that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<DedicatedHostGroup> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, DedicatedHostGroup>(results, genericResource => new DedicatedHostGroupOperations(genericResource).Get().Value);
+        }
+
+        // Builders.
+        // public ArmBuilder<TenantResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
     }
 }

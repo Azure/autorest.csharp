@@ -24,6 +24,9 @@ namespace Azure.ResourceManager.Sample
             PublicKey = publicKey;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format. </summary>
         public string PublicKey { get; set; }
     }

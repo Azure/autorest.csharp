@@ -32,6 +32,9 @@ namespace Azure.ResourceManager.Sample
             SupportsMultipleExtensions = supportsMultipleExtensions;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> The operating system this extension supports. </summary>
         public string OperatingSystem { get; set; }
         /// <summary> The type of role (IaaS or PaaS) this extension supports. </summary>

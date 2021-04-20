@@ -5,19 +5,136 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineExtensionImage and their operations over a [ParentResource]. </summary>
-    public partial class VirtualMachineExtensionImageContainer
+    public partial class VirtualMachineExtensionImageContainer : ResourceContainerBase<TenantResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData>
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageContainer for mocking. </summary>
-        protected VirtualMachineExtensionImageContainer()
+        /// <summary> Initializes a new instance of VirtualMachineExtensionImageContainer class. </summary>
+        /// <param name="resourceGroup"> The parent resource group. </param>
+        internal VirtualMachineExtensionImageContainer(ResourceGroupOperations resourceGroup) : base(resourceGroup)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = new HttpPipeline(ClientOptions.Transport);
         }
 
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
+
+        /// <summary> Represents the REST operations. </summary>
+        private VirtualMachineExtensionImagesRestOperations Operations => new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+
+        /// <summary> Typed Resource Identifier for the container. </summary>
+        // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
+        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected ResourceType ValidResourceType => "Microsoft.Compute/locations/publishers";
+        protected override ResourceType ValidResourceType => "Microsoft.Compute/locations/publishers";
+
+        // Container level operations.
+
+        /// <inheritdoc />
+        public override ArmResponse<VirtualMachineExtensionImage> CreateOrUpdate(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmResponse<VirtualMachineExtensionImage>> CreateOrUpdateAsync(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override ArmOperation<VirtualMachineExtensionImage> StartCreateOrUpdate(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmOperation<VirtualMachineExtensionImage>> StartCreateOrUpdateAsync(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        /// <param name="version"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override ArmResponse<VirtualMachineExtensionImage> Get(string version, CancellationToken cancellationToken = default)
+        {
+            return new PhArmResponse<VirtualMachineExtensionImage, VirtualMachineExtensionImageData>(
+            Operations.Get(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, version, cancellationToken: cancellationToken),
+            data => new VirtualMachineExtensionImage(Parent, data));
+        }
+
+        /// <inheritdoc />
+        /// <param name="version"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<ArmResponse<VirtualMachineExtensionImage>> GetAsync(string version, CancellationToken cancellationToken = default)
+        {
+            return new PhArmResponse<VirtualMachineExtensionImage, VirtualMachineExtensionImageData>(
+            await Operations.GetAsync(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, version, cancellationToken: cancellationToken),
+            data => new VirtualMachineExtensionImage(Parent, data));
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
+        public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var filters = new ResourceFilterCollection(VirtualMachineExtensionImageData.ResourceType);
+            filters.SubstringFilter = nameFilter;
+            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var filters = new ResourceFilterCollection(VirtualMachineExtensionImageData.ResourceType);
+            filters.SubstringFilter = nameFilter;
+            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of todo: availability set that may take multiple service requests to iterate over. </returns>
+        public Pageable<VirtualMachineExtensionImage> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, VirtualMachineExtensionImage>(results, genericResource => new VirtualMachineExtensionImageOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of todo: availability set for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of todo: availability set that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<VirtualMachineExtensionImage> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineExtensionImage>(results, genericResource => new VirtualMachineExtensionImageOperations(genericResource).Get().Value);
+        }
+
+        // Builders.
+        // public ArmBuilder<TenantResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData> Construct() { }
     }
 }

@@ -36,6 +36,9 @@ namespace Azure.ResourceManager.Sample
             SupportAutomaticPlacement = supportAutomaticPlacement;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone. </summary>
         public IList<string> Zones { get; }
         /// <summary> Number of fault domains that the host group can span. </summary>

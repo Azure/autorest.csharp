@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineScaleSetRollingUpgradeData : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetRollingUpgrade : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetRollingUpgradeData DeserializeVirtualMachineScaleSetRollingUpgradeData(JsonElement element)
+        internal static VirtualMachineScaleSetRollingUpgrade DeserializeVirtualMachineScaleSetRollingUpgrade(JsonElement element)
         {
             Optional<RollingUpgradePolicy> policy = default;
             Optional<RollingUpgradeRunningStatus> runningStatus = default;
@@ -82,7 +82,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetRollingUpgradeData(policy.Value, runningStatus.Value, progress.Value, error.Value);
+            return new VirtualMachineScaleSetRollingUpgrade(policy.Value, runningStatus.Value, progress.Value, error.Value);
         }
     }
 }

@@ -20,18 +20,12 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("colocationStatus");
                 writer.WriteObjectValue(ColocationStatus);
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
             writer.WriteEndObject();
         }
 
         internal static SubResourceWithColocationStatus DeserializeSubResourceWithColocationStatus(JsonElement element)
         {
             Optional<InstanceViewStatus> colocationStatus = default;
-            Optional<string> id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("colocationStatus"))
@@ -44,13 +38,8 @@ namespace Azure.ResourceManager.Sample
                     colocationStatus = InstanceViewStatus.DeserializeInstanceViewStatus(property.Value);
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
             }
-            return new SubResourceWithColocationStatus(id.Value, colocationStatus.Value);
+            return new SubResourceWithColocationStatus(colocationStatus.Value);
         }
     }
 }

@@ -16,8 +16,16 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the operations that can be performed over a specific SshPublicKey. </summary>
     public partial class SshPublicKeyOperations : ResourceOperationsBase<TenantResourceIdentifier, SshPublicKey>
     {
-        /// <summary> Initializes a new instance of SshPublicKeyOperations for mocking. </summary>
-        protected SshPublicKeyOperations()
+        /// <summary> Initializes a new instance of the <see cref="SshPublicKeyOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        internal SshPublicKeyOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="SshPublicKeyOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected SshPublicKeyOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
         {
         }
 

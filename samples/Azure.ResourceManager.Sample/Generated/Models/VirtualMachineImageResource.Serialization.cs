@@ -31,11 +31,6 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndObject();
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
             writer.WriteEndObject();
         }
 
@@ -44,7 +39,6 @@ namespace Azure.ResourceManager.Sample
             string name = default;
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
-            Optional<string> id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -72,13 +66,8 @@ namespace Azure.ResourceManager.Sample
                     tags = dictionary;
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
             }
-            return new VirtualMachineImageResource(id.Value, name, location, Optional.ToDictionary(tags));
+            return new VirtualMachineImageResource(name, location, Optional.ToDictionary(tags));
         }
     }
 }

@@ -149,8 +149,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         !IsAssignable(parentProperty.PropertyType, childPropertyType) &&
                         !(parentProperty.PropertyType.IsGenericParameter && IsAssignable(parentProperty.PropertyType.BaseType!, childPropertyType)))
                     {
-                        //TODO(ADO item 5712): deal with protected setter
-                        return false;
+                        if (parentProperty.PropertyType.ContainsGenericParameters && parentProperty.PropertyType.BaseType != null && IsAssignable(parentProperty.PropertyType.BaseType, childPropertyType))
+                        {
+                            // Generic property, but base type is assignable => good to go
+                            // For example `TIdentifier where TIdentifier : TenantResourceIdentifier`
+                        }
+                        else
+                        {
+                            //TODO(ADO item 5712): deal with protected setter
+                            return false;
+                        }
                     }
                 }
                 else
@@ -161,6 +169,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return true;
         }
 
+        /// <summary>
+        /// Tells if <paramref name="childPropertyType" /> can be assigned to <paramref name="parentPropertyType" />
+        /// by checking if there's an implicit type convertor in <paramref name="parentPropertyType" />.
+        /// Todo: should we check childPropertyType as well since an implicit can be defined in either classes?
+        /// </summary>
+        /// <param name="parentPropertyType">The type to be assigned to.</param>
+        /// <param name="childPropertyType">The type to assign.</param>
+        /// <returns></returns>
         private static bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
         {
             return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&

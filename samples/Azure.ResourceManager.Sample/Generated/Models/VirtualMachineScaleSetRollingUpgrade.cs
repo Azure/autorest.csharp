@@ -9,20 +9,20 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the VirtualMachineScaleSetRollingUpgrade data model. </summary>
-    public partial class VirtualMachineScaleSetRollingUpgradeData : TrackedResource<TenantResourceIdentifier>
+    /// <summary> The status of the latest virtual machine scale set rolling upgrade. </summary>
+    public partial class VirtualMachineScaleSetRollingUpgrade : TrackedResource<TenantResourceIdentifier>
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgradeData. </summary>
-        public VirtualMachineScaleSetRollingUpgradeData()
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgrade. </summary>
+        public VirtualMachineScaleSetRollingUpgrade()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgradeData. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgrade. </summary>
         /// <param name="policy"> The rolling upgrade policies applied for this upgrade. </param>
         /// <param name="runningStatus"> Information about the current running state of the overall upgrade. </param>
         /// <param name="progress"> Information about the number of virtual machine instances in each upgrade state. </param>
         /// <param name="error"> Error details for this upgrade, if there are any. </param>
-        internal VirtualMachineScaleSetRollingUpgradeData(RollingUpgradePolicy policy, RollingUpgradeRunningStatus runningStatus, RollingUpgradeProgressInfo progress, ApiError error)
+        internal VirtualMachineScaleSetRollingUpgrade(RollingUpgradePolicy policy, RollingUpgradeRunningStatus runningStatus, RollingUpgradeProgressInfo progress, ApiError error)
         {
             Policy = policy;
             RunningStatus = runningStatus;

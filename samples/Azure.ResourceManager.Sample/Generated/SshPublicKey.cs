@@ -5,10 +5,22 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A Class representing a SshPublicKey along with the instance operations that can be performed on it. </summary>
     public class SshPublicKey : SshPublicKeyOperations
     {
+        /// <summary> Initializes a new instance of the <see cref="SshPublicKey"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="resource"> The resource that is the target of operations. </param>
+        internal SshPublicKey(ResourceOperationsBase options, SshPublicKeyData resource) : base(options, resource.Id)
+        {
+            Data = resource;
+        }
+
+        /// <summary> Gets or sets the availability set data. </summary>
+        public SshPublicKeyData Data { get; private set; }
     }
 }

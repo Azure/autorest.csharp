@@ -25,15 +25,16 @@
     "LogAnalytics": "Microsoft.Compute/locations/logAnalytics"
   },
   "OperationGroupToResource": {
-    "Operations": "RestApi",
+    "Operations": "NonResource",
     "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
     "VirtualMachineImages": "VirtualMachineImage",
     "Usage": "NonResource",
-    "VirtualMachineSizes": "VirtualMachineSize",
-    "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
+    "VirtualMachineSizes": "NonResource",
+    "VirtualMachineScaleSetRollingUpgrades": "NonResource",
     "LogAnalytics": "NonResource"
   },
   "OperationGroupToParent": {
+    "Operations": "Tenant",
     "LogAnalytics": "subscriptions",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
     "VirtualMachineImages": "Microsoft.Compute/locations",

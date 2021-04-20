@@ -37,6 +37,9 @@ namespace Azure.ResourceManager.Sample
             ColocationStatus = colocationStatus;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> Specifies the type of the proximity placement group. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Standard** : Co-locate resources within an Azure region or Availability Zone. &lt;br&gt;&lt;br&gt; **Ultra** : For future use. </summary>
         public ProximityPlacementGroupType? ProximityPlacementGroupType { get; set; }
         /// <summary> A list of references to all virtual machines in the proximity placement group. </summary>

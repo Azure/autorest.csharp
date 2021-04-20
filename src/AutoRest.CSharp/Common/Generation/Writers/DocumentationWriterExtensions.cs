@@ -41,6 +41,17 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.WriteDocumentationLines($"<param name=\"{name}\">", "</param>", text, skipWhenEmpty: false);
         }
 
+        /// <summary>
+        /// Writes XML documentation for a parameter of a method using a "param" tag.
+        /// </summary>
+        /// <param name="writer">Writer to which code is written to.</param>
+        /// <param name="parameter">The definition of the parameter, including name and description.</param>
+        /// <returns></returns>
+        public static CodeWriter WriteXmlDocumentationParameter(this CodeWriter writer, Parameter parameter)
+        {
+            return writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+        }
+
         public static CodeWriter WriteXmlDocumentationException(this CodeWriter writer, Type exception, string? description)
         {
             return writer.WriteDocumentationLines($"<exception cref=\"{exception.FullName}\">", "</exception>", description, skipWhenEmpty: false);

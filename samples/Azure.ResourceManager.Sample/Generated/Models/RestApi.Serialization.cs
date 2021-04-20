@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class RestApiData
+    public partial class RestApi
     {
-        internal static RestApiData DeserializeRestApiData(JsonElement element)
+        internal static RestApi DeserializeRestApi(JsonElement element)
         {
             Optional<string> origin = default;
             Optional<string> name = default;
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new RestApiData(origin.Value, name.Value, operation.Value, resource.Value, description.Value, provider.Value);
+            return new RestApi(origin.Value, name.Value, operation.Value, resource.Value, description.Value, provider.Value);
         }
     }
 }

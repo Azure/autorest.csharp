@@ -16,11 +16,6 @@ namespace Azure.ResourceManager.Sample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
             writer.WriteEndObject();
         }
 
@@ -30,7 +25,6 @@ namespace Azure.ResourceManager.Sample
             Optional<string> contentVersion = default;
             Optional<object> parameters = default;
             Optional<IReadOnlyList<object>> resources = default;
-            Optional<string> id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("$schema"))
@@ -68,13 +62,8 @@ namespace Azure.ResourceManager.Sample
                     resources = array;
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
             }
-            return new VirtualMachineCaptureResult(id.Value, schema.Value, contentVersion.Value, parameters.Value, Optional.ToList(resources));
+            return new VirtualMachineCaptureResult(schema.Value, contentVersion.Value, parameters.Value, Optional.ToList(resources));
         }
     }
 }

@@ -68,6 +68,9 @@ namespace Azure.ResourceManager.Sample
             ProtectionPolicy = protectionPolicy;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> The virtual machine instance ID. </summary>
         public string InstanceId { get; }
         /// <summary> The virtual machine SKU. </summary>

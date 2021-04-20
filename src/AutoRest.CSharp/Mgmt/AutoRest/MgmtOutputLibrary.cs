@@ -241,6 +241,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureRestClients()[operationGroup];
         }
 
+        /// <summary>
+        /// Looks up a resource data object by resource name.
+        /// </summary>
+        /// <param name="resourceName">Name of the resource.</param>
+        /// <returns></returns>
+        public ResourceData FindResourceData(OperationGroup operationGroup)
+        {
+            return EnsureResourceData()[operationGroup];
+        }
+
         private void DecorateOperationGroup()
         {
             foreach (var operationsGroup in _codeModel.OperationGroups)

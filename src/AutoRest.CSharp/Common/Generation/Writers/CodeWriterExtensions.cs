@@ -413,5 +413,22 @@ namespace AutoRest.CSharp.Generation.Writers
 
             return null;
         }
+
+        /// <summary>
+        /// Write the input namespaces as using statements.
+        /// </summary>
+        /// <param name="writer">The code writer that is used to write code.</param>
+        /// <param name="namespaces"></param>
+        internal static void UseNamespaces(this CodeWriter writer, params string[] namespaces)
+        {
+            foreach (var @namespace in namespaces)
+            {
+                writer.UseNamespace(@namespace);
+            }
+            if (namespaces.Count() > 0)
+            {
+                writer.Line();
+            }
+        }
     }
 }

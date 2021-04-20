@@ -35,11 +35,6 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("version");
                 writer.WriteStringValue(Version);
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
             writer.WriteEndObject();
         }
 
@@ -50,7 +45,6 @@ namespace Azure.ResourceManager.Sample
             Optional<string> sku = default;
             Optional<string> version = default;
             Optional<string> exactVersion = default;
-            Optional<string> id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("publisher"))
@@ -78,13 +72,8 @@ namespace Azure.ResourceManager.Sample
                     exactVersion = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
             }
-            return new ImageReference(id.Value, publisher.Value, offer.Value, sku.Value, version.Value, exactVersion.Value);
+            return new ImageReference(publisher.Value, offer.Value, sku.Value, version.Value, exactVersion.Value);
         }
     }
 }
