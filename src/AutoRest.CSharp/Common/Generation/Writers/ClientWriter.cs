@@ -17,7 +17,6 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 {
     internal class ClientWriter
     {
-       // protected const string ClientDiagnosticsVariable = "clientDiagnostics";
         protected string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
         protected void WritePagingOperationDefinition(CodeWriter writer, PagingMethod pagingMethod, bool async, string restClientParam, string clientDiagnosticsParam)
