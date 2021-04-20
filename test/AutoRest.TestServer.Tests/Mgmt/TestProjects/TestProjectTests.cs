@@ -123,9 +123,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
                 var containerObj = Activator.CreateInstance(type, true);
                 var validResourceTypeProperty = containerObj.GetType().GetProperty("ValidResourceType", BindingFlags.NonPublic | BindingFlags.Instance);
-                ResourceType parentResourceType = validResourceTypeProperty.GetValue(containerObj) as ResourceType;
+                ResourceType resourceType = validResourceTypeProperty.GetValue(containerObj) as ResourceType;
 
-                if (parentResourceType.Type == "subscriptions")
+                if (resourceType.Equals(SubscriptionOperations.ResourceType))
                 {
                     var methodInfo = subscriptionExtension.GetMethod($"Get{resourceName}Container", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(methodInfo);
