@@ -52,7 +52,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [Ignore("TODO ADO item 1111")]
         [Test]
         public void ValidateResourceGroupExtensions()
         {
@@ -65,20 +64,21 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Type resourceExtensions = allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
             Assert.NotNull(resourceExtensions);
 
-            var resourceType = ResourceGroupOperations.ResourceType;
             foreach (var type in FindAllContainers())
             {
-                var obj = Activator.CreateInstance(resourceExtensions.Assembly.FullName, type.Name, true,
-                    BindingFlags.CreateInstance | BindingFlags.NonPublic, null, null, CultureInfo.CurrentCulture, null);
-                var validResourceType = obj.GetType().GetProperty("ValidResourceType").GetValue(obj) as string;
-                if (resourceType.Equals(validResourceType))
+                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
+
+                var containerObj = Activator.CreateInstance(type, true);
+                var validResourceTypeProperty = containerObj.GetType().GetProperty("ValidResourceType", BindingFlags.NonPublic | BindingFlags.Instance);
+                ResourceType resourceType = validResourceTypeProperty.GetValue(containerObj) as ResourceType;
+                if (resourceType.Equals(ResourceGroupOperations.ResourceType))
                 {
-                    var getContainerMethod = resourceExtensions.GetMethod($"Get{type.Name.Substring(0, type.Name.IndexOf("Container"))}s");
+                    var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}s");
                     Assert.NotNull(getContainerMethod);
                 }
                 else
                 {
-                    var getContainerMethod = resourceExtensions.GetMethod($"Get{type.Name.Substring(0, type.Name.IndexOf("Container"))}s");
+                    var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}s");
                     Assert.IsNull(getContainerMethod);
                 }
             }
@@ -90,7 +90,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type t in allTypes)
             {
-                if (t.Name.Contains("Containers") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (t.Name.Contains("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
                 {
                     yield return t;
                 }
@@ -119,19 +119,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var propertyInfo = type.GetProperty(propertyName, BindingFlags.Instance | BindingFlags.NonPublic);
                 Assert.NotNull(propertyInfo, $"Property '{type.Name}' is not found");
                 Assert.AreEqual(typeof(ResourceType), propertyInfo.PropertyType);
-            }
-        }
-
-        private IEnumerable<Type> FindAllContainers()
-        {
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
-
-            foreach (Type t in allTypes)
-            {
-                if (t.Name.Contains("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
-                {
-                    yield return t;
-                }
             }
         }
     }

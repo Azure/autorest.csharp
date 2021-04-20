@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (var resource in context.Library.ArmResource)
                     {
-                        if (resource.OperationGroup.Parent(context.Configuration.MgmtConfiguration).Equals("resourceGroups"))
+                        if (resource.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("resourceGroups"))
                         {
                             foreach (var container in context.Library.ResourceContainers)
                             {
