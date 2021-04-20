@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
@@ -15,7 +16,7 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public static void WriteClientOptions(CodeWriter writer, BuildContext context)
         {
-            var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
+            var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
             var @namespace = context.DefaultNamespace;
             var apiVersions = context.CodeModel.OperationGroups
                 .SelectMany(g => g.Operations.SelectMany(o => o.ApiVersions))
