@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string _prefix;
         private BuildContext<MgmtOutputLibrary> _context;
 
-        protected OperationGroup _operationGroup;
+        public OperationGroup _operationGroup { get; protected set; }
         protected MgmtRestClient? _restClient;
 
         public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
