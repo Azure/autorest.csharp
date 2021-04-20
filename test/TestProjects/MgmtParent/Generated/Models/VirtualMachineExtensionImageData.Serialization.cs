@@ -10,8 +10,19 @@ using Azure.Core;
 
 namespace MgmtParent
 {
-    public partial class VirtualMachineExtensionImageData
+    public partial class VirtualMachineExtensionImageData : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Bar))
+            {
+                writer.WritePropertyName("bar");
+                writer.WriteStringValue(Bar);
+            }
+            writer.WriteEndObject();
+        }
+
         internal static VirtualMachineExtensionImageData DeserializeVirtualMachineExtensionImageData(JsonElement element)
         {
             Optional<string> bar = default;

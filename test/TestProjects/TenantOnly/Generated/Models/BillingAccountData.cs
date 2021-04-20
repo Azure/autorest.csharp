@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace TenantOnly
 {
     /// <summary> A class representing the BillingAccount data model. </summary>
-    public partial class BillingAccountData
+    public partial class BillingAccountData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of BillingAccountData. </summary>
         public BillingAccountData()

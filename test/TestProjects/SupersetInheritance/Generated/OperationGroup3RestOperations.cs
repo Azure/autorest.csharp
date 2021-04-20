@@ -49,7 +49,7 @@ namespace SupersetInheritance
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string operationGroup3Name, SupersetModel3Data parameters)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string operationGroup3Name, SupersetModel3 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -77,7 +77,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup3Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SupersetModel3Data>> PutAsync(string resourceGroupName, string operationGroup3Name, SupersetModel3Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SupersetModel3>> PutAsync(string resourceGroupName, string operationGroup3Name, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -98,9 +98,9 @@ namespace SupersetInheritance
             {
                 case 200:
                     {
-                        SupersetModel3Data value = default;
+                        SupersetModel3 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SupersetModel3Data.DeserializeSupersetModel3Data(document.RootElement);
+                        value = SupersetModel3.DeserializeSupersetModel3(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -113,7 +113,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup3Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SupersetModel3Data> Put(string resourceGroupName, string operationGroup3Name, SupersetModel3Data parameters, CancellationToken cancellationToken = default)
+        public Response<SupersetModel3> Put(string resourceGroupName, string operationGroup3Name, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -134,9 +134,9 @@ namespace SupersetInheritance
             {
                 case 200:
                     {
-                        SupersetModel3Data value = default;
+                        SupersetModel3 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SupersetModel3Data.DeserializeSupersetModel3Data(document.RootElement);
+                        value = SupersetModel3.DeserializeSupersetModel3(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

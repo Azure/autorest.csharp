@@ -49,7 +49,7 @@ namespace MgmtParent
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string hostGroupName, string foo)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -66,12 +66,8 @@ namespace MgmtParent
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new DedicatedHostGroupData()
-            {
-                Foo = foo
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
             return message;
         }
@@ -79,10 +75,10 @@ namespace MgmtParent
         /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
-        /// <param name="foo"> specifies the foo. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is null. </exception>
-        public async Task<Response<DedicatedHostGroupData>> CreateOrUpdateAsync(string resourceGroupName, string hostGroupName, string foo = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<DedicatedHostGroupData>> CreateOrUpdateAsync(string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -92,8 +88,12 @@ namespace MgmtParent
             {
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, hostGroupName, foo);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, hostGroupName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -113,10 +113,10 @@ namespace MgmtParent
         /// <summary> Create or update a dedicated host group. For details of Dedicated Host and Dedicated Host Groups please see [Dedicated Host Documentation] (https://go.microsoft.com/fwlink/?linkid=2082596). </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
-        /// <param name="foo"> specifies the foo. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="hostGroupName"/> is null. </exception>
-        public Response<DedicatedHostGroupData> CreateOrUpdate(string resourceGroupName, string hostGroupName, string foo = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<DedicatedHostGroupData> CreateOrUpdate(string resourceGroupName, string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -126,8 +126,12 @@ namespace MgmtParent
             {
                 throw new ArgumentNullException(nameof(hostGroupName));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, hostGroupName, foo);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, hostGroupName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

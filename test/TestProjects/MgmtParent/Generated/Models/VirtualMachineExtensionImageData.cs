@@ -5,13 +5,15 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace MgmtParent
 {
     /// <summary> A class representing the VirtualMachineExtensionImage data model. </summary>
-    public partial class VirtualMachineExtensionImageData
+    public partial class VirtualMachineExtensionImageData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
-        internal VirtualMachineExtensionImageData()
+        public VirtualMachineExtensionImageData()
         {
         }
 
@@ -23,6 +25,6 @@ namespace MgmtParent
         }
 
         /// <summary> specifies the bar. </summary>
-        public string Bar { get; }
+        public string Bar { get; set; }
     }
 }

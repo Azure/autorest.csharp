@@ -21,6 +21,13 @@ namespace ExactMatchInheritance
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref = "ExactMatchModel3Operations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected ExactMatchModel3Operations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        {
+        }
+
         public static readonly ResourceType ResourceType = "ExactMatchInheritance/ExactMatchModel3Operations";
         protected override ResourceType ValidResourceType => ResourceType;
 

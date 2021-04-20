@@ -9,22 +9,35 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace TenantOnly
+namespace MgmtParent
 {
-    public partial class AgreementData
+    public partial class Resource : IUtf8JsonSerializable
     {
-        internal static AgreementData DeserializeAgreementData(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
-            Optional<string> foo = default;
-            Optional<string> location = default;
-            Optional<IReadOnlyDictionary<string, string>> tags = default;
+            writer.WriteStartObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
+            if (Optional.IsCollectionDefined(Tags))
+            {
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndObject();
+        }
+
+        internal static Resource DeserializeResource(JsonElement element)
+        {
+            string location = default;
+            Optional<IDictionary<string, string>> tags = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("foo"))
-                {
-                    foo = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("location"))
                 {
                     location = property.Value.GetString();
@@ -46,7 +59,7 @@ namespace TenantOnly
                     continue;
                 }
             }
-            return new AgreementData(foo.Value, location.Value, Optional.ToDictionary(tags));
+            return new Resource(location, Optional.ToDictionary(tags));
         }
     }
 }

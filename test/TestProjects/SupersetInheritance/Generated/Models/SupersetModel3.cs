@@ -7,20 +7,20 @@
 
 namespace SupersetInheritance
 {
-    /// <summary> A class representing the SupersetModel3 data model. </summary>
-    public partial class SupersetModel3Data
+    /// <summary> The SupersetModel3. </summary>
+    public partial class SupersetModel3
     {
-        /// <summary> Initializes a new instance of SupersetModel3Data. </summary>
-        public SupersetModel3Data()
+        /// <summary> Initializes a new instance of SupersetModel3. </summary>
+        public SupersetModel3()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel3Data. </summary>
+        /// <summary> Initializes a new instance of SupersetModel3. </summary>
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="type"> . </param>
         /// <param name="new"> . </param>
-        internal SupersetModel3Data(int? id, string name, string type, string @new)
+        internal SupersetModel3(int? id, string name, string type, string @new)
         {
             Id = id;
             Name = name;

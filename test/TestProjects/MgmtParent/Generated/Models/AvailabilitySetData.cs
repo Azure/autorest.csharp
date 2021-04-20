@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace MgmtParent
 {
     /// <summary> A class representing the AvailabilitySet data model. </summary>
-    public partial class AvailabilitySetData
+    public partial class AvailabilitySetData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
         public AvailabilitySetData()

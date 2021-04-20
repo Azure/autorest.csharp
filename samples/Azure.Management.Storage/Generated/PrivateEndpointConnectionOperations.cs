@@ -21,6 +21,13 @@ namespace Azure.Management.Storage
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref = "PrivateEndpointConnectionOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected PrivateEndpointConnectionOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Azure.Management.Storage/PrivateEndpointConnectionOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 

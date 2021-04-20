@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineSizeData
+    public partial class VirtualMachineSize
     {
-        internal static VirtualMachineSizeData DeserializeVirtualMachineSizeData(JsonElement element)
+        internal static VirtualMachineSize DeserializeVirtualMachineSize(JsonElement element)
         {
             Optional<string> name = default;
             Optional<int> numberOfCores = default;
@@ -78,7 +78,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineSizeData(name.Value, Optional.ToNullable(numberOfCores), Optional.ToNullable(osDiskSizeInMB), Optional.ToNullable(resourceDiskSizeInMB), Optional.ToNullable(memoryInMB), Optional.ToNullable(maxDataDiskCount));
+            return new VirtualMachineSize(name.Value, Optional.ToNullable(numberOfCores), Optional.ToNullable(osDiskSizeInMB), Optional.ToNullable(resourceDiskSizeInMB), Optional.ToNullable(memoryInMB), Optional.ToNullable(maxDataDiskCount));
         }
     }
 }

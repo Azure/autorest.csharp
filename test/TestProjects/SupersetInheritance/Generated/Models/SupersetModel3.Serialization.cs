@@ -8,18 +8,13 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace ExactMatchInheritance
+namespace SupersetInheritance
 {
-    public partial class ExactMatchModel4Data : IUtf8JsonSerializable
+    public partial class SupersetModel3 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(New))
-            {
-                writer.WritePropertyName("new");
-                writer.WriteStringValue(New);
-            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
@@ -35,22 +30,22 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(Type);
             }
+            if (Optional.IsDefined(New))
+            {
+                writer.WritePropertyName("new");
+                writer.WriteStringValue(New);
+            }
             writer.WriteEndObject();
         }
 
-        internal static ExactMatchModel4Data DeserializeExactMatchModel4Data(JsonElement element)
+        internal static SupersetModel3 DeserializeSupersetModel3(JsonElement element)
         {
-            Optional<string> @new = default;
             Optional<int> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
+            Optional<string> @new = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("new"))
-                {
-                    @new = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("id"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -71,8 +66,13 @@ namespace ExactMatchInheritance
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("new"))
+                {
+                    @new = property.Value.GetString();
+                    continue;
+                }
             }
-            return new ExactMatchModel4Data(Optional.ToNullable(id), name.Value, type.Value, @new.Value);
+            return new SupersetModel3(Optional.ToNullable(id), name.Value, type.Value, @new.Value);
         }
     }
 }

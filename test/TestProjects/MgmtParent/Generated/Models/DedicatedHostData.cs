@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace MgmtParent
 {
     /// <summary> A class representing the DedicatedHost data model. </summary>
-    public partial class DedicatedHostData
+    public partial class DedicatedHostData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
         public DedicatedHostData()

@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of VirtualMachineSizeListResult. </summary>
         internal VirtualMachineSizeListResult()
         {
-            Value = new ChangeTrackingList<VirtualMachineSizeData>();
+            Value = new ChangeTrackingList<VirtualMachineSize>();
         }
 
         /// <summary> Initializes a new instance of VirtualMachineSizeListResult. </summary>
         /// <param name="value"> The list of virtual machine sizes. </param>
-        internal VirtualMachineSizeListResult(IReadOnlyList<VirtualMachineSizeData> value)
+        internal VirtualMachineSizeListResult(IReadOnlyList<VirtualMachineSize> value)
         {
             Value = value;
         }
 
         /// <summary> The list of virtual machine sizes. </summary>
-        public IReadOnlyList<VirtualMachineSizeData> Value { get; }
+        public IReadOnlyList<VirtualMachineSize> Value { get; }
     }
 }

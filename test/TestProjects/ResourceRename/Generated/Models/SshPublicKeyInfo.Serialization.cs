@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace ResourceRename
 {
-    public partial class SshPublicKeyInfoData : IUtf8JsonSerializable
+    public partial class SshPublicKeyInfo : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -28,7 +28,7 @@ namespace ResourceRename
             writer.WriteEndObject();
         }
 
-        internal static SshPublicKeyInfoData DeserializeSshPublicKeyInfoData(JsonElement element)
+        internal static SshPublicKeyInfo DeserializeSshPublicKeyInfo(JsonElement element)
         {
             Optional<string> path = default;
             Optional<string> keyData = default;
@@ -45,7 +45,7 @@ namespace ResourceRename
                     continue;
                 }
             }
-            return new SshPublicKeyInfoData(path.Value, keyData.Value);
+            return new SshPublicKeyInfo(path.Value, keyData.Value);
         }
     }
 }
