@@ -106,6 +106,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateSubscriptionExtensions()
         {
+            if (_projectName.Equals(""))
+            {
+                return;
+            }
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
             Type subscriptionExtension = allTypes.FirstOrDefault(t => t.Name == "SubscriptionExtensions" && !t.Name.Contains("Tests") && t.Namespace == _projectName);

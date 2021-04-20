@@ -34,16 +34,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (var resource in resources)
                     {
-                        bool isRegion = false;
                         if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions))
                         {
-                            if (!isRegion)
-                            {
-                                isRegion = true;
-                                writer.Line($"#region {resource.Type.Name}");
-                            }
+                            writer.Line($"#region {resource.Type.Name}");
                             var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
                             WriteGetResourceContainerMethod(writer, resourceContainer);
+                            writer.LineRaw("#endregion");
                         }
                         else
                         {
@@ -59,11 +55,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             }
                             if (pagingMethod != null)
                             {
-                                if (!isRegion)
-                                {
-                                    isRegion = true;
-                                    writer.Line($"#region {resource.Type.Name}");
-                                }
+                                writer.Line($"#region {resource.Type.Name}");
                                 WriteGetResourceRestOperations(writer, resourceOperation);
 
                                 WriteListResourceMethod(writer, resource, resourceOperation, pagingMethod, true);
@@ -74,9 +66,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                                 WriteListResourceByNameMethod(writer, resourceOperation, true);
                                 WriteListResourceByNameMethod(writer, resourceOperation, false);
+                                writer.LineRaw("#endregion");
                             }
                         }
-                        if (isRegion) writer.LineRaw("#endregion");
                         writer.Line();
                     }
                 }
