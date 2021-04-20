@@ -23,6 +23,10 @@
     "Azure.AI.DocumentTranslation": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.DocumentTranslation\\Generated"
+    },    
+    "Azure.AI.FormRecognizer": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Generated"
     },
     "azure-parameter-grouping": {
       "commandName": "Project",
@@ -35,10 +39,6 @@
     "BodyAndPath": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath\\Generated"
-    },
-    "Azure.AI.FormRecognizer": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.FormRecognizer\\Generated"
     },
     "Azure.Management.Storage": {
       "commandName": "Project",
