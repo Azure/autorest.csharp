@@ -115,8 +115,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Type subscriptionExtension = allTypes.FirstOrDefault(t => t.Name == "SubscriptionExtensions" && !t.Name.Contains("Tests") && t.Namespace == _projectName);
             Assert.NotNull(subscriptionExtension);
 
-            Type containerType = FindAllContainers().FirstOrDefault();
-
             foreach (Type type in FindAllContainers())
             {
                 var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
