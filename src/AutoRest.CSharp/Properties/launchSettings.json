@@ -20,6 +20,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\AppConfiguration\\Generated"
     },
+    "Azure.AI.DocumentTranslation": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.DocumentTranslation\\Generated"
+    },
     "azure-parameter-grouping": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-parameter-grouping\\Generated"
@@ -28,9 +32,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\azure-special-properties\\Generated"
     },
-    "Azure.AI.DocumentTranslation": {
+    "BodyAndPath": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.AI.DocumentTranslation\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath\\Generated"
     },
     "Azure.AI.FormRecognizer": {
       "commandName": "Project",
@@ -124,10 +128,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-time\\Generated"
     },
-    "BodyAndPath": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath\\Generated"
-    },
     "CognitiveSearch": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\CognitiveSearch\\Generated"
@@ -176,13 +176,13 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\header\\Generated"
     },
-    "header-LowLevel": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\header\\Generated"
-    },
     "HeaderCollectionPrefix": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeaderCollectionPrefix\\Generated"
+    },
+    "header-LowLevel": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\header\\Generated"
     },
     "httpInfrastructure": {
       "commandName": "Project",

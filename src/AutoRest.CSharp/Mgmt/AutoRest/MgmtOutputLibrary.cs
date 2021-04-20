@@ -173,7 +173,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         if (!_armResource.ContainsKey(operation))
                         {
                             _armResource.Add(operation, new Resource(operation, _context));
-                            //_armResource.Add(operation, new Resource(operation, _context));
                         }
                     }
                 }
