@@ -15,10 +15,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class XmlTests : TestServerTestBase
     {
-        public XmlTests(TestServerVersion version) : base(version) { }
-
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task JsonInputInXMLSwagger() => TestStatus(async (host, pipeline) =>
         {
             return await new XmlClient(ClientDiagnostics, pipeline, host).JsonInputAsync(new JsonInput()
@@ -28,7 +25,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task JsonOutputInXMLSwagger() => Test(async (host, pipeline) =>
         {
             var result = await new XmlClient(ClientDiagnostics, pipeline, host).JsonOutputAsync();
@@ -36,7 +32,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetWithXMsText() => Test(async (host, pipeline) =>
         {
             var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetXMsTextAsync();
@@ -45,7 +40,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutSimpleXML() => TestStatus(async (host, pipeline) =>
         {
             var slideshow = new Slideshow
@@ -105,7 +99,6 @@ namespace AutoRest.TestServer.Tests
 
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutRootWithRefAndNoMetaXML() => TestStatus(async (host, pipeline) =>
         {
             var root = new RootWithRefAndNoMeta
@@ -122,7 +115,6 @@ namespace AutoRest.TestServer.Tests
 
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutRootWithRefAndNoMetaXML_Sync() => TestStatus((host, pipeline) =>
         {
             var root = new RootWithRefAndNoMeta
@@ -158,7 +150,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutRootWithRefAndMetaXML() => TestStatus(async (host, pipeline) =>
         {
             var root = new RootWithRefAndMeta()
@@ -184,7 +175,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutXMLListAtRootSingle() => TestStatus(async (host, pipeline) =>
         {
             var root = new[]
@@ -213,7 +203,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutEmptyXMLList() => TestStatus(async (host, pipeline) =>
         {
             var root = new Slideshow
@@ -236,7 +225,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutXMLEmptyNode() => TestStatus(async (host, pipeline) =>
         {
             var root = new Banana()
@@ -261,7 +249,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutWrappedXMLList() => TestStatus(async (host, pipeline) =>
         {
             var root = new AppleBarrel()
@@ -284,7 +271,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutEmptyWrappedXMLList() => TestStatus(async (host, pipeline) =>
         {
             var root = new AppleBarrel();
@@ -305,7 +291,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task StoragePutContainerACLXML() => TestStatus(async (host, pipeline) =>
         {
             var root = new List<SignedIdentifier>()
@@ -338,7 +323,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutXMLListAtRoot() => TestStatus(async (host, pipeline) =>
         {
             var root = new List<Banana>()
@@ -378,7 +362,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task PutEmptyXMLListAtRoot() => TestStatus(async (host, pipeline) =>
         {
             var root = new List<Banana>();
@@ -422,7 +405,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task GetHeadersAsync() => Test(async (host, pipeline) =>
         {
             var result = await new XmlClient(ClientDiagnostics, pipeline, host).RestClient.GetHeadersAsync();
@@ -519,7 +501,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task StoragePutServicePropertiesXML() => TestStatus(async (host, pipeline) =>
         {
             var properties = new StorageServiceProperties()
@@ -574,7 +555,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task XmlGetBytes() => Test(async (host, pipeline) =>
         {
             var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetBytesAsync();
@@ -582,7 +562,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task XmlPutBytes() => TestStatus(async (host, pipeline) =>
             await new XmlClient(ClientDiagnostics, pipeline, host).PutBinaryAsync(new ModelWithByteProperty()
             {
@@ -590,7 +569,6 @@ namespace AutoRest.TestServer.Tests
             }));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task XmlGetUrl() => Test(async (host, pipeline) =>
         {
             var result = await new XmlClient(ClientDiagnostics, pipeline, host).GetUriAsync();
@@ -598,7 +576,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No match")]
         public Task XmlPutUrl() => TestStatus(async (host, pipeline) =>
             await new XmlClient(ClientDiagnostics, pipeline, host).PutUriAsync(new ModelWithUrlProperty()
             {

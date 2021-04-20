@@ -11,13 +11,10 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
-    [IgnoreOnTestServer(TestServerVersion.V2, "Too many missing or too strict recordings")]
     public class HeaderTests : TestServerTestBase
     {
         private static readonly DateTimeOffset MinDate = new DateTimeOffset(0001, 1, 1, 0, 0, 0, TimeSpan.Zero);
         private static readonly DateTimeOffset ValidDate = new DateTimeOffset(2010, 1, 1, 12, 34, 56, TimeSpan.Zero);
-        public HeaderTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task HeaderParameterExistingKey() => TestStatus(async (host, pipeline) => await new HeaderClient(ClientDiagnostics, pipeline, host).ParamExistingKeyAsync( "overwrite"), ignoreScenario: false, useSimplePipeline: true);
 

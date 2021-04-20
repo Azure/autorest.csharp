@@ -8,11 +8,8 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
-    [IgnoreOnTestServer(TestServerVersion.V2, "LRO tests are not supported yet")]
     public class lroParameterizedEndpoints: TestServerTestBase
     {
-        public lroParameterizedEndpoints(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task LROParameterizedEndpoint() => Test(async (host, pipeline) =>
         {

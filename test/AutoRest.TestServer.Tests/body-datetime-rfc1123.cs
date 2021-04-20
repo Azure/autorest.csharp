@@ -12,8 +12,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyDateTimeRfc1123Test: TestServerTestBase
     {
-        public BodyDateTimeRfc1123Test(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task GetDateTimeRfc1123Invalid() => Test((host, pipeline) =>
         {

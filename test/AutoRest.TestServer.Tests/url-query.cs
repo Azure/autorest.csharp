@@ -12,8 +12,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class UrlQueryTests : TestServerTestBase
     {
-        public UrlQueryTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task UrlQueriesBoolTrue() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetBooleanTrueAsync());
 
@@ -33,22 +31,18 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesIntNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetIntNullAsync( null));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlQueriesLongPositive() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetTenBillionAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlQueriesLongNegative() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetNegativeTenBillionAsync());
 
         [Test]
         public Task UrlQueriesLongNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetLongNullAsync( null));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task UrlQueriesFloatPositive() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).FloatScientificPositiveAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task UrlQueriesFloatNegative() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).FloatScientificNegativeAsync());
 
         [Test]
@@ -64,7 +58,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesDoubleNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).DoubleNullAsync( null));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task UrlQueriesStringUnicode() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).StringUnicodeAsync());
 
         [Test]
@@ -98,7 +91,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesDateNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).DateNullAsync( null));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task UrlQueriesDateTimeValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).DateTimeValidAsync());
 
         [Test]
@@ -108,7 +100,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayCsvValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringCsvValidAsync( new[] {"ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""}));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
         public Task UrlQueriesArrayNoCollectionFormatValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringNoCollectionFormatEmptyAsync( new[] {"hello", "nihao", "bonjour"}));
 
         [Test]

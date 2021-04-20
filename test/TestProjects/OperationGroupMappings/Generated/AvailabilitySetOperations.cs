@@ -21,7 +21,7 @@ namespace OperationGroupMappings
         {
         }
 
-        private static readonly ResourceType ResourceType = "OperationGroupMappings/AvailabilitySetOperations";
+        public static readonly ResourceType ResourceType = "OperationGroupMappings/AvailabilitySetOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

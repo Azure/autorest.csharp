@@ -13,11 +13,8 @@ using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
 {
-    [IgnoreOnTestServer(TestServerVersion.V2, "These tests are not implemented on V2")]
     public class MediaTypesTests : TestServerTestBase
     {
-        public MediaTypesTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task MediaTypeJson() => Test(async (host, pipeline) =>
         {

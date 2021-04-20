@@ -21,7 +21,7 @@ namespace SupersetInheritance
         {
         }
 
-        private static readonly ResourceType ResourceType = "SupersetInheritance/SupersetModel3Operations";
+        public static readonly ResourceType ResourceType = "SupersetInheritance/SupersetModel3Operations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

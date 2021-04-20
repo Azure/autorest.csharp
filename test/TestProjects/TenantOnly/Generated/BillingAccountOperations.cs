@@ -21,7 +21,7 @@ namespace TenantOnly
         {
         }
 
-        private static readonly ResourceType ResourceType = "TenantOnly/BillingAccountOperations";
+        public static readonly ResourceType ResourceType = "TenantOnly/BillingAccountOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
