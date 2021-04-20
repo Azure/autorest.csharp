@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     foreach (var resource in resources)
                     {
                         bool isRegion = false;
-                        if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals("subscriptions"))
+                        if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions))
                         {
                             if (!isRegion)
                             {
