@@ -29,8 +29,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// </summary>
     internal class ResourceContainerWriter
     {
-        private const string ClientDiagnosticsVariable = "_clientDiagnostics";
-        private const string PipelineVariable = "_pipeline";
+        private const string ClientDiagnosticsField = "_clientDiagnostics";
+        private const string PipelineField = "_pipeline";
+        private const string OperationsField = "Operations";
 
         public void WriteContainer(CodeWriter writer, ResourceContainer resourceContainer, AutoRest.MgmtOutputLibrary library)
         {
@@ -87,22 +88,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 using (_writer.Scope($"internal {_resourceContainer.Type.Name}({typeof(ResourceOperationsBase)} {parent}) : base({parent})"))
                 {
-                    _writer.Line($"{ClientDiagnosticsVariable} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                    _writer.Line($"{PipelineVariable} = new {typeof(HttpPipeline)}(ClientOptions.Transport);");
+                    _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
+                    _writer.Line($"{PipelineField} = new {typeof(HttpPipeline)}(ClientOptions.Transport);");
                 }
             }
 
             private void WriteFields()
             {
                 _writer.Line();
-                _writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsVariable};");
-                _writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineVariable};");
+                _writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
+                _writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
 
                 _writer.Line();
                 _writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
                 // subscriptionId might not always be needed. For example `RestOperations` does not have it.
-                var subscriptionId = _restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-                _writer.Line($"private {_resourceContainer.RestOperationsDefaultName} Operations => new {_resourceContainer.RestOperationsDefaultName}({ClientDiagnosticsVariable}, {PipelineVariable}{subscriptionId});");
+                var subIdIfNeeded = _restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
+                _writer.Line($"private {_restClient.Type} {OperationsField} => new {_restClient.Type}({ClientDiagnosticsField}, {PipelineField}{subIdIfNeeded});");
             }
 
             private void WriteIdProperty()
@@ -110,15 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line();
                 _writer.WriteXmlDocumentationSummary($"Typed Resource Identifier for the container.");
                 _writer.LineRaw("// todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.");
-                _writer.Line($"public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;");
-            }
-
-            private void WriteValidResourceType()
-            {
-                _writer.Line();
-                _writer.WriteXmlDocumentationInheritDoc();
-                // todo: what if valid resource type is not resource group?
-                _writer.Line($"protected override ResourceType ValidResourceType => {"ResourceGroupOperations"}.ResourceType;");
+                _writer.Line($"public new {typeof(ResourceGroupResourceIdentifier)} Id => base.Id as {typeof(ResourceGroupResourceIdentifier)};");
             }
 
             private void WriteResourceOperations()
@@ -127,18 +120,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.LineRaw($"// Container level operations.");
 
                 // To generate resource operations, we need to find out the correct REST client methods to call.
-                // We can't find CreateOrUpdate method by name cause it may not always be called `CreateOrUpdate`.
+                // We must look for CreateOrUpdate by HTTP method because it may be named differently from `CreateOrUpdate`.
                 if (FindRestClientMethodByHttpMethod(RequestMethod.Put, out var restClientMethod))
                 {
                     WriteCreateOrUpdateVariants(restClientMethod);
                 }
                 else
                 {
-                    WriteFakeCreateOrUpdateVariants();
+                    WriteCreateOrUpdateVariantsThatThrow();
                 }
 
-                // We can't find Get method by HTTP method because it may map to List
-                if (FindRestClientMethodByHttpMethod(new string[] { "Get" }, out restClientMethod))
+                // We must look for Get by method name because HTTP GET may map to >1 methods (get/list)
+                if (FindRestClientMethodByName(new string[] { "Get" }, out restClientMethod))
                 {
                     WriteGetVariants(restClientMethod);
                 }
@@ -154,9 +147,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 restMethod = _restClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(httpMethod));
                 return restMethod != null;
             }
-            private bool FindRestClientMethodByHttpMethod(IEnumerable<string> nameOptions, out RestClientMethod restMethod)
+            private bool FindRestClientMethodByName(IEnumerable<string> nameOptions, out RestClientMethod restMethod)
             {
-                restMethod = _restClient.Methods.FirstOrDefault(m => nameOptions.Any(nameOption => string.Equals(m.Name, nameOption, StringComparison.InvariantCultureIgnoreCase)));
+                restMethod = _restClient.Methods.FirstOrDefault(method => nameOptions.Any(option => string.Equals(method.Name, option, StringComparison.InvariantCultureIgnoreCase)));
                 return restMethod != null;
             }
 
@@ -247,7 +240,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (isLongRunning)
                     {
                         _writer.Line($"var operation = new {_resource.Type}{restClientMethod.Name}Operation(");
-                        _writer.Line($"{ClientDiagnosticsVariable}, {PipelineVariable}, Operations.Create{restClientMethod.Name}Request(");
+                        _writer.Line($"{ClientDiagnosticsField}, {PipelineField}, Operations.Create{restClientMethod.Name}Request(");
                         foreach (var parameter in parameterMapping)
                         {
                             _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
@@ -295,7 +288,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (isLongRunning)
                     {
                         _writer.Line($"var operation = new {_resource.Type}{restClientMethod.Name}Operation(");
-                        _writer.Line($"{ClientDiagnosticsVariable}, {PipelineVariable}, Operations.Create{restClientMethod.Name}Request(");
+                        _writer.Line($"{ClientDiagnosticsField}, {PipelineField}, Operations.Create{restClientMethod.Name}Request(");
                         foreach (var parameter in parameterMapping)
                         {
                             _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
@@ -372,10 +365,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             /// <summary>
             /// Write 4 variants of CreateOrUpdate that only throw exceptions when the resource does not support PUT,
-            /// so that the container class implements the methods overload defined in `ContainerBase`.
+            /// so that the container class correctly implements `ContainerBase`.
             /// </summary>
             /// <param name="_writer"></param>
-            private void WriteFakeCreateOrUpdateVariants()
+            private void WriteCreateOrUpdateVariantsThatThrow()
             {
                 var nameParameter = new Parameter("name", "The name of the resource.", typeof(string), null, false);
                 var resourceDetailsParameter = new Parameter("resourceDetails", "The desired resource configuration.", _resourceContainer.ResourceData.Type, null, false);
