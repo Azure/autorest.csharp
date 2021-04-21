@@ -13,7 +13,6 @@ namespace AutoRest.TestServer.Tests.Mgmt
         [TestCase(typeof(Resource<TenantResourceIdentifier>), typeof(ExactMatchModel1Data))]
         [TestCase(typeof(ExactMatchModel7), typeof(ExactMatchModel2Data))]
         [TestCase(typeof(ExactMatchModel8), typeof(ExactMatchModel3Data))]
-        [TestCase(typeof(ExactMatchModel9), typeof(ExactMatchModel4Data))]
         [TestCase(typeof(TrackedResource<TenantResourceIdentifier>), typeof(ExactMatchModel5Data))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {

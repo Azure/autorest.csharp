@@ -338,6 +338,9 @@
                 },
                 "type": {
                     "type": "string"
+                },
+                "new": {
+                    "type": "string"
                 }
             }
         },
@@ -349,7 +352,7 @@
                 "name": {
                     "type": "string"
                 },
-                "NEW": {
+                "new": {
                     "type": "string"
                 }
             }

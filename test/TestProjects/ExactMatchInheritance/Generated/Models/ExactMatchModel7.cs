@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace ExactMatchInheritance
 {
     /// <summary> The ExactMatchModel7. </summary>
-    public partial class ExactMatchModel7
+    public partial class ExactMatchModel7 : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ExactMatchModel7. </summary>
         public ExactMatchModel7()
@@ -16,18 +18,12 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel7. </summary>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
-        internal ExactMatchModel7(string id, string name, string type)
+        /// <param name="nEW"> . </param>
+        internal ExactMatchModel7(string nEW)
         {
-            Id = id;
-            Name = name;
-            Type = type;
+            NEW = nEW;
         }
 
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
+        public string NEW { get; set; }
     }
 }
