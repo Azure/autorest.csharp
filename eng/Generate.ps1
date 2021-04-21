@@ -170,7 +170,7 @@ $settings = @{
     'profiles' = [System.Collections.Generic.SortedDictionary[string,System.Collections.Specialized.OrderedDictionary]]@{}
 };
 
-foreach ($key in $swaggerDefinitions.Keys | Sort-Object –CaseSensitive)
+foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
 {
     $definition = $swaggerDefinitions[$key];
     $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
