@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -18,7 +17,7 @@ namespace Azure.Management.Storage
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         public static SkuContainer GetSkuContainer(this SubscriptionOperations subscription)
         {
-            throw new NotImplementedException();
+            return new SkuContainer(subscription);
         }
         #endregion
 
@@ -27,7 +26,7 @@ namespace Azure.Management.Storage
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         public static UsageContainer GetUsageContainer(this SubscriptionOperations subscription)
         {
-            throw new NotImplementedException();
+            return new UsageContainer(subscription);
         }
         #endregion
     }

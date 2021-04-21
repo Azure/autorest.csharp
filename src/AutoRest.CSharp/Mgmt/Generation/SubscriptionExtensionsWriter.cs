@@ -82,10 +82,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope($"public static {resourceContainer.Type} Get{resourceContainer.Type.Name}(this {typeof(SubscriptionOperations)} subscription)"))
             {
-                // TODO: Bring this back after container class implemented
-                // Issue: https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5396
-                // writer.Line($"return new {resourceContainer.Type}(subscription);");
-                writer.Append($"throw new {typeof(NotImplementedException)}();");
+                writer.Line($"return new {resourceContainer.Type}(subscription);");
             }
         }
 

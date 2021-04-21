@@ -25,7 +25,7 @@ namespace SubscriptionExtensions
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         public static AvailabilitySetContainer GetAvailabilitySetContainer(this SubscriptionOperations subscription)
         {
-            throw new NotImplementedException();
+            return new AvailabilitySetContainer(subscription);
         }
         #endregion
 
