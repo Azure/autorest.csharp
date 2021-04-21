@@ -167,8 +167,8 @@ if (!($Exclude -contains "SmokeTests"))
 
 Write-Host "Hamons-Test";
 $t = $("HeaderCollectionPrefix", "header-LowLevel");
-$t | sort | Out-Host;
-$t | Sort-Object | Out-Host;
+$t | sort -Stable | Out-Host;
+$t | Sort-Object -Stable | Out-Host;
 Write-Host "!Hamons-Test";
 
 $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
