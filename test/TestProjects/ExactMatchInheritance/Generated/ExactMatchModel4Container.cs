@@ -17,6 +17,10 @@ namespace ExactMatchInheritance
         {
         }
 
+        internal ExactMatchModel4Container(ResourceGroupOperations resourceGroup)
+        {
+        }
+
         /// <summary> Gets the valid resource type for this object. </summary>
         protected ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
     }
