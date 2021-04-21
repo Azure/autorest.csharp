@@ -167,7 +167,7 @@ if (!($Exclude -contains "SmokeTests"))
 
 $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
 $settings = @{
-    'profiles' = [ordered]@{}
+    'profiles' = New-Object PSObject
 };
 
 foreach ($key in $swaggerDefinitions.Keys | Sort-Object –CaseSensitive)
@@ -175,13 +175,14 @@ foreach ($key in $swaggerDefinitions.Keys | Sort-Object –CaseSensitive)
     $definition = $swaggerDefinitions[$key];
     $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
 
-    $settings.profiles[$key] = [ordered]@{
+    $value = @{
         'commandName'='Project';
         'commandLineArgs'="--standalone $outputPath"
-    }
+    };
+    Add-Member -InputObject $settings.profiles -NotePropertyName $key -NotePropertyValue $value
 }
 
-$settings | ConvertTo-Json | Out-File $launchSettings
+$settings | Sort-Object –CaseSensitive | ConvertTo-Json | Out-File $launchSettings
 
 if ($reset -or $env:TF_BUILD)
 {
