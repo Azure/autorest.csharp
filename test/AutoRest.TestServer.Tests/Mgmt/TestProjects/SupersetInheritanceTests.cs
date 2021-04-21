@@ -11,7 +11,8 @@ namespace AutoRest.TestServer.Tests.Mgmt
     public class SupersetInheritanceTests
     {
         [TestCase(typeof(Resource<TenantResourceIdentifier>), typeof(SupersetModel1Data))]
-        [TestCase(typeof(Object), typeof(SupersetModel2))]
+        [TestCase(typeof(Object), typeof(SupersetModel2Data))]
+        [TestCase(typeof(Object), typeof(SupersetModel3Data))]
         [TestCase(typeof(TrackedResource<TenantResourceIdentifier>), typeof(SupersetModel4Data))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
