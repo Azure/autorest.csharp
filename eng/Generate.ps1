@@ -173,6 +173,7 @@ $d['a'] = 1
 $d['za'] = 1
 $d['A'] = 1
 $d.keys | Out-Host;
+Get-Culture | Out-Host;
 Write-Host "!Hamons-Test";
 
 $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
