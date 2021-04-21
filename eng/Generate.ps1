@@ -166,18 +166,18 @@ if (!($Exclude -contains "SmokeTests"))
 }
 
 Write-Host "Hamons-Test";
+Write-Host "";
 
-$dic = [ordered]@{}
-$dic["azure-special-properties"] = 1;
-$dic["Azure.AI.DocumentTranslation"] = 1;
-$dic["AppConfiguration"] = 1;
-$dic | Out-Host;
+$("body-boolean", "azure-special-properties", "Azure.AI.DocumentTranslation", "AppConfiguration") | sort | Out-Host;
+Write-Host "";
+$("body-boolean", "azure-special-properties", "Azure.AI.DocumentTranslation", "AppConfiguration") | Sort-Object -Stable -Descending -CaseSensitive | Out-Host;
 
+Write-Host "";
 Write-Host "!Hamons-Test";
 
 $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
 $settings = @{
-    'profiles' = [System.Collections.Generic.SortedDictionary[string,System.Collections.Specialized.OrderedDictionary]]@{}
+    'profiles' = [ordered]@{}
 };
 
 foreach ($key in $swaggerDefinitions.Keys)
