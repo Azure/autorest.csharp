@@ -165,6 +165,12 @@ if (!($Exclude -contains "SmokeTests"))
     }
 }
 
+Write-Host "Hamons-Test";
+$t = $("HeaderCollectionPrefix", "header-LowLevel");
+$t | sort | Out-Host;
+$t | Sort-Object | Out-Host;
+Write-Host "!Hamons-Test";
+
 $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
 $settings = @{
     'profiles' = [System.Collections.Generic.SortedDictionary[string,System.Collections.Specialized.OrderedDictionary]]@{}
