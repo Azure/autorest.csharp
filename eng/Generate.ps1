@@ -168,9 +168,10 @@ if (!($Exclude -contains "SmokeTests"))
 Write-Host "Hamons-Test";
 
 $dic = New-Object PSObject;
-Add-Member -InputObject $dic -NotePropertyName "azure-special-properties" -NotePropertyValue 1
-Add-Member -InputObject $dic -NotePropertyName "Azure.AI.DocumentTranslation" -NotePropertyValue 1
-Add-Member -InputObject $dic -NotePropertyName "AppConfiguration" -NotePropertyValue 1
+foreach ($key in $("body-boolean", "azure-special-properties", "Azure.AI.DocumentTranslation", "AppConfiguration"))
+{
+    Add-Member -InputObject $dic -NotePropertyName $key -NotePropertyValue 1
+}
 $dic | ConvertTo-Json | Out-Host;
 
 Write-Host "!Hamons-Test";
