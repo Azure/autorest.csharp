@@ -166,17 +166,14 @@ if (!($Exclude -contains "SmokeTests"))
 }
 
 Write-Host "Hamons-Test";
-$t = $("HeaderCollectionPrefix", "header-LowLevel");
-$t | Sort-Object -Stable -Descending -CaseSensitive | Out-Host;
-$d = [System.Collections.Generic.SortedDictionary[string,int]]@{}
-$d['a'] = 1
-$d['za'] = 1
-$d['A'] = 1
-$d.keys | Out-Host;
-Get-Culture | Out-Host;
-(Get-Host).Version | Out-Host;
-$d.keys | ConvertTo-Json | Out-Host;
-$t | ConvertTo-Json | Out-Host;
+
+$dic = [System.Collections.Generic.SortedDictionary[string,System.Collections.Specialized.OrderedDictionary]]@{}
+
+foreach ($key in $swaggerDefinitions.Keys)
+{
+    $dic[$key] = [ordered]@{'commandName'='Project';}
+}
+$dic | ConvertTo-Json | Out-Host;
 
 Write-Host "!Hamons-Test";
 
