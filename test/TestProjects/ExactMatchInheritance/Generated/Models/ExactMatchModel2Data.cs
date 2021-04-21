@@ -16,13 +16,9 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel2Data. </summary>
-        /// <param name="nEW"> . </param>
         /// <param name="new"> . </param>
-        internal ExactMatchModel2Data(string nEW, string @new) : base(nEW)
+        internal ExactMatchModel2Data(string @new) : base(@new)
         {
-            New = @new;
         }
-
-        public string New { get; set; }
     }
 }

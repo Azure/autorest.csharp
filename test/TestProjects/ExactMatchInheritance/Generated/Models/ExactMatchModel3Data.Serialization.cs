@@ -15,11 +15,6 @@ namespace ExactMatchInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(New))
-            {
-                writer.WritePropertyName("new");
-                writer.WriteStringValue(New);
-            }
             if (Optional.IsDefined(Id))
             {
                 writer.WritePropertyName("id");
@@ -30,27 +25,21 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
-            if (Optional.IsDefined(NEW))
+            if (Optional.IsDefined(New))
             {
-                writer.WritePropertyName("NEW");
-                writer.WriteStringValue(NEW);
+                writer.WritePropertyName("new");
+                writer.WriteStringValue(New);
             }
             writer.WriteEndObject();
         }
 
         internal static ExactMatchModel3Data DeserializeExactMatchModel3Data(JsonElement element)
         {
-            Optional<string> @new = default;
             Optional<string> id = default;
             Optional<string> name = default;
-            Optional<string> nEW = default;
+            Optional<string> @new = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("new"))
-                {
-                    @new = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("id"))
                 {
                     id = property.Value.GetString();
@@ -61,13 +50,13 @@ namespace ExactMatchInheritance
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("NEW"))
+                if (property.NameEquals("new"))
                 {
-                    nEW = property.Value.GetString();
+                    @new = property.Value.GetString();
                     continue;
                 }
             }
-            return new ExactMatchModel3Data(id.Value, name.Value, nEW.Value, @new.Value);
+            return new ExactMatchModel3Data(id.Value, name.Value, @new.Value);
         }
     }
 }

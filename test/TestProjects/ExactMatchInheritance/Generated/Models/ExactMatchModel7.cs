@@ -18,12 +18,12 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel7. </summary>
-        /// <param name="nEW"> . </param>
-        internal ExactMatchModel7(string nEW)
+        /// <param name="new"> . </param>
+        internal ExactMatchModel7(string @new)
         {
-            NEW = nEW;
+            New = @new;
         }
 
-        public string NEW { get; set; }
+        public string New { get; set; }
     }
 }

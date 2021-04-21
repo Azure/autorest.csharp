@@ -20,18 +20,12 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("new");
                 writer.WriteStringValue(New);
             }
-            if (Optional.IsDefined(NEW))
-            {
-                writer.WritePropertyName("NEW");
-                writer.WriteStringValue(NEW);
-            }
             writer.WriteEndObject();
         }
 
         internal static ExactMatchModel2Data DeserializeExactMatchModel2Data(JsonElement element)
         {
             Optional<string> @new = default;
-            Optional<string> nEW = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"))
@@ -39,13 +33,8 @@ namespace ExactMatchInheritance
                     @new = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("NEW"))
-                {
-                    nEW = property.Value.GetString();
-                    continue;
-                }
             }
-            return new ExactMatchModel2Data(nEW.Value, @new.Value);
+            return new ExactMatchModel2Data(@new.Value);
         }
     }
 }
