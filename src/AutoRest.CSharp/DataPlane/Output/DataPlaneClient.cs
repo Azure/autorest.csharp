@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -15,7 +16,7 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class DataPlaneClient : ClientBase
+    internal class DataPlaneClient : TypeProvider
     {
         private readonly OperationGroup _operationGroup;
         private readonly BuildContext<DataPlaneOutputLibrary> _context;
@@ -28,53 +29,24 @@ namespace AutoRest.CSharp.Output.Models
         {
             _operationGroup = operationGroup;
             _context = context;
-            var clientPrefix = GetClientPrefix(operationGroup.Language.Default.Name, Context);
-            DefaultName = clientPrefix + ClientSuffix;
+            var clientPrefix = ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context);
+            var clientSuffix = ClientBuilder.GetClientSuffix(context);
+            DefaultName = clientPrefix + clientSuffix;
             ClientShortName = string.IsNullOrEmpty(clientPrefix) ? DefaultName : clientPrefix;
         }
 
         public string ClientShortName { get; }
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, GetClientPrefix(Declaration.Name, _context)));
+        public string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(_operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
         public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
         public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
 
-        public PagingMethod[] PagingMethods => _pagingMethods ??= BuildPagingMethods().ToArray();
+        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(_operationGroup, RestClient, Declaration).ToArray();
 
         public DataPlaneLongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
 
         protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility { get; } = "public";
-
-        private IEnumerable<PagingMethod> BuildPagingMethods()
-        {
-            foreach (var operation in _operationGroup.Operations)
-            {
-                Paging? paging = operation.Language.Default.Paging;
-                if (paging == null || operation.IsLongRunning)
-                {
-                    continue;
-                }
-
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    RestClientMethod method = RestClient.GetOperationMethod(serviceRequest);
-                    RestClientMethod? nextPageMethod = RestClient.GetNextOperationMethod(serviceRequest);
-
-                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
-                    {
-                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
-                    }
-
-                    yield return new PagingMethod(
-                        method,
-                        nextPageMethod,
-                        method.Name,
-                        new Diagnostic($"{Declaration.Name}.{method.Name}"),
-                        new PagingResponseInfo(paging, objectResponseBody.Type));
-                }
-            }
-        }
 
         private IEnumerable<DataPlaneLongRunningOperationMethod> BuildLongRunningOperationMethods()
         {

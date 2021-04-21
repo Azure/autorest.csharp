@@ -5,10 +5,18 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A Class representing a DedicatedHost along with the instance operations that can be performed on it. </summary>
     public class DedicatedHost : DedicatedHostOperations
     {
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHost"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="resource"> The resource that is the target of operations. </param>
+        internal DedicatedHost(ResourceOperationsBase options, DedicatedHostData resource) : base()
+        {
+        }
     }
 }
