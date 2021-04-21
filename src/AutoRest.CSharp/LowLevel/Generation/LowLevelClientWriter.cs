@@ -13,6 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Common.Output.Builders;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -186,7 +187,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.WriteXmlDocumentationParameter(OptionsVariable, "The options for configuring the client.");
 
-            var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
+            var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
             writer.Append($"public {client.Type.Name:D}(");
             foreach (Parameter parameter in ctorParams)
             {

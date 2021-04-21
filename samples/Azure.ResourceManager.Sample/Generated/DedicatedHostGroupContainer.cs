@@ -17,6 +17,10 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
+        internal DedicatedHostGroupContainer(ResourceOperationsBase parent)
+        {
+        }
+
         /// <summary> Gets the valid resource type for this object. </summary>
         protected ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
     }

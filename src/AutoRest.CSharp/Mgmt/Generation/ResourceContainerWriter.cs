@@ -39,6 +39,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
             }
             writer.Line();
+
+            using (writer.Scope($"internal {resourceContainer.Type.Name}({typeof(ResourceOperationsBase)} parent)"))
+            {
+            }
+            writer.Line();
         }
 
         private void WriteContainerProperties(CodeWriter writer, ResourceContainer resourceContainer)
