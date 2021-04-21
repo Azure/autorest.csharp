@@ -28,10 +28,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             try
             {
                 IPlugin plugin = Plugins[autoRest.PluginName]();
-                // AutoRest sends an empty Object as a 'true' value. When the configuration item is not present, it sends a Null value.
-                if (autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.attach").GetAwaiter().GetResult().IsObject())
+                var shouldAttach = await autoRest.GetValue<JsonElement?>($"{autoRest.PluginName}.attach");
+                if (shouldAttach.ToBoolean() ?? false)
                 {
-                    DebuggerAwaiter.AwaitAttach();
+                    Console.Error.WriteLine("Attempting to attach debugger.");
+                    System.Diagnostics.Debugger.Launch();
                 }
                 await plugin.Execute(autoRest);
                 return true;
