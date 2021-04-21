@@ -167,7 +167,7 @@ if (!($Exclude -contains "SmokeTests"))
 
 $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
 $settings = @{
-    'profiles' = New-Object PSObject
+    'profiles' = [System.Collections.Generic.SortedDictionary[string,System.Collections.Specialized.OrderedDictionary]]@{}
 };
 
 foreach ($key in $swaggerDefinitions.Keys | Sort-Object –CaseSensitive)
@@ -175,11 +175,10 @@ foreach ($key in $swaggerDefinitions.Keys | Sort-Object –CaseSensitive)
     $definition = $swaggerDefinitions[$key];
     $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
 
-    $value = [ordered]@{
+    $settings.profiles[$key] = [ordered]@{
         'commandName'='Project';
         'commandLineArgs'="--standalone $outputPath"
-    };
-    Add-Member -InputObject $settings.profiles -NotePropertyName $key -NotePropertyValue $value
+    }
 }
 
 $settings | ConvertTo-Json | Out-File $launchSettings
