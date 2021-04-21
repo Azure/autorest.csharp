@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private BuildContext<MgmtOutputLibrary> _context;
 
         protected OperationGroup _operationGroup;
+        internal OperationGroup OperationGroup => _operationGroup;
         protected MgmtRestClient? _restClient;
         protected ResourceData? _resourceData;
 

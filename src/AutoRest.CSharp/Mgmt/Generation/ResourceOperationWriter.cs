@@ -54,43 +54,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteValidResourceType(CodeWriter writer, ResourceOperation resourceOperation)
-        {
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            // todo: do not throw
-            writer.Line($"protected override ResourceType ValidResourceType => throw new System.NotImplementedException();");
-        }
-
-        private void WriteOperations(CodeWriter writer, ResourceOperation resourceOperation)
-        {
-            writeGet(writer, resourceOperation);
-            writeGetAsync(writer, resourceOperation);
-        }
-
-        private void writeGet(CodeWriter writer, ResourceOperation resourceOperation)
-        {
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public override ArmResponse<{resourceOperation.ResourceDefaultName}> Get({typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                // todo: do not throw
-                writer.Line($"throw new System.NotImplementedException();");
-            }
-        }
-
-        private void writeGetAsync(CodeWriter writer, ResourceOperation resourceOperation)
-        {
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public async override Task<ArmResponse<{resourceOperation.ResourceDefaultName}>> GetAsync({typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Line($"await Task.Run(() => {{}});");
-                // todo: do not throw
-                writer.Line($"throw new System.NotImplementedException();");
-            }
-        }
-
         private void WriteClientProperties(CodeWriter writer, ResourceOperation resourceOperation)
         {
             writer.Line();

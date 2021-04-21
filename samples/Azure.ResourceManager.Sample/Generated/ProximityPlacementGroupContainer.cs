@@ -102,7 +102,7 @@ namespace Azure.ResourceManager.Sample
             data => new ProximityPlacementGroup(Parent, data));
         }
 
-        /// <summary> Filters the list of todo: availability set for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of ProximityPlacementGroup for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -114,7 +114,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of todo: availability set for this resource group represented as generic resources. </summary>
+        /// <summary> Filters the list of ProximityPlacementGroup for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -126,22 +126,22 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of todo: availability set for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <summary> Filters the list of <see cref="ProximityPlacementGroup" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of todo: availability set that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of <see cref="ProximityPlacementGroup" /> that may take multiple service requests to iterate over. </returns>
         public Pageable<ProximityPlacementGroup> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(nameFilter, top, cancellationToken);
             return new PhWrappingPageable<GenericResource, ProximityPlacementGroup>(results, genericResource => new ProximityPlacementGroupOperations(genericResource).Get().Value);
         }
 
-        /// <summary> Filters the list of todo: availability set for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <summary> Filters the list of <see cref="ProximityPlacementGroup" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of todo: availability set that may take multiple service requests to iterate over. </returns>
+        /// <returns> An async collection of <see cref="ProximityPlacementGroup" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<ProximityPlacementGroup> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);

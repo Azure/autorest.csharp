@@ -45,6 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             private ResourceData _resourceData;
             private MgmtRestClient _restClient;
             private Resource _resource;
+            private ResourceOperation _resourceOperation;
 
             public StatefulWriter(CodeWriter writer, ResourceContainer resourceContainer, AutoRest.MgmtOutputLibrary library)
             {
@@ -54,6 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _resourceData = library.FindResourceData(operationGroup);
                 _restClient = library.FindRestClient(operationGroup);
                 _resource = library.FindArmResource(operationGroup);
+                _resourceOperation = library.FindResourceOperation(operationGroup);
             }
 
             public void WriteContainer()
@@ -312,6 +314,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             /// <summary>
             /// Builds the mapping between resource operations in Container class and that in RestOperations class.
+            /// For example, how to map the parameters of
+            /// `DedicatedHostContainer.CreateOrUpdate(string hostName, DedicatedHostData parameters) to
+            /// `DedicatedHostsRestOperations.CreateOrUpdate(string resourceGroupName, string hostGroupName, string hostName, DedicatedHostData parameters)
             /// </summary>
             /// <param name="method">Represents a method in RestOperations class.</param>
             /// <returns>
@@ -325,21 +330,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var parameterMapping = new List<(Parameter Parameter, bool IsPassThru, string ValueExpression)>();
                 var dotParent = "";
 
+                // loop through parameters in REST call, map the leading string parameters to
+                // Id.ResourceGroupName, Id.ResourceGroupName.Parent.Name, Id.ResourceGroupName.Parent.Parent.Name...
                 foreach (var parameter in method.Parameters)
                 {
                     bool passThru = true;
                     string valueExpression = string.Empty;
                     if (parameter.Type.Equals(typeof(System.String)))
                     {
-                        // todo: how about "location"?
+                        passThru = false;
                         if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
                         {
-                            passThru = false;
                             valueExpression = "Id.ResourceGroupName";
                         }
                         else
                         {
-                            passThru = false;
                             valueExpression = $"Id{dotParent}.Name";
                             dotParent += ".Parent";
                         }
@@ -357,8 +362,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     var index = parameterMapping.IndexOf(lastString);
                     parameterMapping[index] = (lastString.Parameter, true, string.Empty);
-                    // can't just do `lastString.IsPassThru = true` as it does not affect parameterMapping
-                    // lastString is not a ref?
+                    // Tuple types are value types; tuple elements are public fields. That makes tuples mutable value types.
                 }
                 return parameterMapping;
             }
@@ -371,7 +375,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             private void WriteCreateOrUpdateVariantsThatThrow()
             {
                 var nameParameter = new Parameter("name", "The name of the resource.", typeof(string), null, false);
-                var resourceDetailsParameter = new Parameter("resourceDetails", "The desired resource configuration.", _resourceContainer.ResourceData.Type, null, false);
+                var resourceDetailsParameter = new Parameter("resourceDetails", "The desired resource configuration.", _resourceData.Type, null, false);
                 // CreateOrUpdate()
                 _writer.Line();
                 _writer.WriteXmlDocumentationInheritDoc();
@@ -417,45 +421,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line($"// {doesNotSupportPut}");
                     _writer.Line($"throw new {typeof(NotImplementedException)}();");
                 }
-            }
-
-            private void WriteCreateOrUpdateAsync()
-            {
-
-                _writer.Line();
-                _writer.WriteXmlDocumentationInheritDoc();
-                using (_writer.Scope($"public async override Task<ArmResponse<{_resource.Type}>> CreateOrUpdateAsync(string name, {_resourceData.Type} resourceDetails, {typeof(CancellationToken)} cancellationToken = default)"))
-                {
-                    _writer.Line($"var response = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, name, resourceDetails).ConfigureAwait(false);");
-                    _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
-                    _writer.Line($"response,");
-                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
-                }
-            }
-
-            private void WriteStartCreateOrUpdate()
-            {
-                _writer.Line();
-                _writer.WriteXmlDocumentationInheritDoc();
-                using (_writer.Scope($"public override ArmOperation<{_resource.Type}> StartCreateOrUpdate(string name, {_resourceData.Type} resourceDetails, {typeof(CancellationToken)} cancellationToken = default)"))
-                {
-                    _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
-                    _writer.Line($"Operations.CreateOrUpdate(Id.ResourceGroupName, name, resourceDetails, cancellationToken),");
-                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
-                }
-            }
-
-            private void WriteStartCreateOrUpdateAsync()
-            {
-                _writer.Line();
-                _writer.WriteXmlDocumentationInheritDoc();
-                using (_writer.Scope($"public async override Task<ArmOperation<{_resource.Type}>> StartCreateOrUpdateAsync(string name, {_resourceData.Type} resourceDetails, {typeof(CancellationToken)} cancellationToken = default)"))
-                {
-                    _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
-                    _writer.Line($"await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, name, resourceDetails, cancellationToken).ConfigureAwait(false),");
-                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
-                }
-                _writer.Line();
             }
 
             private void WriteContainerProperties()
@@ -535,57 +500,40 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
 
-            private void WriteGetAsync(RestClientMethod method)
-            {
-                _writer.Line();
-                _writer.WriteXmlDocumentationInheritDoc();
-                using (_writer.Scope($"public async override Task<ArmResponse<{_resource.Type}>> GetAsync(string name, {typeof(CancellationToken)} cancellationToken = default)"))
-                {
-                    _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
-                    _writer.Line($"await Operations.GetAsync(Id.ResourceGroupName, name, cancellationToken),");
-                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
-                }
-            }
-
             private void WriteList()
             {
                 _writer.Line();
-                // todo: do not hard code resource type
-                _writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
+                _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type.Name}\" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
                 _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
                 _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
                 _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-                // todo: do not hard code resource type
-                _writer.WriteXmlDocumentation("returns", $"A collection of {"todo: availability set"} that may take multiple service requests to iterate over.");
+                _writer.WriteXmlDocumentation("returns", $"A collection of <see cref=\"{_resource.Type.Name}\" /> that may take multiple service requests to iterate over.");
                 using (_writer.Scope($"public Pageable<{_resource.Type}> List(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
                 {
                     _writer.Line($"var results = ListAsGenericResource(nameFilter, top, cancellationToken);");
-                    _writer.Line($"return new PhWrappingPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceContainer.OperationsDefaultName}(genericResource).Get().Value);");
+                    _writer.Line($"return new PhWrappingPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
                 }
             }
 
             private void WriteListAsync()
             {
                 _writer.Line();
-                // todo: do not hard code resource type
-                _writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
+                _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type.Name}\" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
                 _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
                 _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
                 _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-                // todo: do not hard code resource type
-                _writer.WriteXmlDocumentation("returns", $"An async collection of {"todo: availability set"} that may take multiple service requests to iterate over.");
+                _writer.WriteXmlDocumentation("returns", $"An async collection of <see cref=\"{_resource.Type.Name}\" /> that may take multiple service requests to iterate over.");
                 using (_writer.Scope($"public AsyncPageable<{_resource.Type}> ListAsync(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
                 {
                     _writer.Line($"var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);");
-                    _writer.Line($"return new PhWrappingAsyncPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceContainer.OperationsDefaultName}(genericResource).Get().Value);");
+                    _writer.Line($"return new PhWrappingAsyncPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
                 }
             }
 
             private void WriteListAsGenericResource()
             {
                 _writer.Line();
-                // todo: do not hard code resource type
-                _writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group represented as generic resources.");
+                _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
                 _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
                 _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
                 _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
@@ -602,8 +550,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             private void WriteListAsGenericResourceAsync()
             {
                 _writer.Line();
-                // todo: do not hard code resource type
-                _writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group represented as generic resources.");
+                _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
                 _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
                 _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
                 _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");

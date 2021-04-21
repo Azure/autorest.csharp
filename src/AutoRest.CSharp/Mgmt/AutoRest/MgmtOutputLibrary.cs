@@ -256,6 +256,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return EnsureArmResource()[operationGroup];
         }
 
+        public ResourceOperation FindResourceOperation(OperationGroup operationGroup)
+        {
+            return EnsureResourceOperations()[operationGroup];
+        }
+
         private void DecorateOperationGroup()
         {
             foreach (var operationsGroup in _codeModel.OperationGroups)
