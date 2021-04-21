@@ -170,7 +170,7 @@ $settings = @{
     'profiles' = [ordered]@{}
 };
 
-foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
+foreach ($key in $swaggerDefinitions.Keys | Sort-Object –CaseSensitive)
 {
     $definition = $swaggerDefinitions[$key];
     $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
@@ -193,7 +193,7 @@ if (!$noBuild)
     Invoke "dotnet build $autoRestPluginProject"
 }
 
-$keys = $swaggerDefinitions.Keys | Sort-Object;
+$keys = $swaggerDefinitions.Keys | Sort-Object –CaseSensitive;
 if (![string]::IsNullOrWhiteSpace($filter))
 { 
     Write-Host "Using filter: $filter"
