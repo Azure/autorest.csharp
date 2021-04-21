@@ -167,19 +167,11 @@ if (!($Exclude -contains "SmokeTests"))
 
 Write-Host "Hamons-Test";
 
-$dic = New-Object PSObject;
-foreach ($key in $("body-boolean", "azure-special-properties", "Azure.AI.DocumentTranslation", "AppConfiguration"))
-{
-    Add-Member -InputObject $dic -NotePropertyName $key -NotePropertyValue 1
-}
-$dic | ConvertTo-Json | Out-Host;
-
-$dic = New-Object PSObject;
-foreach ($key in $("body-boolean", "azure-special-properties", "Azure.AI.DocumentTranslation", "AppConfiguration") | Sort-Object)
-{
-    Add-Member -InputObject $dic -NotePropertyName $key -NotePropertyValue 1
-}
-$dic | ConvertTo-Json | Out-Host;
+$dic = [ordered]@{}
+$dic["azure-special-properties"] = 1;
+$dic["Azure.AI.DocumentTranslation"] = 1;
+$dic["AppConfiguration"] = 1;
+$dic | Out-Host;
 
 Write-Host "!Hamons-Test";
 
