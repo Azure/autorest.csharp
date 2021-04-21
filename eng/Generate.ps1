@@ -182,7 +182,7 @@ foreach ($key in $swaggerDefinitions.Keys | Sort-Object –CaseSensitive)
     Add-Member -InputObject $settings.profiles -NotePropertyName $key -NotePropertyValue $value
 }
 
-$settings | Sort-Object –CaseSensitive | ConvertTo-Json | Out-File $launchSettings
+$settings | ConvertTo-Json | Out-File $launchSettings
 
 if ($reset -or $env:TF_BUILD)
 {
@@ -194,7 +194,7 @@ if (!$noBuild)
     Invoke "dotnet build $autoRestPluginProject"
 }
 
-$keys = $swaggerDefinitions.Keys | Sort-Object –CaseSensitive;
+$keys = $swaggerDefinitions.Keys | Sort-Object;
 if (![string]::IsNullOrWhiteSpace($filter))
 { 
     Write-Host "Using filter: $filter"
