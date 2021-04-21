@@ -171,7 +171,7 @@ $dic = [System.Collections.Generic.SortedDictionary[string,int]]@{}
 $dic["azure-special-properties"] = 1;
 $dic["Azure.AI.DocumentTranslation"] = 1;
 $dic["AppConfiguration"] = 1;
-$dic | ConvertTo-Json | Out-Host;
+$dic | Out-Host;
 
 Write-Host "!Hamons-Test";
 
