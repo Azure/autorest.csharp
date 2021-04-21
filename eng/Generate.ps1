@@ -175,7 +175,7 @@ foreach ($key in $swaggerDefinitions.Keys | Sort-Object –CaseSensitive)
     $definition = $swaggerDefinitions[$key];
     $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
 
-    $value = @{
+    $value = [ordered]@{
         'commandName'='Project';
         'commandLineArgs'="--standalone $outputPath"
     };
