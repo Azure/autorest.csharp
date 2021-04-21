@@ -174,6 +174,13 @@ foreach ($key in $("body-boolean", "azure-special-properties", "Azure.AI.Documen
 }
 $dic | ConvertTo-Json | Out-Host;
 
+$dic = New-Object PSObject;
+foreach ($key in $("body-boolean", "azure-special-properties", "Azure.AI.DocumentTranslation", "AppConfiguration") | Sort-Object)
+{
+    Add-Member -InputObject $dic -NotePropertyName $key -NotePropertyValue 1
+}
+$dic | ConvertTo-Json | Out-Host;
+
 Write-Host "!Hamons-Test";
 
 $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
