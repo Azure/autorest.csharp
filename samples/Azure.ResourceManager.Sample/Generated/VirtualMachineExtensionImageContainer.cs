@@ -19,8 +19,8 @@ namespace Azure.ResourceManager.Sample
     public partial class VirtualMachineExtensionImageContainer : ResourceContainerBase<TenantResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData>
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageContainer class. </summary>
-        /// <param name="resourceGroup"> The parent resource group. </param>
-        internal VirtualMachineExtensionImageContainer(ResourceGroupOperations resourceGroup) : base(resourceGroup)
+        /// <param name="parent"> The resource representing the parent resource. </param>
+        internal VirtualMachineExtensionImageContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _pipeline = new HttpPipeline(ClientOptions.Transport);

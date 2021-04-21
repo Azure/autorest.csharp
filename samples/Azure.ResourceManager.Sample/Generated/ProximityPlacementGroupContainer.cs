@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.Sample
     public partial class ProximityPlacementGroupContainer : ResourceContainerBase<TenantResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData>
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupContainer class. </summary>
-        /// <param name="resourceGroup"> The parent resource group. </param>
-        internal ProximityPlacementGroupContainer(ResourceGroupOperations resourceGroup) : base(resourceGroup)
+        /// <param name="parent"> The resource representing the parent resource. </param>
+        internal ProximityPlacementGroupContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _pipeline = new HttpPipeline(ClientOptions.Transport);

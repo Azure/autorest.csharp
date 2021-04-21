@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.Sample
     public partial class VirtualMachineScaleSetContainer : ResourceContainerBase<TenantResourceIdentifier, VirtualMachineScaleSet, VirtualMachineScaleSetData>
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetContainer class. </summary>
-        /// <param name="resourceGroup"> The parent resource group. </param>
-        internal VirtualMachineScaleSetContainer(ResourceGroupOperations resourceGroup) : base(resourceGroup)
+        /// <param name="parent"> The resource representing the parent resource. </param>
+        internal VirtualMachineScaleSetContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _pipeline = new HttpPipeline(ClientOptions.Transport);

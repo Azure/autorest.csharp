@@ -82,10 +82,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             private void WriteContainerCtors()
             {
                 _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {_resourceContainer.Type.Name} class.");
-                var resourceGroupParameterName = "resourceGroup";
-                _writer.WriteXmlDocumentationParameter(resourceGroupParameterName, "The parent resource group.");
+                var parent = "parent";
+                _writer.WriteXmlDocumentationParameter(parent, "The resource representing the parent resource.");
 
-                using (_writer.Scope($"internal {_resourceContainer.Type.Name:D}(ResourceGroupOperations {resourceGroupParameterName}) : base({resourceGroupParameterName})"))
+                using (_writer.Scope($"internal {_resourceContainer.Type.Name}({typeof(ResourceOperationsBase)} {parent}) : base({parent})"))
                 {
                     _writer.Line($"{ClientDiagnosticsVariable} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                     _writer.Line($"{PipelineVariable} = new {typeof(HttpPipeline)}(ClientOptions.Transport);");

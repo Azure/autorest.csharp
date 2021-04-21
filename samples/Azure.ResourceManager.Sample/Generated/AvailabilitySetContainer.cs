@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.Sample
     public partial class AvailabilitySetContainer : ResourceContainerBase<TenantResourceIdentifier, AvailabilitySet, AvailabilitySetData>
     {
         /// <summary> Initializes a new instance of AvailabilitySetContainer class. </summary>
-        /// <param name="resourceGroup"> The parent resource group. </param>
-        internal AvailabilitySetContainer(ResourceGroupOperations resourceGroup) : base(resourceGroup)
+        /// <param name="parent"> The resource representing the parent resource. </param>
+        internal AvailabilitySetContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _pipeline = new HttpPipeline(ClientOptions.Transport);

@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.Sample
     public partial class DedicatedHostGroupContainer : ResourceContainerBase<TenantResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData>
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupContainer class. </summary>
-        /// <param name="resourceGroup"> The parent resource group. </param>
-        internal DedicatedHostGroupContainer(ResourceGroupOperations resourceGroup) : base(resourceGroup)
+        /// <param name="parent"> The resource representing the parent resource. </param>
+        internal DedicatedHostGroupContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _pipeline = new HttpPipeline(ClientOptions.Transport);

@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.Sample
     public partial class ImageContainer : ResourceContainerBase<TenantResourceIdentifier, Image, ImageData>
     {
         /// <summary> Initializes a new instance of ImageContainer class. </summary>
-        /// <param name="resourceGroup"> The parent resource group. </param>
-        internal ImageContainer(ResourceGroupOperations resourceGroup) : base(resourceGroup)
+        /// <param name="parent"> The resource representing the parent resource. </param>
+        internal ImageContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _pipeline = new HttpPipeline(ClientOptions.Transport);
