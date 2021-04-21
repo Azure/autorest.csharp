@@ -29,584 +29,607 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// </summary>
     internal class ResourceContainerWriter
     {
-        private const string ClientDiagnosticsVariable = "clientDiagnostics";
-        private const string PipelineVariable = "pipeline";
+        private const string ClientDiagnosticsVariable = "_clientDiagnostics";
+        private const string PipelineVariable = "_pipeline";
 
-        public void WriteContainer(CodeWriter writer, ResourceContainer resourceContainer)
+        public void WriteContainer(CodeWriter writer, ResourceContainer resourceContainer, AutoRest.MgmtOutputLibrary library)
         {
-            writer.UseNamespace(typeof(Task).Namespace!); // I need to explicitly use namespace here because
-            // at build time I don't have the type information inside Task<>
+            new StatefulWriter(writer, resourceContainer, library).WriteContainer();
+        }
 
-            var cs = resourceContainer.Type;
-            var @namespace = cs.Namespace;
-            using (writer.Namespace(@namespace))
+        private class StatefulWriter
+        {
+            private CodeWriter _writer;
+            private ResourceContainer _resourceContainer;
+            private ResourceData _resourceData;
+            private MgmtRestClient _restClient;
+            private Resource _resource;
+
+            public StatefulWriter(CodeWriter writer, ResourceContainer resourceContainer, AutoRest.MgmtOutputLibrary library)
             {
-                writer.WriteXmlDocumentationSummary(resourceContainer.Description);
-                var baseClass = $"ResourceContainerBase<{resourceContainer.ResourceIdentifierType}, {resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>";
-                using (writer.Scope($"{resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : {baseClass}"))
+                _writer = writer;
+                _resourceContainer = resourceContainer;
+                var operationGroup = resourceContainer.OperationGroup;
+                _resourceData = library.FindResourceData(operationGroup);
+                _restClient = library.FindRestClient(operationGroup);
+                _resource = library.FindArmResource(operationGroup);
+            }
+
+            public void WriteContainer()
+            {
+                _writer.UseNamespace(typeof(Task).Namespace!); // Explicitly adding `System.Threading.Tasks` because
+                                                               // at build time I don't have the type information inside Task<>
+
+                var cs = _resourceContainer.Type;
+                var @namespace = cs.Namespace;
+                using (_writer.Namespace(@namespace))
                 {
-                    WriteContainerCtors(writer, resourceContainer);
-                    WriteFields(writer, resourceContainer);
-                    WriteIdProperty(writer, resourceContainer);
-                    // WriteValidResourceType(writer, resourceContainer);
-                    WriteContainerProperties(writer, resourceContainer);
-                    WriteResourceOperations(writer, resourceContainer);
-                    WriteBuilders(writer, resourceContainer);
-
-                }
-            }
-        }
-
-        private void WriteContainerCtors(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {resourceContainer.Type.Name} class.");
-            var resourceGroupParameterName = "resourceGroup";
-            writer.WriteXmlDocumentationParameter(resourceGroupParameterName, "The parent resource group.");
-
-            using (writer.Scope($"internal {resourceContainer.Type.Name:D}(ResourceGroupOperations {resourceGroupParameterName}) : base({resourceGroupParameterName})"))
-            {
-                writer.Line($"_clientDiagnostics = new ClientDiagnostics(ClientOptions);");
-                writer.Line($"_pipeline = new HttpPipeline(ClientOptions.Transport);");
-            }
-        }
-
-        private void WriteFields(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            writer.Line($"private readonly {typeof(ClientDiagnostics)} _clientDiagnostics;");
-            writer.Line($"private readonly {typeof(HttpPipeline)} _pipeline;");
-
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
-            // subscriptionId might not always be needed. For example `RestOperations` does not have it.
-            var subscriptionId = resourceContainer.RestClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-            writer.Line($"private {resourceContainer.RestOperationsDefaultName} Operations => new {resourceContainer.RestOperationsDefaultName}(_clientDiagnostics, _pipeline{subscriptionId});");
-        }
-
-        private void WriteIdProperty(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Typed Resource Identifier for the container.");
-            writer.LineRaw("// todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.");
-            writer.Line($"public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;");
-        }
-
-        private void WriteValidResourceType(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            // todo: what if valid resource type is not resource group?
-            writer.Line($"protected override ResourceType ValidResourceType => {"ResourceGroupOperations"}.ResourceType;");
-        }
-
-        private void WriteResourceOperations(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            writer.LineRaw($"// Container level operations.");
-
-            // To generate resource operations, we need to find out the correct REST client methods to call.
-            // We can't find CreateOrUpdate method by name cause it may not always be called `CreateOrUpdate`.
-            if (FindRestClientMethodByHttpMethod(resourceContainer, RequestMethod.Put, out var restClientMethod))
-            {
-                WriteCreateOrUpdateVariants(writer, resourceContainer, restClientMethod);
-            }
-            else
-            {
-                WriteFakeCreateOrUpdateVariants(writer, resourceContainer);
-            }
-
-            // We can't find Get method by HTTP method because it may map to List
-            if (FindRestClientMethodByHttpMethod(resourceContainer, new string[] { "Get" }, out restClientMethod))
-            {
-                WriteGetVariants(writer, resourceContainer, restClientMethod);
-            }
-
-            WriteListAsGenericResource(writer, resourceContainer);
-            WriteListAsGenericResourceAsync(writer, resourceContainer);
-            WriteList(writer, resourceContainer);
-            WriteListAsync(writer, resourceContainer);
-        }
-
-        private bool FindRestClientMethodByHttpMethod(ResourceContainer resourceContainer, RequestMethod httpMethod, out RestClientMethod restMethod)
-        {
-            restMethod = resourceContainer.RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(httpMethod));
-            return restMethod != null;
-        }
-        private bool FindRestClientMethodByHttpMethod(ResourceContainer resourceContainer, IEnumerable<string> nameOptions, out RestClientMethod restMethod)
-        {
-            restMethod = resourceContainer.RestClient.Methods.FirstOrDefault(m => nameOptions.Any(nameOption => string.Equals(m.Name, nameOption, StringComparison.InvariantCultureIgnoreCase)));
-            return restMethod != null;
-        }
-
-        private void WriteCreateOrUpdateVariants(CodeWriter writer, ResourceContainer resourceContainer, RestClientMethod restClientMethod)
-        {
-            // hack: should add a IsLongRunning property to method?
-            var isLongRunning = restClientMethod.Responses.All(response => response.ResponseBody == null);
-            var parameterMapping = BuildParameterMapping(restClientMethod);
-
-            // CreateOrUpdate()
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
-
-            writer.Append($"public override ArmResponse<{resourceContainer.ResourceDefaultName}> CreateOrUpdate(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                writer.WriteParameter(parameter.Parameter);
-            }
-            using (writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Append($"return StartCreateOrUpdate(");
-                foreach (var parameter in parameterMapping)
-                {
-                    if (parameter.IsPassThru)
+                    _writer.WriteXmlDocumentationSummary(_resourceContainer.Description);
+                    using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type}, {_resourceData.Type}>"))
                     {
-                        writer.AppendRaw($"{parameter.Parameter.Name}, ");
+                        WriteContainerCtors();
+                        WriteFields();
+                        WriteIdProperty();
+                        // WriteValidResourceType(writer, resourceContainer);
+                        WriteContainerProperties();
+                        WriteResourceOperations();
+                        WriteBuilders();
+
                     }
                 }
-                writer.Line($"cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<{resourceContainer.ResourceDefaultName}>;");
             }
 
-            // CreateOrUpdateAsync()
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+            private void WriteContainerCtors()
             {
-                writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
+                _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {_resourceContainer.Type.Name} class.");
+                var resourceGroupParameterName = "resourceGroup";
+                _writer.WriteXmlDocumentationParameter(resourceGroupParameterName, "The parent resource group.");
 
-            writer.Append($"public async override Task<ArmResponse<{resourceContainer.ResourceDefaultName}>> CreateOrUpdateAsync(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                writer.WriteParameter(parameter.Parameter);
-            }
-            using (writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Append($"var operation = await StartCreateOrUpdateAsync(");
-                foreach (var parameter in parameterMapping)
+                using (_writer.Scope($"internal {_resourceContainer.Type.Name:D}(ResourceGroupOperations {resourceGroupParameterName}) : base({resourceGroupParameterName})"))
                 {
-                    if (parameter.IsPassThru)
-                    {
-                        writer.AppendRaw($"{parameter.Parameter.Name}, ");
-                    }
+                    _writer.Line($"{ClientDiagnosticsVariable} = new {typeof(ClientDiagnostics)}(ClientOptions);");
+                    _writer.Line($"{PipelineVariable} = new {typeof(HttpPipeline)}(ClientOptions.Transport);");
                 }
-                writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
-                writer.Line($"return operation.WaitForCompletion() as ArmResponse<{resourceContainer.ResourceDefaultName}>;");  // no WaitForCompletionAsync()?
             }
 
-            // StartCreateOrUpdate()
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+            private void WriteFields()
             {
-                writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
+                _writer.Line();
+                _writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsVariable};");
+                _writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineVariable};");
 
-            writer.Append($"public override ArmOperation<{resourceContainer.ResourceDefaultName}> StartCreateOrUpdate(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                writer.WriteParameter(parameter.Parameter);
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
+                // subscriptionId might not always be needed. For example `RestOperations` does not have it.
+                var subscriptionId = _restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
+                _writer.Line($"private {_resourceContainer.RestOperationsDefaultName} Operations => new {_resourceContainer.RestOperationsDefaultName}({ClientDiagnosticsVariable}, {PipelineVariable}{subscriptionId});");
             }
-            using (writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+
+            private void WriteIdProperty()
             {
-                writer.Append($"var originalResponse = Operations.{restClientMethod.Name}(");
-                foreach (var parameter in parameterMapping)
+                _writer.Line();
+                _writer.WriteXmlDocumentationSummary($"Typed Resource Identifier for the container.");
+                _writer.LineRaw("// todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.");
+                _writer.Line($"public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;");
+            }
+
+            private void WriteValidResourceType()
+            {
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                // todo: what if valid resource type is not resource group?
+                _writer.Line($"protected override ResourceType ValidResourceType => {"ResourceGroupOperations"}.ResourceType;");
+            }
+
+            private void WriteResourceOperations()
+            {
+                _writer.Line();
+                _writer.LineRaw($"// Container level operations.");
+
+                // To generate resource operations, we need to find out the correct REST client methods to call.
+                // We can't find CreateOrUpdate method by name cause it may not always be called `CreateOrUpdate`.
+                if (FindRestClientMethodByHttpMethod(RequestMethod.Put, out var restClientMethod))
                 {
-                    writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    writer.AppendRaw(", ");
-                }
-                writer.Line($"cancellationToken: cancellationToken);");
-                if (isLongRunning)
-                {
-                    writer.Line($"var operation = new {resourceContainer.ResourceDefaultName}{restClientMethod.Name}Operation(");
-                    writer.Line($"_clientDiagnostics, _pipeline, Operations.Create{restClientMethod.Name}Request(");
-                    foreach (var parameter in parameterMapping)
-                    {
-                        writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                        writer.AppendRaw(", ");
-                    }
-                    writer.RemoveTrailingComma();
-                    writer.Line($").Request,");
-                    writer.Line($"originalResponse);");
-                    writer.Line($"return new PhArmOperation<{resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>(");
-                    writer.Line($"operation,");
-                    writer.Line($"data => new {resourceContainer.ResourceDefaultName}(Parent, data));");
+                    WriteCreateOrUpdateVariants(restClientMethod);
                 }
                 else
                 {
-                    writer.Line($"return new PhArmOperation<{resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>(");
-                    writer.Line($"originalResponse,");
-                    writer.Line($"data => new {resourceContainer.ResourceDefaultName}(Parent, data));");
-
+                    WriteFakeCreateOrUpdateVariants();
                 }
-            }
 
-            // StartCreateOrUpdateAsync()
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
-
-            writer.Append($"public async override Task<ArmOperation<{resourceContainer.ResourceDefaultName}>> StartCreateOrUpdateAsync(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                writer.WriteParameter(parameter.Parameter);
-            }
-            using (writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Append($"var originalResponse = await Operations.{restClientMethod.Name}Async(");
-                foreach (var parameter in parameterMapping)
+                // We can't find Get method by HTTP method because it may map to List
+                if (FindRestClientMethodByHttpMethod(new string[] { "Get" }, out restClientMethod))
                 {
-                    writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    writer.AppendRaw(", ");
+                    WriteGetVariants(restClientMethod);
                 }
-                writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
-                if (isLongRunning)
+
+                WriteListAsGenericResource();
+                WriteListAsGenericResourceAsync();
+                WriteList();
+                WriteListAsync();
+            }
+
+            private bool FindRestClientMethodByHttpMethod(RequestMethod httpMethod, out RestClientMethod restMethod)
+            {
+                restMethod = _restClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(httpMethod));
+                return restMethod != null;
+            }
+            private bool FindRestClientMethodByHttpMethod(IEnumerable<string> nameOptions, out RestClientMethod restMethod)
+            {
+                restMethod = _restClient.Methods.FirstOrDefault(m => nameOptions.Any(nameOption => string.Equals(m.Name, nameOption, StringComparison.InvariantCultureIgnoreCase)));
+                return restMethod != null;
+            }
+
+            private void WriteCreateOrUpdateVariants(RestClientMethod restClientMethod)
+            {
+                // hack: should add a IsLongRunning property to method?
+                var isLongRunning = restClientMethod.Responses.All(response => response.ResponseBody == null);
+                var parameterMapping = BuildParameterMapping(restClientMethod);
+
+                // CreateOrUpdate()
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
                 {
-                    writer.Line($"var operation = new {resourceContainer.ResourceDefaultName}{restClientMethod.Name}Operation(");
-                    writer.Line($"_clientDiagnostics, _pipeline, Operations.Create{restClientMethod.Name}Request(");
+                    _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
+                }
+                _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
+
+                _writer.Append($"public override ArmResponse<{_resource.Type}> CreateOrUpdate(");
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+                {
+                    _writer.WriteParameter(parameter.Parameter);
+                }
+                using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Append($"return StartCreateOrUpdate(");
                     foreach (var parameter in parameterMapping)
                     {
-                        writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                        writer.AppendRaw(", ");
+                        if (parameter.IsPassThru)
+                        {
+                            _writer.AppendRaw($"{parameter.Parameter.Name}, ");
+                        }
                     }
-                    writer.RemoveTrailingComma();
-                    writer.Line($").Request,");
-                    writer.Line($"originalResponse);");
-                    writer.Line($"return new PhArmOperation<{resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>(");
-                    writer.Line($"operation,");
-                    writer.Line($"data => new {resourceContainer.ResourceDefaultName}(Parent, data));");
+                    _writer.Line($"cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<{_resource.Type}>;");
                 }
-                else
+
+                // CreateOrUpdateAsync()
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
                 {
-                    writer.Line($"return new PhArmOperation<{resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>(");
-                    writer.Line($"originalResponse,");
-                    writer.Line($"data => new {resourceContainer.ResourceDefaultName}(Parent, data));");
+                    _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
                 }
-            }
-        }
+                _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-        /// <summary>
-        /// Builds the mapping between resource operations in Container class and that in RestOperations class.
-        /// </summary>
-        /// <param name="method">Represents a method in RestOperations class.</param>
-        /// <returns>
-        /// A list of tuples containing
-        /// - Parameter: the reference to the parameter object in RestClientMethod
-        /// - IsPassThru: should the parameter be passed through from the method in container class
-        /// - ValueExpression: if not pass-through, this is the value to pass in RestClientMethod
-        /// </returns>
-        private IEnumerable<(Parameter Parameter, bool IsPassThru, string ValueExpression)> BuildParameterMapping(RestClientMethod method)
-        {
-            var parameterMapping = new List<(Parameter Parameter, bool IsPassThru, string ValueExpression)>();
-            var dotParent = "";
-
-            foreach (var parameter in method.Parameters)
-            {
-                bool passThru = true;
-                string valueExpression = string.Empty;
-                if (parameter.Type.Equals(typeof(System.String)))
+                _writer.Append($"public async override Task<ArmResponse<{_resource.Type}>> CreateOrUpdateAsync(");
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
                 {
-                    // todo: how about "location"?
-                    if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+                    _writer.WriteParameter(parameter.Parameter);
+                }
+                using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Append($"var operation = await StartCreateOrUpdateAsync(");
+                    foreach (var parameter in parameterMapping)
                     {
-                        passThru = false;
-                        valueExpression = "Id.ResourceGroupName";
+                        if (parameter.IsPassThru)
+                        {
+                            _writer.AppendRaw($"{parameter.Parameter.Name}, ");
+                        }
+                    }
+                    _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
+                    _writer.Line($"return operation.WaitForCompletion() as ArmResponse<{_resource.Type}>;");  // no WaitForCompletionAsync()?
+                }
+
+                // StartCreateOrUpdate()
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+                {
+                    _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
+                }
+                _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
+
+                _writer.Append($"public override ArmOperation<{_resource.Type}> StartCreateOrUpdate(");
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+                {
+                    _writer.WriteParameter(parameter.Parameter);
+                }
+                using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Append($"var originalResponse = Operations.{restClientMethod.Name}(");
+                    foreach (var parameter in parameterMapping)
+                    {
+                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                        _writer.AppendRaw(", ");
+                    }
+                    _writer.Line($"cancellationToken: cancellationToken);");
+                    if (isLongRunning)
+                    {
+                        _writer.Line($"var operation = new {_resource.Type}{restClientMethod.Name}Operation(");
+                        _writer.Line($"{ClientDiagnosticsVariable}, {PipelineVariable}, Operations.Create{restClientMethod.Name}Request(");
+                        foreach (var parameter in parameterMapping)
+                        {
+                            _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                            _writer.AppendRaw(", ");
+                        }
+                        _writer.RemoveTrailingComma();
+                        _writer.Line($").Request,");
+                        _writer.Line($"originalResponse);");
+                        _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
+                        _writer.Line($"operation,");
+                        _writer.Line($"data => new {_resource.Type}(Parent, data));");
                     }
                     else
                     {
-                        passThru = false;
-                        valueExpression = $"Id{dotParent}.Name";
-                        dotParent += ".Parent";
+                        _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
+                        _writer.Line($"originalResponse,");
+                        _writer.Line($"data => new {_resource.Type}(Parent, data));");
+
                     }
                 }
-                else
+
+                // StartCreateOrUpdateAsync()
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
                 {
-                    passThru = true;
+                    _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
                 }
-                parameterMapping.Add((parameter, passThru, valueExpression));
-            }
-            // make last string parameter (typically the resource name) pass-through from container method
-            // ignoring optional parameters such as `expand`
-            var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.Equals(typeof(System.String)) && parameter.Parameter.DefaultValue is null);
-            if (lastString.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var index = parameterMapping.IndexOf(lastString);
-                parameterMapping[index] = (lastString.Parameter, true, string.Empty);
-                // can't just do `lastString.IsPassThru = true` as it does not affect parameterMapping
-                // lastString is not a ref?
-            }
-            return parameterMapping;
-        }
+                _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-        /// <summary>
-        /// Write 4 variants of CreateOrUpdate that only throw exceptions when the resource does not support PUT,
-        /// so that the container class implements the methods overload defined in `ContainerBase`.
-        /// </summary>
-        /// <param name="writer"></param>
-        private void WriteFakeCreateOrUpdateVariants(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            var nameParameter = new Parameter("name", "The name of the resource.", typeof(string), null, false);
-            var resourceDetailsParameter = new Parameter("resourceDetails", "The desired resource configuration.", resourceContainer.ResourceData.Type, null, false);
-            // CreateOrUpdate()
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            var parameters = new List<Parameter> { nameParameter, resourceDetailsParameter };
-            writer.Append($"public override ArmResponse<{resourceContainer.ResourceDefaultName}> CreateOrUpdate(");
-            parameters.ForEach(parameter => writer.WriteParameter(parameter));
-            var doesNotSupportPut = @"This resource does not support PUT HTTP method.";
-            using (writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Line($"// {doesNotSupportPut}");
-                writer.Line($"throw new {typeof(NotImplementedException)}();");
-            }
-
-            // CreateOrUpdateAsync()
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            writer.Append($"public override Task<ArmResponse<{resourceContainer.ResourceDefaultName}>> CreateOrUpdateAsync(");
-            parameters.ForEach(parameter => writer.WriteParameter(parameter));
-            using (writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Line($"// {doesNotSupportPut}");
-                writer.Line($"throw new {typeof(NotImplementedException)}();");
-            }
-
-            // StartCreateOrUpdate()
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            writer.Append($"public override ArmOperation<{resourceContainer.ResourceDefaultName}> StartCreateOrUpdate(");
-            parameters.ForEach(parameter => writer.WriteParameter(parameter));
-            using (writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Line($"// {doesNotSupportPut}");
-                writer.Line($"throw new {typeof(NotImplementedException)}();");
-            }
-
-            // StartCreateOrUpdateAsync()
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            writer.Append($"public override Task<ArmOperation<{resourceContainer.ResourceDefaultName}>> StartCreateOrUpdateAsync(");
-            parameters.ForEach(parameter => writer.WriteParameter(parameter));
-            using (writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Line($"// {doesNotSupportPut}");
-                writer.Line($"throw new {typeof(NotImplementedException)}();");
-            }
-        }
-
-        private void WriteCreateOrUpdateAsync(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public async override Task<ArmResponse<{resourceContainer.ResourceDefaultName}>> CreateOrUpdateAsync(string name, {resourceContainer.DataDefaultName} resourceDetails, {typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Line($"var response = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, name, resourceDetails).ConfigureAwait(false);");
-                writer.Line($"return new PhArmResponse<{resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>(");
-                writer.Line($"response,");
-                writer.Line($"data => new {resourceContainer.ResourceDefaultName}(Parent, data));");
-            }
-        }
-
-        private void WriteStartCreateOrUpdate(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public override ArmOperation<{resourceContainer.ResourceDefaultName}> StartCreateOrUpdate(string name, {resourceContainer.DataDefaultName} resourceDetails, {typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Line($"return new PhArmOperation<{resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>(");
-                writer.Line($"Operations.CreateOrUpdate(Id.ResourceGroupName, name, resourceDetails, cancellationToken),");
-                writer.Line($"data => new {resourceContainer.ResourceDefaultName}(Parent, data));");
-            }
-        }
-
-        private void WriteStartCreateOrUpdateAsync(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public async override Task<ArmOperation<{resourceContainer.ResourceDefaultName}>> StartCreateOrUpdateAsync(string name, {resourceContainer.DataDefaultName} resourceDetails, {typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Line($"return new PhArmOperation<{resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>(");
-                writer.Line($"await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, name, resourceDetails, cancellationToken).ConfigureAwait(false),");
-                writer.Line($"data => new {resourceContainer.ResourceDefaultName}(Parent, data));");
-            }
-            writer.Line();
-        }
-
-        private void WriteContainerProperties(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            var resourceType = resourceContainer.GetValidResourceValue();
-
-            // TODO: Remove this if condition after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5800
-            if (!resourceType.Contains(".ResourceType"))
-            {
-                resourceType = $"\"{resourceType}\"";
-            }
-
-            writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
-            writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
-        }
-
-        private void WriteGetVariants(CodeWriter writer, ResourceContainer resourceContainer, RestClientMethod method)
-        {
-            var parameterMapping = BuildParameterMapping(method);
-            // some Get() contains extra non-name parameters which if added to method signature,
-            // would break the inheritance to ResourceContainerBase
-            // e.g. `expand` when getting image in compute RP
-            parameterMapping = parameterMapping.Where(mapping => mapping.Parameter.DefaultValue is null);
-
-            // Get()
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
-
-            writer.Append($"public override ArmResponse<{resourceContainer.ResourceDefaultName}> Get(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                writer.WriteParameter(parameter.Parameter);
-            }
-            using (writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Line($"return new PhArmResponse<{resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>(");
-                writer.Append($"Operations.Get(");
-                foreach (var parameter in parameterMapping)
+                _writer.Append($"public async override Task<ArmOperation<{_resource.Type}>> StartCreateOrUpdateAsync(");
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
                 {
-                    writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    writer.AppendRaw(", ");
+                    _writer.WriteParameter(parameter.Parameter);
                 }
-                writer.Line($"cancellationToken: cancellationToken),");
-                writer.Line($"data => new {resourceContainer.ResourceDefaultName}(Parent, data));");
-            }
-
-            // GetAsync()
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
-
-            writer.Append($"public async override Task<ArmResponse<{resourceContainer.ResourceDefaultName}>> GetAsync(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                writer.WriteParameter(parameter.Parameter);
-            }
-            using (writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                writer.Line($"return new PhArmResponse<{resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>(");
-                writer.Append($"await Operations.GetAsync(");
-                foreach (var parameter in parameterMapping)
+                using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
                 {
-                    writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    writer.AppendRaw(", ");
+                    _writer.Append($"var originalResponse = await Operations.{restClientMethod.Name}Async(");
+                    foreach (var parameter in parameterMapping)
+                    {
+                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                        _writer.AppendRaw(", ");
+                    }
+                    _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
+                    if (isLongRunning)
+                    {
+                        _writer.Line($"var operation = new {_resource.Type}{restClientMethod.Name}Operation(");
+                        _writer.Line($"{ClientDiagnosticsVariable}, {PipelineVariable}, Operations.Create{restClientMethod.Name}Request(");
+                        foreach (var parameter in parameterMapping)
+                        {
+                            _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                            _writer.AppendRaw(", ");
+                        }
+                        _writer.RemoveTrailingComma();
+                        _writer.Line($").Request,");
+                        _writer.Line($"originalResponse);");
+                        _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
+                        _writer.Line($"operation,");
+                        _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                    }
+                    else
+                    {
+                        _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
+                        _writer.Line($"originalResponse,");
+                        _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                    }
                 }
-                writer.Line($"cancellationToken: cancellationToken),");
-                writer.Line($"data => new {resourceContainer.ResourceDefaultName}(Parent, data));");
             }
-        }
 
-        private void WriteGetAsync(CodeWriter writer, ResourceContainer resourceContainer, RestClientMethod method)
-        {
-            writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public async override Task<ArmResponse<{resourceContainer.ResourceDefaultName}>> GetAsync(string name, {typeof(CancellationToken)} cancellationToken = default)"))
+            /// <summary>
+            /// Builds the mapping between resource operations in Container class and that in RestOperations class.
+            /// </summary>
+            /// <param name="method">Represents a method in RestOperations class.</param>
+            /// <returns>
+            /// A list of tuples containing
+            /// - Parameter: the reference to the parameter object in RestClientMethod
+            /// - IsPassThru: should the parameter be passed through from the method in container class
+            /// - ValueExpression: if not pass-through, this is the value to pass in RestClientMethod
+            /// </returns>
+            private IEnumerable<(Parameter Parameter, bool IsPassThru, string ValueExpression)> BuildParameterMapping(RestClientMethod method)
             {
-                writer.Line($"return new PhArmResponse<{resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}>(");
-                writer.Line($"await Operations.GetAsync(Id.ResourceGroupName, name, cancellationToken),");
-                writer.Line($"data => new {resourceContainer.ResourceDefaultName}(Parent, data));");
-            }
-        }
+                var parameterMapping = new List<(Parameter Parameter, bool IsPassThru, string ValueExpression)>();
+                var dotParent = "";
 
-        private void WriteList(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            // todo: do not hard code resource type
-            writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
-            writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
-            writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-            // todo: do not hard code resource type
-            writer.WriteXmlDocumentation("returns", $"A collection of {"todo: availability set"} that may take multiple service requests to iterate over.");
-            using (writer.Scope($"public Pageable<{resourceContainer.ResourceDefaultName}> List(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+                foreach (var parameter in method.Parameters)
+                {
+                    bool passThru = true;
+                    string valueExpression = string.Empty;
+                    if (parameter.Type.Equals(typeof(System.String)))
+                    {
+                        // todo: how about "location"?
+                        if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            passThru = false;
+                            valueExpression = "Id.ResourceGroupName";
+                        }
+                        else
+                        {
+                            passThru = false;
+                            valueExpression = $"Id{dotParent}.Name";
+                            dotParent += ".Parent";
+                        }
+                    }
+                    else
+                    {
+                        passThru = true;
+                    }
+                    parameterMapping.Add((parameter, passThru, valueExpression));
+                }
+                // make last string parameter (typically the resource name) pass-through from container method
+                // ignoring optional parameters such as `expand`
+                var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.Equals(typeof(System.String)) && parameter.Parameter.DefaultValue is null);
+                if (lastString.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    var index = parameterMapping.IndexOf(lastString);
+                    parameterMapping[index] = (lastString.Parameter, true, string.Empty);
+                    // can't just do `lastString.IsPassThru = true` as it does not affect parameterMapping
+                    // lastString is not a ref?
+                }
+                return parameterMapping;
+            }
+
+            /// <summary>
+            /// Write 4 variants of CreateOrUpdate that only throw exceptions when the resource does not support PUT,
+            /// so that the container class implements the methods overload defined in `ContainerBase`.
+            /// </summary>
+            /// <param name="_writer"></param>
+            private void WriteFakeCreateOrUpdateVariants()
             {
-                writer.Line($"var results = ListAsGenericResource(nameFilter, top, cancellationToken);");
-                writer.Line($"return new PhWrappingPageable<GenericResource, {resourceContainer.ResourceDefaultName}>(results, genericResource => new {resourceContainer.OperationsDefaultName}(genericResource).Get().Value);");
-            }
-        }
+                var nameParameter = new Parameter("name", "The name of the resource.", typeof(string), null, false);
+                var resourceDetailsParameter = new Parameter("resourceDetails", "The desired resource configuration.", _resourceContainer.ResourceData.Type, null, false);
+                // CreateOrUpdate()
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                var parameters = new List<Parameter> { nameParameter, resourceDetailsParameter };
+                _writer.Append($"public override ArmResponse<{_resource.Type}> CreateOrUpdate(");
+                parameters.ForEach(parameter => _writer.WriteParameter(parameter));
+                var doesNotSupportPut = @"This resource does not support PUT HTTP method.";
+                using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"// {doesNotSupportPut}");
+                    _writer.Line($"throw new {typeof(NotImplementedException)}();");
+                }
 
-        private void WriteListAsync(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            // todo: do not hard code resource type
-            writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
-            writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
-            writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-            // todo: do not hard code resource type
-            writer.WriteXmlDocumentation("returns", $"An async collection of {"todo: availability set"} that may take multiple service requests to iterate over.");
-            using (writer.Scope($"public AsyncPageable<{resourceContainer.ResourceDefaultName}> ListAsync(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+                // CreateOrUpdateAsync()
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                _writer.Append($"public override Task<ArmResponse<{_resource.Type}>> CreateOrUpdateAsync(");
+                parameters.ForEach(parameter => _writer.WriteParameter(parameter));
+                using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"// {doesNotSupportPut}");
+                    _writer.Line($"throw new {typeof(NotImplementedException)}();");
+                }
+
+                // StartCreateOrUpdate()
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                _writer.Append($"public override ArmOperation<{_resource.Type}> StartCreateOrUpdate(");
+                parameters.ForEach(parameter => _writer.WriteParameter(parameter));
+                using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"// {doesNotSupportPut}");
+                    _writer.Line($"throw new {typeof(NotImplementedException)}();");
+                }
+
+                // StartCreateOrUpdateAsync()
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                _writer.Append($"public override Task<ArmOperation<{_resource.Type}>> StartCreateOrUpdateAsync(");
+                parameters.ForEach(parameter => _writer.WriteParameter(parameter));
+                using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"// {doesNotSupportPut}");
+                    _writer.Line($"throw new {typeof(NotImplementedException)}();");
+                }
+            }
+
+            private void WriteCreateOrUpdateAsync()
             {
-                writer.Line($"var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);");
-                writer.Line($"return new PhWrappingAsyncPageable<GenericResource, {resourceContainer.ResourceDefaultName}>(results, genericResource => new {resourceContainer.OperationsDefaultName}(genericResource).Get().Value);");
-            }
-        }
 
-        private void WriteListAsGenericResource(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            // todo: do not hard code resource type
-            writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group represented as generic resources.");
-            writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
-            writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-            writer.WriteXmlDocumentation("returns", $"A collection of resource that may take multiple service requests to iterate over.");
-            using (writer.Scope($"public {typeof(Pageable<GenericResource>)} ListAsGenericResource(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                using (_writer.Scope($"public async override Task<ArmResponse<{_resource.Type}>> CreateOrUpdateAsync(string name, {_resourceData.Type} resourceDetails, {typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"var response = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, name, resourceDetails).ConfigureAwait(false);");
+                    _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Line($"response,");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                }
+            }
+
+            private void WriteStartCreateOrUpdate()
             {
-                writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({resourceContainer.DataDefaultName}.ResourceType);");
-                writer.Line($"filters.SubstringFilter = nameFilter;");
-                // todo: do not hard code ResourceGroupOperations
-                writer.Line($"return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                using (_writer.Scope($"public override ArmOperation<{_resource.Type}> StartCreateOrUpdate(string name, {_resourceData.Type} resourceDetails, {typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Line($"Operations.CreateOrUpdate(Id.ResourceGroupName, name, resourceDetails, cancellationToken),");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                }
             }
-        }
 
-        private void WriteListAsGenericResourceAsync(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            // todo: do not hard code resource type
-            writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group represented as generic resources.");
-            writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
-            writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-            writer.WriteXmlDocumentation("returns", $"An async collection of resource that may take multiple service requests to iterate over.");
-            using (writer.Scope($"public {typeof(AsyncPageable<GenericResource>)} ListAsGenericResourceAsync(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            private void WriteStartCreateOrUpdateAsync()
             {
-                writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({resourceContainer.DataDefaultName}.ResourceType);");
-                writer.Line($"filters.SubstringFilter = nameFilter;");
-                // todo: do not hard code ResourceGroupOperations
-                writer.Line($"return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                using (_writer.Scope($"public async override Task<ArmOperation<{_resource.Type}>> StartCreateOrUpdateAsync(string name, {_resourceData.Type} resourceDetails, {typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Line($"await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, name, resourceDetails, cancellationToken).ConfigureAwait(false),");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                }
+                _writer.Line();
             }
-        }
 
-        private void WriteBuilders(CodeWriter writer, ResourceContainer resourceContainer)
-        {
-            writer.Line();
-            writer.LineRaw($"// Builders.");
-            writer.LineRaw($"// public ArmBuilder<{resourceContainer.ResourceIdentifierType}, {resourceContainer.ResourceDefaultName}, {resourceContainer.DataDefaultName}> Construct() {{ }}");
+            private void WriteContainerProperties()
+            {
+                var resourceType = _resourceContainer.GetValidResourceValue();
+
+                // TODO: Remove this if condition after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5800
+                if (!resourceType.Contains(".ResourceType"))
+                {
+                    resourceType = $"\"{resourceType}\"";
+                }
+
+                _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
+                _writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
+            }
+
+            private void WriteGetVariants(RestClientMethod method)
+            {
+                var parameterMapping = BuildParameterMapping(method);
+                // some Get() contains extra non-name parameters which if added to method signature,
+                // would break the inheritance to ResourceContainerBase
+                // e.g. `expand` when getting image in compute RP
+                parameterMapping = parameterMapping.Where(mapping => mapping.Parameter.DefaultValue is null);
+
+                // Get()
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+                {
+                    _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
+                }
+                _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
+
+                _writer.Append($"public override ArmResponse<{_resource.Type}> Get(");
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+                {
+                    _writer.WriteParameter(parameter.Parameter);
+                }
+                using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Append($"Operations.Get(");
+                    foreach (var parameter in parameterMapping)
+                    {
+                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                        _writer.AppendRaw(", ");
+                    }
+                    _writer.Line($"cancellationToken: cancellationToken),");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                }
+
+                // GetAsync()
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+                {
+                    _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
+                }
+                _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
+
+                _writer.Append($"public async override Task<ArmResponse<{_resource.Type}>> GetAsync(");
+                foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+                {
+                    _writer.WriteParameter(parameter.Parameter);
+                }
+                using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Append($"await Operations.GetAsync(");
+                    foreach (var parameter in parameterMapping)
+                    {
+                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                        _writer.AppendRaw(", ");
+                    }
+                    _writer.Line($"cancellationToken: cancellationToken),");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                }
+            }
+
+            private void WriteGetAsync(RestClientMethod method)
+            {
+                _writer.Line();
+                _writer.WriteXmlDocumentationInheritDoc();
+                using (_writer.Scope($"public async override Task<ArmResponse<{_resource.Type}>> GetAsync(string name, {typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Line($"await Operations.GetAsync(Id.ResourceGroupName, name, cancellationToken),");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                }
+            }
+
+            private void WriteList()
+            {
+                _writer.Line();
+                // todo: do not hard code resource type
+                _writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
+                _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
+                _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
+                _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
+                // todo: do not hard code resource type
+                _writer.WriteXmlDocumentation("returns", $"A collection of {"todo: availability set"} that may take multiple service requests to iterate over.");
+                using (_writer.Scope($"public Pageable<{_resource.Type}> List(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"var results = ListAsGenericResource(nameFilter, top, cancellationToken);");
+                    _writer.Line($"return new PhWrappingPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceContainer.OperationsDefaultName}(genericResource).Get().Value);");
+                }
+            }
+
+            private void WriteListAsync()
+            {
+                _writer.Line();
+                // todo: do not hard code resource type
+                _writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
+                _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
+                _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
+                _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
+                // todo: do not hard code resource type
+                _writer.WriteXmlDocumentation("returns", $"An async collection of {"todo: availability set"} that may take multiple service requests to iterate over.");
+                using (_writer.Scope($"public AsyncPageable<{_resource.Type}> ListAsync(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);");
+                    _writer.Line($"return new PhWrappingAsyncPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceContainer.OperationsDefaultName}(genericResource).Get().Value);");
+                }
+            }
+
+            private void WriteListAsGenericResource()
+            {
+                _writer.Line();
+                // todo: do not hard code resource type
+                _writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group represented as generic resources.");
+                _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
+                _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
+                _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
+                _writer.WriteXmlDocumentation("returns", $"A collection of resource that may take multiple service requests to iterate over.");
+                using (_writer.Scope($"public {typeof(Pageable<GenericResource>)} ListAsGenericResource(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resourceData.Type}.ResourceType);");
+                    _writer.Line($"filters.SubstringFilter = nameFilter;");
+                    // todo: do not hard code ResourceGroupOperations
+                    _writer.Line($"return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
+                }
+            }
+
+            private void WriteListAsGenericResourceAsync()
+            {
+                _writer.Line();
+                // todo: do not hard code resource type
+                _writer.WriteXmlDocumentationSummary($"Filters the list of {"todo: availability set"} for this resource group represented as generic resources.");
+                _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
+                _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
+                _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
+                _writer.WriteXmlDocumentation("returns", $"An async collection of resource that may take multiple service requests to iterate over.");
+                using (_writer.Scope($"public {typeof(AsyncPageable<GenericResource>)} ListAsGenericResourceAsync(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+                {
+                    _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resourceData.Type}.ResourceType);");
+                    _writer.Line($"filters.SubstringFilter = nameFilter;");
+                    // todo: do not hard code ResourceGroupOperations
+                    _writer.Line($"return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
+                }
+            }
+
+            private void WriteBuilders()
+            {
+                _writer.Line();
+                _writer.Line($"// Builders.");
+                _writer.LineRaw($"// public ArmBuilder<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}> Construct() {{ }}");
+            }
         }
     }
 }
