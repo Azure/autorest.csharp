@@ -169,7 +169,9 @@ Write-Host "Hamons-Test";
 
 $dic = [System.Collections.Generic.SortedDictionary[string,System.Collections.Specialized.OrderedDictionary]]@{}
 
-foreach ($key in $swaggerDefinitions.Keys)
+$t = $("body-boolean", "azure-special-properties", "Azure.AI.DocumentTranslation", "AppConfiguration")
+
+foreach ($key in $t)
 {
     $dic[$key] = [ordered]@{'commandName'='Project';}
 }
