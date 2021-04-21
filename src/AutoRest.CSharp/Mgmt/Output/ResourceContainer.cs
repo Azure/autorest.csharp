@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
-        internal OperationGroup OperationGroup { get; }
+        internal new OperationGroup OperationGroup { get; }
 
         protected override string SuffixValue => _suffixValue;
 

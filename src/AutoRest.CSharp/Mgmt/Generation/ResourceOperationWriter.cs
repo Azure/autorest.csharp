@@ -12,6 +12,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -88,13 +89,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             writer.Line();
 
-            foreach (var item in context.Library.ChildParent)
+            foreach (var item in context.CodeModel.OperationGroups)
             {
-                var parent = item.Value;
-                if (parent.Value.ResourceName.Equals(resourceOperation.ResourceName))
+                if (item.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(resourceOperation.OperationGroup.ResourceType(context.Configuration.MgmtConfiguration)))
                 {
-                    var child = item.Key;
-                    var container = context.Library.ResourceContainers.First(x => x.ResourceName.Equals(child.Value.ResourceName));
+                    var container = context.Library.ResourceContainers.First(x => x.ResourceName.Equals(item.Resource(context.Configuration.MgmtConfiguration)));
                     using (writer.Scope($"public {container.Type} Get{container.ResourceName}()"))
                     {
                         // TODO: Bring this back after container class implemented

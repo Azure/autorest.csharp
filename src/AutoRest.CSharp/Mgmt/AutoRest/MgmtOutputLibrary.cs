@@ -54,8 +54,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
-        public IDictionary<KeyValuePair<OperationGroup, ResourceOperation>, KeyValuePair<OperationGroup, ResourceOperation>> ChildParent => GetParent();
-
         private static HashSet<string> ResourceTypes = new HashSet<string>
         {
             "resourceGroups",
@@ -271,21 +269,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 _operationGroups.Add(operationsGroup.Resource(_mgmtConfiguration), result);
             }
             result.Add(operationsGroup);
-        }
-
-        private IDictionary<KeyValuePair<OperationGroup, ResourceOperation>, KeyValuePair<OperationGroup, ResourceOperation>> GetParent()
-        {
-            var childParent = new Dictionary<KeyValuePair<OperationGroup, ResourceOperation>, KeyValuePair<OperationGroup, ResourceOperation>>();
-            var allResources = EnsureResourceOperations();
-            foreach (var childResource in allResources)
-            {
-                var parentResource = allResources.FirstOrDefault(x => x.Key.ResourceType(_mgmtConfiguration).Equals(childResource.Key.ParentResourceType(_mgmtConfiguration)));
-                if (!parentResource.Equals(new KeyValuePair<OperationGroup, ResourceOperation>()) && parentResource.Value.Type.Namespace.Equals(childResource.Value.Type.Namespace))
-                {
-                    childParent.Add(childResource, parentResource);
-                }
-            }
-            return childParent;
         }
     }
 }
