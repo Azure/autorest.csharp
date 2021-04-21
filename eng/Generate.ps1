@@ -168,12 +168,9 @@ if (!($Exclude -contains "SmokeTests"))
 Write-Host "Hamons-Test";
 
 $dic = [System.Collections.Generic.SortedDictionary[string,int]]@{}
-foreach ($key in $("body-boolean", "azure-special-properties", "Azure.AI.DocumentTranslation", "AppConfiguration"))
-{
-    $dic[$key] = 1;
-}
-$dic | Sort-Object -Stable -Descending -CaseSensitive | Out-Host;
-$dic.Keys | Out-Host;
+$dic["azure-special-properties"] = 1;
+$dic["Azure.AI.DocumentTranslation"] = 1;
+$dic["AppConfiguration"] = 1;
 $dic | ConvertTo-Json | Out-Host;
 
 Write-Host "!Hamons-Test";
