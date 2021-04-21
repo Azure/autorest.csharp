@@ -17,6 +17,10 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
+        internal VirtualMachineExtensionContainer(ResourceGroupOperations resourceGroup)
+        {
+        }
+
         /// <summary> Gets the valid resource type for this object. </summary>
         protected ResourceType ValidResourceType => VirtualMachineScaleSetOperations.ResourceType;
     }

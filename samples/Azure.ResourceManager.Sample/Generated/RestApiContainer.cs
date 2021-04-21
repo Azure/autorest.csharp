@@ -17,6 +17,10 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
+        internal RestApiContainer(ResourceGroupOperations resourceGroup)
+        {
+        }
+
         /// <summary> Gets the valid resource type for this object. </summary>
         protected ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
     }

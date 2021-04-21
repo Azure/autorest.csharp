@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.ResourceManager.Core;
 
 namespace ResourceRename
@@ -19,7 +18,7 @@ namespace ResourceRename
         /// <returns> Returns a <see cref="SshPublicKeyInfoContainer" /> object. </returns>
         public static SshPublicKeyInfoContainer GetSshPublicKeyInfos(this ResourceGroupOperations resourceGroup)
         {
-            throw new NotImplementedException();
+            return new SshPublicKeyInfoContainer(resourceGroup);
         }
         #endregion
     }

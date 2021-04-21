@@ -55,10 +55,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateResourceGroupExtensions()
         {
-            if (_projectName.Equals(""))
-            {
-                return;
-            }
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
             Type resourceExtensions = allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);

@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (var resource in context.Library.ArmResource)
                     {
-                        if (resource.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("resourceGroups"))
+                        if (resource.OperationGroup.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.ResourceGroups))
                         {
                             foreach (var container in context.Library.ResourceContainers)
                             {
@@ -57,9 +57,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type.Name}\" /> object.");
             using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name}s (this {typeof(ResourceGroupOperations)} resourceGroup)"))
             {
-                // TODO: Bring this back after container class implemented
-                // writer.Line($"return new {container.Type.Name}(resourceGroup);");
-                writer.Line($"throw new {typeof(NotImplementedException)}();");
+                writer.Line($"return new {container.Type.Name}(resourceGroup);");
             }
         }
     }

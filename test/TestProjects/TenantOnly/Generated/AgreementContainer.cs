@@ -17,6 +17,10 @@ namespace TenantOnly
         {
         }
 
+        internal AgreementContainer(ResourceGroupOperations resourceGroup)
+        {
+        }
+
         /// <summary> Gets the valid resource type for this object. </summary>
         protected ResourceType ValidResourceType => BillingAccountOperations.ResourceType;
     }

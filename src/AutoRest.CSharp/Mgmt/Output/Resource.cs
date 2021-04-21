@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class Resource : TypeProvider
     {
-        public Resource(OperationGroup  operationGroup, BuildContext context)
+        public Resource(OperationGroup operationGroup, BuildContext context)
             : base(context)
         {
             OperationGroup = operationGroup;

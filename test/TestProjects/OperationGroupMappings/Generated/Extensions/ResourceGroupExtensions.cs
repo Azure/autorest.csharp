@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using Azure.ResourceManager.Core;
 
 namespace OperationGroupMappings
@@ -19,7 +18,7 @@ namespace OperationGroupMappings
         /// <returns> Returns a <see cref="AvailabilitySetContainer" /> object. </returns>
         public static AvailabilitySetContainer GetAvailabilitySets(this ResourceGroupOperations resourceGroup)
         {
-            throw new NotImplementedException();
+            return new AvailabilitySetContainer(resourceGroup);
         }
         #endregion
     }
