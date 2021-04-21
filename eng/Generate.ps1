@@ -167,10 +167,10 @@ if (!($Exclude -contains "SmokeTests"))
 
 Write-Host "Hamons-Test";
 
-$dic = [System.Collections.Generic.SortedDictionary[string,int]]@{}
-$dic["azure-special-properties"] = 1;
-$dic["Azure.AI.DocumentTranslation"] = 1;
-$dic["AppConfiguration"] = 1;
+$dic = New-Object PSObject;
+Add-Member -InputObject $dic -NotePropertyName "azure-special-properties" -NotePropertyValue 1
+Add-Member -InputObject $dic -NotePropertyName "Azure.AI.DocumentTranslation" -NotePropertyValue 1
+Add-Member -InputObject $dic -NotePropertyName "AppConfiguration" -NotePropertyValue 1
 $dic | Out-Host;
 
 Write-Host "!Hamons-Test";
