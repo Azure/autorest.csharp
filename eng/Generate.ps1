@@ -168,9 +168,11 @@ if (!($Exclude -contains "SmokeTests"))
 Write-Host "Hamons-Test";
 Write-Host "";
 
-$("body-boolean", "azure-special-properties", "Azure.AI.DocumentTranslation", "AppConfiguration") | sort | Out-Host;
-Write-Host "";
-$("body-boolean", "azure-special-properties", "Azure.AI.DocumentTranslation", "AppConfiguration") | Sort-Object -Stable -Descending -CaseSensitive | Out-Host;
+$dic = [System.Collections.Generic.SortedDictionary[string,int]]@{}
+$dic["azure-special-properties"] = 1;
+$dic["Azure.AI.DocumentTranslation"] = 1;
+$dic["AppConfiguration"] = 1;
+$dic | Sort-Object -property key | Out-Host;
 
 Write-Host "";
 Write-Host "!Hamons-Test";
