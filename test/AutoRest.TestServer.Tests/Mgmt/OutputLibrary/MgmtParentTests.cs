@@ -1,23 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.IO;
-using System.Threading.Tasks;
 using NUnit.Framework;
-using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.AutoRest.Plugins;
-using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Models.Types;
-using System.Reflection;
-using System.Text;
-using System.Text.Json;
 using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
     internal class MgmtParentTests : OutputLibraryTestBase
     {
+        public MgmtParentTests() : base("MgmtParent") { }
+
         [Test]
         public void TestParentComputer()
         {
