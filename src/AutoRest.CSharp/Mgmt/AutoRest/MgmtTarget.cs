@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resourceOperationWriter = new ResourceOperationWriter();
             var resourceContainerWriter = new ResourceContainerWriter();
             var armResourceWriter = new ResourceWriter();
-            var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter(); 
+            var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
 
             foreach (var model in context.Library.Models)
