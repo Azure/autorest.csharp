@@ -21,7 +21,7 @@ namespace SubscriptionExtensions
         {
         }
 
-        public static readonly ResourceType ResourceType = "SubscriptionExtensions/VirtualMachineOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
