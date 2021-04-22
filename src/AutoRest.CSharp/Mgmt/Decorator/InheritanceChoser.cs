@@ -1,13 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
@@ -95,46 +92,33 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return trees;
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType childType)
+        public static CSharpType? GetExactMatch(MgmtObjectType childType, ObjectTypeProperty[] properties)
         {
             foreach (System.Type parentType in ReferenceClassCollection)
             {
-                if (IsEqual(childType, parentType))
+                if (IsEqual(parentType, properties))
                 {
-                    return GetCSharpTypeFromSystemType(childType, parentType);
+                    return CSharpType.FromSystemType(childType.Context, parentType);
                 }
             }
             return null;
         }
 
-        private static CSharpType GetCSharpTypeFromSystemType(MgmtObjectType childType, Type parentType)
-        {
-            var genericTypes = parentType.GetGenericArguments().Select<Type, CSharpType>(t => new CSharpType(t));
-            var systemObjectType = new SystemObjectType(parentType, childType.Context);
-            return new CSharpType(
-                systemObjectType,
-                parentType.Namespace ?? childType.Context.DefaultNamespace,
-                systemObjectType.DefaultName,
-                false,
-                false,
-                genericTypes.ToArray());
-        }
-
-        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType)
+        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
             foreach (System.Type parentType in ReferenceClassCollection)
             {
-                if (IsSuperset(originalType, parentType))
+                if (IsSuperset(parentType, properties))
                 {
-                    return GetCSharpTypeFromSystemType(originalType, parentType);
+                    return CSharpType.FromSystemType(originalType.Context, parentType);
                 }
             }
             return null;
         }
 
-        private static bool IsEqual(MgmtObjectType childType, System.Type parentType)
+        private static bool IsEqual(System.Type parentType, ObjectTypeProperty[] properties)
         {
-            var childProperties = childType.Properties.ToList();
+            var childProperties = properties.ToList();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
             if (parentProperties.Count != childProperties.Count)
@@ -182,9 +166,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 m.GetParameters().First().ParameterType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}").Count() > 0;
         }
 
-        private static bool IsSuperset(MgmtObjectType childType, System.Type parentType)
+        private static bool IsSuperset(System.Type parentType, ObjectTypeProperty[] properties)
         {
-            var childProperties = childType.Properties.ToList();
+            var childProperties = properties.ToList();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
             if (parentProperties.Count >= childProperties.Count)

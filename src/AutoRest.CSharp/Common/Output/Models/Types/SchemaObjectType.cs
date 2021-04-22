@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -146,15 +145,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return Discriminator.Value;
             }
 
-            return null;
-        }
-
-        protected virtual ObjectTypeConstructor? GetBaseCtor()
-        {
-            if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
-            {
-                return objectType.Constructors.First();
-            }
             return null;
         }
 

@@ -3,18 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -34,7 +27,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
-        public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
+        public virtual ObjectTypeProperty[] Properties => DefinedProperties;
+        public ObjectTypeProperty[] DefinedProperties => _properties ??= BuildProperties().ToArray();
+
         public virtual CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor? SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
@@ -74,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        protected IEnumerable<ObjectTypeConstructor> BuildConstructors()
+        protected virtual IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
             yield return InitializationConstructor;
 
@@ -130,7 +125,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var type in EnumerateHierarchy())
             {
-                objectProperty = type.Properties.SingleOrDefault(propertySelector);
+                objectProperty = type.DefinedProperties.SingleOrDefault(propertySelector);
                 if (objectProperty != null || !includeParents)
                 {
                     break;
@@ -138,6 +133,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return objectProperty != null;
+        }
+
+        protected virtual ObjectTypeConstructor? GetBaseCtor()
+        {
+            if (Inherits != null && !Inherits.IsFrameworkType && Inherits.Implementation is ObjectType objectType)
+            {
+                return objectType.Constructors.First();
+            }
+            return null;
         }
     }
 }

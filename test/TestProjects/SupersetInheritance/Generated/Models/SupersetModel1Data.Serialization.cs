@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
 {
@@ -15,21 +16,6 @@ namespace SupersetInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
-            }
             if (Optional.IsDefined(New))
             {
                 writer.WritePropertyName("new");
@@ -40,12 +26,17 @@ namespace SupersetInheritance
 
         internal static SupersetModel1Data DeserializeSupersetModel1Data(JsonElement element)
         {
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
             Optional<string> @new = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("new"))
+                {
+                    @new = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("id"))
                 {
                     id = property.Value.GetString();
@@ -61,13 +52,8 @@ namespace SupersetInheritance
                     type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("new"))
-                {
-                    @new = property.Value.GetString();
-                    continue;
-                }
             }
-            return new SupersetModel1Data(, , , id.Value, name.Value, type.Value, @new.Value);
+            return new SupersetModel1Data(id, name, type, @new.Value);
         }
     }
 }

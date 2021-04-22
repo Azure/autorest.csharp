@@ -13,32 +13,15 @@ namespace SupersetInheritance
     public partial class SupersetModel1Data : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
-        /// <param name="Id"> . </param>
-        /// <param name="Name"> . </param>
-        /// <param name="Type"> . </param>
-        public SupersetModel1Data(TenantResourceIdentifier Id, string Name, ResourceType Type) : base(Id, Name, Type)
-        {
-        }
-
-        /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
-        /// <param name="Id"> . </param>
-        /// <param name="Name"> . </param>
-        /// <param name="Type"> . </param>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="new"> . </param>
-        internal SupersetModel1Data(TenantResourceIdentifier Id, string Name, ResourceType Type, string id, string name, string type, string @new) : base(Id, Name, Type)
+        internal SupersetModel1Data(TenantResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
         {
-            Id = id;
-            Name = name;
-            Type = type;
             New = @new;
         }
 
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
         public string New { get; set; }
     }
 }

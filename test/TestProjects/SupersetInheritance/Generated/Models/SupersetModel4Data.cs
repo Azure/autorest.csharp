@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
@@ -15,40 +14,17 @@ namespace SupersetInheritance
     public partial class SupersetModel4Data : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
-        /// <param name="Tags"> . </param>
-        /// <param name="Location"> . </param>
-        /// <param name="Id"> . </param>
-        public SupersetModel4Data(IDictionary<string, string> Tags, LocationData Location, TenantResourceIdentifier Id) : base(Tags, Location, Id)
-        {
-            Tags = new ChangeTrackingDictionary<string, string>();
-        }
-
-        /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
-        /// <param name="Tags"> . </param>
-        /// <param name="Location"> . </param>
-        /// <param name="Id"> . </param>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
-        /// <param name="location"> . </param>
-        /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="new"> . </param>
-        internal SupersetModel4Data(IDictionary<string, string> Tags, LocationData Location, TenantResourceIdentifier Id, string id, string name, string type, string location, IDictionary<string, string> tags, string @new) : base(Tags, Location, Id)
+        internal SupersetModel4Data(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string @new) : base(id, name, type, tags, location)
         {
-            Id = id;
-            Name = name;
-            Type = type;
-            Location = location;
-            Tags = tags;
             New = @new;
         }
 
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Location { get; set; }
-        /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> Tags { get; }
         public string New { get; set; }
     }
 }
