@@ -20,6 +20,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ExactMatchModel8), typeof(ExactMatchModel3Data))]
         [TestCase(typeof(ExactMatchModel9), typeof(ExactMatchModel4Data))]
         [TestCase(typeof(TrackedResource<TenantResourceIdentifier>), typeof(ExactMatchModel5Data))]
+        [TestCase(typeof(object), typeof(ExactMatchModel6Data))]
+        [TestCase(typeof(object), typeof(ExactMatchModel7Data))]
+        [TestCase(typeof(object), typeof(ExactMatchModel8Data))]
+        [TestCase(typeof(object), typeof(ExactMatchModel9Data))]
+        [TestCase(typeof(ExactMatchModel11Data), typeof(ExactMatchModel10Data))]
+        [TestCase(typeof(object), typeof(ExactMatchModel11Data))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
             Assert.AreEqual(expectedBaseType, generatedClass.BaseType);

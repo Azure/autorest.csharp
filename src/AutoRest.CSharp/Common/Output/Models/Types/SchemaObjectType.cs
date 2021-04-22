@@ -313,12 +313,29 @@ namespace AutoRest.CSharp.Output.Models.Types
             )).ToArray();
         }
 
+        protected virtual HashSet<string?> GetParentProperties()
+        {
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.SchemaProperty?.Language.Default.Name)
+                .ToHashSet();
+        }
+
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
+            var existingProperties = GetParentProperties();
+
             foreach (var objectSchema in GetCombinedSchemas())
             {
                 foreach (Property property in objectSchema.Properties!)
                 {
+                    if (existingProperties.Contains(property.Language.Default.Name))
+                    {
+                        // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/261
+                        continue;
+                    }
+
                     var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
                     SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
 
