@@ -171,18 +171,6 @@ function Sort-FileSafe ($names) {
     return $names | % {$_.replace("-","?")} | % {$_.replace(".","|")} | Sort-Object |  % {$_.replace("?","-")} | % {$_.replace("|",".")}
 }
 
-Write-Host "Hamons-Test";
-Write-Host "";
-
-$dic = [System.Collections.Generic.SortedDictionary[string,int]]@{}
-$dic["azure-special-properties"] = 1;
-$dic["Azure.AI.DocumentTranslation"] = 1;
-$dic["AppConfiguration"] = 1;
-Sort-FileSafe ($dic.Keys) | Out-Host;
-
-Write-Host "";
-Write-Host "!Hamons-Test";
-
 $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
 $settings = @{
     'profiles' = [ordered]@{}
