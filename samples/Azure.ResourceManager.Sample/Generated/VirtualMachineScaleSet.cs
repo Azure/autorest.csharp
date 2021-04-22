@@ -17,10 +17,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resource"> The resource that is the target of operations. </param>
         internal VirtualMachineScaleSet(ResourceOperationsBase options, VirtualMachineScaleSetData resource) : base(options, resource.Id)
         {
-            Data = resource;
         }
 
-        /// <summary> Gets or sets the availability set data. </summary>
-        public VirtualMachineScaleSetData Data { get; private set; }
+        /// <summary> Gets or sets the resource data. </summary>
+        public VirtualMachineScaleSet Data { get; private set; }
     }
 }

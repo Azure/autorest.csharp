@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var armResourceWriter = new ResourceWriter();
             var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
             var lroWriter = new MgmtPlaneLongRunningOperationWriter();
+            var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -79,7 +80,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var model in context.Library.ArmResource)
             {
                 var codeWriter = new CodeWriter();
-                armResourceWriter.WriteResource(codeWriter, model);
+                armResourceWriter.WriteResource(codeWriter, context, model);
 
                 var name = model.Type.Name;
                 project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
@@ -97,6 +98,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     }
                 }
             }
+
+            var subscriptionExtensionsCodeWriter = new CodeWriter();
+            var resources = context.Library.ArmResource;
+            subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context, resources);
+            project.AddGeneratedFile($"Extensions/SubscriptionExtensions.cs", subscriptionExtensionsCodeWriter.ToString());
         }
     }
 }

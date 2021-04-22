@@ -17,10 +17,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="resource"> The resource that is the target of operations. </param>
         internal AvailabilitySet(ResourceOperationsBase options, AvailabilitySetData resource) : base(options, resource.Id)
         {
-            Data = resource;
         }
 
-        /// <summary> Gets or sets the availability set data. </summary>
-        public AvailabilitySetData Data { get; private set; }
+        /// <summary> Gets or sets the resource data. </summary>
+        public AvailabilitySet Data { get; private set; }
     }
 }

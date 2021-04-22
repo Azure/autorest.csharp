@@ -2,48 +2,45 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter
     {
-        public void WriteResource(CodeWriter writer, Resource resource)
+        public void WriteResource(CodeWriter writer, BuildContext<MgmtOutputLibrary> context, Resource resource)
         {
-            writer.UseNamespaces(new string[] { "Azure.ResourceManager.Core" });
-
-            var cs = resource.Type;
-
-            using (writer.Namespace(cs.Namespace))
+            using (writer.Namespace(resource.Type.Namespace))
             {
+                var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
                 writer.WriteXmlDocumentationSummary(resource.Description);
-                using (writer.Scope($"{resource.Declaration.Accessibility} class {cs.Name} : {cs.Name}Operations"))
+                using (writer.Scope($"{resource.Declaration.Accessibility} class {resource.Type.Name} : {resourceOperation.Type}"))
                 {
-                    // Write Data property
-                    WriteConstrcutors(writer, resource);
-                    WriteDataProperty(writer, resource);
+                    var resourceData = context.Library.GetResourceData(resource.OperationGroup);
+                    WriteConstructors(writer, resource, resourceData);
+                    WriteDataProperty(writer, resource, resourceData);
                 }
             }
         }
 
-        private void WriteConstrcutors(CodeWriter writer, Resource resource)
+        private void WriteConstructors(CodeWriter writer, Resource resource, ResourceData resourceData)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{resource.Type.Name}\"/> class.");
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
             writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
-            // todo: should not hard code logic of how Data class is named here
-            using (writer.Scope($"internal {resource.Type.Name}(ResourceOperationsBase options, {resource.Type.Name}Data resource) : base(options, resource.Id)"))
+            using (writer.Scope($"internal {resource.Type.Name}({typeof(ResourceOperationsBase)} options, {resourceData.Type} resource) : base(options, resource.Id)"))
             {
-                writer.Line($"Data = resource;");
             }
         }
 
-        private void WriteDataProperty(CodeWriter writer, Resource resource)
+        private void WriteDataProperty(CodeWriter writer, Resource resource, ResourceData resourceData)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"Gets or sets the availability set data.");
-            // todo: should not hard code logic of how Data class is named here
-            writer.LineRaw($"public {resource.Type.Name}Data Data {{ get; private set; }}");
+            writer.WriteXmlDocumentationSummary($"Gets or sets the resource data.");
+            writer.LineRaw($"public {resource.Type.Name} Data {{ get; private set; }}");
         }
     }
 }
