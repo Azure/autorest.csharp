@@ -172,9 +172,7 @@ $dic = [System.Collections.Generic.SortedDictionary[string,int]]@{}
 $dic["azure-special-properties"] = 1;
 $dic["Azure.AI.DocumentTranslation"] = 1;
 $dic["AppConfiguration"] = 1;
-$hash = [System.Collections.SortedList] $dic
-
-$hash | Out-Host;
+$dic.Keys | % {$_.replace("-","?")} | Sort-Object |  % {$_.replace("?","-")} | Out-Host;
 
 Write-Host "";
 Write-Host "!Hamons-Test";
