@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteClientProperties(CodeWriter writer, ResourceOperation resourceOperation, MgmtConfiguration config)
         {
             writer.Line();
-            writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{resourceOperation._operationGroup.ResourceType(config)}\";");
+            writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{resourceOperation.OperationGroup.ResourceType(config)}\";");
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
             }
 
