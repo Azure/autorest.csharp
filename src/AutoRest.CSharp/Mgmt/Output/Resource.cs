@@ -24,8 +24,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override string DefaultName { get; }
 
-        protected override string DefaultAccessibility => "public";
-
         public string Description { get; }
     }
 }
