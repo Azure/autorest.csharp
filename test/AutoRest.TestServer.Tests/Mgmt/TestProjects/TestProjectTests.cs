@@ -52,6 +52,38 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
+        [Test]
+        public void ValidateResourceGroupExtensions()
+        {
+            if (_projectName.Equals(""))
+            {
+                return;
+            }
+
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            Type resourceExtensions = allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
+            Assert.NotNull(resourceExtensions);
+
+            foreach (var type in FindAllContainers())
+            {
+                var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
+                ResourceType resourceType = GetContainerValidResourceType(type);
+                if (resourceType.Equals(ResourceGroupOperations.ResourceType))
+                {
+                    var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}s");
+                    Assert.NotNull(getContainerMethod);
+                    Assert.AreEqual(1, getContainerMethod.GetParameters().Length);
+                    var param = TypeAsserts.HasParameter(getContainerMethod, "resourceGroup");
+                    Assert.AreEqual(typeof(ResourceGroupOperations), param.ParameterType);
+                }
+                else
+                {
+                    var getContainerMethod = resourceExtensions.GetMethod($"Get{resourceName}s");
+                    Assert.IsNull(getContainerMethod);
+                }
+            }
+        }
+
         private IEnumerable<Type> FindAllOperations()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
