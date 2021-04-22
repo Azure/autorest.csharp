@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resourceOperationWriter = new ResourceOperationWriter();
             var resourceContainerWriter = new ResourceContainerWriter();
             var armResourceWriter = new ResourceWriter();
+            var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter(); 
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
 
             foreach (var model in context.Library.Models)
@@ -83,6 +84,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var name = model.Type.Name;
                 project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
             }
+
+            var extensionsWriter = new CodeWriter();
+            resourceGroupExtensionsWriter.WriteExtension(context, extensionsWriter);
+            project.AddGeneratedFile("Extensions/ResourceGroupExtensions.cs", extensionsWriter.ToString());
 
             var subscriptionExtensionsCodeWriter = new CodeWriter();
             var resources = context.Library.ArmResource;
