@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/VirtualMachineScaleSetRollingUpgradeOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

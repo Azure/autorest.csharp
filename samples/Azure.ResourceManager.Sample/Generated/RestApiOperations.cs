@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/RestApiOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/operations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

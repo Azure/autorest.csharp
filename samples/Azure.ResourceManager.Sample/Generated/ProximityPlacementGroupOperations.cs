@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/ProximityPlacementGroupOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/proximityPlacementGroups";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
