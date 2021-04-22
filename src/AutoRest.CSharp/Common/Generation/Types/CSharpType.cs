@@ -90,13 +90,13 @@ namespace AutoRest.CSharp.Generation.Types
             return new CodeWriter().Append($"{this}").ToString(false);
         }
 
-        internal static CSharpType FromSystemType(BuildContext context, Type parentType)
+        internal static CSharpType FromSystemType(BuildContext context, Type type)
         {
-            var genericTypes = parentType.GetGenericArguments().Select<Type, CSharpType>(t => new CSharpType(t));
-            var systemObjectType = new SystemObjectType(parentType, context);
+            var genericTypes = type.GetGenericArguments().Select<Type, CSharpType>(t => new CSharpType(t));
+            var systemObjectType = new SystemObjectType(type, context);
             return new CSharpType(
                 systemObjectType,
-                parentType.Namespace ?? context.DefaultNamespace,
+                type.Namespace ?? context.DefaultNamespace,
                 systemObjectType.DefaultName,
                 false,
                 false,

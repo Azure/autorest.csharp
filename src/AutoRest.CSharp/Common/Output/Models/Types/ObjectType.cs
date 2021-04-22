@@ -27,8 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
-        public virtual ObjectTypeProperty[] Properties => DefinedProperties;
-        public ObjectTypeProperty[] DefinedProperties => _properties ??= BuildProperties().ToArray();
+        public virtual ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 
         public virtual CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor? SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
@@ -125,7 +124,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var type in EnumerateHierarchy())
             {
-                objectProperty = type.DefinedProperties.SingleOrDefault(propertySelector);
+                objectProperty = type.Properties.SingleOrDefault(propertySelector);
                 if (objectProperty != null || !includeParents)
                 {
                     break;

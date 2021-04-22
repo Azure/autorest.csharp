@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         else if (frameworkType == typeof(string) ||
                                  frameworkType == typeof(char) ||
                                  frameworkType == typeof(Guid) ||
-                                 IsMgmtReferenceType(frameworkType))
+                                 ReferenceTypes.IsMgmtReferenceType(frameworkType))
                         {
                             writer.AppendRaw("WriteStringValue");
                         }
@@ -505,7 +505,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"new {typeof(Uri)}({element}.GetString())");
                 return;
             }
-            else if (IsMgmtReferenceType(frameworkType))
+            else if (ReferenceTypes.IsMgmtReferenceType(frameworkType))
             {
                 writer.Append($"({frameworkType}){element}.GetString()");
                 return;
@@ -570,11 +570,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.AppendRaw(")");
-        }
-
-        private static bool IsMgmtReferenceType(Type frameworkType)
-        {
-            return frameworkType.IsSubclassOf(typeof(ResourceIdentifier)) || frameworkType == typeof(ResourceType) || frameworkType == typeof(LocationData);
         }
 
         public static void DeserializeImplementation(this CodeWriter writer, TypeProvider implementation, CodeWriterDelegate element)

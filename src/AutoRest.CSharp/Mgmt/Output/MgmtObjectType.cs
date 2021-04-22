@@ -23,7 +23,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             _isResourceType = isResourceType;
         }
 
-        public override ObjectTypeProperty[] Properties => GetProperties().ToArray();
+        public override ObjectTypeProperty[] Properties => HasSystemBaseType() ? GetProperties().ToArray() : base.Properties;
+
+        private ObjectTypeProperty[] DefinedProperties => base.Properties;
 
         public override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
 
@@ -33,12 +35,18 @@ namespace AutoRest.CSharp.Mgmt.Output
             return isResourceType ? name + "Data" : name;
         }
 
+        private bool HasSystemBaseType()
+        {
+            return (Inherits is not null && !Inherits.IsFrameworkType && Inherits.Implementation is SystemObjectType);
+        }
+
         private IEnumerable<ObjectTypeProperty> GetProperties()
         {
             HashSet<string> baseProperties = new HashSet<string>();
-            if (Inherits is not null && !Inherits.IsFrameworkType && Inherits.Implementation is SystemObjectType baseType)
+            if (HasSystemBaseType())
             {
-                foreach (var property in baseType.GetAllProperties())
+                var baseType = Inherits!.Implementation as SystemObjectType;
+                foreach (var property in baseType!.GetAllProperties())
                 {
                     baseProperties.Add(property.Name);
                 }
@@ -55,10 +63,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             CSharpType? inheritedType = base.CreateInheritedType();
 
-            var typeToReplace = inheritedType?.Implementation as ObjectType;
+            var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             if (typeToReplace != null)
             {
-                var match = InheritanceChoser.GetExactMatch((MgmtObjectType)typeToReplace, DefinedProperties);
+                var match = InheritanceChoser.GetExactMatch(typeToReplace, typeToReplace.Properties);
                 if (match != null)
                 {
                     inheritedType = match;

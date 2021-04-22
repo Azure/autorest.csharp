@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _operationGroup = operationGroup;
             _context = context;
-            DefaultAccessibility = "public"; 
+            DefaultAccessibility = "public";
             var clientPrefix = ClientBuilder.GetClientPrefix(operationGroup.Language.Default.Name, context);
             var clientSuffix = ClientBuilder.GetClientSuffix(context);
             DefaultName = clientPrefix + clientSuffix;
