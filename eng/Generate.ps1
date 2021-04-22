@@ -165,6 +165,12 @@ if (!($Exclude -contains "SmokeTests"))
     }
 }
 
+# Sorting file names that include '-' and '.' is broken in powershell - https://github.com/PowerShell/PowerShell/issues/3425
+# So map each to characters invalid for file system use '?' and '|', sort, and then map back
+function Sort-FileSafe ($names) {
+    return $names | % {$_.replace("-","?")} | % {$_.replace(".","|")} | Sort-Object |  % {$_.replace("?","-")} | % {$_.replace("|",".")}
+}
+
 Write-Host "Hamons-Test";
 Write-Host "";
 
@@ -172,7 +178,7 @@ $dic = [System.Collections.Generic.SortedDictionary[string,int]]@{}
 $dic["azure-special-properties"] = 1;
 $dic["Azure.AI.DocumentTranslation"] = 1;
 $dic["AppConfiguration"] = 1;
-$dic.Keys | % {$_.replace("-","?")} | % {$_.replace(".","|")} |Sort-Object |  % {$_.replace("?","-")} | % {$_.replace("|",".")} | Out-Host;
+Sort-FileSafe ($dic.Keys) | Out-Host;
 
 Write-Host "";
 Write-Host "!Hamons-Test";
@@ -182,7 +188,7 @@ $settings = @{
     'profiles' = [ordered]@{}
 };
 
-foreach ($key in $swaggerDefinitions.Keys)
+foreach ($key in Sort-FileSafe ($swaggerDefinitions.Keys))
 {
     $definition = $swaggerDefinitions[$key];
     $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
