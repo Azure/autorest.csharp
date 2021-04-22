@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -46,7 +47,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<VirtualMachineScaleSetExtension> CreateOrUpdate(string vmssExtensionName, VirtualMachineScaleSetExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
-            return StartCreateOrUpdate(vmssExtensionName, extensionParameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<VirtualMachineScaleSetExtension>;
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return StartCreateOrUpdate(vmssExtensionName, extensionParameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<VirtualMachineScaleSetExtension>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -55,8 +66,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<VirtualMachineScaleSetExtension>> CreateOrUpdateAsync(string vmssExtensionName, VirtualMachineScaleSetExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
-            var operation = await StartCreateOrUpdateAsync(vmssExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-            return operation.WaitForCompletion() as ArmResponse<VirtualMachineScaleSetExtension>;
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.CreateOrUpdateAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartCreateOrUpdateAsync(vmssExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return operation.WaitForCompletion() as ArmResponse<VirtualMachineScaleSetExtension>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -65,14 +86,24 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmOperation<VirtualMachineScaleSetExtension> StartCreateOrUpdate(string vmssExtensionName, VirtualMachineScaleSetExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
-            var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, Id.Name, vmssExtensionName, extensionParameters, cancellationToken: cancellationToken);
-            var operation = new VirtualMachineScaleSetExtensionCreateOrUpdateOperation(
-            _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
-            Id.ResourceGroupName, Id.Name, vmssExtensionName, extensionParameters).Request,
-            originalResponse);
-            return new PhArmOperation<VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData>(
-            operation,
-            data => new VirtualMachineScaleSetExtension(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, Id.Name, vmssExtensionName, extensionParameters, cancellationToken: cancellationToken);
+                var operation = new VirtualMachineScaleSetExtensionCreateOrUpdateOperation(
+                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                Id.ResourceGroupName, Id.Name, vmssExtensionName, extensionParameters).Request,
+                originalResponse);
+                return new PhArmOperation<VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData>(
+                operation,
+                data => new VirtualMachineScaleSetExtension(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -81,14 +112,24 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmOperation<VirtualMachineScaleSetExtension>> StartCreateOrUpdateAsync(string vmssExtensionName, VirtualMachineScaleSetExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
-            var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, vmssExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-            var operation = new VirtualMachineScaleSetExtensionCreateOrUpdateOperation(
-            _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
-            Id.ResourceGroupName, Id.Name, vmssExtensionName, extensionParameters).Request,
-            originalResponse);
-            return new PhArmOperation<VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData>(
-            operation,
-            data => new VirtualMachineScaleSetExtension(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.StartCreateOrUpdateAsync");
+            scope.Start();
+            try
+            {
+                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, vmssExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineScaleSetExtensionCreateOrUpdateOperation(
+                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                Id.ResourceGroupName, Id.Name, vmssExtensionName, extensionParameters).Request,
+                originalResponse);
+                return new PhArmOperation<VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData>(
+                operation,
+                data => new VirtualMachineScaleSetExtension(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />

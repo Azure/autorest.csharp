@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -46,7 +47,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<VirtualMachine> CreateOrUpdate(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
-            return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<VirtualMachine>;
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<VirtualMachine>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -55,8 +66,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<VirtualMachine>> CreateOrUpdateAsync(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
-            var operation = await StartCreateOrUpdateAsync(vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-            return operation.WaitForCompletion() as ArmResponse<VirtualMachine>;
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.CreateOrUpdateAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartCreateOrUpdateAsync(vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return operation.WaitForCompletion() as ArmResponse<VirtualMachine>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -65,14 +86,24 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmOperation<VirtualMachine> StartCreateOrUpdate(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
-            var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken);
-            var operation = new VirtualMachineCreateOrUpdateOperation(
-            _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
-            Id.ResourceGroupName, vmName, parameters).Request,
-            originalResponse);
-            return new PhArmOperation<VirtualMachine, VirtualMachineData>(
-            operation,
-            data => new VirtualMachine(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken);
+                var operation = new VirtualMachineCreateOrUpdateOperation(
+                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                Id.ResourceGroupName, vmName, parameters).Request,
+                originalResponse);
+                return new PhArmOperation<VirtualMachine, VirtualMachineData>(
+                operation,
+                data => new VirtualMachine(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -81,14 +112,24 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmOperation<VirtualMachine>> StartCreateOrUpdateAsync(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
-            var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-            var operation = new VirtualMachineCreateOrUpdateOperation(
-            _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
-            Id.ResourceGroupName, vmName, parameters).Request,
-            originalResponse);
-            return new PhArmOperation<VirtualMachine, VirtualMachineData>(
-            operation,
-            data => new VirtualMachine(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.StartCreateOrUpdateAsync");
+            scope.Start();
+            try
+            {
+                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineCreateOrUpdateOperation(
+                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                Id.ResourceGroupName, vmName, parameters).Request,
+                originalResponse);
+                return new PhArmOperation<VirtualMachine, VirtualMachineData>(
+                operation,
+                data => new VirtualMachine(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />

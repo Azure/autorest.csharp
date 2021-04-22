@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -46,7 +47,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<VirtualMachineScaleSetVM> CreateOrUpdate(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
         {
-            return StartCreateOrUpdate(instanceId, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<VirtualMachineScaleSetVM>;
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return StartCreateOrUpdate(instanceId, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<VirtualMachineScaleSetVM>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -55,8 +66,18 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<VirtualMachineScaleSetVM>> CreateOrUpdateAsync(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
         {
-            var operation = await StartCreateOrUpdateAsync(instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-            return operation.WaitForCompletion() as ArmResponse<VirtualMachineScaleSetVM>;
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.CreateOrUpdateAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartCreateOrUpdateAsync(instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return operation.WaitForCompletion() as ArmResponse<VirtualMachineScaleSetVM>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -65,14 +86,24 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmOperation<VirtualMachineScaleSetVM> StartCreateOrUpdate(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
         {
-            var originalResponse = Operations.Update(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken);
-            var operation = new VirtualMachineScaleSetVMUpdateOperation(
-            _clientDiagnostics, _pipeline, Operations.CreateUpdateRequest(
-            Id.ResourceGroupName, Id.Name, instanceId, parameters).Request,
-            originalResponse);
-            return new PhArmOperation<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
-            operation,
-            data => new VirtualMachineScaleSetVM(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var originalResponse = Operations.Update(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken);
+                var operation = new VirtualMachineScaleSetVMUpdateOperation(
+                _clientDiagnostics, _pipeline, Operations.CreateUpdateRequest(
+                Id.ResourceGroupName, Id.Name, instanceId, parameters).Request,
+                originalResponse);
+                return new PhArmOperation<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
+                operation,
+                data => new VirtualMachineScaleSetVM(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -81,14 +112,24 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmOperation<VirtualMachineScaleSetVM>> StartCreateOrUpdateAsync(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
         {
-            var originalResponse = await Operations.UpdateAsync(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-            var operation = new VirtualMachineScaleSetVMUpdateOperation(
-            _clientDiagnostics, _pipeline, Operations.CreateUpdateRequest(
-            Id.ResourceGroupName, Id.Name, instanceId, parameters).Request,
-            originalResponse);
-            return new PhArmOperation<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
-            operation,
-            data => new VirtualMachineScaleSetVM(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.StartCreateOrUpdateAsync");
+            scope.Start();
+            try
+            {
+                var originalResponse = await Operations.UpdateAsync(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineScaleSetVMUpdateOperation(
+                _clientDiagnostics, _pipeline, Operations.CreateUpdateRequest(
+                Id.ResourceGroupName, Id.Name, instanceId, parameters).Request,
+                originalResponse);
+                return new PhArmOperation<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
+                operation,
+                data => new VirtualMachineScaleSetVM(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />

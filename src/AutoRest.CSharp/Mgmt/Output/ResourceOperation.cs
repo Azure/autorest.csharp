@@ -28,7 +28,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected OperationGroup _operationGroup;
         internal OperationGroup OperationGroup => _operationGroup;
         protected MgmtRestClient? _restClient;
-        protected ResourceData? _resourceData;
 
         public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(context)
@@ -51,11 +50,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
 
-        /// <summary>
-        /// Get the model for the XXXResourceData class related to this operation.
-        /// </summary>
-        public ResourceData ResourceData => _resourceData ??= _context.Library.FindResourceData(_operationGroup);
-
         public string ResourceIdentifierType => _operationGroup.GetResourceIdentifierType();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(_operationGroup, RestClient, Declaration).ToArray();
@@ -67,12 +61,5 @@ namespace AutoRest.CSharp.Mgmt.Output
                 $"A class representing the operations that can be performed over a specific {clientPrefix}." :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
-
-        // helper name loopups so you can quickly find related class names in various writers
-        public string ResourceDefaultName => _prefix;
-        public string OperationsDefaultName => _prefix + OperationsSuffixValue;
-        public string ContainerDefaultName => _prefix + ContainerSuffixValue;
-        public string DataDefaultName => _prefix + DataSuffixValue;
-        public string RestOperationsDefaultName => RestClient.Type.Name;
     }
 }
