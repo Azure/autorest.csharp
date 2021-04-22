@@ -15,7 +15,6 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private readonly TypeFactory _typeFactory;
         private bool _isResourceType;
-        //private ObjectTypeProperty[]? _myProperties;
 
         public MgmtObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceType) : base(objectSchema, context)
         {

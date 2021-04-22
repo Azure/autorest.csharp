@@ -195,7 +195,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return true;
         }
 
-        public void AppendType(CSharpType type)
+        private void AppendType(CSharpType type)
         {
             string? mappedName = type.IsFrameworkType ? GetKeywordMapping(type.FrameworkType) : null;
             if (mappedName == null)
