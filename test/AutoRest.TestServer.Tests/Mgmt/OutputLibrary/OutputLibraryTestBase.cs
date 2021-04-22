@@ -50,7 +50,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             Assert.AreEqual(count, context.Library.ResourceContainers.Count());
             Assert.AreEqual(count, context.Library.ResourceData.Count());
             Assert.AreEqual(count, context.Library.ArmResource.Count());
-            Assert.AreEqual(count, context.Library.RestClients.Count());
         }
     }
 }
