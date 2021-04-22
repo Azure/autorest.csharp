@@ -72,10 +72,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        protected override ObjectTypeDiscriminator? BuildDiscriminator()
-        {
-            return null;
-        }
+        protected override ObjectTypeDiscriminator? BuildDiscriminator() => null;
 
         public string GetNameWithoutGeneric(Type t)
         {
@@ -124,11 +121,16 @@ namespace AutoRest.CSharp.Output.Models.Types
                 prop.SerializedName = ToCamelCase(property.Name);
                 prop.Summary = $"Gets{GetPropertySummary(setter)} {property.Name}";
                 prop.Required = true;
+
+                //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager.Core is known
+                //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious
+                //given that the generation will fail with the new types
                 if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(IDictionary<,>))
                 {
                     prop.Schema = new DictionarySchema();
                     prop.Schema.Type = AllSchemaTypes.Dictionary;
                 }
+
                 yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, GetTypeFromSystem(property.PropertyType));
             }
         }
@@ -158,24 +160,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter is not null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor? BuildSerializationConstructor()
-        {
-            return null;
-        }
+        protected override ObjectTypeConstructor? BuildSerializationConstructor() => null;
 
-        protected override ObjectSerialization[] BuildSerializations()
-        {
-            return new ObjectSerialization[0];
-        }
+        protected override ObjectSerialization[] BuildSerializations() => new ObjectSerialization[0];
 
-        protected override CSharpType? CreateInheritedDictionaryType()
-        {
-            throw new NotImplementedException();
-        }
+        protected override CSharpType? CreateInheritedDictionaryType() => throw new NotImplementedException();
 
         protected override CSharpType? CreateInheritedType()
         {
-            return _type.BaseType is null ? null : CSharpType.FromSystemType(Context, _type.BaseType); //new CSharpType(_type.BaseType);
+            return _type.BaseType is null ? null : CSharpType.FromSystemType(Context, _type.BaseType);
         }
     }
 }
