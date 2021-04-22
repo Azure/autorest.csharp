@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
@@ -9,7 +10,6 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
@@ -17,6 +17,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
     internal abstract class OutputLibraryTestBase
     {
+        private string _projectName;
+
+        public OutputLibraryTestBase(string projectName)
+        {
+            _projectName = projectName;
+        }
+
         protected static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject)
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -30,6 +37,19 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var context = new BuildContext<MgmtOutputLibrary>(model, configuration, sourceInputModel);
             _ = context.Library; // gen lib
             return (model, context);
+        }
+
+        [Test]
+        public void ValidateResourceClassTypesCount()
+        {
+            var result = Generate(_projectName).Result;
+            var context = result.Context;
+
+            var count = context.Library.ResourceSchemaMap.Count;
+            Assert.AreEqual(count, context.Library.ResourceOperations.Count());
+            Assert.AreEqual(count, context.Library.ResourceContainers.Count());
+            Assert.AreEqual(count, context.Library.ResourceData.Count());
+            Assert.AreEqual(count, context.Library.ArmResource.Count());
         }
     }
 }
