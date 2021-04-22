@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace TenantOnly
 {
     /// <summary> A class representing collection of Agreement and their operations over a [ParentResource]. </summary>
@@ -14,5 +16,12 @@ namespace TenantOnly
         protected AgreementContainer()
         {
         }
+
+        internal AgreementContainer(ResourceOperationsBase parent)
+        {
+        }
+
+        /// <summary> Gets the valid resource type for this object. </summary>
+        protected ResourceType ValidResourceType => BillingAccountOperations.ResourceType;
     }
 }

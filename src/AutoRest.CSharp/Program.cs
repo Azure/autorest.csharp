@@ -29,11 +29,6 @@ namespace AutoRest.CSharp
                 return 0;
             }
 
-            if (args.Contains("--launch-debugger") && !Debugger.IsAttached)
-            {
-                Debugger.Launch();
-            }
-
             if (!HasServerArgument(args))
             {
                 Console.WriteLine("Not a valid invocation of this AutoRest extension. Invoke this extension through the AutoRest pipeline.");

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing collection of ExactMatchModel3 and their operations over a [ParentResource]. </summary>
@@ -14,5 +16,12 @@ namespace ExactMatchInheritance
         protected ExactMatchModel3Container()
         {
         }
+
+        internal ExactMatchModel3Container(ResourceOperationsBase parent)
+        {
+        }
+
+        /// <summary> Gets the valid resource type for this object. </summary>
+        protected ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
     }
 }

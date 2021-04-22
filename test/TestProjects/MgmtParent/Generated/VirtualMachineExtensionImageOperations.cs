@@ -21,7 +21,7 @@ namespace MgmtParent
         {
         }
 
-        private static readonly ResourceType ResourceType = "MgmtParent/VirtualMachineExtensionImageOperations";
+        public static readonly ResourceType ResourceType = "MgmtParent/VirtualMachineExtensionImageOperations";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

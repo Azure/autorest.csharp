@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of ProximityPlacementGroup and their operations over a [ParentResource]. </summary>
@@ -14,5 +16,12 @@ namespace Azure.ResourceManager.Sample
         protected ProximityPlacementGroupContainer()
         {
         }
+
+        internal ProximityPlacementGroupContainer(ResourceOperationsBase parent)
+        {
+        }
+
+        /// <summary> Gets the valid resource type for this object. </summary>
+        protected ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
     }
 }

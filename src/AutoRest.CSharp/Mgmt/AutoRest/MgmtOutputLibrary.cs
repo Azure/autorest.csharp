@@ -67,6 +67,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
+        public ResourceOperation GetResourceOperation(OperationGroup operationGroup) => EnsureResourceOperations()[operationGroup];
+
+        public ResourceContainer GetResourceContainer(OperationGroup operationGroup) => EnsureResourceContainers()[operationGroup];
+
+        public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
+
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
             if (_restClients != null)
@@ -163,7 +169,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     {
                         if (!_armResource.ContainsKey(operation))
                         {
-                            _armResource.Add(operation, new Resource(operation.Resource(_mgmtConfiguration), _context));
+                            _armResource.Add(operation, new Resource(operation, _context));
                         }
                     }
                 }
