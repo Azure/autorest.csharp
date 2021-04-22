@@ -5,10 +5,18 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace TenantOnly
 {
     /// <summary> A Class representing a Agreement along with the instance operations that can be performed on it. </summary>
     public class Agreement : AgreementOperations
     {
+        /// <summary> Initializes a new instance of the <see cref="Agreement"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="resource"> The resource that is the target of operations. </param>
+        internal Agreement(ResourceOperationsBase options, AgreementData resource) : base()
+        {
+        }
     }
 }
