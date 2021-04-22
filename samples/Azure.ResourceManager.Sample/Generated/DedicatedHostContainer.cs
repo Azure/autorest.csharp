@@ -137,9 +137,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<DedicatedHost> Get(string hostName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<DedicatedHost, DedicatedHostData>(
-            Operations.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
-            data => new DedicatedHost(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.Get");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<DedicatedHost, DedicatedHostData>(
+                Operations.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
+                data => new DedicatedHost(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -147,9 +157,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<DedicatedHost>> GetAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<DedicatedHost, DedicatedHostData>(
-            await Operations.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
-            data => new DedicatedHost(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAsync");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<DedicatedHost, DedicatedHostData>(
+                await Operations.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
+                data => new DedicatedHost(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of DedicatedHost for this resource group represented as generic resources. </summary>
@@ -159,9 +179,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(DedicatedHostData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(DedicatedHostData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of DedicatedHost for this resource group represented as generic resources. </summary>
@@ -171,9 +201,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(DedicatedHostData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsGenericResourceAsync");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(DedicatedHostData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -183,8 +223,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
         public Pageable<DedicatedHost> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+                return new PhWrappingPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -194,8 +244,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<DedicatedHost> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsync");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+                return new PhWrappingAsyncPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         // Builders.

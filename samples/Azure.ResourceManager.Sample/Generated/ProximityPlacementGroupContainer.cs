@@ -129,9 +129,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<ProximityPlacementGroup> Get(string proximityPlacementGroupName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<ProximityPlacementGroup, ProximityPlacementGroupData>(
-            Operations.Get(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken),
-            data => new ProximityPlacementGroup(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.Get");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<ProximityPlacementGroup, ProximityPlacementGroupData>(
+                Operations.Get(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken),
+                data => new ProximityPlacementGroup(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -139,9 +149,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<ProximityPlacementGroup>> GetAsync(string proximityPlacementGroupName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<ProximityPlacementGroup, ProximityPlacementGroupData>(
-            await Operations.GetAsync(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken),
-            data => new ProximityPlacementGroup(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.GetAsync");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<ProximityPlacementGroup, ProximityPlacementGroupData>(
+                await Operations.GetAsync(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken),
+                data => new ProximityPlacementGroup(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of ProximityPlacementGroup for this resource group represented as generic resources. </summary>
@@ -151,9 +171,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(ProximityPlacementGroupData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(ProximityPlacementGroupData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of ProximityPlacementGroup for this resource group represented as generic resources. </summary>
@@ -163,9 +193,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(ProximityPlacementGroupData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.ListAsGenericResourceAsync");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(ProximityPlacementGroupData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="ProximityPlacementGroup" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -175,8 +215,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="ProximityPlacementGroup" /> that may take multiple service requests to iterate over. </returns>
         public Pageable<ProximityPlacementGroup> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ProximityPlacementGroup>(results, genericResource => new ProximityPlacementGroupOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.List");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+                return new PhWrappingPageable<GenericResource, ProximityPlacementGroup>(results, genericResource => new ProximityPlacementGroupOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="ProximityPlacementGroup" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -186,8 +236,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="ProximityPlacementGroup" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<ProximityPlacementGroup> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ProximityPlacementGroup>(results, genericResource => new ProximityPlacementGroupOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.ListAsync");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+                return new PhWrappingAsyncPageable<GenericResource, ProximityPlacementGroup>(results, genericResource => new ProximityPlacementGroupOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         // Builders.

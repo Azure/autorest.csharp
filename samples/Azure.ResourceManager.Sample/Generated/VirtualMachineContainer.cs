@@ -137,9 +137,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<VirtualMachine> Get(string vmName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<VirtualMachine, VirtualMachineData>(
-            Operations.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken),
-            data => new VirtualMachine(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.Get");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<VirtualMachine, VirtualMachineData>(
+                Operations.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken),
+                data => new VirtualMachine(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -147,9 +157,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<VirtualMachine>> GetAsync(string vmName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<VirtualMachine, VirtualMachineData>(
-            await Operations.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken),
-            data => new VirtualMachine(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.GetAsync");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<VirtualMachine, VirtualMachineData>(
+                await Operations.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken),
+                data => new VirtualMachine(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of VirtualMachine for this resource group represented as generic resources. </summary>
@@ -159,9 +179,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(VirtualMachineData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(VirtualMachineData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of VirtualMachine for this resource group represented as generic resources. </summary>
@@ -171,9 +201,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(VirtualMachineData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.ListAsGenericResourceAsync");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(VirtualMachineData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachine" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -183,8 +223,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
         public Pageable<VirtualMachine> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, VirtualMachine>(results, genericResource => new VirtualMachineOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.List");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+                return new PhWrappingPageable<GenericResource, VirtualMachine>(results, genericResource => new VirtualMachineOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachine" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -194,8 +244,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachine" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<VirtualMachine> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, VirtualMachine>(results, genericResource => new VirtualMachineOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.ListAsync");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+                return new PhWrappingAsyncPageable<GenericResource, VirtualMachine>(results, genericResource => new VirtualMachineOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         // Builders.

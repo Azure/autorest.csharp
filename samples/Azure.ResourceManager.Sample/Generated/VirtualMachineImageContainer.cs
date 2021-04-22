@@ -74,9 +74,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<VirtualMachineImage> Get(string version, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<VirtualMachineImage, VirtualMachineImageData>(
-            Operations.Get(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, version, cancellationToken: cancellationToken),
-            data => new VirtualMachineImage(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.Get");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<VirtualMachineImage, VirtualMachineImageData>(
+                Operations.Get(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, version, cancellationToken: cancellationToken),
+                data => new VirtualMachineImage(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -84,9 +94,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<VirtualMachineImage>> GetAsync(string version, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<VirtualMachineImage, VirtualMachineImageData>(
-            await Operations.GetAsync(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, version, cancellationToken: cancellationToken),
-            data => new VirtualMachineImage(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.GetAsync");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<VirtualMachineImage, VirtualMachineImageData>(
+                await Operations.GetAsync(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, version, cancellationToken: cancellationToken),
+                data => new VirtualMachineImage(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of VirtualMachineImage for this resource group represented as generic resources. </summary>
@@ -96,9 +116,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(VirtualMachineImageData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(VirtualMachineImageData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of VirtualMachineImage for this resource group represented as generic resources. </summary>
@@ -108,9 +138,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(VirtualMachineImageData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.ListAsGenericResourceAsync");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(VirtualMachineImageData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineImage" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -120,8 +160,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineImage" /> that may take multiple service requests to iterate over. </returns>
         public Pageable<VirtualMachineImage> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, VirtualMachineImage>(results, genericResource => new VirtualMachineImageOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.List");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+                return new PhWrappingPageable<GenericResource, VirtualMachineImage>(results, genericResource => new VirtualMachineImageOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineImage" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -131,8 +181,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineImage" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<VirtualMachineImage> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineImage>(results, genericResource => new VirtualMachineImageOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.ListAsync");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+                return new PhWrappingAsyncPageable<GenericResource, VirtualMachineImage>(results, genericResource => new VirtualMachineImageOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         // Builders.

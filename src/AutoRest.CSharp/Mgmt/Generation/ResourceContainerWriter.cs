@@ -452,7 +452,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // e.g. `expand` when getting image in compute RP
             parameterMapping = parameterMapping.Where(mapping => mapping.Parameter.DefaultValue is null);
 
-            // Get()
+            var methodName = "Get";
             _writer.Line();
             _writer.WriteXmlDocumentationInheritDoc();
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
@@ -461,25 +461,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-            _writer.Append($"public override ArmResponse<{_resource.Type}> Get(");
+            _writer.Append($"public override ArmResponse<{_resource.Type}> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
                 _writer.WriteParameter(parameter.Parameter);
             }
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
-                _writer.Append($"Operations.Get(");
-                foreach (var parameter in parameterMapping)
+                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
                 {
-                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    _writer.AppendRaw(", ");
-                }
-                _writer.Line($"cancellationToken: cancellationToken),");
-                _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                    _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Append($"Operations.Get(");
+                    foreach (var parameter in parameterMapping)
+                    {
+                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                        _writer.AppendRaw(", ");
+                    }
+                    _writer.Line($"cancellationToken: cancellationToken),");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                });
             }
 
-            // GetAsync()
+            methodName = CreateMethodName("Get", true);
             _writer.Line();
             _writer.WriteXmlDocumentationInheritDoc();
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
@@ -488,86 +491,105 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-            _writer.Append($"public async override Task<ArmResponse<{_resource.Type}>> GetAsync(");
+            _writer.Append($"public async override Task<ArmResponse<{_resource.Type}>> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
                 _writer.WriteParameter(parameter.Parameter);
             }
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
-                _writer.Append($"await Operations.GetAsync(");
-                foreach (var parameter in parameterMapping)
+                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
                 {
-                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    _writer.AppendRaw(", ");
-                }
-                _writer.Line($"cancellationToken: cancellationToken),");
-                _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                    _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Append($"await Operations.GetAsync(");
+                    foreach (var parameter in parameterMapping)
+                    {
+                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                        _writer.AppendRaw(", ");
+                    }
+                    _writer.Line($"cancellationToken: cancellationToken),");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                });
             }
         }
 
         private void WriteList()
         {
+            var methodName = "List";
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type.Name}\" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
             _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
             _writer.WriteXmlDocumentation("returns", $"A collection of <see cref=\"{_resource.Type.Name}\" /> that may take multiple service requests to iterate over.");
-            using (_writer.Scope($"public Pageable<{_resource.Type}> List(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            using (_writer.Scope($"public Pageable<{_resource.Type}> {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"var results = ListAsGenericResource(nameFilter, top, cancellationToken);");
-                _writer.Line($"return new PhWrappingPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
+                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                {
+                    _writer.Line($"var results = ListAsGenericResource(nameFilter, top, cancellationToken);");
+                    _writer.Line($"return new PhWrappingPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
+                });
             }
         }
 
         private void WriteListAsync()
         {
+            var methodName = CreateMethodName("List", true);
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type.Name}\" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
             _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
             _writer.WriteXmlDocumentation("returns", $"An async collection of <see cref=\"{_resource.Type.Name}\" /> that may take multiple service requests to iterate over.");
-            using (_writer.Scope($"public AsyncPageable<{_resource.Type}> ListAsync(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            using (_writer.Scope($"public AsyncPageable<{_resource.Type}> {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);");
-                _writer.Line($"return new PhWrappingAsyncPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
+                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                {
+                    _writer.Line($"var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);");
+                    _writer.Line($"return new PhWrappingAsyncPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
+                });
             }
         }
 
         private void WriteListAsGenericResource()
         {
+            var methodName = "ListAsGenericResource";
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
             _writer.WriteXmlDocumentation("returns", $"A collection of resource that may take multiple service requests to iterate over.");
-            using (_writer.Scope($"public {typeof(Pageable<GenericResource>)} ListAsGenericResource(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            using (_writer.Scope($"public {typeof(Pageable<GenericResource>)} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resourceData.Type}.ResourceType);");
-                _writer.Line($"filters.SubstringFilter = nameFilter;");
-                // todo: do not hard code ResourceGroupOperations
-                _writer.Line($"return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
+                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                {
+                    _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resourceData.Type}.ResourceType);");
+                    _writer.Line($"filters.SubstringFilter = nameFilter;");
+                    // todo: do not hard code ResourceGroupOperations
+                    _writer.Line($"return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
+                });
             }
         }
 
         private void WriteListAsGenericResourceAsync()
         {
+            var methodName = CreateMethodName("ListAsGenericResource", true);
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
             _writer.WriteXmlDocumentation("returns", $"An async collection of resource that may take multiple service requests to iterate over.");
-            using (_writer.Scope($"public {typeof(AsyncPageable<GenericResource>)} ListAsGenericResourceAsync(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            using (_writer.Scope($"public {typeof(AsyncPageable<GenericResource>)} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resourceData.Type}.ResourceType);");
-                _writer.Line($"filters.SubstringFilter = nameFilter;");
-                // todo: do not hard code ResourceGroupOperations
-                _writer.Line($"return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
+                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                {
+                    _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resourceData.Type}.ResourceType);");
+                    _writer.Line($"filters.SubstringFilter = nameFilter;");
+                    // todo: do not hard code ResourceGroupOperations
+                    _writer.Line($"return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
+                });
             }
         }
 

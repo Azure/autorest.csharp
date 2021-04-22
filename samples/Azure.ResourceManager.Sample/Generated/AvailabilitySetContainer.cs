@@ -129,9 +129,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<AvailabilitySet> Get(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<AvailabilitySet, AvailabilitySetData>(
-            Operations.Get(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
-            data => new AvailabilitySet(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.Get");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<AvailabilitySet, AvailabilitySetData>(
+                Operations.Get(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
+                data => new AvailabilitySet(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -139,9 +149,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<AvailabilitySet>> GetAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<AvailabilitySet, AvailabilitySetData>(
-            await Operations.GetAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
-            data => new AvailabilitySet(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.GetAsync");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<AvailabilitySet, AvailabilitySetData>(
+                await Operations.GetAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
+                data => new AvailabilitySet(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of AvailabilitySet for this resource group represented as generic resources. </summary>
@@ -151,9 +171,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(AvailabilitySetData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(AvailabilitySetData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of AvailabilitySet for this resource group represented as generic resources. </summary>
@@ -163,9 +193,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(AvailabilitySetData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.ListAsGenericResourceAsync");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(AvailabilitySetData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="AvailabilitySet" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -175,8 +215,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="AvailabilitySet" /> that may take multiple service requests to iterate over. </returns>
         public Pageable<AvailabilitySet> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, AvailabilitySet>(results, genericResource => new AvailabilitySetOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.List");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+                return new PhWrappingPageable<GenericResource, AvailabilitySet>(results, genericResource => new AvailabilitySetOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="AvailabilitySet" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -186,8 +236,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="AvailabilitySet" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<AvailabilitySet> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, AvailabilitySet>(results, genericResource => new AvailabilitySetOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.ListAsync");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+                return new PhWrappingAsyncPageable<GenericResource, AvailabilitySet>(results, genericResource => new AvailabilitySetOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         // Builders.

@@ -137,9 +137,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<VirtualMachineScaleSetExtension> Get(string vmssExtensionName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData>(
-            Operations.Get(Id.ResourceGroupName, Id.Name, vmssExtensionName, cancellationToken: cancellationToken),
-            data => new VirtualMachineScaleSetExtension(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.Get");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData>(
+                Operations.Get(Id.ResourceGroupName, Id.Name, vmssExtensionName, cancellationToken: cancellationToken),
+                data => new VirtualMachineScaleSetExtension(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -147,9 +157,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<VirtualMachineScaleSetExtension>> GetAsync(string vmssExtensionName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData>(
-            await Operations.GetAsync(Id.ResourceGroupName, Id.Name, vmssExtensionName, cancellationToken: cancellationToken),
-            data => new VirtualMachineScaleSetExtension(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.GetAsync");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData>(
+                await Operations.GetAsync(Id.ResourceGroupName, Id.Name, vmssExtensionName, cancellationToken: cancellationToken),
+                data => new VirtualMachineScaleSetExtension(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of VirtualMachineScaleSetExtension for this resource group represented as generic resources. </summary>
@@ -159,9 +179,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(VirtualMachineScaleSetExtensionData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(VirtualMachineScaleSetExtensionData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of VirtualMachineScaleSetExtension for this resource group represented as generic resources. </summary>
@@ -171,9 +201,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(VirtualMachineScaleSetExtensionData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.ListAsGenericResourceAsync");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(VirtualMachineScaleSetExtensionData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineScaleSetExtension" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -183,8 +223,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineScaleSetExtension" /> that may take multiple service requests to iterate over. </returns>
         public Pageable<VirtualMachineScaleSetExtension> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, VirtualMachineScaleSetExtension>(results, genericResource => new VirtualMachineScaleSetExtensionOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.List");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+                return new PhWrappingPageable<GenericResource, VirtualMachineScaleSetExtension>(results, genericResource => new VirtualMachineScaleSetExtensionOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineScaleSetExtension" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -194,8 +244,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetExtension" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<VirtualMachineScaleSetExtension> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineScaleSetExtension>(results, genericResource => new VirtualMachineScaleSetExtensionOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionContainer.ListAsync");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+                return new PhWrappingAsyncPageable<GenericResource, VirtualMachineScaleSetExtension>(results, genericResource => new VirtualMachineScaleSetExtensionOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         // Builders.

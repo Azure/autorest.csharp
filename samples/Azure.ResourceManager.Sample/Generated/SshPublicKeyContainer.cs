@@ -129,9 +129,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<SshPublicKey> Get(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<SshPublicKey, SshPublicKeyData>(
-            Operations.Get(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
-            data => new SshPublicKey(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.Get");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<SshPublicKey, SshPublicKeyData>(
+                Operations.Get(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
+                data => new SshPublicKey(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
@@ -139,9 +149,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<SshPublicKey>> GetAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            return new PhArmResponse<SshPublicKey, SshPublicKeyData>(
-            await Operations.GetAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
-            data => new SshPublicKey(Parent, data));
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.GetAsync");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<SshPublicKey, SshPublicKeyData>(
+                await Operations.GetAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
+                data => new SshPublicKey(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of SshPublicKey for this resource group represented as generic resources. </summary>
@@ -151,9 +171,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(SshPublicKeyData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(SshPublicKeyData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of SshPublicKey for this resource group represented as generic resources. </summary>
@@ -163,9 +193,19 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var filters = new ResourceFilterCollection(SshPublicKeyData.ResourceType);
-            filters.SubstringFilter = nameFilter;
-            return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.ListAsGenericResourceAsync");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(SshPublicKeyData.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="SshPublicKey" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -175,8 +215,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="SshPublicKey" /> that may take multiple service requests to iterate over. </returns>
         public Pageable<SshPublicKey> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, SshPublicKey>(results, genericResource => new SshPublicKeyOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.List");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+                return new PhWrappingPageable<GenericResource, SshPublicKey>(results, genericResource => new SshPublicKeyOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Filters the list of <see cref="SshPublicKey" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -186,8 +236,18 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="SshPublicKey" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<SshPublicKey> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, SshPublicKey>(results, genericResource => new SshPublicKeyOperations(genericResource).Get().Value);
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.ListAsync");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+                return new PhWrappingAsyncPageable<GenericResource, SshPublicKey>(results, genericResource => new SshPublicKeyOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         // Builders.
