@@ -17,7 +17,7 @@ namespace SupersetInheritance
         {
         }
 
-        internal SupersetModel4Container(ResourceGroupOperations resourceGroup)
+        internal SupersetModel4Container(ResourceOperationsBase parent)
         {
         }
 

@@ -17,7 +17,7 @@ namespace OperationGroupMappings
         {
         }
 
-        internal AvailabilitySetContainer(ResourceGroupOperations resourceGroup)
+        internal AvailabilitySetContainer(ResourceOperationsBase parent)
         {
         }
 

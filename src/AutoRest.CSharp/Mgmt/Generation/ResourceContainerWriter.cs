@@ -40,8 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             writer.Line();
 
-            // TODO: This is a temp fix, remove after https://github.com/Azure/autorest.csharp/pull/1180
-            using (writer.Scope($"internal {resourceContainer.Type.Name:D}({typeof(ResourceGroupOperations)} resourceGroup)"))
+            using (writer.Scope($"internal {resourceContainer.Type.Name}({typeof(ResourceOperationsBase)} parent)"))
             {
             }
             writer.Line();

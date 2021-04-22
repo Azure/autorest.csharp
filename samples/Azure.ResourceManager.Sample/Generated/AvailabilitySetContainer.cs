@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal AvailabilitySetContainer(ResourceGroupOperations resourceGroup)
+        internal AvailabilitySetContainer(ResourceOperationsBase parent)
         {
         }
 

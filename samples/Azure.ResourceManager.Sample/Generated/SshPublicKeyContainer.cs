@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal SshPublicKeyContainer(ResourceGroupOperations resourceGroup)
+        internal SshPublicKeyContainer(ResourceOperationsBase parent)
         {
         }
 

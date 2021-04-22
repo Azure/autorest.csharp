@@ -17,7 +17,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        internal PrivateLinkResourceContainer(ResourceGroupOperations resourceGroup)
+        internal PrivateLinkResourceContainer(ResourceOperationsBase parent)
         {
         }
 

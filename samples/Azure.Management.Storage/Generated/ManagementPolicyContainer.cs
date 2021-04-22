@@ -17,7 +17,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        internal ManagementPolicyContainer(ResourceGroupOperations resourceGroup)
+        internal ManagementPolicyContainer(ResourceOperationsBase parent)
         {
         }
 

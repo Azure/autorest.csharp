@@ -17,7 +17,7 @@ namespace ResourceRename
         {
         }
 
-        internal SshPublicKeyInfoContainer(ResourceGroupOperations resourceGroup)
+        internal SshPublicKeyInfoContainer(ResourceOperationsBase parent)
         {
         }
 

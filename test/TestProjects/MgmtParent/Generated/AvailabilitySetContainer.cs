@@ -17,7 +17,7 @@ namespace MgmtParent
         {
         }
 
-        internal AvailabilitySetContainer(ResourceGroupOperations resourceGroup)
+        internal AvailabilitySetContainer(ResourceOperationsBase parent)
         {
         }
 

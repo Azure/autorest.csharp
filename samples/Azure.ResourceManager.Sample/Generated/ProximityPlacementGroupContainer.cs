@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal ProximityPlacementGroupContainer(ResourceGroupOperations resourceGroup)
+        internal ProximityPlacementGroupContainer(ResourceOperationsBase parent)
         {
         }
 

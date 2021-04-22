@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal DedicatedHostContainer(ResourceGroupOperations resourceGroup)
+        internal DedicatedHostContainer(ResourceOperationsBase parent)
         {
         }
 

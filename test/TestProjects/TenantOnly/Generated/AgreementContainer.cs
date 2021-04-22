@@ -17,7 +17,7 @@ namespace TenantOnly
         {
         }
 
-        internal AgreementContainer(ResourceGroupOperations resourceGroup)
+        internal AgreementContainer(ResourceOperationsBase parent)
         {
         }
 

@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal ImageContainer(ResourceGroupOperations resourceGroup)
+        internal ImageContainer(ResourceOperationsBase parent)
         {
         }
 

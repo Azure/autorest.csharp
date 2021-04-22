@@ -17,7 +17,7 @@ namespace ExactMatchInheritance
         {
         }
 
-        internal ExactMatchModel3Container(ResourceGroupOperations resourceGroup)
+        internal ExactMatchModel3Container(ResourceOperationsBase parent)
         {
         }
 

@@ -17,7 +17,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        internal EncryptionScopeContainer(ResourceGroupOperations resourceGroup)
+        internal EncryptionScopeContainer(ResourceOperationsBase parent)
         {
         }
 

@@ -17,7 +17,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        internal PrivateEndpointConnectionContainer(ResourceGroupOperations resourceGroup)
+        internal PrivateEndpointConnectionContainer(ResourceOperationsBase parent)
         {
         }
 

@@ -17,7 +17,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        internal SkuContainer(ResourceGroupOperations resourceGroup)
+        internal SkuContainer(ResourceOperationsBase parent)
         {
         }
 

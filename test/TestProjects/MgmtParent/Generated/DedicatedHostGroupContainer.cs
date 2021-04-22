@@ -17,7 +17,7 @@ namespace MgmtParent
         {
         }
 
-        internal DedicatedHostGroupContainer(ResourceGroupOperations resourceGroup)
+        internal DedicatedHostGroupContainer(ResourceOperationsBase parent)
         {
         }
 

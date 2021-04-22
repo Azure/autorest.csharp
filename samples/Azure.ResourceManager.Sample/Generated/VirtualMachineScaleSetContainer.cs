@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal VirtualMachineScaleSetContainer(ResourceGroupOperations resourceGroup)
+        internal VirtualMachineScaleSetContainer(ResourceOperationsBase parent)
         {
         }
 

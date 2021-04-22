@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal VirtualMachineScaleSetRollingUpgradeContainer(ResourceGroupOperations resourceGroup)
+        internal VirtualMachineScaleSetRollingUpgradeContainer(ResourceOperationsBase parent)
         {
         }
 

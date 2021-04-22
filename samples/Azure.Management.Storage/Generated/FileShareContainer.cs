@@ -17,7 +17,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        internal FileShareContainer(ResourceGroupOperations resourceGroup)
+        internal FileShareContainer(ResourceOperationsBase parent)
         {
         }
 

@@ -17,7 +17,7 @@ namespace MgmtParent
         {
         }
 
-        internal VirtualMachineExtensionImageContainer(ResourceGroupOperations resourceGroup)
+        internal VirtualMachineExtensionImageContainer(ResourceOperationsBase parent)
         {
         }
 

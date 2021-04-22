@@ -17,7 +17,7 @@ namespace TenantOnly
         {
         }
 
-        internal BillingAccountContainer(ResourceGroupOperations resourceGroup)
+        internal BillingAccountContainer(ResourceOperationsBase parent)
         {
         }
 

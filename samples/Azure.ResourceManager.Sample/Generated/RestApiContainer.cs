@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        internal RestApiContainer(ResourceGroupOperations resourceGroup)
+        internal RestApiContainer(ResourceOperationsBase parent)
         {
         }
 
