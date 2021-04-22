@@ -21,7 +21,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var resourceOperationWriter = new ResourceOperationWriter();
-            var resourceContainerWriter = new ResourceContainerWriter();
             var resourceDataWriter = new ResourceDataWriter();
             var armResourceWriter = new ResourceWriter();
             var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
@@ -59,7 +58,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resourceContainer in context.Library.ResourceContainers)
             {
                 var codeWriter = new CodeWriter();
-                resourceContainerWriter.WriteContainer(codeWriter, resourceContainer, context.Library);
+                new ResourceContainerWriter(codeWriter, resourceContainer, context.Library).WriteContainer();
 
                 project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
             }
