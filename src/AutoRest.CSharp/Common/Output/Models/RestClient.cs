@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -17,7 +18,7 @@ using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class RestClient : ClientBase
+    internal class RestClient : TypeProvider
     {
         private CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
         private CachedDictionary<ServiceRequest, RestClientMethod> _nextPageMethods;
@@ -33,8 +34,8 @@ namespace AutoRest.CSharp.Output.Models
 
             Parameters = Builder.GetOrderedParameters ();
 
-            ClientPrefix = GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context);
-            RestClientSuffix = "Rest" + ClientSuffix;
+            ClientPrefix = ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context);
+            RestClientSuffix = "Rest" + ClientBuilder.GetClientSuffix(context);
             DefaultName = ClientPrefix + RestClientSuffix;
             Description = "";
         }

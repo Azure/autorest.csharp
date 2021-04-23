@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -14,27 +12,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A Class representing a VirtualMachineExtension along with the instance operations that can be performed on it. </summary>
     public class VirtualMachineExtension : VirtualMachineExtensionOperations
     {
-        /// <summary> Initializes a new instance of the <see cref = "VirtualMachineExtension"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtension"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal VirtualMachineExtension(ResourceOperationsBase options, VirtualMachineExtensionData resource) : base(options, resource.Id)
+        internal VirtualMachineExtension(ResourceOperationsBase options, VirtualMachineExtensionData resource) : base()
         {
-            Data = resource;
-        }
-
-        /// <summary> Gets or sets the VirtualMachineExtensionData. </summary>
-        public VirtualMachineExtensionData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override VirtualMachineExtension GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<VirtualMachineExtension> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
         }
     }
 }

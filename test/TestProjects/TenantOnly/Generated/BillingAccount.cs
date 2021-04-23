@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System.Threading;
-using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace TenantOnly
@@ -14,27 +12,11 @@ namespace TenantOnly
     /// <summary> A Class representing a BillingAccount along with the instance operations that can be performed on it. </summary>
     public class BillingAccount : BillingAccountOperations
     {
-        /// <summary> Initializes a new instance of the <see cref = "BillingAccount"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BillingAccount"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal BillingAccount(ResourceOperationsBase options, BillingAccountData resource) : base(options, resource.Id)
+        internal BillingAccount(ResourceOperationsBase options, BillingAccountData resource) : base()
         {
-            Data = resource;
-        }
-
-        /// <summary> Gets or sets the BillingAccountData. </summary>
-        public BillingAccountData Data { get; private set; }
-
-        /// <inheritdoc />
-        protected override BillingAccount GetResource(CancellationToken cancellation = default)
-        {
-            return this;
-        }
-
-        /// <inheritdoc />
-        protected override Task<BillingAccount> GetResourceAsync(CancellationToken cancellation = default)
-        {
-            return Task.FromResult(this);
         }
     }
 }

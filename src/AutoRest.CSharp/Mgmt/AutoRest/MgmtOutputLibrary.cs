@@ -57,8 +57,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
-        public ResourceOperation GetResourceOperation(OperationGroup operationGroup) => EnsureResourceOperations()[operationGroup];
-
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
         private static HashSet<string> ResourceTypes = new HashSet<string>
@@ -75,6 +73,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+
+        public ResourceOperation GetResourceOperation(OperationGroup operationGroup) => EnsureResourceOperations()[operationGroup];
+
+        public ResourceContainer GetResourceContainer(OperationGroup operationGroup) => EnsureResourceContainers()[operationGroup];
+
+        public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
 
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
