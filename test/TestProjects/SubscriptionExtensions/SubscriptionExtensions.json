@@ -198,17 +198,69 @@
             "foo": {
                 "type": "string",
                 "description": "specifies the foo"
+            },
+            "id": {
+                "readOnly": true,
+                "type": "string",
+                "description": "Resource Id"
+            },
+            "name": {
+                "readOnly": true,
+                "type": "string",
+                "description": "Resource name"
+            },
+            "type": {
+                "readOnly": true,
+                "type": "string",
+                "description": "Resource type"
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location"
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags"
             }
         },
       "description": "The ToasterListResult."
     },
     "Oven": {
-      "properties": {
-        "bar": {
-          "type": "string",
-          "description": "specifies the bar"
-        }
-      },
+        "properties": {
+            "bar": {
+                "type": "string",
+                "description": "specifies the bar"
+            },
+            "id": {
+                "readOnly": true,
+                "type": "string",
+                "description": "Resource Id"
+            },
+            "name": {
+                "readOnly": true,
+                "type": "string",
+                "description": "Resource name"
+            },
+            "type": {
+                "readOnly": true,
+                "type": "string",
+                "description": "Resource type"
+            },
+            "location": {
+                "type": "string",
+                "description": "Resource location"
+            },
+            "tags": {
+                "type": "object",
+                "additionalProperties": {
+                    "type": "string"
+                },
+                "description": "Resource tags"
+            }
+        },
       "description": "The Oven."
     }
   },

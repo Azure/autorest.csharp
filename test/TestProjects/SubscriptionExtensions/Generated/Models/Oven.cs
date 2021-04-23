@@ -5,19 +5,28 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+using Azure.ResourceManager.Core;
+
 namespace SubscriptionExtensions.Models
 {
     /// <summary> The Oven. </summary>
-    public partial class Oven
+    public partial class Oven : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of Oven. </summary>
-        public Oven()
+        /// <param name="location"> The location. </param>
+        public Oven(LocationData location) : base(location)
         {
         }
 
         /// <summary> Initializes a new instance of Oven. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal Oven(string bar)
+        internal Oven(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }

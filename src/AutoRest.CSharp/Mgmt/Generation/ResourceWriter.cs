@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using Azure.ResourceManager.Core;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter
     {
-        public void WriteResource(CodeWriter writer, Resource resource)
+        public void WriteResource(CodeWriter writer, Resource resource, BuildContext<MgmtOutputLibrary> context)
         {
             var cs = resource.Type;
 
@@ -25,16 +27,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class.");
                     writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
                     writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
-                    using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resource.ResourceDataObject.Type} resource) : base(options, resource.Id)"))
+                    using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {context.Library.GetResourceData(resource.OperationGroup).Type} resource) : base(options, resource.Id)"))
                     {
                         writer.LineRaw("Data = resource;");
                     }
 
                     // write Data
                     writer.Line();
-                    var x = resource.ResourceDataObject.GetType();
-                    writer.WriteXmlDocumentationSummary($"Gets or sets the {resource.ResourceDataObject.Type.Name}.");
-                    writer.LineRaw("public " + resource.ResourceDataObject.Type.Name + " Data {get; private set;}");
+                    writer.WriteXmlDocumentationSummary($"Gets or sets the {context.Library.GetResourceData(resource.OperationGroup).Type.Name}.");
+                    var resourceDataObject = context.Library.GetResourceData(resource.OperationGroup);
+                    writer.Append($"public {context.Library.GetResourceData(resource.OperationGroup).Type} Data");
+                    writer.Append($"{{ get; private set; }}");
+                    writer.Line();
 
                     // protected override GetResource
                     writer.Line();

@@ -30,7 +30,5 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultAccessibility => "public";
 
         public string Description { get; }
-
-        public ResourceData ResourceDataObject => _context.Library.GetResourceData(OperationGroup);
     }
 }

@@ -30,7 +30,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
-
         private IEnumerable<Schema> _allSchemas;
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
