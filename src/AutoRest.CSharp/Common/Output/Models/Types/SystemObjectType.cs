@@ -11,6 +11,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -47,26 +48,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             return name.Substring(0, 1).ToLower(CultureInfo.InvariantCulture) + name.Substring(1);
         }
 
-        private IEnumerable<ParameterInfo> GetSerializationParameters()
+        private IEnumerable<ParameterInfo> GetCtorParameters(Type attributeType)
         {
             foreach (var ctor in _type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.CreateInstance))
             {
-                if (!ctor.IsPublic && ctor.GetParameters().Length > 0)
+                if (!ctor.IsPublic)
                 {
-                    return ctor.GetParameters();
-                }
-            }
-
-            return new List<ParameterInfo>();
-        }
-
-        private IEnumerable<ParameterInfo> GetInitializationParameters()
-        {
-            foreach (var ctor in _type.GetConstructors(BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
-            {
-                if (ctor.IsPublic && ctor.GetParameters().Length > 0)
-                {
-                    return ctor.GetParameters();
+                    if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType() == attributeType) is not null)
+                        return ctor.GetParameters();
                 }
             }
 
@@ -119,7 +108,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return ctor;
         }
 
-        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetInitializationParameters());
+        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtorParameters(typeof(InitializationConstructor)));
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties(bool getParentProperties = true)
         {
@@ -177,7 +166,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter is not null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetSerializationParameters());
+        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtorParameters(typeof(SerializationConstructor)));
 
         protected override ObjectSerialization[] BuildSerializations() => new ObjectSerialization[0];
 
