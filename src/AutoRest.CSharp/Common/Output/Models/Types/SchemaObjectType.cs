@@ -341,7 +341,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             )).ToArray();
         }
 
-        protected virtual HashSet<string?> GetParentProperties()
+        private HashSet<string?> GetParentPropertySerializedNames()
         {
             return EnumerateHierarchy()
                 .Skip(1)
@@ -350,9 +350,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 .ToHashSet();
         }
 
-        protected override IEnumerable<ObjectTypeProperty> BuildProperties(bool getParentProperties = true)
+        protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            var existingProperties = getParentProperties ? GetParentProperties() : new HashSet<string?>();
+            var existingProperties = GetParentPropertySerializedNames();
 
             foreach (var objectSchema in GetCombinedSchemas())
             {
@@ -360,74 +360,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     if (existingProperties.Contains(property.Language.Default.Name))
                     {
-                        // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/261
                         continue;
                     }
 
-                    var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
-                    SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
 
-                    var accessibility = property.IsDiscriminator == true ? "internal" : "public";
-
-                    var propertyType = GetDefaultPropertyType(property);
-
-                    // We represent property being optional by making it nullable
-                    // Except in the case of collection where there is a special handling
-                    bool optionalViaNullability = !property.IsRequired &&
-                                                  !property.IsNullable &&
-                                                  !TypeFactory.IsCollectionType(propertyType);
-
-                    if (optionalViaNullability)
-                    {
-                        propertyType = propertyType.WithNullable(true);
-                    }
-
-                    var memberDeclaration = BuilderHelpers.CreateMemberDeclaration(
-                        name,
-                        propertyType,
-                        accessibility,
-                        memberMapping?.ExistingMember,
-                        _typeFactory);
-
-                    var type = memberDeclaration.Type;
-
-                    var valueType = type;
-                    if (optionalViaNullability)
-                    {
-                        valueType = valueType.WithNullable(false);
-                    }
-
-                    bool isCollection = TypeFactory.IsCollectionType(type);
-
-                    bool isReadOnly = IsStruct ||
-                                      !_usage.HasFlag(SchemaTypeUsage.Input) ||
-                                      property.IsReadOnly;
-
-                    if (isCollection)
-                    {
-                        isReadOnly |= !property.IsNullable;
-                    }
-                    else
-                    {
-                        // In mixed models required properties are not readonly
-                        isReadOnly |= property.IsRequired &&
-                                      _usage.HasFlag(SchemaTypeUsage.Input) &&
-                                     !_usage.HasFlag(SchemaTypeUsage.Output);
-                    }
-
-                    if (property.IsDiscriminator == true)
-                    {
-                        // Discriminator properties should be writeable
-                        isReadOnly = false;
-                    }
-
-                    yield return new ObjectTypeProperty(
-                        memberDeclaration,
-                        BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
-                        isReadOnly,
-                        property,
-                        valueType,
-                        optionalViaNullability);
+                    yield return CreateProperty(property);
                 }
             }
 
@@ -435,6 +372,75 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 yield return additionalPropertiesProperty;
             }
+        }
+
+        protected ObjectTypeProperty CreateProperty(Property property)
+        {
+            var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
+            SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
+
+            var accessibility = property.IsDiscriminator == true ? "internal" : "public";
+
+            var propertyType = GetDefaultPropertyType(property);
+
+            // We represent property being optional by making it nullable
+            // Except in the case of collection where there is a special handling
+            bool optionalViaNullability = !property.IsRequired &&
+                                          !property.IsNullable &&
+                                          !TypeFactory.IsCollectionType(propertyType);
+
+            if (optionalViaNullability)
+            {
+                propertyType = propertyType.WithNullable(true);
+            }
+
+            var memberDeclaration = BuilderHelpers.CreateMemberDeclaration(
+                name,
+                propertyType,
+                accessibility,
+                memberMapping?.ExistingMember,
+                _typeFactory);
+
+            var type = memberDeclaration.Type;
+
+            var valueType = type;
+            if (optionalViaNullability)
+            {
+                valueType = valueType.WithNullable(false);
+            }
+
+            bool isCollection = TypeFactory.IsCollectionType(type);
+
+            bool isReadOnly = IsStruct ||
+                              !_usage.HasFlag(SchemaTypeUsage.Input) ||
+                              property.IsReadOnly;
+
+            if (isCollection)
+            {
+                isReadOnly |= !property.IsNullable;
+            }
+            else
+            {
+                // In mixed models required properties are not readonly
+                isReadOnly |= property.IsRequired &&
+                              _usage.HasFlag(SchemaTypeUsage.Input) &&
+                              !_usage.HasFlag(SchemaTypeUsage.Output);
+            }
+
+            if (property.IsDiscriminator == true)
+            {
+                // Discriminator properties should be writeable
+                isReadOnly = false;
+            }
+
+            var objectTypeProperty = new ObjectTypeProperty(
+                memberDeclaration,
+                BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
+                isReadOnly,
+                property,
+                valueType,
+                optionalViaNullability);
+            return objectTypeProperty;
         }
 
         private CSharpType GetDefaultPropertyType(Property property)
@@ -451,7 +457,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
-        private IEnumerable<ObjectSchema> GetCombinedSchemas()
+        protected IEnumerable<ObjectSchema> GetCombinedSchemas()
         {
             yield return ObjectSchema;
 

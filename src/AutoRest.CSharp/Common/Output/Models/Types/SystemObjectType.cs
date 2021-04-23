@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtorParameters(typeof(InitializationConstructor)));
 
-        protected override IEnumerable<ObjectTypeProperty> BuildProperties(bool getParentProperties = true)
+        protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             foreach (var property in _type.GetProperties().Where(p => p.DeclaringType == _type))
             {

@@ -15,12 +15,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
 
-        public ObjectType(BuildContext context) : base(context)
+        protected ObjectType(BuildContext context) : base(context)
         {
         }
 
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
-        public virtual ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
+        public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract ObjectTypeConstructor BuildInitializationConstructor();
         protected abstract ObjectTypeConstructor BuildSerializationConstructor();
         protected abstract CSharpType? CreateInheritedType();
-        protected abstract IEnumerable<ObjectTypeProperty> BuildProperties(bool getParentProperties = true);
+        protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
 
         public IEnumerable<ObjectType> EnumerateHierarchy()
         {
