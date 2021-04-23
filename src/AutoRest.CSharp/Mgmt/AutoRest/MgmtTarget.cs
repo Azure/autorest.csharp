@@ -78,12 +78,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
-            foreach (var model in context.Library.ArmResource)
+            foreach (var resource in context.Library.ArmResource)
             {
                 var codeWriter = new CodeWriter();
-                armResourceWriter.WriteResource(codeWriter, context, model);
+                //armResourceWriter.WriteResource(codeWriter, context, model);
+                armResourceWriter.WriteResource(codeWriter, resource);
 
-                var name = model.Type.Name;
+                var name = resource.Type.Name;
                 project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
             }
 
