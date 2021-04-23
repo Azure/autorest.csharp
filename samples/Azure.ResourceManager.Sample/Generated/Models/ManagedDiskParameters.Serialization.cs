@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -25,11 +26,8 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("diskEncryptionSet");
                 writer.WriteObjectValue(DiskEncryptionSet);
             }
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
 
@@ -37,7 +35,7 @@ namespace Azure.ResourceManager.Sample
         {
             Optional<StorageAccountTypes> storageAccountType = default;
             Optional<DiskEncryptionSetParameters> diskEncryptionSet = default;
-            Optional<string> id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("storageAccountType"))
@@ -66,7 +64,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new ManagedDiskParameters(id.Value, Optional.ToNullable(storageAccountType), diskEncryptionSet.Value);
+            return new ManagedDiskParameters(id, Optional.ToNullable(storageAccountType), diskEncryptionSet.Value);
         }
     }
 }

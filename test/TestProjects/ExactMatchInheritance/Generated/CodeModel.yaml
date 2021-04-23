@@ -741,7 +741,7 @@ globalParameters:
         in: query
 operationGroups:
   - !OperationGroup 
-    $key: OperationGroup1
+    $key: ExactMatchModel1s
     operations:
       - !Operation 
         apiVersions:
@@ -767,9 +767,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: operationGroup1Name
+                name: exactMatchModel1SName
                 description: ''
-                serializedName: operationGroup1Name
+                serializedName: exactMatchModel1sName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -824,7 +824,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup1/{operationGroup1Name}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -854,11 +854,11 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: OperationGroup1
+        name: ExactMatchModel1S
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: OperationGroup2
+    $key: ExactMatchModel2s
     operations:
       - !Operation 
         apiVersions:
@@ -884,9 +884,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: operationGroup2Name
+                name: exactMatchModel2SName
                 description: ''
-                serializedName: operationGroup2Name
+                serializedName: exactMatchModel2sName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -941,7 +941,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup2/{operationGroup2Name}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel2s/{exactMatchModel2sName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -971,11 +971,11 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: OperationGroup2
+        name: ExactMatchModel2S
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: OperationGroup3
+    $key: ExactMatchModel3s
     operations:
       - !Operation 
         apiVersions:
@@ -1001,9 +1001,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: operationGroup3Name
+                name: exactMatchModel3SName
                 description: ''
-                serializedName: operationGroup3Name
+                serializedName: exactMatchModel3sName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -1058,7 +1058,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup3/{operationGroup3Name}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -1088,11 +1088,11 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: OperationGroup3
+        name: ExactMatchModel3S
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: OperationGroup4
+    $key: ExactMatchModel4s
     operations:
       - !Operation 
         apiVersions:
@@ -1118,9 +1118,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: operationGroup4Name
+                name: exactMatchModel4SName
                 description: ''
-                serializedName: operationGroup4Name
+                serializedName: exactMatchModel4sName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -1175,7 +1175,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup4/{operationGroup4Name}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel4s/{exactMatchModel4sName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -1205,11 +1205,11 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: OperationGroup4
+        name: ExactMatchModel4S
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: OperationGroup5
+    $key: ExactMatchModel5s
     operations:
       - !Operation 
         apiVersions:
@@ -1235,9 +1235,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: operationGroup5Name
+                name: exactMatchModel5SName
                 description: ''
-                serializedName: operationGroup5Name
+                serializedName: exactMatchModel5sName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -1292,7 +1292,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup5/{operationGroup5Name}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -1322,7 +1322,7 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: OperationGroup5
+        name: ExactMatchModel5S
         description: ''
     protocol: !Protocols {}
 security: !Security 

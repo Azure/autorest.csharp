@@ -5,10 +5,12 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace ExactMatchInheritance
 {
     /// <summary> The ExactMatchModel8. </summary>
-    public partial class ExactMatchModel8
+    public partial class ExactMatchModel8 : SubResource
     {
         /// <summary> Initializes a new instance of ExactMatchModel8. </summary>
         public ExactMatchModel8()
@@ -16,17 +18,15 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel8. </summary>
-        /// <param name="id"> . </param>
+        /// <param name="id"> The id. </param>
         /// <param name="name"> . </param>
         /// <param name="nEW"> . </param>
-        internal ExactMatchModel8(string id, string name, string nEW)
+        internal ExactMatchModel8(string id, string name, string nEW) : base(id)
         {
-            Id = id;
             Name = name;
             NEW = nEW;
         }
 
-        public string Id { get; set; }
         public string Name { get; set; }
         public string NEW { get; set; }
     }

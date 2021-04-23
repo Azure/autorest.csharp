@@ -10,13 +10,23 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace SupersetInheritance
 {
-    public partial class SshPublicKeyData : IUtf8JsonSerializable
+    public partial class SupersetModel5 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Foo))
+            {
+                writer.WritePropertyName("foo");
+                writer.WriteStringValue(Foo);
+            }
+            if (Optional.IsDefined(New))
+            {
+                writer.WritePropertyName("new");
+                writer.WriteStringValue(New);
+            }
             writer.WritePropertyName("tags");
             writer.WriteStartObject();
             foreach (var item in Tags)
@@ -25,27 +35,30 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
-            writer.WritePropertyName("properties");
-            writer.WriteStartObject();
-            if (Optional.IsDefined(PublicKey))
-            {
-                writer.WritePropertyName("publicKey");
-                writer.WriteStringValue(PublicKey);
-            }
-            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static SshPublicKeyData DeserializeSshPublicKeyData(JsonElement element)
+        internal static SupersetModel5 DeserializeSupersetModel5(JsonElement element)
         {
+            Optional<string> foo = default;
+            Optional<string> @new = default;
             IDictionary<string, string> tags = default;
             LocationData location = default;
             TenantResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
-            Optional<string> publicKey = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("foo"))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("new"))
+                {
+                    @new = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("tags"))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -76,25 +89,8 @@ namespace Azure.ResourceManager.Sample
                     type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("properties"))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.NameEquals("publicKey"))
-                        {
-                            publicKey = property0.Value.GetString();
-                            continue;
-                        }
-                    }
-                    continue;
-                }
             }
-            return new SshPublicKeyData(id, name, type, tags, location, publicKey.Value);
+            return new SupersetModel5(id, name, type, tags, location, @new.Value, foo.Value);
         }
     }
 }

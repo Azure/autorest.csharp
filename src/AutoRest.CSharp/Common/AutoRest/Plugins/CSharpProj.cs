@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _armCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager.Core"" Version=""1.0.0-alpha.20210413.3"" />
+    <PackageReference Include=""Azure.ResourceManager.Core"" Version=""1.0.0-alpha.20210422.3"" />
   </ItemGroup>
 ";
         private string _csProjPackageReference = @"
