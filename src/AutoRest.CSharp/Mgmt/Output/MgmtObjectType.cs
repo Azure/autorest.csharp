@@ -13,25 +13,17 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtObjectType : SchemaObjectType
     {
-        private readonly TypeFactory _typeFactory;
         private bool _isResourceType;
-        private HashSet<string?>? _hierarchyProperties;
-        private ObjectTypeProperty[]? _properties;
         private ObjectTypeProperty[]? _myProperties;
 
         public MgmtObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceType) : base(objectSchema, context)
         {
-            _typeFactory = context.TypeFactory;
             _isResourceType = isResourceType;
         }
 
-        public override ObjectTypeProperty[] Properties => _properties ??= GetProperties().ToArray();
-
-        private ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
+        private ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
         protected override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
-
-        public HashSet<string?> HierarchyProperties => _hierarchyProperties ??= GetParentProperties();
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
@@ -39,44 +31,33 @@ namespace AutoRest.CSharp.Mgmt.Output
             return isResourceType ? name + "Data" : name;
         }
 
-        private bool HasSystemBaseType()
+        private HashSet<string> GetParentPropertyNames()
         {
-            return (Inherits is not null && !Inherits.IsFrameworkType && Inherits.Implementation is SystemObjectType);
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.Declaration.Name)
+                .ToHashSet();
         }
 
-        private IEnumerable<ObjectTypeProperty> GetProperties()
+        protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            foreach (var property in base.Properties)
+            var parentProperties = GetParentPropertyNames();
+            foreach (var property in base.BuildProperties())
             {
-                if (!HierarchyProperties.Contains(property.Declaration.Name))
+                if (!parentProperties.Contains(property.Declaration.Name))
                     yield return property;
             }
         }
 
-        private HashSet<string?> GetParentPropertiesFromSystemObject()
+        private IEnumerable<ObjectTypeProperty> BuildMyProperties()
         {
-            HashSet<string?> baseProperties = new HashSet<string?>();
-            if (HasSystemBaseType())
+            foreach (var objectSchema in GetCombinedSchemas())
             {
-                var baseType = Inherits!.Implementation as SystemObjectType;
-                foreach (var property in baseType!.GetAllProperties())
+                foreach (var property in objectSchema.Properties)
                 {
-                    baseProperties.Add(property.Name);
+                    yield return CreateProperty(property);
                 }
-            }
-
-            return baseProperties;
-        }
-
-        protected override HashSet<string?> GetParentProperties()
-        {
-            if (HasSystemBaseType())
-            {
-                return GetParentPropertiesFromSystemObject();
-            }
-            else
-            {
-                return base.GetParentProperties();
             }
         }
 
