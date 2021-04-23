@@ -69,6 +69,16 @@ schemas: !Schemas
           name: ExactMatchModel6Type
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_13
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ExactMatchModel2New
+          description: ''
+      protocol: !Protocols {}
     - !StringSchema &ref_9
       type: string
       apiVersions:
@@ -76,7 +86,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: ExactMatchModel7Id
+          name: ExactMatchModel7ID
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_10
@@ -97,16 +107,6 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: ExactMatchModel7Type
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_12
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ExactMatchModel7New
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_15
@@ -217,16 +217,6 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: ExactMatchModel11Type
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema 
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ExactMatchModel2New
           description: ''
       protocol: !Protocols {}
     - !StringSchema 
@@ -363,7 +353,7 @@ schemas: !Schemas
           version: '2020-06-01'
       parents: !Relations 
         all:
-          - !ObjectSchema &ref_13
+          - !ObjectSchema &ref_12
             type: object
             apiVersions:
               - !ApiVersion 
@@ -376,10 +366,10 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_9
-                serializedName: id
+                serializedName: iD
                 language: !Languages 
                   default:
-                    name: id
+                    name: iD
                     description: ''
                 protocol: !Protocols {}
               - !Property 
@@ -398,14 +388,6 @@ schemas: !Schemas
                     name: type
                     description: ''
                 protocol: !Protocols {}
-              - !Property 
-                schema: *ref_12
-                serializedName: new
-                language: !Languages 
-                  default:
-                    name: new
-                    description: ''
-                protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
@@ -418,7 +400,16 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_13
+          - *ref_12
+      properties:
+        - !Property 
+          schema: *ref_13
+          serializedName: new
+          language: !Languages 
+            default:
+              name: new
+              description: ''
+          protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
@@ -430,7 +421,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_13
+    - *ref_12
     - !ObjectSchema &ref_14
       type: object
       apiVersions:

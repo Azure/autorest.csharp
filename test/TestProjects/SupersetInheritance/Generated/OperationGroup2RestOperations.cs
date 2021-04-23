@@ -49,7 +49,7 @@ namespace SupersetInheritance
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string operationGroup2Name, SupersetModel2Data parameters)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string operationGroup2Name, SupersetModel2 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -77,7 +77,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup2Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SupersetModel2Data>> PutAsync(string resourceGroupName, string operationGroup2Name, SupersetModel2Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SupersetModel2>> PutAsync(string resourceGroupName, string operationGroup2Name, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -98,9 +98,9 @@ namespace SupersetInheritance
             {
                 case 200:
                     {
-                        SupersetModel2Data value = default;
+                        SupersetModel2 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SupersetModel2Data.DeserializeSupersetModel2Data(document.RootElement);
+                        value = SupersetModel2.DeserializeSupersetModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -113,7 +113,7 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup2Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SupersetModel2Data> Put(string resourceGroupName, string operationGroup2Name, SupersetModel2Data parameters, CancellationToken cancellationToken = default)
+        public Response<SupersetModel2> Put(string resourceGroupName, string operationGroup2Name, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -134,9 +134,9 @@ namespace SupersetInheritance
             {
                 case 200:
                     {
-                        SupersetModel2Data value = default;
+                        SupersetModel2 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SupersetModel2Data.DeserializeSupersetModel2Data(document.RootElement);
+                        value = SupersetModel2.DeserializeSupersetModel2(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

@@ -330,16 +330,13 @@
         },
         "ExactMatchModel7": {
             "properties": {
-                "id": {
+                "iD": {
                     "type": "string"
                 },
                 "name": {
                     "type": "string"
                 },
                 "type": {
-                    "type": "string"
-                },
-                "new": {
                     "type": "string"
                 }
             }
