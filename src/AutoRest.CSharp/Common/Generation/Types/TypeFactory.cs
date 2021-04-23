@@ -126,8 +126,7 @@ namespace AutoRest.CSharp.Generation.Types
         {
             return type.IsFrameworkType &&
                    (type.FrameworkType == typeof(IDictionary<,>) ||
-                   type.FrameworkType == typeof(IReadOnlyDictionary<,>) ||
-                   type.FrameworkType.IsGenericType && type.FrameworkType.GetGenericTypeDefinition() == typeof(IDictionary<,>));
+                   type.FrameworkType == typeof(IReadOnlyDictionary<,>));
         }
 
         internal static bool IsList(CSharpType type)
