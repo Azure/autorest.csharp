@@ -9,7 +9,6 @@ using System.Reflection;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.ResourceManager.Core;
 
@@ -25,20 +24,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _type = type;
             _csharpType = new CSharpType(type);
-            SystemType = type;
         }
 
-        public Type SystemType { get; }
-
         public override ObjectTypeProperty? AdditionalPropertiesProperty => null;
-
-        public override bool IncludeSerializer => false;
-
-        public override bool IncludeDeserializer => false;
-
-        public override bool IncludeConverter => false;
-
-        protected override bool SkipSerializerConstructor => false;
 
         protected override string DefaultName => GetNameWithoutGeneric(_type);
         protected override string DefaultAccessibility { get; } = "public";
@@ -75,9 +63,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        protected override ObjectTypeDiscriminator? BuildDiscriminator() => null;
-
-        public string GetNameWithoutGeneric(Type t)
+        private string GetNameWithoutGeneric(Type t)
         {
             if (!t.IsGenericType)
                 return t.Name;
@@ -141,6 +127,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
+        protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
+        {
+            yield return BuildInitializationConstructor();
+            yield return BuildSerializationConstructor();
+        }
+
         private bool GetReadOnly(PropertyInfo property)
         {
             if (property.Name == "Tags")
@@ -167,10 +159,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtorParameters(typeof(SerializationConstructor)));
-
-        protected override ObjectSerialization[] BuildSerializations() => new ObjectSerialization[0];
-
-        protected override CSharpType? CreateInheritedDictionaryType() => throw new NotImplementedException();
 
         protected override CSharpType? CreateInheritedType()
         {

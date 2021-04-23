@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (model)
             {
-                case ObjectType objectSchema:
+                case SchemaObjectType objectSchema:
                     WriteObjectSchema(writer, objectSchema);
                     break;
                 case EnumType e when e.IsExtendable:
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteObjectSchema(CodeWriter writer, ObjectType schema)
+        private void WriteObjectSchema(CodeWriter writer, SchemaObjectType schema)
         {
             const string collectionOfT = "ICollection{T}.";
             const string readonlyCollectionOfT = "IReadOnlyCollection{T}.";

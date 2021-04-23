@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -25,6 +26,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private readonly ModelTypeMapping? _sourceTypeMapping;
         private ObjectTypeProperty? _additionalPropertiesProperty;
+        private ObjectSerialization[]? _serializations;
+        private CSharpType? _implementsDictionaryType;
+        private ObjectTypeDiscriminator? _discriminator;
 
         public SchemaObjectType(ObjectSchema objectSchema, BuildContext context) : base(context)
         {
@@ -57,6 +61,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; } = "public";
         protected override string DefaultNamespace { get; }
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
+        public bool IsStruct => ExistingType?.IsValueType == true;
+
+        public ObjectSerialization[] Serializations => _serializations ??= BuildSerializations();
+        public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -245,11 +253,30 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseCtor);
         }
 
-        public override bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
-        public override bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output);
-        public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        public bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
+        public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output);
+        public bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        protected bool SkipSerializerConstructor => !IncludeDeserializer;
+        public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
+        protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
+        {
+            yield return InitializationConstructor;
 
-        protected override ObjectTypeDiscriminator? BuildDiscriminator()
+            if (SkipSerializerConstructor)
+            {
+                yield break;
+            }
+
+            // Skip serialization ctor if they are the same
+            if (!InitializationConstructor.Parameters
+                .Select(p => p.Type)
+                .SequenceEqual(SerializationConstructor!.Parameters.Select(p => p.Type)))
+            {
+                yield return SerializationConstructor;
+            }
+        }
+
+        private ObjectTypeDiscriminator? BuildDiscriminator()
         {
             Discriminator? schemaDiscriminator = ObjectSchema.Discriminator;
             ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
@@ -284,7 +311,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             );
         }
 
-        protected override ObjectSerialization[] BuildSerializations()
+        private ObjectSerialization[] BuildSerializations()
         {
             var formats = ObjectSchema.SerializationFormats;
 
@@ -473,7 +500,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        protected override CSharpType? CreateInheritedDictionaryType()
+        private CSharpType? CreateInheritedDictionaryType()
         {
             foreach (ComplexSchema complexSchema in ObjectSchema.Parents!.Immediate)
             {
@@ -487,6 +514,54 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return null;
+        }
+
+        public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {DefaultName}");
+            }
+
+            return objectProperty;
+        }
+
+        public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                throw new InvalidOperationException($"Unable to find object property with serialized name {serializedName} in schema {DefaultName}");
+            }
+
+            return objectProperty;
+        }
+
+        public ObjectTypeProperty GetPropertyForGroupedParameter(RequestParameter groupedParameter, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(
+                p => (p.SchemaProperty as GroupProperty)?.OriginalParameter.Contains(groupedParameter) == true,
+                out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                throw new InvalidOperationException($"Unable to find object property for grouped parameter {groupedParameter.Language.Default.Name} in schema {DefaultName}");
+            }
+
+            return objectProperty;
+        }
+
+        private bool TryGetPropertyForSchemaProperty(Func<ObjectTypeProperty, bool> propertySelector, [NotNullWhen(true)] out ObjectTypeProperty? objectProperty, bool includeParents = false)
+        {
+            objectProperty = null;
+
+            foreach (var type in EnumerateHierarchy())
+            {
+                objectProperty = type.Properties.SingleOrDefault(propertySelector);
+                if (objectProperty != null || !includeParents)
+                {
+                    break;
+                }
+            }
+
+            return objectProperty != null;
         }
     }
 }

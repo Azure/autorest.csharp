@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             ResponseType = type;
 
             TypeProvider implementation = type.Implementation;
-            if (!(implementation is ObjectType objectType))
+            if (!(implementation is SchemaObjectType objectType))
             {
                 throw new InvalidOperationException($"The type '{type}' has to be an object schema to be used in paging");
             }
