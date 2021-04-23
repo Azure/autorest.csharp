@@ -7,17 +7,17 @@
 
 namespace SubscriptionExtensions.Models
 {
-    /// <summary> A class representing the AvailabilitySet data model. </summary>
-    public partial class AvailabilitySetData
+    /// <summary> The AvailabilitySetListResult. </summary>
+    public partial class AvailabilitySet
     {
-        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
-        public AvailabilitySetData()
+        /// <summary> Initializes a new instance of AvailabilitySet. </summary>
+        public AvailabilitySet()
         {
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <summary> Initializes a new instance of AvailabilitySet. </summary>
         /// <param name="foo"> specifies the foo. </param>
-        internal AvailabilitySetData(string foo)
+        internal AvailabilitySet(string foo)
         {
             Foo = foo;
         }

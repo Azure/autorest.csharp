@@ -10,31 +10,31 @@ using Azure.Core;
 
 namespace SubscriptionExtensions.Models
 {
-    public partial class VirtualMachineData : IUtf8JsonSerializable
+    public partial class AvailabilitySet : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Bar))
+            if (Optional.IsDefined(Foo))
             {
-                writer.WritePropertyName("bar");
-                writer.WriteStringValue(Bar);
+                writer.WritePropertyName("foo");
+                writer.WriteStringValue(Foo);
             }
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
+        internal static AvailabilitySet DeserializeAvailabilitySet(JsonElement element)
         {
-            Optional<string> bar = default;
+            Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("bar"))
+                if (property.NameEquals("foo"))
                 {
-                    bar = property.Value.GetString();
+                    foo = property.Value.GetString();
                     continue;
                 }
             }
-            return new VirtualMachineData(bar.Value);
+            return new AvailabilitySet(foo.Value);
         }
     }
 }

@@ -16,6 +16,9 @@
   "CredentialScopes": [],
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
+  "OperationGroupToResource": {
+    "AvailabilitySets": "NonResource",
+    "VirtualMachines": "NonResource"
+  },
   "OperationGroupToParent": {}
 }

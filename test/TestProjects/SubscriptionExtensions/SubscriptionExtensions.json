@@ -61,7 +61,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AvailabilitySet"
+                "$ref": "#/definitions/AvailabilitySet"
             },
             "description": "Parameters supplied to the Create Availability Set operation."
           },
@@ -194,12 +194,12 @@
       "description": "The List Virtual Machine operation response."
     },
     "AvailabilitySet": {
-      "properties": {
-        "foo": {
-          "type": "string",
-          "description": "specifies the foo"
-        }
-      },
+        "properties": {
+            "foo": {
+                "type": "string",
+                "description": "specifies the foo"
+            }
+        },
       "description": "The AvailabilitySetListResult."
     },
     "VirtualMachine": {

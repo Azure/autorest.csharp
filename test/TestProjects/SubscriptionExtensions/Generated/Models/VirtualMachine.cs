@@ -7,17 +7,17 @@
 
 namespace SubscriptionExtensions.Models
 {
-    /// <summary> A class representing the VirtualMachine data model. </summary>
-    public partial class VirtualMachineData
+    /// <summary> The VirtualMachine. </summary>
+    public partial class VirtualMachine
     {
-        /// <summary> Initializes a new instance of VirtualMachineData. </summary>
-        public VirtualMachineData()
+        /// <summary> Initializes a new instance of VirtualMachine. </summary>
+        public VirtualMachine()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineData. </summary>
+        /// <summary> Initializes a new instance of VirtualMachine. </summary>
         /// <param name="bar"> specifies the bar. </param>
-        internal VirtualMachineData(string bar)
+        internal VirtualMachine(string bar)
         {
             Bar = bar;
         }

@@ -12,7 +12,6 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class Resource : TypeProvider
     {
         private BuildContext<MgmtOutputLibrary> _context;
-        private OperationGroup _operationGroup;
 
         public Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(context)
@@ -21,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = BuilderHelpers.EscapeXmlDescription(
                 $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.");
             _context = context;
-            _operationGroup = operationGroup;
+            OperationGroup = operationGroup;
         }
 
         protected override string DefaultName { get; }
@@ -30,6 +29,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string Description { get; }
 
-        public ResourceData ResourceDataObject => _context.Library.GetResourceData(_operationGroup);
+        internal OperationGroup OperationGroup { get; private set; }
+
+        public ResourceData ResourceDataObject => _context.Library.GetResourceData(OperationGroup);
     }
 }

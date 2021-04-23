@@ -22,16 +22,6 @@ namespace ExactMatchInheritance
         }
         #endregion
 
-        #region ExactMatchModel2s
-        /// <summary> Gets an object representing a ExactMatchModel2Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel2Container" /> object. </returns>
-        public static ExactMatchModel2Container GetExactMatchModel2s(this ResourceGroupOperations resourceGroup)
-        {
-            return new ExactMatchModel2Container(resourceGroup);
-        }
-        #endregion
-
         #region ExactMatchModel3s
         /// <summary> Gets an object representing a ExactMatchModel3Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -39,16 +29,6 @@ namespace ExactMatchInheritance
         public static ExactMatchModel3Container GetExactMatchModel3s(this ResourceGroupOperations resourceGroup)
         {
             return new ExactMatchModel3Container(resourceGroup);
-        }
-        #endregion
-
-        #region ExactMatchModel4s
-        /// <summary> Gets an object representing a ExactMatchModel4Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel4Container" /> object. </returns>
-        public static ExactMatchModel4Container GetExactMatchModel4s(this ResourceGroupOperations resourceGroup)
-        {
-            return new ExactMatchModel4Container(resourceGroup);
         }
         #endregion
 

@@ -17,7 +17,7 @@ namespace SubscriptionExtensions.Models
         /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
         /// <param name="value"> The list of virtual machines. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal VirtualMachineListResult(IEnumerable<VirtualMachineData> value)
+        internal VirtualMachineListResult(IEnumerable<VirtualMachine> value)
         {
             if (value == null)
             {
@@ -30,14 +30,14 @@ namespace SubscriptionExtensions.Models
         /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
         /// <param name="value"> The list of virtual machines. </param>
         /// <param name="nextLink"> The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines. </param>
-        internal VirtualMachineListResult(IReadOnlyList<VirtualMachineData> value, string nextLink)
+        internal VirtualMachineListResult(IReadOnlyList<VirtualMachine> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of virtual machines. </summary>
-        public IReadOnlyList<VirtualMachineData> Value { get; }
+        public IReadOnlyList<VirtualMachine> Value { get; }
         /// <summary> The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines. </summary>
         public string NextLink { get; }
     }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System.Threading;
+using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace MgmtParent
@@ -12,11 +14,27 @@ namespace MgmtParent
     /// <summary> A Class representing a DedicatedHostGroup along with the instance operations that can be performed on it. </summary>
     public class DedicatedHostGroup : DedicatedHostGroupOperations
     {
-        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroup"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref = "DedicatedHostGroup"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DedicatedHostGroup(ResourceOperationsBase options, DedicatedHostGroupData resource) : base()
+        internal DedicatedHostGroup(ResourceOperationsBase options, DedicatedHostGroupData resource) : base(options, resource.Id)
         {
+            Data = resource;
+        }
+
+        /// <summary> Gets or sets the DedicatedHostGroupData. </summary>
+        public DedicatedHostGroupData Data { get; private set; }
+
+        /// <inheritdoc />
+        protected override DedicatedHostGroup GetResource(CancellationToken cancellation = default)
+        {
+            return this;
+        }
+
+        /// <inheritdoc />
+        protected override Task<DedicatedHostGroup> GetResourceAsync(CancellationToken cancellation = default)
+        {
+            return Task.FromResult(this);
         }
     }
 }

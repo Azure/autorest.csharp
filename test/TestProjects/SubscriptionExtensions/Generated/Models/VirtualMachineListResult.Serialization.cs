@@ -15,16 +15,16 @@ namespace SubscriptionExtensions.Models
     {
         internal static VirtualMachineListResult DeserializeVirtualMachineListResult(JsonElement element)
         {
-            IReadOnlyList<VirtualMachineData> value = default;
+            IReadOnlyList<VirtualMachine> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<VirtualMachineData> array = new List<VirtualMachineData>();
+                    List<VirtualMachine> array = new List<VirtualMachine>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachineData.DeserializeVirtualMachineData(item));
+                        array.Add(VirtualMachine.DeserializeVirtualMachine(item));
                     }
                     value = array;
                     continue;

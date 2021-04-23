@@ -50,7 +50,7 @@ namespace SubscriptionExtensions
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string vmName, VirtualMachineData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string vmName, VirtualMachine parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -79,7 +79,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateOrUpdateAsync(string resourceGroupName, string vmName, VirtualMachine parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -112,7 +112,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="vmName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response CreateOrUpdate(string resourceGroupName, string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
+        public Response CreateOrUpdate(string resourceGroupName, string vmName, VirtualMachine parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {

@@ -50,7 +50,7 @@ namespace SubscriptionExtensions
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string availabilitySetName, AvailabilitySet parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -77,7 +77,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AvailabilitySetData>> CreateOrUpdateAsync(string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailabilitySet>> CreateOrUpdateAsync(string resourceGroupName, string availabilitySetName, AvailabilitySet parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -98,9 +98,9 @@ namespace SubscriptionExtensions
             {
                 case 200:
                     {
-                        AvailabilitySetData value = default;
+                        AvailabilitySet value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
+                        value = AvailabilitySet.DeserializeAvailabilitySet(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -114,7 +114,7 @@ namespace SubscriptionExtensions
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<AvailabilitySetData> CreateOrUpdate(string resourceGroupName, string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
+        public Response<AvailabilitySet> CreateOrUpdate(string resourceGroupName, string availabilitySetName, AvailabilitySet parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -135,9 +135,9 @@ namespace SubscriptionExtensions
             {
                 case 200:
                     {
-                        AvailabilitySetData value = default;
+                        AvailabilitySet value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AvailabilitySetData.DeserializeAvailabilitySetData(document.RootElement);
+                        value = AvailabilitySet.DeserializeAvailabilitySet(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
