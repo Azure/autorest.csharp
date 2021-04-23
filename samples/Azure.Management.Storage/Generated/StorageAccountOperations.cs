@@ -52,5 +52,68 @@ namespace Azure.Management.Storage
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
+
+        /// <summary> Gets a list of BlobService in the StorageAccount. </summary>
+        /// <returns> An object representing collection of BlobServices and their operations over a StorageAccount. </returns>
+        public BlobServiceContainer GetBlobService()
+        {
+            return new BlobServiceContainer(this);
+        }
+
+        /// <summary> Gets a list of BlobContainer in the StorageAccount. </summary>
+        /// <returns> An object representing collection of BlobContainers and their operations over a StorageAccount. </returns>
+        public BlobContainerContainer GetBlobContainer()
+        {
+            return new BlobContainerContainer(this);
+        }
+
+        /// <summary> Gets a list of FileService in the StorageAccount. </summary>
+        /// <returns> An object representing collection of FileServices and their operations over a StorageAccount. </returns>
+        public FileServiceContainer GetFileService()
+        {
+            return new FileServiceContainer(this);
+        }
+
+        /// <summary> Gets a list of FileShare in the StorageAccount. </summary>
+        /// <returns> An object representing collection of FileShares and their operations over a StorageAccount. </returns>
+        public FileShareContainer GetFileShare()
+        {
+            return new FileShareContainer(this);
+        }
+
+        /// <summary> Gets a list of ManagementPolicy in the StorageAccount. </summary>
+        /// <returns> An object representing collection of ManagementPolicys and their operations over a StorageAccount. </returns>
+        public ManagementPolicyContainer GetManagementPolicy()
+        {
+            return new ManagementPolicyContainer(this);
+        }
+
+        /// <summary> Gets a list of PrivateEndpointConnection in the StorageAccount. </summary>
+        /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a StorageAccount. </returns>
+        public PrivateEndpointConnectionContainer GetPrivateEndpointConnection()
+        {
+            return new PrivateEndpointConnectionContainer(this);
+        }
+
+        /// <summary> Gets a list of PrivateLinkResource in the StorageAccount. </summary>
+        /// <returns> An object representing collection of PrivateLinkResources and their operations over a StorageAccount. </returns>
+        public PrivateLinkResourceContainer GetPrivateLinkResource()
+        {
+            return new PrivateLinkResourceContainer(this);
+        }
+
+        /// <summary> Gets a list of ObjectReplicationPolicy in the StorageAccount. </summary>
+        /// <returns> An object representing collection of ObjectReplicationPolicys and their operations over a StorageAccount. </returns>
+        public ObjectReplicationPolicyContainer GetObjectReplicationPolicy()
+        {
+            return new ObjectReplicationPolicyContainer(this);
+        }
+
+        /// <summary> Gets a list of EncryptionScope in the StorageAccount. </summary>
+        /// <returns> An object representing collection of EncryptionScopes and their operations over a StorageAccount. </returns>
+        public EncryptionScopeContainer GetEncryptionScope()
+        {
+            return new EncryptionScopeContainer(this);
+        }
     }
 }

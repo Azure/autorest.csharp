@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string ResourceIdentifierType => OperationGroup.GetResourceIdentifierType();
 
-        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(_operationGroup, RestClient, Declaration).ToArray();
+        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

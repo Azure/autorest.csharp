@@ -52,5 +52,12 @@ namespace MgmtParent
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
+
+        /// <summary> Gets a list of DedicatedHost in the DedicatedHostGroup. </summary>
+        /// <returns> An object representing collection of DedicatedHosts and their operations over a DedicatedHostGroup. </returns>
+        public DedicatedHostContainer GetDedicatedHost()
+        {
+            return new DedicatedHostContainer(this);
+        }
     }
 }

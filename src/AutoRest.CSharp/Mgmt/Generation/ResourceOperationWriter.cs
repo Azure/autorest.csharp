@@ -94,11 +94,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (item.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(resourceOperation.OperationGroup.ResourceType(context.Configuration.MgmtConfiguration)))
                 {
                     var container = context.Library.ResourceContainers.First(x => x.ResourceName.Equals(item.Resource(context.Configuration.MgmtConfiguration)));
+                    writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName} in the {resourceOperation.ResourceName}.");
+                    writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName}s and their operations over a {resourceOperation.ResourceName}.");
                     using (writer.Scope($"public {container.Type} Get{container.ResourceName}()"))
                     {
-                        // TODO: Bring this back after container class implemented
-                        // writer.Line($"return new {container.Type}(this);");
-                        writer.Line($"throw new {typeof(NotImplementedException)}();");
+                        writer.Line($"return new {container.Type}(this);");
                     }
                     writer.Line();
                 }

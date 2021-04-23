@@ -53,9 +53,11 @@ namespace Azure.ResourceManager.Sample
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
 
+        /// <summary> Gets a list of VirtualMachineExtension in the VirtualMachine. </summary>
+        /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachine. </returns>
         public VirtualMachineExtensionContainer GetVirtualMachineExtension()
         {
-            throw new NotImplementedException();
+            return new VirtualMachineExtensionContainer(this);
         }
     }
 }

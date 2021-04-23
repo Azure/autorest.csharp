@@ -53,24 +53,32 @@ namespace Azure.ResourceManager.Sample
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
 
+        /// <summary> Gets a list of VirtualMachineScaleSetExtension in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetExtensions and their operations over a VirtualMachineScaleSet. </returns>
         public VirtualMachineScaleSetExtensionContainer GetVirtualMachineScaleSetExtension()
         {
-            throw new NotImplementedException();
+            return new VirtualMachineScaleSetExtensionContainer(this);
         }
 
+        /// <summary> Gets a list of VirtualMachineScaleSetRollingUpgrade in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetRollingUpgrades and their operations over a VirtualMachineScaleSet. </returns>
         public VirtualMachineScaleSetRollingUpgradeContainer GetVirtualMachineScaleSetRollingUpgrade()
         {
-            throw new NotImplementedException();
+            return new VirtualMachineScaleSetRollingUpgradeContainer(this);
         }
 
+        /// <summary> Gets a list of VirtualMachineExtension in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachineScaleSet. </returns>
         public VirtualMachineExtensionContainer GetVirtualMachineExtension()
         {
-            throw new NotImplementedException();
+            return new VirtualMachineExtensionContainer(this);
         }
 
+        /// <summary> Gets a list of VirtualMachineScaleSetVM in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetVMs and their operations over a VirtualMachineScaleSet. </returns>
         public VirtualMachineScaleSetVMContainer GetVirtualMachineScaleSetVM()
         {
-            throw new NotImplementedException();
+            return new VirtualMachineScaleSetVMContainer(this);
         }
     }
 }
