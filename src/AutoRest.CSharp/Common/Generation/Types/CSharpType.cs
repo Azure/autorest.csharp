@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static CSharpType FromSystemType(BuildContext context, Type type)
         {
-            var genericTypes = type.GetGenericArguments().Select<Type, CSharpType>(t => new CSharpType(t));
+            var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
             var systemObjectType = new SystemObjectType(type, context);
             return new CSharpType(
                 systemObjectType,
