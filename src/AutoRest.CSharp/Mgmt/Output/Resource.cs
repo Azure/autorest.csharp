@@ -31,8 +31,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string Description { get; }
 
-        internal OperationGroup OperationGroup { get; private set; }
-
         public ResourceData ResourceDataObject => _context.Library.GetResourceData(OperationGroup);
     }
 }
