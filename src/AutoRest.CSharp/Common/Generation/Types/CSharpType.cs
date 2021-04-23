@@ -44,7 +44,7 @@ namespace AutoRest.CSharp.Generation.Types
             IsValueType = isValueType;
             IsNullable = isNullable;
             Namespace = ns;
-            if (arguments is not null)
+            if (arguments != null)
                 Arguments = arguments;
         }
 

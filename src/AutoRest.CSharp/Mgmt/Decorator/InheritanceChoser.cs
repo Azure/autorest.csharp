@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static IList<System.Type> GetReferenceClassCollection()
         {
             var assembly = Assembly.GetAssembly(typeof(ArmClient));
-            if (assembly is null)
+            if (assembly == null)
             {
                 return new List<System.Type>();
             }

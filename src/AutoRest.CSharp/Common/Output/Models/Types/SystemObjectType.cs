@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 if (!ctor.IsPublic)
                 {
-                    if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType() == attributeType) is not null)
+                    if (ctor.GetCustomAttributes().FirstOrDefault(a => a.GetType() == attributeType) != null)
                         return ctor.GetParameters();
                 }
             }
@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         internal IEnumerable<PropertyInfo> GetAllProperties()
         {
             var type = _type;
-            while (type is not null)
+            while (type != null)
             {
                 foreach (var property in type.GetProperties())
                 {
@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             List<Parameter> parameters = new List<Parameter>();
             foreach (var param in paramInfos)
             {
-                parameters.Add(new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", GetTypeFromSystem(param.ParameterType), null, false));
+                parameters.Add(new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, false));
 
             }
 
@@ -117,9 +117,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var getter = property.GetGetMethod();
                 var setter = property.GetSetMethod();
                 MemberDeclarationOptions memberDeclarationOptions = new MemberDeclarationOptions(
-                    getter is not null && getter.IsPublic ? "public" : "internal",
+                    getter != null && getter.IsPublic ? "public" : "internal",
                     property.Name,
-                    GetTypeFromSystem(property.PropertyType));
+                    new CSharpType(property.PropertyType));
                 Property prop = new Property();
                 prop.Nullable = false;
                 prop.ReadOnly = GetReadOnly(property); //TODO read this from attribute from reference object
@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     prop.Schema.Type = AllSchemaTypes.Dictionary;
                 }
 
-                yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, GetTypeFromSystem(property.PropertyType));
+                yield return new ObjectTypeProperty(memberDeclarationOptions, prop.Summary, prop.IsReadOnly, prop, new CSharpType(property.PropertyType));
             }
         }
 
@@ -145,25 +145,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (property.Name == "Tags")
                 return false;
-            return property.GetSetMethod() is null;
-        }
-
-        private CSharpType GetTypeFromSystem(Type type)
-        {
-            List<CSharpType> args = new List<CSharpType>();
-            if (type.IsGenericType)
-            {
-                foreach (var argType in type.GetGenericArguments())
-                {
-                    args.Add(GetTypeFromSystem(argType));
-                }
-            }
-            return new CSharpType(type, false, args.ToArray());
+            return property.GetSetMethod() == null;
         }
 
         private string GetPropertySummary(MethodInfo? setter)
         {
-            return setter is not null ? " or sets" : string.Empty;
+            return setter != null ? " or sets" : string.Empty;
         }
 
         protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtorParameters(typeof(SerializationConstructor)));
@@ -174,7 +161,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override CSharpType? CreateInheritedType()
         {
-            return _type.BaseType is null ? null : CSharpType.FromSystemType(Context, _type.BaseType);
+            return _type.BaseType == null ? null : CSharpType.FromSystemType(Context, _type.BaseType);
         }
     }
 }
