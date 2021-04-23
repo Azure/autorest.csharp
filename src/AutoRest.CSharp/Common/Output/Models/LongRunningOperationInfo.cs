@@ -13,15 +13,14 @@ namespace AutoRest.CSharp.Common.Output.Models
         {
             Accessibility = accessibility;
             ClientPrefix = clientPrefix;
-            NextOperationMethod = nextOperationMethod ?? throw new ArgumentNullException(nameof(nextOperationMethod));
+            NextOperationMethod = nextOperationMethod;
         }
 
         public string Accessibility { get; }
 
         public string ClientPrefix { get; }
 
-        [NotNull]
-        public RestClientMethod NextOperationMethod { get; }
+        public RestClientMethod? NextOperationMethod { get; }
 
     }
 }

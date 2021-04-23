@@ -202,10 +202,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             var mgmtRestClient = FindRestClient(operationGroup);
 
+            var nextOperationMethod = operation.Language.Default.Paging != null
+                ? mgmtRestClient.GetNextOperationMethod(operation.Requests.Single())
+                : null;
+
             return new LongRunningOperationInfo(
                 "public",
                 mgmtRestClient.ClientPrefix,
-                mgmtRestClient.GetNextOperationMethod(operation.Requests.SingleOrDefault()));
+                nextOperationMethod);
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()

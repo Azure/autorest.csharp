@@ -102,10 +102,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             Debug.Assert(client != null, "client != null, LROs should be disabled when public clients are disables");
 
+            var nextOperationMethod = operation.Language.Default.Paging != null
+                ? client.RestClient.GetNextOperationMethod(operation.Requests.Single())
+                : null;
+
             return new LongRunningOperationInfo(
                 client.Declaration.Accessibility,
                 client.RestClient.ClientPrefix,
-                client.RestClient.GetNextOperationMethod(operation.Requests.Single()));
+                nextOperationMethod);
         }
 
         public IEnumerable<DataPlaneRestClient> RestClients => _restClients.Values;
