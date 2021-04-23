@@ -14,6 +14,12 @@ namespace SupersetInheritance
     public partial class SupersetModel4Data : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
+        /// <param name="location"> The location. </param>
+        public SupersetModel4Data(LocationData location) : base(location)
+        {
+        }
+
+        /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>

@@ -95,24 +95,5 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
             return inheritedType == null ? InheritanceChoser.GetSupersetMatch(this, MyProperties) : inheritedType;
         }
-
-        protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
-        {
-            if (!(Inherits is not null && Inherits.Implementation is SystemObjectType))
-                yield return InitializationConstructor;
-
-            if (!IncludeDeserializer)
-            {
-                yield break;
-            }
-
-            // Skip serialization ctor if they are the same
-            if (!InitializationConstructor.Parameters
-                .Select(p => p.Type)
-                .SequenceEqual(SerializationConstructor!.Parameters.Select(p => p.Type)))
-            {
-                yield return SerializationConstructor;
-            }
-        }
     }
 }

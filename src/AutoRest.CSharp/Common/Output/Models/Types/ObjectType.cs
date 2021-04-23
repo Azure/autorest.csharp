@@ -41,6 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public abstract bool IncludeSerializer { get; }
         public abstract bool IncludeDeserializer { get; }
         public abstract bool IncludeConverter { get; }
+        protected virtual bool SkipSerializerConstructor => !IncludeDeserializer;
         public abstract ObjectTypeProperty? AdditionalPropertiesProperty { get; }
         protected abstract ObjectTypeDiscriminator? BuildDiscriminator();
         protected abstract ObjectSerialization[] BuildSerializations();
@@ -68,11 +69,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        protected virtual IEnumerable<ObjectTypeConstructor> BuildConstructors()
+        protected IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
             yield return InitializationConstructor;
 
-            if (!IncludeDeserializer)
+            if (SkipSerializerConstructor)
             {
                 yield break;
             }

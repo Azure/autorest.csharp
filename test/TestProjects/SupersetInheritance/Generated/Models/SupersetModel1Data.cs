@@ -13,6 +13,11 @@ namespace SupersetInheritance
     public partial class SupersetModel1Data : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
+        public SupersetModel1Data()
+        {
+        }
+
+        /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>

@@ -37,6 +37,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override bool IncludeConverter => false;
 
+        protected override bool SkipSerializerConstructor => false;
+
         public override string DefaultName => GetNameWithoutGeneric(_type);
 
         private string ToCamelCase(string name)
@@ -46,11 +48,24 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private IEnumerable<PropertyInfo> _myProperties => _type.GetProperties().Where(p => p.DeclaringType == _type);
 
-        private IEnumerable<ParameterInfo> GetInitializationParameters()
+        private IEnumerable<ParameterInfo> GetSerializationParameters()
         {
             foreach (var ctor in _type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.CreateInstance))
             {
                 if (!ctor.IsPublic && ctor.GetParameters().Length > 0)
+                {
+                    return ctor.GetParameters();
+                }
+            }
+
+            return new List<ParameterInfo>();
+        }
+
+        private IEnumerable<ParameterInfo> GetInitializationParameters()
+        {
+            foreach (var ctor in _type.GetConstructors(BindingFlags.Public | BindingFlags.Instance | BindingFlags.CreateInstance))
+            {
+                if (ctor.IsPublic && ctor.GetParameters().Length > 0)
                 {
                     return ctor.GetParameters();
                 }
@@ -84,11 +99,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return index == -1 ? name : name.Substring(0, index);
         }
 
-        protected override ObjectTypeConstructor BuildInitializationConstructor()
+        private ObjectTypeConstructor BuildConstructor(IEnumerable<ParameterInfo> paramInfos)
         {
             MemberDeclarationOptions memberDeclarationOptions = new MemberDeclarationOptions("protected", DefaultName, _csharpType);
             List<Parameter> parameters = new List<Parameter>();
-            foreach (var param in GetInitializationParameters())
+            foreach (var param in paramInfos)
             {
                 parameters.Add(new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", GetTypeFromSystem(param.ParameterType), null, false));
 
@@ -104,6 +119,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             ObjectTypeConstructor ctor = new ObjectTypeConstructor(memberDeclarationOptions, parameters.ToArray(), initializers.ToArray(), GetBaseCtor());
             return ctor;
         }
+
+        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetInitializationParameters());
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties(bool getParentProperties = true)
         {
@@ -161,7 +178,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter is not null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor? BuildSerializationConstructor() => null;
+        protected override ObjectTypeConstructor? BuildSerializationConstructor() => BuildConstructor(GetSerializationParameters());
 
         protected override ObjectSerialization[] BuildSerializations() => new ObjectSerialization[0];
 

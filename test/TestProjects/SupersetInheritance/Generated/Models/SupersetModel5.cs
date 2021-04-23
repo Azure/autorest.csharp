@@ -14,13 +14,8 @@ namespace SupersetInheritance
     public partial class SupersetModel5 : SupersetModel4Data
     {
         /// <summary> Initializes a new instance of SupersetModel5. </summary>
-        /// <param name="id"> The id. </param>
-        /// <param name="name"> The name. </param>
-        /// <param name="type"> The type. </param>
-        /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
-        /// <param name="new"> . </param>
-        public SupersetModel5(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string @new) : base(id, name, type, tags, location, @new)
+        public SupersetModel5(LocationData location) : base(location)
         {
         }
 
