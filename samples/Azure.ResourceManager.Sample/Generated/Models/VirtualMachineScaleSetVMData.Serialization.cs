@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -21,6 +22,14 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("plan");
                 writer.WriteObjectValue(Plan);
             }
+            writer.WritePropertyName("tags");
+            writer.WriteStartObject();
+            foreach (var item in Tags)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(HardwareProfile))
@@ -89,6 +98,11 @@ namespace Azure.ResourceManager.Sample
             Optional<Plan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtensionData>> resources = default;
             Optional<IReadOnlyList<string>> zones = default;
+            IDictionary<string, string> tags = default;
+            LocationData location = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<bool> latestModelApplied = default;
             Optional<string> vmId = default;
             Optional<VirtualMachineScaleSetVMInstanceView> instanceView = default;
@@ -160,6 +174,36 @@ namespace Azure.ResourceManager.Sample
                         array.Add(item.GetString());
                     }
                     zones = array;
+                    continue;
+                }
+                if (property.NameEquals("tags"))
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("location"))
+                {
+                    location = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -315,7 +359,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetVMData(instanceId.Value, sku.Value, plan.Value, Optional.ToList(resources), Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet.Value, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
+            return new VirtualMachineScaleSetVMData(id, name, type, tags, location, instanceId.Value, sku.Value, plan.Value, Optional.ToList(resources), Optional.ToList(zones), Optional.ToNullable(latestModelApplied), vmId.Value, instanceView.Value, hardwareProfile.Value, storageProfile.Value, additionalCapabilities.Value, osProfile.Value, securityProfile.Value, networkProfile.Value, networkProfileConfiguration.Value, diagnosticsProfile.Value, availabilitySet.Value, provisioningState.Value, licenseType.Value, modelDefinitionApplied.Value, protectionPolicy.Value);
         }
     }
 }

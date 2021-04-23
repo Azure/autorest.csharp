@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -34,6 +35,9 @@ namespace Azure.Management.Storage.Models
         internal static ImmutabilityPolicy DeserializeImmutabilityPolicy(JsonElement element)
         {
             Optional<string> etag = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<int> immutabilityPeriodSinceCreationInDays = default;
             Optional<ImmutabilityPolicyState> state = default;
             Optional<bool> allowProtectedAppendWrites = default;
@@ -42,6 +46,21 @@ namespace Azure.Management.Storage.Models
                 if (property.NameEquals("etag"))
                 {
                     etag = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -87,7 +106,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new ImmutabilityPolicy(etag.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites));
+            return new ImmutabilityPolicy(id, name, type, etag.Value, Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(state), Optional.ToNullable(allowProtectedAppendWrites));
         }
     }
 }

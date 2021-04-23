@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -26,6 +27,14 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndArray();
             }
+            writer.WritePropertyName("tags");
+            writer.WriteStartObject();
+            foreach (var item in Tags)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(PlatformFaultDomainCount))
@@ -45,6 +54,11 @@ namespace Azure.ResourceManager.Sample
         internal static DedicatedHostGroupData DeserializeDedicatedHostGroupData(JsonElement element)
         {
             Optional<IList<string>> zones = default;
+            IDictionary<string, string> tags = default;
+            LocationData location = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<int> platformFaultDomainCount = default;
             Optional<IReadOnlyList<SubResourceReadOnly>> hosts = default;
             Optional<DedicatedHostGroupInstanceView> instanceView = default;
@@ -64,6 +78,36 @@ namespace Azure.ResourceManager.Sample
                         array.Add(item.GetString());
                     }
                     zones = array;
+                    continue;
+                }
+                if (property.NameEquals("tags"))
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("location"))
+                {
+                    location = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -124,7 +168,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new DedicatedHostGroupData(Optional.ToList(zones), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(hosts), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement));
+            return new DedicatedHostGroupData(id, name, type, tags, location, Optional.ToList(zones), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(hosts), instanceView.Value, Optional.ToNullable(supportAutomaticPlacement));
         }
     }
 }

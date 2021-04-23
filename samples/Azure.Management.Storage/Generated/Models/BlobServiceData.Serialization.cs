@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -63,7 +64,14 @@ namespace Azure.Management.Storage.Models
 
         internal static BlobServiceData DeserializeBlobServiceData(JsonElement element)
         {
+<<<<<<< HEAD
             Optional<Sku> sku = default;
+=======
+            Optional<SkuData> sku = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
+>>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724
             Optional<CorsRules> cors = default;
             Optional<string> defaultServiceVersion = default;
             Optional<DeleteRetentionPolicy> deleteRetentionPolicy = default;
@@ -82,6 +90,21 @@ namespace Azure.Management.Storage.Models
                         continue;
                     }
                     sku = Sku.DeserializeSku(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -172,7 +195,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new BlobServiceData(sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value);
+            return new BlobServiceData(id, name, type, sku.Value, cors.Value, defaultServiceVersion.Value, deleteRetentionPolicy.Value, Optional.ToNullable(isVersioningEnabled), Optional.ToNullable(automaticSnapshotPolicyEnabled), changeFeed.Value, restorePolicy.Value, containerDeleteRetentionPolicy.Value);
         }
     }
 }

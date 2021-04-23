@@ -18,10 +18,17 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of FileServiceData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="sku"> Sku name and tier. </param>
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
+<<<<<<< HEAD
         internal FileServiceData(Sku sku, CorsRules cors, DeleteRetentionPolicy shareDeleteRetentionPolicy)
+=======
+        internal FileServiceData(TenantResourceIdentifier id, string name, ResourceType type, SkuData sku, CorsRules cors, DeleteRetentionPolicy shareDeleteRetentionPolicy) : base(id, name, type)
+>>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724
         {
             Sku = sku;
             Cors = cors;

@@ -23,6 +23,8 @@ namespace AutoRest.CSharp.Mgmt.Output
             OperationGroup = operationGroup;
         }
 
+        internal OperationGroup OperationGroup { get; }
+
         protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility => "public";

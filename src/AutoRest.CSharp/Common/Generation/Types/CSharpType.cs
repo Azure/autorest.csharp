@@ -37,13 +37,15 @@ namespace AutoRest.CSharp.Generation.Types
             IsValueType = type.IsValueType;
         }
 
-        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false)
+        public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false, CSharpType[]? arguments = default)
         {
             _implementation = implementation;
             Name = name;
             IsValueType = isValueType;
             IsNullable = isNullable;
             Namespace = ns;
+            if (arguments != null)
+                Arguments = arguments;
         }
 
         public string Namespace { get; }
@@ -86,6 +88,19 @@ namespace AutoRest.CSharp.Generation.Types
         public override string ToString()
         {
             return new CodeWriter().Append($"{this}").ToString(false);
+        }
+
+        internal static CSharpType FromSystemType(BuildContext context, Type type)
+        {
+            var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
+            var systemObjectType = new SystemObjectType(type, context);
+            return new CSharpType(
+                systemObjectType,
+                type.Namespace ?? context.DefaultNamespace,
+                systemObjectType.Declaration.Name,
+                false,
+                false,
+                genericTypes.ToArray());
         }
     }
 }

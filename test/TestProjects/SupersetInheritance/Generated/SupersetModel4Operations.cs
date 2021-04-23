@@ -21,6 +21,7 @@ namespace SupersetInheritance
         {
         }
 
+<<<<<<< HEAD
         /// <summary> Initializes a new instance of <see cref = "SupersetModel4Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
@@ -29,6 +30,9 @@ namespace SupersetInheritance
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/operationGroup4";
+=======
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/supersetModel4s";
+>>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

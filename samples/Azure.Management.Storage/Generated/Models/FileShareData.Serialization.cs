@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -57,6 +58,9 @@ namespace Azure.Management.Storage.Models
         internal static FileShareData DeserializeFileShareData(JsonElement element)
         {
             Optional<string> etag = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<DateTimeOffset> lastModifiedTime = default;
             Optional<IDictionary<string, string>> metadata = default;
             Optional<int> shareQuota = default;
@@ -75,6 +79,21 @@ namespace Azure.Management.Storage.Models
                 if (property.NameEquals("etag"))
                 {
                     etag = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -215,7 +234,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new FileShareData(etag.Value, Optional.ToNullable(lastModifiedTime), Optional.ToDictionary(metadata), Optional.ToNullable(shareQuota), Optional.ToNullable(enabledProtocols), Optional.ToNullable(rootSquash), version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), Optional.ToNullable(accessTier), Optional.ToNullable(accessTierChangeTime), accessTierStatus.Value, Optional.ToNullable(shareUsageBytes));
+            return new FileShareData(id, name, type, etag.Value, Optional.ToNullable(lastModifiedTime), Optional.ToDictionary(metadata), Optional.ToNullable(shareQuota), Optional.ToNullable(enabledProtocols), Optional.ToNullable(rootSquash), version.Value, Optional.ToNullable(deleted), Optional.ToNullable(deletedTime), Optional.ToNullable(remainingRetentionDays), Optional.ToNullable(accessTier), Optional.ToNullable(accessTierChangeTime), accessTierStatus.Value, Optional.ToNullable(shareUsageBytes));
         }
     }
 }

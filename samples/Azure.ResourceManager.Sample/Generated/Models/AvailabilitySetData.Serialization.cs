@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -21,6 +22,14 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("sku");
                 writer.WriteObjectValue(Sku);
             }
+            writer.WritePropertyName("tags");
+            writer.WriteStartObject();
+            foreach (var item in Tags)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(PlatformUpdateDomainCount))
@@ -55,6 +64,11 @@ namespace Azure.ResourceManager.Sample
         internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element)
         {
             Optional<Sku> sku = default;
+            IDictionary<string, string> tags = default;
+            LocationData location = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<int> platformUpdateDomainCount = default;
             Optional<int> platformFaultDomainCount = default;
             Optional<IList<SubResource>> virtualMachines = default;
@@ -70,6 +84,36 @@ namespace Azure.ResourceManager.Sample
                         continue;
                     }
                     sku = Sku.DeserializeSku(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("tags"))
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("location"))
+                {
+                    location = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -145,7 +189,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new AvailabilitySetData(sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup.Value, Optional.ToList(statuses));
+            return new AvailabilitySetData(id, name, type, tags, location, sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup.Value, Optional.ToList(statuses));
         }
     }
 }

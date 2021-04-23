@@ -18,6 +18,9 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of BlobServiceData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="sku"> Sku name and tier. </param>
         /// <param name="cors"> Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service. </param>
         /// <param name="defaultServiceVersion"> DefaultServiceVersion indicates the default version to use for requests to the Blob service if an incoming request’s version is not specified. Possible values include version 2008-10-27 and all more recent versions. </param>
@@ -27,7 +30,11 @@ namespace Azure.Management.Storage.Models
         /// <param name="changeFeed"> The blob service properties for change feed events. </param>
         /// <param name="restorePolicy"> The blob service properties for blob restore policy. </param>
         /// <param name="containerDeleteRetentionPolicy"> The blob service properties for container soft delete. </param>
+<<<<<<< HEAD
         internal BlobServiceData(Sku sku, CorsRules cors, string defaultServiceVersion, DeleteRetentionPolicy deleteRetentionPolicy, bool? isVersioningEnabled, bool? automaticSnapshotPolicyEnabled, ChangeFeed changeFeed, RestorePolicyProperties restorePolicy, DeleteRetentionPolicy containerDeleteRetentionPolicy)
+=======
+        internal BlobServiceData(TenantResourceIdentifier id, string name, ResourceType type, SkuData sku, CorsRules cors, string defaultServiceVersion, DeleteRetentionPolicy deleteRetentionPolicy, bool? isVersioningEnabled, bool? automaticSnapshotPolicyEnabled, ChangeFeed changeFeed, RestorePolicyProperties restorePolicy, DeleteRetentionPolicy containerDeleteRetentionPolicy) : base(id, name, type)
+>>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724
         {
             Sku = sku;
             Cors = cors;

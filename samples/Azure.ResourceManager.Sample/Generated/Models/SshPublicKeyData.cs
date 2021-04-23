@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -13,13 +14,19 @@ namespace Azure.ResourceManager.Sample
     public partial class SshPublicKeyData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SshPublicKeyData. </summary>
-        public SshPublicKeyData()
+        /// <param name="location"> The location. </param>
+        public SshPublicKeyData(LocationData location) : base(location)
         {
         }
 
         /// <summary> Initializes a new instance of SshPublicKeyData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="publicKey"> SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format. </param>
-        internal SshPublicKeyData(string publicKey)
+        internal SshPublicKeyData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string publicKey) : base(id, name, type, tags, location)
         {
             PublicKey = publicKey;
         }
