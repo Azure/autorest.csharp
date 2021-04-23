@@ -21,6 +21,13 @@ namespace TenantOnly
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref = "AgreementOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected AgreementOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Billing/billingAccounts/agreements";
         protected override ResourceType ValidResourceType => ResourceType;
 
