@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -15,20 +14,17 @@ namespace Azure.ResourceManager.Sample
     public partial class ProximityPlacementGroupData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupData. </summary>
-        public ProximityPlacementGroupData()
-        {
-            VirtualMachines = new ChangeTrackingList<SubResourceWithColocationStatus>();
-            VirtualMachineScaleSets = new ChangeTrackingList<SubResourceWithColocationStatus>();
-            AvailabilitySets = new ChangeTrackingList<SubResourceWithColocationStatus>();
-        }
-
-        /// <summary> Initializes a new instance of ProximityPlacementGroupData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="proximityPlacementGroupType"> Specifies the type of the proximity placement group. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Standard** : Co-locate resources within an Azure region or Availability Zone. &lt;br&gt;&lt;br&gt; **Ultra** : For future use. </param>
         /// <param name="virtualMachines"> A list of references to all virtual machines in the proximity placement group. </param>
         /// <param name="virtualMachineScaleSets"> A list of references to all virtual machine scale sets in the proximity placement group. </param>
         /// <param name="availabilitySets"> A list of references to all availability sets in the proximity placement group. </param>
         /// <param name="colocationStatus"> Describes colocation status of the Proximity Placement Group. </param>
-        internal ProximityPlacementGroupData(ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus)
+        internal ProximityPlacementGroupData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus) : base(id, name, type, tags, location)
         {
             ProximityPlacementGroupType = proximityPlacementGroupType;
             VirtualMachines = virtualMachines;

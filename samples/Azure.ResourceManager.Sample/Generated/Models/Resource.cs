@@ -5,9 +5,7 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
-using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -16,23 +14,12 @@ namespace Azure.ResourceManager.Sample
     public partial class Resource : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of Resource. </summary>
-        /// <param name="location"> Resource location. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public Resource(string location)
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            Location = location;
-            Tags = new ChangeTrackingDictionary<string, string>();
-        }
-
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal Resource(string location, IDictionary<string, string> tags)
+        internal Resource(TenantResourceIdentifier id, string name, ResourceType type, string location, IDictionary<string, string> tags) : base(id, name, type)
         {
             Location = location;
             Tags = tags;
