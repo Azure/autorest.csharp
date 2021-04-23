@@ -5,10 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
@@ -194,6 +196,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             TypeProvider? provider = Models.FirstOrDefault(m => m.Type.Name == originalName);
             provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
+        }
+
+        public LongRunningOperationInfo FindLongRunningOperationInfo(OperationGroup operationGroup, Operation operation)
+        {
+            var mgmtRestClient = FindRestClient(operationGroup);
+
+            return new LongRunningOperationInfo(
+                "public",
+                mgmtRestClient.ClientPrefix,
+                mgmtRestClient.GetNextOperationMethod(operation.Requests.SingleOrDefault()));
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()

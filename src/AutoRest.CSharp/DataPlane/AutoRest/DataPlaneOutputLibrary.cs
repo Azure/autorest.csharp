@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -17,7 +18,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private CachedDictionary<OperationGroup, DataPlaneRestClient> _restClients;
         private CachedDictionary<OperationGroup, DataPlaneClient> _clients;
-        private CachedDictionary<Operation, DataPlaneLongRunningOperation> _operations;
+        private CachedDictionary<Operation, LongRunningOperation> _operations;
         private CachedDictionary<Operation, DataPlaneResponseHeaderGroupType> _headerModels;
         private CachedDictionary<Schema, TypeProvider> _models;
         private BuildContext<DataPlaneOutputLibrary> _context;
@@ -30,13 +31,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             _restClients = new CachedDictionary<OperationGroup, DataPlaneRestClient> (EnsureRestClients);
             _clients = new CachedDictionary<OperationGroup, DataPlaneClient>(EnsureClients);
-            _operations = new CachedDictionary<Operation, DataPlaneLongRunningOperation>(EnsureLongRunningOperations);
+            _operations = new CachedDictionary<Operation, LongRunningOperation>(EnsureLongRunningOperations);
             _headerModels = new CachedDictionary<Operation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
             _models = new CachedDictionary<Schema, TypeProvider> (BuildModels);
         }
 
         public IEnumerable<DataPlaneClient> Clients => _clients.Values;
-        public IEnumerable<DataPlaneLongRunningOperation> LongRunningOperations => _operations.Values;
+        public IEnumerable<LongRunningOperation> LongRunningOperations => _operations.Values;
         public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Values;
         internal CachedDictionary<Schema, TypeProvider> SchemaMap => _models;
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
@@ -76,7 +77,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => throw new NotImplementedException()
         };
 
-        public DataPlaneLongRunningOperation FindLongRunningOperation(Operation operation)
+        public LongRunningOperation FindLongRunningOperation(Operation operation)
         {
             Debug.Assert(operation.IsLongRunning);
 
@@ -93,6 +94,18 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _headerModels.TryGetValue(operation, out var model);
             return model;
+        }
+
+        public LongRunningOperationInfo FindLongRunningOperationInfo(OperationGroup operationGroup, Operation operation)
+        {
+            var client = FindClient(operationGroup);
+
+            Debug.Assert(client != null, "client != null, LROs should be disabled when public clients are disables");
+
+            return new LongRunningOperationInfo(
+                client.Declaration.Accessibility,
+                client.RestClient.ClientPrefix,
+                client.RestClient.GetNextOperationMethod(operation.Requests.Single()));
         }
 
         public IEnumerable<DataPlaneRestClient> RestClients => _restClients.Values;
@@ -120,9 +133,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             return headerModels;
         }
 
-        private Dictionary<Operation, DataPlaneLongRunningOperation> EnsureLongRunningOperations()
+        private Dictionary<Operation, LongRunningOperation> EnsureLongRunningOperations()
         {
-            var operations = new Dictionary<Operation, DataPlaneLongRunningOperation>();
+            var operations = new Dictionary<Operation, LongRunningOperation>();
 
             if (_context.Configuration.PublicClients)
             {
@@ -132,7 +145,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                     {
                         if (operation.IsLongRunning)
                         {
-                            operations.Add(operation, new DataPlaneLongRunningOperation(operationGroup, operation, _context));
+                            operations.Add(
+                                operation,
+                                new LongRunningOperation(
+                                    operationGroup,
+                                    operation,
+                                    _context,
+                                    FindLongRunningOperationInfo(operationGroup, operation)));
                         }
                     }
                 }

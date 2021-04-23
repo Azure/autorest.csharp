@@ -4,6 +4,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
@@ -14,17 +15,16 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models.Requests
 {
-    internal class DataPlaneLongRunningOperation: TypeProvider
+    internal class LongRunningOperation: TypeProvider
     {
-        public DataPlaneLongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext<DataPlaneOutputLibrary> context) : base(context)
+        public LongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext context, LongRunningOperationInfo lroInfo) : base(context)
         {
             Debug.Assert(operation.IsLongRunning);
 
-            var clientClass = context.Library.FindClient(operationGroup);
+            //var lroInfo = context.Library.FindLongRunningOperationInfo(operationGroup, operation);
 
-            Debug.Assert(clientClass != null, "clientClass != null, LROs should be disabled when public clients are disables");
 
-            DefaultName = clientClass.RestClient.ClientPrefix + operation.CSharpName() + "Operation";
+            DefaultName = lroInfo.ClientPrefix + operation.CSharpName() + "Operation";
             FinalStateVia = operation.LongRunningFinalStateVia switch
             {
                 "azure-async-operation" => OperationFinalStateVia.AzureAsyncOperation,
@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
                 Paging? paging = operation.Language.Default.Paging;
                 if (paging != null)
                 {
-                    NextPageMethod = clientClass.RestClient.GetNextOperationMethod(operation.Requests.Single());
+                    NextPageMethod = lroInfo.NextOperationMethod;
                     PagingResponse = new PagingResponseInfo(paging, ResultType);
                     ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
                 }
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
             }
 
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
-            DefaultAccessibility = clientClass.Declaration.Accessibility;
+            DefaultAccessibility = lroInfo.Accessibility;
         }
 
         public CSharpType ResultType { get; }
