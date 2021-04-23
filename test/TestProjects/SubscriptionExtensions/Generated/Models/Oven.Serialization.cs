@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SubscriptionExtensions.Models
 {
-    public partial class VirtualMachine : IUtf8JsonSerializable
+    public partial class Oven : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -23,7 +23,7 @@ namespace SubscriptionExtensions.Models
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachine DeserializeVirtualMachine(JsonElement element)
+        internal static Oven DeserializeOven(JsonElement element)
         {
             Optional<string> bar = default;
             foreach (var property in element.EnumerateObject())
@@ -34,7 +34,7 @@ namespace SubscriptionExtensions.Models
                     continue;
                 }
             }
-            return new VirtualMachine(bar.Value);
+            return new Oven(bar.Value);
         }
     }
 }

@@ -28,7 +28,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: AvailabilitySetFoo
+          name: ToasterFoo
           description: specifies the foo
       protocol: !Protocols {}
     - !StringSchema &ref_2
@@ -38,7 +38,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: VirtualMachineBar
+          name: OvenBar
           description: specifies the bar
       protocol: !Protocols {}
     - !StringSchema &ref_4
@@ -48,7 +48,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: VirtualMachineListResultNextLink
+          name: OvenListResultNextLink
           description: The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
       protocol: !Protocols {}
   constants:
@@ -104,8 +104,8 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: AvailabilitySet
-          description: The AvailabilitySetListResult.
+          name: Toaster
+          description: The ToasterListResult.
           namespace: ''
       protocol: !Protocols {}
     - !ObjectSchema &ref_3
@@ -129,8 +129,8 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: VirtualMachine
-          description: The VirtualMachine.
+          name: Oven
+          description: The Oven.
           namespace: ''
       protocol: !Protocols {}
     - !ObjectSchema &ref_21
@@ -148,7 +148,7 @@ schemas: !Schemas
             elementType: *ref_3
             language: !Languages 
               default:
-                name: VirtualMachineListResultValue
+                name: OvenListResultValue
                 description: The list of virtual machines.
             protocol: !Protocols {}
           required: true
@@ -173,7 +173,7 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: VirtualMachineListResult
+          name: OvenListResult
           description: The List Virtual Machine operation response.
           namespace: ''
       protocol: !Protocols {}
@@ -225,7 +225,7 @@ globalParameters:
         in: query
 operationGroups:
   - !OperationGroup 
-    $key: AvailabilitySets
+    $key: Toasters
     operations:
       - !Operation 
         apiVersions:
@@ -338,11 +338,11 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: AvailabilitySets
+        name: Toasters
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: VirtualMachines
+    $key: Ovens
     operations:
       - !Operation 
         apiVersions:
@@ -541,7 +541,7 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: VirtualMachines
+        name: Ovens
         description: ''
     protocol: !Protocols {}
 security: !Security 

@@ -11,20 +11,20 @@ using Azure.Core;
 
 namespace SubscriptionExtensions.Models
 {
-    internal partial class VirtualMachineListResult
+    internal partial class OvenListResult
     {
-        internal static VirtualMachineListResult DeserializeVirtualMachineListResult(JsonElement element)
+        internal static OvenListResult DeserializeOvenListResult(JsonElement element)
         {
-            IReadOnlyList<VirtualMachine> value = default;
+            IReadOnlyList<Oven> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<VirtualMachine> array = new List<VirtualMachine>();
+                    List<Oven> array = new List<Oven>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(VirtualMachine.DeserializeVirtualMachine(item));
+                        array.Add(Oven.DeserializeOven(item));
                     }
                     value = array;
                     continue;
@@ -35,7 +35,7 @@ namespace SubscriptionExtensions.Models
                     continue;
                 }
             }
-            return new VirtualMachineListResult(value, nextLink.Value);
+            return new OvenListResult(value, nextLink.Value);
         }
     }
 }

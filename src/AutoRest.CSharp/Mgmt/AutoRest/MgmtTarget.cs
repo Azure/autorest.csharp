@@ -81,7 +81,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resource in context.Library.ArmResource)
             {
                 var codeWriter = new CodeWriter();
-                //armResourceWriter.WriteResource(codeWriter, context, model);
                 armResourceWriter.WriteResource(codeWriter, resource);
 
                 var name = resource.Type.Name;

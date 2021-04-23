@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace SubscriptionExtensions.Models
 {
-    public partial class AvailabilitySet : IUtf8JsonSerializable
+    public partial class Toaster : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -23,7 +23,7 @@ namespace SubscriptionExtensions.Models
             writer.WriteEndObject();
         }
 
-        internal static AvailabilitySet DeserializeAvailabilitySet(JsonElement element)
+        internal static Toaster DeserializeToaster(JsonElement element)
         {
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
@@ -34,7 +34,7 @@ namespace SubscriptionExtensions.Models
                     continue;
                 }
             }
-            return new AvailabilitySet(foo.Value);
+            return new Toaster(foo.Value);
         }
     }
 }

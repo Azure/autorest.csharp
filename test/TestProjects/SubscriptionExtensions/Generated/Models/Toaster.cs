@@ -7,17 +7,17 @@
 
 namespace SubscriptionExtensions.Models
 {
-    /// <summary> The AvailabilitySetListResult. </summary>
-    public partial class AvailabilitySet
+    /// <summary> The ToasterListResult. </summary>
+    public partial class Toaster
     {
-        /// <summary> Initializes a new instance of AvailabilitySet. </summary>
-        public AvailabilitySet()
+        /// <summary> Initializes a new instance of Toaster. </summary>
+        public Toaster()
         {
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySet. </summary>
+        /// <summary> Initializes a new instance of Toaster. </summary>
         /// <param name="foo"> specifies the foo. </param>
-        internal AvailabilitySet(string foo)
+        internal Toaster(string foo)
         {
             Foo = foo;
         }

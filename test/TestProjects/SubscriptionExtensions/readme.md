@@ -9,6 +9,6 @@ input-file: $(this-folder)/SubscriptionExtensions.json
 namespace: SubscriptionExtensions
 
 operation-group-to-resource:
-   AvailabilitySets: NonResource
-   VirtualMachines: NonResource
+   Toasters: NonResource
+   Ovens: NonResource
 ```

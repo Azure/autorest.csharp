@@ -17,8 +17,8 @@
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {
-    "AvailabilitySets": "NonResource",
-    "VirtualMachines": "NonResource"
+    "Toasters": "NonResource",
+    "Ovens": "NonResource"
   },
   "OperationGroupToParent": {}
 }

@@ -12,12 +12,12 @@ using System.Linq;
 namespace SubscriptionExtensions.Models
 {
     /// <summary> The List Virtual Machine operation response. </summary>
-    internal partial class VirtualMachineListResult
+    internal partial class OvenListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
+        /// <summary> Initializes a new instance of OvenListResult. </summary>
         /// <param name="value"> The list of virtual machines. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        internal VirtualMachineListResult(IEnumerable<VirtualMachine> value)
+        internal OvenListResult(IEnumerable<Oven> value)
         {
             if (value == null)
             {
@@ -27,17 +27,17 @@ namespace SubscriptionExtensions.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
+        /// <summary> Initializes a new instance of OvenListResult. </summary>
         /// <param name="value"> The list of virtual machines. </param>
         /// <param name="nextLink"> The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines. </param>
-        internal VirtualMachineListResult(IReadOnlyList<VirtualMachine> value, string nextLink)
+        internal OvenListResult(IReadOnlyList<Oven> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of virtual machines. </summary>
-        public IReadOnlyList<VirtualMachine> Value { get; }
+        public IReadOnlyList<Oven> Value { get; }
         /// <summary> The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines. </summary>
         public string NextLink { get; }
     }

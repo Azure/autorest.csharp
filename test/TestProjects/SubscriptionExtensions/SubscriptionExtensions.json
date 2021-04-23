@@ -37,9 +37,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": {
       "put": {
         "tags": [
-          "AvailabilitySets"
+          "Toasters"
         ],
-        "operationId": "AvailabilitySets_CreateOrUpdate",
+        "operationId": "Toasters_CreateOrUpdate",
         "description": "Create or update an availability set.",
         "parameters": [
           {
@@ -61,7 +61,7 @@
             "in": "body",
             "required": true,
             "schema": {
-                "$ref": "#/definitions/AvailabilitySet"
+                "$ref": "#/definitions/Toaster"
             },
             "description": "Parameters supplied to the Create Availability Set operation."
           },
@@ -76,7 +76,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AvailabilitySet"
+              "$ref": "#/definitions/Toaster"
             }
           }
         }
@@ -85,9 +85,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
       "put": {
         "tags": [
-          "VirtualMachines"
+          "Ovens"
         ],
-        "operationId": "VirtualMachines_CreateOrUpdate",
+        "operationId": "Ovens_CreateOrUpdate",
         "description": "The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.",
         "parameters": [
           {
@@ -109,7 +109,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualMachine"
+              "$ref": "#/definitions/Oven"
             },
             "description": "Parameters supplied to the Create Virtual Machine operation."
           },
@@ -124,13 +124,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachine"
+              "$ref": "#/definitions/Oven"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/VirtualMachine"
+              "$ref": "#/definitions/Oven"
             }
           }
         },
@@ -140,9 +140,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines": {
       "get": {
         "tags": [
-          "VirtualMachines"
+          "Ovens"
         ],
-        "operationId": "VirtualMachines_ListAll",
+        "operationId": "Ovens_ListAll",
         "description": "Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.",
         "parameters": [
           {
@@ -163,7 +163,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineListResult"
+              "$ref": "#/definitions/OvenListResult"
             }
           }
         },
@@ -174,12 +174,12 @@
     }
   },
   "definitions": {
-    "VirtualMachineListResult": {
+    "OvenListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualMachine"
+            "$ref": "#/definitions/Oven"
           },
           "description": "The list of virtual machines."
         },
@@ -193,23 +193,23 @@
       ],
       "description": "The List Virtual Machine operation response."
     },
-    "AvailabilitySet": {
+    "Toaster": {
         "properties": {
             "foo": {
                 "type": "string",
                 "description": "specifies the foo"
             }
         },
-      "description": "The AvailabilitySetListResult."
+      "description": "The ToasterListResult."
     },
-    "VirtualMachine": {
+    "Oven": {
       "properties": {
         "bar": {
           "type": "string",
           "description": "specifies the bar"
         }
       },
-      "description": "The VirtualMachine."
+      "description": "The Oven."
     }
   },
   "parameters": {

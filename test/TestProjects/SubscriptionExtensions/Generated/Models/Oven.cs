@@ -7,17 +7,17 @@
 
 namespace SubscriptionExtensions.Models
 {
-    /// <summary> The VirtualMachine. </summary>
-    public partial class VirtualMachine
+    /// <summary> The Oven. </summary>
+    public partial class Oven
     {
-        /// <summary> Initializes a new instance of VirtualMachine. </summary>
-        public VirtualMachine()
+        /// <summary> Initializes a new instance of Oven. </summary>
+        public Oven()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachine. </summary>
+        /// <summary> Initializes a new instance of Oven. </summary>
         /// <param name="bar"> specifies the bar. </param>
-        internal VirtualMachine(string bar)
+        internal Oven(string bar)
         {
             Bar = bar;
         }
