@@ -1,12 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -19,6 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string DataSuffixValue = "Data";
         private string _prefix;
         private BuildContext<MgmtOutputLibrary> _context;
+        private PagingMethod[]? _pagingMethods;
 
         internal OperationGroup OperationGroup;
         protected MgmtRestClient? _restClient;
@@ -45,6 +50,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(OperationGroup);
 
         public string ResourceIdentifierType => OperationGroup.GetResourceIdentifierType();
+
+        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(_operationGroup, RestClient, Declaration).ToArray();
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

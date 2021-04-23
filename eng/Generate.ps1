@@ -165,12 +165,18 @@ if (!($Exclude -contains "SmokeTests"))
     }
 }
 
+# Sorting file names that include '-' and '.' is broken in powershell - https://github.com/PowerShell/PowerShell/issues/3425
+# So map each to characters invalid for file system use '?' and '|', sort, and then map back
+function Sort-FileSafe ($names) {
+    return $names | % {$_.replace("-","?")} | % {$_.replace(".","|")} | Sort-Object |  % {$_.replace("?","-")} | % {$_.replace("|",".")}
+}
+
 $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
 $settings = @{
     'profiles' = [ordered]@{}
 };
 
-foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
+foreach ($key in Sort-FileSafe ($swaggerDefinitions.Keys))
 {
     $definition = $swaggerDefinitions[$key];
     $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')

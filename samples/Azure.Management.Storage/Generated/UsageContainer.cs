@@ -17,6 +17,10 @@ namespace Azure.Management.Storage
         {
         }
 
+        internal UsageContainer(ResourceOperationsBase parent)
+        {
+        }
+
         /// <summary> Gets the valid resource type for this object. </summary>
         protected ResourceType ValidResourceType => SubscriptionOperations.ResourceType;
     }
