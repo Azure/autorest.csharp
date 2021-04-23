@@ -21,7 +21,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.Management.Storage/PrivateLinkResourceOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/privateLinkResources";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

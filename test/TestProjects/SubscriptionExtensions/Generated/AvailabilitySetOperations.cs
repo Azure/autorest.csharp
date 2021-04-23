@@ -21,7 +21,7 @@ namespace SubscriptionExtensions
         {
         }
 
-        public static readonly ResourceType ResourceType = "SubscriptionExtensions/AvailabilitySetOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
