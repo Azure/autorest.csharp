@@ -4,12 +4,13 @@
 ## Configuration
 ```yaml
 use-extension:
-  "@autorest/modelerfour": "4.18.3"
+  "@autorest/modelerfour": https://tinyurl.com/ykyaqqpx
 modelerfour:
   always-create-content-type-parameter: true
   flatten-models: true
   flatten-payloads: true
   group-parameters: true
+  treat-type-object-as-anything: true
 pipeline:
   csharpgen:
     input: modelerfour/identity
