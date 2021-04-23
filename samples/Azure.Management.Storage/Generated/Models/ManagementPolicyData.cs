@@ -27,6 +27,9 @@ namespace Azure.Management.Storage.Models
             Policy = policy;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> Returns the date and time the ManagementPolicies was last modified. </summary>
         public DateTimeOffset? LastModifiedTime { get; }
         /// <summary> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </summary>

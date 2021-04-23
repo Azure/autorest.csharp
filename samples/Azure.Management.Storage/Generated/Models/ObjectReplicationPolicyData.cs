@@ -36,6 +36,9 @@ namespace Azure.Management.Storage.Models
             Rules = rules;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> A unique id for object replication policy. </summary>
         public string PolicyId { get; }
         /// <summary> Indicates when the policy is enabled on the source account. </summary>

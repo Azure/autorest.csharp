@@ -16,8 +16,11 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicy"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ObjectReplicationPolicy(ResourceOperationsBase options, ObjectReplicationPolicyData resource) : base()
+        internal ObjectReplicationPolicy(ResourceOperationsBase options, ObjectReplicationPolicyData resource) : base(options, resource.Id)
         {
         }
+
+        /// <summary> Gets or sets the resource data. </summary>
+        public ObjectReplicationPolicy Data { get; private set; }
     }
 }

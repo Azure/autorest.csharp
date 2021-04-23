@@ -33,6 +33,9 @@ namespace Azure.Management.Storage.Models
             KeyVaultProperties = keyVaultProperties;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault. </summary>
         public EncryptionScopeSource? Source { get; set; }
         /// <summary> The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled. </summary>

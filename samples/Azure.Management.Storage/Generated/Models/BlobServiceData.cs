@@ -40,6 +40,9 @@ namespace Azure.Management.Storage.Models
             ContainerDeleteRetentionPolicy = containerDeleteRetentionPolicy;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> Sku name and tier. </summary>
         public SkuData Sku { get; }
         /// <summary> Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service. </summary>

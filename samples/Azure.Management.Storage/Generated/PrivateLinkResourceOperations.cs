@@ -16,8 +16,16 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific PrivateLinkResource. </summary>
     public partial class PrivateLinkResourceOperations : ResourceOperationsBase<TenantResourceIdentifier, PrivateLinkResource>
     {
-        /// <summary> Initializes a new instance of PrivateLinkResourceOperations for mocking. </summary>
-        protected PrivateLinkResourceOperations()
+        /// <summary> Initializes a new instance of the <see cref="PrivateLinkResourceOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        internal PrivateLinkResourceOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="PrivateLinkResourceOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected PrivateLinkResourceOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
         {
         }
 

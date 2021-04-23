@@ -32,6 +32,9 @@ namespace Azure.Management.Storage.Models
             RequiredZoneNames = requiredZoneNames;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> The private link resource group id. </summary>
         public string GroupId { get; }
         /// <summary> The private link resource required member names. </summary>

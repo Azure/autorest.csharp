@@ -16,8 +16,11 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnection"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal PrivateEndpointConnection(ResourceOperationsBase options, PrivateEndpointConnectionData resource) : base()
+        internal PrivateEndpointConnection(ResourceOperationsBase options, PrivateEndpointConnectionData resource) : base(options, resource.Id)
         {
         }
+
+        /// <summary> Gets or sets the resource data. </summary>
+        public PrivateEndpointConnection Data { get; private set; }
     }
 }

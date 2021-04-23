@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the Sku data model. </summary>
@@ -25,6 +27,9 @@ namespace Azure.Management.Storage.Models
             Name = name;
             Tier = tier;
         }
+
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </summary>
         public SkuName Name { get; set; }

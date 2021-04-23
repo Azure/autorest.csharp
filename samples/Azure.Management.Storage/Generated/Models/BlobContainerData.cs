@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -49,6 +50,9 @@ namespace Azure.Management.Storage.Models
             HasLegalHold = hasLegalHold;
             HasImmutabilityPolicy = hasImmutabilityPolicy;
         }
+
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> Default the container to use specified encryption scope for all writes. </summary>
         public string DefaultEncryptionScope { get; set; }

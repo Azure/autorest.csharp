@@ -129,6 +129,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 WriteGetVariants(restClientMethod);
             }
+            else
+            {
+                WriteGetVariantsThatThrow();
+            }
 
             WriteListAsGenericResource();
             WriteListAsGenericResourceAsync();
@@ -232,7 +236,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
-
                 WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
                 {
                     _writer.Append($"var originalResponse = Operations.{restClientMethod.Name}(");
@@ -510,6 +513,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.Line($"cancellationToken: cancellationToken),");
                     _writer.Line($"data => new {_resource.Type}(Parent, data));");
                 });
+            }
+        }
+
+        private void WriteGetVariantsThatThrow()
+        {
+            var nameParameter = new Parameter("resourceName", "The name of the resource.", typeof(string), null, false);
+
+            // Get()
+            _writer.Line();
+            _writer.WriteXmlDocumentationInheritDoc();
+            _writer.Append($"public override ArmResponse<{_resource.Type}> Get(");
+            _writer.WriteParameter(nameParameter);
+            var doesNotSupportPut = @"This resource does not support Get operation.";
+            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+            {
+                _writer.Line($"// {doesNotSupportPut}");
+                _writer.Line($"throw new {typeof(NotImplementedException)}();");
+            }
+
+            // GetAsync()
+            _writer.Line();
+            _writer.WriteXmlDocumentationInheritDoc();
+            _writer.Append($"public override Task<ArmResponse<{_resource.Type}>> GetAsync(");
+            _writer.WriteParameter(nameParameter);
+            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
+            {
+                _writer.Line($"// {doesNotSupportPut}");
+                _writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
         }
 

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the Operation data model. </summary>
@@ -27,6 +29,9 @@ namespace Azure.Management.Storage.Models
             Origin = origin;
             ServiceSpecification = serviceSpecification;
         }
+
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> Operation name: {provider}/{resource}/{operation}. </summary>
         public string Name { get; }

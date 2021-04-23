@@ -22,9 +22,9 @@ operation-group-to-resource-type:
    Usages: Microsoft.Storage/locations/usages
    PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
 operation-group-to-resource:
-   Operations: Operation
-   Skus: Sku
-   Usages: Usage
+   Operations: NonResource
+   Skus: NonResource
+   Usages: NonResource
    PrivateLinkResources: PrivateLinkResource
    StorageAccounts: StorageAccount
 operation-group-to-parent:

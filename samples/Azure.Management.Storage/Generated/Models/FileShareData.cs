@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -51,6 +52,9 @@ namespace Azure.Management.Storage.Models
             AccessTierStatus = accessTierStatus;
             ShareUsageBytes = shareUsageBytes;
         }
+
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> Returns the date and time the share was last modified. </summary>
         public DateTimeOffset? LastModifiedTime { get; }

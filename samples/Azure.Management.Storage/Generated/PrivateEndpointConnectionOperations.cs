@@ -16,8 +16,16 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific PrivateEndpointConnection. </summary>
     public partial class PrivateEndpointConnectionOperations : ResourceOperationsBase<TenantResourceIdentifier, PrivateEndpointConnection>
     {
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionOperations for mocking. </summary>
-        protected PrivateEndpointConnectionOperations()
+        /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        internal PrivateEndpointConnectionOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected PrivateEndpointConnectionOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
         {
         }
 

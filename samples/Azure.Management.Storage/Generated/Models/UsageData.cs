@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the Usage data model. </summary>
@@ -27,6 +29,9 @@ namespace Azure.Management.Storage.Models
             Limit = limit;
             Name = name;
         }
+
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> Gets the unit of measurement. </summary>
         public UsageUnit? Unit { get; }

@@ -76,6 +76,9 @@ namespace Azure.Management.Storage.Models
             BlobRestoreStatus = blobRestoreStatus;
         }
 
+        /// <summary> ARM resource type. </summary>
+        public static ResourceType ResourceType => "todo: find out resource type";
+
         /// <summary> Gets the SKU. </summary>
         public SkuData Sku { get; }
         /// <summary> Gets the Kind. </summary>
