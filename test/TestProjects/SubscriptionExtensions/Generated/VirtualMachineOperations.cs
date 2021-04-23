@@ -11,27 +11,27 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
-namespace TenantOnly
+namespace SubscriptionExtensions
 {
-    /// <summary> A class representing the operations that can be performed over a specific Agreement. </summary>
-    public partial class AgreementOperations : ResourceOperationsBase<TenantResourceIdentifier, Agreement>
+    /// <summary> A class representing the operations that can be performed over a specific VirtualMachine. </summary>
+    public partial class VirtualMachineOperations : ResourceOperationsBase<TenantResourceIdentifier, VirtualMachine>
     {
-        /// <summary> Initializes a new instance of AgreementOperations for mocking. </summary>
-        protected AgreementOperations()
+        /// <summary> Initializes a new instance of VirtualMachineOperations for mocking. </summary>
+        protected VirtualMachineOperations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Billing/billingAccounts/agreements";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<Agreement> Get(CancellationToken cancellationToken = default)
+        public override ArmResponse<VirtualMachine> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<Agreement>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<ArmResponse<VirtualMachine>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

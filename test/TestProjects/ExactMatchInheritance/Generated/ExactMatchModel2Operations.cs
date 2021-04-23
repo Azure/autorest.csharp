@@ -11,27 +11,27 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
-namespace TenantOnly
+namespace ExactMatchInheritance
 {
-    /// <summary> A class representing the operations that can be performed over a specific Agreement. </summary>
-    public partial class AgreementOperations : ResourceOperationsBase<TenantResourceIdentifier, Agreement>
+    /// <summary> A class representing the operations that can be performed over a specific ExactMatchModel2. </summary>
+    public partial class ExactMatchModel2Operations : ResourceOperationsBase<TenantResourceIdentifier, ExactMatchModel2>
     {
-        /// <summary> Initializes a new instance of AgreementOperations for mocking. </summary>
-        protected AgreementOperations()
+        /// <summary> Initializes a new instance of ExactMatchModel2Operations for mocking. </summary>
+        protected ExactMatchModel2Operations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Billing/billingAccounts/agreements";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/operationGroup2";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<Agreement> Get(CancellationToken cancellationToken = default)
+        public override ArmResponse<ExactMatchModel2> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<Agreement>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<ArmResponse<ExactMatchModel2>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

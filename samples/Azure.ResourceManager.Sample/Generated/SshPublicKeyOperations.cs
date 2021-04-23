@@ -21,14 +21,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "SshPublicKeyOperations"/> class. </summary>
-        /// <param name="options"> The client parameters to use in these operations. </param>
-        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected SshPublicKeyOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
-        {
-        }
-
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/SshPublicKeyOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/sshPublicKeys";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

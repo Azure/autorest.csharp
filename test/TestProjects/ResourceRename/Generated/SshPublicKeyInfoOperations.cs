@@ -11,27 +11,27 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
-namespace TenantOnly
+namespace ResourceRename
 {
-    /// <summary> A class representing the operations that can be performed over a specific Agreement. </summary>
-    public partial class AgreementOperations : ResourceOperationsBase<TenantResourceIdentifier, Agreement>
+    /// <summary> A class representing the operations that can be performed over a specific SshPublicKeyInfo. </summary>
+    public partial class SshPublicKeyInfoOperations : ResourceOperationsBase<TenantResourceIdentifier, SshPublicKeyInfo>
     {
-        /// <summary> Initializes a new instance of AgreementOperations for mocking. </summary>
-        protected AgreementOperations()
+        /// <summary> Initializes a new instance of SshPublicKeyInfoOperations for mocking. </summary>
+        protected SshPublicKeyInfoOperations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Billing/billingAccounts/agreements";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/sshPublicKeys";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<Agreement> Get(CancellationToken cancellationToken = default)
+        public override ArmResponse<SshPublicKeyInfo> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<Agreement>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<ArmResponse<SshPublicKeyInfo>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

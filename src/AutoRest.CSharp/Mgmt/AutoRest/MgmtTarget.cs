@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resourceOperation in context.Library.ResourceOperations)
             {
                 var codeWriter = new CodeWriter();
-                resourceOperationWriter.WriteClient(codeWriter, resourceOperation);
+                resourceOperationWriter.WriteClient(codeWriter, resourceOperation, context.Configuration.MgmtConfiguration);
 
                 project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
             }
