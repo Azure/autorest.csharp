@@ -11,6 +11,6 @@ input-file: $(this-folder)/ExactMatchInheritance.json
 namespace: ExactMatchInheritance
 
 operation-group-to-resource:
-   OperationGroup2: NonResource
-   OperationGroup4: NonResource
+   ExactMatchModel2s: NonResource
+   ExactMatchModel4s: NonResource
 ```

@@ -14,25 +14,21 @@ using Azure.ResourceManager.Core;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific ExactMatchModel3. </summary>
-    public partial class ExactMatchModel3Operations : ResourceOperationsBase<TenantResourceIdentifier, ExactMatchModel3>
+    public partial class ExactMatchModel3Operations : ResourceOperationsBase<ResourceIdentifier, ExactMatchModel3>
     {
         /// <summary> Initializes a new instance of ExactMatchModel3Operations for mocking. </summary>
         protected ExactMatchModel3Operations()
         {
         }
 
-<<<<<<< HEAD
         /// <summary> Initializes a new instance of <see cref = "ExactMatchModel3Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected ExactMatchModel3Operations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected ExactMatchModel3Operations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
         {
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/operationGroup3";
-=======
         public static readonly ResourceType ResourceType = "Microsoft.Compute/exactMatchModel3s";
->>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

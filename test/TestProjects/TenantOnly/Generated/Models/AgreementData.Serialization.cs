@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace TenantOnly
 {
@@ -18,6 +19,9 @@ namespace TenantOnly
             Optional<string> foo = default;
             Optional<string> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"))
@@ -45,8 +49,23 @@ namespace TenantOnly
                     tags = dictionary;
                     continue;
                 }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
             }
-            return new AgreementData(foo.Value, location.Value, Optional.ToDictionary(tags));
+            return new AgreementData(id, name, type, foo.Value, location.Value, Optional.ToDictionary(tags));
         }
     }
 }

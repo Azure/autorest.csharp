@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace MgmtParent
 {
@@ -36,6 +37,9 @@ namespace MgmtParent
         {
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("location"))
@@ -58,8 +62,23 @@ namespace MgmtParent
                     tags = dictionary;
                     continue;
                 }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
             }
-            return new Resource(location, Optional.ToDictionary(tags));
+            return new Resource(id, name, type, location, Optional.ToDictionary(tags));
         }
     }
 }

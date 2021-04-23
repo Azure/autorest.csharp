@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using Azure.ResourceManager.Core;
 
 namespace TenantOnly
@@ -13,13 +14,19 @@ namespace TenantOnly
     public partial class BillingAccountData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of BillingAccountData. </summary>
-        public BillingAccountData()
+        /// <param name="location"> The location. </param>
+        public BillingAccountData(LocationData location) : base(location)
         {
         }
 
         /// <summary> Initializes a new instance of BillingAccountData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="bar"> . </param>
-        internal BillingAccountData(string bar)
+        internal BillingAccountData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }

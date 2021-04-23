@@ -49,11 +49,7 @@ namespace ExactMatchInheritance
             _pipeline = pipeline;
         }
 
-<<<<<<< HEAD:test/TestProjects/ExactMatchInheritance/Generated/OperationGroup2RestOperations.cs
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string operationGroup2Name, ExactMatchModel2 parameters)
-=======
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2Data parameters)
->>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724:test/TestProjects/ExactMatchInheritance/Generated/ExactMatchModel2SRestOperations.cs
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -80,13 +76,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD:test/TestProjects/ExactMatchInheritance/Generated/OperationGroup2RestOperations.cs
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup2Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ExactMatchModel2>> PutAsync(string resourceGroupName, string operationGroup2Name, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ExactMatchModel2Data>> PutAsync(string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2Data parameters, CancellationToken cancellationToken = default)
->>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724:test/TestProjects/ExactMatchInheritance/Generated/ExactMatchModel2SRestOperations.cs
+        public async Task<Response<ExactMatchModel2>> PutAsync(string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -121,13 +112,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD:test/TestProjects/ExactMatchInheritance/Generated/OperationGroup2RestOperations.cs
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup2Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ExactMatchModel2> Put(string resourceGroupName, string operationGroup2Name, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ExactMatchModel2Data> Put(string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2Data parameters, CancellationToken cancellationToken = default)
->>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724:test/TestProjects/ExactMatchInheritance/Generated/ExactMatchModel2SRestOperations.cs
+        public Response<ExactMatchModel2> Put(string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {

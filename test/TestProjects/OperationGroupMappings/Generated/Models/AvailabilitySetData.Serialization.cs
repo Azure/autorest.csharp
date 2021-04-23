@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace OperationGroupMappings
 {
@@ -19,6 +20,9 @@ namespace OperationGroupMappings
             Optional<string> sku = default;
             string location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"))
@@ -51,8 +55,23 @@ namespace OperationGroupMappings
                     tags = dictionary;
                     continue;
                 }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
             }
-            return new AvailabilitySetData(location, Optional.ToDictionary(tags), foo.Value, sku.Value);
+            return new AvailabilitySetData(id, name, type, location, Optional.ToDictionary(tags), foo.Value, sku.Value);
         }
     }
 }

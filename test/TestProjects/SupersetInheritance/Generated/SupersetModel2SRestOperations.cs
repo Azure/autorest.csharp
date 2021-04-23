@@ -49,11 +49,7 @@ namespace SupersetInheritance
             _pipeline = pipeline;
         }
 
-<<<<<<< HEAD:test/TestProjects/SupersetInheritance/Generated/OperationGroup2RestOperations.cs
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string operationGroup2Name, SupersetModel2 parameters)
-=======
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string supersetModel2SName, SupersetModel2Data parameters)
->>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724:test/TestProjects/SupersetInheritance/Generated/SupersetModel2SRestOperations.cs
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -80,13 +76,8 @@ namespace SupersetInheritance
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD:test/TestProjects/SupersetInheritance/Generated/OperationGroup2RestOperations.cs
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup2Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SupersetModel2>> PutAsync(string resourceGroupName, string operationGroup2Name, SupersetModel2 parameters, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="supersetModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SupersetModel2Data>> PutAsync(string resourceGroupName, string supersetModel2SName, SupersetModel2Data parameters, CancellationToken cancellationToken = default)
->>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724:test/TestProjects/SupersetInheritance/Generated/SupersetModel2SRestOperations.cs
+        public async Task<Response<SupersetModel2>> PutAsync(string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -121,13 +112,8 @@ namespace SupersetInheritance
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-<<<<<<< HEAD:test/TestProjects/SupersetInheritance/Generated/OperationGroup2RestOperations.cs
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup2Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SupersetModel2> Put(string resourceGroupName, string operationGroup2Name, SupersetModel2 parameters, CancellationToken cancellationToken = default)
-=======
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="supersetModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SupersetModel2Data> Put(string resourceGroupName, string supersetModel2SName, SupersetModel2Data parameters, CancellationToken cancellationToken = default)
->>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724:test/TestProjects/SupersetInheritance/Generated/SupersetModel2SRestOperations.cs
+        public Response<SupersetModel2> Put(string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {

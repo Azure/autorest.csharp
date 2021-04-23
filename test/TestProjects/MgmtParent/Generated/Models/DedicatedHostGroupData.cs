@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using Azure.ResourceManager.Core;
 
 namespace MgmtParent
@@ -13,13 +14,19 @@ namespace MgmtParent
     public partial class DedicatedHostGroupData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
-        public DedicatedHostGroupData()
+        /// <param name="location"> The location. </param>
+        public DedicatedHostGroupData(LocationData location) : base(location)
         {
         }
 
         /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal DedicatedHostGroupData(string foo)
+        internal DedicatedHostGroupData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string foo) : base(id, name, type, tags, location)
         {
             Foo = foo;
         }

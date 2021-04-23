@@ -34,14 +34,10 @@ namespace Azure.Management.Storage.Models
 
         internal static FileServiceData DeserializeFileServiceData(JsonElement element)
         {
-<<<<<<< HEAD
             Optional<Sku> sku = default;
-=======
-            Optional<SkuData> sku = default;
             TenantResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
->>>>>>> 39d8276362dc7bda4732be7e79b62d35d4d17724
             Optional<CorsRules> cors = default;
             Optional<DeleteRetentionPolicy> shareDeleteRetentionPolicy = default;
             foreach (var property in element.EnumerateObject())

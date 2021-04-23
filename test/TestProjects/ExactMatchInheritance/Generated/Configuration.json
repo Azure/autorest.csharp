@@ -17,8 +17,8 @@
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {
-    "OperationGroup2": "NonResource",
-    "OperationGroup4": "NonResource"
+    "ExactMatchModel2s": "NonResource",
+    "ExactMatchModel4s": "NonResource"
   },
   "OperationGroupToParent": {}
 }

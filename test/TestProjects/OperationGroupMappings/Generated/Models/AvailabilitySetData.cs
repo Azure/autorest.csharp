@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.ResourceManager.Core;
 
 namespace OperationGroupMappings
 {
@@ -25,11 +26,14 @@ namespace OperationGroupMappings
         }
 
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="foo"> . </param>
         /// <param name="sku"> sku. </param>
-        internal AvailabilitySetData(string location, IReadOnlyDictionary<string, string> tags, string foo, string sku) : base(location, tags)
+        internal AvailabilitySetData(TenantResourceIdentifier id, string name, ResourceType type, string location, IReadOnlyDictionary<string, string> tags, string foo, string sku) : base(id, name, type, location, tags)
         {
             Foo = foo;
             Sku = sku;
