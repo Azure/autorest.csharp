@@ -105,7 +105,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return ctor;
         }
 
-        protected override IEnumerable<ObjectTypeProperty> BuildProperties()
+        protected override IEnumerable<ObjectTypeProperty> BuildProperties(bool getParentProperties = true)
         {
             foreach (var property in _myProperties)
             {
@@ -121,6 +121,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 prop.SerializedName = ToCamelCase(property.Name);
                 prop.Summary = $"Gets{GetPropertySummary(setter)} {property.Name}";
                 prop.Required = true;
+                prop.Language.Default.Name = property.Name;
 
                 //We are only handling a small subset of cases because the set of reference types used from Azure.ResourceManager.Core is known
                 //If in the future we add more types which have unique cases we might need to update this code, but it will be obvious

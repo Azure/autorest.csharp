@@ -19,6 +19,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(Object), typeof(SupersetModel2Data))]
         [TestCase(typeof(Object), typeof(SupersetModel3Data))]
         [TestCase(typeof(TrackedResource<TenantResourceIdentifier>), typeof(SupersetModel4Data))]
+        [TestCase(typeof(SupersetModel4Data), typeof(SupersetModel5))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
             Assert.AreEqual(expectedBaseType, generatedClass.BaseType);

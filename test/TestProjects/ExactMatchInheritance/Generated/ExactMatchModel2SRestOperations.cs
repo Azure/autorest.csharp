@@ -13,9 +13,9 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace SupersetInheritance
+namespace ExactMatchInheritance
 {
-    internal partial class OperationGroup1RestOperations
+    internal partial class ExactMatchModel2SRestOperations
     {
         private string subscriptionId;
         private Uri endpoint;
@@ -23,14 +23,14 @@ namespace SupersetInheritance
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of OperationGroup1RestOperations. </summary>
+        /// <summary> Initializes a new instance of ExactMatchModel2SRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public OperationGroup1RestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        public ExactMatchModel2SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
             if (subscriptionId == null)
             {
@@ -49,7 +49,7 @@ namespace SupersetInheritance
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string operationGroup1Name, SupersetModel1Data parameters)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -60,8 +60,8 @@ namespace SupersetInheritance
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/operationGroup1/", false);
-            uri.AppendPath(operationGroup1Name, true);
+            uri.AppendPath("/providers/Microsoft.Compute/exactMatchModel2s/", false);
+            uri.AppendPath(exactMatchModel2SName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -73,34 +73,34 @@ namespace SupersetInheritance
         }
 
         /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="operationGroup1Name"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel1 to use. </param>
+        /// <param name="exactMatchModel2SName"> The String to use. </param>
+        /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup1Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SupersetModel1Data>> PutAsync(string resourceGroupName, string operationGroup1Name, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<ExactMatchModel2Data>> PutAsync(string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (operationGroup1Name == null)
+            if (exactMatchModel2SName == null)
             {
-                throw new ArgumentNullException(nameof(operationGroup1Name));
+                throw new ArgumentNullException(nameof(exactMatchModel2SName));
             }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, operationGroup1Name, parameters);
+            using var message = CreatePutRequest(resourceGroupName, exactMatchModel2SName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        SupersetModel1Data value = default;
+                        ExactMatchModel2Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SupersetModel1Data.DeserializeSupersetModel1Data(document.RootElement);
+                        value = ExactMatchModel2Data.DeserializeExactMatchModel2Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -109,34 +109,34 @@ namespace SupersetInheritance
         }
 
         /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="operationGroup1Name"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel1 to use. </param>
+        /// <param name="exactMatchModel2SName"> The String to use. </param>
+        /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup1Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<SupersetModel1Data> Put(string resourceGroupName, string operationGroup1Name, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<ExactMatchModel2Data> Put(string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (operationGroup1Name == null)
+            if (exactMatchModel2SName == null)
             {
-                throw new ArgumentNullException(nameof(operationGroup1Name));
+                throw new ArgumentNullException(nameof(exactMatchModel2SName));
             }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, operationGroup1Name, parameters);
+            using var message = CreatePutRequest(resourceGroupName, exactMatchModel2SName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        SupersetModel1Data value = default;
+                        ExactMatchModel2Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SupersetModel1Data.DeserializeSupersetModel1Data(document.RootElement);
+                        value = ExactMatchModel2Data.DeserializeExactMatchModel2Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

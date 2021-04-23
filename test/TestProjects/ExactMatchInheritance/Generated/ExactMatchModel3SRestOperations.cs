@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 
 namespace ExactMatchInheritance
 {
-    internal partial class OperationGroup3RestOperations
+    internal partial class ExactMatchModel3SRestOperations
     {
         private string subscriptionId;
         private Uri endpoint;
@@ -23,14 +23,14 @@ namespace ExactMatchInheritance
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of OperationGroup3RestOperations. </summary>
+        /// <summary> Initializes a new instance of ExactMatchModel3SRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public OperationGroup3RestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        public ExactMatchModel3SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
             if (subscriptionId == null)
             {
@@ -49,7 +49,7 @@ namespace ExactMatchInheritance
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string operationGroup3Name, ExactMatchModel3Data parameters)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -60,8 +60,8 @@ namespace ExactMatchInheritance
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/operationGroup3/", false);
-            uri.AppendPath(operationGroup3Name, true);
+            uri.AppendPath("/providers/Microsoft.Compute/exactMatchModel3s/", false);
+            uri.AppendPath(exactMatchModel3SName, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -73,26 +73,26 @@ namespace ExactMatchInheritance
         }
 
         /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="operationGroup3Name"> The String to use. </param>
+        /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup3Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ExactMatchModel3Data>> PutAsync(string resourceGroupName, string operationGroup3Name, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel3SName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<ExactMatchModel3Data>> PutAsync(string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (operationGroup3Name == null)
+            if (exactMatchModel3SName == null)
             {
-                throw new ArgumentNullException(nameof(operationGroup3Name));
+                throw new ArgumentNullException(nameof(exactMatchModel3SName));
             }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, operationGroup3Name, parameters);
+            using var message = CreatePutRequest(resourceGroupName, exactMatchModel3SName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -109,26 +109,26 @@ namespace ExactMatchInheritance
         }
 
         /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="operationGroup3Name"> The String to use. </param>
+        /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="operationGroup3Name"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ExactMatchModel3Data> Put(string resourceGroupName, string operationGroup3Name, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel3SName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<ExactMatchModel3Data> Put(string resourceGroupName, string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (operationGroup3Name == null)
+            if (exactMatchModel3SName == null)
             {
-                throw new ArgumentNullException(nameof(operationGroup3Name));
+                throw new ArgumentNullException(nameof(exactMatchModel3SName));
             }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, operationGroup3Name, parameters);
+            using var message = CreatePutRequest(resourceGroupName, exactMatchModel3SName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

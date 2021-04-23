@@ -15,6 +15,9 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private readonly TypeFactory _typeFactory;
         private bool _isResourceType;
+        private HashSet<string?>? _hierarchyProperties;
+        private ObjectTypeProperty[]? _properties;
+        private ObjectTypeProperty[]? _myProperties;
 
         public MgmtObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceType) : base(objectSchema, context)
         {
@@ -22,11 +25,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             _isResourceType = isResourceType;
         }
 
-        public override ObjectTypeProperty[] Properties => HasSystemBaseType() ? GetProperties().ToArray() : base.Properties;
+        public override ObjectTypeProperty[] Properties => _properties ??= GetProperties().ToArray();
 
-        private ObjectTypeProperty[] DefinedProperties => base.Properties;
+        private ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
 
         public override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
+
+        public HashSet<string?> HierarchyProperties => _hierarchyProperties ??= GetParentProperties();
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
@@ -41,7 +46,16 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<ObjectTypeProperty> GetProperties()
         {
-            HashSet<string> baseProperties = new HashSet<string>();
+            foreach (var property in base.Properties)
+            {
+                if (!HierarchyProperties.Contains(property.Declaration.Name))
+                    yield return property;
+            }
+        }
+
+        private HashSet<string?> GetParentPropertiesFromSystemObject()
+        {
+            HashSet<string?> baseProperties = new HashSet<string?>();
             if (HasSystemBaseType())
             {
                 var baseType = Inherits!.Implementation as SystemObjectType;
@@ -51,29 +65,35 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            foreach (var property in DefinedProperties)
+            return baseProperties;
+        }
+
+        protected override HashSet<string?> GetParentProperties()
+        {
+            if (HasSystemBaseType())
             {
-                if (!baseProperties.Contains(property.Declaration.Name))
-                    yield return property;
+                return GetParentPropertiesFromSystemObject();
+            }
+            else
+            {
+                return base.GetParentProperties();
             }
         }
 
         protected override CSharpType? CreateInheritedType()
         {
             CSharpType? inheritedType = base.CreateInheritedType();
-            if (inheritedType is null)
-                return inheritedType;
 
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             if (typeToReplace != null)
             {
-                var match = InheritanceChoser.GetExactMatch(typeToReplace, typeToReplace.Properties);
+                var match = InheritanceChoser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
                     inheritedType = match;
                 }
             }
-            return inheritedType == null ? InheritanceChoser.GetSupersetMatch(this, DefinedProperties) : inheritedType;
+            return inheritedType == null ? InheritanceChoser.GetSupersetMatch(this, MyProperties) : inheritedType;
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()

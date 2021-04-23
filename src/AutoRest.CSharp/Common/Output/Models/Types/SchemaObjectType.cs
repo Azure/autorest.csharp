@@ -322,9 +322,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 .ToHashSet();
         }
 
-        protected override IEnumerable<ObjectTypeProperty> BuildProperties()
+        protected override IEnumerable<ObjectTypeProperty> BuildProperties(bool getParentProperties = true)
         {
-            var existingProperties = GetParentProperties();
+            var existingProperties = getParentProperties ? GetParentProperties() : new HashSet<string?>();
 
             foreach (var objectSchema in GetCombinedSchemas())
             {

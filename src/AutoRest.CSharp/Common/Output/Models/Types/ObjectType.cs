@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal abstract class ObjectType : TypeProvider
     {
         private ObjectTypeConstructor[]? _constructors;
-        protected ObjectTypeProperty[]? _properties;
+        private ObjectTypeProperty[]? _properties;
         private CSharpType? _inheritsType;
         private ObjectTypeConstructor? _serializationConstructor;
         private CSharpType? _implementsDictionaryType;
@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract CSharpType? CreateInheritedDictionaryType();
         protected abstract ObjectTypeConstructor? BuildSerializationConstructor();
         protected abstract CSharpType? CreateInheritedType();
-        protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
+        protected abstract IEnumerable<ObjectTypeProperty> BuildProperties(bool getParentProperties = true);
 
         public IEnumerable<ObjectType> EnumerateHierarchy()
         {
