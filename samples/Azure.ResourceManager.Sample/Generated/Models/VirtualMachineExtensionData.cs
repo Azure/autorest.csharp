@@ -14,6 +14,12 @@ namespace Azure.ResourceManager.Sample
     public partial class VirtualMachineExtensionData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionData. </summary>
+        /// <param name="location"> The location. </param>
+        public VirtualMachineExtensionData(LocationData location) : base(location)
+        {
+        }
+
+        /// <summary> Initializes a new instance of VirtualMachineExtensionData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>

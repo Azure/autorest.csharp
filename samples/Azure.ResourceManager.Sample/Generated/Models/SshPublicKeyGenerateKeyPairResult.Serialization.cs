@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -16,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         {
             string privateKey = default;
             string publicKey = default;
-            string id = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("privateKey"))
@@ -35,7 +36,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new SshPublicKeyGenerateKeyPairResult(privateKey, publicKey, id);
+            return new SshPublicKeyGenerateKeyPairResult(id, privateKey, publicKey);
         }
     }
 }

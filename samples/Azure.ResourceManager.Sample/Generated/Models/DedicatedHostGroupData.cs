@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -13,6 +14,14 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the DedicatedHostGroup data model. </summary>
     public partial class DedicatedHostGroupData : TrackedResource<TenantResourceIdentifier>
     {
+        /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
+        /// <param name="location"> The location. </param>
+        public DedicatedHostGroupData(LocationData location) : base(location)
+        {
+            Zones = new ChangeTrackingList<string>();
+            Hosts = new ChangeTrackingList<SubResourceReadOnly>();
+        }
+
         /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

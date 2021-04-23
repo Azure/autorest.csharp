@@ -13,6 +13,11 @@ namespace ExactMatchInheritance
     public partial class ExactMatchModel1Data : Resource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
+        public ExactMatchModel1Data()
+        {
+        }
+
+        /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>

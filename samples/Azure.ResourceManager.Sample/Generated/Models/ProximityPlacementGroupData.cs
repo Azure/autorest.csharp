@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -13,6 +14,15 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the ProximityPlacementGroup data model. </summary>
     public partial class ProximityPlacementGroupData : TrackedResource<TenantResourceIdentifier>
     {
+        /// <summary> Initializes a new instance of ProximityPlacementGroupData. </summary>
+        /// <param name="location"> The location. </param>
+        public ProximityPlacementGroupData(LocationData location) : base(location)
+        {
+            VirtualMachines = new ChangeTrackingList<SubResourceWithColocationStatus>();
+            VirtualMachineScaleSets = new ChangeTrackingList<SubResourceWithColocationStatus>();
+            AvailabilitySets = new ChangeTrackingList<SubResourceWithColocationStatus>();
+        }
+
         /// <summary> Initializes a new instance of ProximityPlacementGroupData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

@@ -14,6 +14,12 @@ namespace ExactMatchInheritance
     public partial class ExactMatchModel5Data : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
+        /// <param name="location"> The location. </param>
+        public ExactMatchModel5Data(LocationData location) : base(location)
+        {
+        }
+
+        /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>

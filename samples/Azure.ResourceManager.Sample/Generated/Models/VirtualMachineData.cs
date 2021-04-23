@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -13,6 +14,14 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the VirtualMachine data model. </summary>
     public partial class VirtualMachineData : TrackedResource<TenantResourceIdentifier>
     {
+        /// <summary> Initializes a new instance of VirtualMachineData. </summary>
+        /// <param name="location"> The location. </param>
+        public VirtualMachineData(LocationData location) : base(location)
+        {
+            Resources = new ChangeTrackingList<VirtualMachineExtensionData>();
+            Zones = new ChangeTrackingList<string>();
+        }
+
         /// <summary> Initializes a new instance of VirtualMachineData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

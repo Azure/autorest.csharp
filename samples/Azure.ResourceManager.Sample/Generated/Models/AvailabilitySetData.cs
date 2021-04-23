@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -13,6 +14,14 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the AvailabilitySet data model. </summary>
     public partial class AvailabilitySetData : TrackedResource<TenantResourceIdentifier>
     {
+        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <param name="location"> The location. </param>
+        public AvailabilitySetData(LocationData location) : base(location)
+        {
+            VirtualMachines = new ChangeTrackingList<SubResource>();
+            Statuses = new ChangeTrackingList<InstanceViewStatus>();
+        }
+
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

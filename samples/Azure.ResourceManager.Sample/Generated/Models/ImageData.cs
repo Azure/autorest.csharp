@@ -14,6 +14,12 @@ namespace Azure.ResourceManager.Sample
     public partial class ImageData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ImageData. </summary>
+        /// <param name="location"> The location. </param>
+        public ImageData(LocationData location) : base(location)
+        {
+        }
+
+        /// <summary> Initializes a new instance of ImageData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -14,6 +15,21 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the DedicatedHost data model. </summary>
     public partial class DedicatedHostData : TrackedResource<TenantResourceIdentifier>
     {
+        /// <summary> Initializes a new instance of DedicatedHostData. </summary>
+        /// <param name="location"> The location. </param>
+        /// <param name="sku"> SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="sku"/> is null. </exception>
+        public DedicatedHostData(LocationData location, Sku sku) : base(location)
+        {
+            if (sku == null)
+            {
+                throw new ArgumentNullException(nameof(sku));
+            }
+
+            Sku = sku;
+            VirtualMachines = new ChangeTrackingList<SubResourceReadOnly>();
+        }
+
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
