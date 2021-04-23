@@ -39,14 +39,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool SkipSerializerConstructor => false;
 
-        public override string DefaultName => GetNameWithoutGeneric(_type);
+        protected override string DefaultName => GetNameWithoutGeneric(_type);
+        protected override string DefaultAccessibility { get; } = "public";
 
         private string ToCamelCase(string name)
         {
             return name.Substring(0, 1).ToLower(CultureInfo.InvariantCulture) + name.Substring(1);
         }
-
-        private IEnumerable<PropertyInfo> _myProperties => _type.GetProperties().Where(p => p.DeclaringType == _type);
 
         private IEnumerable<ParameterInfo> GetSerializationParameters()
         {
@@ -124,7 +123,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties(bool getParentProperties = true)
         {
-            foreach (var property in _myProperties)
+            foreach (var property in _type.GetProperties().Where(p => p.DeclaringType == _type))
             {
                 var getter = property.GetGetMethod();
                 var setter = property.GetSetMethod();
@@ -178,7 +177,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter is not null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor? BuildSerializationConstructor() => BuildConstructor(GetSerializationParameters());
+        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetSerializationParameters());
 
         protected override ObjectSerialization[] BuildSerializations() => new ObjectSerialization[0];
 

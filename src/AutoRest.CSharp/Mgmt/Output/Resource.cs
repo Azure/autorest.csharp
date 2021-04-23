@@ -17,12 +17,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultName = operationGroup.Resource(context.Configuration.MgmtConfiguration);
             Description = BuilderHelpers.EscapeXmlDescription(
                 $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.");
-            DefaultAccessibility = "public";
         }
 
         internal OperationGroup OperationGroup { get; }
 
-        public override string DefaultName { get; }
+        protected override string DefaultName { get; }
+
+        protected override string DefaultAccessibility => "public";
 
         public string Description { get; }
     }

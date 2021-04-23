@@ -29,8 +29,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
         public virtual ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 
-        public virtual CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
-        public ObjectTypeConstructor? SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
+        public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
+        public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
         public ObjectSerialization[] Serializations => _serializations ??= BuildSerializations();
@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract ObjectSerialization[] BuildSerializations();
         protected abstract ObjectTypeConstructor BuildInitializationConstructor();
         protected abstract CSharpType? CreateInheritedDictionaryType();
-        protected abstract ObjectTypeConstructor? BuildSerializationConstructor();
+        protected abstract ObjectTypeConstructor BuildSerializationConstructor();
         protected abstract CSharpType? CreateInheritedType();
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties(bool getParentProperties = true);
 

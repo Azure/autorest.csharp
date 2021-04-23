@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Generation.Types
             return new CSharpType(
                 systemObjectType,
                 type.Namespace ?? context.DefaultNamespace,
-                systemObjectType.DefaultName,
+                systemObjectType.Declaration.Name,
                 false,
                 false,
                 genericTypes.ToArray());

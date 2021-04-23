@@ -66,6 +66,7 @@ namespace AutoRest.CSharp.Output.Models.Requests
         public RestClientMethod? NextPageMethod { get; }
         public PagingResponseInfo? PagingResponse { get; }
         public string Description { get; }
-        public override string DefaultName { get; }
+        protected override string DefaultName { get; }
+        protected override string DefaultAccessibility { get; }
     }
 }

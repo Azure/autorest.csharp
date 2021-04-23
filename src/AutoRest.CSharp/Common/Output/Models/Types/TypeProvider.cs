@@ -18,7 +18,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             Context = context;
             _existingType = new Lazy<INamedTypeSymbol?>(() => Context.SourceInputModel?.FindForType(DefaultNamespace, DefaultName));
-            DefaultAccessibility = "public";
         }
 
         public CSharpType Type => new CSharpType(
@@ -29,9 +28,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         public TypeDeclarationOptions Declaration => _type ??= BuildType();
 
         internal BuildContext Context { get; private set; }
-        public abstract string DefaultName { get; }
+        protected abstract string DefaultName { get; }
         protected virtual string DefaultNamespace => Context.DefaultNamespace;
-        protected string DefaultAccessibility { get; set; }
+        protected abstract string DefaultAccessibility { get; }
         protected virtual TypeKind TypeKind { get; } = TypeKind.Class;
         protected INamedTypeSymbol? ExistingType => _existingType.Value;
 

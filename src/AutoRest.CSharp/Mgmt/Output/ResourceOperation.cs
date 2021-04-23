@@ -35,14 +35,15 @@ namespace AutoRest.CSharp.Mgmt.Output
             _operationGroup = operationGroup;
             _prefix = operationGroup.Resource(context.Configuration.MgmtConfiguration);
             DefaultName = _prefix + SuffixValue;
-            DefaultAccessibility = "public";
         }
 
         public string ResourceName => _operationGroup.Resource(_context.Configuration.MgmtConfiguration);
 
         protected virtual string SuffixValue => OperationsSuffixValue;
 
-        public override string DefaultName { get; }
+        protected override string DefaultName { get; }
+
+        protected override string DefaultAccessibility { get; } = "public";
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, _prefix));
 

@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
 
-        public override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
+        protected override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
 
         public HashSet<string?> HierarchyProperties => _hierarchyProperties ??= GetParentProperties();
 

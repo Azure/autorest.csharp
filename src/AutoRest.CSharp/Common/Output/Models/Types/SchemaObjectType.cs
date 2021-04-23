@@ -53,7 +53,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal ObjectSchema ObjectSchema { get; }
 
-        public override string DefaultName => ObjectSchema.CSharpName();
+        protected override string DefaultName => ObjectSchema.CSharpName();
+        protected override string DefaultAccessibility { get; } = "public";
         protected override string DefaultNamespace { get; }
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
 
