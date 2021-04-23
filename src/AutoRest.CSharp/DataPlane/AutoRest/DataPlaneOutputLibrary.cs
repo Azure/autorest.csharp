@@ -100,9 +100,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var client = FindClient(operationGroup);
 
-            Debug.Assert(client != null, "client != null, LROs should be disabled when public clients are disables");
+            Debug.Assert(client != null, "client != null, LROs should be disabled when public clients are disabled.");
 
-            var nextOperationMethod = operation.Language.Default.Paging != null
+            var nextOperationMethod = operation?.Language?.Default?.Paging != null
                 ? client.RestClient.GetNextOperationMethod(operation.Requests.Single())
                 : null;
 

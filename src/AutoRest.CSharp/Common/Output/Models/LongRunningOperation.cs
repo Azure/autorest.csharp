@@ -21,9 +21,6 @@ namespace AutoRest.CSharp.Output.Models.Requests
         {
             Debug.Assert(operation.IsLongRunning);
 
-            //var lroInfo = context.Library.FindLongRunningOperationInfo(operationGroup, operation);
-
-
             DefaultName = lroInfo.ClientPrefix + operation.CSharpName() + "Operation";
             FinalStateVia = operation.LongRunningFinalStateVia switch
             {

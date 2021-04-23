@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.Models;
@@ -202,7 +203,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             var mgmtRestClient = FindRestClient(operationGroup);
 
-            var nextOperationMethod = operation.Language.Default.Paging != null
+            Debug.Assert(mgmtRestClient != null, "Unexpected. Unable find matching rest client.");
+
+            var nextOperationMethod = operation?.Language?.Default?.Paging != null
                 ? mgmtRestClient.GetNextOperationMethod(operation.Requests.Single())
                 : null;
 
