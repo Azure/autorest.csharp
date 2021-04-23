@@ -23,11 +23,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context)
         {
-            OperationGroup = operationGroup;
             _context = context;
         }
-
-        internal OperationGroup OperationGroup { get; }
 
         protected override string SuffixValue => _suffixValue;
 

@@ -21,7 +21,7 @@ namespace ResourceRename
         {
         }
 
-        public static readonly ResourceType ResourceType = "ResourceRename/SshPublicKeyInfoOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/sshPublicKeys";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

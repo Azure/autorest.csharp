@@ -21,7 +21,7 @@ namespace OperationGroupMappings
         {
         }
 
-        public static readonly ResourceType ResourceType = "OperationGroupMappings/AvailabilitySetOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
