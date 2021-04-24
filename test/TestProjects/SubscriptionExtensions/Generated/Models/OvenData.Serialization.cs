@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 
 namespace SubscriptionExtensions.Models
 {
-    public partial class Oven : IUtf8JsonSerializable
+    public partial class OvenData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,7 +33,7 @@ namespace SubscriptionExtensions.Models
             writer.WriteEndObject();
         }
 
-        internal static Oven DeserializeOven(JsonElement element)
+        internal static OvenData DeserializeOvenData(JsonElement element)
         {
             Optional<string> bar = default;
             IDictionary<string, string> tags = default;
@@ -79,7 +79,7 @@ namespace SubscriptionExtensions.Models
                     continue;
                 }
             }
-            return new Oven(id, name, type, tags, location, bar.Value);
+            return new OvenData(id, name, type, tags, location, bar.Value);
         }
     }
 }

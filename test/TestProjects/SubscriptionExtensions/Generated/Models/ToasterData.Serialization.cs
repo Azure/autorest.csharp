@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 
 namespace SubscriptionExtensions.Models
 {
-    public partial class Toaster : IUtf8JsonSerializable
+    public partial class ToasterData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,7 +33,7 @@ namespace SubscriptionExtensions.Models
             writer.WriteEndObject();
         }
 
-        internal static Toaster DeserializeToaster(JsonElement element)
+        internal static ToasterData DeserializeToasterData(JsonElement element)
         {
             Optional<string> foo = default;
             IDictionary<string, string> tags = default;
@@ -79,7 +79,7 @@ namespace SubscriptionExtensions.Models
                     continue;
                 }
             }
-            return new Toaster(id, name, type, tags, location, foo.Value);
+            return new ToasterData(id, name, type, tags, location, foo.Value);
         }
     }
 }

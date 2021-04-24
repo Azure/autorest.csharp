@@ -16,9 +16,6 @@
   "CredentialScopes": [],
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {
-    "Toasters": "NonResource",
-    "Ovens": "NonResource"
-  },
+  "OperationGroupToResource": {},
   "OperationGroupToParent": {}
 }

@@ -11,15 +11,12 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class Resource : TypeProvider
     {
-        private BuildContext<MgmtOutputLibrary> _context;
-
         public Resource(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(context)
         {
             DefaultName = operationGroup.Resource(context.Configuration.MgmtConfiguration);
             Description = BuilderHelpers.EscapeXmlDescription(
                 $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.");
-            _context = context;
             OperationGroup = operationGroup;
         }
 

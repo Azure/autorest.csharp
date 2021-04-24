@@ -5,10 +5,21 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace SubscriptionExtensions
 {
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
+        #region Ovens
+        /// <summary> Gets an object representing a OvenContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="OvenContainer" /> object. </returns>
+        public static OvenContainer GetOvens(this ResourceGroupOperations resourceGroup)
+        {
+            return new OvenContainer(resourceGroup);
+        }
+        #endregion
     }
 }

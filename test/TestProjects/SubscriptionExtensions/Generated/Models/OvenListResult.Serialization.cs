@@ -15,16 +15,16 @@ namespace SubscriptionExtensions.Models
     {
         internal static OvenListResult DeserializeOvenListResult(JsonElement element)
         {
-            IReadOnlyList<Oven> value = default;
+            IReadOnlyList<OvenData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("value"))
                 {
-                    List<Oven> array = new List<Oven>();
+                    List<OvenData> array = new List<OvenData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(Oven.DeserializeOven(item));
+                        array.Add(OvenData.DeserializeOvenData(item));
                     }
                     value = array;
                     continue;

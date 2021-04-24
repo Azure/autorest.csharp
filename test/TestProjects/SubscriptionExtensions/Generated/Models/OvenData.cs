@@ -10,23 +10,23 @@ using Azure.ResourceManager.Core;
 
 namespace SubscriptionExtensions.Models
 {
-    /// <summary> The Oven. </summary>
-    public partial class Oven : TrackedResource<TenantResourceIdentifier>
+    /// <summary> A class representing the Oven data model. </summary>
+    public partial class OvenData : TrackedResource<TenantResourceIdentifier>
     {
-        /// <summary> Initializes a new instance of Oven. </summary>
+        /// <summary> Initializes a new instance of OvenData. </summary>
         /// <param name="location"> The location. </param>
-        public Oven(LocationData location) : base(location)
+        public OvenData(LocationData location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of Oven. </summary>
+        /// <summary> Initializes a new instance of OvenData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal Oven(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string bar) : base(id, name, type, tags, location)
+        internal OvenData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }
