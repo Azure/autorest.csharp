@@ -10,9 +10,9 @@ using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class OperationData
+    public partial class Operation
     {
-        internal static OperationData DeserializeOperationData(JsonElement element)
+        internal static Operation DeserializeOperation(JsonElement element)
         {
             Optional<string> name = default;
             Optional<OperationDisplay> display = default;
@@ -63,7 +63,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new OperationData(name.Value, display.Value, origin.Value, serviceSpecification.Value);
+            return new Operation(name.Value, display.Value, origin.Value, serviceSpecification.Value);
         }
     }
 }

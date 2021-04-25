@@ -16,6 +16,7 @@ using Azure.ResourceManager.Core;
 using Azure.Core.Pipeline;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -117,7 +118,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // We must look for CreateOrUpdate by HTTP method because it may be named differently from `CreateOrUpdate`.
             if (FindRestClientMethodByHttpMethod(RequestMethod.Put, out var restClientMethod))
             {
-                WriteCreateOrUpdateVariants(restClientMethod);
+                if (restClientMethod.Parameters.Any(parameter => parameter.Type.Name == _resourceData.Type.Name && parameter.Type.Namespace == _resourceData.Type.Namespace))
+                {
+                    WriteCreateOrUpdateVariants(restClientMethod);
+                }
+                else
+                {
+                    // it [Resource]Data is not a parameter of the rest method, for example when creating storage account
+                    // the generated methods cannot override base class, so we also generate override methods that only throw exception
+                    WriteCreateOrUpdateVariants(restClientMethod, false);
+                    WriteCreateOrUpdateVariantsThatThrow($"There is no create or update method in {_restClient.Type.Name} that accepts {_resourceData.Type.Name}");
+                }
             }
             else
             {
@@ -151,7 +162,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return restMethod != null;
         }
 
-        private void WriteCreateOrUpdateVariants(RestClientMethod restClientMethod)
+        private void WriteCreateOrUpdateVariants(RestClientMethod restClientMethod, bool shouldOverride = true)
         {
             // hack: should add a IsLongRunning property to method?
             var isLongRunning = restClientMethod.Responses.All(response => response.ResponseBody == null);
@@ -166,7 +177,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-            _writer.Append($"public override ArmResponse<{_resource.Type}> {methodName}(");
+            var @override = shouldOverride ? "override " : "";
+            _writer.Append($"public {@override}ArmResponse<{_resource.Type}> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
                 _writer.WriteParameter(parameter.Parameter);
@@ -198,7 +210,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-            _writer.Append($"public async override Task<ArmResponse<{_resource.Type}>> {methodName}(");
+            _writer.Append($"public async {@override}Task<ArmResponse<{_resource.Type}>> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
                 _writer.WriteParameter(parameter.Parameter);
@@ -229,7 +241,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-            _writer.Append($"public override ArmOperation<{_resource.Type}> {methodName}(");
+            _writer.Append($"public {@override}ArmOperation<{_resource.Type}> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
                 _writer.WriteParameter(parameter.Parameter);
@@ -280,7 +292,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-            _writer.Append($"public async override Task<ArmOperation<{_resource.Type}>> {methodName}(");
+            _writer.Append($"public async {@override}Task<ArmOperation<{_resource.Type}>> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
                 _writer.WriteParameter(parameter.Parameter);
@@ -340,13 +352,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var parameterMapping = new List<(Parameter Parameter, bool IsPassThru, string ValueExpression)>();
             var dotParent = "";
 
-            // loop through parameters in REST call, map the leading string parameters to
+            // loop through parameters in REST call, map the leading string-like parameters to
             // Id.ResourceGroupName, Id.ResourceGroupName.Parent.Name, Id.ResourceGroupName.Parent.Parent.Name...
+            // corner case: type is enum and you can convert string to it (model-as-string), we handle it as string
             foreach (var parameter in method.Parameters)
             {
                 bool passThru = true;
                 string valueExpression = string.Empty;
-                if (parameter.Type.Equals(typeof(System.String)))
+                if (IsStringLike(parameter.Type))
                 {
                     passThru = false;
                     if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
@@ -365,9 +378,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 parameterMapping.Add((parameter, passThru, valueExpression));
             }
-            // make last string parameter (typically the resource name) pass-through from container method
+            // make last string-like parameter (typically the resource name) pass-through from container method
             // ignoring optional parameters such as `expand`
-            var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.Equals(typeof(System.String)) && parameter.Parameter.DefaultValue is null);
+            var lastString = parameterMapping.LastOrDefault(parameter => IsStringLike(parameter.Parameter.Type) && parameter.Parameter.DefaultValue is null);
             if (lastString.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
             {
                 var index = parameterMapping.IndexOf(lastString);
@@ -378,11 +391,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         /// <summary>
+        /// Is the input type string or an Enum that is modeled as string.
+        /// </summary>
+        /// <param name="type">Type to check.</param>
+        /// <returns>Is the input type string or an Enum that is modeled as string.</returns>
+        private bool IsStringLike(CSharp.Generation.Types.CSharpType type)
+        {
+            return type.Equals(typeof(string)) || type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string));
+        }
+
+        /// <summary>
         /// Write 4 variants of CreateOrUpdate that only throw exceptions when the resource does not support PUT,
         /// so that the container class correctly implements `ContainerBase`.
         /// </summary>
-        /// <param name="_writer"></param>
-        private void WriteCreateOrUpdateVariantsThatThrow()
+        /// <param name="comment">The comment to put into generated code. By default it says there is no PUT method.</param>
+        private void WriteCreateOrUpdateVariantsThatThrow(string comment = _doesNotSupportPut)
         {
             var nameParameter = new Parameter("name", "The name of the resource.", typeof(string), null, false);
             var resourceDetailsParameter = new Parameter("resourceDetails", "The desired resource configuration.", _resourceData.Type, null, false);
@@ -392,10 +415,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var parameters = new List<Parameter> { nameParameter, resourceDetailsParameter };
             _writer.Append($"public override ArmResponse<{_resource.Type}> CreateOrUpdate(");
             parameters.ForEach(parameter => _writer.WriteParameter(parameter));
-            var doesNotSupportPut = @"This resource does not support PUT HTTP method.";
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"// {doesNotSupportPut}");
+                _writer.Line($"// {comment}");
                 _writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
 
@@ -406,7 +428,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             parameters.ForEach(parameter => _writer.WriteParameter(parameter));
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"// {doesNotSupportPut}");
+                _writer.Line($"// {comment}");
                 _writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
 
@@ -417,7 +439,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             parameters.ForEach(parameter => _writer.WriteParameter(parameter));
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"// {doesNotSupportPut}");
+                _writer.Line($"// {comment}");
                 _writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
 
@@ -428,10 +450,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             parameters.ForEach(parameter => _writer.WriteParameter(parameter));
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"// {doesNotSupportPut}");
+                _writer.Line($"// {comment}");
                 _writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
         }
+
+        private const string _doesNotSupportPut = @"This resource does not support PUT HTTP method.";
 
         private void WriteContainerProperties()
         {
@@ -467,7 +491,22 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"public override ArmResponse<{_resource.Type}> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
-                _writer.WriteParameter(parameter.Parameter);
+                if (IsStringLike(parameter.Parameter.Type))
+                {
+                    // for string-like parameters, we shall write them as string as base class
+                    _writer.WriteParameter(new Parameter(
+                        parameter.Parameter.Name,
+                        parameter.Parameter.Description,
+                        new CSharp.Generation.Types.CSharpType(typeof(string)),
+                        parameter.Parameter.DefaultValue,
+                        parameter.Parameter.ValidateNotNull,
+                        parameter.Parameter.IsApiVersionParameter
+                    ));
+                }
+                else
+                {
+                    _writer.WriteParameter(parameter.Parameter);
+                }
             }
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
@@ -497,7 +536,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"public async override Task<ArmResponse<{_resource.Type}>> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
-                _writer.WriteParameter(parameter.Parameter);
+                // todo: duplicated code
+                if (IsStringLike(parameter.Parameter.Type))
+                {
+                    // for string-like parameters, we shall write them as string as base class
+                    _writer.WriteParameter(new Parameter(
+                        parameter.Parameter.Name,
+                        parameter.Parameter.Description,
+                        new CSharp.Generation.Types.CSharpType(typeof(string)),
+                        parameter.Parameter.DefaultValue,
+                        parameter.Parameter.ValidateNotNull,
+                        parameter.Parameter.IsApiVersionParameter
+                    ));
+                }
+                else
+                {
+                    _writer.WriteParameter(parameter.Parameter);
+                }
             }
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {

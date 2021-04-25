@@ -47,7 +47,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<FileService> CreateOrUpdate(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public ArmResponse<FileService> CreateOrUpdate(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
             scope.Start();
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<FileService>> CreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public async Task<ArmResponse<FileService>> CreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdateAsync");
             scope.Start();
@@ -88,7 +88,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmOperation<FileService> StartCreateOrUpdate(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public ArmOperation<FileService> StartCreateOrUpdate(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -111,7 +111,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmOperation<FileService>> StartCreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public async Task<ArmOperation<FileService>> StartCreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdateAsync");
             scope.Start();
@@ -127,6 +127,34 @@ namespace Azure.Management.Storage
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <inheritdoc />
+        public override ArmResponse<FileService> CreateOrUpdate(string name, FileServiceData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in FileServicesRestOperations that accepts FileServiceData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmResponse<FileService>> CreateOrUpdateAsync(string name, FileServiceData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in FileServicesRestOperations that accepts FileServiceData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override ArmOperation<FileService> StartCreateOrUpdate(string name, FileServiceData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in FileServicesRestOperations that accepts FileServiceData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmOperation<FileService>> StartCreateOrUpdateAsync(string name, FileServiceData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in FileServicesRestOperations that accepts FileServiceData
+            throw new NotImplementedException();
         }
 
         /// <inheritdoc />

@@ -32,39 +32,39 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.UseNamespace("Azure.ResourceManager.Core");
 
             var typeName = $"{operationGroup.Resource(context.Configuration.MgmtConfiguration)}{operation.Language.Default.Name}Operation";
-            var dataTypeName = $"{operationGroup.Resource(context.Configuration.MgmtConfiguration)}Data";
+            var resourceData = context.Library.GetResourceData(operationGroup);
             using var _ = writer.Namespace(context.DefaultNamespace);
             using (writer.Scope(
-                $"public partial class {typeName} : ArmOperation<{dataTypeName}>, IOperationSource<{dataTypeName}>"
+                $"public partial class {typeName} : ArmOperation<{resourceData.Type}>, IOperationSource<{resourceData.Type}>"
             ))
             {
-                writer.Line($"private readonly ArmOperationHelpers<{dataTypeName}> _operation;");
+                writer.Line($"private readonly ArmOperationHelpers<{resourceData.Type}> _operation;");
                 using (writer.Scope($"protected {typeName}()"))
                 { };
                 using (writer.Scope($"internal {typeName}(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)"))
                 {
-                    writer.Line($"_operation = new ArmOperationHelpers<{dataTypeName}>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, \"{typeName}\");");
+                    writer.Line($"_operation = new ArmOperationHelpers<{resourceData.Type}>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, \"{typeName}\");");
                 }
 
                 writer.Line($"public override string Id => _operation.Id;");
-                writer.Line($"public override {dataTypeName} Value => _operation.Value;");
+                writer.Line($"public override {resourceData.Type} Value => _operation.Value;");
                 writer.Line($"public override bool HasCompleted => _operation.HasCompleted;");
                 writer.Line($"public override bool HasValue => _operation.HasValue;");
                 writer.Line($"public override Response GetRawResponse() => _operation.GetRawResponse();");
                 writer.Line($"public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);");
                 writer.Line($"public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);");
-                writer.Line($"public override ValueTask<Response<{dataTypeName}>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);");
-                writer.Line($"public override ValueTask<Response<{dataTypeName}>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);");
+                writer.Line($"public override ValueTask<Response<{resourceData.Type}>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);");
+                writer.Line($"public override ValueTask<Response<{resourceData.Type}>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);");
 
-                using (writer.Scope($"{dataTypeName} IOperationSource<{dataTypeName}>.CreateResult(Response response, CancellationToken cancellationToken)"))
+                using (writer.Scope($"{resourceData.Type} IOperationSource<{resourceData.Type}>.CreateResult(Response response, CancellationToken cancellationToken)"))
                 {
                     writer.Line($"using var document = JsonDocument.Parse(response.ContentStream);");
-                    writer.Line($"return {dataTypeName}.Deserialize{dataTypeName}(document.RootElement);");
+                    writer.Line($"return {resourceData.Type}.Deserialize{resourceData.Type.Name}(document.RootElement);");
                 }
-                using (writer.Scope($"async ValueTask<{dataTypeName}> IOperationSource<{dataTypeName}>.CreateResultAsync(Response response, CancellationToken cancellationToken)"))
+                using (writer.Scope($"async ValueTask<{resourceData.Type}> IOperationSource<{resourceData.Type}>.CreateResultAsync(Response response, CancellationToken cancellationToken)"))
                 {
                     writer.Line($"using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                    writer.Line($"return {dataTypeName}.Deserialize{dataTypeName}(document.RootElement);");
+                    writer.Line($"return {resourceData.Type}.Deserialize{resourceData.Type.Name}(document.RootElement);");
                 }
             }
         }

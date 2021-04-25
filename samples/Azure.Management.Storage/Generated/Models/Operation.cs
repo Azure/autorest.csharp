@@ -5,33 +5,28 @@
 
 #nullable disable
 
-using Azure.ResourceManager.Core;
-
 namespace Azure.Management.Storage.Models
 {
-    /// <summary> A class representing the Operation data model. </summary>
-    public partial class OperationData
+    /// <summary> Storage REST API operation definition. </summary>
+    public partial class Operation
     {
-        /// <summary> Initializes a new instance of OperationData. </summary>
-        internal OperationData()
+        /// <summary> Initializes a new instance of Operation. </summary>
+        internal Operation()
         {
         }
 
-        /// <summary> Initializes a new instance of OperationData. </summary>
+        /// <summary> Initializes a new instance of Operation. </summary>
         /// <param name="name"> Operation name: {provider}/{resource}/{operation}. </param>
         /// <param name="display"> Display metadata associated with the operation. </param>
         /// <param name="origin"> The origin of operations. </param>
         /// <param name="serviceSpecification"> One property of operation, include metric specifications. </param>
-        internal OperationData(string name, OperationDisplay display, string origin, ServiceSpecification serviceSpecification)
+        internal Operation(string name, OperationDisplay display, string origin, ServiceSpecification serviceSpecification)
         {
             Name = name;
             Display = display;
             Origin = origin;
             ServiceSpecification = serviceSpecification;
         }
-
-        /// <summary> ARM resource type. </summary>
-        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> Operation name: {provider}/{resource}/{operation}. </summary>
         public string Name { get; }

@@ -47,7 +47,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="privateEndpointConnections"> List of private endpoint connection associated with the specified storage account. </param>
         /// <param name="routingPreference"> Maintains information about the network routing choice opted by the user for data transfer. </param>
         /// <param name="blobRestoreStatus"> Blob restore status. </param>
-        internal StorageAccountData(SkuData sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus)
+        internal StorageAccountData(Sku sku, Kind? kind, Identity identity, ProvisioningState? provisioningState, Endpoints primaryEndpoints, string primaryLocation, AccountStatus? statusOfPrimary, DateTimeOffset? lastGeoFailoverTime, string secondaryLocation, AccountStatus? statusOfSecondary, DateTimeOffset? creationTime, CustomDomain customDomain, Endpoints secondaryEndpoints, Encryption encryption, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, bool? isHnsEnabled, GeoReplicationStats geoReplicationStats, bool? failoverInProgress, LargeFileSharesState? largeFileSharesState, IReadOnlyList<PrivateEndpointConnectionData> privateEndpointConnections, RoutingPreference routingPreference, BlobRestoreStatus blobRestoreStatus)
         {
             Sku = sku;
             Kind = kind;
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage.Models
         public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> Gets the SKU. </summary>
-        public SkuData Sku { get; }
+        public Sku Sku { get; }
         /// <summary> Gets the Kind. </summary>
         public Kind? Kind { get; }
         /// <summary> The identity of the resource. </summary>

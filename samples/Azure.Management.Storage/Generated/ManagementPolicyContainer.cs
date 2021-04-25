@@ -43,17 +43,16 @@ namespace Azure.Management.Storage
         // Container level operations.
 
         /// <inheritdoc />
-        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<ManagementPolicy> CreateOrUpdate(string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public ArmResponse<ManagementPolicy> CreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                return StartCreateOrUpdate(accountName, managementPolicyName, policy, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<ManagementPolicy>;
+                return StartCreateOrUpdate(managementPolicyName, policy, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<ManagementPolicy>;
             }
             catch (Exception e)
             {
@@ -63,17 +62,16 @@ namespace Azure.Management.Storage
         }
 
         /// <inheritdoc />
-        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<ManagementPolicy>> CreateOrUpdateAsync(string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public async Task<ArmResponse<ManagementPolicy>> CreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CreateOrUpdateAsync");
             scope.Start();
             try
             {
-                var operation = await StartCreateOrUpdateAsync(accountName, managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<ManagementPolicy>;
             }
             catch (Exception e)
@@ -84,17 +82,16 @@ namespace Azure.Management.Storage
         }
 
         /// <inheritdoc />
-        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmOperation<ManagementPolicy> StartCreateOrUpdate(string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public ArmOperation<ManagementPolicy> StartCreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, accountName, managementPolicyName, policy, cancellationToken: cancellationToken);
+                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, Id.Name, managementPolicyName, policy, cancellationToken: cancellationToken);
                 return new PhArmOperation<ManagementPolicy, ManagementPolicyData>(
                 originalResponse,
                 data => new ManagementPolicy(Parent, data));
@@ -107,17 +104,16 @@ namespace Azure.Management.Storage
         }
 
         /// <inheritdoc />
-        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmOperation<ManagementPolicy>> StartCreateOrUpdateAsync(string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public async Task<ArmOperation<ManagementPolicy>> StartCreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartCreateOrUpdateAsync");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, accountName, managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<ManagementPolicy, ManagementPolicyData>(
                 originalResponse,
                 data => new ManagementPolicy(Parent, data));
@@ -130,17 +126,44 @@ namespace Azure.Management.Storage
         }
 
         /// <inheritdoc />
-        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        public override ArmResponse<ManagementPolicy> CreateOrUpdate(string name, ManagementPolicyData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in ManagementPoliciesRestOperations that accepts ManagementPolicyData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmResponse<ManagementPolicy>> CreateOrUpdateAsync(string name, ManagementPolicyData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in ManagementPoliciesRestOperations that accepts ManagementPolicyData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override ArmOperation<ManagementPolicy> StartCreateOrUpdate(string name, ManagementPolicyData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in ManagementPoliciesRestOperations that accepts ManagementPolicyData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmOperation<ManagementPolicy>> StartCreateOrUpdateAsync(string name, ManagementPolicyData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in ManagementPoliciesRestOperations that accepts ManagementPolicyData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<ManagementPolicy> Get(string accountName, ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public override ArmResponse<ManagementPolicy> Get(string managementPolicyName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.Get");
             scope.Start();
             try
             {
                 return new PhArmResponse<ManagementPolicy, ManagementPolicyData>(
-                Operations.Get(Id.ResourceGroupName, accountName, managementPolicyName, cancellationToken: cancellationToken),
+                Operations.Get(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken),
                 data => new ManagementPolicy(Parent, data));
             }
             catch (Exception e)
@@ -151,17 +174,16 @@ namespace Azure.Management.Storage
         }
 
         /// <inheritdoc />
-        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<ManagementPolicy>> GetAsync(string accountName, ManagementPolicyName managementPolicyName, CancellationToken cancellationToken = default)
+        public async override Task<ArmResponse<ManagementPolicy>> GetAsync(string managementPolicyName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.GetAsync");
             scope.Start();
             try
             {
                 return new PhArmResponse<ManagementPolicy, ManagementPolicyData>(
-                await Operations.GetAsync(Id.ResourceGroupName, accountName, managementPolicyName, cancellationToken: cancellationToken),
+                await Operations.GetAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken),
                 data => new ManagementPolicy(Parent, data));
             }
             catch (Exception e)
