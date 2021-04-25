@@ -21,9 +21,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var resourceOperationWriter = new ResourceOperationWriter();
-            var resourceDataWriter = new ResourceDataWriter();
             var armResourceWriter = new ResourceWriter();
-            var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
             var lroWriter = new MgmtPlaneLongRunningOperationWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
@@ -52,7 +50,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resourceOperation in context.Library.ResourceOperations)
             {
                 var codeWriter = new CodeWriter();
-                resourceOperationWriter.WriteClient(codeWriter, resourceOperation);
+                resourceOperationWriter.WriteClient(codeWriter, resourceOperation, context.Configuration.MgmtConfiguration);
 
                 project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
             }
@@ -68,10 +66,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var model in context.Library.ResourceData)
             {
                 var codeWriter = new CodeWriter();
-                resourceDataWriter.WriteResourceData(codeWriter, model);
+                modelWriter.WriteModel(codeWriter, model);
 
                 var serializerCodeWriter = new CodeWriter();
-                resourceDataSerializeWriter.WriteSerialization(serializerCodeWriter, model);
+                serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
                 var name = model.Type.Name;
                 project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());

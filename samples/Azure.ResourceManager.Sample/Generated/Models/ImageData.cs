@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -13,25 +14,28 @@ namespace Azure.ResourceManager.Sample
     public partial class ImageData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ImageData. </summary>
-        public ImageData()
+        /// <param name="location"> The location. </param>
+        public ImageData(LocationData location) : base(location)
         {
         }
 
         /// <summary> Initializes a new instance of ImageData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="sourceVirtualMachine"> The source virtual machine from which Image is created. </param>
         /// <param name="storageProfile"> Specifies the storage settings for the virtual machine disks. </param>
         /// <param name="provisioningState"> The provisioning state. </param>
         /// <param name="hyperVGeneration"> Gets the HyperVGenerationType of the VirtualMachine created from the image. </param>
-        internal ImageData(SubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationTypes? hyperVGeneration)
+        internal ImageData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, SubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGenerationTypes? hyperVGeneration) : base(id, name, type, tags, location)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;
             ProvisioningState = provisioningState;
             HyperVGeneration = hyperVGeneration;
         }
-
-        /// <summary> ARM resource type. </summary>
-        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> The source virtual machine from which Image is created. </summary>
         public SubResource SourceVirtualMachine { get; set; }

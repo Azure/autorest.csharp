@@ -21,7 +21,7 @@ namespace ExactMatchInheritance
         {
         }
 
-        public static readonly ResourceType ResourceType = "ExactMatchInheritance/ExactMatchModel3Operations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/exactMatchModel3s";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

@@ -18,9 +18,10 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of ManagedDiskParameters. </summary>
+        /// <param name="id"> The id. </param>
         /// <param name="storageAccountType"> Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk. </param>
         /// <param name="diskEncryptionSet"> Specifies the customer managed disk encryption set resource id for the managed disk. </param>
-        internal ManagedDiskParameters(StorageAccountTypes? storageAccountType, DiskEncryptionSetParameters diskEncryptionSet)
+        internal ManagedDiskParameters(string id, StorageAccountTypes? storageAccountType, DiskEncryptionSetParameters diskEncryptionSet) : base(id)
         {
             StorageAccountType = storageAccountType;
             DiskEncryptionSet = diskEncryptionSet;

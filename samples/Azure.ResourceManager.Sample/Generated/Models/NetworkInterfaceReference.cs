@@ -18,8 +18,9 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of NetworkInterfaceReference. </summary>
+        /// <param name="id"> The id. </param>
         /// <param name="primary"> Specifies the primary network interface in case the virtual machine has more than 1 network interface. </param>
-        internal NetworkInterfaceReference(bool? primary)
+        internal NetworkInterfaceReference(string id, bool? primary) : base(id)
         {
             Primary = primary;
         }

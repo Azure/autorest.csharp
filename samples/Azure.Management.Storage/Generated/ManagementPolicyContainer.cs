@@ -204,7 +204,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ManagementPolicyData.ResourceType);
+                var filters = new ResourceFilterCollection(ManagementPolicyOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
             }
@@ -226,7 +226,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(ManagementPolicyData.ResourceType);
+                var filters = new ResourceFilterCollection(ManagementPolicyOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
             }

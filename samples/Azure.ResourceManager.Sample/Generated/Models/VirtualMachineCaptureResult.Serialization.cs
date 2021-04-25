@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -16,6 +17,8 @@ namespace Azure.ResourceManager.Sample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
 
@@ -25,6 +28,7 @@ namespace Azure.ResourceManager.Sample
             Optional<string> contentVersion = default;
             Optional<object> parameters = default;
             Optional<IReadOnlyList<object>> resources = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("$schema"))
@@ -62,8 +66,13 @@ namespace Azure.ResourceManager.Sample
                     resources = array;
                     continue;
                 }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
             }
-            return new VirtualMachineCaptureResult(schema.Value, contentVersion.Value, parameters.Value, Optional.ToList(resources));
+            return new VirtualMachineCaptureResult(id, schema.Value, contentVersion.Value, parameters.Value, Optional.ToList(resources));
         }
     }
 }

@@ -334,7 +334,7 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Flattened == true)
                         {
-                            var objectType = (ObjectType)_library.FindTypeForSchema(bodyRequestParameter.Schema).Implementation;
+                            var objectType = (SchemaObjectType)_library.FindTypeForSchema(bodyRequestParameter.Schema).Implementation;
                             var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
 
                             List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
@@ -379,7 +379,7 @@ namespace AutoRest.CSharp.Output.Models
 
                     if (requestParameter.GroupedBy is RequestParameter groupedByParameter)
                     {
-                        var groupModel = (ObjectType) _context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
+                        var groupModel = (SchemaObjectType) _context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
                         var property = groupModel.GetPropertyForGroupedParameter(requestParameter);
 
                         constantOrReference = new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);

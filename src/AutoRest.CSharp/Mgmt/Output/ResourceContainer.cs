@@ -23,7 +23,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context)
         {
-            _operationGroup = operationGroup;
             _context = context;
         }
 

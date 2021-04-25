@@ -21,7 +21,7 @@ namespace SupersetInheritance
         {
         }
 
-        public static readonly ResourceType ResourceType = "SupersetInheritance/SupersetModel1Operations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/supersetModel1s";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

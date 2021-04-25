@@ -16,5 +16,11 @@ namespace Azure.ResourceManager.Sample
         public DiskEncryptionSetParameters()
         {
         }
+
+        /// <summary> Initializes a new instance of DiskEncryptionSetParameters. </summary>
+        /// <param name="id"> The id. </param>
+        internal DiskEncryptionSetParameters(string id) : base(id)
+        {
+        }
     }
 }

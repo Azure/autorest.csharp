@@ -22,18 +22,18 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="groupId"> The private link resource group id. </param>
         /// <param name="requiredMembers"> The private link resource required member names. </param>
         /// <param name="requiredZoneNames"> The private link resource Private link DNS zone name. </param>
-        internal PrivateLinkResourceData(string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames)
+        internal PrivateLinkResourceData(TenantResourceIdentifier id, string name, ResourceType type, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames) : base(id, name, type)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;
             RequiredZoneNames = requiredZoneNames;
         }
-
-        /// <summary> ARM resource type. </summary>
-        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> The private link resource group id. </summary>
         public string GroupId { get; }

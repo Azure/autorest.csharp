@@ -120,7 +120,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(VirtualMachineImageData.ResourceType);
+                var filters = new ResourceFilterCollection(VirtualMachineImageOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
             }
@@ -142,7 +142,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var filters = new ResourceFilterCollection(VirtualMachineImageData.ResourceType);
+                var filters = new ResourceFilterCollection(VirtualMachineImageOperations.ResourceType);
                 filters.SubstringFilter = nameFilter;
                 return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
             }

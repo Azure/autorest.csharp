@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -21,6 +22,8 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("name");
                 writer.WriteStringValue(Name);
             }
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(Primary))
@@ -65,6 +68,7 @@ namespace Azure.ResourceManager.Sample
         internal static VirtualMachineScaleSetUpdateNetworkConfiguration DeserializeVirtualMachineScaleSetUpdateNetworkConfiguration(JsonElement element)
         {
             Optional<string> name = default;
+            ResourceIdentifier id = default;
             Optional<bool> primary = default;
             Optional<bool> enableAcceleratedNetworking = default;
             Optional<SubResource> networkSecurityGroup = default;
@@ -76,6 +80,11 @@ namespace Azure.ResourceManager.Sample
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -156,7 +165,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetUpdateNetworkConfiguration(name.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), networkSecurityGroup.Value, dnsSettings.Value, Optional.ToList(ipConfigurations), Optional.ToNullable(enableIPForwarding));
+            return new VirtualMachineScaleSetUpdateNetworkConfiguration(id, name.Value, Optional.ToNullable(primary), Optional.ToNullable(enableAcceleratedNetworking), networkSecurityGroup.Value, dnsSettings.Value, Optional.ToList(ipConfigurations), Optional.ToNullable(enableIPForwarding));
         }
     }
 }

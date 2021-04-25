@@ -25,20 +25,19 @@ namespace AutoRest.CSharp.Mgmt.Output
         private BuildContext<MgmtOutputLibrary> _context;
         private PagingMethod[]? _pagingMethods;
 
-        protected OperationGroup _operationGroup;
-        internal OperationGroup OperationGroup => _operationGroup;
+        internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
 
         public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(context)
         {
             _context = context;
-            _operationGroup = operationGroup;
+            OperationGroup = operationGroup;
             _prefix = operationGroup.Resource(context.Configuration.MgmtConfiguration);
             DefaultName = _prefix + SuffixValue;
         }
 
-        public string ResourceName => _operationGroup.Resource(_context.Configuration.MgmtConfiguration);
+        public string ResourceName => OperationGroup.Resource(_context.Configuration.MgmtConfiguration);
 
         protected virtual string SuffixValue => OperationsSuffixValue;
 
@@ -46,13 +45,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultAccessibility { get; } = "public";
 
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, _prefix));
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(OperationGroup, _prefix));
 
-        public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
+        public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(OperationGroup);
 
-        public string ResourceIdentifierType => _operationGroup.GetResourceIdentifierType();
+        public string ResourceIdentifierType => OperationGroup.GetResourceIdentifierType();
 
-        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(_operationGroup, RestClient, Declaration).ToArray();
+        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

@@ -19,16 +19,16 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of ManagementPolicyData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="lastModifiedTime"> Returns the date and time the ManagementPolicies was last modified. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
-        internal ManagementPolicyData(DateTimeOffset? lastModifiedTime, ManagementPolicySchema policy)
+        internal ManagementPolicyData(TenantResourceIdentifier id, string name, ResourceType type, DateTimeOffset? lastModifiedTime, ManagementPolicySchema policy) : base(id, name, type)
         {
             LastModifiedTime = lastModifiedTime;
             Policy = policy;
         }
-
-        /// <summary> ARM resource type. </summary>
-        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> Returns the date and time the ManagementPolicies was last modified. </summary>
         public DateTimeOffset? LastModifiedTime { get; }

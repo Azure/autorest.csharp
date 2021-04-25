@@ -650,7 +650,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
                 {
-                    _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resourceData.Type}.ResourceType);");
+                    _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
                     // todo: do not hard code ResourceGroupOperations
                     _writer.Line($"return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
@@ -671,7 +671,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
                 {
-                    _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resourceData.Type}.ResourceType);");
+                    _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
                     // todo: do not hard code ResourceGroupOperations
                     _writer.Line($"return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);");

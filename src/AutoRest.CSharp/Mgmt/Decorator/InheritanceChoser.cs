@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
@@ -20,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static IList<System.Type> GetReferenceClassCollection()
         {
             var assembly = Assembly.GetAssembly(typeof(ArmClient));
-            if (assembly is null)
+            if (assembly == null)
             {
                 return new List<System.Type>();
             }
@@ -94,33 +92,33 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return trees;
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType childType)
+        public static CSharpType? GetExactMatch(MgmtObjectType childType, ObjectTypeProperty[] properties)
         {
             foreach (System.Type parentType in ReferenceClassCollection)
             {
-                if (IsEqual(childType, parentType))
+                if (IsEqual(parentType, properties))
                 {
-                    return parentType;
+                    return CSharpType.FromSystemType(childType.Context, parentType);
                 }
             }
             return null;
         }
 
-        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType)
+        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
             foreach (System.Type parentType in ReferenceClassCollection)
             {
-                if (IsSuperset(originalType, parentType))
+                if (IsSuperset(parentType, properties))
                 {
-                    return parentType;
+                    return CSharpType.FromSystemType(originalType.Context, parentType);
                 }
             }
             return null;
         }
 
-        private static bool IsEqual(MgmtObjectType childType, System.Type parentType)
+        private static bool IsEqual(System.Type parentType, ObjectTypeProperty[] properties)
         {
-            var childProperties = childType.MyProperties.ToList();
+            var childProperties = properties.ToList();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
             if (parentProperties.Count != childProperties.Count)
@@ -184,9 +182,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 m.GetParameters().First().ParameterType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}").Count() > 0;
         }
 
-        private static bool IsSuperset(MgmtObjectType childType, System.Type parentType)
+        private static bool IsSuperset(System.Type parentType, ObjectTypeProperty[] properties)
         {
-            var childProperties = childType.MyProperties.ToList();
+            var childProperties = properties.ToList();
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
             if (parentProperties.Count >= childProperties.Count)
@@ -208,7 +206,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                     break;
                 }
 
-                PropertyInfo? parentProperty;
+                PropertyInfo? parentProperty = null;
                 CSharpType childPropertyType = childProperty.Declaration.Type;
                 if (parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
                 {
@@ -228,6 +226,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
             }
             return parentProperties.Count == matchCount;
+        }
+
+        private class Node
+        {
+            public System.Type type;
+            public List<Node> children;
+            public Node(System.Type type)
+            {
+                this.type = type;
+                this.children = new List<Node>();
+            }
         }
     }
 }

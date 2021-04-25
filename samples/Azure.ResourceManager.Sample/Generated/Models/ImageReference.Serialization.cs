@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
@@ -35,6 +36,8 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("version");
                 writer.WriteStringValue(Version);
             }
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
 
@@ -45,6 +48,7 @@ namespace Azure.ResourceManager.Sample
             Optional<string> sku = default;
             Optional<string> version = default;
             Optional<string> exactVersion = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("publisher"))
@@ -72,8 +76,13 @@ namespace Azure.ResourceManager.Sample
                     exactVersion = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
             }
-            return new ImageReference(publisher.Value, offer.Value, sku.Value, version.Value, exactVersion.Value);
+            return new ImageReference(id, publisher.Value, offer.Value, sku.Value, version.Value, exactVersion.Value);
         }
     }
 }

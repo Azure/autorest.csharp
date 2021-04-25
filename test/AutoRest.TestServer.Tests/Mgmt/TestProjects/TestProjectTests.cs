@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Azure.ResourceManager.Core;
 using NUnit.Framework;
@@ -182,7 +183,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             // var containerObj = Activator.CreateInstance(containerType, true);
             // var restOperationsType = containerObj.GetType().GetProperty("RestOperations", BindingFlags.NonPublic | BindingFlags.Instance).PropertyType;
             // return FindAllRestOperations().Where(t => t.Name == "{restOperationsType.Name}").Single();
-            return FindAllRestOperations().Where(t => t.Name == $"{resourceName}sRestOperations").Single();
+            return FindAllRestOperations().Where(t => Regex.IsMatch(t.Name, $"{resourceName}\\S?RestOperations")).Single();
         }
 
         [Test]

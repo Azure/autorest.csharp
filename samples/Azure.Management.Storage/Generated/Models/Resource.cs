@@ -18,9 +18,10 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of Resource. </summary>
+        /// <param name="id"> The id. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="type"> The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts. </param>
-        internal Resource(string name, string type)
+        internal Resource(string id, string name, string type) : base(id)
         {
             Name = name;
             Type = type;

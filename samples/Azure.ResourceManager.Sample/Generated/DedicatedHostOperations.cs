@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/DedicatedHostOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/hostGroups/hosts";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

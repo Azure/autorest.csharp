@@ -33,12 +33,12 @@
         }
     },
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup1/{operationGroup1Name}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}": {
             "put": {
                 "tags": [
-                    "OperationGroup1"
+                    "ExactMatchModel1s"
                 ],
-                "operationId": "OperationGroup1_Put",
+                "operationId": "ExactMatchModel1s_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -47,7 +47,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "operationGroup1Name",
+                        "name": "exactMatchModel1sName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -77,12 +77,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup2/{operationGroup2Name}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel2s/{exactMatchModel2sName}": {
             "put": {
                 "tags": [
-                    "OperationGroup2"
+                    "ExactMatchModel2s"
                 ],
-                "operationId": "OperationGroup2_Put",
+                "operationId": "ExactMatchModel2s_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -91,7 +91,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "operationGroup2Name",
+                        "name": "exactMatchModel2sName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -121,12 +121,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup3/{operationGroup3Name}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}": {
             "put": {
                 "tags": [
-                    "OperationGroup3"
+                    "ExactMatchModel3s"
                 ],
-                "operationId": "OperationGroup3_Put",
+                "operationId": "ExactMatchModel3s_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -135,7 +135,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "operationGroup3Name",
+                        "name": "exactMatchModel3sName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -165,12 +165,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup4/{operationGroup4Name}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel4s/{exactMatchModel4sName}": {
             "put": {
                 "tags": [
-                    "OperationGroup4"
+                    "ExactMatchModel4s"
                 ],
-                "operationId": "OperationGroup4_Put",
+                "operationId": "ExactMatchModel4s_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -179,7 +179,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "operationGroup4Name",
+                        "name": "exactMatchModel4sName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -209,12 +209,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup5/{operationGroup5Name}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}": {
             "put": {
                 "tags": [
-                    "OperationGroup5"
+                    "ExactMatchModel5s"
                 ],
-                "operationId": "OperationGroup5_Put",
+                "operationId": "ExactMatchModel5s_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -223,7 +223,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "operationGroup5Name",
+                        "name": "exactMatchModel5sName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -256,6 +256,7 @@
     },
     "definitions": {
         "ExactMatchModel1": {
+            "type": "object",
             "properties": {
                 "new": {
                     "type": "string"
@@ -268,6 +269,7 @@
             ]
         },
         "ExactMatchModel2": {
+            "type": "object",
             "properties": {
                 "new": {
                     "type": "string"
@@ -280,6 +282,7 @@
             ]
         },
         "ExactMatchModel3": {
+            "type": "object",
             "properties": {
                 "new": {
                     "type": "string"
@@ -292,6 +295,7 @@
             ]
         },
         "ExactMatchModel4": {
+            "type": "object",
             "properties": {
                 "new": {
                     "type": "string"
@@ -304,6 +308,7 @@
             ]
         },
         "ExactMatchModel5": {
+            "type": "object",
             "properties": {
                 "new": {
                     "type": "string"
@@ -316,6 +321,7 @@
             ]
         },
         "ExactMatchModel6": {
+            "type": "object",
             "properties": {
                 "id": {
                     "type": "string"
@@ -329,6 +335,7 @@
             }
         },
         "ExactMatchModel7": {
+            "type": "object",
             "properties": {
                 "iD": {
                     "type": "string"
@@ -342,6 +349,7 @@
             }
         },
         "ExactMatchModel8": {
+            "type": "object",
             "properties": {
                 "id": {
                     "type": "string"
@@ -355,6 +363,7 @@
             }
         },
         "ExactMatchModel9": {
+            "type": "object",
             "properties": {
                 "id": {
                     "type": "integer"
@@ -368,6 +377,7 @@
             }
         },
         "ExactMatchModel10": {
+            "type": "object",
             "properties": {
                 "id": {
                     "type": "string"
@@ -389,6 +399,7 @@
             ]
         },
         "ExactMatchModel11": {
+            "type": "object",
             "properties": {
                 "name": {
                     "type": "string"

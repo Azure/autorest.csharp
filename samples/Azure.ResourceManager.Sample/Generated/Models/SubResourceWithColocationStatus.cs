@@ -18,8 +18,9 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
+        /// <param name="id"> The id. </param>
         /// <param name="colocationStatus"> Describes colocation status of a resource in the Proximity Placement Group. </param>
-        internal SubResourceWithColocationStatus(InstanceViewStatus colocationStatus)
+        internal SubResourceWithColocationStatus(string id, InstanceViewStatus colocationStatus) : base(id)
         {
             ColocationStatus = colocationStatus;
         }

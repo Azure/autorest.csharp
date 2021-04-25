@@ -19,12 +19,15 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of EncryptionScopeData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="source"> The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault. </param>
         /// <param name="state"> The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled. </param>
         /// <param name="creationTime"> Gets the creation date and time of the encryption scope in UTC. </param>
         /// <param name="lastModifiedTime"> Gets the last modification date and time of the encryption scope in UTC. </param>
         /// <param name="keyVaultProperties"> The key vault properties for the encryption scope. This is a required field if encryption scope &apos;source&apos; attribute is set to &apos;Microsoft.KeyVault&apos;. </param>
-        internal EncryptionScopeData(EncryptionScopeSource? source, EncryptionScopeState? state, DateTimeOffset? creationTime, DateTimeOffset? lastModifiedTime, EncryptionScopeKeyVaultProperties keyVaultProperties)
+        internal EncryptionScopeData(TenantResourceIdentifier id, string name, ResourceType type, EncryptionScopeSource? source, EncryptionScopeState? state, DateTimeOffset? creationTime, DateTimeOffset? lastModifiedTime, EncryptionScopeKeyVaultProperties keyVaultProperties) : base(id, name, type)
         {
             Source = source;
             State = state;
@@ -32,9 +35,6 @@ namespace Azure.Management.Storage.Models
             LastModifiedTime = lastModifiedTime;
             KeyVaultProperties = keyVaultProperties;
         }
-
-        /// <summary> ARM resource type. </summary>
-        public static ResourceType ResourceType => "todo: find out resource type";
 
         /// <summary> The provider for the encryption scope. Possible values (case-insensitive):  Microsoft.Storage, Microsoft.KeyVault. </summary>
         public EncryptionScopeSource? Source { get; set; }

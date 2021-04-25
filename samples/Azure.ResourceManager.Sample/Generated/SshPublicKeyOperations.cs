@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/SshPublicKeyOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/sshPublicKeys";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

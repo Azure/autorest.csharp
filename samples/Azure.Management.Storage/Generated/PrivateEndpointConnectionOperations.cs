@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.Management.Storage/PrivateEndpointConnectionOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/privateEndpointConnections";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

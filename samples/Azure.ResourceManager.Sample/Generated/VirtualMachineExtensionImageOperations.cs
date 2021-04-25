@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/VirtualMachineExtensionImageOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/vmextension";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

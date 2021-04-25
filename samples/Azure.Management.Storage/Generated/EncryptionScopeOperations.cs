@@ -29,7 +29,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.Management.Storage/EncryptionScopeOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/encryptionScopes";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
