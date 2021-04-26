@@ -16,8 +16,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class BodyDictionary : TestServerTestBase
     {
-        public BodyDictionary(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task GetDictionaryArrayEmpty() => Test(async (host, pipeline) =>
         {
@@ -277,7 +275,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/982")]
         public Task GetDictionaryDictionaryItemNull() => Test(async (host, pipeline) =>
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDictionaryItemNullAsync();
@@ -559,7 +556,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Unmatched request")]
         public Task PutDictionaryDateTimeValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new Dictionary<string, DateTimeOffset>
@@ -597,7 +593,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Unmatched request")]
         public Task PutDictionaryDoubleValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new Dictionary<string, double>
@@ -628,7 +623,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Unmatched request")]
         public Task PutDictionaryFloatValid() => TestStatus(async (host, pipeline) =>
         {
             var value = new Dictionary<string, float>

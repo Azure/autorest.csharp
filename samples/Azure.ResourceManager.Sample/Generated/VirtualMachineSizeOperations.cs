@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        private static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/VirtualMachineSizeOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/vmSizes";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

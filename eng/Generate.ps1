@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [String[]]$Exclude = "SmokeTests", $parallel = 5)
+param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
@@ -165,26 +165,29 @@ if (!($Exclude -contains "SmokeTests"))
     }
 }
 
-if ($updateLaunchSettings)
-{
-    $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
-    $settings = @{
-        'profiles' = [ordered]@{}
-    };
-
-    foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
-    {
-        $definition = $swaggerDefinitions[$key];
-        $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
-
-        $settings.profiles[$key] = [ordered]@{
-            'commandName'='Project';
-            'commandLineArgs'="--standalone $outputPath"
-        }
-    }
-
-    $settings | ConvertTo-Json | Out-File $launchSettings
+# Sorting file names that include '-' and '.' is broken in powershell - https://github.com/PowerShell/PowerShell/issues/3425
+# So map each to characters invalid for file system use '?' and '|', sort, and then map back
+function Sort-FileSafe ($names) {
+    return $names | % {$_.replace("-","?")} | % {$_.replace(".","|")} | Sort-Object |  % {$_.replace("?","-")} | % {$_.replace("|",".")}
 }
+
+$launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
+$settings = @{
+    'profiles' = [ordered]@{}
+};
+
+foreach ($key in Sort-FileSafe ($swaggerDefinitions.Keys))
+{
+    $definition = $swaggerDefinitions[$key];
+    $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
+
+    $settings.profiles[$key] = [ordered]@{
+        'commandName'='Project';
+        'commandLineArgs'="--standalone $outputPath"
+    }
+}
+
+$settings | ConvertTo-Json | Out-File $launchSettings
 
 if ($reset -or $env:TF_BUILD)
 {

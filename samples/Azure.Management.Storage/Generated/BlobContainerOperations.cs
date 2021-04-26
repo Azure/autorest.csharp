@@ -21,7 +21,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        private static readonly ResourceType ResourceType = "Azure.Management.Storage/BlobContainerOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices/default/containers";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

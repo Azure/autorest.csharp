@@ -1,23 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.IO;
-using System.Threading.Tasks;
 using NUnit.Framework;
-using AutoRest.CSharp.AutoRest.Communication;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.AutoRest.Plugins;
-using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Models.Types;
-using System.Reflection;
-using System.Text;
-using System.Text.Json;
 using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
 {
     internal class MgmtParentTests : OutputLibraryTestBase
     {
+        public MgmtParentTests() : base("MgmtParent") { }
+
         [Test]
         public void TestParentComputer()
         {
@@ -26,13 +18,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var context = result.Context;
             foreach (var operations in model.OperationGroups)
             {
-                Assert.IsNotNull(operations.Parent(context.Configuration.MgmtConfiguration));
+                Assert.IsNotNull(operations.ParentResourceType(context.Configuration.MgmtConfiguration));
                 if (operations.Key.Equals("VirtualMachineExtensionImages"))
-                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/locations/publishers"));
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/locations/publishers"));
                 else if (operations.Key.Equals("AvailabilitySets"))
-                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("resourceGroups"));
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("resourceGroups"));
                 else if (operations.Key.Equals("DedicatedHosts"))
-                    Assert.IsTrue(operations.Parent(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/hostGroups"));
+                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/hostGroups"));
             }
         }
     }

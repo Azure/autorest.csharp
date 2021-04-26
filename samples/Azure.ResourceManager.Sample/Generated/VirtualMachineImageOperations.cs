@@ -21,7 +21,7 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
-        private static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/VirtualMachineImageOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/vmimage";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

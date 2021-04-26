@@ -18,31 +18,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, operationGroup.Resource(context.Configuration.MgmtConfiguration)));
         }
 
-        protected override string DefaultName => GetDefaultName(OjectSchema, true);
-
-        public new string? Description { get; }
+        protected override string DefaultName => GetDefaultName(ObjectSchema, true);
 
         protected string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
                 $"A class representing the {clientPrefix} data model. " :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
-        }
-
-        protected override HashSet<string?> GetParentProperties()
-        {
-            if (Inherits?.IsFrameworkType == false)
-            {
-                return base.GetParentProperties();
-            }
-
-            System.Type type = Inherits?.FrameworkType!;
-            if (type is null)
-            {
-                return new HashSet<string?>();
-            }
-
-            return GetPropertiesFromSystemType(type).ToHashSet<string?>();
         }
     }
 }

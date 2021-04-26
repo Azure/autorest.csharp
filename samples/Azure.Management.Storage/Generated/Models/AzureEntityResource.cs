@@ -18,8 +18,11 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of AzureEntityResource. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="etag"> Resource Etag. </param>
-        internal AzureEntityResource(string etag)
+        internal AzureEntityResource(TenantResourceIdentifier id, string name, ResourceType type, string etag) : base(id, name, type)
         {
             Etag = etag;
         }

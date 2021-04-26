@@ -21,7 +21,7 @@ namespace MgmtParent
         {
         }
 
-        private static readonly ResourceType ResourceType = "MgmtParent/DedicatedHostOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/hostGroups/hosts";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

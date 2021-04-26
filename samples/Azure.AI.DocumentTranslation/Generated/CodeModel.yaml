@@ -328,7 +328,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: ErrorV2Message
+          name: TranslationErrorMessage
           description: Gets high level error message.
       protocol: !Protocols {}
     - !StringSchema &ref_20
@@ -338,7 +338,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: ErrorV2Target
+          name: TranslationErrorTarget
           description: "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document."
       protocol: !Protocols {}
     - !StringSchema &ref_21
@@ -348,7 +348,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: InnerErrorV2Code
+          name: InnerTranslationErrorCode
           description: Gets code error string.
       protocol: !Protocols {}
     - !StringSchema &ref_22
@@ -358,7 +358,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: InnerErrorV2Message
+          name: InnerTranslationErrorMessage
           description: Gets high level error message.
       protocol: !Protocols {}
     - !StringSchema &ref_23
@@ -368,7 +368,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: InnerErrorV2Target
+          name: InnerTranslationErrorTarget
           description: "Gets the source of the error. \r\nFor example it would be \"documents\" or \"document id\" in case of invalid document."
       protocol: !Protocols {}
     - !StringSchema &ref_60
@@ -409,7 +409,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: BatchStatusResponseNextLink
+          name: TranslationsStatusNextLink
           description: Url for the next page.  Null if no more pages available
       protocol: !Protocols {}
     - !StringSchema &ref_100
@@ -430,7 +430,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: DocumentStatusDetailPath
+          name: DocumentStatusPath
           description: Location of the document or folder
       protocol: !Protocols {}
     - !StringSchema &ref_41
@@ -440,7 +440,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: DocumentStatusDetailSourcePath
+          name: DocumentStatusSourcePath
           description: Location of the source document
       protocol: !Protocols {}
     - !StringSchema &ref_44
@@ -450,7 +450,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: DocumentStatusDetailTo
+          name: DocumentStatusTo
           description: To language
       protocol: !Protocols {}
     - !StringSchema &ref_103
@@ -502,7 +502,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: DocumentStatusResponseNextLink
+          name: DocumentsStatusNextLink
           description: Url for the next page.  Null if no more pages available
       protocol: !Protocols {}
     - !StringSchema &ref_50
@@ -649,7 +649,7 @@ schemas: !Schemas
       choiceType: *ref_0
       language: !Languages 
         default:
-          name: ErrorCodeV2
+          name: TranslationErrorCode
           description: Enums containing high level error codes.
       protocol: !Protocols {}
     - !ChoiceSchema &ref_29
@@ -747,7 +747,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: BatchStatusDetailCreatedDateTimeUtc
+          name: TranslationStatusCreatedDateTimeUtc
           description: Operation created date time
       protocol: !Protocols {}
     - !DateTimeSchema &ref_28
@@ -758,7 +758,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: BatchStatusDetailLastActionDateTimeUtc
+          name: TranslationStatusLastActionDateTimeUtc
           description: Date time in which the operation's status has been updated
       protocol: !Protocols {}
     - !DateTimeSchema &ref_42
@@ -769,7 +769,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: DocumentStatusDetailCreatedDateTimeUtc
+          name: DocumentStatusCreatedDateTimeUtc
           description: Operation created date time
       protocol: !Protocols {}
     - !DateTimeSchema &ref_43
@@ -780,7 +780,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: DocumentStatusDetailLastActionDateTimeUtc
+          name: DocumentStatusLastActionDateTimeUtc
           description: Date time in which the operation's status has been updated
       protocol: !Protocols {}
   uuids:
@@ -801,7 +801,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: BatchStatusDetailId
+          name: TranslationStatusId
           description: Id of the operation.
       protocol: !Protocols {}
     - !UuidSchema &ref_63
@@ -821,7 +821,7 @@ schemas: !Schemas
           version: v1.0-preview.1
       language: !Languages 
         default:
-          name: DocumentStatusDetailId
+          name: DocumentStatusId
           description: Document Id
       protocol: !Protocols {}
   objects:
@@ -1095,7 +1095,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: BatchSubmissionRequestInputs
+                name: StartTranslationDetailsInputs
                 description: The input list of documents or folders containing documents
             protocol: !Protocols {}
           required: true
@@ -1111,8 +1111,8 @@ schemas: !Schemas
         - input
       language: !Languages 
         default:
-          name: BatchSubmissionRequest
-          description: Job submission batch request
+          name: StartTranslationDetails
+          description: Translation job submission batch request
           namespace: ''
       protocol: !Protocols {}
     - *ref_13
@@ -1212,7 +1212,7 @@ schemas: !Schemas
                     - output
                   language: !Languages 
                     default:
-                      name: InnerErrorV2
+                      name: InnerTranslationError
                       description: "New Inner Error format which conforms to Cognitive Services API Guidelines which is available at https://microsoft.sharepoint.com/%3Aw%3A/t/CognitiveServicesPMO/EUoytcrjuJdKpeOKIK_QRC8BPtUYQpKBi8JsWyeDMRsWlQ?e=CPq8ow.\r\nThis contains required properties ErrorCode, message and optional properties target, details(key value pair), inner error(this can be nested)."
                       namespace: ''
                   protocol: !Protocols {}
@@ -1230,7 +1230,7 @@ schemas: !Schemas
               - output
             language: !Languages 
               default:
-                name: ErrorV2
+                name: TranslationError
                 description: This contains an outer error with error code, message, details, target and an inner error with more descriptive details.
                 namespace: ''
             protocol: !Protocols {}
@@ -1246,7 +1246,7 @@ schemas: !Schemas
         - exception
       language: !Languages 
         default:
-          name: ErrorResponseV2
+          name: TranslationErrorResponse
           description: "Contains unified error information used for HTTP responses across any Cognitive Service. Instances\r\ncan be created either through Microsoft.CloudAI.Containers.HttpStatusExceptionV2 or by returning it directly from\r\na controller."
           namespace: ''
       protocol: !Protocols {}
@@ -1408,13 +1408,13 @@ schemas: !Schemas
                 - output
               language: !Languages 
                 default:
-                  name: BatchStatusDetail
-                  description: Job status response
+                  name: TranslationStatus
+                  description: Translation job status response
                   namespace: ''
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: BatchStatusResponseValue
+                name: TranslationsStatusValue
                 description: The summary status of individual operation
             protocol: !Protocols {}
           required: true
@@ -1439,8 +1439,8 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: BatchStatusResponse
-          description: Document Status Response
+          name: TranslationsStatus
+          description: Translation job Status Response
           namespace: ''
       protocol: !Protocols {}
     - *ref_38
@@ -1547,8 +1547,8 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: DocumentStatusDetail
-          description: ''
+          name: DocumentStatus
+          description: Document Status Response
           namespace: ''
       protocol: !Protocols {}
     - !ObjectSchema &ref_117
@@ -1566,7 +1566,7 @@ schemas: !Schemas
             elementType: *ref_48
             language: !Languages 
               default:
-                name: DocumentStatusResponseValue
+                name: DocumentsStatusValue
                 description: The detail status of individual documents
             protocol: !Protocols {}
           required: true
@@ -1591,8 +1591,8 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: DocumentStatusResponse
-          description: Document Status Response
+          name: DocumentsStatus
+          description: Documents Status Response
           namespace: ''
       protocol: !Protocols {}
     - !ObjectSchema &ref_120
@@ -1700,7 +1700,7 @@ schemas: !Schemas
               protocol: !Protocols {}
             language: !Languages 
               default:
-                name: FileFormatListResultValue
+                name: SupportedFileFormatsValue
                 description: list of objects
             protocol: !Protocols {}
           required: true
@@ -1716,7 +1716,7 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: FileFormatListResult
+          name: SupportedFileFormats
           description: Base type for List return in our api
           namespace: ''
       protocol: !Protocols {}
@@ -1736,7 +1736,7 @@ schemas: !Schemas
             elementType: *ref_5
             language: !Languages 
               default:
-                name: StorageSourceListResultValue
+                name: SupportedStorageSourcesValue
                 description: list of objects
             protocol: !Protocols {}
           required: true
@@ -1752,7 +1752,7 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: StorageSourceListResult
+          name: SupportedStorageSources
           description: Base type for List return in our api
           namespace: ''
       protocol: !Protocols {}
@@ -1881,7 +1881,7 @@ operationGroups:
               - !Parameter &ref_76
                 schema: *ref_74
                 implementation: Method
-                required: false
+                required: true
                 language: !Languages 
                   default:
                     name: body
@@ -2020,7 +2020,7 @@ operationGroups:
               parameters:
                 Ocp-Apim-Subscription-Key: '{API key}'
                 api-version: v1.0-preview.1
-                batchRequest:
+                body:
                   inputs:
                     - source:
                         filter:
@@ -2033,7 +2033,8 @@ operationGroups:
                       targets:
                         - category: general
                           glossaries:
-                            - glossaryUrl: https://myblob.blob.core.windows.net/myglossary/en_fr_glossary.xlf
+                            - format: XLIFF
+                              glossaryUrl: https://myblob.blob.core.windows.net/myglossary/en_fr_glossary.xlf
                               storageSource: AzureBlob
                           storageSource: AzureBlob
                           targetUrl: https://myblob.blob.core.windows.net/destinationContainer1
@@ -2099,7 +2100,7 @@ operationGroups:
             final-state-via: location
         language: !Languages 
           default:
-            name: SubmitBatchRequest
+            name: StartTranslation
             description: "Use this API to submit a bulk (batch) translation request to the Document Translation service.\r\nEach request can contain multiple documents and must contain a source and destination container for each document.\r\n            \r\nThe prefix and suffix filter (if supplied) are used to filter folders. The prefix is applied to the subpath after the container name.\r\n            \r\nGlossaries / Translation memory can be included in the request and are applied by the service when the document is translated.\r\n            \r\nIf the glossary is invalid or unreachable during translation, an error is indicated in the document status.\r\nIf a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique."
             summary: Submit a document translation request to the Document Translation service
         protocol: !Protocols {}
@@ -2432,7 +2433,7 @@ operationGroups:
             nextLinkName: '@nextLink'
         language: !Languages 
           default:
-            name: GetOperations
+            name: GetTranslationsStatus
             description: "Returns a list of batch requests submitted and the status for each request.\r\nThis list only contains batch requests submitted by the user (based on the resource).\r\n            \r\nIf the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.\r\nThe absence of a continuation token means that no additional pages are available.\r\n            \r\n$top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.\r\n            \r\n$top indicates the total number of records the user wants to be returned across all pages.\r\n$skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.\r\n$maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.\r\n            \r\n$orderBy query parameter can be used to sort the returned list (ex \"$orderBy=createdDateTimeUtc asc\" or \"$orderBy=createdDateTimeUtc desc\").\r\nThe default sorting is descending by createdDateTimeUtc.\r\nSome query parameters can be used to filter the returned list (ex: \"status=Succeeded,Cancelled\") will only return succeeded and cancelled operations.\r\ncreatedDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.\r\nThe supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).\r\n            \r\nThe server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned."
             paging:
               nextLinkName: '@nextLink'
@@ -2915,7 +2916,7 @@ operationGroups:
                   headers: {}
         language: !Languages 
           default:
-            name: GetOperationStatus
+            name: GetTranslationStatus
             description: "Returns the status for a document translation request.\r\nThe status includes the overall request status, as well as the status for documents that are being translated as part of that request."
             summary: Returns the status for a document translation request
         protocol: !Protocols {}
@@ -3133,9 +3134,9 @@ operationGroups:
                   headers: {}
         language: !Languages 
           default:
-            name: CancelOperation
-            description: "Cancel a currently processing or queued operation.\r\nCancel a currently processing or queued operation.\r\nAn operation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible."
-            summary: Cancel a currently processing or queued operation
+            name: CancelTranslation
+            description: "Cancel a currently processing or queued translation.\r\nCancel a currently processing or queued translation.\r\nA translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.\r\nAll documents that have completed translation will not be cancelled and will be charged.\r\nAll pending documents will be cancelled if possible."
+            summary: Cancel a currently processing or queued translation
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -3505,7 +3506,7 @@ operationGroups:
             nextLinkName: '@nextLink'
         language: !Languages 
           default:
-            name: GetOperationDocumentsStatus
+            name: GetDocumentsStatus
             description: "Returns the status for all documents in a batch document translation request.\r\n            \r\nIf the number of documents in the response exceeds our paging limit, server-side paging is used.\r\nPaginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.\r\n            \r\n$top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.\r\n            \r\n$top indicates the total number of records the user wants to be returned across all pages.\r\n$skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.\r\n$maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.\r\n            \r\n$orderBy query parameter can be used to sort the returned list (ex \"$orderBy=createdDateTimeUtc asc\" or \"$orderBy=createdDateTimeUtc desc\").\r\nThe default sorting is descending by createdDateTimeUtc.\r\nSome query parameters can be used to filter the returned list (ex: \"status=Succeeded,Cancelled\") will only return succeeded and cancelled documents.\r\ncreatedDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.\r\nThe supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).\r\n            \r\nWhen both $top and $skip are included, the server should first apply $skip and then $top on the collection.\r\nNote: If the server can't honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.\r\nThis reduces the risk of the client making assumptions about the data returned."
             paging:
               nextLinkName: '@nextLink'
@@ -3688,7 +3689,7 @@ operationGroups:
                   headers: {}
         language: !Languages 
           default:
-            name: GetDocumentFormats
+            name: GetSupportedDocumentFormats
             description: "The list of supported document formats supported by the Document Translation service.\r\nThe list includes the common file extension, as well as the content-type if using the upload API."
             summary: Returns a list of supported document formats
         protocol: !Protocols {}
@@ -3858,7 +3859,7 @@ operationGroups:
                   headers: {}
         language: !Languages 
           default:
-            name: GetGlossaryFormats
+            name: GetSupportedGlossaryFormats
             description: "The list of supported glossary formats supported by the Document Translation service.\r\nThe list includes the common file extension used."
             summary: Returns the list of supported glossary formats
         protocol: !Protocols {}
@@ -4009,7 +4010,7 @@ operationGroups:
                   headers: {}
         language: !Languages 
           default:
-            name: GetDocumentStorageSource
+            name: GetSupportedStorageSources
             description: Returns a list of storage sources/options supported by the Document Translation service.
             summary: Returns a list of supported storage sources
         protocol: !Protocols {}

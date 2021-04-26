@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Output.Builders
 {
     internal class SerializationBuilder
     {
-        public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, ObjectType type)
+        public ObjectSerialization BuildObject(KnownMediaType mediaType, ObjectSchema objectSchema, SchemaObjectType type)
         {
             switch (mediaType)
             {
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public ObjectSerialization Build(KnownMediaType mediaType, Schema schema, CSharpType type)
+        public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type)
         {
             switch (mediaType)
             {
@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Output.Builders
                 );
         }
 
-        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, ObjectType objectType)
+        private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, SchemaObjectType objectType)
         {
             foreach (Property property in propertyBag.Properties)
             {
@@ -196,7 +196,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        private JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
+        private JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
         {
             PropertyBag propertyBag = new PropertyBag();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())

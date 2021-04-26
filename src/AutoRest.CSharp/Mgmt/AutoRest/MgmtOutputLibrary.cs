@@ -3,12 +3,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
@@ -22,8 +25,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<OperationGroup, MgmtRestClient>? _restClients;
         private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
         private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
-        private Dictionary<string, ResourceData>? _resourceData;
-        private Dictionary<string, Resource>? _armResource;
+        private Dictionary<OperationGroup, ResourceData>? _resourceData;
+        private Dictionary<OperationGroup, Resource>? _armResource;
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
@@ -67,6 +70,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
+        public ResourceOperation GetResourceOperation(OperationGroup operationGroup) => EnsureResourceOperations()[operationGroup];
+
+        public ResourceContainer GetResourceContainer(OperationGroup operationGroup) => EnsureResourceContainers()[operationGroup];
+
+        public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
+
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
             if (_restClients != null)
@@ -91,7 +100,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             _resourceOperations = new Dictionary<OperationGroup, ResourceOperation>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+            foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
                 _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
             }
@@ -107,7 +116,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
-            foreach (var operationGroup in _codeModel.OperationGroups)
+            foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
                 _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
             }
@@ -115,33 +124,27 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _resourceContainers;
         }
 
-        private Dictionary<string, ResourceData> EnsureResourceData()
+        private Dictionary<OperationGroup, ResourceData> EnsureResourceData()
         {
             if (_resourceData != null)
             {
                 return _resourceData;
             }
 
-            _resourceData = new Dictionary<string, ResourceData>();
+            _resourceData = new Dictionary<OperationGroup, ResourceData>();
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
-                //TODO: find a way to not need to duplicate this
                 List<OperationGroup>? operations = _operationGroups[schema.Name];
 
                 if (operations != null)
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_resourceData.ContainsKey(operation.Resource(_mgmtConfiguration)))
+                        if (!_resourceData.ContainsKey(operation))
                         {
                             var resourceData = new ResourceData((ObjectSchema)schema, operation, _context);
-                            CSharpType? inherits = ((ObjectType)entry.Value).Inherits;
-                            if (!(inherits is null))
-                            {
-                                resourceData.OverrideInherits(inherits);
-                            }
-                            _resourceData.Add(operation.Resource(_mgmtConfiguration), resourceData);
+                            _resourceData.Add(operation, resourceData);
                         }
                     }
                 }
@@ -150,14 +153,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _resourceData;
         }
 
-        private Dictionary<string, Resource> EnsureArmResource()
+        private Dictionary<OperationGroup, Resource> EnsureArmResource()
         {
             if (_armResource != null)
             {
                 return _armResource;
             }
 
-            _armResource = new Dictionary<string, Resource>();
+            _armResource = new Dictionary<OperationGroup, Resource>();
             foreach (var entry in ResourceSchemaMap)
             {
                 var schema = entry.Key;
@@ -167,9 +170,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_armResource.ContainsKey(operation.Resource(_mgmtConfiguration)))
+                        if (!_armResource.ContainsKey(operation))
                         {
-                            _armResource.Add(operation.Resource(_mgmtConfiguration), new Resource(operation.Resource(_mgmtConfiguration), _context));
+                            _armResource.Add(operation, new Resource(operation, _context));
                         }
                     }
                 }
@@ -191,9 +194,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType? FindTypeByName(string originalName)
         {
-            TypeProvider? provider = Models.FirstOrDefault (m => m.Type.Name == originalName);
-            provider ??= ResourceSchemaMap.Values.FirstOrDefault (m => m.Type.Name == originalName);
+            TypeProvider? provider = Models.FirstOrDefault(m => m.Type.Name == originalName);
+            provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
+        }
+
+        public LongRunningOperationInfo FindLongRunningOperationInfo(OperationGroup operationGroup, Operation operation)
+        {
+            var mgmtRestClient = FindRestClient(operationGroup);
+
+            Debug.Assert(mgmtRestClient != null, "Unexpected. Unable find matching rest client.");
+
+            var nextOperationMethod = operation?.Language?.Default?.Paging != null
+                ? mgmtRestClient.GetNextOperationMethod(operation.Requests.Single())
+                : null;
+
+            return new LongRunningOperationInfo(
+                "public",
+                mgmtRestClient.ClientPrefix,
+                nextOperationMethod);
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()
@@ -240,7 +259,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _ => throw new NotImplementedException()
         };
 
-
         public MgmtRestClient FindRestClient(OperationGroup operationGroup)
         {
             return EnsureRestClients()[operationGroup];
@@ -259,7 +277,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
-                AddOperationGroupToResourceMap(operationsGroup);
+                if (operationsGroup.IsResource(_mgmtConfiguration))
+                    AddOperationGroupToResourceMap(operationsGroup);
             }
             ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }

@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -15,30 +17,26 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private readonly CodeModel _codeModel;
         private readonly BuildContext<LowLevelOutputLibrary> _context;
-        private Dictionary<OperationGroup, LowLevelRestClient>? _restClients;
+        private CachedDictionary<OperationGroup, LowLevelRestClient> _restClients;
 
         public LowLevelOutputLibrary(CodeModel codeModel, BuildContext<LowLevelOutputLibrary> context) : base(codeModel, context)
         {
             _codeModel = codeModel;
             _context = context;
+            _restClients = new CachedDictionary<OperationGroup, LowLevelRestClient>(EnsureRestClients);
         }
 
-        public IEnumerable<LowLevelRestClient> RestClients => EnsureRestClients().Values;
+        public IEnumerable<LowLevelRestClient> RestClients => _restClients.Values;
 
         private Dictionary<OperationGroup, LowLevelRestClient> EnsureRestClients()
         {
-            if (_restClients != null)
-            {
-                return _restClients;
-            }
-
-            _restClients = new Dictionary<OperationGroup, LowLevelRestClient>();
+            var restClients = new Dictionary<OperationGroup, LowLevelRestClient>();
             foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                _restClients.Add(operationGroup, new LowLevelRestClient(operationGroup, _context));
+                restClients.Add(operationGroup, new LowLevelRestClient(operationGroup, _context));
             }
 
-            return _restClients;
+            return restClients;
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)

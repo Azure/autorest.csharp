@@ -21,7 +21,7 @@ namespace Azure.Management.Storage
         {
         }
 
-        private static readonly ResourceType ResourceType = "Azure.Management.Storage/FileShareOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/fileServices/default/shares";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

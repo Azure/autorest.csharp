@@ -21,7 +21,7 @@ namespace MgmtParent
         {
         }
 
-        private static readonly ResourceType ResourceType = "MgmtParent/VirtualMachineExtensionImageOperations";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/vmextension";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
