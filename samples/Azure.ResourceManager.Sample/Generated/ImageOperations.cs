@@ -29,6 +29,11 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
+        /// <summary> Initializes a new instance of the <see cref="ImageOperations"/> class. </summary>
+        internal ImageOperations()
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Compute/images";
         protected override ResourceType ValidResourceType => ResourceType;
 

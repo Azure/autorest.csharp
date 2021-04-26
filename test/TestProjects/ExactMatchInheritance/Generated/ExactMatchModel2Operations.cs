@@ -16,8 +16,21 @@ namespace ExactMatchInheritance
     /// <summary> A class representing the operations that can be performed over a specific ExactMatchModel2. </summary>
     public partial class ExactMatchModel2Operations : ResourceOperationsBase<TenantResourceIdentifier, ExactMatchModel2>
     {
-        /// <summary> Initializes a new instance of ExactMatchModel2Operations for mocking. </summary>
-        protected ExactMatchModel2Operations()
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel2Operations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        internal ExactMatchModel2Operations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel2Operations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected ExactMatchModel2Operations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel2Operations"/> class. </summary>
+        internal ExactMatchModel2Operations()
         {
         }
 

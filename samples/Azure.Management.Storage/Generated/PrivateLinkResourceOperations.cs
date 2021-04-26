@@ -29,6 +29,11 @@ namespace Azure.Management.Storage
         {
         }
 
+        /// <summary> Initializes a new instance of the <see cref="PrivateLinkResourceOperations"/> class. </summary>
+        internal PrivateLinkResourceOperations()
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/privateLinkResources";
         protected override ResourceType ValidResourceType => ResourceType;
 

@@ -29,6 +29,11 @@ namespace Azure.Management.Storage
         {
         }
 
+        /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class. </summary>
+        internal StorageAccountOperations()
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
         protected override ResourceType ValidResourceType => ResourceType;
 

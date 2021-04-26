@@ -29,6 +29,11 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupOperations"/> class. </summary>
+        internal DedicatedHostGroupOperations()
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Compute/hostGroups";
         protected override ResourceType ValidResourceType => ResourceType;
 

@@ -51,6 +51,27 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
+        /// <summary>
+        /// Enumerates the inheritace hireachy.
+        /// </summary>
+        /// <returns>IEnumerable of inherited CSharpClass. </returns>
+        public IEnumerable<CSharpType> EnumerateInherits()
+        {
+            CSharpType? type = Inherits;
+            while (type != null)
+            {
+                yield return type;
+                if (type.Implementation is ObjectType o && o.Inherits != null)
+                {
+                    type = o.Inherits;
+                }
+                else
+                {
+                    type = null;
+                }
+            }
+        }
+
         protected abstract IEnumerable<ObjectTypeConstructor> BuildConstructors();
 
         protected ObjectTypeConstructor? GetBaseCtor()

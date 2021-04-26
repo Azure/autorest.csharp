@@ -29,6 +29,11 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineImageOperations"/> class. </summary>
+        internal VirtualMachineImageOperations()
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/vmimage";
         protected override ResourceType ValidResourceType => ResourceType;
 

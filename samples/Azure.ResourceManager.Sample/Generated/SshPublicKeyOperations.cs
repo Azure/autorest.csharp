@@ -29,6 +29,11 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
+        /// <summary> Initializes a new instance of the <see cref="SshPublicKeyOperations"/> class. </summary>
+        internal SshPublicKeyOperations()
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Compute/sshPublicKeys";
         protected override ResourceType ValidResourceType => ResourceType;
 

@@ -29,6 +29,11 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
+        /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupOperations"/> class. </summary>
+        internal ProximityPlacementGroupOperations()
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Compute/proximityPlacementGroups";
         protected override ResourceType ValidResourceType => ResourceType;
 

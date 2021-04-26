@@ -29,6 +29,11 @@ namespace Azure.ResourceManager.Sample
         {
         }
 
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVMOperations"/> class. </summary>
+        internal VirtualMachineScaleSetVMOperations()
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets/virtualmachines";
         protected override ResourceType ValidResourceType => ResourceType;
 

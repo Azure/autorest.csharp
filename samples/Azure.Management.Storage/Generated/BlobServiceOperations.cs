@@ -29,6 +29,11 @@ namespace Azure.Management.Storage
         {
         }
 
+        /// <summary> Initializes a new instance of the <see cref="BlobServiceOperations"/> class. </summary>
+        internal BlobServiceOperations()
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices";
         protected override ResourceType ValidResourceType => ResourceType;
 

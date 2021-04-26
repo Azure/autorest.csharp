@@ -29,6 +29,11 @@ namespace Azure.Management.Storage
         {
         }
 
+        /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class. </summary>
+        internal FileServiceOperations()
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/fileServices";
         protected override ResourceType ValidResourceType => ResourceType;
 

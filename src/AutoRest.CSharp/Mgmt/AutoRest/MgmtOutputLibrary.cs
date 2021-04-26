@@ -313,5 +313,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
             result.Add(operationsGroup);
         }
+
+        /// <summary>
+        /// Judges if an operationGroup is a resource by checking if [Resource]Data class inherits any of
+        /// Resource, TrackedResource, SubResource, or SubResourceReadOnly.
+        /// </summary>
+        /// <param name="operationGroup"></param>
+        /// <returns></returns>
+        internal bool IsResource(OperationGroup operationGroup)
+        {
+            return GetResourceData(operationGroup).EnumerateInherits().Any(csharpType =>
+                csharpType.Namespace == "Azure.ResourceManager.Core" && (csharpType.Name == "Resource" || csharpType.Name == "TrackedResource" || csharpType.Name == "SubResource" || csharpType.Name == "SubResourceReadOnly"));
+        }
     }
 }

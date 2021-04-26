@@ -15,8 +15,11 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel4"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal ExactMatchModel4(ResourceOperationsBase options, ExactMatchModel4Data resource) : base()
+        internal ExactMatchModel4(ResourceOperationsBase options, ExactMatchModel4Data resource)
         {
         }
+
+        /// <summary> Gets or sets the resource data. </summary>
+        public ExactMatchModel4 Data { get; private set; }
     }
 }

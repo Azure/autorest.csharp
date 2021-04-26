@@ -41,19 +41,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var typeOfThis = resourceOperation.Type.Name;
 
             // write "generic resource" constructor
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis:D}\"/> class.");
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
             writer.WriteXmlDocumentationParameter("genericOperations", @"An instance of <see cref=""GenericResourceOperations""/> that has an id for a {todo: availability set}.");
-            using (writer.Scope($"internal {typeOfThis:D}({typeof(GenericResourceOperations)} genericOperations) : base(genericOperations, genericOperations.Id)"))
+            using (writer.Scope($"internal {typeOfThis}({typeof(GenericResourceOperations)} genericOperations) : base(genericOperations, genericOperations.Id)"))
             { }
 
             // write "resource + id" constructor
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis:D}\"/> class.");
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations."); //todo: revise
             writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
-            using (writer.Scope($"protected {typeOfThis:D}(ResourceOperationsBase options, {typeof(ResourceIdentifier)} id) : base(options, id)"))
-            {
-            }
+            using (writer.Scope($"protected {typeOfThis}(ResourceOperationsBase options, {typeof(ResourceIdentifier)} id) : base(options, id)"))
+            { }
+
+            // write an internal default constructor
+            writer.Line();
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
+            using (writer.Scope($"internal {typeOfThis}()"))
+            { }
         }
 
         private void WriteClientProperties(CodeWriter writer, ResourceOperation resourceOperation, MgmtConfiguration config)

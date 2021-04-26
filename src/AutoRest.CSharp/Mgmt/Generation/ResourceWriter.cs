@@ -20,18 +20,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (writer.Scope($"{resource.Declaration.Accessibility} class {resource.Type.Name} : {resourceOperation.Type}"))
                 {
                     var resourceData = context.Library.GetResourceData(resource.OperationGroup);
-                    WriteConstructors(writer, resource, resourceData);
+                    WriteConstructors(writer, context, resource, resourceData);
                     WriteDataProperty(writer, resource, resourceData);
                 }
             }
         }
 
-        private void WriteConstructors(CodeWriter writer, Resource resource, ResourceData resourceData)
+        private void WriteConstructors(CodeWriter writer, BuildContext<MgmtOutputLibrary> context, Resource resource, ResourceData resourceData)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{resource.Type.Name}\"/> class.");
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
             writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
-            using (writer.Scope($"internal {resource.Type.Name}({typeof(ResourceOperationsBase)} options, {resourceData.Type} resource) : base(options, resource.Id)"))
+            // inherits the default constructor when it is not a resource
+            var baseConstructor = context.Library.IsResource(resource.OperationGroup) ? " : base(options, resource.Id)" : string.Empty;
+            using (writer.Scope($"internal {resource.Type.Name}({typeof(ResourceOperationsBase)} options, {resourceData.Type} resource){baseConstructor}"))
             {
             }
         }
