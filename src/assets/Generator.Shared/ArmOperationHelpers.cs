@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
-namespace Azure.Core
+namespace Azure.Core.Foo
 {
     /// <summary>
     /// This implements the ARM scenarios for LROs. It is highly recommended to read the ARM spec prior to modifying this code:
@@ -21,8 +21,11 @@ namespace Azure.Core
     /// https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md
     /// </summary>
     /// <typeparam name="T">The final result of the LRO.</typeparam>
-    internal class ArmOperationHelpers<T> : OperationHelpers<T>
+    internal class ArmOperationHelpers<T>
     {
+        private readonly ArmOperationHelpers<T>? _operation;
+        private readonly Response<T>? _valueResponse;
+
         public ArmOperationHelpers(
             IOperationSource<T> source,
             ClientDiagnostics clientDiagnostics,
@@ -31,18 +34,15 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : base(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName)
         {
+            _operation = new ArmOperationHelpers<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName);
         }
-
-        private readonly ArmOperationHelpers<T> _operation;
-        private readonly Response<T> _valueResponse;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ArmOperation{TOperations}"/> class.
         /// </summary>
         /// <param name="response"> The non lro response to wrap. </param>
-        protected ArmOperation(Response<T> response)
+        protected ArmOperationHelpers(Response<T> response)
         {
             if (response is null)
                 throw new ArgumentNullException(nameof(response));
@@ -50,69 +50,52 @@ namespace Azure.Core
             _valueResponse = response;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ArmOperation{T}"/> class.
-        /// </summary>
-        /// <param name="source"> The operation source to use. </param>
-        /// <param name="clientDiagnostics">The client diagnostics to use. </param>
-        /// <param name="pipeline"> The HttpPipeline to use. </param>
-        /// <param name="request"> The original request. </param>
-        /// <param name="response"> The original response. </param>
-        /// <param name="scopeName"> The scope name to use. </param>
-        internal ArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, string scopeName)
-        {
-            _operation = new ArmOperationHelpers<T>(source, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, scopeName);
-        }
-
         private bool _doesWrapOperation => _valueResponse is null;
 
         /// <inheritdoc/>
-        public override string Id => _operation?.Id;
+        public T Value => _doesWrapOperation ? _operation!.Value : _valueResponse!.Value;
 
         /// <inheritdoc/>
-        public override TOperations Value => _doesWrapOperation ? _operation.Value : _valueResponse.Value;
+        public bool HasCompleted => _doesWrapOperation ? _operation!.HasCompleted : true;
 
         /// <inheritdoc/>
-        public override bool HasCompleted => _doesWrapOperation ? _operation.HasCompleted : true;
+        public bool HasValue => _doesWrapOperation ? _operation!.HasValue : true;
 
         /// <inheritdoc/>
-        public override bool HasValue => _doesWrapOperation ? _operation.HasValue : true;
-
-        /// <inheritdoc/>
-        public override Response GetRawResponse()
+        public Response GetRawResponse()
         {
-            return _doesWrapOperation ? _operation.GetRawResponse() : _valueResponse.GetRawResponse();
+            return _doesWrapOperation ? _operation!.GetRawResponse() : _valueResponse!.GetRawResponse();
         }
 
         /// <inheritdoc/>
-        public override Response UpdateStatus(CancellationToken cancellationToken = default)
+        public Response UpdateStatus(CancellationToken cancellationToken = default)
         {
-            return _doesWrapOperation ? _operation.UpdateStatus(cancellationToken) : _valueResponse.GetRawResponse();
+            return _doesWrapOperation ? _operation!.UpdateStatus(cancellationToken) : _valueResponse!.GetRawResponse();
         }
 
         /// <inheritdoc/>
-        public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
+        public ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
         {
             return _doesWrapOperation
-                ? _operation.UpdateStatusAsync(cancellationToken)
-                : new ValueTask<Response>(_valueResponse.GetRawResponse());
+                ? _operation!.UpdateStatusAsync(cancellationToken)
+                : new ValueTask<Response>(_valueResponse!.GetRawResponse());
         }
 
         /// <inheritdoc/>
-        public override async ValueTask<Response<T>> WaitForCompletionAsync(
+        public async ValueTask<Response<T>> WaitForCompletionAsync(
             CancellationToken cancellationToken = default)
         {
-            return await WaitForCompletionAsync(ArmOperationHelpers<T>.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+            return await WaitForCompletionAsync(OperationHelpers<T>.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
         }
 
         /// <inheritdoc/>
-        public override async ValueTask<Response<T>> WaitForCompletionAsync(
+        public async ValueTask<Response<T>> WaitForCompletionAsync(
             TimeSpan pollingInterval,
             CancellationToken cancellationToken)
         {
             return _doesWrapOperation
-                ? await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false)
-                : _valueResponse;
+                ? await _operation!.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false)
+                : _valueResponse!;
         }
 
         /// <summary>
@@ -123,10 +106,10 @@ namespace Azure.Core
         /// <remarks>
         /// <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>
         /// </remarks>
-        public virtual Response<T> WaitForCompletion(CancellationToken cancellationToken = default)
-        {
-            return WaitForCompletion(ArmOperationHelpers<T>.DefaultPollingInterval.Seconds, cancellationToken);
-        }
+        //public Response<T> WaitForCompletion(CancellationToken cancellationToken = default)
+        //{
+        //    return WaitForCompletion(OperationHelpers<T>.DefaultPollingInterval.Seconds, cancellationToken);
+        //}
 
         /// <summary>
         /// Waits for the completion of the long running operations.
@@ -137,18 +120,18 @@ namespace Azure.Core
         /// <remarks>
         /// <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>
         /// </remarks>
-        public virtual Response<T> WaitForCompletion(int pollingInterval, CancellationToken cancellationToken = default)
-        {
-            while (true)
-            {
-                UpdateStatus(cancellationToken);
-                if (HasCompleted)
-                {
-                    return Response.FromValue(Value, GetRawResponse()) as ArmResponse<T>;
-                }
+        //public Response<T> WaitForCompletion(int pollingInterval, CancellationToken cancellationToken = default)
+        //{
+        //    while (true)
+        //    {
+        //        UpdateStatus(cancellationToken);
+        //        if (HasCompleted)
+        //        {
+        //            return ArmResponse.FromValue(Value!, GetRawResponse()) as ArmResponse<T>;
+        //        }
 
-                Task.Delay(pollingInterval, cancellationToken).Wait(cancellationToken);
-            }
-        }
+        //        Task.Delay(pollingInterval, cancellationToken).Wait(cancellationToken);
+        //    }
+        //}
     }
 }
