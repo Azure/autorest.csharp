@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
 
-namespace Azure.Core.Foo
+namespace Azure.Core
 {
     /// <summary>
     /// This implements the ARM scenarios for LROs. It is highly recommended to read the ARM spec prior to modifying this code:
@@ -20,12 +20,12 @@ namespace Azure.Core.Foo
     /// https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md
     /// </summary>
     /// <typeparam name="T">The final result of the LRO.</typeparam>
-    internal class ArmOperationHelpers<T>
+    internal class OperationOrResponseInternals<T>
     {
-        private readonly ArmOperationHelpers<T>? _operation;
+        private readonly OperationInternals<T>? _operation;
         private readonly Response<T>? _valueResponse;
 
-        public ArmOperationHelpers(
+        public OperationOrResponseInternals(
             IOperationSource<T> source,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
@@ -34,10 +34,10 @@ namespace Azure.Core.Foo
             OperationFinalStateVia finalStateVia,
             string scopeName)
         {
-            _operation = new ArmOperationHelpers<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName);
+            _operation = new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName);
         }
 
-        public ArmOperationHelpers(Response<T> response)
+        public OperationOrResponseInternals(Response<T> response)
         {
             if (response is null)
                 throw new ArgumentNullException(nameof(response));
@@ -73,7 +73,7 @@ namespace Azure.Core.Foo
         public async ValueTask<Response<T>> WaitForCompletionAsync(
             CancellationToken cancellationToken = default)
         {
-            return await WaitForCompletionAsync(OperationHelpers<T>.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+            return await WaitForCompletionAsync(OperationInternals<T>.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
         }
 
         public async ValueTask<Response<T>> WaitForCompletionAsync(
