@@ -143,17 +143,17 @@ schemas: !Schemas
   dictionaries:
     - !DictionarySchema &ref_5
       type: dictionary
-      elementType: !AnySchema &ref_1
-        type: any
+      elementType: !AnyObjectSchema &ref_1
+        type: any-object
         language: !Languages 
           default:
-            name: any
-            description: Anything
+            name: AnyObject
+            description: Any object
         protocol: !Protocols {}
       language: !Languages 
         default:
           name: PetAPTrue
-          description: Dictionary of <any>
+          description: Dictionary of <AnyObject>
       protocol: !Protocols {}
     - !DictionarySchema &ref_11
       type: dictionary
@@ -161,7 +161,7 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: PetAPObject
-          description: Dictionary of <any>
+          description: Dictionary of <AnyObject>
       protocol: !Protocols {}
     - !DictionarySchema &ref_13
       type: dictionary
@@ -195,7 +195,7 @@ schemas: !Schemas
           name: PetAPInPropertiesWithAPStringAdditionalProperties
           description: Dictionary of <number>
       protocol: !Protocols {}
-  any:
+  anyObjects:
     - *ref_1
   objects:
     - !ObjectSchema &ref_4

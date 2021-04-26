@@ -360,13 +360,13 @@ schemas: !Schemas
           name: SecondModelDictionaryProperty
           description: .
       protocol: !Protocols {}
-  any:
-    - !AnySchema &ref_15
-      type: any
+  anyObjects:
+    - !AnyObjectSchema &ref_15
+      type: any-object
       language: !Languages 
         default:
-          name: any
-          description: Anything
+          name: AnyObject
+          description: Any object
       protocol: !Protocols {}
   uuids:
     - !UuidSchema &ref_11

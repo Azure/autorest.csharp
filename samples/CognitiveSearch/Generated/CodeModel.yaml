@@ -6536,12 +6536,12 @@ schemas: !Schemas
   dictionaries:
     - !DictionarySchema &ref_1
       type: dictionary
-      elementType: !AnySchema &ref_3
-        type: any
+      elementType: !AnyObjectSchema &ref_3
+        type: any-object
         language: !Languages 
           default:
-            name: any
-            description: Anything
+            name: AnyObject
+            description: Any object
         protocol: !Protocols {}
       language: !Languages 
         default:
@@ -6669,7 +6669,7 @@ schemas: !Schemas
           name: WebApiHttpHeaders
           description: A dictionary of http request headers.
       protocol: !Protocols {}
-  any:
+  anyObjects:
     - *ref_3
   dateTimes:
     - !DateTimeSchema &ref_142

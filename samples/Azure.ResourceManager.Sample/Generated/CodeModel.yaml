@@ -5185,13 +5185,13 @@ schemas: !Schemas
             The list of user identities associated with the virtual machine scale set. The user identity dictionary key references will be ARM resource ids in the form:
             '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
       protocol: !Protocols {}
-  any:
-    - !AnySchema &ref_47
-      type: any
+  anyObjects:
+    - !AnyObjectSchema &ref_47
+      type: any-object
       language: !Languages 
         default:
-          name: any
-          description: Anything
+          name: AnyObject
+          description: Any object
       protocol: !Protocols {}
   dateTimes:
     - !DateTimeSchema &ref_23

@@ -420,19 +420,19 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !DictionarySchema &ref_34
       type: dictionary
-      elementType: !AnySchema &ref_2
-        type: any
+      elementType: !AnyObjectSchema &ref_2
+        type: any-object
         language: !Languages 
           default:
-            name: any
-            description: Anything
+            name: AnyObject
+            description: Any object
         protocol: !Protocols {}
       language: !Languages 
         default:
           name: SmartSalmon
-          description: Dictionary of <any>
+          description: Dictionary of <AnyObject>
       protocol: !Protocols {}
-  any:
+  anyObjects:
     - *ref_2
   byteArrays:
     - !ByteArraySchema &ref_22

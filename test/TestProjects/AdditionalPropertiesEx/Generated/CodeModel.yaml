@@ -64,17 +64,17 @@ schemas: !Schemas
   dictionaries:
     - !DictionarySchema &ref_3
       type: dictionary
-      elementType: !AnySchema &ref_2
-        type: any
+      elementType: !AnyObjectSchema &ref_2
+        type: any-object
         language: !Languages 
           default:
-            name: any
-            description: Anything
+            name: AnyObject
+            description: Any object
         protocol: !Protocols {}
       language: !Languages 
         default:
           name: InputAdditionalPropertiesModel
-          description: Dictionary of <any>
+          description: Dictionary of <AnyObject>
       protocol: !Protocols {}
     - !DictionarySchema &ref_6
       type: dictionary
@@ -90,7 +90,7 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: InputAdditionalPropertiesModelStruct
-          description: Dictionary of <any>
+          description: Dictionary of <AnyObject>
       protocol: !Protocols {}
     - !DictionarySchema &ref_8
       type: dictionary
@@ -100,7 +100,7 @@ schemas: !Schemas
           name: OutputAdditionalPropertiesModelStruct
           description: Dictionary of <string>
       protocol: !Protocols {}
-  any:
+  anyObjects:
     - *ref_2
   objects:
     - !ObjectSchema &ref_11

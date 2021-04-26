@@ -32,13 +32,13 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-  any:
-    - !AnySchema &ref_3
-      type: any
+  anyObjects:
+    - !AnyObjectSchema &ref_3
+      type: any-object
       language: !Languages 
         default:
-          name: any
-          description: Anything
+          name: AnyObject
+          description: Any object
       protocol: !Protocols {}
 globalParameters:
   - !Parameter &ref_1
