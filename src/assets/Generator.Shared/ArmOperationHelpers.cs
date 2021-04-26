@@ -9,7 +9,6 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager.Core;
 
 namespace Azure.Core.Foo
 {
@@ -38,11 +37,7 @@ namespace Azure.Core.Foo
             _operation = new ArmOperationHelpers<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName);
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ArmOperation{TOperations}"/> class.
-        /// </summary>
-        /// <param name="response"> The non lro response to wrap. </param>
-        protected ArmOperationHelpers(Response<T> response)
+        public ArmOperationHelpers(Response<T> response)
         {
             if (response is null)
                 throw new ArgumentNullException(nameof(response));
@@ -52,28 +47,22 @@ namespace Azure.Core.Foo
 
         private bool _doesWrapOperation => _valueResponse is null;
 
-        /// <inheritdoc/>
         public T Value => _doesWrapOperation ? _operation!.Value : _valueResponse!.Value;
 
-        /// <inheritdoc/>
         public bool HasCompleted => _doesWrapOperation ? _operation!.HasCompleted : true;
 
-        /// <inheritdoc/>
         public bool HasValue => _doesWrapOperation ? _operation!.HasValue : true;
 
-        /// <inheritdoc/>
         public Response GetRawResponse()
         {
             return _doesWrapOperation ? _operation!.GetRawResponse() : _valueResponse!.GetRawResponse();
         }
 
-        /// <inheritdoc/>
         public Response UpdateStatus(CancellationToken cancellationToken = default)
         {
             return _doesWrapOperation ? _operation!.UpdateStatus(cancellationToken) : _valueResponse!.GetRawResponse();
         }
 
-        /// <inheritdoc/>
         public ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
         {
             return _doesWrapOperation
@@ -81,14 +70,12 @@ namespace Azure.Core.Foo
                 : new ValueTask<Response>(_valueResponse!.GetRawResponse());
         }
 
-        /// <inheritdoc/>
         public async ValueTask<Response<T>> WaitForCompletionAsync(
             CancellationToken cancellationToken = default)
         {
             return await WaitForCompletionAsync(OperationHelpers<T>.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
         }
 
-        /// <inheritdoc/>
         public async ValueTask<Response<T>> WaitForCompletionAsync(
             TimeSpan pollingInterval,
             CancellationToken cancellationToken)
@@ -97,41 +84,5 @@ namespace Azure.Core.Foo
                 ? await _operation!.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false)
                 : _valueResponse!;
         }
-
-        /// <summary>
-        /// Waits for the completion of the long running operations.
-        /// </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A response with the <see cref="ArmOperation{TOperations}"/> operation for this resource. </returns>
-        /// <remarks>
-        /// <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>
-        /// </remarks>
-        //public Response<T> WaitForCompletion(CancellationToken cancellationToken = default)
-        //{
-        //    return WaitForCompletion(OperationHelpers<T>.DefaultPollingInterval.Seconds, cancellationToken);
-        //}
-
-        /// <summary>
-        /// Waits for the completion of the long running operations.
-        /// </summary>
-        /// <param name="pollingInterval"> The polling interval in seconds to check for status. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        /// <returns> A response with the <see cref="ArmOperation{TOperations}"/> operation for this resource. </returns>
-        /// <remarks>
-        /// <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>
-        /// </remarks>
-        //public Response<T> WaitForCompletion(int pollingInterval, CancellationToken cancellationToken = default)
-        //{
-        //    while (true)
-        //    {
-        //        UpdateStatus(cancellationToken);
-        //        if (HasCompleted)
-        //        {
-        //            return ArmResponse.FromValue(Value!, GetRawResponse()) as ArmResponse<T>;
-        //        }
-
-        //        Task.Delay(pollingInterval, cancellationToken).Wait(cancellationToken);
-        //    }
-        //}
     }
 }
