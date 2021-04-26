@@ -33,17 +33,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_15
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AvailabilitySetBar
-          description: specifies the bar
-      protocol: !Protocols {}
-    - !StringSchema &ref_10
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
@@ -53,7 +43,7 @@ schemas: !Schemas
           name: ResourceId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_11
+    - !StringSchema &ref_12
       type: string
       apiVersions:
         - !ApiVersion 
@@ -63,7 +53,7 @@ schemas: !Schemas
           name: ResourceName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_13
       type: string
       apiVersions:
         - !ApiVersion 
@@ -73,7 +63,7 @@ schemas: !Schemas
           name: ResourceType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_13
+    - !StringSchema &ref_14
       type: string
       apiVersions:
         - !ApiVersion 
@@ -82,6 +72,16 @@ schemas: !Schemas
         default:
           name: ResourceLocation
           description: Resource location
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: AvailabilitySetBar
+          description: specifies the bar
       protocol: !Protocols {}
     - !StringSchema &ref_16
       type: string
@@ -198,7 +198,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_14
+    - !DictionarySchema &ref_15
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -212,201 +212,201 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      parents: !Relations 
+      children: !Relations 
         all:
-          - !ObjectSchema &ref_3
+          - !ObjectSchema &ref_7
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            children: !Relations 
+            parents: !Relations 
               all:
                 - *ref_2
-                - !ObjectSchema &ref_7
-                  type: object
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  parents: !Relations 
-                    all:
-                      - *ref_3
-                    immediate:
-                      - *ref_3
-                  properties:
-                    - !Property 
-                      schema: *ref_4
-                      serializedName: foo
-                      language: !Languages 
-                        default:
-                          name: foo
-                          description: specifies the foo
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - input
-                    - output
-                  language: !Languages 
-                    default:
-                      name: DedicatedHostGroup
-                      description: Specifies information about the Dedicated host.
-                      namespace: ''
-                  protocol: !Protocols {}
-                - !ObjectSchema &ref_8
-                  type: object
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  parents: !Relations 
-                    all:
-                      - *ref_3
-                    immediate:
-                      - *ref_3
-                  properties:
-                    - !Property 
-                      schema: *ref_5
-                      serializedName: foo
-                      language: !Languages 
-                        default:
-                          name: foo
-                          description: specifies the foo
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - input
-                    - output
-                  language: !Languages 
-                    default:
-                      name: DedicatedHost
-                      description: Specifies information about the Dedicated host.
-                      namespace: ''
-                  protocol: !Protocols {}
-                - !ObjectSchema &ref_9
-                  type: object
-                  apiVersions:
-                    - !ApiVersion 
-                      version: '2020-06-01'
-                  parents: !Relations 
-                    all:
-                      - *ref_3
-                    immediate:
-                      - *ref_3
-                  properties:
-                    - !Property 
-                      schema: *ref_6
-                      serializedName: bar
-                      language: !Languages 
-                        default:
-                          name: bar
-                          description: specifies the bar
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - output
-                    - input
-                  language: !Languages 
-                    default:
-                      name: VirtualMachineExtensionImage
-                      description: The VirtualMachineExtensionImage.
-                      namespace: ''
-                  protocol: !Protocols {}
               immediate:
                 - *ref_2
-                - *ref_7
-                - *ref_8
-                - *ref_9
             properties:
               - !Property 
-                schema: *ref_10
-                readOnly: true
-                required: false
-                serializedName: id
+                schema: *ref_3
+                serializedName: bar
                 language: !Languages 
                   default:
-                    name: id
-                    description: Resource Id
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_11
-                readOnly: true
-                required: false
-                serializedName: name
-                language: !Languages 
-                  default:
-                    name: name
-                    description: Resource name
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_12
-                readOnly: true
-                required: false
-                serializedName: type
-                language: !Languages 
-                  default:
-                    name: type
-                    description: Resource type
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_13
-                required: true
-                serializedName: location
-                language: !Languages 
-                  default:
-                    name: location
-                    description: Resource location
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_14
-                required: false
-                serializedName: tags
-                language: !Languages 
-                  default:
-                    name: tags
-                    description: Resource tags
+                    name: bar
+                    description: specifies the bar
                 protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
               - input
               - output
-            extensions:
-              x-ms-azure-resource: true
             language: !Languages 
               default:
-                name: Resource
-                description: The Resource model definition.
+                name: AvailabilitySet
+                description: >-
+                  Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
+                  information about availability sets, see [Manage the availability of virtual
+                  machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance,
+                  see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br>
+                  Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_8
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: *ref_4
+                serializedName: foo
+                language: !Languages 
+                  default:
+                    name: foo
+                    description: specifies the foo
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: DedicatedHostGroup
+                description: Specifies information about the Dedicated host.
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_9
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: *ref_5
+                serializedName: foo
+                language: !Languages 
+                  default:
+                    name: foo
+                    description: specifies the foo
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: DedicatedHost
+                description: Specifies information about the Dedicated host.
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_10
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_2
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: *ref_6
+                serializedName: bar
+                language: !Languages 
+                  default:
+                    name: bar
+                    description: specifies the bar
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - output
+              - input
+            language: !Languages 
+              default:
+                name: VirtualMachineExtensionImage
+                description: The VirtualMachineExtensionImage.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_3
+          - *ref_7
+          - *ref_8
+          - *ref_9
+          - *ref_10
       properties:
         - !Property 
-          schema: *ref_15
-          serializedName: bar
+          schema: *ref_11
+          readOnly: true
+          required: false
+          serializedName: id
           language: !Languages 
             default:
-              name: bar
-              description: specifies the bar
+              name: id
+              description: Resource Id
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_12
+          readOnly: true
+          required: false
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: Resource name
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_13
+          readOnly: true
+          required: false
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: Resource type
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_14
+          required: true
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: Resource location
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_15
+          required: false
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Resource tags
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - input
         - output
+      extensions:
+        x-ms-azure-resource: true
       language: !Languages 
         default:
-          name: AvailabilitySet
-          description: >-
-            Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more
-            information about availability sets, see [Manage the availability of virtual
-            machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see
-            [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM
-            can only be added to availability set at creation time. An existing VM cannot be added to an availability set.
+          name: Resource
+          description: The Resource model definition.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_3
+    - *ref_7
     - !ObjectSchema &ref_31
       type: object
       apiVersions:
@@ -448,7 +448,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_2
+            elementType: *ref_7
             language: !Languages 
               default:
                 name: AvailabilitySetListResultValue
@@ -480,8 +480,8 @@ schemas: !Schemas
           description: The List Availability Set operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_7
     - *ref_8
+    - *ref_9
     - !ObjectSchema &ref_56
       type: object
       apiVersions:
@@ -518,7 +518,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_8
+            elementType: *ref_9
             language: !Languages 
               default:
                 name: DedicatedHostListResultValue
@@ -550,7 +550,7 @@ schemas: !Schemas
           description: The list dedicated host operation response.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_9
+    - *ref_10
   arrays:
     - *ref_20
     - *ref_21
@@ -559,7 +559,7 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      elementType: *ref_9
+      elementType: *ref_10
       language: !Languages 
         default:
           name: ArrayOfVirtualMachineExtensionImage
@@ -570,7 +570,7 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      elementType: *ref_9
+      elementType: *ref_10
       language: !Languages 
         default:
           name: ArrayOfVirtualMachineExtensionImage
@@ -673,7 +673,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_28
-                schema: *ref_2
+                schema: *ref_7
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -716,7 +716,7 @@ operationGroups:
           - *ref_30
         responses:
           - !SchemaResponse 
-            schema: *ref_2
+            schema: *ref_7
             language: !Languages 
               default:
                 name: ''
@@ -837,7 +837,7 @@ operationGroups:
           - *ref_36
         responses:
           - !SchemaResponse 
-            schema: *ref_2
+            schema: *ref_7
             language: !Languages 
               default:
                 name: ''
@@ -987,7 +987,7 @@ operationGroups:
           - *ref_40
         responses:
           - !SchemaResponse 
-            schema: *ref_2
+            schema: *ref_7
             language: !Languages 
               default:
                 name: ''
@@ -1204,7 +1204,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_44
-                schema: *ref_7
+                schema: *ref_8
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1247,7 +1247,7 @@ operationGroups:
           - *ref_46
         responses:
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_8
             language: !Languages 
               default:
                 name: ''
@@ -1260,7 +1260,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_8
             language: !Languages 
               default:
                 name: ''
@@ -1421,7 +1421,7 @@ operationGroups:
           - *ref_51
         responses:
           - !SchemaResponse 
-            schema: *ref_7
+            schema: *ref_8
             language: !Languages 
               default:
                 name: ''
@@ -1507,7 +1507,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_52
-                schema: *ref_8
+                schema: *ref_9
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1551,7 +1551,7 @@ operationGroups:
           - *ref_55
         responses:
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -1564,7 +1564,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -1700,7 +1700,7 @@ operationGroups:
           - *ref_62
         responses:
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -1900,7 +1900,7 @@ operationGroups:
           - *ref_68
         responses:
           - !SchemaResponse 
-            schema: *ref_8
+            schema: *ref_9
             language: !Languages 
               default:
                 name: ''
@@ -2099,7 +2099,7 @@ operationGroups:
           - *ref_75
         responses:
           - !SchemaResponse 
-            schema: *ref_9
+            schema: *ref_10
             language: !Languages 
               default:
                 name: ''
