@@ -13,18 +13,19 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using SubscriptionExtensions.Models;
 
-namespace Azure.ResourceManager.Sample
+namespace SubscriptionExtensions
 {
-    public partial class VirtualMachinePerformMaintenanceOperation : ArmOperation<VirtualMachineData>, IOperationSource<VirtualMachineData>
+    public partial class VirtualMachineCreateOrUpdateOperation : ArmOperation<VirtualMachineData>, IOperationSource<VirtualMachineData>
     {
         private readonly ArmOperationHelpers<VirtualMachineData> _operation;
-        protected VirtualMachinePerformMaintenanceOperation()
+        protected VirtualMachineCreateOrUpdateOperation()
         {
         }
-        internal VirtualMachinePerformMaintenanceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal VirtualMachineCreateOrUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<VirtualMachineData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachinePerformMaintenanceOperation");
+            _operation = new ArmOperationHelpers<VirtualMachineData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineCreateOrUpdateOperation");
         }
         public override string Id => _operation.Id;
         public override VirtualMachineData Value => _operation.Value;

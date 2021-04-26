@@ -15,8 +15,11 @@ namespace ResourceRename
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyInfo"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SshPublicKeyInfo(ResourceOperationsBase options, SshPublicKeyInfoData resource) : base()
+        internal SshPublicKeyInfo(ResourceOperationsBase options, SshPublicKeyInfoData resource)
         {
         }
+
+        /// <summary> Gets or sets the resource data. </summary>
+        public SshPublicKeyInfo Data { get; private set; }
     }
 }

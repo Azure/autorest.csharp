@@ -15,8 +15,11 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal SupersetModel4(ResourceOperationsBase options, SupersetModel4Data resource) : base()
+        internal SupersetModel4(ResourceOperationsBase options, SupersetModel4Data resource) : base(options, resource.Id)
         {
         }
+
+        /// <summary> Gets or sets the resource data. </summary>
+        public SupersetModel4 Data { get; private set; }
     }
 }

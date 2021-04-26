@@ -16,8 +16,21 @@ namespace SupersetInheritance
     /// <summary> A class representing the operations that can be performed over a specific SupersetModel4. </summary>
     public partial class SupersetModel4Operations : ResourceOperationsBase<TenantResourceIdentifier, SupersetModel4>
     {
-        /// <summary> Initializes a new instance of SupersetModel4Operations for mocking. </summary>
-        protected SupersetModel4Operations()
+        /// <summary> Initializes a new instance of the <see cref="SupersetModel4Operations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        internal SupersetModel4Operations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="SupersetModel4Operations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected SupersetModel4Operations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="SupersetModel4Operations"/> class. </summary>
+        internal SupersetModel4Operations()
         {
         }
 

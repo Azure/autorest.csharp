@@ -5,23 +5,276 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core.Resources;
 
 namespace ResourceRename
 {
     /// <summary> A class representing collection of SshPublicKeyInfo and their operations over a [ParentResource]. </summary>
-    public partial class SshPublicKeyInfoContainer
+    public partial class SshPublicKeyInfoContainer : ResourceContainerBase<TenantResourceIdentifier, SshPublicKeyInfo, SshPublicKeyInfoData>
     {
-        /// <summary> Initializes a new instance of SshPublicKeyInfoContainer for mocking. </summary>
-        protected SshPublicKeyInfoContainer()
+        /// <summary> Initializes a new instance of SshPublicKeyInfoContainer class. </summary>
+        /// <param name="parent"> The resource representing the parent resource. </param>
+        internal SshPublicKeyInfoContainer(ResourceOperationsBase parent) : base(parent)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
-        internal SshPublicKeyInfoContainer(ResourceOperationsBase parent)
-        {
-        }
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
 
+        /// <summary> Represents the REST operations. </summary>
+        private SshPublicKeysRestOperations Operations => new SshPublicKeysRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+
+        /// <summary> Typed Resource Identifier for the container. </summary>
+        // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
+        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+
+        // Container level operations.
+
+        /// <inheritdoc />
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public ArmResponse<SshPublicKeyInfo> CreateOrUpdate(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return StartCreateOrUpdate(sshPublicKeyName, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<SshPublicKeyInfo>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async Task<ArmResponse<SshPublicKeyInfo>> CreateOrUpdateAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.CreateOrUpdateAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartCreateOrUpdateAsync(sshPublicKeyName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return operation.WaitForCompletion() as ArmResponse<SshPublicKeyInfo>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public ArmOperation<SshPublicKeyInfo> StartCreateOrUpdate(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var originalResponse = Operations.Create(Id.ResourceGroupName, sshPublicKeyName, Id.Parent.Name, Id.Parent.Parent.Name, cancellationToken: cancellationToken);
+                return new PhArmOperation<SshPublicKeyInfo, SshPublicKeyInfoData>(
+                originalResponse,
+                data => new SshPublicKeyInfo(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async Task<ArmOperation<SshPublicKeyInfo>> StartCreateOrUpdateAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.StartCreateOrUpdateAsync");
+            scope.Start();
+            try
+            {
+                var originalResponse = await Operations.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, Id.Parent.Name, Id.Parent.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return new PhArmOperation<SshPublicKeyInfo, SshPublicKeyInfoData>(
+                originalResponse,
+                data => new SshPublicKeyInfo(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public override ArmResponse<SshPublicKeyInfo> CreateOrUpdate(string name, SshPublicKeyInfoData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in SshPublicKeysRestOperations that accepts SshPublicKeyInfoData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmResponse<SshPublicKeyInfo>> CreateOrUpdateAsync(string name, SshPublicKeyInfoData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in SshPublicKeysRestOperations that accepts SshPublicKeyInfoData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override ArmOperation<SshPublicKeyInfo> StartCreateOrUpdate(string name, SshPublicKeyInfoData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in SshPublicKeysRestOperations that accepts SshPublicKeyInfoData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmOperation<SshPublicKeyInfo>> StartCreateOrUpdateAsync(string name, SshPublicKeyInfoData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in SshPublicKeysRestOperations that accepts SshPublicKeyInfoData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override ArmResponse<SshPublicKeyInfo> Get(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.Get");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<SshPublicKeyInfo, SshPublicKeyInfoData>(
+                Operations.Get(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
+                data => new SshPublicKeyInfo(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<ArmResponse<SshPublicKeyInfo>> GetAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.GetAsync");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<SshPublicKeyInfo, SshPublicKeyInfoData>(
+                await Operations.GetAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
+                data => new SshPublicKeyInfo(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of SshPublicKeyInfo for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
+        public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(SshPublicKeyInfoOperations.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of SshPublicKeyInfo for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.ListAsGenericResourceAsync");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(SshPublicKeyInfoOperations.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of <see cref="SshPublicKeyInfo" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="SshPublicKeyInfo" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<SshPublicKeyInfo> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.List");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+                return new PhWrappingPageable<GenericResource, SshPublicKeyInfo>(results, genericResource => new SshPublicKeyInfoOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of <see cref="SshPublicKeyInfo" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="SshPublicKeyInfo" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<SshPublicKeyInfo> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyInfoContainer.ListAsync");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+                return new PhWrappingAsyncPageable<GenericResource, SshPublicKeyInfo>(results, genericResource => new SshPublicKeyInfoOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // Builders.
+        // public ArmBuilder<TenantResourceIdentifier, SshPublicKeyInfo, SshPublicKeyInfoData> Construct() { }
     }
 }

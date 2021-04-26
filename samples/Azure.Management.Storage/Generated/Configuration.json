@@ -9,7 +9,7 @@
   "AzureArm": true,
   "PublicClients": true,
   "ModelNamespace": true,
-  "HeadAsBoolean": false,
+  "HeadAsBoolean": true,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
   "CredentialTypes": [],

@@ -5,23 +5,197 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core.Resources;
 
 namespace TenantOnly
 {
     /// <summary> A class representing collection of BillingAccount and their operations over a [ParentResource]. </summary>
-    public partial class BillingAccountContainer
+    public partial class BillingAccountContainer : ResourceContainerBase<TenantResourceIdentifier, BillingAccount, BillingAccountData>
     {
-        /// <summary> Initializes a new instance of BillingAccountContainer for mocking. </summary>
-        protected BillingAccountContainer()
+        /// <summary> Initializes a new instance of BillingAccountContainer class. </summary>
+        /// <param name="parent"> The resource representing the parent resource. </param>
+        internal BillingAccountContainer(ResourceOperationsBase parent) : base(parent)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
-        internal BillingAccountContainer(ResourceOperationsBase parent)
-        {
-        }
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
 
+        /// <summary> Represents the REST operations. </summary>
+        private BillingAccountsRestOperations Operations => new BillingAccountsRestOperations(_clientDiagnostics, _pipeline);
+
+        /// <summary> Typed Resource Identifier for the container. </summary>
+        // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
+        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
+
+        // Container level operations.
+
+        /// <inheritdoc />
+        public override ArmResponse<BillingAccount> CreateOrUpdate(string name, BillingAccountData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmResponse<BillingAccount>> CreateOrUpdateAsync(string name, BillingAccountData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override ArmOperation<BillingAccount> StartCreateOrUpdate(string name, BillingAccountData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmOperation<BillingAccount>> StartCreateOrUpdateAsync(string name, BillingAccountData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // This resource does not support PUT HTTP method.
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override ArmResponse<BillingAccount> Get(string billingAccountName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.Get");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<BillingAccount, BillingAccountData>(
+                Operations.Get(billingAccountName, cancellationToken: cancellationToken),
+                data => new BillingAccount(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<ArmResponse<BillingAccount>> GetAsync(string billingAccountName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.GetAsync");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<BillingAccount, BillingAccountData>(
+                await Operations.GetAsync(billingAccountName, cancellationToken: cancellationToken),
+                data => new BillingAccount(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of BillingAccount for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
+        public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(BillingAccountOperations.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of BillingAccount for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.ListAsGenericResourceAsync");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(BillingAccountOperations.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of <see cref="BillingAccount" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="BillingAccount" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<BillingAccount> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.List");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+                return new PhWrappingPageable<GenericResource, BillingAccount>(results, genericResource => new BillingAccountOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of <see cref="BillingAccount" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="BillingAccount" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<BillingAccount> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.ListAsync");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+                return new PhWrappingAsyncPageable<GenericResource, BillingAccount>(results, genericResource => new BillingAccountOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // Builders.
+        // public ArmBuilder<TenantResourceIdentifier, BillingAccount, BillingAccountData> Construct() { }
     }
 }
