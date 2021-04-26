@@ -284,5 +284,27 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 }
             }
         }
+
+        [Test]
+        public void ValidateParentResourceOperation()
+        {
+            foreach (var operation in FindAllOperations())
+            {
+                var operationObj = Activator.CreateInstance(operation, true);
+                var operationTypeProperty = operationObj.GetType().GetField("ResourceType");
+                ResourceType operationType = operationTypeProperty.GetValue(operationObj) as ResourceType;
+                foreach (var container in FindAllContainers())
+                {
+                    ResourceType containerType = GetContainerValidResourceType(container);
+                    if (containerType.Equals(operationType))
+                    {
+                        var method = operationObj.GetType().GetMethod($"Get{container.Name.Remove(container.Name.LastIndexOf("Container"))}");
+                        Assert.NotNull(method);
+                        Assert.IsTrue(method.ReturnParameter.Equals(container.Name));
+                        Assert.IsTrue(method.GetParameters().Count() == 0);
+                    }
+                }
+            }
+        }
     }
 }
