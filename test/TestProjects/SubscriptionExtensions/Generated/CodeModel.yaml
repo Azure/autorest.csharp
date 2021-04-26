@@ -11,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_6
+    - !StringSchema &ref_1
       type: string
       apiVersions:
         - !ApiVersion 
@@ -21,16 +21,6 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_1
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AvailabilitySetFoo
-          description: specifies the foo
-      protocol: !Protocols {}
     - !StringSchema &ref_2
       type: string
       apiVersions:
@@ -38,8 +28,18 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: VirtualMachineBar
-          description: specifies the bar
+          name: ToasterFoo
+          description: specifies the foo
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ToasterId
+          description: Resource Id
       protocol: !Protocols {}
     - !StringSchema &ref_4
       type: string
@@ -48,11 +48,91 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: VirtualMachineListResultNextLink
+          name: ToasterName
+          description: Resource name
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ToasterType
+          description: Resource type
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ToasterLocation
+          description: Resource location
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: OvenBar
+          description: specifies the bar
+      protocol: !Protocols {}
+    - !StringSchema &ref_9
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: OvenId
+          description: Resource Id
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: OvenName
+          description: Resource name
+      protocol: !Protocols {}
+    - !StringSchema &ref_11
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: OvenType
+          description: Resource type
+      protocol: !Protocols {}
+    - !StringSchema &ref_12
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: OvenLocation
+          description: Resource location
+      protocol: !Protocols {}
+    - !StringSchema &ref_15
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: OvenListResultNextLink
           description: The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_7
+    - !ConstantSchema &ref_17
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -62,7 +142,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_11
+    - !ConstantSchema &ref_21
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -72,7 +152,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_13
+    - !ConstantSchema &ref_23
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -82,33 +162,25 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-  objects:
-    - !ObjectSchema &ref_12
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      properties:
-        - !Property 
-          schema: *ref_1
-          serializedName: foo
-          language: !Languages 
-            default:
-              name: foo
-              description: specifies the foo
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-        - output
+  dictionaries:
+    - !DictionarySchema &ref_7
+      type: dictionary
+      elementType: *ref_1
       language: !Languages 
         default:
-          name: AvailabilitySet
-          description: The AvailabilitySetListResult.
-          namespace: ''
+          name: ToasterTags
+          description: Resource tags
       protocol: !Protocols {}
-    - !ObjectSchema &ref_3
+    - !DictionarySchema &ref_13
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: OvenTags
+          description: Resource tags
+      protocol: !Protocols {}
+  objects:
+    - !ObjectSchema &ref_22
       type: object
       apiVersions:
         - !ApiVersion 
@@ -116,11 +188,54 @@ schemas: !Schemas
       properties:
         - !Property 
           schema: *ref_2
-          serializedName: bar
+          serializedName: foo
           language: !Languages 
             default:
-              name: bar
-              description: specifies the bar
+              name: foo
+              description: specifies the foo
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_3
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: Resource Id
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_4
+          readOnly: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: Resource name
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_5
+          readOnly: true
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: Resource type
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_6
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: Resource location
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_7
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Resource tags
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -129,26 +244,94 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: VirtualMachine
-          description: The VirtualMachine.
+          name: Toaster
+          description: The ToasterListResult.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_21
+    - !ObjectSchema &ref_14
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_5
+          schema: *ref_8
+          serializedName: bar
+          language: !Languages 
+            default:
+              name: bar
+              description: specifies the bar
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_9
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: Resource Id
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_10
+          readOnly: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: Resource name
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_11
+          readOnly: true
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: Resource type
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_12
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: Resource location
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_13
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Resource tags
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !Languages 
+        default:
+          name: Oven
+          description: The Oven.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_31
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_16
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_3
+            elementType: *ref_14
             language: !Languages 
               default:
-                name: VirtualMachineListResultValue
+                name: OvenListResultValue
                 description: The list of virtual machines.
             protocol: !Protocols {}
           required: true
@@ -159,7 +342,7 @@ schemas: !Schemas
               description: The list of virtual machines.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_4
+          schema: *ref_15
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -173,15 +356,15 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: VirtualMachineListResult
+          name: OvenListResult
           description: The List Virtual Machine operation response.
           namespace: ''
       protocol: !Protocols {}
   arrays:
-    - *ref_5
+    - *ref_16
 globalParameters:
-  - !Parameter &ref_10
-    schema: *ref_6
+  - !Parameter &ref_20
+    schema: *ref_1
     implementation: Client
     required: true
     extensions:
@@ -194,7 +377,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_8
+  - !Parameter &ref_18
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -210,8 +393,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_9
-    schema: *ref_7
+  - !Parameter &ref_19
+    schema: *ref_17
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -225,16 +408,16 @@ globalParameters:
         in: query
 operationGroups:
   - !OperationGroup 
-    $key: AvailabilitySets
+    $key: Toasters
     operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_8
-          - !Parameter &ref_15
-            schema: *ref_6
+          - *ref_18
+          - !Parameter &ref_25
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -245,8 +428,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_16
-            schema: *ref_6
+          - !Parameter &ref_26
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -257,13 +440,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_9
-          - *ref_10
+          - *ref_19
+          - *ref_20
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_11
+                schema: *ref_21
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -275,8 +458,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_14
-                schema: *ref_12
+              - !Parameter &ref_24
+                schema: *ref_22
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -288,7 +471,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_13
+                schema: *ref_23
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -301,7 +484,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_14
+              - *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -315,11 +498,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_15
-          - *ref_16
+          - *ref_25
+          - *ref_26
         responses:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_22
             language: !Languages 
               default:
                 name: ''
@@ -338,20 +521,20 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: AvailabilitySets
+        name: Toasters
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: VirtualMachines
+    $key: Ovens
     operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_8
-          - !Parameter &ref_18
-            schema: *ref_6
+          - *ref_18
+          - !Parameter &ref_28
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -362,8 +545,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_19
-            schema: *ref_6
+          - !Parameter &ref_29
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -374,13 +557,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_9
-          - *ref_10
+          - *ref_19
+          - *ref_20
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_11
+                schema: *ref_21
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -392,8 +575,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_17
-                schema: *ref_3
+              - !Parameter &ref_27
+                schema: *ref_14
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -405,7 +588,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_13
+                schema: *ref_23
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -418,7 +601,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_17
+              - *ref_27
             language: !Languages 
               default:
                 name: ''
@@ -432,11 +615,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_18
-          - *ref_19
+          - *ref_28
+          - *ref_29
         responses:
           - !SchemaResponse 
-            schema: *ref_3
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -449,7 +632,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_3
+            schema: *ref_14
             language: !Languages 
               default:
                 name: ''
@@ -473,11 +656,11 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_8
-          - *ref_9
-          - *ref_10
-          - !Parameter &ref_20
-            schema: *ref_6
+          - *ref_18
+          - *ref_19
+          - *ref_20
+          - !Parameter &ref_30
+            schema: *ref_1
             implementation: Method
             language: !Languages 
               default:
@@ -491,7 +674,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_13
+                schema: *ref_23
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -514,10 +697,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_20
+          - *ref_30
         responses:
           - !SchemaResponse 
-            schema: *ref_21
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -541,7 +724,7 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: VirtualMachines
+        name: Ovens
         description: ''
     protocol: !Protocols {}
 security: !Security 

@@ -21,6 +21,13 @@ namespace SupersetInheritance
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref = "SupersetModel1Operations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected SupersetModel1Operations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Compute/supersetModel1s";
         protected override ResourceType ValidResourceType => ResourceType;
 

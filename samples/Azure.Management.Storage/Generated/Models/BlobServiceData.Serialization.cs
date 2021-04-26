@@ -64,7 +64,7 @@ namespace Azure.Management.Storage.Models
 
         internal static BlobServiceData DeserializeBlobServiceData(JsonElement element)
         {
-            Optional<SkuData> sku = default;
+            Optional<Sku> sku = default;
             TenantResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -85,7 +85,7 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = SkuData.DeserializeSkuData(property.Value);
+                    sku = Sku.DeserializeSku(property.Value);
                     continue;
                 }
                 if (property.NameEquals("id"))

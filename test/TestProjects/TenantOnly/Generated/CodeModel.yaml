@@ -11,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_7
+    - !StringSchema &ref_1
       type: string
       apiVersions:
         - !ApiVersion 
@@ -21,7 +21,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_1
+    - !StringSchema &ref_2
       type: string
       apiVersions:
         - !ApiVersion 
@@ -31,7 +31,47 @@ schemas: !Schemas
           name: BillingAccountBar
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_2
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-05-01'
+      language: !Languages 
+        default:
+          name: BillingAccountId
+          description: Resource Id
+      protocol: !Protocols {}
+    - !StringSchema &ref_4
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-05-01'
+      language: !Languages 
+        default:
+          name: BillingAccountName
+          description: Resource name
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-05-01'
+      language: !Languages 
+        default:
+          name: BillingAccountType
+          description: Resource type
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-05-01'
+      language: !Languages 
+        default:
+          name: BillingAccountLocation
+          description: Resource location
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
       type: string
       apiVersions:
         - !ApiVersion 
@@ -41,7 +81,7 @@ schemas: !Schemas
           name: ErrorResponseError
           description: The details of the error.
       protocol: !Protocols {}
-    - !StringSchema &ref_3
+    - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
@@ -51,8 +91,48 @@ schemas: !Schemas
           name: AgreementFoo
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_10
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-05-01'
+      language: !Languages 
+        default:
+          name: AgreementId
+          description: Resource Id
+      protocol: !Protocols {}
+    - !StringSchema &ref_11
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-05-01'
+      language: !Languages 
+        default:
+          name: AgreementName
+          description: Resource name
+      protocol: !Protocols {}
+    - !StringSchema &ref_12
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-05-01'
+      language: !Languages 
+        default:
+          name: AgreementType
+          description: Resource type
+      protocol: !Protocols {}
+    - !StringSchema &ref_13
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-05-01'
+      language: !Languages 
+        default:
+          name: AgreementLocation
+          description: Resource location
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_4
+    - !ConstantSchema &ref_15
       type: constant
       value: !ConstantValue 
         value: '2020-05-01'
@@ -62,7 +142,7 @@ schemas: !Schemas
           name: ApiVersion20200501
           description: Api Version (2020-05-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_8
+    - !ConstantSchema &ref_18
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -72,7 +152,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_13
+    - !ConstantSchema &ref_23
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -82,20 +162,80 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
+  dictionaries:
+    - !DictionarySchema &ref_7
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: BillingAccountTags
+          description: Resource tags
+      protocol: !Protocols {}
+    - !DictionarySchema &ref_14
+      type: dictionary
+      elementType: *ref_1
+      language: !Languages 
+        default:
+          name: AgreementTags
+          description: Resource tags
+      protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_11
+    - !ObjectSchema &ref_21
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       properties:
         - !Property 
-          schema: *ref_1
+          schema: *ref_2
           serializedName: bar
           language: !Languages 
             default:
               name: bar
               description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_3
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: Resource Id
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_4
+          readOnly: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: Resource name
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_5
+          readOnly: true
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: Resource type
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_6
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: Resource location
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_7
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Resource tags
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -108,14 +248,14 @@ schemas: !Schemas
           description: A billing account.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_12
+    - !ObjectSchema &ref_22
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       properties:
         - !Property 
-          schema: *ref_2
+          schema: *ref_8
           serializedName: error
           language: !Languages 
             default:
@@ -132,19 +272,62 @@ schemas: !Schemas
           description: Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_19
+    - !ObjectSchema &ref_29
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-05-01'
       properties:
         - !Property 
-          schema: *ref_3
+          schema: *ref_9
           serializedName: foo
           language: !Languages 
             default:
               name: foo
               description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_10
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: Resource Id
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_11
+          readOnly: true
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: Resource name
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_12
+          readOnly: true
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: Resource type
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_13
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: Resource location
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_14
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Resource tags
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -157,7 +340,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_5
+  - !Parameter &ref_16
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -173,8 +356,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_6
-    schema: *ref_4
+  - !Parameter &ref_17
+    schema: *ref_15
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -195,10 +378,10 @@ operationGroups:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
-          - *ref_5
-          - *ref_6
-          - !Parameter &ref_9
-            schema: *ref_7
+          - *ref_16
+          - *ref_17
+          - !Parameter &ref_19
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -209,8 +392,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_10
-            schema: *ref_7
+          - !Parameter &ref_20
+            schema: *ref_1
             implementation: Method
             language: !Languages 
               default:
@@ -224,7 +407,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_8
+                schema: *ref_18
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -247,11 +430,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_9
-          - *ref_10
+          - *ref_19
+          - *ref_20
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_21
             language: !Languages 
               default:
                 name: ''
@@ -265,7 +448,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_22
             language: !Languages 
               default:
                 name: ''
@@ -287,10 +470,10 @@ operationGroups:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
-          - *ref_5
-          - *ref_6
-          - !Parameter &ref_15
-            schema: *ref_7
+          - *ref_16
+          - *ref_17
+          - !Parameter &ref_25
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -305,7 +488,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_13
+                schema: *ref_23
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -317,8 +500,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_14
-                schema: *ref_11
+              - !Parameter &ref_24
+                schema: *ref_21
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -330,7 +513,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_8
+                schema: *ref_18
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -343,7 +526,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_14
+              - *ref_24
             language: !Languages 
               default:
                 name: ''
@@ -357,10 +540,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_15
+          - *ref_25
         responses:
           - !SchemaResponse 
-            schema: *ref_11
+            schema: *ref_21
             language: !Languages 
               default:
                 name: ''
@@ -383,7 +566,7 @@ operationGroups:
                   - '202'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_22
             language: !Languages 
               default:
                 name: ''
@@ -417,10 +600,10 @@ operationGroups:
           - !ApiVersion 
             version: '2020-05-01'
         parameters:
-          - *ref_5
-          - *ref_6
-          - !Parameter &ref_16
-            schema: *ref_7
+          - *ref_16
+          - *ref_17
+          - !Parameter &ref_26
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -431,8 +614,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_17
-            schema: *ref_7
+          - !Parameter &ref_27
+            schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
@@ -443,8 +626,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_18
-            schema: *ref_7
+          - !Parameter &ref_28
+            schema: *ref_1
             implementation: Method
             language: !Languages 
               default:
@@ -458,7 +641,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_8
+                schema: *ref_18
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -481,12 +664,12 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_16
-          - *ref_17
-          - *ref_18
+          - *ref_26
+          - *ref_27
+          - *ref_28
         responses:
           - !SchemaResponse 
-            schema: *ref_19
+            schema: *ref_29
             language: !Languages 
               default:
                 name: ''
@@ -500,7 +683,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_12
+            schema: *ref_22
             language: !Languages 
               default:
                 name: ''

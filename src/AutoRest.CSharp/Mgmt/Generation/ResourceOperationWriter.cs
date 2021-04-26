@@ -37,7 +37,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {resourceOperation.Type.Name} for mocking.");
-            using (writer.Scope($"protected {resourceOperation.Type.Name:D}()"))
+            using (writer.Scope($"protected {resourceOperation.Type.Name}()"))
+            {
+
+            }
+
+            writer.Line();
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref = \"{resourceOperation.Type.Name}\"/> class.");
+            writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
+            writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
+            using (writer.Scope($"protected {resourceOperation.Type.Name}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : base(options, id)"))
             {
 
             }
