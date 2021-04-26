@@ -15,8 +15,11 @@ namespace MgmtParent
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySet"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal AvailabilitySet(ResourceOperationsBase options, AvailabilitySetData resource) : base()
+        internal AvailabilitySet(ResourceOperationsBase options, AvailabilitySetData resource)
         {
         }
+
+        /// <summary> Gets or sets the resource data. </summary>
+        public AvailabilitySet Data { get; private set; }
     }
 }

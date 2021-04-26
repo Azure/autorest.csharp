@@ -15,8 +15,11 @@ namespace MgmtParent
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImage"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal VirtualMachineExtensionImage(ResourceOperationsBase options, VirtualMachineExtensionImageData resource) : base()
+        internal VirtualMachineExtensionImage(ResourceOperationsBase options, VirtualMachineExtensionImageData resource)
         {
         }
+
+        /// <summary> Gets or sets the resource data. </summary>
+        public VirtualMachineExtensionImage Data { get; private set; }
     }
 }

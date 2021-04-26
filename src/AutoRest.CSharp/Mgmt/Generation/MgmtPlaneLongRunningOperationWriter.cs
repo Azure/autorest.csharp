@@ -10,6 +10,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using Azure;
 using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -21,7 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
     /// </summary>
     internal class MgmtPlaneLongRunningOperationWriter
     {
-        internal void Write(CodeWriter writer, OperationGroup operationGroup, Operation operation, Output.Models.Types.BuildContext<Mgmt.AutoRest.MgmtOutputLibrary> context)
+        internal void Write(CodeWriter writer, OperationGroup operationGroup, Input.Operation operation, Output.Models.Types.BuildContext<Mgmt.AutoRest.MgmtOutputLibrary> context)
         {
             writer.UseNamespace("System");
             writer.UseNamespace("System.Text.Json");
@@ -50,8 +51,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"public override {resourceData.Type} Value => _operation.Value;");
                 writer.Line($"public override bool HasCompleted => _operation.HasCompleted;");
                 writer.Line($"public override bool HasValue => _operation.HasValue;");
-                writer.Line($"public override Response GetRawResponse() => _operation.GetRawResponse();");
-                writer.Line($"public override Response UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);");
+                writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.GetRawResponse();");
+                writer.Line($"public override {typeof(Response)} UpdateStatus(CancellationToken cancellationToken = default) => _operation.UpdateStatus(cancellationToken);");
                 writer.Line($"public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);");
                 writer.Line($"public override ValueTask<Response<{resourceData.Type}>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);");
                 writer.Line($"public override ValueTask<Response<{resourceData.Type}>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);");

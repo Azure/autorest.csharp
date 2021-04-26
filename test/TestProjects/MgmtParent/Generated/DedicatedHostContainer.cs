@@ -5,23 +5,284 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core.Resources;
 
 namespace MgmtParent
 {
     /// <summary> A class representing collection of DedicatedHost and their operations over a [ParentResource]. </summary>
-    public partial class DedicatedHostContainer
+    public partial class DedicatedHostContainer : ResourceContainerBase<TenantResourceIdentifier, DedicatedHost, DedicatedHostData>
     {
-        /// <summary> Initializes a new instance of DedicatedHostContainer for mocking. </summary>
-        protected DedicatedHostContainer()
+        /// <summary> Initializes a new instance of DedicatedHostContainer class. </summary>
+        /// <param name="parent"> The resource representing the parent resource. </param>
+        internal DedicatedHostContainer(ResourceOperationsBase parent) : base(parent)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
-        internal DedicatedHostContainer(ResourceOperationsBase parent)
-        {
-        }
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
 
+        /// <summary> Represents the REST operations. </summary>
+        private DedicatedHostsRestOperations Operations => new DedicatedHostsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+
+        /// <summary> Typed Resource Identifier for the container. </summary>
+        // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
+        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected ResourceType ValidResourceType => DedicatedHostGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => DedicatedHostGroupOperations.ResourceType;
+
+        // Container level operations.
+
+        /// <inheritdoc />
+        /// <param name="hostName"> The name of the dedicated host . </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public ArmResponse<DedicatedHost> CreateOrUpdate(string hostName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                return StartCreateOrUpdate(hostName, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<DedicatedHost>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="hostName"> The name of the dedicated host . </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async Task<ArmResponse<DedicatedHost>> CreateOrUpdateAsync(string hostName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CreateOrUpdateAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartCreateOrUpdateAsync(hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return operation.WaitForCompletion() as ArmResponse<DedicatedHost>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="hostName"> The name of the dedicated host . </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public ArmOperation<DedicatedHost> StartCreateOrUpdate(string hostName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, Id.Name, hostName, Id.Parent.Parent.Name, cancellationToken: cancellationToken);
+                var operation = new DedicatedHostCreateOrUpdateOperation(
+                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                Id.ResourceGroupName, Id.Name, hostName, Id.Parent.Parent.Name).Request,
+                originalResponse);
+                return new PhArmOperation<DedicatedHost, DedicatedHostData>(
+                operation,
+                data => new DedicatedHost(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="hostName"> The name of the dedicated host . </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async Task<ArmOperation<DedicatedHost>> StartCreateOrUpdateAsync(string hostName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.StartCreateOrUpdateAsync");
+            scope.Start();
+            try
+            {
+                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, hostName, Id.Parent.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = new DedicatedHostCreateOrUpdateOperation(
+                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                Id.ResourceGroupName, Id.Name, hostName, Id.Parent.Parent.Name).Request,
+                originalResponse);
+                return new PhArmOperation<DedicatedHost, DedicatedHostData>(
+                operation,
+                data => new DedicatedHost(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public override ArmResponse<DedicatedHost> CreateOrUpdate(string name, DedicatedHostData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in DedicatedHostsRestOperations that accepts DedicatedHostData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmResponse<DedicatedHost>> CreateOrUpdateAsync(string name, DedicatedHostData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in DedicatedHostsRestOperations that accepts DedicatedHostData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override ArmOperation<DedicatedHost> StartCreateOrUpdate(string name, DedicatedHostData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in DedicatedHostsRestOperations that accepts DedicatedHostData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        public override Task<ArmOperation<DedicatedHost>> StartCreateOrUpdateAsync(string name, DedicatedHostData resourceDetails, CancellationToken cancellationToken = default)
+        {
+            // There is no create or update method in DedicatedHostsRestOperations that accepts DedicatedHostData
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc />
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override ArmResponse<DedicatedHost> Get(string hostName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.Get");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<DedicatedHost, DedicatedHostData>(
+                Operations.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
+                data => new DedicatedHost(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="hostName"> The name of the dedicated host. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<ArmResponse<DedicatedHost>> GetAsync(string hostName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAsync");
+            scope.Start();
+            try
+            {
+                return new PhArmResponse<DedicatedHost, DedicatedHostData>(
+                await Operations.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
+                data => new DedicatedHost(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of DedicatedHost for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
+        public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(DedicatedHostOperations.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of DedicatedHost for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsGenericResourceAsync");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(DedicatedHostOperations.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<DedicatedHost> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+                return new PhWrappingPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<DedicatedHost> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsync");
+            scope.Start();
+            try
+            {
+                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+                return new PhWrappingAsyncPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // Builders.
+        // public ArmBuilder<TenantResourceIdentifier, DedicatedHost, DedicatedHostData> Construct() { }
     }
 }

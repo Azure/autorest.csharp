@@ -15,8 +15,11 @@ namespace MgmtParent
         /// <summary> Initializes a new instance of the <see cref="DedicatedHost"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DedicatedHost(ResourceOperationsBase options, DedicatedHostData resource) : base()
+        internal DedicatedHost(ResourceOperationsBase options, DedicatedHostData resource)
         {
         }
+
+        /// <summary> Gets or sets the resource data. </summary>
+        public DedicatedHost Data { get; private set; }
     }
 }

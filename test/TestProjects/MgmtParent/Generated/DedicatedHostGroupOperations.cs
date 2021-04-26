@@ -16,8 +16,21 @@ namespace MgmtParent
     /// <summary> A class representing the operations that can be performed over a specific DedicatedHostGroup. </summary>
     public partial class DedicatedHostGroupOperations : ResourceOperationsBase<TenantResourceIdentifier, DedicatedHostGroup>
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupOperations for mocking. </summary>
-        protected DedicatedHostGroupOperations()
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        internal DedicatedHostGroupOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected DedicatedHostGroupOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupOperations"/> class. </summary>
+        internal DedicatedHostGroupOperations()
         {
         }
 
