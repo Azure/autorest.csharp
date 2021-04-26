@@ -6541,7 +6541,7 @@ schemas: !Schemas
         language: !Languages 
           default:
             name: any
-            description: Any object
+            description: Anything
         protocol: !Protocols {}
       language: !Languages 
         default:

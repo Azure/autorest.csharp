@@ -38,7 +38,7 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: any
-          description: Any object
+          description: Anything
       protocol: !Protocols {}
 globalParameters:
   - !Parameter &ref_1

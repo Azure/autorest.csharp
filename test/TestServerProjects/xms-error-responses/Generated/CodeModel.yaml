@@ -40,8 +40,8 @@ schemas: !Schemas
           version: 0.0.0
       language: !Languages 
         default:
-          name: PetName
-          description: Gets the Pet by id.
+          name: AnimalAniType
+          description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_2
       type: string
@@ -50,17 +50,17 @@ schemas: !Schemas
           version: 0.0.0
       language: !Languages 
         default:
-          name: AnimalAniType
-          description: ''
+          name: PetName
+          description: Gets the Pet by id.
       protocol: !Protocols {}
-    - !StringSchema &ref_13
+    - !StringSchema &ref_14
       type: string
       apiVersions:
         - !ApiVersion 
           version: 0.0.0
       language: !Languages 
         default:
-          name: NotFoundErrorBaseReason
+          name: BaseErrorSomeBaseProp
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_12
@@ -70,17 +70,17 @@ schemas: !Schemas
           version: 0.0.0
       language: !Languages 
         default:
-          name: NotFoundErrorBaseWhatNotFound
+          name: NotFoundErrorBaseReason
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_9
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
           version: 0.0.0
       language: !Languages 
         default:
-          name: BaseErrorSomeBaseProp
+          name: NotFoundErrorBaseWhatNotFound
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_24
@@ -113,7 +113,7 @@ schemas: !Schemas
           name: PetActionErrorMessage
           description: the error message
       protocol: !Protocols {}
-    - !StringSchema &ref_10
+    - !StringSchema &ref_7
       type: string
       apiVersions:
         - !ApiVersion 
@@ -170,14 +170,14 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 0.0.0
-      parents: !Relations 
+      children: !Relations 
         all:
           - !ObjectSchema &ref_3
             type: object
             apiVersions:
               - !ApiVersion 
                 version: 0.0.0
-            children: !Relations 
+            parents: !Relations 
               all:
                 - *ref_1
               immediate:
@@ -185,11 +185,12 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_2
-                serializedName: aniType
+                readOnly: true
+                serializedName: name
                 language: !Languages 
                   default:
-                    name: aniType
-                    description: ''
+                    name: name
+                    description: Gets the Pet by id.
                 protocol: !Protocols {}
             serializationFormats:
               - json
@@ -197,7 +198,7 @@ schemas: !Schemas
               - output
             language: !Languages 
               default:
-                name: Animal
+                name: Pet
                 description: ''
                 namespace: ''
             protocol: !Protocols {}
@@ -206,12 +207,11 @@ schemas: !Schemas
       properties:
         - !Property 
           schema: *ref_4
-          readOnly: true
-          serializedName: name
+          serializedName: aniType
           language: !Languages 
             default:
-              name: name
-              description: Gets the Pet by id.
+              name: aniType
+              description: ''
           protocol: !Protocols {}
       serializationFormats:
         - json
@@ -219,76 +219,77 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: Pet
+          name: Animal
           description: ''
           namespace: ''
       protocol: !Protocols {}
     - *ref_3
-    - !ObjectSchema &ref_5
+    - !ObjectSchema &ref_6
       type: object
       apiVersions:
         - !ApiVersion 
           version: 0.0.0
       children: !Relations 
         all:
-          - !ObjectSchema &ref_6
+          - !ObjectSchema &ref_5
             type: object
             apiVersions:
               - !ApiVersion 
                 version: 0.0.0
-            discriminatorValue: InvalidResourceLink
-            parents: !Relations 
+            children: !Relations 
               all:
-                - *ref_5
-                - !ObjectSchema &ref_7
+                - !ObjectSchema &ref_9
                   type: object
                   apiVersions:
                     - !ApiVersion 
                       version: 0.0.0
-                  children: !Relations 
+                  discriminatorValue: InvalidResourceLink
+                  parents: !Relations 
                     all:
                       - *ref_5
                       - *ref_6
-                      - !ObjectSchema &ref_11
-                        type: object
-                        apiVersions:
-                          - !ApiVersion 
-                            version: 0.0.0
-                        discriminatorValue: AnimalNotFound
-                        parents: !Relations 
-                          all:
-                            - *ref_5
-                            - *ref_7
-                          immediate:
-                            - *ref_5
-                        properties:
-                          - !Property 
-                            schema: *ref_8
-                            serializedName: name
-                            language: !Languages 
-                              default:
-                                name: name
-                                description: ''
-                            protocol: !Protocols {}
-                        serializationFormats:
-                          - json
-                        usage:
-                          - exception
-                        language: !Languages 
-                          default:
-                            name: AnimalNotFound
-                            description: ''
-                            namespace: ''
-                        protocol: !Protocols {}
                     immediate:
                       - *ref_5
                   properties:
                     - !Property 
-                      schema: *ref_9
-                      serializedName: someBaseProp
+                      schema: *ref_7
+                      serializedName: whatSubAddress
                       language: !Languages 
                         default:
-                          name: someBaseProp
+                          name: whatSubAddress
+                          description: ''
+                      protocol: !Protocols {}
+                  serializationFormats:
+                    - json
+                  usage:
+                    - exception
+                  extensions:
+                    x-ms-discriminator-value: InvalidResourceLink
+                  language: !Languages 
+                    default:
+                      name: LinkNotFound
+                      description: ''
+                      namespace: ''
+                  protocol: !Protocols {}
+                - !ObjectSchema &ref_10
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: 0.0.0
+                  discriminatorValue: AnimalNotFound
+                  parents: !Relations 
+                    all:
+                      - *ref_5
+                      - *ref_6
+                    immediate:
+                      - *ref_5
+                  properties:
+                    - !Property 
+                      schema: *ref_8
+                      serializedName: name
+                      language: !Languages 
+                        default:
+                          name: name
                           description: ''
                       protocol: !Protocols {}
                   serializationFormats:
@@ -297,82 +298,81 @@ schemas: !Schemas
                     - exception
                   language: !Languages 
                     default:
-                      name: BaseError
+                      name: AnimalNotFound
                       description: ''
                       namespace: ''
                   protocol: !Protocols {}
               immediate:
-                - *ref_5
-            properties:
-              - !Property 
-                schema: *ref_10
-                serializedName: whatSubAddress
+                - *ref_9
+                - *ref_10
+            discriminator: !Discriminator 
+              all:
+                AnimalNotFound: *ref_10
+                InvalidResourceLink: *ref_9
+              immediate:
+                AnimalNotFound: *ref_10
+                InvalidResourceLink: *ref_9
+              property: !Property &ref_13
+                schema: *ref_11
+                isDiscriminator: true
+                required: true
+                serializedName: whatNotFound
                 language: !Languages 
                   default:
-                    name: whatSubAddress
+                    name: whatNotFound
                     description: ''
                 protocol: !Protocols {}
+            discriminatorValue: NotFoundErrorBase
+            parents: !Relations 
+              all:
+                - *ref_6
+              immediate:
+                - *ref_6
+            properties:
+              - !Property 
+                schema: *ref_12
+                required: false
+                serializedName: reason
+                language: !Languages 
+                  default:
+                    name: reason
+                    description: ''
+                protocol: !Protocols {}
+              - *ref_13
             serializationFormats:
               - json
             usage:
               - exception
-            extensions:
-              x-ms-discriminator-value: InvalidResourceLink
             language: !Languages 
               default:
-                name: LinkNotFound
+                name: NotFoundErrorBase
                 description: ''
                 namespace: ''
             protocol: !Protocols {}
-          - *ref_11
+          - *ref_9
+          - *ref_10
         immediate:
-          - *ref_6
-          - *ref_11
-      discriminator: !Discriminator 
-        all:
-          AnimalNotFound: *ref_11
-          InvalidResourceLink: *ref_6
-        immediate:
-          AnimalNotFound: *ref_11
-          InvalidResourceLink: *ref_6
-        property: !Property &ref_14
-          schema: *ref_12
-          isDiscriminator: true
-          required: true
-          serializedName: whatNotFound
-          language: !Languages 
-            default:
-              name: whatNotFound
-              description: ''
-          protocol: !Protocols {}
-      discriminatorValue: NotFoundErrorBase
-      parents: !Relations 
-        all:
-          - *ref_7
-        immediate:
-          - *ref_7
+          - *ref_5
       properties:
         - !Property 
-          schema: *ref_13
-          required: false
-          serializedName: reason
+          schema: *ref_14
+          serializedName: someBaseProp
           language: !Languages 
             default:
-              name: reason
+              name: someBaseProp
               description: ''
           protocol: !Protocols {}
-        - *ref_14
       serializationFormats:
         - json
       usage:
         - exception
       language: !Languages 
         default:
-          name: NotFoundErrorBase
+          name: BaseError
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_7
+    - *ref_5
     - !ObjectSchema &ref_17
       type: object
       apiVersions:
@@ -534,8 +534,8 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_16
-    - *ref_6
-    - *ref_11
+    - *ref_9
+    - *ref_10
     - *ref_15
     - *ref_19
 globalParameters:
@@ -607,7 +607,7 @@ operationGroups:
           - *ref_28
         responses:
           - !SchemaResponse 
-            schema: *ref_1
+            schema: *ref_3
             language: !Languages 
               default:
                 name: ''

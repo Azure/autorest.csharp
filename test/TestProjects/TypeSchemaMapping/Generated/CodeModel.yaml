@@ -366,7 +366,7 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: any
-          description: Any object
+          description: Anything
       protocol: !Protocols {}
   uuids:
     - !UuidSchema &ref_11
