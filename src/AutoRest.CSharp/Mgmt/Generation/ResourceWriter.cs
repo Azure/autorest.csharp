@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Namespace(cs.Namespace))
             {
                 writer.WriteXmlDocumentationSummary(resource.Description);
+                var resourceDataObject = context.Library.GetResourceData(resource.OperationGroup);
 
                 using (writer.Scope($"{resource.Declaration.Accessibility} class {cs.Name} : {cs.Name}Operations"))
                 {
@@ -27,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class.");
                     writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
                     writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
-                    using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {context.Library.GetResourceData(resource.OperationGroup).Type} resource) : base(options, resource.Id)"))
+                    using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resourceDataObject.Type} resource) : base(options, resource.Id)"))
                     {
                         writer.LineRaw("Data = resource;");
                     }
@@ -35,8 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // write Data
                     writer.Line();
                     writer.WriteXmlDocumentationSummary($"Gets or sets the {context.Library.GetResourceData(resource.OperationGroup).Type.Name}.");
-                    var resourceDataObject = context.Library.GetResourceData(resource.OperationGroup);
-                    writer.Append($"public {context.Library.GetResourceData(resource.OperationGroup).Type} Data");
+                    writer.Append($"public {resourceDataObject.Type} Data");
                     writer.Append($"{{ get; private set; }}");
                     writer.Line();
 
