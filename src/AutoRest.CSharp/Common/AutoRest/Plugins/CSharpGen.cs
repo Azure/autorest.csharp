@@ -106,8 +106,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 try
                 {
                     // We are unsuspectingly crashing, so output anything that might help us reproduce the issue
-                    await autoRest.WriteFile("Configuration-Crash.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
-                    await autoRest.WriteFile("CodeModel-Crash.yaml", codeModelYaml, "source-file-csharp");
+                    await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
+                    await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
                 }
                 catch
                 {
