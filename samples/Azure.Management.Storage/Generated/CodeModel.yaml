@@ -719,7 +719,7 @@ schemas: !Schemas
           version: '2019-06-01'
       language: !Languages 
         default:
-          name: OperationName
+          name: RestApiName
           description: 'Operation name: {provider}/{resource}/{operation}'
       protocol: !Protocols {}
     - !StringSchema &ref_209
@@ -729,7 +729,7 @@ schemas: !Schemas
           version: '2019-06-01'
       language: !Languages 
         default:
-          name: OperationDisplayProvider
+          name: RestApiDisplayProvider
           description: 'Service provider: Microsoft Storage.'
       protocol: !Protocols {}
     - !StringSchema &ref_210
@@ -739,7 +739,7 @@ schemas: !Schemas
           version: '2019-06-01'
       language: !Languages 
         default:
-          name: OperationDisplayResource
+          name: RestApiDisplayResource
           description: Resource on which the operation is performed etc.
       protocol: !Protocols {}
     - !StringSchema &ref_211
@@ -749,7 +749,7 @@ schemas: !Schemas
           version: '2019-06-01'
       language: !Languages 
         default:
-          name: OperationDisplayOperation
+          name: RestApiDisplayOperation
           description: 'Type of operation: get, read, delete, etc.'
       protocol: !Protocols {}
     - !StringSchema &ref_212
@@ -759,7 +759,7 @@ schemas: !Schemas
           version: '2019-06-01'
       language: !Languages 
         default:
-          name: OperationDisplayDescription
+          name: RestApiDisplayDescription
           description: Description of the operation.
       protocol: !Protocols {}
     - !StringSchema &ref_213
@@ -769,7 +769,7 @@ schemas: !Schemas
           version: '2019-06-01'
       language: !Languages 
         default:
-          name: OperationOrigin
+          name: RestApiOrigin
           description: The origin of operations.
       protocol: !Protocols {}
     - !StringSchema &ref_214
@@ -7881,7 +7881,7 @@ schemas: !Schemas
                         anonymous: true
                     language: !Languages 
                       default:
-                        name: OperationDisplay
+                        name: RestApiDisplay
                         description: Display metadata associated with the operation.
                         namespace: ''
                     protocol: !Protocols {}
@@ -8077,7 +8077,7 @@ schemas: !Schemas
                 - output
               language: !Languages 
                 default:
-                  name: Operation
+                  name: RestApi
                   description: Storage REST API operation definition.
                   namespace: ''
               protocol: !Protocols {}

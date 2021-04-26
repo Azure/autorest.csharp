@@ -49,7 +49,7 @@ namespace ExactMatchInheritance
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4Data parameters)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -77,7 +77,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ExactMatchModel4Data>> PutAsync(string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ExactMatchModel4>> PutAsync(string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -98,9 +98,9 @@ namespace ExactMatchInheritance
             {
                 case 200:
                     {
-                        ExactMatchModel4Data value = default;
+                        ExactMatchModel4 value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = ExactMatchModel4Data.DeserializeExactMatchModel4Data(document.RootElement);
+                        value = ExactMatchModel4.DeserializeExactMatchModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -113,7 +113,7 @@ namespace ExactMatchInheritance
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ExactMatchModel4Data> Put(string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4Data parameters, CancellationToken cancellationToken = default)
+        public Response<ExactMatchModel4> Put(string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -134,9 +134,9 @@ namespace ExactMatchInheritance
             {
                 case 200:
                     {
-                        ExactMatchModel4Data value = default;
+                        ExactMatchModel4 value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = ExactMatchModel4Data.DeserializeExactMatchModel4Data(document.RootElement);
+                        value = ExactMatchModel4.DeserializeExactMatchModel4(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
