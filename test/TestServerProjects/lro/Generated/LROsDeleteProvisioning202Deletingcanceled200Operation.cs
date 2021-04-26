@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
     public partial class LROsDeleteProvisioning202Deletingcanceled200Operation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly ArmOperationHelpers<Product> _operation;
+        private readonly OperationInternals<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsDeleteProvisioning202Deletingcanceled200Operation for mocking. </summary>
         protected LROsDeleteProvisioning202Deletingcanceled200Operation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LROsDeleteProvisioning202Deletingcanceled200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteProvisioning202Deletingcanceled200Operation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteProvisioning202Deletingcanceled200Operation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

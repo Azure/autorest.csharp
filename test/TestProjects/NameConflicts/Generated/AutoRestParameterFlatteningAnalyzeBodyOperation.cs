@@ -17,7 +17,7 @@ namespace NameConflicts
     /// <summary> Analyze body, that could be different media types. </summary>
     public partial class AutoRestParameterFlatteningAnalyzeBodyOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of AutoRestParameterFlatteningAnalyzeBodyOperation for mocking. </summary>
         protected AutoRestParameterFlatteningAnalyzeBodyOperation()
@@ -26,7 +26,7 @@ namespace NameConflicts
 
         internal AutoRestParameterFlatteningAnalyzeBodyOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "AutoRestParameterFlatteningAnalyzeBodyOperation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "AutoRestParameterFlatteningAnalyzeBodyOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

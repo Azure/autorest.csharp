@@ -19,7 +19,7 @@ namespace lro
     /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
     public partial class LROsCustomHeaderPut201CreatingSucceeded200Operation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly ArmOperationHelpers<Product> _operation;
+        private readonly OperationInternals<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsCustomHeaderPut201CreatingSucceeded200Operation for mocking. </summary>
         protected LROsCustomHeaderPut201CreatingSucceeded200Operation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LROsCustomHeaderPut201CreatingSucceeded200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsCustomHeaderPut201CreatingSucceeded200Operation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsCustomHeaderPut201CreatingSucceeded200Operation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

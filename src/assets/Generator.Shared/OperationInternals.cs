@@ -20,7 +20,7 @@ namespace Azure.Core
     /// https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md
     /// </summary>
     /// <typeparam name="T">The final result of the LRO.</typeparam>
-    internal class ArmOperationHelpers<T>
+    internal class OperationInternals<T>
     {
         public static TimeSpan DefaultPollingInterval { get; } = TimeSpan.FromSeconds(1);
 
@@ -45,7 +45,7 @@ namespace Azure.Core
         private bool _hasCompleted;
         private bool _shouldPoll;
 
-        public ArmOperationHelpers(
+        public OperationInternals(
             IOperationSource<T> source,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
