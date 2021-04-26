@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header. </summary>
     public partial class LROsDeleteNoHeaderInRetryOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly OperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LROsDeleteNoHeaderInRetryOperation for mocking. </summary>
         protected LROsDeleteNoHeaderInRetryOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LROsDeleteNoHeaderInRetryOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteNoHeaderInRetryOperation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteNoHeaderInRetryOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

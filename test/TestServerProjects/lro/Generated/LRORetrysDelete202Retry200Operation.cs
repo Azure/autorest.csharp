@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
     public partial class LRORetrysDelete202Retry200Operation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly OperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LRORetrysDelete202Retry200Operation for mocking. </summary>
         protected LRORetrysDelete202Retry200Operation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LRORetrysDelete202Retry200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LRORetrysDelete202Retry200Operation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LRORetrysDelete202Retry200Operation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

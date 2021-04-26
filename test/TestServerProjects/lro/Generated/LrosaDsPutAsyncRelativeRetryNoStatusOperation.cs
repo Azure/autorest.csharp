@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
     public partial class LrosaDsPutAsyncRelativeRetryNoStatusOperation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly OperationHelpers<Product> _operation;
+        private readonly OperationInternals<Product> _operation;
 
         /// <summary> Initializes a new instance of LrosaDsPutAsyncRelativeRetryNoStatusOperation for mocking. </summary>
         protected LrosaDsPutAsyncRelativeRetryNoStatusOperation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LrosaDsPutAsyncRelativeRetryNoStatusOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPutAsyncRelativeRetryNoStatusOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPutAsyncRelativeRetryNoStatusOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

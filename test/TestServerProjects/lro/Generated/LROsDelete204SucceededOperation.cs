@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running delete succeeds and returns right away. </summary>
     public partial class LROsDelete204SucceededOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly OperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LROsDelete204SucceededOperation for mocking. </summary>
         protected LROsDelete204SucceededOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LROsDelete204SucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDelete204SucceededOperation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDelete204SucceededOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

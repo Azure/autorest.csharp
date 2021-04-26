@@ -19,7 +19,7 @@ namespace Azure.Network.Management.Interface
     /// <summary> Creates or updates a network interface. </summary>
     public partial class NetworkInterfacesCreateOrUpdateOperation : Operation<NetworkInterface>, IOperationSource<NetworkInterface>
     {
-        private readonly OperationHelpers<NetworkInterface> _operation;
+        private readonly OperationInternals<NetworkInterface> _operation;
 
         /// <summary> Initializes a new instance of NetworkInterfacesCreateOrUpdateOperation for mocking. </summary>
         protected NetworkInterfacesCreateOrUpdateOperation()
@@ -28,7 +28,7 @@ namespace Azure.Network.Management.Interface
 
         internal NetworkInterfacesCreateOrUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<NetworkInterface>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "NetworkInterfacesCreateOrUpdateOperation");
+            _operation = new OperationInternals<NetworkInterface>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "NetworkInterfacesCreateOrUpdateOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

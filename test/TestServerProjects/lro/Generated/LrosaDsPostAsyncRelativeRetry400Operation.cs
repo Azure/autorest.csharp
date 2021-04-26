@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
     public partial class LrosaDsPostAsyncRelativeRetry400Operation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly OperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LrosaDsPostAsyncRelativeRetry400Operation for mocking. </summary>
         protected LrosaDsPostAsyncRelativeRetry400Operation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LrosaDsPostAsyncRelativeRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPostAsyncRelativeRetry400Operation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPostAsyncRelativeRetry400Operation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

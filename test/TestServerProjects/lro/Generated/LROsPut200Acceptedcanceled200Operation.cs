@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’. </summary>
     public partial class LROsPut200Acceptedcanceled200Operation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly OperationHelpers<Product> _operation;
+        private readonly OperationInternals<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsPut200Acceptedcanceled200Operation for mocking. </summary>
         protected LROsPut200Acceptedcanceled200Operation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LROsPut200Acceptedcanceled200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPut200Acceptedcanceled200Operation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPut200Acceptedcanceled200Operation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

@@ -19,7 +19,7 @@ namespace Azure.Network.Management.Interface
     /// <summary> Creates or updates a Tap configuration in the specified NetworkInterface. </summary>
     public partial class NetworkInterfaceTapConfigurationsCreateOrUpdateOperation : Operation<NetworkInterfaceTapConfiguration>, IOperationSource<NetworkInterfaceTapConfiguration>
     {
-        private readonly OperationHelpers<NetworkInterfaceTapConfiguration> _operation;
+        private readonly OperationInternals<NetworkInterfaceTapConfiguration> _operation;
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsCreateOrUpdateOperation for mocking. </summary>
         protected NetworkInterfaceTapConfigurationsCreateOrUpdateOperation()
@@ -28,7 +28,7 @@ namespace Azure.Network.Management.Interface
 
         internal NetworkInterfaceTapConfigurationsCreateOrUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<NetworkInterfaceTapConfiguration>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "NetworkInterfaceTapConfigurationsCreateOrUpdateOperation");
+            _operation = new OperationInternals<NetworkInterfaceTapConfiguration>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "NetworkInterfaceTapConfigurationsCreateOrUpdateOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

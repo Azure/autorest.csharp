@@ -17,7 +17,7 @@ namespace lro
     /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success. </summary>
     public partial class LROsCustomHeaderPost202Retry200Operation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly OperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LROsCustomHeaderPost202Retry200Operation for mocking. </summary>
         protected LROsCustomHeaderPost202Retry200Operation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LROsCustomHeaderPost202Retry200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsCustomHeaderPost202Retry200Operation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsCustomHeaderPost202Retry200Operation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

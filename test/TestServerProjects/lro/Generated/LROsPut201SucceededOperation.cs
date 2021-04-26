@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’. </summary>
     public partial class LROsPut201SucceededOperation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly OperationHelpers<Product> _operation;
+        private readonly OperationInternals<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsPut201SucceededOperation for mocking. </summary>
         protected LROsPut201SucceededOperation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LROsPut201SucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPut201SucceededOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPut201SucceededOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

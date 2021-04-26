@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header. </summary>
     public partial class LROsPutNoHeaderInRetryOperation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly OperationHelpers<Product> _operation;
+        private readonly OperationInternals<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsPutNoHeaderInRetryOperation for mocking. </summary>
         protected LROsPutNoHeaderInRetryOperation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LROsPutNoHeaderInRetryOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutNoHeaderInRetryOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutNoHeaderInRetryOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

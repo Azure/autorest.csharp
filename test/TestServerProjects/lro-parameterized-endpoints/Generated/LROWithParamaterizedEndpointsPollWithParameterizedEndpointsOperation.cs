@@ -18,7 +18,7 @@ namespace lro_parameterized_endpoints
     /// <summary> Poll with method and client level parameters in endpoint. </summary>
     public partial class LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation : Operation<string>, IOperationSource<string>
     {
-        private readonly OperationHelpers<string> _operation;
+        private readonly OperationInternals<string> _operation;
 
         /// <summary> Initializes a new instance of LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation for mocking. </summary>
         protected LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation()
@@ -27,7 +27,7 @@ namespace lro_parameterized_endpoints
 
         internal LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<string>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation");
+            _operation = new OperationInternals<string>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

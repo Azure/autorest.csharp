@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; header, 204 with noresponse body after success. </summary>
     public partial class LROsPost202NoRetry204Operation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly OperationHelpers<Product> _operation;
+        private readonly OperationInternals<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsPost202NoRetry204Operation for mocking. </summary>
         protected LROsPost202NoRetry204Operation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LROsPost202NoRetry204Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202NoRetry204Operation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202NoRetry204Operation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;
