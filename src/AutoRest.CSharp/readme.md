@@ -10,7 +10,6 @@ modelerfour:
   flatten-models: true
   flatten-payloads: true
   group-parameters: true
-  treat-type-object-as-anything: true
 pipeline:
   csharpgen:
     input: modelerfour/identity
