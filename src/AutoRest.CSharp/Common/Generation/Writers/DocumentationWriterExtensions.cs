@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        private static CodeWriter WriteDocumentationLines(this CodeWriter writer, string prefix, string suffix, string? text, bool skipWhenEmpty = true)
+        public static CodeWriter WriteDocumentationLines(this CodeWriter writer, string prefix, string suffix, string? text, bool skipWhenEmpty = true)
         {
             if (string.IsNullOrEmpty(text))
             {
