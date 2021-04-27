@@ -40,7 +40,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var typeOfThis = resourceOperation.Type.Name;
 
+            // write an internal default constructor
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class for mocking.");
+            using (writer.Scope($"protected {typeOfThis}()"))
+            { }
+
             // write "generic resource" constructor
+            writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
             writer.WriteXmlDocumentationParameter("genericOperations", @"An instance of <see cref=""GenericResourceOperations""/> that has an id for a {todo: availability set}.");
             using (writer.Scope($"internal {typeOfThis}({typeof(GenericResourceOperations)} genericOperations) : base(genericOperations, genericOperations.Id)"))
@@ -52,12 +58,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations."); //todo: revise
             writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
             using (writer.Scope($"protected {typeOfThis}(ResourceOperationsBase options, {typeof(ResourceIdentifier)} id) : base(options, id)"))
-            { }
-
-            // write an internal default constructor
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
-            using (writer.Scope($"internal {typeOfThis}()"))
             { }
         }
 

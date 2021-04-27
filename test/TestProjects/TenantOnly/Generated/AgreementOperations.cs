@@ -16,6 +16,11 @@ namespace TenantOnly
     /// <summary> A class representing the operations that can be performed over a specific Agreement. </summary>
     public partial class AgreementOperations : ResourceOperationsBase<TenantResourceIdentifier, Agreement>
     {
+        /// <summary> Initializes a new instance of the <see cref="AgreementOperations"/> class for mocking. </summary>
+        protected AgreementOperations()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref="AgreementOperations"/> class. </summary>
         /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
         internal AgreementOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
@@ -26,11 +31,6 @@ namespace TenantOnly
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected AgreementOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="AgreementOperations"/> class. </summary>
-        internal AgreementOperations()
         {
         }
 

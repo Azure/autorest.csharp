@@ -19,6 +19,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of ProximityPlacementGroup and their operations over a [ParentResource]. </summary>
     public partial class ProximityPlacementGroupContainer : ResourceContainerBase<TenantResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData>
     {
+        /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupContainer"/> class for mocking. </summary>
+        protected ProximityPlacementGroupContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of ProximityPlacementGroupContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ProximityPlacementGroupContainer(ResourceOperationsBase parent) : base(parent)

@@ -20,6 +20,11 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of BlobContainer and their operations over a [ParentResource]. </summary>
     public partial class BlobContainerContainer : ResourceContainerBase<TenantResourceIdentifier, BlobContainer, BlobContainerData>
     {
+        /// <summary> Initializes a new instance of the <see cref="BlobContainerContainer"/> class for mocking. </summary>
+        protected BlobContainerContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of BlobContainerContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BlobContainerContainer(ResourceOperationsBase parent) : base(parent)

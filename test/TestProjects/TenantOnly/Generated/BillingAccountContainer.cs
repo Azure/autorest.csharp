@@ -19,6 +19,11 @@ namespace TenantOnly
     /// <summary> A class representing collection of BillingAccount and their operations over a [ParentResource]. </summary>
     public partial class BillingAccountContainer : ResourceContainerBase<TenantResourceIdentifier, BillingAccount, BillingAccountData>
     {
+        /// <summary> Initializes a new instance of the <see cref="BillingAccountContainer"/> class for mocking. </summary>
+        protected BillingAccountContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of BillingAccountContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal BillingAccountContainer(ResourceOperationsBase parent) : base(parent)

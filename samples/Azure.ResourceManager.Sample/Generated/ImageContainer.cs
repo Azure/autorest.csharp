@@ -19,6 +19,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of Image and their operations over a [ParentResource]. </summary>
     public partial class ImageContainer : ResourceContainerBase<TenantResourceIdentifier, Image, ImageData>
     {
+        /// <summary> Initializes a new instance of the <see cref="ImageContainer"/> class for mocking. </summary>
+        protected ImageContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of ImageContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ImageContainer(ResourceOperationsBase parent) : base(parent)

@@ -20,6 +20,11 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of ManagementPolicy and their operations over a [ParentResource]. </summary>
     public partial class ManagementPolicyContainer : ResourceContainerBase<TenantResourceIdentifier, ManagementPolicy, ManagementPolicyData>
     {
+        /// <summary> Initializes a new instance of the <see cref="ManagementPolicyContainer"/> class for mocking. </summary>
+        protected ManagementPolicyContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of ManagementPolicyContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ManagementPolicyContainer(ResourceOperationsBase parent) : base(parent)

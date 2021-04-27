@@ -20,6 +20,11 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of PrivateLinkResource and their operations over a [ParentResource]. </summary>
     public partial class PrivateLinkResourceContainer : ResourceContainerBase<TenantResourceIdentifier, PrivateLinkResource, PrivateLinkResourceData>
     {
+        /// <summary> Initializes a new instance of the <see cref="PrivateLinkResourceContainer"/> class for mocking. </summary>
+        protected PrivateLinkResourceContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of PrivateLinkResourceContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal PrivateLinkResourceContainer(ResourceOperationsBase parent) : base(parent)

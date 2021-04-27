@@ -16,6 +16,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the operations that can be performed over a specific ProximityPlacementGroup. </summary>
     public partial class ProximityPlacementGroupOperations : ResourceOperationsBase<TenantResourceIdentifier, ProximityPlacementGroup>
     {
+        /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupOperations"/> class for mocking. </summary>
+        protected ProximityPlacementGroupOperations()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupOperations"/> class. </summary>
         /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
         internal ProximityPlacementGroupOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
@@ -26,11 +31,6 @@ namespace Azure.ResourceManager.Sample
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected ProximityPlacementGroupOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupOperations"/> class. </summary>
-        internal ProximityPlacementGroupOperations()
         {
         }
 

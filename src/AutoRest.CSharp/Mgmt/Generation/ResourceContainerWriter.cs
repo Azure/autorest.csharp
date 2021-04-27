@@ -76,11 +76,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteContainerCtors()
         {
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {_resourceContainer.Type.Name} class.");
+            string typeOfThis = _resourceContainer.Type.Name;
+
+            // write protected default constructor
+            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class for mocking.");
+            using (_writer.Scope($"protected {typeOfThis}()"))
+            { }
+
+            // write "parent resource" constructor
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {typeOfThis} class.");
             var parent = "parent";
             _writer.WriteXmlDocumentationParameter(parent, "The resource representing the parent resource.");
-
-            using (_writer.Scope($"internal {_resourceContainer.Type.Name}({typeof(ResourceOperationsBase)} {parent}) : base({parent})"))
+            using (_writer.Scope($"internal {typeOfThis}({typeof(ResourceOperationsBase)} {parent}) : base({parent})"))
             {
                 _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
                 // todo: after a shared pipeline field is implemented in the base class, replace this with that

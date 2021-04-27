@@ -19,6 +19,11 @@ namespace ExactMatchInheritance
     /// <summary> A class representing collection of ExactMatchModel5 and their operations over a [ParentResource]. </summary>
     public partial class ExactMatchModel5Container : ResourceContainerBase<TenantResourceIdentifier, ExactMatchModel5, ExactMatchModel5Data>
     {
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Container"/> class for mocking. </summary>
+        protected ExactMatchModel5Container()
+        {
+        }
+
         /// <summary> Initializes a new instance of ExactMatchModel5Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ExactMatchModel5Container(ResourceOperationsBase parent) : base(parent)

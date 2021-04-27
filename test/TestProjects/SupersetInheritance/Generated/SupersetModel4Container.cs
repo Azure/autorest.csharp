@@ -19,6 +19,11 @@ namespace SupersetInheritance
     /// <summary> A class representing collection of SupersetModel4 and their operations over a [ParentResource]. </summary>
     public partial class SupersetModel4Container : ResourceContainerBase<TenantResourceIdentifier, SupersetModel4, SupersetModel4Data>
     {
+        /// <summary> Initializes a new instance of the <see cref="SupersetModel4Container"/> class for mocking. </summary>
+        protected SupersetModel4Container()
+        {
+        }
+
         /// <summary> Initializes a new instance of SupersetModel4Container class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SupersetModel4Container(ResourceOperationsBase parent) : base(parent)

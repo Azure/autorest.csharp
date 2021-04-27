@@ -19,6 +19,11 @@ namespace ResourceRename
     /// <summary> A class representing collection of SshPublicKeyInfo and their operations over a [ParentResource]. </summary>
     public partial class SshPublicKeyInfoContainer : ResourceContainerBase<TenantResourceIdentifier, SshPublicKeyInfo, SshPublicKeyInfoData>
     {
+        /// <summary> Initializes a new instance of the <see cref="SshPublicKeyInfoContainer"/> class for mocking. </summary>
+        protected SshPublicKeyInfoContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of SshPublicKeyInfoContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SshPublicKeyInfoContainer(ResourceOperationsBase parent) : base(parent)

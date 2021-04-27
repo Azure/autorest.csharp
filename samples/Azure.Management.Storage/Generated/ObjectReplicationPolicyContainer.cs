@@ -20,6 +20,11 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of ObjectReplicationPolicy and their operations over a [ParentResource]. </summary>
     public partial class ObjectReplicationPolicyContainer : ResourceContainerBase<TenantResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData>
     {
+        /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicyContainer"/> class for mocking. </summary>
+        protected ObjectReplicationPolicyContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of ObjectReplicationPolicyContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal ObjectReplicationPolicyContainer(ResourceOperationsBase parent) : base(parent)

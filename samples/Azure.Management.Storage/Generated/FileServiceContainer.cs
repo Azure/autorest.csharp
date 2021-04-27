@@ -20,6 +20,11 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of FileService and their operations over a [ParentResource]. </summary>
     public partial class FileServiceContainer : ResourceContainerBase<TenantResourceIdentifier, FileService, FileServiceData>
     {
+        /// <summary> Initializes a new instance of the <see cref="FileServiceContainer"/> class for mocking. </summary>
+        protected FileServiceContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of FileServiceContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal FileServiceContainer(ResourceOperationsBase parent) : base(parent)

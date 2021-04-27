@@ -16,6 +16,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineScaleSetVM. </summary>
     public partial class VirtualMachineScaleSetVMOperations : ResourceOperationsBase<TenantResourceIdentifier, VirtualMachineScaleSetVM>
     {
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVMOperations"/> class for mocking. </summary>
+        protected VirtualMachineScaleSetVMOperations()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVMOperations"/> class. </summary>
         /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
         internal VirtualMachineScaleSetVMOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
@@ -26,11 +31,6 @@ namespace Azure.ResourceManager.Sample
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected VirtualMachineScaleSetVMOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetVMOperations"/> class. </summary>
-        internal VirtualMachineScaleSetVMOperations()
         {
         }
 

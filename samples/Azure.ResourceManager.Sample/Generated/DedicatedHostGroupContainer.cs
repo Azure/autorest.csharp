@@ -19,6 +19,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of DedicatedHostGroup and their operations over a [ParentResource]. </summary>
     public partial class DedicatedHostGroupContainer : ResourceContainerBase<TenantResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData>
     {
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupContainer"/> class for mocking. </summary>
+        protected DedicatedHostGroupContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of DedicatedHostGroupContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal DedicatedHostGroupContainer(ResourceOperationsBase parent) : base(parent)

@@ -16,6 +16,11 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific EncryptionScope. </summary>
     public partial class EncryptionScopeOperations : ResourceOperationsBase<TenantResourceIdentifier, EncryptionScope>
     {
+        /// <summary> Initializes a new instance of the <see cref="EncryptionScopeOperations"/> class for mocking. </summary>
+        protected EncryptionScopeOperations()
+        {
+        }
+
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeOperations"/> class. </summary>
         /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
         internal EncryptionScopeOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
@@ -26,11 +31,6 @@ namespace Azure.Management.Storage
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected EncryptionScopeOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="EncryptionScopeOperations"/> class. </summary>
-        internal EncryptionScopeOperations()
         {
         }
 

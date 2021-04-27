@@ -20,6 +20,11 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of PrivateEndpointConnection and their operations over a [ParentResource]. </summary>
     public partial class PrivateEndpointConnectionContainer : ResourceContainerBase<TenantResourceIdentifier, PrivateEndpointConnection, PrivateEndpointConnectionData>
     {
+        /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionContainer"/> class for mocking. </summary>
+        protected PrivateEndpointConnectionContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of PrivateEndpointConnectionContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal PrivateEndpointConnectionContainer(ResourceOperationsBase parent) : base(parent)

@@ -19,6 +19,11 @@ namespace MgmtParent
     /// <summary> A class representing collection of AvailabilitySet and their operations over a [ParentResource]. </summary>
     public partial class AvailabilitySetContainer : ResourceContainerBase<TenantResourceIdentifier, AvailabilitySet, AvailabilitySetData>
     {
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetContainer"/> class for mocking. </summary>
+        protected AvailabilitySetContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of AvailabilitySetContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AvailabilitySetContainer(ResourceOperationsBase parent) : base(parent)

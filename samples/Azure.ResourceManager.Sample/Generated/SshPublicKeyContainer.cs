@@ -19,6 +19,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of SshPublicKey and their operations over a [ParentResource]. </summary>
     public partial class SshPublicKeyContainer : ResourceContainerBase<TenantResourceIdentifier, SshPublicKey, SshPublicKeyData>
     {
+        /// <summary> Initializes a new instance of the <see cref="SshPublicKeyContainer"/> class for mocking. </summary>
+        protected SshPublicKeyContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of SshPublicKeyContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal SshPublicKeyContainer(ResourceOperationsBase parent) : base(parent)

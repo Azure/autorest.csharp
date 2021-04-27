@@ -19,6 +19,11 @@ namespace TenantOnly
     /// <summary> A class representing collection of Agreement and their operations over a [ParentResource]. </summary>
     public partial class AgreementContainer : ResourceContainerBase<TenantResourceIdentifier, Agreement, AgreementData>
     {
+        /// <summary> Initializes a new instance of the <see cref="AgreementContainer"/> class for mocking. </summary>
+        protected AgreementContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of AgreementContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal AgreementContainer(ResourceOperationsBase parent) : base(parent)

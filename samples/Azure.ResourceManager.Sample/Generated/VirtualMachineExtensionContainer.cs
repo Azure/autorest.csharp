@@ -19,6 +19,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of VirtualMachineExtension and their operations over a [ParentResource]. </summary>
     public partial class VirtualMachineExtensionContainer : ResourceContainerBase<TenantResourceIdentifier, VirtualMachineExtension, VirtualMachineExtensionData>
     {
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionContainer"/> class for mocking. </summary>
+        protected VirtualMachineExtensionContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of VirtualMachineExtensionContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal VirtualMachineExtensionContainer(ResourceOperationsBase parent) : base(parent)

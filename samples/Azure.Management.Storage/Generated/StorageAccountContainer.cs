@@ -20,6 +20,11 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of StorageAccount and their operations over a [ParentResource]. </summary>
     public partial class StorageAccountContainer : ResourceContainerBase<TenantResourceIdentifier, StorageAccount, StorageAccountData>
     {
+        /// <summary> Initializes a new instance of the <see cref="StorageAccountContainer"/> class for mocking. </summary>
+        protected StorageAccountContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of StorageAccountContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal StorageAccountContainer(ResourceOperationsBase parent) : base(parent)

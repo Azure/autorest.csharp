@@ -19,6 +19,11 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing collection of VirtualMachineImage and their operations over a [ParentResource]. </summary>
     public partial class VirtualMachineImageContainer : ResourceContainerBase<TenantResourceIdentifier, VirtualMachineImage, VirtualMachineImageData>
     {
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineImageContainer"/> class for mocking. </summary>
+        protected VirtualMachineImageContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of VirtualMachineImageContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal VirtualMachineImageContainer(ResourceOperationsBase parent) : base(parent)

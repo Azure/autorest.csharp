@@ -20,6 +20,11 @@ namespace Azure.Management.Storage
     /// <summary> A class representing collection of EncryptionScope and their operations over a [ParentResource]. </summary>
     public partial class EncryptionScopeContainer : ResourceContainerBase<TenantResourceIdentifier, EncryptionScope, EncryptionScopeData>
     {
+        /// <summary> Initializes a new instance of the <see cref="EncryptionScopeContainer"/> class for mocking. </summary>
+        protected EncryptionScopeContainer()
+        {
+        }
+
         /// <summary> Initializes a new instance of EncryptionScopeContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
         internal EncryptionScopeContainer(ResourceOperationsBase parent) : base(parent)
