@@ -20,7 +20,7 @@ namespace Azure.Core
     /// https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md
     /// </summary>
     /// <typeparam name="T">The final result of the LRO.</typeparam>
-    internal class OperationInternals<T>
+    internal class OperationInternals
     {
         public static TimeSpan DefaultPollingInterval { get; } = TimeSpan.FromSeconds(1);
 
@@ -38,10 +38,7 @@ namespace Azure.Core
         private bool _originalHasLocation;
         private string? _lastKnownLocation;
 
-        private readonly IOperationSource<T>? _source;
         private Response _rawResponse;
-        private T _value = default!;
-        private bool _hasValue;
         private bool _hasCompleted;
         private bool _shouldPoll;
 
@@ -52,20 +49,7 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : this(null, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName)
         {
-        }
-
-        public OperationInternals(
-            IOperationSource<T>? source,
-            ClientDiagnostics clientDiagnostics,
-            HttpPipeline pipeline,
-            Request originalRequest,
-            Response originalResponse,
-            OperationFinalStateVia finalStateVia,
-            string scopeName)
-        {
-            _source = source;
             _rawResponse = originalResponse;
             _requestMethod = originalRequest.Method;
             _originalUri = originalRequest.Uri.ToUri();
@@ -81,19 +65,19 @@ namespace Azure.Core
 
         public Response GetRawResponse() => _rawResponse;
 
-        public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
+        public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default)
         {
-            return WaitForCompletionAsync(DefaultPollingInterval, cancellationToken);
+            return WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken);
         }
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        public async ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
         {
             while (true)
             {
                 await UpdateStatusAsync(cancellationToken).ConfigureAwait(false);
                 if (HasCompleted)
                 {
-                    return Response.FromValue(Value, GetRawResponse());
+                    return GetRawResponse();
                 }
 
                 await Task.Delay(pollingInterval, cancellationToken).ConfigureAwait(false);
@@ -139,13 +123,7 @@ namespace Azure.Core
                     case 201 when _requestMethod == RequestMethod.Put:
                     case 204 when !(_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch):
                         {
-                            if (_source != null)
-                            {
-                                _value = async
-                                    ? await _source.CreateResultAsync(finalResponse, cancellationToken).ConfigureAwait(false)
-                                    : _source.CreateResult(finalResponse, cancellationToken);
-                                _hasValue = true;
-                            }
+                            SetValue(async,  finalResponse, cancellationToken);
                             _rawResponse = finalResponse;
                             break;
                         }
@@ -157,6 +135,10 @@ namespace Azure.Core
             return GetRawResponse();
         }
 
+        protected virtual void SetValue(bool async, Response finalResponse, CancellationToken cancellationToken = default)
+        {
+        }
+
         public async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => await UpdateStatusAsync(async: true, cancellationToken).ConfigureAwait(false);
 
         public Response UpdateStatus(CancellationToken cancellationToken = default) => UpdateStatusAsync(async: false, cancellationToken).EnsureCompleted();
@@ -166,21 +148,7 @@ namespace Azure.Core
         public string Id => throw new NotImplementedException();
 #pragma warning restore CA1822
 
-        public T Value
-        {
-            get
-            {
-                if (!HasValue)
-                {
-                    throw new InvalidOperationException("The operation has not completed yet.");
-                }
-
-                return _value;
-            }
-        }
-
         public bool HasCompleted => _hasCompleted;
-        public bool HasValue => _hasValue;
 
         private HttpMessage CreateRequest(string link)
         {
