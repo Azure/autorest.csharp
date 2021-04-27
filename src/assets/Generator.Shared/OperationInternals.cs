@@ -19,7 +19,6 @@ namespace Azure.Core
     /// https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation
     /// https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md
     /// </summary>
-    /// <typeparam name="T">The final result of the LRO.</typeparam>
     internal class OperationInternals
     {
         public static TimeSpan DefaultPollingInterval { get; } = TimeSpan.FromSeconds(1);
