@@ -26,7 +26,18 @@ namespace Azure.Core
         private readonly Response<T>? _valueResponse;
 
         public OperationOrResponseInternals(
-            IOperationSource<T> source,
+            ClientDiagnostics clientDiagnostics,
+            HttpPipeline pipeline,
+            Request originalRequest,
+            Response originalResponse,
+            OperationFinalStateVia finalStateVia,
+            string scopeName)
+            : this(null, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName)
+        {
+        }
+
+        public OperationOrResponseInternals(
+            IOperationSource<T>? source,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             Request originalRequest,

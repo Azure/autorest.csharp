@@ -24,8 +24,8 @@ namespace Azure.Core
     {
         public static TimeSpan DefaultPollingInterval { get; } = TimeSpan.FromSeconds(1);
 
-        private static readonly string[] s_failureStates = {"failed", "canceled"};
-        private static readonly string[] s_terminalStates = {"succeeded", "failed", "canceled"};
+        private static readonly string[] s_failureStates = { "failed", "canceled" };
+        private static readonly string[] s_terminalStates = { "succeeded", "failed", "canceled" };
 
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
@@ -38,7 +38,7 @@ namespace Azure.Core
         private bool _originalHasLocation;
         private string? _lastKnownLocation;
 
-        private readonly IOperationSource<T> _source;
+        private readonly IOperationSource<T>? _source;
         private Response _rawResponse;
         private T _value = default!;
         private bool _hasValue;
@@ -46,7 +46,18 @@ namespace Azure.Core
         private bool _shouldPoll;
 
         public OperationInternals(
-            IOperationSource<T> source,
+            ClientDiagnostics clientDiagnostics,
+            HttpPipeline pipeline,
+            Request originalRequest,
+            Response originalResponse,
+            OperationFinalStateVia finalStateVia,
+            string scopeName)
+            : this(null, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName)
+        {
+        }
+
+        public OperationInternals(
+            IOperationSource<T>? source,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             Request originalRequest,
@@ -127,14 +138,17 @@ namespace Azure.Core
                     case 200:
                     case 201 when _requestMethod == RequestMethod.Put:
                     case 204 when !(_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch):
-                    {
-                        _value = async
-                            ? await _source.CreateResultAsync(finalResponse, cancellationToken).ConfigureAwait(false)
-                            : _source.CreateResult(finalResponse, cancellationToken);
-                        _rawResponse = finalResponse;
-                        _hasValue = true;
-                        break;
-                    }
+                        {
+                            if (_source != null)
+                            {
+                                _value = async
+                                    ? await _source.CreateResultAsync(finalResponse, cancellationToken).ConfigureAwait(false)
+                                    : _source.CreateResult(finalResponse, cancellationToken);
+                                _hasValue = true;
+                            }
+                            _rawResponse = finalResponse;
+                            break;
+                        }
                     default:
                         throw _clientDiagnostics.CreateRequestFailedException(finalResponse);
                 }
