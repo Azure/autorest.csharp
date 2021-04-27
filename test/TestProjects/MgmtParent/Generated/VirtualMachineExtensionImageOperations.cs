@@ -21,6 +21,13 @@ namespace MgmtParent
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref = "VirtualMachineExtensionImageOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected VirtualMachineExtensionImageOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/vmextension";
         protected override ResourceType ValidResourceType => ResourceType;
 

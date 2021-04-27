@@ -21,6 +21,13 @@ namespace Azure.Management.Storage
         {
         }
 
+        /// <summary> Initializes a new instance of <see cref = "EncryptionScopeOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected EncryptionScopeOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        {
+        }
+
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/encryptionScopes";
         protected override ResourceType ValidResourceType => ResourceType;
 
