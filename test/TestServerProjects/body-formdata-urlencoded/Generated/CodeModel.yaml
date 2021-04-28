@@ -17,10 +17,13 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !NumberSchema &ref_3
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: PostContentSchemaPetAge
           description: How many years is it old?
       protocol: !Protocols {}
   strings:

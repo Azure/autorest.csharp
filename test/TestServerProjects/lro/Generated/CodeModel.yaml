@@ -6,10 +6,13 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_11
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: CloudErrorCode
           description: ''
       protocol: !Protocols {}
     - !NumberSchema &ref_43
@@ -566,10 +569,13 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !NumberSchema &ref_21
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: OperationResultErrorCode
           description: The error code for an operation failure
       protocol: !Protocols {}
   strings:

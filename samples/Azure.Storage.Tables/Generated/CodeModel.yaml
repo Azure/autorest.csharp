@@ -60,20 +60,26 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !NumberSchema &ref_31
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2018-10-10'
       minimum: 1
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: RetentionPolicyDays
           description: Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted
       protocol: !Protocols {}
     - !NumberSchema &ref_41
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2018-10-10'
       minimum: 0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: CorsRuleMaxAgeInSeconds
           description: The maximum amount time that a browser should cache the preflight OPTIONS request.
       protocol: !Protocols {}
   strings:

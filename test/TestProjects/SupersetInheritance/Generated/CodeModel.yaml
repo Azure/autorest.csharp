@@ -5,10 +5,13 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_10
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: SupersetModel3Id
           description: ''
       protocol: !Protocols {}
   strings:

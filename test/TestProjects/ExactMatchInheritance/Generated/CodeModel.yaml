@@ -5,10 +5,13 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_23
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ExactMatchModel9Id
           description: ''
       protocol: !Protocols {}
   strings:

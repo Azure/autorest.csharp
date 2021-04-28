@@ -14,10 +14,13 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_8
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 3.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ErrorStatus
           description: ''
       protocol: !Protocols {}
   strings:
