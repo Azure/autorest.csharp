@@ -134,9 +134,9 @@ namespace Azure.Core
             return GetRawResponse();
         }
 
-        protected virtual async Task SetValueAsync(bool async, Response finalResponse, CancellationToken cancellationToken = default)
+        protected virtual Task SetValueAsync(bool async, Response finalResponse, CancellationToken cancellationToken = default)
         {
-            await Task.Delay(0);
+            return Task.CompletedTask;
         }
 
         public async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => await UpdateStatusAsync(async: true, cancellationToken).ConfigureAwait(false);
