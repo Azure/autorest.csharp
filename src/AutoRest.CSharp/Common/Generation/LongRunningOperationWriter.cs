@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var waitForCompleteMethodName = operation.ResultType != null ? "WaitForCompletionAsync" : "WaitForCompletionResponseAsync";
 
                 writer.Append($"{operation.Declaration.Accessibility} partial class {cs.Name}: {baseType}");
-                if (operation.ResultType != null)
+                if (interfaceType != null)
                 {
                     writer.Append($", {interfaceType}");
                 }
