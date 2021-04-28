@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it&apos;s success. Should NOT poll Location to get the final object if you support initial Autorest behavior. </summary>
     public partial class LROsPostDoubleHeadersFinalAzureHeaderGetDefaultOperation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly ArmOperationHelpers<Product> _operation;
+        private readonly OperationInternals<Product> _operation;
 
         /// <summary> Initializes a new instance of LROsPostDoubleHeadersFinalAzureHeaderGetDefaultOperation for mocking. </summary>
         protected LROsPostDoubleHeadersFinalAzureHeaderGetDefaultOperation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LROsPostDoubleHeadersFinalAzureHeaderGetDefaultOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPostDoubleHeadersFinalAzureHeaderGetDefaultOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPostDoubleHeadersFinalAzureHeaderGetDefaultOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

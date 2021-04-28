@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running post request, service returns a 400 with no error body. </summary>
     public partial class LrosaDsPostNonRetry400Operation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LrosaDsPostNonRetry400Operation for mocking. </summary>
         protected LrosaDsPostNonRetry400Operation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LrosaDsPostNonRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPostNonRetry400Operation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPostNonRetry400Operation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

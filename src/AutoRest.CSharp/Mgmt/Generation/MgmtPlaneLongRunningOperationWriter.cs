@@ -39,12 +39,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 $"public partial class {typeName} : ArmOperation<{resourceData.Type}>, IOperationSource<{resourceData.Type}>"
             ))
             {
-                writer.Line($"private readonly ArmOperationHelpers<{resourceData.Type}> _operation;");
+                writer.Line($"private readonly OperationInternals<{resourceData.Type}> _operation;");
                 using (writer.Scope($"protected {typeName}()"))
                 { };
                 using (writer.Scope($"internal {typeName}(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)"))
                 {
-                    writer.Line($"_operation = new ArmOperationHelpers<{resourceData.Type}>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, \"{typeName}\");");
+                    writer.Line($"_operation = new OperationInternals<{resourceData.Type}>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, \"{typeName}\");");
                 }
 
                 writer.Line($"public override string Id => _operation.Id;");

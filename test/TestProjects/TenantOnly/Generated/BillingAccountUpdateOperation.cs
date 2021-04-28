@@ -18,13 +18,13 @@ namespace TenantOnly
 {
     public partial class BillingAccountUpdateOperation : ArmOperation<BillingAccountData>, IOperationSource<BillingAccountData>
     {
-        private readonly ArmOperationHelpers<BillingAccountData> _operation;
+        private readonly OperationInternals<BillingAccountData> _operation;
         protected BillingAccountUpdateOperation()
         {
         }
         internal BillingAccountUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<BillingAccountData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "BillingAccountUpdateOperation");
+            _operation = new OperationInternals<BillingAccountData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "BillingAccountUpdateOperation");
         }
         public override string Id => _operation.Id;
         public override BillingAccountData Value => _operation.Value;

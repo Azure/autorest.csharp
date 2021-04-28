@@ -18,13 +18,13 @@ namespace Azure.ResourceManager.Sample
 {
     public partial class DedicatedHostUpdateOperation : ArmOperation<DedicatedHostData>, IOperationSource<DedicatedHostData>
     {
-        private readonly ArmOperationHelpers<DedicatedHostData> _operation;
+        private readonly OperationInternals<DedicatedHostData> _operation;
         protected DedicatedHostUpdateOperation()
         {
         }
         internal DedicatedHostUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<DedicatedHostData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DedicatedHostUpdateOperation");
+            _operation = new OperationInternals<DedicatedHostData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DedicatedHostUpdateOperation");
         }
         public override string Id => _operation.Id;
         public override DedicatedHostData Value => _operation.Value;

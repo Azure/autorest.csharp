@@ -48,14 +48,15 @@ namespace MgmtParent
 
         /// <inheritdoc />
         /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<AvailabilitySet> CreateOrUpdate(string availabilitySetName, CancellationToken cancellationToken = default)
+        public override ArmResponse<AvailabilitySet> CreateOrUpdate(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                return StartCreateOrUpdate(availabilitySetName, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<AvailabilitySet>;
+                return StartCreateOrUpdate(availabilitySetName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<AvailabilitySet>;
             }
             catch (Exception e)
             {
@@ -66,14 +67,15 @@ namespace MgmtParent
 
         /// <inheritdoc />
         /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<AvailabilitySet>> CreateOrUpdateAsync(string availabilitySetName, CancellationToken cancellationToken = default)
+        public async override Task<ArmResponse<AvailabilitySet>> CreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.CreateOrUpdateAsync");
             scope.Start();
             try
             {
-                var operation = await StartCreateOrUpdateAsync(availabilitySetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<AvailabilitySet>;
             }
             catch (Exception e)
@@ -85,14 +87,15 @@ namespace MgmtParent
 
         /// <inheritdoc />
         /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<AvailabilitySet> StartCreateOrUpdate(string availabilitySetName, CancellationToken cancellationToken = default)
+        public override ArmOperation<AvailabilitySet> StartCreateOrUpdate(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, availabilitySetName, Id.Parent.Name, cancellationToken: cancellationToken);
+                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken);
                 return new PhArmOperation<AvailabilitySet, AvailabilitySetData>(
                 originalResponse,
                 data => new AvailabilitySet(Parent, data));
@@ -106,14 +109,15 @@ namespace MgmtParent
 
         /// <inheritdoc />
         /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<AvailabilitySet>> StartCreateOrUpdateAsync(string availabilitySetName, CancellationToken cancellationToken = default)
+        public async override Task<ArmOperation<AvailabilitySet>> StartCreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.StartCreateOrUpdateAsync");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, availabilitySetName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<AvailabilitySet, AvailabilitySetData>(
                 originalResponse,
                 data => new AvailabilitySet(Parent, data));
@@ -123,34 +127,6 @@ namespace MgmtParent
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <inheritdoc />
-        public override ArmResponse<AvailabilitySet> CreateOrUpdate(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in AvailabilitySetsRestOperations that accepts AvailabilitySetData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<AvailabilitySet>> CreateOrUpdateAsync(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in AvailabilitySetsRestOperations that accepts AvailabilitySetData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override ArmOperation<AvailabilitySet> StartCreateOrUpdate(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in AvailabilitySetsRestOperations that accepts AvailabilitySetData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmOperation<AvailabilitySet>> StartCreateOrUpdateAsync(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in AvailabilitySetsRestOperations that accepts AvailabilitySetData
-            throw new NotImplementedException();
         }
 
         /// <inheritdoc />

@@ -18,13 +18,13 @@ namespace Azure.ResourceManager.Sample
 {
     public partial class VirtualMachineScaleSetVMDeleteOperation : ArmOperation<VirtualMachineScaleSetVMData>, IOperationSource<VirtualMachineScaleSetVMData>
     {
-        private readonly ArmOperationHelpers<VirtualMachineScaleSetVMData> _operation;
+        private readonly OperationInternals<VirtualMachineScaleSetVMData> _operation;
         protected VirtualMachineScaleSetVMDeleteOperation()
         {
         }
         internal VirtualMachineScaleSetVMDeleteOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<VirtualMachineScaleSetVMData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetVMDeleteOperation");
+            _operation = new OperationInternals<VirtualMachineScaleSetVMData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetVMDeleteOperation");
         }
         public override string Id => _operation.Id;
         public override VirtualMachineScaleSetVMData Value => _operation.Value;

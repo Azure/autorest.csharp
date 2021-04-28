@@ -18,13 +18,13 @@ namespace Azure.ResourceManager.Sample
 {
     public partial class VirtualMachineScaleSetReimageAllOperation : ArmOperation<VirtualMachineScaleSetData>, IOperationSource<VirtualMachineScaleSetData>
     {
-        private readonly ArmOperationHelpers<VirtualMachineScaleSetData> _operation;
+        private readonly OperationInternals<VirtualMachineScaleSetData> _operation;
         protected VirtualMachineScaleSetReimageAllOperation()
         {
         }
         internal VirtualMachineScaleSetReimageAllOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<VirtualMachineScaleSetData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetReimageAllOperation");
+            _operation = new OperationInternals<VirtualMachineScaleSetData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetReimageAllOperation");
         }
         public override string Id => _operation.Id;
         public override VirtualMachineScaleSetData Value => _operation.Value;

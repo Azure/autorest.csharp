@@ -18,13 +18,13 @@ namespace Azure.ResourceManager.Sample
 {
     public partial class DedicatedHostDeleteOperation : ArmOperation<DedicatedHostData>, IOperationSource<DedicatedHostData>
     {
-        private readonly ArmOperationHelpers<DedicatedHostData> _operation;
+        private readonly OperationInternals<DedicatedHostData> _operation;
         protected DedicatedHostDeleteOperation()
         {
         }
         internal DedicatedHostDeleteOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<DedicatedHostData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DedicatedHostDeleteOperation");
+            _operation = new OperationInternals<DedicatedHostData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DedicatedHostDeleteOperation");
         }
         public override string Id => _operation.Id;
         public override DedicatedHostData Value => _operation.Value;

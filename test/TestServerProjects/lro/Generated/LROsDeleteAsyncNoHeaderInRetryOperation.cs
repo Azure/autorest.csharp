@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header. </summary>
     public partial class LROsDeleteAsyncNoHeaderInRetryOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LROsDeleteAsyncNoHeaderInRetryOperation for mocking. </summary>
         protected LROsDeleteAsyncNoHeaderInRetryOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LROsDeleteAsyncNoHeaderInRetryOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteAsyncNoHeaderInRetryOperation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteAsyncNoHeaderInRetryOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

@@ -34,6 +34,9 @@ operation-group-to-parent:
     StorageAccounts: any
 directive:
   - rename-model:
+      from: Operation
+      to: RestApi
+  - rename-model:
       from: BlobServiceProperties
       to: BlobService
   - rename-model:

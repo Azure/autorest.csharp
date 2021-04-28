@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
     public partial class LrosaDsPostAsyncRelativeRetryInvalidJsonPollingOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LrosaDsPostAsyncRelativeRetryInvalidJsonPollingOperation for mocking. </summary>
         protected LrosaDsPostAsyncRelativeRetryInvalidJsonPollingOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LrosaDsPostAsyncRelativeRetryInvalidJsonPollingOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPostAsyncRelativeRetryInvalidJsonPollingOperation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPostAsyncRelativeRetryInvalidJsonPollingOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

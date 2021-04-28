@@ -18,13 +18,13 @@ namespace Azure.ResourceManager.Sample
 {
     public partial class VirtualMachineExtensionUpdateOperation : ArmOperation<VirtualMachineExtensionData>, IOperationSource<VirtualMachineExtensionData>
     {
-        private readonly ArmOperationHelpers<VirtualMachineExtensionData> _operation;
+        private readonly OperationInternals<VirtualMachineExtensionData> _operation;
         protected VirtualMachineExtensionUpdateOperation()
         {
         }
         internal VirtualMachineExtensionUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<VirtualMachineExtensionData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineExtensionUpdateOperation");
+            _operation = new OperationInternals<VirtualMachineExtensionData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineExtensionUpdateOperation");
         }
         public override string Id => _operation.Id;
         public override VirtualMachineExtensionData Value => _operation.Value;

@@ -18,13 +18,13 @@ namespace Azure.ResourceManager.Sample
 {
     public partial class ImageDeleteOperation : ArmOperation<ImageData>, IOperationSource<ImageData>
     {
-        private readonly ArmOperationHelpers<ImageData> _operation;
+        private readonly OperationInternals<ImageData> _operation;
         protected ImageDeleteOperation()
         {
         }
         internal ImageDeleteOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<ImageData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ImageDeleteOperation");
+            _operation = new OperationInternals<ImageData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ImageDeleteOperation");
         }
         public override string Id => _operation.Id;
         public override ImageData Value => _operation.Value;

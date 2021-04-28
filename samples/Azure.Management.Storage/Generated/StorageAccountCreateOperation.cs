@@ -19,13 +19,13 @@ namespace Azure.Management.Storage
 {
     public partial class StorageAccountCreateOperation : ArmOperation<StorageAccountData>, IOperationSource<StorageAccountData>
     {
-        private readonly ArmOperationHelpers<StorageAccountData> _operation;
+        private readonly OperationInternals<StorageAccountData> _operation;
         protected StorageAccountCreateOperation()
         {
         }
         internal StorageAccountCreateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<StorageAccountData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "StorageAccountCreateOperation");
+            _operation = new OperationInternals<StorageAccountData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "StorageAccountCreateOperation");
         }
         public override string Id => _operation.Id;
         public override StorageAccountData Value => _operation.Value;

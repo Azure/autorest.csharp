@@ -18,13 +18,13 @@ namespace Azure.ResourceManager.Sample
 {
     public partial class VirtualMachineDeallocateOperation : ArmOperation<VirtualMachineData>, IOperationSource<VirtualMachineData>
     {
-        private readonly ArmOperationHelpers<VirtualMachineData> _operation;
+        private readonly OperationInternals<VirtualMachineData> _operation;
         protected VirtualMachineDeallocateOperation()
         {
         }
         internal VirtualMachineDeallocateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<VirtualMachineData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineDeallocateOperation");
+            _operation = new OperationInternals<VirtualMachineData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineDeallocateOperation");
         }
         public override string Id => _operation.Id;
         public override VirtualMachineData Value => _operation.Value;

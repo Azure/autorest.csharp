@@ -16,6 +16,8 @@
   "CredentialScopes": [],
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
+  "OperationGroupToResource": {
+    "SshPublicKeys": "NonResource"
+  },
   "OperationGroupToParent": {}
 }

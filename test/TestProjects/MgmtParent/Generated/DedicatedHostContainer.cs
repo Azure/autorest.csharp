@@ -48,14 +48,15 @@ namespace MgmtParent
 
         /// <inheritdoc />
         /// <param name="hostName"> The name of the dedicated host . </param>
+        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<DedicatedHost> CreateOrUpdate(string hostName, CancellationToken cancellationToken = default)
+        public override ArmResponse<DedicatedHost> CreateOrUpdate(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                return StartCreateOrUpdate(hostName, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<DedicatedHost>;
+                return StartCreateOrUpdate(hostName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<DedicatedHost>;
             }
             catch (Exception e)
             {
@@ -66,14 +67,15 @@ namespace MgmtParent
 
         /// <inheritdoc />
         /// <param name="hostName"> The name of the dedicated host . </param>
+        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<DedicatedHost>> CreateOrUpdateAsync(string hostName, CancellationToken cancellationToken = default)
+        public async override Task<ArmResponse<DedicatedHost>> CreateOrUpdateAsync(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CreateOrUpdateAsync");
             scope.Start();
             try
             {
-                var operation = await StartCreateOrUpdateAsync(hostName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(hostName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<DedicatedHost>;
             }
             catch (Exception e)
@@ -85,17 +87,18 @@ namespace MgmtParent
 
         /// <inheritdoc />
         /// <param name="hostName"> The name of the dedicated host . </param>
+        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<DedicatedHost> StartCreateOrUpdate(string hostName, CancellationToken cancellationToken = default)
+        public override ArmOperation<DedicatedHost> StartCreateOrUpdate(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, Id.Name, hostName, Id.Parent.Parent.Name, cancellationToken: cancellationToken);
+                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken: cancellationToken);
                 var operation = new DedicatedHostCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
-                Id.ResourceGroupName, Id.Name, hostName, Id.Parent.Parent.Name).Request,
+                Id.ResourceGroupName, Id.Name, hostName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<DedicatedHost, DedicatedHostData>(
                 operation,
@@ -110,17 +113,18 @@ namespace MgmtParent
 
         /// <inheritdoc />
         /// <param name="hostName"> The name of the dedicated host . </param>
+        /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<DedicatedHost>> StartCreateOrUpdateAsync(string hostName, CancellationToken cancellationToken = default)
+        public async override Task<ArmOperation<DedicatedHost>> StartCreateOrUpdateAsync(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.StartCreateOrUpdateAsync");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, hostName, Id.Parent.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var operation = new DedicatedHostCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
-                Id.ResourceGroupName, Id.Name, hostName, Id.Parent.Parent.Name).Request,
+                Id.ResourceGroupName, Id.Name, hostName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<DedicatedHost, DedicatedHostData>(
                 operation,
@@ -131,34 +135,6 @@ namespace MgmtParent
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <inheritdoc />
-        public override ArmResponse<DedicatedHost> CreateOrUpdate(string name, DedicatedHostData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in DedicatedHostsRestOperations that accepts DedicatedHostData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<DedicatedHost>> CreateOrUpdateAsync(string name, DedicatedHostData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in DedicatedHostsRestOperations that accepts DedicatedHostData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override ArmOperation<DedicatedHost> StartCreateOrUpdate(string name, DedicatedHostData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in DedicatedHostsRestOperations that accepts DedicatedHostData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmOperation<DedicatedHost>> StartCreateOrUpdateAsync(string name, DedicatedHostData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in DedicatedHostsRestOperations that accepts DedicatedHostData
-            throw new NotImplementedException();
         }
 
         /// <inheritdoc />

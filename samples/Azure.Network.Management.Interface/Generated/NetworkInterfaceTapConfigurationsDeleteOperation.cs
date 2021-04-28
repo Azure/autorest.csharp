@@ -17,7 +17,7 @@ namespace Azure.Network.Management.Interface
     /// <summary> Deletes the specified tap configuration from the NetworkInterface. </summary>
     public partial class NetworkInterfaceTapConfigurationsDeleteOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of NetworkInterfaceTapConfigurationsDeleteOperation for mocking. </summary>
         protected NetworkInterfaceTapConfigurationsDeleteOperation()
@@ -26,7 +26,7 @@ namespace Azure.Network.Management.Interface
 
         internal NetworkInterfaceTapConfigurationsDeleteOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "NetworkInterfaceTapConfigurationsDeleteOperation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "NetworkInterfaceTapConfigurationsDeleteOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;
