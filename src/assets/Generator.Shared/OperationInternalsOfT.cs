@@ -75,7 +75,7 @@ namespace Azure.Core
 
         public bool HasValue => _hasValue;
 
-        protected override async void SetValue(bool async, Response finalResponse, CancellationToken cancellationToken = default)
+        protected override async Task SetValueAsync(bool async, Response finalResponse, CancellationToken cancellationToken = default)
         {
             _value = async
                 ? await _source.CreateResultAsync(finalResponse, cancellationToken).ConfigureAwait(false)

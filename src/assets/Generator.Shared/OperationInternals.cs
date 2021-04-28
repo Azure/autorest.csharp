@@ -122,7 +122,7 @@ namespace Azure.Core
                     case 201 when _requestMethod == RequestMethod.Put:
                     case 204 when !(_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch):
                         {
-                            SetValue(async,  finalResponse, cancellationToken);
+                            await SetValueAsync(async,  finalResponse, cancellationToken);
                             _rawResponse = finalResponse;
                             break;
                         }
@@ -134,8 +134,9 @@ namespace Azure.Core
             return GetRawResponse();
         }
 
-        protected virtual void SetValue(bool async, Response finalResponse, CancellationToken cancellationToken = default)
+        protected virtual async Task SetValueAsync(bool async, Response finalResponse, CancellationToken cancellationToken = default)
         {
+            await Task.Delay(0);
         }
 
         public async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => await UpdateStatusAsync(async: true, cancellationToken).ConfigureAwait(false);
