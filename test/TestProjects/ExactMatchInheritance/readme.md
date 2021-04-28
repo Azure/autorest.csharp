@@ -9,4 +9,8 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/ExactMatchInheritance.json
 namespace: ExactMatchInheritance
+
+operation-group-to-resource:
+   ExactMatchModel2s: NonResource
+   ExactMatchModel4s: NonResource
 ```

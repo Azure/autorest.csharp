@@ -17,7 +17,7 @@ namespace CustomNamespace
 {
     internal partial class MainOperation : Operation<CustomizedModel>, IOperationSource<CustomizedModel>
     {
-        private readonly ArmOperationHelpers<CustomizedModel> _operation;
+        private readonly OperationInternals<CustomizedModel> _operation;
 
         /// <summary> Initializes a new instance of MainOperation for mocking. </summary>
         protected MainOperation()
@@ -26,7 +26,7 @@ namespace CustomNamespace
 
         internal MainOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<CustomizedModel>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "MainOperation");
+            _operation = new OperationInternals<CustomizedModel>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "MainOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace MgmtParent
 {
@@ -20,12 +22,25 @@ namespace MgmtParent
                 writer.WritePropertyName("foo");
                 writer.WriteStringValue(Foo);
             }
+            writer.WritePropertyName("tags");
+            writer.WriteStartObject();
+            foreach (var item in Tags)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
         internal static DedicatedHostData DeserializeDedicatedHostData(JsonElement element)
         {
             Optional<string> foo = default;
+            IDictionary<string, string> tags = default;
+            LocationData location = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"))
@@ -33,8 +48,38 @@ namespace MgmtParent
                     foo = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("tags"))
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("location"))
+                {
+                    location = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
             }
-            return new DedicatedHostData(foo.Value);
+            return new DedicatedHostData(id, name, type, tags, location, foo.Value);
         }
     }
 }

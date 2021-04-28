@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
     public partial class LROsPostAsyncRetryFailedOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LROsPostAsyncRetryFailedOperation for mocking. </summary>
         protected LROsPostAsyncRetryFailedOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LROsPostAsyncRetryFailedOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPostAsyncRetryFailedOperation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPostAsyncRetryFailedOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

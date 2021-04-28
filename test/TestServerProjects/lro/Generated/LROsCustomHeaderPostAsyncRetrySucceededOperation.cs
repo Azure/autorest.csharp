@@ -17,7 +17,7 @@ namespace lro
     /// <summary> x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
     public partial class LROsCustomHeaderPostAsyncRetrySucceededOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LROsCustomHeaderPostAsyncRetrySucceededOperation for mocking. </summary>
         protected LROsCustomHeaderPostAsyncRetrySucceededOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LROsCustomHeaderPostAsyncRetrySucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsCustomHeaderPostAsyncRetrySucceededOperation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsCustomHeaderPostAsyncRetrySucceededOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

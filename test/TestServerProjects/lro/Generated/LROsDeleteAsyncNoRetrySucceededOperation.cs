@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
     public partial class LROsDeleteAsyncNoRetrySucceededOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LROsDeleteAsyncNoRetrySucceededOperation for mocking. </summary>
         protected LROsDeleteAsyncNoRetrySucceededOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LROsDeleteAsyncNoRetrySucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteAsyncNoRetrySucceededOperation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteAsyncNoRetrySucceededOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

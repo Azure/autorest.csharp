@@ -17,7 +17,7 @@ namespace lro
     /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
     public partial class LrosaDsPostAsyncRelativeRetryInvalidHeaderOperation : Operation<Response>, IOperationSource<Response>
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationInternals<Response> _operation;
 
         /// <summary> Initializes a new instance of LrosaDsPostAsyncRelativeRetryInvalidHeaderOperation for mocking. </summary>
         protected LrosaDsPostAsyncRelativeRetryInvalidHeaderOperation()
@@ -26,7 +26,7 @@ namespace lro
 
         internal LrosaDsPostAsyncRelativeRetryInvalidHeaderOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPostAsyncRelativeRetryInvalidHeaderOperation");
+            _operation = new OperationInternals<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPostAsyncRelativeRetryInvalidHeaderOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;
