@@ -77,7 +77,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 var valueTaskType = isGenericOperation ? new CSharpType(typeof(Response<>), operation.ResultType) : new CSharpType(typeof(Response));
                 var waitForCompletionType = new CSharpType(typeof(ValueTask<>), valueTaskType);
                 var helperType = isGenericOperation ? new CSharpType(typeof(OperationInternals<>), operation.ResultType) : new CSharpType(typeof(OperationInternals));
-                var interfaceSeparator = isGenericOperation ? ", " : string.Empty;
                 var paramStart = isGenericOperation ? "(this, " : "(";
                 var waitForCompleteMethodName = isGenericOperation ? "WaitForCompletionAsync" : "WaitForCompletionResponseAsync";
 
