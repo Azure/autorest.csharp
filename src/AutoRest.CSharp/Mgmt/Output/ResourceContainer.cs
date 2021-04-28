@@ -20,8 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string SubscriptionOperationsResourceType = "SubscriptionOperations.ResourceType";
         private const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
         private const string ResourceGroupCommentName = "ResourceGroup";
-        private const string Subscription = "Subscription";
-        private const string Tenant = "Tenant";
+        private const string SubscriptionCommentName = "Subscription";
+        private const string TenantCommentName = "Tenant";
 
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context)
@@ -33,8 +33,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
-            StringBuilder summary = new StringBuilder();
-            string ParentResourceName = GetParentResourceName();
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
                 $"A class representing collection of {clientPrefix} and their operations over a {GetParentResourceName()}." :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
@@ -47,11 +45,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             switch (parentResourceType)
             {
                 case ResourceTypeBuilder.ResourceGroups:
-                    return ResourceGroup;
+                    return ResourceGroupCommentName;
                 case ResourceTypeBuilder.Subscriptions:
-                    return Subscription;
+                    return SubscriptionCommentName;
                 case ResourceTypeBuilder.Tenant:
-                    return Tenant;
+                    return TenantCommentName;
                 default:
                     OperationGroup? opGroup = FindParentOperationGroup(parentResourceType);
                     if (opGroup != null)

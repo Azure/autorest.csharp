@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of StorageAccount and their operations over a . </summary>
+    /// <summary> A class representing collection of StorageAccount and their operations over a Parent. </summary>
     public partial class StorageAccountContainer
     {
         /// <summary> Initializes a new instance of StorageAccountContainer for mocking. </summary>
