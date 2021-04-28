@@ -53,7 +53,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                 case ResourceTypeBuilder.Tenant:
                     return Tenant;
                 default:
-                    return FindParentOperationGroup(parentResourceType)!.Resource(Context.Configuration.MgmtConfiguration);
+                    OperationGroup? opGroup = FindParentOperationGroup(parentResourceType);
+                    if (opGroup != null)
+                    {
+                        return opGroup.Resource(Context.Configuration.MgmtConfiguration);
+                    }
+                    return "";
             }
         }
 

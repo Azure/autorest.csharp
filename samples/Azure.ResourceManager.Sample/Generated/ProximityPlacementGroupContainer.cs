@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of ProximityPlacementGroup and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of ProximityPlacementGroup and their operations over a ResourceGroup. </summary>
     public partial class ProximityPlacementGroupContainer
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupContainer for mocking. </summary>

@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of VirtualMachineImage and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of VirtualMachineImage and their operations over a . </summary>
     public partial class VirtualMachineImageContainer
     {
         /// <summary> Initializes a new instance of VirtualMachineImageContainer for mocking. </summary>

@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of SshPublicKey and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of SshPublicKey and their operations over a ResourceGroup. </summary>
     public partial class SshPublicKeyContainer
     {
         /// <summary> Initializes a new instance of SshPublicKeyContainer for mocking. </summary>
