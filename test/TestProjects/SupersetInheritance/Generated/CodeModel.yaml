@@ -5,10 +5,13 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_10
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: SupersetModel3Id
           description: ''
       protocol: !Protocols {}
   strings:
@@ -1002,6 +1005,11 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
+  schemes:
+    - !AADTokenSecurityScheme 
+      type: AADToken
+      scopes:
+        - https://management.azure.com/.default
 language: !Languages 
   default:
     name: SupersetInheritance

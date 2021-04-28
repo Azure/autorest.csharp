@@ -47,16 +47,12 @@ namespace AutoRest.CSharp.Output.Models.Requests
                     ResultType = new CSharpType(typeof(AsyncPageable<>), PagingResponse.ItemType);
                 }
             }
-            else
-            {
-                ResultType = typeof(Response);
-            }
 
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
         }
 
-        public CSharpType ResultType { get; }
+        public CSharpType? ResultType { get; }
         public OperationFinalStateVia FinalStateVia { get; }
         public Diagnostic Diagnostics => new Diagnostic(Declaration.Name);
         public ObjectSerialization? ResultSerialization { get; }

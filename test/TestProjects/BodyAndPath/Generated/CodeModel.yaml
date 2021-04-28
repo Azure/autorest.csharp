@@ -38,7 +38,7 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: any
-          description: Any object
+          description: Anything
       protocol: !Protocols {}
 globalParameters:
   - !Parameter &ref_1
@@ -146,6 +146,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: BodyAndPath

@@ -53,13 +53,50 @@ namespace AutoRest.CSharp.Generation.Writers
             RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private");
         }
 
-        private void WriteClientMethod(CodeWriter writer, RestClientMethod clientMethod, bool async)
+        private void WriteClientMethod(CodeWriter writer, LowLevelRestClientMethod clientMethod, bool async)
         {
             var parameters = clientMethod.Parameters;
 
             var responseType = async ? new CSharpType(typeof(Task<Response>)) : new CSharpType(typeof(Response));
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
+
+            if (clientMethod.SchemaDocumentations != null)
+            {
+                writer.LineRaw("/// <remarks>");
+
+                foreach (var schemaDoc in clientMethod.SchemaDocumentations)
+                {
+                    writer.Line($"/// Schema for <c>{schemaDoc.SchemaName}</c>:");
+                    writer.LineRaw("/// <list type=\"table\">");
+                    writer.LineRaw("///   <listeader>");
+                    writer.LineRaw("///     <term>Name</term>");
+                    writer.LineRaw("///     <term>Type</term>");
+                    writer.LineRaw("///     <term>Required</term>");
+                    writer.LineRaw("///     <term>Description</term>");
+                    writer.LineRaw("///   </listeader>");
+                    foreach (var row in schemaDoc.DocumentationRows)
+                    {
+                        writer.LineRaw("///   <item>");
+                        writer.Line($"///     <term>{row.Name}</term>");
+                        writer.Line($"///     <term>{row.Type}</term>");
+                        writer.Line($"///     <term>{(row.Required ? "Yes" : "")}</term>");
+                        if (string.IsNullOrEmpty(row.Description))
+                        {
+                            writer.Line($"///    <term></term>");
+                        }
+                        else
+                        {
+                            writer.WriteDocumentationLines("    <term>", "</term>", row.Description);
+                        }
+                        writer.LineRaw("///   </item>");
+                    }
+                    writer.LineRaw("/// </list>");
+                }
+
+                writer.LineRaw("/// </remarks>");
+            }
+
             foreach (var parameter in parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);

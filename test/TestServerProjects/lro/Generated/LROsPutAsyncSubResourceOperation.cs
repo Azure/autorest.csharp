@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request with sub resource. </summary>
     public partial class LROsPutAsyncSubResourceOperation : Operation<SubProduct>, IOperationSource<SubProduct>
     {
-        private readonly ArmOperationHelpers<SubProduct> _operation;
+        private readonly OperationInternals<SubProduct> _operation;
 
         /// <summary> Initializes a new instance of LROsPutAsyncSubResourceOperation for mocking. </summary>
         protected LROsPutAsyncSubResourceOperation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LROsPutAsyncSubResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<SubProduct>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutAsyncSubResourceOperation");
+            _operation = new OperationInternals<SubProduct>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutAsyncSubResourceOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

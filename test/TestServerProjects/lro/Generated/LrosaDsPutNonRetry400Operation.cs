@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
     public partial class LrosaDsPutNonRetry400Operation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly ArmOperationHelpers<Product> _operation;
+        private readonly OperationInternals<Product> _operation;
 
         /// <summary> Initializes a new instance of LrosaDsPutNonRetry400Operation for mocking. </summary>
         protected LrosaDsPutNonRetry400Operation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LrosaDsPutNonRetry400Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPutNonRetry400Operation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPutNonRetry400Operation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;
