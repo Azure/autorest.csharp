@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string ResourceGroupOperationsResourceType = "ResourceGroupOperations.ResourceType";
         private const string SubscriptionOperationsResourceType = "SubscriptionOperations.ResourceType";
         private const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
-        private const string ResourceGroup = "ResourceGroup";
+        private const string ResourceGroupCommentName = "ResourceGroup";
         private const string Subscription = "Subscription";
         private const string Tenant = "Tenant";
 
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             StringBuilder summary = new StringBuilder();
             string ParentResourceName = GetParentResourceName();
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
-                $"A class representing collection of {clientPrefix} and their operations over a {ParentResourceName}." :
+                $"A class representing collection of {clientPrefix} and their operations over a {GetParentResourceName()}." :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     {
                         return opGroup.Resource(Context.Configuration.MgmtConfiguration);
                     }
-                    return "";
+                    return "Parent";
             }
         }
 
