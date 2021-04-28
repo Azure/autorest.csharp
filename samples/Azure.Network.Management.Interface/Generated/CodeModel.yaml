@@ -10295,6 +10295,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
+  schemes: []
 language: !Languages 
   default:
     name: AzureNetworkManagementInterface

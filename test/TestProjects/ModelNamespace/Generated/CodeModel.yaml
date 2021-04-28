@@ -125,6 +125,7 @@ schemas: !Schemas
 operationGroups: []
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: ModelNamespace

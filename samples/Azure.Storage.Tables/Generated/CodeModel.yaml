@@ -4630,7 +4630,8 @@ operationGroups:
         description: ''
     protocol: !Protocols {}
 security: !Security 
-  authenticationRequired: true
+  authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: AzureStorageTables
