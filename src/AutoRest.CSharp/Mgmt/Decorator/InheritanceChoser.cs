@@ -110,6 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (IsSuperset(parentType, properties))
                 {
+                    //TODO: change type
                     return CSharpType.FromSystemType(originalType.Context, parentType);
                 }
             }

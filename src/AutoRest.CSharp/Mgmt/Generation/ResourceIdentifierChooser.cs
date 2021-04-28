@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
@@ -14,11 +16,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal static class ResourceIdentifierChooser
     {
-        internal static string GetResourceIdentifierType(this OperationGroup operation, ResourceData resourceData)
+        internal static string GetResourceIdentifierType(this OperationGroup operation, ResourceData resourceData, MgmtConfiguration config)
         {
-            //TODO: remove hard coded value during 5779
             ObjectType? obj = GetObjectTypeBase(resourceData);
-            return IsSubclassOf(obj, typeof(SubResource)) ? "ResourceIdentifier" : "TenantResourceIdentifier";
+            if (operation.ResourceType(config) == ResourceTypeBuilder.Subscriptions)
+                return nameof(SubscriptionResourceIdentifier);
+            else if (operation.IsTenantResource(config))
+                return nameof(TenantResourceIdentifier);
+            else if (obj is not null && IsSubclassOf(obj, typeof(SubResource)))
+                return nameof(ResourceIdentifier);
+            else
+                return nameof(ResourceGroupResourceIdentifier);
         }
 
         private static ObjectType? GetObjectTypeBase(ObjectType obj)

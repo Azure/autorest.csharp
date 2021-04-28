@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(OperationGroup);
 
-        public string ResourceIdentifierType => OperationGroup.GetResourceIdentifierType(_context.Library.GetResourceData(OperationGroup));
+        public string ResourceIdentifierType => OperationGroup.GetResourceIdentifierType(_context.Library.GetResourceData(OperationGroup), _context.Configuration.MgmtConfiguration);
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
 
