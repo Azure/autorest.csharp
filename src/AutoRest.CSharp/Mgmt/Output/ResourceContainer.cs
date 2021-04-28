@@ -3,7 +3,6 @@
 
 using System;
 using System.Text;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -37,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             StringBuilder summary = new StringBuilder();
             string ParentResourceName = GetParentResourceName();
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
-                $"A class representing collection of {clientPrefix} and their operations over a ParentResourceName. " :
+                $"A class representing collection of {clientPrefix} and their operations over a {ParentResourceName}." :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
@@ -48,7 +47,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             switch (parentResourceType)
             {
                 case ResourceTypeBuilder.ResourceGroups:
-                    return ResourceGroup        ;
+                    return ResourceGroup;
                 case ResourceTypeBuilder.Subscriptions:
                     return Subscription;
                 case ResourceTypeBuilder.Tenant:
