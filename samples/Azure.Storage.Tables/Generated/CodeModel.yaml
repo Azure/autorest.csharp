@@ -60,20 +60,26 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !NumberSchema &ref_31
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2018-10-10'
       minimum: 1
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: RetentionPolicyDays
           description: Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted
       protocol: !Protocols {}
     - !NumberSchema &ref_41
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2018-10-10'
       minimum: 0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: CorsRuleMaxAgeInSeconds
           description: The maximum amount time that a browser should cache the preflight OPTIONS request.
       protocol: !Protocols {}
   strings:
@@ -1080,11 +1086,11 @@ schemas: !Schemas
   dictionaries:
     - !DictionarySchema &ref_20
       type: dictionary
-      elementType: !AnySchema &ref_1
-        type: any
+      elementType: !AnyObjectSchema &ref_1
+        type: any-object
         language: !Languages 
           default:
-            name: any
+            name: AnyObject
             description: Any object
         protocol: !Protocols {}
       language: !Languages 
@@ -1092,7 +1098,7 @@ schemas: !Schemas
           name: TableEntityProperties
           description: The other properties of the table entity
       protocol: !Protocols {}
-  any:
+  anyObjects:
     - *ref_1
   dateTimes:
     - !DateTimeSchema &ref_64
@@ -4630,7 +4636,8 @@ operationGroups:
         description: ''
     protocol: !Protocols {}
 security: !Security 
-  authenticationRequired: true
+  authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: AzureStorageTables

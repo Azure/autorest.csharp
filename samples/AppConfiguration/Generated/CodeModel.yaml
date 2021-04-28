@@ -13,10 +13,13 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_9
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '1.0'
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ErrorStatus
           description: The HTTP status code that the error maps to.
       protocol: !Protocols {}
   strings:
@@ -3678,6 +3681,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: AppConfiguration

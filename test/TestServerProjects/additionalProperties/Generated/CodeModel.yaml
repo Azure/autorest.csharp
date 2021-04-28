@@ -14,10 +14,57 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_8
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: PetAPTrueId
+          description: ''
+      protocol: !Protocols {}
+    - !NumberSchema &ref_10
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      precision: 32
+      language: !Languages 
+        default:
+          name: ErrorStatus
+          description: ''
+      protocol: !Protocols {}
+    - !NumberSchema &ref_13
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      precision: 32
+      language: !Languages 
+        default:
+          name: PetAPObjectId
+          description: ''
+      protocol: !Protocols {}
+    - !NumberSchema &ref_16
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      precision: 32
+      language: !Languages 
+        default:
+          name: PetAPStringId
+          description: ''
+      protocol: !Protocols {}
+    - !NumberSchema &ref_18
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      precision: 32
+      language: !Languages 
+        default:
+          name: PetAPInPropertiesId
           description: ''
       protocol: !Protocols {}
     - !NumberSchema &ref_3
@@ -29,6 +76,17 @@ schemas: !Schemas
       language: !Languages 
         default:
           name: Number
+          description: ''
+      protocol: !Protocols {}
+    - !NumberSchema &ref_22
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      precision: 32
+      language: !Languages 
+        default:
+          name: PetAPInPropertiesWithAPStringId
           description: ''
       protocol: !Protocols {}
   strings:
@@ -49,7 +107,7 @@ schemas: !Schemas
           name: PetAPTrueName
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_10
+    - !StringSchema &ref_11
       type: string
       apiVersions:
         - !ApiVersion 
@@ -59,7 +117,7 @@ schemas: !Schemas
           name: ErrorMessage
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_14
       type: string
       apiVersions:
         - !ApiVersion 
@@ -79,7 +137,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_17
       type: string
       apiVersions:
         - !ApiVersion 
@@ -89,7 +147,7 @@ schemas: !Schemas
           name: PetAPStringName
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_15
+    - !StringSchema &ref_19
       type: string
       apiVersions:
         - !ApiVersion 
@@ -99,7 +157,7 @@ schemas: !Schemas
           name: PetAPInPropertiesName
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_18
+    - !StringSchema &ref_23
       type: string
       apiVersions:
         - !ApiVersion 
@@ -109,7 +167,7 @@ schemas: !Schemas
           name: PetAPInPropertiesWithAPStringName
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_19
+    - !StringSchema &ref_24
       type: string
       apiVersions:
         - !ApiVersion 
@@ -120,7 +178,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_22
+    - !ConstantSchema &ref_27
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -130,7 +188,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_23
+    - !ConstantSchema &ref_28
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -143,27 +201,27 @@ schemas: !Schemas
   dictionaries:
     - !DictionarySchema &ref_5
       type: dictionary
-      elementType: !AnySchema &ref_1
-        type: any
+      elementType: !AnyObjectSchema &ref_1
+        type: any-object
         language: !Languages 
           default:
-            name: any
+            name: AnyObject
             description: Any object
         protocol: !Protocols {}
       language: !Languages 
         default:
           name: PetAPTrue
-          description: Dictionary of <any>
+          description: Dictionary of <AnyObject>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_11
+    - !DictionarySchema &ref_12
       type: dictionary
       elementType: *ref_1
       language: !Languages 
         default:
           name: PetAPObject
-          description: Dictionary of <any>
+          description: Dictionary of <AnyObject>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_13
+    - !DictionarySchema &ref_15
       type: dictionary
       elementType: *ref_2
       language: !Languages 
@@ -171,7 +229,7 @@ schemas: !Schemas
           name: PetAPString
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_16
+    - !DictionarySchema &ref_20
       type: dictionary
       elementType: *ref_3
       language: !Languages 
@@ -179,7 +237,7 @@ schemas: !Schemas
           name: PetAPInPropertiesAdditionalProperties
           description: Dictionary of <number>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_17
+    - !DictionarySchema &ref_21
       type: dictionary
       elementType: *ref_2
       language: !Languages 
@@ -187,7 +245,7 @@ schemas: !Schemas
           name: PetAPInPropertiesWithAPString
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_20
+    - !DictionarySchema &ref_25
       type: dictionary
       elementType: *ref_3
       language: !Languages 
@@ -195,7 +253,7 @@ schemas: !Schemas
           name: PetAPInPropertiesWithAPStringAdditionalProperties
           description: Dictionary of <number>
       protocol: !Protocols {}
-  any:
+  anyObjects:
     - *ref_1
   objects:
     - !ObjectSchema &ref_4
@@ -283,14 +341,14 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_25
+    - !ObjectSchema &ref_30
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_8
+          schema: *ref_10
           serializedName: status
           language: !Languages 
             default:
@@ -298,7 +356,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_10
+          schema: *ref_11
           serializedName: message
           language: !Languages 
             default:
@@ -316,69 +374,19 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_7
-    - !ObjectSchema &ref_27
+    - !ObjectSchema &ref_32
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       parents: !Relations 
         all:
-          - *ref_11
+          - *ref_12
         immediate:
-          - *ref_11
+          - *ref_12
       properties:
         - !Property 
-          schema: *ref_8
-          required: true
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_12
-          required: false
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_6
-          readOnly: true
-          required: false
-          serializedName: status
-          language: !Languages 
-            default:
-              name: status
-              description: ''
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-        - output
-      language: !Languages 
-        default:
-          name: PetAPObject
-          description: ''
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_29
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      parents: !Relations 
-        all:
-          - *ref_13
-        immediate:
-          - *ref_13
-      properties:
-        - !Property 
-          schema: *ref_8
+          schema: *ref_13
           required: true
           serializedName: id
           language: !Languages 
@@ -412,18 +420,23 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: PetAPString
+          name: PetAPObject
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_31
+    - !ObjectSchema &ref_34
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
+      parents: !Relations 
+        all:
+          - *ref_15
+        immediate:
+          - *ref_15
       properties:
         - !Property 
-          schema: *ref_8
+          schema: *ref_16
           required: true
           serializedName: id
           language: !Languages 
@@ -432,7 +445,52 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_15
+          schema: *ref_17
+          required: false
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_6
+          readOnly: true
+          required: false
+          serializedName: status
+          language: !Languages 
+            default:
+              name: status
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !Languages 
+        default:
+          name: PetAPString
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_36
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      properties:
+        - !Property 
+          schema: *ref_18
+          required: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_19
           required: false
           serializedName: name
           language: !Languages 
@@ -451,7 +509,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_16
+          schema: *ref_20
           required: false
           serializedName: additionalProperties
           language: !Languages 
@@ -470,19 +528,19 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_33
+    - !ObjectSchema &ref_38
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       parents: !Relations 
         all:
-          - *ref_17
+          - *ref_21
         immediate:
-          - *ref_17
+          - *ref_21
       properties:
         - !Property 
-          schema: *ref_8
+          schema: *ref_22
           required: true
           serializedName: id
           language: !Languages 
@@ -491,7 +549,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_18
+          schema: *ref_23
           required: false
           serializedName: name
           language: !Languages 
@@ -510,7 +568,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_19
+          schema: *ref_24
           required: true
           serializedName: '@odata.location'
           language: !Languages 
@@ -519,7 +577,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_20
+          schema: *ref_25
           required: false
           serializedName: additionalProperties
           language: !Languages 
@@ -539,7 +597,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_21
+  - !Parameter &ref_26
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -564,12 +622,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_21
+          - *ref_26
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_22
+                schema: *ref_27
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -581,7 +639,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_24
+              - !Parameter &ref_29
                 schema: *ref_4
                 implementation: Method
                 required: true
@@ -594,7 +652,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_28
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -607,7 +665,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_24
+              - *ref_29
             language: !Languages 
               default:
                 name: ''
@@ -637,7 +695,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -659,12 +717,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_21
+          - *ref_26
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_22
+                schema: *ref_27
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -676,7 +734,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_26
+              - !Parameter &ref_31
                 schema: *ref_7
                 implementation: Method
                 required: true
@@ -689,7 +747,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_28
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -702,7 +760,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_26
+              - *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -732,7 +790,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -754,12 +812,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_21
+          - *ref_26
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_22
+                schema: *ref_27
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -771,8 +829,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_28
-                schema: *ref_27
+              - !Parameter &ref_33
+                schema: *ref_32
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -784,7 +842,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_28
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -797,7 +855,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_28
+              - *ref_33
             language: !Languages 
               default:
                 name: ''
@@ -813,7 +871,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_27
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -827,7 +885,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -849,12 +907,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_21
+          - *ref_26
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_22
+                schema: *ref_27
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -866,8 +924,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_30
-                schema: *ref_29
+              - !Parameter &ref_35
+                schema: *ref_34
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -879,7 +937,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_28
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -892,7 +950,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_30
+              - *ref_35
             language: !Languages 
               default:
                 name: ''
@@ -908,7 +966,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_29
+            schema: *ref_34
             language: !Languages 
               default:
                 name: ''
@@ -922,7 +980,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -944,12 +1002,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_21
+          - *ref_26
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_22
+                schema: *ref_27
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -961,8 +1019,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_32
-                schema: *ref_31
+              - !Parameter &ref_37
+                schema: *ref_36
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -974,7 +1032,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_28
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -987,7 +1045,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_32
+              - *ref_37
             language: !Languages 
               default:
                 name: ''
@@ -1003,7 +1061,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_36
             language: !Languages 
               default:
                 name: ''
@@ -1017,7 +1075,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -1039,12 +1097,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_21
+          - *ref_26
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_22
+                schema: *ref_27
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1056,8 +1114,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_34
-                schema: *ref_33
+              - !Parameter &ref_39
+                schema: *ref_38
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1069,7 +1127,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_28
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1082,7 +1140,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_34
+              - *ref_39
             language: !Languages 
               default:
                 name: ''
@@ -1098,7 +1156,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_33
+            schema: *ref_38
             language: !Languages 
               default:
                 name: ''
@@ -1112,7 +1170,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_25
+            schema: *ref_30
             language: !Languages 
               default:
                 name: ''
@@ -1136,6 +1194,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: AdditionalPropertiesClient
