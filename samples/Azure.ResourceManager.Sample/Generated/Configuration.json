@@ -34,7 +34,6 @@
     "LogAnalytics": "NonResource"
   },
   "OperationGroupToParent": {
-    "Operations": "Tenant",
     "LogAnalytics": "subscriptions",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
     "VirtualMachineImages": "Microsoft.Compute/locations",

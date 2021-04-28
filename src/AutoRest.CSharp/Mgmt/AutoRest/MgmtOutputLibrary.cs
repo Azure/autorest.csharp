@@ -76,6 +76,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
 
+        /// <summary>
+        /// Looks up a <see cref="Resource" /> object by <see cref="OperationGroup" />.
+        /// </summary>
+        /// <param name="operationGroup">OperationGroup object.</param>
+        /// <returns>The <see cref="Resource" /> object associated with the operation group.</returns>
+        public Resource GetArmResource(OperationGroup operationGroup) => EnsureArmResource()[operationGroup];
+
+        /// <summary>
+        /// Looks up a <see cref="RestClient" /> object by <see cref="OperationGroup" />.
+        /// </summary>
+        /// <param name="operationGroup">OperationGroup object.</param>
+        /// <returns>The <see cref="RestClient" /> object associated with the operation group.</returns>
+        public MgmtRestClient GetRestClient(OperationGroup operationGroup) => EnsureRestClients()[operationGroup];
+
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
             if (_restClients != null)
@@ -201,7 +215,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public LongRunningOperationInfo FindLongRunningOperationInfo(OperationGroup operationGroup, Operation operation)
         {
-            var mgmtRestClient = FindRestClient(operationGroup);
+            var mgmtRestClient = GetRestClient(operationGroup);
 
             Debug.Assert(mgmtRestClient != null, "Unexpected. Unable find matching rest client.");
 
@@ -258,31 +272,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context, true),
             _ => throw new NotImplementedException()
         };
-
-        public MgmtRestClient FindRestClient(OperationGroup operationGroup)
-        {
-            return EnsureRestClients()[operationGroup];
-        }
-
-        /// <summary>
-        /// Looks up a resource data object by resource name.
-        /// </summary>
-        /// <param name="resourceName">Name of the resource.</param>
-        /// <returns></returns>
-        public ResourceData FindResourceData(OperationGroup operationGroup)
-        {
-            return EnsureResourceData()[operationGroup];
-        }
-
-        public Resource FindArmResource(OperationGroup operationGroup)
-        {
-            return EnsureArmResource()[operationGroup];
-        }
-
-        public ResourceOperation FindResourceOperation(OperationGroup operationGroup)
-        {
-            return EnsureResourceOperations()[operationGroup];
-        }
 
         private void DecorateOperationGroup()
         {

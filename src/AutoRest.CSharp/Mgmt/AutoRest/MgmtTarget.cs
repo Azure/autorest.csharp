@@ -85,6 +85,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
             }
 
+
+            // Write long running operations as individual files.
+            // todo: levarage data-plane code to simplify
             foreach (var operationGroup in codeModel.OperationGroups.Where(og => og.IsResource(configuration.MgmtConfiguration)))
             {
                 foreach (var operation in operationGroup.Operations)

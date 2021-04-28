@@ -20,8 +20,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation, MgmtConfiguration config)
         {
-            writer.UseNamespace(typeof(Task).Namespace!);
-
             var cs = resourceOperation.Type;
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))

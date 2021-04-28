@@ -28,7 +28,6 @@ operation-group-to-resource:
    VirtualMachineScaleSetRollingUpgrades: NonResource
    LogAnalytics: NonResource
 operation-group-to-parent:
-   Operations: Tenant
    LogAnalytics: subscriptions
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
    VirtualMachineImages: Microsoft.Compute/locations

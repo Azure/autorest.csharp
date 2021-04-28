@@ -46,10 +46,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer = writer;
             _resourceContainer = resourceContainer;
             var operationGroup = resourceContainer.OperationGroup;
-            _resourceData = library.FindResourceData(operationGroup);
-            _restClient = library.FindRestClient(operationGroup);
-            _resource = library.FindArmResource(operationGroup);
-            _resourceOperation = library.FindResourceOperation(operationGroup);
+            _resourceData = library.GetResourceData(operationGroup);
+            _restClient = library.GetRestClient(operationGroup);
+            _resource = library.GetArmResource(operationGroup);
+            _resourceOperation = library.GetResourceOperation(operationGroup);
         }
 
         public void WriteContainer()

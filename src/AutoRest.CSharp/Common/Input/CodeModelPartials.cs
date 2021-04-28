@@ -11,7 +11,6 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using YamlDotNet.Serialization;
 using AutoRest.CSharp.Output.Models.Requests;
-using Azure.ResourceManager.Core;
 
 #pragma warning disable SA1649
 #pragma warning disable SA1402
