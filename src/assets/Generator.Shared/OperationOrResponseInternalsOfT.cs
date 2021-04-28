@@ -21,7 +21,7 @@ namespace Azure.Core
     /// </summary>
     /// <typeparam name="T">The final result of the LRO.</typeparam>
 #pragma warning disable SA1649 // File name should match first type name
-    internal class OperationOrResponseInternals<T> : OperationOrResponseInternalsBase
+    internal class OperationOrResponseInternals<T> : OperationOrResponseInternals
 #pragma warning restore SA1649 // File name should match first type name
     {
         private readonly OperationInternals<T>? _operation;

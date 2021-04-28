@@ -122,7 +122,7 @@ namespace Azure.Core
                     case 201 when _requestMethod == RequestMethod.Put:
                     case 204 when !(_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch):
                         {
-                            await SetValueAsync(async,  finalResponse, cancellationToken);
+                            await SetValueAsync(async, finalResponse, cancellationToken);
                             _rawResponse = finalResponse;
                             break;
                         }

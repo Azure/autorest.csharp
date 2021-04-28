@@ -19,7 +19,7 @@ namespace Azure.Core
     /// https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation
     /// https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md
     /// </summary>
-    internal class OperationOrResponseInternals : OperationOrResponseInternalsBase
+    internal class OperationOrResponseInternals
     {
         public OperationOrResponseInternals(
             ClientDiagnostics clientDiagnostics,
@@ -28,13 +28,64 @@ namespace Azure.Core
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
-            : base(new OperationInternals(clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName))
+            : this(new OperationInternals(clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName))
         {
         }
 
-        public OperationOrResponseInternals(Response response)
-            : base(response)
+        protected OperationOrResponseInternals(OperationInternals operationInternals)
         {
+            if (operationInternals is null)
+                throw new ArgumentNullException(nameof(operationInternals));
+
+            Operation = operationInternals;
+        }
+
+        public OperationOrResponseInternals(Response response)
+        {
+            if (response is null)
+                throw new ArgumentNullException(nameof(response));
+
+            VoidResponse = response;
+        }
+
+        protected OperationInternals? Operation { get; }
+
+        protected Response? VoidResponse { get; }
+
+        protected bool DoesWrapOperation => VoidResponse is null;
+
+        public bool HasCompleted => DoesWrapOperation ? Operation!.HasCompleted : true;
+
+        public Response GetRawResponse()
+        {
+            return DoesWrapOperation ? Operation!.GetRawResponse() : VoidResponse!;
+        }
+
+        public Response UpdateStatus(CancellationToken cancellationToken = default)
+        {
+            return DoesWrapOperation ? Operation!.UpdateStatus(cancellationToken) : VoidResponse!;
+        }
+
+        public ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
+        {
+            return DoesWrapOperation
+                ? Operation!.UpdateStatusAsync(cancellationToken)
+                : new ValueTask<Response>(VoidResponse!);
+        }
+
+        public async ValueTask<Response> WaitForCompletionResponseAsync(
+            CancellationToken cancellationToken = default)
+        {
+            return await WaitForCompletionResponseAsync(OperationInternals.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+        }
+
+        public async ValueTask<Response> WaitForCompletionResponseAsync(
+            TimeSpan pollingInterval,
+            CancellationToken cancellationToken)
+        {
+            return DoesWrapOperation
+                ? await Operation!.WaitForCompletionResponseAsync(pollingInterval, cancellationToken).ConfigureAwait(false)
+                : VoidResponse!;
         }
     }
 }
