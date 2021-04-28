@@ -70,13 +70,22 @@ namespace AutoRest.CSharp.Generation.Writers
             var @namespace = cs.Namespace;
             using (writer.Namespace(@namespace))
             {
+                bool isGenericOperation = !(operation.ResultType.IsFrameworkType && operation.ResultType.FrameworkType == typeof(Response));
                 writer.WriteXmlDocumentationSummary(operation.Description);
-                var interfaceType = new CSharpType(typeof(IOperationSource<>), operation.ResultType);
-                var baseType = new CSharpType(typeof(Operation<>), operation.ResultType);
-                var waitForCompletionType = new CSharpType(typeof(ValueTask<>), new CSharpType(typeof(Response<>), operation.ResultType));
-                var helperType = new CSharpType(typeof(OperationInternals<>), operation.ResultType);
+                var interfaceType = isGenericOperation ? new CSharpType(typeof(IOperationSource<>), operation.ResultType) : null;
+                var baseType = isGenericOperation ? new CSharpType(typeof(Operation<>), operation.ResultType) : new CSharpType(typeof(Operation));
+                var valueTaskType = isGenericOperation ? new CSharpType(typeof(Response<>), operation.ResultType) : new CSharpType(typeof(Response));
+                var waitForCompletionType = new CSharpType(typeof(ValueTask<>), valueTaskType);
+                var helperType = isGenericOperation ? new CSharpType(typeof(OperationInternals<>), operation.ResultType) : new CSharpType(typeof(OperationInternals));
+                var interfaceSeparator = isGenericOperation ? ", " : string.Empty;
+                var paramStart = isGenericOperation ? "(this, " : "(";
+                var waitForCompleteMethodName = isGenericOperation ? "WaitForCompletionAsync" : "WaitForCompletionResponseAsync";
 
-                using (writer.Scope($"{operation.Declaration.Accessibility} partial class {cs.Name}: {baseType}, {interfaceType}"))
+                FormattableString scope = isGenericOperation
+                    ? (FormattableString)$"{operation.Declaration.Accessibility} partial class {cs.Name}: {baseType}, {interfaceType}"
+                    : (FormattableString)$"{operation.Declaration.Accessibility} partial class {cs.Name}: {baseType}";
+
+                using (writer.Scope(scope))
                 {
                     writer.Line($"private readonly {helperType} _operation;");
 
@@ -103,7 +112,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     using (writer.Scope())
                     {
-                        writer.Line($"_operation = new {helperType}(this, clientDiagnostics, pipeline, request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia}, {operation.Diagnostics.ScopeName:L});");
+                        writer.Line($"_operation = new {helperType}{paramStart}clientDiagnostics, pipeline, request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia}, {operation.Diagnostics.ScopeName:L});");
 
                         if (pagingResponse != null)
                         {
@@ -115,17 +124,23 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"public override string Id => _operation.Id;");
                     writer.Line();
 
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {operation.ResultType} Value => _operation.Value;");
-                    writer.Line();
+                    if (isGenericOperation)
+                    {
+                        writer.WriteXmlDocumentationInheritDoc();
+                        writer.Line($"public override {operation.ResultType} Value => _operation.Value;");
+                        writer.Line();
+                    }
 
                     writer.WriteXmlDocumentationInheritDoc();
                     writer.Line($"public override bool HasCompleted => _operation.HasCompleted;");
                     writer.Line();
 
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override bool HasValue => _operation.HasValue;");
-                    writer.Line();
+                    if (isGenericOperation)
+                    {
+                        writer.WriteXmlDocumentationInheritDoc();
+                        writer.Line($"public override bool HasValue => _operation.HasValue;");
+                        writer.Line();
+                    }
 
                     writer.WriteXmlDocumentationInheritDoc();
                     writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.GetRawResponse();");
@@ -140,22 +155,25 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {waitForCompletionType} WaitForCompletionAsync({typeof(CancellationToken)} cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);");
+                    writer.Line($"public override {waitForCompletionType} {waitForCompleteMethodName}({typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompleteMethodName}(cancellationToken);");
                     writer.Line();
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {waitForCompletionType} WaitForCompletionAsync({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);");
+                    writer.Line($"public override {waitForCompletionType} {waitForCompleteMethodName}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompleteMethodName}(pollingInterval, cancellationToken);");
                     writer.Line();
 
-                    using (writer.Scope($"{operation.ResultType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+                    if (isGenericOperation)
                     {
-                        WriteResultFunction(false);
-                    }
-                    writer.Line();
+                        using (writer.Scope($"{operation.ResultType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+                        {
+                            WriteResultFunction(false);
+                        }
+                        writer.Line();
 
-                    using (writer.Scope($"async {new CSharpType(typeof(ValueTask<>), operation.ResultType)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
-                    {
-                        WriteResultFunction(true);
+                        using (writer.Scope($"async {new CSharpType(typeof(ValueTask<>), operation.ResultType)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+                        {
+                            WriteResultFunction(true);
+                        }
                     }
 
                     if (pagingResponse != null)
