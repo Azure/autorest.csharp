@@ -47,28 +47,28 @@ namespace TenantOnly
         // Container level operations.
 
         /// <inheritdoc />
-        public override ArmResponse<Agreement> CreateOrUpdate(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
+        public ArmResponse<Agreement> CreateOrUpdate(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<Agreement>> CreateOrUpdateAsync(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
+        public Task<ArmResponse<Agreement>> CreateOrUpdateAsync(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override ArmOperation<Agreement> StartCreateOrUpdate(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
+        public ArmOperation<Agreement> StartCreateOrUpdate(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmOperation<Agreement>> StartCreateOrUpdateAsync(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
+        public Task<ArmOperation<Agreement>> StartCreateOrUpdateAsync(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();

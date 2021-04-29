@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<VirtualMachineScaleSet> CreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public ArmResponse<VirtualMachineScaleSet> CreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.CreateOrUpdate");
             scope.Start();
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<VirtualMachineScaleSet>> CreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public async Task<ArmResponse<VirtualMachineScaleSet>> CreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.CreateOrUpdateAsync");
             scope.Start();
@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmOperation<VirtualMachineScaleSet> StartCreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public ArmOperation<VirtualMachineScaleSet> StartCreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.StartCreateOrUpdate");
             scope.Start();
@@ -115,7 +115,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmOperation<VirtualMachineScaleSet>> StartCreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public async Task<ArmOperation<VirtualMachineScaleSet>> StartCreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.StartCreateOrUpdateAsync");
             scope.Start();

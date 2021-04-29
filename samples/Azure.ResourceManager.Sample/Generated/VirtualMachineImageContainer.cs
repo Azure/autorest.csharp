@@ -47,28 +47,28 @@ namespace Azure.ResourceManager.Sample
         // Container level operations.
 
         /// <inheritdoc />
-        public override ArmResponse<VirtualMachineImage> CreateOrUpdate(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
+        public ArmResponse<VirtualMachineImage> CreateOrUpdate(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<VirtualMachineImage>> CreateOrUpdateAsync(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
+        public Task<ArmResponse<VirtualMachineImage>> CreateOrUpdateAsync(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override ArmOperation<VirtualMachineImage> StartCreateOrUpdate(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
+        public ArmOperation<VirtualMachineImage> StartCreateOrUpdate(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmOperation<VirtualMachineImage>> StartCreateOrUpdateAsync(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
+        public Task<ArmOperation<VirtualMachineImage>> StartCreateOrUpdateAsync(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();

@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<Image> CreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public ArmResponse<Image> CreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.CreateOrUpdate");
             scope.Start();
@@ -69,7 +69,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<Image>> CreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public async Task<ArmResponse<Image>> CreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.CreateOrUpdateAsync");
             scope.Start();
@@ -89,7 +89,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmOperation<Image> StartCreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public ArmOperation<Image> StartCreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.StartCreateOrUpdate");
             scope.Start();
@@ -115,7 +115,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmOperation<Image>> StartCreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public async Task<ArmOperation<Image>> StartCreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.StartCreateOrUpdateAsync");
             scope.Start();

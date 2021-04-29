@@ -50,7 +50,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<SupersetModel4> CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public ArmResponse<SupersetModel4> CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.CreateOrUpdate");
             scope.Start();
@@ -69,7 +69,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<SupersetModel4>> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public async Task<ArmResponse<SupersetModel4>> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.CreateOrUpdateAsync");
             scope.Start();
@@ -89,7 +89,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmOperation<SupersetModel4> StartCreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public ArmOperation<SupersetModel4> StartCreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.StartCreateOrUpdate");
             scope.Start();
@@ -111,7 +111,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmOperation<SupersetModel4>> StartCreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public async Task<ArmOperation<SupersetModel4>> StartCreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.StartCreateOrUpdateAsync");
             scope.Start();

@@ -135,34 +135,6 @@ namespace Azure.Management.Storage
         }
 
         /// <inheritdoc />
-        public override ArmResponse<PrivateEndpointConnection> CreateOrUpdate(string name, PrivateEndpointConnectionData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in PrivateEndpointConnectionsRestOperations that accepts PrivateEndpointConnectionData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<PrivateEndpointConnection>> CreateOrUpdateAsync(string name, PrivateEndpointConnectionData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in PrivateEndpointConnectionsRestOperations that accepts PrivateEndpointConnectionData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override ArmOperation<PrivateEndpointConnection> StartCreateOrUpdate(string name, PrivateEndpointConnectionData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in PrivateEndpointConnectionsRestOperations that accepts PrivateEndpointConnectionData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmOperation<PrivateEndpointConnection>> StartCreateOrUpdateAsync(string name, PrivateEndpointConnectionData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in PrivateEndpointConnectionsRestOperations that accepts PrivateEndpointConnectionData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<PrivateEndpointConnection> Get(string privateEndpointConnectionName, CancellationToken cancellationToken = default)

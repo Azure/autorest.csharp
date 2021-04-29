@@ -135,34 +135,6 @@ namespace Azure.Management.Storage
         }
 
         /// <inheritdoc />
-        public override ArmResponse<FileService> CreateOrUpdate(string name, FileServiceData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in FileServicesRestOperations that accepts FileServiceData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<FileService>> CreateOrUpdateAsync(string name, FileServiceData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in FileServicesRestOperations that accepts FileServiceData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override ArmOperation<FileService> StartCreateOrUpdate(string name, FileServiceData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in FileServicesRestOperations that accepts FileServiceData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmOperation<FileService>> StartCreateOrUpdateAsync(string name, FileServiceData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in FileServicesRestOperations that accepts FileServiceData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         public override ArmResponse<FileService> Get(string resourceName, CancellationToken cancellationToken = default)
         {
             // This resource does not support Get operation.

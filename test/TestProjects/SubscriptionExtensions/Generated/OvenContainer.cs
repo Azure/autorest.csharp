@@ -51,7 +51,7 @@ namespace SubscriptionExtensions
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<Oven> CreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public ArmResponse<Oven> CreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.CreateOrUpdate");
             scope.Start();
@@ -70,7 +70,7 @@ namespace SubscriptionExtensions
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<Oven>> CreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public async Task<ArmResponse<Oven>> CreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.CreateOrUpdateAsync");
             scope.Start();
@@ -90,7 +90,7 @@ namespace SubscriptionExtensions
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmOperation<Oven> StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public ArmOperation<Oven> StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.StartCreateOrUpdate");
             scope.Start();
@@ -116,7 +116,7 @@ namespace SubscriptionExtensions
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmOperation<Oven>> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public async Task<ArmOperation<Oven>> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.StartCreateOrUpdateAsync");
             scope.Start();

@@ -48,28 +48,28 @@ namespace Azure.Management.Storage
         // Container level operations.
 
         /// <inheritdoc />
-        public override ArmResponse<PrivateLinkResource> CreateOrUpdate(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
+        public ArmResponse<PrivateLinkResource> CreateOrUpdate(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<PrivateLinkResource>> CreateOrUpdateAsync(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
+        public Task<ArmResponse<PrivateLinkResource>> CreateOrUpdateAsync(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override ArmOperation<PrivateLinkResource> StartCreateOrUpdate(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
+        public ArmOperation<PrivateLinkResource> StartCreateOrUpdate(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmOperation<PrivateLinkResource>> StartCreateOrUpdateAsync(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
+        public Task<ArmOperation<PrivateLinkResource>> StartCreateOrUpdateAsync(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();

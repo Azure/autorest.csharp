@@ -47,28 +47,28 @@ namespace MgmtParent
         // Container level operations.
 
         /// <inheritdoc />
-        public override ArmResponse<VirtualMachineExtensionImage> CreateOrUpdate(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
+        public ArmResponse<VirtualMachineExtensionImage> CreateOrUpdate(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<VirtualMachineExtensionImage>> CreateOrUpdateAsync(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
+        public Task<ArmResponse<VirtualMachineExtensionImage>> CreateOrUpdateAsync(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override ArmOperation<VirtualMachineExtensionImage> StartCreateOrUpdate(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
+        public ArmOperation<VirtualMachineExtensionImage> StartCreateOrUpdate(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmOperation<VirtualMachineExtensionImage>> StartCreateOrUpdateAsync(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
+        public Task<ArmOperation<VirtualMachineExtensionImage>> StartCreateOrUpdateAsync(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();

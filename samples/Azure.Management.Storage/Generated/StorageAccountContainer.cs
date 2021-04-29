@@ -139,34 +139,6 @@ namespace Azure.Management.Storage
         }
 
         /// <inheritdoc />
-        public override ArmResponse<StorageAccount> CreateOrUpdate(string name, StorageAccountData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in StorageAccountsRestOperations that accepts StorageAccountData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<StorageAccount>> CreateOrUpdateAsync(string name, StorageAccountData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in StorageAccountsRestOperations that accepts StorageAccountData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override ArmOperation<StorageAccount> StartCreateOrUpdate(string name, StorageAccountData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in StorageAccountsRestOperations that accepts StorageAccountData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmOperation<StorageAccount>> StartCreateOrUpdateAsync(string name, StorageAccountData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in StorageAccountsRestOperations that accepts StorageAccountData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         public override ArmResponse<StorageAccount> Get(string resourceName, CancellationToken cancellationToken = default)
         {
             // This resource does not support Get operation.

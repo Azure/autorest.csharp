@@ -51,7 +51,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<EncryptionScope> CreateOrUpdate(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public ArmResponse<EncryptionScope> CreateOrUpdate(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.CreateOrUpdate");
             scope.Start();
@@ -70,7 +70,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<EncryptionScope>> CreateOrUpdateAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public async Task<ArmResponse<EncryptionScope>> CreateOrUpdateAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.CreateOrUpdateAsync");
             scope.Start();
@@ -90,7 +90,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmOperation<EncryptionScope> StartCreateOrUpdate(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public ArmOperation<EncryptionScope> StartCreateOrUpdate(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartCreateOrUpdate");
             scope.Start();
@@ -112,7 +112,7 @@ namespace Azure.Management.Storage
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmOperation<EncryptionScope>> StartCreateOrUpdateAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
+        public async Task<ArmOperation<EncryptionScope>> StartCreateOrUpdateAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartCreateOrUpdateAsync");
             scope.Start();

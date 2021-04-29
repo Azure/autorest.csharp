@@ -131,34 +131,6 @@ namespace Azure.Management.Storage
         }
 
         /// <inheritdoc />
-        public override ArmResponse<ManagementPolicy> CreateOrUpdate(string name, ManagementPolicyData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in ManagementPoliciesRestOperations that accepts ManagementPolicyData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<ManagementPolicy>> CreateOrUpdateAsync(string name, ManagementPolicyData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in ManagementPoliciesRestOperations that accepts ManagementPolicyData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override ArmOperation<ManagementPolicy> StartCreateOrUpdate(string name, ManagementPolicyData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in ManagementPoliciesRestOperations that accepts ManagementPolicyData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmOperation<ManagementPolicy>> StartCreateOrUpdateAsync(string name, ManagementPolicyData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // There is no create or update method in ManagementPoliciesRestOperations that accepts ManagementPolicyData
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<ManagementPolicy> Get(string managementPolicyName, CancellationToken cancellationToken = default)

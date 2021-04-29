@@ -126,17 +126,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // We must look for CreateOrUpdate by HTTP method because it may be named differently from `CreateOrUpdate`.
             if (FindRestClientMethodByHttpMethod(RequestMethod.Put, out var restClientMethod))
             {
-                if (restClientMethod.Parameters.Any(parameter => parameter.Type.Name == _resourceData.Type.Name && parameter.Type.Namespace == _resourceData.Type.Namespace))
-                {
-                    WriteCreateOrUpdateVariants(restClientMethod);
-                }
-                else
-                {
-                    // it [Resource]Data is not a parameter of the rest method, for example when creating storage account
-                    // the generated methods cannot override base class, so we also generate override methods that only throw exception
-                    WriteCreateOrUpdateVariants(restClientMethod, false);
-                    WriteCreateOrUpdateVariantsThatThrow($"There is no create or update method in {_restClient.Type.Name} that accepts {_resourceData.Type.Name}");
-                }
+                WriteCreateOrUpdateVariants(restClientMethod);
+                // if (restClientMethod.Parameters.Any(parameter => parameter.Type.Name == _resourceData.Type.Name && parameter.Type.Namespace == _resourceData.Type.Namespace))
+                // {
+                //     WriteCreateOrUpdateVariants(restClientMethod);
+                // }
+                // else
+                // {
+                //     // it [Resource]Data is not a parameter of the rest method, for example when creating storage account
+                //     // the generated methods cannot override base class, so we also generate override methods that only throw exception
+                //     WriteCreateOrUpdateVariants(restClientMethod, false);
+                //     WriteCreateOrUpdateVariantsThatThrow($"There is no create or update method in {_restClient.Type.Name} that accepts {_resourceData.Type.Name}");
+                // }
             }
             else
             {
@@ -170,7 +171,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return restMethod != null;
         }
 
-        private void WriteCreateOrUpdateVariants(RestClientMethod restClientMethod, bool shouldOverride = true)
+        private void WriteCreateOrUpdateVariants(RestClientMethod restClientMethod)
         {
             // hack: should add a IsLongRunning property to method?
             var isLongRunning = restClientMethod.Responses.All(response => response.ResponseBody == null);
@@ -185,8 +186,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-            var @override = shouldOverride ? "override " : "";
-            _writer.Append($"public {@override}ArmResponse<{_resource.Type}> {methodName}(");
+            _writer.Append($"public ArmResponse<{_resource.Type}> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
                 _writer.WriteParameter(parameter.Parameter);
@@ -218,7 +218,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-            _writer.Append($"public async {@override}Task<ArmResponse<{_resource.Type}>> {methodName}(");
+            _writer.Append($"public async Task<ArmResponse<{_resource.Type}>> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
                 _writer.WriteParameter(parameter.Parameter);
@@ -249,7 +249,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-            _writer.Append($"public {@override}ArmOperation<{_resource.Type}> {methodName}(");
+            _writer.Append($"public ArmOperation<{_resource.Type}> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
                 _writer.WriteParameter(parameter.Parameter);
@@ -300,7 +300,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
 
-            _writer.Append($"public async {@override}Task<ArmOperation<{_resource.Type}>> {methodName}(");
+            _writer.Append($"public async Task<ArmOperation<{_resource.Type}>> {methodName}(");
             foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
             {
                 _writer.WriteParameter(parameter.Parameter);
@@ -421,7 +421,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.WriteXmlDocumentationInheritDoc();
             var parameters = new List<Parameter> { nameParameter, resourceDetailsParameter };
-            _writer.Append($"public override ArmResponse<{_resource.Type}> CreateOrUpdate(");
+            _writer.Append($"public ArmResponse<{_resource.Type}> CreateOrUpdate(");
             parameters.ForEach(parameter => _writer.WriteParameter(parameter));
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
@@ -432,7 +432,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // CreateOrUpdateAsync()
             _writer.Line();
             _writer.WriteXmlDocumentationInheritDoc();
-            _writer.Append($"public override Task<ArmResponse<{_resource.Type}>> CreateOrUpdateAsync(");
+            _writer.Append($"public Task<ArmResponse<{_resource.Type}>> CreateOrUpdateAsync(");
             parameters.ForEach(parameter => _writer.WriteParameter(parameter));
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
@@ -443,7 +443,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // StartCreateOrUpdate()
             _writer.Line();
             _writer.WriteXmlDocumentationInheritDoc();
-            _writer.Append($"public override ArmOperation<{_resource.Type}> StartCreateOrUpdate(");
+            _writer.Append($"public ArmOperation<{_resource.Type}> StartCreateOrUpdate(");
             parameters.ForEach(parameter => _writer.WriteParameter(parameter));
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
@@ -454,7 +454,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // StartCreateOrUpdateAsync()
             _writer.Line();
             _writer.WriteXmlDocumentationInheritDoc();
-            _writer.Append($"public override Task<ArmOperation<{_resource.Type}>> StartCreateOrUpdateAsync(");
+            _writer.Append($"public Task<ArmOperation<{_resource.Type}>> StartCreateOrUpdateAsync(");
             parameters.ForEach(parameter => _writer.WriteParameter(parameter));
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {

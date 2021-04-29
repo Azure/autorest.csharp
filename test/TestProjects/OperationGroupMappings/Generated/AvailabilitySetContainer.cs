@@ -47,28 +47,28 @@ namespace OperationGroupMappings
         // Container level operations.
 
         /// <inheritdoc />
-        public override ArmResponse<AvailabilitySet> CreateOrUpdate(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
+        public ArmResponse<AvailabilitySet> CreateOrUpdate(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<AvailabilitySet>> CreateOrUpdateAsync(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
+        public Task<ArmResponse<AvailabilitySet>> CreateOrUpdateAsync(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override ArmOperation<AvailabilitySet> StartCreateOrUpdate(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
+        public ArmOperation<AvailabilitySet> StartCreateOrUpdate(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmOperation<AvailabilitySet>> StartCreateOrUpdateAsync(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
+        public Task<ArmOperation<AvailabilitySet>> StartCreateOrUpdateAsync(string name, AvailabilitySetData resourceDetails, CancellationToken cancellationToken = default)
         {
             // This resource does not support PUT HTTP method.
             throw new NotImplementedException();

@@ -51,7 +51,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<FileShare> CreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public ArmResponse<FileShare> CreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.CreateOrUpdate");
             scope.Start();
@@ -70,7 +70,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<FileShare>> CreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public async Task<ArmResponse<FileShare>> CreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.CreateOrUpdateAsync");
             scope.Start();
@@ -90,7 +90,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmOperation<FileShare> StartCreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public ArmOperation<FileShare> StartCreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreateOrUpdate");
             scope.Start();
@@ -112,7 +112,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmOperation<FileShare>> StartCreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public async Task<ArmOperation<FileShare>> StartCreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreateOrUpdateAsync");
             scope.Start();
