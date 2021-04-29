@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of BlobService and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of BlobService and their operations over a StorageAccount. </summary>
     public partial class BlobServiceContainer : ResourceContainerBase<TenantResourceIdentifier, BlobService, BlobServiceData>
     {
         /// <summary> Initializes a new instance of the <see cref="BlobServiceContainer"/> class for mocking. </summary>

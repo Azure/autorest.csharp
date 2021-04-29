@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core.Resources;
 
 namespace TenantOnly
 {
-    /// <summary> A class representing collection of BillingAccount and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of BillingAccount and their operations over a Tenant. </summary>
     public partial class BillingAccountContainer : ResourceContainerBase<TenantResourceIdentifier, BillingAccount, BillingAccountData>
     {
         /// <summary> Initializes a new instance of the <see cref="BillingAccountContainer"/> class for mocking. </summary>

@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of PrivateEndpointConnection and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of PrivateEndpointConnection and their operations over a StorageAccount. </summary>
     public partial class PrivateEndpointConnectionContainer : ResourceContainerBase<TenantResourceIdentifier, PrivateEndpointConnection, PrivateEndpointConnectionData>
     {
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionContainer"/> class for mocking. </summary>

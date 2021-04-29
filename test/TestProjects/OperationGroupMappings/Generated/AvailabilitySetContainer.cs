@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core.Resources;
 
 namespace OperationGroupMappings
 {
-    /// <summary> A class representing collection of AvailabilitySet and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of AvailabilitySet and their operations over a ResourceGroup. </summary>
     public partial class AvailabilitySetContainer : ResourceContainerBase<TenantResourceIdentifier, AvailabilitySet, AvailabilitySetData>
     {
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetContainer"/> class for mocking. </summary>

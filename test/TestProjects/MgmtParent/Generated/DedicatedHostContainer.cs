@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core.Resources;
 
 namespace MgmtParent
 {
-    /// <summary> A class representing collection of DedicatedHost and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of DedicatedHost and their operations over a DedicatedHostGroup. </summary>
     public partial class DedicatedHostContainer : ResourceContainerBase<TenantResourceIdentifier, DedicatedHost, DedicatedHostData>
     {
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostContainer"/> class for mocking. </summary>

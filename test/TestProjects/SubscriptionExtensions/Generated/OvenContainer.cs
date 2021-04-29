@@ -17,7 +17,7 @@ using SubscriptionExtensions.Models;
 
 namespace SubscriptionExtensions
 {
-    /// <summary> A class representing collection of Oven and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of Oven and their operations over a ResourceGroup. </summary>
     public partial class OvenContainer : ResourceContainerBase<TenantResourceIdentifier, Oven, OvenData>
     {
         /// <summary> Initializes a new instance of the <see cref="OvenContainer"/> class for mocking. </summary>

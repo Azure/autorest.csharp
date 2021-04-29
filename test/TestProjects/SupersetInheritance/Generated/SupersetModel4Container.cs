@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core.Resources;
 
 namespace SupersetInheritance
 {
-    /// <summary> A class representing collection of SupersetModel4 and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of SupersetModel4 and their operations over a ResourceGroup. </summary>
     public partial class SupersetModel4Container : ResourceContainerBase<TenantResourceIdentifier, SupersetModel4, SupersetModel4Data>
     {
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Container"/> class for mocking. </summary>

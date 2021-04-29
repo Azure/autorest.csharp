@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core.Resources;
 
 namespace ExactMatchInheritance
 {
-    /// <summary> A class representing collection of ExactMatchModel3 and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of ExactMatchModel3 and their operations over a ResourceGroup. </summary>
     public partial class ExactMatchModel3Container : ResourceContainerBase<TenantResourceIdentifier, ExactMatchModel3, ExactMatchModel3Data>
     {
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel3Container"/> class for mocking. </summary>

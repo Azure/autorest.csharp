@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of VirtualMachine and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of VirtualMachine and their operations over a ResourceGroup. </summary>
     public partial class VirtualMachineContainer : ResourceContainerBase<TenantResourceIdentifier, VirtualMachine, VirtualMachineData>
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineContainer"/> class for mocking. </summary>
