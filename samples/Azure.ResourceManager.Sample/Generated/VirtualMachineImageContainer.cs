@@ -47,34 +47,6 @@ namespace Azure.ResourceManager.Sample
         // Container level operations.
 
         /// <inheritdoc />
-        public ArmResponse<VirtualMachineImage> CreateOrUpdate(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<ArmResponse<VirtualMachineImage>> CreateOrUpdateAsync(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public ArmOperation<VirtualMachineImage> StartCreateOrUpdate(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<ArmOperation<VirtualMachineImage>> StartCreateOrUpdateAsync(string name, VirtualMachineImageData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         /// <param name="version"> A valid image SKU version. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<VirtualMachineImage> Get(string version, CancellationToken cancellationToken = default)

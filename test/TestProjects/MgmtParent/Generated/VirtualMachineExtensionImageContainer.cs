@@ -47,34 +47,6 @@ namespace MgmtParent
         // Container level operations.
 
         /// <inheritdoc />
-        public ArmResponse<VirtualMachineExtensionImage> CreateOrUpdate(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<ArmResponse<VirtualMachineExtensionImage>> CreateOrUpdateAsync(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public ArmOperation<VirtualMachineExtensionImage> StartCreateOrUpdate(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<ArmOperation<VirtualMachineExtensionImage>> StartCreateOrUpdateAsync(string name, VirtualMachineExtensionImageData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<VirtualMachineExtensionImage> Get(string version, CancellationToken cancellationToken = default)

@@ -47,34 +47,6 @@ namespace TenantOnly
         // Container level operations.
 
         /// <inheritdoc />
-        public ArmResponse<Agreement> CreateOrUpdate(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<ArmResponse<Agreement>> CreateOrUpdateAsync(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public ArmOperation<Agreement> StartCreateOrUpdate(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<ArmOperation<Agreement>> StartCreateOrUpdateAsync(string name, AgreementData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<Agreement> Get(string agreementName, CancellationToken cancellationToken = default)

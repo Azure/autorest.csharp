@@ -128,10 +128,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 WriteCreateOrUpdateVariants(restClientMethod);
             }
-            else
-            {
-                WriteCreateOrUpdateVariantsThatThrow();
-            }
 
             // We must look for Get by method name because HTTP GET may map to >1 methods (get/list)
             if (FindRestClientMethodByName(new string[] { "Get" }, out restClientMethod))
@@ -143,10 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteGetVariantsThatThrow();
             }
 
-            WriteListAsGenericResource();
-            WriteListAsGenericResourceAsync();
-            WriteList();
-            WriteListAsync();
+            WriteListVariants();
         }
 
         private bool FindRestClientMethodByHttpMethod(RequestMethod httpMethod, out RestClientMethod restMethod)
@@ -397,63 +390,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return type.Equals(typeof(string)) || type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string));
         }
 
-        /// <summary>
-        /// Write 4 variants of CreateOrUpdate that only throw exceptions when the resource does not support PUT,
-        /// so that the container class correctly implements `ContainerBase`.
-        /// </summary>
-        /// <param name="comment">The comment to put into generated code. By default it says there is no PUT method.</param>
-        private void WriteCreateOrUpdateVariantsThatThrow(string comment = _doesNotSupportPut)
-        {
-            var nameParameter = new Parameter("name", "The name of the resource.", typeof(string), null, false);
-            var resourceDetailsParameter = new Parameter("resourceDetails", "The desired resource configuration.", _resourceData.Type, null, false);
-            // CreateOrUpdate()
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            var parameters = new List<Parameter> { nameParameter, resourceDetailsParameter };
-            _writer.Append($"public ArmResponse<{_resource.Type}> CreateOrUpdate(");
-            parameters.ForEach(parameter => _writer.WriteParameter(parameter));
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                _writer.Line($"// {comment}");
-                _writer.Line($"throw new {typeof(NotImplementedException)}();");
-            }
-
-            // CreateOrUpdateAsync()
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            _writer.Append($"public Task<ArmResponse<{_resource.Type}>> CreateOrUpdateAsync(");
-            parameters.ForEach(parameter => _writer.WriteParameter(parameter));
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                _writer.Line($"// {comment}");
-                _writer.Line($"throw new {typeof(NotImplementedException)}();");
-            }
-
-            // StartCreateOrUpdate()
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            _writer.Append($"public ArmOperation<{_resource.Type}> StartCreateOrUpdate(");
-            parameters.ForEach(parameter => _writer.WriteParameter(parameter));
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                _writer.Line($"// {comment}");
-                _writer.Line($"throw new {typeof(NotImplementedException)}();");
-            }
-
-            // StartCreateOrUpdateAsync()
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            _writer.Append($"public Task<ArmOperation<{_resource.Type}>> StartCreateOrUpdateAsync(");
-            parameters.ForEach(parameter => _writer.WriteParameter(parameter));
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                _writer.Line($"// {comment}");
-                _writer.Line($"throw new {typeof(NotImplementedException)}();");
-            }
-        }
-
-        private const string _doesNotSupportPut = @"This resource does not support PUT HTTP method.";
-
         private void WriteContainerProperties()
         {
             var resourceType = _resourceContainer.GetValidResourceValue();
@@ -568,32 +504,46 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
+        /// <summary>
+        /// Write 2 variants of Get() that only throw exceptions if the resource does not support PUT,
+        /// so that the container class correctly implements <see cref="ResourceContainerBase" />.
+        /// </summary>
+        /// <param name="comment">The comment to put into generated code. By default it says there is no PUT method.</param>
         private void WriteGetVariantsThatThrow()
         {
             var nameParameter = new Parameter("resourceName", "The name of the resource.", typeof(string), null, false);
+            var parameters = new Parameter[] { nameParameter };
+            var doesNotSupportGet = @"This resource does not support Get operation.";
 
-            // Get()
+            WriteMethodThrowNotImplemented($"ArmResponse<{_resource.Type.Name}>", "Get", parameters, doesNotSupportGet);
+            WriteMethodThrowNotImplemented($"Task<ArmResponse<{_resource.Type.Name}>>", "GetAsync", parameters, doesNotSupportGet);
+        }
+
+        private void WriteMethodThrowNotImplemented(string returnType, string methodName, IEnumerable<Parameter> parameters, string? comment = null)
+        {
             _writer.Line();
             _writer.WriteXmlDocumentationInheritDoc();
-            _writer.Append($"public override ArmResponse<{_resource.Type}> Get(");
-            _writer.WriteParameter(nameParameter);
-            var doesNotSupportPut = @"This resource does not support Get operation.";
+            _writer.Append($"public override {returnType} {methodName}(");
+            foreach (var parameter in parameters)
+            {
+                _writer.WriteParameter(parameter);
+            }
             using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
             {
-                _writer.Line($"// {doesNotSupportPut}");
+                if (!string.IsNullOrEmpty(comment))
+                {
+                    _writer.Line($"// {comment}");
+                }
                 _writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
+        }
 
-            // GetAsync()
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            _writer.Append($"public override Task<ArmResponse<{_resource.Type}>> GetAsync(");
-            _writer.WriteParameter(nameParameter);
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                _writer.Line($"// {doesNotSupportPut}");
-                _writer.Line($"throw new {typeof(NotImplementedException)}();");
-            }
+        private void WriteListVariants()
+        {
+            WriteListAsGenericResource();
+            WriteListAsGenericResourceAsync();
+            WriteList();
+            WriteListAsync();
         }
 
         private void WriteList()

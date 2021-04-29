@@ -48,34 +48,6 @@ namespace Azure.Management.Storage
         // Container level operations.
 
         /// <inheritdoc />
-        public ArmResponse<PrivateLinkResource> CreateOrUpdate(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<ArmResponse<PrivateLinkResource>> CreateOrUpdateAsync(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public ArmOperation<PrivateLinkResource> StartCreateOrUpdate(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<ArmOperation<PrivateLinkResource>> StartCreateOrUpdateAsync(string name, PrivateLinkResourceData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         public override ArmResponse<PrivateLinkResource> Get(string resourceName, CancellationToken cancellationToken = default)
         {
             // This resource does not support Get operation.

@@ -47,34 +47,6 @@ namespace TenantOnly
         // Container level operations.
 
         /// <inheritdoc />
-        public ArmResponse<BillingAccount> CreateOrUpdate(string name, BillingAccountData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<ArmResponse<BillingAccount>> CreateOrUpdateAsync(string name, BillingAccountData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public ArmOperation<BillingAccount> StartCreateOrUpdate(string name, BillingAccountData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public Task<ArmOperation<BillingAccount>> StartCreateOrUpdateAsync(string name, BillingAccountData resourceDetails, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support PUT HTTP method.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override ArmResponse<BillingAccount> Get(string billingAccountName, CancellationToken cancellationToken = default)
