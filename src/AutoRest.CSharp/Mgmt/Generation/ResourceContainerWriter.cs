@@ -127,17 +127,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (FindRestClientMethodByHttpMethod(RequestMethod.Put, out var restClientMethod))
             {
                 WriteCreateOrUpdateVariants(restClientMethod);
-                // if (restClientMethod.Parameters.Any(parameter => parameter.Type.Name == _resourceData.Type.Name && parameter.Type.Namespace == _resourceData.Type.Namespace))
-                // {
-                //     WriteCreateOrUpdateVariants(restClientMethod);
-                // }
-                // else
-                // {
-                //     // it [Resource]Data is not a parameter of the rest method, for example when creating storage account
-                //     // the generated methods cannot override base class, so we also generate override methods that only throw exception
-                //     WriteCreateOrUpdateVariants(restClientMethod, false);
-                //     WriteCreateOrUpdateVariantsThatThrow($"There is no create or update method in {_restClient.Type.Name} that accepts {_resourceData.Type.Name}");
-                // }
             }
             else
             {
