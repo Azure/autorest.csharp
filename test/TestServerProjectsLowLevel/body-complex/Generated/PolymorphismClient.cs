@@ -79,6 +79,41 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
@@ -88,6 +123,41 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValid(RequestContent requestBody, CancellationToken cancellationToken = default)
@@ -234,6 +304,86 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>location</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>iswild</term>
+        ///     <term>boolean</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>Fish</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutComplicatedAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
@@ -243,6 +393,86 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>location</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>iswild</term>
+        ///     <term>boolean</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>Fish</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutComplicated(RequestContent requestBody, CancellationToken cancellationToken = default)
@@ -269,6 +499,86 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>location</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>iswild</term>
+        ///     <term>boolean</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>Fish</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
@@ -278,6 +588,86 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>location</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>iswild</term>
+        ///     <term>boolean</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>Fish</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutMissingDiscriminator(RequestContent requestBody, CancellationToken cancellationToken = default)
@@ -304,6 +694,41 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
@@ -313,6 +738,41 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutValidMissingRequired(RequestContent requestBody, CancellationToken cancellationToken = default)

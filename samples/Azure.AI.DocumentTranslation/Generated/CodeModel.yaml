@@ -58,58 +58,79 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !NumberSchema &ref_30
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: v1.0-preview.1
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: StatusSummaryTotal
           description: Total count
       protocol: !Protocols {}
     - !NumberSchema &ref_31
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: v1.0-preview.1
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: StatusSummaryFailed
           description: Failed count
       protocol: !Protocols {}
     - !NumberSchema &ref_32
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: v1.0-preview.1
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: StatusSummarySuccess
           description: Number of Success
       protocol: !Protocols {}
     - !NumberSchema &ref_33
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: v1.0-preview.1
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: StatusSummaryInProgress
           description: Number of in progress
       protocol: !Protocols {}
     - !NumberSchema &ref_34
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: v1.0-preview.1
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: StatusSummaryNotYetStarted
           description: Count of not yet started
       protocol: !Protocols {}
     - !NumberSchema &ref_35
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: v1.0-preview.1
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: StatusSummaryCancelled
           description: Number of cancelled
       protocol: !Protocols {}
     - !NumberSchema &ref_36
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: v1.0-preview.1
       precision: 64
       language: !Languages 
         default:
-          name: Integer
+          name: StatusSummaryTotalCharacterCharged
           description: Total characters charged by the API
       protocol: !Protocols {}
     - !NumberSchema &ref_99
@@ -126,20 +147,26 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !NumberSchema &ref_45
       type: number
+      apiVersions:
+        - !ApiVersion 
+          version: v1.0-preview.1
       maximum: 1
       minimum: 0
       precision: 32
       language: !Languages 
         default:
-          name: Number
+          name: DocumentStatusProgress
           description: Progress of the translation if available
       protocol: !Protocols {}
     - !NumberSchema &ref_47
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: v1.0-preview.1
       precision: 64
       language: !Languages 
         default:
-          name: Integer
+          name: DocumentStatusCharacterCharged
           description: Character charged by the API
       protocol: !Protocols {}
     - !NumberSchema &ref_102
@@ -4021,6 +4048,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
+  schemes: []
 language: !Languages 
   default:
     name: AzureAIDocumentTranslation

@@ -65,6 +65,9 @@ namespace Azure.Core
                 case BinaryData bytes:
                     writer.WriteBase64StringValue(bytes);
                     break;
+                case System.Text.Json.JsonElement json:
+                    json.WriteTo(writer);
+                    break;
                 case int i:
                     writer.WriteNumberValue(i);
                     break;
