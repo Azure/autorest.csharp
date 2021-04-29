@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace SubscriptionExtensions
 {
-    /// <summary> A class representing collection of Toaster and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of Toaster and their operations over a Subscription. </summary>
     public partial class ToasterContainer
     {
         /// <summary> Initializes a new instance of ToasterContainer for mocking. </summary>

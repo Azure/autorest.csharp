@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of DedicatedHost and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of DedicatedHost and their operations over a DedicatedHostGroup. </summary>
     public partial class DedicatedHostContainer
     {
         /// <summary> Initializes a new instance of DedicatedHostContainer for mocking. </summary>
