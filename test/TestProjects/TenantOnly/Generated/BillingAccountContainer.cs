@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace TenantOnly
 {
-    /// <summary> A class representing collection of BillingAccount and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of BillingAccount and their operations over a Tenant. </summary>
     public partial class BillingAccountContainer
     {
         /// <summary> Initializes a new instance of BillingAccountContainer for mocking. </summary>

@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtParent
 {
-    /// <summary> A class representing collection of AvailabilitySet and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of AvailabilitySet and their operations over a ResourceGroup. </summary>
     public partial class AvailabilitySetContainer
     {
         /// <summary> Initializes a new instance of AvailabilitySetContainer for mocking. </summary>
