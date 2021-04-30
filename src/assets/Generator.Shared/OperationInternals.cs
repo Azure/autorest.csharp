@@ -234,7 +234,7 @@ namespace Azure.Core
                                  _headerFrom == HeaderFrom.AzureAsyncOperation) &&
                                 property.NameEquals("status"))
                             {
-                                state = property.Value.GetString().ToLowerInvariant();
+                                state = property.Value.GetRequiredString().ToLowerInvariant();
                                 return s_terminalStates.Contains(state);
                             }
 
@@ -244,7 +244,7 @@ namespace Azure.Core
                                 {
                                     if (innerProperty.NameEquals("provisioningState"))
                                     {
-                                        state = innerProperty.Value.GetString().ToLowerInvariant();
+                                        state = innerProperty.Value.GetRequiredString().ToLowerInvariant();
                                         return s_terminalStates.Contains(state);
                                     }
                                 }
