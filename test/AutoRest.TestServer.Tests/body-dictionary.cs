@@ -227,7 +227,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetDictionaryDateTimeWithNull() => Test((host, pipeline) =>
         {
             // Non-nullable item type
-            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateTimeInvalidNullAsync());
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateTimeInvalidNullAsync());
         });
 
         [Test]
@@ -252,7 +252,7 @@ namespace AutoRest.TestServer.Tests
         public Task GetDictionaryDateWithNull() => Test((host, pipeline) =>
         {
             // Non-nullable item type
-            Assert.ThrowsAsync<InvalidOperationException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateInvalidNullAsync());
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetDateInvalidNullAsync());
         });
 
         [Test]

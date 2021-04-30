@@ -66,11 +66,13 @@ namespace Azure.Core
         public static DateTimeOffset GetDateTimeOffset(in this JsonElement element, string format) => format switch
         {
             "U" when element.ValueKind == JsonValueKind.Number => DateTimeOffset.FromUnixTimeSeconds(element.GetInt64()),
-            _ => TypeFormatters.ParseDateTimeOffset(element.GetRequiredString(), format)
+            // relying on the param check of the inner call to throw ArgumentNullException if GetString() returns null
+            _ => TypeFormatters.ParseDateTimeOffset(element.GetString()!, format)
         };
 
         public static TimeSpan GetTimeSpan(in this JsonElement element, string format) =>
-            TypeFormatters.ParseTimeSpan(element.GetRequiredString(), format);
+            // relying on the param check of the inner call to throw ArgumentNullException if GetString() returns null
+            TypeFormatters.ParseTimeSpan(element.GetString()!, format);
 
         public static char GetChar(this in JsonElement element)
         {
