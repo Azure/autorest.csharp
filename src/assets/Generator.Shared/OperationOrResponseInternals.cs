@@ -54,6 +54,11 @@ namespace Azure.Core
 
         protected bool DoesWrapOperation => VoidResponse is null;
 
+#pragma warning disable CA1822
+        //TODO: This will be filled in by ADO 5821.
+        public string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
+
         public bool HasCompleted => DoesWrapOperation ? Operation!.HasCompleted : true;
 
         public Response GetRawResponse()
