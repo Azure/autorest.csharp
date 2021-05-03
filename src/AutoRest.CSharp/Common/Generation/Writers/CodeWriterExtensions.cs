@@ -31,9 +31,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static IDisposable Class(this CodeWriter writer, string className, string accessibility = "public", bool isStatic = false)
-            => writer.Scope($"{accessibility}{(isStatic ? " static" : "")} class {className}");
-
         public static IDisposable Method(
             this CodeWriter writer,
             string name,
