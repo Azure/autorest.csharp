@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -21,7 +20,6 @@ namespace AutoRest.CSharp.Generation.Writers
             var modelFactoryName = $"{clientPrefix}ModelFactory";
             var @namespace = context.DefaultNamespace;
 
-            writer.UseNamespace("System.Linq");
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary($"Model factory for {clientPrefix} read-only models.");
@@ -46,7 +44,15 @@ namespace AutoRest.CSharp.Generation.Writers
             var parameters = objectType.SerializationConstructor.Parameters;
             using (writer.Method(methodName, documentationSummary, returnType: objectType.Type, documentationReturns: documentationReturns, isStatic: true, parameters: parameters))
             {
-                writer.Line($"return new {objectType.Type}({string.Join(", ", parameters.Select(p => p.Name))});");
+                writer.Append($"return new {objectType.Type}(");
+                foreach (var parameter in parameters)
+                {
+                    writer.Identifier(parameter.Name);
+                    writer.AppendRaw(", ");
+                }
+                writer.RemoveTrailingComma();
+                writer.Append($");");
+                writer.Line();
             }
         }
 
