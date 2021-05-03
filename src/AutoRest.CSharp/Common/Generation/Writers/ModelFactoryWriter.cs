@@ -12,10 +12,10 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class ModelFactoryWriter
     {
-        public static IReadOnlyCollection<ObjectType> ObjectTypesThatRequireFactory(IEnumerable<TypeProvider> models)
-            => models.OfType<ObjectType>().Where(ObjectTypeRequiresFactory).ToArray();
+        public static IReadOnlyCollection<SchemaObjectType> ObjectTypesThatRequireFactory(IEnumerable<TypeProvider> models)
+            => models.OfType<SchemaObjectType>().Where(SchemaObjectTypeRequiresFactory).ToArray();
 
-        public static string WriteModelFactory(CodeWriter writer, BuildContext context, IEnumerable<ObjectType> objectTypes)
+        public static string WriteModelFactory(CodeWriter writer, BuildContext context, IEnumerable<SchemaObjectType> objectTypes)
         {
             var clientPrefix = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
             var modelFactoryName = $"{clientPrefix}ModelFactory";
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (var objectType in objectTypes)
                     {
-                        WriteFactoryMethodForObjectType(writer, objectType);
+                        WriteFactoryMethodForSchemaObjectType(writer, objectType);
                         writer.Line();
                     }
                 }
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return modelFactoryName;
         }
 
-        private static void WriteFactoryMethodForObjectType(CodeWriter writer, ObjectType objectType)
+        private static void WriteFactoryMethodForSchemaObjectType(CodeWriter writer, SchemaObjectType objectType)
         {
             var methodName = objectType.Type.Name;
             var documentationSummary = $"Initializes new instance of {objectType.Type.Name} {(objectType.IsStruct ? "structure" : "class")}.";
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static bool ObjectTypeRequiresFactory(ObjectType objectType)
+        private static bool SchemaObjectTypeRequiresFactory(SchemaObjectType objectType)
         {
             if (objectType.Declaration.Accessibility != "public" || !objectType.IncludeDeserializer)
             {
