@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
 {
-    public partial class SubscriptionLevelIdentifierData : IUtf8JsonSerializable
+    public partial class TenantLevelResourceData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,7 +33,7 @@ namespace ResourceIdentifierChooser
             writer.WriteEndObject();
         }
 
-        internal static SubscriptionLevelIdentifierData DeserializeSubscriptionLevelIdentifierData(JsonElement element)
+        internal static TenantLevelResourceData DeserializeTenantLevelResourceData(JsonElement element)
         {
             Optional<string> @new = default;
             IDictionary<string, string> tags = default;
@@ -79,7 +79,7 @@ namespace ResourceIdentifierChooser
                     continue;
                 }
             }
-            return new SubscriptionLevelIdentifierData(id, name, type, tags, location, @new.Value);
+            return new TenantLevelResourceData(id, name, type, tags, location, @new.Value);
         }
     }
 }

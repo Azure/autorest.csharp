@@ -12,20 +12,15 @@ using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
 {
-    public partial class ResourceGroupIdentifierData : IUtf8JsonSerializable
+    public partial class SubscriptionLevelResourceData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsCollectionDefined(Zones))
+            if (Optional.IsDefined(New))
             {
-                writer.WritePropertyName("zones");
-                writer.WriteStartArray();
-                foreach (var item in Zones)
-                {
-                    writer.WriteStringValue(item);
-                }
-                writer.WriteEndArray();
+                writer.WritePropertyName("new");
+                writer.WriteStringValue(New);
             }
             writer.WritePropertyName("tags");
             writer.WriteStartObject();
@@ -38,29 +33,19 @@ namespace ResourceIdentifierChooser
             writer.WriteEndObject();
         }
 
-        internal static ResourceGroupIdentifierData DeserializeResourceGroupIdentifierData(JsonElement element)
+        internal static SubscriptionLevelResourceData DeserializeSubscriptionLevelResourceData(JsonElement element)
         {
-            Optional<IList<string>> zones = default;
+            Optional<string> @new = default;
             IDictionary<string, string> tags = default;
             LocationData location = default;
-            TenantResourceIdentifier id = default;
+            SubscriptionResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("zones"))
+                if (property.NameEquals("new"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    List<string> array = new List<string>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(item.GetString());
-                    }
-                    zones = array;
+                    @new = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -94,7 +79,7 @@ namespace ResourceIdentifierChooser
                     continue;
                 }
             }
-            return new ResourceGroupIdentifierData(id, name, type, tags, location, Optional.ToList(zones));
+            return new SubscriptionLevelResourceData(id, name, type, tags, location, @new.Value);
         }
     }
 }

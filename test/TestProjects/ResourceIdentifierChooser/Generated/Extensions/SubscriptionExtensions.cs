@@ -12,12 +12,12 @@ namespace ResourceIdentifierChooser
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region SubscriptionLevelIdentifier
-        /// <summary> Gets an object representing a SubscriptionLevelIdentifierContainer along with the instance operations that can be performed on it. </summary>
+        #region SubscriptionLevelResource
+        /// <summary> Gets an object representing a SubscriptionLevelResourceContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
-        public static SubscriptionLevelIdentifierContainer GetSubscriptionLevelIdentifierContainer(this SubscriptionOperations subscription)
+        public static SubscriptionLevelResourceContainer GetSubscriptionLevelResourceContainer(this SubscriptionOperations subscription)
         {
-            return new SubscriptionLevelIdentifierContainer(subscription);
+            return new SubscriptionLevelResourceContainer(subscription);
         }
         #endregion
     }

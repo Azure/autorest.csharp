@@ -20,17 +20,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_11
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ResourceGroupIdentifierZonesItem
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_6
+    - !StringSchema &ref_5
       type: string
       apiVersions:
         - !ApiVersion 
@@ -40,7 +30,7 @@ schemas: !Schemas
           name: ResourceId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_7
+    - !StringSchema &ref_6
       type: string
       apiVersions:
         - !ApiVersion 
@@ -50,7 +40,7 @@ schemas: !Schemas
           name: ResourceName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_8
+    - !StringSchema &ref_7
       type: string
       apiVersions:
         - !ApiVersion 
@@ -60,7 +50,7 @@ schemas: !Schemas
           name: ResourceType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_9
+    - !StringSchema &ref_8
       type: string
       apiVersions:
         - !ApiVersion 
@@ -70,6 +60,36 @@ schemas: !Schemas
           name: ResourceLocation
           description: Resource location
       protocol: !Protocols {}
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: ResourceGroupResourceZonesItem
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_10
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: TenantLevelResourceId
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_11
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: TenantLevelResourceName
+          description: ''
+      protocol: !Protocols {}
     - !StringSchema &ref_12
       type: string
       apiVersions:
@@ -77,7 +97,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: TenantLevelIdentifierId
+          name: TenantLevelResourceType
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_13
@@ -87,17 +107,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: TenantLevelIdentifierName
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_14
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: TenantLevelIdentifierType
+          name: TenantLevelResourceLocation
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_15
@@ -107,7 +117,17 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: TenantLevelIdentifierLocation
+          name: TenantLevelResourceNew
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_16
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SubscriptionLevelResourceId
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_17
@@ -117,7 +137,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: TenantLevelIdentifierNew
+          name: SubscriptionLevelResourceName
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_18
@@ -127,7 +147,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SubscriptionLevelIdentifierId
+          name: SubscriptionLevelResourceType
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_19
@@ -137,17 +157,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SubscriptionLevelIdentifierName
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_20
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: SubscriptionLevelIdentifierType
+          name: SubscriptionLevelResourceLocation
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_21
@@ -157,8 +167,18 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SubscriptionLevelIdentifierLocation
+          name: SubscriptionLevelResourceNew
           description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_25
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SubResourceId
+          description: Resource ID.
       protocol: !Protocols {}
     - !StringSchema &ref_23
       type: string
@@ -167,21 +187,11 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SubscriptionLevelIdentifierNew
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_4
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ResourcesIdentifierZonesItem
+          name: ResourceLevelZonesItem
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_26
+    - !ConstantSchema &ref_28
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -191,7 +201,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_30
+    - !ConstantSchema &ref_32
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -201,7 +211,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_31
+    - !ConstantSchema &ref_33
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -212,7 +222,7 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_10
+    - !DictionarySchema &ref_9
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -220,20 +230,20 @@ schemas: !Schemas
           name: ResourceTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_16
+    - !DictionarySchema &ref_14
       type: dictionary
       elementType: *ref_1
       language: !Languages 
         default:
-          name: TenantLevelIdentifierTags
+          name: TenantLevelResourceTags
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_22
+    - !DictionarySchema &ref_20
       type: dictionary
       elementType: *ref_1
       language: !Languages 
         default:
-          name: SubscriptionLevelIdentifierTags
+          name: SubscriptionLevelResourceTags
           description: Dictionary of <string>
       protocol: !Protocols {}
   objects:
@@ -242,186 +252,145 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
-      parents: !Relations 
+      children: !Relations 
         all:
-          - !ObjectSchema &ref_3
+          - !ObjectSchema &ref_4
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            children: !Relations 
+            parents: !Relations 
               all:
                 - *ref_2
-                - !ObjectSchema &ref_5
-                  type: object
+              immediate:
+                - *ref_2
+            properties:
+              - !Property 
+                schema: !ArraySchema &ref_26
+                  type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  parents: !Relations 
-                    all:
-                      - *ref_3
-                    immediate:
-                      - *ref_3
-                  properties:
-                    - !Property 
-                      schema: !ArraySchema &ref_25
-                        type: array
-                        apiVersions:
-                          - !ApiVersion 
-                            version: '2020-06-01'
-                        elementType: *ref_4
-                        language: !Languages 
-                          default:
-                            name: ResourcesIdentifierZones
-                            description: The resource identifier.
-                        protocol: !Protocols {}
-                      serializedName: zones
-                      language: !Languages 
-                        default:
-                          name: zones
-                          description: The resource identifier.
-                      protocol: !Protocols {}
-                  serializationFormats:
-                    - json
-                  usage:
-                    - input
-                    - output
+                  elementType: *ref_3
                   language: !Languages 
                     default:
-                      name: ResourcesIdentifier
-                      description: Describes a ResourceIdentifier.
-                      namespace: ''
+                      name: ResourceGroupResourceZones
+                      description: The virtual machine zones.
                   protocol: !Protocols {}
-              immediate:
-                - *ref_2
-                - *ref_5
-            properties:
-              - !Property 
-                schema: *ref_6
-                readOnly: true
-                required: false
-                serializedName: id
+                serializedName: zones
                 language: !Languages 
                   default:
-                    name: id
-                    description: Resource Id
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_7
-                readOnly: true
-                required: false
-                serializedName: name
-                language: !Languages 
-                  default:
-                    name: name
-                    description: Resource name
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_8
-                readOnly: true
-                required: false
-                serializedName: type
-                language: !Languages 
-                  default:
-                    name: type
-                    description: Resource type
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_9
-                required: true
-                serializedName: location
-                language: !Languages 
-                  default:
-                    name: location
-                    description: Resource location
-                protocol: !Protocols {}
-              - !Property 
-                schema: *ref_10
-                required: false
-                serializedName: tags
-                language: !Languages 
-                  default:
-                    name: tags
-                    description: Resource tags
+                    name: zones
+                    description: The virtual machine zones.
                 protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
               - input
               - output
-            extensions:
-              x-ms-azure-resource: true
             language: !Languages 
               default:
-                name: Resource
-                description: The Resource model definition.
+                name: ResourceGroupResource
+                description: Describes a Virtual Machine.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_3
+          - *ref_4
       properties:
         - !Property 
-          schema: !ArraySchema &ref_24
-            type: array
-            apiVersions:
-              - !ApiVersion 
-                version: '2020-06-01'
-            elementType: *ref_11
-            language: !Languages 
-              default:
-                name: ResourceGroupIdentifierZones
-                description: The virtual machine zones.
-            protocol: !Protocols {}
-          serializedName: zones
+          schema: *ref_5
+          readOnly: true
+          required: false
+          serializedName: id
           language: !Languages 
             default:
-              name: zones
-              description: The virtual machine zones.
+              name: id
+              description: Resource Id
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_6
+          readOnly: true
+          required: false
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: Resource name
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_7
+          readOnly: true
+          required: false
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
+              description: Resource type
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_8
+          required: true
+          serializedName: location
+          language: !Languages 
+            default:
+              name: location
+              description: Resource location
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_9
+          required: false
+          serializedName: tags
+          language: !Languages 
+            default:
+              name: tags
+              description: Resource tags
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - input
         - output
+      extensions:
+        x-ms-azure-resource: true
       language: !Languages 
         default:
-          name: ResourceGroupIdentifier
-          description: Describes a Virtual Machine.
+          name: Resource
+          description: The Resource model definition.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_3
-    - !ObjectSchema &ref_35
+    - *ref_4
+    - !ObjectSchema &ref_37
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: *ref_12
+          schema: *ref_10
           serializedName: id
           language: !Languages 
             default:
               name: id
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_11
+          serializedName: name
+          language: !Languages 
+            default:
+              name: name
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_12
+          serializedName: type
+          language: !Languages 
+            default:
+              name: type
               description: ''
           protocol: !Protocols {}
         - !Property 
           schema: *ref_13
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_14
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_15
           serializedName: location
           language: !Languages 
             default:
@@ -429,7 +398,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_16
+          schema: *ref_14
           serializedName: tags
           language: !Languages 
             default:
@@ -437,7 +406,7 @@ schemas: !Schemas
               description: Dictionary of <string>
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_15
           serializedName: new
           language: !Languages 
             default:
@@ -451,18 +420,18 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: TenantLevelIdentifier
+          name: TenantLevelResource
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_39
+    - !ObjectSchema &ref_41
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: *ref_18
+          schema: *ref_16
           serializedName: id
           language: !Languages 
             default:
@@ -470,7 +439,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_19
+          schema: *ref_17
           serializedName: name
           language: !Languages 
             default:
@@ -478,7 +447,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_20
+          schema: *ref_18
           serializedName: type
           language: !Languages 
             default:
@@ -486,7 +455,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_21
+          schema: *ref_19
           serializedName: location
           language: !Languages 
             default:
@@ -494,7 +463,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_22
+          schema: *ref_20
           serializedName: tags
           language: !Languages 
             default:
@@ -502,7 +471,7 @@ schemas: !Schemas
               description: Dictionary of <string>
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_23
+          schema: *ref_21
           serializedName: new
           language: !Languages 
             default:
@@ -516,16 +485,87 @@ schemas: !Schemas
         - output
       language: !Languages 
         default:
-          name: SubscriptionLevelIdentifier
+          name: SubscriptionLevelResource
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_5
-  arrays:
+    - !ObjectSchema &ref_22
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      children: !Relations 
+        all:
+          - !ObjectSchema &ref_24
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_22
+              immediate:
+                - *ref_22
+            properties:
+              - !Property 
+                schema: !ArraySchema &ref_27
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  elementType: *ref_23
+                  language: !Languages 
+                    default:
+                      name: ResourceLevelZones
+                      description: The resource identifier.
+                  protocol: !Protocols {}
+                serializedName: zones
+                language: !Languages 
+                  default:
+                    name: zones
+                    description: The resource identifier.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: ResourceLevel
+                description: Describes a ResourceIdentifier.
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_24
+      properties:
+        - !Property 
+          schema: *ref_25
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: Resource ID.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      extensions:
+        x-ms-azure-resource: true
+      language: !Languages 
+        default:
+          name: SubResource
+          description: Reference to another subresource.
+          namespace: ''
+      protocol: !Protocols {}
     - *ref_24
-    - *ref_25
+  arrays:
+    - *ref_26
+    - *ref_27
 globalParameters:
-  - !Parameter &ref_29
+  - !Parameter &ref_31
     schema: *ref_1
     implementation: Client
     required: true
@@ -539,7 +579,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_27
+  - !Parameter &ref_29
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -555,8 +595,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_28
-    schema: *ref_26
+  - !Parameter &ref_30
+    schema: *ref_28
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -570,15 +610,15 @@ globalParameters:
         in: query
 operationGroups:
   - !OperationGroup 
-    $key: ResourceGroupIdentifiers
+    $key: ResourceGroupResources
     operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_27
-          - !Parameter &ref_33
+          - *ref_29
+          - !Parameter &ref_35
             schema: *ref_1
             implementation: Method
             required: true
@@ -590,25 +630,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_34
+          - !Parameter &ref_36
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: resourceGroupIdentifiersName
+                name: resourceGroupResourcesName
                 description: ''
-                serializedName: ResourceGroupIdentifiersName
+                serializedName: ResourceGroupResourcesName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_28
-          - *ref_29
+          - *ref_30
+          - *ref_31
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_30
+                schema: *ref_32
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -620,8 +660,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_32
-                schema: *ref_2
+              - !Parameter &ref_34
+                schema: *ref_4
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -633,7 +673,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_31
+                schema: *ref_33
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -646,25 +686,25 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_32
+              - *ref_34
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ResourceGroupIdentifiers/{ResourceGroupIdentifiersName}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ResourceGroupResources/{ResourceGroupResourcesName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_33
-          - *ref_34
+          - *ref_35
+          - *ref_36
         responses:
           - !SchemaResponse 
-            schema: *ref_2
+            schema: *ref_4
             language: !Languages 
               default:
                 name: ''
@@ -683,19 +723,19 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: ResourceGroupIdentifiers
+        name: ResourceGroupResources
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: TenantLevelIdentifiers
+    $key: TenantLevelResources
     operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_27
-          - !Parameter &ref_37
+          - *ref_29
+          - !Parameter &ref_39
             schema: *ref_1
             implementation: Method
             required: true
@@ -707,25 +747,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_38
+          - !Parameter &ref_40
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: tenantLevelIdentifiersName
+                name: tenantLevelResourcesName
                 description: ''
-                serializedName: TenantLevelIdentifiersName
+                serializedName: TenantLevelResourcesName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_28
-          - *ref_29
+          - *ref_30
+          - *ref_31
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_30
+                schema: *ref_32
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -737,8 +777,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_36
-                schema: *ref_35
+              - !Parameter &ref_38
+                schema: *ref_37
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -750,7 +790,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_31
+                schema: *ref_33
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -763,25 +803,25 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_36
+              - *ref_38
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /providers/Microsoft.Compute/TenantLevelIdentifiers/{TenantLevelIdentifiersName}
+                path: /providers/Microsoft.Compute/TenantLevelResources/{TenantLevelResourcesName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_37
-          - *ref_38
+          - *ref_39
+          - *ref_40
         responses:
           - !SchemaResponse 
-            schema: *ref_35
+            schema: *ref_37
             language: !Languages 
               default:
                 name: ''
@@ -800,19 +840,19 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: TenantLevelIdentifiers
+        name: TenantLevelResources
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: SubscriptionLevelIdentifiers
+    $key: SubscriptionLevelResources
     operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_27
-          - !Parameter &ref_41
+          - *ref_29
+          - !Parameter &ref_43
             schema: *ref_1
             implementation: Method
             required: true
@@ -824,142 +864,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_42
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: subscriptionLevelIdentifiersName
-                description: ''
-                serializedName: SubscriptionLevelIdentifiersName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_28
-          - *ref_29
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_30
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_40
-                schema: *ref_39
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_31
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_40
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/SubscriptionLevelIdentifiers/{SubscriptionLevelIdentifiersName}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_41
-          - *ref_42
-        responses:
-          - !SchemaResponse 
-            schema: *ref_39
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Put
-            description: ''
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: SubscriptionLevelIdentifiers
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: ResourcesIdentifiers
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_27
           - !Parameter &ref_44
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
+                name: subscriptionLevelResourcesName
                 description: ''
-                serializedName: resourceGroupName
+                serializedName: SubscriptionLevelResourcesName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_45
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourcesIdentifiersName
-                description: ''
-                serializedName: ResourcesIdentifiersName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_28
-          - *ref_29
+          - *ref_30
+          - *ref_31
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_30
+                schema: *ref_32
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -971,8 +894,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_43
-                schema: *ref_5
+              - !Parameter &ref_42
+                schema: *ref_41
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -984,7 +907,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_31
+                schema: *ref_33
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -997,25 +920,25 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_43
+              - *ref_42
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ResourcesIdentifiers/{ResourcesIdentifiersName}
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/SubscriptionLevelResources/{SubscriptionLevelResourcesName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
+          - *ref_43
           - *ref_44
-          - *ref_45
         responses:
           - !SchemaResponse 
-            schema: *ref_5
+            schema: *ref_41
             language: !Languages 
               default:
                 name: ''
@@ -1034,11 +957,133 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: ResourcesIdentifiers
+        name: SubscriptionLevelResources
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: ResourceLevels
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_29
+          - !Parameter &ref_46
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_47
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceLevelsName
+                description: ''
+                serializedName: ResourceLevelsName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_30
+          - *ref_31
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_32
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_45
+                schema: *ref_24
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_33
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_45
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ResourceLevels/{ResourceLevelsName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_46
+          - *ref_47
+        responses:
+          - !SchemaResponse 
+            schema: *ref_24
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: ResourceLevels
         description: ''
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
+  schemes:
+    - !AADTokenSecurityScheme 
+      type: AADToken
+      scopes:
+        - https://management.azure.com/.default
 language: !Languages 
   default:
     name: ResourceIdentifierChooser

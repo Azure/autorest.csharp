@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
@@ -15,15 +16,19 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private bool _isResourceType;
         private ObjectTypeProperty[]? _myProperties;
+        private BuildContext<MgmtOutputLibrary> _context;
 
-        public MgmtObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceType) : base(objectSchema, context)
+        public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context, bool isResourceType) : base(objectSchema, context)
         {
             _isResourceType = isResourceType;
+            _context = context;
         }
 
         private ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
         protected override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
+
+        internal OperationGroup? OperationGroup => _context.Library.GetOperationGroupBySchema(ObjectSchema);
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
@@ -68,13 +73,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             if (typeToReplace != null)
             {
-                var match = InheritanceChoser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
+                var match = InheritanceChooser.GetExactMatch(OperationGroup, typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
                     inheritedType = match;
                 }
             }
-            return inheritedType == null ? InheritanceChoser.GetSupersetMatch(this, MyProperties) : inheritedType;
+            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(OperationGroup, this, MyProperties) : inheritedType;
         }
     }
 }

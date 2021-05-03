@@ -9,15 +9,15 @@ using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
 {
-    /// <summary> A class representing collection of TenantLevelIdentifier and their operations over a [ParentResource]. </summary>
-    public partial class TenantLevelIdentifierContainer
+    /// <summary> A class representing collection of TenantLevelResource and their operations over a Tenant. </summary>
+    public partial class TenantLevelResourceContainer
     {
-        /// <summary> Initializes a new instance of TenantLevelIdentifierContainer for mocking. </summary>
-        protected TenantLevelIdentifierContainer()
+        /// <summary> Initializes a new instance of TenantLevelResourceContainer for mocking. </summary>
+        protected TenantLevelResourceContainer()
         {
         }
 
-        internal TenantLevelIdentifierContainer(ResourceOperationsBase parent)
+        internal TenantLevelResourceContainer(ResourceOperationsBase parent)
         {
         }
 

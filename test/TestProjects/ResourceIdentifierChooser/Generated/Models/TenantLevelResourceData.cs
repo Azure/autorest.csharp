@@ -10,23 +10,23 @@ using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
 {
-    /// <summary> A class representing the SubscriptionLevelIdentifier data model. </summary>
-    public partial class SubscriptionLevelIdentifierData : TrackedResource<TenantResourceIdentifier>
+    /// <summary> A class representing the TenantLevelResource data model. </summary>
+    public partial class TenantLevelResourceData : TrackedResource<TenantResourceIdentifier>
     {
-        /// <summary> Initializes a new instance of SubscriptionLevelIdentifierData. </summary>
+        /// <summary> Initializes a new instance of TenantLevelResourceData. </summary>
         /// <param name="location"> The location. </param>
-        public SubscriptionLevelIdentifierData(LocationData location) : base(location)
+        public TenantLevelResourceData(LocationData location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of SubscriptionLevelIdentifierData. </summary>
+        /// <summary> Initializes a new instance of TenantLevelResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="new"> . </param>
-        internal SubscriptionLevelIdentifierData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string @new) : base(id, name, type, tags, location)
+        internal TenantLevelResourceData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string @new) : base(id, name, type, tags, location)
         {
             New = @new;
         }

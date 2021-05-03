@@ -33,12 +33,12 @@
         }
     },
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ResourceGroupIdentifiers/{ResourceGroupIdentifiersName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ResourceGroupResources/{ResourceGroupResourcesName}": {
             "put": {
                 "tags": [
-                    "ResourceGroupIdentifiers"
+                    "ResourceGroupResources"
                 ],
-                "operationId": "ResourceGroupIdentifiers_Put",
+                "operationId": "ResourceGroupResources_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -47,7 +47,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "ResourceGroupIdentifiersName",
+                        "name": "ResourceGroupResourcesName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -57,7 +57,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ResourceGroupIdentifier"
+                            "$ref": "#/definitions/ResourceGroupResource"
                         }
                     },
                     {
@@ -71,18 +71,18 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ResourceGroupIdentifier"
+                            "$ref": "#/definitions/ResourceGroupResource"
                         }
                     }
                 }
             }
         },
-        "/providers/Microsoft.Compute/TenantLevelIdentifiers/{TenantLevelIdentifiersName}": {
+        "/providers/Microsoft.Compute/TenantLevelResources/{TenantLevelResourcesName}": {
             "put": {
                 "tags": [
-                    "TenantLevelIdentifiers"
+                    "TenantLevelResources"
                 ],
-                "operationId": "TenantLevelIdentifiers_Put",
+                "operationId": "TenantLevelResources_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -91,7 +91,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "TenantLevelIdentifiersName",
+                        "name": "TenantLevelResourcesName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -101,7 +101,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/TenantLevelIdentifier"
+                            "$ref": "#/definitions/TenantLevelResource"
                         }
                     },
                     {
@@ -115,18 +115,18 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TenantLevelIdentifier"
+                            "$ref": "#/definitions/TenantLevelResource"
                         }
                     }
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/SubscriptionLevelIdentifiers/{SubscriptionLevelIdentifiersName}": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/SubscriptionLevelResources/{SubscriptionLevelResourcesName}": {
             "put": {
                 "tags": [
-                    "SubscriptionLevelIdentifiers"
+                    "SubscriptionLevelResources"
                 ],
-                "operationId": "SubscriptionLevelIdentifiers_Put",
+                "operationId": "SubscriptionLevelResources_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -135,7 +135,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "SubscriptionLevelIdentifiersName",
+                        "name": "SubscriptionLevelResourcesName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -145,7 +145,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/SubscriptionLevelIdentifier"
+                            "$ref": "#/definitions/SubscriptionLevelResource"
                         }
                     },
                     {
@@ -159,18 +159,18 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SubscriptionLevelIdentifier"
+                            "$ref": "#/definitions/SubscriptionLevelResource"
                         }
                     }
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ResourcesIdentifiers/{ResourcesIdentifiersName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ResourceLevels/{ResourceLevelsName}": {
             "put": {
                 "tags": [
-                    "ResourcesIdentifiers"
+                    "ResourceLevels"
                 ],
-                "operationId": "ResourcesIdentifiers_Put",
+                "operationId": "ResourceLevels_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -179,7 +179,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "ResourcesIdentifiersName",
+                        "name": "ResourceLevelsName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -189,7 +189,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/ResourcesIdentifier"
+                            "$ref": "#/definitions/ResourceLevel"
                         }
                     },
                     {
@@ -203,7 +203,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/ResourcesIdentifier"
+                            "$ref": "#/definitions/ResourceLevel"
                         }
                     }
                 }
@@ -211,7 +211,7 @@
         }
     },
     "definitions": {
-        "SubscriptionLevelIdentifier": {
+        "SubscriptionLevelResource": {
             "type": "object",
             "properties": {
                 "id": {
@@ -237,7 +237,7 @@
                 }
             }
         },
-        "TenantLevelIdentifier": {
+        "TenantLevelResource": {
             "type": "object",
             "properties": {
                 "id": {
@@ -263,7 +263,7 @@
                 }
             }
         },
-        "ResourceGroupIdentifier": {
+        "ResourceGroupResource": {
             "properties": {
                 "zones": {
                     "type": "array",
@@ -280,7 +280,7 @@
             ],
             "description": "Describes a Virtual Machine."
         },
-        "ResourcesIdentifier": {
+        "ResourceLevel": {
             "properties": {
                 "zones": {
                     "type": "array",
@@ -292,7 +292,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                    "$ref": "#/definitions/SubResource"
                 }
             ],
             "description": "Describes a ResourceIdentifier."
@@ -330,6 +330,16 @@
             "required": [
                 "location"
             ],
+            "x-ms-azure-resource": true
+        },
+        "SubResource": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Resource ID."
+                }
+            },
+            "description": "Reference to another subresource.",
             "x-ms-azure-resource": true
         }
     },

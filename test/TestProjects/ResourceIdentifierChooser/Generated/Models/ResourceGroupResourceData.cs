@@ -11,24 +11,24 @@ using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
 {
-    /// <summary> A class representing the ResourceGroupIdentifier data model. </summary>
-    public partial class ResourceGroupIdentifierData : TrackedResource<TenantResourceIdentifier>
+    /// <summary> A class representing the ResourceGroupResource data model. </summary>
+    public partial class ResourceGroupResourceData : TrackedResource<ResourceGroupResourceIdentifier>
     {
-        /// <summary> Initializes a new instance of ResourceGroupIdentifierData. </summary>
+        /// <summary> Initializes a new instance of ResourceGroupResourceData. </summary>
         /// <param name="location"> The location. </param>
-        public ResourceGroupIdentifierData(LocationData location) : base(location)
+        public ResourceGroupResourceData(LocationData location) : base(location)
         {
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of ResourceGroupIdentifierData. </summary>
+        /// <summary> Initializes a new instance of ResourceGroupResourceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="zones"> The virtual machine zones. </param>
-        internal ResourceGroupIdentifierData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, IList<string> zones) : base(id, name, type, tags, location)
+        internal ResourceGroupResourceData(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, IList<string> zones) : base(id, name, type, tags, location)
         {
             Zones = zones;
         }

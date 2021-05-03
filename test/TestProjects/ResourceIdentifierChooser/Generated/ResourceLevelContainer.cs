@@ -9,15 +9,15 @@ using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
 {
-    /// <summary> A class representing collection of ResourceGroupIdentifier and their operations over a [ParentResource]. </summary>
-    public partial class ResourceGroupIdentifierContainer
+    /// <summary> A class representing collection of ResourceLevel and their operations over a ResourceGroup. </summary>
+    public partial class ResourceLevelContainer
     {
-        /// <summary> Initializes a new instance of ResourceGroupIdentifierContainer for mocking. </summary>
-        protected ResourceGroupIdentifierContainer()
+        /// <summary> Initializes a new instance of ResourceLevelContainer for mocking. </summary>
+        protected ResourceLevelContainer()
         {
         }
 
-        internal ResourceGroupIdentifierContainer(ResourceOperationsBase parent)
+        internal ResourceLevelContainer(ResourceOperationsBase parent)
         {
         }
 

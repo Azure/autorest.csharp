@@ -76,6 +76,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
 
+        public OperationGroup? GetOperationGroupBySchema(Schema schema)
+        {
+            List<OperationGroup>? operationGroups;
+            if (_operationGroups.TryGetValue(schema.Name, out operationGroups))
+                return operationGroups.FirstOrDefault();
+            return null;
+        }
+
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
             if (_restClients != null)

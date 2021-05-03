@@ -9,13 +9,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
     {
         public ResourceIdentifierChooserTests() : base("ResourceIdentifierChooser") { }
 
-        [TestCase(typeof(SubscriptionLevelIdentifier), typeof(SubscriptionResourceIdentifier))]
-        [TestCase(typeof(TenantLevelIdentifier), typeof(TenantResourceIdentifier))]
-        [TestCase(typeof(ResourceGroup), typeof(ResourceGroupResourceIdentifier))]
-        [TestCase(typeof(ResourcesIdentifier), typeof(ResourceIdentifier))]
+        [TestCase(typeof(SubscriptionLevelResource), typeof(SubscriptionResourceIdentifier))]
+        [TestCase(typeof(TenantLevelResource), typeof(TenantResourceIdentifier))]
+        [TestCase(typeof(ResourceGroupResource), typeof(ResourceGroupResourceIdentifier))]
+        [TestCase(typeof(ResourceLevel), typeof(ResourceIdentifier))]
         public void TestResourceIdentifierChooser(Type dataType, Type expectedIdType)
         {
-            Assert.AreEqual(dataType.BaseType.GenericTypeArguments, expectedIdType);
+            Assert.AreEqual(dataType.BaseType.BaseType.GenericTypeArguments[0], expectedIdType);
         }
     }
 }

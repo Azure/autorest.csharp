@@ -13,32 +13,32 @@ using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
 {
-    /// <summary> A class representing the operations that can be performed over a specific ResourcesIdentifier. </summary>
-    public partial class ResourcesIdentifierOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ResourcesIdentifier>
+    /// <summary> A class representing the operations that can be performed over a specific ResourceGroupResource. </summary>
+    public partial class ResourceGroupResourceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ResourceGroupResource>
     {
-        /// <summary> Initializes a new instance of ResourcesIdentifierOperations for mocking. </summary>
-        protected ResourcesIdentifierOperations()
+        /// <summary> Initializes a new instance of ResourceGroupResourceOperations for mocking. </summary>
+        protected ResourceGroupResourceOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "ResourcesIdentifierOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of <see cref = "ResourceGroupResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected ResourcesIdentifierOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected ResourceGroupResourceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/ResourcesIdentifiers";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/ResourceGroupResources";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<ResourcesIdentifier> Get(CancellationToken cancellationToken = default)
+        public override ArmResponse<ResourceGroupResource> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<ResourcesIdentifier>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<ArmResponse<ResourceGroupResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

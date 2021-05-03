@@ -12,23 +12,23 @@ namespace ResourceIdentifierChooser
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region ResourceGroupIdentifiers
-        /// <summary> Gets an object representing a ResourceGroupIdentifierContainer along with the instance operations that can be performed on it. </summary>
+        #region ResourceGroupResources
+        /// <summary> Gets an object representing a ResourceGroupResourceContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResourceGroupIdentifierContainer" /> object. </returns>
-        public static ResourceGroupIdentifierContainer GetResourceGroupIdentifiers(this ResourceGroupOperations resourceGroup)
+        /// <returns> Returns a <see cref="ResourceGroupResourceContainer" /> object. </returns>
+        public static ResourceGroupResourceContainer GetResourceGroupResources(this ResourceGroupOperations resourceGroup)
         {
-            return new ResourceGroupIdentifierContainer(resourceGroup);
+            return new ResourceGroupResourceContainer(resourceGroup);
         }
         #endregion
 
-        #region ResourcesIdentifiers
-        /// <summary> Gets an object representing a ResourcesIdentifierContainer along with the instance operations that can be performed on it. </summary>
+        #region ResourceLevels
+        /// <summary> Gets an object representing a ResourceLevelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="ResourcesIdentifierContainer" /> object. </returns>
-        public static ResourcesIdentifierContainer GetResourcesIdentifiers(this ResourceGroupOperations resourceGroup)
+        /// <returns> Returns a <see cref="ResourceLevelContainer" /> object. </returns>
+        public static ResourceLevelContainer GetResourceLevels(this ResourceGroupOperations resourceGroup)
         {
-            return new ResourcesIdentifierContainer(resourceGroup);
+            return new ResourceLevelContainer(resourceGroup);
         }
         #endregion
     }

@@ -13,32 +13,32 @@ using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
 {
-    /// <summary> A class representing the operations that can be performed over a specific TenantLevelIdentifier. </summary>
-    public partial class TenantLevelIdentifierOperations : ResourceOperationsBase<TenantResourceIdentifier, TenantLevelIdentifier>
+    /// <summary> A class representing the operations that can be performed over a specific SubscriptionLevelResource. </summary>
+    public partial class SubscriptionLevelResourceOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, SubscriptionLevelResource>
     {
-        /// <summary> Initializes a new instance of TenantLevelIdentifierOperations for mocking. </summary>
-        protected TenantLevelIdentifierOperations()
+        /// <summary> Initializes a new instance of SubscriptionLevelResourceOperations for mocking. </summary>
+        protected SubscriptionLevelResourceOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "TenantLevelIdentifierOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of <see cref = "SubscriptionLevelResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected TenantLevelIdentifierOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected SubscriptionLevelResourceOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
         {
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/TenantLevelIdentifiers";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/SubscriptionLevelResources";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<TenantLevelIdentifier> Get(CancellationToken cancellationToken = default)
+        public override ArmResponse<SubscriptionLevelResource> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<TenantLevelIdentifier>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<ArmResponse<SubscriptionLevelResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

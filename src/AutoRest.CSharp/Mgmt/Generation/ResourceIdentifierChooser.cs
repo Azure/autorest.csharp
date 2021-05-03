@@ -16,17 +16,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal static class ResourceIdentifierChooser
     {
-        internal static string GetResourceIdentifierType(this OperationGroup operation, ResourceData resourceData, MgmtConfiguration config)
+        internal static Type GetResourceIdentifierType(this OperationGroup operation, MgmtObjectType mgmtObjectType, MgmtConfiguration config, bool skipResourceIdentifier)
         {
-            ObjectType? obj = GetObjectTypeBase(resourceData);
-            if (operation.ResourceType(config) == ResourceTypeBuilder.Subscriptions)
-                return nameof(SubscriptionResourceIdentifier);
+            if (operation.ParentResourceType(config) == ResourceTypeBuilder.Subscriptions)
+                return typeof(SubscriptionResourceIdentifier);
             else if (operation.IsTenantResource(config))
-                return nameof(TenantResourceIdentifier);
-            else if (obj is not null && IsSubclassOf(obj, typeof(SubResource)))
-                return nameof(ResourceIdentifier);
+                return typeof(TenantResourceIdentifier);
+            else if (!skipResourceIdentifier && IsSubclassOf(GetObjectTypeBase(mgmtObjectType), typeof(SubResource)))
+                return typeof(ResourceIdentifier);
             else
-                return nameof(ResourceGroupResourceIdentifier);
+                return typeof(ResourceGroupResourceIdentifier);
         }
 
         private static ObjectType? GetObjectTypeBase(ObjectType obj)
