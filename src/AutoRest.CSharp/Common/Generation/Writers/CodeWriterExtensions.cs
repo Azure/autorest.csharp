@@ -31,6 +31,41 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
+        public static IDisposable Class(this CodeWriter writer, string className, string accessibility = "public", bool isStatic = false)
+            => writer.Scope($"{accessibility}{(isStatic ? " static" : "")} class {className}");
+
+        public static IDisposable Method(
+            this CodeWriter writer,
+            string name,
+            string? documentationSummary,
+            string accessibility = "public",
+            bool isStatic = false,
+            CSharpType? returnType = default,
+            string? documentationReturns = default,
+            params Parameter[] parameters)
+        {
+            writer.WriteXmlDocumentationSummary(documentationSummary);
+            foreach (var parameter in parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+            writer.WriteXmlDocumentationRequiredParametersException(parameters);
+            if (documentationReturns != default)
+            {
+                writer.WriteXmlDocumentationReturns(documentationReturns);
+            }
+
+            writer.Append($"{accessibility}{(isStatic ? " static" : "")} {(returnType?.Name ?? "void")} {name}(");
+            foreach (var parameter in parameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.RemoveTrailingComma();
+            writer.Append($")");
+
+            return writer.Scope();
+        }
+
         public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool includeDefaultValue = true)
         {
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");

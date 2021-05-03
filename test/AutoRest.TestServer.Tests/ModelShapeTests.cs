@@ -9,9 +9,11 @@ using System.Reflection;
 using System.Text.Json;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure.Core;
+using ModelShapes;
 using ModelShapes.Models;
 using NUnit.Framework;
 using TypeSchemaMapping.Models;
+using SchemaMappingModelFactory = ModelShapes.SchemaMappingModelFactory;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -28,6 +30,7 @@ namespace AutoRest.TestServer.Tests
         {
             Assert.AreEqual(1, typeof(InputModel).GetConstructors().Length);
         }
+
         [Test]
         public void RequiredPropertiesAreSetableInMixedModels()
         {
@@ -494,6 +497,40 @@ namespace AutoRest.TestServer.Tests
         public void ModelWithCustomizedNullableJsonElementPropertySerializesValue()
         {
             JsonAsserts.AssertSerialization("{\"ModelProperty\":1}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("1").RootElement});
+        }
+
+        [Test]
+        public void ModelFactory_DeclaresOnlyStaticMethodsForReadonlyTypes()
+        {
+            TypeAsserts.TypeIsStatic(typeof(SchemaMappingModelFactory));
+            TypeAsserts.TypeOnlyDeclaredThesePublicMethods(typeof(SchemaMappingModelFactory),
+                nameof(MixedModel), nameof(MixedModelWithReadonlyProperty), nameof(OutputModel), nameof(ReadonlyModel));
+        }
+
+        [Test]
+        public void ModelFactory_InstantiatesReadonlyModel()
+        {
+            const string stringValue = "stringValue";
+
+            var expectedModel = new ReadonlyModel(stringValue);
+            var actualModel = SchemaMappingModelFactory.ReadonlyModel(stringValue);
+
+            Assert.AreEqual(expectedModel.Name, actualModel.Name);
+        }
+
+        [Test]
+        public void ModelFactory_InstantiatesMixedModelWithReadonlyProperty()
+        {
+            const string stringValue = "stringValue";
+            var readonlyModel = new ReadonlyModel(stringValue);
+            var readonlyModelList = new List<ReadonlyModel> {readonlyModel};
+
+            var expectedModel = new MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList.ToList());
+            var actualModel = SchemaMappingModelFactory.MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList);
+
+            Assert.AreEqual(expectedModel.ReadonlyProperty, actualModel.ReadonlyProperty);
+            Assert.AreEqual(expectedModel.ReadonlyProperty.Name, actualModel.ReadonlyProperty.Name);
+            Assert.AreEqual(expectedModel.ReadonlyListProperty[0], actualModel.ReadonlyListProperty[0]);
         }
     }
 }

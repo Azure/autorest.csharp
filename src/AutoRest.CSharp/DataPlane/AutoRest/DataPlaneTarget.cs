@@ -36,6 +36,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
+            var modelsThatRequireFactory = ModelFactoryWriter.ObjectTypesThatRequireFactory(context.Library.Models);
+            if (modelsThatRequireFactory.Any())
+            {
+                var codeWriter = new CodeWriter();
+                var modelFactoryFileName = ModelFactoryWriter.WriteModelFactory(codeWriter, context, modelsThatRequireFactory);
+                project.AddGeneratedFile($"{modelFactoryFileName}.cs", codeWriter.ToString());
+            }
+
             foreach (var client in context.Library.RestClients)
             {
                 var restCodeWriter = new CodeWriter();
@@ -52,7 +60,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
-            if (configuration.PublicClients && context.Library.Clients.Count() > 0)
+            if (configuration.PublicClients && context.Library.Clients.Any())
             {
                 var codeWriter = new CodeWriter();
                 ClientOptionsWriter.WriteClientOptions(codeWriter, context);
