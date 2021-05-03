@@ -6,10 +6,13 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_3
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 2014-04-01-preview
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ErrorCode
           description: ''
       protocol: !Protocols {}
   strings:
@@ -282,6 +285,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: MicrosoftAzureTestUrl

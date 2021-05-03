@@ -38,10 +38,10 @@ namespace AutoRest.CSharp.Output.Models.Requests
             var finalResponse = operation.LongRunningFinalResponse;
             Schema? finalResponseSchema = finalResponse.ResponseSchema;
 
-            if (finalResponseSchema != null)
+            if (finalResponseSchema != null && finalResponse.HttpResponse.KnownMediaType is {} knownType)
             {
                 ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(finalResponseSchema, false));
-                ResultSerialization = new SerializationBuilder().Build(finalResponse.HttpResponse.KnownMediaType, finalResponseSchema, ResultType);
+                ResultSerialization = new SerializationBuilder().Build(knownType, finalResponseSchema, ResultType);
 
                 Paging? paging = operation.Language.Default.Paging;
                 if (paging != null)

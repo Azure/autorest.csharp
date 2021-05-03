@@ -4,12 +4,15 @@ info: !Info
   title: AutoRest Resource Flattening Test Service
 schemas: !Schemas 
   numbers:
-    - !NumberSchema &ref_29
+    - !NumberSchema &ref_30
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ErrorStatus
           description: ''
       protocol: !Protocols {}
   strings:
@@ -70,7 +73,7 @@ schemas: !Schemas
           name: ResourceName
           description: Resource Name
       protocol: !Protocols {}
-    - !StringSchema &ref_30
+    - !StringSchema &ref_31
       type: string
       apiVersions:
         - !ApiVersion 
@@ -110,7 +113,7 @@ schemas: !Schemas
           name: FlattenedProductPropertiesProvisioningState
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_32
+    - !StringSchema &ref_33
       type: string
       apiVersions:
         - !ApiVersion 
@@ -119,36 +122,6 @@ schemas: !Schemas
         default:
           name: WrappedProductValue
           description: the product value
-      protocol: !Protocols {}
-    - !StringSchema &ref_18
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: SimpleProductPropertiesMaxProductDisplayName
-          description: Display name of product.
-      protocol: !Protocols {}
-    - !StringSchema &ref_21
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: ProductUrlOdataValue
-          description: URL value.
-      protocol: !Protocols {}
-    - !StringSchema &ref_20
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: GenericUrlGenericValue
-          description: Generic URL value.
       protocol: !Protocols {}
     - !StringSchema &ref_15
       type: string
@@ -169,6 +142,36 @@ schemas: !Schemas
         default:
           name: BaseProductDescription
           description: Description of product.
+      protocol: !Protocols {}
+    - !StringSchema &ref_18
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: SimpleProductPropertiesMaxProductDisplayName
+          description: Display name of product.
+      protocol: !Protocols {}
+    - !StringSchema &ref_20
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: GenericUrlGenericValue
+          description: Generic URL value.
+      protocol: !Protocols {}
+    - !StringSchema &ref_21
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: ProductUrlOdataValue
+          description: URL value.
       protocol: !Protocols {}
   choices:
     - !ChoiceSchema &ref_11
@@ -250,7 +253,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_40
+    - !ConstantSchema &ref_41
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -260,7 +263,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_42
+    - !ConstantSchema &ref_43
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -292,7 +295,7 @@ schemas: !Schemas
           name: ResourceTags
           description: Dictionary of <string>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_48
+    - !DictionarySchema &ref_49
       type: dictionary
       elementType: !ObjectSchema &ref_2
         type: object
@@ -430,7 +433,7 @@ schemas: !Schemas
           name: DictionaryOfFlattenedProduct
           description: Dictionary of <FlattenedProduct>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_50
+    - !DictionarySchema &ref_51
       type: dictionary
       elementType: *ref_2
       language: !Languages 
@@ -438,7 +441,7 @@ schemas: !Schemas
           name: DictionaryOfFlattenedProduct
           description: Dictionary of <FlattenedProduct>
       protocol: !Protocols {}
-    - !DictionarySchema &ref_33
+    - !DictionarySchema &ref_34
       type: dictionary
       elementType: *ref_2
       language: !Languages 
@@ -543,7 +546,7 @@ schemas: !Schemas
                     name: maxProductDisplayName
                     description: Display name of product.
                 protocol: !Protocols {}
-              - !Property &ref_55
+              - !Property &ref_27
                 schema: *ref_19
                 flattenedNames:
                   - details
@@ -554,7 +557,7 @@ schemas: !Schemas
                     name: capacity
                     description: Capacity of product. For example, 4 people.
                 protocol: !Protocols {}
-              - !Property &ref_27
+              - !Property &ref_28
                 schema: *ref_20
                 flattenedNames:
                   - details
@@ -566,7 +569,7 @@ schemas: !Schemas
                     name: genericValue
                     description: Generic URL value.
                 protocol: !Protocols {}
-              - !Property &ref_28
+              - !Property &ref_29
                 schema: *ref_21
                 flattenedNames:
                   - details
@@ -681,15 +684,36 @@ schemas: !Schemas
               description: Display name of product.
           protocol: !Protocols {}
         - !GroupProperty 
-          schema: *ref_20
+          schema: *ref_19
           originalParameter:
             - !VirtualParameter &ref_65
-              schema: *ref_20
+              schema: *ref_19
               groupedBy: *ref_22
               implementation: Method
               originalParameter: *ref_23
               pathToProperty: []
               targetProperty: *ref_27
+              language: !Languages 
+                default:
+                  name: capacity
+                  description: Capacity of product. For example, 4 people.
+              protocol: !Protocols {}
+          serializedName: capacity
+          language: !Languages 
+            default:
+              name: capacity
+              description: Capacity of product. For example, 4 people.
+          protocol: !Protocols {}
+        - !GroupProperty 
+          schema: *ref_20
+          originalParameter:
+            - !VirtualParameter &ref_66
+              schema: *ref_20
+              groupedBy: *ref_22
+              implementation: Method
+              originalParameter: *ref_23
+              pathToProperty: []
+              targetProperty: *ref_28
               language: !Languages 
                 default:
                   name: genericValue
@@ -704,13 +728,13 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_21
           originalParameter:
-            - !VirtualParameter &ref_66
+            - !VirtualParameter &ref_67
               schema: *ref_21
               groupedBy: *ref_22
               implementation: Method
               originalParameter: *ref_23
               pathToProperty: []
-              targetProperty: *ref_28
+              targetProperty: *ref_29
               language: !Languages 
                 default:
                   name: odataValue
@@ -731,14 +755,14 @@ schemas: !Schemas
       protocol: !Protocols {}
   objects:
     - *ref_8
-    - !ObjectSchema &ref_31
+    - !ObjectSchema &ref_32
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_29
+          schema: *ref_30
           serializedName: status
           language: !Languages 
             default:
@@ -746,7 +770,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_30
+          schema: *ref_31
           serializedName: message
           language: !Languages 
             default:
@@ -754,7 +778,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_31
+          schema: *ref_32
           serializedName: parentError
           language: !Languages 
             default:
@@ -772,14 +796,14 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_2
-    - !ObjectSchema &ref_36
+    - !ObjectSchema &ref_37
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_32
+          schema: *ref_33
           serializedName: value
           language: !Languages 
             default:
@@ -799,14 +823,14 @@ schemas: !Schemas
           description: The wrapped produc.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_37
+    - !ObjectSchema &ref_38
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_32
+          schema: *ref_33
           flattenedNames:
             - property
             - value
@@ -826,7 +850,7 @@ schemas: !Schemas
           description: The wrapped produc.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_51
+    - !ObjectSchema &ref_52
       type: object
       apiVersions:
         - !ApiVersion 
@@ -841,7 +865,7 @@ schemas: !Schemas
               description: Flattened product.
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_38
+          schema: !ArraySchema &ref_39
             type: array
             apiVersions:
               - !ApiVersion 
@@ -859,7 +883,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_33
+          schema: *ref_34
           serializedName: dictionaryofresources
           language: !Languages 
             default:
@@ -877,72 +901,72 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
+    - *ref_17
     - *ref_14
-    - !ObjectSchema &ref_34
+    - !ObjectSchema &ref_35
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
-      parents: !Relations 
+      children: !Relations 
         all:
-          - !ObjectSchema &ref_35
+          - !ObjectSchema &ref_36
             type: object
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            children: !Relations 
+            parents: !Relations 
               all:
-                - *ref_34
+                - *ref_35
               immediate:
-                - *ref_34
+                - *ref_35
             properties:
               - !Property 
-                schema: *ref_20
-                serializedName: generic_value
+                schema: *ref_21
+                serializedName: '@odata.value'
                 language: !Languages 
                   default:
-                    name: genericValue
-                    description: Generic URL value.
+                    name: odataValue
+                    description: URL value.
                 protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
               - input
               - output
+            extensions:
+              x-ms-flattened: true
             language: !Languages 
               default:
-                name: GenericUrl
-                description: The Generic URL.
+                name: ProductUrl
+                description: The product URL.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_35
+          - *ref_36
       properties:
         - !Property 
-          schema: *ref_21
-          serializedName: '@odata.value'
+          schema: *ref_20
+          serializedName: generic_value
           language: !Languages 
             default:
-              name: odataValue
-              description: URL value.
+              name: genericValue
+              description: Generic URL value.
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - input
         - output
-      extensions:
-        x-ms-flattened: true
       language: !Languages 
         default:
-          name: ProductUrl
-          description: The product URL.
+          name: GenericUrl
+          description: The Generic URL.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_35
-    - *ref_17
+    - *ref_36
   arrays:
-    - !ArraySchema &ref_41
+    - !ArraySchema &ref_42
       type: array
       apiVersions:
         - !ApiVersion 
@@ -953,7 +977,7 @@ schemas: !Schemas
           name: ArrayOfResource
           description: Array of Resource
       protocol: !Protocols {}
-    - !ArraySchema &ref_44
+    - !ArraySchema &ref_45
       type: array
       apiVersions:
         - !ApiVersion 
@@ -964,18 +988,7 @@ schemas: !Schemas
           name: ArrayOfFlattenedProduct
           description: Array of FlattenedProduct
       protocol: !Protocols {}
-    - !ArraySchema &ref_45
-      type: array
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      elementType: *ref_36
-      language: !Languages 
-        default:
-          name: ArrayOfWrappedProduct
-          description: Array of WrappedProduct
-      protocol: !Protocols {}
-    - !ArraySchema &ref_47
+    - !ArraySchema &ref_46
       type: array
       apiVersions:
         - !ApiVersion 
@@ -983,12 +996,23 @@ schemas: !Schemas
       elementType: *ref_37
       language: !Languages 
         default:
+          name: ArrayOfWrappedProduct
+          description: Array of WrappedProduct
+      protocol: !Protocols {}
+    - !ArraySchema &ref_48
+      type: array
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      elementType: *ref_38
+      language: !Languages 
+        default:
           name: ArrayOfProductWrapper
           description: Array of ProductWrapper
       protocol: !Protocols {}
-    - *ref_38
+    - *ref_39
 globalParameters:
-  - !Parameter &ref_39
+  - !Parameter &ref_40
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -1013,12 +1037,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_41
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1030,8 +1054,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_43
-                schema: *ref_41
+              - !Parameter &ref_44
+                schema: *ref_42
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -1043,7 +1067,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1056,7 +1080,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_43
+              - *ref_44
             language: !Languages 
               default:
                 name: ''
@@ -1082,7 +1106,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1104,12 +1128,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1134,7 +1158,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_44
+            schema: *ref_45
             language: !Languages 
               default:
                 name: ''
@@ -1148,7 +1172,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1170,12 +1194,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_41
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1187,8 +1211,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_46
-                schema: *ref_45
+              - !Parameter &ref_47
+                schema: *ref_46
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -1200,7 +1224,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1213,7 +1237,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_46
+              - *ref_47
             language: !Languages 
               default:
                 name: ''
@@ -1239,7 +1263,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1261,12 +1285,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1291,7 +1315,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_47
+            schema: *ref_48
             language: !Languages 
               default:
                 name: ''
@@ -1305,7 +1329,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1327,12 +1351,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_41
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1344,8 +1368,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_49
-                schema: *ref_48
+              - !Parameter &ref_50
+                schema: *ref_49
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -1357,7 +1381,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1370,7 +1394,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_49
+              - *ref_50
             language: !Languages 
               default:
                 name: ''
@@ -1396,7 +1420,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1418,12 +1442,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1448,7 +1472,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_50
+            schema: *ref_51
             language: !Languages 
               default:
                 name: ''
@@ -1462,7 +1486,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1484,12 +1508,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_41
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1501,8 +1525,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_52
-                schema: *ref_51
+              - !Parameter &ref_53
+                schema: *ref_52
                 implementation: Method
                 required: false
                 language: !Languages 
@@ -1514,7 +1538,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1527,7 +1551,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_52
+              - *ref_53
             language: !Languages 
               default:
                 name: ''
@@ -1553,7 +1577,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1575,12 +1599,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1605,7 +1629,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_52
             language: !Languages 
               default:
                 name: ''
@@ -1619,7 +1643,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1641,12 +1665,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_41
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1658,7 +1682,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_53
+              - !Parameter &ref_54
                 schema: *ref_14
                 implementation: Method
                 required: false
@@ -1671,7 +1695,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1684,7 +1708,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_53
+              - *ref_54
             language: !Languages 
               default:
                 name: ''
@@ -1714,7 +1738,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1736,12 +1760,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_41
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1753,7 +1777,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_54
+              - !Parameter &ref_55
                 schema: *ref_14
                 flattened: true
                 implementation: Method
@@ -1769,7 +1793,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1784,7 +1808,7 @@ operationGroups:
               - !VirtualParameter &ref_56
                 schema: *ref_15
                 implementation: Method
-                originalParameter: *ref_54
+                originalParameter: *ref_55
                 pathToProperty: []
                 required: true
                 targetProperty: *ref_24
@@ -1796,7 +1820,7 @@ operationGroups:
               - !VirtualParameter &ref_57
                 schema: *ref_16
                 implementation: Method
-                originalParameter: *ref_54
+                originalParameter: *ref_55
                 pathToProperty: []
                 required: false
                 targetProperty: *ref_25
@@ -1808,7 +1832,7 @@ operationGroups:
               - !VirtualParameter &ref_58
                 schema: *ref_18
                 implementation: Method
-                originalParameter: *ref_54
+                originalParameter: *ref_55
                 pathToProperty: []
                 targetProperty: *ref_26
                 language: !Languages 
@@ -1819,9 +1843,9 @@ operationGroups:
               - !VirtualParameter 
                 schema: *ref_19
                 implementation: Method
-                originalParameter: *ref_54
+                originalParameter: *ref_55
                 pathToProperty: []
-                targetProperty: *ref_55
+                targetProperty: *ref_27
                 language: !Languages 
                   default:
                     name: capacity
@@ -1830,9 +1854,9 @@ operationGroups:
               - !VirtualParameter &ref_59
                 schema: *ref_20
                 implementation: Method
-                originalParameter: *ref_54
+                originalParameter: *ref_55
                 pathToProperty: []
-                targetProperty: *ref_27
+                targetProperty: *ref_28
                 language: !Languages 
                   default:
                     name: genericValue
@@ -1841,9 +1865,9 @@ operationGroups:
               - !VirtualParameter &ref_60
                 schema: *ref_21
                 implementation: Method
-                originalParameter: *ref_54
+                originalParameter: *ref_55
                 pathToProperty: []
-                targetProperty: *ref_28
+                targetProperty: *ref_29
                 language: !Languages 
                   default:
                     name: odataValue
@@ -1884,7 +1908,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1906,13 +1930,13 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_39
+          - *ref_40
           - *ref_61
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_40
+                schema: *ref_41
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1926,7 +1950,7 @@ operationGroups:
                     in: header
               - *ref_23
               - !Parameter 
-                schema: *ref_42
+                schema: *ref_43
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1941,22 +1965,9 @@ operationGroups:
               - *ref_62
               - *ref_63
               - *ref_64
-              - !VirtualParameter 
-                schema: *ref_19
-                implementation: Method
-                originalParameter: *ref_23
-                pathToProperty: []
-                targetProperty: *ref_55
-                extensions:
-                  x-ms-parameter-grouping:
-                    name: flatten-parameter-group
-                language: !Languages 
-                  default:
-                    name: capacity
-                    description: Capacity of product. For example, 4 people.
-                protocol: !Protocols {}
               - *ref_65
               - *ref_66
+              - *ref_67
               - *ref_22
             signatureParameters:
               - *ref_22
@@ -1989,7 +2000,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -2013,6 +2024,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: AutoRestResourceFlatteningTestService
