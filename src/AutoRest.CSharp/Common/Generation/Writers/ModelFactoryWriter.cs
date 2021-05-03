@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -11,9 +12,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class ModelFactoryWriter
     {
-        public static IReadOnlyCollection<SchemaObjectType> ObjectTypesThatRequireFactory(IEnumerable<TypeProvider> models)
-            => models.OfType<SchemaObjectType>().Where(SchemaObjectTypeRequiresFactory).ToArray();
-
         public static string WriteModelFactory(CodeWriter writer, BuildContext context, IEnumerable<SchemaObjectType> objectTypes)
         {
             var clientPrefix = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
@@ -23,7 +21,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary($"Model factory for {clientPrefix} read-only models.");
-                using (writer.Class(modelFactoryName, isStatic: true))
+                using (writer.Scope($"public static class {modelFactoryName}"))
                 {
                     foreach (var objectType in objectTypes)
                     {
@@ -54,27 +52,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($");");
                 writer.Line();
             }
-        }
-
-        private static bool SchemaObjectTypeRequiresFactory(SchemaObjectType objectType)
-        {
-            if (objectType.Declaration.Accessibility != "public" || !objectType.IncludeDeserializer)
-            {
-                return false;
-            }
-
-            var readOnlyProperties = objectType.Properties
-                .Where(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType))
-                .ToList();
-
-            if (!readOnlyProperties.Any())
-            {
-                return false;
-            }
-
-            return objectType.Constructors
-                .Where(c => c.Declaration.Accessibility == "public")
-                .All(c => readOnlyProperties.Any(property => c.FindParameterByInitializedProperty(property) == default));
         }
     }
 }

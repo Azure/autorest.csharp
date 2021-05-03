@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests
                 return;
             }
 
-            Fail($"Type {type} is expected to be static.");
+            Assert.Fail($"Type \"{type}\" is expected to be static.");
         }
 
         public static void TypeOnlyDeclaredThesePublicMethods(Type type, params string[] expectedMethodNames)
@@ -37,20 +37,20 @@ namespace AutoRest.TestServer.Tests
                     return;
                 }
 
-                Fail($"Type \"{type}\" has public methods {extraMethods} that aren't expected.");
+                Assert.Fail($"Type \"{type}\" has public methods {extraMethods} that aren't expected.");
             }
 
             if (extraMethods.Length == 0)
             {
-                Fail($"Type \"{type}\" doesn't have public methods {missingMethods}.");
+                Assert.Fail($"Type \"{type}\" doesn't have public methods {missingMethods}.");
             }
 
-            Fail($"Type \"{type}\" doesn't have public methods {missingMethods} and has public methods {extraMethods} that aren't expected.");
+            Assert.Fail($"Type \"{type}\" doesn't have public methods {missingMethods} and has public methods {extraMethods} that aren't expected.");
         }
 
         public static MethodInfo HasPublicInstanceMethod(Type type, string name)
         {
-            var methodInfo = type.GetMethod(name, BindingFlags.Instance | BindingFlags.Public);
+            var methodInfo = type.GetMethod(name, Instance | Public);
             Assert.NotNull(methodInfo);
             return methodInfo;
         }
@@ -81,11 +81,6 @@ namespace AutoRest.TestServer.Tests
             var fieldInfo = type.GetFields(bindingFlags).FirstOrDefault(p=>p.Name == name);
             Assert.NotNull(fieldInfo, $"Field '{name}' is not found");
             return fieldInfo;
-        }
-
-        private static void Fail(FormattableString message)
-        {
-            Assert.Fail(FormattableString.Invariant(message));
         }
     }
 }

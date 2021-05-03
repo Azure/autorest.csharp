@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -36,7 +37,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
-            var modelsThatRequireFactory = ModelFactoryWriter.ObjectTypesThatRequireFactory(context.Library.Models);
+            var modelsThatRequireFactory = context.Library.Models
+                .OfType<SchemaObjectType>()
+                .Where(o => o.RequiresFactoryMethod)
+                .ToArray();
+
             if (modelsThatRequireFactory.Any())
             {
                 var codeWriter = new CodeWriter();

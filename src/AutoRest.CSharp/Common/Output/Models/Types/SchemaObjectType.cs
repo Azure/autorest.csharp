@@ -88,6 +88,30 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
+        public bool RequiresFactoryMethod
+        {
+            get
+            {
+                if (Declaration.Accessibility != "public" || !IncludeDeserializer)
+                {
+                    return false;
+                }
+
+                var readOnlyProperties = Properties
+                    .Where(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType))
+                    .ToList();
+
+                if (!readOnlyProperties.Any())
+                {
+                    return false;
+                }
+
+                return Constructors
+                    .Where(c => c.Declaration.Accessibility == "public")
+                    .All(c => readOnlyProperties.Any(property => c.FindParameterByInitializedProperty(property) == default));
+            }
+        }
+
         protected override ObjectTypeConstructor BuildSerializationConstructor()
         {
             bool ownsDiscriminatorProperty = false;

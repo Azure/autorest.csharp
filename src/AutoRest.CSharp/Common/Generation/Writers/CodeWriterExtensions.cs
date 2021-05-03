@@ -55,7 +55,22 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationReturns(documentationReturns);
             }
 
-            writer.Append($"{accessibility}{(isStatic ? " static" : "")} {(returnType?.Name ?? "void")} {name}(");
+            writer.Append($"{accessibility} ");
+            if (isStatic)
+            {
+                writer.AppendRaw("static ");
+            }
+
+            if (returnType != null)
+            {
+                writer.Append($"{returnType} ");
+            }
+            else
+            {
+                writer.AppendRaw("void ");
+            }
+
+            writer.Append($"{name}(");
             foreach (var parameter in parameters)
             {
                 writer.WriteParameter(parameter);
@@ -69,13 +84,12 @@ namespace AutoRest.CSharp.Generation.Writers
         public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool includeDefaultValue = true)
         {
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
-            if (includeDefaultValue &&
-                clientParameter.DefaultValue != null)
+            if (includeDefaultValue && clientParameter.DefaultValue != null)
             {
                 if (TypeFactory.CanBeInitializedInline(clientParameter.Type, clientParameter.DefaultValue))
                 {
                     writer.Append($" = ");
-                    CodeWriterExtensions.WriteConstant(writer, clientParameter.DefaultValue.Value);
+                    writer.WriteConstant(clientParameter.DefaultValue.Value);
                 }
                 else
                 {
