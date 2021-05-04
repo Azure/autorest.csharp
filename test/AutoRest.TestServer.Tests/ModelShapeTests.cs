@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
@@ -13,7 +12,6 @@ using ModelShapes;
 using ModelShapes.Models;
 using NUnit.Framework;
 using TypeSchemaMapping.Models;
-using SchemaMappingModelFactory = ModelShapes.SchemaMappingModelFactory;
 
 namespace AutoRest.TestServer.Tests
 {

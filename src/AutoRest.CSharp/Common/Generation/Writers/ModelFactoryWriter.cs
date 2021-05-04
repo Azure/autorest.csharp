@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -36,12 +37,41 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteFactoryMethodForSchemaObjectType(CodeWriter writer, SchemaObjectType objectType)
         {
-            var methodName = objectType.Type.Name;
-            var documentationSummary = $"Initializes new instance of {objectType.Type.Name} {(objectType.IsStruct ? "structure" : "class")}.";
-            var documentationReturns = $"A new <see cref=\"{objectType.Declaration.Namespace}.{objectType.Type.Name}\"/> instance for mocking.";
             var parameters = objectType.SerializationConstructor.Parameters;
-            using (writer.Method(methodName, documentationSummary, returnType: objectType.Type, documentationReturns: documentationReturns, isStatic: true, parameters: parameters))
+            writer.WriteXmlDocumentationSummary($"Initializes new instance of {objectType.Type.Name} {(objectType.IsStruct ? "structure" : "class")}.");
+            foreach (var parameter in parameters)
             {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+            writer.WriteXmlDocumentationRequiredParametersException(parameters);
+            writer.WriteXmlDocumentationReturns($"A new <see cref=\"{objectType.Declaration.Namespace}.{objectType.Type.Name}\"/> instance for mocking.");
+
+            writer.Append($"public static {objectType.Type} {objectType.Type.Name}(");
+            foreach (var parameter in parameters)
+            {
+                writer.WriteParameter(parameter, enforceDefaultValue: true);
+            }
+            writer.RemoveTrailingComma();
+            writer.Append($")");
+
+            using (writer.Scope())
+            {
+                foreach (var parameter in parameters)
+                {
+                    if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
+                    {
+                        writer.Line($"{parameter.Name} ??= {parameter.DefaultValue}");
+                    }
+                    else if (TypeFactory.IsDictionary(parameter.Type))
+                    {
+                        writer.Line($"{parameter.Name} ??= new Dictionary<{parameter.Type.Arguments[0]}, {parameter.Type.Arguments[1]}>();");
+                    }
+                    else if (TypeFactory.IsList(parameter.Type))
+                    {
+                        writer.Line($"{parameter.Name} ??= new List<{parameter.Type.Arguments[0]}>();");
+                    }
+                }
+
                 writer.Append($"return new {objectType.Type}(");
                 foreach (var parameter in parameters)
                 {

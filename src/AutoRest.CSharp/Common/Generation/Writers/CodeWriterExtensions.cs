@@ -31,57 +31,10 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static IDisposable Method(
-            this CodeWriter writer,
-            string name,
-            string? documentationSummary,
-            string accessibility = "public",
-            bool isStatic = false,
-            CSharpType? returnType = default,
-            string? documentationReturns = default,
-            params Parameter[] parameters)
-        {
-            writer.WriteXmlDocumentationSummary(documentationSummary);
-            foreach (var parameter in parameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-            }
-            writer.WriteXmlDocumentationRequiredParametersException(parameters);
-            if (documentationReturns != default)
-            {
-                writer.WriteXmlDocumentationReturns(documentationReturns);
-            }
-
-            writer.Append($"{accessibility} ");
-            if (isStatic)
-            {
-                writer.AppendRaw("static ");
-            }
-
-            if (returnType != null)
-            {
-                writer.Append($"{returnType} ");
-            }
-            else
-            {
-                writer.AppendRaw("void ");
-            }
-
-            writer.Append($"{name}(");
-            foreach (var parameter in parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.RemoveTrailingComma();
-            writer.Append($")");
-
-            return writer.Scope();
-        }
-
-        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool includeDefaultValue = true)
+        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool enforceDefaultValue = false)
         {
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
-            if (includeDefaultValue && clientParameter.DefaultValue != null)
+            if (clientParameter.DefaultValue != null)
             {
                 if (TypeFactory.CanBeInitializedInline(clientParameter.Type, clientParameter.DefaultValue))
                 {
@@ -93,6 +46,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     // initialize with null and set the default later
                     writer.Append($" = null");
                 }
+            }
+            else if (enforceDefaultValue)
+            {
+                // initialize with default
+                writer.Append($" = default");
             }
 
             writer.AppendRaw(",");
