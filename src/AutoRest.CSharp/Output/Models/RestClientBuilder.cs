@@ -407,12 +407,12 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return new StringResponseBody();
             }
-            else if (response is SchemaResponse schemaResponse)
+            else if (response is SchemaResponse schemaResponse && response.HttpResponse.KnownMediaType is {} knownType)
             {
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
                 CSharpType responseType = TypeFactory.GetOutputType(_context.TypeFactory.CreateType(schema, isNullable: schemaResponse.IsNullable));
 
-                ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, responseType);
+                ObjectSerialization serialization = _serializationBuilder.Build(knownType, schema, responseType);
 
                 return new ObjectResponseBody(responseType, serialization);
             }
