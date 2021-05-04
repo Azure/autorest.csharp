@@ -10,7 +10,7 @@ using xms_error_responses.Models;
 namespace xms_error_responses
 {
     /// <summary> Model factory for XMSErrorResponseExtensions read-only models. </summary>
-    public static class XMSErrorResponseExtensionsModelFactory
+    public static partial class XMSErrorResponseExtensionsModelFactory
     {
         /// <summary> Initializes new instance of Animal class. </summary>
         /// <param name="aniType"> . </param>

@@ -11,7 +11,7 @@ using lro.Models;
 namespace lro
 {
     /// <summary> Model factory for AutoRestLongRunningOperationTestService read-only models. </summary>
-    public static class AutoRestLongRunningOperationTestServiceModelFactory
+    public static partial class AutoRestLongRunningOperationTestServiceModelFactory
     {
         /// <summary> Initializes new instance of Resource class. </summary>
         /// <param name="id"> Resource Id. </param>

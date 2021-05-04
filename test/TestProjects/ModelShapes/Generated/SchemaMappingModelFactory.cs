@@ -11,7 +11,7 @@ using ModelShapes.Models;
 namespace ModelShapes
 {
     /// <summary> Model factory for SchemaMapping read-only models. </summary>
-    public static class SchemaMappingModelFactory
+    public static partial class SchemaMappingModelFactory
     {
         /// <summary> Initializes new instance of MixedModel class. </summary>
         /// <param name="requiredString"> . </param>

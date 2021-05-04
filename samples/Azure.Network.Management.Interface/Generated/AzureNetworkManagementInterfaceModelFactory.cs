@@ -11,7 +11,7 @@ using Azure.Network.Management.Interface.Models;
 namespace Azure.Network.Management.Interface
 {
     /// <summary> Model factory for AzureNetworkManagementInterface read-only models. </summary>
-    public static class AzureNetworkManagementInterfaceModelFactory
+    public static partial class AzureNetworkManagementInterfaceModelFactory
     {
         /// <summary> Initializes new instance of Resource class. </summary>
         /// <param name="id"> Resource ID. </param>

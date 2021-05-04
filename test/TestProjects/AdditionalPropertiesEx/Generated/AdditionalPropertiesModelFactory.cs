@@ -11,7 +11,7 @@ using AdditionalPropertiesEx.Models;
 namespace AdditionalPropertiesEx
 {
     /// <summary> Model factory for AdditionalProperties read-only models. </summary>
-    public static class AdditionalPropertiesModelFactory
+    public static partial class AdditionalPropertiesModelFactory
     {
         /// <summary> Initializes new instance of OutputAdditionalPropertiesModel class. </summary>
         /// <param name="id"> . </param>

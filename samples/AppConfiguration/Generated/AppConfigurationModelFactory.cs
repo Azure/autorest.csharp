@@ -10,7 +10,7 @@ using AppConfiguration.Models;
 namespace AppConfiguration
 {
     /// <summary> Model factory for AppConfiguration read-only models. </summary>
-    public static class AppConfigurationModelFactory
+    public static partial class AppConfigurationModelFactory
     {
         /// <summary> Initializes new instance of Key class. </summary>
         /// <param name="name"> . </param>

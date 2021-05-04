@@ -12,7 +12,7 @@ using CognitiveSearch.Models;
 namespace CognitiveSearch
 {
     /// <summary> Model factory for CognitiveServices read-only models. </summary>
-    public static class CognitiveServicesModelFactory
+    public static partial class CognitiveServicesModelFactory
     {
         /// <summary> Initializes new instance of SearchDocumentsResult class. </summary>
         /// <param name="count"> The total count of results found by the search operation, or null if the count was not requested. If present, the count may be greater than the number of results in this response. This can happen if you use the $top or $skip parameters, or if Azure Cognitive Search can&apos;t return all the requested documents in a single Search response. </param>

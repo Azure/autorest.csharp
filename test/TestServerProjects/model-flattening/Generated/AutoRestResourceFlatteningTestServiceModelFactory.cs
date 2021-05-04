@@ -11,7 +11,7 @@ using model_flattening.Models;
 namespace model_flattening
 {
     /// <summary> Model factory for AutoRestResourceFlatteningTestService read-only models. </summary>
-    public static class AutoRestResourceFlatteningTestServiceModelFactory
+    public static partial class AutoRestResourceFlatteningTestServiceModelFactory
     {
         /// <summary> Initializes new instance of Resource class. </summary>
         /// <param name="id"> Resource Id. </param>

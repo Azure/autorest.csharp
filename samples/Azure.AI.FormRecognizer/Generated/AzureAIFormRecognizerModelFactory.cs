@@ -12,7 +12,7 @@ using Azure.AI.FormRecognizer.Models;
 namespace Azure.AI.FormRecognizer
 {
     /// <summary> Model factory for AzureAIFormRecognizer read-only models. </summary>
-    public static class AzureAIFormRecognizerModelFactory
+    public static partial class AzureAIFormRecognizerModelFactory
     {
         /// <summary> Initializes new instance of ErrorInformation class. </summary>
         /// <param name="code"> . </param>

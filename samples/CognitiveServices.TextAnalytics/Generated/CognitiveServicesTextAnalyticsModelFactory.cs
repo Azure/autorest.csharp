@@ -11,7 +11,7 @@ using CognitiveServices.TextAnalytics.Models;
 namespace CognitiveServices.TextAnalytics
 {
     /// <summary> Model factory for CognitiveServicesTextAnalytics read-only models. </summary>
-    public static class CognitiveServicesTextAnalyticsModelFactory
+    public static partial class CognitiveServicesTextAnalyticsModelFactory
     {
         /// <summary> Initializes new instance of EntitiesResult class. </summary>
         /// <param name="documents"> Response by document. </param>

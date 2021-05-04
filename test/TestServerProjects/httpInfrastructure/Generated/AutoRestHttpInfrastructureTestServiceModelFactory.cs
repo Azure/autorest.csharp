@@ -10,7 +10,7 @@ using httpInfrastructure.Models;
 namespace httpInfrastructure
 {
     /// <summary> Model factory for AutoRestHttpInfrastructureTestService read-only models. </summary>
-    public static class AutoRestHttpInfrastructureTestServiceModelFactory
+    public static partial class AutoRestHttpInfrastructureTestServiceModelFactory
     {
         /// <summary> Initializes new instance of MyException class. </summary>
         /// <param name="statusCode"> . </param>

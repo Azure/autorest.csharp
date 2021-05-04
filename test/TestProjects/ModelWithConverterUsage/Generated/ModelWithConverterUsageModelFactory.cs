@@ -10,7 +10,7 @@ using ModelWithConverterUsage.Models;
 namespace ModelWithConverterUsage
 {
     /// <summary> Model factory for ModelWithConverterUsage read-only models. </summary>
-    public static class ModelWithConverterUsageModelFactory
+    public static partial class ModelWithConverterUsageModelFactory
     {
         /// <summary> Initializes new instance of OutputModel class. </summary>
         /// <param name="outputModelProperty"> Constant string. </param>

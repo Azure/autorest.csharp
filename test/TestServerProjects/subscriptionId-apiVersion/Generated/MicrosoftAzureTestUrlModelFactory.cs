@@ -10,7 +10,7 @@ using subscriptionId_apiVersion.Models;
 namespace subscriptionId_apiVersion
 {
     /// <summary> Model factory for MicrosoftAzureTestUrl read-only models. </summary>
-    public static class MicrosoftAzureTestUrlModelFactory
+    public static partial class MicrosoftAzureTestUrlModelFactory
     {
         /// <summary> Initializes new instance of SampleResourceGroup class. </summary>
         /// <param name="name"> resource group name &apos;testgroup101&apos;. </param>

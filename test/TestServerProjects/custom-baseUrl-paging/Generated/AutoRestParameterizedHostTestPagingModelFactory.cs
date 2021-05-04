@@ -10,7 +10,7 @@ using custom_baseUrl_paging.Models;
 namespace custom_baseUrl_paging
 {
     /// <summary> Model factory for AutoRestParameterizedHostTestPaging read-only models. </summary>
-    public static class AutoRestParameterizedHostTestPagingModelFactory
+    public static partial class AutoRestParameterizedHostTestPagingModelFactory
     {
         /// <summary> Initializes new instance of Product class. </summary>
         /// <param name="properties"> . </param>

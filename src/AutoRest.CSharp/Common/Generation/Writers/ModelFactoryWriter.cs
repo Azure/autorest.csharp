@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary($"Model factory for {clientPrefix} read-only models.");
-                using (writer.Scope($"public static class {modelFactoryName}"))
+                using (writer.Scope($"public static partial class {modelFactoryName}"))
                 {
                     foreach (var objectType in objectTypes)
                     {

@@ -11,7 +11,7 @@ using TypeSchemaMapping.Models;
 namespace TypeSchemaMapping
 {
     /// <summary> Model factory for SchemaMapping read-only models. </summary>
-    public static class SchemaMappingModelFactory
+    public static partial class SchemaMappingModelFactory
     {
         /// <summary> Initializes new instance of ModelWithGuidProperty class. </summary>
         /// <param name="modelProperty"> . </param>
