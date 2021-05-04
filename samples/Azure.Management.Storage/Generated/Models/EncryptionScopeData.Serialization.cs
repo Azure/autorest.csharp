@@ -40,7 +40,7 @@ namespace Azure.Management.Storage.Models
 
         internal static EncryptionScopeData DeserializeEncryptionScopeData(JsonElement element)
         {
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<EncryptionScopeSource> source = default;

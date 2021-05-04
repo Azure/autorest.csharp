@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the PrivateEndpointConnection data model. </summary>
-    public partial class PrivateEndpointConnectionData : Resource<TenantResourceIdentifier>
+    public partial class PrivateEndpointConnectionData : Resource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of PrivateEndpointConnectionData. </summary>
         public PrivateEndpointConnectionData()
@@ -24,7 +24,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="provisioningState"> The provisioning state of the private endpoint connection resource. </param>
-        internal PrivateEndpointConnectionData(TenantResourceIdentifier id, string name, ResourceType type, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, PrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, type)
+        internal PrivateEndpointConnectionData(ResourceGroupResourceIdentifier id, string name, ResourceType type, PrivateEndpoint privateEndpoint, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, PrivateEndpointConnectionProvisioningState? provisioningState) : base(id, name, type)
         {
             PrivateEndpoint = privateEndpoint;
             PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;

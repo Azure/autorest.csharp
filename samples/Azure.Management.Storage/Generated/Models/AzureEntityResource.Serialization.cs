@@ -22,7 +22,7 @@ namespace Azure.Management.Storage.Models
         internal static AzureEntityResource DeserializeAzureEntityResource(JsonElement element)
         {
             Optional<string> etag = default;
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

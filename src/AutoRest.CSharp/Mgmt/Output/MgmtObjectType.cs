@@ -73,10 +73,27 @@ namespace AutoRest.CSharp.Mgmt.Output
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
             if (typeToReplace != null)
             {
-                var match = InheritanceChooser.GetExactMatch(OperationGroup, typeToReplace, typeToReplace.MyProperties);
+                var operationGroupToUse = OperationGroup;
+                if (operationGroupToUse == null)
+                {
+                    var children = ObjectSchema.Children;
+                    if (children != null)
+                    {
+                        foreach (var child in children.Immediate)
+                        {
+                            var resourceData = _context.Library.GetResourceDataFromSchema(child.Name);
+                            if (resourceData != null)
+                            {
+                                operationGroupToUse = resourceData.OperationGroup;
+                                break;
+                            }
+                        }
+                    }
+                }
+                var match = InheritanceChooser.GetExactMatch(operationGroupToUse, typeToReplace, typeToReplace.MyProperties); //AzureEntityResource gets set here
                 if (match != null)
                 {
-                    inheritedType = match;
+                    inheritedType = match; //gets set to TenantResourceIdentifier
                 }
             }
             return inheritedType == null ? InheritanceChooser.GetSupersetMatch(OperationGroup, this, MyProperties) : inheritedType;

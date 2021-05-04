@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific BlobContainer. </summary>
-    public partial class BlobContainerOperations : ResourceOperationsBase<TenantResourceIdentifier, BlobContainer>
+    public partial class BlobContainerOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, BlobContainer>
     {
         /// <summary> Initializes a new instance of BlobContainerOperations for mocking. </summary>
         protected BlobContainerOperations()
@@ -24,7 +24,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of <see cref = "BlobContainerOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected BlobContainerOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected BlobContainerOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

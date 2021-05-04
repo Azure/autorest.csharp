@@ -74,6 +74,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ResourceContainer GetResourceContainer(OperationGroup operationGroup) => EnsureResourceContainers()[operationGroup];
 
+        internal ResourceData? GetResourceDataFromSchema(string schemaName)
+        {
+            List<OperationGroup>? operationGroups;
+            OperationGroup opGroup;
+            if (_operationGroups.TryGetValue(schemaName, out operationGroups))
+                opGroup =  operationGroups.FirstOrDefault();
+            else
+                return null;
+
+            return GetResourceData(opGroup);
+        }
+
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
 
         public OperationGroup? GetOperationGroupBySchema(Schema schema)

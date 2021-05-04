@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the ProximityPlacementGroup data model. </summary>
-    public partial class ProximityPlacementGroupData : TrackedResource<TenantResourceIdentifier>
+    public partial class ProximityPlacementGroupData : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupData. </summary>
         /// <param name="location"> The location. </param>
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="virtualMachineScaleSets"> A list of references to all virtual machine scale sets in the proximity placement group. </param>
         /// <param name="availabilitySets"> A list of references to all availability sets in the proximity placement group. </param>
         /// <param name="colocationStatus"> Describes colocation status of the Proximity Placement Group. </param>
-        internal ProximityPlacementGroupData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus) : base(id, name, type, tags, location)
+        internal ProximityPlacementGroupData(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, ProximityPlacementGroupType? proximityPlacementGroupType, IReadOnlyList<SubResourceWithColocationStatus> virtualMachines, IReadOnlyList<SubResourceWithColocationStatus> virtualMachineScaleSets, IReadOnlyList<SubResourceWithColocationStatus> availabilitySets, InstanceViewStatus colocationStatus) : base(id, name, type, tags, location)
         {
             ProximityPlacementGroupType = proximityPlacementGroupType;
             VirtualMachines = virtualMachines;
