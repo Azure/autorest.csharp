@@ -43,7 +43,7 @@ namespace Azure.Core
         public OperationOrResponseInternals(Response<T> response)
             : base(response.GetRawResponse())
         {
-            _valueResponse = VoidResponse as Response<T>;
+            _valueResponse = response;
         }
 
         public T Value => DoesWrapOperation ? _operation!.Value : _valueResponse!.Value;
