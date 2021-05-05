@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -51,15 +50,14 @@ namespace Accessibility_LowLevel
 
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> OperationAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> OperationAsync(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateOperationRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -79,15 +77,14 @@ namespace Accessibility_LowLevel
 
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Operation(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response Operation(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateOperationRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -124,15 +121,14 @@ namespace Accessibility_LowLevel
 
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        internal virtual async Task<Response> OperationInternalAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        internal virtual async Task<Response> OperationInternalAsync(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateOperationInternalRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -152,15 +148,14 @@ namespace Accessibility_LowLevel
 
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        internal virtual Response OperationInternal(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        internal virtual Response OperationInternal(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateOperationInternalRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {

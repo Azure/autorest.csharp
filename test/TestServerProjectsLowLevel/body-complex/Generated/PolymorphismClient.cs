@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -51,15 +50,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetValidAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetValidAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetValidRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -79,15 +77,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetValid(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetValid(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetValidRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -123,15 +120,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutValidAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutValidAsync(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -152,15 +148,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutValid(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response PutValid(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -198,15 +193,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetDotSyntaxAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetDotSyntaxAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetDotSyntaxRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -226,15 +220,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetDotSyntax(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetDotSyntax(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetDotSyntaxRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -269,15 +262,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetComposedWithDiscriminatorRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -297,15 +289,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetComposedWithDiscriminator(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetComposedWithDiscriminator(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetComposedWithDiscriminatorRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -340,15 +331,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -368,15 +358,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetComposedWithoutDiscriminator(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetComposedWithoutDiscriminator(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -411,15 +400,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetComplicatedAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetComplicatedAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetComplicatedRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -439,15 +427,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetComplicated(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetComplicated(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetComplicatedRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -483,15 +470,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutComplicatedAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutComplicatedAsync(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutComplicatedRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -512,15 +498,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutComplicated(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response PutComplicated(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutComplicatedRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -559,15 +544,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutMissingDiscriminatorRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -588,15 +572,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutMissingDiscriminator(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response PutMissingDiscriminator(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutMissingDiscriminatorRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -635,15 +618,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutValidMissingRequiredRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -664,15 +646,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutValidMissingRequired(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response PutValidMissingRequired(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutValidMissingRequiredRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {

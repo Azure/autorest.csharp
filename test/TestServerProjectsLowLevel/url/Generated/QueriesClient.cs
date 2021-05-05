@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -52,15 +51,14 @@ namespace url_LowLevel
 
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetBooleanTrueAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetBooleanTrueAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetBooleanTrueRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -80,15 +78,14 @@ namespace url_LowLevel
 
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetBooleanTrue(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetBooleanTrue(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetBooleanTrueRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -124,15 +121,14 @@ namespace url_LowLevel
 
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetBooleanFalseAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetBooleanFalseAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetBooleanFalseRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -152,15 +148,14 @@ namespace url_LowLevel
 
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetBooleanFalse(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetBooleanFalse(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetBooleanFalseRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -197,15 +192,14 @@ namespace url_LowLevel
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
         /// <param name="boolQuery"> null boolean value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetBooleanNullAsync(bool? boolQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetBooleanNullAsync(bool? boolQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetBooleanNullRequest(boolQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -226,15 +220,14 @@ namespace url_LowLevel
         /// <summary> Get null Boolean value on query (query string should be absent). </summary>
         /// <param name="boolQuery"> null boolean value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetBooleanNull(bool? boolQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetBooleanNull(bool? boolQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetBooleanNullRequest(boolQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -274,15 +267,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetIntOneMillionAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetIntOneMillionAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetIntOneMillionRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -302,15 +294,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetIntOneMillion(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetIntOneMillion(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetIntOneMillionRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -346,15 +337,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetIntNegativeOneMillionRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -374,15 +364,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetIntNegativeOneMillion(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetIntNegativeOneMillion(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetIntNegativeOneMillionRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -419,15 +408,14 @@ namespace url_LowLevel
         /// <summary> Get null integer value (no query parameter). </summary>
         /// <param name="intQuery"> null integer value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetIntNullAsync(int? intQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetIntNullAsync(int? intQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetIntNullRequest(intQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -448,15 +436,14 @@ namespace url_LowLevel
         /// <summary> Get null integer value (no query parameter). </summary>
         /// <param name="intQuery"> null integer value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetIntNull(int? intQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetIntNull(int? intQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetIntNullRequest(intQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -496,15 +483,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetTenBillionAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetTenBillionAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetTenBillionRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -524,15 +510,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetTenBillion(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetTenBillion(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetTenBillionRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -568,15 +553,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetNegativeTenBillionAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetNegativeTenBillionAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetNegativeTenBillionRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -596,15 +580,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetNegativeTenBillion(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetNegativeTenBillion(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetNegativeTenBillionRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -641,15 +624,14 @@ namespace url_LowLevel
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetLongNullAsync(long? longQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetLongNullAsync(long? longQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetLongNullRequest(longQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -670,15 +652,14 @@ namespace url_LowLevel
         /// <summary> Get &apos;null 64 bit integer value (no query param in uri). </summary>
         /// <param name="longQuery"> null 64 bit integer value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetLongNull(long? longQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetLongNull(long? longQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetLongNullRequest(longQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -718,15 +699,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> FloatScientificPositiveAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> FloatScientificPositiveAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateFloatScientificPositiveRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -746,15 +726,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response FloatScientificPositive(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response FloatScientificPositive(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateFloatScientificPositiveRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -790,15 +769,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> FloatScientificNegativeAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> FloatScientificNegativeAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateFloatScientificNegativeRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -818,15 +796,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response FloatScientificNegative(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response FloatScientificNegative(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateFloatScientificNegativeRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -863,15 +840,14 @@ namespace url_LowLevel
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="floatQuery"> null numeric value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> FloatNullAsync(float? floatQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> FloatNullAsync(float? floatQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateFloatNullRequest(floatQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -892,15 +868,14 @@ namespace url_LowLevel
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="floatQuery"> null numeric value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response FloatNull(float? floatQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response FloatNull(float? floatQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateFloatNullRequest(floatQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -940,15 +915,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDoubleDecimalPositiveRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -968,15 +942,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DoubleDecimalPositive(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response DoubleDecimalPositive(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDoubleDecimalPositiveRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1012,15 +985,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDoubleDecimalNegativeRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1040,15 +1012,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DoubleDecimalNegative(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response DoubleDecimalNegative(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDoubleDecimalNegativeRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1085,15 +1056,14 @@ namespace url_LowLevel
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DoubleNullAsync(double? doubleQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DoubleNullAsync(double? doubleQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDoubleNullRequest(doubleQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1114,15 +1084,14 @@ namespace url_LowLevel
         /// <summary> Get null numeric value (no query parameter). </summary>
         /// <param name="doubleQuery"> null numeric value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DoubleNull(double? doubleQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response DoubleNull(double? doubleQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDoubleNullRequest(doubleQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1162,15 +1131,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> StringUnicodeAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> StringUnicodeAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateStringUnicodeRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1190,15 +1158,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response StringUnicode(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response StringUnicode(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateStringUnicodeRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1234,15 +1201,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> StringUrlEncodedAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> StringUrlEncodedAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateStringUrlEncodedRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1262,15 +1228,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response StringUrlEncoded(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response StringUrlEncoded(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateStringUrlEncodedRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1306,15 +1271,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> StringEmptyAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> StringEmptyAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateStringEmptyRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1334,15 +1298,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response StringEmpty(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response StringEmpty(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateStringEmptyRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1379,15 +1342,14 @@ namespace url_LowLevel
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> StringNullAsync(string stringQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> StringNullAsync(string stringQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateStringNullRequest(stringQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1408,15 +1370,14 @@ namespace url_LowLevel
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="stringQuery"> null string value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response StringNull(string stringQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response StringNull(string stringQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateStringNullRequest(stringQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1457,15 +1418,14 @@ namespace url_LowLevel
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> EnumValidAsync(string enumQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> EnumValidAsync(string enumQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateEnumValidRequest(enumQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1486,15 +1446,14 @@ namespace url_LowLevel
         /// <summary> Get using uri with query parameter &apos;green color&apos;. </summary>
         /// <param name="enumQuery"> &apos;green color&apos; enum value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response EnumValid(string enumQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response EnumValid(string enumQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateEnumValidRequest(enumQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1535,15 +1494,14 @@ namespace url_LowLevel
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="enumQuery"> null string value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> EnumNullAsync(string enumQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> EnumNullAsync(string enumQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateEnumNullRequest(enumQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1564,15 +1522,14 @@ namespace url_LowLevel
         /// <summary> Get null (no query parameter in url). </summary>
         /// <param name="enumQuery"> null string value. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response EnumNull(string enumQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response EnumNull(string enumQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateEnumNullRequest(enumQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1613,15 +1570,14 @@ namespace url_LowLevel
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ByteMultiByteAsync(byte[] byteQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ByteMultiByteAsync(byte[] byteQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateByteMultiByteRequest(byteQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1642,15 +1598,14 @@ namespace url_LowLevel
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="byteQuery"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ByteMultiByte(byte[] byteQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response ByteMultiByte(byte[] byteQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateByteMultiByteRequest(byteQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1690,15 +1645,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ByteEmptyAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ByteEmptyAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateByteEmptyRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1718,15 +1672,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ByteEmpty(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response ByteEmpty(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateByteEmptyRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1763,15 +1716,14 @@ namespace url_LowLevel
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ByteNullAsync(byte[] byteQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ByteNullAsync(byte[] byteQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateByteNullRequest(byteQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1792,15 +1744,14 @@ namespace url_LowLevel
         /// <summary> Get null as byte array (no query parameters in uri). </summary>
         /// <param name="byteQuery"> null as byte array (no query parameters in uri). </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ByteNull(byte[] byteQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response ByteNull(byte[] byteQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateByteNullRequest(byteQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1840,15 +1791,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DateValidAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DateValidAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDateValidRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1868,15 +1818,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DateValid(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response DateValid(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDateValidRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1913,15 +1862,14 @@ namespace url_LowLevel
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DateNullAsync(DateTimeOffset? dateQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DateNullAsync(DateTimeOffset? dateQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDateNullRequest(dateQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1942,15 +1890,14 @@ namespace url_LowLevel
         /// <summary> Get null as date - this should result in no query parameters in uri. </summary>
         /// <param name="dateQuery"> null as date (no query parameters in uri). </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DateNull(DateTimeOffset? dateQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response DateNull(DateTimeOffset? dateQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDateNullRequest(dateQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1990,15 +1937,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DateTimeValidAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DateTimeValidAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDateTimeValidRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2018,15 +1964,14 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DateTimeValid(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response DateTimeValid(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDateTimeValidRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2063,15 +2008,14 @@ namespace url_LowLevel
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2092,15 +2036,14 @@ namespace url_LowLevel
         /// <summary> Get null as date-time, should result in no query parameters in uri. </summary>
         /// <param name="dateTimeQuery"> null as date-time (no query parameters). </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DateTimeNull(DateTimeOffset? dateTimeQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response DateTimeNull(DateTimeOffset? dateTimeQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateDateTimeNullRequest(dateTimeQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2141,15 +2084,14 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2170,15 +2112,14 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayStringCsvValid(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response ArrayStringCsvValid(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringCsvValidRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2219,15 +2160,14 @@ namespace url_LowLevel
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2248,15 +2188,14 @@ namespace url_LowLevel
         /// <summary> Get a null array of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the csv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayStringCsvNull(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response ArrayStringCsvNull(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringCsvNullRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2297,15 +2236,14 @@ namespace url_LowLevel
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2326,15 +2264,14 @@ namespace url_LowLevel
         /// <summary> Get an empty array [] of string using the csv-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the csv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringCsvEmptyRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2375,15 +2312,14 @@ namespace url_LowLevel
         /// <summary> Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service. </summary>
         /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringNoCollectionFormatEmptyAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ArrayStringNoCollectionFormatEmptyAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2404,15 +2340,14 @@ namespace url_LowLevel
         /// <summary> Array query has no defined collection format, should default to csv. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;] for the &apos;arrayQuery&apos; parameter to the service. </summary>
         /// <param name="arrayQuery"> Array-typed query parameter. Pass in [&apos;hello&apos;, &apos;nihao&apos;, &apos;bonjour&apos;]. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayStringNoCollectionFormatEmpty(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response ArrayStringNoCollectionFormatEmpty(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringNoCollectionFormatEmptyRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2453,15 +2388,14 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2482,15 +2416,14 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the ssv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayStringSsvValid(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response ArrayStringSsvValid(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringSsvValidRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2531,15 +2464,14 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2560,15 +2492,14 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the tsv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayStringTsvValid(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response ArrayStringTsvValid(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringTsvValidRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2609,15 +2540,14 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -2638,15 +2568,14 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the pipes-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayStringPipesValid(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response ArrayStringPipesValid(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateArrayStringPipesValidRequest(arrayQuery, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {

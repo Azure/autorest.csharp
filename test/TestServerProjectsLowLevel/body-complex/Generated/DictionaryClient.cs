@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
@@ -51,15 +50,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with dictionary property. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetValidAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetValidAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetValidRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -79,15 +77,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with dictionary property. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetValid(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetValid(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetValidRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -123,15 +120,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with dictionary property. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutValidAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutValidAsync(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -152,15 +148,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with dictionary property. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutValid(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response PutValid(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -198,15 +193,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with dictionary property which is empty. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetEmptyAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetEmptyAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetEmptyRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -226,15 +220,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with dictionary property which is empty. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetEmpty(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetEmpty(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetEmptyRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -270,15 +263,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with dictionary property which is empty. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutEmptyAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutEmptyAsync(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutEmptyRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -299,15 +291,14 @@ namespace body_complex_LowLevel
         /// <summary> Put complex types with dictionary property which is empty. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutEmpty(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response PutEmpty(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             HttpMessage message = CreatePutEmptyRequest(requestBody, requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -345,15 +336,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with dictionary property which is null. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetNullAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetNullAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetNullRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -373,15 +363,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with dictionary property which is null. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetNull(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetNull(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetNullRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -416,15 +405,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetNotProvidedRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -444,15 +432,14 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="requestOptions"> The request options. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetNotProvided(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response GetNotProvided(RequestOptions requestOptions = null)
         {
             HttpMessage message = CreateGetNotProvidedRequest(requestOptions);
             if (requestOptions?.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, cancellationToken);
+            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
