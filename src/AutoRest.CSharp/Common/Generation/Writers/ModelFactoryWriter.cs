@@ -60,15 +60,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
                     {
-                        writer.Line($"{parameter.Name} ??= {parameter.DefaultValue}");
+                        writer.Append($"{parameter.Name} ??= ");
+                        writer.WriteConstant(parameter.DefaultValue.Value);
+                        writer.Line($";");
                     }
-                    else if (TypeFactory.IsDictionary(parameter.Type))
+                    else if (TypeFactory.IsCollectionType(parameter.Type))
                     {
-                        writer.Line($"{parameter.Name} ??= new Dictionary<{parameter.Type.Arguments[0]}, {parameter.Type.Arguments[1]}>();");
-                    }
-                    else if (TypeFactory.IsList(parameter.Type))
-                    {
-                        writer.Line($"{parameter.Name} ??= new List<{parameter.Type.Arguments[0]}>();");
+                        writer.Line($"{parameter.Name} ??= new {TypeFactory.GetImplementationType(parameter.Type)}();");
                     }
                 }
 
