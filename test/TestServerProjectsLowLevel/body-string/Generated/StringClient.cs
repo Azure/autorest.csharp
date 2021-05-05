@@ -12,8 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-#pragma warning disable AZC0007
-
 namespace body_string_LowLevel
 {
     /// <summary> The String service client. </summary>
@@ -24,6 +22,7 @@ namespace body_string_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
+        private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Initializes a new instance of StringClient for mocking. </summary>
         protected StringClient()
@@ -43,29 +42,72 @@ namespace body_string_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestSwaggerBATServiceClientOptions();
-            Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
+            _clientDiagnostics = new ClientDiagnostics(options);
+            var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
 
         /// <summary> Get null string value value. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetNullAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetNullAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetNullRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetNullRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get null string value value. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetNull(CancellationToken cancellationToken = default)
+        public virtual Response GetNull(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetNullRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetNullRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetNull"/> and <see cref="GetNullAsync"/> operations. </summary>
-        private Request CreateGetNullRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetNullRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -75,30 +117,71 @@ namespace body_string_LowLevel
             uri.AppendPath("/string/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Set string value null. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutNullAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutNullAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutNullRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutNullRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Set string value null. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutNull(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutNull(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutNullRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutNullRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutNull"/> and <see cref="PutNullAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutNullRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutNullRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -110,27 +193,68 @@ namespace body_string_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get empty string value value &apos;&apos;. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetEmptyAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetEmptyAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetEmptyRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetEmptyRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get empty string value value &apos;&apos;. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetEmpty(CancellationToken cancellationToken = default)
+        public virtual Response GetEmpty(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetEmptyRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetEmptyRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetEmpty"/> and <see cref="GetEmptyAsync"/> operations. </summary>
-        private Request CreateGetEmptyRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetEmptyRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -140,30 +264,71 @@ namespace body_string_LowLevel
             uri.AppendPath("/string/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutEmptyAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutEmptyAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutEmptyRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutEmptyRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Set string value empty &apos;&apos;. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutEmpty(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutEmpty(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutEmptyRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutEmptyRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutEmpty"/> and <see cref="PutEmptyAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutEmptyRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutEmptyRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -175,27 +340,68 @@ namespace body_string_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetMbcsAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetMbcsAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetMbcsRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetMbcsRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get mbcs string value &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetMbcs(CancellationToken cancellationToken = default)
+        public virtual Response GetMbcs(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetMbcsRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetMbcsRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetMbcs"/> and <see cref="GetMbcsAsync"/> operations. </summary>
-        private Request CreateGetMbcsRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetMbcsRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -205,30 +411,71 @@ namespace body_string_LowLevel
             uri.AppendPath("/string/mbcs", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutMbcsAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutMbcsAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutMbcsRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutMbcsRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Set string value mbcs &apos;啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€&apos;. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutMbcs(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutMbcs(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutMbcsRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutMbcsRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutMbcs"/> and <see cref="PutMbcsAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutMbcsRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutMbcsRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -240,27 +487,68 @@ namespace body_string_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetWhitespaceAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetWhitespaceAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetWhitespaceRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetWhitespaceRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get string value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetWhitespace(CancellationToken cancellationToken = default)
+        public virtual Response GetWhitespace(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetWhitespaceRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetWhitespaceRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetWhitespace"/> and <see cref="GetWhitespaceAsync"/> operations. </summary>
-        private Request CreateGetWhitespaceRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetWhitespaceRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -270,30 +558,71 @@ namespace body_string_LowLevel
             uri.AppendPath("/string/whitespace", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutWhitespaceAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutWhitespaceAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutWhitespaceRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutWhitespaceRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Set String value with leading and trailing whitespace &apos;&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;&apos;. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutWhitespace(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutWhitespace(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutWhitespaceRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutWhitespaceRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutWhitespace"/> and <see cref="PutWhitespaceAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutWhitespaceRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutWhitespaceRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -305,27 +634,68 @@ namespace body_string_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get String value when no string value is sent in response payload. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetNotProvidedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetNotProvidedRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetNotProvidedRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get String value when no string value is sent in response payload. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetNotProvided(CancellationToken cancellationToken = default)
+        public virtual Response GetNotProvided(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetNotProvidedRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetNotProvidedRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetNotProvided"/> and <see cref="GetNotProvidedAsync"/> operations. </summary>
-        private Request CreateGetNotProvidedRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetNotProvidedRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -335,27 +705,68 @@ namespace body_string_LowLevel
             uri.AppendPath("/string/notProvided", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get value that is base64 encoded. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetBase64EncodedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetBase64EncodedAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetBase64EncodedRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetBase64EncodedRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get value that is base64 encoded. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetBase64Encoded(CancellationToken cancellationToken = default)
+        public virtual Response GetBase64Encoded(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetBase64EncodedRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetBase64EncodedRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetBase64Encoded"/> and <see cref="GetBase64EncodedAsync"/> operations. </summary>
-        private Request CreateGetBase64EncodedRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetBase64EncodedRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -365,27 +776,68 @@ namespace body_string_LowLevel
             uri.AppendPath("/string/base64Encoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get value that is base64url encoded. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetBase64UrlEncodedRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetBase64UrlEncodedRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get value that is base64url encoded. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetBase64UrlEncoded(CancellationToken cancellationToken = default)
+        public virtual Response GetBase64UrlEncoded(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetBase64UrlEncodedRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetBase64UrlEncodedRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetBase64UrlEncoded"/> and <see cref="GetBase64UrlEncodedAsync"/> operations. </summary>
-        private Request CreateGetBase64UrlEncodedRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetBase64UrlEncodedRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -395,30 +847,71 @@ namespace body_string_LowLevel
             uri.AppendPath("/string/base64UrlEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutBase64UrlEncodedAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutBase64UrlEncodedAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutBase64UrlEncodedRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutBase64UrlEncodedRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put value that is base64url encoded. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutBase64UrlEncoded(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutBase64UrlEncoded(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutBase64UrlEncodedRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutBase64UrlEncodedRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutBase64UrlEncoded"/> and <see cref="PutBase64UrlEncodedAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutBase64UrlEncodedRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutBase64UrlEncodedRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -430,27 +923,68 @@ namespace body_string_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetNullBase64UrlEncodedAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetNullBase64UrlEncodedRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetNullBase64UrlEncodedRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get null value that is expected to be base64url encoded. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetNullBase64UrlEncoded(CancellationToken cancellationToken = default)
+        public virtual Response GetNullBase64UrlEncoded(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetNullBase64UrlEncodedRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetNullBase64UrlEncodedRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetNullBase64UrlEncoded"/> and <see cref="GetNullBase64UrlEncodedAsync"/> operations. </summary>
-        private Request CreateGetNullBase64UrlEncodedRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetNullBase64UrlEncodedRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -460,7 +994,7 @@ namespace body_string_LowLevel
             uri.AppendPath("/string/nullBase64UrlEncoding", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
     }
 }

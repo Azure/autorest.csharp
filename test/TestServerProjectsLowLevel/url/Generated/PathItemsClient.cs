@@ -12,8 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-#pragma warning disable AZC0007
-
 namespace url_LowLevel
 {
     /// <summary> The PathItems service client. </summary>
@@ -26,6 +24,7 @@ namespace url_LowLevel
         private Uri endpoint;
         private string globalStringQuery;
         private readonly string apiVersion;
+        private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Initializes a new instance of PathItemsClient for mocking. </summary>
         protected PathItemsClient()
@@ -51,7 +50,9 @@ namespace url_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestUrlTestServiceClientOptions();
-            Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
+            _clientDiagnostics = new ClientDiagnostics(options);
+            var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
             this.globalStringPath = globalStringPath;
             this.endpoint = endpoint;
             this.globalStringQuery = globalStringQuery;
@@ -63,11 +64,31 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetAllWithValuesAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
@@ -75,11 +96,31 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
+        public virtual Response GetAllWithValues(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetAllWithValuesRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetAllWithValues"/> and <see cref="GetAllWithValuesAsync"/> operations. </summary>
@@ -87,7 +128,8 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
-        private Request CreateGetAllWithValuesRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetAllWithValuesRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -115,7 +157,7 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
@@ -123,11 +165,31 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetGlobalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=&apos;localStringQuery&apos;. </summary>
@@ -135,11 +197,31 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
+        public virtual Response GetGlobalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetGlobalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetGlobalQueryNull"/> and <see cref="GetGlobalQueryNullAsync"/> operations. </summary>
@@ -147,7 +229,8 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain value &apos;localStringQuery&apos;. </param>
-        private Request CreateGetGlobalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetGlobalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -175,7 +258,7 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> send globalStringPath=globalStringPath, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=null. </summary>
@@ -183,11 +266,31 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain null value. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetGlobalAndLocalQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> send globalStringPath=globalStringPath, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=null, pathItemStringQuery=&apos;pathItemStringQuery&apos;, localStringQuery=null. </summary>
@@ -195,11 +298,31 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain null value. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
+        public virtual Response GetGlobalAndLocalQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetGlobalAndLocalQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetGlobalAndLocalQueryNull"/> and <see cref="GetGlobalAndLocalQueryNullAsync"/> operations. </summary>
@@ -207,7 +330,8 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> A string value &apos;pathItemStringQuery&apos; that appears as a query parameter. </param>
         /// <param name="localStringQuery"> should contain null value. </param>
-        private Request CreateGetGlobalAndLocalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetGlobalAndLocalQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -235,7 +359,7 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>
@@ -243,11 +367,31 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringQuery"> should contain value null. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetLocalPathItemQueryNullAsync(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> send globalStringPath=&apos;globalStringPath&apos;, pathItemStringPath=&apos;pathItemStringPath&apos;, localStringPath=&apos;localStringPath&apos;, globalStringQuery=&apos;globalStringQuery&apos;, pathItemStringQuery=null, localStringQuery=null. </summary>
@@ -255,11 +399,31 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringQuery"> should contain value null. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, CancellationToken cancellationToken = default)
+        public virtual Response GetLocalPathItemQueryNull(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetLocalPathItemQueryNullRequest(pathItemStringPath, localStringPath, pathItemStringQuery, localStringQuery, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetLocalPathItemQueryNull"/> and <see cref="GetLocalPathItemQueryNullAsync"/> operations. </summary>
@@ -267,7 +431,8 @@ namespace url_LowLevel
         /// <param name="localStringPath"> should contain value &apos;localStringPath&apos;. </param>
         /// <param name="pathItemStringQuery"> should contain value null. </param>
         /// <param name="localStringQuery"> should contain value null. </param>
-        private Request CreateGetLocalPathItemQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetLocalPathItemQueryNullRequest(string pathItemStringPath, string localStringPath, string pathItemStringQuery = null, string localStringQuery = null, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -295,7 +460,7 @@ namespace url_LowLevel
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
     }
 }

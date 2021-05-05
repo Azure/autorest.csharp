@@ -12,8 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-#pragma warning disable AZC0007
-
 namespace BodyAndPath
 {
     /// <summary> The BodyAndPath service client. </summary>
@@ -24,6 +22,7 @@ namespace BodyAndPath
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
+        private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Initializes a new instance of BodyAndPathClient for mocking. </summary>
         protected BodyAndPathClient()
@@ -43,7 +42,9 @@ namespace BodyAndPath
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new BodyAndPathClientOptions();
-            Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
+            _clientDiagnostics = new ClientDiagnostics(options);
+            var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -51,27 +52,68 @@ namespace BodyAndPath
         /// <summary> Resets products. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CreateAsync(string itemName, RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> CreateAsync(string itemName, RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateCreateRequest(itemName, requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateCreateRequest(itemName, requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Resets products. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Create(string itemName, RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response Create(string itemName, RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateCreateRequest(itemName, requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateCreateRequest(itemName, requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="Create"/> and <see cref="CreateAsync"/> operations. </summary>
         /// <param name="itemName"> item name. </param>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreateCreateRequest(string itemName, RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateCreateRequest(string itemName, RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -83,7 +125,7 @@ namespace BodyAndPath
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
     }
 }

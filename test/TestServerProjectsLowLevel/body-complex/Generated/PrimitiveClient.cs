@@ -12,8 +12,6 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-#pragma warning disable AZC0007
-
 namespace body_complex_LowLevel
 {
     /// <summary> The Primitive service client. </summary>
@@ -24,6 +22,7 @@ namespace body_complex_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
+        private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Initializes a new instance of PrimitiveClient for mocking. </summary>
         protected PrimitiveClient()
@@ -43,29 +42,72 @@ namespace body_complex_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestComplexTestServiceClientOptions();
-            Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
+            _clientDiagnostics = new ClientDiagnostics(options);
+            var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
 
         /// <summary> Get complex types with integer properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetIntAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetIntAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetIntRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetIntRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with integer properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetInt(CancellationToken cancellationToken = default)
+        public virtual Response GetInt(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetIntRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetIntRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetInt"/> and <see cref="GetIntAsync"/> operations. </summary>
-        private Request CreateGetIntRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetIntRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -75,30 +117,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/integer", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutIntAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutIntAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutIntRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutIntRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with integer properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutInt(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutInt(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutIntRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutIntRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutInt"/> and <see cref="PutIntAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutIntRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutIntRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -110,27 +193,68 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with long properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetLongAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetLongAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetLongRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetLongRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with long properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetLong(CancellationToken cancellationToken = default)
+        public virtual Response GetLong(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetLongRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetLongRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetLong"/> and <see cref="GetLongAsync"/> operations. </summary>
-        private Request CreateGetLongRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetLongRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -140,30 +264,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/long", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutLongAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutLongAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutLongRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutLongRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with long properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutLong(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutLong(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutLongRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutLongRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutLong"/> and <see cref="PutLongAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutLongRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutLongRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -175,27 +340,68 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with float properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetFloatAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetFloatAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetFloatRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetFloatRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with float properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetFloat(CancellationToken cancellationToken = default)
+        public virtual Response GetFloat(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetFloatRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetFloatRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetFloat"/> and <see cref="GetFloatAsync"/> operations. </summary>
-        private Request CreateGetFloatRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetFloatRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -205,30 +411,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/float", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutFloatAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutFloatAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutFloatRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutFloatRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with float properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutFloat(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutFloat(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutFloatRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutFloatRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutFloat"/> and <see cref="PutFloatAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutFloatRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutFloatRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -240,27 +487,68 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with double properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetDoubleAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetDoubleAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetDoubleRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetDoubleRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with double properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetDouble(CancellationToken cancellationToken = default)
+        public virtual Response GetDouble(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetDoubleRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetDoubleRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetDouble"/> and <see cref="GetDoubleAsync"/> operations. </summary>
-        private Request CreateGetDoubleRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetDoubleRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -270,30 +558,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/double", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutDoubleAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDoubleAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutDoubleRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutDoubleRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with double properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutDouble(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutDouble(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutDoubleRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutDoubleRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutDouble"/> and <see cref="PutDoubleAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutDoubleRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutDoubleRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -305,27 +634,68 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with bool properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetBoolAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetBoolAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetBoolRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetBoolRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with bool properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetBool(CancellationToken cancellationToken = default)
+        public virtual Response GetBool(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetBoolRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetBoolRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetBool"/> and <see cref="GetBoolAsync"/> operations. </summary>
-        private Request CreateGetBoolRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetBoolRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -335,30 +705,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/bool", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutBoolAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutBoolAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutBoolRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutBoolRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with bool properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutBool(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutBool(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutBoolRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutBoolRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutBool"/> and <see cref="PutBoolAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutBoolRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutBoolRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -370,27 +781,68 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with string properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetStringAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetStringAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetStringRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetStringRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with string properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetString(CancellationToken cancellationToken = default)
+        public virtual Response GetString(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetStringRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetStringRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetString"/> and <see cref="GetStringAsync"/> operations. </summary>
-        private Request CreateGetStringRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetStringRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -400,30 +852,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/string", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutStringAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutStringAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutStringRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutStringRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with string properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutString(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutString(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutStringRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutStringRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutString"/> and <see cref="PutStringAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutStringRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutStringRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -435,27 +928,68 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with date properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetDateAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetDateAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetDateRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetDateRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with date properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetDate(CancellationToken cancellationToken = default)
+        public virtual Response GetDate(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetDateRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetDateRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetDate"/> and <see cref="GetDateAsync"/> operations. </summary>
-        private Request CreateGetDateRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetDateRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -465,30 +999,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/date", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutDateAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDateAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutDateRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutDateRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with date properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutDate(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutDate(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutDateRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutDateRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutDate"/> and <see cref="PutDateAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutDateRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutDateRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -500,27 +1075,68 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with datetime properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetDateTimeAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetDateTimeAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetDateTimeRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetDateTimeRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with datetime properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetDateTime(CancellationToken cancellationToken = default)
+        public virtual Response GetDateTime(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetDateTimeRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetDateTimeRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetDateTime"/> and <see cref="GetDateTimeAsync"/> operations. </summary>
-        private Request CreateGetDateTimeRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetDateTimeRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -530,30 +1146,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/datetime", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutDateTimeAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDateTimeAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutDateTimeRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutDateTimeRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with datetime properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutDateTime(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutDateTime(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutDateTimeRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutDateTimeRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutDateTime"/> and <see cref="PutDateTimeAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutDateTimeRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutDateTimeRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -565,27 +1222,68 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetDateTimeRfc1123Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetDateTimeRfc1123Async(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetDateTimeRfc1123Request();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetDateTimeRfc1123Request(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetDateTimeRfc1123(CancellationToken cancellationToken = default)
+        public virtual Response GetDateTimeRfc1123(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetDateTimeRfc1123Request();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetDateTimeRfc1123Request(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetDateTimeRfc1123"/> and <see cref="GetDateTimeRfc1123Async"/> operations. </summary>
-        private Request CreateGetDateTimeRfc1123Request()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetDateTimeRfc1123Request(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -595,30 +1293,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/datetimerfc1123", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutDateTimeRfc1123Request(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutDateTimeRfc1123Request(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutDateTimeRfc1123(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutDateTimeRfc1123(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutDateTimeRfc1123Request(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutDateTimeRfc1123Request(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutDateTimeRfc1123"/> and <see cref="PutDateTimeRfc1123Async"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutDateTimeRfc1123Request(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutDateTimeRfc1123Request(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -630,27 +1369,68 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with duration properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetDurationAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetDurationAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetDurationRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetDurationRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with duration properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetDuration(CancellationToken cancellationToken = default)
+        public virtual Response GetDuration(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetDurationRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetDurationRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetDuration"/> and <see cref="GetDurationAsync"/> operations. </summary>
-        private Request CreateGetDurationRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetDurationRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -660,30 +1440,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/duration", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutDurationAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutDurationAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutDurationRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutDurationRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with duration properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutDuration(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutDuration(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutDurationRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutDurationRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutDuration"/> and <see cref="PutDurationAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutDurationRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutDurationRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -695,27 +1516,68 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with byte properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetByteAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> GetByteAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetByteRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreateGetByteRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Get complex types with byte properties. </summary>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetByte(CancellationToken cancellationToken = default)
+        public virtual Response GetByte(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreateGetByteRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreateGetByteRequest(requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetByte"/> and <see cref="GetByteAsync"/> operations. </summary>
-        private Request CreateGetByteRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetByteRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -725,30 +1587,71 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/primitive/byte", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutByteAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutByteAsync(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutByteRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            HttpMessage message = CreatePutByteRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            await Pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Put complex types with byte properties. </summary>
         /// <param name="requestBody"> The request body. </param>
+        /// <param name="requestOptions"> The request options. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutByte(RequestContent requestBody, CancellationToken cancellationToken = default)
+        public virtual Response PutByte(RequestContent requestBody, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
-            Request req = CreatePutByteRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            HttpMessage message = CreatePutByteRequest(requestBody, requestOptions);
+            if (requestOptions?.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            Pipeline.Send(message, cancellationToken);
+            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
+            if (statusOption == ResponseStatusOption.Default)
+            {
+                switch (message.Response.Status)
+                {
+                    case 200:
+                        return message.Response;
+                    default:
+                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                }
+            }
+            else
+            {
+                return message.Response;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutByte"/> and <see cref="PutByteAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutByteRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutByteRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -760,7 +1663,7 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
     }
 }

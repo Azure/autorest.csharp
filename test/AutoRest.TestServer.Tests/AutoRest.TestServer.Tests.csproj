@@ -5,11 +5,12 @@
     <IsPackable>false</IsPackable>
     <Nullable>annotations</Nullable>
     <NoWarn>SA1649;SA1633</NoWarn>
+    <RestoreSources>$(RestoreSources);https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json;C:\Users\chhamo\nuget\;https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.13.0" />
-    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.11" />
+    <PackageReference Include="Azure.Core" Version="1.14.0-alpha.20210428.1" />
+    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-alpha.20210428.1" />
     <PackageReference Include="Azure.Identity" Version="1.0.0" />
     <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210422.3" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
