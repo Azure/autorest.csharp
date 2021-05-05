@@ -75,6 +75,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
+                writer.Line($"requestOptions ??= new {typeof(Azure.RequestOptions)}();");
+
                 writer.Append($"{typeof(Azure.Core.HttpMessage)} message = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
 
                 foreach (var parameter in clientMethod.Parameters)
@@ -85,14 +87,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($");");
                 writer.Line();
 
-                using (writer.Scope($"if (requestOptions?.PerCallPolicy != null)"))
+                using (writer.Scope($"if (requestOptions.PerCallPolicy != null)"))
                 {
                     writer.Line($"message.SetProperty (\"RequestOptionsPerCallPolicyCallback\", requestOptions.PerCallPolicy);");
                 }
 
                 if (async)
                 {
-                    writer.Line($"await {PipelineField:I}.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);");
+                    writer.Line($"await {PipelineField:I}.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);");
                 }
                 else
                 {
