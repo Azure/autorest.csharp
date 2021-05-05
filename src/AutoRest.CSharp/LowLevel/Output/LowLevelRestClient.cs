@@ -75,6 +75,11 @@ namespace AutoRest.CSharp.Output.Models
                         body = new RequestContentRequestBody(bodyParam);
                     }
 
+                    // Inject the RequestOptions
+                    CSharpType requestType = new CSharpType (typeof(Azure.RequestOptions)).WithNullable(true);
+                    Parameter requestOptions = new Parameter ("requestOptions", "The request options", requestType, new Constant(null, requestType), true);
+                    parameters.Insert (parameters.Count, requestOptions);
+
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, method.Request.Headers, body);
                     yield return new RestClientMethod (method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility);
                 }
