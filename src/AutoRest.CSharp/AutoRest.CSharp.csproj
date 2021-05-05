@@ -12,7 +12,7 @@
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     <PackAsTool>true</PackAsTool>
     <RollForward>Minor</RollForward>
-     <RestoreSources>$(RestoreSources);https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json;C:\Users\chhamo\nuget\;https://api.nuget.org/v3/index.json</RestoreSources>
+     <RestoreSources>$(RestoreSources);https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json;https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
 
   <ItemGroup>
