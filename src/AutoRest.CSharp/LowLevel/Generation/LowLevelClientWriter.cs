@@ -62,8 +62,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
             writer.Append($"{clientMethod.Accessibility} virtual {asyncText} {responseType} {methodName}(");
@@ -72,7 +70,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteParameter(parameter);
             }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+            writer.RemoveTrailingComma();
+            writer.Line($")");
 
             using (writer.Scope())
             {
@@ -93,11 +92,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (async)
                 {
-                    writer.Line($"await {PipelineField:I}.SendAsync(message, cancellationToken).ConfigureAwait(false);");
+                    writer.Line($"await {PipelineField:I}.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);");
                 }
                 else
                 {
-                    writer.Line($"{PipelineField:I}.Send(message, cancellationToken);");
+                    writer.Line($"{PipelineField:I}.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);");
                 }
 
                 writer.Line($"ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;");
