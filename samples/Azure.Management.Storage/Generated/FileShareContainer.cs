@@ -37,7 +37,7 @@ namespace Azure.Management.Storage
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private FileSharesRestOperations Operations => new FileSharesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private FileSharesRestOperations _restClient => new FileSharesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -57,6 +57,15 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (shareName == null)
+                {
+                    throw new ArgumentNullException(nameof(shareName));
+                }
+                if (fileShare == null)
+                {
+                    throw new ArgumentNullException(nameof(fileShare));
+                }
+
                 return StartCreateOrUpdate(shareName, fileShare, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<FileShare>;
             }
             catch (Exception e)
@@ -72,10 +81,19 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<FileShare>> CreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (shareName == null)
+                {
+                    throw new ArgumentNullException(nameof(shareName));
+                }
+                if (fileShare == null)
+                {
+                    throw new ArgumentNullException(nameof(fileShare));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(shareName, fileShare, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<FileShare>;
             }
@@ -96,7 +114,16 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var originalResponse = Operations.Create(Id.ResourceGroupName, Id.Name, shareName, fileShare, cancellationToken: cancellationToken);
+                if (shareName == null)
+                {
+                    throw new ArgumentNullException(nameof(shareName));
+                }
+                if (fileShare == null)
+                {
+                    throw new ArgumentNullException(nameof(fileShare));
+                }
+
+                var originalResponse = _restClient.Create(Id.ResourceGroupName, Id.Name, shareName, fileShare, cancellationToken: cancellationToken);
                 return new PhArmOperation<FileShare, FileShareData>(
                 originalResponse,
                 data => new FileShare(Parent, data));
@@ -114,11 +141,20 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<FileShare>> StartCreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateAsync(Id.ResourceGroupName, Id.Name, shareName, fileShare, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (shareName == null)
+                {
+                    throw new ArgumentNullException(nameof(shareName));
+                }
+                if (fileShare == null)
+                {
+                    throw new ArgumentNullException(nameof(fileShare));
+                }
+
+                var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Name, shareName, fileShare, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<FileShare, FileShareData>(
                 originalResponse,
                 data => new FileShare(Parent, data));
@@ -139,8 +175,13 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (shareName == null)
+                {
+                    throw new ArgumentNullException(nameof(shareName));
+                }
+
                 return new PhArmResponse<FileShare, FileShareData>(
-                Operations.Get(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken),
+                _restClient.Get(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken),
                 data => new FileShare(Parent, data));
             }
             catch (Exception e)
@@ -155,12 +196,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<FileShare>> GetAsync(string shareName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.Get");
             scope.Start();
             try
             {
+                if (shareName == null)
+                {
+                    throw new ArgumentNullException(nameof(shareName));
+                }
+
                 return new PhArmResponse<FileShare, FileShareData>(
-                await Operations.GetAsync(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken),
                 data => new FileShare(Parent, data));
             }
             catch (Exception e)
@@ -199,7 +245,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -242,7 +288,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="FileShare" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<FileShare> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileShareContainer.List");
             scope.Start();
             try
             {

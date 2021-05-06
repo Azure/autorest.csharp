@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private ImagesRestOperations Operations => new ImagesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private ImagesRestOperations _restClient => new ImagesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -56,6 +56,15 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (imageName == null)
+                {
+                    throw new ArgumentNullException(nameof(imageName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(imageName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<Image>;
             }
             catch (Exception e)
@@ -71,10 +80,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<Image>> CreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (imageName == null)
+                {
+                    throw new ArgumentNullException(nameof(imageName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(imageName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<Image>;
             }
@@ -95,9 +113,18 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, imageName, parameters, cancellationToken: cancellationToken);
+                if (imageName == null)
+                {
+                    throw new ArgumentNullException(nameof(imageName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, imageName, parameters, cancellationToken: cancellationToken);
                 var operation = new ImageCreateOrUpdateOperation(
-                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, imageName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<Image, ImageData>(
@@ -117,13 +144,22 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<Image>> StartCreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, imageName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (imageName == null)
+                {
+                    throw new ArgumentNullException(nameof(imageName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, imageName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var operation = new ImageCreateOrUpdateOperation(
-                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, imageName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<Image, ImageData>(
@@ -146,8 +182,13 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (imageName == null)
+                {
+                    throw new ArgumentNullException(nameof(imageName));
+                }
+
                 return new PhArmResponse<Image, ImageData>(
-                Operations.Get(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken),
+                _restClient.Get(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken),
                 data => new Image(Parent, data));
             }
             catch (Exception e)
@@ -162,12 +203,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<Image>> GetAsync(string imageName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageContainer.Get");
             scope.Start();
             try
             {
+                if (imageName == null)
+                {
+                    throw new ArgumentNullException(nameof(imageName));
+                }
+
                 return new PhArmResponse<Image, ImageData>(
-                await Operations.GetAsync(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken),
                 data => new Image(Parent, data));
             }
             catch (Exception e)
@@ -206,7 +252,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -249,7 +295,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="Image" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<Image> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageContainer.List");
             scope.Start();
             try
             {

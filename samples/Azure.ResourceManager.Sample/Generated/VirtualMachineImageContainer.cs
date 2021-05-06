@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private VirtualMachineImagesRestOperations Operations => new VirtualMachineImagesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private VirtualMachineImagesRestOperations _restClient => new VirtualMachineImagesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -55,8 +55,13 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+
                 return new PhArmResponse<VirtualMachineImage, VirtualMachineImageData>(
-                Operations.Get(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, version, cancellationToken: cancellationToken),
+                _restClient.Get(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, version, cancellationToken: cancellationToken),
                 data => new VirtualMachineImage(Parent, data));
             }
             catch (Exception e)
@@ -71,12 +76,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<VirtualMachineImage>> GetAsync(string version, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.Get");
             scope.Start();
             try
             {
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+
                 return new PhArmResponse<VirtualMachineImage, VirtualMachineImageData>(
-                await Operations.GetAsync(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, version, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, version, cancellationToken: cancellationToken),
                 data => new VirtualMachineImage(Parent, data));
             }
             catch (Exception e)
@@ -115,7 +125,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -158,7 +168,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineImage" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<VirtualMachineImage> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.List");
             scope.Start();
             try
             {

@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private VirtualMachineExtensionImagesRestOperations Operations => new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private VirtualMachineExtensionImagesRestOperations _restClient => new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -55,8 +55,13 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+
                 return new PhArmResponse<VirtualMachineExtensionImage, VirtualMachineExtensionImageData>(
-                Operations.Get(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, version, cancellationToken: cancellationToken),
+                _restClient.Get(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, version, cancellationToken: cancellationToken),
                 data => new VirtualMachineExtensionImage(Parent, data));
             }
             catch (Exception e)
@@ -71,12 +76,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<VirtualMachineExtensionImage>> GetAsync(string version, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.Get");
             scope.Start();
             try
             {
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+
                 return new PhArmResponse<VirtualMachineExtensionImage, VirtualMachineExtensionImageData>(
-                await Operations.GetAsync(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, version, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, version, cancellationToken: cancellationToken),
                 data => new VirtualMachineExtensionImage(Parent, data));
             }
             catch (Exception e)
@@ -115,7 +125,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -158,7 +168,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineExtensionImage" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<VirtualMachineExtensionImage> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.List");
             scope.Start();
             try
             {

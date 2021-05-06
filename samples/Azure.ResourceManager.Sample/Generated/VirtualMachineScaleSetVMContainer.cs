@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private VirtualMachineScaleSetVMsRestOperations Operations => new VirtualMachineScaleSetVMsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private VirtualMachineScaleSetVMsRestOperations _restClient => new VirtualMachineScaleSetVMsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -56,6 +56,15 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (instanceId == null)
+                {
+                    throw new ArgumentNullException(nameof(instanceId));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(instanceId, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<VirtualMachineScaleSetVM>;
             }
             catch (Exception e)
@@ -71,10 +80,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<VirtualMachineScaleSetVM>> CreateOrUpdateAsync(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (instanceId == null)
+                {
+                    throw new ArgumentNullException(nameof(instanceId));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<VirtualMachineScaleSetVM>;
             }
@@ -95,9 +113,18 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalResponse = Operations.Update(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken);
+                if (instanceId == null)
+                {
+                    throw new ArgumentNullException(nameof(instanceId));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.Update(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken);
                 var operation = new VirtualMachineScaleSetVMUpdateOperation(
-                _clientDiagnostics, _pipeline, Operations.CreateUpdateRequest(
+                _clientDiagnostics, _pipeline, _restClient.CreateUpdateRequest(
                 Id.ResourceGroupName, Id.Name, instanceId, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
@@ -117,13 +144,22 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<VirtualMachineScaleSetVM>> StartCreateOrUpdateAsync(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.UpdateAsync(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (instanceId == null)
+                {
+                    throw new ArgumentNullException(nameof(instanceId));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var operation = new VirtualMachineScaleSetVMUpdateOperation(
-                _clientDiagnostics, _pipeline, Operations.CreateUpdateRequest(
+                _clientDiagnostics, _pipeline, _restClient.CreateUpdateRequest(
                 Id.ResourceGroupName, Id.Name, instanceId, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
@@ -146,8 +182,13 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (instanceId == null)
+                {
+                    throw new ArgumentNullException(nameof(instanceId));
+                }
+
                 return new PhArmResponse<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
-                Operations.Get(Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken),
+                _restClient.Get(Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken),
                 data => new VirtualMachineScaleSetVM(Parent, data));
             }
             catch (Exception e)
@@ -162,12 +203,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<VirtualMachineScaleSetVM>> GetAsync(string instanceId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.Get");
             scope.Start();
             try
             {
+                if (instanceId == null)
+                {
+                    throw new ArgumentNullException(nameof(instanceId));
+                }
+
                 return new PhArmResponse<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
-                await Operations.GetAsync(Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken),
                 data => new VirtualMachineScaleSetVM(Parent, data));
             }
             catch (Exception e)
@@ -206,7 +252,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -249,7 +295,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetVM" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<VirtualMachineScaleSetVM> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.List");
             scope.Start();
             try
             {

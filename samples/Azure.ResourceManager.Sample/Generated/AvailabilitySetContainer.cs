@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private AvailabilitySetsRestOperations Operations => new AvailabilitySetsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private AvailabilitySetsRestOperations _restClient => new AvailabilitySetsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -56,6 +56,15 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(availabilitySetName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<AvailabilitySet>;
             }
             catch (Exception e)
@@ -71,10 +80,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<AvailabilitySet>> CreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<AvailabilitySet>;
             }
@@ -95,7 +113,16 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken);
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken);
                 return new PhArmOperation<AvailabilitySet, AvailabilitySetData>(
                 originalResponse,
                 data => new AvailabilitySet(Parent, data));
@@ -113,11 +140,20 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<AvailabilitySet>> StartCreateOrUpdateAsync(string availabilitySetName, AvailabilitySetData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<AvailabilitySet, AvailabilitySetData>(
                 originalResponse,
                 data => new AvailabilitySet(Parent, data));
@@ -138,8 +174,13 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+
                 return new PhArmResponse<AvailabilitySet, AvailabilitySetData>(
-                Operations.Get(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
+                _restClient.Get(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
                 data => new AvailabilitySet(Parent, data));
             }
             catch (Exception e)
@@ -154,12 +195,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<AvailabilitySet>> GetAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.Get");
             scope.Start();
             try
             {
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+
                 return new PhArmResponse<AvailabilitySet, AvailabilitySetData>(
-                await Operations.GetAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
                 data => new AvailabilitySet(Parent, data));
             }
             catch (Exception e)
@@ -198,7 +244,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -241,7 +287,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="AvailabilitySet" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<AvailabilitySet> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.List");
             scope.Start();
             try
             {

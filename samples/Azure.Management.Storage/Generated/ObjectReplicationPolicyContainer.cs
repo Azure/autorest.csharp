@@ -37,7 +37,7 @@ namespace Azure.Management.Storage
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private ObjectReplicationPoliciesRestOperations Operations => new ObjectReplicationPoliciesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private ObjectReplicationPoliciesRestOperations _restClient => new ObjectReplicationPoliciesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -57,6 +57,15 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (objectReplicationPolicyId == null)
+                {
+                    throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+                }
+                if (properties == null)
+                {
+                    throw new ArgumentNullException(nameof(properties));
+                }
+
                 return StartCreateOrUpdate(objectReplicationPolicyId, properties, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<ObjectReplicationPolicy>;
             }
             catch (Exception e)
@@ -72,10 +81,19 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<ObjectReplicationPolicy>> CreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (objectReplicationPolicyId == null)
+                {
+                    throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+                }
+                if (properties == null)
+                {
+                    throw new ArgumentNullException(nameof(properties));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(objectReplicationPolicyId, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<ObjectReplicationPolicy>;
             }
@@ -96,7 +114,16 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken: cancellationToken);
+                if (objectReplicationPolicyId == null)
+                {
+                    throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+                }
+                if (properties == null)
+                {
+                    throw new ArgumentNullException(nameof(properties));
+                }
+
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken: cancellationToken);
                 return new PhArmOperation<ObjectReplicationPolicy, ObjectReplicationPolicyData>(
                 originalResponse,
                 data => new ObjectReplicationPolicy(Parent, data));
@@ -114,11 +141,20 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<ObjectReplicationPolicy>> StartCreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (objectReplicationPolicyId == null)
+                {
+                    throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+                }
+                if (properties == null)
+                {
+                    throw new ArgumentNullException(nameof(properties));
+                }
+
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<ObjectReplicationPolicy, ObjectReplicationPolicyData>(
                 originalResponse,
                 data => new ObjectReplicationPolicy(Parent, data));
@@ -139,8 +175,13 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (objectReplicationPolicyId == null)
+                {
+                    throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+                }
+
                 return new PhArmResponse<ObjectReplicationPolicy, ObjectReplicationPolicyData>(
-                Operations.Get(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken),
+                _restClient.Get(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken),
                 data => new ObjectReplicationPolicy(Parent, data));
             }
             catch (Exception e)
@@ -155,12 +196,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<ObjectReplicationPolicy>> GetAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.Get");
             scope.Start();
             try
             {
+                if (objectReplicationPolicyId == null)
+                {
+                    throw new ArgumentNullException(nameof(objectReplicationPolicyId));
+                }
+
                 return new PhArmResponse<ObjectReplicationPolicy, ObjectReplicationPolicyData>(
-                await Operations.GetAsync(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken),
                 data => new ObjectReplicationPolicy(Parent, data));
             }
             catch (Exception e)
@@ -199,7 +245,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -242,7 +288,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="ObjectReplicationPolicy" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<ObjectReplicationPolicy> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.List");
             scope.Start();
             try
             {

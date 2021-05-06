@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of BlobService and their operations over a StorageAccount. </summary>
-    public partial class BlobServiceContainer : ResourceContainerBase<TenantResourceIdentifier, BlobService, BlobServiceData>
+    public partial class BlobServiceContainer : ContainerBase<TenantResourceIdentifier, BlobService>
     {
         /// <summary> Initializes a new instance of the <see cref="BlobServiceContainer"/> class for mocking. </summary>
         protected BlobServiceContainer()
@@ -37,7 +37,7 @@ namespace Azure.Management.Storage
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private BlobServicesRestOperations Operations => new BlobServicesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private BlobServicesRestOperations _restClient => new BlobServicesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -57,6 +57,15 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<BlobService>;
             }
             catch (Exception e)
@@ -72,10 +81,19 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<BlobService>> CreateOrUpdateAsync(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<BlobService>;
             }
@@ -96,7 +114,16 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var originalResponse = Operations.SetServiceProperties(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken);
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.SetServiceProperties(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken);
                 return new PhArmOperation<BlobService, BlobServiceData>(
                 originalResponse,
                 data => new BlobService(Parent, data));
@@ -114,11 +141,20 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<BlobService>> StartCreateOrUpdateAsync(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<BlobService, BlobServiceData>(
                 originalResponse,
                 data => new BlobService(Parent, data));
@@ -128,20 +164,6 @@ namespace Azure.Management.Storage
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <inheritdoc />
-        public override ArmResponse<BlobService> Get(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<BlobService>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
         }
 
         /// <summary> Filters the list of BlobService for this resource group represented as generic resources. </summary>
@@ -173,7 +195,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -216,7 +238,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="BlobService" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<BlobService> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.List");
             scope.Start();
             try
             {

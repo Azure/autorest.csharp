@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private SshPublicKeysRestOperations Operations => new SshPublicKeysRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private SshPublicKeysRestOperations _restClient => new SshPublicKeysRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -56,6 +56,15 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (sshPublicKeyName == null)
+                {
+                    throw new ArgumentNullException(nameof(sshPublicKeyName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(sshPublicKeyName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<SshPublicKey>;
             }
             catch (Exception e)
@@ -71,10 +80,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<SshPublicKey>> CreateOrUpdateAsync(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (sshPublicKeyName == null)
+                {
+                    throw new ArgumentNullException(nameof(sshPublicKeyName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(sshPublicKeyName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<SshPublicKey>;
             }
@@ -95,7 +113,16 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalResponse = Operations.Create(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken: cancellationToken);
+                if (sshPublicKeyName == null)
+                {
+                    throw new ArgumentNullException(nameof(sshPublicKeyName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.Create(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken: cancellationToken);
                 return new PhArmOperation<SshPublicKey, SshPublicKeyData>(
                 originalResponse,
                 data => new SshPublicKey(Parent, data));
@@ -113,11 +140,20 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<SshPublicKey>> StartCreateOrUpdateAsync(string sshPublicKeyName, SshPublicKeyData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (sshPublicKeyName == null)
+                {
+                    throw new ArgumentNullException(nameof(sshPublicKeyName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<SshPublicKey, SshPublicKeyData>(
                 originalResponse,
                 data => new SshPublicKey(Parent, data));
@@ -138,8 +174,13 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (sshPublicKeyName == null)
+                {
+                    throw new ArgumentNullException(nameof(sshPublicKeyName));
+                }
+
                 return new PhArmResponse<SshPublicKey, SshPublicKeyData>(
-                Operations.Get(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
+                _restClient.Get(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
                 data => new SshPublicKey(Parent, data));
             }
             catch (Exception e)
@@ -154,12 +195,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<SshPublicKey>> GetAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.Get");
             scope.Start();
             try
             {
+                if (sshPublicKeyName == null)
+                {
+                    throw new ArgumentNullException(nameof(sshPublicKeyName));
+                }
+
                 return new PhArmResponse<SshPublicKey, SshPublicKeyData>(
-                await Operations.GetAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
                 data => new SshPublicKey(Parent, data));
             }
             catch (Exception e)
@@ -198,7 +244,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -241,7 +287,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="SshPublicKey" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<SshPublicKey> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyContainer.List");
             scope.Start();
             try
             {

@@ -37,7 +37,7 @@ namespace Azure.Management.Storage
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private EncryptionScopesRestOperations Operations => new EncryptionScopesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private EncryptionScopesRestOperations _restClient => new EncryptionScopesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -57,6 +57,15 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+                if (encryptionScope == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScope));
+                }
+
                 return StartCreateOrUpdate(encryptionScopeName, encryptionScope, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<EncryptionScope>;
             }
             catch (Exception e)
@@ -72,10 +81,19 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<EncryptionScope>> CreateOrUpdateAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+                if (encryptionScope == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScope));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(encryptionScopeName, encryptionScope, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<EncryptionScope>;
             }
@@ -96,7 +114,16 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var originalResponse = Operations.Put(Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken: cancellationToken);
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+                if (encryptionScope == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScope));
+                }
+
+                var originalResponse = _restClient.Put(Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken: cancellationToken);
                 return new PhArmOperation<EncryptionScope, EncryptionScopeData>(
                 originalResponse,
                 data => new EncryptionScope(Parent, data));
@@ -114,11 +141,20 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<EncryptionScope>> StartCreateOrUpdateAsync(string encryptionScopeName, EncryptionScopeData encryptionScope, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.PutAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+                if (encryptionScope == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScope));
+                }
+
+                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<EncryptionScope, EncryptionScopeData>(
                 originalResponse,
                 data => new EncryptionScope(Parent, data));
@@ -139,8 +175,13 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+
                 return new PhArmResponse<EncryptionScope, EncryptionScopeData>(
-                Operations.Get(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken),
+                _restClient.Get(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken),
                 data => new EncryptionScope(Parent, data));
             }
             catch (Exception e)
@@ -155,12 +196,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<EncryptionScope>> GetAsync(string encryptionScopeName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.Get");
             scope.Start();
             try
             {
+                if (encryptionScopeName == null)
+                {
+                    throw new ArgumentNullException(nameof(encryptionScopeName));
+                }
+
                 return new PhArmResponse<EncryptionScope, EncryptionScopeData>(
-                await Operations.GetAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken),
                 data => new EncryptionScope(Parent, data));
             }
             catch (Exception e)
@@ -199,7 +245,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -242,7 +288,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="EncryptionScope" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<EncryptionScope> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
             scope.Start();
             try
             {

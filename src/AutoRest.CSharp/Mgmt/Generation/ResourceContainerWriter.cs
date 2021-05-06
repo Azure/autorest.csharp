@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private const string ClientDiagnosticsField = "_clientDiagnostics";
         private const string PipelineField = "_pipeline";
-        private const string OperationsField = "Operations";
+        private const string RestClient = "_restClient";
         private CodeWriter _writer;
         private ResourceContainer _resourceContainer;
         private ResourceData _resourceData;
@@ -62,7 +62,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Namespace(@namespace))
             {
                 _writer.WriteXmlDocumentationSummary(_resourceContainer.Description);
-                using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type}, {_resourceData.Type}>"))
+                string baseClass = FindRestClientMethodByName(new string[] { "Get" }, out _)
+                    ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
+                    : $"ContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}>";
+                using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : {baseClass}"))
                 {
                     WriteContainerCtors();
                     WriteFields();
@@ -106,7 +109,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
             // subscriptionId might not always be needed. For example `RestOperations` does not have it.
             var subIdIfNeeded = _restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-            _writer.Line($"private {_restClient.Type} {OperationsField} => new {_restClient.Type}({ClientDiagnosticsField}, {PipelineField}{subIdIfNeeded});");
+            _writer.Line($"private {_restClient.Type} {RestClient} => new {_restClient.Type}({ClientDiagnosticsField}, {PipelineField}{subIdIfNeeded});");
         }
 
         private void WriteIdProperty()
@@ -136,7 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                WriteGetVariantsThatThrow();
+                // WriteGetVariantsThatThrow();
             }
 
             WriteListVariants();
@@ -158,170 +161,131 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // hack: should add a IsLongRunning property to method?
             var isLongRunning = restClientMethod.Responses.All(response => response.ResponseBody == null);
             var parameterMapping = BuildParameterMapping(restClientMethod);
+            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
-            var methodName = "CreateOrUpdate";
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+            // todo: should not write inheritdoc
+            WriteContainerMethodScope(false, $"{typeof(ArmResponse)}<{_resource.Type.Name}>", "CreateOrUpdate", passThruParameters, writer =>
             {
-                _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
-
-            _writer.Append($"public ArmResponse<{_resource.Type}> {methodName}(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                _writer.WriteParameter(parameter.Parameter);
-            }
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                _writer.Append($"return StartCreateOrUpdate(");
+                foreach (var parameter in passThruParameters)
                 {
+                    _writer.AppendRaw($"{parameter.Name}, ");
+                }
+                _writer.Line($"cancellationToken: cancellationToken).WaitForCompletion() as {typeof(ArmResponse)}<{_resource.Type}>;");
+            });
 
-                    _writer.Append($"return StartCreateOrUpdate(");
-                    foreach (var parameter in parameterMapping)
-                    {
-                        if (parameter.IsPassThru)
-                        {
-                            _writer.AppendRaw($"{parameter.Parameter.Name}, ");
-                        }
-                    }
-                    _writer.Line($"cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<{_resource.Type}>;");
-
-                });
-            }
-
-            methodName = CreateMethodName("CreateOrUpdate", true);
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+            WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(ArmResponse)}<{_resource.Type.Name}>>", "CreateOrUpdate", passThruParameters, writer =>
             {
-                _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
-
-            _writer.Append($"public async Task<ArmResponse<{_resource.Type}>> {methodName}(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                _writer.WriteParameter(parameter.Parameter);
-            }
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                _writer.Append($"var operation = await StartCreateOrUpdateAsync(");
+                foreach (var parameter in passThruParameters)
                 {
-                    _writer.Append($"var operation = await StartCreateOrUpdateAsync(");
-                    foreach (var parameter in parameterMapping)
-                    {
-                        if (parameter.IsPassThru)
-                        {
-                            _writer.AppendRaw($"{parameter.Parameter.Name}, ");
-                        }
-                    }
-                    _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
-                    _writer.Line($"return operation.WaitForCompletion() as ArmResponse<{_resource.Type}>;");  // no WaitForCompletionAsync()?
-                });
-            }
+                    _writer.AppendRaw($"{parameter.Name}, ");
+                }
+                _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
+                _writer.Line($"return operation.WaitForCompletion() as {typeof(ArmResponse)}<{_resource.Type}>;");
+            });
 
-            methodName = "StartCreateOrUpdate";
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+            WriteContainerMethodScope(false, $"ArmOperation<{_resource.Type.Name}>", "StartCreateOrUpdate", passThruParameters, writer =>
             {
-                _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
-
-            _writer.Append($"public ArmOperation<{_resource.Type}> {methodName}(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                _writer.WriteParameter(parameter.Parameter);
-            }
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                _writer.Append($"var originalResponse = {RestClient}.{restClientMethod.Name}(");
+                foreach (var parameter in parameterMapping)
                 {
-                    _writer.Append($"var originalResponse = Operations.{restClientMethod.Name}(");
+                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                    _writer.AppendRaw(", ");
+                }
+                _writer.Line($"cancellationToken: cancellationToken);");
+                if (isLongRunning)
+                {
+                    _writer.Line($"var operation = new {_resource.Type}{restClientMethod.Name}Operation(");
+                    _writer.Line($"{ClientDiagnosticsField}, {PipelineField}, {RestClient}.Create{restClientMethod.Name}Request(");
                     foreach (var parameter in parameterMapping)
                     {
                         _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
                         _writer.AppendRaw(", ");
                     }
-                    _writer.Line($"cancellationToken: cancellationToken);");
-                    if (isLongRunning)
-                    {
-                        _writer.Line($"var operation = new {_resource.Type}{restClientMethod.Name}Operation(");
-                        _writer.Line($"{ClientDiagnosticsField}, {PipelineField}, Operations.Create{restClientMethod.Name}Request(");
-                        foreach (var parameter in parameterMapping)
-                        {
-                            _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                            _writer.AppendRaw(", ");
-                        }
-                        _writer.RemoveTrailingComma();
-                        _writer.Line($").Request,");
-                        _writer.Line($"originalResponse);");
-                        _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
-                        _writer.Line($"operation,");
-                        _writer.Line($"data => new {_resource.Type}(Parent, data));");
-                    }
-                    else
-                    {
-                        _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
-                        _writer.Line($"originalResponse,");
-                        _writer.Line($"data => new {_resource.Type}(Parent, data));");
-
-                    }
-                });
-            }
-
-            methodName = CreateMethodName("StartCreateOrUpdate", true);
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
-
-            _writer.Append($"public async Task<ArmOperation<{_resource.Type}>> {methodName}(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                _writer.WriteParameter(parameter.Parameter);
-            }
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                    _writer.RemoveTrailingComma();
+                    _writer.Line($").Request,");
+                    _writer.Line($"originalResponse);");
+                    _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Line($"operation,");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                }
+                else
                 {
-                    _writer.Append($"var originalResponse = await Operations.{restClientMethod.Name}Async(");
+                    _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Line($"originalResponse,");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+
+                }
+            });
+
+            WriteContainerMethodScope(true, $"{typeof(Task)}<ArmOperation<{_resource.Type.Name}>>", "StartCreateOrUpdate", passThruParameters, writer =>
+            {
+                _writer.Append($"var originalResponse = await {RestClient}.{restClientMethod.Name}Async(");
+                foreach (var parameter in parameterMapping)
+                {
+                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                    _writer.AppendRaw(", ");
+                }
+                _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
+                if (isLongRunning)
+                {
+                    _writer.Line($"var operation = new {_resource.Type}{restClientMethod.Name}Operation(");
+                    _writer.Line($"{ClientDiagnosticsField}, {PipelineField}, {RestClient}.Create{restClientMethod.Name}Request(");
                     foreach (var parameter in parameterMapping)
                     {
                         _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
                         _writer.AppendRaw(", ");
                     }
-                    _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
-                    if (isLongRunning)
-                    {
-                        _writer.Line($"var operation = new {_resource.Type}{restClientMethod.Name}Operation(");
-                        _writer.Line($"{ClientDiagnosticsField}, {PipelineField}, Operations.Create{restClientMethod.Name}Request(");
-                        foreach (var parameter in parameterMapping)
-                        {
-                            _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                            _writer.AppendRaw(", ");
-                        }
-                        _writer.RemoveTrailingComma();
-                        _writer.Line($").Request,");
-                        _writer.Line($"originalResponse);");
-                        _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
-                        _writer.Line($"operation,");
-                        _writer.Line($"data => new {_resource.Type}(Parent, data));");
-                    }
-                    else
-                    {
-                        _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
-                        _writer.Line($"originalResponse,");
-                        _writer.Line($"data => new {_resource.Type}(Parent, data));");
-                    }
-                });
+                    _writer.RemoveTrailingComma();
+                    _writer.Line($").Request,");
+                    _writer.Line($"originalResponse);");
+                    _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Line($"operation,");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                }
+                else
+                {
+                    _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
+                    _writer.Line($"originalResponse,");
+                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                }
+            });
+        }
+
+        /// <summary>
+        /// Write some scaffolding for container operation methods.
+        /// </summary>
+        /// <param name="isAsync"></param>
+        /// <param name="returnType">Must be string.</param>
+        /// <param name="syncMethodName">Method name in its sync form.</param>
+        /// <param name="parameters">Must not contain cancellationToken.</param>
+        /// <param name="inner">Main logic of the method writer.</param>
+        /// <param name="isOverride"></param>
+        private void WriteContainerMethodScope(bool isAsync, FormattableString returnType, string syncMethodName, IEnumerable<Parameter> parameters, CodeWriterDelegate inner, bool isOverride = false)
+        {
+            _writer.Line();
+            _writer.WriteXmlDocumentationInheritDoc();
+            foreach (var parameter in parameters)
+            {
+                _writer.WriteXmlDocumentationParameter(parameter);
             }
+
+            const string cancellationTokenParameter = "cancellationToken";
+            _writer.WriteXmlDocumentationParameter(cancellationTokenParameter, @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
+
+            _writer.Append($"public {(isAsync ? "async " : string.Empty)}{(isOverride ? "override " : string.Empty)}{returnType} {CreateMethodName(syncMethodName, isAsync)}(");
+            foreach (var parameter in parameters)
+            {
+                _writer.WriteParameter(parameter);
+            }
+            _writer.Append($"{typeof(CancellationToken)} {cancellationTokenParameter} = default)");
+            using var _ = _writer.Scope();
+            WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField, writer =>
+            {
+                _writer.WriteParameterNullChecks(parameters.ToList());
+                inner(_writer);
+            });
         }
 
         /// <summary>
@@ -413,129 +377,53 @@ namespace AutoRest.CSharp.Mgmt.Generation
             parameterMapping = parameterMapping.Where(mapping => mapping.Parameter.DefaultValue is null);
 
             var methodName = "Get";
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
+            var scopeName = methodName;
 
-            _writer.Append($"public override ArmResponse<{_resource.Type}> {methodName}(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+            IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(parameter =>
             {
                 if (IsStringLike(parameter.Parameter.Type))
                 {
                     // for string-like parameters, we shall write them as string as base class
-                    _writer.WriteParameter(new Parameter(
+                    return new Parameter(
                         parameter.Parameter.Name,
                         parameter.Parameter.Description,
                         new CSharp.Generation.Types.CSharpType(typeof(string)),
                         parameter.Parameter.DefaultValue,
                         parameter.Parameter.ValidateNotNull,
                         parameter.Parameter.IsApiVersionParameter
-                    ));
+                    );
                 }
                 else
                 {
-                    _writer.WriteParameter(parameter.Parameter);
+                    return parameter.Parameter;
                 }
-            }
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
-                {
-                    _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
-                    _writer.Append($"Operations.Get(");
-                    foreach (var parameter in parameterMapping)
-                    {
-                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                        _writer.AppendRaw(", ");
-                    }
-                    _writer.Line($"cancellationToken: cancellationToken),");
-                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
-                });
-            }
+            });
 
-            methodName = CreateMethodName("Get", true);
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
+            WriteContainerMethodScope(false, $"{typeof(ArmResponse)}<{_resource.Type.Name}>", "Get", passThruParameters, writer =>
             {
-                _writer.WriteXmlDocumentationParameter(parameter.Parameter.Name, parameter.Parameter.Description);
-            }
-            _writer.WriteXmlDocumentationParameter("cancellationToken", @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
-
-            _writer.Append($"public async override Task<ArmResponse<{_resource.Type}>> {methodName}(");
-            foreach (var parameter in parameterMapping.Where(p => p.IsPassThru))
-            {
-                // todo: duplicated code
-                if (IsStringLike(parameter.Parameter.Type))
+                _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
+                _writer.Append($"{RestClient}.Get(");
+                foreach (var parameter in parameterMapping)
                 {
-                    // for string-like parameters, we shall write them as string as base class
-                    _writer.WriteParameter(new Parameter(
-                        parameter.Parameter.Name,
-                        parameter.Parameter.Description,
-                        new CSharp.Generation.Types.CSharpType(typeof(string)),
-                        parameter.Parameter.DefaultValue,
-                        parameter.Parameter.ValidateNotNull,
-                        parameter.Parameter.IsApiVersionParameter
-                    ));
+                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                    _writer.AppendRaw(", ");
                 }
-                else
+                _writer.Line($"cancellationToken: cancellationToken),");
+                _writer.Line($"data => new {_resource.Type}(Parent, data));");
+            }, isOverride: true);
+
+            WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(ArmResponse)}<{_resource.Type.Name}>>", "Get", passThruParameters, writer =>
+            {
+                _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
+                _writer.Append($"await {RestClient}.GetAsync(");
+                foreach (var parameter in parameterMapping)
                 {
-                    _writer.WriteParameter(parameter.Parameter);
+                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
+                    _writer.AppendRaw(", ");
                 }
-            }
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
-                {
-                    _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
-                    _writer.Append($"await Operations.GetAsync(");
-                    foreach (var parameter in parameterMapping)
-                    {
-                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                        _writer.AppendRaw(", ");
-                    }
-                    _writer.Line($"cancellationToken: cancellationToken),");
-                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
-                });
-            }
-        }
-
-        /// <summary>
-        /// Write 2 variants of Get() that only throw exceptions if the resource does not support PUT,
-        /// so that the container class correctly implements <see cref="ResourceContainerBase" />.
-        /// </summary>
-        /// <param name="comment">The comment to put into generated code. By default it says there is no PUT method.</param>
-        private void WriteGetVariantsThatThrow()
-        {
-            var nameParameter = new Parameter("resourceName", "The name of the resource.", typeof(string), null, false);
-            var parameters = new Parameter[] { nameParameter };
-            var doesNotSupportGet = @"This resource does not support Get operation.";
-
-            WriteMethodThrowNotImplemented($"ArmResponse<{_resource.Type.Name}>", "Get", parameters, doesNotSupportGet);
-            WriteMethodThrowNotImplemented($"Task<ArmResponse<{_resource.Type.Name}>>", "GetAsync", parameters, doesNotSupportGet);
-        }
-
-        private void WriteMethodThrowNotImplemented(string returnType, string methodName, IEnumerable<Parameter> parameters, string? comment = null)
-        {
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
-            _writer.Append($"public override {returnType} {methodName}(");
-            foreach (var parameter in parameters)
-            {
-                _writer.WriteParameter(parameter);
-            }
-            using (_writer.Scope($"{typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                if (!string.IsNullOrEmpty(comment))
-                {
-                    _writer.Line($"// {comment}");
-                }
-                _writer.Line($"throw new {typeof(NotImplementedException)}();");
-            }
+                _writer.Line($"cancellationToken: cancellationToken),");
+                _writer.Line($"data => new {_resource.Type}(Parent, data));");
+            }, isOverride: true);
         }
 
         private void WriteListVariants()
@@ -576,7 +464,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentation("returns", $"An async collection of <see cref=\"{_resource.Type.Name}\" /> that may take multiple service requests to iterate over.");
             using (_writer.Scope($"public AsyncPageable<{_resource.Type}> {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{"List"}"), ClientDiagnosticsField, writer =>
                 {
                     _writer.Line($"var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);");
                     _writer.Line($"return new PhWrappingAsyncPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
@@ -616,7 +504,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentation("returns", $"An async collection of resource that may take multiple service requests to iterate over.");
             using (_writer.Scope($"public {typeof(AsyncPageable<GenericResource>)} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{"ListAsGenericResource"}"), ClientDiagnosticsField, writer =>
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");

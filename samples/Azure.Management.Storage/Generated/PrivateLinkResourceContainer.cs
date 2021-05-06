@@ -11,14 +11,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of PrivateLinkResource and their operations over a StorageAccount. </summary>
-    public partial class PrivateLinkResourceContainer : ResourceContainerBase<TenantResourceIdentifier, PrivateLinkResource, PrivateLinkResourceData>
+    public partial class PrivateLinkResourceContainer : ContainerBase<TenantResourceIdentifier, PrivateLinkResource>
     {
         /// <summary> Initializes a new instance of the <see cref="PrivateLinkResourceContainer"/> class for mocking. </summary>
         protected PrivateLinkResourceContainer()
@@ -37,7 +36,7 @@ namespace Azure.Management.Storage
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private PrivateLinkResourcesRestOperations Operations => new PrivateLinkResourcesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private PrivateLinkResourcesRestOperations _restClient => new PrivateLinkResourcesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -46,20 +45,6 @@ namespace Azure.Management.Storage
         protected override ResourceType ValidResourceType => StorageAccountOperations.ResourceType;
 
         // Container level operations.
-
-        /// <inheritdoc />
-        public override ArmResponse<PrivateLinkResource> Get(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<PrivateLinkResource>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
-        }
 
         /// <summary> Filters the list of PrivateLinkResource for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
@@ -90,7 +75,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateLinkResourceContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("PrivateLinkResourceContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -133,7 +118,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="PrivateLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<PrivateLinkResource> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateLinkResourceContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("PrivateLinkResourceContainer.List");
             scope.Start();
             try
             {

@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of FileService and their operations over a StorageAccount. </summary>
-    public partial class FileServiceContainer : ResourceContainerBase<TenantResourceIdentifier, FileService, FileServiceData>
+    public partial class FileServiceContainer : ContainerBase<TenantResourceIdentifier, FileService>
     {
         /// <summary> Initializes a new instance of the <see cref="FileServiceContainer"/> class for mocking. </summary>
         protected FileServiceContainer()
@@ -37,7 +37,7 @@ namespace Azure.Management.Storage
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private FileServicesRestOperations Operations => new FileServicesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private FileServicesRestOperations _restClient => new FileServicesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -58,6 +58,11 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
                 return StartCreateOrUpdate(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<FileService>;
             }
             catch (Exception e)
@@ -74,10 +79,15 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<FileService>> CreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<FileService>;
             }
@@ -99,7 +109,12 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var originalResponse = Operations.SetServiceProperties(Id.ResourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken);
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
+                var originalResponse = _restClient.SetServiceProperties(Id.ResourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken);
                 return new PhArmOperation<FileService, FileServiceData>(
                 originalResponse,
                 data => new FileService(Parent, data));
@@ -118,11 +133,16 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<FileService>> StartCreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
+                var originalResponse = await _restClient.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<FileService, FileServiceData>(
                 originalResponse,
                 data => new FileService(Parent, data));
@@ -132,20 +152,6 @@ namespace Azure.Management.Storage
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <inheritdoc />
-        public override ArmResponse<FileService> Get(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<FileService>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
         }
 
         /// <summary> Filters the list of FileService for this resource group represented as generic resources. </summary>
@@ -177,7 +183,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -220,7 +226,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="FileService" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<FileService> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.List");
             scope.Start();
             try
             {

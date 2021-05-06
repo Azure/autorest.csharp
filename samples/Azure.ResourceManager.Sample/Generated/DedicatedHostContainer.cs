@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private DedicatedHostsRestOperations Operations => new DedicatedHostsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private DedicatedHostsRestOperations _restClient => new DedicatedHostsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -56,6 +56,15 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(hostName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<DedicatedHost>;
             }
             catch (Exception e)
@@ -71,10 +80,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<DedicatedHost>> CreateOrUpdateAsync(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(hostName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<DedicatedHost>;
             }
@@ -95,9 +113,18 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken: cancellationToken);
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken: cancellationToken);
                 var operation = new DedicatedHostCreateOrUpdateOperation(
-                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, Id.Name, hostName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<DedicatedHost, DedicatedHostData>(
@@ -117,13 +144,22 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<DedicatedHost>> StartCreateOrUpdateAsync(string hostName, DedicatedHostData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var operation = new DedicatedHostCreateOrUpdateOperation(
-                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, Id.Name, hostName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<DedicatedHost, DedicatedHostData>(
@@ -146,8 +182,13 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+
                 return new PhArmResponse<DedicatedHost, DedicatedHostData>(
-                Operations.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
+                _restClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
                 data => new DedicatedHost(Parent, data));
             }
             catch (Exception e)
@@ -162,12 +203,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<DedicatedHost>> GetAsync(string hostName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.Get");
             scope.Start();
             try
             {
+                if (hostName == null)
+                {
+                    throw new ArgumentNullException(nameof(hostName));
+                }
+
                 return new PhArmResponse<DedicatedHost, DedicatedHostData>(
-                await Operations.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
                 data => new DedicatedHost(Parent, data));
             }
             catch (Exception e)
@@ -206,7 +252,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -249,7 +295,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<DedicatedHost> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
             scope.Start();
             try
             {

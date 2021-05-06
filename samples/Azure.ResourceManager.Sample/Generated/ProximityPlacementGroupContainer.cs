@@ -36,7 +36,7 @@ namespace Azure.ResourceManager.Sample
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private ProximityPlacementGroupsRestOperations Operations => new ProximityPlacementGroupsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private ProximityPlacementGroupsRestOperations _restClient => new ProximityPlacementGroupsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -56,6 +56,15 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (proximityPlacementGroupName == null)
+                {
+                    throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(proximityPlacementGroupName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<ProximityPlacementGroup>;
             }
             catch (Exception e)
@@ -71,10 +80,19 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<ProximityPlacementGroup>> CreateOrUpdateAsync(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (proximityPlacementGroupName == null)
+                {
+                    throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(proximityPlacementGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<ProximityPlacementGroup>;
             }
@@ -95,7 +113,16 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken: cancellationToken);
+                if (proximityPlacementGroupName == null)
+                {
+                    throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken: cancellationToken);
                 return new PhArmOperation<ProximityPlacementGroup, ProximityPlacementGroupData>(
                 originalResponse,
                 data => new ProximityPlacementGroup(Parent, data));
@@ -113,11 +140,20 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<ProximityPlacementGroup>> StartCreateOrUpdateAsync(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (proximityPlacementGroupName == null)
+                {
+                    throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<ProximityPlacementGroup, ProximityPlacementGroupData>(
                 originalResponse,
                 data => new ProximityPlacementGroup(Parent, data));
@@ -138,8 +174,13 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
+                if (proximityPlacementGroupName == null)
+                {
+                    throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+                }
+
                 return new PhArmResponse<ProximityPlacementGroup, ProximityPlacementGroupData>(
-                Operations.Get(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken),
+                _restClient.Get(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken),
                 data => new ProximityPlacementGroup(Parent, data));
             }
             catch (Exception e)
@@ -154,12 +195,17 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<ProximityPlacementGroup>> GetAsync(string proximityPlacementGroupName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.Get");
             scope.Start();
             try
             {
+                if (proximityPlacementGroupName == null)
+                {
+                    throw new ArgumentNullException(nameof(proximityPlacementGroupName));
+                }
+
                 return new PhArmResponse<ProximityPlacementGroup, ProximityPlacementGroupData>(
-                await Operations.GetAsync(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken),
                 data => new ProximityPlacementGroup(Parent, data));
             }
             catch (Exception e)
@@ -198,7 +244,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -241,7 +287,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="ProximityPlacementGroup" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<ProximityPlacementGroup> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.List");
             scope.Start();
             try
             {

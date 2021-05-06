@@ -37,7 +37,7 @@ namespace Azure.Management.Storage
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private BlobContainersRestOperations Operations => new BlobContainersRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private BlobContainersRestOperations _restClient => new BlobContainersRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -57,6 +57,15 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (containerName == null)
+                {
+                    throw new ArgumentNullException(nameof(containerName));
+                }
+                if (blobContainer == null)
+                {
+                    throw new ArgumentNullException(nameof(blobContainer));
+                }
+
                 return StartCreateOrUpdate(containerName, blobContainer, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<BlobContainer>;
             }
             catch (Exception e)
@@ -72,10 +81,19 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<BlobContainer>> CreateOrUpdateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (containerName == null)
+                {
+                    throw new ArgumentNullException(nameof(containerName));
+                }
+                if (blobContainer == null)
+                {
+                    throw new ArgumentNullException(nameof(blobContainer));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(containerName, blobContainer, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<BlobContainer>;
             }
@@ -96,7 +114,16 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var originalResponse = Operations.Create(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken: cancellationToken);
+                if (containerName == null)
+                {
+                    throw new ArgumentNullException(nameof(containerName));
+                }
+                if (blobContainer == null)
+                {
+                    throw new ArgumentNullException(nameof(blobContainer));
+                }
+
+                var originalResponse = _restClient.Create(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken: cancellationToken);
                 return new PhArmOperation<BlobContainer, BlobContainerData>(
                 originalResponse,
                 data => new BlobContainer(Parent, data));
@@ -114,11 +141,20 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<BlobContainer>> StartCreateOrUpdateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateAsync(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (containerName == null)
+                {
+                    throw new ArgumentNullException(nameof(containerName));
+                }
+                if (blobContainer == null)
+                {
+                    throw new ArgumentNullException(nameof(blobContainer));
+                }
+
+                var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<BlobContainer, BlobContainerData>(
                 originalResponse,
                 data => new BlobContainer(Parent, data));
@@ -139,8 +175,13 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (containerName == null)
+                {
+                    throw new ArgumentNullException(nameof(containerName));
+                }
+
                 return new PhArmResponse<BlobContainer, BlobContainerData>(
-                Operations.Get(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken),
+                _restClient.Get(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken),
                 data => new BlobContainer(Parent, data));
             }
             catch (Exception e)
@@ -155,12 +196,17 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<BlobContainer>> GetAsync(string containerName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.Get");
             scope.Start();
             try
             {
+                if (containerName == null)
+                {
+                    throw new ArgumentNullException(nameof(containerName));
+                }
+
                 return new PhArmResponse<BlobContainer, BlobContainerData>(
-                await Operations.GetAsync(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken),
+                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken),
                 data => new BlobContainer(Parent, data));
             }
             catch (Exception e)
@@ -199,7 +245,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -242,7 +288,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="BlobContainer" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<BlobContainer> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.List");
             scope.Start();
             try
             {

@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of StorageAccount and their operations over a Parent. </summary>
-    public partial class StorageAccountContainer : ResourceContainerBase<TenantResourceIdentifier, StorageAccount, StorageAccountData>
+    public partial class StorageAccountContainer : ContainerBase<TenantResourceIdentifier, StorageAccount>
     {
         /// <summary> Initializes a new instance of the <see cref="StorageAccountContainer"/> class for mocking. </summary>
         protected StorageAccountContainer()
@@ -37,7 +37,7 @@ namespace Azure.Management.Storage
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private StorageAccountsRestOperations Operations => new StorageAccountsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private StorageAccountsRestOperations _restClient => new StorageAccountsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -57,6 +57,15 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<StorageAccount>;
             }
             catch (Exception e)
@@ -72,10 +81,19 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<StorageAccount>> CreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<StorageAccount>;
             }
@@ -96,9 +114,18 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var originalResponse = Operations.Create(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken);
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.Create(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken);
                 var operation = new StorageAccountCreateOperation(
-                _clientDiagnostics, _pipeline, Operations.CreateCreateRequest(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateRequest(
                 Id.ResourceGroupName, accountName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<StorageAccount, StorageAccountData>(
@@ -118,13 +145,22 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<StorageAccount>> StartCreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var operation = new StorageAccountCreateOperation(
-                _clientDiagnostics, _pipeline, Operations.CreateCreateRequest(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateRequest(
                 Id.ResourceGroupName, accountName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<StorageAccount, StorageAccountData>(
@@ -136,20 +172,6 @@ namespace Azure.Management.Storage
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <inheritdoc />
-        public override ArmResponse<StorageAccount> Get(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<StorageAccount>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
         }
 
         /// <summary> Filters the list of StorageAccount for this resource group represented as generic resources. </summary>
@@ -181,7 +203,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -224,7 +246,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<StorageAccount> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.List");
             scope.Start();
             try
             {
