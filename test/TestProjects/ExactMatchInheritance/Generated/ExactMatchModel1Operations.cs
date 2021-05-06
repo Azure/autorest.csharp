@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific ExactMatchModel1. </summary>
-    public partial class ExactMatchModel1Operations : ResourceOperationsBase<TenantResourceIdentifier, ExactMatchModel1>
+    public partial class ExactMatchModel1Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ExactMatchModel1>
     {
         /// <summary> Initializes a new instance of ExactMatchModel1Operations for mocking. </summary>
         protected ExactMatchModel1Operations()
@@ -24,7 +24,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of <see cref = "ExactMatchModel1Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected ExactMatchModel1Operations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected ExactMatchModel1Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

@@ -90,10 +90,10 @@ namespace AutoRest.CSharp.Mgmt.Output
                         }
                     }
                 }
-                var match = InheritanceChooser.GetExactMatch(operationGroupToUse, typeToReplace, typeToReplace.MyProperties); //AzureEntityResource gets set here
+                var match = InheritanceChooser.GetExactMatch(operationGroupToUse, typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
-                    inheritedType = match; //gets set to TenantResourceIdentifier
+                    inheritedType = match;
                 }
             }
             return inheritedType == null ? InheritanceChooser.GetSupersetMatch(OperationGroup, this, MyProperties) : inheritedType;

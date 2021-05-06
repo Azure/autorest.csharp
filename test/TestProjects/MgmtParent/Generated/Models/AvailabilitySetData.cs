@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtParent
 {
     /// <summary> A class representing the AvailabilitySet data model. </summary>
-    public partial class AvailabilitySetData : TrackedResource<TenantResourceIdentifier>
+    public partial class AvailabilitySetData : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
         /// <param name="location"> The location. </param>
@@ -26,7 +26,7 @@ namespace MgmtParent
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal AvailabilitySetData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string bar) : base(id, name, type, tags, location)
+        internal AvailabilitySetData(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }

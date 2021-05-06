@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 namespace SubscriptionExtensions.Models
 {
     /// <summary> A class representing the Toaster data model. </summary>
-    public partial class ToasterData : TrackedResource<TenantResourceIdentifier>
+    public partial class ToasterData : TrackedResource<SubscriptionResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ToasterData. </summary>
         /// <param name="location"> The location. </param>
@@ -26,7 +26,7 @@ namespace SubscriptionExtensions.Models
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal ToasterData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string foo) : base(id, name, type, tags, location)
+        internal ToasterData(SubscriptionResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string foo) : base(id, name, type, tags, location)
         {
             Foo = foo;
         }

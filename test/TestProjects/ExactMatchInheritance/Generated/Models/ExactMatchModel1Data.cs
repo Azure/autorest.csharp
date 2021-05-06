@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing the ExactMatchModel1 data model. </summary>
-    public partial class ExactMatchModel1Data : Resource<TenantResourceIdentifier>
+    public partial class ExactMatchModel1Data : Resource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
         public ExactMatchModel1Data()
@@ -22,7 +22,7 @@ namespace ExactMatchInheritance
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="new"> . </param>
-        internal ExactMatchModel1Data(TenantResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
+        internal ExactMatchModel1Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, string @new) : base(id, name, type)
         {
             New = @new;
         }
