@@ -12,12 +12,11 @@
     <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
     <PackAsTool>true</PackAsTool>
     <RollForward>Minor</RollForward>
-     <RestoreSources>$(RestoreSources);https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json;https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.14.0-alpha.20210428.1" />
-    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-alpha.20210428.1" />
+    <PackageReference Include="Azure.Core" Version="1.13.0" />
+    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.12" />
     <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210422.3" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.10.0-1.final" />
     <PackageReference Include="YamlDotNet" Version="8.1.2" />
