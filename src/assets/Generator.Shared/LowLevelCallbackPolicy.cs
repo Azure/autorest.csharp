@@ -28,6 +28,7 @@ namespace Azure.Core.Pipeline
                 if (value is HttpPipelineSynchronousPolicy policy)
                 {
                     policy.Process (message, pipeline);
+                    return;
                 }
             }
             ProcessNext (message, pipeline);
@@ -39,7 +40,8 @@ namespace Azure.Core.Pipeline
             {
                 if (value is HttpPipelineSynchronousPolicy policy)
                 {
-                    await policy.ProcessAsync (message, pipeline);
+                    await policy.ProcessAsync (message, pipeline).ConfigureAwait(false);
+                    return;
                 }
             }
             await ProcessNextAsync (message, pipeline);
