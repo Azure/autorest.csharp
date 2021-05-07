@@ -23,9 +23,9 @@ namespace Azure.Core.Pipeline
 
         public override void Process(HttpMessage message, ReadOnlyMemory<HttpPipelinePolicy> pipeline)
         {
-            if(message.TryGetProperty(RequestOptionsKey, out object? value))
+            if (message.TryGetProperty(RequestOptionsKey, out object? value))
             {
-                if(value is HttpPipelineSynchronousPolicy policy)
+                if (value is HttpPipelineSynchronousPolicy policy)
                 {
                     policy.Process(message, pipeline);
                     return;
@@ -36,9 +36,9 @@ namespace Azure.Core.Pipeline
 
         public override async ValueTask ProcessAsync(HttpMessage message, ReadOnlyMemory<HttpPipelinePolicy> pipeline)
         {
-            if(message.TryGetProperty(RequestOptionsKey, out object? value))
+            if (message.TryGetProperty(RequestOptionsKey, out object? value))
             {
-                if(value is HttpPipelineSynchronousPolicy policy)
+                if (value is HttpPipelineSynchronousPolicy policy)
                 {
                     await policy.ProcessAsync(message, pipeline).ConfigureAwait(false);
                     return;
