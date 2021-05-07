@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace BodyAndPath
+namespace BodyAndPath_LowLevel
 {
     /// <summary> The BodyAndPath service client. </summary>
     public partial class BodyAndPathClient

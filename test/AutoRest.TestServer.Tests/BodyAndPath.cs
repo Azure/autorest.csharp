@@ -4,7 +4,7 @@
 using System.Reflection;
 using Azure;
 using Azure.Core;
-using BodyAndPath;
+using BodyAndPath_LowLevel;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
