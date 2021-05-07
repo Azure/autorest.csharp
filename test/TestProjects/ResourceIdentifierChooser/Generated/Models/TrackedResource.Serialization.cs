@@ -10,9 +10,9 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Core;
 
-namespace MgmtParent
+namespace ResourceIdentifierChooser
 {
-    public partial class Resource : IUtf8JsonSerializable
+    public partial class TrackedResource : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,7 +33,7 @@ namespace MgmtParent
             writer.WriteEndObject();
         }
 
-        internal static Resource DeserializeResource(JsonElement element)
+        internal static TrackedResource DeserializeTrackedResource(JsonElement element)
         {
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
@@ -78,7 +78,7 @@ namespace MgmtParent
                     continue;
                 }
             }
-            return new Resource(id, name, type, location, Optional.ToDictionary(tags));
+            return new TrackedResource(id, name, type, location, Optional.ToDictionary(tags));
         }
     }
 }

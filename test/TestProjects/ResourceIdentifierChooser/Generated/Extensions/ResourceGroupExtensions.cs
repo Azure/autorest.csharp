@@ -31,5 +31,15 @@ namespace ResourceIdentifierChooser
             return new ResourceLevelContainer(resourceGroup);
         }
         #endregion
+
+        #region ModelDatas
+        /// <summary> Gets an object representing a ModelDataContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="ModelDataContainer" /> object. </returns>
+        public static ModelDataContainer GetModelDatas(this ResourceGroupOperations resourceGroup)
+        {
+            return new ModelDataContainer(resourceGroup);
+        }
+        #endregion
     }
 }

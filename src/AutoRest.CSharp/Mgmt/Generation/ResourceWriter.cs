@@ -28,17 +28,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class.");
                     writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
                     writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
-                    foreach (var resourceOperation in context.Library.ResourceOperations)
+                    using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resourceDataObject.Type} resource) : base(options, resource.Id)"))
                     {
-                        if (resourceOperation.ResourceName == cs.Name)
-                        {
-                            using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resourceDataObject.Type} resource) : base(options, resource.Id as {resourceOperation.ResourceIdentifierType})"))
-                            {
-                                writer.LineRaw("Data = resource;");
-                            }
-                            break;
-                        }
+                        writer.LineRaw("Data = resource;");
                     }
+
                     // write Data
                     writer.Line();
                     writer.WriteXmlDocumentationSummary($"Gets or sets the {context.Library.GetResourceData(resource.OperationGroup).Type.Name}.");

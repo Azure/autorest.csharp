@@ -71,32 +71,46 @@ namespace AutoRest.CSharp.Mgmt.Output
             CSharpType? inheritedType = base.CreateInheritedType();
 
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
+            var operationGroupToUse = OperationGroup ?? GetOperationGroupFromChildren();
             if (typeToReplace != null)
             {
-                var operationGroupToUse = OperationGroup;
-                if (operationGroupToUse == null)
-                {
-                    var children = ObjectSchema.Children;
-                    if (children != null)
-                    {
-                        foreach (var child in children.Immediate)
-                        {
-                            var resourceData = _context.Library.GetResourceDataFromSchema(child.Name);
-                            if (resourceData != null)
-                            {
-                                operationGroupToUse = resourceData.OperationGroup;
-                                break;
-                            }
-                        }
-                    }
-                }
                 var match = InheritanceChooser.GetExactMatch(operationGroupToUse, typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
                     inheritedType = match;
                 }
             }
-            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(OperationGroup, this, MyProperties) : inheritedType;
+            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(operationGroupToUse, this, MyProperties) : inheritedType;
+        }
+
+        private OperationGroup? GetOperationGroupFromChildren()
+        {
+            OperationGroup? operationGroup = null;
+            var children = ObjectSchema.Children;
+            if (children == null)
+                return null;
+
+            foreach (var child in children.Immediate)
+            {
+                var resourceData = _context.Library.GetResourceDataFromSchema(child.Name);
+                if (resourceData != null)
+                {
+                    return resourceData.OperationGroup;
+                }
+                else
+                {
+                    // child is Model not Data
+                    MgmtObjectType? mgmtObject = _context.Library.GetMgmtObjectFromModelName(child.Name);
+                    if (mgmtObject != null)
+                    {
+                        operationGroup = mgmtObject.GetOperationGroupFromChildren();
+                        if (operationGroup != null)
+                            return operationGroup;
+                    }
+                }
+            }
+
+            return operationGroup;
         }
     }
 }

@@ -10,56 +10,57 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Core;
 
-namespace MgmtParent
+namespace ResourceIdentifierChooser
 {
-    public partial class Resource : IUtf8JsonSerializable
+    public partial class Model2 : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("location");
-            writer.WriteStringValue(Location);
-            if (Optional.IsCollectionDefined(Tags))
+            if (Optional.IsDefined(Mango))
             {
-                writer.WritePropertyName("tags");
-                writer.WriteStartObject();
-                foreach (var item in Tags)
-                {
-                    writer.WritePropertyName(item.Key);
-                    writer.WriteStringValue(item.Value);
-                }
-                writer.WriteEndObject();
+                writer.WritePropertyName("mango");
+                writer.WriteStringValue(Mango);
             }
+            writer.WritePropertyName("tags");
+            writer.WriteStartObject();
+            foreach (var item in Tags)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
 
-        internal static Resource DeserializeResource(JsonElement element)
+        internal static Model2 DeserializeModel2(JsonElement element)
         {
-            string location = default;
-            Optional<IDictionary<string, string>> tags = default;
+            Optional<string> mango = default;
+            IDictionary<string, string> tags = default;
+            LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("location"))
+                if (property.NameEquals("mango"))
                 {
-                    location = property.Value.GetString();
+                    mango = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
                         dictionary.Add(property0.Name, property0.Value.GetString());
                     }
                     tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("location"))
+                {
+                    location = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("id"))
@@ -78,7 +79,7 @@ namespace MgmtParent
                     continue;
                 }
             }
-            return new Resource(id, name, type, location, Optional.ToDictionary(tags));
+            return new Model2(id, name, type, tags, location, mango.Value);
         }
     }
 }

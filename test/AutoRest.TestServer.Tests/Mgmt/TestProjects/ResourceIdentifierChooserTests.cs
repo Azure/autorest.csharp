@@ -13,6 +13,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(TenantLevelResource), typeof(TenantResourceIdentifier))]
         [TestCase(typeof(ResourceGroupResource), typeof(ResourceGroupResourceIdentifier))]
         [TestCase(typeof(ResourceLevel), typeof(ResourceIdentifier))]
+        [TestCase(typeof(ModelData), typeof(ResourceGroupResourceIdentifier))]
         public void TestResourceIdentifierChooser(Type dataType, Type expectedIdType)
         {
             Assert.AreEqual(dataType.BaseType.BaseType.GenericTypeArguments[0], expectedIdType);

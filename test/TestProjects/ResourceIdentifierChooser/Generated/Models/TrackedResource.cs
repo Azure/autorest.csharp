@@ -12,13 +12,13 @@ using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
 {
-    /// <summary> The Resource model definition. </summary>
-    public partial class Resource : Resource<TenantResourceIdentifier>
+    /// <summary> The TrackedResource model definition. </summary>
+    public partial class TrackedResource : Resource<ResourceGroupResourceIdentifier>
     {
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="location"> Resource location. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public Resource(string location)
+        public TrackedResource(string location)
         {
             if (location == null)
             {
@@ -29,13 +29,13 @@ namespace ResourceIdentifierChooser
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal Resource(TenantResourceIdentifier id, string name, ResourceType type, string location, IDictionary<string, string> tags) : base(id, name, type)
+        internal TrackedResource(ResourceGroupResourceIdentifier id, string name, ResourceType type, string location, IDictionary<string, string> tags) : base(id, name, type)
         {
             Location = location;
             Tags = tags;

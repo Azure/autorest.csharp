@@ -208,6 +208,50 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ModelDatas/{ModelDatasName}": {
+            "put": {
+                "tags": [
+                    "ModelDatas"
+                ],
+                "operationId": "ModelDatas_Put",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ModelDatasName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },                    
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ModelData"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelData"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -275,7 +319,7 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                    "$ref": "#/definitions/TrackedResource"
                 }
             ],
             "description": "Describes a Virtual Machine."
@@ -297,8 +341,8 @@
             ],
             "description": "Describes a ResourceIdentifier."
         },
-        "Resource": {
-            "description": "The Resource model definition.",
+        "TrackedResource": {
+            "description": "The TrackedResource model definition.",
             "properties": {
                 "id": {
                     "readOnly": true,
@@ -341,6 +385,48 @@
             },
             "description": "Reference to another subresource.",
             "x-ms-azure-resource": true
+        },
+        "Model2": {
+            "properties": {
+                "mango": {
+                    "type": "string",
+                    "description": "Fruit."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TrackedResource"
+                }
+            ],
+            "description": "Model2 inherits from a TrackedResource."
+        },
+        "Model1": {
+            "properties": {
+                "strawberry": {
+                    "type": "string",
+                    "description": "Fruit."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Model2"
+                }
+            ],
+            "description": "Model1 inherits from Model2."
+        },
+        "ModelData": {
+            "properties": {
+                "cherry": {
+                    "type": "string",
+                    "description": "Fruit."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Model1"
+                }
+            ],
+            "description": "ModelData inherits from Model1."
         }
     },
     "parameters": {

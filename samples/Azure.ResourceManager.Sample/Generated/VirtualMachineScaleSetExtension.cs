@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineScaleSetExtension"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal VirtualMachineScaleSetExtension(ResourceOperationsBase options, VirtualMachineScaleSetExtensionData resource) : base(options, resource.Id as ResourceIdentifier)
+        internal VirtualMachineScaleSetExtension(ResourceOperationsBase options, VirtualMachineScaleSetExtensionData resource) : base(options, resource.Id)
         {
             Data = resource;
         }
