@@ -86,9 +86,8 @@ namespace AutoRest.CSharp.Output.Models
                     parameters.Insert (parameters.Count, requestOptions);
 
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, method.Request.Headers, body);
-                    RestClientMethod restClientMethod = new RestClientMethod (method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility);
                     Diagnostic diagnostic = new Diagnostic($"{Declaration.Name}.{method.Name}");
-                    yield return new LowLevelClientMethod(restClientMethod, schemaDocumentation, diagnostic);
+                    yield return new LowLevelClientMethod(method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, schemaDocumentation, diagnostic);
                 }
             }
         }

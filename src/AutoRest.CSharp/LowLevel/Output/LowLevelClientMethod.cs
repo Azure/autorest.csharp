@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class LowLevelClientMethod
+    internal class LowLevelClientMethod : RestClientMethod
     {
         internal class SchemaDocumentation
         {
@@ -24,16 +24,14 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        public LowLevelClientMethod(RestClientMethod restClientMethod, SchemaDocumentation[]? schemaDocumentations, Diagnostic diagnostics)
+        public LowLevelClientMethod(string name, string? description, CSharpType? returnType, Request request, Parameter[] parameters, Response[] responses, DataPlaneResponseHeaderGroupType? headerModel, bool bufferResponse, string accessibility, SchemaDocumentation[]? schemaDocumentations, Diagnostic diagnostics) :
+            base (name, description, returnType, request, parameters, responses, headerModel, bufferResponse, accessibility)
         {
-            RestClientMethod = restClientMethod;
             Diagnostics = diagnostics;
             SchemaDocumentations = schemaDocumentations;
         }
 
-        public RestClientMethod RestClientMethod { get; }
         public Diagnostic Diagnostics { get; }
         public SchemaDocumentation[]? SchemaDocumentations { get; }
-
     }
 }

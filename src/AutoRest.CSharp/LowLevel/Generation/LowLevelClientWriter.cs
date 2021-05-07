@@ -40,10 +40,8 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteClientMethodRequest(CodeWriter writer, LowLevelClientMethod lowLevelClientMethod)
+        private void WriteClientMethodRequest(CodeWriter writer, LowLevelClientMethod clientMethod)
         {
-            var clientMethod = lowLevelClientMethod.RestClientMethod;
-
             writer.WriteXmlDocumentationSummary($"Create Request for <see cref=\"{clientMethod.Name}\"/> and <see cref=\"{clientMethod.Name}Async\"/> operations.");
             foreach (Parameter parameter in clientMethod.Parameters)
             {
@@ -52,21 +50,19 @@ namespace AutoRest.CSharp.Generation.Writers
             RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private");
         }
 
-        private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod lowLevelClientMethod, bool async)
+        private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
-            var clientMethod = lowLevelClientMethod.RestClientMethod;
-
             var parameters = clientMethod.Parameters;
 
             var responseType = async ? new CSharpType(typeof(Task<Response>)) : new CSharpType(typeof(Response));
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
 
-            if (lowLevelClientMethod.SchemaDocumentations != null)
+            if (clientMethod.SchemaDocumentations != null)
             {
                 writer.LineRaw("/// <remarks>");
 
-                foreach (var schemaDoc in lowLevelClientMethod.SchemaDocumentations)
+                foreach (var schemaDoc in clientMethod.SchemaDocumentations)
                 {
                     writer.Line($"/// Schema for <c>{schemaDoc.SchemaName}</c>:");
                     writer.LineRaw("/// <list type=\"table\">");
@@ -134,7 +130,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
 
                 var scopeVariable = new CodeWriterDeclaration("scope");
-                writer.Line($"using var {scopeVariable:D} = {ClientDiagnosticsField}.CreateScope({lowLevelClientMethod.Diagnostics.ScopeName:L});");
+                writer.Line($"using var {scopeVariable:D} = {ClientDiagnosticsField}.CreateScope({clientMethod.Diagnostics.ScopeName:L});");
 
                 writer.Line($"{scopeVariable}.Start();");
 
