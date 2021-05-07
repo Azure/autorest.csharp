@@ -46,7 +46,7 @@ namespace CognitiveSearch
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateGetServiceStatisticsRequest(RequestOptions requestOptions)
+        internal HttpMessage CreateGetServiceStatisticsRequest(Models.RequestOptions requestOptions)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -63,7 +63,7 @@ namespace CognitiveSearch
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ServiceStatistics>> GetServiceStatisticsAsync(Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetServiceStatisticsRequest(requestOptions);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -84,7 +84,7 @@ namespace CognitiveSearch
         /// <summary> Gets service level statistics for a search service. </summary>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ServiceStatistics> GetServiceStatistics(RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public Response<ServiceStatistics> GetServiceStatistics(Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateGetServiceStatisticsRequest(requestOptions);
             _pipeline.Send(message, cancellationToken);

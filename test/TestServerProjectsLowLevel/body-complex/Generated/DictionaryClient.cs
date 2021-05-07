@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-
-#pragma warning disable AZC0007
 
 namespace body_complex_LowLevel
 {
@@ -24,6 +21,7 @@ namespace body_complex_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
+        private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Initializes a new instance of DictionaryClient for mocking. </summary>
         protected DictionaryClient()
@@ -43,29 +41,90 @@ namespace body_complex_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestComplexTestServiceClientOptions();
-            Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
+            _clientDiagnostics = new ClientDiagnostics(options);
+            var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
 
         /// <summary> Get complex types with dictionary property. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetValidAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> GetValidAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetValidRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetValidRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetValid");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetValid(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response GetValid(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetValidRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetValidRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetValid");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetValid"/> and <see cref="GetValidAsync"/> operations. </summary>
-        private Request CreateGetValidRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetValidRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -75,7 +134,7 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/dictionary/typed/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with dictionary property. </summary>
@@ -97,11 +156,40 @@ namespace body_complex_LowLevel
         /// </list>
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutValidAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> PutValidAsync(RequestContent requestBody, RequestOptions requestOptions = null)
         {
-            Request req = CreatePutValidRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutValid");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with dictionary property. </summary>
@@ -123,16 +211,46 @@ namespace body_complex_LowLevel
         /// </list>
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutValid(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response PutValid(RequestContent requestBody, RequestOptions requestOptions = null)
         {
-            Request req = CreatePutValidRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutValid");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutValid"/> and <see cref="PutValidAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutValidRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutValidRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -144,27 +262,86 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with dictionary property which is empty. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetEmptyAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> GetEmptyAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetEmptyRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetEmptyRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property which is empty. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetEmpty(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response GetEmpty(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetEmptyRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetEmptyRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetEmpty"/> and <see cref="GetEmptyAsync"/> operations. </summary>
-        private Request CreateGetEmptyRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetEmptyRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -174,7 +351,7 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/dictionary/typed/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types with dictionary property which is empty. </summary>
@@ -196,11 +373,40 @@ namespace body_complex_LowLevel
         /// </list>
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutEmptyAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> PutEmptyAsync(RequestContent requestBody, RequestOptions requestOptions = null)
         {
-            Request req = CreatePutEmptyRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreatePutEmptyRequest(requestBody, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types with dictionary property which is empty. </summary>
@@ -222,16 +428,46 @@ namespace body_complex_LowLevel
         /// </list>
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutEmpty(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response PutEmpty(RequestContent requestBody, RequestOptions requestOptions = null)
         {
-            Request req = CreatePutEmptyRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreatePutEmptyRequest(requestBody, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutEmpty"/> and <see cref="PutEmptyAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutEmptyRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutEmptyRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -243,27 +479,86 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with dictionary property which is null. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetNullAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> GetNullAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetNullRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetNullRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property which is null. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetNull(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response GetNull(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetNullRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetNullRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNull");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetNull"/> and <see cref="GetNullAsync"/> operations. </summary>
-        private Request CreateGetNullRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetNullRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -273,27 +568,86 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/dictionary/typed/null", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetNotProvidedAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> GetNotProvidedAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetNotProvidedRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetNotProvidedRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNotProvided");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types with dictionary property while server doesn&apos;t provide a response payload. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetNotProvided(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response GetNotProvided(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetNotProvidedRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetNotProvidedRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DictionaryClient.GetNotProvided");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetNotProvided"/> and <see cref="GetNotProvidedAsync"/> operations. </summary>
-        private Request CreateGetNotProvidedRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetNotProvidedRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -303,7 +657,7 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/dictionary/typed/notprovided", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
     }
 }

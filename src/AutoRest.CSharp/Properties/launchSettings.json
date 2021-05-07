@@ -124,9 +124,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\body-time\\Generated"
     },
-    "BodyAndPath": {
+    "BodyAndPath-LowLevel": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath-LowLevel\\Generated"
     },
     "CognitiveSearch": {
       "commandName": "Project",

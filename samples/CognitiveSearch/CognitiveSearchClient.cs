@@ -91,7 +91,7 @@ namespace Azure.CognitiveSearch
                 {
                     Filter = filter
                 },
-                new RequestOptions(),
+                new global::CognitiveSearch.Models.RequestOptions(),
                 cancellationToken: cancellationToken);
     }
 }

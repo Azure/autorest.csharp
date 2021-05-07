@@ -44,7 +44,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> CreateOrUpdateAsync(string dataSourceName, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.CreateOrUpdate");
             scope.Start();
@@ -65,7 +65,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> CreateOrUpdate(string dataSourceName, DataSource dataSource, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.CreateOrUpdate");
             scope.Start();
@@ -85,7 +85,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string dataSourceName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Delete");
             scope.Start();
@@ -105,7 +105,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string dataSourceName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string dataSourceName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Delete");
             scope.Start();
@@ -124,7 +124,7 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> GetAsync(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> GetAsync(string dataSourceName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Get");
             scope.Start();
@@ -143,7 +143,7 @@ namespace CognitiveSearch
         /// <param name="dataSourceName"> The name of the datasource to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> Get(string dataSourceName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> Get(string dataSourceName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Get");
             scope.Start();
@@ -162,7 +162,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ListDataSourcesResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListDataSourcesResult>> ListAsync(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.List");
             scope.Start();
@@ -181,7 +181,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the data sources to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ListDataSourcesResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<ListDataSourcesResult> List(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.List");
             scope.Start();
@@ -200,7 +200,7 @@ namespace CognitiveSearch
         /// <param name="dataSource"> The definition of the datasource to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DataSource>> CreateAsync(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DataSource>> CreateAsync(DataSource dataSource, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Create");
             scope.Start();
@@ -219,7 +219,7 @@ namespace CognitiveSearch
         /// <param name="dataSource"> The definition of the datasource to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DataSource> Create(DataSource dataSource, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<DataSource> Create(DataSource dataSource, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DataSourcesClient.Create");
             scope.Start();

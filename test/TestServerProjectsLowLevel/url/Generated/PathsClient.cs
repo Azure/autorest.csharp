@@ -7,13 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-
-#pragma warning disable AZC0007
 
 namespace url_LowLevel
 {
@@ -25,6 +22,7 @@ namespace url_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
+        private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Initializes a new instance of PathsClient for mocking. </summary>
         protected PathsClient()
@@ -44,29 +42,90 @@ namespace url_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestUrlTestServiceClientOptions();
-            Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
+            _clientDiagnostics = new ClientDiagnostics(options);
+            var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
 
         /// <summary> Get true Boolean value on path. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetBooleanTrueAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> GetBooleanTrueAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetBooleanTrueRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetBooleanTrueRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get true Boolean value on path. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetBooleanTrue(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response GetBooleanTrue(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetBooleanTrueRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetBooleanTrueRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetBooleanTrue"/> and <see cref="GetBooleanTrueAsync"/> operations. </summary>
-        private Request CreateGetBooleanTrueRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetBooleanTrueRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -77,27 +136,86 @@ namespace url_LowLevel
             uri.AppendPath(true, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get false Boolean value on path. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetBooleanFalseAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> GetBooleanFalseAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetBooleanFalseRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetBooleanFalseRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get false Boolean value on path. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetBooleanFalse(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response GetBooleanFalse(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetBooleanFalseRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetBooleanFalseRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetBooleanFalse"/> and <see cref="GetBooleanFalseAsync"/> operations. </summary>
-        private Request CreateGetBooleanFalseRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetBooleanFalseRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -108,27 +226,86 @@ namespace url_LowLevel
             uri.AppendPath(false, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetIntOneMillionAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> GetIntOneMillionAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetIntOneMillionRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetIntOneMillionRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetIntOneMillion(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response GetIntOneMillion(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetIntOneMillionRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetIntOneMillionRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetIntOneMillion"/> and <see cref="GetIntOneMillionAsync"/> operations. </summary>
-        private Request CreateGetIntOneMillionRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetIntOneMillionRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -139,27 +316,86 @@ namespace url_LowLevel
             uri.AppendPath(1000000, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetIntNegativeOneMillionAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetIntNegativeOneMillionRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetIntNegativeOneMillionRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetIntNegativeOneMillion(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response GetIntNegativeOneMillion(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetIntNegativeOneMillionRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetIntNegativeOneMillionRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetIntNegativeOneMillion"/> and <see cref="GetIntNegativeOneMillionAsync"/> operations. </summary>
-        private Request CreateGetIntNegativeOneMillionRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetIntNegativeOneMillionRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -170,27 +406,86 @@ namespace url_LowLevel
             uri.AppendPath(-1000000, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetTenBillionAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> GetTenBillionAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetTenBillionRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetTenBillionRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetTenBillion(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response GetTenBillion(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetTenBillionRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetTenBillionRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetTenBillion");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetTenBillion"/> and <see cref="GetTenBillionAsync"/> operations. </summary>
-        private Request CreateGetTenBillionRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetTenBillionRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -201,27 +496,86 @@ namespace url_LowLevel
             uri.AppendPath(10000000000L, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetNegativeTenBillionAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> GetNegativeTenBillionAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetNegativeTenBillionRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetNegativeTenBillionRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetNegativeTenBillion(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response GetNegativeTenBillion(RequestOptions requestOptions = null)
         {
-            Request req = CreateGetNegativeTenBillionRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetNegativeTenBillionRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetNegativeTenBillion"/> and <see cref="GetNegativeTenBillionAsync"/> operations. </summary>
-        private Request CreateGetNegativeTenBillionRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetNegativeTenBillionRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -232,27 +586,86 @@ namespace url_LowLevel
             uri.AppendPath(-10000000000L, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> FloatScientificPositiveAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> FloatScientificPositiveAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateFloatScientificPositiveRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateFloatScientificPositiveRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response FloatScientificPositive(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response FloatScientificPositive(RequestOptions requestOptions = null)
         {
-            Request req = CreateFloatScientificPositiveRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateFloatScientificPositiveRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="FloatScientificPositive"/> and <see cref="FloatScientificPositiveAsync"/> operations. </summary>
-        private Request CreateFloatScientificPositiveRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateFloatScientificPositiveRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -263,27 +676,86 @@ namespace url_LowLevel
             uri.AppendPath(1.034E+20F, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> FloatScientificNegativeAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> FloatScientificNegativeAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateFloatScientificNegativeRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateFloatScientificNegativeRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response FloatScientificNegative(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response FloatScientificNegative(RequestOptions requestOptions = null)
         {
-            Request req = CreateFloatScientificNegativeRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateFloatScientificNegativeRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="FloatScientificNegative"/> and <see cref="FloatScientificNegativeAsync"/> operations. </summary>
-        private Request CreateFloatScientificNegativeRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateFloatScientificNegativeRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -294,27 +766,86 @@ namespace url_LowLevel
             uri.AppendPath(-1.034E-20F, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DoubleDecimalPositiveAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateDoubleDecimalPositiveRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDoubleDecimalPositiveRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DoubleDecimalPositive(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response DoubleDecimalPositive(RequestOptions requestOptions = null)
         {
-            Request req = CreateDoubleDecimalPositiveRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDoubleDecimalPositiveRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="DoubleDecimalPositive"/> and <see cref="DoubleDecimalPositiveAsync"/> operations. </summary>
-        private Request CreateDoubleDecimalPositiveRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateDoubleDecimalPositiveRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -325,27 +856,86 @@ namespace url_LowLevel
             uri.AppendPath(9999999.999, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DoubleDecimalNegativeAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateDoubleDecimalNegativeRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDoubleDecimalNegativeRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DoubleDecimalNegative(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response DoubleDecimalNegative(RequestOptions requestOptions = null)
         {
-            Request req = CreateDoubleDecimalNegativeRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDoubleDecimalNegativeRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="DoubleDecimalNegative"/> and <see cref="DoubleDecimalNegativeAsync"/> operations. </summary>
-        private Request CreateDoubleDecimalNegativeRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateDoubleDecimalNegativeRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -356,27 +946,86 @@ namespace url_LowLevel
             uri.AppendPath(-9999999.999, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> StringUnicodeAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> StringUnicodeAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateStringUnicodeRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStringUnicodeRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response StringUnicode(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response StringUnicode(RequestOptions requestOptions = null)
         {
-            Request req = CreateStringUnicodeRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStringUnicodeRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUnicode");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="StringUnicode"/> and <see cref="StringUnicodeAsync"/> operations. </summary>
-        private Request CreateStringUnicodeRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateStringUnicodeRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -387,27 +1036,86 @@ namespace url_LowLevel
             uri.AppendPath("啊齄丂狛狜隣郎隣兀﨩", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> StringUrlEncodedAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> StringUrlEncodedAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateStringUrlEncodedRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStringUrlEncodedRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response StringUrlEncoded(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response StringUrlEncoded(RequestOptions requestOptions = null)
         {
-            Request req = CreateStringUrlEncodedRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStringUrlEncodedRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="StringUrlEncoded"/> and <see cref="StringUrlEncodedAsync"/> operations. </summary>
-        private Request CreateStringUrlEncodedRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateStringUrlEncodedRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -418,27 +1126,86 @@ namespace url_LowLevel
             uri.AppendPath("begin!*'();:@ &=+$,/?#[]end", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> StringUrlNonEncodedAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> StringUrlNonEncodedAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateStringUrlNonEncodedRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStringUrlNonEncodedRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response StringUrlNonEncoded(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response StringUrlNonEncoded(RequestOptions requestOptions = null)
         {
-            Request req = CreateStringUrlNonEncodedRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStringUrlNonEncodedRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="StringUrlNonEncoded"/> and <see cref="StringUrlNonEncodedAsync"/> operations. </summary>
-        private Request CreateStringUrlNonEncodedRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateStringUrlNonEncodedRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -449,27 +1216,86 @@ namespace url_LowLevel
             uri.AppendPath("begin!*'();:@&=+$,end", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;&apos;. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> StringEmptyAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> StringEmptyAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateStringEmptyRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStringEmptyRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;&apos;. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response StringEmpty(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response StringEmpty(RequestOptions requestOptions = null)
         {
-            Request req = CreateStringEmptyRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStringEmptyRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringEmpty");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="StringEmpty"/> and <see cref="StringEmptyAsync"/> operations. </summary>
-        private Request CreateStringEmptyRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateStringEmptyRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -480,30 +1306,89 @@ namespace url_LowLevel
             uri.AppendPath("", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> StringNullAsync(string stringPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> StringNullAsync(string stringPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateStringNullRequest(stringPath);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStringNullRequest(stringPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 400:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response StringNull(string stringPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response StringNull(string stringPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateStringNullRequest(stringPath);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStringNullRequest(stringPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.StringNull");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 400:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="StringNull"/> and <see cref="StringNullAsync"/> operations. </summary>
         /// <param name="stringPath"> null string value. </param>
-        private Request CreateStringNullRequest(string stringPath)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateStringNullRequest(string stringPath, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -514,30 +1399,89 @@ namespace url_LowLevel
             uri.AppendPath(stringPath, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
         /// <param name="enumPath"> send the value green. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> EnumValidAsync(string enumPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> EnumValidAsync(string enumPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateEnumValidRequest(enumPath);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateEnumValidRequest(enumPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
         /// <param name="enumPath"> send the value green. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response EnumValid(string enumPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response EnumValid(string enumPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateEnumValidRequest(enumPath);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateEnumValidRequest(enumPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumValid");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="EnumValid"/> and <see cref="EnumValidAsync"/> operations. </summary>
         /// <param name="enumPath"> send the value green. </param>
-        private Request CreateEnumValidRequest(string enumPath)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateEnumValidRequest(string enumPath, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -548,30 +1492,89 @@ namespace url_LowLevel
             uri.AppendPath(enumPath, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
         /// <param name="enumPath"> send null should throw. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> EnumNullAsync(string enumPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> EnumNullAsync(string enumPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateEnumNullRequest(enumPath);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateEnumNullRequest(enumPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 400:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
         /// <param name="enumPath"> send null should throw. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response EnumNull(string enumPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response EnumNull(string enumPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateEnumNullRequest(enumPath);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateEnumNullRequest(enumPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.EnumNull");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 400:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="EnumNull"/> and <see cref="EnumNullAsync"/> operations. </summary>
         /// <param name="enumPath"> send null should throw. </param>
-        private Request CreateEnumNullRequest(string enumPath)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateEnumNullRequest(string enumPath, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -582,30 +1585,89 @@ namespace url_LowLevel
             uri.AppendPath(enumPath, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestOptions requestOptions = null)
         {
-            Request req = CreateByteMultiByteRequest(bytePath);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateByteMultiByteRequest(bytePath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ByteMultiByte(byte[] bytePath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response ByteMultiByte(byte[] bytePath, RequestOptions requestOptions = null)
         {
-            Request req = CreateByteMultiByteRequest(bytePath);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateByteMultiByteRequest(bytePath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteMultiByte");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="ByteMultiByte"/> and <see cref="ByteMultiByteAsync"/> operations. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
-        private Request CreateByteMultiByteRequest(byte[] bytePath)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateByteMultiByteRequest(byte[] bytePath, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -616,27 +1678,86 @@ namespace url_LowLevel
             uri.AppendPath(bytePath, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ByteEmptyAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> ByteEmptyAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateByteEmptyRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateByteEmptyRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ByteEmpty(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response ByteEmpty(RequestOptions requestOptions = null)
         {
-            Request req = CreateByteEmptyRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateByteEmptyRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteEmpty");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="ByteEmpty"/> and <see cref="ByteEmptyAsync"/> operations. </summary>
-        private Request CreateByteEmptyRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateByteEmptyRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -647,30 +1768,89 @@ namespace url_LowLevel
             uri.AppendPath(new byte[] { }, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ByteNullAsync(byte[] bytePath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestOptions requestOptions = null)
         {
-            Request req = CreateByteNullRequest(bytePath);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateByteNullRequest(bytePath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 400:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ByteNull(byte[] bytePath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response ByteNull(byte[] bytePath, RequestOptions requestOptions = null)
         {
-            Request req = CreateByteNullRequest(bytePath);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateByteNullRequest(bytePath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.ByteNull");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 400:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="ByteNull"/> and <see cref="ByteNullAsync"/> operations. </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
-        private Request CreateByteNullRequest(byte[] bytePath)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateByteNullRequest(byte[] bytePath, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -681,27 +1861,86 @@ namespace url_LowLevel
             uri.AppendPath(bytePath, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DateValidAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> DateValidAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateDateValidRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDateValidRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DateValid(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response DateValid(RequestOptions requestOptions = null)
         {
-            Request req = CreateDateValidRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDateValidRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateValid");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="DateValid"/> and <see cref="DateValidAsync"/> operations. </summary>
-        private Request CreateDateValidRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateDateValidRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -712,30 +1951,89 @@ namespace url_LowLevel
             uri.AppendPath(new DateTimeOffset(2012, 1, 1, 0, 0, 0, 0, TimeSpan.Zero), "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, RequestOptions requestOptions = null)
         {
-            Request req = CreateDateNullRequest(datePath);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDateNullRequest(datePath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 400:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DateNull(DateTimeOffset datePath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response DateNull(DateTimeOffset datePath, RequestOptions requestOptions = null)
         {
-            Request req = CreateDateNullRequest(datePath);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDateNullRequest(datePath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateNull");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 400:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="DateNull"/> and <see cref="DateNullAsync"/> operations. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
-        private Request CreateDateNullRequest(DateTimeOffset datePath)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateDateNullRequest(DateTimeOffset datePath, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -746,27 +2044,86 @@ namespace url_LowLevel
             uri.AppendPath(datePath, "D", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DateTimeValidAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> DateTimeValidAsync(RequestOptions requestOptions = null)
         {
-            Request req = CreateDateTimeValidRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDateTimeValidRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DateTimeValid(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response DateTimeValid(RequestOptions requestOptions = null)
         {
-            Request req = CreateDateTimeValidRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDateTimeValidRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeValid");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="DateTimeValid"/> and <see cref="DateTimeValidAsync"/> operations. </summary>
-        private Request CreateDateTimeValidRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateDateTimeValidRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -777,30 +2134,89 @@ namespace url_LowLevel
             uri.AppendPath(new DateTimeOffset(2012, 1, 1, 1, 1, 1, 0, TimeSpan.Zero), "O", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, RequestOptions requestOptions = null)
         {
-            Request req = CreateDateTimeNullRequest(dateTimePath);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDateTimeNullRequest(dateTimePath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 400:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response DateTimeNull(DateTimeOffset dateTimePath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response DateTimeNull(DateTimeOffset dateTimePath, RequestOptions requestOptions = null)
         {
-            Request req = CreateDateTimeNullRequest(dateTimePath);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateDateTimeNullRequest(dateTimePath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.DateTimeNull");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 400:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="DateTimeNull"/> and <see cref="DateTimeNullAsync"/> operations. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
-        private Request CreateDateTimeNullRequest(DateTimeOffset dateTimePath)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateDateTimeNullRequest(DateTimeOffset dateTimePath, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -811,30 +2227,89 @@ namespace url_LowLevel
             uri.AppendPath(dateTimePath, "O", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateBase64UrlRequest(base64UrlPath);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateBase64UrlRequest(base64UrlPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Base64Url(byte[] base64UrlPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response Base64Url(byte[] base64UrlPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateBase64UrlRequest(base64UrlPath);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateBase64UrlRequest(base64UrlPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.Base64Url");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="Base64Url"/> and <see cref="Base64UrlAsync"/> operations. </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
-        private Request CreateBase64UrlRequest(byte[] base64UrlPath)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateBase64UrlRequest(byte[] base64UrlPath, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -845,30 +2320,89 @@ namespace url_LowLevel
             uri.AppendPath(base64UrlPath, "U", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateArrayCsvInPathRequest(arrayPath);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateArrayCsvInPathRequest(arrayPath);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.ArrayCsvInPath");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="ArrayCsvInPath"/> and <see cref="ArrayCsvInPathAsync"/> operations. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
-        private Request CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateArrayCsvInPathRequest(IEnumerable<string> arrayPath, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -879,30 +2413,89 @@ namespace url_LowLevel
             uri.AppendPath(arrayPath, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateUnixTimeUrlRequest(unixTimeUrlPath);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+        public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, RequestOptions requestOptions = null)
         {
-            Request req = CreateUnixTimeUrlRequest(unixTimeUrlPath);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="UnixTimeUrl"/> and <see cref="UnixTimeUrlAsync"/> operations. </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
-        private Request CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateUnixTimeUrlRequest(DateTimeOffset unixTimeUrlPath, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -913,7 +2506,7 @@ namespace url_LowLevel
             uri.AppendPath(unixTimeUrlPath, "U", true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
     }
 }

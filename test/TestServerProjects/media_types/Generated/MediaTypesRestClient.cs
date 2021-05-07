@@ -36,7 +36,7 @@ namespace media_types
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateAnalyzeBodyRequest(ContentType contentType, Stream input)
+        internal HttpMessage CreateAnalyzeBodyRequest(Models.ContentType contentType, Stream input)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -58,7 +58,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<string>> AnalyzeBodyAsync(ContentType contentType, Stream input = null, CancellationToken cancellationToken = default)
+        public async Task<Response<string>> AnalyzeBodyAsync(Models.ContentType contentType, Stream input = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeBodyRequest(contentType, input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -80,7 +80,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="input"> Input parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<string> AnalyzeBody(ContentType contentType, Stream input = null, CancellationToken cancellationToken = default)
+        public Response<string> AnalyzeBody(Models.ContentType contentType, Stream input = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeBodyRequest(contentType, input);
             _pipeline.Send(message, cancellationToken);
