@@ -81,20 +81,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 202:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -127,20 +137,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 202:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 202:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -257,20 +277,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -368,20 +398,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -483,20 +523,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -512,20 +562,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -565,20 +625,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -597,20 +667,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -653,20 +733,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -691,20 +781,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -815,20 +915,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -921,20 +1031,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1041,20 +1161,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1072,20 +1202,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1119,20 +1259,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1150,20 +1300,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1193,20 +1353,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1220,20 +1390,30 @@ namespace Azure.AI.DocumentTranslation
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 

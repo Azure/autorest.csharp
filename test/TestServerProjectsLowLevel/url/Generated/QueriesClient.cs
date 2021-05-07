@@ -59,20 +59,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -86,20 +96,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -129,20 +149,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -156,20 +186,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -200,20 +240,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -228,20 +278,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -275,20 +335,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -302,20 +372,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -345,20 +425,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -372,20 +462,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -416,20 +516,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -444,20 +554,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetIntNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -491,20 +611,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -518,20 +648,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -561,20 +701,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -588,20 +738,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -632,20 +792,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -660,20 +830,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.GetLongNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -707,20 +887,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -734,20 +924,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -777,20 +977,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -804,20 +1014,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -848,20 +1068,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -876,20 +1106,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.FloatNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -923,20 +1163,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -950,20 +1200,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -993,20 +1253,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1020,20 +1290,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1064,20 +1344,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1092,20 +1382,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DoubleNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1139,20 +1439,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1166,20 +1476,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUnicode");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1209,20 +1529,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1236,20 +1566,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1279,20 +1619,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1306,20 +1656,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringEmpty");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1350,20 +1710,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1378,20 +1748,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.StringNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1426,20 +1806,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1454,20 +1844,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1502,20 +1902,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1530,20 +1940,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.EnumNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1578,20 +1998,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1606,20 +2036,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1653,20 +2093,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1680,20 +2130,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1724,20 +2184,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1752,20 +2222,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ByteNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1799,20 +2279,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1826,20 +2316,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1870,20 +2370,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1898,20 +2408,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1945,20 +2465,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -1972,20 +2502,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2016,20 +2556,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2044,20 +2594,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2092,20 +2652,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2120,20 +2690,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2168,20 +2748,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2196,20 +2786,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2244,20 +2844,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2272,20 +2882,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2320,20 +2940,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2348,20 +2978,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2396,20 +3036,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2424,20 +3074,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2472,20 +3132,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2500,20 +3170,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2548,20 +3228,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
@@ -2576,20 +3266,30 @@ namespace url_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions.CancellationToken);
-            if (requestOptions.StatusOption == ResponseStatusOption.Default)
+            using var scope = _clientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
+            scope.Start();
+            try
             {
-                switch (message.Response.Status)
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
                 {
-                    case 200:
-                        return message.Response;
-                    default:
-                        throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
                 }
             }
-            else
+            catch (Exception e)
             {
-                return message.Response;
+                scope.Failed(e);
+                throw;
             }
         }
 
