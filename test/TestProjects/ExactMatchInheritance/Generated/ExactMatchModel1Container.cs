@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace ExactMatchInheritance
 {
-    /// <summary> A class representing collection of ExactMatchModel1 and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of ExactMatchModel1 and their operations over a ResourceGroup. </summary>
     public partial class ExactMatchModel1Container
     {
         /// <summary> Initializes a new instance of ExactMatchModel1Container for mocking. </summary>

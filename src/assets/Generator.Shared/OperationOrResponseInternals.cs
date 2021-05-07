@@ -19,70 +19,78 @@ namespace Azure.Core
     /// https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation
     /// https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md
     /// </summary>
-    /// <typeparam name="T">The final result of the LRO.</typeparam>
-    internal class OperationOrResponseInternals<T>
+    internal class OperationOrResponseInternals
     {
-        private readonly OperationInternals<T>? _operation;
-        private readonly Response<T>? _valueResponse;
-
         public OperationOrResponseInternals(
-            IOperationSource<T> source,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             Request originalRequest,
             Response originalResponse,
             OperationFinalStateVia finalStateVia,
             string scopeName)
+            : this(new OperationInternals(clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName))
         {
-            _operation = new OperationInternals<T>(source, clientDiagnostics, pipeline, originalRequest, originalResponse, finalStateVia, scopeName);
         }
 
-        public OperationOrResponseInternals(Response<T> response)
+        protected OperationOrResponseInternals(OperationInternals operationInternals)
+        {
+            if (operationInternals is null)
+                throw new ArgumentNullException(nameof(operationInternals));
+
+            Operation = operationInternals;
+        }
+
+        public OperationOrResponseInternals(Response response)
         {
             if (response is null)
                 throw new ArgumentNullException(nameof(response));
 
-            _valueResponse = response;
+            VoidResponse = response;
         }
 
-        private bool _doesWrapOperation => _valueResponse is null;
+        protected OperationInternals? Operation { get; }
 
-        public T Value => _doesWrapOperation ? _operation!.Value : _valueResponse!.Value;
+        protected Response? VoidResponse { get; }
 
-        public bool HasCompleted => _doesWrapOperation ? _operation!.HasCompleted : true;
+        protected bool DoesWrapOperation => VoidResponse is null;
 
-        public bool HasValue => _doesWrapOperation ? _operation!.HasValue : true;
+#pragma warning disable CA1822
+        //TODO: This will be filled in by ADO 5821.
+        public string Id => throw new NotImplementedException();
+#pragma warning restore CA1822
+
+        public bool HasCompleted => DoesWrapOperation ? Operation!.HasCompleted : true;
 
         public Response GetRawResponse()
         {
-            return _doesWrapOperation ? _operation!.GetRawResponse() : _valueResponse!.GetRawResponse();
+            return DoesWrapOperation ? Operation!.GetRawResponse() : VoidResponse!;
         }
 
         public Response UpdateStatus(CancellationToken cancellationToken = default)
         {
-            return _doesWrapOperation ? _operation!.UpdateStatus(cancellationToken) : _valueResponse!.GetRawResponse();
+            return DoesWrapOperation ? Operation!.UpdateStatus(cancellationToken) : VoidResponse!;
         }
 
         public ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default)
         {
-            return _doesWrapOperation
-                ? _operation!.UpdateStatusAsync(cancellationToken)
-                : new ValueTask<Response>(_valueResponse!.GetRawResponse());
+            return DoesWrapOperation
+                ? Operation!.UpdateStatusAsync(cancellationToken)
+                : new ValueTask<Response>(VoidResponse!);
         }
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync(
+        public async ValueTask<Response> WaitForCompletionResponseAsync(
             CancellationToken cancellationToken = default)
         {
-            return await WaitForCompletionAsync(OperationInternals<T>.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
+            return await WaitForCompletionResponseAsync(OperationInternals.DefaultPollingInterval, cancellationToken).ConfigureAwait(false);
         }
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync(
+        public async ValueTask<Response> WaitForCompletionResponseAsync(
             TimeSpan pollingInterval,
             CancellationToken cancellationToken)
         {
-            return _doesWrapOperation
-                ? await _operation!.WaitForCompletionAsync(pollingInterval, cancellationToken).ConfigureAwait(false)
-                : _valueResponse!;
+            return DoesWrapOperation
+                ? await Operation!.WaitForCompletionResponseAsync(pollingInterval, cancellationToken).ConfigureAwait(false)
+                : VoidResponse!;
         }
     }
 }

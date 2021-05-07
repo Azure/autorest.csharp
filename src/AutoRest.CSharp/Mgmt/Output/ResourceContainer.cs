@@ -19,6 +19,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string ResourceGroupOperationsResourceType = "ResourceGroupOperations.ResourceType";
         private const string SubscriptionOperationsResourceType = "SubscriptionOperations.ResourceType";
         private const string TenantResourceType = "ResourceIdentifier.RootResourceIdentifier.ResourceType";
+        private const string ResourceGroupCommentName = "ResourceGroup";
+        private const string SubscriptionCommentName = "Subscription";
+        private const string TenantCommentName = "Tenant";
 
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context)
@@ -30,10 +33,31 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
-            StringBuilder summary = new StringBuilder();
             return string.IsNullOrWhiteSpace(operationGroup.Language.Default.Description) ?
-                $"A class representing collection of {clientPrefix} and their operations over a [ParentResource]. " :
+                $"A class representing collection of {clientPrefix} and their operations over a {GetParentResourceName()}." :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
+        }
+
+        private string GetParentResourceName()
+        {
+            var parentResourceType = OperationGroup.ParentResourceType(_context.Configuration.MgmtConfiguration);
+
+            switch (parentResourceType)
+            {
+                case ResourceTypeBuilder.ResourceGroups:
+                    return ResourceGroupCommentName;
+                case ResourceTypeBuilder.Subscriptions:
+                    return SubscriptionCommentName;
+                case ResourceTypeBuilder.Tenant:
+                    return TenantCommentName;
+                default:
+                    OperationGroup? opGroup = FindParentOperationGroup(parentResourceType);
+                    if (opGroup != null)
+                    {
+                        return opGroup.Resource(Context.Configuration.MgmtConfiguration);
+                    }
+                    return "Parent";
+            }
         }
 
         public string GetValidResourceValue()
@@ -53,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        private string FindParentFromRp(string parentResourceType)
+        private OperationGroup? FindParentOperationGroup(string parentResourceType)
         {
             OperationGroup? parentOperationGroup = null;
             foreach (var operationGroup in _context.CodeModel.OperationGroups)
@@ -64,6 +88,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                     break;
                 }
             }
+            return parentOperationGroup;
+        }
+
+        private string FindParentFromRp(string parentResourceType)
+        {
+            OperationGroup? parentOperationGroup = FindParentOperationGroup(parentResourceType);
 
             if (parentOperationGroup is null)
                 return parentResourceType;

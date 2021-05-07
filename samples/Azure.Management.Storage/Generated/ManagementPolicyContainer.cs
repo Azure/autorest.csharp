@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of ManagementPolicy and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of ManagementPolicy and their operations over a StorageAccount. </summary>
     public partial class ManagementPolicyContainer
     {
         /// <summary> Initializes a new instance of ManagementPolicyContainer for mocking. </summary>

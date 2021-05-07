@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
 {
-    /// <summary> A class representing collection of SupersetModel1 and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of SupersetModel1 and their operations over a ResourceGroup. </summary>
     public partial class SupersetModel1Container
     {
         /// <summary> Initializes a new instance of SupersetModel1Container for mocking. </summary>

@@ -138,6 +138,41 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutValidAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -176,6 +211,41 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types that are polymorphic and have recursive references. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>fishtype</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>species</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>length</term>
+        ///     <term>number</term>
+        ///     <term>Yes</term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>siblings</term>
+        ///     <term>Fish[]</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutValid(RequestContent requestBody, RequestOptions requestOptions = null)

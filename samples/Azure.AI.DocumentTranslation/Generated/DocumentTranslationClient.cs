@@ -71,6 +71,196 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>inputs</term>
+        ///     <term>BatchRequest[]</term>
+        ///     <term>Yes</term>
+        ///     <term> The input list of documents or folders containing documents. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>BatchRequest</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>source</term>
+        ///     <term>SourceInput</term>
+        ///     <term>Yes</term>
+        ///     <term> Source of the input documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>targets</term>
+        ///     <term>TargetInput[]</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the destination for the output. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageType</term>
+        ///     <term>&quot;Folder&quot; | &quot;File&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage type of the input documents source string. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>SourceInput</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>sourceUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the folder / container or single file with your documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>filter</term>
+        ///     <term>DocumentFilter</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>language</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// Language code
+        /// 
+        /// If none is specified, we will perform auto detect on the document.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>DocumentFilter</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>prefix</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// A case-sensitive prefix string to filter documents in the source path for translation.
+        /// 
+        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>suffix</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// A case-sensitive suffix string to filter documents in the source path for translation.
+        /// 
+        /// This is most often use for file extensions.
+        /// </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>TargetInput</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>targetUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the folder / container with your documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>category</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> Category / custom system for translation request. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>language</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Target Language. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>glossaries</term>
+        ///     <term>Glossary[]</term>
+        ///     <term></term>
+        ///     <term> List of Glossary. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>Glossary</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>glossaryUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term>
+        /// Location of the glossary.
+        /// 
+        /// We will use the file extension to extract the formatting if the format parameter is not supplied.
+        /// 
+        /// 
+        /// 
+        /// If the translation language pair is not present in the glossary, it will not be applied.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>format</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Format. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>version</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> Optional Version.  If not specified, default is used. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> StartTranslationAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -127,6 +317,196 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>inputs</term>
+        ///     <term>BatchRequest[]</term>
+        ///     <term>Yes</term>
+        ///     <term> The input list of documents or folders containing documents. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>BatchRequest</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>source</term>
+        ///     <term>SourceInput</term>
+        ///     <term>Yes</term>
+        ///     <term> Source of the input documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>targets</term>
+        ///     <term>TargetInput[]</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the destination for the output. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageType</term>
+        ///     <term>&quot;Folder&quot; | &quot;File&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage type of the input documents source string. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>SourceInput</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>sourceUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the folder / container or single file with your documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>filter</term>
+        ///     <term>DocumentFilter</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>language</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// Language code
+        /// 
+        /// If none is specified, we will perform auto detect on the document.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>DocumentFilter</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>prefix</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// A case-sensitive prefix string to filter documents in the source path for translation.
+        /// 
+        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>suffix</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// A case-sensitive suffix string to filter documents in the source path for translation.
+        /// 
+        /// This is most often use for file extensions.
+        /// </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>TargetInput</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>targetUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the folder / container with your documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>category</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> Category / custom system for translation request. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>language</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Target Language. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>glossaries</term>
+        ///     <term>Glossary[]</term>
+        ///     <term></term>
+        ///     <term> List of Glossary. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>Glossary</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>glossaryUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term>
+        /// Location of the glossary.
+        /// 
+        /// We will use the file extension to extract the formatting if the format parameter is not supplied.
+        /// 
+        /// 
+        /// 
+        /// If the translation language pair is not present in the glossary, it will not be applied.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>format</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Format. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>version</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> Optional Version.  If not specified, default is used. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response StartTranslation(RequestContent requestBody, RequestOptions requestOptions = null)

@@ -138,6 +138,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with integer properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field1</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field2</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutIntAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -176,6 +199,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with integer properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field1</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field2</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutInt(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -321,6 +367,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with long properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field1</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field2</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutLongAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -359,6 +428,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with long properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field1</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field2</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutLong(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -504,6 +596,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with float properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field1</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field2</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutFloatAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -542,6 +657,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with float properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field1</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field2</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutFloat(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -687,6 +825,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with double properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field1</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutDoubleAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -725,6 +886,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with double properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field1</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose</term>
+        ///     <term>number</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutDouble(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -870,6 +1054,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with bool properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field_true</term>
+        ///     <term>boolean</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field_false</term>
+        ///     <term>boolean</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutBoolAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -908,6 +1115,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with bool properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field_true</term>
+        ///     <term>boolean</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field_false</term>
+        ///     <term>boolean</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutBool(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1053,6 +1283,35 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with string properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>empty</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>null</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutStringAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1091,6 +1350,35 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with string properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>empty</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>null</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutString(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1236,6 +1524,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with date properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>DateWrapperField</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>leap</term>
+        ///     <term>DateWrapperLeap</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutDateAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1274,6 +1585,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with date properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>DateWrapperField</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>leap</term>
+        ///     <term>DateWrapperLeap</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutDate(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1419,6 +1753,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with datetime properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>string (ISO 8601 Format)</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>now</term>
+        ///     <term>string (ISO 8601 Format)</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutDateTimeAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1457,6 +1814,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with datetime properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>string (ISO 8601 Format)</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>now</term>
+        ///     <term>string (ISO 8601 Format)</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutDateTime(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1602,6 +1982,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>string (ISO 8601 Format)</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>now</term>
+        ///     <term>string (ISO 8601 Format)</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1640,6 +2043,29 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with datetimeRfc1123 properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>string (ISO 8601 Format)</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>now</term>
+        ///     <term>string (ISO 8601 Format)</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutDateTimeRfc1123(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1785,6 +2211,23 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with duration properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>DurationWrapperField</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutDurationAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1823,6 +2266,23 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with duration properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>DurationWrapperField</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutDuration(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -1968,6 +2428,23 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with byte properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>ByteWrapperField</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutByteAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -2006,6 +2483,23 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Put complex types with byte properties. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>field</term>
+        ///     <term>ByteWrapperField</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutByte(RequestContent requestBody, RequestOptions requestOptions = null)

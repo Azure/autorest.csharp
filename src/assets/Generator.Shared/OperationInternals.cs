@@ -19,13 +19,12 @@ namespace Azure.Core
     /// https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation
     /// https://github.com/Azure/adx-documentation-pr/blob/master/sdks/LRO/LRO_AzureSDK.md
     /// </summary>
-    /// <typeparam name="T">The final result of the LRO.</typeparam>
-    internal class OperationInternals<T>
+    internal class OperationInternals
     {
         public static TimeSpan DefaultPollingInterval { get; } = TimeSpan.FromSeconds(1);
 
-        private static readonly string[] s_failureStates = {"failed", "canceled"};
-        private static readonly string[] s_terminalStates = {"succeeded", "failed", "canceled"};
+        private static readonly string[] s_failureStates = { "failed", "canceled" };
+        private static readonly string[] s_terminalStates = { "succeeded", "failed", "canceled" };
 
         private readonly HttpPipeline _pipeline;
         private readonly ClientDiagnostics _clientDiagnostics;
@@ -38,15 +37,11 @@ namespace Azure.Core
         private bool _originalHasLocation;
         private string? _lastKnownLocation;
 
-        private readonly IOperationSource<T> _source;
         private Response _rawResponse;
-        private T _value = default!;
-        private bool _hasValue;
         private bool _hasCompleted;
         private bool _shouldPoll;
 
         public OperationInternals(
-            IOperationSource<T> source,
             ClientDiagnostics clientDiagnostics,
             HttpPipeline pipeline,
             Request originalRequest,
@@ -54,7 +49,6 @@ namespace Azure.Core
             OperationFinalStateVia finalStateVia,
             string scopeName)
         {
-            _source = source;
             _rawResponse = originalResponse;
             _requestMethod = originalRequest.Method;
             _originalUri = originalRequest.Uri.ToUri();
@@ -70,19 +64,19 @@ namespace Azure.Core
 
         public Response GetRawResponse() => _rawResponse;
 
-        public ValueTask<Response<T>> WaitForCompletionAsync(CancellationToken cancellationToken = default)
+        public ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default)
         {
-            return WaitForCompletionAsync(DefaultPollingInterval, cancellationToken);
+            return WaitForCompletionResponseAsync(DefaultPollingInterval, cancellationToken);
         }
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
+        public async ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken)
         {
             while (true)
             {
                 await UpdateStatusAsync(cancellationToken).ConfigureAwait(false);
                 if (HasCompleted)
                 {
-                    return Response.FromValue(Value, GetRawResponse());
+                    return GetRawResponse();
                 }
 
                 await Task.Delay(pollingInterval, cancellationToken).ConfigureAwait(false);
@@ -127,20 +121,22 @@ namespace Azure.Core
                     case 200:
                     case 201 when _requestMethod == RequestMethod.Put:
                     case 204 when !(_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch):
-                    {
-                        _value = async
-                            ? await _source.CreateResultAsync(finalResponse, cancellationToken).ConfigureAwait(false)
-                            : _source.CreateResult(finalResponse, cancellationToken);
-                        _rawResponse = finalResponse;
-                        _hasValue = true;
-                        break;
-                    }
+                        {
+                            await SetValueAsync(async, finalResponse, cancellationToken).ConfigureAwait(false);
+                            _rawResponse = finalResponse;
+                            break;
+                        }
                     default:
                         throw _clientDiagnostics.CreateRequestFailedException(finalResponse);
                 }
             }
 
             return GetRawResponse();
+        }
+
+        protected virtual Task SetValueAsync(bool async, Response finalResponse, CancellationToken cancellationToken = default)
+        {
+            return Task.CompletedTask;
         }
 
         public async ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => await UpdateStatusAsync(async: true, cancellationToken).ConfigureAwait(false);
@@ -152,21 +148,7 @@ namespace Azure.Core
         public string Id => throw new NotImplementedException();
 #pragma warning restore CA1822
 
-        public T Value
-        {
-            get
-            {
-                if (!HasValue)
-                {
-                    throw new InvalidOperationException("The operation has not completed yet.");
-                }
-
-                return _value;
-            }
-        }
-
         public bool HasCompleted => _hasCompleted;
-        public bool HasValue => _hasValue;
 
         private HttpMessage CreateRequest(string link)
         {
@@ -252,7 +234,7 @@ namespace Azure.Core
                                  _headerFrom == HeaderFrom.AzureAsyncOperation) &&
                                 property.NameEquals("status"))
                             {
-                                state = property.Value.GetString().ToLowerInvariant();
+                                state = property.Value.GetRequiredString().ToLowerInvariant();
                                 return s_terminalStates.Contains(state);
                             }
 
@@ -262,7 +244,7 @@ namespace Azure.Core
                                 {
                                     if (innerProperty.NameEquals("provisioningState"))
                                     {
-                                        state = innerProperty.Value.GetString().ToLowerInvariant();
+                                        state = innerProperty.Value.GetRequiredString().ToLowerInvariant();
                                         return s_terminalStates.Contains(state);
                                     }
                                 }

@@ -504,6 +504,29 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>ColorConstant</term>
+        ///     <term>ColorConstant</term>
+        ///     <term>Yes</term>
+        ///     <term> Referenced Color Constant Description. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field1</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> Sample string. </term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> PutReferencedConstantAsync(RequestContent requestBody, RequestOptions requestOptions = null)
@@ -542,6 +565,29 @@ namespace body_string_LowLevel
         }
 
         /// <summary> Sends value &apos;green-color&apos; from a constant. </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>ColorConstant</term>
+        ///     <term>ColorConstant</term>
+        ///     <term>Yes</term>
+        ///     <term> Referenced Color Constant Description. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>field1</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> Sample string. </term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response PutReferencedConstant(RequestContent requestBody, RequestOptions requestOptions = null)
