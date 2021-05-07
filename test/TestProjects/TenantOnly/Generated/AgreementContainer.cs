@@ -36,7 +36,7 @@ namespace TenantOnly
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private AgreementsRestOperations Operations => new AgreementsRestOperations(_clientDiagnostics, _pipeline);
+        private AgreementsRestOperations _restClient => new AgreementsRestOperations(_clientDiagnostics, _pipeline);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -55,9 +55,13 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                return new PhArmResponse<Agreement, AgreementData>(
-                Operations.Get(Id.Name, agreementName, cancellationToken: cancellationToken),
-                data => new Agreement(Parent, data));
+                if (agreementName == null)
+                {
+                    throw new ArgumentNullException(nameof(agreementName));
+                }
+
+                var response = _restClient.Get(Id.Name, agreementName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new Agreement(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -71,13 +75,17 @@ namespace TenantOnly
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<Agreement>> GetAsync(string agreementName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.Get");
             scope.Start();
             try
             {
-                return new PhArmResponse<Agreement, AgreementData>(
-                await Operations.GetAsync(Id.Name, agreementName, cancellationToken: cancellationToken),
-                data => new Agreement(Parent, data));
+                if (agreementName == null)
+                {
+                    throw new ArgumentNullException(nameof(agreementName));
+                }
+
+                var response = await _restClient.GetAsync(Id.Name, agreementName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new Agreement(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -115,7 +123,7 @@ namespace TenantOnly
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -158,7 +166,7 @@ namespace TenantOnly
         /// <returns> An async collection of <see cref="Agreement" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<Agreement> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.List");
             scope.Start();
             try
             {

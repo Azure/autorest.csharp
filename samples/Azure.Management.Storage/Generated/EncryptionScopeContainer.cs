@@ -180,9 +180,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(encryptionScopeName));
                 }
 
-                return new PhArmResponse<EncryptionScope, EncryptionScopeData>(
-                _restClient.Get(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken),
-                data => new EncryptionScope(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new EncryptionScope(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -205,9 +204,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(encryptionScopeName));
                 }
 
-                return new PhArmResponse<EncryptionScope, EncryptionScopeData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken),
-                data => new EncryptionScope(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new EncryptionScope(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

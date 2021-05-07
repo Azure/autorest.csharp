@@ -180,9 +180,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(shareName));
                 }
 
-                return new PhArmResponse<FileShare, FileShareData>(
-                _restClient.Get(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken),
-                data => new FileShare(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new FileShare(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -205,9 +204,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(shareName));
                 }
 
-                return new PhArmResponse<FileShare, FileShareData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken),
-                data => new FileShare(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, shareName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new FileShare(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

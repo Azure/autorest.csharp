@@ -180,9 +180,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(containerName));
                 }
 
-                return new PhArmResponse<BlobContainer, BlobContainerData>(
-                _restClient.Get(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken),
-                data => new BlobContainer(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new BlobContainer(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -205,9 +204,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(containerName));
                 }
 
-                return new PhArmResponse<BlobContainer, BlobContainerData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken),
-                data => new BlobContainer(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new BlobContainer(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

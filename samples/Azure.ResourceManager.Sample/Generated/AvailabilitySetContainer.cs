@@ -179,9 +179,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(availabilitySetName));
                 }
 
-                return new PhArmResponse<AvailabilitySet, AvailabilitySetData>(
-                _restClient.Get(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
-                data => new AvailabilitySet(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new AvailabilitySet(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -204,9 +203,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(availabilitySetName));
                 }
 
-                return new PhArmResponse<AvailabilitySet, AvailabilitySetData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
-                data => new AvailabilitySet(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new AvailabilitySet(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

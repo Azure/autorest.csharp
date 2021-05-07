@@ -36,7 +36,7 @@ namespace TenantOnly
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private BillingAccountsRestOperations Operations => new BillingAccountsRestOperations(_clientDiagnostics, _pipeline);
+        private BillingAccountsRestOperations _restClient => new BillingAccountsRestOperations(_clientDiagnostics, _pipeline);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -55,9 +55,13 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                return new PhArmResponse<BillingAccount, BillingAccountData>(
-                Operations.Get(billingAccountName, cancellationToken: cancellationToken),
-                data => new BillingAccount(Parent, data));
+                if (billingAccountName == null)
+                {
+                    throw new ArgumentNullException(nameof(billingAccountName));
+                }
+
+                var response = _restClient.Get(billingAccountName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new BillingAccount(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -71,13 +75,17 @@ namespace TenantOnly
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<BillingAccount>> GetAsync(string billingAccountName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.Get");
             scope.Start();
             try
             {
-                return new PhArmResponse<BillingAccount, BillingAccountData>(
-                await Operations.GetAsync(billingAccountName, cancellationToken: cancellationToken),
-                data => new BillingAccount(Parent, data));
+                if (billingAccountName == null)
+                {
+                    throw new ArgumentNullException(nameof(billingAccountName));
+                }
+
+                var response = await _restClient.GetAsync(billingAccountName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new BillingAccount(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -115,7 +123,7 @@ namespace TenantOnly
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -158,7 +166,7 @@ namespace TenantOnly
         /// <returns> An async collection of <see cref="BillingAccount" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<BillingAccount> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.List");
             scope.Start();
             try
             {

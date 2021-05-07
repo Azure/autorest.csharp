@@ -36,7 +36,7 @@ namespace OperationGroupMappings
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private AvailabilitySetsRestOperations Operations => new AvailabilitySetsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private AvailabilitySetsRestOperations _restClient => new AvailabilitySetsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -55,9 +55,13 @@ namespace OperationGroupMappings
             scope.Start();
             try
             {
-                return new PhArmResponse<AvailabilitySet, AvailabilitySetData>(
-                Operations.Get(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
-                data => new AvailabilitySet(Parent, data));
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+
+                var response = _restClient.Get(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new AvailabilitySet(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -71,13 +75,17 @@ namespace OperationGroupMappings
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<ArmResponse<AvailabilitySet>> GetAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.GetAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.Get");
             scope.Start();
             try
             {
-                return new PhArmResponse<AvailabilitySet, AvailabilitySetData>(
-                await Operations.GetAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken),
-                data => new AvailabilitySet(Parent, data));
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new AvailabilitySet(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -115,7 +123,7 @@ namespace OperationGroupMappings
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -158,7 +166,7 @@ namespace OperationGroupMappings
         /// <returns> An async collection of <see cref="AvailabilitySet" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<AvailabilitySet> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.List");
             scope.Start();
             try
             {

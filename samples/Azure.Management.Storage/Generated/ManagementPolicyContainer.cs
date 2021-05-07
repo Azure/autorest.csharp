@@ -144,9 +144,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(managementPolicyName));
                 }
 
-                return new PhArmResponse<ManagementPolicy, ManagementPolicyData>(
-                _restClient.Get(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken),
-                data => new ManagementPolicy(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new ManagementPolicy(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -169,9 +168,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(managementPolicyName));
                 }
 
-                return new PhArmResponse<ManagementPolicy, ManagementPolicyData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken),
-                data => new ManagementPolicy(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new ManagementPolicy(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

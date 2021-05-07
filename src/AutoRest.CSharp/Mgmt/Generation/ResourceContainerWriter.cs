@@ -401,28 +401,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             WriteContainerMethodScope(false, $"{typeof(ArmResponse)}<{_resource.Type.Name}>", "Get", passThruParameters, writer =>
             {
-                _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
-                _writer.Append($"{RestClient}.Get(");
+                _writer.Append($"var response = {RestClient}.Get(");
                 foreach (var parameter in parameterMapping)
                 {
                     _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
                     _writer.AppendRaw(", ");
                 }
-                _writer.Line($"cancellationToken: cancellationToken),");
-                _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                _writer.Line($"cancellationToken: cancellationToken);");
+                _writer.Line($"return {typeof(ArmResponse)}.FromValue(new {_resource.Type}(Parent, response.Value), {typeof(ArmResponse)}.FromResponse(response.GetRawResponse()));");
             }, isOverride: true);
 
             WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(ArmResponse)}<{_resource.Type.Name}>>", "Get", passThruParameters, writer =>
             {
-                _writer.Line($"return new PhArmResponse<{_resource.Type}, {_resourceData.Type}>(");
-                _writer.Append($"await {RestClient}.GetAsync(");
+                _writer.Append($"var response = await {RestClient}.GetAsync(");
                 foreach (var parameter in parameterMapping)
                 {
                     _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
                     _writer.AppendRaw(", ");
                 }
-                _writer.Line($"cancellationToken: cancellationToken),");
-                _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                _writer.Line($"cancellationToken: cancellationToken);");
+                _writer.Line($"return {typeof(ArmResponse)}.FromValue(new {_resource.Type}(Parent, response.Value), {typeof(ArmResponse)}.FromResponse(response.GetRawResponse()));");
             }, isOverride: true);
         }
 

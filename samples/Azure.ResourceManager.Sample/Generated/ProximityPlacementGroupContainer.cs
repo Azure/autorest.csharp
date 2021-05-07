@@ -179,9 +179,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(proximityPlacementGroupName));
                 }
 
-                return new PhArmResponse<ProximityPlacementGroup, ProximityPlacementGroupData>(
-                _restClient.Get(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken),
-                data => new ProximityPlacementGroup(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new ProximityPlacementGroup(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -204,9 +203,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(proximityPlacementGroupName));
                 }
 
-                return new PhArmResponse<ProximityPlacementGroup, ProximityPlacementGroupData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken),
-                data => new ProximityPlacementGroup(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new ProximityPlacementGroup(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

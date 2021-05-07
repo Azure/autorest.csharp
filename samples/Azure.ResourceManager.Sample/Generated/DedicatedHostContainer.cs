@@ -187,9 +187,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(hostName));
                 }
 
-                return new PhArmResponse<DedicatedHost, DedicatedHostData>(
-                _restClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
-                data => new DedicatedHost(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new DedicatedHost(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -212,9 +211,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(hostName));
                 }
 
-                return new PhArmResponse<DedicatedHost, DedicatedHostData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken),
-                data => new DedicatedHost(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new DedicatedHost(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

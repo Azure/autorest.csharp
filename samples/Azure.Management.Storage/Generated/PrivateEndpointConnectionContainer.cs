@@ -168,9 +168,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(privateEndpointConnectionName));
                 }
 
-                return new PhArmResponse<PrivateEndpointConnection, PrivateEndpointConnectionData>(
-                _restClient.Get(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken),
-                data => new PrivateEndpointConnection(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new PrivateEndpointConnection(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -193,9 +192,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(privateEndpointConnectionName));
                 }
 
-                return new PhArmResponse<PrivateEndpointConnection, PrivateEndpointConnectionData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken),
-                data => new PrivateEndpointConnection(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new PrivateEndpointConnection(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

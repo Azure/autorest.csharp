@@ -179,9 +179,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(sshPublicKeyName));
                 }
 
-                return new PhArmResponse<SshPublicKey, SshPublicKeyData>(
-                _restClient.Get(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
-                data => new SshPublicKey(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new SshPublicKey(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -204,9 +203,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(sshPublicKeyName));
                 }
 
-                return new PhArmResponse<SshPublicKey, SshPublicKeyData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken),
-                data => new SshPublicKey(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, sshPublicKeyName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new SshPublicKey(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

@@ -18,7 +18,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Toaster and their operations over a Subscription. </summary>
-    public partial class ToasterContainer : ResourceContainerBase<TenantResourceIdentifier, Toaster, ToasterData>
+    public partial class ToasterContainer : ContainerBase<TenantResourceIdentifier, Toaster>
     {
         /// <summary> Initializes a new instance of the <see cref="ToasterContainer"/> class for mocking. </summary>
         protected ToasterContainer()
@@ -37,7 +37,7 @@ namespace SubscriptionExtensions
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private ToastersRestOperations Operations => new ToastersRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private ToastersRestOperations _restClient => new ToastersRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -57,6 +57,15 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(availabilitySetName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<Toaster>;
             }
             catch (Exception e)
@@ -72,10 +81,19 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<Toaster>> CreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<Toaster>;
             }
@@ -96,7 +114,16 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken);
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken);
                 return new PhArmOperation<Toaster, ToasterData>(
                 originalResponse,
                 data => new Toaster(Parent, data));
@@ -114,11 +141,20 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<Toaster>> StartCreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (availabilitySetName == null)
+                {
+                    throw new ArgumentNullException(nameof(availabilitySetName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<Toaster, ToasterData>(
                 originalResponse,
                 data => new Toaster(Parent, data));
@@ -128,20 +164,6 @@ namespace SubscriptionExtensions
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <inheritdoc />
-        public override ArmResponse<Toaster> Get(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<Toaster>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
         }
 
         /// <summary> Filters the list of Toaster for this resource group represented as generic resources. </summary>
@@ -173,7 +195,7 @@ namespace SubscriptionExtensions
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -216,7 +238,7 @@ namespace SubscriptionExtensions
         /// <returns> An async collection of <see cref="Toaster" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<Toaster> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterContainer.List");
             scope.Start();
             try
             {

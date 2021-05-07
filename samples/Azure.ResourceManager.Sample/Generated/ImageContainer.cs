@@ -187,9 +187,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(imageName));
                 }
 
-                return new PhArmResponse<Image, ImageData>(
-                _restClient.Get(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken),
-                data => new Image(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new Image(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -212,9 +211,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(imageName));
                 }
 
-                return new PhArmResponse<Image, ImageData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken),
-                data => new Image(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new Image(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

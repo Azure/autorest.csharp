@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel1 and their operations over a ResourceGroup. </summary>
-    public partial class SupersetModel1Container : ResourceContainerBase<TenantResourceIdentifier, SupersetModel1, SupersetModel1Data>
+    public partial class SupersetModel1Container : ContainerBase<TenantResourceIdentifier, SupersetModel1>
     {
         /// <summary> Initializes a new instance of the <see cref="SupersetModel1Container"/> class for mocking. </summary>
         protected SupersetModel1Container()
@@ -36,7 +36,7 @@ namespace SupersetInheritance
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private SupersetModel1SRestOperations Operations => new SupersetModel1SRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private SupersetModel1SRestOperations _restClient => new SupersetModel1SRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -56,6 +56,15 @@ namespace SupersetInheritance
             scope.Start();
             try
             {
+                if (supersetModel1SName == null)
+                {
+                    throw new ArgumentNullException(nameof(supersetModel1SName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(supersetModel1SName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<SupersetModel1>;
             }
             catch (Exception e)
@@ -71,10 +80,19 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<SupersetModel1>> CreateOrUpdateAsync(string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (supersetModel1SName == null)
+                {
+                    throw new ArgumentNullException(nameof(supersetModel1SName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(supersetModel1SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<SupersetModel1>;
             }
@@ -95,7 +113,16 @@ namespace SupersetInheritance
             scope.Start();
             try
             {
-                var originalResponse = Operations.Put(Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken: cancellationToken);
+                if (supersetModel1SName == null)
+                {
+                    throw new ArgumentNullException(nameof(supersetModel1SName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.Put(Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken: cancellationToken);
                 return new PhArmOperation<SupersetModel1, SupersetModel1Data>(
                 originalResponse,
                 data => new SupersetModel1(Parent, data));
@@ -113,11 +140,20 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<SupersetModel1>> StartCreateOrUpdateAsync(string supersetModel1SName, SupersetModel1Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.PutAsync(Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (supersetModel1SName == null)
+                {
+                    throw new ArgumentNullException(nameof(supersetModel1SName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, supersetModel1SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<SupersetModel1, SupersetModel1Data>(
                 originalResponse,
                 data => new SupersetModel1(Parent, data));
@@ -127,20 +163,6 @@ namespace SupersetInheritance
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <inheritdoc />
-        public override ArmResponse<SupersetModel1> Get(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<SupersetModel1>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
         }
 
         /// <summary> Filters the list of SupersetModel1 for this resource group represented as generic resources. </summary>
@@ -172,7 +194,7 @@ namespace SupersetInheritance
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -215,7 +237,7 @@ namespace SupersetInheritance
         /// <returns> An async collection of <see cref="SupersetModel1" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<SupersetModel1> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.List");
             scope.Start();
             try
             {

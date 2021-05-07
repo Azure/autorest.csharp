@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing collection of ExactMatchModel5 and their operations over a ResourceGroup. </summary>
-    public partial class ExactMatchModel5Container : ResourceContainerBase<TenantResourceIdentifier, ExactMatchModel5, ExactMatchModel5Data>
+    public partial class ExactMatchModel5Container : ContainerBase<TenantResourceIdentifier, ExactMatchModel5>
     {
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Container"/> class for mocking. </summary>
         protected ExactMatchModel5Container()
@@ -36,7 +36,7 @@ namespace ExactMatchInheritance
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private ExactMatchModel5SRestOperations Operations => new ExactMatchModel5SRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private ExactMatchModel5SRestOperations _restClient => new ExactMatchModel5SRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -56,6 +56,15 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
+                if (exactMatchModel5SName == null)
+                {
+                    throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(exactMatchModel5SName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<ExactMatchModel5>;
             }
             catch (Exception e)
@@ -71,10 +80,19 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<ExactMatchModel5>> CreateOrUpdateAsync(string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Container.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Container.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (exactMatchModel5SName == null)
+                {
+                    throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(exactMatchModel5SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<ExactMatchModel5>;
             }
@@ -95,7 +113,16 @@ namespace ExactMatchInheritance
             scope.Start();
             try
             {
-                var originalResponse = Operations.Put(Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken: cancellationToken);
+                if (exactMatchModel5SName == null)
+                {
+                    throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.Put(Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken: cancellationToken);
                 return new PhArmOperation<ExactMatchModel5, ExactMatchModel5Data>(
                 originalResponse,
                 data => new ExactMatchModel5(Parent, data));
@@ -113,11 +140,20 @@ namespace ExactMatchInheritance
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<ExactMatchModel5>> StartCreateOrUpdateAsync(string exactMatchModel5SName, ExactMatchModel5Data parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Container.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Container.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.PutAsync(Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (exactMatchModel5SName == null)
+                {
+                    throw new ArgumentNullException(nameof(exactMatchModel5SName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, exactMatchModel5SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<ExactMatchModel5, ExactMatchModel5Data>(
                 originalResponse,
                 data => new ExactMatchModel5(Parent, data));
@@ -127,20 +163,6 @@ namespace ExactMatchInheritance
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <inheritdoc />
-        public override ArmResponse<ExactMatchModel5> Get(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<ExactMatchModel5>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
         }
 
         /// <summary> Filters the list of ExactMatchModel5 for this resource group represented as generic resources. </summary>
@@ -172,7 +194,7 @@ namespace ExactMatchInheritance
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Container.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Container.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -215,7 +237,7 @@ namespace ExactMatchInheritance
         /// <returns> An async collection of <see cref="ExactMatchModel5" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<ExactMatchModel5> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Container.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Container.List");
             scope.Start();
             try
             {

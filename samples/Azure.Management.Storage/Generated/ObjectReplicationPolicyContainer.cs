@@ -180,9 +180,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(objectReplicationPolicyId));
                 }
 
-                return new PhArmResponse<ObjectReplicationPolicy, ObjectReplicationPolicyData>(
-                _restClient.Get(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken),
-                data => new ObjectReplicationPolicy(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new ObjectReplicationPolicy(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -205,9 +204,8 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(objectReplicationPolicyId));
                 }
 
-                return new PhArmResponse<ObjectReplicationPolicy, ObjectReplicationPolicyData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken),
-                data => new ObjectReplicationPolicy(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, objectReplicationPolicyId, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new ObjectReplicationPolicy(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {

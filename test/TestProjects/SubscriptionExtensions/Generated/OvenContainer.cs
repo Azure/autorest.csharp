@@ -18,7 +18,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Oven and their operations over a ResourceGroup. </summary>
-    public partial class OvenContainer : ResourceContainerBase<TenantResourceIdentifier, Oven, OvenData>
+    public partial class OvenContainer : ContainerBase<TenantResourceIdentifier, Oven>
     {
         /// <summary> Initializes a new instance of the <see cref="OvenContainer"/> class for mocking. </summary>
         protected OvenContainer()
@@ -37,7 +37,7 @@ namespace SubscriptionExtensions
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private OvensRestOperations Operations => new OvensRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private OvensRestOperations _restClient => new OvensRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
@@ -57,6 +57,15 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
+                if (vmName == null)
+                {
+                    throw new ArgumentNullException(nameof(vmName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<Oven>;
             }
             catch (Exception e)
@@ -72,10 +81,19 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmResponse<Oven>> CreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.CreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (vmName == null)
+                {
+                    throw new ArgumentNullException(nameof(vmName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
                 var operation = await StartCreateOrUpdateAsync(vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return operation.WaitForCompletion() as ArmResponse<Oven>;
             }
@@ -96,9 +114,18 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var originalResponse = Operations.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken);
+                if (vmName == null)
+                {
+                    throw new ArgumentNullException(nameof(vmName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken);
                 var operation = new OvenCreateOrUpdateOperation(
-                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, vmName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<Oven, OvenData>(
@@ -118,13 +145,22 @@ namespace SubscriptionExtensions
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ArmOperation<Oven>> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.StartCreateOrUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await Operations.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (vmName == null)
+                {
+                    throw new ArgumentNullException(nameof(vmName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var operation = new OvenCreateOrUpdateOperation(
-                _clientDiagnostics, _pipeline, Operations.CreateCreateOrUpdateRequest(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, vmName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<Oven, OvenData>(
@@ -136,20 +172,6 @@ namespace SubscriptionExtensions
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <inheritdoc />
-        public override ArmResponse<Oven> Get(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc />
-        public override Task<ArmResponse<Oven>> GetAsync(string resourceName, CancellationToken cancellationToken = default)
-        {
-            // This resource does not support Get operation.
-            throw new NotImplementedException();
         }
 
         /// <summary> Filters the list of Oven for this resource group represented as generic resources. </summary>
@@ -181,7 +203,7 @@ namespace SubscriptionExtensions
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListAsGenericResourceAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListAsGenericResource");
             scope.Start();
             try
             {
@@ -224,7 +246,7 @@ namespace SubscriptionExtensions
         /// <returns> An async collection of <see cref="Oven" /> that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<Oven> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.List");
             scope.Start();
             try
             {

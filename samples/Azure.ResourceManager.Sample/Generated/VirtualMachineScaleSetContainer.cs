@@ -187,9 +187,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(vmScaleSetName));
                 }
 
-                return new PhArmResponse<VirtualMachineScaleSet, VirtualMachineScaleSetData>(
-                _restClient.Get(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken),
-                data => new VirtualMachineScaleSet(Parent, data));
+                var response = _restClient.Get(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new VirtualMachineScaleSet(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
@@ -212,9 +211,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(vmScaleSetName));
                 }
 
-                return new PhArmResponse<VirtualMachineScaleSet, VirtualMachineScaleSetData>(
-                await _restClient.GetAsync(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken),
-                data => new VirtualMachineScaleSet(Parent, data));
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken);
+                return ArmResponse.FromValue(new VirtualMachineScaleSet(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
             {
