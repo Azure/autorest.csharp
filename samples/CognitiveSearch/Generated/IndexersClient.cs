@@ -42,7 +42,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> ResetAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> ResetAsync(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Reset");
             scope.Start();
@@ -61,7 +61,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to reset. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Reset(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response Reset(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Reset");
             scope.Start();
@@ -80,7 +80,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to run. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> RunAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> RunAsync(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Run");
             scope.Start();
@@ -99,7 +99,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to run. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Run(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response Run(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Run");
             scope.Start();
@@ -120,7 +120,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Indexer indexer, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Indexer>> CreateOrUpdateAsync(string indexerName, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.CreateOrUpdate");
             scope.Start();
@@ -141,7 +141,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Indexer> CreateOrUpdate(string indexerName, Indexer indexer, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response<Indexer> CreateOrUpdate(string indexerName, Indexer indexer, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.CreateOrUpdate");
             scope.Start();
@@ -161,7 +161,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> DeleteAsync(string indexerName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> DeleteAsync(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Delete");
             scope.Start();
@@ -181,7 +181,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete(string indexerName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
+        public virtual Response Delete(string indexerName, Models.RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Delete");
             scope.Start();
@@ -200,7 +200,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Indexer>> GetAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Indexer>> GetAsync(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Get");
             scope.Start();
@@ -219,7 +219,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Indexer> Get(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<Indexer> Get(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Get");
             scope.Start();
@@ -238,7 +238,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ListIndexersResult>> ListAsync(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ListIndexersResult>> ListAsync(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.List");
             scope.Start();
@@ -257,7 +257,7 @@ namespace CognitiveSearch
         /// <param name="select"> Selects which top-level properties of the indexers to retrieve. Specified as a comma-separated list of JSON property names, or &apos;*&apos; for all properties. The default is all properties. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ListIndexersResult> List(string select = null, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<ListIndexersResult> List(string select = null, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.List");
             scope.Start();
@@ -276,7 +276,7 @@ namespace CognitiveSearch
         /// <param name="indexer"> The definition of the indexer to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Indexer>> CreateAsync(Indexer indexer, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Indexer>> CreateAsync(Indexer indexer, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Create");
             scope.Start();
@@ -295,7 +295,7 @@ namespace CognitiveSearch
         /// <param name="indexer"> The definition of the indexer to create. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Indexer> Create(Indexer indexer, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<Indexer> Create(Indexer indexer, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.Create");
             scope.Start();
@@ -314,7 +314,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer for which to retrieve status. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IndexerExecutionInfo>> GetStatusAsync(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.GetStatus");
             scope.Start();
@@ -333,7 +333,7 @@ namespace CognitiveSearch
         /// <param name="indexerName"> The name of the indexer for which to retrieve status. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IndexerExecutionInfo> GetStatus(string indexerName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
+        public virtual Response<IndexerExecutionInfo> GetStatus(string indexerName, Models.RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("IndexersClient.GetStatus");
             scope.Start();

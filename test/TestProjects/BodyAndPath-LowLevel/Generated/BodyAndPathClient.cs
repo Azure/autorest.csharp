@@ -11,10 +11,10 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace body_complex_LowLevel
+namespace BodyAndPath_LowLevel
 {
-    /// <summary> The Flattencomplex service client. </summary>
-    public partial class FlattencomplexClient
+    /// <summary> The BodyAndPath service client. </summary>
+    public partial class BodyAndPathClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get; }
@@ -23,16 +23,16 @@ namespace body_complex_LowLevel
         private readonly string apiVersion;
         private readonly ClientDiagnostics _clientDiagnostics;
 
-        /// <summary> Initializes a new instance of FlattencomplexClient for mocking. </summary>
-        protected FlattencomplexClient()
+        /// <summary> Initializes a new instance of BodyAndPathClient for mocking. </summary>
+        protected BodyAndPathClient()
         {
         }
 
-        /// <summary> Initializes a new instance of FlattencomplexClient. </summary>
+        /// <summary> Initializes a new instance of BodyAndPathClient. </summary>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        public FlattencomplexClient(AzureKeyCredential credential, Uri endpoint = null, AutoRestComplexTestServiceClientOptions options = null)
+        public BodyAndPathClient(AzureKeyCredential credential, Uri endpoint = null, BodyAndPathClientOptions options = null)
         {
             if (credential == null)
             {
@@ -40,7 +40,7 @@ namespace body_complex_LowLevel
             }
             endpoint ??= new Uri("http://localhost:3000");
 
-            options ??= new AutoRestComplexTestServiceClientOptions();
+            options ??= new BodyAndPathClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
             var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
             Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
@@ -48,16 +48,19 @@ namespace body_complex_LowLevel
             apiVersion = options.Version;
         }
 
+        /// <summary> Resets products. </summary>
+        /// <param name="itemName"> item name. </param>
+        /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        public virtual async Task<Response> GetValidAsync(RequestOptions requestOptions = null)
+        public virtual async Task<Response> CreateAsync(string itemName, RequestContent requestBody, RequestOptions requestOptions = null)
         {
             requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateGetValidRequest(requestOptions);
+            HttpMessage message = CreateCreateRequest(itemName, requestBody, requestOptions);
             if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
             try
             {
@@ -84,16 +87,19 @@ namespace body_complex_LowLevel
             }
         }
 
+        /// <summary> Resets products. </summary>
+        /// <param name="itemName"> item name. </param>
+        /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        public virtual Response GetValid(RequestOptions requestOptions = null)
+        public virtual Response Create(string itemName, RequestContent requestBody, RequestOptions requestOptions = null)
         {
             requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateGetValidRequest(requestOptions);
+            HttpMessage message = CreateCreateRequest(itemName, requestBody, requestOptions);
             if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            using var scope = _clientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
+            using var scope = _clientDiagnostics.CreateScope("BodyAndPathClient.Create");
             scope.Start();
             try
             {
@@ -120,18 +126,22 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Create Request for <see cref="GetValid"/> and <see cref="GetValidAsync"/> operations. </summary>
+        /// <summary> Create Request for <see cref="Create"/> and <see cref="CreateAsync"/> operations. </summary>
+        /// <param name="itemName"> item name. </param>
+        /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateGetValidRequest(RequestOptions requestOptions = null)
+        private HttpMessage CreateCreateRequest(string itemName, RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
-            request.Method = RequestMethod.Get;
+            request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
-            uri.AppendPath("/complex/flatten/valid", false);
+            uri.AppendPath("/", false);
+            uri.AppendPath(itemName, true);
             request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = requestBody;
             return message;
         }
     }

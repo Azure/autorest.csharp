@@ -214,7 +214,7 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
-        internal HttpMessage CreateAnalyzeWithCustomModelRequest(Guid modelId, ContentType contentType, bool? includeTextDetails, Stream fileStream)
+        internal HttpMessage CreateAnalyzeWithCustomModelRequest(Guid modelId, Models.ContentType contentType, bool? includeTextDetails, Stream fileStream)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -245,7 +245,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeWithCustomModelHeaders>> AnalyzeWithCustomModelAsync(Guid modelId, ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeWithCustomModelHeaders>> AnalyzeWithCustomModelAsync(Guid modelId, Models.ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeWithCustomModelRequest(modelId, contentType, includeTextDetails, fileStream);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -265,7 +265,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeWithCustomModelHeaders> AnalyzeWithCustomModel(Guid modelId, ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeWithCustomModelHeaders> AnalyzeWithCustomModel(Guid modelId, Models.ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeWithCustomModelRequest(modelId, contentType, includeTextDetails, fileStream);
             _pipeline.Send(message, cancellationToken);
@@ -590,7 +590,7 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
-        internal HttpMessage CreateAnalyzeReceiptAsyncRequest(ContentType contentType, bool? includeTextDetails, Stream fileStream)
+        internal HttpMessage CreateAnalyzeReceiptAsyncRequest(Models.ContentType contentType, bool? includeTextDetails, Stream fileStream)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -618,7 +618,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeReceiptAsyncHeaders>> AnalyzeReceiptAsyncAsync(ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeReceiptAsyncHeaders>> AnalyzeReceiptAsyncAsync(Models.ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeReceiptAsyncRequest(contentType, includeTextDetails, fileStream);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -637,7 +637,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="includeTextDetails"> Include text lines and element references in the result. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeReceiptAsyncHeaders> AnalyzeReceiptAsync(ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeReceiptAsyncHeaders> AnalyzeReceiptAsync(Models.ContentType contentType, bool? includeTextDetails = null, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeReceiptAsyncRequest(contentType, includeTextDetails, fileStream);
             _pipeline.Send(message, cancellationToken);
@@ -769,7 +769,7 @@ namespace Azure.AI.FormRecognizer
             }
         }
 
-        internal HttpMessage CreateAnalyzeLayoutAsyncRequest(ContentType contentType, Stream fileStream)
+        internal HttpMessage CreateAnalyzeLayoutAsyncRequest(Models.ContentType contentType, Stream fileStream)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -792,7 +792,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders>> AnalyzeLayoutAsyncAsync(ContentType contentType, Stream fileStream = null, CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders>> AnalyzeLayoutAsyncAsync(Models.ContentType contentType, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeLayoutAsyncRequest(contentType, fileStream);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -810,7 +810,7 @@ namespace Azure.AI.FormRecognizer
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="fileStream"> .json, .pdf, .jpg, .png or .tiff type file stream. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders> AnalyzeLayoutAsync(ContentType contentType, Stream fileStream = null, CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<AzureAIFormRecognizerAnalyzeLayoutAsyncHeaders> AnalyzeLayoutAsync(Models.ContentType contentType, Stream fileStream = null, CancellationToken cancellationToken = default)
         {
             using var message = CreateAnalyzeLayoutAsyncRequest(contentType, fileStream);
             _pipeline.Send(message, cancellationToken);

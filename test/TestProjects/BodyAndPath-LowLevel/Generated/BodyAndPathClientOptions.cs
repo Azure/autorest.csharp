@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace BodyAndPath
+namespace BodyAndPath_LowLevel
 {
     /// <summary> Client options for BodyAndPathClient. </summary>
     public partial class BodyAndPathClientOptions : ClientOptions

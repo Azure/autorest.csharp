@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly BuildContext<LowLevelOutputLibrary> _context;
         private RestClientBuilder _builder;
 
-        private LowLevelRestClientMethod[]? _allMethods;
+        private LowLevelClientMethod[]? _allMethods;
 
         protected override string DefaultAccessibility { get; } = "public";
 
@@ -38,13 +38,13 @@ namespace AutoRest.CSharp.Output.Models
 
         public Parameter[] Parameters { get; }
         public string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(_operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
-        public LowLevelRestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
+        public LowLevelClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }
 
-        private IEnumerable<LowLevelRestClientMethod> BuildAllMethods()
+        private IEnumerable<LowLevelClientMethod> BuildAllMethods()
         {
-            var requestMethods = new Dictionary<ServiceRequest, LowLevelRestClientMethod>();
+            var requestMethods = new Dictionary<ServiceRequest, LowLevelClientMethod>();
 
             foreach (var operation in _operationGroup.Operations)
             {
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Output.Models
                     RestClientMethod method = _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null, accessibility);
                     List<Parameter> parameters = method.Parameters.ToList();
                     RequestBody? body = null;
-                    LowLevelRestClientMethod.SchemaDocumentation[]? schemaDocumentation = null;
+                    LowLevelClientMethod.SchemaDocumentation[]? schemaDocumentation = null;
 
                     if (serviceRequest.Parameters.Any(p => p.In == ParameterLocation.Body))
                     {
@@ -80,18 +80,24 @@ namespace AutoRest.CSharp.Output.Models
                         schemaDocumentation = GetSchemaDocumentationsForParameter(bodyParameter);
                     }
 
+                    // Inject the RequestOptions
+                    CSharpType requestType = new CSharpType (typeof(Azure.RequestOptions)).WithNullable(true);
+                    Parameter requestOptions = new Parameter ("requestOptions", "The request options", requestType, new Constant(null, requestType), true);
+                    parameters.Insert (parameters.Count, requestOptions);
+
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, method.Request.Headers, body);
-                    yield return new LowLevelRestClientMethod (method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, schemaDocumentation);
+                    Diagnostic diagnostic = new Diagnostic($"{Declaration.Name}.{method.Name}");
+                    yield return new LowLevelClientMethod(method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility, schemaDocumentation, diagnostic);
                 }
             }
         }
 
-        private LowLevelRestClientMethod.SchemaDocumentation[]? GetSchemaDocumentationsForParameter(RequestParameter parameter)
+        private LowLevelClientMethod.SchemaDocumentation[]? GetSchemaDocumentationsForParameter(RequestParameter parameter)
         {
             // Visit each schema in the graph and for object schemas, collect information about all the properties.
             HashSet<string> visitedSchema = new HashSet<string>();
             Queue<Schema> schemasToExplore = new Queue<Schema>(new Schema[] { parameter.Schema });
-            List<(string SchemaName, List<LowLevelRestClientMethod.SchemaDocumentation.DocumentationRow> Rows)> documentationObjects = new ();
+            List<(string SchemaName, List<LowLevelClientMethod.SchemaDocumentation.DocumentationRow> Rows)> documentationObjects = new ();
 
             while (schemasToExplore.Any())
             {
@@ -117,14 +123,14 @@ namespace AutoRest.CSharp.Output.Models
                         schemasToExplore.Enqueue(a.ElementType);
                         break;
                     case ObjectSchema o:
-                        List<LowLevelRestClientMethod.SchemaDocumentation.DocumentationRow> propertyDocumentation = new ();
+                        List<LowLevelClientMethod.SchemaDocumentation.DocumentationRow> propertyDocumentation = new ();
 
                         // We must also include any properties introduced by our parent chain.
                         foreach (ObjectSchema s in (o.Parents?.All ?? Array.Empty<ComplexSchema>()).Concat(new ComplexSchema[] { o }).OfType<ObjectSchema>())
                         {
                             foreach (Property prop in s.Properties)
                             {
-                                propertyDocumentation.Add(new LowLevelRestClientMethod.SchemaDocumentation.DocumentationRow(
+                                propertyDocumentation.Add(new LowLevelClientMethod.SchemaDocumentation.DocumentationRow(
                                     prop.SerializedName,
                                     BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(prop.Schema)),
                                     prop.Required ?? false,
@@ -146,7 +152,7 @@ namespace AutoRest.CSharp.Output.Models
                 return null;
             }
 
-            return documentationObjects.Select(o => new LowLevelRestClientMethod.SchemaDocumentation(o.SchemaName, o.Rows.ToArray())).ToArray();
+            return documentationObjects.Select(o => new LowLevelClientMethod.SchemaDocumentation(o.SchemaName, o.Rows.ToArray())).ToArray();
         }
 
         private string StringifyTypeForTable(Schema s)

@@ -6,6 +6,10 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
 
+<ItemGroup>
+    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.12" />
+</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Azure.Core" Version="1.13.0" />
   </ItemGroup>
