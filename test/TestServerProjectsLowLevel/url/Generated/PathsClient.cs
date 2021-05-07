@@ -53,12 +53,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> GetBooleanTrueAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetBooleanTrueRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -80,8 +81,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response GetBooleanTrue(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetBooleanTrueRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -123,12 +125,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> GetBooleanFalseAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetBooleanFalseRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -150,8 +153,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response GetBooleanFalse(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetBooleanFalseRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -193,12 +197,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> GetIntOneMillionAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetIntOneMillionRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -220,8 +225,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response GetIntOneMillion(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetIntOneMillionRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -263,12 +269,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetIntNegativeOneMillionRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -290,8 +297,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response GetIntNegativeOneMillion(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetIntNegativeOneMillionRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -333,12 +341,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> GetTenBillionAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetTenBillionRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -360,8 +369,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response GetTenBillion(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetTenBillionRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -403,12 +413,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetNegativeTenBillionRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -430,8 +441,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response GetNegativeTenBillion(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetNegativeTenBillionRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -473,12 +485,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateFloatScientificPositiveRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -500,8 +513,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response FloatScientificPositive(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateFloatScientificPositiveRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -543,12 +557,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateFloatScientificNegativeRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -570,8 +585,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response FloatScientificNegative(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateFloatScientificNegativeRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -613,12 +629,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDoubleDecimalPositiveRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -640,8 +657,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response DoubleDecimalPositive(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDoubleDecimalPositiveRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -683,12 +701,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDoubleDecimalNegativeRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -710,8 +729,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response DoubleDecimalNegative(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDoubleDecimalNegativeRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -753,12 +773,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> StringUnicodeAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUnicodeRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -780,8 +801,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response StringUnicode(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUnicodeRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -823,12 +845,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> StringUrlEncodedAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUrlEncodedRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -850,8 +873,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response StringUrlEncoded(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUrlEncodedRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -893,12 +917,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUrlNonEncodedRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -920,8 +945,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response StringUrlNonEncoded(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUrlNonEncodedRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -963,12 +989,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> StringEmptyAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringEmptyRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -990,8 +1017,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response StringEmpty(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringEmptyRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1034,12 +1062,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringNullRequest(stringPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1062,8 +1091,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response StringNull(string stringPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringNullRequest(stringPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1107,12 +1137,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateEnumValidRequest(enumPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1135,8 +1166,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response EnumValid(string enumPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateEnumValidRequest(enumPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1180,12 +1212,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateEnumNullRequest(enumPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1208,8 +1241,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response EnumNull(string enumPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateEnumNullRequest(enumPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1253,12 +1287,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteMultiByteRequest(bytePath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1281,8 +1316,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response ByteMultiByte(byte[] bytePath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteMultiByteRequest(bytePath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1325,12 +1361,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> ByteEmptyAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteEmptyRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1352,8 +1389,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response ByteEmpty(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteEmptyRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1396,12 +1434,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteNullRequest(bytePath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1424,8 +1463,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response ByteNull(byte[] bytePath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteNullRequest(bytePath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1468,12 +1508,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> DateValidAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateValidRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1495,8 +1536,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response DateValid(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateValidRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1539,12 +1581,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateNullRequest(datePath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1567,8 +1610,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response DateNull(DateTimeOffset datePath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateNullRequest(datePath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1611,12 +1655,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> DateTimeValidAsync(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateTimeValidRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1638,8 +1683,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response DateTimeValid(RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateTimeValidRequest(requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1682,12 +1728,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateTimeNullRequest(dateTimePath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1710,8 +1757,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response DateTimeNull(DateTimeOffset dateTimePath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateTimeNullRequest(dateTimePath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1755,12 +1803,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateBase64UrlRequest(base64UrlPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1783,8 +1832,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response Base64Url(byte[] base64UrlPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateBase64UrlRequest(base64UrlPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1828,12 +1878,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1856,8 +1907,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
@@ -1901,12 +1953,13 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            await Pipeline.SendAsync(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None).ConfigureAwait(false);
+            await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
             ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
             if (statusOption == ResponseStatusOption.Default)
             {
@@ -1929,8 +1982,9 @@ namespace url_LowLevel
         /// <param name="requestOptions"> The request options. </param>
         public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, RequestOptions requestOptions = null)
         {
+            requestOptions ??= new RequestOptions();
             HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, requestOptions);
-            if (requestOptions?.PerCallPolicy != null)
+            if (requestOptions.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
