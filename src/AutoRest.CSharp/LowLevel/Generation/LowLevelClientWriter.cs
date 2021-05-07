@@ -40,8 +40,10 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteClientMethodRequest(CodeWriter writer, RestClientMethod clientMethod)
+        private void WriteClientMethodRequest(CodeWriter writer, LowLevelClientMethod lowLevelClientMethod)
         {
+            var clientMethod = lowLevelClientMethod.RestClientMethod;
+
             writer.WriteXmlDocumentationSummary($"Create Request for <see cref=\"{clientMethod.Name}\"/> and <see cref=\"{clientMethod.Name}Async\"/> operations.");
             foreach (Parameter parameter in clientMethod.Parameters)
             {
@@ -50,8 +52,10 @@ namespace AutoRest.CSharp.Generation.Writers
             RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private");
         }
 
-        private void WriteClientMethod(CodeWriter writer, RestClientMethod clientMethod, bool async)
+        private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod lowLevelClientMethod, bool async)
         {
+            var clientMethod = lowLevelClientMethod.RestClientMethod;
+
             var parameters = clientMethod.Parameters;
 
             var responseType = async ? new CSharpType(typeof(Task<Response>)) : new CSharpType(typeof(Response));
@@ -92,22 +96,36 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"message.SetProperty (\"RequestOptionsPerCallPolicyCallback\", requestOptions.PerCallPolicy);");
                 }
 
-                if (async)
+                var scopeVariable = new CodeWriterDeclaration("scope");
+                writer.Line($"using var {scopeVariable:D} = {ClientDiagnosticsField}.CreateScope({lowLevelClientMethod.Diagnostics.ScopeName:L});");
+
+                writer.Line($"{scopeVariable}.Start();");
+
+                using (writer.Scope($"try"))
                 {
-                    writer.Line($"await {PipelineField:I}.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);");
-                }
-                else
-                {
-                    writer.Line($"{PipelineField:I}.Send(message, requestOptions.CancellationToken);");
+                    if (async)
+                    {
+                        writer.Line($"await {PipelineField:I}.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);");
+                    }
+                    else
+                    {
+                        writer.Line($"{PipelineField:I}.Send(message, requestOptions.CancellationToken);");
+                    }
+
+                    using (writer.Scope($"if (requestOptions.StatusOption == ResponseStatusOption.Default)"))
+                    {
+                        WriteStatusCodeSwitch(writer, clientMethod, async);
+                    }
+                    using (writer.Scope($"else"))
+                    {
+                        writer.Line($"return message.Response;");
+                    }
                 }
 
-                using (writer.Scope($"if (requestOptions.StatusOption == ResponseStatusOption.Default)"))
+                using (writer.Scope($"catch ({typeof(Exception)} e)"))
                 {
-                    WriteStatusCodeSwitch(writer, clientMethod, async);
-                }
-                using (writer.Scope($"else"))
-                {
-                    writer.Line($"return message.Response;");
+                    writer.Line($"{scopeVariable}.Failed(e);");
+                    writer.Line($"throw;");
                 }
             }
 

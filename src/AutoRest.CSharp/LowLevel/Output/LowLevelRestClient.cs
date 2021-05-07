@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly BuildContext<LowLevelOutputLibrary> _context;
         private RestClientBuilder _builder;
 
-        private RestClientMethod[]? _allMethods;
+        private LowLevelClientMethod[]? _allMethods;
 
         protected override string DefaultAccessibility { get; } = "public";
 
@@ -37,11 +37,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public Parameter[] Parameters { get; }
         public string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(_operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
-        public RestClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
+        public LowLevelClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }
 
-        private IEnumerable<RestClientMethod> BuildAllMethods()
+        private IEnumerable<LowLevelClientMethod> BuildAllMethods()
         {
             var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
 
@@ -81,7 +81,9 @@ namespace AutoRest.CSharp.Output.Models
                     parameters.Insert (parameters.Count, requestOptions);
 
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, method.Request.Headers, body);
-                    yield return new RestClientMethod (method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility);
+                    RestClientMethod restClientMethod = new RestClientMethod (method.Name, method.Description, method.ReturnType, request, parameters.ToArray(), method.Responses, method.HeaderModel, method.BufferResponse, method.Accessibility);
+                    Diagnostic diagnostic = new Diagnostic($"{Declaration.Name}.{method.Name}");
+                    yield return new LowLevelClientMethod(restClientMethod, diagnostic);
                 }
             }
         }
