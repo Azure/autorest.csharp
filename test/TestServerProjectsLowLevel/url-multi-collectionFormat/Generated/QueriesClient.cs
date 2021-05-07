@@ -61,8 +61,7 @@ namespace url_multi_collectionFormat_LowLevel
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
             await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
-            if (statusOption == ResponseStatusOption.Default)
+            if (requestOptions.StatusOption == ResponseStatusOption.Default)
             {
                 switch (message.Response.Status)
                 {
@@ -89,9 +88,8 @@ namespace url_multi_collectionFormat_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
-            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
-            if (statusOption == ResponseStatusOption.Default)
+            Pipeline.Send(message, requestOptions.CancellationToken);
+            if (requestOptions.StatusOption == ResponseStatusOption.Default)
             {
                 switch (message.Response.Status)
                 {
@@ -139,8 +137,7 @@ namespace url_multi_collectionFormat_LowLevel
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
             await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
-            if (statusOption == ResponseStatusOption.Default)
+            if (requestOptions.StatusOption == ResponseStatusOption.Default)
             {
                 switch (message.Response.Status)
                 {
@@ -167,9 +164,8 @@ namespace url_multi_collectionFormat_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
-            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
-            if (statusOption == ResponseStatusOption.Default)
+            Pipeline.Send(message, requestOptions.CancellationToken);
+            if (requestOptions.StatusOption == ResponseStatusOption.Default)
             {
                 switch (message.Response.Status)
                 {
@@ -217,8 +213,7 @@ namespace url_multi_collectionFormat_LowLevel
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
             await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
-            if (statusOption == ResponseStatusOption.Default)
+            if (requestOptions.StatusOption == ResponseStatusOption.Default)
             {
                 switch (message.Response.Status)
                 {
@@ -245,9 +240,8 @@ namespace url_multi_collectionFormat_LowLevel
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
             }
-            Pipeline.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);
-            ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;
-            if (statusOption == ResponseStatusOption.Default)
+            Pipeline.Send(message, requestOptions.CancellationToken);
+            if (requestOptions.StatusOption == ResponseStatusOption.Default)
             {
                 switch (message.Response.Status)
                 {
