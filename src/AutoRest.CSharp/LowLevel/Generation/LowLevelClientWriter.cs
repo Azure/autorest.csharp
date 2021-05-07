@@ -98,11 +98,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    writer.Line($"{PipelineField:I}.Send(message, requestOptions?.CancellationToken ?? System.Threading.CancellationToken.None);");
+                    writer.Line($"{PipelineField:I}.Send(message, requestOptions.CancellationToken);");
                 }
 
-                writer.Line($"ResponseStatusOption statusOption = requestOptions?.StatusOption ?? ResponseStatusOption.Default;");
-                using (writer.Scope($"if (statusOption == ResponseStatusOption.Default)"))
+                using (writer.Scope($"if (requestOptions.StatusOption == ResponseStatusOption.Default)"))
                 {
                     WriteStatusCodeSwitch(writer, clientMethod, async);
                 }
