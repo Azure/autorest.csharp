@@ -7,7 +7,8 @@ using System.Text;
 using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Output.Models
-{    internal class LowLevelClientMethod
+{
+    internal class LowLevelClientMethod
     {
         internal class SchemaDocumentation
         {
