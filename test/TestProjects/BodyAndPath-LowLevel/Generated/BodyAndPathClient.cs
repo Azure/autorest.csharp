@@ -52,7 +52,9 @@ namespace BodyAndPath_LowLevel
         /// <param name="itemName"> item name. </param>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> CreateAsync(string itemName, RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateCreateRequest(itemName, requestBody, requestOptions);
@@ -91,7 +93,9 @@ namespace BodyAndPath_LowLevel
         /// <param name="itemName"> item name. </param>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response Create(string itemName, RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateCreateRequest(itemName, requestBody, requestOptions);

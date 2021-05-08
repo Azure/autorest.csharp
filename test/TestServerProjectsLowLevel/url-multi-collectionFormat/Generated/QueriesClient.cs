@@ -52,7 +52,9 @@ namespace url_multi_collectionFormat_LowLevel
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery, requestOptions);
@@ -90,7 +92,9 @@ namespace url_multi_collectionFormat_LowLevel
         /// <summary> Get a null array of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> a null array of string using the multi-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response ArrayStringMultiNull(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateArrayStringMultiNullRequest(arrayQuery, requestOptions);
@@ -148,7 +152,9 @@ namespace url_multi_collectionFormat_LowLevel
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery, requestOptions);
@@ -186,7 +192,9 @@ namespace url_multi_collectionFormat_LowLevel
         /// <summary> Get an empty array [] of string using the multi-array format. </summary>
         /// <param name="arrayQuery"> an empty array [] of string using the multi-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateArrayStringMultiEmptyRequest(arrayQuery, requestOptions);
@@ -244,7 +252,9 @@ namespace url_multi_collectionFormat_LowLevel
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery, requestOptions);
@@ -282,7 +292,9 @@ namespace url_multi_collectionFormat_LowLevel
         /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
         /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateArrayStringMultiValidRequest(arrayQuery, requestOptions);

@@ -50,7 +50,9 @@ namespace body_string_LowLevel
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetNotExpandableAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetNotExpandableRequest(requestOptions);
@@ -87,7 +89,9 @@ namespace body_string_LowLevel
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetNotExpandable(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetNotExpandableRequest(requestOptions);
@@ -140,7 +144,9 @@ namespace body_string_LowLevel
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutNotExpandableAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutNotExpandableRequest(requestBody, requestOptions);
@@ -178,7 +184,9 @@ namespace body_string_LowLevel
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutNotExpandable(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutNotExpandableRequest(requestBody, requestOptions);
@@ -233,7 +241,9 @@ namespace body_string_LowLevel
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetReferencedAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetReferencedRequest(requestOptions);
@@ -270,7 +280,9 @@ namespace body_string_LowLevel
 
         /// <summary> Get enum value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetReferenced(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetReferencedRequest(requestOptions);
@@ -323,7 +335,9 @@ namespace body_string_LowLevel
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutReferencedAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutReferencedRequest(requestBody, requestOptions);
@@ -361,7 +375,9 @@ namespace body_string_LowLevel
         /// <summary> Sends value &apos;red color&apos; from enumeration of &apos;red color&apos;, &apos;green-color&apos;, &apos;blue_color&apos;. </summary>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutReferenced(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutReferencedRequest(requestBody, requestOptions);
@@ -416,7 +432,9 @@ namespace body_string_LowLevel
 
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetReferencedConstantAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetReferencedConstantRequest(requestOptions);
@@ -453,7 +471,9 @@ namespace body_string_LowLevel
 
         /// <summary> Get value &apos;green-color&apos; from the constant. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetReferencedConstant(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetReferencedConstantRequest(requestOptions);
@@ -529,7 +549,9 @@ namespace body_string_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutReferencedConstantAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutReferencedConstantRequest(requestBody, requestOptions);
@@ -590,7 +612,9 @@ namespace body_string_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutReferencedConstant(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutReferencedConstantRequest(requestBody, requestOptions);

@@ -51,7 +51,9 @@ namespace url_LowLevel
 
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanTrueAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetBooleanTrueRequest(requestOptions);
@@ -88,7 +90,9 @@ namespace url_LowLevel
 
         /// <summary> Get true Boolean value on path. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetBooleanTrue(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetBooleanTrueRequest(requestOptions);
@@ -141,7 +145,9 @@ namespace url_LowLevel
 
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetBooleanFalseAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetBooleanFalseRequest(requestOptions);
@@ -178,7 +184,9 @@ namespace url_LowLevel
 
         /// <summary> Get false Boolean value on path. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetBooleanFalse(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetBooleanFalseRequest(requestOptions);
@@ -231,7 +239,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetIntOneMillionAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetIntOneMillionRequest(requestOptions);
@@ -268,7 +278,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1000000&apos; integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetIntOneMillion(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetIntOneMillionRequest(requestOptions);
@@ -321,7 +333,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetIntNegativeOneMillionRequest(requestOptions);
@@ -358,7 +372,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1000000&apos; integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetIntNegativeOneMillion(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetIntNegativeOneMillionRequest(requestOptions);
@@ -411,7 +427,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetTenBillionAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetTenBillionRequest(requestOptions);
@@ -448,7 +466,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;10000000000&apos; 64 bit integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetTenBillion(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetTenBillionRequest(requestOptions);
@@ -501,7 +521,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetNegativeTenBillionRequest(requestOptions);
@@ -538,7 +560,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-10000000000&apos; 64 bit integer value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetNegativeTenBillion(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetNegativeTenBillionRequest(requestOptions);
@@ -591,7 +615,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateFloatScientificPositiveRequest(requestOptions);
@@ -628,7 +654,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;1.034E+20&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response FloatScientificPositive(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateFloatScientificPositiveRequest(requestOptions);
@@ -681,7 +709,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateFloatScientificNegativeRequest(requestOptions);
@@ -718,7 +748,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-1.034E-20&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response FloatScientificNegative(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateFloatScientificNegativeRequest(requestOptions);
@@ -771,7 +803,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDoubleDecimalPositiveRequest(requestOptions);
@@ -808,7 +842,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;9999999.999&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response DoubleDecimalPositive(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDoubleDecimalPositiveRequest(requestOptions);
@@ -861,7 +897,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDoubleDecimalNegativeRequest(requestOptions);
@@ -898,7 +936,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;-9999999.999&apos; numeric value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response DoubleDecimalNegative(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDoubleDecimalNegativeRequest(requestOptions);
@@ -951,7 +991,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> StringUnicodeAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUnicodeRequest(requestOptions);
@@ -988,7 +1030,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multi-byte string value. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response StringUnicode(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUnicodeRequest(requestOptions);
@@ -1041,7 +1085,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlEncodedAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUrlEncodedRequest(requestOptions);
@@ -1078,7 +1124,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response StringUrlEncoded(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUrlEncodedRequest(requestOptions);
@@ -1131,7 +1179,9 @@ namespace url_LowLevel
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUrlNonEncodedRequest(requestOptions);
@@ -1168,7 +1218,9 @@ namespace url_LowLevel
 
         /// <summary> https://tools.ietf.org/html/rfc3986#appendix-A &apos;path&apos; accept any &apos;pchar&apos; not encoded. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response StringUrlNonEncoded(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringUrlNonEncodedRequest(requestOptions);
@@ -1221,7 +1273,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> StringEmptyAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringEmptyRequest(requestOptions);
@@ -1258,7 +1312,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos;. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response StringEmpty(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringEmptyRequest(requestOptions);
@@ -1312,7 +1368,9 @@ namespace url_LowLevel
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringNullRequest(stringPath, requestOptions);
@@ -1350,7 +1408,9 @@ namespace url_LowLevel
         /// <summary> Get null (should throw). </summary>
         /// <param name="stringPath"> null string value. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response StringNull(string stringPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateStringNullRequest(stringPath, requestOptions);
@@ -1405,7 +1465,9 @@ namespace url_LowLevel
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
         /// <param name="enumPath"> send the value green. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateEnumValidRequest(enumPath, requestOptions);
@@ -1443,7 +1505,9 @@ namespace url_LowLevel
         /// <summary> Get using uri with &apos;green color&apos; in path parameter. </summary>
         /// <param name="enumPath"> send the value green. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response EnumValid(string enumPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateEnumValidRequest(enumPath, requestOptions);
@@ -1498,7 +1562,9 @@ namespace url_LowLevel
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
         /// <param name="enumPath"> send null should throw. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateEnumNullRequest(enumPath, requestOptions);
@@ -1536,7 +1602,9 @@ namespace url_LowLevel
         /// <summary> Get null (should throw on the client before the request is sent on wire). </summary>
         /// <param name="enumPath"> send null should throw. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response EnumNull(string enumPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateEnumNullRequest(enumPath, requestOptions);
@@ -1591,7 +1659,9 @@ namespace url_LowLevel
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteMultiByteRequest(bytePath, requestOptions);
@@ -1629,7 +1699,9 @@ namespace url_LowLevel
         /// <summary> Get &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </summary>
         /// <param name="bytePath"> &apos;啊齄丂狛狜隣郎隣兀﨩&apos; multibyte value as utf-8 encoded byte array. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response ByteMultiByte(byte[] bytePath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteMultiByteRequest(bytePath, requestOptions);
@@ -1683,7 +1755,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> ByteEmptyAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteEmptyRequest(requestOptions);
@@ -1720,7 +1794,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;&apos; as byte array. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response ByteEmpty(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteEmptyRequest(requestOptions);
@@ -1774,7 +1850,9 @@ namespace url_LowLevel
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteNullRequest(bytePath, requestOptions);
@@ -1812,7 +1890,9 @@ namespace url_LowLevel
         /// <summary> Get null as byte array (should throw). </summary>
         /// <param name="bytePath"> null as byte array (should throw). </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response ByteNull(byte[] bytePath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateByteNullRequest(bytePath, requestOptions);
@@ -1866,7 +1946,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> DateValidAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateValidRequest(requestOptions);
@@ -1903,7 +1985,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01&apos; as date. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response DateValid(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateValidRequest(requestOptions);
@@ -1957,7 +2041,9 @@ namespace url_LowLevel
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateNullRequest(datePath, requestOptions);
@@ -1995,7 +2081,9 @@ namespace url_LowLevel
         /// <summary> Get null as date - this should throw or be unusable on the client side, depending on date representation. </summary>
         /// <param name="datePath"> null as date (should throw). </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response DateNull(DateTimeOffset datePath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateNullRequest(datePath, requestOptions);
@@ -2049,7 +2137,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeValidAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateTimeValidRequest(requestOptions);
@@ -2086,7 +2176,9 @@ namespace url_LowLevel
 
         /// <summary> Get &apos;2012-01-01T01:01:01Z&apos; as date-time. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response DateTimeValid(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateTimeValidRequest(requestOptions);
@@ -2140,7 +2232,9 @@ namespace url_LowLevel
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateTimeNullRequest(dateTimePath, requestOptions);
@@ -2178,7 +2272,9 @@ namespace url_LowLevel
         /// <summary> Get null as date-time, should be disallowed or throw depending on representation of date-time. </summary>
         /// <param name="dateTimePath"> null as date-time. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response DateTimeNull(DateTimeOffset dateTimePath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateDateTimeNullRequest(dateTimePath, requestOptions);
@@ -2233,7 +2329,9 @@ namespace url_LowLevel
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateBase64UrlRequest(base64UrlPath, requestOptions);
@@ -2271,7 +2369,9 @@ namespace url_LowLevel
         /// <summary> Get &apos;lorem&apos; encoded value as &apos;bG9yZW0&apos; (base64url). </summary>
         /// <param name="base64UrlPath"> base64url encoded value. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response Base64Url(byte[] base64UrlPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateBase64UrlRequest(base64UrlPath, requestOptions);
@@ -2326,7 +2426,9 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, requestOptions);
@@ -2364,7 +2466,9 @@ namespace url_LowLevel
         /// <summary> Get an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </summary>
         /// <param name="arrayPath"> an array of string [&apos;ArrayPath1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the csv-array format. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateArrayCsvInPathRequest(arrayPath, requestOptions);
@@ -2419,7 +2523,9 @@ namespace url_LowLevel
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, requestOptions);
@@ -2457,7 +2563,9 @@ namespace url_LowLevel
         /// <summary> Get the date 2016-04-13 encoded value as &apos;1460505600&apos; (Unix time). </summary>
         /// <param name="unixTimeUrlPath"> Unix time encoded value. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateUnixTimeUrlRequest(unixTimeUrlPath, requestOptions);

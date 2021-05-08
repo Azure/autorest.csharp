@@ -49,7 +49,9 @@ namespace body_complex_LowLevel
         }
 
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetValidAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetValidRequest(requestOptions);
@@ -85,7 +87,9 @@ namespace body_complex_LowLevel
         }
 
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetValid(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetValidRequest(requestOptions);

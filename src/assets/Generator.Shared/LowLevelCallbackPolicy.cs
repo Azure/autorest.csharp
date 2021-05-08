@@ -11,6 +11,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Diagnostics;
 
+#nullable enable
+
 namespace Azure.Core.Pipeline
 {
     // Chain to RequestOptions.PerCallPolicy if added to a request
@@ -44,7 +46,7 @@ namespace Azure.Core.Pipeline
                     return;
                 }
             }
-            await ProcessNextAsync(message, pipeline);
+            await ProcessNextAsync(message, pipeline).ConfigureAwait(false);
         }
     }
 }

@@ -50,7 +50,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetValidAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetValidRequest(requestOptions);
@@ -87,7 +89,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetValid(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetValidRequest(requestOptions);
@@ -175,7 +179,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutValidAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
@@ -248,7 +254,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutValid(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
@@ -303,7 +311,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetDotSyntaxAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDotSyntaxRequest(requestOptions);
@@ -340,7 +350,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetDotSyntax(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDotSyntaxRequest(requestOptions);
@@ -392,7 +404,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetComposedWithDiscriminatorRequest(requestOptions);
@@ -429,7 +443,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetComposedWithDiscriminator(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetComposedWithDiscriminatorRequest(requestOptions);
@@ -481,7 +497,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(requestOptions);
@@ -518,7 +536,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetComposedWithoutDiscriminator(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetComposedWithoutDiscriminatorRequest(requestOptions);
@@ -570,7 +590,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetComplicatedAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetComplicatedRequest(requestOptions);
@@ -607,7 +629,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetComplicated(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetComplicatedRequest(requestOptions);
@@ -740,7 +764,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutComplicatedAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutComplicatedRequest(requestBody, requestOptions);
@@ -858,7 +884,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutComplicated(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutComplicatedRequest(requestBody, requestOptions);
@@ -994,7 +1022,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutMissingDiscriminatorRequest(requestBody, requestOptions);
@@ -1112,7 +1142,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutMissingDiscriminator(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutMissingDiscriminatorRequest(requestBody, requestOptions);
@@ -1203,7 +1235,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutValidMissingRequiredRequest(requestBody, requestOptions);
@@ -1276,7 +1310,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutValidMissingRequired(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutValidMissingRequiredRequest(requestBody, requestOptions);
