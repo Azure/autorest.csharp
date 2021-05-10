@@ -208,26 +208,17 @@ namespace ExactMatchInheritance
                 throw;
             }
         }
+        // have not LIST paging method
 
         /// <summary> Filters the list of <see cref="ExactMatchModel5" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of <see cref="ExactMatchModel5" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<ExactMatchModel5> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<ExactMatchModel5> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Container.List");
-            scope.Start();
-            try
-            {
-                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-                return new PhWrappingPageable<GenericResource, ExactMatchModel5>(results, genericResource => new ExactMatchModel5Operations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, ExactMatchModel5>(results, genericResource => new ExactMatchModel5Operations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ExactMatchModel5" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>

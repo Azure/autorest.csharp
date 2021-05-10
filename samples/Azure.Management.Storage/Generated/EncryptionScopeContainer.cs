@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -123,7 +124,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(encryptionScope));
                 }
 
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Put(Id.ResourceGroupName, Id.Parent.Name, encryptionScopeName, encryptionScope, cancellationToken: cancellationToken);
                 return new PhArmOperation<EncryptionScope, EncryptionScopeData>(
                 originalResponse,
                 data => new EncryptionScope(Parent, data));
@@ -154,7 +155,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(encryptionScope));
                 }
 
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, encryptionScope, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, Id.Parent.Name, encryptionScopeName, encryptionScope, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<EncryptionScope, EncryptionScopeData>(
                 originalResponse,
                 data => new EncryptionScope(Parent, data));
@@ -180,7 +181,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(encryptionScopeName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, encryptionScopeName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new EncryptionScope(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -204,7 +205,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(encryptionScopeName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, encryptionScopeName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, encryptionScopeName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new EncryptionScope(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -257,25 +258,53 @@ namespace Azure.Management.Storage
                 throw;
             }
         }
+        // have LIST paging method: List
 
         /// <summary> Filters the list of <see cref="EncryptionScope" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of <see cref="EncryptionScope" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<EncryptionScope> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<EncryptionScope> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
-            scope.Start();
-            try
+            if (string.IsNullOrEmpty(nameFilter))
+            {
+                Page<EncryptionScope> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = _restClient.List(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<EncryptionScope> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            else
             {
                 var results = ListAsGenericResource(nameFilter, top, cancellationToken);
                 return new PhWrappingPageable<GenericResource, EncryptionScope>(results, genericResource => new EncryptionScopeOperations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
             }
         }
 

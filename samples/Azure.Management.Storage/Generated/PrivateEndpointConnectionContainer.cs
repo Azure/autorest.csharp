@@ -114,7 +114,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(privateEndpointConnectionName));
                 }
 
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Put(Id.ResourceGroupName, Id.Parent.Name, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken: cancellationToken);
                 return new PhArmOperation<PrivateEndpointConnection, PrivateEndpointConnectionData>(
                 originalResponse,
                 data => new PrivateEndpointConnection(Parent, data));
@@ -142,7 +142,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(privateEndpointConnectionName));
                 }
 
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, Id.Parent.Name, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<PrivateEndpointConnection, PrivateEndpointConnectionData>(
                 originalResponse,
                 data => new PrivateEndpointConnection(Parent, data));
@@ -168,7 +168,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(privateEndpointConnectionName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new PrivateEndpointConnection(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -192,7 +192,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(privateEndpointConnectionName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new PrivateEndpointConnection(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -245,26 +245,17 @@ namespace Azure.Management.Storage
                 throw;
             }
         }
+        // have not LIST paging method
 
         /// <summary> Filters the list of <see cref="PrivateEndpointConnection" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of <see cref="PrivateEndpointConnection" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<PrivateEndpointConnection> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<PrivateEndpointConnection> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.List");
-            scope.Start();
-            try
-            {
-                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-                return new PhWrappingPageable<GenericResource, PrivateEndpointConnection>(results, genericResource => new PrivateEndpointConnectionOperations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, PrivateEndpointConnection>(results, genericResource => new PrivateEndpointConnectionOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="PrivateEndpointConnection" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -264,25 +265,53 @@ namespace Azure.ResourceManager.Sample
                 throw;
             }
         }
+        // have LIST paging method: ListByResourceGroup
 
         /// <summary> Filters the list of <see cref="Image" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of <see cref="Image" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<Image> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<Image> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageContainer.List");
-            scope.Start();
-            try
+            if (string.IsNullOrEmpty(nameFilter))
+            {
+                Page<Image> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("ImageContainer.ListByResourceGroup");
+                    scope.Start();
+                    try
+                    {
+                        var response = _restClient.ListByResourceGroup(Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new Image(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<Image> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("ImageContainer.ListByResourceGroup");
+                    scope.Start();
+                    try
+                    {
+                        var response = _restClient.ListByResourceGroupNextPage(nextLink, Id.ResourceGroupName, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new Image(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            else
             {
                 var results = ListAsGenericResource(nameFilter, top, cancellationToken);
                 return new PhWrappingPageable<GenericResource, Image>(results, genericResource => new ImageOperations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
             }
         }
 

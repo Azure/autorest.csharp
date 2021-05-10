@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -123,7 +124,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(blobContainer));
                 }
 
-                var originalResponse = _restClient.Create(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Create(Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken: cancellationToken);
                 return new PhArmOperation<BlobContainer, BlobContainerData>(
                 originalResponse,
                 data => new BlobContainer(Parent, data));
@@ -154,7 +155,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(blobContainer));
                 }
 
-                var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Name, containerName, blobContainer, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<BlobContainer, BlobContainerData>(
                 originalResponse,
                 data => new BlobContainer(Parent, data));
@@ -180,7 +181,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(containerName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new BlobContainer(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -204,7 +205,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(containerName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, containerName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new BlobContainer(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -257,25 +258,53 @@ namespace Azure.Management.Storage
                 throw;
             }
         }
+        // have LIST paging method: List
 
         /// <summary> Filters the list of <see cref="BlobContainer" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of <see cref="BlobContainer" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<BlobContainer> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<BlobContainer> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.List");
-            scope.Start();
-            try
+            if (string.IsNullOrEmpty(nameFilter))
+            {
+                Page<BlobContainer> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = _restClient.List(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<BlobContainer> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new BlobContainer(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            else
             {
                 var results = ListAsGenericResource(nameFilter, top, cancellationToken);
                 return new PhWrappingPageable<GenericResource, BlobContainer>(results, genericResource => new BlobContainerOperations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
             }
         }
 

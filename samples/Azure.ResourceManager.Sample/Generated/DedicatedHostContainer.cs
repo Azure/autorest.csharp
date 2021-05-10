@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -122,10 +123,10 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, hostName, parameters, cancellationToken: cancellationToken);
                 var operation = new DedicatedHostCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
-                Id.ResourceGroupName, Id.Name, hostName, parameters).Request,
+                Id.ResourceGroupName, Id.Parent.Name, hostName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<DedicatedHost, DedicatedHostData>(
                 operation,
@@ -157,10 +158,10 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, hostName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, hostName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var operation = new DedicatedHostCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
-                Id.ResourceGroupName, Id.Name, hostName, parameters).Request,
+                Id.ResourceGroupName, Id.Parent.Name, hostName, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<DedicatedHost, DedicatedHostData>(
                 operation,
@@ -187,7 +188,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(hostName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, hostName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new DedicatedHost(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -211,7 +212,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(hostName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, hostName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, hostName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new DedicatedHost(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -264,25 +265,53 @@ namespace Azure.ResourceManager.Sample
                 throw;
             }
         }
+        // have LIST paging method: ListByHostGroup
 
         /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<DedicatedHost> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<DedicatedHost> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.List");
-            scope.Start();
-            try
+            if (string.IsNullOrEmpty(nameFilter))
+            {
+                Page<DedicatedHost> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
+                    scope.Start();
+                    try
+                    {
+                        var response = _restClient.ListByHostGroup(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<DedicatedHost> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
+                    scope.Start();
+                    try
+                    {
+                        var response = _restClient.ListByHostGroupNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            else
             {
                 var results = ListAsGenericResource(nameFilter, top, cancellationToken);
                 return new PhWrappingPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
             }
         }
 

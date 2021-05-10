@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -122,10 +123,10 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var originalResponse = _restClient.Update(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, instanceId, parameters, cancellationToken: cancellationToken);
                 var operation = new VirtualMachineScaleSetVMUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateUpdateRequest(
-                Id.ResourceGroupName, Id.Name, instanceId, parameters).Request,
+                Id.ResourceGroupName, Id.Parent.Name, instanceId, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
                 operation,
@@ -157,10 +158,10 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var originalResponse = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 var operation = new VirtualMachineScaleSetVMUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateUpdateRequest(
-                Id.ResourceGroupName, Id.Name, instanceId, parameters).Request,
+                Id.ResourceGroupName, Id.Parent.Name, instanceId, parameters).Request,
                 originalResponse);
                 return new PhArmOperation<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
                 operation,
@@ -187,7 +188,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(instanceId));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, instanceId, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new VirtualMachineScaleSetVM(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -211,7 +212,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(instanceId));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, instanceId, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new VirtualMachineScaleSetVM(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -264,25 +265,53 @@ namespace Azure.ResourceManager.Sample
                 throw;
             }
         }
+        // have LIST paging method: List
 
         /// <summary> Filters the list of <see cref="VirtualMachineScaleSetVM" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of <see cref="VirtualMachineScaleSetVM" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<VirtualMachineScaleSetVM> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<VirtualMachineScaleSetVM> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.List");
-            scope.Start();
-            try
+            if (string.IsNullOrEmpty(nameFilter))
+            {
+                Page<VirtualMachineScaleSetVM> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = _restClient.List(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVM(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<VirtualMachineScaleSetVM> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVM(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            else
             {
                 var results = ListAsGenericResource(nameFilter, top, cancellationToken);
                 return new PhWrappingPageable<GenericResource, VirtualMachineScaleSetVM>(results, genericResource => new VirtualMachineScaleSetVMOperations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
             }
         }
 

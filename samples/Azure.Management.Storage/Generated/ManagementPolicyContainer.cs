@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, managementPolicyName, policy, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, policy, cancellationToken: cancellationToken);
                 return new PhArmOperation<ManagementPolicy, ManagementPolicyData>(
                 originalResponse,
                 data => new ManagementPolicy(Parent, data));
@@ -118,7 +118,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new PhArmOperation<ManagementPolicy, ManagementPolicyData>(
                 originalResponse,
                 data => new ManagementPolicy(Parent, data));
@@ -144,7 +144,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(managementPolicyName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new ManagementPolicy(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -168,7 +168,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(managementPolicyName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new ManagementPolicy(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -221,26 +221,17 @@ namespace Azure.Management.Storage
                 throw;
             }
         }
+        // have not LIST paging method
 
         /// <summary> Filters the list of <see cref="ManagementPolicy" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of <see cref="ManagementPolicy" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<ManagementPolicy> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<ManagementPolicy> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.List");
-            scope.Start();
-            try
-            {
-                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-                return new PhWrappingPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ManagementPolicy" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>

@@ -60,7 +60,7 @@ namespace TenantOnly
                     throw new ArgumentNullException(nameof(agreementName));
                 }
 
-                var response = _restClient.Get(Id.Name, agreementName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.Parent.Name, agreementName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new Agreement(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -84,7 +84,7 @@ namespace TenantOnly
                     throw new ArgumentNullException(nameof(agreementName));
                 }
 
-                var response = await _restClient.GetAsync(Id.Name, agreementName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.Parent.Name, agreementName, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new Agreement(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -137,26 +137,17 @@ namespace TenantOnly
                 throw;
             }
         }
+        // have not LIST paging method
 
         /// <summary> Filters the list of <see cref="Agreement" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of <see cref="Agreement" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<Agreement> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<Agreement> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AgreementContainer.List");
-            scope.Start();
-            try
-            {
-                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-                return new PhWrappingPageable<GenericResource, Agreement>(results, genericResource => new AgreementOperations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, Agreement>(results, genericResource => new AgreementOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="Agreement" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>

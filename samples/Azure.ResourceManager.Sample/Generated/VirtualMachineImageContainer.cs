@@ -60,7 +60,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(version));
                 }
 
-                var response = _restClient.Get(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, version, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, version, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new VirtualMachineImage(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -84,7 +84,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(version));
                 }
 
-                var response = await _restClient.GetAsync(Id.Name, Id.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, version, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.Parent.Parent.Parent.Parent.Name, Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, version, cancellationToken: cancellationToken);
                 return ArmResponse.FromValue(new VirtualMachineImage(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
             }
             catch (Exception e)
@@ -137,26 +137,17 @@ namespace Azure.ResourceManager.Sample
                 throw;
             }
         }
+        // have not LIST paging method
 
         /// <summary> Filters the list of <see cref="VirtualMachineImage" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of <see cref="VirtualMachineImage" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<VirtualMachineImage> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<VirtualMachineImage> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineImageContainer.List");
-            scope.Start();
-            try
-            {
-                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-                return new PhWrappingPageable<GenericResource, VirtualMachineImage>(results, genericResource => new VirtualMachineImageOperations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, VirtualMachineImage>(results, genericResource => new VirtualMachineImageOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineImage" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
