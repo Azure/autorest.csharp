@@ -41,8 +41,8 @@ namespace Azure.Management.Storage
         private StorageAccountsRestOperations _restClient => new StorageAccountsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
-        // todo: hard coding ResourceGroupResourceIdentifier we don't know the exact ID type but we need it in implementations in CreateOrUpdate() etc.
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
+
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => "any";
 
@@ -218,7 +218,6 @@ namespace Azure.Management.Storage
                 throw;
             }
         }
-        // have LIST paging method: ListByResourceGroup
 
         /// <summary> Filters the list of <see cref="StorageAccount" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
@@ -258,19 +257,31 @@ namespace Azure.Management.Storage
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> An async collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<StorageAccount> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<StorageAccount> ListAsync(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.List");
-            scope.Start();
-            try
+            if (string.IsNullOrEmpty(nameFilter))
+            {
+                async Task<Page<StorageAccount>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListByResourceGroup");
+                    scope.Start();
+                    try
+                    {
+                        var response = await _restClient.ListByResourceGroupAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Parent, value)), null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            }
+            else
             {
                 var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
                 return new PhWrappingAsyncPageable<GenericResource, StorageAccount>(results, genericResource => new StorageAccountOperations(genericResource).Get().Value);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
             }
         }
 
