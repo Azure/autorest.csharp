@@ -1,7 +1,7 @@
 !CodeModel 
 info: !Info 
   description: Some cool documentation.
-  title: BodyAndPath
+  title: Body and Path Client
 schemas: !Schemas 
   strings:
     - !StringSchema &ref_0
@@ -149,7 +149,7 @@ security: !Security
   schemes: []
 language: !Languages 
   default:
-    name: BodyAndPath
+    name: BodyAndPathClient
     description: ''
 protocol: !Protocols 
   http: !HttpModel {}

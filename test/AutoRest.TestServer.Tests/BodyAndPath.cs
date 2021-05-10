@@ -2,9 +2,9 @@
 // Licensed under the MIT License.
 
 using System.Reflection;
-using System.Threading;
+using Azure;
 using Azure.Core;
-using BodyAndPath;
+using BodyAndPath_LowLevel;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -17,7 +17,7 @@ namespace AutoRest.TestServer.Tests
             ParameterInfo[] parameters = typeof(BodyAndPathClient).GetMethod("Create").GetParameters();
             Assert.AreEqual(typeof(string), parameters[0].ParameterType);
             Assert.AreEqual(typeof(RequestContent), parameters[1].ParameterType);
-            Assert.AreEqual(typeof(CancellationToken), parameters[2].ParameterType);
+            Assert.AreEqual(typeof(RequestOptions), parameters[2].ParameterType);
         }
     }
 }

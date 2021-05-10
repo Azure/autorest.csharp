@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-
-#pragma warning disable AZC0007
 
 namespace body_complex_LowLevel
 {
@@ -24,6 +21,7 @@ namespace body_complex_LowLevel
         private const string AuthorizationHeader = "Fake-Subscription-Key";
         private Uri endpoint;
         private readonly string apiVersion;
+        private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Initializes a new instance of InheritanceClient for mocking. </summary>
         protected InheritanceClient()
@@ -43,29 +41,94 @@ namespace body_complex_LowLevel
             endpoint ??= new Uri("http://localhost:3000");
 
             options ??= new AutoRestComplexTestServiceClientOptions();
-            Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
+            _clientDiagnostics = new ClientDiagnostics(options);
+            var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
 
         /// <summary> Get complex types that extend others. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetValidAsync(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetValidAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateGetValidRequest();
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetValidRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("InheritanceClient.GetValid");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get complex types that extend others. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetValid(CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetValid(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateGetValidRequest();
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetValidRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("InheritanceClient.GetValid");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetValid"/> and <see cref="GetValidAsync"/> operations. </summary>
-        private Request CreateGetValidRequest()
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetValidRequest(RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -75,7 +138,7 @@ namespace body_complex_LowLevel
             uri.AppendPath("/complex/inheritance/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            return request;
+            return message;
         }
 
         /// <summary> Put complex types that extend others. </summary>
@@ -148,11 +211,42 @@ namespace body_complex_LowLevel
         /// </list>
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutValidAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> PutValidAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreatePutValidRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("InheritanceClient.PutValid");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Put complex types that extend others. </summary>
@@ -225,16 +319,48 @@ namespace body_complex_LowLevel
         /// </list>
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutValid(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response PutValid(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreatePutValidRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("InheritanceClient.PutValid");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="PutValid"/> and <see cref="PutValidAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        private Request CreatePutValidRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreatePutValidRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -246,7 +372,7 @@ namespace body_complex_LowLevel
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
+            return message;
         }
     }
 }
