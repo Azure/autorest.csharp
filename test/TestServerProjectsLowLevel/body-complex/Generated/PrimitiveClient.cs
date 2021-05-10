@@ -50,7 +50,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetIntAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetIntRequest(requestOptions);
@@ -87,7 +89,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with integer properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetInt(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetIntRequest(requestOptions);
@@ -163,7 +167,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutIntAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutIntRequest(requestBody, requestOptions);
@@ -224,7 +230,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutInt(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutIntRequest(requestBody, requestOptions);
@@ -279,7 +287,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetLongAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetLongRequest(requestOptions);
@@ -316,7 +326,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with long properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetLong(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetLongRequest(requestOptions);
@@ -392,7 +404,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutLongAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutLongRequest(requestBody, requestOptions);
@@ -453,7 +467,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutLong(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutLongRequest(requestBody, requestOptions);
@@ -508,7 +524,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetFloatAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetFloatRequest(requestOptions);
@@ -545,7 +563,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with float properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetFloat(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetFloatRequest(requestOptions);
@@ -621,7 +641,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutFloatAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutFloatRequest(requestBody, requestOptions);
@@ -682,7 +704,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutFloat(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutFloatRequest(requestBody, requestOptions);
@@ -737,7 +761,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetDoubleAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDoubleRequest(requestOptions);
@@ -774,7 +800,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with double properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetDouble(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDoubleRequest(requestOptions);
@@ -850,7 +878,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutDoubleAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutDoubleRequest(requestBody, requestOptions);
@@ -911,7 +941,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutDouble(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutDoubleRequest(requestBody, requestOptions);
@@ -966,7 +998,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetBoolAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetBoolRequest(requestOptions);
@@ -1003,7 +1037,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with bool properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetBool(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetBoolRequest(requestOptions);
@@ -1079,7 +1115,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutBoolAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutBoolRequest(requestBody, requestOptions);
@@ -1140,7 +1178,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutBool(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutBoolRequest(requestBody, requestOptions);
@@ -1195,7 +1235,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetStringAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetStringRequest(requestOptions);
@@ -1232,7 +1274,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with string properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetString(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetStringRequest(requestOptions);
@@ -1314,7 +1358,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutStringAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutStringRequest(requestBody, requestOptions);
@@ -1381,7 +1427,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutString(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutStringRequest(requestBody, requestOptions);
@@ -1436,7 +1484,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetDateAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDateRequest(requestOptions);
@@ -1473,7 +1523,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with date properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetDate(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDateRequest(requestOptions);
@@ -1549,7 +1601,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutDateAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutDateRequest(requestBody, requestOptions);
@@ -1610,7 +1664,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutDate(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutDateRequest(requestBody, requestOptions);
@@ -1665,7 +1721,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetDateTimeAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDateTimeRequest(requestOptions);
@@ -1702,7 +1760,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with datetime properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetDateTime(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDateTimeRequest(requestOptions);
@@ -1778,7 +1838,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutDateTimeAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutDateTimeRequest(requestBody, requestOptions);
@@ -1839,7 +1901,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutDateTime(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutDateTimeRequest(requestBody, requestOptions);
@@ -1894,7 +1958,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetDateTimeRfc1123Async(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDateTimeRfc1123Request(requestOptions);
@@ -1931,7 +1997,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with datetimeRfc1123 properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetDateTimeRfc1123(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDateTimeRfc1123Request(requestOptions);
@@ -2007,7 +2075,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutDateTimeRfc1123Request(requestBody, requestOptions);
@@ -2068,7 +2138,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutDateTimeRfc1123(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutDateTimeRfc1123Request(requestBody, requestOptions);
@@ -2123,7 +2195,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetDurationAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDurationRequest(requestOptions);
@@ -2160,7 +2234,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with duration properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetDuration(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetDurationRequest(requestOptions);
@@ -2230,7 +2306,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutDurationAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutDurationRequest(requestBody, requestOptions);
@@ -2285,7 +2363,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutDuration(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutDurationRequest(requestBody, requestOptions);
@@ -2340,7 +2420,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetByteAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetByteRequest(requestOptions);
@@ -2377,7 +2459,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with byte properties. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetByte(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetByteRequest(requestOptions);
@@ -2447,7 +2531,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutByteAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutByteRequest(requestBody, requestOptions);
@@ -2502,7 +2588,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutByte(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutByteRequest(requestBody, requestOptions);

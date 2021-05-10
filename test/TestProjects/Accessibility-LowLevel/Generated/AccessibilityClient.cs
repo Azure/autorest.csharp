@@ -50,7 +50,9 @@ namespace Accessibility_LowLevel
 
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> OperationAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateOperationRequest(requestBody, requestOptions);
@@ -87,7 +89,9 @@ namespace Accessibility_LowLevel
 
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response Operation(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateOperationRequest(requestBody, requestOptions);
@@ -141,7 +145,9 @@ namespace Accessibility_LowLevel
 
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         internal virtual async Task<Response> OperationInternalAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateOperationInternalRequest(requestBody, requestOptions);
@@ -178,7 +184,9 @@ namespace Accessibility_LowLevel
 
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         internal virtual Response OperationInternal(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateOperationInternalRequest(requestBody, requestOptions);

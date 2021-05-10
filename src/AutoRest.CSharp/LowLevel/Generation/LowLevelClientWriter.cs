@@ -101,6 +101,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
+            writer.Line($"#pragma warning disable AZC0002");
             writer.Append($"{clientMethod.Accessibility} virtual {asyncText} {responseType} {methodName}(");
 
             foreach (var parameter in parameters)
@@ -109,6 +110,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             writer.RemoveTrailingComma();
             writer.Line($")");
+            writer.Line($"#pragma warning restore AZC0002");
 
             using (writer.Scope())
             {

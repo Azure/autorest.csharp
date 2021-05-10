@@ -50,7 +50,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with array property. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetValidAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetValidRequest(requestOptions);
@@ -87,7 +89,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with array property. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetValid(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetValidRequest(requestOptions);
@@ -157,7 +161,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutValidAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
@@ -212,7 +218,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutValid(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutValidRequest(requestBody, requestOptions);
@@ -267,7 +275,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with array property which is empty. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetEmptyAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetEmptyRequest(requestOptions);
@@ -304,7 +314,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with array property which is empty. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetEmpty(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetEmptyRequest(requestOptions);
@@ -374,7 +386,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> PutEmptyAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutEmptyRequest(requestBody, requestOptions);
@@ -429,7 +443,9 @@ namespace body_complex_LowLevel
         /// </remarks>
         /// <param name="requestBody"> The request body. </param>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response PutEmpty(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreatePutEmptyRequest(requestBody, requestOptions);
@@ -484,7 +500,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual async Task<Response> GetNotProvidedAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetNotProvidedRequest(requestOptions);
@@ -521,7 +539,9 @@ namespace body_complex_LowLevel
 
         /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
         /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
         public virtual Response GetNotProvided(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
             requestOptions ??= new RequestOptions();
             HttpMessage message = CreateGetNotProvidedRequest(requestOptions);
