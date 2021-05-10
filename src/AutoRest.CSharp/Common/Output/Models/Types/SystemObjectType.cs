@@ -17,19 +17,18 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class SystemObjectType : ObjectType
     {
         private Type _type;
-        private CSharpType _csharpType;
 
         public SystemObjectType(Type type, BuildContext context)
             : base(context)
         {
             _type = type;
-            _csharpType = new CSharpType(type);
         }
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => null;
 
         protected override string DefaultName => GetNameWithoutGeneric(_type);
         protected override string DefaultAccessibility { get; } = "public";
+        protected override string DefaultNamespace => _type.Namespace ?? base.DefaultNamespace;
 
         private string ToCamelCase(string name)
         {
@@ -75,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ObjectTypeConstructor BuildConstructor(IEnumerable<ParameterInfo> paramInfos)
         {
-            MemberDeclarationOptions memberDeclarationOptions = new MemberDeclarationOptions("protected", DefaultName, _csharpType);
+            MemberDeclarationOptions memberDeclarationOptions = new MemberDeclarationOptions("protected", DefaultName, Type);
             List<Parameter> parameters = new List<Parameter>();
             foreach (var param in paramInfos)
             {

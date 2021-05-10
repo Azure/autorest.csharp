@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific ObjectReplicationPolicy. </summary>
-    public partial class ObjectReplicationPolicyOperations : ResourceOperationsBase<TenantResourceIdentifier, ObjectReplicationPolicy>
+    public partial class ObjectReplicationPolicyOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ObjectReplicationPolicy>
     {
         /// <summary> Initializes a new instance of ObjectReplicationPolicyOperations for mocking. </summary>
         protected ObjectReplicationPolicyOperations()
@@ -24,7 +24,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of <see cref = "ObjectReplicationPolicyOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected ObjectReplicationPolicyOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected ObjectReplicationPolicyOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

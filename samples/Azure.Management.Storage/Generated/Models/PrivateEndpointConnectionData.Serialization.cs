@@ -34,7 +34,7 @@ namespace Azure.Management.Storage.Models
 
         internal static PrivateEndpointConnectionData DeserializePrivateEndpointConnectionData(JsonElement element)
         {
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<PrivateEndpoint> privateEndpoint = default;

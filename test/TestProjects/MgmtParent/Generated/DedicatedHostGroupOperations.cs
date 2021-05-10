@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtParent
 {
     /// <summary> A class representing the operations that can be performed over a specific DedicatedHostGroup. </summary>
-    public partial class DedicatedHostGroupOperations : ResourceOperationsBase<TenantResourceIdentifier, DedicatedHostGroup>
+    public partial class DedicatedHostGroupOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, DedicatedHostGroup>
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupOperations for mocking. </summary>
         protected DedicatedHostGroupOperations()
@@ -24,7 +24,7 @@ namespace MgmtParent
         /// <summary> Initializes a new instance of <see cref = "DedicatedHostGroupOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected DedicatedHostGroupOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected DedicatedHostGroupOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

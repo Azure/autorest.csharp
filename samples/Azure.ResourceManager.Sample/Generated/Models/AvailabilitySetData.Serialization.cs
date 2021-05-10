@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample
             Optional<Sku> sku = default;
             IDictionary<string, string> tags = default;
             LocationData location = default;
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<int> platformUpdateDomainCount = default;

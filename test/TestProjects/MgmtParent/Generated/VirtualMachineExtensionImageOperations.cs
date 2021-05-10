@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtParent
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineExtensionImage. </summary>
-    public partial class VirtualMachineExtensionImageOperations : ResourceOperationsBase<TenantResourceIdentifier, VirtualMachineExtensionImage>
+    public partial class VirtualMachineExtensionImageOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachineExtensionImage>
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageOperations for mocking. </summary>
         protected VirtualMachineExtensionImageOperations()
@@ -24,7 +24,7 @@ namespace MgmtParent
         /// <summary> Initializes a new instance of <see cref = "VirtualMachineExtensionImageOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected VirtualMachineExtensionImageOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected VirtualMachineExtensionImageOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

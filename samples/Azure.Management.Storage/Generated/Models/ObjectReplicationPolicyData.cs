@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the ObjectReplicationPolicy data model. </summary>
-    public partial class ObjectReplicationPolicyData : Resource<TenantResourceIdentifier>
+    public partial class ObjectReplicationPolicyData : Resource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ObjectReplicationPolicyData. </summary>
         public ObjectReplicationPolicyData()
@@ -30,7 +30,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="sourceAccount"> Required. Source account name. </param>
         /// <param name="destinationAccount"> Required. Destination account name. </param>
         /// <param name="rules"> The storage account object replication rules. </param>
-        internal ObjectReplicationPolicyData(TenantResourceIdentifier id, string name, ResourceType type, string policyId, DateTimeOffset? enabledTime, string sourceAccount, string destinationAccount, IList<ObjectReplicationPolicyRule> rules) : base(id, name, type)
+        internal ObjectReplicationPolicyData(ResourceGroupResourceIdentifier id, string name, ResourceType type, string policyId, DateTimeOffset? enabledTime, string sourceAccount, string destinationAccount, IList<ObjectReplicationPolicyRule> rules) : base(id, name, type)
         {
             PolicyId = policyId;
             EnabledTime = enabledTime;

@@ -38,7 +38,7 @@ namespace SubscriptionExtensions.Models
             Optional<string> foo = default;
             IDictionary<string, string> tags = default;
             LocationData location = default;
-            TenantResourceIdentifier id = default;
+            SubscriptionResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

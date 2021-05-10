@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the FileService data model. </summary>
-    public partial class FileServiceData : Resource<TenantResourceIdentifier>
+    public partial class FileServiceData : Resource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of FileServiceData. </summary>
         public FileServiceData()
@@ -24,7 +24,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="sku"> Sku name and tier. </param>
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
-        internal FileServiceData(TenantResourceIdentifier id, string name, ResourceType type, Sku sku, CorsRules cors, DeleteRetentionPolicy shareDeleteRetentionPolicy) : base(id, name, type)
+        internal FileServiceData(ResourceGroupResourceIdentifier id, string name, ResourceType type, Sku sku, CorsRules cors, DeleteRetentionPolicy shareDeleteRetentionPolicy) : base(id, name, type)
         {
             Sku = sku;
             Cors = cors;

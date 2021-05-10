@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtParent
 {
     /// <summary> A class representing the VirtualMachineExtensionImage data model. </summary>
-    public partial class VirtualMachineExtensionImageData : TrackedResource<TenantResourceIdentifier>
+    public partial class VirtualMachineExtensionImageData : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
         /// <param name="location"> The location. </param>
@@ -26,7 +26,7 @@ namespace MgmtParent
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal VirtualMachineExtensionImageData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string bar) : base(id, name, type, tags, location)
+        internal VirtualMachineExtensionImageData(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }

@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific SshPublicKey. </summary>
-    public partial class SshPublicKeyOperations : ResourceOperationsBase<TenantResourceIdentifier, SshPublicKey>
+    public partial class SshPublicKeyOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SshPublicKey>
     {
         /// <summary> Initializes a new instance of SshPublicKeyOperations for mocking. </summary>
         protected SshPublicKeyOperations()
@@ -24,7 +24,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of <see cref = "SshPublicKeyOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected SshPublicKeyOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected SshPublicKeyOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

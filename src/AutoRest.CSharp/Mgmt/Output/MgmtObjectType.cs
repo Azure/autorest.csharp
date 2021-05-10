@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
@@ -15,15 +16,19 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private bool _isResourceType;
         private ObjectTypeProperty[]? _myProperties;
+        private BuildContext<MgmtOutputLibrary> _context;
 
-        public MgmtObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceType) : base(objectSchema, context)
+        public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context, bool isResourceType) : base(objectSchema, context)
         {
             _isResourceType = isResourceType;
+            _context = context;
         }
 
         private ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
         protected override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
+
+        internal OperationGroup? OperationGroup => _context.Library.GetOperationGroupBySchema(ObjectSchema);
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
@@ -66,15 +71,46 @@ namespace AutoRest.CSharp.Mgmt.Output
             CSharpType? inheritedType = base.CreateInheritedType();
 
             var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
+            var operationGroupToUse = OperationGroup ?? GetOperationGroupFromChildren();
             if (typeToReplace != null)
             {
-                var match = InheritanceChoser.GetExactMatch(typeToReplace, typeToReplace.MyProperties);
+                var match = InheritanceChooser.GetExactMatch(operationGroupToUse, typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
                     inheritedType = match;
                 }
             }
-            return inheritedType == null ? InheritanceChoser.GetSupersetMatch(this, MyProperties) : inheritedType;
+            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(operationGroupToUse, this, MyProperties) : inheritedType;
+        }
+
+        private OperationGroup? GetOperationGroupFromChildren()
+        {
+            OperationGroup? operationGroup = null;
+            var children = ObjectSchema.Children;
+            if (children == null)
+                return null;
+
+            foreach (var child in children.Immediate)
+            {
+                var resourceData = _context.Library.GetResourceDataFromSchema(child.Name);
+                if (resourceData != null)
+                {
+                    return resourceData.OperationGroup;
+                }
+                else
+                {
+                    // child is Model not Data
+                    MgmtObjectType? mgmtObject = _context.Library.GetMgmtObjectFromModelName(child.Name);
+                    if (mgmtObject != null)
+                    {
+                        operationGroup = mgmtObject.GetOperationGroupFromChildren();
+                        if (operationGroup != null)
+                            return operationGroup;
+                    }
+                }
+            }
+
+            return operationGroup;
         }
     }
 }
