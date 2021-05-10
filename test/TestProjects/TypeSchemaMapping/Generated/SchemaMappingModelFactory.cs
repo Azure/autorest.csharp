@@ -13,6 +13,14 @@ namespace TypeSchemaMapping
     /// <summary> Model factory for SchemaMapping read-only models. </summary>
     public static partial class SchemaMappingModelFactory
     {
+        /// <summary> Initializes new instance of ModelWithAbstractModel class. </summary>
+        /// <param name="abstractModelProperty"> . </param>
+        /// <returns> A new <see cref="Models.ModelWithAbstractModel"/> instance for mocking. </returns>
+        public static ModelWithAbstractModel ModelWithAbstractModel(AbstractModel abstractModelProperty = default)
+        {
+            return new ModelWithAbstractModel(abstractModelProperty);
+        }
+
         /// <summary> Initializes new instance of ModelWithGuidProperty class. </summary>
         /// <param name="modelProperty"> . </param>
         /// <returns> A new <see cref="Models.ModelWithGuidProperty"/> instance for mocking. </returns>

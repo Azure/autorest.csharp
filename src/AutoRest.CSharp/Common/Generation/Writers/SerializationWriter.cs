@@ -201,9 +201,16 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                writer.DeserializeValue(jsonSerialization,
-                    w=> w.AppendRaw("element"),
-                    (w, v) => w.Line($"return {v};"));
+                if (model.Declaration.IsAbstract)
+                {
+                    writer.Line($"throw new {typeof(Exception)}();");
+                }
+                else
+                {
+                    writer.DeserializeValue(jsonSerialization,
+                        w => w.AppendRaw("element"),
+                        (w, v) => w.Line($"return {v};"));
+                }
             }
             writer.Line();
         }
