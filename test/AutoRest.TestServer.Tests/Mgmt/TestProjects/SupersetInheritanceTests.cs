@@ -28,5 +28,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Assert.IsFalse(generatedClass.GetProperty(property.Name).DeclaringType == generatedClass);
             }
         }
+
+        [TestCase(typeof(SupersetModel1Data), new string[] { }, new Type[] { })]
+        [TestCase(typeof(SupersetModel2), new string[] { }, new Type[] { })]
+        [TestCase(typeof(SupersetModel3), new string[] { }, new Type[] { })]
+        [TestCase(typeof(SupersetModel4Data), new string[] { "location" }, new Type[] { typeof(LocationData) })]
+        [TestCase(typeof(SupersetModel5), new string[] { "location" }, new Type[] { typeof(LocationData) })]
+        public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }
 }

@@ -346,5 +346,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
             return leastParamCtor;
         }
+
+        protected void ValidatePublicCtor(Type model, string[] paramNames, Type[] paramTypes)
+        {
+            var ctors = model.GetConstructors(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+            Assert.AreEqual(1, ctors.Length);
+            var ctor = ctors.First();
+            var parameters = ctor.GetParameters();
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                Assert.AreEqual(paramNames[i], parameters[i].Name);
+                Assert.AreEqual(paramTypes[i], parameters[i].ParameterType);
+            }
+        }
     }
 }
