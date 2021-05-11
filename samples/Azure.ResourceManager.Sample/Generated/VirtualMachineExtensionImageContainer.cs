@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineExtensionImage and their operations over a Parent. </summary>
-    public partial class VirtualMachineExtensionImageContainer : ResourceContainerBase<TenantResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData>
+    public partial class VirtualMachineExtensionImageContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData>
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageContainer"/> class for mocking. </summary>
         protected VirtualMachineExtensionImageContainer()
@@ -161,6 +161,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData> Construct() { }
     }
 }

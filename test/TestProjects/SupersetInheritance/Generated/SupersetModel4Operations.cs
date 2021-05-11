@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace SupersetInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific SupersetModel4. </summary>
-    public partial class SupersetModel4Operations : ResourceOperationsBase<TenantResourceIdentifier, SupersetModel4>
+    public partial class SupersetModel4Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SupersetModel4>
     {
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Operations"/> class for mocking. </summary>
         protected SupersetModel4Operations()
@@ -30,7 +30,7 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected SupersetModel4Operations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected SupersetModel4Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

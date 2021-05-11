@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachine. </summary>
-    public partial class VirtualMachineOperations : ResourceOperationsBase<TenantResourceIdentifier, VirtualMachine>
+    public partial class VirtualMachineOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachine>
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineOperations"/> class for mocking. </summary>
         protected VirtualMachineOperations()
@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected VirtualMachineOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected VirtualMachineOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

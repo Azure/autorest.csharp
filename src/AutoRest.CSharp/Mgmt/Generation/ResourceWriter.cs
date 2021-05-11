@@ -29,7 +29,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
                     writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
                     // inherits the default constructor when it is not a resource
-                    var baseConstructor = context.Library.IsResource(resource.OperationGroup) ? $" : base(options, resource.Id as {resource.OperationGroup.GetResourceIdentifierType(resourceDataObject)})" : string.Empty;
+                    // todo: remove "as ..." after change to ResourceContainerBase
+                    var baseConstructor = context.Library.IsResource(resource.OperationGroup) ? $" : base(options, resource.Id as {resource.OperationGroup.GetResourceIdentifierType(resourceDataObject, context.Configuration.MgmtConfiguration, true)})" : string.Empty;
                     using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resourceDataObject.Type} resource){baseConstructor}"))
                     {
                         writer.LineRaw("Data = resource;");

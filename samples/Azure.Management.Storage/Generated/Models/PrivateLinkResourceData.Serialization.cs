@@ -35,7 +35,7 @@ namespace Azure.Management.Storage.Models
 
         internal static PrivateLinkResourceData DeserializePrivateLinkResourceData(JsonElement element)
         {
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> groupId = default;

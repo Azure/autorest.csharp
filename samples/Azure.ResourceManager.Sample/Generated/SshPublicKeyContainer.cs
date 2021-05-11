@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of SshPublicKey and their operations over a ResourceGroup. </summary>
-    public partial class SshPublicKeyContainer : ResourceContainerBase<TenantResourceIdentifier, SshPublicKey, SshPublicKeyData>
+    public partial class SshPublicKeyContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, SshPublicKey, SshPublicKeyData>
     {
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyContainer"/> class for mocking. </summary>
         protected SshPublicKeyContainer()
@@ -355,6 +355,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, SshPublicKey, SshPublicKeyData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, SshPublicKey, SshPublicKeyData> Construct() { }
     }
 }

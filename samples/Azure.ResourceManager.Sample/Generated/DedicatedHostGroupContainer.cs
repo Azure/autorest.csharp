@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of DedicatedHostGroup and their operations over a ResourceGroup. </summary>
-    public partial class DedicatedHostGroupContainer : ResourceContainerBase<TenantResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData>
+    public partial class DedicatedHostGroupContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData>
     {
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupContainer"/> class for mocking. </summary>
         protected DedicatedHostGroupContainer()
@@ -355,6 +355,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
     }
 }

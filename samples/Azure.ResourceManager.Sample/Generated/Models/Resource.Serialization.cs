@@ -37,7 +37,7 @@ namespace Azure.ResourceManager.Sample
         {
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

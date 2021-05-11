@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace TenantOnly
 {
     /// <summary> A class representing the operations that can be performed over a specific Agreement. </summary>
-    public partial class AgreementOperations : ResourceOperationsBase<TenantResourceIdentifier, Agreement>
+    public partial class AgreementOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Agreement>
     {
         /// <summary> Initializes a new instance of the <see cref="AgreementOperations"/> class for mocking. </summary>
         protected AgreementOperations()
@@ -30,7 +30,7 @@ namespace TenantOnly
         /// <summary> Initializes a new instance of the <see cref="AgreementOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected AgreementOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected AgreementOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

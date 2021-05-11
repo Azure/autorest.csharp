@@ -27,7 +27,7 @@ namespace SupersetInheritance
         /// <param name="location"> The location. </param>
         /// <param name="new"> . </param>
         /// <param name="foo"> . </param>
-        internal SupersetModel5(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string @new, string foo) : base(id, name, type, tags, location, @new)
+        internal SupersetModel5(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string @new, string foo) : base(id, name, type, tags, location, @new)
         {
             Foo = foo;
         }

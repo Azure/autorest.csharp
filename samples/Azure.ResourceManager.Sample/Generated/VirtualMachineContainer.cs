@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachine and their operations over a ResourceGroup. </summary>
-    public partial class VirtualMachineContainer : ResourceContainerBase<TenantResourceIdentifier, VirtualMachine, VirtualMachineData>
+    public partial class VirtualMachineContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, VirtualMachine, VirtualMachineData>
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineContainer"/> class for mocking. </summary>
         protected VirtualMachineContainer()
@@ -363,6 +363,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, VirtualMachine, VirtualMachineData> Construct() { }
     }
 }

@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of ProximityPlacementGroup and their operations over a ResourceGroup. </summary>
-    public partial class ProximityPlacementGroupContainer : ResourceContainerBase<TenantResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData>
+    public partial class ProximityPlacementGroupContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData>
     {
         /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupContainer"/> class for mocking. </summary>
         protected ProximityPlacementGroupContainer()
@@ -355,6 +355,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, ProximityPlacementGroup, ProximityPlacementGroupData> Construct() { }
     }
 }

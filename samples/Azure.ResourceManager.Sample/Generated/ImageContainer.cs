@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of Image and their operations over a ResourceGroup. </summary>
-    public partial class ImageContainer : ResourceContainerBase<TenantResourceIdentifier, Image, ImageData>
+    public partial class ImageContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, Image, ImageData>
     {
         /// <summary> Initializes a new instance of the <see cref="ImageContainer"/> class for mocking. </summary>
         protected ImageContainer()
@@ -363,6 +363,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, Image, ImageData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, Image, ImageData> Construct() { }
     }
 }

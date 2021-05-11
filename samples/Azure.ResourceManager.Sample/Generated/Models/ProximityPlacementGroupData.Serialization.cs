@@ -45,7 +45,7 @@ namespace Azure.ResourceManager.Sample
         {
             IDictionary<string, string> tags = default;
             LocationData location = default;
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<ProximityPlacementGroupType> proximityPlacementGroupType = default;

@@ -27,7 +27,7 @@ namespace SupersetInheritance
         internal static SupersetModel1Data DeserializeSupersetModel1Data(JsonElement element)
         {
             Optional<string> @new = default;
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())

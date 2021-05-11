@@ -14,7 +14,7 @@ using Azure.ResourceManager.Core;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the operations that can be performed over a specific Toaster. </summary>
-    public partial class ToasterOperations : ResourceOperationsBase<TenantResourceIdentifier, Toaster>
+    public partial class ToasterOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, Toaster>
     {
         /// <summary> Initializes a new instance of the <see cref="ToasterOperations"/> class for mocking. </summary>
         protected ToasterOperations()
@@ -30,7 +30,7 @@ namespace SubscriptionExtensions
         /// <summary> Initializes a new instance of the <see cref="ToasterOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected ToasterOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected ToasterOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
         {
         }
 

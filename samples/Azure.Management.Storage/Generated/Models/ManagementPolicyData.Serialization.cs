@@ -30,7 +30,7 @@ namespace Azure.Management.Storage.Models
 
         internal static ManagementPolicyData DeserializeManagementPolicyData(JsonElement element)
         {
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<DateTimeOffset> lastModifiedTime = default;

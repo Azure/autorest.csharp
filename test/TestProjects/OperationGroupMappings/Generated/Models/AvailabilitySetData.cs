@@ -33,7 +33,7 @@ namespace OperationGroupMappings
         /// <param name="tags"> Resource tags. </param>
         /// <param name="foo"> . </param>
         /// <param name="sku"> sku. </param>
-        internal AvailabilitySetData(TenantResourceIdentifier id, string name, ResourceType type, string location, IReadOnlyDictionary<string, string> tags, string foo, string sku) : base(id, name, type, location, tags)
+        internal AvailabilitySetData(ResourceGroupResourceIdentifier id, string name, ResourceType type, string location, IReadOnlyDictionary<string, string> tags, string foo, string sku) : base(id, name, type, location, tags)
         {
             Foo = foo;
             Sku = sku;

@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 namespace SubscriptionExtensions.Models
 {
     /// <summary> A class representing the Oven data model. </summary>
-    public partial class OvenData : TrackedResource<TenantResourceIdentifier>
+    public partial class OvenData : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of OvenData. </summary>
         /// <param name="location"> The location. </param>
@@ -26,7 +26,7 @@ namespace SubscriptionExtensions.Models
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal OvenData(TenantResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string bar) : base(id, name, type, tags, location)
+        internal OvenData(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string bar) : base(id, name, type, tags, location)
         {
             Bar = bar;
         }

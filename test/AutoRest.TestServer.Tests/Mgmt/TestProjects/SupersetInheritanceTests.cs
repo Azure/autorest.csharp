@@ -15,10 +15,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(Resource<TenantResourceIdentifier>), typeof(SupersetModel1Data))]
+        [TestCase(typeof(Resource<ResourceGroupResourceIdentifier>), typeof(SupersetModel1Data))]
         [TestCase(typeof(Object), typeof(SupersetModel2))]
         [TestCase(typeof(Object), typeof(SupersetModel3))]
-        [TestCase(typeof(TrackedResource<TenantResourceIdentifier>), typeof(SupersetModel4Data))]
+        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(SupersetModel4Data))]
         [TestCase(typeof(SupersetModel4Data), typeof(SupersetModel5))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {

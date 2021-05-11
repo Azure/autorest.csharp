@@ -1,17 +1,21 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
-    internal static class InheritanceChoser
+    internal static class InheritanceChooser
     {
         public static IList<System.Type> ReferenceClassCollection = GetOrderedList();
 
@@ -92,28 +96,36 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return trees;
         }
 
-        public static CSharpType? GetExactMatch(MgmtObjectType childType, ObjectTypeProperty[] properties)
+        public static CSharpType? GetExactMatch(OperationGroup? operationGroup, MgmtObjectType childType, ObjectTypeProperty[] properties)
         {
             foreach (System.Type parentType in ReferenceClassCollection)
             {
                 if (IsEqual(parentType, properties))
                 {
-                    return CSharpType.FromSystemType(childType.Context, parentType);
+                    return GetCSharpType(operationGroup, childType, parentType);
                 }
             }
             return null;
         }
 
-        public static CSharpType? GetSupersetMatch(MgmtObjectType originalType, ObjectTypeProperty[] properties)
+        public static CSharpType? GetSupersetMatch(OperationGroup? operationGroup, MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
             foreach (System.Type parentType in ReferenceClassCollection)
             {
                 if (IsSuperset(parentType, properties))
                 {
-                    return CSharpType.FromSystemType(originalType.Context, parentType);
+                    return GetCSharpType(operationGroup, originalType, parentType);
                 }
             }
             return null;
+        }
+
+        private static CSharpType GetCSharpType(OperationGroup? operationGroup, MgmtObjectType originalType, Type parentType)
+        {
+            var newParentType = operationGroup == null || !parentType.IsGenericType
+                ? parentType
+                : parentType.GetGenericTypeDefinition().MakeGenericType(operationGroup.GetResourceIdentifierType(originalType, originalType.Context.Configuration.MgmtConfiguration, true));
+            return CSharpType.FromSystemType(originalType.Context, newParentType);
         }
 
         private static bool IsEqual(System.Type parentType, ObjectTypeProperty[] properties)

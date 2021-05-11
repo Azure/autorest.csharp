@@ -15,11 +15,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
         }
 
-        [TestCase(typeof(Resource<TenantResourceIdentifier>), typeof(ExactMatchModel1Data))]
+        [TestCase(typeof(Resource<ResourceGroupResourceIdentifier>), typeof(ExactMatchModel1Data))]
         [TestCase(typeof(ExactMatchModel7), typeof(ExactMatchModel2))]
         [TestCase(typeof(ExactMatchModel8), typeof(ExactMatchModel3Data))]
         [TestCase(typeof(ExactMatchModel9), typeof(ExactMatchModel4))]
-        [TestCase(typeof(TrackedResource<TenantResourceIdentifier>), typeof(ExactMatchModel5Data))]
+        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(ExactMatchModel5Data))]
         [TestCase(typeof(SubResource), typeof(ExactMatchModel6))]
         [TestCase(typeof(object), typeof(ExactMatchModel7))]
         [TestCase(typeof(SubResource), typeof(ExactMatchModel8))]

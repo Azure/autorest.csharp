@@ -53,7 +53,7 @@ namespace Azure.Management.Storage.Models
         internal static BlobContainerData DeserializeBlobContainerData(JsonElement element)
         {
             Optional<string> etag = default;
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> defaultEncryptionScope = default;
