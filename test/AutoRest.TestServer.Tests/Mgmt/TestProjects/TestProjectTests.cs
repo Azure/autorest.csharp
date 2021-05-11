@@ -301,10 +301,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             var output = await OutputLibraryTestBase.Generate(_projectName);
             var library = output.Context.Library;
-            foreach (var model in library.Models)
+            foreach (var mgmtObject in library.Models.OfType<MgmtObjectType>())
             {
-                if (model is MgmtObjectType mgmtObject)
-                    ValidateModelRequiredCtorParams(mgmtObject.ObjectSchema);
+                ValidateModelRequiredCtorParams(mgmtObject.ObjectSchema);
             }
             foreach (var resourceData in library.ResourceData)
             {
@@ -323,12 +322,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             var fullRequiredParams = requiredParams.Select(p => p.SerializedName).Concat(baseLeastParamCtor?.GetParameters().Select(p => p.Name)).Distinct();
             Assert.NotNull(leastParamCtor, $"Ctor not found for {objectSchema.Name}");
             Assert.AreEqual(fullRequiredParams.Count(), leastParamCtor.GetParameters().Length, $"{objectSchema.Name} had a mismatch in required ctor params");
-            if (fullRequiredParams.Count() != 0)
+            foreach (var param in fullRequiredParams)
             {
-                foreach (var param in fullRequiredParams)
-                {
-                    Assert.NotNull(leastParamCtor.GetParameters().FirstOrDefault(p => string.Equals(p.Name, param, StringComparison.InvariantCultureIgnoreCase)), $"{param} was not found in {objectSchema.Name}'s ctor");
-                }
+                Assert.NotNull(leastParamCtor.GetParameters().FirstOrDefault(p => string.Equals(p.Name, param, StringComparison.InvariantCultureIgnoreCase)), $"{param} was not found in {objectSchema.Name}'s ctor");
             }
         }
 
