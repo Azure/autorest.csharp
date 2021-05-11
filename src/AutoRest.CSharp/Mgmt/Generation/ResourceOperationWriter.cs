@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // write "generic resource" constructor
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
-            writer.WriteXmlDocumentationParameter("genericOperations", @"An instance of <see cref=""GenericResourceOperations""/> that has an id for a {todo: availability set}.");
+            writer.WriteXmlDocumentationParameter("genericOperations", $"An instance of <see cref=\"{typeof(GenericResourceOperations)}\"/> that has an id for a {resourceOperation.ResourceName}.");
             using (writer.Scope($"internal {typeOfThis}({typeof(GenericResourceOperations)} genericOperations) : base(genericOperations, genericOperations.Id)"))
             { }
 

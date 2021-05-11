@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetExtensionOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a VirtualMachineScaleSetExtension. </param>
         internal VirtualMachineScaleSetExtensionOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
         {
         }

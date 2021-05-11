@@ -8,6 +8,7 @@ using System.Reflection;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
@@ -159,16 +160,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         !IsAssignable(parentProperty.PropertyType, childPropertyType) &&
                         !(parentProperty.PropertyType.IsGenericParameter && IsAssignable(parentProperty.PropertyType.BaseType!, childPropertyType)))
                     {
-                        if (parentProperty.PropertyType.ContainsGenericParameters && parentProperty.PropertyType.BaseType != null && IsAssignable(parentProperty.PropertyType.BaseType, childPropertyType))
-                        {
-                            // Generic property, but base type is assignable => good to go
-                            // For example `TIdentifier where TIdentifier : TenantResourceIdentifier`
-                        }
-                        else
-                        {
-                            //TODO(ADO item 5712): deal with protected setter
-                            return false;
-                        }
+                        //TODO(ADO item 5712): deal with protected setter
+                        return false;
                     }
                 }
                 else
@@ -249,6 +242,21 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 this.type = type;
                 this.children = new List<Node>();
             }
+        }
+
+        /// <summary>
+        /// Tells if a [Resource]Data is a resource by checking if it inherits any of:
+        /// Resource, TrackedResource, SubResource, or SubResourceReadOnly.
+        /// </summary>
+        /// <param name="resourceData"></param>
+        /// <returns></returns>
+        internal static bool IsResource(this ResourceData resourceData)
+        {
+            return resourceData
+                .EnumerateHierarchy()
+                .Select(t => t.Inherits!)
+                .Any(csharpType =>
+                    csharpType.Namespace == "Azure.ResourceManager.Core" && (csharpType.Name == "Resource" || csharpType.Name == "TrackedResource" || csharpType.Name == "SubResource" || csharpType.Name == "SubResourceReadOnly"));
         }
     }
 }

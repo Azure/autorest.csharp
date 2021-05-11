@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref="ImageOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a Image. </param>
         internal ImageOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
         {
         }

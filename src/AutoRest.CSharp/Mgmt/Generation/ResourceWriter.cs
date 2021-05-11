@@ -8,6 +8,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -30,7 +31,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
                     // inherits the default constructor when it is not a resource
                     // todo: remove "as ..." after change to ResourceContainerBase
-                    var baseConstructor = context.Library.IsResource(resource.OperationGroup) ? $" : base(options, resource.Id as {resource.OperationGroup.GetResourceIdentifierType(resourceDataObject, context.Configuration.MgmtConfiguration, true)})" : string.Empty;
+                    var resourceData = context.Library.GetResourceData(resource.OperationGroup);
+                    var baseConstructor = resourceData.IsResource() ? $" : base(options, resource.Id as {resource.OperationGroup.GetResourceIdentifierType(resourceDataObject, context.Configuration.MgmtConfiguration, true)})" : string.Empty;
                     using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resourceDataObject.Type} resource){baseConstructor}"))
                     {
                         writer.LineRaw("Data = resource;");
