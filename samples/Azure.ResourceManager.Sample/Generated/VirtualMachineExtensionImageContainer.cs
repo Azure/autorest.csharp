@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<VirtualMachineExtensionImage> Get(string version, CancellationToken cancellationToken = default)
+        public override Response<VirtualMachineExtensionImage> Get(string version, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.Get");
             scope.Start();
@@ -61,7 +61,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = _restClient.Get(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, version, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new VirtualMachineExtensionImage(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new VirtualMachineExtensionImage(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<VirtualMachineExtensionImage>> GetAsync(string version, CancellationToken cancellationToken = default)
+        public async override Task<Response<VirtualMachineExtensionImage>> GetAsync(string version, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.Get");
             scope.Start();
@@ -85,7 +85,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = await _restClient.GetAsync(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, version, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new VirtualMachineExtensionImage(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new VirtualMachineExtensionImage(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

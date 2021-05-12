@@ -50,7 +50,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<VirtualMachineExtension> CreateOrUpdate(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtension> CreateOrUpdate(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.CreateOrUpdate");
             scope.Start();
@@ -65,7 +65,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(extensionParameters));
                 }
 
-                return StartCreateOrUpdate(vmExtensionName, extensionParameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<VirtualMachineExtension>;
+                return StartCreateOrUpdate(vmExtensionName, extensionParameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<VirtualMachineExtension>;
             }
             catch (Exception e)
             {
@@ -78,7 +78,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<VirtualMachineExtension>> CreateOrUpdateAsync(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtension>> CreateOrUpdateAsync(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.CreateOrUpdate");
             scope.Start();
@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(vmExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<VirtualMachineExtension>;
+                return operation.WaitForCompletion() as Response<VirtualMachineExtension>;
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<VirtualMachineExtension> StartCreateOrUpdate(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public Operation<VirtualMachineExtension> StartCreateOrUpdate(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.StartCreateOrUpdate");
             scope.Start();
@@ -142,7 +142,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<VirtualMachineExtension>> StartCreateOrUpdateAsync(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<VirtualMachineExtension>> StartCreateOrUpdateAsync(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.StartCreateOrUpdate");
             scope.Start();
@@ -176,7 +176,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<VirtualMachineExtension> Get(string vmExtensionName, CancellationToken cancellationToken = default)
+        public override Response<VirtualMachineExtension> Get(string vmExtensionName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.Get");
             scope.Start();
@@ -188,7 +188,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, vmExtensionName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new VirtualMachineExtension(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new VirtualMachineExtension(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<VirtualMachineExtension>> GetAsync(string vmExtensionName, CancellationToken cancellationToken = default)
+        public async override Task<Response<VirtualMachineExtension>> GetAsync(string vmExtensionName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.Get");
             scope.Start();
@@ -212,7 +212,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, vmExtensionName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new VirtualMachineExtension(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new VirtualMachineExtension(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

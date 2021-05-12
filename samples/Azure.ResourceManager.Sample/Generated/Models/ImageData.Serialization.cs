@@ -25,6 +25,8 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(SourceVirtualMachine))
@@ -137,7 +139,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new ImageData(id, name, type, tags, location, sourceVirtualMachine.Value, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
+            return new ImageData(id, name, type, location, tags, sourceVirtualMachine.Value, storageProfile.Value, provisioningState.Value, Optional.ToNullable(hyperVGeneration));
         }
     }
 }

@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class ImageCreateOrUpdateOperation : ArmOperation<ImageData>, IOperationSource<ImageData>
+    public partial class ImageCreateOrUpdateOperation : Operation<ImageData>, IOperationSource<ImageData>
     {
         private readonly OperationInternals<ImageData> _operation;
         protected ImageCreateOrUpdateOperation()

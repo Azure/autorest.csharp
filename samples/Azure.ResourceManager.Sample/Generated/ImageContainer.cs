@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<Image> CreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public Response<Image> CreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.CreateOrUpdate");
             scope.Start();
@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(imageName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<Image>;
+                return StartCreateOrUpdate(imageName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<Image>;
             }
             catch (Exception e)
             {
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<Image>> CreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<Image>> CreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.CreateOrUpdate");
             scope.Start();
@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(imageName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<Image>;
+                return operation.WaitForCompletion() as Response<Image>;
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<Image> StartCreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public Operation<Image> StartCreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.StartCreateOrUpdate");
             scope.Start();
@@ -143,7 +143,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<Image>> StartCreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<Image>> StartCreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.StartCreateOrUpdate");
             scope.Start();
@@ -177,7 +177,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<Image> Get(string imageName, CancellationToken cancellationToken = default)
+        public override Response<Image> Get(string imageName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.Get");
             scope.Start();
@@ -189,7 +189,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new Image(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new Image(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -201,7 +201,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<Image>> GetAsync(string imageName, CancellationToken cancellationToken = default)
+        public async override Task<Response<Image>> GetAsync(string imageName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.Get");
             scope.Start();
@@ -213,7 +213,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new Image(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new Image(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

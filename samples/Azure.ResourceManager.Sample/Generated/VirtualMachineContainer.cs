@@ -51,7 +51,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<VirtualMachine> CreateOrUpdate(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
+        public Response<VirtualMachine> CreateOrUpdate(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.CreateOrUpdate");
             scope.Start();
@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<VirtualMachine>;
+                return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<VirtualMachine>;
             }
             catch (Exception e)
             {
@@ -79,7 +79,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<VirtualMachine>> CreateOrUpdateAsync(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachine>> CreateOrUpdateAsync(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.CreateOrUpdate");
             scope.Start();
@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<VirtualMachine>;
+                return operation.WaitForCompletion() as Response<VirtualMachine>;
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<VirtualMachine> StartCreateOrUpdate(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
+        public Operation<VirtualMachine> StartCreateOrUpdate(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.StartCreateOrUpdate");
             scope.Start();
@@ -143,7 +143,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<VirtualMachine>> StartCreateOrUpdateAsync(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<VirtualMachine>> StartCreateOrUpdateAsync(string vmName, VirtualMachineData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.StartCreateOrUpdate");
             scope.Start();
@@ -177,7 +177,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<VirtualMachine> Get(string vmName, CancellationToken cancellationToken = default)
+        public override Response<VirtualMachine> Get(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.Get");
             scope.Start();
@@ -189,7 +189,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new VirtualMachine(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new VirtualMachine(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -201,7 +201,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<VirtualMachine>> GetAsync(string vmName, CancellationToken cancellationToken = default)
+        public async override Task<Response<VirtualMachine>> GetAsync(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineContainer.Get");
             scope.Start();
@@ -213,7 +213,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new VirtualMachine(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new VirtualMachine(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

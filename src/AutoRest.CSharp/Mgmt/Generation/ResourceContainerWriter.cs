@@ -164,17 +164,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
             // todo: should not write inheritdoc
-            WriteContainerMethodScope(false, $"{typeof(ArmResponse)}<{_resource.Type.Name}>", "CreateOrUpdate", passThruParameters, writer =>
+            WriteContainerMethodScope(false, $"{typeof(Response)}<{_resource.Type.Name}>", "CreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"return StartCreateOrUpdate(");
                 foreach (var parameter in passThruParameters)
                 {
                     _writer.AppendRaw($"{parameter.Name}, ");
                 }
-                _writer.Line($"cancellationToken: cancellationToken).WaitForCompletion() as {typeof(ArmResponse)}<{_resource.Type}>;");
+                _writer.Line($"cancellationToken: cancellationToken).WaitForCompletion() as {typeof(Response)}<{_resource.Type}>;");
             });
 
-            WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(ArmResponse)}<{_resource.Type.Name}>>", "CreateOrUpdate", passThruParameters, writer =>
+            WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", "CreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var operation = await StartCreateOrUpdateAsync(");
                 foreach (var parameter in passThruParameters)
@@ -182,10 +182,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.AppendRaw($"{parameter.Name}, ");
                 }
                 _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
-                _writer.Line($"return operation.WaitForCompletion() as {typeof(ArmResponse)}<{_resource.Type}>;");
+                _writer.Line($"return operation.WaitForCompletion() as {typeof(Response)}<{_resource.Type}>;");
             });
 
-            WriteContainerMethodScope(false, $"ArmOperation<{_resource.Type.Name}>", "StartCreateOrUpdate", passThruParameters, writer =>
+            WriteContainerMethodScope(false, $"Operation<{_resource.Type.Name}>", "StartCreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var originalResponse = {RestClientField}.{restClientMethod.Name}(");
                 foreach (var parameter in parameterMapping)
@@ -219,7 +219,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             });
 
-            WriteContainerMethodScope(true, $"{typeof(Task)}<ArmOperation<{_resource.Type.Name}>>", "StartCreateOrUpdate", passThruParameters, writer =>
+            WriteContainerMethodScope(true, $"{typeof(Task)}<Operation<{_resource.Type.Name}>>", "StartCreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var originalResponse = await {RestClientField}.{restClientMethod.Name}Async(");
                 foreach (var parameter in parameterMapping)
@@ -443,7 +443,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             });
 
-            WriteContainerMethodScope(false, $"{typeof(ArmResponse)}<{_resource.Type.Name}>", "Get", passThruParameters, writer =>
+            WriteContainerMethodScope(false, $"{typeof(Response)}<{_resource.Type.Name}>", "Get", passThruParameters, writer =>
             {
                 _writer.Append($"var response = {RestClientField}.Get(");
                 foreach (var parameter in parameterMapping)
@@ -452,10 +452,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.AppendRaw(", ");
                 }
                 _writer.Line($"cancellationToken: cancellationToken);");
-                _writer.Line($"return {typeof(ArmResponse)}.FromValue(new {_resource.Type}(Parent, response.Value), {typeof(ArmResponse)}.FromResponse(response.GetRawResponse()));");
+                _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}(Parent, response.Value), response.GetRawResponse());");
             }, isOverride: true);
 
-            WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(ArmResponse)}<{_resource.Type.Name}>>", "Get", passThruParameters, writer =>
+            WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", "Get", passThruParameters, writer =>
             {
                 _writer.Append($"var response = await {RestClientField}.GetAsync(");
                 foreach (var parameter in parameterMapping)
@@ -464,7 +464,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.AppendRaw(", ");
                 }
                 _writer.Line($"cancellationToken: cancellationToken);");
-                _writer.Line($"return {typeof(ArmResponse)}.FromValue(new {_resource.Type}(Parent, response.Value), {typeof(ArmResponse)}.FromResponse(response.GetRawResponse()));");
+                _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}(Parent, response.Value), response.GetRawResponse());");
             }, isOverride: true);
         }
 

@@ -26,8 +26,6 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("diskEncryptionSet");
                 writer.WriteObjectValue(DiskEncryptionSet);
             }
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
 

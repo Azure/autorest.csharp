@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineDeallocateOperation : ArmOperation<VirtualMachineData>, IOperationSource<VirtualMachineData>
+    public partial class VirtualMachineDeallocateOperation : Operation<VirtualMachineData>, IOperationSource<VirtualMachineData>
     {
         private readonly OperationInternals<VirtualMachineData> _operation;
         protected VirtualMachineDeallocateOperation()

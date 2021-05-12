@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class DedicatedHostUpdateOperation : ArmOperation<DedicatedHostData>, IOperationSource<DedicatedHostData>
+    public partial class DedicatedHostUpdateOperation : Operation<DedicatedHostData>, IOperationSource<DedicatedHostData>
     {
         private readonly OperationInternals<DedicatedHostData> _operation;
         protected DedicatedHostUpdateOperation()

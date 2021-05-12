@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var resourceData = context.Library.GetResourceData(operationGroup);
             using var _ = writer.Namespace(context.DefaultNamespace);
             using (writer.Scope(
-                $"public partial class {typeName} : ArmOperation<{resourceData.Type}>, IOperationSource<{resourceData.Type}>"
+                $"public partial class {typeName} : Operation<{resourceData.Type}>, IOperationSource<{resourceData.Type}>"
             ))
             {
                 writer.Line($"private readonly OperationInternals<{resourceData.Type}> _operation;");

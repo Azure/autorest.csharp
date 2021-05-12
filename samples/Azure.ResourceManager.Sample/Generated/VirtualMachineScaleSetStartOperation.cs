@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineScaleSetStartOperation : ArmOperation<VirtualMachineScaleSetData>, IOperationSource<VirtualMachineScaleSetData>
+    public partial class VirtualMachineScaleSetStartOperation : Operation<VirtualMachineScaleSetData>, IOperationSource<VirtualMachineScaleSetData>
     {
         private readonly OperationInternals<VirtualMachineScaleSetData> _operation;
         protected VirtualMachineScaleSetStartOperation()

@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineScaleSetExtensionCreateOrUpdateOperation : ArmOperation<VirtualMachineScaleSetExtensionData>, IOperationSource<VirtualMachineScaleSetExtensionData>
+    public partial class VirtualMachineScaleSetExtensionCreateOrUpdateOperation : Operation<VirtualMachineScaleSetExtensionData>, IOperationSource<VirtualMachineScaleSetExtensionData>
     {
         private readonly OperationInternals<VirtualMachineScaleSetExtensionData> _operation;
         protected VirtualMachineScaleSetExtensionCreateOrUpdateOperation()

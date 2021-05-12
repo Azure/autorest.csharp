@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineExtensionDeleteOperation : ArmOperation<VirtualMachineExtensionData>, IOperationSource<VirtualMachineExtensionData>
+    public partial class VirtualMachineExtensionDeleteOperation : Operation<VirtualMachineExtensionData>, IOperationSource<VirtualMachineExtensionData>
     {
         private readonly OperationInternals<VirtualMachineExtensionData> _operation;
         protected VirtualMachineExtensionDeleteOperation()

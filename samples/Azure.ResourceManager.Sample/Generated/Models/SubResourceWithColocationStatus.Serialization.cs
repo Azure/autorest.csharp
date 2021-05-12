@@ -21,8 +21,6 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("colocationStatus");
                 writer.WriteObjectValue(ColocationStatus);
             }
-            writer.WritePropertyName("id");
-            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
 

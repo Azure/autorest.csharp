@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -38,13 +39,13 @@ namespace Azure.ResourceManager.Sample
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<DedicatedHost> Get(CancellationToken cancellationToken = default)
+        public override Response<DedicatedHost> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<DedicatedHost>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<DedicatedHost>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
