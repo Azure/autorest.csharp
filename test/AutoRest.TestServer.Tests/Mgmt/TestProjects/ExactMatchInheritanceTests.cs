@@ -2,6 +2,8 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Azure.ResourceManager.Core;
 using ExactMatchInheritance;
 using NUnit.Framework;
@@ -34,5 +36,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 Assert.IsFalse(generatedClass.GetProperty(property.Name).DeclaringType == generatedClass);
             }
         }
+
+        [TestCase(typeof(ExactMatchModel1Data), new string[] { }, new Type[] { })]
+        [TestCase(typeof(ExactMatchModel2), new string[] { }, new Type[] { })]
+        [TestCase(typeof(ExactMatchModel3Data), new string[] { }, new Type[] { })]
+        [TestCase(typeof(ExactMatchModel4), new string[] { }, new Type[] { })]
+        [TestCase(typeof(ExactMatchModel5Data), new string[] { "location" }, new Type[] { typeof(LocationData) })]
+        [TestCase(typeof(ExactMatchModel6), new string[] { }, new Type[] { })]
+        [TestCase(typeof(ExactMatchModel7), new string[] { }, new Type[] { })]
+        [TestCase(typeof(ExactMatchModel8), new string[] { }, new Type[] { })]
+        [TestCase(typeof(ExactMatchModel9), new string[] { }, new Type[] { })]
+        [TestCase(typeof(ExactMatchModel10), new string[] { }, new Type[] { })]
+        [TestCase(typeof(ExactMatchModel11), new string[] { }, new Type[] { })]
+        public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }
 }

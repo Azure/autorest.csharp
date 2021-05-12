@@ -212,6 +212,8 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string ScopesConstant = "AuthorizationScopes";
         private const string ClientDiagnosticsVariable = "clientDiagnostics";
         private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
+        private const string KeyAuthField = "_keyCredential";
+        private const string TokenAuthField = "_tokenCredential";
 
         private bool HasKeyAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase);
         private bool HasTokenAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase);
@@ -225,6 +227,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (HasKeyAuth (context))
             {
                 writer.Line($"private const string {AuthorizationHeaderConstant} = {context.Configuration.CredentialHeaderName:L};");
+                writer.Line($"private readonly {typeof(AzureKeyCredential)}? {KeyAuthField};");
             }
             if (HasTokenAuth (context))
             {
@@ -236,6 +239,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 writer.RemoveTrailingComma();
                 writer.Line($"}};");
+                writer.Line($"private readonly {typeof(TokenCredential)}? {TokenAuthField};");
             }
 
             foreach (Parameter clientParameter in client.Parameters)
@@ -305,16 +309,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
-
+                writer.Line($"{KeyAuthField} = {KeyCredentialVariable};");
 
                 var authPolicy = new CodeWriterDeclaration("authPolicy");
                 if (keyCredential)
                 {
-                    writer.Line($"var {authPolicy:D} = new {typeof(AzureKeyCredentialPolicy)}({KeyCredentialVariable}, {AuthorizationHeaderConstant});");
+                    writer.Line($"var {authPolicy:D} = new {typeof(AzureKeyCredentialPolicy)}({KeyAuthField}, {AuthorizationHeaderConstant});");
                 }
                 else
                 {
-                    writer.Line($"var {authPolicy:D} = new {typeof(BearerTokenAuthenticationPolicy)}({KeyCredentialVariable}, {ScopesConstant});");
+                    writer.Line($"var {authPolicy:D} = new {typeof(BearerTokenAuthenticationPolicy)}({KeyAuthField}, {ScopesConstant});");
                 }
                 var policies = new CodeWriterDeclaration("policies");
 
