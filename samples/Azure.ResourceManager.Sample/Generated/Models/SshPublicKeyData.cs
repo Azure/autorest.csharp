@@ -23,10 +23,10 @@ namespace Azure.ResourceManager.Sample
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
         /// <param name="publicKey"> SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format. </param>
-        internal SshPublicKeyData(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string publicKey) : base(id, name, type, tags, location)
+        internal SshPublicKeyData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string publicKey) : base(id, name, type, location, tags)
         {
             PublicKey = publicKey;
         }

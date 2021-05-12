@@ -30,6 +30,8 @@ namespace MgmtParent
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
@@ -79,7 +81,7 @@ namespace MgmtParent
                     continue;
                 }
             }
-            return new AvailabilitySetData(id, name, type, tags, location, bar.Value);
+            return new AvailabilitySetData(id, name, type, location, tags, bar.Value);
         }
     }
 }

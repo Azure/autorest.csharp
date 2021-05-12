@@ -23,10 +23,10 @@ namespace MgmtParent
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal DedicatedHostGroupData(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string foo) : base(id, name, type, tags, location)
+        internal DedicatedHostGroupData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
         {
             Foo = foo;
         }
