@@ -20,6 +20,7 @@ namespace Azure.AI.DocumentTranslation
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
         private string endpoint;
         private readonly string apiVersion;
         private readonly ClientDiagnostics _clientDiagnostics;
@@ -46,7 +47,8 @@ namespace Azure.AI.DocumentTranslation
 
             options ??= new AzureAIDocumentTranslationClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
-            var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
+            _keyCredential = credential;
+            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
             this.endpoint = endpoint;
             apiVersion = options.Version;

@@ -19,6 +19,7 @@ namespace url_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
         private string globalStringPath;
         private Uri endpoint;
         private string globalStringQuery;
@@ -50,7 +51,8 @@ namespace url_LowLevel
 
             options ??= new AutoRestUrlTestServiceClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
-            var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
+            _keyCredential = credential;
+            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
             Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
             this.globalStringPath = globalStringPath;
             this.endpoint = endpoint;
