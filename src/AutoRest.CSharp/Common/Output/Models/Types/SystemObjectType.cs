@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return ctor;
         }
 
-        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtorParameters(typeof(InitializationConstructor)));
+        protected override ObjectTypeConstructor BuildInitializationConstructor() => BuildConstructor(GetCtorParameters(typeof(InitializationConstructorAttribute)));
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return setter != null ? " or sets" : string.Empty;
         }
 
-        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtorParameters(typeof(SerializationConstructor)));
+        protected override ObjectTypeConstructor BuildSerializationConstructor() => BuildConstructor(GetCtorParameters(typeof(SerializationConstructorAttribute)));
 
         protected override CSharpType? CreateInheritedType()
         {
