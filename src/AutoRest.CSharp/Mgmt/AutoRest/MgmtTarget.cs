@@ -22,9 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var resourceOperationWriter = new ResourceOperationWriter();
             var resourceContainerWriter = new ResourceContainerWriter();
-            var resourceDataWriter = new ResourceDataWriter();
             var armResourceWriter = new ResourceWriter();
-            var resourceDataSerializeWriter = new ResourceDataSerializationWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
 
@@ -52,7 +50,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resourceOperation in context.Library.ResourceOperations)
             {
                 var codeWriter = new CodeWriter();
-                resourceOperationWriter.WriteClient(codeWriter, resourceOperation, context);
+                resourceOperationWriter.WriteClient(codeWriter, resourceOperation, context.Configuration.MgmtConfiguration);
 
                 project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
             }
@@ -68,22 +66,22 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var model in context.Library.ResourceData)
             {
                 var codeWriter = new CodeWriter();
-                resourceDataWriter.WriteResourceData(codeWriter, model);
+                modelWriter.WriteModel(codeWriter, model);
 
                 var serializerCodeWriter = new CodeWriter();
-                resourceDataSerializeWriter.WriteSerialization(serializerCodeWriter, model);
+                serializeWriter.WriteSerialization(serializerCodeWriter, model);
 
                 var name = model.Type.Name;
                 project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
-            foreach (var model in context.Library.ArmResource)
+            foreach (var resource in context.Library.ArmResource)
             {
                 var codeWriter = new CodeWriter();
-                armResourceWriter.WriteResource(codeWriter, context, model);
+                armResourceWriter.WriteResource(codeWriter, resource, context);
 
-                var name = model.Type.Name;
+                var name = resource.Type.Name;
                 project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
             }
 

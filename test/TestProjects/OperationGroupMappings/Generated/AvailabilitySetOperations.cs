@@ -14,14 +14,21 @@ using Azure.ResourceManager.Core;
 namespace OperationGroupMappings
 {
     /// <summary> A class representing the operations that can be performed over a specific AvailabilitySet. </summary>
-    public partial class AvailabilitySetOperations : ResourceOperationsBase<TenantResourceIdentifier, AvailabilitySet>
+    public partial class AvailabilitySetOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AvailabilitySet>
     {
         /// <summary> Initializes a new instance of AvailabilitySetOperations for mocking. </summary>
         protected AvailabilitySetOperations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "OperationGroupMappings/AvailabilitySetOperations";
+        /// <summary> Initializes a new instance of <see cref = "AvailabilitySetOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected AvailabilitySetOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        {
+        }
+
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

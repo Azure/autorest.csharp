@@ -9,7 +9,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of VirtualMachineScaleSetExtension and their operations over a [ParentResource]. </summary>
+    /// <summary> A class representing collection of VirtualMachineScaleSetExtension and their operations over a VirtualMachineScaleSet. </summary>
     public partial class VirtualMachineScaleSetExtensionContainer
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionContainer for mocking. </summary>

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace ExactMatchInheritance
 {
@@ -26,6 +27,9 @@ namespace ExactMatchInheritance
         internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element)
         {
             Optional<string> @new = default;
+            ResourceGroupResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"))
@@ -33,8 +37,23 @@ namespace ExactMatchInheritance
                     @new = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
             }
-            return new ExactMatchModel1Data(@new.Value);
+            return new ExactMatchModel1Data(id, name, type, @new.Value);
         }
     }
 }

@@ -2,31 +2,33 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtObjectType : ObjectType
+    internal class MgmtObjectType : SchemaObjectType
     {
-        private readonly TypeFactory _typeFactory;
         private bool _isResourceType;
         private ObjectTypeProperty[]? _myProperties;
+        private BuildContext<MgmtOutputLibrary> _context;
 
-        public MgmtObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceType) : base(objectSchema, context)
+        public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context, bool isResourceType) : base(objectSchema, context)
         {
-            _typeFactory = context.TypeFactory;
             _isResourceType = isResourceType;
+            _context = context;
         }
 
-        protected override string DefaultName => GetDefaultName(OjectSchema, _isResourceType);
+        private ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
+
+        protected override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
+
+        internal OperationGroup? OperationGroup => _context.Library.GetOperationGroupBySchema(ObjectSchema);
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
@@ -34,97 +36,81 @@ namespace AutoRest.CSharp.Mgmt.Output
             return isResourceType ? name + "Data" : name;
         }
 
-        public override CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
-
-        public ObjectTypeProperty[] MyProperties => _myProperties ??= BuildProperties(false).ToArray();
-
-        protected override HashSet<string?> GetParentProperties()
+        private HashSet<string> GetParentPropertyNames()
         {
-            HashSet<string?> result = new HashSet<string?>();
-            CSharpType? type = Inherits;
-            while (type != null)
-            {
-                if (type.IsFrameworkType == false)
-                {
-                    if (type.Implementation is ObjectType objType)
-                    {
-                        result.UnionWith(objType.Properties.Select(p => p.SchemaProperty?.Language.Default.Name));
-                        type = objType.Inherits;
-                    }
-                    else
-                    {
-                        type = null;
-                    }
-                }
-                else
-                {
-                    result.UnionWith(GetPropertiesFromSystemType(type.FrameworkType));
-                    type = null;
-                }
-            }
-            return result;
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.Declaration.Name)
+                .ToHashSet();
         }
 
-        protected IEnumerable<string> GetPropertiesFromSystemType(System.Type systemType)
+        protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            return systemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
-                .Select(p =>
-                {
-                    StringBuilder builder = new StringBuilder();
-                    builder.Append(char.ToLower(p.Name[0]));
-                    builder.Append(p.Name.Substring(1));
-                    return builder.ToString();
-                });
+            var parentProperties = GetParentPropertyNames();
+            foreach (var property in base.BuildProperties())
+            {
+                if (!parentProperties.Contains(property.Declaration.Name))
+                    yield return property;
+            }
         }
 
-        private CSharpType? CreateInheritedType()
+        private IEnumerable<ObjectTypeProperty> BuildMyProperties()
         {
-            CSharpType? inheritedType = null;
-
-            var sourceBaseType = ExistingType?.BaseType;
-            if (sourceBaseType != null &&
-                sourceBaseType.SpecialType != SpecialType.System_ValueType &&
-                sourceBaseType.SpecialType != SpecialType.System_Object &&
-                _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
+            foreach (var objectSchema in GetCombinedSchemas())
             {
-                inheritedType = baseType;
-            }
-            else
-            {
-                var objectSchemas = OjectSchema.Parents!.Immediate.OfType<ObjectSchema>().ToArray();
-
-                ObjectSchema? selectedSchema = null;
-
-                foreach (var objectSchema in objectSchemas)
+                foreach (var property in objectSchema.Properties)
                 {
-                    // Take first schema or the one with discriminator
-                    selectedSchema ??= objectSchema;
-
-                    if (objectSchema.Discriminator != null)
-                    {
-                        selectedSchema = objectSchema;
-                        break;
-                    }
-                }
-
-                if (selectedSchema != null)
-                {
-                    CSharpType type = _typeFactory.CreateType(selectedSchema, false);
-                    Debug.Assert(!type.IsFrameworkType);
-                    inheritedType = type;
+                    yield return CreateProperty(property);
                 }
             }
+        }
 
-            var typeToReplace = inheritedType?.Implementation as ObjectType;
+        protected override CSharpType? CreateInheritedType()
+        {
+            CSharpType? inheritedType = base.CreateInheritedType();
+
+            var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
+            var operationGroupToUse = OperationGroup ?? GetOperationGroupFromChildren();
             if (typeToReplace != null)
             {
-                var match = InheritanceChoser.GetExactMatch((MgmtObjectType)typeToReplace);
+                var match = InheritanceChooser.GetExactMatch(operationGroupToUse, typeToReplace, typeToReplace.MyProperties);
                 if (match != null)
                 {
                     inheritedType = match;
                 }
             }
-            return inheritedType == null ? InheritanceChoser.GetSupersetMatch(this) : inheritedType;
+            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(operationGroupToUse, this, MyProperties) : inheritedType;
+        }
+
+        private OperationGroup? GetOperationGroupFromChildren()
+        {
+            OperationGroup? operationGroup = null;
+            var children = ObjectSchema.Children;
+            if (children == null)
+                return null;
+
+            foreach (var child in children.Immediate)
+            {
+                var resourceData = _context.Library.GetResourceDataFromSchema(child.Name);
+                if (resourceData != null)
+                {
+                    return resourceData.OperationGroup;
+                }
+                else
+                {
+                    // child is Model not Data
+                    MgmtObjectType? mgmtObject = _context.Library.GetMgmtObjectFromModelName(child.Name);
+                    if (mgmtObject != null)
+                    {
+                        operationGroup = mgmtObject.GetOperationGroupFromChildren();
+                        if (operationGroup != null)
+                            return operationGroup;
+                    }
+                }
+            }
+
+            return operationGroup;
         }
     }
 }

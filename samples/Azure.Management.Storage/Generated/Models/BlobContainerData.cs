@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -21,6 +22,9 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of BlobContainerData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="etag"> Resource Etag. </param>
         /// <param name="defaultEncryptionScope"> Default the container to use specified encryption scope for all writes. </param>
         /// <param name="denyEncryptionScopeOverride"> Block override of encryption scope from the container default. </param>
@@ -34,7 +38,7 @@ namespace Azure.Management.Storage.Models
         /// <param name="legalHold"> The LegalHold property of the container. </param>
         /// <param name="hasLegalHold"> The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account. </param>
         /// <param name="hasImmutabilityPolicy"> The hasImmutabilityPolicy public property is set to true by SRP if ImmutabilityPolicy has been created for this container. The hasImmutabilityPolicy public property is set to false by SRP if ImmutabilityPolicy has not been created for this container. </param>
-        internal BlobContainerData(string etag, string defaultEncryptionScope, bool? denyEncryptionScopeOverride, PublicAccess? publicAccess, DateTimeOffset? lastModifiedTime, LeaseStatus? leaseStatus, LeaseState? leaseState, LeaseDuration? leaseDuration, IDictionary<string, string> metadata, ImmutabilityPolicyProperties immutabilityPolicy, LegalHoldProperties legalHold, bool? hasLegalHold, bool? hasImmutabilityPolicy) : base(etag)
+        internal BlobContainerData(ResourceGroupResourceIdentifier id, string name, ResourceType type, string etag, string defaultEncryptionScope, bool? denyEncryptionScopeOverride, PublicAccess? publicAccess, DateTimeOffset? lastModifiedTime, LeaseStatus? leaseStatus, LeaseState? leaseState, LeaseDuration? leaseDuration, IDictionary<string, string> metadata, ImmutabilityPolicyProperties immutabilityPolicy, LegalHoldProperties legalHold, bool? hasLegalHold, bool? hasImmutabilityPolicy) : base(id, name, type, etag)
         {
             DefaultEncryptionScope = defaultEncryptionScope;
             DenyEncryptionScopeOverride = denyEncryptionScopeOverride;

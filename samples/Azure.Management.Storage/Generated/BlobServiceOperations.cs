@@ -14,14 +14,21 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific BlobService. </summary>
-    public partial class BlobServiceOperations : ResourceOperationsBase<TenantResourceIdentifier, BlobService>
+    public partial class BlobServiceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, BlobService>
     {
         /// <summary> Initializes a new instance of BlobServiceOperations for mocking. </summary>
         protected BlobServiceOperations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.Management.Storage/BlobServiceOperations";
+        /// <summary> Initializes a new instance of <see cref = "BlobServiceOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected BlobServiceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        {
+        }
+
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

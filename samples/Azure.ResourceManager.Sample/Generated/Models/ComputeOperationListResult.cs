@@ -16,17 +16,17 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of ComputeOperationListResult. </summary>
         internal ComputeOperationListResult()
         {
-            Value = new ChangeTrackingList<RestApiData>();
+            Value = new ChangeTrackingList<RestApi>();
         }
 
         /// <summary> Initializes a new instance of ComputeOperationListResult. </summary>
         /// <param name="value"> The list of compute operations. </param>
-        internal ComputeOperationListResult(IReadOnlyList<RestApiData> value)
+        internal ComputeOperationListResult(IReadOnlyList<RestApi> value)
         {
             Value = value;
         }
 
         /// <summary> The list of compute operations. </summary>
-        public IReadOnlyList<RestApiData> Value { get; }
+        public IReadOnlyList<RestApi> Value { get; }
     }
 }

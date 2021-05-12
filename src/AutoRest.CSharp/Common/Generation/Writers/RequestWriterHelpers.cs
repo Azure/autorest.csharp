@@ -25,8 +25,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var parameters = clientMethod.Parameters;
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
-            var returnType = lowLevel ? typeof(Azure.Core.Request) : typeof(HttpMessage);
-            writer.Append($"{methodAccessibility} {returnType} {methodName}(");
+            writer.Append($"{methodAccessibility} {typeof(HttpMessage)} {methodName}(");
             foreach (Parameter clientParameter in parameters)
             {
                 if (lowLevel)
@@ -198,7 +197,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         throw new NotImplementedException(clientMethod.Request.Body?.GetType().FullName);
                 }
 
-                writer.Line($"return {(lowLevel ? request : message)};");
+                writer.Line($"return {message};");
             }
             writer.Line();
         }

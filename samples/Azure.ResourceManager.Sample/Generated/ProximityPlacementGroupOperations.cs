@@ -14,14 +14,21 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific ProximityPlacementGroup. </summary>
-    public partial class ProximityPlacementGroupOperations : ResourceOperationsBase<TenantResourceIdentifier, ProximityPlacementGroup>
+    public partial class ProximityPlacementGroupOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ProximityPlacementGroup>
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupOperations for mocking. </summary>
         protected ProximityPlacementGroupOperations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/ProximityPlacementGroupOperations";
+        /// <summary> Initializes a new instance of <see cref = "ProximityPlacementGroupOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected ProximityPlacementGroupOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        {
+        }
+
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/proximityPlacementGroups";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

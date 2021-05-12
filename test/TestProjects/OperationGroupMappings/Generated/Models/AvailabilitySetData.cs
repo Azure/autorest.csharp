@@ -5,20 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.ResourceManager.Core;
+
 namespace OperationGroupMappings
 {
     /// <summary> A class representing the AvailabilitySet data model. </summary>
-    public partial class AvailabilitySetData
+    public partial class AvailabilitySetData : Resource
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
-        internal AvailabilitySetData()
+        /// <param name="location"> Resource location. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        internal AvailabilitySetData(string location) : base(location)
         {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
         }
 
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
         /// <param name="foo"> . </param>
         /// <param name="sku"> sku. </param>
-        internal AvailabilitySetData(string foo, string sku)
+        internal AvailabilitySetData(ResourceGroupResourceIdentifier id, string name, ResourceType type, string location, IReadOnlyDictionary<string, string> tags, string foo, string sku) : base(id, name, type, location, tags)
         {
             Foo = foo;
             Sku = sku;

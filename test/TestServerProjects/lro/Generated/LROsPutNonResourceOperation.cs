@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request with non resource. </summary>
     public partial class LROsPutNonResourceOperation : Operation<Sku>, IOperationSource<Sku>
     {
-        private readonly ArmOperationHelpers<Sku> _operation;
+        private readonly OperationInternals<Sku> _operation;
 
         /// <summary> Initializes a new instance of LROsPutNonResourceOperation for mocking. </summary>
         protected LROsPutNonResourceOperation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LROsPutNonResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Sku>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutNonResourceOperation");
+            _operation = new OperationInternals<Sku>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutNonResourceOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

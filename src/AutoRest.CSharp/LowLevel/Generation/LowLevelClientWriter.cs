@@ -22,9 +22,6 @@ namespace AutoRest.CSharp.Generation.Writers
         public void WriteClient(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             var cs = client.Type;
-            // Client type should have public constructor with equivalent parameters not taking ClientOptions type as last argument
-            writer.Line ($"#pragma warning disable AZC0007\n");
-
             using (writer.Namespace(cs.Namespace))
             {
                 writer.WriteXmlDocumentationSummary(client.Description);
@@ -43,7 +40,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteClientMethodRequest(CodeWriter writer, RestClientMethod clientMethod)
+        private void WriteClientMethodRequest(CodeWriter writer, LowLevelClientMethod clientMethod)
         {
             writer.WriteXmlDocumentationSummary($"Create Request for <see cref=\"{clientMethod.Name}\"/> and <see cref=\"{clientMethod.Name}Async\"/> operations.");
             foreach (Parameter parameter in clientMethod.Parameters)
@@ -53,33 +50,73 @@ namespace AutoRest.CSharp.Generation.Writers
             RequestWriterHelpers.WriteRequestCreation(writer, clientMethod, lowLevel: true, "private");
         }
 
-        private void WriteClientMethod(CodeWriter writer, RestClientMethod clientMethod, bool async)
+        private void WriteClientMethod(CodeWriter writer, LowLevelClientMethod clientMethod, bool async)
         {
             var parameters = clientMethod.Parameters;
 
             var responseType = async ? new CSharpType(typeof(Task<Response>)) : new CSharpType(typeof(Response));
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
+
+            if (clientMethod.SchemaDocumentations != null)
+            {
+                writer.LineRaw("/// <remarks>");
+
+                foreach (var schemaDoc in clientMethod.SchemaDocumentations)
+                {
+                    writer.Line($"/// Schema for <c>{schemaDoc.SchemaName}</c>:");
+                    writer.LineRaw("/// <list type=\"table\">");
+                    writer.LineRaw("///   <listeader>");
+                    writer.LineRaw("///     <term>Name</term>");
+                    writer.LineRaw("///     <term>Type</term>");
+                    writer.LineRaw("///     <term>Required</term>");
+                    writer.LineRaw("///     <term>Description</term>");
+                    writer.LineRaw("///   </listeader>");
+                    foreach (var row in schemaDoc.DocumentationRows)
+                    {
+                        writer.LineRaw("///   <item>");
+                        writer.Line($"///     <term>{row.Name}</term>");
+                        writer.Line($"///     <term>{row.Type}</term>");
+                        writer.Line($"///     <term>{(row.Required ? "Yes" : "")}</term>");
+                        if (string.IsNullOrEmpty(row.Description))
+                        {
+                            writer.Line($"///    <term></term>");
+                        }
+                        else
+                        {
+                            writer.WriteDocumentationLines("    <term>", "</term>", row.Description);
+                        }
+                        writer.LineRaw("///   </item>");
+                    }
+                    writer.LineRaw("/// </list>");
+                }
+
+                writer.LineRaw("/// </remarks>");
+            }
+
             foreach (var parameter in parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
             }
 
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-
             var methodName = CreateMethodName(clientMethod.Name, async);
             var asyncText = async ? "async" : string.Empty;
+            writer.Line($"#pragma warning disable AZC0002");
             writer.Append($"{clientMethod.Accessibility} virtual {asyncText} {responseType} {methodName}(");
 
             foreach (var parameter in parameters)
             {
                 writer.WriteParameter(parameter);
             }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+            writer.RemoveTrailingComma();
+            writer.Line($")");
+            writer.Line($"#pragma warning restore AZC0002");
 
             using (writer.Scope())
             {
-                writer.Append($"{typeof(Azure.Core.Request)} req = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
+                writer.Line($"requestOptions ??= new {typeof(Azure.RequestOptions)}();");
+
+                writer.Append($"{typeof(Azure.Core.HttpMessage)} message = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
 
                 foreach (var parameter in clientMethod.Parameters)
                 {
@@ -89,17 +126,80 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($");");
                 writer.Line();
 
-                if (async)
+                using (writer.Scope($"if (requestOptions.PerCallPolicy != null)"))
                 {
-                    writer.Line($"return await {PipelineField:I}.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);");
+                    writer.Line($"message.SetProperty (\"RequestOptionsPerCallPolicyCallback\", requestOptions.PerCallPolicy);");
                 }
-                else
+
+                var scopeVariable = new CodeWriterDeclaration("scope");
+                writer.Line($"using var {scopeVariable:D} = {ClientDiagnosticsField}.CreateScope({clientMethod.Diagnostics.ScopeName:L});");
+
+                writer.Line($"{scopeVariable}.Start();");
+
+                using (writer.Scope($"try"))
                 {
-                    writer.Line($"return {PipelineField:I}.SendRequest(req, cancellationToken);");
+                    if (async)
+                    {
+                        writer.Line($"await {PipelineField:I}.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);");
+                    }
+                    else
+                    {
+                        writer.Line($"{PipelineField:I}.Send(message, requestOptions.CancellationToken);");
+                    }
+
+                    using (writer.Scope($"if (requestOptions.StatusOption == ResponseStatusOption.Default)"))
+                    {
+                        WriteStatusCodeSwitch(writer, clientMethod, async);
+                    }
+                    using (writer.Scope($"else"))
+                    {
+                        writer.Line($"return message.Response;");
+                    }
+                }
+
+                using (writer.Scope($"catch ({typeof(Exception)} e)"))
+                {
+                    writer.Line($"{scopeVariable}.Failed(e);");
+                    writer.Line($"throw;");
                 }
             }
 
             writer.Line();
+        }
+
+        private void WriteStatusCodeSwitch(CodeWriter writer, RestClientMethod clientMethod, bool async)
+        {
+             using (writer.Scope($"switch (message.Response.Status)"))
+            {
+                foreach (var response in clientMethod.Responses)
+                {
+                    var responseBody = response.ResponseBody;
+                    var statusCodes = response.StatusCodes;
+
+                    foreach (var statusCode in statusCodes)
+                    {
+                        if (statusCode.Code != null)
+                        {
+                           writer.Line($"case {statusCode.Code}:");
+                        }
+                        else
+                        {
+                            writer.Line($"case int s when s >= {statusCode.Family * 100:L} && s < {statusCode.Family * 100 + 100:L}:");
+                        }
+                    }
+                }
+                writer.Line($"return message.Response;");
+
+                writer.Line($"default:");
+                if (async)
+                {
+                    writer.Line($"throw await {ClientDiagnosticsField}.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);");
+                }
+                else
+                {
+                    writer.Line($"throw {ClientDiagnosticsField}.CreateRequestFailedException(message.Response);");
+                }
+            }
         }
 
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
@@ -110,6 +210,8 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string APIVersionField = "apiVersion";
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
         private const string ScopesConstant = "AuthorizationScopes";
+        private const string ClientDiagnosticsVariable = "clientDiagnostics";
+        private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
 
         private bool HasKeyAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase);
         private bool HasTokenAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase);
@@ -142,6 +244,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line($"private readonly string {APIVersionField};");
+            writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
 
             writer.Line();
         }
@@ -201,15 +304,26 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
 
                 writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
+                writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
 
+
+                var authPolicy = new CodeWriterDeclaration("authPolicy");
                 if (keyCredential)
                 {
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(AzureKeyCredentialPolicy)}({KeyCredentialVariable}, {AuthorizationHeaderConstant}));");
+                    writer.Line($"var {authPolicy:D} = new {typeof(AzureKeyCredentialPolicy)}({KeyCredentialVariable}, {AuthorizationHeaderConstant});");
                 }
                 else
                 {
-                    writer.Line($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new {typeof(BearerTokenAuthenticationPolicy)}({KeyCredentialVariable}, {ScopesConstant}));");
+                    writer.Line($"var {authPolicy:D} = new {typeof(BearerTokenAuthenticationPolicy)}({KeyCredentialVariable}, {ScopesConstant});");
                 }
+                var policies = new CodeWriterDeclaration("policies");
+
+                writer.Append($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new HttpPipelinePolicy[] ");
+                writer.AppendRaw("{");
+                writer.Append($" {authPolicy:I}, ");
+                writer.Append($" new {typeof(LowLevelCallbackPolicy)}() ");
+
+                writer.LineRaw("});");
 
                 foreach (Parameter clientParameter in client.Parameters)
                 {

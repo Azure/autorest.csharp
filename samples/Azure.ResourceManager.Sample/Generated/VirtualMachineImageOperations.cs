@@ -14,14 +14,21 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineImage. </summary>
-    public partial class VirtualMachineImageOperations : ResourceOperationsBase<TenantResourceIdentifier, VirtualMachineImage>
+    public partial class VirtualMachineImageOperations : ResourceOperationsBase<ResourceIdentifier, VirtualMachineImage>
     {
         /// <summary> Initializes a new instance of VirtualMachineImageOperations for mocking. </summary>
         protected VirtualMachineImageOperations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/VirtualMachineImageOperations";
+        /// <summary> Initializes a new instance of <see cref = "VirtualMachineImageOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected VirtualMachineImageOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
+        {
+        }
+
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/vmimage";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

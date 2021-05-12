@@ -32,12 +32,12 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-  any:
-    - !AnySchema &ref_3
-      type: any
+  anyObjects:
+    - !AnyObjectSchema &ref_3
+      type: any-object
       language: !Languages 
         default:
-          name: any
+          name: AnyObject
           description: Any object
       protocol: !Protocols {}
 globalParameters:
@@ -225,6 +225,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: ObjectTypeClient

@@ -30,11 +30,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
 </Project>
 ";
+
         private string _armCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager.Core"" Version=""1.0.0-alpha.20210413.3"" />
+    <PackageReference Include=""Azure.ResourceManager.Core"" Version=""1.0.0-alpha.20210422.3"" />
   </ItemGroup>
 ";
+
         private string _csProjPackageReference = @"
   <PropertyGroup>
     <LangVersion>8.0</LangVersion>
@@ -45,6 +47,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   <ItemGroup>
     <PackageReference Include=""Microsoft.Azure.AutoRest.CSharp"" Version=""{0}"" PrivateAssets=""All"" />
   </ItemGroup>
+";
+
+      private string _llcProjectContent = @"
+<ItemGroup>
+    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.12"" />
+</ItemGroup>
 ";
 
         internal static string GetVersion()
@@ -84,7 +92,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             string csProjContent;
             if (configuration.SkipCSProjPackageReference)
             {
-                csProjContent = string.Format(_csProjContent, configuration.AzureArm ? _armCsProjContent : string.Empty);
+                string additionalContent = string.Empty;
+                if (configuration.AzureArm)
+                {
+                  additionalContent += _armCsProjContent;
+                }
+                if (configuration.LowLevelClient)
+                {
+                  additionalContent += _llcProjectContent;
+                }
+                csProjContent = string.Format(_csProjContent, additionalContent);
             }
             else
             {

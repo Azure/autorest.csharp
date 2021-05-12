@@ -6,8 +6,9 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Output.Models.Types;
@@ -21,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private const string ClientDiagnosticsVariable = "clientDiagnostics";
         private const string PipelineVariable = "pipeline";
 
-        public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
+        public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation, MgmtConfiguration config)
         {
             var cs = resourceOperation.Type;
             var @namespace = cs.Namespace;
@@ -31,8 +32,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (writer.Scope($"{resourceOperation.Declaration.Accessibility} partial class {cs.Name} : ResourceOperationsBase<{resourceOperation.ResourceIdentifierType}, {resourceOperation.ResourceName}>"))
                 {
                     WriteClientCtors(writer, resourceOperation);
-                    WriteClientProperties(writer, resourceOperation);
-                    WriteClientMethods(writer, resourceOperation, context);
+                    WriteClientProperties(writer, resourceOperation, config);
+                    WriteClientMethods(writer, resourceOperation);
                 }
             }
         }
@@ -40,16 +41,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation)
         {
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {resourceOperation.Type.Name} for mocking.");
-            using (writer.Scope($"protected {resourceOperation.Type.Name:D}()"))
+            using (writer.Scope($"protected {resourceOperation.Type.Name}()"))
+            {
+
+            }
+
+            writer.Line();
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref = \"{resourceOperation.Type.Name}\"/> class.");
+            writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
+            writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
+            using (writer.Scope($"protected {resourceOperation.Type.Name}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : base(options, id)"))
             {
 
             }
         }
 
-        private void WriteClientProperties(CodeWriter writer, ResourceOperation resourceOperation)
+        private void WriteClientProperties(CodeWriter writer, ResourceOperation resourceOperation, MgmtConfiguration config)
         {
             writer.Line();
-            writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{resourceOperation.Type.Namespace}/{resourceOperation.Type.Name}\";");
+            writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{resourceOperation.OperationGroup.ResourceType(config)}\";");
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
             }
 

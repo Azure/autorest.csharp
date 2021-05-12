@@ -16,7 +16,7 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of ExactMatchModel3Data. </summary>
-        /// <param name="id"> . </param>
+        /// <param name="id"> The id. </param>
         /// <param name="name"> . </param>
         /// <param name="nEW"> . </param>
         /// <param name="new"> . </param>

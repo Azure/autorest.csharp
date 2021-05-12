@@ -37,19 +37,13 @@ namespace AutoRest.CSharp.Input
     {
     }
 
-    /// <summary>represents  deprecation information for a given aspect</summary>
+    /// <summary>Represent information about a deprecation</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class Deprecation
     {
-        /// <summary>the reason why this aspect</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "message")]
-        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
-        public string Message { get; set; }
-
-        /// <summary>the api versions that this deprecation is applicable to.</summary>
-        [YamlDotNet.Serialization.YamlMember(Alias = "apiVersions")]
-        [System.ComponentModel.DataAnnotations.Required]
-        public System.Collections.Generic.ICollection<ApiVersion> ApiVersions { get; set; } = new System.Collections.ObjectModel.Collection<ApiVersion>();
+        /// <summary>Reason why this was deprecated.</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "reason")]
+        public string? Reason { get; set; }
     }
 
     /// <summary>A dictionary of open-ended 'x-*' extensions propogated from the original source document.</summary>
@@ -95,7 +89,7 @@ namespace AutoRest.CSharp.Input
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<ApiVersion> ApiVersions { get; set; } = new System.Collections.ObjectModel.Collection<ApiVersion>();
 
-        /// <summary>deprecation information -- ie, when this aspect doesn't apply and why</summary>
+        /// <summary>Represent the deprecation information if api is deprecated.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "deprecated")]
         public Deprecation? Deprecated { get; set; }
 
@@ -251,95 +245,98 @@ namespace AutoRest.CSharp.Input
         [System.Runtime.Serialization.EnumMember(Value = @"any")]
         Any = 0,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"any-object")]
+        AnyObject = 1,
+
         [System.Runtime.Serialization.EnumMember(Value = @"array")]
-        Array = 1,
+        Array = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"binary")]
-        Binary = 2,
+        Binary = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"boolean")]
-        Boolean = 3,
+        Boolean = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"byte-array")]
-        ByteArray = 4,
+        ByteArray = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"char")]
-        Char = 5,
+        Char = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"choice")]
-        Choice = 6,
+        Choice = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"conditional")]
-        Conditional = 7,
+        Conditional = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"constant")]
-        Constant = 8,
+        Constant = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"credential")]
-        Credential = 9,
+        Credential = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date")]
-        Date = 10,
+        Date = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        DateTime = 11,
+        DateTime = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dictionary")]
-        Dictionary = 12,
+        Dictionary = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"duration")]
-        Duration = 13,
+        Duration = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
-        Flag = 14,
+        Flag = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"group")]
-        Group = 15,
+        Group = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"integer")]
-        Integer = 16,
+        Integer = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"not")]
-        Not = 17,
+        Not = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"number")]
-        Number = 18,
+        Number = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"object")]
-        Object = 19,
+        Object = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"odata-query")]
-        OdataQuery = 20,
+        OdataQuery = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"or")]
-        Or = 21,
+        Or = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
-        SealedChoice = 22,
+        SealedChoice = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-conditional")]
-        SealedConditional = 23,
+        SealedConditional = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
-        String = 24,
+        String = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"time")]
-        Time = 25,
+        Time = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unixtime")]
-        Unixtime = 26,
+        Unixtime = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unknown")]
-        Unknown = 27,
+        Unknown = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
-        Uri = 28,
+        Uri = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uuid")]
-        Uuid = 29,
+        Uuid = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"xor")]
-        Xor = 30,
+        Xor = 31,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -479,92 +476,95 @@ namespace AutoRest.CSharp.Input
         [System.Runtime.Serialization.EnumMember(Value = @"any")]
         Any = 0,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"any-object")]
+        AnyObject = 1,
+
         [System.Runtime.Serialization.EnumMember(Value = @"array")]
-        Array = 1,
+        Array = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"binary")]
-        Binary = 2,
+        Binary = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"boolean")]
-        Boolean = 3,
+        Boolean = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"byte-array")]
-        ByteArray = 4,
+        ByteArray = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"char")]
-        Char = 5,
+        Char = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"choice")]
-        Choice = 6,
+        Choice = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"conditional")]
-        Conditional = 7,
+        Conditional = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"constant")]
-        Constant = 8,
+        Constant = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"credential")]
-        Credential = 9,
+        Credential = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date")]
-        Date = 10,
+        Date = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        DateTime = 11,
+        DateTime = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dictionary")]
-        Dictionary = 12,
+        Dictionary = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"duration")]
-        Duration = 13,
+        Duration = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
-        Flag = 14,
+        Flag = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"group")]
-        Group = 15,
+        Group = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"integer")]
-        Integer = 16,
+        Integer = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"not")]
-        Not = 17,
+        Not = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"number")]
-        Number = 18,
+        Number = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"object")]
-        Object = 19,
+        Object = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"odata-query")]
-        OdataQuery = 20,
+        OdataQuery = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"or")]
-        Or = 21,
+        Or = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
-        SealedChoice = 22,
+        SealedChoice = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-conditional")]
-        SealedConditional = 23,
+        SealedConditional = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
-        String = 24,
+        String = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"time")]
-        Time = 25,
+        Time = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unixtime")]
-        Unixtime = 26,
+        Unixtime = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
-        Uri = 27,
+        Uri = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uuid")]
-        Uuid = 28,
+        Uuid = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"xor")]
-        Xor = 29,
+        Xor = 30,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -869,7 +869,7 @@ namespace AutoRest.CSharp.Input
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<ApiVersion> ApiVersions { get; set; } = new System.Collections.ObjectModel.Collection<ApiVersion>();
 
-        /// <summary>deprecation information -- ie, when this aspect doesn't apply and why</summary>
+        /// <summary>Represent the deprecation information if api is deprecated.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "deprecated")]
         public Deprecation? Deprecated { get; set; }
 
@@ -1276,6 +1276,11 @@ namespace AutoRest.CSharp.Input
     {
     }
 
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class AnyObjectSchema : Schema
+    {
+    }
+
     /// <summary>the full set of schemas for a given service, categorized into convenient collections</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class Schemas
@@ -1424,6 +1429,10 @@ namespace AutoRest.CSharp.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "any")]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<AnySchema> Any { get; set; } = new System.Collections.ObjectModel.Collection<AnySchema>();
+
+        [YamlDotNet.Serialization.YamlMember(Alias = "anyObjects")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<AnyObjectSchema> AnyObjects { get; set; } = new System.Collections.ObjectModel.Collection<AnyObjectSchema>();
     }
 
     /// <summary>contact information</summary>
@@ -1568,7 +1577,7 @@ namespace AutoRest.CSharp.Input
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<ApiVersion> ApiVersions { get; set; } = new System.Collections.ObjectModel.Collection<ApiVersion>();
 
-        /// <summary>deprecation information -- ie, when this aspect doesn't apply and why</summary>
+        /// <summary>Represent the deprecation information if api is deprecated.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "deprecated")]
         public Deprecation? Deprecated { get; set; }
 
@@ -1629,6 +1638,34 @@ namespace AutoRest.CSharp.Input
         /// <summary>indicates that the API surface requires authentication</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "authenticationRequired")]
         public bool? AuthenticationRequired { get; set; }
+
+        [YamlDotNet.Serialization.YamlMember(Alias = "schemes")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<SecurityScheme> Schemes { get; set; } = new System.Collections.ObjectModel.Collection<SecurityScheme>();
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class SecurityScheme
+    {
+        [YamlDotNet.Serialization.YamlMember(Alias = "type")]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string Type { get; set; }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class AADTokenSecurityScheme : SecurityScheme
+    {
+        [YamlDotNet.Serialization.YamlMember(Alias = "scopes")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<string> Scopes { get; set; } = new System.Collections.ObjectModel.Collection<string>();
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class AzureKeySecurityScheme : SecurityScheme
+    {
+        [YamlDotNet.Serialization.YamlMember(Alias = "headerName")]
+        [System.ComponentModel.DataAnnotations.Required(AllowEmptyStrings = true)]
+        public string HeaderName { get; set; }
     }
 
     /// <summary>example data [UNFINISHED]</summary>
@@ -2157,11 +2194,6 @@ namespace AutoRest.CSharp.Input
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
-    internal partial class SecurityScheme
-    {
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class APIKeySecurityScheme
     {
         [YamlDotNet.Serialization.YamlMember(Alias = "type")]
@@ -2420,7 +2452,7 @@ namespace AutoRest.CSharp.Input
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<ApiVersion> ApiVersions { get; set; } = new System.Collections.ObjectModel.Collection<ApiVersion>();
 
-        /// <summary>deprecation information -- ie, when this aspect doesn't apply and why</summary>
+        /// <summary>Represent the deprecation information if api is deprecated.</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "deprecated")]
         public Deprecation? Deprecated { get; set; }
 

@@ -19,11 +19,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                 $"A Class representing a {DefaultName} along with the instance operations that can be performed on it.");
         }
 
+        internal OperationGroup OperationGroup { get; }
+
         protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility => "public";
-
-        internal OperationGroup OperationGroup { get; }
 
         public string Description { get; }
     }

@@ -14,14 +14,21 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific FileShare. </summary>
-    public partial class FileShareOperations : ResourceOperationsBase<TenantResourceIdentifier, FileShare>
+    public partial class FileShareOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, FileShare>
     {
         /// <summary> Initializes a new instance of FileShareOperations for mocking. </summary>
         protected FileShareOperations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.Management.Storage/FileShareOperations";
+        /// <summary> Initializes a new instance of <see cref = "FileShareOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected FileShareOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        {
+        }
+
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/fileServices/default/shares";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

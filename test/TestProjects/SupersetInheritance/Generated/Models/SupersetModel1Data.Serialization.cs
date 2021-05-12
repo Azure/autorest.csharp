@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
 {
@@ -26,6 +27,9 @@ namespace SupersetInheritance
         internal static SupersetModel1Data DeserializeSupersetModel1Data(JsonElement element)
         {
             Optional<string> @new = default;
+            ResourceGroupResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"))
@@ -33,8 +37,23 @@ namespace SupersetInheritance
                     @new = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
+                    continue;
+                }
             }
-            return new SupersetModel1Data(@new.Value);
+            return new SupersetModel1Data(id, name, type, @new.Value);
         }
     }
 }

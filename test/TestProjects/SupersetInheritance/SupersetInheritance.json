@@ -33,12 +33,12 @@
         }
     },
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup1/{operationGroup1Name}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}": {
             "put": {
                 "tags": [
-                    "OperationGroup1"
+                    "SupersetModel1s"
                 ],
-                "operationId": "OperationGroup1_Put",
+                "operationId": "SupersetModel1s_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -47,7 +47,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "operationGroup1Name",
+                        "name": "supersetModel1sName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -77,12 +77,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup2/{operationGroup2Name}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}": {
             "put": {
                 "tags": [
-                    "OperationGroup2"
+                    "SupersetModel2s"
                 ],
-                "operationId": "OperationGroup2_Put",
+                "operationId": "SupersetModel2s_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -91,7 +91,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "operationGroup2Name",
+                        "name": "supersetModel2sName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -121,12 +121,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup3/{operationGroup3Name}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}": {
             "put": {
                 "tags": [
-                    "OperationGroup3"
+                    "SupersetModel3s"
                 ],
-                "operationId": "OperationGroup3_Put",
+                "operationId": "SupersetModel3s_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -135,7 +135,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "operationGroup3Name",
+                        "name": "supersetModel3sName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -165,12 +165,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup4/{operationGroup4Name}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4sName}": {
             "put": {
                 "tags": [
-                    "OperationGroup4"
+                    "SupersetModel4s"
                 ],
-                "operationId": "OperationGroup4_Put",
+                "operationId": "SupersetModel4s_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -179,7 +179,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "operationGroup4Name",
+                        "name": "supersetModel4sName",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -212,6 +212,7 @@
     },
     "definitions": {
         "SupersetModel1": {
+            "type": "object",
             "properties": {
                 "id": {
                     "type": "string"
@@ -228,6 +229,7 @@
             }
         },
         "SupersetModel2": {
+            "type": "object",
             "properties": {
                 "iD": {
                     "type": "string"
@@ -244,6 +246,7 @@
             }
         },
         "SupersetModel3": {
+            "type": "object",
             "properties": {
                 "id": {
                     "type": "integer"
@@ -260,6 +263,7 @@
             }
         },
         "SupersetModel4": {
+            "type": "object",
             "properties": {
                 "id": {
                     "type": "string"
@@ -283,6 +287,19 @@
                     "type": "string"
                 }
             }
+        },
+        "SupersetModel5": {
+            "type": "object",
+            "properties": {
+                "foo": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SupersetModel4"
+                }
+            ]
         }
     },
     "parameters": {

@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace ExactMatchInheritance
 {
@@ -15,11 +16,6 @@ namespace ExactMatchInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name");
@@ -30,21 +26,18 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("type");
                 writer.WriteStringValue(Type);
             }
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
 
         internal static ExactMatchModel6 DeserializeExactMatchModel6(JsonElement element)
         {
-            Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
+            ResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
@@ -55,8 +48,13 @@ namespace ExactMatchInheritance
                     type = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
             }
-            return new ExactMatchModel6(id.Value, name.Value, type.Value);
+            return new ExactMatchModel6(id, name.Value, type.Value);
         }
     }
 }

@@ -5,10 +5,13 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_10
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: SupersetModel3Id
           description: ''
       protocol: !Protocols {}
   strings:
@@ -139,7 +142,7 @@ schemas: !Schemas
           name: SupersetModel3New
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_14
+    - !StringSchema &ref_17
       type: string
       apiVersions:
         - !ApiVersion 
@@ -149,7 +152,7 @@ schemas: !Schemas
           name: SupersetModel4Id
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_15
+    - !StringSchema &ref_18
       type: string
       apiVersions:
         - !ApiVersion 
@@ -159,7 +162,7 @@ schemas: !Schemas
           name: SupersetModel4Name
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_16
+    - !StringSchema &ref_19
       type: string
       apiVersions:
         - !ApiVersion 
@@ -169,7 +172,7 @@ schemas: !Schemas
           name: SupersetModel4Type
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_17
+    - !StringSchema &ref_20
       type: string
       apiVersions:
         - !ApiVersion 
@@ -179,7 +182,7 @@ schemas: !Schemas
           name: SupersetModel4Location
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_19
+    - !StringSchema &ref_22
       type: string
       apiVersions:
         - !ApiVersion 
@@ -189,8 +192,18 @@ schemas: !Schemas
           name: SupersetModel4New
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_15
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SupersetModel5Foo
+          description: ''
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_20
+    - !ConstantSchema &ref_23
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -200,7 +213,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_24
+    - !ConstantSchema &ref_27
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -210,7 +223,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_26
+    - !ConstantSchema &ref_29
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -221,7 +234,7 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_18
+    - !DictionarySchema &ref_21
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -230,7 +243,7 @@ schemas: !Schemas
           description: Dictionary of <string>
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_25
+    - !ObjectSchema &ref_28
       type: object
       apiVersions:
         - !ApiVersion 
@@ -279,7 +292,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_30
+    - !ObjectSchema &ref_33
       type: object
       apiVersions:
         - !ApiVersion 
@@ -328,7 +341,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_34
+    - !ObjectSchema &ref_37
       type: object
       apiVersions:
         - !ApiVersion 
@@ -377,14 +390,48 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_38
+    - !ObjectSchema &ref_14
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
+      children: !Relations 
+        all:
+          - !ObjectSchema &ref_16
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_14
+              immediate:
+                - *ref_14
+            properties:
+              - !Property 
+                schema: *ref_15
+                serializedName: foo
+                language: !Languages 
+                  default:
+                    name: foo
+                    description: ''
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: SupersetModel5
+                description: ''
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_16
       properties:
         - !Property 
-          schema: *ref_14
+          schema: *ref_17
           serializedName: id
           language: !Languages 
             default:
@@ -392,7 +439,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_15
+          schema: *ref_18
           serializedName: name
           language: !Languages 
             default:
@@ -400,7 +447,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_16
+          schema: *ref_19
           serializedName: type
           language: !Languages 
             default:
@@ -408,7 +455,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_20
           serializedName: location
           language: !Languages 
             default:
@@ -416,7 +463,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_18
+          schema: *ref_21
           serializedName: tags
           language: !Languages 
             default:
@@ -424,7 +471,7 @@ schemas: !Schemas
               description: Dictionary of <string>
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_19
+          schema: *ref_22
           serializedName: new
           language: !Languages 
             default:
@@ -442,8 +489,9 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
+    - *ref_16
 globalParameters:
-  - !Parameter &ref_23
+  - !Parameter &ref_26
     schema: *ref_1
     implementation: Client
     required: true
@@ -457,7 +505,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_21
+  - !Parameter &ref_24
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -473,8 +521,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_22
-    schema: *ref_20
+  - !Parameter &ref_25
+    schema: *ref_23
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -488,15 +536,15 @@ globalParameters:
         in: query
 operationGroups:
   - !OperationGroup 
-    $key: OperationGroup1
+    $key: SupersetModel1s
     operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_21
-          - !Parameter &ref_28
+          - *ref_24
+          - !Parameter &ref_31
             schema: *ref_1
             implementation: Method
             required: true
@@ -508,142 +556,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_29
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: operationGroup1Name
-                description: ''
-                serializedName: operationGroup1Name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_22
-          - *ref_23
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_24
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_27
-                schema: *ref_25
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_26
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_27
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup1/{operationGroup1Name}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_28
-          - *ref_29
-        responses:
-          - !SchemaResponse 
-            schema: *ref_25
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Put
-            description: ''
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: OperationGroup1
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: OperationGroup2
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_21
           - !Parameter &ref_32
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
+                name: supersetModel1SName
                 description: ''
-                serializedName: resourceGroupName
+                serializedName: supersetModel1sName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_33
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: operationGroup2Name
-                description: ''
-                serializedName: operationGroup2Name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_22
-          - *ref_23
+          - *ref_25
+          - *ref_26
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_27
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -655,8 +586,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_31
-                schema: *ref_30
+              - !Parameter &ref_30
+                schema: *ref_28
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -668,7 +599,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_26
+                schema: *ref_29
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -681,25 +612,25 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_31
+              - *ref_30
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup2/{operationGroup2Name}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel1s/{supersetModel1sName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
+          - *ref_31
           - *ref_32
-          - *ref_33
         responses:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_28
             language: !Languages 
               default:
                 name: ''
@@ -718,49 +649,49 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: OperationGroup2
+        name: SupersetModel1S
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: OperationGroup3
+    $key: SupersetModel2s
     operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_21
+          - *ref_24
+          - !Parameter &ref_35
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
           - !Parameter &ref_36
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
+                name: supersetModel2SName
                 description: ''
-                serializedName: resourceGroupName
+                serializedName: supersetModel2sName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_37
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: operationGroup3Name
-                description: ''
-                serializedName: operationGroup3Name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_22
-          - *ref_23
+          - *ref_25
+          - *ref_26
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_27
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -772,8 +703,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_35
-                schema: *ref_34
+              - !Parameter &ref_34
+                schema: *ref_33
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -785,7 +716,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_26
+                schema: *ref_29
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -798,25 +729,25 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_35
+              - *ref_34
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup3/{operationGroup3Name}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
+          - *ref_35
           - *ref_36
-          - *ref_37
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_33
             language: !Languages 
               default:
                 name: ''
@@ -835,19 +766,19 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: OperationGroup3
+        name: SupersetModel2S
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: OperationGroup4
+    $key: SupersetModel3s
     operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_21
-          - !Parameter &ref_40
+          - *ref_24
+          - !Parameter &ref_39
             schema: *ref_1
             implementation: Method
             required: true
@@ -859,25 +790,25 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_41
+          - !Parameter &ref_40
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: operationGroup4Name
+                name: supersetModel3SName
                 description: ''
-                serializedName: operationGroup4Name
+                serializedName: supersetModel3sName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_22
-          - *ref_23
+          - *ref_25
+          - *ref_26
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_27
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -889,8 +820,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_39
-                schema: *ref_38
+              - !Parameter &ref_38
+                schema: *ref_37
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -902,7 +833,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_26
+                schema: *ref_29
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -915,25 +846,25 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_39
+              - *ref_38
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/operationGroup4/{operationGroup4Name}
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel3s/{supersetModel3sName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
+          - *ref_39
           - *ref_40
-          - *ref_41
         responses:
           - !SchemaResponse 
-            schema: *ref_38
+            schema: *ref_37
             language: !Languages 
               default:
                 name: ''
@@ -952,11 +883,133 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: OperationGroup4
+        name: SupersetModel3S
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: SupersetModel4s
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_24
+          - !Parameter &ref_42
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_43
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: supersetModel4SName
+                description: ''
+                serializedName: supersetModel4sName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_25
+          - *ref_26
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_27
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_41
+                schema: *ref_14
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_29
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_41
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4sName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_42
+          - *ref_43
+        responses:
+          - !SchemaResponse 
+            schema: *ref_14
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: SupersetModel4S
         description: ''
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: true
+  schemes:
+    - !AADTokenSecurityScheme 
+      type: AADToken
+      scopes:
+        - https://management.azure.com/.default
 language: !Languages 
   default:
     name: SupersetInheritance

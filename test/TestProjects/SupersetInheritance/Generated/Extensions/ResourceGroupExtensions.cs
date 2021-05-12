@@ -22,26 +22,6 @@ namespace SupersetInheritance
         }
         #endregion
 
-        #region SupersetModel2s
-        /// <summary> Gets an object representing a SupersetModel2Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SupersetModel2Container" /> object. </returns>
-        public static SupersetModel2Container GetSupersetModel2s(this ResourceGroupOperations resourceGroup)
-        {
-            return new SupersetModel2Container(resourceGroup);
-        }
-        #endregion
-
-        #region SupersetModel3s
-        /// <summary> Gets an object representing a SupersetModel3Container along with the instance operations that can be performed on it. </summary>
-        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="SupersetModel3Container" /> object. </returns>
-        public static SupersetModel3Container GetSupersetModel3s(this ResourceGroupOperations resourceGroup)
-        {
-            return new SupersetModel3Container(resourceGroup);
-        }
-        #endregion
-
         #region SupersetModel4s
         /// <summary> Gets an object representing a SupersetModel4Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>

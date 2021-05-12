@@ -3,12 +3,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
@@ -27,6 +30,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private Dictionary<Schema, TypeProvider>? _resourceModels;
         private Dictionary<string, List<OperationGroup>> _operationGroups;
+        private Dictionary<string, TypeProvider> _nameToTypeProvider;
         private IEnumerable<Schema> _allSchemas;
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
@@ -35,6 +39,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
+            _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
@@ -71,7 +76,33 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ResourceContainer GetResourceContainer(OperationGroup operationGroup) => EnsureResourceContainers()[operationGroup];
 
+        internal ResourceData? GetResourceDataFromSchema(string schemaName)
+        {
+            List<OperationGroup>? operationGroups;
+            OperationGroup opGroup;
+            if (_operationGroups.TryGetValue(schemaName, out operationGroups))
+                opGroup =  operationGroups.FirstOrDefault();
+            else
+                return null;
+
+            return GetResourceData(opGroup);
+        }
+
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
+
+        public OperationGroup? GetOperationGroupBySchema(Schema schema)
+        {
+            List<OperationGroup>? operationGroups;
+            if (_operationGroups.TryGetValue(schema.Name, out operationGroups))
+                return operationGroups.FirstOrDefault();
+            return null;
+        }
+
+        internal MgmtObjectType? GetMgmtObjectFromModelName(string name)
+        {
+            TypeProvider? provider = _nameToTypeProvider[name];
+            return provider as MgmtObjectType;
+        }
 
         private Dictionary<OperationGroup, MgmtRestClient> EnsureRestClients()
         {
@@ -191,9 +222,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public override CSharpType? FindTypeByName(string originalName)
         {
-            TypeProvider? provider = Models.FirstOrDefault(m => m.Type.Name == originalName);
+            TypeProvider? provider = _nameToTypeProvider[originalName];
             provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
             return provider?.Type;
+        }
+
+        public LongRunningOperationInfo FindLongRunningOperationInfo(OperationGroup operationGroup, Operation operation)
+        {
+            var mgmtRestClient = FindRestClient(operationGroup);
+
+            Debug.Assert(mgmtRestClient != null, "Unexpected. Unable find matching rest client.");
+
+            var nextOperationMethod = operation?.Language?.Default?.Paging != null
+                ? mgmtRestClient.GetNextOperationMethod(operation.Requests.Single())
+                : null;
+
+            return new LongRunningOperationInfo(
+                "public",
+                mgmtRestClient.ClientPrefix,
+                nextOperationMethod);
         }
 
         private Dictionary<Schema, TypeProvider> BuildModels()
@@ -206,8 +253,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     continue;
                 }
-                models.Add(schema, BuildModel(schema));
-
+                TypeProvider typeOfModel = BuildModel(schema);
+                models.Add(schema, typeOfModel);
+                _nameToTypeProvider.Add(schema.Name, typeOfModel);
             }
             return models;
         }
@@ -220,7 +268,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 if (_operationGroups.ContainsKey(schema.Name))
                 {
-                    resourceModels.Add(schema, BuildResourceModel(schema));
+                    TypeProvider typeOfModel = BuildResourceModel(schema);
+                    resourceModels.Add(schema, typeOfModel);
+                    _nameToTypeProvider.Add(schema.Name, typeOfModel); // TODO: ADO #5829 create new dictionary that allows look-up with multiple key types to eliminate duplicate dictionaries
                 }
             }
             return resourceModels;

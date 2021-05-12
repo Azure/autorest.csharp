@@ -5,21 +5,28 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
 {
     /// <summary> A class representing the SupersetModel4 data model. </summary>
-    public partial class SupersetModel4Data : TrackedResource<TenantResourceIdentifier>
+    public partial class SupersetModel4Data : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
-        public SupersetModel4Data()
+        /// <param name="location"> The location. </param>
+        public SupersetModel4Data(LocationData location) : base(location)
         {
         }
 
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
         /// <param name="new"> . </param>
-        internal SupersetModel4Data(string @new)
+        internal SupersetModel4Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string @new) : base(id, name, type, tags, location)
         {
             New = @new;
         }

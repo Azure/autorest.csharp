@@ -14,10 +14,13 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_16
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ProductPropertiesId
           description: ''
       protocol: !Protocols {}
     - !NumberSchema &ref_2
@@ -2440,6 +2443,7 @@ operationGroups:
     protocol: !Protocols {}
 security: !Security 
   authenticationRequired: false
+  schemes: []
 language: !Languages 
   default:
     name: AutoRestPagingTestService

@@ -14,14 +14,21 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific DedicatedHostGroup. </summary>
-    public partial class DedicatedHostGroupOperations : ResourceOperationsBase<TenantResourceIdentifier, DedicatedHostGroup>
+    public partial class DedicatedHostGroupOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, DedicatedHostGroup>
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupOperations for mocking. </summary>
         protected DedicatedHostGroupOperations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.ResourceManager.Sample/DedicatedHostGroupOperations";
+        /// <summary> Initializes a new instance of <see cref = "DedicatedHostGroupOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected DedicatedHostGroupOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        {
+        }
+
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/hostGroups";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />

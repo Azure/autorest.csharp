@@ -14,14 +14,21 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing the operations that can be performed over a specific ManagementPolicy. </summary>
-    public partial class ManagementPolicyOperations : ResourceOperationsBase<TenantResourceIdentifier, ManagementPolicy>
+    public partial class ManagementPolicyOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ManagementPolicy>
     {
         /// <summary> Initializes a new instance of ManagementPolicyOperations for mocking. </summary>
         protected ManagementPolicyOperations()
         {
         }
 
-        public static readonly ResourceType ResourceType = "Azure.Management.Storage/ManagementPolicyOperations";
+        /// <summary> Initializes a new instance of <see cref = "ManagementPolicyOperations"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="id"> The identifier of the resource that is the target of operations. </param>
+        protected ManagementPolicyOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        {
+        }
+
+        public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/managementPolicies";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
