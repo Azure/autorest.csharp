@@ -6,41 +6,31 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace SupersetInheritance
 {
     /// <summary> A class representing the SupersetModel4 data model. </summary>
-    public partial class SupersetModel4Data : SubResourceWritable
+    public partial class SupersetModel4Data : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
-        public SupersetModel4Data()
+        /// <param name="location"> The location. </param>
+        public SupersetModel4Data(LocationData location) : base(location)
         {
-            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
         /// <param name="id"> The id. </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
-        /// <param name="location"> . </param>
-        /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
         /// <param name="new"> . </param>
-        internal SupersetModel4Data(string id, string name, string type, string location, IDictionary<string, string> tags, string @new) : base(id)
+        internal SupersetModel4Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
         {
-            Name = name;
-            Type = type;
-            Location = location;
-            Tags = tags;
             New = @new;
         }
 
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string Location { get; set; }
-        /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> Tags { get; }
         public string New { get; set; }
     }
 }
