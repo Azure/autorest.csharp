@@ -12,6 +12,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
@@ -32,6 +33,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, List<OperationGroup>> _operationGroups;
         private Dictionary<string, TypeProvider> _nameToTypeProvider;
         private IEnumerable<Schema> _allSchemas;
+        private Dictionary<Operation, LongRunningOperation>? _longRunningOperations;
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
@@ -57,6 +59,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
+        public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
+
         private static HashSet<string> ResourceTypes = new HashSet<string>
         {
             "resourceGroups",
@@ -81,7 +85,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             List<OperationGroup>? operationGroups;
             OperationGroup opGroup;
             if (_operationGroups.TryGetValue(schemaName, out operationGroups))
-                opGroup =  operationGroups.FirstOrDefault();
+                opGroup = operationGroups.FirstOrDefault();
             else
                 return null;
 
@@ -207,6 +211,38 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _armResource;
+        }
+
+        private Dictionary<Operation, LongRunningOperation> EnsureLongRunningOperations()
+        {
+            if (_longRunningOperations != null)
+            {
+                return _longRunningOperations;
+            }
+
+            _longRunningOperations = new Dictionary<Operation, LongRunningOperation>();
+
+            if (_context.Configuration.PublicClients)
+            {
+                foreach (var operationGroup in _codeModel.OperationGroups)
+                {
+                    foreach (var operation in operationGroup.Operations)
+                    {
+                        if (operation.IsLongRunning)
+                        {
+                            _longRunningOperations.Add(
+                                operation,
+                                new LongRunningOperation(
+                                    operationGroup,
+                                    operation,
+                                    _context,
+                                    FindLongRunningOperationInfo(operationGroup, operation)));
+                        }
+                    }
+                }
+            }
+
+            return _longRunningOperations;
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)
