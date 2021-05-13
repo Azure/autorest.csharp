@@ -335,6 +335,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             if (generatedModel == null)
                 return leastParamCtor;
 
+            if (generatedModel.GetCustomAttribute(typeof(ReferenceTypeAttribute), false) != null)
+                return generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+                    .Where(c => c.GetCustomAttribute(typeof(InitializationConstructorAttribute), false) != null)
+                    .FirstOrDefault();
+
             foreach (var ctor in generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
             {
                 if (ctor.GetParameters().Length < (leastParamCtor == null ? int.MaxValue : leastParamCtor.GetParameters().Length))

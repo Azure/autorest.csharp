@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
@@ -32,13 +33,13 @@ namespace ResourceIdentifierChooser
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<ResourceLevel> Get(CancellationToken cancellationToken = default)
+        public override Response<ResourceLevel> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<ResourceLevel>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<ResourceLevel>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

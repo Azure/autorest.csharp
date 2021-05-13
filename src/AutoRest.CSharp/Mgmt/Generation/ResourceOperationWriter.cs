@@ -9,6 +9,7 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -63,14 +64,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public override {typeof(ArmResponse)}<{resourceOperation.ResourceName}> Get({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public override {typeof(Response)}<{resourceOperation.ResourceName}> Get({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
 
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public override Task<ArmResponse<{resourceOperation.ResourceName}>> GetAsync({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public override Task<{typeof(Response)}<{resourceOperation.ResourceName}>> GetAsync({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Line($"throw new {typeof(NotImplementedException)}();");
             }

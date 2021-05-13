@@ -30,6 +30,8 @@ namespace SubscriptionExtensions.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
@@ -79,7 +81,7 @@ namespace SubscriptionExtensions.Models
                     continue;
                 }
             }
-            return new ToasterData(id, name, type, tags, location, foo.Value);
+            return new ToasterData(id, name, type, location, tags, foo.Value);
         }
     }
 }

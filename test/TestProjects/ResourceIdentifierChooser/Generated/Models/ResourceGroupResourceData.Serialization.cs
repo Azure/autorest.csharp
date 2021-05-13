@@ -35,6 +35,8 @@ namespace ResourceIdentifierChooser
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
@@ -94,7 +96,7 @@ namespace ResourceIdentifierChooser
                     continue;
                 }
             }
-            return new ResourceGroupResourceData(id, name, type, tags, location, Optional.ToList(zones));
+            return new ResourceGroupResourceData(id, name, type, location, tags, Optional.ToList(zones));
         }
     }
 }

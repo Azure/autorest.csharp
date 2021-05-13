@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace ExactMatchInheritance
@@ -32,13 +33,13 @@ namespace ExactMatchInheritance
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<ExactMatchModel5> Get(CancellationToken cancellationToken = default)
+        public override Response<ExactMatchModel5> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<ExactMatchModel5>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<ExactMatchModel5>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

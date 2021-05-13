@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace MgmtParent
@@ -32,13 +33,13 @@ namespace MgmtParent
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<VirtualMachineExtensionImage> Get(CancellationToken cancellationToken = default)
+        public override Response<VirtualMachineExtensionImage> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<VirtualMachineExtensionImage>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<VirtualMachineExtensionImage>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

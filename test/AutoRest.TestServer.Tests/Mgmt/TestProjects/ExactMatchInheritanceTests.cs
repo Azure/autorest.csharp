@@ -18,15 +18,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         }
 
         [TestCase(typeof(Resource<ResourceGroupResourceIdentifier>), typeof(ExactMatchModel1Data))]
+        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(ExactMatchModel5Data))]
+        [TestCase(typeof(SubResource), typeof(ExactMatchModel6))]
+        [TestCase(typeof(SubResourceWritable), typeof(ExactMatchModel8))]
         [TestCase(typeof(ExactMatchModel7), typeof(ExactMatchModel2))]
         [TestCase(typeof(ExactMatchModel8), typeof(ExactMatchModel3Data))]
         [TestCase(typeof(ExactMatchModel9), typeof(ExactMatchModel4))]
-        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(ExactMatchModel5Data))]
-        [TestCase(typeof(SubResource), typeof(ExactMatchModel6))]
-        [TestCase(typeof(object), typeof(ExactMatchModel7))]
-        [TestCase(typeof(SubResource), typeof(ExactMatchModel8))]
-        [TestCase(typeof(object), typeof(ExactMatchModel9))]
         [TestCase(typeof(ExactMatchModel11), typeof(ExactMatchModel10))]
+        [TestCase(typeof(object), typeof(ExactMatchModel9))]
+        [TestCase(typeof(object), typeof(ExactMatchModel7))]
         [TestCase(typeof(object), typeof(ExactMatchModel11))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {

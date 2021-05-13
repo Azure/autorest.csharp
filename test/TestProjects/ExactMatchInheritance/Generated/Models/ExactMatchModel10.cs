@@ -32,7 +32,7 @@ namespace ExactMatchInheritance
             Tags = tags;
         }
 
-        public string Id { get; set; }
+        public string Id { get; }
         public string Location { get; set; }
         /// <summary> Dictionary of &lt;string&gt;. </summary>
         public IDictionary<string, string> Tags { get; }

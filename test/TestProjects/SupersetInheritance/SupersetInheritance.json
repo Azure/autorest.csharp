@@ -215,12 +215,15 @@
             "type": "object",
             "properties": {
                 "id": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "name": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "type": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "new": {
@@ -266,12 +269,15 @@
             "type": "object",
             "properties": {
                 "id": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "name": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "type": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "location": {

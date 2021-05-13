@@ -23,10 +23,10 @@ namespace SupersetInheritance
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
         /// <param name="new"> . </param>
-        internal SupersetModel4Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string @new) : base(id, name, type, tags, location)
+        internal SupersetModel4Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string @new) : base(id, name, type, location, tags)
         {
             New = @new;
         }
