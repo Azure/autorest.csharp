@@ -85,6 +85,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{name}.cs", codeWriter.ToString());
             }
 
+            foreach (var operation in context.Library.LongRunningOperations)
+            {
+                var codeWriter = new CodeWriter();
+                LongRunningOperationWriter.Write(codeWriter, operation);
+
+                project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
+            }
+
             var extensionsWriter = new CodeWriter();
             resourceGroupExtensionsWriter.WriteExtension(context, extensionsWriter);
             project.AddGeneratedFile("Extensions/ResourceGroupExtensions.cs", extensionsWriter.ToString());
