@@ -27,6 +27,7 @@ namespace ResourceIdentifierChooser
         {
             _operation = new OperationOrResponseInternals<ModelData>(Response.FromValue(new ModelData(operationsBase, response.Value), response.GetRawResponse()));
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

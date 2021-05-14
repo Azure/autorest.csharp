@@ -27,6 +27,7 @@ namespace ExactMatchInheritance
         {
             _operation = new OperationOrResponseInternals<ExactMatchModel3>(Response.FromValue(new ExactMatchModel3(operationsBase, response.Value), response.GetRawResponse()));
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

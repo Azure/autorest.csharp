@@ -29,6 +29,7 @@ namespace SubscriptionExtensions
         {
             _operation = new OperationOrResponseInternals<Toaster>(Response.FromValue(new Toaster(operationsBase, response.Value), response.GetRawResponse()));
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

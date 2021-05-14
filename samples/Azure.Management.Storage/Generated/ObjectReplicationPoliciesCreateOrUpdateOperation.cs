@@ -29,6 +29,7 @@ namespace Azure.Management.Storage
         {
             _operation = new OperationOrResponseInternals<ObjectReplicationPolicy>(Response.FromValue(new ObjectReplicationPolicy(operationsBase, response.Value), response.GetRawResponse()));
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

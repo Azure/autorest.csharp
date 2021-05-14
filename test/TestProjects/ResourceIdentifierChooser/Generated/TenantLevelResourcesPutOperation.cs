@@ -27,6 +27,7 @@ namespace ResourceIdentifierChooser
         {
             _operation = new OperationOrResponseInternals<TenantLevelResource>(Response.FromValue(new TenantLevelResource(operationsBase, response.Value), response.GetRawResponse()));
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

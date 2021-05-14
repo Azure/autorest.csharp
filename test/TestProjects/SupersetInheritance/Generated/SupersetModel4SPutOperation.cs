@@ -27,6 +27,7 @@ namespace SupersetInheritance
         {
             _operation = new OperationOrResponseInternals<SupersetModel4>(Response.FromValue(new SupersetModel4(operationsBase, response.Value), response.GetRawResponse()));
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

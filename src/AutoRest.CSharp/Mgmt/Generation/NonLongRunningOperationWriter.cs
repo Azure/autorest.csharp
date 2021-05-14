@@ -66,6 +66,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     }
 
+                    writer.Line();
+
                     writer.WriteXmlDocumentationInheritDoc();
                     writer.Line($"public override string Id => _operation.Id;");
                     writer.Line();
