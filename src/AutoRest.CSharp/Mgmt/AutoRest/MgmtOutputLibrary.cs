@@ -34,6 +34,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, TypeProvider> _nameToTypeProvider;
         private IEnumerable<Schema> _allSchemas;
         private Dictionary<Operation, LongRunningOperation>? _longRunningOperations;
+        private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
@@ -60,6 +61,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
         public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
+
+        public IEnumerable<NonLongRunningOperation> NonLongRunningOperations => EnsureNonLongRunningOperations().Values;
 
         private static HashSet<string> ResourceTypes = new HashSet<string>
         {
@@ -93,6 +96,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
+        public Resource GetArmResource(OperationGroup operationGroup) => EnsureArmResource()[operationGroup];
 
         /// <summary>
         /// Looks up a <see cref="Resource" /> object by <see cref="OperationGroup" />.
@@ -255,8 +259,48 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     }
                 }
             }
-
             return _longRunningOperations;
+        }
+
+        private Dictionary<Operation, NonLongRunningOperation> EnsureNonLongRunningOperations()
+        {
+            if (_nonLongRunningOperations != null)
+            {
+                return _nonLongRunningOperations;
+            }
+
+            _nonLongRunningOperations = new Dictionary<Operation, NonLongRunningOperation>();
+            var desiredHttpMethods = new HttpMethod[] { HttpMethod.Put, HttpMethod.Delete, HttpMethod.Patch };
+
+            if (_context.Configuration.PublicClients)
+            {
+                foreach (var operationGroup in _codeModel.OperationGroups)
+                {
+                    // if non-resource, we won't be able to get the info for LRO
+                    if (operationGroup.IsResource(_mgmtConfiguration))
+                    {
+                        foreach (var operation in operationGroup.Operations)
+                        {
+                            if (!operation.IsLongRunning
+                                && operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest
+                                && desiredHttpMethods.Contains(httpRequest.Method))
+                            {
+                                _nonLongRunningOperations.Add(
+                                    operation,
+                                    new NonLongRunningOperation(
+                                        operationGroup,
+                                        operation,
+                                        _context,
+                                        FindLongRunningOperationInfo(operationGroup, operation)
+                                    )
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+
+            return _nonLongRunningOperations;
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)
