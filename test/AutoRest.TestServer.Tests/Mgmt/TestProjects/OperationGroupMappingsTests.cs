@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using NUnit.Framework;
 using OperationGroupMappings;
@@ -45,6 +46,37 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             Assert.NotNull(GetType("Usage"));
             Assert.NotNull(GetType("UsageRestOperations"));
+        }
+
+        [Test]
+        public void ValidateUsageCtors()
+        {
+            Type usage = typeof(Usage);
+            Assert.AreEqual(2, usage.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public).Length);
+            foreach (var ctor in usage.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
+            {
+                var parameters = ctor.GetParameters();
+                if (parameters.Length == 3)
+                {
+                    Assert.AreEqual("currentValue", parameters[0].Name);
+                    Assert.AreEqual(typeof(int), parameters[0].ParameterType);
+                    Assert.AreEqual("limit", parameters[1].Name);
+                    Assert.AreEqual(typeof(long), parameters[1].ParameterType);
+                    Assert.AreEqual("name", parameters[2].Name);
+                    Assert.AreEqual(typeof(UsageName), parameters[2].ParameterType);
+                }
+                else
+                {
+                    Assert.AreEqual("unit", parameters[0].Name);
+                    Assert.AreEqual(typeof(string), parameters[0].ParameterType);
+                    Assert.AreEqual("currentValue", parameters[1].Name);
+                    Assert.AreEqual(typeof(int), parameters[1].ParameterType);
+                    Assert.AreEqual("limit", parameters[2].Name);
+                    Assert.AreEqual(typeof(long), parameters[2].ParameterType);
+                    Assert.AreEqual("name", parameters[3].Name);
+                    Assert.AreEqual(typeof(UsageName), parameters[3].ParameterType);
+                }
+            }
         }
     }
 }

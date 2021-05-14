@@ -24,7 +24,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             _projectName = projectName;
         }
 
-        protected static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject)
+        internal static async Task<(CodeModel Model, BuildContext<MgmtOutputLibrary> Context)> Generate(string testProject)
         {
             var basePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", testProject, "Generated");

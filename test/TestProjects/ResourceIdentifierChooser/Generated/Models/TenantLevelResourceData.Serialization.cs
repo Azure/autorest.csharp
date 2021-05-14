@@ -30,6 +30,8 @@ namespace ResourceIdentifierChooser
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
@@ -79,7 +81,7 @@ namespace ResourceIdentifierChooser
                     continue;
                 }
             }
-            return new TenantLevelResourceData(id, name, type, tags, location, @new.Value);
+            return new TenantLevelResourceData(id, name, type, location, tags, @new.Value);
         }
     }
 }

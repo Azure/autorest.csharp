@@ -22,9 +22,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return typeof(SubscriptionResourceIdentifier);
             else if (operation.IsTenantResource(config))
                 return typeof(TenantResourceIdentifier);
-            else if (!skipResourceIdentifier && IsSubclassOf(GetObjectTypeBase(mgmtObjectType), typeof(SubResource)))
-                return typeof(TenantResourceIdentifier);
-                // todo: return ResourceIdentifier after we lose constraint of TIdentifier of ResourceContainerBase
+            else if (!skipResourceIdentifier && (IsSubclassOf(GetObjectTypeBase(mgmtObjectType), typeof(SubResource)) || IsSubclassOf(GetObjectTypeBase(mgmtObjectType), typeof(SubResourceWritable))))
+                return typeof(ResourceIdentifier);
             else
                 return typeof(ResourceGroupResourceIdentifier);
         }

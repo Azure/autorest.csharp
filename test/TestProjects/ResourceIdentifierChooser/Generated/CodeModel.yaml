@@ -502,6 +502,7 @@ schemas: !Schemas
       properties:
         - !Property 
           schema: *ref_16
+          readOnly: true
           serializedName: id
           language: !Languages 
             default:
@@ -510,6 +511,7 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_17
+          readOnly: true
           serializedName: name
           language: !Languages 
             default:
@@ -518,6 +520,7 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_18
+          readOnly: true
           serializedName: type
           language: !Languages 
             default:
@@ -567,6 +570,7 @@ schemas: !Schemas
       properties:
         - !Property 
           schema: *ref_22
+          readOnly: true
           serializedName: id
           language: !Languages 
             default:
@@ -575,6 +579,7 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_23
+          readOnly: true
           serializedName: name
           language: !Languages 
             default:
@@ -583,6 +588,7 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_24
+          readOnly: true
           serializedName: type
           language: !Languages 
             default:

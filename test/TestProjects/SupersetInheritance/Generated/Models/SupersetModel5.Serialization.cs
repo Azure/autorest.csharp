@@ -35,6 +35,8 @@ namespace SupersetInheritance
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
@@ -90,7 +92,7 @@ namespace SupersetInheritance
                     continue;
                 }
             }
-            return new SupersetModel5(id, name, type, tags, location, @new.Value, foo.Value);
+            return new SupersetModel5(id, name, type, location, tags, @new.Value, foo.Value);
         }
     }
 }

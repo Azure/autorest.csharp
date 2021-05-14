@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public override Task<Response<{resourceOperation.ResourceName}>> GetAsync({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public override Task<{typeof(Response)}<{resourceOperation.ResourceName}>> GetAsync({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Line($"throw new {typeof(NotImplementedException)}();");
             }

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace SubscriptionExtensions
@@ -38,13 +39,13 @@ namespace SubscriptionExtensions
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<Oven> Get(CancellationToken cancellationToken = default)
+        public override Response<Oven> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<Oven>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<Oven>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

@@ -23,11 +23,11 @@ namespace ResourceIdentifierChooser
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
-        /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
         /// <param name="mango"> Fruit. </param>
         /// <param name="strawberry"> Fruit. </param>
-        internal Model1(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, LocationData location, string mango, string strawberry) : base(id, name, type, tags, location, mango)
+        internal Model1(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string mango, string strawberry) : base(id, name, type, location, tags, mango)
         {
             Strawberry = strawberry;
         }

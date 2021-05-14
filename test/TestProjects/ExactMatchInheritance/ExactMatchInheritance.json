@@ -324,12 +324,15 @@
             "type": "object",
             "properties": {
                 "id": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "name": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "type": {
+                    "readOnly": true,
                     "type": "string"
                 }
             }
@@ -380,6 +383,7 @@
             "type": "object",
             "properties": {
                 "id": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "location": {
@@ -402,9 +406,11 @@
             "type": "object",
             "properties": {
                 "name": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "type": {
+                    "readOnly": true,
                     "type": "string"
                 }
             }
