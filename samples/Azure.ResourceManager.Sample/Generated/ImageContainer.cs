@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, imageName, parameters, cancellationToken: cancellationToken);
-                var operation = new ImageCreateOrUpdateOperation(
+                var operation = new ImagesCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, imageName, parameters).Request,
                 originalResponse);
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, imageName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new ImageCreateOrUpdateOperation(
+                var operation = new ImagesCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, imageName, parameters).Request,
                 originalResponse);

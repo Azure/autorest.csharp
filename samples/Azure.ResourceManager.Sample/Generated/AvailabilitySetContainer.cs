@@ -124,9 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken);
-                return new PhArmOperation<AvailabilitySet, AvailabilitySetData>(
-                originalResponse,
-                data => new AvailabilitySet(Parent, data));
+                return new AvailabilitySetsCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -155,9 +153,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<AvailabilitySet, AvailabilitySetData>(
-                originalResponse,
-                data => new AvailabilitySet(Parent, data));
+                return new AvailabilitySetsCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {

@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken: cancellationToken);
-                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(
+                var operation = new VirtualMachineScaleSetsCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, vmScaleSetName, parameters).Request,
                 originalResponse);
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetCreateOrUpdateOperation(
+                var operation = new VirtualMachineScaleSetsCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, vmScaleSetName, parameters).Request,
                 originalResponse);

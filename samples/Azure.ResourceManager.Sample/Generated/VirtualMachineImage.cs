@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref = "VirtualMachineImage"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal VirtualMachineImage(ResourceOperationsBase options, VirtualMachineImageData resource) : base(options, resource.Id as ResourceGroupResourceIdentifier)
+        internal VirtualMachineImage(ResourceOperationsBase options, VirtualMachineImageData resource)
         {
             Data = resource;
         }

@@ -124,9 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken: cancellationToken);
-                return new PhArmOperation<ProximityPlacementGroup, ProximityPlacementGroupData>(
-                originalResponse,
-                data => new ProximityPlacementGroup(Parent, data));
+                return new ProximityPlacementGroupsCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -155,9 +153,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, proximityPlacementGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<ProximityPlacementGroup, ProximityPlacementGroupData>(
-                originalResponse,
-                data => new ProximityPlacementGroup(Parent, data));
+                return new ProximityPlacementGroupsCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {

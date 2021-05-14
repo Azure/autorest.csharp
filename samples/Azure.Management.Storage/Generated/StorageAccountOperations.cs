@@ -23,7 +23,7 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a StorageAccount. </param>
         internal StorageAccountOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
         {
         }

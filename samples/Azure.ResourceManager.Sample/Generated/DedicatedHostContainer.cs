@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, hostName, parameters, cancellationToken: cancellationToken);
-                var operation = new DedicatedHostCreateOrUpdateOperation(
+                var operation = new DedicatedHostsCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, Id.Parent.Name, hostName, parameters).Request,
                 originalResponse);
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, hostName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new DedicatedHostCreateOrUpdateOperation(
+                var operation = new DedicatedHostsCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, Id.Parent.Name, hostName, parameters).Request,
                 originalResponse);

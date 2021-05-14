@@ -36,6 +36,8 @@ namespace Azure.ResourceManager.Sample
                 writer.WritePropertyName("version");
                 writer.WriteStringValue(Version);
             }
+            writer.WritePropertyName("id");
+            writer.WriteStringValue(Id);
             writer.WriteEndObject();
         }
 

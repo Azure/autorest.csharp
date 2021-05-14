@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of ManagementPolicy and their operations over a StorageAccount. </summary>
-    public partial class ManagementPolicyContainer : ResourceContainerBase<TenantResourceIdentifier, ManagementPolicy, ManagementPolicyData>
+    public partial class ManagementPolicyContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ManagementPolicy, ManagementPolicyData>
     {
         /// <summary> Initializes a new instance of the <see cref="ManagementPolicyContainer"/> class for mocking. </summary>
         protected ManagementPolicyContainer()
@@ -51,13 +51,13 @@ namespace Azure.Management.Storage
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<ManagementPolicy> CreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public Response<ManagementPolicy> CreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
-                return StartCreateOrUpdate(managementPolicyName, policy, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<ManagementPolicy>;
+                return StartCreateOrUpdate(managementPolicyName, policy, cancellationToken: cancellationToken).WaitForCompletion() as Response<ManagementPolicy>;
             }
             catch (Exception e)
             {
@@ -70,14 +70,14 @@ namespace Azure.Management.Storage
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<ManagementPolicy>> CreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ManagementPolicy>> CreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CreateOrUpdate");
             scope.Start();
             try
             {
                 var operation = await StartCreateOrUpdateAsync(managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<ManagementPolicy>;
+                return operation.WaitForCompletion() as Response<ManagementPolicy>;
             }
             catch (Exception e)
             {
@@ -90,16 +90,14 @@ namespace Azure.Management.Storage
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<ManagementPolicy> StartCreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public Operation<ManagementPolicy> StartCreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, policy, cancellationToken: cancellationToken);
-                return new PhArmOperation<ManagementPolicy, ManagementPolicyData>(
-                originalResponse,
-                data => new ManagementPolicy(Parent, data));
+                return new ManagementPoliciesCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -112,16 +110,14 @@ namespace Azure.Management.Storage
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<ManagementPolicy>> StartCreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public async Task<Operation<ManagementPolicy>> StartCreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<ManagementPolicy, ManagementPolicyData>(
-                originalResponse,
-                data => new ManagementPolicy(Parent, data));
+                return new ManagementPoliciesCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -133,7 +129,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<ManagementPolicy> Get(string managementPolicyName, CancellationToken cancellationToken = default)
+        public override Response<ManagementPolicy> Get(string managementPolicyName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.Get");
             scope.Start();
@@ -145,7 +141,7 @@ namespace Azure.Management.Storage
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new ManagementPolicy(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new ManagementPolicy(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -157,7 +153,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<ManagementPolicy>> GetAsync(string managementPolicyName, CancellationToken cancellationToken = default)
+        public async override Task<Response<ManagementPolicy>> GetAsync(string managementPolicyName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.Get");
             scope.Start();
@@ -169,7 +165,7 @@ namespace Azure.Management.Storage
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new ManagementPolicy(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new ManagementPolicy(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -245,6 +241,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, ManagementPolicy, ManagementPolicyData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, ManagementPolicy, ManagementPolicyData> Construct() { }
     }
 }

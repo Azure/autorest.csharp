@@ -242,6 +242,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             return resourceData
                 .EnumerateHierarchy()
+                .Where(t => t.Inherits != null)
                 .Select(t => t.Inherits!)
                 .Any(csharpType =>
                     csharpType.Namespace == "Azure.ResourceManager.Core" && (csharpType.Name == "Resource" || csharpType.Name == "TrackedResource" || csharpType.Name == "SubResource" || csharpType.Name == "SubResourceReadOnly"));

@@ -124,9 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.Create(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken: cancellationToken);
-                return new PhArmOperation<SshPublicKey, SshPublicKeyData>(
-                originalResponse,
-                data => new SshPublicKey(Parent, data));
+                return new SshPublicKeysCreateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -155,9 +153,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, sshPublicKeyName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<SshPublicKey, SshPublicKeyData>(
-                originalResponse,
-                data => new SshPublicKey(Parent, data));
+                return new SshPublicKeysCreateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {

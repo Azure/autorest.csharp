@@ -124,9 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken: cancellationToken);
-                return new PhArmOperation<DedicatedHostGroup, DedicatedHostGroupData>(
-                originalResponse,
-                data => new DedicatedHostGroup(Parent, data));
+                return new DedicatedHostGroupsCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -155,9 +153,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<DedicatedHostGroup, DedicatedHostGroupData>(
-                originalResponse,
-                data => new DedicatedHostGroup(Parent, data));
+                return new DedicatedHostGroupsCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {

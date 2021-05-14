@@ -96,7 +96,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
-        public Resource GetArmResource(OperationGroup operationGroup) => EnsureArmResource()[operationGroup];
 
         /// <summary>
         /// Looks up a <see cref="Resource" /> object by <see cref="OperationGroup" />.
@@ -119,6 +118,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return operationGroups.FirstOrDefault();
             return null;
         }
+
+        internal LongRunningOperation GetLongRunningOperation(Operation op) => EnsureLongRunningOperations()[op];
+
+        internal NonLongRunningOperation GetNonLongRunningOperation(Operation op) => EnsureNonLongRunningOperations()[op];
 
         internal MgmtObjectType? GetMgmtObjectFromModelName(string name)
         {

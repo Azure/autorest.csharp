@@ -5,23 +5,229 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core.Resources;
 
 namespace ResourceIdentifierChooser
 {
     /// <summary> A class representing collection of ResourceLevel and their operations over a ResourceGroup. </summary>
-    public partial class ResourceLevelContainer
+    public partial class ResourceLevelContainer : ContainerBase<ResourceIdentifier>
     {
-        /// <summary> Initializes a new instance of ResourceLevelContainer for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceLevelContainer"/> class for mocking. </summary>
         protected ResourceLevelContainer()
         {
         }
 
-        internal ResourceLevelContainer(ResourceOperationsBase parent)
+        /// <summary> Initializes a new instance of ResourceLevelContainer class. </summary>
+        /// <param name="parent"> The resource representing the parent resource. </param>
+        internal ResourceLevelContainer(ResourceOperationsBase parent) : base(parent)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
+
+        /// <summary> Represents the REST operations. </summary>
+        private ResourceLevelsRestOperations _restClient => new ResourceLevelsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+
+        /// <summary> Typed Resource Identifier for the container. </summary>
+        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
+
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
+
+        // Container level operations.
+
+        /// <inheritdoc />
+        /// <param name="resourceLevelsName"> The String to use. </param>
+        /// <param name="parameters"> The ResourceLevel to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public Response<ResourceLevel> CreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (resourceLevelsName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceLevelsName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                return StartCreateOrUpdate(resourceLevelsName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<ResourceLevel>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="resourceLevelsName"> The String to use. </param>
+        /// <param name="parameters"> The ResourceLevel to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async Task<Response<ResourceLevel>> CreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (resourceLevelsName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceLevelsName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var operation = await StartCreateOrUpdateAsync(resourceLevelsName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return operation.WaitForCompletion() as Response<ResourceLevel>;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="resourceLevelsName"> The String to use. </param>
+        /// <param name="parameters"> The ResourceLevel to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public Operation<ResourceLevel> StartCreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (resourceLevelsName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceLevelsName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.Put(Id.ResourceGroupName, resourceLevelsName, parameters, cancellationToken: cancellationToken);
+                return new ResourceLevelsPutOperation(Parent, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="resourceLevelsName"> The String to use. </param>
+        /// <param name="parameters"> The ResourceLevel to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async Task<Operation<ResourceLevel>> StartCreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (resourceLevelsName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceLevelsName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, resourceLevelsName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return new ResourceLevelsPutOperation(Parent, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of ResourceLevel for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
+        public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(ResourceLevelOperations.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of ResourceLevel for this resource group represented as generic resources. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.ListAsGenericResource");
+            scope.Start();
+            try
+            {
+                var filters = new ResourceFilterCollection(ResourceLevelOperations.ResourceType);
+                filters.SubstringFilter = nameFilter;
+                return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Filters the list of <see cref="ResourceLevel" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="ResourceLevel" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<ResourceLevel> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="ResourceLevel" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="ResourceLevel" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<ResourceLevel> ListAsync(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource).Get().Value);
+        }
+
+        // Builders.
+        // public ArmBuilder<ResourceIdentifier, ResourceLevel, ResourceLevelData> Construct() { }
     }
 }

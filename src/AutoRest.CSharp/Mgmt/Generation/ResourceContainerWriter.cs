@@ -18,6 +18,8 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using System.Diagnostics;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -41,8 +43,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private MgmtRestClient _restClient;
         private Resource _resource;
         private ResourceOperation _resourceOperation;
+        private MgmtOutputLibrary _library;
 
-        public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, AutoRest.MgmtOutputLibrary library)
+        public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, MgmtOutputLibrary library)
         {
             _writer = writer;
             _resourceContainer = resourceContainer;
@@ -51,6 +54,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _restClient = library.GetRestClient(operationGroup);
             _resource = library.GetArmResource(operationGroup);
             _resourceOperation = library.GetResourceOperation(operationGroup);
+            _library = library;
         }
 
         public void WriteContainer()
@@ -65,7 +69,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary(_resourceContainer.Description);
                 string baseClass = FindRestClientMethodByName(new string[] { "Get" }, out _)
                     ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
-                    : $"ContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}>";
+                    : $"ContainerBase<{_resourceContainer.ResourceIdentifierType}>";
+                    // : $"ContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}>";
                 using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : {baseClass}"))
                 {
                     WriteContainerCtors();
@@ -158,8 +163,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteCreateOrUpdateVariants(RestClientMethod restClientMethod)
         {
-            // hack: should add a IsLongRunning property to method?
-            var isLongRunning = restClientMethod.Responses.All(response => response.ResponseBody == null);
+            Debug.Assert(restClientMethod.Operation != null);
             var parameterMapping = BuildParameterMapping(restClientMethod);
             IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
@@ -185,6 +189,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"return operation.WaitForCompletion() as {typeof(Response)}<{_resource.Type}>;");
             });
 
+            var isLongRunning = restClientMethod.Operation.IsLongRunning;
+            CSharpType lroObjectType = isLongRunning
+                ? _library.GetLongRunningOperation(restClientMethod.Operation).Type
+                : _library.GetNonLongRunningOperation(restClientMethod.Operation).Type;
+
             WriteContainerMethodScope(false, $"Operation<{_resource.Type.Name}>", "StartCreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var originalResponse = {RestClientField}.{restClientMethod.Name}(");
@@ -196,7 +205,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"cancellationToken: cancellationToken);");
                 if (isLongRunning)
                 {
-                    _writer.Line($"var operation = new {_resource.Type}{restClientMethod.Name}Operation(");
+                    _writer.Line($"var operation = new {lroObjectType}(");
                     _writer.Line($"{ClientDiagnosticsField}, {PipelineField}, {RestClientField}.Create{restClientMethod.Name}Request(");
                     foreach (var parameter in parameterMapping)
                     {
@@ -212,10 +221,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
-                    _writer.Line($"originalResponse,");
-                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
-
+                    _writer.Append($"return new {lroObjectType}(");
+                    _writer.Append($"Parent,");
+                    _writer.Line($"originalResponse);");
                 }
             });
 
@@ -230,7 +238,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
                 if (isLongRunning)
                 {
-                    _writer.Line($"var operation = new {_resource.Type}{restClientMethod.Name}Operation(");
+                    _writer.Line($"var operation = new {lroObjectType}(");
                     _writer.Line($"{ClientDiagnosticsField}, {PipelineField}, {RestClientField}.Create{restClientMethod.Name}Request(");
                     foreach (var parameter in parameterMapping)
                     {
@@ -246,9 +254,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    _writer.Line($"return new PhArmOperation<{_resource.Type}, {_resourceData.Type}>(");
-                    _writer.Line($"originalResponse,");
-                    _writer.Line($"data => new {_resource.Type}(Parent, data));");
+                    _writer.Append($"return new {lroObjectType}(");
+                    _writer.Append($"Parent,");
+                    _writer.Line($"originalResponse);");
                 }
             });
         }

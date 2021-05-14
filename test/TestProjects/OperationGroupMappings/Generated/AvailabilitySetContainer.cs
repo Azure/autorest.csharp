@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace OperationGroupMappings
 {
     /// <summary> A class representing collection of AvailabilitySet and their operations over a ResourceGroup. </summary>
-    public partial class AvailabilitySetContainer : ResourceContainerBase<TenantResourceIdentifier, AvailabilitySet, AvailabilitySetData>
+    public partial class AvailabilitySetContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, AvailabilitySet, AvailabilitySetData>
     {
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetContainer"/> class for mocking. </summary>
         protected AvailabilitySetContainer()
@@ -49,7 +49,7 @@ namespace OperationGroupMappings
         /// <inheritdoc />
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<AvailabilitySet> Get(string availabilitySetName, CancellationToken cancellationToken = default)
+        public override Response<AvailabilitySet> Get(string availabilitySetName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.Get");
             scope.Start();
@@ -61,7 +61,7 @@ namespace OperationGroupMappings
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new AvailabilitySet(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new AvailabilitySet(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -73,7 +73,7 @@ namespace OperationGroupMappings
         /// <inheritdoc />
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<AvailabilitySet>> GetAsync(string availabilitySetName, CancellationToken cancellationToken = default)
+        public async override Task<Response<AvailabilitySet>> GetAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetContainer.Get");
             scope.Start();
@@ -85,7 +85,7 @@ namespace OperationGroupMappings
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, availabilitySetName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new AvailabilitySet(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new AvailabilitySet(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -161,6 +161,6 @@ namespace OperationGroupMappings
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, AvailabilitySet, AvailabilitySetData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, AvailabilitySet, AvailabilitySetData> Construct() { }
     }
 }

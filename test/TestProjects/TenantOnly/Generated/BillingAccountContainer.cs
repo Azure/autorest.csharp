@@ -49,7 +49,7 @@ namespace TenantOnly
         /// <inheritdoc />
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<BillingAccount> Get(string billingAccountName, CancellationToken cancellationToken = default)
+        public override Response<BillingAccount> Get(string billingAccountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.Get");
             scope.Start();
@@ -61,7 +61,7 @@ namespace TenantOnly
                 }
 
                 var response = _restClient.Get(billingAccountName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new BillingAccount(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new BillingAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -73,7 +73,7 @@ namespace TenantOnly
         /// <inheritdoc />
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<BillingAccount>> GetAsync(string billingAccountName, CancellationToken cancellationToken = default)
+        public async override Task<Response<BillingAccount>> GetAsync(string billingAccountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.Get");
             scope.Start();
@@ -85,7 +85,7 @@ namespace TenantOnly
                 }
 
                 var response = await _restClient.GetAsync(billingAccountName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new BillingAccount(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new BillingAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

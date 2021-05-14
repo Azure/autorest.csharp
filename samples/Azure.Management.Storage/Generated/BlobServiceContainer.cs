@@ -19,7 +19,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of BlobService and their operations over a StorageAccount. </summary>
-    public partial class BlobServiceContainer : ContainerBase<TenantResourceIdentifier, BlobService>
+    public partial class BlobServiceContainer : ContainerBase<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of the <see cref="BlobServiceContainer"/> class for mocking. </summary>
         protected BlobServiceContainer()
@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<BlobService> CreateOrUpdate(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
+        public Response<BlobService> CreateOrUpdate(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.CreateOrUpdate");
             scope.Start();
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<BlobService>;
+                return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<BlobService>;
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<BlobService>> CreateOrUpdateAsync(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobService>> CreateOrUpdateAsync(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.CreateOrUpdate");
             scope.Start();
@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<BlobService>;
+                return operation.WaitForCompletion() as Response<BlobService>;
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<BlobService> StartCreateOrUpdate(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
+        public Operation<BlobService> StartCreateOrUpdate(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -125,9 +125,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = _restClient.SetServiceProperties(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken);
-                return new PhArmOperation<BlobService, BlobServiceData>(
-                originalResponse,
-                data => new BlobService(Parent, data));
+                return new BlobServicesSetServicePropertiesOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -140,7 +138,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<BlobService>> StartCreateOrUpdateAsync(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<BlobService>> StartCreateOrUpdateAsync(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -156,9 +154,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = await _restClient.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<BlobService, BlobServiceData>(
-                originalResponse,
-                data => new BlobService(Parent, data));
+                return new BlobServicesSetServicePropertiesOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -278,6 +274,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, BlobService, BlobServiceData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, BlobService, BlobServiceData> Construct() { }
     }
 }

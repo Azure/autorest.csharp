@@ -18,7 +18,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Toaster and their operations over a Subscription. </summary>
-    public partial class ToasterContainer : ContainerBase<TenantResourceIdentifier, Toaster>
+    public partial class ToasterContainer : ContainerBase<SubscriptionResourceIdentifier>
     {
         /// <summary> Initializes a new instance of the <see cref="ToasterContainer"/> class for mocking. </summary>
         protected ToasterContainer()
@@ -51,7 +51,7 @@ namespace SubscriptionExtensions
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<Toaster> CreateOrUpdate(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public Response<Toaster> CreateOrUpdate(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.CreateOrUpdate");
             scope.Start();
@@ -66,7 +66,7 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(availabilitySetName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<Toaster>;
+                return StartCreateOrUpdate(availabilitySetName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<Toaster>;
             }
             catch (Exception e)
             {
@@ -79,7 +79,7 @@ namespace SubscriptionExtensions
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<Toaster>> CreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<Toaster>> CreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.CreateOrUpdate");
             scope.Start();
@@ -95,7 +95,7 @@ namespace SubscriptionExtensions
                 }
 
                 var operation = await StartCreateOrUpdateAsync(availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<Toaster>;
+                return operation.WaitForCompletion() as Response<Toaster>;
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace SubscriptionExtensions
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<Toaster> StartCreateOrUpdate(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public Operation<Toaster> StartCreateOrUpdate(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.StartCreateOrUpdate");
             scope.Start();
@@ -124,9 +124,7 @@ namespace SubscriptionExtensions
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken);
-                return new PhArmOperation<Toaster, ToasterData>(
-                originalResponse,
-                data => new Toaster(Parent, data));
+                return new ToastersCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -139,7 +137,7 @@ namespace SubscriptionExtensions
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<Toaster>> StartCreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<Toaster>> StartCreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.StartCreateOrUpdate");
             scope.Start();
@@ -155,9 +153,7 @@ namespace SubscriptionExtensions
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<Toaster, ToasterData>(
-                originalResponse,
-                data => new Toaster(Parent, data));
+                return new ToastersCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -233,6 +229,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, Toaster, ToasterData> Construct() { }
+        // public ArmBuilder<SubscriptionResourceIdentifier, Toaster, ToasterData> Construct() { }
     }
 }

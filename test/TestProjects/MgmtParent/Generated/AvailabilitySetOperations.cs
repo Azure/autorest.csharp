@@ -23,7 +23,7 @@ namespace MgmtParent
         }
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a AvailabilitySet. </param>
         internal AvailabilitySetOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
         {
         }

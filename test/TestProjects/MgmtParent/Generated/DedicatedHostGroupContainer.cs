@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace MgmtParent
 {
     /// <summary> A class representing collection of DedicatedHostGroup and their operations over a ResourceGroup. </summary>
-    public partial class DedicatedHostGroupContainer : ResourceContainerBase<TenantResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData>
+    public partial class DedicatedHostGroupContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData>
     {
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupContainer"/> class for mocking. </summary>
         protected DedicatedHostGroupContainer()
@@ -50,7 +50,7 @@ namespace MgmtParent
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<DedicatedHostGroup> CreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        public Response<DedicatedHostGroup> CreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CreateOrUpdate");
             scope.Start();
@@ -65,7 +65,7 @@ namespace MgmtParent
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(hostGroupName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<DedicatedHostGroup>;
+                return StartCreateOrUpdate(hostGroupName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<DedicatedHostGroup>;
             }
             catch (Exception e)
             {
@@ -78,7 +78,7 @@ namespace MgmtParent
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<DedicatedHostGroup>> CreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<DedicatedHostGroup>> CreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.CreateOrUpdate");
             scope.Start();
@@ -94,7 +94,7 @@ namespace MgmtParent
                 }
 
                 var operation = await StartCreateOrUpdateAsync(hostGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<DedicatedHostGroup>;
+                return operation.WaitForCompletion() as Response<DedicatedHostGroup>;
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace MgmtParent
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<DedicatedHostGroup> StartCreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        public Operation<DedicatedHostGroup> StartCreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.StartCreateOrUpdate");
             scope.Start();
@@ -123,9 +123,7 @@ namespace MgmtParent
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken: cancellationToken);
-                return new PhArmOperation<DedicatedHostGroup, DedicatedHostGroupData>(
-                originalResponse,
-                data => new DedicatedHostGroup(Parent, data));
+                return new DedicatedHostGroupsCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -138,7 +136,7 @@ namespace MgmtParent
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<DedicatedHostGroup>> StartCreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<DedicatedHostGroup>> StartCreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.StartCreateOrUpdate");
             scope.Start();
@@ -154,9 +152,7 @@ namespace MgmtParent
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, hostGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<DedicatedHostGroup, DedicatedHostGroupData>(
-                originalResponse,
-                data => new DedicatedHostGroup(Parent, data));
+                return new DedicatedHostGroupsCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -168,7 +164,7 @@ namespace MgmtParent
         /// <inheritdoc />
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<DedicatedHostGroup> Get(string hostGroupName, CancellationToken cancellationToken = default)
+        public override Response<DedicatedHostGroup> Get(string hostGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.Get");
             scope.Start();
@@ -180,7 +176,7 @@ namespace MgmtParent
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new DedicatedHostGroup(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new DedicatedHostGroup(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,7 +188,7 @@ namespace MgmtParent
         /// <inheritdoc />
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<DedicatedHostGroup>> GetAsync(string hostGroupName, CancellationToken cancellationToken = default)
+        public async override Task<Response<DedicatedHostGroup>> GetAsync(string hostGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.Get");
             scope.Start();
@@ -204,7 +200,7 @@ namespace MgmtParent
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new DedicatedHostGroup(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new DedicatedHostGroup(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -280,6 +276,6 @@ namespace MgmtParent
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, DedicatedHostGroup, DedicatedHostGroupData> Construct() { }
     }
 }

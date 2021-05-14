@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of PrivateLinkResource and their operations over a StorageAccount. </summary>
-    public partial class PrivateLinkResourceContainer : ContainerBase<TenantResourceIdentifier, PrivateLinkResource>
+    public partial class PrivateLinkResourceContainer : ContainerBase<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of the <see cref="PrivateLinkResourceContainer"/> class for mocking. </summary>
         protected PrivateLinkResourceContainer()
@@ -113,6 +113,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, PrivateLinkResource, PrivateLinkResourceData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, PrivateLinkResource, PrivateLinkResourceData> Construct() { }
     }
 }

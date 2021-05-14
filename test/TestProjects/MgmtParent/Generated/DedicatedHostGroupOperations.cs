@@ -23,7 +23,7 @@ namespace MgmtParent
         }
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a DedicatedHostGroup. </param>
         internal DedicatedHostGroupOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
         {
         }

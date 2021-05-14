@@ -19,7 +19,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of BlobContainer and their operations over a StorageAccount. </summary>
-    public partial class BlobContainerContainer : ResourceContainerBase<TenantResourceIdentifier, BlobContainer, BlobContainerData>
+    public partial class BlobContainerContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, BlobContainer, BlobContainerData>
     {
         /// <summary> Initializes a new instance of the <see cref="BlobContainerContainer"/> class for mocking. </summary>
         protected BlobContainerContainer()
@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<BlobContainer> CreateOrUpdate(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public Response<BlobContainer> CreateOrUpdate(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.CreateOrUpdate");
             scope.Start();
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(blobContainer));
                 }
 
-                return StartCreateOrUpdate(containerName, blobContainer, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<BlobContainer>;
+                return StartCreateOrUpdate(containerName, blobContainer, cancellationToken: cancellationToken).WaitForCompletion() as Response<BlobContainer>;
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<BlobContainer>> CreateOrUpdateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobContainer>> CreateOrUpdateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.CreateOrUpdate");
             scope.Start();
@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(containerName, blobContainer, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<BlobContainer>;
+                return operation.WaitForCompletion() as Response<BlobContainer>;
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace Azure.Management.Storage
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<BlobContainer> StartCreateOrUpdate(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public Operation<BlobContainer> StartCreateOrUpdate(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.StartCreateOrUpdate");
             scope.Start();
@@ -125,9 +125,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = _restClient.Create(Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken: cancellationToken);
-                return new PhArmOperation<BlobContainer, BlobContainerData>(
-                originalResponse,
-                data => new BlobContainer(Parent, data));
+                return new BlobContainersCreateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -140,7 +138,7 @@ namespace Azure.Management.Storage
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="blobContainer"> Properties of the blob container to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<BlobContainer>> StartCreateOrUpdateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
+        public async Task<Operation<BlobContainer>> StartCreateOrUpdateAsync(string containerName, BlobContainerData blobContainer, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.StartCreateOrUpdate");
             scope.Start();
@@ -156,9 +154,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Parent.Name, containerName, blobContainer, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<BlobContainer, BlobContainerData>(
-                originalResponse,
-                data => new BlobContainer(Parent, data));
+                return new BlobContainersCreateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -170,7 +166,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<BlobContainer> Get(string containerName, CancellationToken cancellationToken = default)
+        public override Response<BlobContainer> Get(string containerName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.Get");
             scope.Start();
@@ -182,7 +178,7 @@ namespace Azure.Management.Storage
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new BlobContainer(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new BlobContainer(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -194,7 +190,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<BlobContainer>> GetAsync(string containerName, CancellationToken cancellationToken = default)
+        public async override Task<Response<BlobContainer>> GetAsync(string containerName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobContainerContainer.Get");
             scope.Start();
@@ -206,7 +202,7 @@ namespace Azure.Management.Storage
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, containerName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new BlobContainer(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new BlobContainer(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -356,6 +352,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, BlobContainer, BlobContainerData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, BlobContainer, BlobContainerData> Construct() { }
     }
 }

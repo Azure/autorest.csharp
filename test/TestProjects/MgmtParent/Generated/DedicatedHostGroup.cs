@@ -17,7 +17,7 @@ namespace MgmtParent
         /// <summary> Initializes a new instance of the <see cref = "DedicatedHostGroup"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal DedicatedHostGroup(ResourceOperationsBase options, DedicatedHostGroupData resource) : base(options, resource.Id as TenantResourceIdentifier)
+        internal DedicatedHostGroup(ResourceOperationsBase options, DedicatedHostGroupData resource) : base(options, resource.Id as ResourceGroupResourceIdentifier)
         {
             Data = resource;
         }

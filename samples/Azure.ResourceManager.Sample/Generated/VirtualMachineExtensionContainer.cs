@@ -123,7 +123,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, vmExtensionName, extensionParameters, cancellationToken: cancellationToken);
-                var operation = new VirtualMachineExtensionCreateOrUpdateOperation(
+                var operation = new VirtualMachineScaleSetVMExtensionsCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, vmExtensionName, extensionParameters).Request,
                 originalResponse);
@@ -158,7 +158,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, vmExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineExtensionCreateOrUpdateOperation(
+                var operation = new VirtualMachineScaleSetVMExtensionsCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, Id.Parent.Parent.Name, Id.Parent.Name, vmExtensionName, extensionParameters).Request,
                 originalResponse);

@@ -23,7 +23,7 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a Oven. </param>
         internal OvenOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
         {
         }

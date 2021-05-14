@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of PrivateEndpointConnection and their operations over a StorageAccount. </summary>
-    public partial class PrivateEndpointConnectionContainer : ResourceContainerBase<TenantResourceIdentifier, PrivateEndpointConnection, PrivateEndpointConnectionData>
+    public partial class PrivateEndpointConnectionContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, PrivateEndpointConnection, PrivateEndpointConnectionData>
     {
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionContainer"/> class for mocking. </summary>
         protected PrivateEndpointConnectionContainer()
@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<PrivateEndpointConnection> CreateOrUpdate(string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
+        public Response<PrivateEndpointConnection> CreateOrUpdate(string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.CreateOrUpdate");
             scope.Start();
@@ -63,7 +63,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(privateEndpointConnectionName));
                 }
 
-                return StartCreateOrUpdate(privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<PrivateEndpointConnection>;
+                return StartCreateOrUpdate(privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken: cancellationToken).WaitForCompletion() as Response<PrivateEndpointConnection>;
             }
             catch (Exception e)
             {
@@ -77,7 +77,7 @@ namespace Azure.Management.Storage
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<PrivateEndpointConnection>> CreateOrUpdateAsync(string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
+        public async Task<Response<PrivateEndpointConnection>> CreateOrUpdateAsync(string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.CreateOrUpdate");
             scope.Start();
@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<PrivateEndpointConnection>;
+                return operation.WaitForCompletion() as Response<PrivateEndpointConnection>;
             }
             catch (Exception e)
             {
@@ -103,7 +103,7 @@ namespace Azure.Management.Storage
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<PrivateEndpointConnection> StartCreateOrUpdate(string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
+        public Operation<PrivateEndpointConnection> StartCreateOrUpdate(string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.StartCreateOrUpdate");
             scope.Start();
@@ -115,9 +115,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = _restClient.Put(Id.ResourceGroupName, Id.Parent.Name, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken: cancellationToken);
-                return new PhArmOperation<PrivateEndpointConnection, PrivateEndpointConnectionData>(
-                originalResponse,
-                data => new PrivateEndpointConnection(Parent, data));
+                return new PrivateEndpointConnectionsPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -131,7 +129,7 @@ namespace Azure.Management.Storage
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<PrivateEndpointConnection>> StartCreateOrUpdateAsync(string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
+        public async Task<Operation<PrivateEndpointConnection>> StartCreateOrUpdateAsync(string privateEndpointConnectionName, PrivateEndpoint privateEndpoint = null, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.StartCreateOrUpdate");
             scope.Start();
@@ -143,9 +141,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, Id.Parent.Name, privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<PrivateEndpointConnection, PrivateEndpointConnectionData>(
-                originalResponse,
-                data => new PrivateEndpointConnection(Parent, data));
+                return new PrivateEndpointConnectionsPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -157,7 +153,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<PrivateEndpointConnection> Get(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public override Response<PrivateEndpointConnection> Get(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.Get");
             scope.Start();
@@ -169,7 +165,7 @@ namespace Azure.Management.Storage
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new PrivateEndpointConnection(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new PrivateEndpointConnection(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -181,7 +177,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<PrivateEndpointConnection>> GetAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
+        public async override Task<Response<PrivateEndpointConnection>> GetAsync(string privateEndpointConnectionName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionContainer.Get");
             scope.Start();
@@ -193,7 +189,7 @@ namespace Azure.Management.Storage
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, privateEndpointConnectionName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new PrivateEndpointConnection(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new PrivateEndpointConnection(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -269,6 +265,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, PrivateEndpointConnection, PrivateEndpointConnectionData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, PrivateEndpointConnection, PrivateEndpointConnectionData> Construct() { }
     }
 }

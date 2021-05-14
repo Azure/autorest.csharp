@@ -23,7 +23,7 @@ namespace ExactMatchInheritance
         }
 
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel1Operations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a {todo: availability set}. </param>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a ExactMatchModel1. </param>
         internal ExactMatchModel1Operations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
         {
         }

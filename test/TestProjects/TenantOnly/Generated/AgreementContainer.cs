@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace TenantOnly
 {
     /// <summary> A class representing collection of Agreement and their operations over a BillingAccount. </summary>
-    public partial class AgreementContainer : ResourceContainerBase<TenantResourceIdentifier, Agreement, AgreementData>
+    public partial class AgreementContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, Agreement, AgreementData>
     {
         /// <summary> Initializes a new instance of the <see cref="AgreementContainer"/> class for mocking. </summary>
         protected AgreementContainer()
@@ -49,7 +49,7 @@ namespace TenantOnly
         /// <inheritdoc />
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<Agreement> Get(string agreementName, CancellationToken cancellationToken = default)
+        public override Response<Agreement> Get(string agreementName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AgreementContainer.Get");
             scope.Start();
@@ -61,7 +61,7 @@ namespace TenantOnly
                 }
 
                 var response = _restClient.Get(Id.Parent.Name, agreementName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new Agreement(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -73,7 +73,7 @@ namespace TenantOnly
         /// <inheritdoc />
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<Agreement>> GetAsync(string agreementName, CancellationToken cancellationToken = default)
+        public async override Task<Response<Agreement>> GetAsync(string agreementName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AgreementContainer.Get");
             scope.Start();
@@ -85,7 +85,7 @@ namespace TenantOnly
                 }
 
                 var response = await _restClient.GetAsync(Id.Parent.Name, agreementName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new Agreement(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -161,6 +161,6 @@ namespace TenantOnly
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, Agreement, AgreementData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, Agreement, AgreementData> Construct() { }
     }
 }

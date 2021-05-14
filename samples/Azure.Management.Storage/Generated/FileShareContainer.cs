@@ -19,7 +19,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of FileShare and their operations over a StorageAccount. </summary>
-    public partial class FileShareContainer : ResourceContainerBase<TenantResourceIdentifier, FileShare, FileShareData>
+    public partial class FileShareContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, FileShare, FileShareData>
     {
         /// <summary> Initializes a new instance of the <see cref="FileShareContainer"/> class for mocking. </summary>
         protected FileShareContainer()
@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<FileShare> CreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public Response<FileShare> CreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.CreateOrUpdate");
             scope.Start();
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(fileShare));
                 }
 
-                return StartCreateOrUpdate(shareName, fileShare, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<FileShare>;
+                return StartCreateOrUpdate(shareName, fileShare, cancellationToken: cancellationToken).WaitForCompletion() as Response<FileShare>;
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<FileShare>> CreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public async Task<Response<FileShare>> CreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.CreateOrUpdate");
             scope.Start();
@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(shareName, fileShare, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<FileShare>;
+                return operation.WaitForCompletion() as Response<FileShare>;
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<FileShare> StartCreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public Operation<FileShare> StartCreateOrUpdate(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreateOrUpdate");
             scope.Start();
@@ -125,9 +125,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = _restClient.Create(Id.ResourceGroupName, Id.Parent.Name, shareName, fileShare, cancellationToken: cancellationToken);
-                return new PhArmOperation<FileShare, FileShareData>(
-                originalResponse,
-                data => new FileShare(Parent, data));
+                return new FileSharesCreateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -140,7 +138,7 @@ namespace Azure.Management.Storage
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="fileShare"> Properties of the file share to create. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<FileShare>> StartCreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
+        public async Task<Operation<FileShare>> StartCreateOrUpdateAsync(string shareName, FileShareData fileShare, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.StartCreateOrUpdate");
             scope.Start();
@@ -156,9 +154,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, Id.Parent.Name, shareName, fileShare, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<FileShare, FileShareData>(
-                originalResponse,
-                data => new FileShare(Parent, data));
+                return new FileSharesCreateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -170,7 +166,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<FileShare> Get(string shareName, CancellationToken cancellationToken = default)
+        public override Response<FileShare> Get(string shareName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.Get");
             scope.Start();
@@ -182,7 +178,7 @@ namespace Azure.Management.Storage
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, shareName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new FileShare(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new FileShare(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -194,7 +190,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<FileShare>> GetAsync(string shareName, CancellationToken cancellationToken = default)
+        public async override Task<Response<FileShare>> GetAsync(string shareName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileShareContainer.Get");
             scope.Start();
@@ -206,7 +202,7 @@ namespace Azure.Management.Storage
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, shareName, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new FileShare(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new FileShare(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -356,6 +352,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, FileShare, FileShareData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, FileShare, FileShareData> Construct() { }
     }
 }

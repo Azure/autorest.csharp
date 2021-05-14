@@ -173,7 +173,8 @@ namespace AutoRest.CSharp.Output.Models
                 responses,
                 method.HeaderModel,
                 bufferResponse: true,
-                accessibility: "internal");
+                accessibility: "internal",
+                operation);
         }
 
         public virtual RestClientMethod? GetNextOperationMethod(ServiceRequest request)

@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel4 and their operations over a ResourceGroup. </summary>
-    public partial class SupersetModel4Container : ContainerBase<TenantResourceIdentifier, SupersetModel4>
+    public partial class SupersetModel4Container : ContainerBase<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Container"/> class for mocking. </summary>
         protected SupersetModel4Container()
@@ -50,7 +50,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<SupersetModel4> CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public Response<SupersetModel4> CreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.CreateOrUpdate");
             scope.Start();
@@ -65,7 +65,7 @@ namespace SupersetInheritance
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(supersetModel4SName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<SupersetModel4>;
+                return StartCreateOrUpdate(supersetModel4SName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<SupersetModel4>;
             }
             catch (Exception e)
             {
@@ -78,7 +78,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<SupersetModel4>> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SupersetModel4>> CreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.CreateOrUpdate");
             scope.Start();
@@ -94,7 +94,7 @@ namespace SupersetInheritance
                 }
 
                 var operation = await StartCreateOrUpdateAsync(supersetModel4SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<SupersetModel4>;
+                return operation.WaitForCompletion() as Response<SupersetModel4>;
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<SupersetModel4> StartCreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public Operation<SupersetModel4> StartCreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.StartCreateOrUpdate");
             scope.Start();
@@ -123,9 +123,7 @@ namespace SupersetInheritance
                 }
 
                 var originalResponse = _restClient.Put(Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken: cancellationToken);
-                return new PhArmOperation<SupersetModel4, SupersetModel4Data>(
-                originalResponse,
-                data => new SupersetModel4(Parent, data));
+                return new SupersetModel4SPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -138,7 +136,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<SupersetModel4>> StartCreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<SupersetModel4>> StartCreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.StartCreateOrUpdate");
             scope.Start();
@@ -154,9 +152,7 @@ namespace SupersetInheritance
                 }
 
                 var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<SupersetModel4, SupersetModel4Data>(
-                originalResponse,
-                data => new SupersetModel4(Parent, data));
+                return new SupersetModel4SPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -232,6 +228,6 @@ namespace SupersetInheritance
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, SupersetModel4, SupersetModel4Data> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, SupersetModel4, SupersetModel4Data> Construct() { }
     }
 }

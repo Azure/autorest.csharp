@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of FileService and their operations over a StorageAccount. </summary>
-    public partial class FileServiceContainer : ContainerBase<TenantResourceIdentifier, FileService>
+    public partial class FileServiceContainer : ContainerBase<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of the <see cref="FileServiceContainer"/> class for mocking. </summary>
         protected FileServiceContainer()
@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<FileService> CreateOrUpdate(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public Response<FileService> CreateOrUpdate(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
             scope.Start();
@@ -63,7 +63,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(accountName));
                 }
 
-                return StartCreateOrUpdate(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<FileService>;
+                return StartCreateOrUpdate(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).WaitForCompletion() as Response<FileService>;
             }
             catch (Exception e)
             {
@@ -77,7 +77,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<FileService>> CreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FileService>> CreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
             scope.Start();
@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<FileService>;
+                return operation.WaitForCompletion() as Response<FileService>;
             }
             catch (Exception e)
             {
@@ -103,7 +103,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<FileService> StartCreateOrUpdate(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public Operation<FileService> StartCreateOrUpdate(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -115,9 +115,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = _restClient.SetServiceProperties(Id.ResourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken);
-                return new PhArmOperation<FileService, FileServiceData>(
-                originalResponse,
-                data => new FileService(Parent, data));
+                return new FileServicesSetServicePropertiesOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -131,7 +129,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<FileService>> StartCreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public async Task<Operation<FileService>> StartCreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -143,9 +141,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = await _restClient.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<FileService, FileServiceData>(
-                originalResponse,
-                data => new FileService(Parent, data));
+                return new FileServicesSetServicePropertiesOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -221,6 +217,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, FileService, FileServiceData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, FileService, FileServiceData> Construct() { }
     }
 }

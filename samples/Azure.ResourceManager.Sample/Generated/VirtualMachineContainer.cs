@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken);
-                var operation = new VirtualMachineCreateOrUpdateOperation(
+                var operation = new VirtualMachinesCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, vmName, parameters).Request,
                 originalResponse);
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineCreateOrUpdateOperation(
+                var operation = new VirtualMachinesCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, vmName, parameters).Request,
                 originalResponse);

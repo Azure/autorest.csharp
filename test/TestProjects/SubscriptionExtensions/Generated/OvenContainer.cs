@@ -19,7 +19,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Oven and their operations over a ResourceGroup. </summary>
-    public partial class OvenContainer : ContainerBase<TenantResourceIdentifier, Oven>
+    public partial class OvenContainer : ContainerBase<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of the <see cref="OvenContainer"/> class for mocking. </summary>
         protected OvenContainer()
@@ -52,7 +52,7 @@ namespace SubscriptionExtensions
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<Oven> CreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public Response<Oven> CreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.CreateOrUpdate");
             scope.Start();
@@ -67,7 +67,7 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<Oven>;
+                return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<Oven>;
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace SubscriptionExtensions
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<Oven>> CreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<Oven>> CreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.CreateOrUpdate");
             scope.Start();
@@ -96,7 +96,7 @@ namespace SubscriptionExtensions
                 }
 
                 var operation = await StartCreateOrUpdateAsync(vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<Oven>;
+                return operation.WaitForCompletion() as Response<Oven>;
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace SubscriptionExtensions
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<Oven> StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public Operation<Oven> StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.StartCreateOrUpdate");
             scope.Start();
@@ -125,7 +125,7 @@ namespace SubscriptionExtensions
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken);
-                var operation = new OvenCreateOrUpdateOperation(
+                var operation = new OvensCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, vmName, parameters).Request,
                 originalResponse);
@@ -144,7 +144,7 @@ namespace SubscriptionExtensions
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<Oven>> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<Oven>> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.StartCreateOrUpdate");
             scope.Start();
@@ -160,7 +160,7 @@ namespace SubscriptionExtensions
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new OvenCreateOrUpdateOperation(
+                var operation = new OvensCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, vmName, parameters).Request,
                 originalResponse);
@@ -316,6 +316,6 @@ namespace SubscriptionExtensions
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, Oven, OvenData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, Oven, OvenData> Construct() { }
     }
 }

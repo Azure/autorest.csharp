@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineScaleSetExtension and their operations over a VirtualMachineScaleSet. </summary>
-    public partial class VirtualMachineScaleSetExtensionContainer : ResourceContainerBase<TenantResourceIdentifier, VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData>
+    public partial class VirtualMachineScaleSetExtensionContainer : ResourceContainerBase<ResourceIdentifier, VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData>
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetExtensionContainer"/> class for mocking. </summary>
         protected VirtualMachineScaleSetExtensionContainer()
@@ -124,7 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, vmssExtensionName, extensionParameters, cancellationToken: cancellationToken);
-                var operation = new VirtualMachineScaleSetExtensionCreateOrUpdateOperation(
+                var operation = new VirtualMachineScaleSetExtensionsCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, Id.Parent.Name, vmssExtensionName, extensionParameters).Request,
                 originalResponse);
@@ -159,7 +159,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, vmssExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetExtensionCreateOrUpdateOperation(
+                var operation = new VirtualMachineScaleSetExtensionsCreateOrUpdateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
                 Id.ResourceGroupName, Id.Parent.Name, vmssExtensionName, extensionParameters).Request,
                 originalResponse);
@@ -363,6 +363,6 @@ namespace Azure.ResourceManager.Sample
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, VirtualMachineScaleSetExtension, VirtualMachineScaleSetExtensionData> Construct() { }
     }
 }

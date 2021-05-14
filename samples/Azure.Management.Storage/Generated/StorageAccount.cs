@@ -18,7 +18,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "StorageAccount"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal StorageAccount(ResourceOperationsBase options, StorageAccountData resource) : base(options, resource.Id as TenantResourceIdentifier)
+        internal StorageAccount(ResourceOperationsBase options, StorageAccountData resource) : base(options, resource.Id as ResourceGroupResourceIdentifier)
         {
             Data = resource;
         }

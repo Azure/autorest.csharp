@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing collection of ExactMatchModel3 and their operations over a ResourceGroup. </summary>
-    public partial class ExactMatchModel3Container : ContainerBase<TenantResourceIdentifier, ExactMatchModel3>
+    public partial class ExactMatchModel3Container : ContainerBase<ResourceIdentifier>
     {
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel3Container"/> class for mocking. </summary>
         protected ExactMatchModel3Container()
@@ -50,7 +50,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<ExactMatchModel3> CreateOrUpdate(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
+        public Response<ExactMatchModel3> CreateOrUpdate(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.CreateOrUpdate");
             scope.Start();
@@ -65,7 +65,7 @@ namespace ExactMatchInheritance
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(exactMatchModel3SName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<ExactMatchModel3>;
+                return StartCreateOrUpdate(exactMatchModel3SName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<ExactMatchModel3>;
             }
             catch (Exception e)
             {
@@ -78,7 +78,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<ExactMatchModel3>> CreateOrUpdateAsync(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ExactMatchModel3>> CreateOrUpdateAsync(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.CreateOrUpdate");
             scope.Start();
@@ -94,7 +94,7 @@ namespace ExactMatchInheritance
                 }
 
                 var operation = await StartCreateOrUpdateAsync(exactMatchModel3SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<ExactMatchModel3>;
+                return operation.WaitForCompletion() as Response<ExactMatchModel3>;
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<ExactMatchModel3> StartCreateOrUpdate(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
+        public Operation<ExactMatchModel3> StartCreateOrUpdate(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.StartCreateOrUpdate");
             scope.Start();
@@ -123,9 +123,7 @@ namespace ExactMatchInheritance
                 }
 
                 var originalResponse = _restClient.Put(Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken: cancellationToken);
-                return new PhArmOperation<ExactMatchModel3, ExactMatchModel3Data>(
-                originalResponse,
-                data => new ExactMatchModel3(Parent, data));
+                return new ExactMatchModel3SPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -138,7 +136,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<ExactMatchModel3>> StartCreateOrUpdateAsync(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<ExactMatchModel3>> StartCreateOrUpdateAsync(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.StartCreateOrUpdate");
             scope.Start();
@@ -154,9 +152,7 @@ namespace ExactMatchInheritance
                 }
 
                 var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, exactMatchModel3SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<ExactMatchModel3, ExactMatchModel3Data>(
-                originalResponse,
-                data => new ExactMatchModel3(Parent, data));
+                return new ExactMatchModel3SPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -232,6 +228,6 @@ namespace ExactMatchInheritance
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, ExactMatchModel3, ExactMatchModel3Data> Construct() { }
+        // public ArmBuilder<ResourceIdentifier, ExactMatchModel3, ExactMatchModel3Data> Construct() { }
     }
 }

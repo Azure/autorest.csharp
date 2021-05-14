@@ -19,7 +19,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of StorageAccount and their operations over a Parent. </summary>
-    public partial class StorageAccountContainer : ContainerBase<TenantResourceIdentifier, StorageAccount>
+    public partial class StorageAccountContainer : ContainerBase<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of the <see cref="StorageAccountContainer"/> class for mocking. </summary>
         protected StorageAccountContainer()
@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<StorageAccount> CreateOrUpdate(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public Response<StorageAccount> CreateOrUpdate(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.CreateOrUpdate");
             scope.Start();
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<StorageAccount>;
+                return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<StorageAccount>;
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<StorageAccount>> CreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<StorageAccount>> CreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.CreateOrUpdate");
             scope.Start();
@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<StorageAccount>;
+                return operation.WaitForCompletion() as Response<StorageAccount>;
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<StorageAccount> StartCreateOrUpdate(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public Operation<StorageAccount> StartCreateOrUpdate(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.StartCreateOrUpdate");
             scope.Start();
@@ -125,7 +125,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = _restClient.Create(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken);
-                var operation = new StorageAccountCreateOperation(
+                var operation = new StorageAccountsCreateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateRequest(
                 Id.ResourceGroupName, accountName, parameters).Request,
                 originalResponse);
@@ -144,7 +144,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<StorageAccount>> StartCreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<StorageAccount>> StartCreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.StartCreateOrUpdate");
             scope.Start();
@@ -160,7 +160,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new StorageAccountCreateOperation(
+                var operation = new StorageAccountsCreateOperation(
                 _clientDiagnostics, _pipeline, _restClient.CreateCreateRequest(
                 Id.ResourceGroupName, accountName, parameters).Request,
                 originalResponse);
@@ -286,6 +286,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, StorageAccount, StorageAccountData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, StorageAccount, StorageAccountData> Construct() { }
     }
 }

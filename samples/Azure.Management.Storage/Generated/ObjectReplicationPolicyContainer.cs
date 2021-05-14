@@ -19,7 +19,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of ObjectReplicationPolicy and their operations over a StorageAccount. </summary>
-    public partial class ObjectReplicationPolicyContainer : ResourceContainerBase<TenantResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData>
+    public partial class ObjectReplicationPolicyContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData>
     {
         /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicyContainer"/> class for mocking. </summary>
         protected ObjectReplicationPolicyContainer()
@@ -52,7 +52,7 @@ namespace Azure.Management.Storage
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmResponse<ObjectReplicationPolicy> CreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        public Response<ObjectReplicationPolicy> CreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.CreateOrUpdate");
             scope.Start();
@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(properties));
                 }
 
-                return StartCreateOrUpdate(objectReplicationPolicyId, properties, cancellationToken: cancellationToken).WaitForCompletion() as ArmResponse<ObjectReplicationPolicy>;
+                return StartCreateOrUpdate(objectReplicationPolicyId, properties, cancellationToken: cancellationToken).WaitForCompletion() as Response<ObjectReplicationPolicy>;
             }
             catch (Exception e)
             {
@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmResponse<ObjectReplicationPolicy>> CreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        public async Task<Response<ObjectReplicationPolicy>> CreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.CreateOrUpdate");
             scope.Start();
@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(objectReplicationPolicyId, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as ArmResponse<ObjectReplicationPolicy>;
+                return operation.WaitForCompletion() as Response<ObjectReplicationPolicy>;
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace Azure.Management.Storage
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ArmOperation<ObjectReplicationPolicy> StartCreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        public Operation<ObjectReplicationPolicy> StartCreateOrUpdate(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.StartCreateOrUpdate");
             scope.Start();
@@ -125,9 +125,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, objectReplicationPolicyId, properties, cancellationToken: cancellationToken);
-                return new PhArmOperation<ObjectReplicationPolicy, ObjectReplicationPolicyData>(
-                originalResponse,
-                data => new ObjectReplicationPolicy(Parent, data));
+                return new ObjectReplicationPoliciesCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -140,7 +138,7 @@ namespace Azure.Management.Storage
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="properties"> The object replication policy set to a storage account. A unique policy ID will be created if absent. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ArmOperation<ObjectReplicationPolicy>> StartCreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
+        public async Task<Operation<ObjectReplicationPolicy>> StartCreateOrUpdateAsync(string objectReplicationPolicyId, ObjectReplicationPolicyData properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.StartCreateOrUpdate");
             scope.Start();
@@ -156,9 +154,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, objectReplicationPolicyId, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new PhArmOperation<ObjectReplicationPolicy, ObjectReplicationPolicyData>(
-                originalResponse,
-                data => new ObjectReplicationPolicy(Parent, data));
+                return new ObjectReplicationPoliciesCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
             {
@@ -170,7 +166,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override ArmResponse<ObjectReplicationPolicy> Get(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public override Response<ObjectReplicationPolicy> Get(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.Get");
             scope.Start();
@@ -182,7 +178,7 @@ namespace Azure.Management.Storage
                 }
 
                 var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, objectReplicationPolicyId, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new ObjectReplicationPolicy(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new ObjectReplicationPolicy(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -194,7 +190,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         /// <param name="objectReplicationPolicyId"> The ID of object replication policy or &apos;default&apos; if the policy ID is unknown. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<ArmResponse<ObjectReplicationPolicy>> GetAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
+        public async override Task<Response<ObjectReplicationPolicy>> GetAsync(string objectReplicationPolicyId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectReplicationPolicyContainer.Get");
             scope.Start();
@@ -206,7 +202,7 @@ namespace Azure.Management.Storage
                 }
 
                 var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, objectReplicationPolicyId, cancellationToken: cancellationToken);
-                return ArmResponse.FromValue(new ObjectReplicationPolicy(Parent, response.Value), ArmResponse.FromResponse(response.GetRawResponse()));
+                return Response.FromValue(new ObjectReplicationPolicy(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -326,6 +322,6 @@ namespace Azure.Management.Storage
         }
 
         // Builders.
-        // public ArmBuilder<TenantResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, ObjectReplicationPolicy, ObjectReplicationPolicyData> Construct() { }
     }
 }
