@@ -70,7 +70,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 string baseClass = FindRestClientMethodByName(new string[] { "Get" }, out _)
                     ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
                     : $"ContainerBase<{_resourceContainer.ResourceIdentifierType}>";
-                    // : $"ContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}>";
                 using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : {baseClass}"))
                 {
                     WriteContainerCtors();
@@ -142,10 +141,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 WriteGetVariants(restClientMethod);
             }
-            else
-            {
-                // WriteGetVariantsThatThrow();
-            }
 
             WriteListVariants();
         }
@@ -167,7 +162,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var parameterMapping = BuildParameterMapping(restClientMethod);
             IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(p => p.Parameter);
 
-            // todo: should not write inheritdoc
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"The operation to create or update a {_resource.Type.Name}. Please note some properties can be set only during creation.");
             WriteContainerMethodScope(false, $"{typeof(Response)}<{_resource.Type.Name}>", "CreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"return StartCreateOrUpdate(");
@@ -178,6 +174,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"cancellationToken: cancellationToken).WaitForCompletion() as {typeof(Response)}<{_resource.Type}>;");
             });
 
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"The operation to create or update a {_resource.Type.Name}. Please note some properties can be set only during creation.");
             WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", "CreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var operation = await StartCreateOrUpdateAsync(");
@@ -194,6 +192,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 ? _library.GetLongRunningOperation(restClientMethod.Operation).Type
                 : _library.GetNonLongRunningOperation(restClientMethod.Operation).Type;
 
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"The operation to create or update a {_resource.Type.Name}. Please note some properties can be set only during creation.");
             WriteContainerMethodScope(false, $"Operation<{_resource.Type.Name}>", "StartCreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var originalResponse = {RestClientField}.{restClientMethod.Name}(");
@@ -227,6 +227,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             });
 
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"The operation to create or update a {_resource.Type.Name}. Please note some properties can be set only during creation.");
             WriteContainerMethodScope(true, $"{typeof(Task)}<Operation<{_resource.Type.Name}>>", "StartCreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var originalResponse = await {RestClientField}.{restClientMethod.Name}Async(");
@@ -272,8 +274,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="isOverride"></param>
         private void WriteContainerMethodScope(bool isAsync, FormattableString returnType, string syncMethodName, IEnumerable<Parameter> parameters, CodeWriterDelegate inner, bool isOverride = false)
         {
-            _writer.Line();
-            _writer.WriteXmlDocumentationInheritDoc();
+            if (isOverride)
+            {
+                _writer.WriteXmlDocumentationInheritDoc();
+            }
             foreach (var parameter in parameters)
             {
                 _writer.WriteXmlDocumentationParameter(parameter);
@@ -451,6 +455,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             });
 
+            _writer.Line();
             WriteContainerMethodScope(false, $"{typeof(Response)}<{_resource.Type.Name}>", "Get", passThruParameters, writer =>
             {
                 _writer.Append($"var response = {RestClientField}.Get(");
@@ -463,6 +468,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}(Parent, response.Value), response.GetRawResponse());");
             }, isOverride: true);
 
+            _writer.Line();
             WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", "Get", passThruParameters, writer =>
             {
                 _writer.Append($"var response = await {RestClientField}.GetAsync(");
@@ -478,45 +484,53 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListVariants()
         {
-            WriteListAsGenericResource();
-            WriteListAsGenericResourceAsync();
-            WriteList();
-            WriteListAsync();
+            WriteList(async: false);
+            WriteList(async: true);
+            WriteListAsGenericResource(async: false);
+            WriteListAsGenericResource(async: true);
         }
 
-        private void WriteList()
+        private void WriteList(bool async)
         {
             // if we find a proper *list* method that supports *paging*,
             // we should generate paging logic (PageableHelpers.CreateEnumerable)
             // else we just call ListAsGenericResource to get the list then call Get on every resource
             PagingMethod list = FindListPagingMethod();
 
-            var methodName = "List";
+            var methodName = CreateMethodName("List", async);
+            _writer.Line();
+            _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type.Name}\" /> for this resource group.");
+            _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
+            _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
+            string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{_resource.Type.Name}\" /> that may take multiple service requests to iterate over.";
+            _writer.WriteXmlDocumentation("returns", returnText);
+            var returnType = async
+                ? new CSharpType(typeof(AsyncPageable<>), _resource.Type)
+                : new CSharpType(typeof(Pageable<>), _resource.Type);
+            var asyncText = async ? "Async" : string.Empty;
+            using (_writer.Scope($"public {returnType} {methodName}(int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            {
+                if (list != null)
+                {
+                    WriteContainerPagingOperation(list, async);
+                }
+                else
+                {
+                    _writer.Line($"var results = ListAsGenericResource{asyncText}(null, top, cancellationToken);");
+                    _writer.Line($"return new PhWrapping{asyncText}Pageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
+                }
+            }
+
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type.Name}\" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
             _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-            _writer.WriteXmlDocumentation("returns", $"A collection of <see cref=\"{_resource.Type.Name}\" /> that may take multiple service requests to iterate over.");
-            using (_writer.Scope($"public Pageable<{_resource.Type}> {methodName}(string nameFilter = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            _writer.WriteXmlDocumentation("returns", returnText);
+            using (_writer.Scope($"public {returnType} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                if (list != null)
-                {
-                    using (_writer.Scope($"if (string.IsNullOrEmpty(nameFilter))"))
-                    {
-                        WriteContainerPagingOperation(list, false);
-                    }
-                    using (_writer.Scope($"else"))
-                    {
-                        _writer.Line($"var results = ListAsGenericResource(nameFilter, top, cancellationToken);");
-                        _writer.Line($"return new PhWrappingPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
-                    }
-                }
-                else
-                {
-                    _writer.Line($"var results = ListAsGenericResource(nameFilter, top, cancellationToken);");
-                    _writer.Line($"return new PhWrappingPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
-                }
+                _writer.Line($"var results = ListAsGenericResource{asyncText}(null, top, cancellationToken);");
+                _writer.Line($"return new PhWrapping{asyncText}Pageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
             }
         }
 
@@ -587,57 +601,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
-        private void WriteListAsync()
+        private void WriteListAsGenericResource(bool async)
         {
-            PagingMethod list = FindListPagingMethod();
-
-            var methodName = CreateMethodName("List", true);
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type.Name}\" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
-            _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
-            _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-            _writer.WriteXmlDocumentation("returns", $"An async collection of <see cref=\"{_resource.Type.Name}\" /> that may take multiple service requests to iterate over.");
-
-            using (_writer.Scope($"public AsyncPageable<{_resource.Type}> {methodName}(string nameFilter = null, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
-            {
-                if (list != null)
-                {
-                    using (_writer.Scope($"if (string.IsNullOrEmpty(nameFilter))"))
-                    {
-                        WriteContainerPagingOperation(list, true);
-                    }
-                    using (_writer.Scope($"else"))
-                    {
-                        _writer.Line($"var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);");
-                        _writer.Line($"return new PhWrappingAsyncPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
-                    }
-                }
-                else
-                {
-                    _writer.Line($"var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);");
-                    _writer.Line($"return new PhWrappingAsyncPageable<GenericResource, {_resource.Type}>(results, genericResource => new {_resourceOperation.Type}(genericResource).Get().Value);");
-                }
-            }
-        }
-
-        private void WriteListAsGenericResource()
-        {
-            var methodName = "ListAsGenericResource";
+            const string syncMethodName = "ListAsGenericResource";
+            var methodName = CreateMethodName(syncMethodName, async);
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
             _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-            _writer.WriteXmlDocumentation("returns", $"A collection of resource that may take multiple service requests to iterate over.");
-            using (_writer.Scope($"public {typeof(Pageable<GenericResource>)} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            _writer.WriteXmlDocumentation("returns", $"{(async ? "An async" : "A")} collection of resource that may take multiple service requests to iterate over.");
+            CSharpType returnType = new CSharpType(async ? typeof(AsyncPageable<>) : typeof(Pageable<>), typeof(GenericResource));
+            using (_writer.Scope($"public {returnType} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{methodName}"), ClientDiagnosticsField, writer =>
+                WriteDiagnosticScope(_writer, new Diagnostic($"{_resourceContainer.Type.Name}.{syncMethodName}"), ClientDiagnosticsField, writer =>
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    // todo: do not hard code ResourceGroupOperations
-                    _writer.Line($"return ResourceListOperations.ListAtContext(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
+                    string asyncText = async ? "Async" : string.Empty;
+                    _writer.Line($"return {typeof(ResourceListOperations)}.ListAtContext{asyncText}(Parent as {typeof(ResourceGroupOperations)}, filters, top, cancellationToken);");
                 });
             }
         }
@@ -657,8 +639,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    // todo: do not hard code ResourceGroupOperations
-                    _writer.Line($"return ResourceListOperations.ListAtContextAsync(Parent as ResourceGroupOperations, filters, top, cancellationToken);");
+                    _writer.Line($"return {typeof(ResourceListOperations)}.ListAtContextAsync(Parent as {typeof(ResourceGroupOperations)}, filters, top, cancellationToken);");
                 });
             }
         }

@@ -48,7 +48,7 @@ namespace Azure.Management.Storage
 
         // Container level operations.
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a StorageAccount. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -76,7 +76,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a StorageAccount. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -105,7 +105,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a StorageAccount. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a StorageAccount. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -173,6 +173,76 @@ namespace Azure.Management.Storage
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> Filters the list of <see cref="StorageAccount" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<StorageAccount> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            Page<StorageAccount> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListByResourceGroup");
+                scope.Start();
+                try
+                {
+                    var response = _restClient.ListByResourceGroup(Id.ResourceGroupName, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+        }
+
+        /// <summary> Filters the list of <see cref="StorageAccount" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<StorageAccount> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, StorageAccount>(results, genericResource => new StorageAccountOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="StorageAccount" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<StorageAccount> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            async Task<Page<StorageAccount>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListByResourceGroup");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.ListByResourceGroupAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Parent, value)), null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+        }
+
+        /// <summary> Filters the list of <see cref="StorageAccount" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<StorageAccount> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, StorageAccount>(results, genericResource => new StorageAccountOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of StorageAccount for this resource group represented as generic resources. </summary>
@@ -216,72 +286,6 @@ namespace Azure.Management.Storage
             {
                 scope.Failed(e);
                 throw;
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="StorageAccount" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<StorageAccount> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            if (string.IsNullOrEmpty(nameFilter))
-            {
-                Page<StorageAccount> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListByResourceGroup");
-                    scope.Start();
-                    try
-                    {
-                        var response = _restClient.ListByResourceGroup(Id.ResourceGroupName, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Parent, value)), null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
-            }
-            else
-            {
-                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-                return new PhWrappingPageable<GenericResource, StorageAccount>(results, genericResource => new StorageAccountOperations(genericResource).Get().Value);
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="StorageAccount" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="StorageAccount" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<StorageAccount> ListAsync(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            if (string.IsNullOrEmpty(nameFilter))
-            {
-                async Task<Page<StorageAccount>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.ListByResourceGroup");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _restClient.ListByResourceGroupAsync(Id.ResourceGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new StorageAccount(Parent, value)), null, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
-            }
-            else
-            {
-                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-                return new PhWrappingAsyncPageable<GenericResource, StorageAccount>(results, genericResource => new StorageAccountOperations(genericResource).Get().Value);
             }
         }
 

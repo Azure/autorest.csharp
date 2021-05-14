@@ -46,7 +46,7 @@ namespace ResourceIdentifierChooser
 
         // Container level operations.
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a ModelData. Please note some properties can be set only during creation. </summary>
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="parameters"> The ModelData to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -74,7 +74,7 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a ModelData. Please note some properties can be set only during creation. </summary>
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="parameters"> The ModelData to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -103,7 +103,7 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a ModelData. Please note some properties can be set only during creation. </summary>
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="parameters"> The ModelData to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -132,7 +132,7 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a ModelData. Please note some properties can be set only during creation. </summary>
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="parameters"> The ModelData to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -159,6 +159,48 @@ namespace ResourceIdentifierChooser
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> Filters the list of <see cref="ModelData" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="ModelData" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<ModelData> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="ModelData" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="ModelData" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<ModelData> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="ModelData" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="ModelData" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<ModelData> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="ModelData" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="ModelData" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<ModelData> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of ModelData for this resource group represented as generic resources. </summary>
@@ -203,28 +245,6 @@ namespace ResourceIdentifierChooser
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <summary> Filters the list of <see cref="ModelData" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="ModelData" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<ModelData> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource).Get().Value);
-        }
-
-        /// <summary> Filters the list of <see cref="ModelData" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="ModelData" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<ModelData> ListAsync(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource).Get().Value);
         }
 
         // Builders.

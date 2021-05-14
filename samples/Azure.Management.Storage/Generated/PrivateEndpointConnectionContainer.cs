@@ -47,7 +47,7 @@ namespace Azure.Management.Storage
 
         // Container level operations.
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a PrivateEndpointConnection. Please note some properties can be set only during creation. </summary>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
@@ -72,7 +72,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a PrivateEndpointConnection. Please note some properties can be set only during creation. </summary>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
@@ -98,7 +98,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a PrivateEndpointConnection. Please note some properties can be set only during creation. </summary>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
@@ -124,7 +124,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a PrivateEndpointConnection. Please note some properties can be set only during creation. </summary>
         /// <param name="privateEndpointConnectionName"> The name of the private endpoint connection associated with the Storage Account. </param>
         /// <param name="privateEndpoint"> The resource of private end point. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of information about the state of the connection between service consumer and provider. </param>
@@ -198,6 +198,48 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// <summary> Filters the list of <see cref="PrivateEndpointConnection" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="PrivateEndpointConnection" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<PrivateEndpointConnection> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, PrivateEndpointConnection>(results, genericResource => new PrivateEndpointConnectionOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="PrivateEndpointConnection" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="PrivateEndpointConnection" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<PrivateEndpointConnection> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, PrivateEndpointConnection>(results, genericResource => new PrivateEndpointConnectionOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="PrivateEndpointConnection" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="PrivateEndpointConnection" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<PrivateEndpointConnection> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, PrivateEndpointConnection>(results, genericResource => new PrivateEndpointConnectionOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="PrivateEndpointConnection" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="PrivateEndpointConnection" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<PrivateEndpointConnection> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, PrivateEndpointConnection>(results, genericResource => new PrivateEndpointConnectionOperations(genericResource).Get().Value);
+        }
+
         /// <summary> Filters the list of PrivateEndpointConnection for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -240,28 +282,6 @@ namespace Azure.Management.Storage
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <summary> Filters the list of <see cref="PrivateEndpointConnection" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="PrivateEndpointConnection" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<PrivateEndpointConnection> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, PrivateEndpointConnection>(results, genericResource => new PrivateEndpointConnectionOperations(genericResource).Get().Value);
-        }
-
-        /// <summary> Filters the list of <see cref="PrivateEndpointConnection" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="PrivateEndpointConnection" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<PrivateEndpointConnection> ListAsync(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, PrivateEndpointConnection>(results, genericResource => new PrivateEndpointConnectionOperations(genericResource).Get().Value);
         }
 
         // Builders.

@@ -48,7 +48,7 @@ namespace Azure.Management.Storage
 
         // Container level operations.
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a EncryptionScope. Please note some properties can be set only during creation. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -76,7 +76,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a EncryptionScope. Please note some properties can be set only during creation. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -105,7 +105,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a EncryptionScope. Please note some properties can be set only during creation. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -134,7 +134,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a EncryptionScope. Please note some properties can be set only during creation. </summary>
         /// <param name="encryptionScopeName"> The name of the encryption scope within the specified storage account. Encryption scope names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="encryptionScope"> Encryption scope properties to be used for the create or update. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -211,6 +211,106 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// <summary> Filters the list of <see cref="EncryptionScope" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="EncryptionScope" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<EncryptionScope> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            Page<EncryptionScope> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
+                scope.Start();
+                try
+                {
+                    var response = _restClient.List(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<EncryptionScope> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
+                scope.Start();
+                try
+                {
+                    var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Filters the list of <see cref="EncryptionScope" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="EncryptionScope" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<EncryptionScope> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, EncryptionScope>(results, genericResource => new EncryptionScopeOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="EncryptionScope" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="EncryptionScope" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<EncryptionScope> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            async Task<Page<EncryptionScope>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<EncryptionScope>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Filters the list of <see cref="EncryptionScope" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="EncryptionScope" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<EncryptionScope> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, EncryptionScope>(results, genericResource => new EncryptionScopeOperations(genericResource).Get().Value);
+        }
+
         /// <summary> Filters the list of EncryptionScope for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -252,102 +352,6 @@ namespace Azure.Management.Storage
             {
                 scope.Failed(e);
                 throw;
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="EncryptionScope" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="EncryptionScope" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<EncryptionScope> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            if (string.IsNullOrEmpty(nameFilter))
-            {
-                Page<EncryptionScope> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
-                    scope.Start();
-                    try
-                    {
-                        var response = _restClient.List(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                Page<EncryptionScope> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
-                    scope.Start();
-                    try
-                    {
-                        var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-            }
-            else
-            {
-                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-                return new PhWrappingPageable<GenericResource, EncryptionScope>(results, genericResource => new EncryptionScopeOperations(genericResource).Get().Value);
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="EncryptionScope" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="EncryptionScope" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<EncryptionScope> ListAsync(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            if (string.IsNullOrEmpty(nameFilter))
-            {
-                async Task<Page<EncryptionScope>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                async Task<Page<EncryptionScope>> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("EncryptionScopeContainer.List");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new EncryptionScope(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-            }
-            else
-            {
-                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-                return new PhWrappingAsyncPageable<GenericResource, EncryptionScope>(results, genericResource => new EncryptionScopeOperations(genericResource).Get().Value);
             }
         }
 

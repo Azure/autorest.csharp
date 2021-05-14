@@ -47,7 +47,7 @@ namespace Azure.ResourceManager.Sample
 
         // Container level operations.
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a DedicatedHost. Please note some properties can be set only during creation. </summary>
         /// <param name="hostName"> The name of the dedicated host . </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -75,7 +75,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a DedicatedHost. Please note some properties can be set only during creation. </summary>
         /// <param name="hostName"> The name of the dedicated host . </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -104,7 +104,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a DedicatedHost. Please note some properties can be set only during creation. </summary>
         /// <param name="hostName"> The name of the dedicated host . </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -139,7 +139,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a DedicatedHost. Please note some properties can be set only during creation. </summary>
         /// <param name="hostName"> The name of the dedicated host . </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -222,6 +222,106 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<DedicatedHost> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            Page<DedicatedHost> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
+                scope.Start();
+                try
+                {
+                    var response = _restClient.ListByHostGroup(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<DedicatedHost> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
+                scope.Start();
+                try
+                {
+                    var response = _restClient.ListByHostGroupNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<DedicatedHost> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<DedicatedHost> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            async Task<Page<DedicatedHost>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.ListByHostGroupAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<DedicatedHost>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.ListByHostGroupNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<DedicatedHost> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
+        }
+
         /// <summary> Filters the list of DedicatedHost for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -263,102 +363,6 @@ namespace Azure.ResourceManager.Sample
             {
                 scope.Failed(e);
                 throw;
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<DedicatedHost> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            if (string.IsNullOrEmpty(nameFilter))
-            {
-                Page<DedicatedHost> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
-                    scope.Start();
-                    try
-                    {
-                        var response = _restClient.ListByHostGroup(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                Page<DedicatedHost> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
-                    scope.Start();
-                    try
-                    {
-                        var response = _restClient.ListByHostGroupNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
-                        return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
-            }
-            else
-            {
-                var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-                return new PhWrappingPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
-            }
-        }
-
-        /// <summary> Filters the list of <see cref="DedicatedHost" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="DedicatedHost" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<DedicatedHost> ListAsync(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            if (string.IsNullOrEmpty(nameFilter))
-            {
-                async Task<Page<DedicatedHost>> FirstPageFunc(int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _restClient.ListByHostGroupAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                async Task<Page<DedicatedHost>> NextPageFunc(string nextLink, int? pageSizeHint)
-                {
-                    using var scope = _clientDiagnostics.CreateScope("DedicatedHostContainer.ListByHostGroup");
-                    scope.Start();
-                    try
-                    {
-                        var response = await _restClient.ListByHostGroupNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
-                        return Page.FromValues(response.Value.Value.Select(value => new DedicatedHost(Parent, value)), response.Value.NextLink, response.GetRawResponse());
-                    }
-                    catch (Exception e)
-                    {
-                        scope.Failed(e);
-                        throw;
-                    }
-                }
-                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
-            }
-            else
-            {
-                var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-                return new PhWrappingAsyncPageable<GenericResource, DedicatedHost>(results, genericResource => new DedicatedHostOperations(genericResource).Get().Value);
             }
         }
 

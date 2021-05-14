@@ -46,7 +46,7 @@ namespace SupersetInheritance
 
         // Container level operations.
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a SupersetModel1. Please note some properties can be set only during creation. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel1 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -74,7 +74,7 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a SupersetModel1. Please note some properties can be set only during creation. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel1 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -103,7 +103,7 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a SupersetModel1. Please note some properties can be set only during creation. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel1 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -132,7 +132,7 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a SupersetModel1. Please note some properties can be set only during creation. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel1 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -159,6 +159,48 @@ namespace SupersetInheritance
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> Filters the list of <see cref="SupersetModel1" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="SupersetModel1" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<SupersetModel1> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, SupersetModel1>(results, genericResource => new SupersetModel1Operations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="SupersetModel1" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="SupersetModel1" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<SupersetModel1> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, SupersetModel1>(results, genericResource => new SupersetModel1Operations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="SupersetModel1" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="SupersetModel1" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<SupersetModel1> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, SupersetModel1>(results, genericResource => new SupersetModel1Operations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="SupersetModel1" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="SupersetModel1" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<SupersetModel1> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, SupersetModel1>(results, genericResource => new SupersetModel1Operations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of SupersetModel1 for this resource group represented as generic resources. </summary>
@@ -203,28 +245,6 @@ namespace SupersetInheritance
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <summary> Filters the list of <see cref="SupersetModel1" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="SupersetModel1" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<SupersetModel1> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, SupersetModel1>(results, genericResource => new SupersetModel1Operations(genericResource).Get().Value);
-        }
-
-        /// <summary> Filters the list of <see cref="SupersetModel1" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="SupersetModel1" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<SupersetModel1> ListAsync(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, SupersetModel1>(results, genericResource => new SupersetModel1Operations(genericResource).Get().Value);
         }
 
         // Builders.

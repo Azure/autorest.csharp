@@ -18,7 +18,7 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref = "BlobContainer"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal BlobContainer(ResourceOperationsBase options, BlobContainerData resource) : base(options, resource.Id as ResourceGroupResourceIdentifier)
+        internal BlobContainer(ResourceOperationsBase options, BlobContainerData resource) : base(options, resource.Id)
         {
             Data = resource;
         }

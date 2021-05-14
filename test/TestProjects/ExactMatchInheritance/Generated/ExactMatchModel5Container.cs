@@ -46,7 +46,7 @@ namespace ExactMatchInheritance
 
         // Container level operations.
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a ExactMatchModel5. Please note some properties can be set only during creation. </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel5 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -74,7 +74,7 @@ namespace ExactMatchInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a ExactMatchModel5. Please note some properties can be set only during creation. </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel5 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -103,7 +103,7 @@ namespace ExactMatchInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a ExactMatchModel5. Please note some properties can be set only during creation. </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel5 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -132,7 +132,7 @@ namespace ExactMatchInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> The operation to create or update a ExactMatchModel5. Please note some properties can be set only during creation. </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel5 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
@@ -159,6 +159,48 @@ namespace ExactMatchInheritance
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> Filters the list of <see cref="ExactMatchModel5" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="ExactMatchModel5" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<ExactMatchModel5> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, ExactMatchModel5>(results, genericResource => new ExactMatchModel5Operations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="ExactMatchModel5" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="ExactMatchModel5" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<ExactMatchModel5> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, ExactMatchModel5>(results, genericResource => new ExactMatchModel5Operations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="ExactMatchModel5" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="ExactMatchModel5" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<ExactMatchModel5> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel5>(results, genericResource => new ExactMatchModel5Operations(genericResource).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="ExactMatchModel5" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
+        /// <param name="nameFilter"> The filter used in this operation. </param>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="ExactMatchModel5" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<ExactMatchModel5> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel5>(results, genericResource => new ExactMatchModel5Operations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of ExactMatchModel5 for this resource group represented as generic resources. </summary>
@@ -203,28 +245,6 @@ namespace ExactMatchInheritance
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <summary> Filters the list of <see cref="ExactMatchModel5" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="ExactMatchModel5" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<ExactMatchModel5> List(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResource(nameFilter, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ExactMatchModel5>(results, genericResource => new ExactMatchModel5Operations(genericResource).Get().Value);
-        }
-
-        /// <summary> Filters the list of <see cref="ExactMatchModel5" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="ExactMatchModel5" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<ExactMatchModel5> ListAsync(string nameFilter = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResourceAsync(nameFilter, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel5>(results, genericResource => new ExactMatchModel5Operations(genericResource).Get().Value);
         }
 
         // Builders.
