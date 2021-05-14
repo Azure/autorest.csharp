@@ -306,7 +306,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     {
                         var method = operationObj.GetType().GetMethod($"Get{container.Name.Remove(container.Name.LastIndexOf("Container"))}");
                         Assert.NotNull(method);
-                        Assert.IsTrue(method.ReturnParameter.Equals(container.Name));
+                        Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(container.Namespace+"."+container.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);
                     }
                 }

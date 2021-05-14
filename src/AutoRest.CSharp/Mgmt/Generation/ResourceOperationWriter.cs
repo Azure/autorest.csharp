@@ -13,7 +13,6 @@ using AutoRest.CSharp.Mgmt.Output;
 using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -22,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private const string ClientDiagnosticsVariable = "clientDiagnostics";
         private const string PipelineVariable = "pipeline";
 
-        public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation, MgmtConfiguration config)
+        public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
             var cs = resourceOperation.Type;
             var @namespace = cs.Namespace;
@@ -32,8 +31,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (writer.Scope($"{resourceOperation.Declaration.Accessibility} partial class {cs.Name} : ResourceOperationsBase<{resourceOperation.ResourceIdentifierType}, {resourceOperation.ResourceName}>"))
                 {
                     WriteClientCtors(writer, resourceOperation);
-                    WriteClientProperties(writer, resourceOperation, config);
-                    WriteClientMethods(writer, resourceOperation);
+                    WriteClientProperties(writer, resourceOperation, context.Configuration.MgmtConfiguration);
+                    WriteClientMethods(writer, resourceOperation, context);
                 }
             }
         }
