@@ -32,6 +32,7 @@ operation-group-to-parent:
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
    VirtualMachineImages: Microsoft.Compute/locations
    VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
+operation-group-is-tuple: VirtualMachineImages;VirtualMachineExtensionImages
 modelerfour:
   lenient-model-deduplication: true
 directive:

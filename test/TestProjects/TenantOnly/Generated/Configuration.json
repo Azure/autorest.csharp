@@ -22,5 +22,6 @@
     "BillingAccounts": "BillingAccount",
     "Agreements": "Agreement"
   },
-  "OperationGroupToParent": {}
+  "OperationGroupToParent": {},
+  "OperationGroupIsTuple": []
 }

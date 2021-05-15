@@ -33,5 +33,6 @@
     "FileShares": "Microsoft.Storage/storageAccounts",
     "Usages": "subscriptions",
     "StorageAccounts": "any"
-  }
+  },
+  "OperationGroupIsTuple": []
 }

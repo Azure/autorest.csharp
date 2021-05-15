@@ -38,5 +38,9 @@
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
     "VirtualMachineImages": "Microsoft.Compute/locations",
     "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets"
-  }
+  },
+  "OperationGroupIsTuple": [
+    "VirtualMachineImages",
+    "VirtualMachineExtensionImages"
+  ]
 }

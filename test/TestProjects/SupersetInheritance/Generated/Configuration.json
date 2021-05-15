@@ -20,5 +20,6 @@
     "SupersetModel2s": "NonResource",
     "SupersetModel3s": "NonResource"
   },
-  "OperationGroupToParent": {}
+  "OperationGroupToParent": {},
+  "OperationGroupIsTuple": []
 }
