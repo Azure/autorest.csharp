@@ -35,10 +35,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             _valueCache.TryAdd(operationGroup, result);
             return result;
-
         }
 
-        private static bool IsTuple(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        // This tuple detection algorithm works fine for AvailabilitySets, VirtualMachineExtensionImages, DedicatedHostGroups, DedicatedHosts, SshPublicKeys..etc
+        // but it's doesn't work for VirtualMachines, Images, ProximityPlacementGroups..etc because of different naming convention and format.
+        // TODO: We need to make it work for all possible resources before making it usable.
+
+        /*private static bool IsTuple(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
             bool foundTuple = false;
 
@@ -57,12 +60,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return foundTuple;
             }
 
-            List<string> paramList = new ();
+            List<string> paramList = new();
             // This method gets the list of matching parameters. It matches the get
             // method parameters with resource type.
             GetParams(paramList, getMethod, resourceOperation.OperationGroup, context);
 
-            // It checks if get method parameters length is greater than matching parameters
+            // It checks if get method parameters length is greater than the matching parameters
             // length + 1, then it's a tuple, otherwise it's not a tuple.
 
             // Let's take AvailabilitySets as an example
@@ -157,6 +160,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static bool IsTerminalState(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
             return operationGroup.ParentOperationGroup(context) == null;
-        }
+        }*/
     }
 }
