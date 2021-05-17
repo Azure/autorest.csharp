@@ -25,7 +25,7 @@ operation-group-to-resource:
    VirtualMachineImages: VirtualMachineImage
    Usage: NonResource
    VirtualMachineSizes: NonResource
-   VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
+   VirtualMachineScaleSetRollingUpgrades: NonResource
    LogAnalytics: NonResource
 operation-group-to-parent:
    LogAnalytics: subscriptions

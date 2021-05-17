@@ -17,12 +17,18 @@ namespace TenantOnly
     /// <summary> A class representing the operations that can be performed over a specific BillingAccount. </summary>
     public partial class BillingAccountOperations : ResourceOperationsBase<TenantResourceIdentifier, BillingAccount>
     {
-        /// <summary> Initializes a new instance of BillingAccountOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class for mocking. </summary>
         protected BillingAccountOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "BillingAccountOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a BillingAccount. </param>
+        internal BillingAccountOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected BillingAccountOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)

@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(OperationGroup, _prefix));
 
-        public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(OperationGroup);
+        public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
         public string ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(
             _context.Library.GetResourceData(OperationGroup),

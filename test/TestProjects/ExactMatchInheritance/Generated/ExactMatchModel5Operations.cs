@@ -17,12 +17,18 @@ namespace ExactMatchInheritance
     /// <summary> A class representing the operations that can be performed over a specific ExactMatchModel5. </summary>
     public partial class ExactMatchModel5Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ExactMatchModel5>
     {
-        /// <summary> Initializes a new instance of ExactMatchModel5Operations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Operations"/> class for mocking. </summary>
         protected ExactMatchModel5Operations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "ExactMatchModel5Operations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Operations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a ExactMatchModel5. </param>
+        internal ExactMatchModel5Operations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel5Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected ExactMatchModel5Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)

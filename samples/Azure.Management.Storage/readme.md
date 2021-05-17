@@ -42,4 +42,10 @@ directive:
   - rename-model:
       from: FileServiceProperties
       to: FileService
+  - from: swagger-document
+    where: $.definitions.FileShareItems.properties.value.items["$ref"]
+    transform: return "#/definitions/FileShare"
+  - from: swagger-document
+    where: $.definitions.ListContainerItems.properties.value.items["$ref"]
+    transform: return "#/definitions/BlobContainer"
 ```
