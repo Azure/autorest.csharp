@@ -234,20 +234,10 @@ namespace AutoRest.CSharp.Generation.Writers
             var schemes = context.CodeModel.Security.Schemes;
             foreach (var scheme in schemes)
             {
-<<<<<<< HEAD
                 if (scheme is AzureKeySecurityScheme azureKeySecurityScheme)
-=======
-                writer.Line($"private const string {AuthorizationHeaderConstant} = {context.Configuration.CredentialHeaderName:L};");
-                writer.Line($"private readonly {typeof(AzureKeyCredential)}? {KeyAuthField};");
-            }
-            if (HasTokenAuth (context))
-            {
-                writer.Append($"private readonly string[] {ScopesConstant} = ");
-                writer.Append($"{{ ");
-                foreach (var credentialScope in context.Configuration.CredentialScopes)
->>>>>>> feature/v3
                 {
                     writer.Line($"private const string {AuthorizationHeaderConstant} = {azureKeySecurityScheme.HeaderName:L};");
+                    writer.Line($"private readonly {typeof(AzureKeyCredential)}? {KeyAuthField};");
                 }
                 else if (scheme is AADTokenSecurityScheme aadTokenSecurityScheme)
                 {
@@ -259,13 +249,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     writer.RemoveTrailingComma();
                     writer.Line($"}};");
+                    writer.Line($"private readonly {typeof(TokenCredential)}? {TokenAuthField};");
                 }
-<<<<<<< HEAD
-=======
-                writer.RemoveTrailingComma();
-                writer.Line($"}};");
-                writer.Line($"private readonly {typeof(TokenCredential)}? {TokenAuthField};");
->>>>>>> feature/v3
             }
 
             foreach (Parameter clientParameter in client.Parameters)
@@ -295,7 +280,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 WriteConstructor(writer, client, CredentialKind.Token, context);
             }
-            if (context.Configuration.CredentialTypes.Length == 0)
+            if (!context.CodeModel.Security.Schemes.Any())
             {
                 WriteConstructor(writer, client, CredentialKind.None, context);
             }

@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var schemes = context.CodeModel.Security.Schemes;
             foreach (var scheme in schemes)
             {
-                var clientOptionsName = ClientBase.GetClientPrefix(context.DefaultLibraryName, context);
+                var clientOptionsName = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
                 if (scheme is AzureKeySecurityScheme azureKeySecurityScheme)
                 {
                     var ctorParams = client.GetClientConstructorParameters(typeof(AzureKeyCredential));
