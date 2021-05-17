@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(encryptionScopeName, encryptionScope, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<EncryptionScope>;
+                return await operation.WaitForCompletionAsync() as Response<EncryptionScope>;
             }
             catch (Exception e)
             {

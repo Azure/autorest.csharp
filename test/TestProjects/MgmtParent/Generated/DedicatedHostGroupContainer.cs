@@ -94,7 +94,7 @@ namespace MgmtParent
                 }
 
                 var operation = await StartCreateOrUpdateAsync(hostGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<DedicatedHostGroup>;
+                return await operation.WaitForCompletionAsync() as Response<DedicatedHostGroup>;
             }
             catch (Exception e)
             {

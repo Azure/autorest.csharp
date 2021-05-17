@@ -19,7 +19,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of StorageAccount and their operations over a Parent. </summary>
-    public partial class StorageAccountContainer : ContainerBase<ResourceGroupResourceIdentifier>
+    public partial class StorageAccountContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, StorageAccount, StorageAccountData>
     {
         /// <summary> Initializes a new instance of the <see cref="StorageAccountContainer"/> class for mocking. </summary>
         protected StorageAccountContainer()
@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<StorageAccount>;
+                return await operation.WaitForCompletionAsync() as Response<StorageAccount>;
             }
             catch (Exception e)
             {
@@ -167,6 +167,54 @@ namespace Azure.Management.Storage
                 return new PhArmOperation<StorageAccount, StorageAccountData>(
                 operation,
                 data => new StorageAccount(Parent, data));
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override Response<StorageAccount> Get(string accountName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.Get");
+            scope.Start();
+            try
+            {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
+                var response = _restClient.GetProperties(Id.ResourceGroupName, accountName, cancellationToken: cancellationToken);
+                return Response.FromValue(new StorageAccount(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<Response<StorageAccount>> GetAsync(string accountName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.Get");
+            scope.Start();
+            try
+            {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
+                var response = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, accountName, cancellationToken: cancellationToken);
+                return Response.FromValue(new StorageAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

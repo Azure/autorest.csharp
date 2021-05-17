@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(modelDatasName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<ModelData>;
+                return await operation.WaitForCompletionAsync() as Response<ModelData>;
             }
             catch (Exception e)
             {

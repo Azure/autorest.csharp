@@ -94,7 +94,7 @@ namespace SupersetInheritance
                 }
 
                 var operation = await StartCreateOrUpdateAsync(supersetModel1SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<SupersetModel1>;
+                return await operation.WaitForCompletionAsync() as Response<SupersetModel1>;
             }
             catch (Exception e)
             {

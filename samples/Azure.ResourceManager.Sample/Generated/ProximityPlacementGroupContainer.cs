@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(proximityPlacementGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<ProximityPlacementGroup>;
+                return await operation.WaitForCompletionAsync() as Response<ProximityPlacementGroup>;
             }
             catch (Exception e)
             {

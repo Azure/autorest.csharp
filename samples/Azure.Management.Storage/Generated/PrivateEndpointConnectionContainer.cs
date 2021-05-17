@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(privateEndpointConnectionName, privateEndpoint, privateLinkServiceConnectionState, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<PrivateEndpointConnection>;
+                return await operation.WaitForCompletionAsync() as Response<PrivateEndpointConnection>;
             }
             catch (Exception e)
             {

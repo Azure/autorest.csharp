@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(vmExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<VirtualMachineExtension>;
+                return await operation.WaitForCompletionAsync() as Response<VirtualMachineExtension>;
             }
             catch (Exception e)
             {

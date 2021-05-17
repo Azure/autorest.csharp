@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of FileService and their operations over a StorageAccount. </summary>
-    public partial class FileServiceContainer : ContainerBase<ResourceGroupResourceIdentifier>
+    public partial class FileServiceContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, FileService, FileServiceData>
     {
         /// <summary> Initializes a new instance of the <see cref="FileServiceContainer"/> class for mocking. </summary>
         protected FileServiceContainer()
@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<FileService>;
+                return await operation.WaitForCompletionAsync() as Response<FileService>;
             }
             catch (Exception e)
             {
@@ -142,6 +142,54 @@ namespace Azure.Management.Storage
 
                 var originalResponse = await _restClient.SetServicePropertiesAsync(Id.ResourceGroupName, accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new FileServicesSetServicePropertiesOperation(Parent, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override Response<FileService> Get(string accountName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.Get");
+            scope.Start();
+            try
+            {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
+                var response = _restClient.GetServiceProperties(Id.ResourceGroupName, accountName, cancellationToken: cancellationToken);
+                return Response.FromValue(new FileService(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<Response<FileService>> GetAsync(string accountName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.Get");
+            scope.Start();
+            try
+            {
+                if (accountName == null)
+                {
+                    throw new ArgumentNullException(nameof(accountName));
+                }
+
+                var response = await _restClient.GetServicePropertiesAsync(Id.ResourceGroupName, accountName, cancellationToken: cancellationToken);
+                return Response.FromValue(new FileService(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

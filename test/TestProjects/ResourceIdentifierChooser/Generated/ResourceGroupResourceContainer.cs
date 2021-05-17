@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(resourceGroupResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<ResourceGroupResource>;
+                return await operation.WaitForCompletionAsync() as Response<ResourceGroupResource>;
             }
             catch (Exception e)
             {

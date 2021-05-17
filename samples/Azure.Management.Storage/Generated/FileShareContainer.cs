@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(shareName, fileShare, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<FileShare>;
+                return await operation.WaitForCompletionAsync() as Response<FileShare>;
             }
             catch (Exception e)
             {

@@ -95,7 +95,7 @@ namespace SubscriptionExtensions
                 }
 
                 var operation = await StartCreateOrUpdateAsync(availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<Toaster>;
+                return await operation.WaitForCompletionAsync() as Response<Toaster>;
             }
             catch (Exception e)
             {

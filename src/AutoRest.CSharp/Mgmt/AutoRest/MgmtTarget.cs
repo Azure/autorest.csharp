@@ -22,7 +22,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var serializeWriter = new SerializationWriter();
             var resourceOperationWriter = new ResourceOperationWriter();
             var armResourceWriter = new ResourceWriter();
-            var lroWriter = new MgmtPlaneLongRunningOperationWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
 

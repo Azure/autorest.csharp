@@ -231,21 +231,5 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 this.children = new List<Node>();
             }
         }
-
-        /// <summary>
-        /// Tells if a [Resource]Data is a resource by checking if it inherits any of:
-        /// Resource, TrackedResource, SubResource, or SubResourceReadOnly.
-        /// </summary>
-        /// <param name="resourceData"></param>
-        /// <returns></returns>
-        internal static bool IsResource(this ResourceData resourceData)
-        {
-            return resourceData
-                .EnumerateHierarchy()
-                .Where(t => t.Inherits != null)
-                .Select(t => t.Inherits!)
-                .Any(csharpType =>
-                    csharpType.Namespace == "Azure.ResourceManager.Core" && (csharpType.Name == "Resource" || csharpType.Name == "TrackedResource" || csharpType.Name == "SubResource" || csharpType.Name == "SubResourceReadOnly"));
-        }
     }
 }

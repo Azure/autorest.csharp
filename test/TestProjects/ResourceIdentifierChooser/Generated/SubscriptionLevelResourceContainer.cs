@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<SubscriptionLevelResource>;
+                return await operation.WaitForCompletionAsync() as Response<SubscriptionLevelResource>;
             }
             catch (Exception e)
             {

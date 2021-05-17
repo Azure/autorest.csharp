@@ -96,7 +96,7 @@ namespace SubscriptionExtensions
                 }
 
                 var operation = await StartCreateOrUpdateAsync(vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<Oven>;
+                return await operation.WaitForCompletionAsync() as Response<Oven>;
             }
             catch (Exception e)
             {

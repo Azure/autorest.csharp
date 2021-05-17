@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(imageName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<Image>;
+                return await operation.WaitForCompletionAsync() as Response<Image>;
             }
             catch (Exception e)
             {

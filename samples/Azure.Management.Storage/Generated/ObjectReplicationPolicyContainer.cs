@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(objectReplicationPolicyId, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<ObjectReplicationPolicy>;
+                return await operation.WaitForCompletionAsync() as Response<ObjectReplicationPolicy>;
             }
             catch (Exception e)
             {

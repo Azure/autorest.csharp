@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(tenantLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<TenantLevelResource>;
+                return await operation.WaitForCompletionAsync() as Response<TenantLevelResource>;
             }
             catch (Exception e)
             {

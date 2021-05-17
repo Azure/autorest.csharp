@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Namespace(@namespace))
             {
                 _writer.WriteXmlDocumentationSummary(_resourceContainer.Description);
-                string baseClass = FindRestClientMethodByName(new string[] { "Get" }, out _)
+                string baseClass = FindRestClientMethodByPrefix("Get", out _)
                     ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
                     : $"ContainerBase<{_resourceContainer.ResourceIdentifierType}>";
                 using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : {baseClass}"))
@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             // We must look for Get by method name because HTTP GET may map to >1 methods (get/list)
-            if (FindRestClientMethodByName(new string[] { "Get" }, out restClientMethod))
+            if (FindRestClientMethodByPrefix("Get", out restClientMethod))
             {
                 WriteGetVariants(restClientMethod);
             }
@@ -150,9 +150,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             restMethod = _restClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(httpMethod));
             return restMethod != null;
         }
-        private bool FindRestClientMethodByName(IEnumerable<string> nameOptions, out RestClientMethod restMethod)
+
+        private bool FindRestClientMethodByPrefix(string prefix, out RestClientMethod restMethod)
         {
-            restMethod = _restClient.Methods.FirstOrDefault(method => nameOptions.Any(option => string.Equals(method.Name, option, StringComparison.InvariantCultureIgnoreCase)));
+            restMethod = _restClient.Methods.FirstOrDefault(method => method.Name.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
             return restMethod != null;
         }
 
@@ -184,7 +185,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.AppendRaw($"{parameter.Name}, ");
                 }
                 _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
-                _writer.Line($"return operation.WaitForCompletion() as {typeof(Response)}<{_resource.Type}>;");
+                _writer.Line($"return await operation.WaitForCompletionAsync() as {typeof(Response)}<{_resource.Type}>;");
             });
 
             var isLongRunning = restClientMethod.Operation.IsLongRunning;
@@ -458,7 +459,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             WriteContainerMethodScope(false, $"{typeof(Response)}<{_resource.Type.Name}>", "Get", passThruParameters, writer =>
             {
-                _writer.Append($"var response = {RestClientField}.Get(");
+                _writer.Append($"var response = {RestClientField}.{method.Name}(");
                 foreach (var parameter in parameterMapping)
                 {
                     _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
@@ -471,7 +472,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", "Get", passThruParameters, writer =>
             {
-                _writer.Append($"var response = await {RestClientField}.GetAsync(");
+                _writer.Append($"var response = await {RestClientField}.{method.Name}Async(");
                 foreach (var parameter in parameterMapping)
                 {
                     _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);

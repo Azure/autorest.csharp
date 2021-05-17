@@ -94,7 +94,7 @@ namespace ExactMatchInheritance
                 }
 
                 var operation = await StartCreateOrUpdateAsync(exactMatchModel3SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<ExactMatchModel3>;
+                return await operation.WaitForCompletionAsync() as Response<ExactMatchModel3>;
             }
             catch (Exception e)
             {

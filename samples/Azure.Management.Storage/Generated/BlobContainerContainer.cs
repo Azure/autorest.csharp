@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(containerName, blobContainer, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<BlobContainer>;
+                return await operation.WaitForCompletionAsync() as Response<BlobContainer>;
             }
             catch (Exception e)
             {

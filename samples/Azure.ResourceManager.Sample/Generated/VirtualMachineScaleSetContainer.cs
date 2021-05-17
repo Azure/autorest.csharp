@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(vmScaleSetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<VirtualMachineScaleSet>;
+                return await operation.WaitForCompletionAsync() as Response<VirtualMachineScaleSet>;
             }
             catch (Exception e)
             {

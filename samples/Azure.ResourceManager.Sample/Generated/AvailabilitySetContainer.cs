@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<AvailabilitySet>;
+                return await operation.WaitForCompletionAsync() as Response<AvailabilitySet>;
             }
             catch (Exception e)
             {

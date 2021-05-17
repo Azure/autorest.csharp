@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(sshPublicKeyName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<SshPublicKey>;
+                return await operation.WaitForCompletionAsync() as Response<SshPublicKey>;
             }
             catch (Exception e)
             {

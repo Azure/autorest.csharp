@@ -77,7 +77,7 @@ namespace Azure.Management.Storage
             try
             {
                 var operation = await StartCreateOrUpdateAsync(managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return operation.WaitForCompletion() as Response<ManagementPolicy>;
+                return await operation.WaitForCompletionAsync() as Response<ManagementPolicy>;
             }
             catch (Exception e)
             {
