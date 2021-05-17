@@ -89,7 +89,8 @@ namespace AutoRest.CSharp.Output.Models
                 responses,
                 responseHeaderModel,
                 operation.Extensions?.BufferResponse ?? true,
-                accessibility: accessibility
+                accessibility: accessibility,
+                operation
             );
         }
 

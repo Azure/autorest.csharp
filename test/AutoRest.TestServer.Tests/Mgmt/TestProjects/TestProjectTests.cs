@@ -145,7 +145,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        private IEnumerable<Type> FindAllContainers()
+        public IEnumerable<Type> FindAllContainers()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 

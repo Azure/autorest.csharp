@@ -17,12 +17,18 @@ namespace ResourceIdentifierChooser
     /// <summary> A class representing the operations that can be performed over a specific ResourceGroupResource. </summary>
     public partial class ResourceGroupResourceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ResourceGroupResource>
     {
-        /// <summary> Initializes a new instance of ResourceGroupResourceOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceOperations"/> class for mocking. </summary>
         protected ResourceGroupResourceOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "ResourceGroupResourceOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a ResourceGroupResource. </param>
+        internal ResourceGroupResourceOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected ResourceGroupResourceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)

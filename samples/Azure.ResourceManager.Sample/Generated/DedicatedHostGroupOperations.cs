@@ -17,12 +17,18 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the operations that can be performed over a specific DedicatedHostGroup. </summary>
     public partial class DedicatedHostGroupOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, DedicatedHostGroup>
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupOperations"/> class for mocking. </summary>
         protected DedicatedHostGroupOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "DedicatedHostGroupOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a DedicatedHostGroup. </param>
+        internal DedicatedHostGroupOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected DedicatedHostGroupOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)

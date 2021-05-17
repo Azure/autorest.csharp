@@ -51,9 +51,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var resourceCount = count - tupleOperationGroupsList.Count();
 
             Assert.AreEqual(resourceCount, context.Library.ResourceOperations.Count());
-            Assert.AreEqual(count, context.Library.ResourceContainers.Count());
-            Assert.AreEqual(count, context.Library.ResourceData.Count());
+            Assert.AreEqual(resourceCount, context.Library.ResourceContainers.Count());
             Assert.AreEqual(resourceCount, context.Library.ArmResource.Count());
+            Assert.AreEqual(count, context.Library.ResourceData.Count());
         }
 
         [Test]

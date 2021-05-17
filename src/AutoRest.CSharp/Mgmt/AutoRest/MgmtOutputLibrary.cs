@@ -96,7 +96,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
+
+        /// <summary>
+        /// Looks up a <see cref="Resource" /> object by <see cref="OperationGroup" />.
+        /// </summary>
+        /// <param name="operationGroup">OperationGroup object.</param>
+        /// <returns>The <see cref="Resource" /> object associated with the operation group.</returns>
         public Resource GetArmResource(OperationGroup operationGroup) => EnsureArmResource()[operationGroup];
+
+        /// <summary>
+        /// Looks up a <see cref="RestClient" /> object by <see cref="OperationGroup" />.
+        /// </summary>
+        /// <param name="operationGroup">OperationGroup object.</param>
+        /// <returns>The <see cref="RestClient" /> object associated with the operation group.</returns>
+        public MgmtRestClient GetRestClient(OperationGroup operationGroup) => EnsureRestClients()[operationGroup];
 
         public OperationGroup? GetOperationGroupBySchema(Schema schema)
         {
@@ -105,6 +118,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return operationGroups.FirstOrDefault();
             return null;
         }
+
+        internal LongRunningOperation GetLongRunningOperation(Operation op) => EnsureLongRunningOperations()[op];
+
+        internal NonLongRunningOperation GetNonLongRunningOperation(Operation op) => EnsureNonLongRunningOperations()[op];
 
         internal MgmtObjectType? GetMgmtObjectFromModelName(string name)
         {
@@ -157,7 +174,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
-                _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
+                if (!operationGroup.IsTupleResource(_context))
+                {
+                    _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
+                }
             }
 
             return _resourceContainers;
@@ -312,7 +332,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public LongRunningOperationInfo FindLongRunningOperationInfo(OperationGroup operationGroup, Operation operation)
         {
-            var mgmtRestClient = FindRestClient(operationGroup);
+            var mgmtRestClient = GetRestClient(operationGroup);
 
             Debug.Assert(mgmtRestClient != null, "Unexpected. Unable find matching rest client.");
 
@@ -372,11 +392,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context, true),
             _ => throw new NotImplementedException()
         };
-
-        public MgmtRestClient FindRestClient(OperationGroup operationGroup)
-        {
-            return EnsureRestClients()[operationGroup];
-        }
 
         private void DecorateOperationGroup()
         {

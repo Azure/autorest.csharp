@@ -17,12 +17,18 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachine. </summary>
     public partial class VirtualMachineOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachine>
     {
-        /// <summary> Initializes a new instance of VirtualMachineOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineOperations"/> class for mocking. </summary>
         protected VirtualMachineOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "VirtualMachineOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a VirtualMachine. </param>
+        internal VirtualMachineOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected VirtualMachineOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)

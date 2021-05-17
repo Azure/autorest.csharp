@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var method = GetBestMethod(operationsGroup);
             if (method == null)
             {
-                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key} 
+                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key}
                                             Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
             }
             var indexOfProvider = method.Path.IndexOf(ProviderSegment.Providers);
