@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -104,14 +105,31 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     var container = context.Library.ResourceContainers.First(x => x.ResourceName.Equals(item.Resource(context.Configuration.MgmtConfiguration)));
                     writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName} in the {resourceOperation.ResourceName}.");
-                    writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName}s and their operations over a {resourceOperation.ResourceName}.");
-                    using (writer.Scope($"public {container.Type} Get{container.ResourceName}()"))
+                    writer.WriteXmlDocumentationReturns($"An object representing collection of {Pluralization(container.ResourceName)} and their operations over a {resourceOperation.ResourceName}.");
+                    using (writer.Scope($"public {container.Type} Get{Pluralization(container.ResourceName)}()"))
                     {
                         writer.Line($"return new {container.Type}(this);");
                     }
                     writer.Line();
                 }
             }
+        }
+
+        private static string Pluralization(string single)
+        {
+            if (new Regex("([^aeiou])y$").IsMatch(single))
+            {
+                single = Regex.Replace(single, "([^aeiou])y$", "ie");
+            }
+            else if (new Regex("fe?$").IsMatch(single))
+            {
+                single = Regex.Replace(single, "fe?$", "ve");
+            }
+            else if (new Regex("([^aeiou]o|[sxz]|[cs]h)$").IsMatch(single))
+            {
+                single = Regex.Replace(single, "([^aeiou]o|[sxz]|[cs]h)$", "e");
+            }
+            return single + "s";
         }
     }
 }
