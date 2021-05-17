@@ -12,8 +12,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class UrlQueryTests : TestServerTestBase
     {
-        public UrlQueryTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task UrlQueriesBoolTrue() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetBooleanTrueAsync());
 
@@ -33,22 +31,18 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesIntNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetIntNullAsync( null));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlQueriesLongPositive() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetTenBillionAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Strict type checking, format from code model is incorrect")]
         public Task UrlQueriesLongNegative() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetNegativeTenBillionAsync());
 
         [Test]
         public Task UrlQueriesLongNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).GetLongNullAsync( null));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task UrlQueriesFloatPositive() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).FloatScientificPositiveAsync());
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task UrlQueriesFloatNegative() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).FloatScientificNegativeAsync());
 
         [Test]
@@ -64,7 +58,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesDoubleNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).DoubleNullAsync( null));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Request not matched.")]
         public Task UrlQueriesStringUnicode() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).StringUnicodeAsync());
 
         [Test]
@@ -98,7 +91,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesDateNull() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).DateNullAsync( null));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "Recording match is too strict")]
         public Task UrlQueriesDateTimeValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).DateTimeValidAsync());
 
         [Test]
@@ -108,7 +100,6 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayCsvValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringCsvValidAsync( new[] {"ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", ""}));
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
         public Task UrlQueriesArrayNoCollectionFormatValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringNoCollectionFormatEmptyAsync( new[] {"hello", "nihao", "bonjour"}));
 
         [Test]
@@ -127,13 +118,14 @@ namespace AutoRest.TestServer.Tests
         public Task UrlQueriesArrayPipesValid() => TestStatus(async (host, pipeline) => await new QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringPipesValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
-        public void UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiNullAsync( null));
+        public Task UrlQueriesArrayMultiNull() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiNullAsync( null));
 
         [Test]
-        public void UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiEmptyAsync( new string[] { }));
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/1161")]
+        public Task UrlQueriesArrayMultiEmpty() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiEmptyAsync( new string[] { }));
 
         [Test]
-        public void UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
+        public Task UrlQueriesArrayMultiValid() => TestStatus(async (host, pipeline) => await new url_multi_collectionFormat.QueriesClient(ClientDiagnostics, pipeline, host).ArrayStringMultiValidAsync( new[] { "ArrayQuery1", "begin!*'();:@ &=+$,/?#[]end", "", "" }));
 
         [Test]
         public async Task UrlQueriesLongMaxValue()
@@ -150,45 +142,5 @@ namespace AutoRest.TestServer.Tests
 
             Assert.AreEqual("9223372036854775807", queryValue);
         }
-
-        public override IEnumerable<string> AdditionalKnownScenarios { get; } = new string[]
-        {
-            "UrlQueriesBoolFalse",
-            "UrlQueriesBoolTrue",
-            "UrlQueriesBoolNull",
-            "UrlQueriesIntPositive",
-            "UrlQueriesIntNegative",
-            "UrlQueriesIntNull",
-            "UrlQueriesLongPositive",
-            "UrlQueriesLongNegative",
-            "UrlQueriesLongNull",
-            "UrlQueriesFloatPositive",
-            "UrlQueriesFloatNegative",
-            "UrlQueriesFloatNull",
-            "UrlQueriesDoublePositive",
-            "UrlQueriesDoubleNegative",
-            "UrlQueriesDoubleNull",
-            "UrlQueriesStringUrlEncoded",
-            "UrlQueriesStringEmpty",
-            "UrlQueriesStringNull",
-            "UrlQueriesEnumValid",
-            "UrlQueriesEnumNull",
-            "UrlQueriesByteMultiByte",
-            "UrlQueriesByteEmpty",
-            "UrlQueriesByteNull",
-            "UrlQueriesDateValid",
-            "UrlQueriesDateNull",
-            "UrlQueriesDateTimeValid",
-            "UrlQueriesDateTimeNull",
-            "UrlQueriesArrayCsvNull",
-            "UrlQueriesArrayCsvEmpty",
-            "UrlQueriesArrayCsvValid",
-            "UrlQueriesArrayMultiNull",
-            "UrlQueriesArrayMultiEmpty",
-            "UrlQueriesArrayMultiValid",
-            "UrlQueriesArraySsvValid",
-            "UrlQueriesArrayPipesValid",
-            "UrlQueriesArrayTsvValid",
-        };
     }
 }

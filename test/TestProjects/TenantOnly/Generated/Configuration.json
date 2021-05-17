@@ -13,16 +13,11 @@
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
   "OperationGroupToResourceType": {
-    "AvailableBalances": "Microsoft.Billing/billingAccounts/billingProfiles/availableBalance",
     "Agreements": "Microsoft.Billing/billingAccounts/agreements"
   },
   "OperationGroupToResource": {
     "BillingAccounts": "BillingAccount",
-    "AvailableBalances": "AvailableBalance",
     "Agreements": "Agreement"
   },
-  "ResourceRename": {},
-  "OperationGroupToParent": {
-    "Instructions": "Microsoft.Billing/billingAccounts/billingProfiles"
-  }
+  "OperationGroupToParent": {}
 }

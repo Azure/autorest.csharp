@@ -41,9 +41,25 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.WriteDocumentationLines($"<param name=\"{name}\">", "</param>", text, skipWhenEmpty: false);
         }
 
+        /// <summary>
+        /// Writes XML documentation for a parameter of a method using a "param" tag.
+        /// </summary>
+        /// <param name="writer">Writer to which code is written to.</param>
+        /// <param name="parameter">The definition of the parameter, including name and description.</param>
+        /// <returns></returns>
+        public static CodeWriter WriteXmlDocumentationParameter(this CodeWriter writer, Parameter parameter)
+        {
+            return writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+        }
+
         public static CodeWriter WriteXmlDocumentationException(this CodeWriter writer, Type exception, string? description)
         {
             return writer.WriteDocumentationLines($"<exception cref=\"{exception.FullName}\">", "</exception>", description, skipWhenEmpty: false);
+        }
+
+        public static CodeWriter WriteXmlDocumentationReturns(this CodeWriter writer, string text)
+        {
+            return writer.WriteDocumentationLines($"<returns>", $"</returns>", text);
         }
 
         public static CodeWriter WriteXmlDocumentationRequiredParametersException(this CodeWriter writer, IReadOnlyCollection<Parameter> parameters)
@@ -78,7 +94,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        private static CodeWriter WriteDocumentationLines(this CodeWriter writer, string prefix, string suffix, string? text, bool skipWhenEmpty = true)
+        public static CodeWriter WriteDocumentationLines(this CodeWriter writer, string prefix, string suffix, string? text, bool skipWhenEmpty = true)
         {
             if (string.IsNullOrEmpty(text))
             {

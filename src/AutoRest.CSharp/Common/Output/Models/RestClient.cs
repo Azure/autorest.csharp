@@ -4,22 +4,24 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal class RestClient : ClientBase
+    internal class RestClient : TypeProvider
     {
-        private Dictionary<ServiceRequest, RestClientMethod>? _requestMethods;
-        private Dictionary<ServiceRequest, RestClientMethod>? _nextPageMethods;
+        private CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
+        private CachedDictionary<ServiceRequest, RestClientMethod> _nextPageMethods;
         private RestClientMethod[]? _allMethods;
 
         public RestClient(OperationGroup operationGroup, BuildContext context, string? clientName) : base(context)
@@ -27,10 +29,13 @@ namespace AutoRest.CSharp.Output.Models
             OperationGroup = operationGroup;
             Builder = new RestClientBuilder(operationGroup, context);
 
+            _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod> (EnsureNormalMethods);
+            _nextPageMethods = new CachedDictionary<ServiceRequest, RestClientMethod> (EnsureGetNextPageMethods);
+
             Parameters = Builder.GetOrderedParameters ();
 
-            ClientPrefix = GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context);
-            RestClientSuffix = "Rest" + ClientSuffix;
+            ClientPrefix = ClientBuilder.GetClientPrefix(clientName ?? operationGroup.Language.Default.Name, context);
+            RestClientSuffix = "Rest" + ClientBuilder.GetClientSuffix(context);
             DefaultName = ClientPrefix + RestClientSuffix;
             Description = "";
         }
@@ -72,12 +77,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected virtual Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
         {
-            if (_requestMethods != null)
-            {
-                return _requestMethods;
-            }
-
-            _requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
+            var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
 
             foreach (var operation in OperationGroup.Operations)
             {
@@ -88,21 +88,16 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         continue;
                     }
-                    _requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, false));
+                    requestMethods.Add(serviceRequest, Builder.BuildMethod(operation, httpRequest, serviceRequest.Parameters, null, "public"));
                 }
             }
 
-            return _requestMethods;
+            return requestMethods;
         }
 
         protected virtual Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()
         {
-            if (_nextPageMethods != null)
-            {
-                return _nextPageMethods;
-            }
-
-            _nextPageMethods = new Dictionary<ServiceRequest, RestClientMethod>();
+            var nextPageMethods = new Dictionary<ServiceRequest, RestClientMethod>();
             foreach (var operation in OperationGroup.Operations)
             {
                 var paging = operation.Language.Default.Paging;
@@ -125,12 +120,12 @@ namespace AutoRest.CSharp.Output.Models
 
                     if (nextMethod != null)
                     {
-                        _nextPageMethods.Add(serviceRequest, nextMethod);
+                        nextPageMethods.Add(serviceRequest, nextMethod);
                     }
                 }
             }
 
-            return _nextPageMethods;
+            return nextPageMethods;
         }
 
         protected static RestClientMethod BuildNextPageMethod(RestClientMethod method, Operation operation)
@@ -178,18 +173,19 @@ namespace AutoRest.CSharp.Output.Models
                 responses,
                 method.HeaderModel,
                 bufferResponse: true,
-                isVisible: false);
+                accessibility: "internal",
+                operation);
         }
 
         public virtual RestClientMethod? GetNextOperationMethod(ServiceRequest request)
         {
-            EnsureGetNextPageMethods().TryGetValue(request, out RestClientMethod? value);
+            _nextPageMethods.TryGetValue(request, out RestClientMethod? value);
             return value;
         }
 
         public virtual RestClientMethod GetOperationMethod(ServiceRequest request)
         {
-            return EnsureNormalMethods()[request];
+            return _requestMethods[request];
         }
     }
 }

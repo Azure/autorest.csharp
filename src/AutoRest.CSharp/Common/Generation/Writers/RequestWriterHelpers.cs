@@ -19,15 +19,13 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private static string GetPipeline (bool lowLevel) => lowLevel ? "Pipeline" : "_pipeline";
 
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, bool lowLevel)
+        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, bool lowLevel, string methodAccessibility)
         {
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
 
             var methodName = CreateRequestMethodName(clientMethod.Name);
-            var returnType = lowLevel ? typeof(Azure.Core.Request) : typeof(HttpMessage);
-            var visibility = clientMethod.IsVisible ? "protected" : "internal";
-            writer.Append($"{visibility} {returnType} {methodName}(");
+            writer.Append($"{methodAccessibility} {typeof(HttpMessage)} {methodName}(");
             foreach (Parameter clientParameter in parameters)
             {
                 if (lowLevel)
@@ -47,16 +45,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 var request = new CodeWriterDeclaration("request");
                 var uri = new CodeWriterDeclaration("uri");
 
-                // Do note there is a subtle difference here, the lines are not identical
-                if (lowLevel)
-                {
-                    writer.Line($"var {request:D} = {GetPipeline(lowLevel)}.CreateRequest();");
-                }
-                else
-                {
-                    writer.Line($"var {message:D} = {GetPipeline(lowLevel)}.CreateMessage();");
-                    writer.Line($"var {request:D} = {message}.Request;");
-                }
+                writer.Line($"var {message:D} = {GetPipeline(lowLevel)}.CreateMessage();");
+                writer.Line($"var {request:D} = {message}.Request;");
 
                 var method = clientMethod.Request.HttpMethod;
                 if (!clientMethod.BufferResponse)
@@ -93,9 +83,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     case RequestContentRequestBody body:
                         WriteHeaders(writer, clientMethod, request, content: true);
                         writer.Line($"{request}.Content = {body.Parameter.Name};");
-                        writer.Line($"return {request:I};");
-                        // Early return not break as we've already returned in generated code
-                        return;
+                        break;
                     case SchemaRequestBody body:
                         using (WriteValueNullCheck(writer, body.Value))
                         {

@@ -3,73 +3,114 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Types;
 
-namespace AutoRest.CSharp.Output.Models.Types
+namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtObjectType : ObjectType
+    internal class MgmtObjectType : SchemaObjectType
     {
         private bool _isResourceType;
+        private ObjectTypeProperty[]? _myProperties;
+        private BuildContext<MgmtOutputLibrary> _context;
 
-        public MgmtObjectType(ObjectSchema objectSchema, BuildContext context, bool isResourceType) : base(objectSchema, context)
+        public MgmtObjectType(ObjectSchema objectSchema, BuildContext<MgmtOutputLibrary> context, bool isResourceType) : base(objectSchema, context)
         {
             _isResourceType = isResourceType;
+            _context = context;
         }
 
-        protected override string DefaultName => GetDefaultName(OjectSchema, _isResourceType);
+        private ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
+
+        protected override string DefaultName => GetDefaultName(ObjectSchema, _isResourceType);
+
+        internal OperationGroup? OperationGroup => _context.Library.GetOperationGroupBySchema(ObjectSchema);
 
         protected string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
-            var name = objectSchema.NameOverride is null ? objectSchema.CSharpName() : objectSchema.NameOverride;
+            var name = objectSchema.CSharpName();
             return isResourceType ? name + "Data" : name;
         }
 
-        public void OverrideInherits(CSharpType cSharpType)
+        private HashSet<string> GetParentPropertyNames()
         {
-            _inheritsType = cSharpType;
-            _properties = null;
+            return EnumerateHierarchy()
+                .Skip(1)
+                .SelectMany(type => type.Properties)
+                .Select(p => p.Declaration.Name)
+                .ToHashSet();
         }
 
-        protected override HashSet<string?> GetParentProperties()
+        protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            HashSet<string?> result = new HashSet<string?>();
-            CSharpType? type = Inherits;
-            while (type != null)
+            var parentProperties = GetParentPropertyNames();
+            foreach (var property in base.BuildProperties())
             {
-                if (type.IsFrameworkType == false)
+                if (!parentProperties.Contains(property.Declaration.Name))
+                    yield return property;
+            }
+        }
+
+        private IEnumerable<ObjectTypeProperty> BuildMyProperties()
+        {
+            foreach (var objectSchema in GetCombinedSchemas())
+            {
+                foreach (var property in objectSchema.Properties)
                 {
-                    if (type.Implementation is ObjectType objType)
-                    {
-                        result.UnionWith(objType.Properties.Select(p => p.SchemaProperty?.Language.Default.Name));
-                        type = objType.Inherits;
-                    }
-                    else
-                    {
-                        type = null;
-                    }
+                    yield return CreateProperty(property);
+                }
+            }
+        }
+
+        protected override CSharpType? CreateInheritedType()
+        {
+            CSharpType? inheritedType = base.CreateInheritedType();
+
+            var typeToReplace = inheritedType?.Implementation as MgmtObjectType;
+            var operationGroupToUse = OperationGroup ?? GetOperationGroupFromChildren();
+            if (typeToReplace != null)
+            {
+                var match = InheritanceChooser.GetExactMatch(operationGroupToUse, typeToReplace, typeToReplace.MyProperties);
+                if (match != null)
+                {
+                    inheritedType = match;
+                }
+            }
+            return inheritedType == null ? InheritanceChooser.GetSupersetMatch(operationGroupToUse, this, MyProperties) : inheritedType;
+        }
+
+        private OperationGroup? GetOperationGroupFromChildren()
+        {
+            OperationGroup? operationGroup = null;
+            var children = ObjectSchema.Children;
+            if (children == null)
+                return null;
+
+            foreach (var child in children.Immediate)
+            {
+                var resourceData = _context.Library.GetResourceDataFromSchema(child.Name);
+                if (resourceData != null)
+                {
+                    return resourceData.OperationGroup;
                 }
                 else
                 {
-                    result.UnionWith(GetPropertiesFromSystemType(type.FrameworkType));
-                    type = null;
+                    // child is Model not Data
+                    MgmtObjectType? mgmtObject = _context.Library.GetMgmtObjectFromModelName(child.Name);
+                    if (mgmtObject != null)
+                    {
+                        operationGroup = mgmtObject.GetOperationGroupFromChildren();
+                        if (operationGroup != null)
+                            return operationGroup;
+                    }
                 }
             }
-            return result;
-        }
 
-        protected IEnumerable<string> GetPropertiesFromSystemType(System.Type systemType)
-        {
-            return systemType.GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance)
-                .Select(p =>
-                {
-                    StringBuilder builder = new StringBuilder();
-                    builder.Append(char.ToLower(p.Name[0]));
-                    builder.Append(p.Name.Substring(1));
-                    return builder.ToString();
-                });
+            return operationGroup;
         }
     }
 }

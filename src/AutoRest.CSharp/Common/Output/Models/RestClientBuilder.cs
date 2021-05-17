@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Output.Models
             return requestParameter.Language.Default.SerializedName ?? defaultName;
         }
 
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, bool isVisible)
+        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility)
         {
             Dictionary<RequestParameter, ConstructedParameter> allParameters = new ();
 
@@ -89,7 +89,8 @@ namespace AutoRest.CSharp.Output.Models
                 responses,
                 responseHeaderModel,
                 operation.Extensions?.BufferResponse ?? true,
-                isVisible: isVisible
+                accessibility: accessibility,
+                operation
             );
         }
 
@@ -334,7 +335,7 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Flattened == true)
                         {
-                            var objectType = (ObjectType)_library.FindTypeForSchema(bodyRequestParameter.Schema).Implementation;
+                            var objectType = (SchemaObjectType)_library.FindTypeForSchema(bodyRequestParameter.Schema).Implementation;
                             var virtualParameters = requestParameters.OfType<VirtualParameter>().ToArray();
 
                             List<ObjectPropertyInitializer> initializationMap = new List<ObjectPropertyInitializer>();
@@ -379,7 +380,7 @@ namespace AutoRest.CSharp.Output.Models
 
                     if (requestParameter.GroupedBy is RequestParameter groupedByParameter)
                     {
-                        var groupModel = (ObjectType) _context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
+                        var groupModel = (SchemaObjectType) _context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
                         var property = groupModel.GetPropertyForGroupedParameter(requestParameter);
 
                         constantOrReference = new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
@@ -619,19 +620,22 @@ namespace AutoRest.CSharp.Output.Models
             return optionalParameters;
         }
 
-        public static IReadOnlyCollection<Parameter> GetConstructorParameters(Parameter[] parameters, CSharpType credentialType, bool includeAPIVersion = false)
+        public static IReadOnlyCollection<Parameter> GetConstructorParameters(Parameter[] parameters, CSharpType? credentialType, bool includeAPIVersion = false)
         {
             List<Parameter> constructorParameters = new List<Parameter>();
 
             constructorParameters.AddRange(GetRequiredParameters(parameters));
 
-            var credentialParam = new Parameter(
-                "credential",
-                "A credential used to authenticate to an Azure Service.",
-                credentialType,
-                null,
-                true);
-            constructorParameters.Add(credentialParam);
+            if (credentialType != null)
+            {
+                var credentialParam = new Parameter(
+                    "credential",
+                    "A credential used to authenticate to an Azure Service.",
+                    credentialType!,
+                    null,
+                    true);
+                constructorParameters.Add(credentialParam);
+            }
 
             constructorParameters.AddRange(GetOptionalParameters(parameters, includeAPIVersion));
 

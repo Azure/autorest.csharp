@@ -4,7 +4,8 @@ These documents are C#-specific, see [our main docs][main_docs] for more general
 
 
 1. Generating C# Clients with AutoRest
-    - How do I generate code? Main documents are [here][main_generate], while here are the [csharp-specific docs][csharp_generate]
+    - How do I generate code? Main documents are [here][main_generate], while here are the [csharp-specific docs][csharp_generate].
+    - See [here](protocol_method_client) for clients with protocol methods (previously known as low level clients)
 
 2. Using Your Generated C# Client
     - How do I [use my C# client][csharp_client] now that I've generated it? Main docs are [here][main_client]
@@ -26,6 +27,7 @@ These documents are C#-specific, see [our main docs][main_docs] for more general
 [main_docs]: https://github.com/Azure/autorest/tree/master/docs
 [main_generate]: https://github.com/Azure/autorest/tree/master/docs/generate/readme.md
 [csharp_generate]: ./generate/readme.md
+[protocol_method_client]: ./protocol_method_client.md
 [csharp_client]: ./client/readme.md
 [main_client]: https://github.com/Azure/autorest/tree/master/docs/generate/client.md
 [main_migrate]: https://github.com/Azure/autorest/tree/master/docs/migrate/readme.md

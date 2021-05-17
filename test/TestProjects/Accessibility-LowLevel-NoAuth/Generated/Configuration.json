@@ -1,0 +1,21 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "Accessibility_LowLevel_NoAuth",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "AzureArm": false,
+  "PublicClients": true,
+  "ModelNamespace": true,
+  "HeadAsBoolean": false,
+  "SkipCSProjPackageReference": true,
+  "LowLevelClient": true,
+  "CredentialTypes": [],
+  "CredentialScopes": [],
+  "CredentialHeaderName": "api-key",
+  "OperationGroupToResourceType": {},
+  "OperationGroupToResource": {},
+  "OperationGroupToParent": {}
+}

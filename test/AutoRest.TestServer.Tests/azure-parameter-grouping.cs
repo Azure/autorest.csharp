@@ -14,8 +14,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class ParameterGroupingTests : TestServerTestBase
     {
-        public ParameterGroupingTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task PostParameterGroupingMultipleParameterGroups() => TestStatus(async (host, pipeline) =>
         {
@@ -58,7 +56,6 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [IgnoreOnTestServer(TestServerVersion.V2, "No recording")]
         public Task PostParameterGroupingSharedParameterGroupObject() => TestStatus(async (host, pipeline) =>
         {
             return await new ParameterGroupingClient(ClientDiagnostics, pipeline, host).PostSharedParameterGroupObjectAsync(

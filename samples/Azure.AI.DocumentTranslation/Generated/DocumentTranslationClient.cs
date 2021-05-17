@@ -7,13 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-
-#pragma warning disable AZC0007
 
 namespace Azure.AI.DocumentTranslation
 {
@@ -21,10 +18,12 @@ namespace Azure.AI.DocumentTranslation
     public partial class DocumentTranslationClient
     {
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        protected HttpPipeline Pipeline { get; }
+        public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Ocp-Apim-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
         private string endpoint;
         private readonly string apiVersion;
+        private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Initializes a new instance of DocumentTranslationClient for mocking. </summary>
         protected DocumentTranslationClient()
@@ -47,7 +46,10 @@ namespace Azure.AI.DocumentTranslation
             }
 
             options ??= new AzureAIDocumentTranslationClientOptions();
-            Pipeline = HttpPipelineBuilder.Build(options, new AzureKeyCredentialPolicy(credential, AuthorizationHeader));
+            _clientDiagnostics = new ClientDiagnostics(options);
+            _keyCredential = credential;
+            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
@@ -71,12 +73,233 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>inputs</term>
+        ///     <term>BatchRequest[]</term>
+        ///     <term>Yes</term>
+        ///     <term> The input list of documents or folders containing documents. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>BatchRequest</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>source</term>
+        ///     <term>SourceInput</term>
+        ///     <term>Yes</term>
+        ///     <term> Source of the input documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>targets</term>
+        ///     <term>TargetInput[]</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the destination for the output. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageType</term>
+        ///     <term>&quot;Folder&quot; | &quot;File&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage type of the input documents source string. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>SourceInput</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>sourceUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the folder / container or single file with your documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>filter</term>
+        ///     <term>DocumentFilter</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>language</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// Language code
+        /// 
+        /// If none is specified, we will perform auto detect on the document.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>DocumentFilter</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>prefix</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// A case-sensitive prefix string to filter documents in the source path for translation.
+        /// 
+        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>suffix</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// A case-sensitive suffix string to filter documents in the source path for translation.
+        /// 
+        /// This is most often use for file extensions.
+        /// </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>TargetInput</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>targetUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the folder / container with your documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>category</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> Category / custom system for translation request. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>language</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Target Language. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>glossaries</term>
+        ///     <term>Glossary[]</term>
+        ///     <term></term>
+        ///     <term> List of Glossary. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>Glossary</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>glossaryUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term>
+        /// Location of the glossary.
+        /// 
+        /// We will use the file extension to extract the formatting if the format parameter is not supplied.
+        /// 
+        /// 
+        /// 
+        /// If the translation language pair is not present in the glossary, it will not be applied.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>format</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Format. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>version</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> Optional Version.  If not specified, default is used. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> SubmitBatchRequestAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> StartTranslationAsync(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateSubmitBatchRequestRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStartTranslationRequest(requestBody, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 202:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
@@ -98,19 +321,242 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
         /// </summary>
+        /// <remarks>
+        /// Schema for <c>Request Body</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>inputs</term>
+        ///     <term>BatchRequest[]</term>
+        ///     <term>Yes</term>
+        ///     <term> The input list of documents or folders containing documents. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>BatchRequest</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>source</term>
+        ///     <term>SourceInput</term>
+        ///     <term>Yes</term>
+        ///     <term> Source of the input documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>targets</term>
+        ///     <term>TargetInput[]</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the destination for the output. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageType</term>
+        ///     <term>&quot;Folder&quot; | &quot;File&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage type of the input documents source string. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>SourceInput</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>sourceUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the folder / container or single file with your documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>filter</term>
+        ///     <term>DocumentFilter</term>
+        ///     <term></term>
+        ///    <term></term>
+        ///   </item>
+        ///   <item>
+        ///     <term>language</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// Language code
+        /// 
+        /// If none is specified, we will perform auto detect on the document.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>DocumentFilter</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>prefix</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// A case-sensitive prefix string to filter documents in the source path for translation.
+        /// 
+        /// For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for translation.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>suffix</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term>
+        /// A case-sensitive suffix string to filter documents in the source path for translation.
+        /// 
+        /// This is most often use for file extensions.
+        /// </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>TargetInput</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>targetUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Location of the folder / container with your documents. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>category</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> Category / custom system for translation request. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>language</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Target Language. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>glossaries</term>
+        ///     <term>Glossary[]</term>
+        ///     <term></term>
+        ///     <term> List of Glossary. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// Schema for <c>Glossary</c>:
+        /// <list type="table">
+        ///   <listeader>
+        ///     <term>Name</term>
+        ///     <term>Type</term>
+        ///     <term>Required</term>
+        ///     <term>Description</term>
+        ///   </listeader>
+        ///   <item>
+        ///     <term>glossaryUrl</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term>
+        /// Location of the glossary.
+        /// 
+        /// We will use the file extension to extract the formatting if the format parameter is not supplied.
+        /// 
+        /// 
+        /// 
+        /// If the translation language pair is not present in the glossary, it will not be applied.
+        /// </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>format</term>
+        ///     <term>string</term>
+        ///     <term>Yes</term>
+        ///     <term> Format. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>version</term>
+        ///     <term>string</term>
+        ///     <term></term>
+        ///     <term> Optional Version.  If not specified, default is used. </term>
+        ///   </item>
+        ///   <item>
+        ///     <term>storageSource</term>
+        ///     <term>&quot;AzureBlob&quot;</term>
+        ///     <term></term>
+        ///     <term> Storage Source. </term>
+        ///   </item>
+        /// </list>
+        /// </remarks>
         /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response SubmitBatchRequest(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response StartTranslation(RequestContent requestBody, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateSubmitBatchRequestRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateStartTranslationRequest(requestBody, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.StartTranslation");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 202:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        /// <summary> Create Request for <see cref="SubmitBatchRequest"/> and <see cref="SubmitBatchRequestAsync"/> operations. </summary>
+        /// <summary> Create Request for <see cref="StartTranslation"/> and <see cref="StartTranslationAsync"/> operations. </summary>
         /// <param name="requestBody"> The request body. </param>
-        protected Request CreateSubmitBatchRequestRequest(RequestContent requestBody)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateStartTranslationRequest(RequestContent requestBody, RequestOptions requestOptions = null)
         {
-            var request = Pipeline.CreateRequest();
+            var message = Pipeline.CreateMessage();
+            var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
@@ -120,99 +566,7 @@ namespace Azure.AI.DocumentTranslation
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = requestBody;
-            return request;
-        }
-        /// <summary>
-        /// Returns a list of batch requests submitted and the status for each request.
-        /// 
-        /// This list only contains batch requests submitted by the user (based on the resource).
-        /// 
-        /// 
-        /// 
-        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
-        /// 
-        /// The absence of a continuation token means that no additional pages are available.
-        /// 
-        /// 
-        /// 
-        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
-        /// 
-        /// 
-        /// 
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// 
-        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
-        /// 
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        /// 
-        /// 
-        /// 
-        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
-        /// 
-        /// The default sorting is descending by createdDateTimeUtc.
-        /// 
-        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
-        /// 
-        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
-        /// 
-        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
-        /// 
-        /// 
-        /// 
-        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
-        /// 
-        /// 
-        /// 
-        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
-        /// 
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
-        /// 
-        /// This reduces the risk of the client making assumptions about the data returned.
-        /// </summary>
-        /// <param name="requestBody"> The request body. </param>
-        /// <param name="top">
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// 
-        /// 
-        /// 
-        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
-        /// 
-        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
-        /// 
-        /// 
-        /// 
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
-        /// </param>
-        /// <param name="skip">
-        /// $skip indicates the number of records to skip from the list of records held by the server based on the sorting method specified.  By default, we sort by descending start time.
-        /// 
-        /// 
-        /// 
-        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
-        /// 
-        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
-        /// 
-        /// 
-        /// 
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
-        /// </param>
-        /// <param name="maxpagesize">
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        /// 
-        /// 
-        /// 
-        /// Clients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server&apos;s default page size.
-        /// </param>
-        /// <param name="ids"> Ids to use in filtering. </param>
-        /// <param name="statuses"> Statuses to use in filtering. </param>
-        /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
-        /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
-        /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetOperationsAsync(RequestContent requestBody, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, CancellationToken cancellationToken = default)
-        {
-            Request req = CreateGetOperationsRequest(requestBody, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            return message;
         }
 
         /// <summary>
@@ -262,7 +616,6 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
-        /// <param name="requestBody"> The request body. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         /// 
@@ -301,15 +654,91 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetOperations(RequestContent requestBody, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetTranslationsStatusAsync(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateGetOperationsRequest(requestBody, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        /// <summary> Create Request for <see cref="GetOperations"/> and <see cref="GetOperationsAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <summary>
+        /// Returns a list of batch requests submitted and the status for each request.
+        /// 
+        /// This list only contains batch requests submitted by the user (based on the resource).
+        /// 
+        /// 
+        /// 
+        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
+        /// 
+        /// The absence of a continuation token means that no additional pages are available.
+        /// 
+        /// 
+        /// 
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        /// 
+        /// 
+        /// 
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// 
+        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
+        /// 
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        /// 
+        /// 
+        /// 
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// 
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// 
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
+        /// 
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// 
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        /// 
+        /// 
+        /// 
+        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
+        /// 
+        /// 
+        /// 
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// 
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// 
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// </summary>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         /// 
@@ -348,9 +777,88 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        protected Request CreateGetOperationsRequest(RequestContent requestBody, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetTranslationsStatus(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            var request = Pipeline.CreateRequest();
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationsStatus");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create Request for <see cref="GetTranslationsStatus"/> and <see cref="GetTranslationsStatusAsync"/> operations. </summary>
+        /// <param name="top">
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// 
+        /// 
+        /// 
+        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
+        /// 
+        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
+        /// 
+        /// 
+        /// 
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
+        /// </param>
+        /// <param name="skip">
+        /// $skip indicates the number of records to skip from the list of records held by the server based on the sorting method specified.  By default, we sort by descending start time.
+        /// 
+        /// 
+        /// 
+        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
+        /// 
+        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
+        /// 
+        /// 
+        /// 
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
+        /// </param>
+        /// <param name="maxpagesize">
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        /// 
+        /// 
+        /// 
+        /// Clients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server&apos;s default page size.
+        /// </param>
+        /// <param name="ids"> Ids to use in filtering. </param>
+        /// <param name="statuses"> Statuses to use in filtering. </param>
+        /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
+        /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
+        /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetTranslationsStatusRequest(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions requestOptions = null)
+        {
+            var message = Pipeline.CreateMessage();
+            var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
@@ -390,38 +898,99 @@ namespace Azure.AI.DocumentTranslation
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Content = requestBody;
-            return request;
-        }
-        /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
-        /// <param name="requestBody"> The request body. </param>
-        /// <param name="id"> Format - uuid.  The batch id. </param>
-        /// <param name="documentId"> Format - uuid.  The document id. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetDocumentStatusAsync(RequestContent requestBody, Guid id, Guid documentId, CancellationToken cancellationToken = default)
-        {
-            Request req = CreateGetDocumentStatusRequest(requestBody, id, documentId);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            return message;
         }
 
         /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
-        /// <param name="requestBody"> The request body. </param>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetDocumentStatus(RequestContent requestBody, Guid id, Guid documentId, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetDocumentStatusAsync(Guid id, Guid documentId, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateGetDocumentStatusRequest(requestBody, id, documentId);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetDocumentStatusRequest(id, documentId, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns the translation status for a specific document based on the request Id and document Id. </summary>
+        /// <param name="id"> Format - uuid.  The batch id. </param>
+        /// <param name="documentId"> Format - uuid.  The document id. </param>
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetDocumentStatus(Guid id, Guid documentId, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
+        {
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetDocumentStatusRequest(id, documentId, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Create Request for <see cref="GetDocumentStatus"/> and <see cref="GetDocumentStatusAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
-        protected Request CreateGetDocumentStatusRequest(RequestContent requestBody, Guid id, Guid documentId)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetDocumentStatusRequest(Guid id, Guid documentId, RequestOptions requestOptions = null)
         {
-            var request = Pipeline.CreateRequest();
+            var message = Pipeline.CreateMessage();
+            var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
@@ -432,21 +1001,7 @@ namespace Azure.AI.DocumentTranslation
             uri.AppendPath(documentId, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Content = requestBody;
-            return request;
-        }
-        /// <summary>
-        /// Returns the status for a document translation request.
-        /// 
-        /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
-        /// </summary>
-        /// <param name="requestBody"> The request body. </param>
-        /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetOperationStatusAsync(RequestContent requestBody, Guid id, CancellationToken cancellationToken = default)
-        {
-            Request req = CreateGetOperationStatusRequest(requestBody, id);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            return message;
         }
 
         /// <summary>
@@ -454,21 +1009,96 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
         /// </summary>
-        /// <param name="requestBody"> The request body. </param>
         /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetOperationStatus(RequestContent requestBody, Guid id, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetTranslationStatusAsync(Guid id, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateGetOperationStatusRequest(requestBody, id);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetTranslationStatusRequest(id, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        /// <summary> Create Request for <see cref="GetOperationStatus"/> and <see cref="GetOperationStatusAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <summary>
+        /// Returns the status for a document translation request.
+        /// 
+        /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
+        /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
-        protected Request CreateGetOperationStatusRequest(RequestContent requestBody, Guid id)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetTranslationStatus(Guid id, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            var request = Pipeline.CreateRequest();
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetTranslationStatusRequest(id, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create Request for <see cref="GetTranslationStatus"/> and <see cref="GetTranslationStatusAsync"/> operations. </summary>
+        /// <param name="id"> Format - uuid.  The operation id. </param>
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetTranslationStatusRequest(Guid id, RequestOptions requestOptions = null)
+        {
+            var message = Pipeline.CreateMessage();
+            var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
@@ -477,55 +1107,116 @@ namespace Azure.AI.DocumentTranslation
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Content = requestBody;
-            return request;
+            return message;
         }
+
         /// <summary>
-        /// Cancel a currently processing or queued operation.
+        /// Cancel a currently processing or queued translation.
         /// 
-        /// Cancel a currently processing or queued operation.
+        /// Cancel a currently processing or queued translation.
         /// 
-        /// An operation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
+        /// A translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
         /// 
         /// All documents that have completed translation will not be cancelled and will be charged.
         /// 
         /// All pending documents will be cancelled if possible.
         /// </summary>
-        /// <param name="requestBody"> The request body. </param>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CancelOperationAsync(RequestContent requestBody, Guid id, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> CancelTranslationAsync(Guid id, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateCancelOperationRequest(requestBody, id);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateCancelTranslationRequest(id, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
-        /// Cancel a currently processing or queued operation.
+        /// Cancel a currently processing or queued translation.
         /// 
-        /// Cancel a currently processing or queued operation.
+        /// Cancel a currently processing or queued translation.
         /// 
-        /// An operation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
+        /// A translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
         /// 
         /// All documents that have completed translation will not be cancelled and will be charged.
         /// 
         /// All pending documents will be cancelled if possible.
         /// </summary>
-        /// <param name="requestBody"> The request body. </param>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response CancelOperation(RequestContent requestBody, Guid id, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response CancelTranslation(Guid id, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateCancelOperationRequest(requestBody, id);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateCancelTranslationRequest(id, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        /// <summary> Create Request for <see cref="CancelOperation"/> and <see cref="CancelOperationAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <summary> Create Request for <see cref="CancelTranslation"/> and <see cref="CancelTranslationAsync"/> operations. </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
-        protected Request CreateCancelOperationRequest(RequestContent requestBody, Guid id)
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateCancelTranslationRequest(Guid id, RequestOptions requestOptions = null)
         {
-            var request = Pipeline.CreateRequest();
+            var message = Pipeline.CreateMessage();
+            var request = message.Request;
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
@@ -534,95 +1225,7 @@ namespace Azure.AI.DocumentTranslation
             uri.AppendPath(id, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Content = requestBody;
-            return request;
-        }
-        /// <summary>
-        /// Returns the status for all documents in a batch document translation request.
-        /// 
-        /// 
-        /// 
-        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
-        /// 
-        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
-        /// 
-        /// 
-        /// 
-        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
-        /// 
-        /// 
-        /// 
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// 
-        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
-        /// 
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        /// 
-        /// 
-        /// 
-        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
-        /// 
-        /// The default sorting is descending by createdDateTimeUtc.
-        /// 
-        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
-        /// 
-        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
-        /// 
-        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
-        /// 
-        /// 
-        /// 
-        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
-        /// 
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
-        /// 
-        /// This reduces the risk of the client making assumptions about the data returned.
-        /// </summary>
-        /// <param name="requestBody"> The request body. </param>
-        /// <param name="id"> Format - uuid.  The operation id. </param>
-        /// <param name="top">
-        /// $top indicates the total number of records the user wants to be returned across all pages.
-        /// 
-        /// 
-        /// 
-        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
-        /// 
-        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
-        /// 
-        /// 
-        /// 
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
-        /// </param>
-        /// <param name="skip">
-        /// $skip indicates the number of records to skip from the list of records held by the server based on the sorting method specified.  By default, we sort by descending start time.
-        /// 
-        /// 
-        /// 
-        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
-        /// 
-        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
-        /// 
-        /// 
-        /// 
-        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
-        /// </param>
-        /// <param name="maxpagesize">
-        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
-        /// 
-        /// 
-        /// 
-        /// Clients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server&apos;s default page size.
-        /// </param>
-        /// <param name="ids"> Ids to use in filtering. </param>
-        /// <param name="statuses"> Statuses to use in filtering. </param>
-        /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
-        /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
-        /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetOperationDocumentsStatusAsync(RequestContent requestBody, Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, CancellationToken cancellationToken = default)
-        {
-            Request req = CreateGetOperationDocumentsStatusRequest(requestBody, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            return message;
         }
 
         /// <summary>
@@ -666,7 +1269,6 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// This reduces the risk of the client making assumptions about the data returned.
         /// </summary>
-        /// <param name="requestBody"> The request body. </param>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -706,15 +1308,85 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetOperationDocumentsStatus(RequestContent requestBody, Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetDocumentsStatusAsync(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateGetOperationDocumentsStatusRequest(requestBody, id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        /// <summary> Create Request for <see cref="GetOperationDocumentsStatus"/> and <see cref="GetOperationDocumentsStatusAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <summary>
+        /// Returns the status for all documents in a batch document translation request.
+        /// 
+        /// 
+        /// 
+        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
+        /// 
+        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
+        /// 
+        /// 
+        /// 
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        /// 
+        /// 
+        /// 
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// 
+        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
+        /// 
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        /// 
+        /// 
+        /// 
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// 
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// 
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
+        /// 
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// 
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        /// 
+        /// 
+        /// 
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// 
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// 
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -754,9 +1426,89 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
         /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
         /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
-        protected Request CreateGetOperationDocumentsStatusRequest(RequestContent requestBody, Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetDocumentsStatus(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            var request = Pipeline.CreateRequest();
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentsStatus");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create Request for <see cref="GetDocumentsStatus"/> and <see cref="GetDocumentsStatusAsync"/> operations. </summary>
+        /// <param name="id"> Format - uuid.  The operation id. </param>
+        /// <param name="top">
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// 
+        /// 
+        /// 
+        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
+        /// 
+        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
+        /// 
+        /// 
+        /// 
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
+        /// </param>
+        /// <param name="skip">
+        /// $skip indicates the number of records to skip from the list of records held by the server based on the sorting method specified.  By default, we sort by descending start time.
+        /// 
+        /// 
+        /// 
+        /// Clients MAY use $top and $skip query parameters to specify a number of results to return and an offset into the collection.
+        /// 
+        /// When both $top and $skip are given by a client, the server SHOULD first apply $skip and then $top on the collection.
+        /// 
+        /// 
+        /// 
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server MUST return an error to the client informing about it instead of just ignoring the query options.
+        /// </param>
+        /// <param name="maxpagesize">
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        /// 
+        /// 
+        /// 
+        /// Clients MAY request server-driven paging with a specific page size by specifying a $maxpagesize preference. The server SHOULD honor this preference if the specified page size is smaller than the server&apos;s default page size.
+        /// </param>
+        /// <param name="ids"> Ids to use in filtering. </param>
+        /// <param name="statuses"> Statuses to use in filtering. </param>
+        /// <param name="createdDateTimeUtcStart"> the start datetime to get items after. </param>
+        /// <param name="createdDateTimeUtcEnd"> the end datetime to get items before. </param>
+        /// <param name="orderBy"> the sorting query for the collection (ex: &apos;CreatedDateTimeUtc asc&apos;, &apos;CreatedDateTimeUtc desc&apos;). </param>
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetDocumentsStatusRequest(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestOptions requestOptions = null)
+        {
+            var message = Pipeline.CreateMessage();
+            var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
@@ -798,20 +1550,7 @@ namespace Azure.AI.DocumentTranslation
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Content = requestBody;
-            return request;
-        }
-        /// <summary>
-        /// The list of supported document formats supported by the Document Translation service.
-        /// 
-        /// The list includes the common file extension, as well as the content-type if using the upload API.
-        /// </summary>
-        /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetDocumentFormatsAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
-        {
-            Request req = CreateGetDocumentFormatsRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            return message;
         }
 
         /// <summary>
@@ -819,19 +1558,93 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// The list includes the common file extension, as well as the content-type if using the upload API.
         /// </summary>
-        /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetDocumentFormats(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateGetDocumentFormatsRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetSupportedDocumentFormatsRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        /// <summary> Create Request for <see cref="GetDocumentFormats"/> and <see cref="GetDocumentFormatsAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
-        protected Request CreateGetDocumentFormatsRequest(RequestContent requestBody)
+        /// <summary>
+        /// The list of supported document formats supported by the Document Translation service.
+        /// 
+        /// The list includes the common file extension, as well as the content-type if using the upload API.
+        /// </summary>
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetSupportedDocumentFormats(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            var request = Pipeline.CreateRequest();
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetSupportedDocumentFormatsRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create Request for <see cref="GetSupportedDocumentFormats"/> and <see cref="GetSupportedDocumentFormatsAsync"/> operations. </summary>
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetSupportedDocumentFormatsRequest(RequestOptions requestOptions = null)
+        {
+            var message = Pipeline.CreateMessage();
+            var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
@@ -839,20 +1652,7 @@ namespace Azure.AI.DocumentTranslation
             uri.AppendPath("/documents/formats", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Content = requestBody;
-            return request;
-        }
-        /// <summary>
-        /// The list of supported glossary formats supported by the Document Translation service.
-        /// 
-        /// The list includes the common file extension used.
-        /// </summary>
-        /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetGlossaryFormatsAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
-        {
-            Request req = CreateGetGlossaryFormatsRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            return message;
         }
 
         /// <summary>
@@ -860,19 +1660,93 @@ namespace Azure.AI.DocumentTranslation
         /// 
         /// The list includes the common file extension used.
         /// </summary>
-        /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetGlossaryFormats(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateGetGlossaryFormatsRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetSupportedGlossaryFormatsRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        /// <summary> Create Request for <see cref="GetGlossaryFormats"/> and <see cref="GetGlossaryFormatsAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
-        protected Request CreateGetGlossaryFormatsRequest(RequestContent requestBody)
+        /// <summary>
+        /// The list of supported glossary formats supported by the Document Translation service.
+        /// 
+        /// The list includes the common file extension used.
+        /// </summary>
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetSupportedGlossaryFormats(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            var request = Pipeline.CreateRequest();
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetSupportedGlossaryFormatsRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create Request for <see cref="GetSupportedGlossaryFormats"/> and <see cref="GetSupportedGlossaryFormatsAsync"/> operations. </summary>
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetSupportedGlossaryFormatsRequest(RequestOptions requestOptions = null)
+        {
+            var message = Pipeline.CreateMessage();
+            var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
@@ -880,32 +1754,93 @@ namespace Azure.AI.DocumentTranslation
             uri.AppendPath("/glossaries/formats", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Content = requestBody;
-            return request;
-        }
-        /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
-        /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> GetDocumentStorageSourceAsync(RequestContent requestBody, CancellationToken cancellationToken = default)
-        {
-            Request req = CreateGetDocumentStorageSourceRequest(requestBody);
-            return await Pipeline.SendRequestAsync(req, cancellationToken).ConfigureAwait(false);
+            return message;
         }
 
         /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
-        /// <param name="requestBody"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response GetDocumentStorageSource(RequestContent requestBody, CancellationToken cancellationToken = default)
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            Request req = CreateGetDocumentStorageSourceRequest(requestBody);
-            return Pipeline.SendRequest(req, cancellationToken);
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetSupportedStorageSourcesRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
+            scope.Start();
+            try
+            {
+                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        /// <summary> Create Request for <see cref="GetDocumentStorageSource"/> and <see cref="GetDocumentStorageSourceAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
-        protected Request CreateGetDocumentStorageSourceRequest(RequestContent requestBody)
+        /// <summary> Returns a list of storage sources/options supported by the Document Translation service. </summary>
+        /// <param name="requestOptions"> The request options. </param>
+#pragma warning disable AZC0002
+        public virtual Response GetSupportedStorageSources(RequestOptions requestOptions = null)
+#pragma warning restore AZC0002
         {
-            var request = Pipeline.CreateRequest();
+            requestOptions ??= new RequestOptions();
+            HttpMessage message = CreateGetSupportedStorageSourcesRequest(requestOptions);
+            if (requestOptions.PerCallPolicy != null)
+            {
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+            }
+            using var scope = _clientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
+            scope.Start();
+            try
+            {
+                Pipeline.Send(message, requestOptions.CancellationToken);
+                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                {
+                    switch (message.Response.Status)
+                    {
+                        case 200:
+                            return message.Response;
+                        default:
+                            throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+                    }
+                }
+                else
+                {
+                    return message.Response;
+                }
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create Request for <see cref="GetSupportedStorageSources"/> and <see cref="GetSupportedStorageSourcesAsync"/> operations. </summary>
+        /// <param name="requestOptions"> The request options. </param>
+        private HttpMessage CreateGetSupportedStorageSourcesRequest(RequestOptions requestOptions = null)
+        {
+            var message = Pipeline.CreateMessage();
+            var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
@@ -913,8 +1848,7 @@ namespace Azure.AI.DocumentTranslation
             uri.AppendPath("/storagesources", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Content = requestBody;
-            return request;
+            return message;
         }
     }
 }

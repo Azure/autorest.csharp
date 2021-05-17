@@ -13,11 +13,16 @@
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
   "OperationGroupToResourceType": {
-    "AvailabilitySets": "Microsoft.Compute/availabilitySets"
+    "AvailabilitySets": "Microsoft.Compute/availabilitySets",
+    "Operations": "Microsoft.Compute/operations",
+    "Usage": "Microsoft.Compute/locations/usages"
   },
   "OperationGroupToResource": {
-    "AvailabilitySets": "AvailabilitySet"
+    "Operations": "RestApi",
+    "AvailabilitySets": "AvailabilitySet",
+    "Usage": "NonResource"
   },
-  "ResourceRename": {},
-  "OperationGroupToParent": {}
+  "OperationGroupToParent": {
+    "Usage": "subscriptions"
+  }
 }

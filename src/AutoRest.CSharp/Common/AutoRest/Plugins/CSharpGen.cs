@@ -96,7 +96,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             catch (Exception e)
             {
-                await autoRest.Fatal($"Internal error in AutoRest.CSharp - {ErrorHelpers.FileIssueText}\nException: {e.Message}\n{e.StackTrace}");
+                try
+                {
+                    // We are unsuspectingly crashing, so output anything that might help us reproduce the issue
+                    await autoRest.WriteFile("Configuration.json", StandaloneGeneratorRunner.SaveConfiguration(configuration), "source-file-csharp");
+                    await autoRest.WriteFile("CodeModel.yaml", codeModelYaml, "source-file-csharp");
+                }
+                catch
+                {
+                    // Ignore any errors while trying to output crash information
+                }
+                await autoRest.Fatal($"Internal error in AutoRest.CSharp{ErrorHelpers.FileIssueText}\nException: {e.Message}\n{e.StackTrace}");
                 return false;
             }
 

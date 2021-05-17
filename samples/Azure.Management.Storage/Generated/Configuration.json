@@ -19,15 +19,11 @@
     "PrivateLinkResources": "Microsoft.Storage/storageAccounts/privateLinkResources"
   },
   "OperationGroupToResource": {
-    "Operations": "Operation",
-    "Skus": "Sku",
-    "Usages": "Usage",
+    "Operations": "NonResource",
+    "Skus": "NonResource",
+    "Usages": "NonResource",
     "PrivateLinkResources": "PrivateLinkResource",
     "StorageAccounts": "StorageAccount"
-  },
-  "ResourceRename": {
-    "BlobServiceProperties": "BlobService",
-    "FileServiceProperties": "FileService"
   },
   "OperationGroupToParent": {
     "BlobContainers": "Microsoft.Storage/storageAccounts",

@@ -1,21 +1,44 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
-using System;
-using System.Text;
-using AutoRest.CSharp.Input;
-using System.Collections.Generic;
-using AutoRest.CSharp.Output.Models.Requests;
 
-namespace AutoRest.CSharp.Output.Models.Type.Decorate
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Text;
+using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Output;
+
+namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceTypeBuilder
     {
-        public static string ConstructOperationResourceType(OperationGroup operationsGroup)
+        public const string Subscriptions = "subscriptions";
+        public const string ResourceGroups = "resourceGroups";
+        public const string Tenant = "tenant";
+        private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
+
+        public static string ResourceType(this OperationGroup operationsGroup, MgmtConfiguration config)
+        {
+            string? result = null;
+            if (_valueCache.TryGetValue(operationsGroup, out result))
+                return result;
+
+            if (!config.OperationGroupToResourceType.TryGetValue(operationsGroup.Key, out result))
+            {
+                result = ResourceTypeBuilder.ConstructOperationResourceType(operationsGroup);
+            }
+
+            _valueCache.TryAdd(operationsGroup, result);
+            return result;
+        }
+
+        private static string ConstructOperationResourceType(OperationGroup operationsGroup)
         {
             var method = GetBestMethod(operationsGroup);
             if (method == null)
             {
-                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key} 
+                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key}
                                             Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
             }
             var indexOfProvider = method.Path.IndexOf(ProviderSegment.Providers);
@@ -30,6 +53,7 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
             }
             return resourceType.ToString().TrimEnd('/');
         }
+
 
         private static string ConstructResourceType(string httpRequestUri)
         {
@@ -68,15 +92,15 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
         private static HttpRequest? GetBestMethod(OperationGroup operationsGroup)
         {
             List<ServiceRequest>? requests;
-            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Put, out requests))
+            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Put, out requests))
             {
                 return (HttpRequest?)requests[0].Protocol?.Http;
             }
-            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Delete, out requests))
+            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Delete, out requests))
             {
                 return (HttpRequest?)requests[0].Protocol?.Http;
             }
-            if (operationsGroup.OperationHttpMethodMapping.TryGetValue(HttpMethod.Patch, out requests))
+            if (operationsGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Patch, out requests))
             {
                 return (HttpRequest?)requests[0].Protocol?.Http;
             }

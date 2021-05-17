@@ -22,18 +22,13 @@
     "LogAnalytics": "Microsoft.Compute/locations/logAnalytics"
   },
   "OperationGroupToResource": {
-    "Operations": "Operation",
+    "Operations": "NonResource",
     "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
     "VirtualMachineImages": "VirtualMachineImage",
-    "Usage": "Usage",
-    "VirtualMachineSizes": "VirtualMachineSize",
-    "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
-    "LogAnalytics": "LogAnalyticsOperationResult"
-  },
-  "ResourceRename": {
-    "SshPublicKey": "SshPublicKeyInfo",
-    "LogAnalyticsOperationResult": "LogAnalytics",
-    "SshPublicKeyResource": "SshPublicKey"
+    "Usage": "NonResource",
+    "VirtualMachineSizes": "NonResource",
+    "VirtualMachineScaleSetRollingUpgrades": "NonResource",
+    "LogAnalytics": "NonResource"
   },
   "OperationGroupToParent": {
     "LogAnalytics": "subscriptions",

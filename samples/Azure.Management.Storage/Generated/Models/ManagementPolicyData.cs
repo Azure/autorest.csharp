@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> A class representing the ManagementPolicy data model. </summary>
-    public partial class ManagementPolicyData : ResourceManager.Core.Resource
+    public partial class ManagementPolicyData : Resource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ManagementPolicyData. </summary>
         public ManagementPolicyData()
@@ -19,9 +19,12 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of ManagementPolicyData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="lastModifiedTime"> Returns the date and time the ManagementPolicies was last modified. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
-        internal ManagementPolicyData(DateTimeOffset? lastModifiedTime, ManagementPolicySchema policy)
+        internal ManagementPolicyData(ResourceGroupResourceIdentifier id, string name, ResourceType type, DateTimeOffset? lastModifiedTime, ManagementPolicySchema policy) : base(id, name, type)
         {
             LastModifiedTime = lastModifiedTime;
             Policy = policy;

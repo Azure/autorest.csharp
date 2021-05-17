@@ -3,23 +3,23 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager.Core;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceData : MgmtObjectType
     {
         public ResourceData(ObjectSchema schema, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context) : base(schema, context, true)
         {
-            Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, operationGroup.Resource));
+            Description = BuilderHelpers.EscapeXmlDescription(CreateDescription(operationGroup, operationGroup.Resource(context.Configuration.MgmtConfiguration)));
         }
 
-        protected override string DefaultName => GetDefaultName(OjectSchema, true);
-
-        public new string? Description { get; }
+        protected override string DefaultName => GetDefaultName(ObjectSchema, true);
 
         protected string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
@@ -28,20 +28,20 @@ namespace AutoRest.CSharp.Output.Models
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
 
-        protected override HashSet<string?> GetParentProperties()
+        /// <summary>
+        /// Tells if a [Resource]Data is a resource by checking if it inherits any of:
+        /// Resource, TrackedResource, SubResource, or SubResourceWritable.
+        /// </summary>
+        /// <param name="resourceData"></param>
+        /// <returns></returns>
+        internal bool IsResource()
         {
-            if (Inherits?.IsFrameworkType == false)
-            {
-                return base.GetParentProperties();
-            }
-
-            System.Type type = Inherits?.FrameworkType!;
-            if (type is null)
-            {
-                return new HashSet<string?>();
-            }
-
-            return GetPropertiesFromSystemType(type).ToHashSet<string?>();
+            return EnumerateHierarchy()
+                .Where(t => t.Inherits != null)
+                .Select(t => t.Inherits!)
+                .Any(csharpType =>
+                    csharpType.Namespace == "Azure.ResourceManager.Core"
+                        && (csharpType.Name == nameof(Resource) || csharpType.Name == "TrackedResource" || csharpType.Name == nameof(SubResource) || csharpType.Name == nameof(SubResourceWritable)));
         }
     }
 }

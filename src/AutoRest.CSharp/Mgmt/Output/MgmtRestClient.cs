@@ -2,9 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtRestClient : RestClient
     {

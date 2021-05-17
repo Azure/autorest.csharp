@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace TenantOnly
 {
@@ -15,48 +17,71 @@ namespace TenantOnly
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties");
+            if (Optional.IsDefined(Bar))
+            {
+                writer.WritePropertyName("bar");
+                writer.WriteStringValue(Bar);
+            }
+            writer.WritePropertyName("tags");
             writer.WriteStartObject();
+            foreach (var item in Tags)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
         internal static BillingAccountData DeserializeBillingAccountData(JsonElement element)
         {
-            Optional<string> id = default;
-            Optional<string> name = default;
-            Optional<string> type = default;
+            Optional<string> bar = default;
+            IDictionary<string, string> tags = default;
+            LocationData location = default;
+            TenantResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("bar"))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
+                    bar = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("tags"))
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("id"))
-                        {
-                            id = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("name"))
-                        {
-                            name = property0.Value.GetString();
-                            continue;
-                        }
-                        if (property0.NameEquals("type"))
-                        {
-                            type = property0.Value.GetString();
-                            continue;
-                        }
+                        dictionary.Add(property0.Name, property0.Value.GetString());
                     }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("location"))
+                {
+                    location = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
             }
-            return new BillingAccountData(id.Value, name.Value, type.Value);
+            return new BillingAccountData(id, name, type, location, tags, bar.Value);
         }
     }
 }

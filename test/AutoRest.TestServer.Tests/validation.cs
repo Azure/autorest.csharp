@@ -13,8 +13,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class ValidationTests : TestServerTestBase
     {
-        public ValidationTests(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task ConstantsInBody() => Test(async (host, pipeline) =>
         {

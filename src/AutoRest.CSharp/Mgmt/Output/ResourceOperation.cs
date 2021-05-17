@@ -2,14 +2,19 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ResourceOperation : TypeProvider
     {
@@ -18,19 +23,23 @@ namespace AutoRest.CSharp.Output.Models
         private const string ContainerSuffixValue = "Container";
         private const string DataSuffixValue = "Data";
         private string _prefix;
+        private string? _resourceIdentifierType;
         private BuildContext<MgmtOutputLibrary> _context;
+        private PagingMethod[]? _pagingMethods;
 
-        protected OperationGroup _operationGroup;
+        internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
 
         public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(context)
         {
             _context = context;
-            _operationGroup = operationGroup;
-            _prefix = operationGroup.Resource;
+            OperationGroup = operationGroup;
+            _prefix = operationGroup.Resource(context.Configuration.MgmtConfiguration);
             DefaultName = _prefix + SuffixValue;
         }
+
+        public string ResourceName => OperationGroup.Resource(_context.Configuration.MgmtConfiguration);
 
         protected virtual string SuffixValue => OperationsSuffixValue;
 
@@ -38,9 +47,15 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override string DefaultAccessibility { get; } = "public";
 
-        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(_operationGroup, _prefix));
+        public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(OperationGroup, _prefix));
 
-        public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
+        public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
+
+        public string ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(
+            _context.Library.GetResourceData(OperationGroup),
+            _context.Configuration.MgmtConfiguration, false).Name;
+
+        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

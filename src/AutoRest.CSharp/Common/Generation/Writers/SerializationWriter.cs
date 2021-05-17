@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (schema)
             {
-                case ObjectType objectSchema:
+                case SchemaObjectType objectSchema:
                     WriteObjectSerialization(writer, objectSchema);
                     break;
                 case EnumType sealedChoiceSchema when !sealedChoiceSchema.IsExtendable:
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteObjectSerialization(CodeWriter writer, ObjectType model)
+        private void WriteObjectSerialization(CodeWriter writer, SchemaObjectType model)
         {
             if (!model.Serializations.Any())
             {
@@ -118,7 +118,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteCustomJsonConverter(ObjectType model, CodeWriter writer)
+        private void WriteCustomJsonConverter(SchemaObjectType model, CodeWriter writer)
         {
             writer.Append($"internal partial class {model.Declaration.Name}Converter : {typeof(JsonConverter)}<{model.Type}>");
             using (writer.Scope())
@@ -179,7 +179,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteJsonDeserialize(CodeWriter writer, ObjectType model, JsonSerialization jsonSerialization)
+        private void WriteJsonDeserialize(CodeWriter writer, SchemaObjectType model, JsonSerialization jsonSerialization)
         {
             using (writer.Scope($"internal static {model.Type} Deserialize{model.Declaration.Name}({typeof(JsonElement)} element)"))
             {

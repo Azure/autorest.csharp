@@ -20,6 +20,9 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !NumberSchema &ref_3
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       exclusiveMaximum: true
       exclusiveMinimum: true
       maximum: 100
@@ -27,31 +30,40 @@ schemas: !Schemas
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ProductCapacity
           description: Non required int betwen 0 and 100 exclusive.
       protocol: !Protocols {}
     - !NumberSchema &ref_6
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ChildProductCount
           description: Count
       protocol: !Protocols {}
     - !NumberSchema &ref_1
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ProductConstInt
           description: Constant int
       protocol: !Protocols {}
     - !NumberSchema &ref_14
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ErrorCode
           description: ''
       protocol: !Protocols {}
   strings:
@@ -202,12 +214,15 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !ConstantSchema &ref_9
       type: constant
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       value: !ConstantValue 
         value: 0
       valueType: *ref_1
       language: !Languages 
         default:
-          name: Constant4
+          name: ProductConstInt
           description: Constant int
       protocol: !Protocols {}
     - !ConstantSchema &ref_10

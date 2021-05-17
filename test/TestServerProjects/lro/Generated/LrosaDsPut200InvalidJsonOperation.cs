@@ -19,7 +19,7 @@ namespace lro
     /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
     public partial class LrosaDsPut200InvalidJsonOperation : Operation<Product>, IOperationSource<Product>
     {
-        private readonly ArmOperationHelpers<Product> _operation;
+        private readonly OperationInternals<Product> _operation;
 
         /// <summary> Initializes a new instance of LrosaDsPut200InvalidJsonOperation for mocking. </summary>
         protected LrosaDsPut200InvalidJsonOperation()
@@ -28,7 +28,7 @@ namespace lro
 
         internal LrosaDsPut200InvalidJsonOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPut200InvalidJsonOperation");
+            _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPut200InvalidJsonOperation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;

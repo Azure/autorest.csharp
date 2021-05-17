@@ -22,18 +22,30 @@ operation-group-to-resource-type:
    Usages: Microsoft.Storage/locations/usages
    PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
 operation-group-to-resource:
-   Operations: Operation
-   Skus: Sku
-   Usages: Usage
+   Operations: NonResource
+   Skus: NonResource
+   Usages: NonResource
    PrivateLinkResources: PrivateLinkResource
    StorageAccounts: StorageAccount
-resource-rename:
-   BlobServiceProperties: BlobService
-   FileServiceProperties: FileService
 operation-group-to-parent:
     BlobContainers: Microsoft.Storage/storageAccounts
     FileShares: Microsoft.Storage/storageAccounts
     Usages: subscriptions
     StorageAccounts: any
+directive:
+  - rename-model:
+      from: Operation
+      to: RestApi
+  - rename-model:
+      from: BlobServiceProperties
+      to: BlobService
+  - rename-model:
+      from: FileServiceProperties
+      to: FileService
+  - from: swagger-document
+    where: $.definitions.FileShareItems.properties.value.items["$ref"]
+    transform: return "#/definitions/FileShare"
+  - from: swagger-document
+    where: $.definitions.ListContainerItems.properties.value.items["$ref"]
+    transform: return "#/definitions/BlobContainer"
 ```
-

@@ -17,10 +17,13 @@ schemas: !Schemas
       protocol: !Protocols {}
     - !NumberSchema &ref_4
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ErrorStatus
           description: ''
       protocol: !Protocols {}
     - !NumberSchema &ref_2

@@ -5,34 +5,32 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using Azure.ResourceManager.Core;
 
 namespace TenantOnly
 {
     /// <summary> A class representing the BillingAccount data model. </summary>
-    public partial class BillingAccountData : Azure.ResourceManager.Core.Resource
+    public partial class BillingAccountData : TrackedResource<TenantResourceIdentifier>
     {
         /// <summary> Initializes a new instance of BillingAccountData. </summary>
-        public BillingAccountData()
+        /// <param name="location"> The location. </param>
+        public BillingAccountData(LocationData location) : base(location)
         {
         }
 
         /// <summary> Initializes a new instance of BillingAccountData. </summary>
-        /// <param name="idPropertiesId"> Resource Id. </param>
-        /// <param name="namePropertiesName"> Resource name. </param>
-        /// <param name="typePropertiesType"> Resource type. </param>
-        internal BillingAccountData(string idPropertiesId, string namePropertiesName, string typePropertiesType)
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="bar"> . </param>
+        internal BillingAccountData(TenantResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
-            IdPropertiesId = idPropertiesId;
-            NamePropertiesName = namePropertiesName;
-            TypePropertiesType = typePropertiesType;
+            Bar = bar;
         }
 
-        /// <summary> Resource Id. </summary>
-        public string IdPropertiesId { get; }
-        /// <summary> Resource name. </summary>
-        public string NamePropertiesName { get; }
-        /// <summary> Resource type. </summary>
-        public string TypePropertiesType { get; }
+        public string Bar { get; set; }
     }
 }

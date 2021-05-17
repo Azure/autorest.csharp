@@ -15,9 +15,9 @@ using Azure.Core.Pipeline;
 namespace lro
 {
     /// <summary> Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’. </summary>
-    public partial class LRORetrysDelete202Retry200Operation : Operation<Response>, IOperationSource<Response>
+    public partial class LRORetrysDelete202Retry200Operation : Operation
     {
-        private readonly ArmOperationHelpers<Response> _operation;
+        private readonly OperationInternals _operation;
 
         /// <summary> Initializes a new instance of LRORetrysDelete202Retry200Operation for mocking. </summary>
         protected LRORetrysDelete202Retry200Operation()
@@ -26,19 +26,13 @@ namespace lro
 
         internal LRORetrysDelete202Retry200Operation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new ArmOperationHelpers<Response>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LRORetrysDelete202Retry200Operation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LRORetrysDelete202Retry200Operation");
         }
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override Response Value => _operation.Value;
-
-        /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
-
-        /// <inheritdoc />
-        public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
         public override Response GetRawResponse() => _operation.GetRawResponse();
@@ -50,19 +44,9 @@ namespace lro
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<Response>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<Response>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
-
-        Response IOperationSource<Response>.CreateResult(Response response, CancellationToken cancellationToken)
-        {
-            return response;
-        }
-
-        async ValueTask<Response> IOperationSource<Response>.CreateResultAsync(Response response, CancellationToken cancellationToken)
-        {
-            return await new ValueTask<Response>(response).ConfigureAwait(false);
-        }
+        public override ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
     }
 }

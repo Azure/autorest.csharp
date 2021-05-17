@@ -5,19 +5,26 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineExtension data model. </summary>
-    public partial class VirtualMachineExtensionData : TrackedResource
+    public partial class VirtualMachineExtensionData : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionData. </summary>
-        public VirtualMachineExtensionData()
+        /// <param name="location"> The location. </param>
+        public VirtualMachineExtensionData(LocationData location) : base(location)
         {
         }
 
         /// <summary> Initializes a new instance of VirtualMachineExtensionData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
         /// <param name="forceUpdateTag"> How the extension handler should be forced to update even if the extension configuration has not changed. </param>
         /// <param name="publisher"> The name of the extension handler publisher. </param>
         /// <param name="typePropertiesType"> Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;. </param>
@@ -28,7 +35,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="protectedSettings"> The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <param name="instanceView"> The virtual machine extension instance view. </param>
-        internal VirtualMachineExtensionData(string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState, VirtualMachineExtensionInstanceView instanceView)
+        internal VirtualMachineExtensionData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, object settings, object protectedSettings, string provisioningState, VirtualMachineExtensionInstanceView instanceView) : base(id, name, type, location, tags)
         {
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;

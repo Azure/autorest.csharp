@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Core;
@@ -13,46 +12,32 @@ using Azure.ResourceManager.Core;
 namespace TenantOnly
 {
     /// <summary> A class representing the Agreement data model. </summary>
-    public partial class AgreementData : Azure.ResourceManager.Core.Resource
+    public partial class AgreementData : Resource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of AgreementData. </summary>
-        public AgreementData()
+        internal AgreementData()
         {
-            Participants = new ChangeTrackingList<Participants>();
+            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of AgreementData. </summary>
-        /// <param name="agreementLink"> The URL to download the agreement. </param>
-        /// <param name="category"> The category of the agreement signed by a customer. </param>
-        /// <param name="acceptanceMode"> The mode of acceptance for an agreement. </param>
-        /// <param name="effectiveDate"> The date from which the agreement is effective. </param>
-        /// <param name="expirationDate"> The date when the agreement expires. </param>
-        /// <param name="participants"> The list of participants that participates in acceptance of an agreement. </param>
-        /// <param name="status"> The current status of the agreement. </param>
-        internal AgreementData(string agreementLink, Category? category, AcceptanceMode? acceptanceMode, DateTimeOffset? effectiveDate, DateTimeOffset? expirationDate, IList<Participants> participants, string status)
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="foo"> . </param>
+        /// <param name="location"> Resource location. </param>
+        /// <param name="tags"> Resource tags. </param>
+        internal AgreementData(ResourceGroupResourceIdentifier id, string name, ResourceType type, string foo, string location, IReadOnlyDictionary<string, string> tags) : base(id, name, type)
         {
-            AgreementLink = agreementLink;
-            Category = category;
-            AcceptanceMode = acceptanceMode;
-            EffectiveDate = effectiveDate;
-            ExpirationDate = expirationDate;
-            Participants = participants;
-            Status = status;
+            Foo = foo;
+            Location = location;
+            Tags = tags;
         }
 
-        /// <summary> The URL to download the agreement. </summary>
-        public string AgreementLink { get; }
-        /// <summary> The category of the agreement signed by a customer. </summary>
-        public Category? Category { get; }
-        /// <summary> The mode of acceptance for an agreement. </summary>
-        public AcceptanceMode? AcceptanceMode { get; }
-        /// <summary> The date from which the agreement is effective. </summary>
-        public DateTimeOffset? EffectiveDate { get; }
-        /// <summary> The date when the agreement expires. </summary>
-        public DateTimeOffset? ExpirationDate { get; }
-        /// <summary> The list of participants that participates in acceptance of an agreement. </summary>
-        public IList<Participants> Participants { get; }
-        /// <summary> The current status of the agreement. </summary>
-        public string Status { get; }
+        public string Foo { get; }
+        /// <summary> Resource location. </summary>
+        public string Location { get; }
+        /// <summary> Resource tags. </summary>
+        public IReadOnlyDictionary<string, string> Tags { get; }
     }
 }

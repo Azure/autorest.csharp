@@ -11,8 +11,6 @@ namespace AutoRest.TestServer.Tests
 {
     public class custom_baseURL : TestServerTestBase
     {
-        public custom_baseURL(TestServerVersion version) : base(version) { }
-
         [Test]
         public Task CustomBaseUri() => TestStatus(async (host, pipeline) =>
             await new custom_baseUrl.PathsClient(ClientDiagnostics, pipeline, host.ToString().Replace("http://", string.Empty)).GetEmptyAsync( string.Empty));

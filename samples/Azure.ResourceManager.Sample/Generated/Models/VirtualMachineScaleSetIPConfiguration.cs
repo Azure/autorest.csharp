@@ -8,11 +8,12 @@
 using System;
 using System.Collections.Generic;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Describes a virtual machine scale set network profile&apos;s IP configuration. </summary>
-    public partial class VirtualMachineScaleSetIPConfiguration : SubResource
+    public partial class VirtualMachineScaleSetIPConfiguration : SubResourceWritable
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetIPConfiguration. </summary>
         /// <param name="name"> The IP configuration name. </param>
@@ -32,7 +33,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of VirtualMachineScaleSetIPConfiguration. </summary>
-        /// <param name="id"> Resource Id. </param>
+        /// <param name="id"> The id. </param>
         /// <param name="name"> The IP configuration name. </param>
         /// <param name="subnet"> Specifies the identifier of the subnet. </param>
         /// <param name="primary"> Specifies the primary network interface in case the virtual machine has more than 1 network interface. </param>

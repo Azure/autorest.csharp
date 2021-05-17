@@ -3,11 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Types;
@@ -159,7 +157,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (frameworkType == typeof(string) ||
                                  frameworkType == typeof(char) ||
-                                 frameworkType == typeof(Guid))
+                                 frameworkType == typeof(Guid) ||
+                                 ReferenceTypes.IsMgmtReferenceType(frameworkType))
                         {
                             writer.AppendRaw("WriteStringValue");
                         }
@@ -504,6 +503,11 @@ namespace AutoRest.CSharp.Generation.Writers
             else if (frameworkType == typeof(Uri))
             {
                 writer.Append($"new {typeof(Uri)}({element}.GetString())");
+                return;
+            }
+            else if (ReferenceTypes.IsMgmtReferenceType(frameworkType))
+            {
+                writer.Append($"({frameworkType}){element}.GetString()");
                 return;
             }
             else

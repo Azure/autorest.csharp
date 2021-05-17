@@ -1,5 +1,5 @@
 #Requires -Version 7.0
-param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [switch]$updateLaunchSettings, [String[]]$Exclude = "SmokeTests", $parallel = 5)
+param($filter, [switch]$continue, [switch]$reset, [switch]$noBuild, [switch]$fast, [String[]]$Exclude = "SmokeTests", $parallel = 5)
 
 Import-Module "$PSScriptRoot\Generation.psm1" -DisableNameChecking -Force;
 
@@ -16,6 +16,22 @@ $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
+
+function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
+    $swaggerDefinitions[$name] = @{
+        'projectName'=$name;
+        'output'=$output;
+        'arguments'=$arguments
+    }
+}
+
+function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [string]$testServerDirectory, [string]$additionalArgs="") {
+    $projectDirectory = Join-Path $testServerDirectory $testName
+    $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
+    $inputReadme = Join-Path $projectDirectory "readme.md"
+    Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
+}
+
 $testNames =
     'additionalProperties',
     'azure-parameter-grouping',
@@ -64,17 +80,27 @@ if (!($Exclude -contains "TestServer"))
 {
     foreach ($testName in $testNames)
     {
-        $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
-        $projectDirectory = Join-Path $testServerDirectory $testName
-        $inputReadme = Join-Path $projectDirectory "readme.md"
-        $swaggerDefinitions[$testName] = @{
-            'projectName'=$testName;
-            'output'=$projectDirectory;
-            'arguments'="--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile"
-        }
+        Add-TestServer-Swagger $testName "" $testServerDirectory
     }
 }
 
+$llcArgs = "--low-level-client=true --credential-types=AzureKeyCredential --credential-header-name=Fake-Subscription-Key"
+
+$testServerLowLevelDirectory = Join-Path $repoRoot 'test' 'TestServerProjectsLowLevel'
+$testNamesLowLevel =
+    'body-complex',
+    'body-string',
+    'header',
+    'url',
+    'url-multi-collectionFormat';
+
+if (!($Exclude -contains "TestServerLowLevel"))
+{
+    foreach ($testName in $testNamesLowLevel)
+    {
+        Add-TestServer-Swagger $testName "-LowLevel" $testServerLowLevelDirectory $llcArgs
+    }
+}
 
 if (!($Exclude -contains "TestProjects"))
 {
@@ -95,11 +121,8 @@ if (!($Exclude -contains "TestProjects"))
             $inputFile = Join-Path $directory "$testName.json"
             $testArguments ="--require=$configurationPath --input-file=$inputFile"
         }
-        $swaggerDefinitions[$testName] = @{
-            'projectName'=$testName;
-            'output'=$directory;
-            'arguments'=$testArguments
-        }
+
+        Add-Swagger $testName $directory $testArguments
     }
 }
 # Sample configuration
@@ -120,11 +143,7 @@ if (!($Exclude -contains "Samples"))
     {
         $projectDirectory = Join-Path $repoRoot 'samples' $projectName
         $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
-        $swaggerDefinitions[$projectName] = @{
-            'projectName'=$projectName;
-            'output'=$projectDirectory;
-            'arguments'="--require=$sampleConfigurationPath"
-        }
+        Add-Swagger $projectName $projectDirectory "--require=$sampleConfigurationPath"
     }
 }
 
@@ -141,35 +160,34 @@ if (!($Exclude -contains "SmokeTests"))
 
             $projectDirectory = Join-Path $repoRoot 'samples' 'smoketests' $projectName
 
-            $swaggerDefinitions[$projectName] = @{
-                'projectName'=$projectName;
-                'output'=$projectDirectory;
-                'arguments'="--require=$configurationPath $args $input"
-            }
+            Add-Swagger $projectName $projectDirectory "--require=$configurationPath $args $input"
         }
     }
 }
 
-if ($updateLaunchSettings)
+# Sorting file names that include '-' and '.' is broken in powershell - https://github.com/PowerShell/PowerShell/issues/3425
+# So map each to characters invalid for file system use '?' and '|', sort, and then map back
+function Sort-FileSafe ($names) {
+    return $names | % {$_.replace("-","?")} | % {$_.replace(".","|")} | Sort-Object |  % {$_.replace("?","-")} | % {$_.replace("|",".")}
+}
+
+$launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
+$settings = @{
+    'profiles' = [ordered]@{}
+};
+
+foreach ($key in Sort-FileSafe ($swaggerDefinitions.Keys))
 {
-    $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
-    $settings = @{
-        'profiles' = [ordered]@{}
-    };
+    $definition = $swaggerDefinitions[$key];
+    $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
 
-    foreach ($key in $swaggerDefinitions.Keys | Sort-Object)
-    {
-        $definition = $swaggerDefinitions[$key];
-        $outputPath = (Join-Path $definition.output "Generated").Replace($repoRoot, '$(SolutionDir)')
-
-        $settings.profiles[$key] = [ordered]@{
-            'commandName'='Project';
-            'commandLineArgs'="--standalone $outputPath"
-        }
+    $settings.profiles[$key] = [ordered]@{
+        'commandName'='Project';
+        'commandLineArgs'="--standalone $outputPath"
     }
-
-    $settings | ConvertTo-Json | Out-File $launchSettings
 }
+
+$settings | ConvertTo-Json | Out-File $launchSettings
 
 if ($reset -or $env:TF_BUILD)
 {

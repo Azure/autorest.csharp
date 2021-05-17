@@ -5,19 +5,28 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+using Azure.ResourceManager.Core;
+
 namespace MgmtParent
 {
     /// <summary> A class representing the DedicatedHost data model. </summary>
-    public partial class DedicatedHostData
+    public partial class DedicatedHostData : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
-        public DedicatedHostData()
+        /// <param name="location"> The location. </param>
+        public DedicatedHostData(LocationData location) : base(location)
         {
         }
 
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal DedicatedHostData(string foo)
+        internal DedicatedHostData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string foo) : base(id, name, type, location, tags)
         {
             Foo = foo;
         }

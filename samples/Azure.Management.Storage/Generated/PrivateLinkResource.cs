@@ -5,10 +5,37 @@
 
 #nullable disable
 
+using System.Threading;
+using System.Threading.Tasks;
+using Azure.Management.Storage.Models;
+using Azure.ResourceManager.Core;
+
 namespace Azure.Management.Storage
 {
     /// <summary> A Class representing a PrivateLinkResource along with the instance operations that can be performed on it. </summary>
     public class PrivateLinkResource : PrivateLinkResourceOperations
     {
+        /// <summary> Initializes a new instance of the <see cref = "PrivateLinkResource"/> class. </summary>
+        /// <param name="options"> The client parameters to use in these operations. </param>
+        /// <param name="resource"> The resource that is the target of operations. </param>
+        internal PrivateLinkResource(ResourceOperationsBase options, PrivateLinkResourceData resource) : base(options, resource.Id)
+        {
+            Data = resource;
+        }
+
+        /// <summary> Gets or sets the PrivateLinkResourceData. </summary>
+        public PrivateLinkResourceData Data { get; private set; }
+
+        /// <inheritdoc />
+        protected override PrivateLinkResource GetResource(CancellationToken cancellation = default)
+        {
+            return this;
+        }
+
+        /// <inheritdoc />
+        protected override Task<PrivateLinkResource> GetResourceAsync(CancellationToken cancellation = default)
+        {
+            return Task.FromResult(this);
+        }
     }
 }

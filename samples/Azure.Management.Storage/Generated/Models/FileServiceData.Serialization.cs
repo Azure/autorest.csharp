@@ -7,6 +7,7 @@
 
 using System.Text.Json;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -33,7 +34,10 @@ namespace Azure.Management.Storage.Models
 
         internal static FileServiceData DeserializeFileServiceData(JsonElement element)
         {
-            Optional<SkuData> sku = default;
+            Optional<Sku> sku = default;
+            ResourceGroupResourceIdentifier id = default;
+            string name = default;
+            ResourceType type = default;
             Optional<CorsRules> cors = default;
             Optional<DeleteRetentionPolicy> shareDeleteRetentionPolicy = default;
             foreach (var property in element.EnumerateObject())
@@ -45,7 +49,22 @@ namespace Azure.Management.Storage.Models
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    sku = SkuData.DeserializeSkuData(property.Value);
+                    sku = Sku.DeserializeSku(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("id"))
+                {
+                    id = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("name"))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("type"))
+                {
+                    type = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("properties"))
@@ -81,7 +100,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new FileServiceData(sku.Value, cors.Value, shareDeleteRetentionPolicy.Value);
+            return new FileServiceData(id, name, type, sku.Value, cors.Value, shareDeleteRetentionPolicy.Value);
         }
     }
 }

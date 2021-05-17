@@ -1,37 +1,57 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
-using System;
-using System.Collections.Generic;
-using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Input;
-using System.Linq;
 
-namespace AutoRest.CSharp.Output.Models.Type.Decorate
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
+using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Output;
+
+namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ParentDetection
     {
-        public static string GetParent(OperationGroup operationGroup)
+        private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
+
+        public static string ParentResourceType(this OperationGroup operationGroup, MgmtConfiguration config)
         {
-            if (operationGroup.IsTenantResource)
+            string? result = null;
+            if (_valueCache.TryGetValue(operationGroup, out result))
+                return result;
+
+            if (!config.OperationGroupToParent.TryGetValue(operationGroup.Key, out result))
+            {
+                result = ParentDetection.GetParent(operationGroup, config);
+            }
+
+            _valueCache.TryAdd(operationGroup, result);
+            return result;
+        }
+
+        private static string GetParent(OperationGroup operationGroup, MgmtConfiguration config)
+        {
+            if (operationGroup.IsTenantResource(config))
             {
                 return TenantDetection.TenantName;
             }
-            if (operationGroup.IsExtensionResource)
+            if (operationGroup.IsExtensionResource(config))
             {
                 throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. This an extensions resource, please add to readme.md");
             }
-            var method = GetBestMethod(operationGroup.OperationHttpMethodMapping);
+            var method = GetBestMethod(operationGroup.OperationHttpMethodMapping());
             if (method == null)
             {
                 throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
             }
 
-            var fullProvider = GetFullProvider(method.ProviderSegments);
+            var fullProvider = GetFullProvider(method.ProviderSegments());
             if (fullProvider == null)
             {
                 throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
             }
-            var canidateParent = ParseMethodForParent(fullProvider, method.Path, operationGroup.ResourceType);
+            var canidateParent = ParseMethodForParent(fullProvider, method.Path, operationGroup.ResourceType(config));
             if (canidateParent == string.Empty)
             {
                 throw new ArgumentException($"Could not set parent for operations group {operationGroup.Key}. Please add to readme.md");
@@ -92,13 +112,13 @@ namespace AutoRest.CSharp.Output.Models.Type.Decorate
             return resourceType.StartsWith(fullProvider.TokenValue) ? resourceType.Substring(0, resourceType.LastIndexOf('/')) : string.Empty;
         }
 
-        public static void VerfiyParents(System.Collections.Generic.ICollection<OperationGroup> operationGroups, HashSet<string> ResourceTypes)
+        public static void VerfiyParents(System.Collections.Generic.ICollection<OperationGroup> operationGroups, HashSet<string> ResourceTypes, MgmtConfiguration config)
         {
             foreach (var operationsGroup in operationGroups)
             {
-                if (operationsGroup.Parent != null && !ResourceTypes.Contains(operationsGroup.Parent))
+                if (operationsGroup.ParentResourceType(config) != null && !ResourceTypes.Contains(operationsGroup.ParentResourceType(config)))
                 {
-                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.Parent}. key Please add to readme.md");
+                    throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.ParentResourceType(config)}. key Please add to readme.md");
                 }
             }
         }

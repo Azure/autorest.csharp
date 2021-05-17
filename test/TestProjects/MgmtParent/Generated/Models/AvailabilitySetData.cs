@@ -5,19 +5,28 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+using Azure.ResourceManager.Core;
+
 namespace MgmtParent
 {
     /// <summary> A class representing the AvailabilitySet data model. </summary>
-    public partial class AvailabilitySetData
+    public partial class AvailabilitySetData : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
-        public AvailabilitySetData()
+        /// <param name="location"> The location. </param>
+        public AvailabilitySetData(LocationData location) : base(location)
         {
         }
 
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal AvailabilitySetData(string bar)
+        internal AvailabilitySetData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }

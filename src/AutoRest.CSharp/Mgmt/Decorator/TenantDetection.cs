@@ -1,27 +1,40 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License
-using System;
-using System.Collections.Generic;
-using AutoRest.CSharp.Output.Models.Requests;
+
+using System.Collections.Concurrent;
+using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 
-namespace AutoRest.CSharp.Output.Models.Type.Decorate
+namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class TenantDetection
     {
         internal static readonly string TenantName = "tenant";
-        public static bool IsTenantOnly(OperationGroup operationGroup)
+        private static ConcurrentDictionary<OperationGroup, bool> _valueCache = new ConcurrentDictionary<OperationGroup, bool>();
+
+        public static bool IsTenantResource(this OperationGroup operationGroup, MgmtConfiguration config)
+        {
+            bool result;
+            if (_valueCache.TryGetValue(operationGroup, out result))
+                return result;
+
+            result = IsTenantOnly(operationGroup, config);
+            _valueCache.TryAdd(operationGroup, result);
+            return result;
+        }
+
+        private static bool IsTenantOnly(OperationGroup operationGroup, MgmtConfiguration config)
         {
             bool foundTenant = false;
-            foreach (var keyValue in operationGroup.OperationHttpMethodMapping)
+            foreach (var keyValue in operationGroup.OperationHttpMethodMapping())
             {
                 foreach (var httpRequest in keyValue.Value)
                 {
-                    var providerSegmentsList = ((HttpRequest?)httpRequest?.Protocol?.Http)?.ProviderSegments;
+                    var providerSegmentsList = ((HttpRequest?)httpRequest?.Protocol?.Http)?.ProviderSegments();
                     for (int i = 0; i < providerSegmentsList?.Count; i++)
                     {
                         var segment = providerSegmentsList[i];
-                        if (segment.TokenValue.Equals(operationGroup.ResourceType) && segment.IsFullProvider)
+                        if (segment.TokenValue.Trim('/').Equals(operationGroup.ResourceType(config)) && segment.IsFullProvider)
                         {
                             foundTenant = foundTenant || segment.NoPredecessor;
                             if (!segment.NoPredecessor)

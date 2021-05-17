@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Utilities;
 using YamlDotNet.Serialization;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -22,6 +23,7 @@ namespace AutoRest.CSharp.Input
         // For some reason, booleans in dictionaries are deserialized as string instead of bool.
         public bool IsLongRunning => Convert.ToBoolean(Extensions.GetValue<string>("x-ms-long-running-operation") ?? "false");
         public string? LongRunningFinalStateVia => Extensions.GetValue<IDictionary<object, object>>("x-ms-long-running-operation-options")?.GetValue<string>("final-state-via");
+        public string? Accessibility => Extensions.GetValue<string>("x-accessibility");
 
         public ServiceResponse LongRunningInitialResponse
         {
@@ -91,21 +93,6 @@ namespace AutoRest.CSharp.Input
         public bool SkipEncoding => TryGetValue("x-ms-skip-url-encoding", out var value) && Convert.ToBoolean(value);
     }
 
-    internal partial class OperationGroup
-    {
-        public string ResourceType { get; set; }
-        public string Resource { get; set; }
-        public bool IsTenantResource { get; set; }
-        public bool IsExtensionResource { get; set; }
-        public string Parent { get; set; }
-        public Dictionary<HttpMethod, List<ServiceRequest>> OperationHttpMethodMapping { get; set; }
-    }
-
-    internal partial class HttpRequest : Protocol
-    {
-        public List<ProviderSegment> ProviderSegments;
-    }
-
     internal partial class ServiceResponse
     {
         public HttpResponse HttpResponse => Protocol.Http as HttpResponse ?? throw new InvalidOperationException($"Expected an HTTP response");
@@ -163,7 +150,6 @@ namespace AutoRest.CSharp.Input
     {
         public string? XmlName => Serialization?.Xml?.Name;
         public string Name => Language.Default.Name;
-        public string? NameOverride;
     }
 
     internal partial class HTTPSecurityScheme : Dictionary<string, object>

@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The resource model definition for a ARM tracked top level resource. </summary>
-    public partial class TrackedResource : ResourceManager.Core.Resource
+    public partial class TrackedResource : Resource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of TrackedResource. </summary>
         /// <param name="location"> The geo-location where the resource lives. </param>
@@ -30,9 +30,12 @@ namespace Azure.Management.Storage.Models
         }
 
         /// <summary> Initializes a new instance of TrackedResource. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="location"> The geo-location where the resource lives. </param>
-        internal TrackedResource(IDictionary<string, string> tags, string location)
+        internal TrackedResource(ResourceGroupResourceIdentifier id, string name, ResourceType type, IDictionary<string, string> tags, string location) : base(id, name, type)
         {
             Tags = tags;
             Location = location;

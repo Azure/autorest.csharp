@@ -13,9 +13,8 @@
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
   "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
-  "ResourceRename": {
-    "SshPublicKeyResource": "SshPublicKeyInfo"
+  "OperationGroupToResource": {
+    "SshPublicKeys": "NonResource"
   },
   "OperationGroupToParent": {}
 }
