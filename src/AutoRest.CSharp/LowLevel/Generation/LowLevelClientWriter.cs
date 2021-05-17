@@ -275,7 +275,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 WriteConstructor(writer, client, CredentialKind.Token, context);
             }
-            if (!hasKeyAuth && !hasTokenAuth)
+            if (context.Configuration.CredentialTypes.Length == 0)
             {
                 WriteConstructor(writer, client, CredentialKind.None, context);
             }
