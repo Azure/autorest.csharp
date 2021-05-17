@@ -155,7 +155,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _resourceOperations = new Dictionary<OperationGroup, ResourceOperation>();
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
-                _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
+                if (!operationGroup.IsTupleResource(_context))
+                {
+                    _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
+                }
             }
 
             return _resourceOperations;
@@ -171,7 +174,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
-                _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
+                if (!operationGroup.IsTupleResource(_context))
+                {
+                    _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
+                }
             }
 
             return _resourceContainers;
@@ -223,7 +229,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_armResource.ContainsKey(operation))
+                        if (!_armResource.ContainsKey(operation) && !operation.IsTupleResource(_context))
                         {
                             _armResource.Add(operation, new Resource(operation, _context));
                         }
