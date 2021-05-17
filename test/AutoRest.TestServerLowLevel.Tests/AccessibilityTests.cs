@@ -20,12 +20,5 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(true, client.GetMethod ("OperationInternal", BindingFlags.Instance | BindingFlags.NonPublic).IsAssembly, "OperationInternal should be internal");
             Assert.AreEqual(true, client.GetMethod ("OperationInternalAsync", BindingFlags.Instance | BindingFlags.NonPublic).IsAssembly, "OperationInternalAsync should be internal");
         }
-
-        [Test]
-        public void CredentialFieldPropertyPrivateInLLC ()
-        {
-            var client = typeof(AccessibilityClient);
-            Assert.AreEqual(false, client.GetField ("_keyCredential", BindingFlags.NonPublic | BindingFlags.Instance).IsPublic, "_keyCredential should be private");
-        }
     }
 }

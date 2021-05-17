@@ -12,11 +12,12 @@ low-level-client: true
 
 3. Define the authentication in configuration 
 
-As clients with protocol methods generate constructors directly, currently authentication needs to be defined in the configuration file.
+As clients with protocol methods generate constructors directly, any authentication needs to be defined in the configuration file.
 
-This may change if [the PR for authentication properties in swagger](1128) lands or [more generic constructors](1221) are figured out.
+There are two forms of supported authentication: `AzureKeyCredential` and `TokenCredential`. 
 
-To do this, first one of two supported credential-types needed to be defined in the readme.md or autorest.md file:
+It is valid to define one, both, or neither (for the rare unauthenticated client use case.)
+
 
 Just Key Credential:
 ```yaml

@@ -19,6 +19,12 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter
     {
+        internal enum CredentialKind {
+            Token,
+            Key,
+            None
+        }
+
         public void WriteClient(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             var cs = client.Type;
@@ -259,18 +265,19 @@ namespace AutoRest.CSharp.Generation.Writers
 
             bool hasKeyAuth = HasKeyAuth (context);
             bool hasTokenAuth = HasTokenAuth (context);
-            if (!hasKeyAuth && !hasTokenAuth)
-            {
-                throw new InvalidOperationException ("Has neither Key or Token credential-types?");
-            }
+
 
             if (hasKeyAuth)
             {
-                WriteConstructor(writer, client, true, context);
+                WriteConstructor(writer, client, CredentialKind.Key, context);
             }
             if (hasTokenAuth)
             {
-                WriteConstructor(writer, client, false, context);
+                WriteConstructor(writer, client, CredentialKind.Token, context);
+            }
+            if (context.Configuration.CredentialTypes.Length == 0)
+            {
+                WriteConstructor(writer, client, CredentialKind.None, context);
             }
         }
 
@@ -283,9 +290,23 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteConstructor (CodeWriter writer, LowLevelRestClient client, bool keyCredential, BuildContext context)
+        private CSharpType? GetCredentialType (CredentialKind credentialKind)
         {
-            var ctorParams = client.GetConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential));
+            switch (credentialKind)
+            {
+                case CredentialKind.Token:
+                    return typeof(TokenCredential);
+                case CredentialKind.Key:
+                    return typeof(AzureKeyCredential);
+                case CredentialKind.None:
+                default:
+                    return null;
+            }
+        }
+
+        private void WriteConstructor (CodeWriter writer, LowLevelRestClient client, CredentialKind credentialKind, BuildContext context)
+        {
+            var ctorParams = client.GetConstructorParameters(GetCredentialType (credentialKind));
 
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             foreach (Parameter parameter in ctorParams)
@@ -309,22 +330,26 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
-                writer.Line($"{KeyAuthField} = {KeyCredentialVariable};");
 
                 var authPolicy = new CodeWriterDeclaration("authPolicy");
-                if (keyCredential)
+                if (credentialKind == CredentialKind.Key)
                 {
+                    writer.Line($"{KeyAuthField} = {KeyCredentialVariable};");
                     writer.Line($"var {authPolicy:D} = new {typeof(AzureKeyCredentialPolicy)}({KeyAuthField}, {AuthorizationHeaderConstant});");
                 }
-                else
+                else if (credentialKind == CredentialKind.Token)
                 {
-                    writer.Line($"var {authPolicy:D} = new {typeof(BearerTokenAuthenticationPolicy)}({KeyAuthField}, {ScopesConstant});");
+                    writer.Line($"{TokenAuthField} = {KeyCredentialVariable};");
+                    writer.Line($"var {authPolicy:D} = new {typeof(BearerTokenAuthenticationPolicy)}({TokenAuthField}, {ScopesConstant});");
                 }
                 var policies = new CodeWriterDeclaration("policies");
 
                 writer.Append($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new HttpPipelinePolicy[] ");
                 writer.AppendRaw("{");
-                writer.Append($" {authPolicy:I}, ");
+                if (credentialKind != CredentialKind.None)
+                {
+                    writer.Append($" {authPolicy:I}, ");
+                }
                 writer.Append($" new {typeof(LowLevelCallbackPolicy)}() ");
 
                 writer.LineRaw("});");
