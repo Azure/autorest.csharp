@@ -18,9 +18,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? operationGroupToResource = default,
             JsonElement? operationGroupToParent = default)
         {
-            OperationGroupToResourceType = operationGroupToResourceType?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
-            OperationGroupToResource = operationGroupToResource?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
-            OperationGroupToParent = operationGroupToParent?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
+            OperationGroupToResourceType = !IsValidJsonElement(operationGroupToResourceType) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
+            OperationGroupToResource = !IsValidJsonElement(operationGroupToResource) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
+            OperationGroupToParent = !IsValidJsonElement(operationGroupToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
             SingletonResource = singletonResource;
             OperationGroupIsTuple = operationGroupIsTuple;
         }
@@ -121,6 +121,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 operationGroupToResourceType,
                 operationGroupToResource,
                 operationGroupToParent);
+        }
+
+        private static bool IsValidJsonElement(JsonElement? element)
+        {
+            return element?.ValueKind != JsonValueKind.Null && element?.ValueKind != JsonValueKind.Undefined;
         }
     }
 }

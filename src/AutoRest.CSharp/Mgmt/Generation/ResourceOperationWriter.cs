@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
             }
             var baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
-            using (writer.Scope($"internal protected {typeOfThis}({typeof(ResourceOperationsBase)} options{constructorIdParam}) : {baseConstructorCall}"))
+            using (writer.Scope($"protected internal {typeOfThis}({typeof(ResourceOperationsBase)} options{constructorIdParam}) : {baseConstructorCall}"))
             { }
         }
 

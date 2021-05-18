@@ -56,12 +56,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resourceContainer in context.Library.ResourceContainers)
             {
-                // Singleton does not have container class
-                if (resourceContainer.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
-                {
-                    continue;
-                }
-
                 var codeWriter = new CodeWriter();
                 new ResourceContainerWriter(codeWriter, resourceContainer, context.Library).WriteContainer();
 
