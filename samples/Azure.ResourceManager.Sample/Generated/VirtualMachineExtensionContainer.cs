@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing collection of VirtualMachineExtension and their operations over a VirtualMachineScaleSet. </summary>
+    /// <summary> A class representing collection of VirtualMachineExtension and their operations over a VirtualMachine. </summary>
     public partial class VirtualMachineExtensionContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, VirtualMachineExtension, VirtualMachineExtensionData>
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionContainer"/> class for mocking. </summary>
@@ -36,13 +36,13 @@ namespace Azure.ResourceManager.Sample
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private VirtualMachineScaleSetVMExtensionsRestOperations _restClient => new VirtualMachineScaleSetVMExtensionsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private VirtualMachineExtensionsRestOperations _restClient => new VirtualMachineExtensionsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => VirtualMachineScaleSetOperations.ResourceType;
+        protected override ResourceType ValidResourceType => VirtualMachineOperations.ResourceType;
 
         // Container level operations.
 
@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(vmExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync();
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public VirtualMachineScaleSetVMExtensionsCreateOrUpdateOperation StartCreateOrUpdate(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public Operation<VirtualMachineExtension> StartCreateOrUpdate(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.StartCreateOrUpdate");
             scope.Start();
@@ -122,8 +122,14 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(extensionParameters));
                 }
 
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, extensionParameters, cancellationToken: cancellationToken);
-                return new VirtualMachineScaleSetVMExtensionsCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, extensionParameters).Request, originalResponse);
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, vmExtensionName, extensionParameters, cancellationToken: cancellationToken);
+                var operation = new VirtualMachineExtensionsCreateOrUpdateOperation(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
+                Id.ResourceGroupName, Id.Parent.Name, vmExtensionName, extensionParameters).Request,
+                originalResponse);
+                return new PhArmOperation<VirtualMachineExtension, VirtualMachineExtensionData>(
+                operation,
+                data => new VirtualMachineExtension(Parent, data));
             }
             catch (Exception e)
             {
@@ -136,7 +142,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
         /// <param name="extensionParameters"> Parameters supplied to the Create Virtual Machine Extension operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<VirtualMachineScaleSetVMExtensionsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<VirtualMachineExtension>> StartCreateOrUpdateAsync(string vmExtensionName, VirtualMachineExtensionData extensionParameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.StartCreateOrUpdate");
             scope.Start();
@@ -151,8 +157,14 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(extensionParameters));
                 }
 
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new VirtualMachineScaleSetVMExtensionsCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, extensionParameters).Request, originalResponse);
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, vmExtensionName, extensionParameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = new VirtualMachineExtensionsCreateOrUpdateOperation(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
+                Id.ResourceGroupName, Id.Parent.Name, vmExtensionName, extensionParameters).Request,
+                originalResponse);
+                return new PhArmOperation<VirtualMachineExtension, VirtualMachineExtensionData>(
+                operation,
+                data => new VirtualMachineExtension(Parent, data));
             }
             catch (Exception e)
             {
@@ -175,7 +187,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(vmExtensionName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, vmExtensionName, cancellationToken: cancellationToken);
                 return Response.FromValue(new VirtualMachineExtension(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -199,7 +211,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(vmExtensionName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, vmExtensionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, vmExtensionName, cancellationToken: cancellationToken);
                 return Response.FromValue(new VirtualMachineExtension(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -216,7 +228,7 @@ namespace Azure.ResourceManager.Sample
         public Pageable<VirtualMachineExtension> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, VirtualMachineExtension>(results, genericResource => new VirtualMachineExtensionOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
+            return new PhWrappingPageable<GenericResource, VirtualMachineExtension>(results, genericResource => new VirtualMachineExtensionOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineExtension" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -227,7 +239,7 @@ namespace Azure.ResourceManager.Sample
         public Pageable<VirtualMachineExtension> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, VirtualMachineExtension>(results, genericResource => new VirtualMachineExtensionOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
+            return new PhWrappingPageable<GenericResource, VirtualMachineExtension>(results, genericResource => new VirtualMachineExtensionOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineExtension" /> for this resource group. </summary>
@@ -237,7 +249,7 @@ namespace Azure.ResourceManager.Sample
         public AsyncPageable<VirtualMachineExtension> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineExtension>(results, genericResource => new VirtualMachineExtensionOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineExtension>(results, genericResource => new VirtualMachineExtensionOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineExtension" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -248,7 +260,7 @@ namespace Azure.ResourceManager.Sample
         public AsyncPageable<VirtualMachineExtension> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineExtension>(results, genericResource => new VirtualMachineExtensionOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineExtension>(results, genericResource => new VirtualMachineExtensionOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of VirtualMachineExtension for this resource group represented as generic resources. </summary>
@@ -292,6 +304,14 @@ namespace Azure.ResourceManager.Sample
             {
                 scope.Failed(e);
                 throw;
+            }
+        }
+
+        // Builders.
+        // public ArmBuilder<ResourceGroupResourceIdentifier, VirtualMachineExtension, VirtualMachineExtensionData> Construct() { }
+    }
+}
+
             }
         }
 

@@ -6,6 +6,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Generation;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -107,6 +108,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resources = context.Library.ArmResource;
             subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context, resources);
             project.AddGeneratedFile($"Extensions/SubscriptionExtensions.cs", subscriptionExtensionsCodeWriter.ToString());
+
+            if (context.Library.RestApiOperationGroup != null)
+            {
+                var codeWriter = new CodeWriter();
+                var restApiWriter = new RestApiWriter();
+                restApiWriter.Write(codeWriter, context.Library.RestApiOperationGroup, context);
+                project.AddGeneratedFile($"RestApiContainer.cs", codeWriter.ToString());
+            }
         }
     }
 }

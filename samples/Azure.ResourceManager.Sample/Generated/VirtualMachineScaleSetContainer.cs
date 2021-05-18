@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(vmScaleSetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync();
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public VirtualMachineScaleSetsCreateOrUpdateOperation StartCreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public Operation<VirtualMachineScaleSet> StartCreateOrUpdate(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.StartCreateOrUpdate");
             scope.Start();
@@ -124,7 +124,13 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken: cancellationToken);
-                return new VirtualMachineScaleSetsCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmScaleSetName, parameters).Request, originalResponse);
+                var operation = new VirtualMachineScaleSetsCreateOrUpdateOperation(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
+                Id.ResourceGroupName, vmScaleSetName, parameters).Request,
+                originalResponse);
+                return new PhArmOperation<VirtualMachineScaleSet, VirtualMachineScaleSetData>(
+                operation,
+                data => new VirtualMachineScaleSet(Parent, data));
             }
             catch (Exception e)
             {
@@ -137,7 +143,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set to create or update. </param>
         /// <param name="parameters"> The scale set object. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<VirtualMachineScaleSetsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
+        public async Task<Operation<VirtualMachineScaleSet>> StartCreateOrUpdateAsync(string vmScaleSetName, VirtualMachineScaleSetData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetContainer.StartCreateOrUpdate");
             scope.Start();
@@ -153,7 +159,13 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmScaleSetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new VirtualMachineScaleSetsCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmScaleSetName, parameters).Request, originalResponse);
+                var operation = new VirtualMachineScaleSetsCreateOrUpdateOperation(
+                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
+                Id.ResourceGroupName, vmScaleSetName, parameters).Request,
+                originalResponse);
+                return new PhArmOperation<VirtualMachineScaleSet, VirtualMachineScaleSetData>(
+                operation,
+                data => new VirtualMachineScaleSet(Parent, data));
             }
             catch (Exception e)
             {
@@ -200,7 +212,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(vmScaleSetName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, vmScaleSetName, cancellationToken: cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSet(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -257,7 +269,7 @@ namespace Azure.ResourceManager.Sample
         public Pageable<VirtualMachineScaleSet> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, VirtualMachineScaleSet>(results, genericResource => new VirtualMachineScaleSetOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
+            return new PhWrappingPageable<GenericResource, VirtualMachineScaleSet>(results, genericResource => new VirtualMachineScaleSetOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineScaleSet" /> for this resource group. </summary>
@@ -307,7 +319,7 @@ namespace Azure.ResourceManager.Sample
         public AsyncPageable<VirtualMachineScaleSet> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineScaleSet>(results, genericResource => new VirtualMachineScaleSetOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineScaleSet>(results, genericResource => new VirtualMachineScaleSetOperations(genericResource).Get().Value);
         }
 
         /// <summary> Filters the list of VirtualMachineScaleSet for this resource group represented as generic resources. </summary>
