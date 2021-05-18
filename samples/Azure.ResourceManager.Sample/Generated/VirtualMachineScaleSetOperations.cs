@@ -66,5 +66,14 @@ namespace Azure.ResourceManager.Sample
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
+
+        #region Get VirtualMachineScaleSetRollingUpgradeOperationss operation
+        /// <summary> Gets an object representing a VirtualMachineScaleSetRollingUpgradeOperations along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeOperations" /> object. </returns>
+        public VirtualMachineScaleSetRollingUpgradeOperations GetVirtualMachineScaleSetRollingUpgradeOperationss()
+        {
+            return new VirtualMachineScaleSetRollingUpgradeOperations(this);
+        }
+        #endregion
     }
 }

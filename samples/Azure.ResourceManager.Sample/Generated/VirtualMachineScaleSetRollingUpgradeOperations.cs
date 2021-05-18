@@ -18,8 +18,8 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetRollingUpgradeOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a VirtualMachineScaleSetRollingUpgrade. </param>
-        internal VirtualMachineScaleSetRollingUpgradeOperations(GenericResourceOperations genericOperations) : base(genericOperations)
+        /// <param name="genericOperations"> An instance of <see cref="OperationsBase"/> that has an id for a VirtualMachineScaleSetRollingUpgrade. </param>
+        internal VirtualMachineScaleSetRollingUpgradeOperations(OperationsBase genericOperations) : base(genericOperations)
         {
         }
 

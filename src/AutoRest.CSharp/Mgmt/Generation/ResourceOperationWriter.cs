@@ -7,8 +7,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.ResourceManager.Core;
 
@@ -19,8 +21,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private const string ClientDiagnosticsVariable = "clientDiagnostics";
         private const string PipelineVariable = "pipeline";
 
-        public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation, MgmtConfiguration config)
+        public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
+            var config = context.Configuration.MgmtConfiguration;
             var cs = resourceOperation.Type;
             var @namespace = cs.Namespace;
             var isSingleton = resourceOperation.OperationGroup.IsSingletonResource(config);
@@ -33,10 +36,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteClientCtors(writer, resourceOperation, isSingleton);
                     WriteClientProperties(writer, resourceOperation, config);
 
+                    // TODO Write singleton operations
                     if (!isSingleton)
                     {
                         WriteClientMethods(writer, resourceOperation);
                     }
+
+                    WriteChildSingletonGetOperationMethods(writer, resourceOperation, context);
                 }
             }
         }
@@ -44,6 +50,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation, bool isSingleton = false)
         {
             var typeOfThis = resourceOperation.Type.Name;
+            var baseConstructorCall = isSingleton ? "base(genericOperations)" : "base(genericOperations, genericOperations.Id)";
+            var constructorType = isSingleton ? typeof(OperationsBase) : typeof(GenericResourceOperations);
 
             // write an internal default constructor
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class for mocking.");
@@ -53,9 +61,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // write "generic resource" constructor
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
-            writer.WriteXmlDocumentationParameter("genericOperations", $"An instance of <see cref=\"{typeof(GenericResourceOperations)}\"/> that has an id for a {resourceOperation.ResourceName}.");
-            var baseConstructorCall = isSingleton ? "base(genericOperations)" : "base(genericOperations, genericOperations.Id)";
-            using (writer.Scope($"internal {typeOfThis}({typeof(GenericResourceOperations)} genericOperations) : {baseConstructorCall}"))
+            writer.WriteXmlDocumentationParameter("genericOperations", $"An instance of <see cref=\"{constructorType}\"/> that has an id for a {resourceOperation.ResourceName}.");
+            using (writer.Scope($"internal {typeOfThis}({constructorType} genericOperations) : {baseConstructorCall}"))
             { }
 
             // write "resource + id" constructor
@@ -111,5 +118,29 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             writer.Line();
         }
+
+
+        private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation currentOperation, BuildContext<MgmtOutputLibrary> context)
+        {
+            var config = context.Configuration.MgmtConfiguration;
+            foreach (var operation in context.Library.ResourceOperations)
+            {
+                if (operation.OperationGroup.IsSingletonResource(config)
+                    && operation.OperationGroup.ParentResourceType(config).Equals(currentOperation.OperationGroup.ResourceType(config)))
+                {
+                    writer.Line($"#region Get {operation.Type.Name}s operation");
+
+                    writer.WriteXmlDocumentationSummary($"Gets an object representing a {operation.Type.Name} along with the instance operations that can be performed on it.");
+                    writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{operation.Type.Name}\" /> object.");
+                    using (writer.Scope($"public {operation.Type} Get{operation.Type.Name}s()"))
+                    {
+                        writer.Line($"return new {operation.Type.Name}(this);");
+                    }
+                    writer.LineRaw("#endregion");
+                    writer.Line();
+                }
+            }
+        }
+
     }
 }
