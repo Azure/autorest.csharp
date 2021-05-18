@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 return typeof(SubscriptionResourceIdentifier);
             else if (operation.IsTenantResource(config))
                 return typeof(TenantResourceIdentifier);
-            else if (!skipResourceIdentifier && (IsSubclassOf(GetObjectTypeBase(mgmtObjectType), typeof(SubResource)) || IsSubclassOf(GetObjectTypeBase(mgmtObjectType), typeof(SubResourceWritable))))
+            else if (!skipResourceIdentifier && (IsSubclassOf(GetObjectTypeBase(mgmtObjectType), typeof(SubResource)) || IsSubclassOf(GetObjectTypeBase(mgmtObjectType), typeof(WritableSubResource))))
                 return typeof(ResourceIdentifier);
             else
                 return typeof(ResourceGroupResourceIdentifier);
