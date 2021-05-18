@@ -32,8 +32,6 @@ operation-group-to-parent:
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
    VirtualMachineImages: Microsoft.Compute/locations
    VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
-SingletonResource:
-   VirtualMachineScaleSetRollingUpgrade
 modelerfour:
   lenient-model-deduplication: true
 directive:

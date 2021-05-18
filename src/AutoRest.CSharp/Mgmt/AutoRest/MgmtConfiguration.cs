@@ -1,13 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
-using Azure.Core;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -19,10 +15,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? operationGroupToParent = default,
             JsonElement? singletonResource = default)
         {
-            OperationGroupToResourceType = operationGroupToResourceType?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
-            OperationGroupToResource = operationGroupToResource?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
-            OperationGroupToParent = operationGroupToParent?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
-            SingletonResource = singletonResource?.ValueKind == JsonValueKind.Null ? new List<string>() : JsonSerializer.Deserialize<List<string>>(singletonResource.ToString());
+            OperationGroupToResourceType = operationGroupToResourceType?.ValueKind == JsonValueKind.Undefined ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
+            OperationGroupToResource = operationGroupToResource?.ValueKind == JsonValueKind.Undefined ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
+            OperationGroupToParent = operationGroupToParent?.ValueKind == JsonValueKind.Undefined ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
+            SingletonResource = singletonResource?.ValueKind == JsonValueKind.Undefined ? new List<string>() : JsonSerializer.Deserialize<List<string>>(singletonResource.ToString());
         }
 
         public IReadOnlyDictionary<string, string> OperationGroupToResourceType { get; }
@@ -62,21 +58,30 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             writer.WriteEndObject();
 
-            writer.WriteStartArray(nameof(SingletonResource));
-            foreach (var r in SingletonResource)
+            if (SingletonResource.Count > 0)
             {
-                writer.WriteStringValue(r);
+                writer.WriteStartArray(nameof(SingletonResource));
+                foreach (var r in SingletonResource)
+                {
+                    writer.WriteStringValue(r);
+                }
+
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
         {
+            root.TryGetProperty(nameof(SingletonResource), out var singletonList);
+            root.TryGetProperty(nameof(OperationGroupToResourceType), out var operationGroupToResourceType);
+            root.TryGetProperty(nameof(OperationGroupToResource), out var operationGroupToResource);
+            root.TryGetProperty(nameof(OperationGroupToParent), out var operationGroupToParent);
+
             return new MgmtConfiguration(
-                root.GetProperty(nameof(OperationGroupToResourceType)),
-                root.GetProperty(nameof(OperationGroupToResource)),
-                root.GetProperty(nameof(OperationGroupToParent)),
-                root.GetProperty(nameof(SingletonResource)));
+                operationGroupToResourceType,
+                operationGroupToResource,
+                operationGroupToParent,
+                singletonList);
         }
     }
 }
