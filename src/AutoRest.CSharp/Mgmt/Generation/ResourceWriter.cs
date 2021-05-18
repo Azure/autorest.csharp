@@ -44,20 +44,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.Append($"{{ get; private set; }}");
                     writer.Line();
 
-                    // protected override GetResource
-                    writer.Line();
-                    writer.WriteXmlDocumentationInheritDoc();
-                    using (writer.Scope($"protected override {cs.Name} GetResource({typeof(CancellationToken)} cancellation = default)"))
+                    // Only write GetResource if it is NOT singleton.
+                    if (!resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
                     {
-                        writer.LineRaw("return this;");
-                    }
+                        // protected override GetResource
+                        writer.Line();
+                        writer.WriteXmlDocumentationInheritDoc();
+                        using (writer.Scope(
+                            $"protected override {cs.Name} GetResource({typeof(CancellationToken)} cancellation = default)")
+                        )
+                        {
+                            writer.LineRaw("return this;");
+                        }
 
-                    // protected override GetResourceAsync
-                    writer.Line();
-                    writer.WriteXmlDocumentationInheritDoc();
-                    using (writer.Scope($"protected override {typeof(Task)}<{cs.Name}> GetResourceAsync({typeof(CancellationToken)} cancellation = default)"))
-                    {
-                        writer.Line($"return {typeof(Task)}.FromResult(this);");
+                        // protected override GetResourceAsync
+                        writer.Line();
+                        writer.WriteXmlDocumentationInheritDoc();
+                        using (writer.Scope(
+                            $"protected override {typeof(Task)}<{cs.Name}> GetResourceAsync({typeof(CancellationToken)} cancellation = default)")
+                        )
+                        {
+                            writer.Line($"return {typeof(Task)}.FromResult(this);");
+                        }
                     }
                 }
             }
