@@ -8,6 +8,7 @@ using System.Reflection;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
@@ -134,9 +135,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
             if (parentProperties.Count != childProperties.Count)
-            {
                 return false;
-            }
 
             Dictionary<string, PropertyInfo> parentDict = new Dictionary<string, PropertyInfo>();
             foreach (var parentProperty in parentProperties)
@@ -146,31 +145,48 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             foreach (var childProperty in childProperties)
             {
-                PropertyInfo? parentProperty;
-                CSharpType childPropertyType = childProperty.Declaration.Type;
-                if (parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
-                {
-                    if (parentProperty.PropertyType.IsGenericType)
-                    {
-                        if (!childPropertyType.Equals(new CSharpType(parentProperty.PropertyType)))
-                            return false;
-                    }
-                    else if (parentProperty.PropertyType.FullName != $"{childPropertyType.Namespace}.{childPropertyType.Name}" &&
-                        !IsAssignable(parentProperty.PropertyType, childPropertyType) &&
-                        !(parentProperty.PropertyType.IsGenericParameter && IsAssignable(parentProperty.PropertyType.BaseType!, childPropertyType)))
-                    {
-                        //TODO(ADO item 5712): deal with protected setter
-                        return false;
-                    }
-                }
-                else
-                {
+                if (!DoesPropertyExistInParent(childProperty, parentDict))
                     return false;
-                }
             }
+
             return true;
         }
 
+        private static bool DoesPropertyExistInParent(ObjectTypeProperty childProperty, Dictionary<string, PropertyInfo> parentDict)
+        {
+            PropertyInfo? parentProperty;
+            CSharpType childPropertyType = childProperty.Declaration.Type;
+
+            if (!parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
+                return false;
+
+            if (parentProperty.PropertyType.IsGenericType)
+            {
+                if (!childPropertyType.Equals(new CSharpType(parentProperty.PropertyType)))
+                    return false;
+            }
+            else if (parentProperty.PropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" ||
+                IsAssignable(parentProperty.PropertyType, childPropertyType))
+            {
+                if (childProperty.IsReadOnly != (parentProperty.GetSetMethod() == null))
+                    return false;
+            }
+            else if (!(parentProperty.PropertyType.IsGenericParameter && IsAssignable(parentProperty.PropertyType.BaseType!, childPropertyType)))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Tells if <paramref name="childPropertyType" /> can be assigned to <paramref name="parentPropertyType" />
+        /// by checking if there's an implicit type convertor in <paramref name="parentPropertyType" />.
+        /// Todo: should we check childPropertyType as well since an implicit can be defined in either classes?
+        /// </summary>
+        /// <param name="parentPropertyType">The type to be assigned to.</param>
+        /// <param name="childPropertyType">The type to assign.</param>
+        /// <returns></returns>
         private static bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
         {
             return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&
@@ -184,9 +200,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             List<PropertyInfo> parentProperties = parentType.GetProperties(BindingFlags.Public | BindingFlags.Instance).ToList();
 
             if (parentProperties.Count >= childProperties.Count)
-            {
                 return false;
-            }
 
             Dictionary<string, PropertyInfo> parentDict = new Dictionary<string, PropertyInfo>();
             int matchCount = 0;
@@ -198,29 +212,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             foreach (var childProperty in childProperties)
             {
                 if (parentProperties.Count == matchCount)
-                {
                     break;
-                }
 
-                PropertyInfo? parentProperty = null;
-                CSharpType childPropertyType = childProperty.Declaration.Type;
-                if (parentDict.TryGetValue(childProperty.Declaration.Name, out parentProperty))
-                {
-                    if (parentProperty.PropertyType.IsGenericType)
-                    {
-                        if (childPropertyType.Equals(new CSharpType(parentProperty.PropertyType)))
-                        {
-                            matchCount++;
-                        }
-                    }
-                    else if (parentProperty.PropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" ||
-                        IsAssignable(parentProperty.PropertyType, childPropertyType))
-                    {
-                        //TODO(ADO item 5712): deal with protected setter
-                        matchCount++;
-                    }
-                }
+                if (DoesPropertyExistInParent(childProperty, parentDict))
+                    matchCount++;
             }
+
             return parentProperties.Count == matchCount;
         }
 

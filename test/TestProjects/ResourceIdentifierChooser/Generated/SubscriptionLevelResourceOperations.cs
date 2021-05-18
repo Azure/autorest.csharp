@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
@@ -16,12 +17,18 @@ namespace ResourceIdentifierChooser
     /// <summary> A class representing the operations that can be performed over a specific SubscriptionLevelResource. </summary>
     public partial class SubscriptionLevelResourceOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, SubscriptionLevelResource>
     {
-        /// <summary> Initializes a new instance of SubscriptionLevelResourceOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionLevelResourceOperations"/> class for mocking. </summary>
         protected SubscriptionLevelResourceOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "SubscriptionLevelResourceOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionLevelResourceOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a SubscriptionLevelResource. </param>
+        internal SubscriptionLevelResourceOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionLevelResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected SubscriptionLevelResourceOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
@@ -32,13 +39,13 @@ namespace ResourceIdentifierChooser
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<SubscriptionLevelResource> Get(CancellationToken cancellationToken = default)
+        public override Response<SubscriptionLevelResource> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<SubscriptionLevelResource>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<SubscriptionLevelResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

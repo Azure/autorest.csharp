@@ -8,6 +8,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Accessibility-LowLevel\\Generated"
     },
+    "Accessibility-LowLevel-NoAuth": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Accessibility-LowLevel-NoAuth\\Generated"
+    },
+    "Accessibility-LowLevel-TokenAuth": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Accessibility-LowLevel-TokenAuth\\Generated"
+    },
     "additionalProperties": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\additionalProperties\\Generated"

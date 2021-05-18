@@ -17,6 +17,7 @@ operation-group-to-resource:
    VirtualMachineExtensionImages: VirtualMachineExtensionImage
 operation-group-to-parent:
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
+operation-group-is-tuple: VirtualMachineExtensionImages
 modelerfour:
   lenient-model-deduplication: true
 ```

@@ -299,7 +299,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public async Task<Response<VirtualMachineScaleSetRollingUpgradeData>> GetLatestAsync(string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineScaleSetRollingUpgrade>> GetLatestAsync(string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -316,9 +316,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        VirtualMachineScaleSetRollingUpgradeData value = default;
+                        VirtualMachineScaleSetRollingUpgrade value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VirtualMachineScaleSetRollingUpgradeData.DeserializeVirtualMachineScaleSetRollingUpgradeData(document.RootElement);
+                        value = VirtualMachineScaleSetRollingUpgrade.DeserializeVirtualMachineScaleSetRollingUpgrade(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -331,7 +331,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmScaleSetName"/> is null. </exception>
-        public Response<VirtualMachineScaleSetRollingUpgradeData> GetLatest(string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineScaleSetRollingUpgrade> GetLatest(string resourceGroupName, string vmScaleSetName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -348,9 +348,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        VirtualMachineScaleSetRollingUpgradeData value = default;
+                        VirtualMachineScaleSetRollingUpgrade value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VirtualMachineScaleSetRollingUpgradeData.DeserializeVirtualMachineScaleSetRollingUpgradeData(document.RootElement);
+                        value = VirtualMachineScaleSetRollingUpgrade.DeserializeVirtualMachineScaleSetRollingUpgrade(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

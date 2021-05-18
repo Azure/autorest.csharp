@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
@@ -16,12 +17,18 @@ namespace ResourceIdentifierChooser
     /// <summary> A class representing the operations that can be performed over a specific ModelData. </summary>
     public partial class ModelDataOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ModelData>
     {
-        /// <summary> Initializes a new instance of ModelDataOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ModelDataOperations"/> class for mocking. </summary>
         protected ModelDataOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "ModelDataOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ModelDataOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a ModelData. </param>
+        internal ModelDataOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="ModelDataOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected ModelDataOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
@@ -32,13 +39,13 @@ namespace ResourceIdentifierChooser
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<ModelData> Get(CancellationToken cancellationToken = default)
+        public override Response<ModelData> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<ModelData>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<ModelData>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

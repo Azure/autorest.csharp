@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace MgmtParent
@@ -16,12 +17,18 @@ namespace MgmtParent
     /// <summary> A class representing the operations that can be performed over a specific DedicatedHost. </summary>
     public partial class DedicatedHostOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, DedicatedHost>
     {
-        /// <summary> Initializes a new instance of DedicatedHostOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostOperations"/> class for mocking. </summary>
         protected DedicatedHostOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "DedicatedHostOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a DedicatedHost. </param>
+        internal DedicatedHostOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="DedicatedHostOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected DedicatedHostOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
@@ -32,13 +39,13 @@ namespace MgmtParent
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<DedicatedHost> Get(CancellationToken cancellationToken = default)
+        public override Response<DedicatedHost> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<DedicatedHost>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<DedicatedHost>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

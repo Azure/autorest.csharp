@@ -19,5 +19,6 @@
   "CredentialHeaderName": "Ocp-Apim-Subscription-Key",
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {},
-  "OperationGroupToParent": {}
+  "OperationGroupToParent": {},
+  "OperationGroupIsTuple": []
 }

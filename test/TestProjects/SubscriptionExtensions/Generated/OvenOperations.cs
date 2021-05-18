@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace SubscriptionExtensions
@@ -16,12 +17,18 @@ namespace SubscriptionExtensions
     /// <summary> A class representing the operations that can be performed over a specific Oven. </summary>
     public partial class OvenOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Oven>
     {
-        /// <summary> Initializes a new instance of OvenOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class for mocking. </summary>
         protected OvenOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "OvenOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a Oven. </param>
+        internal OvenOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected OvenOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
@@ -32,13 +39,13 @@ namespace SubscriptionExtensions
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<Oven> Get(CancellationToken cancellationToken = default)
+        public override Response<Oven> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<Oven>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<Oven>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
@@ -16,12 +17,18 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the operations that can be performed over a specific AvailabilitySet. </summary>
     public partial class AvailabilitySetOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AvailabilitySet>
     {
-        /// <summary> Initializes a new instance of AvailabilitySetOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetOperations"/> class for mocking. </summary>
         protected AvailabilitySetOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "AvailabilitySetOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a AvailabilitySet. </param>
+        internal AvailabilitySetOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected AvailabilitySetOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
@@ -32,13 +39,13 @@ namespace Azure.ResourceManager.Sample
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<AvailabilitySet> Get(CancellationToken cancellationToken = default)
+        public override Response<AvailabilitySet> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<AvailabilitySet>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<AvailabilitySet>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

@@ -30,6 +30,8 @@ namespace MgmtParent
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
@@ -79,7 +81,7 @@ namespace MgmtParent
                     continue;
                 }
             }
-            return new DedicatedHostGroupData(id, name, type, tags, location, foo.Value);
+            return new DedicatedHostGroupData(id, name, type, location, tags, foo.Value);
         }
     }
 }

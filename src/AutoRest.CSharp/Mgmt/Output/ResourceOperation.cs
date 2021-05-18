@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string ContainerSuffixValue = "Container";
         private const string DataSuffixValue = "Data";
         private string _prefix;
+        private string? _resourceIdentifierType;
         private BuildContext<MgmtOutputLibrary> _context;
         private PagingMethod[]? _pagingMethods;
 
@@ -48,9 +49,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(OperationGroup, _prefix));
 
-        public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(OperationGroup);
+        public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
-        public string ResourceIdentifierType => OperationGroup.GetResourceIdentifierType(_context.Library.GetResourceData(OperationGroup), _context.Configuration.MgmtConfiguration, false).Name;
+        public string ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(
+            _context.Library.GetResourceData(OperationGroup),
+            _context.Configuration.MgmtConfiguration, false).Name;
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
 

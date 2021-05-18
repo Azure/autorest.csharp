@@ -90,7 +90,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        private IEnumerable<Type> FindAllOperations()
+        public IEnumerable<Type> FindAllOperations()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -100,6 +100,36 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     // Only [Resource]Operations types for the specified test project are going to be tested.
                     yield return t;
+                }
+            }
+        }
+
+        public IEnumerable<Type> FindAllResources()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                var resourceNames = FindAllResourceNames();
+                if (resourceNames.Contains(t.Name) && t.Namespace == _projectName)
+                {
+                    // Only [Resource] types for the specified test project are going to be tested.
+                    yield return t;
+                }
+            }
+        }
+
+        private IEnumerable<string> FindAllResourceNames()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                if (t.Name.Contains("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                {
+                    // Only [Resource] types names for the specified test project are going to be tested.
+                    var resourceName = t.Name.Replace("Container", "");
+                    yield return resourceName;
                 }
             }
         }
@@ -115,7 +145,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        private IEnumerable<Type> FindAllContainers()
+        public IEnumerable<Type> FindAllContainers()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -355,6 +385,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             if (generatedModel == null)
                 return leastParamCtor;
+
+            if (generatedModel.GetCustomAttribute(typeof(ReferenceTypeAttribute), false) != null)
+                return generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+                    .Where(c => c.GetCustomAttribute(typeof(InitializationConstructorAttribute), false) != null)
+                    .FirstOrDefault();
 
             foreach (var ctor in generatedModel.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
             {

@@ -19,5 +19,6 @@
   "CredentialHeaderName": "Fake-Subscription-Key",
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {},
-  "OperationGroupToParent": {}
+  "OperationGroupToParent": {},
+  "OperationGroupIsTuple": []
 }

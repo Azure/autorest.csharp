@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -16,12 +17,18 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific PrivateLinkResource. </summary>
     public partial class PrivateLinkResourceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, PrivateLinkResource>
     {
-        /// <summary> Initializes a new instance of PrivateLinkResourceOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PrivateLinkResourceOperations"/> class for mocking. </summary>
         protected PrivateLinkResourceOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "PrivateLinkResourceOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PrivateLinkResourceOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a PrivateLinkResource. </param>
+        internal PrivateLinkResourceOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="PrivateLinkResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected PrivateLinkResourceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
@@ -32,13 +39,13 @@ namespace Azure.Management.Storage
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<PrivateLinkResource> Get(CancellationToken cancellationToken = default)
+        public override Response<PrivateLinkResource> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<PrivateLinkResource>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<PrivateLinkResource>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

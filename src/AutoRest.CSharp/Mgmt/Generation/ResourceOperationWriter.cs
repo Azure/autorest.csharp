@@ -10,6 +10,7 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using Azure;
 using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -40,20 +41,27 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation)
         {
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of {resourceOperation.Type.Name} for mocking.");
-            using (writer.Scope($"protected {resourceOperation.Type.Name}()"))
-            {
+            var typeOfThis = resourceOperation.Type.Name;
 
-            }
+            // write an internal default constructor
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class for mocking.");
+            using (writer.Scope($"protected {typeOfThis}()"))
+            { }
 
+            // write "generic resource" constructor
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of <see cref = \"{resourceOperation.Type.Name}\"/> class.");
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
+            writer.WriteXmlDocumentationParameter("genericOperations", $"An instance of <see cref=\"{typeof(GenericResourceOperations)}\"/> that has an id for a {resourceOperation.ResourceName}.");
+            using (writer.Scope($"internal {typeOfThis}({typeof(GenericResourceOperations)} genericOperations) : base(genericOperations, genericOperations.Id)"))
+            { }
+
+            // write "resource + id" constructor
+            writer.Line();
+            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
             writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
-            using (writer.Scope($"protected {resourceOperation.Type.Name}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : base(options, id)"))
-            {
-
-            }
+            using (writer.Scope($"protected {typeOfThis}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : base(options, id)"))
+            { }
         }
 
         private void WriteClientProperties(CodeWriter writer, ResourceOperation resourceOperation, MgmtConfiguration config)
@@ -61,20 +69,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
             writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{resourceOperation.OperationGroup.ResourceType(config)}\";");
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
-            }
+        }
 
         private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public override {typeof(ArmResponse)}<{resourceOperation.ResourceName}> Get({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public override {typeof(Response)}<{resourceOperation.ResourceName}> Get({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Line($"throw new {typeof(NotImplementedException)}();");
             }
 
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
-            using (writer.Scope($"public override Task<ArmResponse<{resourceOperation.ResourceName}>> GetAsync({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public override Task<{typeof(Response)}<{resourceOperation.ResourceName}>> GetAsync({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Line($"throw new {typeof(NotImplementedException)}();");
             }

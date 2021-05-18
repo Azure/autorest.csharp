@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> The SubResourceWithColocationStatus. </summary>
-    public partial class SubResourceWithColocationStatus : Core.SubResource
+    public partial class SubResourceWithColocationStatus : SubResourceWritable
     {
         /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
         public SubResourceWithColocationStatus()

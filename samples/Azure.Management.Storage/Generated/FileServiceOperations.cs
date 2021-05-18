@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -16,12 +17,18 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific FileService. </summary>
     public partial class FileServiceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, FileService>
     {
-        /// <summary> Initializes a new instance of FileServiceOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class for mocking. </summary>
         protected FileServiceOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "FileServiceOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a FileService. </param>
+        internal FileServiceOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected FileServiceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
@@ -32,13 +39,13 @@ namespace Azure.Management.Storage
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<FileService> Get(CancellationToken cancellationToken = default)
+        public override Response<FileService> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<FileService>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<FileService>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

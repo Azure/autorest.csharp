@@ -16,11 +16,6 @@ namespace ExactMatchInheritance
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Id))
-            {
-                writer.WritePropertyName("id");
-                writer.WriteStringValue(Id);
-            }
             if (Optional.IsDefined(Location))
             {
                 writer.WritePropertyName("location");
@@ -36,16 +31,6 @@ namespace ExactMatchInheritance
                     writer.WriteStringValue(item.Value);
                 }
                 writer.WriteEndObject();
-            }
-            if (Optional.IsDefined(Name))
-            {
-                writer.WritePropertyName("name");
-                writer.WriteStringValue(Name);
-            }
-            if (Optional.IsDefined(Type))
-            {
-                writer.WritePropertyName("type");
-                writer.WriteStringValue(Type);
             }
             writer.WriteEndObject();
         }

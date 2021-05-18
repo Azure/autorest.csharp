@@ -23,5 +23,6 @@
   "CredentialHeaderName": "fake-key",
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {},
-  "OperationGroupToParent": {}
+  "OperationGroupToParent": {},
+  "OperationGroupIsTuple": []
 }

@@ -30,6 +30,8 @@ namespace SubscriptionExtensions.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
@@ -79,7 +81,7 @@ namespace SubscriptionExtensions.Models
                     continue;
                 }
             }
-            return new OvenData(id, name, type, tags, location, bar.Value);
+            return new OvenData(id, name, type, location, tags, bar.Value);
         }
     }
 }

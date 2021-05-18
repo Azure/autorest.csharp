@@ -40,6 +40,8 @@ namespace ResourceIdentifierChooser
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
@@ -101,7 +103,7 @@ namespace ResourceIdentifierChooser
                     continue;
                 }
             }
-            return new ModelDataData(id, name, type, tags, location, mango.Value, strawberry.Value, cherry.Value);
+            return new ModelDataData(id, name, type, location, tags, mango.Value, strawberry.Value, cherry.Value);
         }
     }
 }

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -16,12 +17,18 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific ManagementPolicy. </summary>
     public partial class ManagementPolicyOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ManagementPolicy>
     {
-        /// <summary> Initializes a new instance of ManagementPolicyOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ManagementPolicyOperations"/> class for mocking. </summary>
         protected ManagementPolicyOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "ManagementPolicyOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ManagementPolicyOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a ManagementPolicy. </param>
+        internal ManagementPolicyOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="ManagementPolicyOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected ManagementPolicyOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
@@ -32,13 +39,13 @@ namespace Azure.Management.Storage
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<ManagementPolicy> Get(CancellationToken cancellationToken = default)
+        public override Response<ManagementPolicy> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<ManagementPolicy>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<ManagementPolicy>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

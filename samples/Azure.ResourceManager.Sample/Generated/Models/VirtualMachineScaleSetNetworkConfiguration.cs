@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Describes a virtual machine scale set network profile&apos;s network configurations. </summary>
-    public partial class VirtualMachineScaleSetNetworkConfiguration : Core.SubResource
+    public partial class VirtualMachineScaleSetNetworkConfiguration : SubResourceWritable
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfiguration. </summary>
         /// <param name="name"> The network configuration name. </param>

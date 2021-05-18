@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.ResourceManager.Core;
 
 namespace ResourceIdentifierChooser
@@ -16,12 +17,18 @@ namespace ResourceIdentifierChooser
     /// <summary> A class representing the operations that can be performed over a specific ResourceLevel. </summary>
     public partial class ResourceLevelOperations : ResourceOperationsBase<ResourceIdentifier, ResourceLevel>
     {
-        /// <summary> Initializes a new instance of ResourceLevelOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceLevelOperations"/> class for mocking. </summary>
         protected ResourceLevelOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "ResourceLevelOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ResourceLevelOperations"/> class. </summary>
+        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a ResourceLevel. </param>
+        internal ResourceLevelOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
+        {
+        }
+
+        /// <summary> Initializes a new instance of the <see cref="ResourceLevelOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected ResourceLevelOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
@@ -32,13 +39,13 @@ namespace ResourceIdentifierChooser
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<ResourceLevel> Get(CancellationToken cancellationToken = default)
+        public override Response<ResourceLevel> Get(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<ResourceLevel>> GetAsync(CancellationToken cancellationToken = default)
+        public override Task<Response<ResourceLevel>> GetAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }
