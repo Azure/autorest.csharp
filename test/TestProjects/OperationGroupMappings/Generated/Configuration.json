@@ -27,6 +27,5 @@
   },
   "OperationGroupToParent": {
     "Usage": "subscriptions"
-  },
-  "OperationGroupIsTuple": []
+  }
 }

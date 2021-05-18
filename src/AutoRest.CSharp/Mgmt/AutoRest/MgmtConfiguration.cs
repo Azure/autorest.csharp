@@ -18,9 +18,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             JsonElement? operationGroupToResource = default,
             JsonElement? operationGroupToParent = default)
         {
-            OperationGroupToResourceType = operationGroupToResourceType?.ValueKind == JsonValueKind.Undefined ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
-            OperationGroupToResource = operationGroupToResource?.ValueKind == JsonValueKind.Undefined ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
-            OperationGroupToParent = operationGroupToParent?.ValueKind == JsonValueKind.Undefined ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
+            OperationGroupToResourceType = operationGroupToResourceType?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResourceType.ToString());
+            OperationGroupToResource = operationGroupToResource?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToResource.ToString());
+            OperationGroupToParent = operationGroupToParent?.ValueKind == JsonValueKind.Null ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
             SingletonResource = singletonResource;
             OperationGroupIsTuple = operationGroupIsTuple;
         }

@@ -52,8 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation, bool isSingleton = false)
         {
             var typeOfThis = resourceOperation.Type.Name;
-            var baseConstructorCall = isSingleton ? "base(genericOperations)" : "base(genericOperations, genericOperations.Id)";
-            var constructorType = isSingleton ? typeof(OperationsBase) : typeof(GenericResourceOperations);
+            var constructorIdParam = isSingleton ? "" : $", {resourceOperation.ResourceIdentifierType} id";
 
             // write an internal default constructor
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class for mocking.");
@@ -64,9 +63,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
-            writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
-            baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
-            using (writer.Scope($"internal protected {typeOfThis}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : {baseConstructorCall}"))
+            if (!isSingleton)
+            {
+                writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
+            }
+            var baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
+            using (writer.Scope($"internal protected {typeOfThis}({typeof(ResourceOperationsBase)} options{constructorIdParam}) : {baseConstructorCall}"))
             { }
         }
 

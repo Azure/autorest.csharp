@@ -32,6 +32,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // inherits the default constructor when it is not a resource
                     var resourceData = context.Library.GetResourceData(resource.OperationGroup);
                     var baseConstructor = resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;
+                    if (!string.IsNullOrEmpty(baseConstructor) && resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
+                    {
+                        baseConstructor = " : base(options)";
+                    }
+
                     using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resourceDataObject.Type} resource){baseConstructor}"))
                     {
                         writer.LineRaw("Data = resource;");
