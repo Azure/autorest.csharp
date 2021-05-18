@@ -17,8 +17,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static string Resource(this OperationGroup operationGroup, MgmtConfiguration config)
         {
-            string? result = null;
-            if (_valueCache.TryGetValue(operationGroup, out result))
+            if (_valueCache.TryGetValue(operationGroup, out var result))
                 return result;
 
             if (!config.OperationGroupToResource.TryGetValue(operationGroup.Key, out result))
@@ -32,9 +31,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static Schema GetSchema(OperationGroup operationGroup)
         {
-            List<ServiceRequest>? output;
-            operationGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Put, out output);
-            return GetBodyParameter(output.First(), operationGroup).Schema;
+            if (operationGroup.OperationHttpMethodMapping().TryGetValue(HttpMethod.Put, out var output))
+            {
+                return GetBodyParameter(output.First(), operationGroup).Schema;
+            }
+
             throw new Exception($"Schema not found! Please add the {operationGroup.Key} to its schema name mapping to readme.md.");
         }
 

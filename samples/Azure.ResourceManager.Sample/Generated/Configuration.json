@@ -1,42 +1,46 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Azure.ResourceManager.Sample",
-  "LibraryName": null,
-  "SharedSourceFolders": [
-    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
-  ],
-  "AzureArm": true,
-  "PublicClients": true,
-  "ModelNamespace": false,
-  "HeadAsBoolean": false,
-  "SkipCSProjPackageReference": true,
-  "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
-  "OperationGroupToResourceType": {
-    "Operations": "Microsoft.Compute/operations",
-    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension",
-    "VirtualMachineImages": "Microsoft.Compute/locations/publishers/vmimage",
-    "Usage": "Microsoft.Compute/locations/usages",
-    "VirtualMachineSizes": "Microsoft.Compute/locations/vmSizes",
-    "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades",
-    "LogAnalytics": "Microsoft.Compute/locations/logAnalytics"
-  },
-  "OperationGroupToResource": {
-    "Operations": "NonResource",
-    "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
-    "VirtualMachineImages": "VirtualMachineImage",
-    "Usage": "NonResource",
-    "VirtualMachineSizes": "NonResource",
-    "VirtualMachineScaleSetRollingUpgrades": "NonResource",
-    "LogAnalytics": "NonResource"
-  },
-  "OperationGroupToParent": {
-    "LogAnalytics": "subscriptions",
-    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
-    "VirtualMachineImages": "Microsoft.Compute/locations",
-    "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets"
-  }
+    "OutputFolder": ".",
+    "Namespace": "Azure.ResourceManager.Sample",
+    "LibraryName": null,
+    "SharedSourceFolders": [
+        "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+        "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+    ],
+    "AzureArm": true,
+    "PublicClients": true,
+    "ModelNamespace": false,
+    "HeadAsBoolean": false,
+    "SkipCSProjPackageReference": true,
+    "LowLevelClient": false,
+    "CredentialTypes": [],
+    "CredentialScopes": [],
+    "CredentialHeaderName": "api-key",
+    "OperationGroupToResourceType": {
+        "Operations": "Microsoft.Compute/operations",
+        "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension",
+        "VirtualMachineImages": "Microsoft.Compute/locations/publishers/vmimage",
+        "Usage": "Microsoft.Compute/locations/usages",
+        "VirtualMachineSizes": "Microsoft.Compute/locations/vmSizes",
+        "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets/rollingUpgrades",
+        "LogAnalytics": "Microsoft.Compute/locations/logAnalytics"
+    },
+    "OperationGroupToResource": {
+        "Operations": "NonResource",
+        "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
+        "VirtualMachineImages": "VirtualMachineImage",
+        "Usage": "NonResource",
+        "VirtualMachineSizes": "NonResource",
+        "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
+        "LogAnalytics": "NonResource"
+    },
+    "OperationGroupToParent": {
+        "LogAnalytics": "subscriptions",
+        "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
+        "VirtualMachineImages": "Microsoft.Compute/locations",
+        "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets",
+        "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets"
+    },
+    "SingletonResource": [
+        "VirtualMachineScaleSetRollingUpgrade"
+    ]
 }

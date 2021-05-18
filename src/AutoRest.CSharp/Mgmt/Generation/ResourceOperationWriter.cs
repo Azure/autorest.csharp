@@ -23,19 +23,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             var cs = resourceOperation.Type;
             var @namespace = cs.Namespace;
+            var isSingleton = resourceOperation.OperationGroup.IsSingletonResource(config);
+            var baseClass = isSingleton ? "SingletonOperationsBase" : "ResourceOperationsBase";
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(resourceOperation.Description);
-                using (writer.Scope($"{resourceOperation.Declaration.Accessibility} partial class {cs.Name} : ResourceOperationsBase<{resourceOperation.ResourceIdentifierType}, {resourceOperation.ResourceName}>"))
+                using (writer.Scope($"{resourceOperation.Declaration.Accessibility} partial class {cs.Name} : {baseClass}<{resourceOperation.ResourceIdentifierType}, {resourceOperation.ResourceName}>"))
                 {
-                    WriteClientCtors(writer, resourceOperation);
+                    WriteClientCtors(writer, resourceOperation, isSingleton);
                     WriteClientProperties(writer, resourceOperation, config);
-                    WriteClientMethods(writer, resourceOperation);
+
+                    if (!isSingleton)
+                    {
+                        WriteClientMethods(writer, resourceOperation);
+                    }
                 }
             }
         }
 
-        private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation)
+        private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation, bool isSingleton = false)
         {
             var typeOfThis = resourceOperation.Type.Name;
 
@@ -48,7 +54,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
             writer.WriteXmlDocumentationParameter("genericOperations", $"An instance of <see cref=\"{typeof(GenericResourceOperations)}\"/> that has an id for a {resourceOperation.ResourceName}.");
-            using (writer.Scope($"internal {typeOfThis}({typeof(GenericResourceOperations)} genericOperations) : base(genericOperations, genericOperations.Id)"))
+            var baseConstructorCall = isSingleton ? "base(genericOperations)" : "base(genericOperations, genericOperations.Id)";
+            using (writer.Scope($"internal {typeOfThis}({typeof(GenericResourceOperations)} genericOperations) : {baseConstructorCall}"))
             { }
 
             // write "resource + id" constructor
@@ -56,7 +63,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
             writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
-            using (writer.Scope($"protected {typeOfThis}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : base(options, id)"))
+            baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
+            using (writer.Scope($"protected {typeOfThis}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : {baseConstructorCall}"))
             { }
         }
 
