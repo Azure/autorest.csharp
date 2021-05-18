@@ -32,6 +32,7 @@ namespace paging
             _operation = new OperationInternals<AsyncPageable<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "PagingGetMultiplePagesLROOperation");
             _nextPageFunc = nextPageFunc;
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

@@ -17,15 +17,15 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineScaleSet. </summary>
     public partial class VirtualMachineScaleSetOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachineScaleSet>
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetOperations"/> class for mocking. </summary>
         protected VirtualMachineScaleSetOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "VirtualMachineScaleSetOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected VirtualMachineScaleSetOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        internal protected VirtualMachineScaleSetOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 
@@ -59,6 +59,13 @@ namespace Azure.ResourceManager.Sample
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
+        }
+
+        /// <summary> Gets a list of VirtualMachineScaleSetExtension in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetExtensions and their operations over a VirtualMachineScaleSet. </returns>
+        public VirtualMachineScaleSetExtensionContainer GetVirtualMachineScaleSetExtensions()
+        {
+            return new VirtualMachineScaleSetExtensionContainer(this);
         }
     }
 }

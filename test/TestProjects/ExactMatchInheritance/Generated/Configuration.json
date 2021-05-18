@@ -20,5 +20,6 @@
     "ExactMatchModel2s": "NonResource",
     "ExactMatchModel4s": "NonResource"
   },
-  "OperationGroupToParent": {}
+  "OperationGroupToParent": {},
+  "OperationGroupIsTuple": []
 }

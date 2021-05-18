@@ -10,16 +10,16 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the VirtualMachineScaleSetRollingUpgrade data model. </summary>
-    public partial class VirtualMachineScaleSetRollingUpgradeData : TrackedResource<ResourceGroupResourceIdentifier>
+    /// <summary> The status of the latest virtual machine scale set rolling upgrade. </summary>
+    public partial class VirtualMachineScaleSetRollingUpgrade : TrackedResource<TenantResourceIdentifier>
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgradeData. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgrade. </summary>
         /// <param name="location"> The location. </param>
-        public VirtualMachineScaleSetRollingUpgradeData(LocationData location) : base(location)
+        public VirtualMachineScaleSetRollingUpgrade(LocationData location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgradeData. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgrade. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="type"> The type. </param>
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="runningStatus"> Information about the current running state of the overall upgrade. </param>
         /// <param name="progress"> Information about the number of virtual machine instances in each upgrade state. </param>
         /// <param name="error"> Error details for this upgrade, if there are any. </param>
-        internal VirtualMachineScaleSetRollingUpgradeData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, RollingUpgradePolicy policy, RollingUpgradeRunningStatus runningStatus, RollingUpgradeProgressInfo progress, ApiError error) : base(id, name, type, location, tags)
+        internal VirtualMachineScaleSetRollingUpgrade(TenantResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, RollingUpgradePolicy policy, RollingUpgradeRunningStatus runningStatus, RollingUpgradeProgressInfo progress, ApiError error) : base(id, name, type, location, tags)
         {
             Policy = policy;
             RunningStatus = runningStatus;

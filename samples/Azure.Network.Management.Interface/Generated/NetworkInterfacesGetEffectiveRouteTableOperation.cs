@@ -30,6 +30,7 @@ namespace Azure.Network.Management.Interface
         {
             _operation = new OperationInternals<EffectiveRouteListResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "NetworkInterfacesGetEffectiveRouteTableOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

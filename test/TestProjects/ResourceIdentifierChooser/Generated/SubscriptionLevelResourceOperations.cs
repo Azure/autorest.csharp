@@ -17,15 +17,15 @@ namespace ResourceIdentifierChooser
     /// <summary> A class representing the operations that can be performed over a specific SubscriptionLevelResource. </summary>
     public partial class SubscriptionLevelResourceOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, SubscriptionLevelResource>
     {
-        /// <summary> Initializes a new instance of SubscriptionLevelResourceOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionLevelResourceOperations"/> class for mocking. </summary>
         protected SubscriptionLevelResourceOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "SubscriptionLevelResourceOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="SubscriptionLevelResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected SubscriptionLevelResourceOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
+        internal protected SubscriptionLevelResourceOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
         {
         }
 

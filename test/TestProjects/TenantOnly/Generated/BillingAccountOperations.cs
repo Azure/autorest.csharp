@@ -17,15 +17,15 @@ namespace TenantOnly
     /// <summary> A class representing the operations that can be performed over a specific BillingAccount. </summary>
     public partial class BillingAccountOperations : ResourceOperationsBase<TenantResourceIdentifier, BillingAccount>
     {
-        /// <summary> Initializes a new instance of BillingAccountOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class for mocking. </summary>
         protected BillingAccountOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "BillingAccountOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected BillingAccountOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        internal protected BillingAccountOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
         }
 
@@ -59,6 +59,13 @@ namespace TenantOnly
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
+        }
+
+        /// <summary> Gets a list of Agreement in the BillingAccount. </summary>
+        /// <returns> An object representing collection of Agreements and their operations over a BillingAccount. </returns>
+        public AgreementContainer GetAgreements()
+        {
+            return new AgreementContainer(this);
         }
     }
 }

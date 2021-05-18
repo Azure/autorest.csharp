@@ -73,7 +73,7 @@ schemas: !Schemas
             The hasImmutabilityPolicy public property is set to true by SRP if ImmutabilityPolicy has been created for this container. The hasImmutabilityPolicy public property is set to false by SRP if ImmutabilityPolicy has not been
             created for this container.
       protocol: !Protocols {}
-    - !BooleanSchema &ref_40
+    - !BooleanSchema &ref_38
       type: boolean
       language: !Languages 
         default:
@@ -246,7 +246,7 @@ schemas: !Schemas
           name: LeaseContainerRequestLeaseDuration
           description: Required for acquire. Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires.
       protocol: !Protocols {}
-    - !NumberSchema &ref_36
+    - !NumberSchema &ref_34
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -259,7 +259,7 @@ schemas: !Schemas
           name: FileSharePropertiesShareQuota
           description: The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400.
       protocol: !Protocols {}
-    - !NumberSchema &ref_42
+    - !NumberSchema &ref_40
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -270,7 +270,7 @@ schemas: !Schemas
           name: FileSharePropertiesRemainingRetentionDays
           description: Remaining retention days for share that was soft deleted.
       protocol: !Protocols {}
-    - !NumberSchema &ref_46
+    - !NumberSchema &ref_44
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -712,7 +712,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_39
+    - !StringSchema &ref_37
       type: string
       apiVersions:
         - !ApiVersion 
@@ -722,7 +722,7 @@ schemas: !Schemas
           name: FileSharePropertiesVersion
           description: The version of the share.
       protocol: !Protocols {}
-    - !StringSchema &ref_45
+    - !StringSchema &ref_43
       type: string
       apiVersions:
         - !ApiVersion 
@@ -2184,7 +2184,7 @@ schemas: !Schemas
           name: LeaseContainerRequestAction
           description: Specifies the lease action. Can be one of the available actions.
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_37
+    - !ChoiceSchema &ref_35
       choices:
         - !ChoiceValue 
           value: SMB
@@ -2212,7 +2212,7 @@ schemas: !Schemas
           name: EnabledProtocols
           description: The authentication protocol that is used for the file share. Can only be specified when creating a share.
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_38
+    - !ChoiceSchema &ref_36
       choices:
         - !ChoiceValue 
           value: NoRootSquash
@@ -2242,7 +2242,7 @@ schemas: !Schemas
           name: RootSquashType
           description: The property is for NFS share only. The default is NoRootSquash.
       protocol: !Protocols {}
-    - !ChoiceSchema &ref_43
+    - !ChoiceSchema &ref_41
       choices:
         - !ChoiceValue 
           value: TransactionOptimized
@@ -3361,7 +3361,7 @@ schemas: !Schemas
           name: ContainerPropertiesMetadata
           description: A name-value pair to associate with the container as metadata.
       protocol: !Protocols {}
-    - !DictionarySchema &ref_35
+    - !DictionarySchema &ref_33
       type: dictionary
       elementType: *ref_2
       language: !Languages 
@@ -3442,7 +3442,7 @@ schemas: !Schemas
           name: TagPropertyTimestamp
           description: Returns the date and time the tag was added.
       protocol: !Protocols {}
-    - !DateTimeSchema &ref_34
+    - !DateTimeSchema &ref_32
       type: date-time
       format: date-time
       apiVersions:
@@ -3453,7 +3453,7 @@ schemas: !Schemas
           name: FileSharePropertiesLastModifiedTime
           description: Returns the date and time the share was last modified.
       protocol: !Protocols {}
-    - !DateTimeSchema &ref_41
+    - !DateTimeSchema &ref_39
       type: date-time
       format: date-time
       apiVersions:
@@ -3464,7 +3464,7 @@ schemas: !Schemas
           name: FileSharePropertiesDeletedTime
           description: The deleted time if the share was deleted.
       protocol: !Protocols {}
-    - !DateTimeSchema &ref_44
+    - !DateTimeSchema &ref_42
       type: date-time
       format: date-time
       apiVersions:
@@ -3775,7 +3775,7 @@ schemas: !Schemas
                                         description: A name-value pair to associate with the container as metadata.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: !ObjectSchema &ref_32
+                                    schema: !ObjectSchema &ref_45
                                       type: object
                                       apiVersions:
                                         - !ApiVersion 
@@ -3937,7 +3937,7 @@ schemas: !Schemas
                                         description: The ImmutabilityPolicy property of the container.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: !ObjectSchema &ref_33
+                                    schema: !ObjectSchema &ref_46
                                       type: object
                                       apiVersions:
                                         - !ApiVersion 
@@ -4085,15 +4085,248 @@ schemas: !Schemas
                                 serializationFormats:
                                   - json
                                 usage:
-                                  - output
                                   - input
+                                  - output
                                 language: !Languages 
                                   default:
-                                    name: ListContainerItem
-                                    description: The blob container properties be listed out.
+                                    name: BlobContainer
+                                    description: Properties of the blob container, including Id, resource name, resource type, Etag.
                                     namespace: ''
                                 protocol: !Protocols {}
                               - !ObjectSchema &ref_48
+                                type: object
+                                apiVersions:
+                                  - !ApiVersion 
+                                    version: '2019-06-01'
+                                parents: !Relations 
+                                  all:
+                                    - *ref_5
+                                    - *ref_6
+                                  immediate:
+                                    - *ref_5
+                                properties:
+                                  - !Property &ref_412
+                                    schema: *ref_22
+                                    flattenedNames:
+                                      - properties
+                                      - immutabilityPeriodSinceCreationInDays
+                                    serializedName: immutabilityPeriodSinceCreationInDays
+                                    language: !Languages 
+                                      default:
+                                        name: immutabilityPeriodSinceCreationInDays
+                                        description: The immutability period for the blobs in the container since the policy creation, in days.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_23
+                                    flattenedNames:
+                                      - properties
+                                      - state
+                                    readOnly: true
+                                    serializedName: state
+                                    language: !Languages 
+                                      default:
+                                        name: state
+                                        description: 'The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked.'
+                                    protocol: !Protocols {}
+                                  - !Property &ref_413
+                                    schema: *ref_24
+                                    flattenedNames:
+                                      - properties
+                                      - allowProtectedAppendWrites
+                                    serializedName: allowProtectedAppendWrites
+                                    language: !Languages 
+                                      default:
+                                        name: allowProtectedAppendWrites
+                                        description: >-
+                                          This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only
+                                          new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API
+                                    protocol: !Protocols {}
+                                serializationFormats:
+                                  - json
+                                usage:
+                                  - input
+                                  - output
+                                language: !Languages 
+                                  default:
+                                    name: ImmutabilityPolicy
+                                    description: The ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.
+                                    namespace: ''
+                                protocol: !Protocols {}
+                              - !ObjectSchema &ref_49
+                                type: object
+                                apiVersions:
+                                  - !ApiVersion 
+                                    version: '2019-06-01'
+                                parents: !Relations 
+                                  all:
+                                    - *ref_5
+                                    - *ref_6
+                                  immediate:
+                                    - *ref_5
+                                properties:
+                                  - !Property 
+                                    schema: *ref_32
+                                    flattenedNames:
+                                      - properties
+                                      - lastModifiedTime
+                                    readOnly: true
+                                    serializedName: lastModifiedTime
+                                    language: !Languages 
+                                      default:
+                                        name: lastModifiedTime
+                                        description: Returns the date and time the share was last modified.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_33
+                                    flattenedNames:
+                                      - properties
+                                      - metadata
+                                    serializedName: metadata
+                                    language: !Languages 
+                                      default:
+                                        name: metadata
+                                        description: A name-value pair to associate with the share as metadata.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_34
+                                    flattenedNames:
+                                      - properties
+                                      - shareQuota
+                                    serializedName: shareQuota
+                                    language: !Languages 
+                                      default:
+                                        name: shareQuota
+                                        description: The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_35
+                                    flattenedNames:
+                                      - properties
+                                      - enabledProtocols
+                                    serializedName: enabledProtocols
+                                    language: !Languages 
+                                      default:
+                                        name: enabledProtocols
+                                        description: The authentication protocol that is used for the file share. Can only be specified when creating a share.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_36
+                                    flattenedNames:
+                                      - properties
+                                      - rootSquash
+                                    serializedName: rootSquash
+                                    language: !Languages 
+                                      default:
+                                        name: rootSquash
+                                        description: The property is for NFS share only. The default is NoRootSquash.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_37
+                                    flattenedNames:
+                                      - properties
+                                      - version
+                                    readOnly: true
+                                    serializedName: version
+                                    language: !Languages 
+                                      default:
+                                        name: version
+                                        description: The version of the share.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_38
+                                    flattenedNames:
+                                      - properties
+                                      - deleted
+                                    readOnly: true
+                                    serializedName: deleted
+                                    language: !Languages 
+                                      default:
+                                        name: deleted
+                                        description: Indicates whether the share was deleted.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_39
+                                    flattenedNames:
+                                      - properties
+                                      - deletedTime
+                                    readOnly: true
+                                    serializedName: deletedTime
+                                    language: !Languages 
+                                      default:
+                                        name: deletedTime
+                                        description: The deleted time if the share was deleted.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_40
+                                    flattenedNames:
+                                      - properties
+                                      - remainingRetentionDays
+                                    readOnly: true
+                                    serializedName: remainingRetentionDays
+                                    language: !Languages 
+                                      default:
+                                        name: remainingRetentionDays
+                                        description: Remaining retention days for share that was soft deleted.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_41
+                                    flattenedNames:
+                                      - properties
+                                      - accessTier
+                                    serializedName: accessTier
+                                    language: !Languages 
+                                      default:
+                                        name: accessTier
+                                        description: Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_42
+                                    flattenedNames:
+                                      - properties
+                                      - accessTierChangeTime
+                                    readOnly: true
+                                    serializedName: accessTierChangeTime
+                                    language: !Languages 
+                                      default:
+                                        name: accessTierChangeTime
+                                        description: Indicates the last modification time for share access tier.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_43
+                                    flattenedNames:
+                                      - properties
+                                      - accessTierStatus
+                                    readOnly: true
+                                    serializedName: accessTierStatus
+                                    language: !Languages 
+                                      default:
+                                        name: accessTierStatus
+                                        description: Indicates if there is a pending transition for access tier.
+                                    protocol: !Protocols {}
+                                  - !Property 
+                                    schema: *ref_44
+                                    flattenedNames:
+                                      - properties
+                                      - shareUsageBytes
+                                    readOnly: true
+                                    serializedName: shareUsageBytes
+                                    language: !Languages 
+                                      default:
+                                        name: shareUsageBytes
+                                        description: The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files.
+                                    protocol: !Protocols {}
+                                serializationFormats:
+                                  - json
+                                usage:
+                                  - input
+                                  - output
+                                language: !Languages 
+                                  default:
+                                    name: FileShare
+                                    description: Properties of the file share, including Id, resource name, resource type, Etag.
+                                    namespace: ''
+                                protocol: !Protocols {}
+                              - !ObjectSchema &ref_50
                                 type: object
                                 apiVersions:
                                   - !ApiVersion 
@@ -4198,7 +4431,7 @@ schemas: !Schemas
                                         description: A name-value pair to associate with the container as metadata.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_32
+                                    schema: *ref_45
                                     flattenedNames:
                                       - properties
                                       - immutabilityPolicy
@@ -4210,7 +4443,7 @@ schemas: !Schemas
                                         description: The ImmutabilityPolicy property of the container.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_33
+                                    schema: *ref_46
                                     flattenedNames:
                                       - properties
                                       - legalHold
@@ -4252,74 +4485,15 @@ schemas: !Schemas
                                 serializationFormats:
                                   - json
                                 usage:
-                                  - input
                                   - output
+                                  - input
                                 language: !Languages 
                                   default:
-                                    name: BlobContainer
-                                    description: Properties of the blob container, including Id, resource name, resource type, Etag.
+                                    name: ListContainerItem
+                                    description: The blob container properties be listed out.
                                     namespace: ''
                                 protocol: !Protocols {}
-                              - !ObjectSchema &ref_49
-                                type: object
-                                apiVersions:
-                                  - !ApiVersion 
-                                    version: '2019-06-01'
-                                parents: !Relations 
-                                  all:
-                                    - *ref_5
-                                    - *ref_6
-                                  immediate:
-                                    - *ref_5
-                                properties:
-                                  - !Property &ref_412
-                                    schema: *ref_22
-                                    flattenedNames:
-                                      - properties
-                                      - immutabilityPeriodSinceCreationInDays
-                                    serializedName: immutabilityPeriodSinceCreationInDays
-                                    language: !Languages 
-                                      default:
-                                        name: immutabilityPeriodSinceCreationInDays
-                                        description: The immutability period for the blobs in the container since the policy creation, in days.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_23
-                                    flattenedNames:
-                                      - properties
-                                      - state
-                                    readOnly: true
-                                    serializedName: state
-                                    language: !Languages 
-                                      default:
-                                        name: state
-                                        description: 'The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked.'
-                                    protocol: !Protocols {}
-                                  - !Property &ref_413
-                                    schema: *ref_24
-                                    flattenedNames:
-                                      - properties
-                                      - allowProtectedAppendWrites
-                                    serializedName: allowProtectedAppendWrites
-                                    language: !Languages 
-                                      default:
-                                        name: allowProtectedAppendWrites
-                                        description: >-
-                                          This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only
-                                          new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API
-                                    protocol: !Protocols {}
-                                serializationFormats:
-                                  - json
-                                usage:
-                                  - input
-                                  - output
-                                language: !Languages 
-                                  default:
-                                    name: ImmutabilityPolicy
-                                    description: The ImmutabilityPolicy property of a blob container, including Id, resource name, resource type, Etag.
-                                    namespace: ''
-                                protocol: !Protocols {}
-                              - !ObjectSchema &ref_50
+                              - !ObjectSchema &ref_51
                                 type: object
                                 apiVersions:
                                   - !ApiVersion 
@@ -4332,7 +4506,7 @@ schemas: !Schemas
                                     - *ref_5
                                 properties:
                                   - !Property 
-                                    schema: *ref_34
+                                    schema: *ref_32
                                     flattenedNames:
                                       - properties
                                       - lastModifiedTime
@@ -4344,7 +4518,7 @@ schemas: !Schemas
                                         description: Returns the date and time the share was last modified.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_35
+                                    schema: *ref_33
                                     flattenedNames:
                                       - properties
                                       - metadata
@@ -4355,7 +4529,7 @@ schemas: !Schemas
                                         description: A name-value pair to associate with the share as metadata.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_36
+                                    schema: *ref_34
                                     flattenedNames:
                                       - properties
                                       - shareQuota
@@ -4366,7 +4540,7 @@ schemas: !Schemas
                                         description: The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_37
+                                    schema: *ref_35
                                     flattenedNames:
                                       - properties
                                       - enabledProtocols
@@ -4377,7 +4551,7 @@ schemas: !Schemas
                                         description: The authentication protocol that is used for the file share. Can only be specified when creating a share.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_38
+                                    schema: *ref_36
                                     flattenedNames:
                                       - properties
                                       - rootSquash
@@ -4388,7 +4562,7 @@ schemas: !Schemas
                                         description: The property is for NFS share only. The default is NoRootSquash.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_39
+                                    schema: *ref_37
                                     flattenedNames:
                                       - properties
                                       - version
@@ -4400,7 +4574,7 @@ schemas: !Schemas
                                         description: The version of the share.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_40
+                                    schema: *ref_38
                                     flattenedNames:
                                       - properties
                                       - deleted
@@ -4412,7 +4586,7 @@ schemas: !Schemas
                                         description: Indicates whether the share was deleted.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_41
+                                    schema: *ref_39
                                     flattenedNames:
                                       - properties
                                       - deletedTime
@@ -4424,7 +4598,7 @@ schemas: !Schemas
                                         description: The deleted time if the share was deleted.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_42
+                                    schema: *ref_40
                                     flattenedNames:
                                       - properties
                                       - remainingRetentionDays
@@ -4436,7 +4610,7 @@ schemas: !Schemas
                                         description: Remaining retention days for share that was soft deleted.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_43
+                                    schema: *ref_41
                                     flattenedNames:
                                       - properties
                                       - accessTier
@@ -4447,7 +4621,7 @@ schemas: !Schemas
                                         description: Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_44
+                                    schema: *ref_42
                                     flattenedNames:
                                       - properties
                                       - accessTierChangeTime
@@ -4459,7 +4633,7 @@ schemas: !Schemas
                                         description: Indicates the last modification time for share access tier.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_45
+                                    schema: *ref_43
                                     flattenedNames:
                                       - properties
                                       - accessTierStatus
@@ -4471,7 +4645,7 @@ schemas: !Schemas
                                         description: Indicates if there is a pending transition for access tier.
                                     protocol: !Protocols {}
                                   - !Property 
-                                    schema: *ref_46
+                                    schema: *ref_44
                                     flattenedNames:
                                       - properties
                                       - shareUsageBytes
@@ -4491,180 +4665,6 @@ schemas: !Schemas
                                   default:
                                     name: FileShareItem
                                     description: The file share properties be listed out.
-                                    namespace: ''
-                                protocol: !Protocols {}
-                              - !ObjectSchema &ref_51
-                                type: object
-                                apiVersions:
-                                  - !ApiVersion 
-                                    version: '2019-06-01'
-                                parents: !Relations 
-                                  all:
-                                    - *ref_5
-                                    - *ref_6
-                                  immediate:
-                                    - *ref_5
-                                properties:
-                                  - !Property 
-                                    schema: *ref_34
-                                    flattenedNames:
-                                      - properties
-                                      - lastModifiedTime
-                                    readOnly: true
-                                    serializedName: lastModifiedTime
-                                    language: !Languages 
-                                      default:
-                                        name: lastModifiedTime
-                                        description: Returns the date and time the share was last modified.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_35
-                                    flattenedNames:
-                                      - properties
-                                      - metadata
-                                    serializedName: metadata
-                                    language: !Languages 
-                                      default:
-                                        name: metadata
-                                        description: A name-value pair to associate with the share as metadata.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_36
-                                    flattenedNames:
-                                      - properties
-                                      - shareQuota
-                                    serializedName: shareQuota
-                                    language: !Languages 
-                                      default:
-                                        name: shareQuota
-                                        description: The maximum size of the share, in gigabytes. Must be greater than 0, and less than or equal to 5TB (5120). For Large File Shares, the maximum size is 102400.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_37
-                                    flattenedNames:
-                                      - properties
-                                      - enabledProtocols
-                                    serializedName: enabledProtocols
-                                    language: !Languages 
-                                      default:
-                                        name: enabledProtocols
-                                        description: The authentication protocol that is used for the file share. Can only be specified when creating a share.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_38
-                                    flattenedNames:
-                                      - properties
-                                      - rootSquash
-                                    serializedName: rootSquash
-                                    language: !Languages 
-                                      default:
-                                        name: rootSquash
-                                        description: The property is for NFS share only. The default is NoRootSquash.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_39
-                                    flattenedNames:
-                                      - properties
-                                      - version
-                                    readOnly: true
-                                    serializedName: version
-                                    language: !Languages 
-                                      default:
-                                        name: version
-                                        description: The version of the share.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_40
-                                    flattenedNames:
-                                      - properties
-                                      - deleted
-                                    readOnly: true
-                                    serializedName: deleted
-                                    language: !Languages 
-                                      default:
-                                        name: deleted
-                                        description: Indicates whether the share was deleted.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_41
-                                    flattenedNames:
-                                      - properties
-                                      - deletedTime
-                                    readOnly: true
-                                    serializedName: deletedTime
-                                    language: !Languages 
-                                      default:
-                                        name: deletedTime
-                                        description: The deleted time if the share was deleted.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_42
-                                    flattenedNames:
-                                      - properties
-                                      - remainingRetentionDays
-                                    readOnly: true
-                                    serializedName: remainingRetentionDays
-                                    language: !Languages 
-                                      default:
-                                        name: remainingRetentionDays
-                                        description: Remaining retention days for share that was soft deleted.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_43
-                                    flattenedNames:
-                                      - properties
-                                      - accessTier
-                                    serializedName: accessTier
-                                    language: !Languages 
-                                      default:
-                                        name: accessTier
-                                        description: Access tier for specific share. GpV2 account can choose between TransactionOptimized (default), Hot, and Cool. FileStorage account can choose Premium.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_44
-                                    flattenedNames:
-                                      - properties
-                                      - accessTierChangeTime
-                                    readOnly: true
-                                    serializedName: accessTierChangeTime
-                                    language: !Languages 
-                                      default:
-                                        name: accessTierChangeTime
-                                        description: Indicates the last modification time for share access tier.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_45
-                                    flattenedNames:
-                                      - properties
-                                      - accessTierStatus
-                                    readOnly: true
-                                    serializedName: accessTierStatus
-                                    language: !Languages 
-                                      default:
-                                        name: accessTierStatus
-                                        description: Indicates if there is a pending transition for access tier.
-                                    protocol: !Protocols {}
-                                  - !Property 
-                                    schema: *ref_46
-                                    flattenedNames:
-                                      - properties
-                                      - shareUsageBytes
-                                    readOnly: true
-                                    serializedName: shareUsageBytes
-                                    language: !Languages 
-                                      default:
-                                        name: shareUsageBytes
-                                        description: The approximate size of the data stored on the share. Note that this value may not include all recently created or recently resized files.
-                                    protocol: !Protocols {}
-                                serializationFormats:
-                                  - json
-                                usage:
-                                  - input
-                                  - output
-                                language: !Languages 
-                                  default:
-                                    name: FileShare
-                                    description: Properties of the file share, including Id, resource name, resource type, Etag.
                                     namespace: ''
                                 protocol: !Protocols {}
                             immediate:
@@ -4701,7 +4701,6 @@ schemas: !Schemas
                           protocol: !Protocols {}
                         - *ref_47
                         - *ref_48
-                        - *ref_49
                         - !ObjectSchema &ref_171
                           type: object
                           apiVersions:
@@ -4959,8 +4958,7 @@ schemas: !Schemas
                               description: The properties of File services in storage account.
                               namespace: ''
                           protocol: !Protocols {}
-                        - *ref_50
-                        - *ref_51
+                        - *ref_49
                         - !ObjectSchema &ref_62
                           type: object
                           apiVersions:
@@ -7200,6 +7198,8 @@ schemas: !Schemas
                               description: The Encryption Scope resource.
                               namespace: ''
                           protocol: !Protocols {}
+                        - *ref_50
+                        - *ref_51
                       immediate:
                         - *ref_4
                         - *ref_5
@@ -7508,11 +7508,10 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_5
     - *ref_47
-    - *ref_32
+    - *ref_45
     - *ref_192
-    - *ref_33
+    - *ref_46
     - *ref_193
-    - *ref_48
     - !ObjectSchema &ref_399
       type: object
       apiVersions:
@@ -7561,7 +7560,7 @@ schemas: !Schemas
           description: The LegalHold property of a blob container.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_49
+    - *ref_48
     - !ObjectSchema &ref_443
       type: object
       apiVersions:
@@ -7789,7 +7788,7 @@ schemas: !Schemas
             apiVersions:
               - !ApiVersion 
                 version: '2019-06-01'
-            elementType: *ref_50
+            elementType: *ref_49
             language: !Languages 
               default:
                 name: FileShareItemsValue
@@ -7821,8 +7820,7 @@ schemas: !Schemas
           description: Response schema. Contains list of shares returned, and if paging is requested or required, a URL to next page of shares.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_50
-    - *ref_51
+    - *ref_49
     - !ObjectSchema &ref_483
       type: object
       apiVersions:
@@ -9556,6 +9554,8 @@ schemas: !Schemas
           description: List of encryption scopes requested, and if paging is required, a URL to the next page of encryption scopes.
           namespace: ''
       protocol: !Protocols {}
+    - *ref_50
+    - *ref_51
   arrays:
     - *ref_322
     - *ref_323
@@ -10411,7 +10411,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_385
-                schema: *ref_48
+                schema: *ref_47
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -10455,7 +10455,7 @@ operationGroups:
           - *ref_388
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_47
             language: !Languages 
               default:
                 name: ''
@@ -10468,7 +10468,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_47
             language: !Languages 
               default:
                 name: ''
@@ -10599,7 +10599,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_389
-                schema: *ref_48
+                schema: *ref_47
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -10643,7 +10643,7 @@ operationGroups:
           - *ref_392
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_47
             language: !Languages 
               default:
                 name: ''
@@ -10765,7 +10765,7 @@ operationGroups:
           - *ref_395
         responses:
           - !SchemaResponse 
-            schema: *ref_48
+            schema: *ref_47
             language: !Languages 
               default:
                 name: ''
@@ -11343,7 +11343,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_411
-                schema: *ref_49
+                schema: *ref_48
                 flattened: true
                 implementation: Method
                 required: false
@@ -11414,7 +11414,7 @@ operationGroups:
           - *ref_419
         responses:
           - !SchemaResponse 
-            schema: *ref_49
+            schema: *ref_48
             language: !Languages 
               default:
                 name: ''
@@ -11569,7 +11569,7 @@ operationGroups:
           - *ref_424
         responses:
           - !SchemaResponse 
-            schema: *ref_49
+            schema: *ref_48
             language: !Languages 
               default:
                 name: ''
@@ -11721,7 +11721,7 @@ operationGroups:
           - *ref_429
         responses:
           - !SchemaResponse 
-            schema: *ref_49
+            schema: *ref_48
             language: !Languages 
               default:
                 name: ''
@@ -11863,7 +11863,7 @@ operationGroups:
           - *ref_434
         responses:
           - !SchemaResponse 
-            schema: *ref_49
+            schema: *ref_48
             language: !Languages 
               default:
                 name: ''
@@ -11986,7 +11986,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_436
-                schema: *ref_49
+                schema: *ref_48
                 flattened: true
                 implementation: Method
                 required: false
@@ -12057,7 +12057,7 @@ operationGroups:
           - *ref_442
         responses:
           - !SchemaResponse 
-            schema: *ref_49
+            schema: *ref_48
             language: !Languages 
               default:
                 name: ''
@@ -13128,7 +13128,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_468
-                schema: *ref_51
+                schema: *ref_49
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -13172,7 +13172,7 @@ operationGroups:
           - *ref_471
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -13185,7 +13185,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -13353,7 +13353,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
               - !Parameter &ref_472
-                schema: *ref_51
+                schema: *ref_49
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -13397,7 +13397,7 @@ operationGroups:
           - *ref_475
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -13540,7 +13540,7 @@ operationGroups:
           - *ref_479
         responses:
           - !SchemaResponse 
-            schema: *ref_51
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''

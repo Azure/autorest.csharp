@@ -17,15 +17,15 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific EncryptionScope. </summary>
     public partial class EncryptionScopeOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, EncryptionScope>
     {
-        /// <summary> Initializes a new instance of EncryptionScopeOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="EncryptionScopeOperations"/> class for mocking. </summary>
         protected EncryptionScopeOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "EncryptionScopeOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="EncryptionScopeOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected EncryptionScopeOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        internal protected EncryptionScopeOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

@@ -8,6 +8,7 @@ using System.Reflection;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
@@ -178,6 +179,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return true;
         }
 
+        /// <summary>
+        /// Tells if <paramref name="childPropertyType" /> can be assigned to <paramref name="parentPropertyType" />
+        /// by checking if there's an implicit type convertor in <paramref name="parentPropertyType" />.
+        /// Todo: should we check childPropertyType as well since an implicit can be defined in either classes?
+        /// </summary>
+        /// <param name="parentPropertyType">The type to be assigned to.</param>
+        /// <param name="childPropertyType">The type to assign.</param>
+        /// <returns></returns>
         private static bool IsAssignable(System.Type parentPropertyType, CSharpType childPropertyType)
         {
             return parentPropertyType.GetMethods().Where(m => m.Name == "op_Implicit" &&

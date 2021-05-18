@@ -17,15 +17,15 @@ namespace ResourceIdentifierChooser
     /// <summary> A class representing the operations that can be performed over a specific TenantLevelResource. </summary>
     public partial class TenantLevelResourceOperations : ResourceOperationsBase<TenantResourceIdentifier, TenantLevelResource>
     {
-        /// <summary> Initializes a new instance of TenantLevelResourceOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TenantLevelResourceOperations"/> class for mocking. </summary>
         protected TenantLevelResourceOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "TenantLevelResourceOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="TenantLevelResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected TenantLevelResourceOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        internal protected TenantLevelResourceOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
         }
 

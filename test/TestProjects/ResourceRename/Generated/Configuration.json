@@ -19,5 +19,6 @@
   "OperationGroupToResource": {
     "SshPublicKeys": "NonResource"
   },
-  "OperationGroupToParent": {}
+  "OperationGroupToParent": {},
+  "OperationGroupIsTuple": []
 }

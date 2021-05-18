@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new DataPlaneResponseHeaderGroupWriter();
+            var longRunningOperationWriter = new LongRunningOperationWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -72,7 +73,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var operation in context.Library.LongRunningOperations)
             {
                 var codeWriter = new CodeWriter();
-                LongRunningOperationWriter.Write(codeWriter, operation);
+                longRunningOperationWriter.Write(codeWriter, operation);
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }

@@ -17,15 +17,15 @@ namespace SubscriptionExtensions
     /// <summary> A class representing the operations that can be performed over a specific Oven. </summary>
     public partial class OvenOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Oven>
     {
-        /// <summary> Initializes a new instance of OvenOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class for mocking. </summary>
         protected OvenOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "OvenOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected OvenOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        internal protected OvenOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

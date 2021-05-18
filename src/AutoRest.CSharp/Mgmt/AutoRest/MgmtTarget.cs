@@ -1,12 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -21,10 +19,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var resourceOperationWriter = new ResourceOperationWriter();
-            var resourceContainerWriter = new ResourceContainerWriter();
             var armResourceWriter = new ResourceWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
+            var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -50,7 +48,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resourceOperation in context.Library.ResourceOperations)
             {
                 var codeWriter = new CodeWriter();
-                resourceOperationWriter.WriteClient(codeWriter, resourceOperation, context.Configuration.MgmtConfiguration);
+                resourceOperationWriter.WriteClient(codeWriter, resourceOperation, context);
 
                 project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());
             }
@@ -58,7 +56,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resourceContainer in context.Library.ResourceContainers)
             {
                 var codeWriter = new CodeWriter();
-                resourceContainerWriter.WriteContainer(codeWriter, resourceContainer);
+                new ResourceContainerWriter(codeWriter, resourceContainer, context.Library).WriteContainer();
 
                 project.AddGeneratedFile($"{resourceContainer.Type.Name}.cs", codeWriter.ToString());
             }
@@ -88,7 +86,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var operation in context.Library.LongRunningOperations)
             {
                 var codeWriter = new CodeWriter();
-                LongRunningOperationWriter.Write(codeWriter, operation);
+                mgmtLongRunningOperationWriter.Write(codeWriter, operation);
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }

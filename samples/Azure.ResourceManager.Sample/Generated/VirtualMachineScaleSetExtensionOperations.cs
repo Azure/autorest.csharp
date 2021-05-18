@@ -17,15 +17,15 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineScaleSetExtension. </summary>
     public partial class VirtualMachineScaleSetExtensionOperations : ResourceOperationsBase<ResourceIdentifier, VirtualMachineScaleSetExtension>
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetExtensionOperations"/> class for mocking. </summary>
         protected VirtualMachineScaleSetExtensionOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "VirtualMachineScaleSetExtensionOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetExtensionOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected VirtualMachineScaleSetExtensionOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
+        internal protected VirtualMachineScaleSetExtensionOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
         {
         }
 

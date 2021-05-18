@@ -1,0 +1,26 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "Accessibility_LowLevel_TokenAuth",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "AzureArm": false,
+  "PublicClients": true,
+  "ModelNamespace": true,
+  "HeadAsBoolean": false,
+  "SkipCSProjPackageReference": true,
+  "LowLevelClient": true,
+  "CredentialTypes": [
+    "TokenCredential"
+  ],
+  "CredentialScopes": [
+    "https://test.azure.com/.default"
+  ],
+  "CredentialHeaderName": "Your-Subscription-Key",
+  "OperationGroupToResourceType": {},
+  "OperationGroupToResource": {},
+  "OperationGroupToParent": {},
+  "OperationGroupIsTuple": []
+}

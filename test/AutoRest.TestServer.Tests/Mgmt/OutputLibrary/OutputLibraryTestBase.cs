@@ -10,6 +10,7 @@ using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Types;
 using NUnit.Framework;
 
@@ -46,10 +47,31 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var context = result.Context;
 
             var count = context.Library.ResourceSchemaMap.Count;
-            Assert.AreEqual(count, context.Library.ResourceOperations.Count());
-            Assert.AreEqual(count, context.Library.ResourceContainers.Count());
+            var tupleOperationGroupsList = result.Context.Configuration.MgmtConfiguration.OperationGroupIsTuple;
+            var resourceCount = count - tupleOperationGroupsList.Count();
+
+            Assert.AreEqual(resourceCount, context.Library.ResourceOperations.Count());
+            Assert.AreEqual(resourceCount, context.Library.ResourceContainers.Count());
+            Assert.AreEqual(resourceCount, context.Library.ArmResource.Count());
             Assert.AreEqual(count, context.Library.ResourceData.Count());
-            Assert.AreEqual(count, context.Library.ArmResource.Count());
+        }
+
+        [Test]
+        public void TestTupleResources()
+        {
+            var result = Generate(_projectName).Result;
+            var tupleOperationGroupList = result.Context.Configuration.MgmtConfiguration.OperationGroupIsTuple;
+            foreach (var operationGroup in result.Context.CodeModel.OperationGroups)
+            {
+                if (tupleOperationGroupList.Contains(operationGroup.Key))
+                {
+                    Assert.True(operationGroup.IsTupleResource(result.Context));
+                }
+                else
+                {
+                    Assert.False(operationGroup.IsTupleResource(result.Context));
+                }
+            }
         }
     }
 }

@@ -17,15 +17,15 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific FileService. </summary>
     public partial class FileServiceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, FileService>
     {
-        /// <summary> Initializes a new instance of FileServiceOperations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class for mocking. </summary>
         protected FileServiceOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "FileServiceOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected FileServiceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        internal protected FileServiceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

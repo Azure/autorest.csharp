@@ -17,5 +17,6 @@
   "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {},
-  "OperationGroupToParent": {}
+  "OperationGroupToParent": {},
+  "OperationGroupIsTuple": []
 }

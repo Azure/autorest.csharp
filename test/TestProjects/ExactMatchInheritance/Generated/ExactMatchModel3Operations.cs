@@ -17,15 +17,15 @@ namespace ExactMatchInheritance
     /// <summary> A class representing the operations that can be performed over a specific ExactMatchModel3. </summary>
     public partial class ExactMatchModel3Operations : ResourceOperationsBase<ResourceIdentifier, ExactMatchModel3>
     {
-        /// <summary> Initializes a new instance of ExactMatchModel3Operations for mocking. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel3Operations"/> class for mocking. </summary>
         protected ExactMatchModel3Operations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "ExactMatchModel3Operations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="ExactMatchModel3Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected ExactMatchModel3Operations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
+        internal protected ExactMatchModel3Operations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
         {
         }
 
