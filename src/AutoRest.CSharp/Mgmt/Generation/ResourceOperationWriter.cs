@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private static string Pluralization(string single)
+        internal static string Pluralization(string single)
         {
             if (new Regex("([^aeiou])y$").IsMatch(single))
             {

@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
@@ -333,7 +334,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     ResourceType containerType = GetContainerValidResourceType(container);
                     if (containerType.Equals(operationType))
                     {
-                        var method = operation.GetMethod($"Get{container.Name.Remove(container.Name.LastIndexOf("Container"))}");
+                        var method = operation.GetMethod($"Get{ResourceOperationWriter.Pluralization(container.Name.Remove(container.Name.LastIndexOf("Container")))}");
                         Assert.NotNull(method);
                         Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(container.Namespace+"."+container.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);
