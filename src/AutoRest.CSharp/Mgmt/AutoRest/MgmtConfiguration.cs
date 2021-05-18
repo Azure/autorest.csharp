@@ -3,11 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
-using Azure.Core;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -66,12 +63,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
             writer.WriteEndObject();
 
-            writer.WriteStartArray(nameof(SingletonResource));
-            foreach (var r in SingletonResource)
+            if (SingletonResource.Count > 0)
             {
-                writer.WriteStringValue(r);
+                writer.WriteStartArray(nameof(SingletonResource));
+                foreach (var r in SingletonResource)
+                {
+                    writer.WriteStringValue(r);
+                }
+
+                writer.WriteEndArray();
             }
-            writer.WriteEndArray();
 
             writer.WriteStartArray(nameof(OperationGroupIsTuple));
             foreach (var tuple in OperationGroupIsTuple)
