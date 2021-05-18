@@ -23,15 +23,9 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a DedicatedHost. </param>
-        internal DedicatedHostOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="DedicatedHostOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected DedicatedHostOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        internal protected DedicatedHostOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

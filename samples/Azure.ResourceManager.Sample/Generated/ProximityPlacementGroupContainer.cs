@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(proximityPlacementGroupName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<ProximityPlacementGroup>;
+                return StartCreateOrUpdate(proximityPlacementGroupName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(proximityPlacementGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<ProximityPlacementGroup>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<ProximityPlacementGroup> StartCreateOrUpdate(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
+        public ProximityPlacementGroupsCreateOrUpdateOperation StartCreateOrUpdate(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.StartCreateOrUpdate");
             scope.Start();
@@ -137,7 +137,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Proximity Placement Group operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<ProximityPlacementGroup>> StartCreateOrUpdateAsync(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
+        public async Task<ProximityPlacementGroupsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string proximityPlacementGroupName, ProximityPlacementGroupData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ProximityPlacementGroupContainer.StartCreateOrUpdate");
             scope.Start();
@@ -200,7 +200,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(proximityPlacementGroupName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, proximityPlacementGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ProximityPlacementGroup(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -257,7 +257,7 @@ namespace Azure.ResourceManager.Sample
         public Pageable<ProximityPlacementGroup> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ProximityPlacementGroup>(results, genericResource => new ProximityPlacementGroupOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ProximityPlacementGroup>(results, genericResource => new ProximityPlacementGroupOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ProximityPlacementGroup" /> for this resource group. </summary>
@@ -307,7 +307,7 @@ namespace Azure.ResourceManager.Sample
         public AsyncPageable<ProximityPlacementGroup> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ProximityPlacementGroup>(results, genericResource => new ProximityPlacementGroupOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ProximityPlacementGroup>(results, genericResource => new ProximityPlacementGroupOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of ProximityPlacementGroup for this resource group represented as generic resources. </summary>

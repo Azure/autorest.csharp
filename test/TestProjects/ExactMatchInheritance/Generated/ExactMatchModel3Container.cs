@@ -65,7 +65,7 @@ namespace ExactMatchInheritance
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(exactMatchModel3SName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<ExactMatchModel3>;
+                return StartCreateOrUpdate(exactMatchModel3SName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace ExactMatchInheritance
                 }
 
                 var operation = await StartCreateOrUpdateAsync(exactMatchModel3SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<ExactMatchModel3>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<ExactMatchModel3> StartCreateOrUpdate(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
+        public ExactMatchModel3SPutOperation StartCreateOrUpdate(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.StartCreateOrUpdate");
             scope.Start();
@@ -136,7 +136,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<ExactMatchModel3>> StartCreateOrUpdateAsync(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
+        public async Task<ExactMatchModel3SPutOperation> StartCreateOrUpdateAsync(string exactMatchModel3SName, ExactMatchModel3Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel3Container.StartCreateOrUpdate");
             scope.Start();
@@ -168,7 +168,7 @@ namespace ExactMatchInheritance
         public Pageable<ExactMatchModel3> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ExactMatchModel3>(results, genericResource => new ExactMatchModel3Operations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ExactMatchModel3>(results, genericResource => new ExactMatchModel3Operations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ExactMatchModel3" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -179,7 +179,7 @@ namespace ExactMatchInheritance
         public Pageable<ExactMatchModel3> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ExactMatchModel3>(results, genericResource => new ExactMatchModel3Operations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ExactMatchModel3>(results, genericResource => new ExactMatchModel3Operations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ExactMatchModel3" /> for this resource group. </summary>
@@ -189,7 +189,7 @@ namespace ExactMatchInheritance
         public AsyncPageable<ExactMatchModel3> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel3>(results, genericResource => new ExactMatchModel3Operations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel3>(results, genericResource => new ExactMatchModel3Operations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ExactMatchModel3" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -200,7 +200,7 @@ namespace ExactMatchInheritance
         public AsyncPageable<ExactMatchModel3> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel3>(results, genericResource => new ExactMatchModel3Operations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel3>(results, genericResource => new ExactMatchModel3Operations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of ExactMatchModel3 for this resource group represented as generic resources. </summary>

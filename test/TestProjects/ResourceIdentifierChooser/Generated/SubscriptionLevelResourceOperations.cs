@@ -23,15 +23,9 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionLevelResourceOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a SubscriptionLevelResource. </param>
-        internal SubscriptionLevelResourceOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionLevelResourceOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected SubscriptionLevelResourceOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
+        internal protected SubscriptionLevelResourceOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
         {
         }
 

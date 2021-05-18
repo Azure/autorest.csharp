@@ -65,7 +65,7 @@ namespace ResourceIdentifierChooser
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(tenantLevelResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<TenantLevelResource>;
+                return StartCreateOrUpdate(tenantLevelResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(tenantLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<TenantLevelResource>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace ResourceIdentifierChooser
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The TenantLevelResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<TenantLevelResource> StartCreateOrUpdate(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public TenantLevelResourcesPutOperation StartCreateOrUpdate(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -136,7 +136,7 @@ namespace ResourceIdentifierChooser
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The TenantLevelResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<TenantLevelResource>> StartCreateOrUpdateAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<TenantLevelResourcesPutOperation> StartCreateOrUpdateAsync(string tenantLevelResourcesName, TenantLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -168,7 +168,7 @@ namespace ResourceIdentifierChooser
         public Pageable<TenantLevelResource> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, TenantLevelResource>(results, genericResource => new TenantLevelResourceOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, TenantLevelResource>(results, genericResource => new TenantLevelResourceOperations(genericResource, genericResource.Id as TenantResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="TenantLevelResource" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -179,7 +179,7 @@ namespace ResourceIdentifierChooser
         public Pageable<TenantLevelResource> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, TenantLevelResource>(results, genericResource => new TenantLevelResourceOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, TenantLevelResource>(results, genericResource => new TenantLevelResourceOperations(genericResource, genericResource.Id as TenantResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="TenantLevelResource" /> for this resource group. </summary>
@@ -189,7 +189,7 @@ namespace ResourceIdentifierChooser
         public AsyncPageable<TenantLevelResource> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, TenantLevelResource>(results, genericResource => new TenantLevelResourceOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, TenantLevelResource>(results, genericResource => new TenantLevelResourceOperations(genericResource, genericResource.Id as TenantResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="TenantLevelResource" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -200,7 +200,7 @@ namespace ResourceIdentifierChooser
         public AsyncPageable<TenantLevelResource> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, TenantLevelResource>(results, genericResource => new TenantLevelResourceOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, TenantLevelResource>(results, genericResource => new TenantLevelResourceOperations(genericResource, genericResource.Id as TenantResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of TenantLevelResource for this resource group represented as generic resources. </summary>

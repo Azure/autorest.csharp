@@ -67,7 +67,7 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<Oven>;
+                return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -96,7 +96,7 @@ namespace SubscriptionExtensions
                 }
 
                 var operation = await StartCreateOrUpdateAsync(vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<Oven>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace SubscriptionExtensions
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<Oven> StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public OvensCreateOrUpdateOperation StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.StartCreateOrUpdate");
             scope.Start();
@@ -125,13 +125,7 @@ namespace SubscriptionExtensions
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken);
-                var operation = new OvensCreateOrUpdateOperation(
-                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
-                Id.ResourceGroupName, vmName, parameters).Request,
-                originalResponse);
-                return new PhArmOperation<Oven, OvenData>(
-                operation,
-                data => new Oven(Parent, data));
+                return new OvensCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -144,7 +138,7 @@ namespace SubscriptionExtensions
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<Oven>> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
+        public async Task<OvensCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.StartCreateOrUpdate");
             scope.Start();
@@ -160,13 +154,7 @@ namespace SubscriptionExtensions
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new OvensCreateOrUpdateOperation(
-                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
-                Id.ResourceGroupName, vmName, parameters).Request,
-                originalResponse);
-                return new PhArmOperation<Oven, OvenData>(
-                operation,
-                data => new Oven(Parent, data));
+                return new OvensCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -222,7 +210,7 @@ namespace SubscriptionExtensions
         public Pageable<Oven> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, Oven>(results, genericResource => new OvenOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, Oven>(results, genericResource => new OvenOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="Oven" /> for this resource group. </summary>
@@ -272,7 +260,7 @@ namespace SubscriptionExtensions
         public AsyncPageable<Oven> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, Oven>(results, genericResource => new OvenOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, Oven>(results, genericResource => new OvenOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of Oven for this resource group represented as generic resources. </summary>

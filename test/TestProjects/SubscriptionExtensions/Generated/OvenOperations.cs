@@ -23,15 +23,9 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a Oven. </param>
-        internal OvenOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected OvenOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        internal protected OvenOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

@@ -44,19 +44,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"protected {typeOfThis}()"))
             { }
 
-            // write "generic resource" constructor
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
-            writer.WriteXmlDocumentationParameter("genericOperations", $"An instance of <see cref=\"{typeof(GenericResourceOperations)}\"/> that has an id for a {resourceOperation.ResourceName}.");
-            using (writer.Scope($"internal {typeOfThis}({typeof(GenericResourceOperations)} genericOperations) : base(genericOperations, genericOperations.Id)"))
-            { }
-
             // write "resource + id" constructor
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
             writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
-            using (writer.Scope($"protected {typeOfThis}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : base(options, id)"))
+            using (writer.Scope($"internal protected {typeOfThis}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : base(options, id)"))
             { }
         }
 
