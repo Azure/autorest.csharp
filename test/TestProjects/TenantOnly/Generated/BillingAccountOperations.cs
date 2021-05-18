@@ -66,5 +66,12 @@ namespace TenantOnly
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
+
+        /// <summary> Gets a list of Agreement in the BillingAccount. </summary>
+        /// <returns> An object representing collection of Agreements and their operations over a BillingAccount. </returns>
+        public AgreementContainer GetAgreements()
+        {
+            return new AgreementContainer(this);
+        }
     }
 }

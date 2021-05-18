@@ -66,5 +66,12 @@ namespace Azure.ResourceManager.Sample
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
+
+        /// <summary> Gets a list of DedicatedHost in the DedicatedHostGroup. </summary>
+        /// <returns> An object representing collection of DedicatedHosts and their operations over a DedicatedHostGroup. </returns>
+        public DedicatedHostContainer GetDedicatedHosts()
+        {
+            return new DedicatedHostContainer(this);
+        }
     }
 }
