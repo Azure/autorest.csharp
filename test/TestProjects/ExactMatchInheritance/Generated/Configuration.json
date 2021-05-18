@@ -12,9 +12,6 @@
   "HeadAsBoolean": true,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {
     "ExactMatchModel2s": "NonResource",

@@ -6,10 +6,13 @@ schemas: !Schemas
   numbers:
     - !NumberSchema &ref_30
       type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
       precision: 32
       language: !Languages 
         default:
-          name: Integer
+          name: ErrorStatus
           description: ''
       protocol: !Protocols {}
   strings:
@@ -120,36 +123,6 @@ schemas: !Schemas
           name: WrappedProductValue
           description: the product value
       protocol: !Protocols {}
-    - !StringSchema &ref_18
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: SimpleProductPropertiesMaxProductDisplayName
-          description: Display name of product.
-      protocol: !Protocols {}
-    - !StringSchema &ref_21
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: ProductUrlOdataValue
-          description: URL value.
-      protocol: !Protocols {}
-    - !StringSchema &ref_20
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: GenericUrlGenericValue
-          description: Generic URL value.
-      protocol: !Protocols {}
     - !StringSchema &ref_15
       type: string
       apiVersions:
@@ -169,6 +142,36 @@ schemas: !Schemas
         default:
           name: BaseProductDescription
           description: Description of product.
+      protocol: !Protocols {}
+    - !StringSchema &ref_18
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: SimpleProductPropertiesMaxProductDisplayName
+          description: Display name of product.
+      protocol: !Protocols {}
+    - !StringSchema &ref_20
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: GenericUrlGenericValue
+          description: Generic URL value.
+      protocol: !Protocols {}
+    - !StringSchema &ref_21
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: ProductUrlOdataValue
+          description: URL value.
       protocol: !Protocols {}
   choices:
     - !ChoiceSchema &ref_11
@@ -898,70 +901,70 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
+    - *ref_17
     - *ref_14
     - !ObjectSchema &ref_35
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
-      parents: !Relations 
+      children: !Relations 
         all:
           - !ObjectSchema &ref_36
             type: object
             apiVersions:
               - !ApiVersion 
                 version: 1.0.0
-            children: !Relations 
+            parents: !Relations 
               all:
                 - *ref_35
               immediate:
                 - *ref_35
             properties:
               - !Property 
-                schema: *ref_20
-                serializedName: generic_value
+                schema: *ref_21
+                serializedName: '@odata.value'
                 language: !Languages 
                   default:
-                    name: genericValue
-                    description: Generic URL value.
+                    name: odataValue
+                    description: URL value.
                 protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
               - input
               - output
+            extensions:
+              x-ms-flattened: true
             language: !Languages 
               default:
-                name: GenericUrl
-                description: The Generic URL.
+                name: ProductUrl
+                description: The product URL.
                 namespace: ''
             protocol: !Protocols {}
         immediate:
           - *ref_36
       properties:
         - !Property 
-          schema: *ref_21
-          serializedName: '@odata.value'
+          schema: *ref_20
+          serializedName: generic_value
           language: !Languages 
             default:
-              name: odataValue
-              description: URL value.
+              name: genericValue
+              description: Generic URL value.
           protocol: !Protocols {}
       serializationFormats:
         - json
       usage:
         - input
         - output
-      extensions:
-        x-ms-flattened: true
       language: !Languages 
         default:
-          name: ProductUrl
-          description: The product URL.
+          name: GenericUrl
+          description: The Generic URL.
           namespace: ''
       protocol: !Protocols {}
     - *ref_36
-    - *ref_17
   arrays:
     - !ArraySchema &ref_42
       type: array
