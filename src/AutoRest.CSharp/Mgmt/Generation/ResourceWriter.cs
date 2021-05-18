@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.Line();
 
                     // Only write GetResource if it is NOT singleton.
-                    if (!resource.IsSingletonResource(context.Configuration.MgmtConfiguration))
+                    if (!resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
                     {
                         // protected override GetResource
                         writer.Line();
