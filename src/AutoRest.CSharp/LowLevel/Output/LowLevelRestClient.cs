@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Output.Models
         private RestClientBuilder _builder;
 
         private LowLevelClientMethod[]? _allMethods;
+        private Credential[]? _credentials;
 
         protected override string DefaultAccessibility { get; } = "public";
 
@@ -41,6 +42,7 @@ namespace AutoRest.CSharp.Output.Models
         public LowLevelClientMethod[] Methods => _allMethods ??= BuildAllMethods().ToArray();
         public string ClientPrefix { get; }
         protected override string DefaultName { get; }
+        public Credential[] Credentials => _credentials ??= Credential.Create (_context).ToArray();
 
         private IEnumerable<LowLevelClientMethod> BuildAllMethods()
         {

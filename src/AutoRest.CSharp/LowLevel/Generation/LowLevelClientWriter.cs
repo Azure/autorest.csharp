@@ -20,12 +20,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter
     {
-        internal enum CredentialKind {
-            Token,
-            Key,
-            None
-        }
-
         public void WriteClient(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             var cs = client.Type;
@@ -176,7 +170,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteStatusCodeSwitch(CodeWriter writer, RestClientMethod clientMethod, bool async)
         {
-             using (writer.Scope($"switch (message.Response.Status)"))
+            using (writer.Scope($"switch (message.Response.Status)"))
             {
                 foreach (var response in clientMethod.Responses)
                 {
@@ -222,34 +216,31 @@ namespace AutoRest.CSharp.Generation.Writers
         private const string KeyAuthField = "_keyCredential";
         private const string TokenAuthField = "_tokenCredential";
 
-        private bool HasKeyAuth (BuildContext context) => context.CodeModel.Security.Schemes.Any(x => x is AzureKeySecurityScheme);
-        private bool HasTokenAuth (BuildContext context) => context.CodeModel.Security.Schemes.Any(x => x is AADTokenSecurityScheme);
-
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             writer.WriteXmlDocumentationSummary("The HTTP pipeline for sending and receiving REST requests and responses.");
             writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineField}");
             writer.AppendRaw("{ get; }\n");
 
-            var schemes = context.CodeModel.Security.Schemes;
-            foreach (var scheme in schemes)
+            foreach (var scheme in client.Credentials)
             {
-                if (scheme is AzureKeySecurityScheme azureKeySecurityScheme)
+                switch (scheme.Kind)
                 {
-                    writer.Line($"private const string {AuthorizationHeaderConstant} = {azureKeySecurityScheme.HeaderName:L};");
-                    writer.Line($"private readonly {typeof(AzureKeyCredential)}? {KeyAuthField};");
-                }
-                else if (scheme is AADTokenSecurityScheme aadTokenSecurityScheme)
-                {
-                    writer.Append($"private readonly string[] {ScopesConstant} = ");
-                    writer.Append($"{{ ");
-                    foreach (var credentialScope in aadTokenSecurityScheme.Scopes)
-                    {
-                        writer.Append($"{credentialScope:L}, ");
-                    }
-                    writer.RemoveTrailingComma();
-                    writer.Line($"}};");
-                    writer.Line($"private readonly {typeof(TokenCredential)}? {TokenAuthField};");
+                    case CredentialKind.Token:
+                        writer.Append($"private readonly string[] {ScopesConstant} = ");
+                        writer.Append($"{{ ");
+                        foreach (var credentialScope in scheme.GetSchemeData<AADTokenSecurityScheme>().Scopes)
+                        {
+                            writer.Append($"{credentialScope:L}, ");
+                        }
+                        writer.RemoveTrailingComma();
+                        writer.Line($"}};");
+                        writer.Line($"private readonly {typeof(TokenCredential)}? {TokenAuthField};");
+                        break;
+                    case CredentialKind.Key:
+                        writer.Line($"private const string {AuthorizationHeaderConstant} = {scheme.GetSchemeData<AzureKeySecurityScheme>().HeaderName:L};");
+                        writer.Line($"private readonly {typeof(AzureKeyCredential)}? {KeyAuthField};");
+                        break;
                 }
             }
 
@@ -268,21 +259,20 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             WriteEmptyConstructor(writer, client);
 
-            bool hasKeyAuth = HasKeyAuth (context);
-            bool hasTokenAuth = HasTokenAuth (context);
-
-
-            if (hasKeyAuth)
+            foreach (var scheme in client.Credentials)
             {
-                WriteConstructor(writer, client, CredentialKind.Key, context);
-            }
-            if (hasTokenAuth)
-            {
-                WriteConstructor(writer, client, CredentialKind.Token, context);
-            }
-            if (!context.CodeModel.Security.Schemes.Any())
-            {
-                WriteConstructor(writer, client, CredentialKind.None, context);
+                switch (scheme.Kind)
+                {
+                    case CredentialKind.Token:
+                        WriteConstructor(writer, client, CredentialKind.Token, context);
+                        break;
+                    case CredentialKind.Key:
+                        WriteConstructor(writer, client, CredentialKind.Key, context);
+                        break;
+                    case CredentialKind.None:
+                        WriteConstructor(writer, client, CredentialKind.None, context);
+                        break;
+                }
             }
         }
 
