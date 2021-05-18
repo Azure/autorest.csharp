@@ -30,6 +30,7 @@ namespace Azure.Management.Storage
         {
             _operation = new OperationInternals<BlobRestoreStatus>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "StorageAccountsRestoreBlobRangesOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

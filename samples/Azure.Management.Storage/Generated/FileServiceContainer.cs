@@ -63,7 +63,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(accountName));
                 }
 
-                return StartCreateOrUpdate(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).WaitForCompletion() as Response<FileService>;
+                return StartCreateOrUpdate(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<FileService>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -103,7 +103,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<FileService> StartCreateOrUpdate(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public FileServicesSetServicePropertiesOperation StartCreateOrUpdate(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -129,7 +129,7 @@ namespace Azure.Management.Storage
         /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
         /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<FileService>> StartCreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        public async Task<FileServicesSetServicePropertiesOperation> StartCreateOrUpdateAsync(string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -188,7 +188,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(accountName));
                 }
 
-                var response = await _restClient.GetServicePropertiesAsync(Id.ResourceGroupName, accountName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetServicePropertiesAsync(Id.ResourceGroupName, accountName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FileService(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -205,7 +205,7 @@ namespace Azure.Management.Storage
         public Pageable<FileService> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, FileService>(results, genericResource => new FileServiceOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, FileService>(results, genericResource => new FileServiceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="FileService" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -216,7 +216,7 @@ namespace Azure.Management.Storage
         public Pageable<FileService> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, FileService>(results, genericResource => new FileServiceOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, FileService>(results, genericResource => new FileServiceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="FileService" /> for this resource group. </summary>
@@ -226,7 +226,7 @@ namespace Azure.Management.Storage
         public AsyncPageable<FileService> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, FileService>(results, genericResource => new FileServiceOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, FileService>(results, genericResource => new FileServiceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="FileService" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -237,7 +237,7 @@ namespace Azure.Management.Storage
         public AsyncPageable<FileService> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, FileService>(results, genericResource => new FileServiceOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, FileService>(results, genericResource => new FileServiceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of FileService for this resource group represented as generic resources. </summary>

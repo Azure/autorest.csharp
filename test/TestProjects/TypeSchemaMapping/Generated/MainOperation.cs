@@ -28,6 +28,7 @@ namespace CustomNamespace
         {
             _operation = new OperationInternals<CustomizedModel>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "MainOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

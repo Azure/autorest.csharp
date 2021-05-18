@@ -67,7 +67,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<StorageAccount>;
+                return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -96,7 +96,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<StorageAccount>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -109,7 +109,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<StorageAccount> StartCreateOrUpdate(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public StorageAccountsCreateOperation StartCreateOrUpdate(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.StartCreateOrUpdate");
             scope.Start();
@@ -125,13 +125,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = _restClient.Create(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken);
-                var operation = new StorageAccountsCreateOperation(
-                _clientDiagnostics, _pipeline, _restClient.CreateCreateRequest(
-                Id.ResourceGroupName, accountName, parameters).Request,
-                originalResponse);
-                return new PhArmOperation<StorageAccount, StorageAccountData>(
-                operation,
-                data => new StorageAccount(Parent, data));
+                return new StorageAccountsCreateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, accountName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -144,7 +138,7 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The parameters to provide for the created account. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<StorageAccount>> StartCreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
+        public async Task<StorageAccountsCreateOperation> StartCreateOrUpdateAsync(string accountName, StorageAccountCreateParameters parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountContainer.StartCreateOrUpdate");
             scope.Start();
@@ -160,13 +154,7 @@ namespace Azure.Management.Storage
                 }
 
                 var originalResponse = await _restClient.CreateAsync(Id.ResourceGroupName, accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new StorageAccountsCreateOperation(
-                _clientDiagnostics, _pipeline, _restClient.CreateCreateRequest(
-                Id.ResourceGroupName, accountName, parameters).Request,
-                originalResponse);
-                return new PhArmOperation<StorageAccount, StorageAccountData>(
-                operation,
-                data => new StorageAccount(Parent, data));
+                return new StorageAccountsCreateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateRequest(Id.ResourceGroupName, accountName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -213,7 +201,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(accountName));
                 }
 
-                var response = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, accountName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, accountName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new StorageAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -255,7 +243,7 @@ namespace Azure.Management.Storage
         public Pageable<StorageAccount> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, StorageAccount>(results, genericResource => new StorageAccountOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, StorageAccount>(results, genericResource => new StorageAccountOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="StorageAccount" /> for this resource group. </summary>
@@ -290,7 +278,7 @@ namespace Azure.Management.Storage
         public AsyncPageable<StorageAccount> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, StorageAccount>(results, genericResource => new StorageAccountOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, StorageAccount>(results, genericResource => new StorageAccountOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of StorageAccount for this resource group represented as generic resources. </summary>

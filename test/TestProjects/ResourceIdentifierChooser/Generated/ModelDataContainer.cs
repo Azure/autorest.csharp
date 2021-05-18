@@ -65,7 +65,7 @@ namespace ResourceIdentifierChooser
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(modelDatasName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<ModelData>;
+                return StartCreateOrUpdate(modelDatasName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(modelDatasName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<ModelData>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace ResourceIdentifierChooser
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="parameters"> The ModelData to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<ModelData> StartCreateOrUpdate(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
+        public ModelDatasPutOperation StartCreateOrUpdate(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.StartCreateOrUpdate");
             scope.Start();
@@ -136,7 +136,7 @@ namespace ResourceIdentifierChooser
         /// <param name="modelDatasName"> The String to use. </param>
         /// <param name="parameters"> The ModelData to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<ModelData>> StartCreateOrUpdateAsync(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
+        public async Task<ModelDatasPutOperation> StartCreateOrUpdateAsync(string modelDatasName, ModelDataData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.StartCreateOrUpdate");
             scope.Start();
@@ -168,7 +168,7 @@ namespace ResourceIdentifierChooser
         public Pageable<ModelData> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ModelData" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -179,7 +179,7 @@ namespace ResourceIdentifierChooser
         public Pageable<ModelData> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ModelData" /> for this resource group. </summary>
@@ -189,7 +189,7 @@ namespace ResourceIdentifierChooser
         public AsyncPageable<ModelData> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ModelData" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -200,7 +200,7 @@ namespace ResourceIdentifierChooser
         public AsyncPageable<ModelData> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ModelData>(results, genericResource => new ModelDataOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of ModelData for this resource group represented as generic resources. </summary>

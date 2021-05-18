@@ -28,6 +28,7 @@ namespace Azure.Management.Storage
         {
             _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "StorageAccountsFailoverOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

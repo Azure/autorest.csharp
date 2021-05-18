@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,9 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.ResourceManager.Core;
+using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using System.Text.RegularExpressions;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -39,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // TODO Write singleton operations
                     if (!isSingleton)
                     {
-                        WriteClientMethods(writer, resourceOperation);
+                        WriteClientMethods(writer, resourceOperation, context);
                     }
 
                     WriteChildSingletonGetOperationMethods(writer, resourceOperation, context);
@@ -58,20 +62,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"protected {typeOfThis}()"))
             { }
 
-            // write "generic resource" constructor
-            writer.Line();
-            writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
-            writer.WriteXmlDocumentationParameter("genericOperations", $"An instance of <see cref=\"{constructorType}\"/> that has an id for a {resourceOperation.ResourceName}.");
-            using (writer.Scope($"internal {typeOfThis}({constructorType} genericOperations) : {baseConstructorCall}"))
-            { }
-
             // write "resource + id" constructor
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class.");
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
             writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
             baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
-            using (writer.Scope($"protected {typeOfThis}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : {baseConstructorCall}"))
+            using (writer.Scope($"internal {typeOfThis}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : {baseConstructorCall}"))
             { }
         }
 
@@ -82,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
         }
 
-        private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation)
+        private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
@@ -117,6 +114,40 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Line($"return await ListAvailableLocationsAsync(ResourceType, cancellationToken);");
             }
             writer.Line();
+
+            foreach (var item in context.CodeModel.OperationGroups)
+            {
+                if (item.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(resourceOperation.OperationGroup.ResourceType(context.Configuration.MgmtConfiguration)))
+                {
+                    var container = context.Library.ResourceContainers.FirstOrDefault(x => x.ResourceName.Equals(item.Resource(context.Configuration.MgmtConfiguration)));
+                    if (container == null)
+                        return;
+                    writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName} in the {resourceOperation.ResourceName}.");
+                    writer.WriteXmlDocumentationReturns($"An object representing collection of {Pluralization(container.ResourceName)} and their operations over a {resourceOperation.ResourceName}.");
+                    using (writer.Scope($"public {container.Type} Get{Pluralization(container.ResourceName)}()"))
+                    {
+                        writer.Line($"return new {container.Type}(this);");
+                    }
+                    writer.Line();
+                }
+            }
+        }
+
+        internal static string Pluralization(string single)
+        {
+            if (new Regex("([^aeiou])y$").IsMatch(single))
+            {
+                single = Regex.Replace(single, "([^aeiou])y$", "ie");
+            }
+            else if (new Regex("fe?$").IsMatch(single))
+            {
+                single = Regex.Replace(single, "fe?$", "ve");
+            }
+            else if (new Regex("([^aeiou]o|[sxz]|[cs]h)$").IsMatch(single))
+            {
+                single = Regex.Replace(single, "([^aeiou]o|[sxz]|[cs]h)$", "e");
+            }
+            return single + "s";
         }
 
 

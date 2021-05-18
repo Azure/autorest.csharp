@@ -28,6 +28,7 @@ namespace NameConflicts
         {
             _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "AutoRestParameterFlatteningAnalyzeBodyOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

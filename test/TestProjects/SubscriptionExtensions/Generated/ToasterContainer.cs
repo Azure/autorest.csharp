@@ -66,7 +66,7 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(availabilitySetName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<Toaster>;
+                return StartCreateOrUpdate(availabilitySetName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -95,7 +95,7 @@ namespace SubscriptionExtensions
                 }
 
                 var operation = await StartCreateOrUpdateAsync(availabilitySetName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<Toaster>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace SubscriptionExtensions
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<Toaster> StartCreateOrUpdate(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public ToastersCreateOrUpdateOperation StartCreateOrUpdate(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.StartCreateOrUpdate");
             scope.Start();
@@ -137,7 +137,7 @@ namespace SubscriptionExtensions
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<Toaster>> StartCreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        public async Task<ToastersCreateOrUpdateOperation> StartCreateOrUpdateAsync(string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ToasterContainer.StartCreateOrUpdate");
             scope.Start();
@@ -169,7 +169,7 @@ namespace SubscriptionExtensions
         public Pageable<Toaster> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, Toaster>(results, genericResource => new ToasterOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, Toaster>(results, genericResource => new ToasterOperations(genericResource, genericResource.Id as SubscriptionResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="Toaster" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -180,7 +180,7 @@ namespace SubscriptionExtensions
         public Pageable<Toaster> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, Toaster>(results, genericResource => new ToasterOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, Toaster>(results, genericResource => new ToasterOperations(genericResource, genericResource.Id as SubscriptionResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="Toaster" /> for this resource group. </summary>
@@ -190,7 +190,7 @@ namespace SubscriptionExtensions
         public AsyncPageable<Toaster> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, Toaster>(results, genericResource => new ToasterOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, Toaster>(results, genericResource => new ToasterOperations(genericResource, genericResource.Id as SubscriptionResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="Toaster" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -201,7 +201,7 @@ namespace SubscriptionExtensions
         public AsyncPageable<Toaster> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, Toaster>(results, genericResource => new ToasterOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, Toaster>(results, genericResource => new ToasterOperations(genericResource, genericResource.Id as SubscriptionResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of Toaster for this resource group represented as generic resources. </summary>

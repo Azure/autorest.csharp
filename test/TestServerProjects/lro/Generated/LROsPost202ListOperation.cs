@@ -31,6 +31,7 @@ namespace lro
         {
             _operation = new OperationInternals<IReadOnlyList<Product>>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPost202ListOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
