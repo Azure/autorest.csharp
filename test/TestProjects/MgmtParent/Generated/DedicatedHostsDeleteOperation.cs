@@ -28,6 +28,7 @@ namespace MgmtParent
         {
             _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DedicatedHostsDeleteOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

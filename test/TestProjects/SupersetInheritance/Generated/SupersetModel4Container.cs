@@ -65,7 +65,7 @@ namespace SupersetInheritance
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(supersetModel4SName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<SupersetModel4>;
+                return StartCreateOrUpdate(supersetModel4SName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace SupersetInheritance
                 }
 
                 var operation = await StartCreateOrUpdateAsync(supersetModel4SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<SupersetModel4>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<SupersetModel4> StartCreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public SupersetModel4SPutOperation StartCreateOrUpdate(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.StartCreateOrUpdate");
             scope.Start();
@@ -136,7 +136,7 @@ namespace SupersetInheritance
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="parameters"> The SupersetModel4 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<SupersetModel4>> StartCreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
+        public async Task<SupersetModel4SPutOperation> StartCreateOrUpdateAsync(string supersetModel4SName, SupersetModel4Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.StartCreateOrUpdate");
             scope.Start();
@@ -168,7 +168,7 @@ namespace SupersetInheritance
         public Pageable<SupersetModel4> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, SupersetModel4>(results, genericResource => new SupersetModel4Operations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, SupersetModel4>(results, genericResource => new SupersetModel4Operations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="SupersetModel4" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -179,7 +179,7 @@ namespace SupersetInheritance
         public Pageable<SupersetModel4> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, SupersetModel4>(results, genericResource => new SupersetModel4Operations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, SupersetModel4>(results, genericResource => new SupersetModel4Operations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="SupersetModel4" /> for this resource group. </summary>
@@ -189,7 +189,7 @@ namespace SupersetInheritance
         public AsyncPageable<SupersetModel4> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, SupersetModel4>(results, genericResource => new SupersetModel4Operations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, SupersetModel4>(results, genericResource => new SupersetModel4Operations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="SupersetModel4" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -200,7 +200,7 @@ namespace SupersetInheritance
         public AsyncPageable<SupersetModel4> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, SupersetModel4>(results, genericResource => new SupersetModel4Operations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, SupersetModel4>(results, genericResource => new SupersetModel4Operations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of SupersetModel4 for this resource group represented as generic resources. </summary>

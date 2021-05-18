@@ -65,7 +65,7 @@ namespace ResourceIdentifierChooser
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(resourceLevelsName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<ResourceLevel>;
+                return StartCreateOrUpdate(resourceLevelsName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(resourceLevelsName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<ResourceLevel>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="parameters"> The ResourceLevel to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<ResourceLevel> StartCreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        public ResourceLevelsPutOperation StartCreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartCreateOrUpdate");
             scope.Start();
@@ -136,7 +136,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="parameters"> The ResourceLevel to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<ResourceLevel>> StartCreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
+        public async Task<ResourceLevelsPutOperation> StartCreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartCreateOrUpdate");
             scope.Start();
@@ -168,7 +168,7 @@ namespace ResourceIdentifierChooser
         public Pageable<ResourceLevel> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ResourceLevel" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -179,7 +179,7 @@ namespace ResourceIdentifierChooser
         public Pageable<ResourceLevel> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ResourceLevel" /> for this resource group. </summary>
@@ -189,7 +189,7 @@ namespace ResourceIdentifierChooser
         public AsyncPageable<ResourceLevel> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ResourceLevel" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -200,7 +200,7 @@ namespace ResourceIdentifierChooser
         public AsyncPageable<ResourceLevel> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of ResourceLevel for this resource group represented as generic resources. </summary>

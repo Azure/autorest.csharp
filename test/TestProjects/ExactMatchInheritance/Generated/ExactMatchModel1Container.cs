@@ -65,7 +65,7 @@ namespace ExactMatchInheritance
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(exactMatchModel1SName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<ExactMatchModel1>;
+                return StartCreateOrUpdate(exactMatchModel1SName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace ExactMatchInheritance
                 }
 
                 var operation = await StartCreateOrUpdateAsync(exactMatchModel1SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<ExactMatchModel1>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel1 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<ExactMatchModel1> StartCreateOrUpdate(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
+        public ExactMatchModel1SPutOperation StartCreateOrUpdate(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.StartCreateOrUpdate");
             scope.Start();
@@ -136,7 +136,7 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel1 to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<ExactMatchModel1>> StartCreateOrUpdateAsync(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
+        public async Task<ExactMatchModel1SPutOperation> StartCreateOrUpdateAsync(string exactMatchModel1SName, ExactMatchModel1Data parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ExactMatchModel1Container.StartCreateOrUpdate");
             scope.Start();
@@ -168,7 +168,7 @@ namespace ExactMatchInheritance
         public Pageable<ExactMatchModel1> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ExactMatchModel1>(results, genericResource => new ExactMatchModel1Operations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ExactMatchModel1>(results, genericResource => new ExactMatchModel1Operations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ExactMatchModel1" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -179,7 +179,7 @@ namespace ExactMatchInheritance
         public Pageable<ExactMatchModel1> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ExactMatchModel1>(results, genericResource => new ExactMatchModel1Operations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ExactMatchModel1>(results, genericResource => new ExactMatchModel1Operations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ExactMatchModel1" /> for this resource group. </summary>
@@ -189,7 +189,7 @@ namespace ExactMatchInheritance
         public AsyncPageable<ExactMatchModel1> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel1>(results, genericResource => new ExactMatchModel1Operations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel1>(results, genericResource => new ExactMatchModel1Operations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ExactMatchModel1" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -200,7 +200,7 @@ namespace ExactMatchInheritance
         public AsyncPageable<ExactMatchModel1> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel1>(results, genericResource => new ExactMatchModel1Operations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ExactMatchModel1>(results, genericResource => new ExactMatchModel1Operations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of ExactMatchModel1 for this resource group represented as generic resources. </summary>

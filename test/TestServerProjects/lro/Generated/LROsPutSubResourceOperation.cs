@@ -30,6 +30,7 @@ namespace lro
         {
             _operation = new OperationInternals<SubProduct>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsPutSubResourceOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

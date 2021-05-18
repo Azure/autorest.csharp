@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(instanceId, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<VirtualMachineScaleSetVM>;
+                return StartCreateOrUpdate(instanceId, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<VirtualMachineScaleSetVM>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Update Virtual Machine Scale Sets VM operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<VirtualMachineScaleSetVM> StartCreateOrUpdate(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
+        public VirtualMachineScaleSetVMsUpdateOperation StartCreateOrUpdate(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.StartCreateOrUpdate");
             scope.Start();
@@ -123,14 +123,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var originalResponse = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, instanceId, parameters, cancellationToken: cancellationToken);
-                var operation = new VirtualMachineScaleSetVMsUpdateOperation(
-                _clientDiagnostics, _pipeline, _restClient.CreateUpdateRequest(
-                Id.ResourceGroupName, Id.Parent.Name, instanceId, parameters).Request,
-                originalResponse);
-                return new PhArmOperation<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
-                operation,
-                data => new VirtualMachineScaleSetVM(Parent, data));
+                var originalResponse = _restClient.Update(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken);
+                return new VirtualMachineScaleSetVMsUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -143,7 +137,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="instanceId"> The instance ID of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Update Virtual Machine Scale Sets VM operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<VirtualMachineScaleSetVM>> StartCreateOrUpdateAsync(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachineScaleSetVMsUpdateOperation> StartCreateOrUpdateAsync(string instanceId, VirtualMachineScaleSetVMData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetVMContainer.StartCreateOrUpdate");
             scope.Start();
@@ -158,14 +152,8 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var originalResponse = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new VirtualMachineScaleSetVMsUpdateOperation(
-                _clientDiagnostics, _pipeline, _restClient.CreateUpdateRequest(
-                Id.ResourceGroupName, Id.Parent.Name, instanceId, parameters).Request,
-                originalResponse);
-                return new PhArmOperation<VirtualMachineScaleSetVM, VirtualMachineScaleSetVMData>(
-                operation,
-                data => new VirtualMachineScaleSetVM(Parent, data));
+                var originalResponse = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, instanceId, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineScaleSetVMsUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, instanceId, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -188,7 +176,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(instanceId));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, instanceId, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken);
                 return Response.FromValue(new VirtualMachineScaleSetVM(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -212,7 +200,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(instanceId));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, instanceId, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, instanceId, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineScaleSetVM(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -234,7 +222,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = _restClient.List(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.List(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVM(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -249,7 +237,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken);
+                    var response = _restClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVM(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -269,7 +257,7 @@ namespace Azure.ResourceManager.Sample
         public Pageable<VirtualMachineScaleSetVM> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, VirtualMachineScaleSetVM>(results, genericResource => new VirtualMachineScaleSetVMOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, VirtualMachineScaleSetVM>(results, genericResource => new VirtualMachineScaleSetVMOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="VirtualMachineScaleSetVM" /> for this resource group. </summary>
@@ -284,7 +272,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVM(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -299,7 +287,7 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Parent.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSetVM(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -319,7 +307,7 @@ namespace Azure.ResourceManager.Sample
         public AsyncPageable<VirtualMachineScaleSetVM> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineScaleSetVM>(results, genericResource => new VirtualMachineScaleSetVMOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, VirtualMachineScaleSetVM>(results, genericResource => new VirtualMachineScaleSetVMOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of VirtualMachineScaleSetVM for this resource group represented as generic resources. </summary>

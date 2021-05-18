@@ -65,7 +65,7 @@ namespace ResourceIdentifierChooser
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(resourceGroupResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<ResourceGroupResource>;
+                return StartCreateOrUpdate(resourceGroupResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(resourceGroupResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<ResourceGroupResource>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<ResourceGroupResource> StartCreateOrUpdate(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
+        public ResourceGroupResourcesPutOperation StartCreateOrUpdate(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -136,7 +136,7 @@ namespace ResourceIdentifierChooser
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="parameters"> The ResourceGroupResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<ResourceGroupResource>> StartCreateOrUpdateAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<ResourceGroupResourcesPutOperation> StartCreateOrUpdateAsync(string resourceGroupResourcesName, ResourceGroupResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.StartCreateOrUpdate");
             scope.Start();
@@ -168,7 +168,7 @@ namespace ResourceIdentifierChooser
         public Pageable<ResourceGroupResource> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ResourceGroupResource>(results, genericResource => new ResourceGroupResourceOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ResourceGroupResource>(results, genericResource => new ResourceGroupResourceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ResourceGroupResource" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -179,7 +179,7 @@ namespace ResourceIdentifierChooser
         public Pageable<ResourceGroupResource> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ResourceGroupResource>(results, genericResource => new ResourceGroupResourceOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ResourceGroupResource>(results, genericResource => new ResourceGroupResourceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ResourceGroupResource" /> for this resource group. </summary>
@@ -189,7 +189,7 @@ namespace ResourceIdentifierChooser
         public AsyncPageable<ResourceGroupResource> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ResourceGroupResource>(results, genericResource => new ResourceGroupResourceOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ResourceGroupResource>(results, genericResource => new ResourceGroupResourceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ResourceGroupResource" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -200,7 +200,7 @@ namespace ResourceIdentifierChooser
         public AsyncPageable<ResourceGroupResource> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ResourceGroupResource>(results, genericResource => new ResourceGroupResourceOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ResourceGroupResource>(results, genericResource => new ResourceGroupResourceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of ResourceGroupResource for this resource group represented as generic resources. </summary>

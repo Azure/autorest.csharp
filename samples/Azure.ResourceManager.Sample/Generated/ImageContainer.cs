@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(imageName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<Image>;
+                return StartCreateOrUpdate(imageName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -95,7 +95,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var operation = await StartCreateOrUpdateAsync(imageName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<Image>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<Image> StartCreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public ImagesCreateOrUpdateOperation StartCreateOrUpdate(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.StartCreateOrUpdate");
             scope.Start();
@@ -124,13 +124,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, imageName, parameters, cancellationToken: cancellationToken);
-                var operation = new ImagesCreateOrUpdateOperation(
-                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
-                Id.ResourceGroupName, imageName, parameters).Request,
-                originalResponse);
-                return new PhArmOperation<Image, ImageData>(
-                operation,
-                data => new Image(Parent, data));
+                return new ImagesCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, imageName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -143,7 +137,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="parameters"> Parameters supplied to the Create Image operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<Image>> StartCreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
+        public async Task<ImagesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string imageName, ImageData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ImageContainer.StartCreateOrUpdate");
             scope.Start();
@@ -159,13 +153,7 @@ namespace Azure.ResourceManager.Sample
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, imageName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                var operation = new ImagesCreateOrUpdateOperation(
-                _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(
-                Id.ResourceGroupName, imageName, parameters).Request,
-                originalResponse);
-                return new PhArmOperation<Image, ImageData>(
-                operation,
-                data => new Image(Parent, data));
+                return new ImagesCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, imageName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -212,7 +200,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(imageName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, imageName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Image(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -269,7 +257,7 @@ namespace Azure.ResourceManager.Sample
         public Pageable<Image> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, Image>(results, genericResource => new ImageOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, Image>(results, genericResource => new ImageOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="Image" /> for this resource group. </summary>
@@ -319,7 +307,7 @@ namespace Azure.ResourceManager.Sample
         public AsyncPageable<Image> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, Image>(results, genericResource => new ImageOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, Image>(results, genericResource => new ImageOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of Image for this resource group represented as generic resources. </summary>

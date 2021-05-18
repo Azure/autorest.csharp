@@ -30,6 +30,7 @@ namespace Azure.Network.Management.Interface
         {
             _operation = new OperationInternals<NetworkInterface>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "NetworkInterfacesCreateOrUpdateOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

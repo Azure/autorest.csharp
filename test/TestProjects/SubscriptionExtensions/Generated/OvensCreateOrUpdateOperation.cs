@@ -12,29 +12,34 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager.Core;
 using SubscriptionExtensions.Models;
 
 namespace SubscriptionExtensions
 {
     /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
-    public partial class OvensCreateOrUpdateOperation : Operation<OvenData>, IOperationSource<OvenData>
+    public partial class OvensCreateOrUpdateOperation : Operation<Oven>, IOperationSource<OvenData>
     {
         private readonly OperationInternals<OvenData> _operation;
+
+        private readonly ResourceOperationsBase _operationBase;
 
         /// <summary> Initializes a new instance of OvensCreateOrUpdateOperation for mocking. </summary>
         protected OvensCreateOrUpdateOperation()
         {
         }
 
-        internal OvensCreateOrUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal OvensCreateOrUpdateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<OvenData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "OvensCreateOrUpdateOperation");
+            _operationBase = operationsBase;
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override OvenData Value => _operation.Value;
+        public override Oven Value => new Oven(_operationBase, _operation.Value);
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,10 +57,12 @@ namespace SubscriptionExtensions
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<OvenData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public async override ValueTask<Response<Oven>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(cancellationToken));
 
         /// <inheritdoc />
-        public override ValueTask<Response<OvenData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public async override ValueTask<Response<Oven>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken));
+
+        private Response<Oven> MapResponseType(Response<OvenData> response) => Response.FromValue(new Oven(_operationBase, response.Value), response.GetRawResponse());
 
         OvenData IOperationSource<OvenData>.CreateResult(Response response, CancellationToken cancellationToken)
         {

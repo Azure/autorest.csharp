@@ -29,6 +29,7 @@ namespace Azure.ResourceManager.Sample
         {
             _operation = new OperationInternals<LogAnalytics>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "LogAnalyticsExportThrottledRequestsOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
