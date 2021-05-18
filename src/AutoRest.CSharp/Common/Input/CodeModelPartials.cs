@@ -256,5 +256,27 @@ namespace AutoRest.CSharp.Input
         public ICollection<string> Keys => _dictionary.Keys;
         public ICollection<object> Values => _dictionary.Values;
     }
+
+    internal partial class NoAuthSecurity : SecurityScheme
+    {
+    }
+
+    internal partial class Security
+    {
+        internal IEnumerable<SecurityScheme> GetSchemesOrAnonymous()
+        {
+            if (Schemes.Count == 0)
+            {
+                yield return new NoAuthSecurity();
+            }
+            else
+            {
+                foreach (var scheme in Schemes)
+                {
+                    yield return scheme;
+                }
+            }
+        }
+    }
 }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.

@@ -20,6 +20,12 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class LowLevelClientWriter
     {
+        private enum CredentialKind {
+            Token,
+            Key,
+            None
+        }
+
         public void WriteClient(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
             var cs = client.Type;
@@ -222,24 +228,24 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineField}");
             writer.AppendRaw("{ get; }\n");
 
-            foreach (var scheme in client.Credentials)
+            foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
             {
-                switch (scheme.Kind)
+                switch (scheme)
                 {
-                    case CredentialKind.Token:
+                    case AzureKeySecurityScheme azureKeySecurityScheme:
+                        writer.Line($"private const string {AuthorizationHeaderConstant} = {azureKeySecurityScheme.HeaderName:L};");
+                        writer.Line($"private readonly {typeof(AzureKeyCredential)}? {KeyAuthField};");
+                        break;
+                    case AADTokenSecurityScheme aadTokenSecurityScheme:
                         writer.Append($"private readonly string[] {ScopesConstant} = ");
                         writer.Append($"{{ ");
-                        foreach (var credentialScope in scheme.GetSchemeData<AADTokenSecurityScheme>().Scopes)
+                        foreach (var credentialScope in aadTokenSecurityScheme.Scopes)
                         {
                             writer.Append($"{credentialScope:L}, ");
                         }
                         writer.RemoveTrailingComma();
                         writer.Line($"}};");
                         writer.Line($"private readonly {typeof(TokenCredential)}? {TokenAuthField};");
-                        break;
-                    case CredentialKind.Key:
-                        writer.Line($"private const string {AuthorizationHeaderConstant} = {scheme.GetSchemeData<AzureKeySecurityScheme>().HeaderName:L};");
-                        writer.Line($"private readonly {typeof(AzureKeyCredential)}? {KeyAuthField};");
                         break;
                 }
             }
@@ -259,17 +265,17 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             WriteEmptyConstructor(writer, client);
 
-            foreach (var scheme in client.Credentials)
+            foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
             {
-                switch (scheme.Kind)
+                switch (scheme)
                 {
-                    case CredentialKind.Token:
-                        WriteConstructor(writer, client, CredentialKind.Token, context);
-                        break;
-                    case CredentialKind.Key:
+                    case AzureKeySecurityScheme azureKeySecurityScheme:
                         WriteConstructor(writer, client, CredentialKind.Key, context);
                         break;
-                    case CredentialKind.None:
+                    case AADTokenSecurityScheme aadTokenSecurityScheme:
+                        WriteConstructor(writer, client, CredentialKind.Token, context);
+                        break;
+                    case NoAuthSecurity noAuthSecurityScheme:
                         WriteConstructor(writer, client, CredentialKind.None, context);
                         break;
                 }
