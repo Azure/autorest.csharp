@@ -29,6 +29,7 @@ namespace TenantOnly
         {
             _operation = new OperationInternals<BillingAccountData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "BillingAccountsUpdateOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

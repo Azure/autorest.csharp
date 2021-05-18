@@ -29,6 +29,7 @@ namespace lro_parameterized_endpoints
         {
             _operation = new OperationInternals<string>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROWithParamaterizedEndpointsPollWithParameterizedEndpointsOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

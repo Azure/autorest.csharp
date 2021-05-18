@@ -29,6 +29,7 @@ namespace MgmtParent
         {
             _operation = new OperationInternals<DedicatedHostData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DedicatedHostsUpdateOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

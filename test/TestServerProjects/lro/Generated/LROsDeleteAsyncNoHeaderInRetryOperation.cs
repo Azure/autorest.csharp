@@ -28,6 +28,7 @@ namespace lro
         {
             _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LROsDeleteAsyncNoHeaderInRetryOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
