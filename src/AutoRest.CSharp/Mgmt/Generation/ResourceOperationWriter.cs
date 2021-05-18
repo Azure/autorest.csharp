@@ -111,7 +111,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (item.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(resourceOperation.OperationGroup.ResourceType(context.Configuration.MgmtConfiguration)))
                 {
-                    var container = context.Library.ResourceContainers.First(x => x.ResourceName.Equals(item.Resource(context.Configuration.MgmtConfiguration)));
+                    var container = context.Library.ResourceContainers.FirstOrDefault(x => x.ResourceName.Equals(item.Resource(context.Configuration.MgmtConfiguration)));
+                    if (container == null)
+                        return;
                     writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName} in the {resourceOperation.ResourceName}.");
                     writer.WriteXmlDocumentationReturns($"An object representing collection of {Pluralization(container.ResourceName)} and their operations over a {resourceOperation.ResourceName}.");
                     using (writer.Scope($"public {container.Type} Get{Pluralization(container.ResourceName)}()"))
