@@ -14,8 +14,6 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.ResourceManager.Core;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using System.Text.RegularExpressions;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -68,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
             writer.WriteXmlDocumentationParameter("id", "The identifier of the resource that is the target of operations.");
             baseConstructorCall = isSingleton ? "base(options)" : "base(options, id)";
-            using (writer.Scope($"internal {typeOfThis}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : {baseConstructorCall}"))
+            using (writer.Scope($"internal protected {typeOfThis}({typeof(ResourceOperationsBase)} options, {resourceOperation.ResourceIdentifierType} id) : {baseConstructorCall}"))
             { }
         }
 
@@ -81,6 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
+            var config = context.Configuration.MgmtConfiguration;
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
             using (writer.Scope($"public override {typeof(Response)}<{resourceOperation.ResourceName}> Get({typeof(CancellationToken)} cancellationToken = default)"))
@@ -117,9 +116,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             foreach (var item in context.CodeModel.OperationGroups)
             {
-                if (item.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(resourceOperation.OperationGroup.ResourceType(context.Configuration.MgmtConfiguration)))
+                if (item.ParentResourceType(config).Equals(resourceOperation.OperationGroup.ResourceType(config))
+                    && !item.IsSingletonResource(config))
                 {
-                    var container = context.Library.ResourceContainers.FirstOrDefault(x => x.ResourceName.Equals(item.Resource(context.Configuration.MgmtConfiguration)));
+                    var container = context.Library.ResourceContainers.FirstOrDefault(x => x.ResourceName.Equals(item.Resource(config)));
                     if (container == null)
                         return;
                     writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName} in the {resourceOperation.ResourceName}.");
