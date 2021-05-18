@@ -62,63 +62,63 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets a list of BlobService in the StorageAccount. </summary>
         /// <returns> An object representing collection of BlobServices and their operations over a StorageAccount. </returns>
-        public BlobServiceContainer GetBlobService()
+        public BlobServiceContainer GetBlobServices()
         {
             return new BlobServiceContainer(this);
         }
 
         /// <summary> Gets a list of BlobContainer in the StorageAccount. </summary>
         /// <returns> An object representing collection of BlobContainers and their operations over a StorageAccount. </returns>
-        public BlobContainerContainer GetBlobContainer()
+        public BlobContainerContainer GetBlobContainers()
         {
             return new BlobContainerContainer(this);
         }
 
         /// <summary> Gets a list of FileService in the StorageAccount. </summary>
         /// <returns> An object representing collection of FileServices and their operations over a StorageAccount. </returns>
-        public FileServiceContainer GetFileService()
+        public FileServiceContainer GetFileServices()
         {
             return new FileServiceContainer(this);
         }
 
         /// <summary> Gets a list of FileShare in the StorageAccount. </summary>
         /// <returns> An object representing collection of FileShares and their operations over a StorageAccount. </returns>
-        public FileShareContainer GetFileShare()
+        public FileShareContainer GetFileShares()
         {
             return new FileShareContainer(this);
         }
 
         /// <summary> Gets a list of ManagementPolicy in the StorageAccount. </summary>
-        /// <returns> An object representing collection of ManagementPolicys and their operations over a StorageAccount. </returns>
-        public ManagementPolicyContainer GetManagementPolicy()
+        /// <returns> An object representing collection of ManagementPoliies and their operations over a StorageAccount. </returns>
+        public ManagementPolicyContainer GetManagementPoliies()
         {
             return new ManagementPolicyContainer(this);
         }
 
         /// <summary> Gets a list of PrivateEndpointConnection in the StorageAccount. </summary>
         /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a StorageAccount. </returns>
-        public PrivateEndpointConnectionContainer GetPrivateEndpointConnection()
+        public PrivateEndpointConnectionContainer GetPrivateEndpointConnections()
         {
             return new PrivateEndpointConnectionContainer(this);
         }
 
         /// <summary> Gets a list of PrivateLinkResource in the StorageAccount. </summary>
         /// <returns> An object representing collection of PrivateLinkResources and their operations over a StorageAccount. </returns>
-        public PrivateLinkResourceContainer GetPrivateLinkResource()
+        public PrivateLinkResourceContainer GetPrivateLinkResources()
         {
             return new PrivateLinkResourceContainer(this);
         }
 
         /// <summary> Gets a list of ObjectReplicationPolicy in the StorageAccount. </summary>
-        /// <returns> An object representing collection of ObjectReplicationPolicys and their operations over a StorageAccount. </returns>
-        public ObjectReplicationPolicyContainer GetObjectReplicationPolicy()
+        /// <returns> An object representing collection of ObjectReplicationPoliies and their operations over a StorageAccount. </returns>
+        public ObjectReplicationPolicyContainer GetObjectReplicationPoliies()
         {
             return new ObjectReplicationPolicyContainer(this);
         }
 
         /// <summary> Gets a list of EncryptionScope in the StorageAccount. </summary>
         /// <returns> An object representing collection of EncryptionScopes and their operations over a StorageAccount. </returns>
-        public EncryptionScopeContainer GetEncryptionScope()
+        public EncryptionScopeContainer GetEncryptionScopes()
         {
             return new EncryptionScopeContainer(this);
         }
