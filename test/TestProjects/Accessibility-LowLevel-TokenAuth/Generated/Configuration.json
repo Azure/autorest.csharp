@@ -18,9 +18,5 @@
   "CredentialScopes": [
     "https://test.azure.com/.default"
   ],
-  "CredentialHeaderName": "Your-Subscription-Key",
-  "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
-  "OperationGroupToParent": {},
-  "OperationGroupIsTuple": []
+  "CredentialHeaderName": "Your-Subscription-Key"
 }

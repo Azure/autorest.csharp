@@ -14,9 +14,5 @@
   "LowLevelClient": true,
   "CredentialTypes": [],
   "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
-  "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
-  "OperationGroupToParent": {},
-  "OperationGroupIsTuple": []
+  "CredentialHeaderName": "api-key"
 }

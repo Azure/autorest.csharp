@@ -47,20 +47,38 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     writer.Line();
                     writer.Append($"internal {cs.Name}(");
-                    // todo: programmatically get the type of operationBase from the definition of [Resource]
-                    writer.Append($"{typeof(ResourceOperationsBase)} operationsBase, ");
-                    writer.Append($"{typeof(Response)}<{operation.ResultDataType}> {responseVariable}");
+                    if (operation.ResultType != null)
+                    {
+                        if (operation.ResultDataType != null)
+                        {
+                            // todo: programmatically get the type of operationBase from the definition of [Resource]
+                            writer.Append($"{typeof(ResourceOperationsBase)} operationsBase, ");
+                            writer.Append($"{typeof(Response)}<{operation.ResultDataType}> {responseVariable}");
+                        }
+                        else
+                        {
+                            writer.Append($"{typeof(Response)}<{operation.ResultType}> {responseVariable}");
+                        }
+                    }
+                    else
+                    {
+                        writer.Append($"{typeof(Response)} {responseVariable}");
+                    }
                     writer.Line($")");
 
                     using (writer.Scope())
                     {
                         writer.Append($"_operation = new {helperType}(");
-                        if (operation.ResultType != null)
+                        if (operation.ResultType != null && operation.ResultDataType != null)
                         {
                             writer.Append($"{typeof(Response)}.FromValue(");
                             writer.Append($"new {operation.ResultType}(operationsBase, {responseVariable}.Value),");
                             writer.Append($"{responseVariable}.GetRawResponse()");
                             writer.Append($")");
+                        }
+                        else
+                        {
+                            writer.Append($"{responseVariable}");
                         }
                         writer.Line($");");
 
