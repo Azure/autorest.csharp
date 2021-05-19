@@ -25,7 +25,7 @@ namespace SupersetInheritance
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal protected SupersetModel4Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal SupersetModel4Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

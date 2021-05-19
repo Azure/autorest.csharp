@@ -16,9 +16,5 @@
     "AzureKeyCredential"
   ],
   "CredentialScopes": [],
-  "CredentialHeaderName": "Fake-Subscription-Key",
-  "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
-  "OperationGroupToParent": {},
-  "OperationGroupIsTuple": []
+  "CredentialHeaderName": "Fake-Subscription-Key"
 }

@@ -16,9 +16,5 @@
     "AzureKeyCredential"
   ],
   "CredentialScopes": [],
-  "CredentialHeaderName": "Ocp-Apim-Subscription-Key",
-  "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
-  "OperationGroupToParent": {},
-  "OperationGroupIsTuple": []
+  "CredentialHeaderName": "Ocp-Apim-Subscription-Key"
 }

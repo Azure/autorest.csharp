@@ -20,9 +20,5 @@
     "https://fakeendpoint.azure.com/.default",
     "https://dummyendpoint.azure.com/.default"
   ],
-  "CredentialHeaderName": "fake-key",
-  "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
-  "OperationGroupToParent": {},
-  "OperationGroupIsTuple": []
+  "CredentialHeaderName": "fake-key"
 }
