@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _operations = new CachedDictionary<Operation, LongRunningOperation>(EnsureLongRunningOperations);
             _headerModels = new CachedDictionary<Operation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
             _models = new CachedDictionary<Schema, TypeProvider>(BuildModels);
-            _modelFactory = new Lazy<ModelFactoryTypeProvider?>(BuildModelFactory);
+            _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(context, Models));
         }
 
         public ModelFactoryTypeProvider? ModelFactory => _modelFactory.Value;
@@ -79,15 +79,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             ObjectSchema objectSchema => new SchemaObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()
         };
-
-        private ModelFactoryTypeProvider? BuildModelFactory()
-        {
-            var models = Models.OfType<SchemaObjectType>()
-                .Where(o => o.RequiresFactoryMethod)
-                .ToArray();
-
-            return models.Any() ? new ModelFactoryTypeProvider(_context, models) : default;
-        }
 
         public LongRunningOperation FindLongRunningOperation(Operation operation)
         {

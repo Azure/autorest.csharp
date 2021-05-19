@@ -11,13 +11,24 @@ namespace AutoRest.TestServer.Tests
 {
     public static class TypeAsserts
     {
-        public static void HasNoTypeWithName(Assembly assembly, string typeName)
+        public static void HasNoType(Assembly assembly, string typeName)
         {
             foreach (var type in assembly.DefinedTypes)
             {
                 if (type.Name == typeName)
                 {
                     Assert.Fail($"Assembly \"{assembly.GetName().Name}\" isn't expected to define type \"{typeName}\".");
+                }
+            }
+        }
+
+        public static void HasNoType(Assembly assembly, string? ns, string typeName)
+        {
+            foreach (var type in assembly.DefinedTypes)
+            {
+                if (type.Name == typeName && type.Namespace == ns)
+                {
+                    Assert.Fail($"Assembly \"{assembly.GetName().Name}\" isn't expected to define type \"{ns}.{typeName}\".");
                 }
             }
         }

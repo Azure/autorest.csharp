@@ -252,7 +252,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelFactoryRenamed()
         {
-            TypeAsserts.HasNoTypeWithName(typeof(MainModelFactory).Assembly, "SchemaMappingModelFactory");
+            TypeAsserts.HasNoType(typeof(MainModelFactory).Assembly, "TypeSchemaMapping", "SchemaMappingModelFactory");
         }
     }
 }
