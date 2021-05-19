@@ -1,0 +1,48 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "Azure.ResourceManager.MachineLearning",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "AzureArm": true,
+  "PublicClients": true,
+  "ModelNamespace": false,
+  "HeadAsBoolean": false,
+  "SkipCSProjPackageReference": true,
+  "LowLevelClient": false,
+  "CredentialTypes": [],
+  "CredentialScopes": [],
+  "CredentialHeaderName": "api-key",
+  "OperationGroupToResourceType": {
+    "Operations": "Microsoft.MachineLearningServices/operations",
+    "WorkspaceFeatures": "Microsoft.MachineLearningServices/workspaces/features",
+    "Usages": "Microsoft.MachineLearningServices/locations/usages",
+    "VirtualMachineSizes": "Microsoft.MachineLearningServices/locations/vmSizes",
+    "Quotas": "Microsoft.MachineLearningServices/locations/quotas",
+    "Workspace": "Microsoft.MachineLearningServices/workspaces/skus",
+    "PrivateLinkResources": "Microsoft.MachineLearningServices/workspaces/privateLinkResources",
+    "Notebooks": "Microsoft.MachineLearningServices/workspaces",
+    "StorageAccount": "NonResourceMicrosoft.MachineLearningServices/workspaces/listStorageAccountKeys"
+  },
+  "OperationGroupToResource": {
+    "Operations": "NonResource",
+    "WorkspaceFeatures": "ListAmlUserFeatureResult",
+    "Usages": "NonResource",
+    "VirtualMachineSizes": "NonResource",
+    "Quotas": "NonResource",
+    "Workspace": "SkuListResult",
+    "PrivateLinkResources": "PrivateLinkResourceListResult",
+    "Notebooks": "NonResource",
+    "StorageAccount": "NonResource",
+    "MachineLearningCompute": "ComputeResource"
+  },
+  "OperationGroupToParent": {
+    "Usages": "Locations",
+    "VirtualMachineSizes": "Locations",
+    "Quotas": "Locations",
+    "Notebooks": "Workspaces",
+    "StorageAccount": "Workspaces"
+  }
+}

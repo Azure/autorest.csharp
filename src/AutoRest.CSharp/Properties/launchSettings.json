@@ -49,8 +49,12 @@
       "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Management.Storage\\Generated"
     },
     "Azure.Network.Management.Interface": {
+        "commandName": "Project",
+        "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Generated"
+    },
+    "Azure.ResourceManager.MachineLearning": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.Network.Management.Interface\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\samples\\Azure.ResourceManager.MachineLearning\\Generated"
     },
     "Azure.ResourceManager.Sample": {
       "commandName": "Project",
