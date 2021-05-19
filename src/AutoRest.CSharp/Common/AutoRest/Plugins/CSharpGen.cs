@@ -32,6 +32,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(Task<CodeModel> codeModelTask, Configuration configuration)
         {
+            ValidateConfiguration (configuration);
+
             Directory.CreateDirectory(configuration.OutputFolder);
             var projectDirectory = Path.Combine(configuration.OutputFolder, Configuration.ProjectRelativeDirectory);
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
@@ -52,6 +54,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 DataPlaneTarget.Execute(project, codeModel, sourceInputModel, configuration);
             }
             return project;
+        }
+
+        private static void ValidateConfiguration (Configuration configuration)
+        {
+            if (configuration.LowLevelClient && configuration.AzureArm)
+            {
+                throw new Exception("Enabling both 'low-level-client' and 'azure-arm' is an invalid configuration.");
+            }
         }
 
         public async Task<bool> Execute(IPluginCommunication autoRest)
