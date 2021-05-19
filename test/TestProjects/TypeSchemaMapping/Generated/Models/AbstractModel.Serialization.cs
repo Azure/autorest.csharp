@@ -21,7 +21,7 @@ namespace TypeSchemaMapping.Models
                     case "DerivedFromAbstractModel": return DerivedFromAbstractModel.DeserializeDerivedFromAbstractModel(element);
                 }
             }
-            throw new Exception();
+            throw new NotSupportedException("Deserialization of abstract type 'global::TypeSchemaMapping.Models.AbstractModel' not supported.");
         }
     }
 }

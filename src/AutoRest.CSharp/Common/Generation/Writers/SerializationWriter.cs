@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (model.Declaration.IsAbstract)
                 {
-                    writer.Line($"throw new {typeof(Exception)}();");
+                    writer.Line($"throw new {typeof(NotSupportedException)}(\"Deserialization of abstract type '{model.Type}' not supported.\");");
                 }
                 else
                 {

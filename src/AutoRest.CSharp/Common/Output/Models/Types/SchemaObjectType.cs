@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             get
             {
-                if (Declaration.Accessibility != "public" || Declaration.IsAbstract || !IncludeDeserializer)
+                if (Declaration.Accessibility != "public" || Declaration.IsAbstract)
                 {
                     return false;
                 }
@@ -106,27 +106,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     return false;
                 }
 
-                static bool IsPublicType(CSharpType type)
-                {
-                    if (type.IsFrameworkType)
-                    {
-                        if (!type.FrameworkType.IsPublic)
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        if (type.Implementation.Declaration.Accessibility != "public")
-                        {
-                            return false;
-                        }
-                    }
-
-                    return type.Arguments.All(IsPublicType);
-                }
-
-                if (SerializationConstructor.Parameters.Any(p => !IsPublicType(p.Type)))
+                if (SerializationConstructor.Parameters.Any(p => !p.Type.IsPublic))
                 {
                     return false;
                 }

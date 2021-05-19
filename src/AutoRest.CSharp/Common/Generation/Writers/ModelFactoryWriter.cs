@@ -1,38 +1,27 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class ModelFactoryWriter
     {
-        public static string WriteModelFactory(CodeWriter writer, BuildContext context, IEnumerable<SchemaObjectType> objectTypes)
+        public static void WriteModelFactory(CodeWriter writer, ModelFactoryTypeProvider modelFactoryType)
         {
-            var clientPrefix = ClientBuilder.GetClientPrefix(context.DefaultLibraryName, context);
-            var modelFactoryName = $"{clientPrefix}ModelFactory";
-            var @namespace = context.DefaultNamespace;
-
-            using (writer.Namespace(@namespace))
+            using (writer.Namespace(modelFactoryType.Type.Namespace))
             {
-                writer.WriteXmlDocumentationSummary($"Model factory for {clientPrefix} read-only models.");
-                using (writer.Scope($"public static partial class {modelFactoryName}"))
+                writer.WriteXmlDocumentationSummary($"Model factory for {modelFactoryType.DefaultClientName} read-only models.");
+                using (writer.Scope($"public static partial class {modelFactoryType.Type.Name}"))
                 {
-                    foreach (var objectType in objectTypes)
+                    foreach (var model in modelFactoryType.Models)
                     {
-                        WriteFactoryMethodForSchemaObjectType(writer, objectType);
+                        WriteFactoryMethodForSchemaObjectType(writer, model);
                         writer.Line();
                     }
                 }
             }
-
-            return modelFactoryName;
         }
 
         private static void WriteFactoryMethodForSchemaObjectType(CodeWriter writer, SchemaObjectType objectType)

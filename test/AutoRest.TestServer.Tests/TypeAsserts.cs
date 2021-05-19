@@ -11,6 +11,17 @@ namespace AutoRest.TestServer.Tests
 {
     public static class TypeAsserts
     {
+        public static void HasNoTypeWithName(Assembly assembly, string typeName)
+        {
+            foreach (var type in assembly.DefinedTypes)
+            {
+                if (type.Name == typeName)
+                {
+                    Assert.Fail($"Assembly \"{assembly.GetName().Name}\" isn't expected to define type \"{typeName}\".");
+                }
+            }
+        }
+
         public static void TypeIsStatic(Type type)
         {
             if (type.IsAbstract && type.IsSealed && type.GetMembers(Public | NonPublic | Instance).All(m => m.DeclaringType == typeof(object)))

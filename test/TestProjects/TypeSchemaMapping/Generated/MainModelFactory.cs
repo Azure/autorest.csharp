@@ -6,20 +6,12 @@
 #nullable disable
 
 using System;
-using TypeSchemaMapping.Models;
 
-namespace TypeSchemaMapping
+namespace TypeSchemaMapping.Models
 {
     /// <summary> Model factory for SchemaMapping read-only models. </summary>
-    public static partial class SchemaMappingModelFactory
+    public static partial class MainModelFactory
     {
-        /// <summary> Initializes new instance of ModelWithAbstractModel class. </summary>
-        /// <param name="abstractModelProperty"> . </param>
-        /// <returns> A new <see cref="Models.ModelWithAbstractModel"/> instance for mocking. </returns>
-        public static ModelWithAbstractModel ModelWithAbstractModel(AbstractModel abstractModelProperty = default)
-        {
-            return new ModelWithAbstractModel(abstractModelProperty);
-        }
 
         /// <summary> Initializes new instance of ModelWithGuidProperty class. </summary>
         /// <param name="modelProperty"> . </param>

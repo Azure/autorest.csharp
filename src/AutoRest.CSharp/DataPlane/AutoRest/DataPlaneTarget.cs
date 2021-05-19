@@ -37,16 +37,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
             }
 
-            var modelsThatRequireFactory = context.Library.Models
-                .OfType<SchemaObjectType>()
-                .Where(o => o.RequiresFactoryMethod)
-                .ToArray();
-
-            if (modelsThatRequireFactory.Any())
+            var modelFactoryType = context.Library.ModelFactory;
+            if (modelFactoryType != default)
             {
                 var codeWriter = new CodeWriter();
-                var modelFactoryFileName = ModelFactoryWriter.WriteModelFactory(codeWriter, context, modelsThatRequireFactory);
-                project.AddGeneratedFile($"{modelFactoryFileName}.cs", codeWriter.ToString());
+                ModelFactoryWriter.WriteModelFactory(codeWriter, modelFactoryType);
+                project.AddGeneratedFile($"{modelFactoryType.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var client in context.Library.RestClients)
