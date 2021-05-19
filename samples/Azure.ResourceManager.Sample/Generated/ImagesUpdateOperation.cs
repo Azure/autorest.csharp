@@ -29,6 +29,7 @@ namespace Azure.ResourceManager.Sample
         {
             _operation = new OperationInternals<ImageData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ImagesUpdateOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

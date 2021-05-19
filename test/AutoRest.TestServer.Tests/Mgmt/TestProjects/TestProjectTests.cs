@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
@@ -90,7 +91,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        private IEnumerable<Type> FindAllOperations()
+        public IEnumerable<Type> FindAllOperations()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -100,6 +101,36 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     // Only [Resource]Operations types for the specified test project are going to be tested.
                     yield return t;
+                }
+            }
+        }
+
+        public IEnumerable<Type> FindAllResources()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                var resourceNames = FindAllResourceNames();
+                if (resourceNames.Contains(t.Name) && t.Namespace == _projectName)
+                {
+                    // Only [Resource] types for the specified test project are going to be tested.
+                    yield return t;
+                }
+            }
+        }
+
+        private IEnumerable<string> FindAllResourceNames()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+
+            foreach (Type t in allTypes)
+            {
+                if (t.Name.Contains("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                {
+                    // Only [Resource] types names for the specified test project are going to be tested.
+                    var resourceName = t.Name.Replace("Container", "");
+                    yield return resourceName;
                 }
             }
         }
@@ -115,7 +146,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        private IEnumerable<Type> FindAllContainers()
+        public IEnumerable<Type> FindAllContainers()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -287,6 +318,27 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     Assert.AreEqual(typeof(int?), listByNameAsyncParam3.ParameterType);
                     var listByNameAsyncParam4 = TypeAsserts.HasParameter(listByNameAsyncMethodInfo, "cancellationToken");
                     Assert.AreEqual(typeof(CancellationToken), listByNameAsyncParam4.ParameterType);
+                }
+            }
+        }
+
+        [Test]
+        public void ValidateParentResourceOperation()
+        {
+            foreach (var operation in FindAllOperations())
+            {
+                var operationTypeProperty = operation.GetField("ResourceType");
+                ResourceType operationType = operationTypeProperty.GetValue(operation) as ResourceType;
+                foreach (var container in FindAllContainers())
+                {
+                    ResourceType containerType = GetContainerValidResourceType(container);
+                    if (containerType.Equals(operationType))
+                    {
+                        var method = operation.GetMethod($"Get{ResourceOperationWriter.Pluralization(container.Name.Remove(container.Name.LastIndexOf("Container")))}");
+                        Assert.NotNull(method);
+                        Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(container.Namespace+"."+container.Name));
+                        Assert.IsTrue(method.GetParameters().Count() == 0);
+                    }
                 }
             }
         }

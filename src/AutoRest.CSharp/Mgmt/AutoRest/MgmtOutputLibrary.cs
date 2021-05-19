@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, List<OperationGroup>> _operationGroups;
         private Dictionary<string, TypeProvider> _nameToTypeProvider;
         private IEnumerable<Schema> _allSchemas;
-        private Dictionary<Operation, LongRunningOperation>? _longRunningOperations;
+        private Dictionary<Operation, MgmtLongRunningOperation>? _longRunningOperations;
         private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
-        public IEnumerable<LongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
+        public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
         public IEnumerable<NonLongRunningOperation> NonLongRunningOperations => EnsureNonLongRunningOperations().Values;
 
@@ -155,7 +155,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _resourceOperations = new Dictionary<OperationGroup, ResourceOperation>();
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
-                _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
+                if (!operationGroup.IsTupleResource(_context))
+                {
+                    _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
+                }
             }
 
             return _resourceOperations;
@@ -171,7 +174,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
-                _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
+                if (!operationGroup.IsTupleResource(_context)
+                    && !operationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
+                {
+                    _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
+                }
             }
 
             return _resourceContainers;
@@ -223,7 +230,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_armResource.ContainsKey(operation))
+                        if (!_armResource.ContainsKey(operation) && !operation.IsTupleResource(_context))
                         {
                             _armResource.Add(operation, new Resource(operation, _context));
                         }
@@ -234,14 +241,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _armResource;
         }
 
-        private Dictionary<Operation, LongRunningOperation> EnsureLongRunningOperations()
+        private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()
         {
             if (_longRunningOperations != null)
             {
                 return _longRunningOperations;
             }
 
-            _longRunningOperations = new Dictionary<Operation, LongRunningOperation>();
+            _longRunningOperations = new Dictionary<Operation, MgmtLongRunningOperation>();
 
             if (_context.Configuration.PublicClients)
             {
@@ -253,7 +260,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                         {
                             _longRunningOperations.Add(
                                 operation,
-                                new LongRunningOperation(
+                                new MgmtLongRunningOperation(
                                     operationGroup,
                                     operation,
                                     _context,

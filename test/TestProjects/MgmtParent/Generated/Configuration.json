@@ -20,5 +20,8 @@
   },
   "OperationGroupToParent": {
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers"
-  }
+  },
+  "OperationGroupIsTuple": [
+    "VirtualMachineExtensionImages"
+  ]
 }

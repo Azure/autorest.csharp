@@ -23,15 +23,9 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a StorageAccount. </param>
-        internal StorageAccountOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected StorageAccountOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal StorageAccountOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 
@@ -65,6 +59,69 @@ namespace Azure.Management.Storage
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
+        }
+
+        /// <summary> Gets a list of BlobService in the StorageAccount. </summary>
+        /// <returns> An object representing collection of BlobServices and their operations over a StorageAccount. </returns>
+        public BlobServiceContainer GetBlobServices()
+        {
+            return new BlobServiceContainer(this);
+        }
+
+        /// <summary> Gets a list of BlobContainer in the StorageAccount. </summary>
+        /// <returns> An object representing collection of BlobContainers and their operations over a StorageAccount. </returns>
+        public BlobContainerContainer GetBlobContainers()
+        {
+            return new BlobContainerContainer(this);
+        }
+
+        /// <summary> Gets a list of FileService in the StorageAccount. </summary>
+        /// <returns> An object representing collection of FileServices and their operations over a StorageAccount. </returns>
+        public FileServiceContainer GetFileServices()
+        {
+            return new FileServiceContainer(this);
+        }
+
+        /// <summary> Gets a list of FileShare in the StorageAccount. </summary>
+        /// <returns> An object representing collection of FileShares and their operations over a StorageAccount. </returns>
+        public FileShareContainer GetFileShares()
+        {
+            return new FileShareContainer(this);
+        }
+
+        /// <summary> Gets a list of ManagementPolicy in the StorageAccount. </summary>
+        /// <returns> An object representing collection of ManagementPoliies and their operations over a StorageAccount. </returns>
+        public ManagementPolicyContainer GetManagementPoliies()
+        {
+            return new ManagementPolicyContainer(this);
+        }
+
+        /// <summary> Gets a list of PrivateEndpointConnection in the StorageAccount. </summary>
+        /// <returns> An object representing collection of PrivateEndpointConnections and their operations over a StorageAccount. </returns>
+        public PrivateEndpointConnectionContainer GetPrivateEndpointConnections()
+        {
+            return new PrivateEndpointConnectionContainer(this);
+        }
+
+        /// <summary> Gets a list of PrivateLinkResource in the StorageAccount. </summary>
+        /// <returns> An object representing collection of PrivateLinkResources and their operations over a StorageAccount. </returns>
+        public PrivateLinkResourceContainer GetPrivateLinkResources()
+        {
+            return new PrivateLinkResourceContainer(this);
+        }
+
+        /// <summary> Gets a list of ObjectReplicationPolicy in the StorageAccount. </summary>
+        /// <returns> An object representing collection of ObjectReplicationPoliies and their operations over a StorageAccount. </returns>
+        public ObjectReplicationPolicyContainer GetObjectReplicationPoliies()
+        {
+            return new ObjectReplicationPolicyContainer(this);
+        }
+
+        /// <summary> Gets a list of EncryptionScope in the StorageAccount. </summary>
+        /// <returns> An object representing collection of EncryptionScopes and their operations over a StorageAccount. </returns>
+        public EncryptionScopeContainer GetEncryptionScopes()
+        {
+            return new EncryptionScopeContainer(this);
         }
     }
 }

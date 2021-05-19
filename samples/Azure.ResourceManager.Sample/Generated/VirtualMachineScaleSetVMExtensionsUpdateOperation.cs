@@ -29,6 +29,7 @@ namespace Azure.ResourceManager.Sample
         {
             _operation = new OperationInternals<VirtualMachineExtensionData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachineScaleSetVMExtensionsUpdateOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

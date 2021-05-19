@@ -30,6 +30,7 @@ namespace lro
         {
             _operation = new OperationInternals<Product>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "LrosaDsPutNonRetry201Creating400Operation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

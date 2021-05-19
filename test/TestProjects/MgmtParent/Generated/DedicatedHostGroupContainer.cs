@@ -65,7 +65,7 @@ namespace MgmtParent
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(hostGroupName, parameters, cancellationToken: cancellationToken).WaitForCompletion() as Response<DedicatedHostGroup>;
+                return StartCreateOrUpdate(hostGroupName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace MgmtParent
                 }
 
                 var operation = await StartCreateOrUpdateAsync(hostGroupName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<DedicatedHostGroup>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -107,7 +107,7 @@ namespace MgmtParent
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<DedicatedHostGroup> StartCreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        public DedicatedHostGroupsCreateOrUpdateOperation StartCreateOrUpdate(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.StartCreateOrUpdate");
             scope.Start();
@@ -136,7 +136,7 @@ namespace MgmtParent
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="parameters"> Parameters supplied to the Create Dedicated Host Group. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<DedicatedHostGroup>> StartCreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
+        public async Task<DedicatedHostGroupsCreateOrUpdateOperation> StartCreateOrUpdateAsync(string hostGroupName, DedicatedHostGroupData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupContainer.StartCreateOrUpdate");
             scope.Start();
@@ -199,7 +199,7 @@ namespace MgmtParent
                     throw new ArgumentNullException(nameof(hostGroupName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, hostGroupName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHostGroup(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -216,7 +216,7 @@ namespace MgmtParent
         public Pageable<DedicatedHostGroup> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, DedicatedHostGroup>(results, genericResource => new DedicatedHostGroupOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, DedicatedHostGroup>(results, genericResource => new DedicatedHostGroupOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="DedicatedHostGroup" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -227,7 +227,7 @@ namespace MgmtParent
         public Pageable<DedicatedHostGroup> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, DedicatedHostGroup>(results, genericResource => new DedicatedHostGroupOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, DedicatedHostGroup>(results, genericResource => new DedicatedHostGroupOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="DedicatedHostGroup" /> for this resource group. </summary>
@@ -237,7 +237,7 @@ namespace MgmtParent
         public AsyncPageable<DedicatedHostGroup> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, DedicatedHostGroup>(results, genericResource => new DedicatedHostGroupOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, DedicatedHostGroup>(results, genericResource => new DedicatedHostGroupOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="DedicatedHostGroup" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -248,7 +248,7 @@ namespace MgmtParent
         public AsyncPageable<DedicatedHostGroup> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, DedicatedHostGroup>(results, genericResource => new DedicatedHostGroupOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, DedicatedHostGroup>(results, genericResource => new DedicatedHostGroupOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of DedicatedHostGroup for this resource group represented as generic resources. </summary>

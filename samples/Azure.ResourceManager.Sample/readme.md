@@ -25,13 +25,15 @@ operation-group-to-resource:
    VirtualMachineImages: VirtualMachineImage
    Usage: NonResource
    VirtualMachineSizes: NonResource
-   VirtualMachineScaleSetRollingUpgrades: NonResource
+   VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
    LogAnalytics: NonResource
 operation-group-to-parent:
    LogAnalytics: subscriptions
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
    VirtualMachineImages: Microsoft.Compute/locations
    VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
+   VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets
+operation-group-is-tuple: VirtualMachineImages;VirtualMachineExtensionImages
 modelerfour:
   lenient-model-deduplication: true
 directive:

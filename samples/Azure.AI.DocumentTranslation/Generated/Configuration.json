@@ -12,7 +12,15 @@
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": true,
+<<<<<<< HEAD
   "OperationGroupToResourceType": {},
   "OperationGroupToResource": {},
   "OperationGroupToParent": {}
+=======
+  "CredentialTypes": [
+    "AzureKeyCredential"
+  ],
+  "CredentialScopes": [],
+  "CredentialHeaderName": "Ocp-Apim-Subscription-Key"
+>>>>>>> feature/v3
 }

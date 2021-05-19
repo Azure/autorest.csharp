@@ -60,7 +60,7 @@ namespace TenantOnly
                     throw new ArgumentNullException(nameof(agreementName));
                 }
 
-                var response = _restClient.Get(Id.Parent.Name, agreementName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.Name, agreementName, cancellationToken: cancellationToken);
                 return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -84,7 +84,7 @@ namespace TenantOnly
                     throw new ArgumentNullException(nameof(agreementName));
                 }
 
-                var response = await _restClient.GetAsync(Id.Parent.Name, agreementName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.Name, agreementName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -101,7 +101,7 @@ namespace TenantOnly
         public Pageable<Agreement> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, Agreement>(results, genericResource => new AgreementOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, Agreement>(results, genericResource => new AgreementOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="Agreement" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -112,7 +112,7 @@ namespace TenantOnly
         public Pageable<Agreement> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, Agreement>(results, genericResource => new AgreementOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, Agreement>(results, genericResource => new AgreementOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="Agreement" /> for this resource group. </summary>
@@ -122,7 +122,7 @@ namespace TenantOnly
         public AsyncPageable<Agreement> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, Agreement>(results, genericResource => new AgreementOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, Agreement>(results, genericResource => new AgreementOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="Agreement" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -133,7 +133,7 @@ namespace TenantOnly
         public AsyncPageable<Agreement> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, Agreement>(results, genericResource => new AgreementOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, Agreement>(results, genericResource => new AgreementOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of Agreement for this resource group represented as generic resources. </summary>

@@ -13,28 +13,33 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed. </summary>
-    public partial class StorageAccountsCreateOperation : Operation<StorageAccountData>, IOperationSource<StorageAccountData>
+    public partial class StorageAccountsCreateOperation : Operation<StorageAccount>, IOperationSource<StorageAccountData>
     {
         private readonly OperationInternals<StorageAccountData> _operation;
+
+        private readonly ResourceOperationsBase _operationBase;
 
         /// <summary> Initializes a new instance of StorageAccountsCreateOperation for mocking. </summary>
         protected StorageAccountsCreateOperation()
         {
         }
 
-        internal StorageAccountsCreateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal StorageAccountsCreateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             _operation = new OperationInternals<StorageAccountData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "StorageAccountsCreateOperation");
+            _operationBase = operationsBase;
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override StorageAccountData Value => _operation.Value;
+        public override StorageAccount Value => new StorageAccount(_operationBase, _operation.Value);
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,10 +57,12 @@ namespace Azure.Management.Storage
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<StorageAccountData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public async override ValueTask<Response<StorageAccount>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(cancellationToken));
 
         /// <inheritdoc />
-        public override ValueTask<Response<StorageAccountData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public async override ValueTask<Response<StorageAccount>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken));
+
+        private Response<StorageAccount> MapResponseType(Response<StorageAccountData> response) => Response.FromValue(new StorageAccount(_operationBase, response.Value), response.GetRawResponse());
 
         StorageAccountData IOperationSource<StorageAccountData>.CreateResult(Response response, CancellationToken cancellationToken)
         {

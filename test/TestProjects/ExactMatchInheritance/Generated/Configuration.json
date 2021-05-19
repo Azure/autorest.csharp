@@ -12,10 +12,15 @@
   "HeadAsBoolean": true,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
+<<<<<<< HEAD
   "OperationGroupToResourceType": {},
+=======
+  "CredentialTypes": [],
+  "CredentialScopes": [],
+  "CredentialHeaderName": "api-key",
+>>>>>>> feature/v3
   "OperationGroupToResource": {
     "ExactMatchModel2s": "NonResource",
     "ExactMatchModel4s": "NonResource"
-  },
-  "OperationGroupToParent": {}
+  }
 }

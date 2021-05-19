@@ -23,15 +23,9 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a VirtualMachineScaleSet. </param>
-        internal VirtualMachineScaleSetOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected VirtualMachineScaleSetOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineScaleSetOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 
@@ -66,5 +60,35 @@ namespace Azure.ResourceManager.Sample
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
+
+        /// <summary> Gets a list of VirtualMachineScaleSetExtension in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetExtensions and their operations over a VirtualMachineScaleSet. </returns>
+        public VirtualMachineScaleSetExtensionContainer GetVirtualMachineScaleSetExtensions()
+        {
+            return new VirtualMachineScaleSetExtensionContainer(this);
+        }
+
+        /// <summary> Gets a list of VirtualMachineExtension in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachineScaleSet. </returns>
+        public VirtualMachineExtensionContainer GetVirtualMachineExtensions()
+        {
+            return new VirtualMachineExtensionContainer(this);
+        }
+
+        /// <summary> Gets a list of VirtualMachineScaleSetVM in the VirtualMachineScaleSet. </summary>
+        /// <returns> An object representing collection of VirtualMachineScaleSetVMs and their operations over a VirtualMachineScaleSet. </returns>
+        public VirtualMachineScaleSetVMContainer GetVirtualMachineScaleSetVMs()
+        {
+            return new VirtualMachineScaleSetVMContainer(this);
+        }
+
+        #region Get VirtualMachineScaleSetRollingUpgradeOperationss operation
+        /// <summary> Gets an object representing a VirtualMachineScaleSetRollingUpgradeOperations along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeOperations" /> object. </returns>
+        public VirtualMachineScaleSetRollingUpgradeOperations GetVirtualMachineScaleSetRollingUpgradeOperationss()
+        {
+            return new VirtualMachineScaleSetRollingUpgradeOperations(this);
+        }
+        #endregion
     }
 }

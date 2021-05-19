@@ -18,6 +18,5 @@
   "OperationGroupToResource": {
     "BillingAccounts": "BillingAccount",
     "Agreements": "Agreement"
-  },
-  "OperationGroupToParent": {}
+  }
 }

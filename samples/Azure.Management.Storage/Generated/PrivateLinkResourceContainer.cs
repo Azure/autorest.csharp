@@ -53,7 +53,7 @@ namespace Azure.Management.Storage
         public Pageable<PrivateLinkResource> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, PrivateLinkResource>(results, genericResource => new PrivateLinkResourceOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, PrivateLinkResource>(results, genericResource => new PrivateLinkResourceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="PrivateLinkResource" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -64,7 +64,7 @@ namespace Azure.Management.Storage
         public Pageable<PrivateLinkResource> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, PrivateLinkResource>(results, genericResource => new PrivateLinkResourceOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, PrivateLinkResource>(results, genericResource => new PrivateLinkResourceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="PrivateLinkResource" /> for this resource group. </summary>
@@ -74,7 +74,7 @@ namespace Azure.Management.Storage
         public AsyncPageable<PrivateLinkResource> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, PrivateLinkResource>(results, genericResource => new PrivateLinkResourceOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, PrivateLinkResource>(results, genericResource => new PrivateLinkResourceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="PrivateLinkResource" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -85,7 +85,7 @@ namespace Azure.Management.Storage
         public AsyncPageable<PrivateLinkResource> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, PrivateLinkResource>(results, genericResource => new PrivateLinkResourceOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, PrivateLinkResource>(results, genericResource => new PrivateLinkResourceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of PrivateLinkResource for this resource group represented as generic resources. </summary>

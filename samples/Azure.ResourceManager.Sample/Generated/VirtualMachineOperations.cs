@@ -23,15 +23,9 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a VirtualMachine. </param>
-        internal VirtualMachineOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="VirtualMachineOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected VirtualMachineOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 
@@ -65,6 +59,13 @@ namespace Azure.ResourceManager.Sample
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
+        }
+
+        /// <summary> Gets a list of VirtualMachineExtension in the VirtualMachine. </summary>
+        /// <returns> An object representing collection of VirtualMachineExtensions and their operations over a VirtualMachine. </returns>
+        public VirtualMachineExtensionContainer GetVirtualMachineExtensions()
+        {
+            return new VirtualMachineExtensionContainer(this);
         }
     }
 }

@@ -30,6 +30,7 @@ namespace Azure.Network.Management.Interface
         {
             _operation = new OperationInternals<EffectiveNetworkSecurityGroupListResult>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "NetworkInterfacesListEffectiveNetworkSecurityGroupsOperation");
         }
+
         /// <inheritdoc />
         public override string Id => _operation.Id;
 

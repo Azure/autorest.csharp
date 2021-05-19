@@ -57,7 +57,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return StartCreateOrUpdate(managementPolicyName, policy, cancellationToken: cancellationToken).WaitForCompletion() as Response<ManagementPolicy>;
+                return StartCreateOrUpdate(managementPolicyName, policy, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -77,7 +77,7 @@ namespace Azure.Management.Storage
             try
             {
                 var operation = await StartCreateOrUpdateAsync(managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync() as Response<ManagementPolicy>;
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -90,13 +90,13 @@ namespace Azure.Management.Storage
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Operation<ManagementPolicy> StartCreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public ManagementPoliciesCreateOrUpdateOperation StartCreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, policy, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, managementPolicyName, policy, cancellationToken: cancellationToken);
                 return new ManagementPoliciesCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
@@ -110,13 +110,13 @@ namespace Azure.Management.Storage
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Operation<ManagementPolicy>> StartCreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        public async Task<ManagementPoliciesCreateOrUpdateOperation> StartCreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
-                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, policy, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new ManagementPoliciesCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
@@ -140,7 +140,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(managementPolicyName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken);
                 return Response.FromValue(new ManagementPolicy(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -164,7 +164,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(managementPolicyName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, managementPolicyName, cancellationToken: cancellationToken);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, managementPolicyName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ManagementPolicy(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -181,7 +181,7 @@ namespace Azure.Management.Storage
         public Pageable<ManagementPolicy> List(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ManagementPolicy" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -192,7 +192,7 @@ namespace Azure.Management.Storage
         public Pageable<ManagementPolicy> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource).Get().Value);
+            return new PhWrappingPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ManagementPolicy" /> for this resource group. </summary>
@@ -202,7 +202,7 @@ namespace Azure.Management.Storage
         public AsyncPageable<ManagementPolicy> ListAsync(int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of <see cref="ManagementPolicy" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
@@ -213,7 +213,7 @@ namespace Azure.Management.Storage
         public AsyncPageable<ManagementPolicy> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
             var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource).Get().Value);
+            return new PhWrappingAsyncPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
         }
 
         /// <summary> Filters the list of ManagementPolicy for this resource group represented as generic resources. </summary>

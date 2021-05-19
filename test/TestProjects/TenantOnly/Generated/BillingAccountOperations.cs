@@ -23,15 +23,9 @@ namespace TenantOnly
         }
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class. </summary>
-        /// <param name="genericOperations"> An instance of <see cref="GenericResourceOperations"/> that has an id for a BillingAccount. </param>
-        internal BillingAccountOperations(GenericResourceOperations genericOperations) : base(genericOperations, genericOperations.Id)
-        {
-        }
-
-        /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected BillingAccountOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
+        protected internal BillingAccountOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
         }
 
@@ -65,6 +59,13 @@ namespace TenantOnly
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
+        }
+
+        /// <summary> Gets a list of Agreement in the BillingAccount. </summary>
+        /// <returns> An object representing collection of Agreements and their operations over a BillingAccount. </returns>
+        public AgreementContainer GetAgreements()
+        {
+            return new AgreementContainer(this);
         }
     }
 }
