@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -17,6 +16,13 @@ namespace AutoRest.CSharp.Output.Models.Requests
 {
     internal class LongRunningOperation : TypeProvider
     {
+        protected LongRunningOperation(BuildContext context) : base(context)
+        {
+            Description = string.Empty;
+            DefaultName = string.Empty;
+            DefaultAccessibility = string.Empty;
+        }
+
         public LongRunningOperation(OperationGroup operationGroup, Input.Operation operation, BuildContext context, LongRunningOperationInfo lroInfo) : base(context)
         {
             Debug.Assert(operation.IsLongRunning);
@@ -52,13 +58,13 @@ namespace AutoRest.CSharp.Output.Models.Requests
             DefaultAccessibility = lroInfo.Accessibility;
         }
 
-        public CSharpType? ResultType { get; }
+        public CSharpType? ResultType { get; protected set; }
         public OperationFinalStateVia FinalStateVia { get; }
         public Diagnostic Diagnostics => new Diagnostic(Declaration.Name);
-        public ObjectSerialization? ResultSerialization { get; }
-        public RestClientMethod? NextPageMethod { get; }
-        public PagingResponseInfo? PagingResponse { get; }
-        public string Description { get; }
+        public ObjectSerialization? ResultSerialization { get; protected set; }
+        public RestClientMethod? NextPageMethod { get; protected set; }
+        public PagingResponseInfo? PagingResponse { get; protected set; }
+        public string Description { get; protected set; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
     }

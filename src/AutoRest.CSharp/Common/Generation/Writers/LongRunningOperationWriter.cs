@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteWaitForCompletionVariants(writer, operation);
                     writer.Line();
 
-                    if (operation.ResultType != null)
+                    if (operation.ResultType != null && interfaceType != null)
                     {
                         using (writer.Scope($"{operation.ResultType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
                         {

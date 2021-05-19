@@ -2,115 +2,132 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Threading;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class NonLongRunningOperationWriter
+    internal class NonLongRunningOperationWriter : LongRunningOperationWriter
     {
-        /// <summary>
-        /// Write a management plane non-LRO as a LRO for the consistency of API surface.
-        /// </summary>
-        /// <param name="writer"></param>
-        /// <param name="operation"></param>
-        public static void Write(CodeWriter writer, NonLongRunningOperation operation)
+        protected override CSharpType GetBaseType(LongRunningOperation operation)
         {
-            var responseVariable = "response";
+            var nonLro = AsNonLongRunningOperation(operation);
+            return nonLro.WrapperType != null ? new CSharpType(typeof(Operation<>), nonLro.WrapperType) : base.GetBaseType(operation);
+        }
 
-            var cs = operation.Type;
-            var @namespace = cs.Namespace;
-            using (writer.Namespace(@namespace))
+        protected override CSharpType GetValueTaskType(LongRunningOperation operation)
+        {
+            var nonLro = AsNonLongRunningOperation(operation);
+            return nonLro.WrapperType != null ? new CSharpType(typeof(Response<>), nonLro.WrapperType) : base.GetValueTaskType(operation);
+        }
+        protected override CSharpType GetHelperType(LongRunningOperation operation)
+        {
+            var nonLro = AsNonLongRunningOperation(operation);
+            if (nonLro.WrapperType != null)
             {
-                writer.WriteXmlDocumentationSummary(operation.Description);
-                var baseType = operation.ResultType != null ? new CSharpType(typeof(Operation<>), operation.ResultType) : new CSharpType(typeof(Azure.Operation));
-                var valueTaskType = operation.ResultType != null ? new CSharpType(typeof(Response<>), operation.ResultType) : new CSharpType(typeof(Response));
-                var waitForCompletionType = new CSharpType(typeof(ValueTask<>), valueTaskType);
-                var helperType = operation.ResultType != null ? new CSharpType(typeof(OperationOrResponseInternals<>), operation.ResultType) : new CSharpType(typeof(OperationOrResponseInternals));
-                var waitForCompleteMethodName = operation.ResultType != null ? "WaitForCompletionAsync" : "WaitForCompletionResponseAsync";
+                return new CSharpType(typeof(OperationOrResponseInternals<>), nonLro.WrapperType);
+            }
+            else if (nonLro.ResultType != null)
+            {
+                return new CSharpType(typeof(OperationOrResponseInternals<>), nonLro.ResultType);
+            }
+            else
+            {
+                return new CSharpType(typeof(OperationOrResponseInternals));
+            }
+        }
 
-                using (writer.Scope($"{operation.Declaration.Accessibility} partial class {cs.Name}: {baseType}"))
+        // no need to implement IOperationSource (CreateResult) in non-LROs
+        protected override CSharpType? GetInterfaceType(LongRunningOperation operation) => null;
+
+        protected override void WriteConstructor(CodeWriter writer, LongRunningOperation operation, PagingResponseInfo? pagingResponse, CSharpType cs, CSharpType helperType)
+        {
+            var nonLro = AsNonLongRunningOperation(operation);
+            if (nonLro.ResultType != null)
+            {
+                var responseType = new CSharpType(typeof(Response), nonLro.ResultType);
+
+                writer.Append($"internal {cs.Name}(");
+
+                if (nonLro.WrapperType != null)
                 {
-                    writer.Line($"private readonly {helperType} _operation;");
-
-                    writer.Line();
-                    writer.WriteXmlDocumentationSummary($"Initializes a new instance of {cs.Name} for mocking.");
-                    using (writer.Scope($"protected {cs.Name:D}()"))
-                    {
-                    }
-
-                    writer.Line();
-                    writer.Append($"internal {cs.Name}(");
-                    // todo: programmatically get the type of operationBase from the definition of [Resource]
+                    // pass operationsBase in so that the construction of [Resource] is possible
                     writer.Append($"{typeof(ResourceOperationsBase)} operationsBase, ");
-                    writer.Append($"{typeof(Response)}<{operation.ResultDataType}> {responseVariable}");
-                    writer.Line($")");
+                }
+                writer.Append($"{responseType} response");
 
-                    using (writer.Scope())
+                if (pagingResponse != null)
+                {
+                    writer.Append($", {typeof(Func<string, Task<Response>>)} nextPageFunc");
+                }
+                writer.Line($")");
+
+                using (writer.Scope())
+                {
+                    writer.Append($"_operation = new {helperType}(");
+                    if (nonLro.WrapperType != null)
                     {
-                        writer.Append($"_operation = new {helperType}(");
-                        if (operation.ResultType != null)
-                        {
-                            writer.Append($"{typeof(Response)}.FromValue(");
-                            writer.Append($"new {operation.ResultType}(operationsBase, {responseVariable}.Value),");
-                            writer.Append($"{responseVariable}.GetRawResponse()");
-                            writer.Append($")");
-                        }
-                        writer.Line($");");
-
+                        writer.Append($"{typeof(Response)}.FromValue(");
+                        writer.Append($"new {nonLro.WrapperType}(operationsBase, response.Value),");
+                        writer.Append($"response.GetRawResponse()");
+                        writer.Append($")");
                     }
-
-                    writer.Line();
-
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override string Id => _operation.Id;");
-                    writer.Line();
-
-                    if (operation.ResultType != null)
+                    else
                     {
-                        writer.WriteXmlDocumentationInheritDoc();
-                        writer.Line($"public override {operation.ResultType} Value => _operation.Value;");
-                        writer.Line();
+                        writer.Append($"response");
                     }
-
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override bool HasCompleted => _operation.HasCompleted;");
-                    writer.Line();
-
-                    if (operation.ResultType != null)
+                    writer.Line($");");
+                    if (pagingResponse != null)
                     {
-                        writer.WriteXmlDocumentationInheritDoc();
-                        writer.Line($"public override bool HasValue => _operation.HasValue;");
-                        writer.Line();
+                        writer.Line($"_nextPageFunc = nextPageFunc;");
                     }
-
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {typeof(Response)} GetRawResponse() => _operation.GetRawResponse();");
-                    writer.Line();
-
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {typeof(Response)} UpdateStatus({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatus(cancellationToken);");
-                    writer.Line();
-
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {typeof(ValueTask<Response>)} UpdateStatusAsync({typeof(CancellationToken)} cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);");
-                    writer.Line();
-
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {waitForCompletionType} {waitForCompleteMethodName}({typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompleteMethodName}(cancellationToken);");
-                    writer.Line();
-
-                    writer.WriteXmlDocumentationInheritDoc();
-                    writer.Line($"public override {waitForCompletionType} {waitForCompleteMethodName}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => _operation.{waitForCompleteMethodName}(pollingInterval, cancellationToken);");
-                    writer.Line();
                 }
             }
+            else
+            {
+                writer.Append($"internal {cs.Name}({typeof(Response)} response");
+
+                if (pagingResponse != null)
+                {
+                    writer.Append($", {typeof(Func<string, Task<Response>>)} nextPageFunc");
+                }
+                writer.Line($")");
+
+                using (writer.Scope())
+                {
+                    writer.Line($"_operation = new {helperType}(response);");
+                    if (pagingResponse != null)
+                    {
+                        writer.Line($"_nextPageFunc = nextPageFunc;");
+                    }
+                }
+            }
+        }
+
+        protected override void WriteValueProperty(CodeWriter writer, LongRunningOperation operation)
+        {
+            var nonLro = AsNonLongRunningOperation(operation);
+
+            if (nonLro.ResultType != null)
+            {
+                writer.WriteXmlDocumentationInheritDoc();
+                writer.Line($"public override {nonLro.WrapperType ?? nonLro.ResultType} Value => _operation.Value;");
+                writer.Line();
+            }
+        }
+
+        protected NonLongRunningOperation AsNonLongRunningOperation(LongRunningOperation operation)
+        {
+            var nonLongRunningOperation = operation as NonLongRunningOperation;
+            Debug.Assert(nonLongRunningOperation != null);
+            return nonLongRunningOperation;
         }
     }
 }
