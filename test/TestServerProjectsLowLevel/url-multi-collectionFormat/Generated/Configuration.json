@@ -11,16 +11,5 @@
   "ModelNamespace": true,
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
-  "LowLevelClient": true,
-<<<<<<< HEAD
-  "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
-  "OperationGroupToParent": {}
-=======
-  "CredentialTypes": [
-    "AzureKeyCredential"
-  ],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "Fake-Subscription-Key"
->>>>>>> feature/v3
+  "LowLevelClient": true
 }

@@ -11,18 +11,5 @@
   "ModelNamespace": true,
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
-  "LowLevelClient": true,
-<<<<<<< HEAD
-  "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
-  "OperationGroupToParent": {}
-=======
-  "CredentialTypes": [
-    "TokenCredential"
-  ],
-  "CredentialScopes": [
-    "https://test.azure.com/.default"
-  ],
-  "CredentialHeaderName": "Your-Subscription-Key"
->>>>>>> feature/v3
+  "LowLevelClient": true
 }

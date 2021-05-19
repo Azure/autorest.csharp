@@ -12,13 +12,6 @@
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
-<<<<<<< HEAD
-  "OperationGroupToResourceType": {},
-=======
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
->>>>>>> feature/v3
   "OperationGroupToResource": {
     "SshPublicKeys": "NonResource"
   }

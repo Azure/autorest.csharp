@@ -11,20 +11,5 @@
   "ModelNamespace": true,
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
-  "LowLevelClient": false,
-<<<<<<< HEAD
-  "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
-  "OperationGroupToParent": {}
-=======
-  "CredentialTypes": [
-    "TokenCredential",
-    "AzureKeyCredential"
-  ],
-  "CredentialScopes": [
-    "https://fakeendpoint.azure.com/.default",
-    "https://dummyendpoint.azure.com/.default"
-  ],
-  "CredentialHeaderName": "fake-key"
->>>>>>> feature/v3
+  "LowLevelClient": false
 }
