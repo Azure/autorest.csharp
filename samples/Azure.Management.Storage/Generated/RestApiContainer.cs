@@ -9,7 +9,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace Azure.Management.Storage
 {
     public partial class RestApiContainer : ContainerBase
     {

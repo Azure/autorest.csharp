@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace ResourceIdentifierChooser
 {
     /// <summary> A class representing collection of ResourceLevel and their operations over a ResourceGroup. </summary>
-    public partial class ResourceLevelContainer : ContainerBase<ResourceIdentifier>
+    public partial class ResourceLevelContainer : ContainerBase
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceLevelContainer"/> class for mocking. </summary>
         protected ResourceLevelContainer()
@@ -65,7 +65,7 @@ namespace ResourceIdentifierChooser
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(resourceLevelsName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
+                return StartCreateOrUpdate(resourceLevelsName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(resourceLevelsName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {

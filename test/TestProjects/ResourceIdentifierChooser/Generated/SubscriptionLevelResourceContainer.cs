@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace ResourceIdentifierChooser
 {
     /// <summary> A class representing collection of SubscriptionLevelResource and their operations over a Subscription. </summary>
-    public partial class SubscriptionLevelResourceContainer : ContainerBase<SubscriptionResourceIdentifier>
+    public partial class SubscriptionLevelResourceContainer : ContainerBase
     {
         /// <summary> Initializes a new instance of the <see cref="SubscriptionLevelResourceContainer"/> class for mocking. </summary>
         protected SubscriptionLevelResourceContainer()
@@ -65,7 +65,7 @@ namespace ResourceIdentifierChooser
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
+                return StartCreateOrUpdate(subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {

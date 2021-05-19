@@ -63,7 +63,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(accountName));
                 }
 
-                return StartCreateOrUpdate(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).WaitForCompletion();
+                return StartCreateOrUpdate(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(accountName, cors, shareDeleteRetentionPolicy, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {

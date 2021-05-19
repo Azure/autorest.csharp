@@ -3,23 +3,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure.Core;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.Output;
-using Azure.ResourceManager.Core.Resources;
-using Azure;
-using Azure.ResourceManager.Core;
-using Azure.Core.Pipeline;
-using System.Threading.Tasks;
-using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using System.Diagnostics;
+using Azure;
+using Azure.Core;
+using Azure.ResourceManager.Core;
+using Azure.ResourceManager.Core.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -32,16 +30,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// and the following builder methods:
     /// 1. Construct
     /// </summary>
-    internal class ResourceContainerWriter : ClientWriter
+    internal class ResourceContainerWriter : MgmtClientBaseWriter
     {
-        private const string ClientDiagnosticsField = "_clientDiagnostics";
-        private const string PipelineField = "_pipeline";
-        private const string RestClientField = "_restClient";
         private const string _parentProperty = "Parent";
         private CodeWriter _writer;
         private ResourceContainer _resourceContainer;
         private ResourceData _resourceData;
-        private MgmtRestClient _restClient;
         private Resource _resource;
         private ResourceOperation _resourceOperation;
         private MgmtOutputLibrary _library;
@@ -70,52 +64,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary(_resourceContainer.Description);
                 string baseClass = FindRestClientMethodByPrefix("Get", out _)
                     ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
-                    : $"ContainerBase<{_resourceContainer.ResourceIdentifierType}>";
+                    : $"ContainerBase";
                 using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : {baseClass}"))
                 {
-                    WriteContainerCtors();
-                    WriteFields();
+                    WriteContainerCtors(_writer, _resourceContainer.Type.Name, typeof(ResourceOperationsBase));
+                    WriteFields(_writer, _restClient!);
                     WriteIdProperty();
-                    WriteContainerProperties();
+                    WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
                     WriteResourceOperations();
                     WriteBuilders();
                 }
             }
-        }
-
-        private void WriteContainerCtors()
-        {
-            string typeOfThis = _resourceContainer.Type.Name;
-
-            // write protected default constructor
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class for mocking.");
-            using (_writer.Scope($"protected {typeOfThis}()"))
-            { }
-
-            // write "parent resource" constructor
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {typeOfThis} class.");
-            var parentArgument = "parent";
-            _writer.WriteXmlDocumentationParameter(parentArgument, "The resource representing the parent resource.");
-            using (_writer.Scope($"internal {typeOfThis}({typeof(ResourceOperationsBase)} {parentArgument}) : base({parentArgument})"))
-            {
-                _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                // todo: after a shared pipeline field is implemented in the base class, replace this with that
-                _writer.Line($"{PipelineField} = {typeof(ManagementPipelineBuilder)}.Build(Credential, BaseUri, ClientOptions);");
-            }
-        }
-
-        private void WriteFields()
-        {
-            _writer.Line();
-            _writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-            _writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
-            // subscriptionId might not always be needed. For example `RestOperations` does not have it.
-            var subIdIfNeeded = _restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-            _writer.Line($"private {_restClient.Type} {RestClientField} => new {_restClient.Type}({ClientDiagnosticsField}, {PipelineField}{subIdIfNeeded});");
         }
 
         private void WriteIdProperty()
@@ -148,13 +107,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private bool FindRestClientMethodByHttpMethod(RequestMethod httpMethod, out RestClientMethod restMethod)
         {
-            restMethod = _restClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(httpMethod));
+            restMethod = _restClient!.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(httpMethod));
             return restMethod != null;
         }
 
         private bool FindRestClientMethodByPrefix(string prefix, out RestClientMethod restMethod)
         {
-            restMethod = _restClient.Methods.FirstOrDefault(method => method.Name.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
+            restMethod = _restClient!.Methods.FirstOrDefault(method => method.Name.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
             return restMethod != null;
         }
 
@@ -173,7 +132,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.AppendRaw($"{parameter.Name}, ");
                 }
-                _writer.Line($"cancellationToken: cancellationToken).WaitForCompletion();");
+                _writer.Line($"cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);");
             });
 
             _writer.Line();
@@ -186,7 +145,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.AppendRaw($"{parameter.Name}, ");
                 }
                 _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
-                _writer.Line($"return await operation.WaitForCompletionAsync().ConfigureAwait(false);");
+                _writer.Line($"return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);");
             });
 
             var isLongRunning = restClientMethod.Operation.IsLongRunning;
@@ -404,21 +363,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private bool IsStringLike(CSharp.Generation.Types.CSharpType type)
         {
             return type.Equals(typeof(string)) || type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string));
-        }
-
-        private void WriteContainerProperties()
-        {
-            var resourceType = _resourceContainer.GetValidResourceValue();
-
-            // TODO: Remove this if condition after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5800
-            if (!resourceType.Contains(".ResourceType"))
-            {
-                resourceType = $"\"{resourceType}\"";
-            }
-
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
-            _writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
         }
 
         private void WriteGetVariants(RestClientMethod method)

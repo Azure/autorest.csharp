@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace Azure.Management.Storage
 {
     /// <summary> A class representing collection of PrivateLinkResource and their operations over a StorageAccount. </summary>
-    public partial class PrivateLinkResourceContainer : ContainerBase<ResourceGroupResourceIdentifier>
+    public partial class PrivateLinkResourceContainer : ContainerBase
     {
         /// <summary> Initializes a new instance of the <see cref="PrivateLinkResourceContainer"/> class for mocking. </summary>
         protected PrivateLinkResourceContainer()
