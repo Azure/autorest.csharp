@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static bool RequiresModelFactory(SchemaObjectType model)
         {
-            if (model.Declaration.Accessibility != "public" || model.Declaration.IsAbstract)
+            if (model.Declaration.Accessibility != "public" || !model.IncludeDeserializer || model.Declaration.IsAbstract)
             {
                 return false;
             }
