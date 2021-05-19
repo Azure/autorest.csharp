@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Diagnostics;
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -20,8 +21,21 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             Debug.Assert(!operation.IsLongRunning);
 
-            ResultType = context.Library.GetArmResource(operationGroup).Type;
-            ResultDataType = context.Library.GetResourceData(operationGroup).Type;
+            var response = GetOperationResponse(operation);
+
+            Schema? responseSchema = response.ResponseSchema;
+
+            if (responseSchema != null)
+            {
+                ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(responseSchema, false));
+            }
+
+            if (ShouldWrapResultType(context, operationGroup, operation))
+            {
+                ResultType = context.Library.GetArmResource(operationGroup).Type;
+                ResultDataType = context.Library.GetResourceData(operationGroup).Type;
+            }
+
             DefaultName = lroInfo.ClientPrefix + operation.CSharpName() + "Operation";
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
@@ -44,5 +58,36 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility { get; }
+
+        private bool ShouldWrapResultType(BuildContext<MgmtOutputLibrary> context, OperationGroup operationGroup, Input.Operation operation)
+        {
+            if (ResultType != null
+                && operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest
+                && httpRequest.Method == HttpMethod.Put)
+            {
+                // need to check result type is [Resource]Data because
+                // some PUT operation returns differently and we don't want to wrap that with [Resource]
+                var resourceDataType = context.Library.GetResourceData(operationGroup).Type;
+                if (ResultType.Name.Equals(resourceDataType.Name))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private ServiceResponse GetOperationResponse(Input.Operation operation)
+        {
+            foreach (var operationResponse in operation.Responses)
+            {
+                if (operationResponse.Protocol.Http is HttpResponse operationHttpResponse)
+                {
+                    return operationResponse;
+                }
+            }
+
+            return operation.Responses.First();
+        }
+
+        public CSharpType? WrapperType { get; protected set; }
     }
 }
