@@ -10,36 +10,29 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Delete a proximity placement group. </summary>
-    public partial class ProximityPlacementGroupsDeleteOperation : Operation<ProximityPlacementGroup>
+    public partial class ProximityPlacementGroupsDeleteOperation : Operation
     {
-        private readonly OperationOrResponseInternals<ProximityPlacementGroup> _operation;
+        private readonly OperationOrResponseInternals _operation;
 
         /// <summary> Initializes a new instance of ProximityPlacementGroupsDeleteOperation for mocking. </summary>
         protected ProximityPlacementGroupsDeleteOperation()
         {
         }
 
-        internal ProximityPlacementGroupsDeleteOperation(ResourceOperationsBase operationsBase, Response<ProximityPlacementGroupData> response)
+        internal ProximityPlacementGroupsDeleteOperation(Response response)
         {
-            _operation = new OperationOrResponseInternals<ProximityPlacementGroup>(Response.FromValue(new ProximityPlacementGroup(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals(response);
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override ProximityPlacementGroup Value => _operation.Value;
-
-        /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
-
-        /// <inheritdoc />
-        public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
         public override Response GetRawResponse() => _operation.GetRawResponse();
@@ -51,9 +44,9 @@ namespace Azure.ResourceManager.Sample
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ProximityPlacementGroup>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<ProximityPlacementGroup>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
     }
 }

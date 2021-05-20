@@ -189,8 +189,12 @@ operationGroups:
         description: ''
     protocol: !Protocols {}
 security: !Security 
-  authenticationRequired: false
-  schemes: []
+  authenticationRequired: true
+  schemes:
+    - !AADTokenSecurityScheme 
+      type: AADToken
+      scopes:
+        - https://test.azure.com/.default
 language: !Languages 
   default:
     name: Accessibility

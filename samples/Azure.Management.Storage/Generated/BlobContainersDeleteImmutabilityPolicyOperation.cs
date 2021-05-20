@@ -11,30 +11,29 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> Aborts an unlocked immutability policy. The response of delete has immutabilityPeriodSinceCreationInDays set to 0. ETag in If-Match is required for this operation. Deleting a locked immutability policy is not allowed, only way is to delete the container after deleting all blobs inside the container. </summary>
-    public partial class BlobContainersDeleteImmutabilityPolicyOperation : Operation<BlobContainer>
+    public partial class BlobContainersDeleteImmutabilityPolicyOperation : Operation<ImmutabilityPolicy>
     {
-        private readonly OperationOrResponseInternals<BlobContainer> _operation;
+        private readonly OperationOrResponseInternals<ImmutabilityPolicy> _operation;
 
         /// <summary> Initializes a new instance of BlobContainersDeleteImmutabilityPolicyOperation for mocking. </summary>
         protected BlobContainersDeleteImmutabilityPolicyOperation()
         {
         }
 
-        internal BlobContainersDeleteImmutabilityPolicyOperation(ResourceOperationsBase operationsBase, Response<BlobContainerData> response)
+        internal BlobContainersDeleteImmutabilityPolicyOperation(Response<ImmutabilityPolicy> response)
         {
-            _operation = new OperationOrResponseInternals<BlobContainer>(Response.FromValue(new BlobContainer(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<ImmutabilityPolicy>(response);
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override BlobContainer Value => _operation.Value;
+        public override ImmutabilityPolicy Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,9 +51,9 @@ namespace Azure.Management.Storage
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<BlobContainer>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<ImmutabilityPolicy>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<BlobContainer>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<ImmutabilityPolicy>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }

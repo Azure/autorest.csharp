@@ -14,28 +14,28 @@ low-level-client: true
 
 As clients with protocol methods generate constructors directly, any authentication needs to be defined in the configuration file.
 
-There are two forms of supported authentication: `AzureKeyCredential` and `TokenCredential`. 
+There are two forms of supported authentication: `AzureKeyCredential` (AzureKey) and `TokenCredential` (AADToken).
 
-It is valid to define one, both, or neither (for the rare unauthenticated client use case.)
+It is valid to define one, both, or neither (for the rare unauthenticated client use case).
 
 
 Just Key Credential:
 ```yaml
-credential-types: AzureKeyCredential
-credential-header-name: Your-Subscription-Key
+security: AzureKey
+security-header-name: Your-Subscription-Key
 ```
 
 Just Token Credential:
 ```yaml
-credential-types: TokenCredential
-credential-scopes: https://yourendpoint.azure.com/.default
+security: AADToken
+security-scopes: https://yourendpoint.azure.com/.default
 ```
 
 Both Credentials:
 ```yaml
-credential-types: TokenCredential;AzureKeyCredential
-credential-header-name: Your-Subscription-Key
-credential-scopes: https://yourendpoint.azure.com/.default
+security: AADToken;AzureKey
+security-header-name: Your-Subscription-Key
+security-scopes: https://yourendpoint.azure.com/.default
 ```
 
 `credential-header-name` and `credential-scopes` need to be filled to the service specific values. 

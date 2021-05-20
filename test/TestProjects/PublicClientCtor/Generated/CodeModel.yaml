@@ -252,8 +252,16 @@ operationGroups:
         description: ''
     protocol: !Protocols {}
 security: !Security 
-  authenticationRequired: false
-  schemes: []
+  authenticationRequired: true
+  schemes:
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: fake-key
+    - !AADTokenSecurityScheme 
+      type: AADToken
+      scopes:
+        - https://fakeendpoint.azure.com/.default
+        - https://dummyendpoint.azure.com/.default
 language: !Languages 
   default:
     name: PublicClientCtor

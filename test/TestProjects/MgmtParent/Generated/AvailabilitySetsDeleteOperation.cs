@@ -10,36 +10,29 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
 
 namespace MgmtParent
 {
     /// <summary> Delete an availability set. </summary>
-    public partial class AvailabilitySetsDeleteOperation : Operation<AvailabilitySet>
+    public partial class AvailabilitySetsDeleteOperation : Operation
     {
-        private readonly OperationOrResponseInternals<AvailabilitySet> _operation;
+        private readonly OperationOrResponseInternals _operation;
 
         /// <summary> Initializes a new instance of AvailabilitySetsDeleteOperation for mocking. </summary>
         protected AvailabilitySetsDeleteOperation()
         {
         }
 
-        internal AvailabilitySetsDeleteOperation(ResourceOperationsBase operationsBase, Response<AvailabilitySetData> response)
+        internal AvailabilitySetsDeleteOperation(Response response)
         {
-            _operation = new OperationOrResponseInternals<AvailabilitySet>(Response.FromValue(new AvailabilitySet(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals(response);
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override AvailabilitySet Value => _operation.Value;
-
-        /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
-
-        /// <inheritdoc />
-        public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
         public override Response GetRawResponse() => _operation.GetRawResponse();
@@ -51,9 +44,9 @@ namespace MgmtParent
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<AvailabilitySet>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<AvailabilitySet>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
     }
 }

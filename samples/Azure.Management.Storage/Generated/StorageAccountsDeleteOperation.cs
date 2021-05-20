@@ -10,37 +10,29 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Management.Storage.Models;
-using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> Deletes a storage account in Microsoft Azure. </summary>
-    public partial class StorageAccountsDeleteOperation : Operation<StorageAccount>
+    public partial class StorageAccountsDeleteOperation : Operation
     {
-        private readonly OperationOrResponseInternals<StorageAccount> _operation;
+        private readonly OperationOrResponseInternals _operation;
 
         /// <summary> Initializes a new instance of StorageAccountsDeleteOperation for mocking. </summary>
         protected StorageAccountsDeleteOperation()
         {
         }
 
-        internal StorageAccountsDeleteOperation(ResourceOperationsBase operationsBase, Response<StorageAccountData> response)
+        internal StorageAccountsDeleteOperation(Response response)
         {
-            _operation = new OperationOrResponseInternals<StorageAccount>(Response.FromValue(new StorageAccount(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals(response);
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override StorageAccount Value => _operation.Value;
-
-        /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
-
-        /// <inheritdoc />
-        public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
         public override Response GetRawResponse() => _operation.GetRawResponse();
@@ -52,9 +44,9 @@ namespace Azure.Management.Storage
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<StorageAccount>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<StorageAccount>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
     }
 }
