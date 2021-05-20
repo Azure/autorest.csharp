@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             if (configuration.LowLevelClient && configuration.AzureArm)
             {
-                throw new Exception("Enabling both 'low-level-client' and 'azure-arm' is an invalid configuration.");
+                throw new Exception("Enabling both 'low-level-client' and 'azure-arm' at the same time is not supported.");
             }
         }
 
