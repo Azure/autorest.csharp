@@ -47,20 +47,25 @@ namespace MgmtSingleton
         // Container level operations.
 
         /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
+        /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public Response<ParentResource> CreateOrUpdate(ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<ParentResource> CreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
                 if (parameters == null)
                 {
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(parameters, cancellationToken: cancellationToken).WaitForCompletion();
+                return StartCreateOrUpdate(parentName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -70,20 +75,25 @@ namespace MgmtSingleton
         }
 
         /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
+        /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<Response<ParentResource>> CreateOrUpdateAsync(ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ParentResource>> CreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CreateOrUpdate");
             scope.Start();
             try
             {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
                 if (parameters == null)
                 {
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var operation = await StartCreateOrUpdateAsync(parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var operation = await StartCreateOrUpdateAsync(parentName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
@@ -94,20 +104,25 @@ namespace MgmtSingleton
         }
 
         /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
+        /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public ParentResourcesCreateOrUpdateOperation StartCreateOrUpdate(ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public ParentResourcesCreateOrUpdateOperation StartCreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
                 if (parameters == null)
                 {
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var originalResponse = _restClient.CreateOrUpdate(parameters, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, parentName, parameters, cancellationToken: cancellationToken);
                 return new ParentResourcesCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
@@ -118,20 +133,25 @@ namespace MgmtSingleton
         }
 
         /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
+        /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async Task<ParentResourcesCreateOrUpdateOperation> StartCreateOrUpdateAsync(ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<ParentResourcesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.StartCreateOrUpdate");
             scope.Start();
             try
             {
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
                 if (parameters == null)
                 {
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var originalResponse = await _restClient.CreateOrUpdateAsync(parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, parentName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new ParentResourcesCreateOrUpdateOperation(Parent, originalResponse);
             }
             catch (Exception e)
@@ -142,14 +162,20 @@ namespace MgmtSingleton
         }
 
         /// <inheritdoc />
+        /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public override Response<ParentResource> Get(CancellationToken cancellationToken = default)
+        public override Response<ParentResource> Get(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.Get");
             scope.Start();
             try
             {
-                var response = _restClient.Get(cancellationToken: cancellationToken);
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+
+                var response = _restClient.Get(Id.ResourceGroupName, parentName, cancellationToken: cancellationToken);
                 return Response.FromValue(new ParentResource(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -160,14 +186,20 @@ namespace MgmtSingleton
         }
 
         /// <inheritdoc />
+        /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        public async override Task<Response<ParentResource>> GetAsync(CancellationToken cancellationToken = default)
+        public async override Task<Response<ParentResource>> GetAsync(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (parentName == null)
+                {
+                    throw new ArgumentNullException(nameof(parentName));
+                }
+
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, parentName, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ParentResource(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

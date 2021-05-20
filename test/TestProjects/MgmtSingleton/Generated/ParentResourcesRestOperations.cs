@@ -18,8 +18,6 @@ namespace MgmtSingleton
     internal partial class ParentResourcesRestOperations
     {
         private string subscriptionId;
-        private string resourceGroupName;
-        private string parentName;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
@@ -29,24 +27,14 @@ namespace MgmtSingleton
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The String to use. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="parentName"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="apiVersion"/> is null. </exception>
-        public ParentResourcesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, string resourceGroupName, string parentName, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
+        public ParentResourcesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
             if (subscriptionId == null)
             {
                 throw new ArgumentNullException(nameof(subscriptionId));
-            }
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (parentName == null)
-            {
-                throw new ArgumentNullException(nameof(parentName));
             }
             endpoint ??= new Uri("https://management.azure.com");
             if (apiVersion == null)
@@ -55,15 +43,13 @@ namespace MgmtSingleton
             }
 
             this.subscriptionId = subscriptionId;
-            this.resourceGroupName = resourceGroupName;
-            this.parentName = parentName;
             this.endpoint = endpoint;
             this.apiVersion = apiVersion;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateListRequest()
+        internal HttpMessage CreateListRequest(string resourceGroupName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -82,10 +68,17 @@ namespace MgmtSingleton
         }
 
         /// <summary> Singleton Test Parent Example. </summary>
+        /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ParentResourceListResult>> ListAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public async Task<Response<ParentResourceListResult>> ListAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListRequest();
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var message = CreateListRequest(resourceGroupName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -102,10 +95,17 @@ namespace MgmtSingleton
         }
 
         /// <summary> Singleton Test Parent Example. </summary>
+        /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ParentResourceListResult> List(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
+        public Response<ParentResourceListResult> List(string resourceGroupName, CancellationToken cancellationToken = default)
         {
-            using var message = CreateListRequest();
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+
+            using var message = CreateListRequest(resourceGroupName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -121,7 +121,7 @@ namespace MgmtSingleton
             }
         }
 
-        internal HttpMessage CreateGetRequest()
+        internal HttpMessage CreateGetRequest(string resourceGroupName, string parentName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -141,10 +141,22 @@ namespace MgmtSingleton
         }
 
         /// <summary> Singleton Test Parent Example. </summary>
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<ParentResourceData>> GetAsync(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
+        public async Task<Response<ParentResourceData>> GetAsync(string resourceGroupName, string parentName, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetRequest();
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var message = CreateGetRequest(resourceGroupName, parentName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -161,10 +173,22 @@ namespace MgmtSingleton
         }
 
         /// <summary> Singleton Test Parent Example. </summary>
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<ParentResourceData> Get(CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
+        public Response<ParentResourceData> Get(string resourceGroupName, string parentName, CancellationToken cancellationToken = default)
         {
-            using var message = CreateGetRequest();
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var message = CreateGetRequest(resourceGroupName, parentName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -180,7 +204,7 @@ namespace MgmtSingleton
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(ParentResourceData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string parentName, ParentResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -203,17 +227,27 @@ namespace MgmtSingleton
             return message;
         }
 
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ParentResourceData>> CreateOrUpdateAsync(ParentResourceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<ParentResourceData>> CreateOrUpdateAsync(string resourceGroupName, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(parameters);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, parentName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -229,17 +263,27 @@ namespace MgmtSingleton
             }
         }
 
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public Response<ParentResourceData> CreateOrUpdate(ParentResourceData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<ParentResourceData> CreateOrUpdate(string resourceGroupName, string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(parameters);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, parentName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

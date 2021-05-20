@@ -45,10 +45,16 @@
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/ParentNameParameter"
+                        "name": "parentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -76,7 +82,10 @@
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -104,10 +113,16 @@
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/ParentNameParameter"
+                        "name": "parentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -132,10 +147,16 @@
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
                     {
-                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     },
                     {
-                        "$ref": "#/parameters/ParentNameParameter"
+                        "name": "parentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
