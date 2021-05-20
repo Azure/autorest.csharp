@@ -27,8 +27,8 @@ namespace AutoRest.TestServer.Tests
 
             var doc = JsonDocument.Parse(Encoding.UTF8.GetString(requestMemoryStream.ToArray()));
             JsonElement items = doc.RootElement.GetProperty("items");
-            Assert.NotNull (items);
-            Assert.AreEqual (JsonValueKind.Null, items.ValueKind);
+            Assert.NotNull(items);
+            Assert.AreEqual(JsonValueKind.Null, items.ValueKind);
         }
 
         [Test]
@@ -44,8 +44,8 @@ namespace AutoRest.TestServer.Tests
 
             var doc = JsonDocument.Parse(Encoding.UTF8.GetString(requestMemoryStream.ToArray()));
             JsonElement items = doc.RootElement.GetProperty("items");
-            Assert.NotNull (items);
-            Assert.AreEqual (0, items.GetArrayLength());
+            Assert.NotNull(items);
+            Assert.AreEqual(0, items.GetArrayLength());
         }
     }
 }
