@@ -17,9 +17,9 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Create or update an image. </summary>
-    public partial class ImagesCreateOrUpdateOperation : Operation<Image>, IOperationSource<ImageData>
+    public partial class ImagesCreateOrUpdateOperation : Operation<Image>, IOperationSource<Image>
     {
-        private readonly OperationInternals<ImageData> _operation;
+        private readonly OperationInternals<Image> _operation;
 
         private readonly ResourceOperationsBase _operationBase;
 
@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.Sample
 
         internal ImagesCreateOrUpdateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<ImageData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ImagesCreateOrUpdateOperation");
+            _operation = new OperationInternals<Image>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "ImagesCreateOrUpdateOperation");
             _operationBase = operationsBase;
         }
 
@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.Sample
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override Image Value => new Image(_operationBase, _operation.Value);
+        public override Image Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -56,23 +56,21 @@ namespace Azure.ResourceManager.Sample
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public async override ValueTask<Response<Image>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(cancellationToken));
+        public override ValueTask<Response<Image>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public async override ValueTask<Response<Image>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken));
+        public override ValueTask<Response<Image>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        private Response<Image> MapResponseType(Response<ImageData> response) => Response.FromValue(new Image(_operationBase, response.Value), response.GetRawResponse());
-
-        ImageData IOperationSource<ImageData>.CreateResult(Response response, CancellationToken cancellationToken)
+        Image IOperationSource<Image>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return ImageData.DeserializeImageData(document.RootElement);
+            return new Image(_operationBase, ImageData.DeserializeImageData(document.RootElement));
         }
 
-        async ValueTask<ImageData> IOperationSource<ImageData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<Image> IOperationSource<Image>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return ImageData.DeserializeImageData(document.RootElement);
+            return new Image(_operationBase, ImageData.DeserializeImageData(document.RootElement));
         }
     }
 }
