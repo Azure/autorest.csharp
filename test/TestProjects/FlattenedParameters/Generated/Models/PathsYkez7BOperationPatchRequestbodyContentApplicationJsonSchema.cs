@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace FlatArray.Models
+namespace FlattenedParameters.Models
 {
     /// <summary> The PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema

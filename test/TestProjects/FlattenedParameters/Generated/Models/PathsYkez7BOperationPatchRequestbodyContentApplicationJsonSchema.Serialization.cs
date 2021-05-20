@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace FlatArray.Models
+namespace FlattenedParameters.Models
 {
     internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable
     {

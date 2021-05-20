@@ -1,7 +1,7 @@
 !CodeModel 
 info: !Info 
   description: FlatArray
-  title: FlatArray
+  title: FlattenedParameters
 schemas: !Schemas 
   strings:
     - !StringSchema &ref_0
@@ -178,7 +178,7 @@ security: !Security
   schemes: []
 language: !Languages 
   default:
-    name: FlatArray
+    name: FlattenedParameters
     description: ''
 protocol: !Protocols 
   http: !HttpModel {}

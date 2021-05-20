@@ -13,21 +13,21 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using FlatArray.Models;
+using FlattenedParameters.Models;
 
-namespace FlatArray
+namespace FlattenedParameters
 {
-    internal partial class FlatArrayRestClient
+    internal partial class FlattenedParametersRestClient
     {
         private Uri endpoint;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of FlatArrayRestClient. </summary>
+        /// <summary> Initializes a new instance of FlattenedParametersRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public FlatArrayRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        public FlattenedParametersRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
             endpoint ??= new Uri("http://localhost:3000");
 

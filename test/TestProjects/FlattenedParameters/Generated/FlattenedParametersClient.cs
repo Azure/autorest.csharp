@@ -12,27 +12,27 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 
-namespace FlatArray
+namespace FlattenedParameters
 {
-    /// <summary> The FlatArray service client. </summary>
-    public partial class FlatArrayClient
+    /// <summary> The FlattenedParameters service client. </summary>
+    public partial class FlattenedParametersClient
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private readonly HttpPipeline _pipeline;
-        internal FlatArrayRestClient RestClient { get; }
+        internal FlattenedParametersRestClient RestClient { get; }
 
-        /// <summary> Initializes a new instance of FlatArrayClient for mocking. </summary>
-        protected FlatArrayClient()
+        /// <summary> Initializes a new instance of FlattenedParametersClient for mocking. </summary>
+        protected FlattenedParametersClient()
         {
         }
 
-        /// <summary> Initializes a new instance of FlatArrayClient. </summary>
+        /// <summary> Initializes a new instance of FlattenedParametersClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        internal FlatArrayClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        internal FlattenedParametersClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
         {
-            RestClient = new FlatArrayRestClient(clientDiagnostics, pipeline, endpoint);
+            RestClient = new FlattenedParametersRestClient(clientDiagnostics, pipeline, endpoint);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -41,7 +41,7 @@ namespace FlatArray
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> OperationAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FlatArrayClient.Operation");
+            using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.Operation");
             scope.Start();
             try
             {
@@ -58,7 +58,7 @@ namespace FlatArray
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response Operation(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FlatArrayClient.Operation");
+            using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.Operation");
             scope.Start();
             try
             {

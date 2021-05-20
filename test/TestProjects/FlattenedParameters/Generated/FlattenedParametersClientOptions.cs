@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace FlatArray
+namespace FlattenedParameters
 {
-    /// <summary> Client options for FlatArrayClient. </summary>
-    public partial class FlatArrayClientOptions : ClientOptions
+    /// <summary> Client options for FlattenedParametersClient. </summary>
+    public partial class FlattenedParametersClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace FlatArray
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of FlatArrayClientOptions. </summary>
-        public FlatArrayClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of FlattenedParametersClientOptions. </summary>
+        public FlattenedParametersClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

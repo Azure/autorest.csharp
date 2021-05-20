@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using FlatArray;
+using FlattenedParameters;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -23,7 +23,7 @@ namespace AutoRest.TestServer.Tests
                 await content.Request.Body.CopyToAsync(requestMemoryStream);
             });
 
-            var response = await new FlatArrayClient(ClientDiagnostics, HttpPipeline, testServer.Address).OperationAsync();
+            var response = await new FlattenedParametersClient(ClientDiagnostics, HttpPipeline, testServer.Address).OperationAsync();
 
             var doc = JsonDocument.Parse(Encoding.UTF8.GetString(requestMemoryStream.ToArray()));
             JsonElement items = doc.RootElement.GetProperty("items");
@@ -40,7 +40,7 @@ namespace AutoRest.TestServer.Tests
                 await content.Request.Body.CopyToAsync(requestMemoryStream);
             });
 
-            var response = await new FlatArrayClient(ClientDiagnostics, HttpPipeline, testServer.Address).OperationAsync(new string [] {} );
+            var response = await new FlattenedParametersClient(ClientDiagnostics, HttpPipeline, testServer.Address).OperationAsync(new string [] {} );
 
             var doc = JsonDocument.Parse(Encoding.UTF8.GetString(requestMemoryStream.ToArray()));
             JsonElement items = doc.RootElement.GetProperty("items");

@@ -172,9 +172,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\Generated"
     },
-    "FlatArray": {
+    "FlattenedParameters": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FlatArray\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FlattenedParameters\\Generated"
     },
     "head": {
       "commandName": "Project",
