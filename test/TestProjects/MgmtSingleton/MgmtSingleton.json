@@ -70,6 +70,43 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources2": {
+            "get": {
+                "tags": [
+                    "SingletonResources2"
+                ],
+                "operationId": "SingletonResources2_GetDefault",
+                "description": "Singleton Test Example without explicit /default, /latest ending.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parentName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/SingletonResource2"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/": {
             "get": {
                 "tags": [
@@ -183,6 +220,20 @@
     },
     "definitions": {
         "SingletonResource": {
+            "description": "A singleton resource.",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "new": {
+                    "type": "string"
+                }
+            }
+        },
+        "SingletonResource2": {
             "description": "A singleton resource.",
             "type": "object",
             "allOf": [

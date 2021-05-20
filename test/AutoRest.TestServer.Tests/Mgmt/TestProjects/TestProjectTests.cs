@@ -44,7 +44,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllOperations())
             {
-                Assert.AreEqual(typeof(ResourceOperationsBase), type.BaseType.BaseType);
+                var expectedBaseOperationsType = IsSingletonOperation(type.BaseType.BaseType)
+                    ? typeof(SingletonOperationsBase)
+                    : typeof(ResourceOperationsBase);
+                Assert.AreEqual(expectedBaseOperationsType, type.BaseType.BaseType);
             }
         }
 
@@ -54,6 +57,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllOperations())
             {
+                if (IsSingletonOperation(type.BaseType.BaseType))
+                {
+                    continue;
+                }
+
                 var method = type.GetMethod(methodName);
                 Assert.NotNull(method, $"{type.Name} does not implement the method.");
             }
@@ -126,10 +134,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type t in allTypes)
             {
-                if (t.Name.Contains("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (t.Name.EndsWith("Operations") && !t.Name.Contains("Tests")
+                    && !t.Name.Contains("RestOperations") && t.Namespace == _projectName)
                 {
                     // Only [Resource] types names for the specified test project are going to be tested.
-                    var resourceName = t.Name.Replace("Container", "");
+                    var resourceName = t.Name.Substring(0, t.Name.Length - 10);
                     yield return resourceName;
                 }
             }
@@ -170,6 +179,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     yield return t;
                 }
             }
+        }
+
+        private bool IsSingletonOperation(Type type)
+        {
+            return type == typeof(SingletonOperationsBase);
         }
 
         private Type FindSubscriptionExtensions()

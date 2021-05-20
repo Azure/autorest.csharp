@@ -49,9 +49,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var count = context.Library.ResourceSchemaMap.Count;
             var tupleOperationGroupsList = result.Context.Configuration.MgmtConfiguration.OperationGroupIsTuple;
             var resourceCount = count - tupleOperationGroupsList.Count();
+            var singletonCount = context.CodeModel.OperationGroups.Count(
+                c => c.IsSingletonResource(result.Context.Configuration.MgmtConfiguration));
 
             Assert.AreEqual(resourceCount, context.Library.ResourceOperations.Count());
-            Assert.AreEqual(resourceCount, context.Library.ResourceContainers.Count());
+            Assert.AreEqual(resourceCount - singletonCount, context.Library.ResourceContainers.Count());
             Assert.AreEqual(resourceCount, context.Library.ArmResource.Count());
             Assert.AreEqual(count, context.Library.ResourceData.Count());
         }

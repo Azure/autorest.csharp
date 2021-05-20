@@ -12,6 +12,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("ParentResourceOperations", true)]
         [TestCase("SingletonResourceOperations", true)]
+        [TestCase("SingletonResource2Operations", true)]
         public void ValidateOperations(string operation, bool isExists)
         {
             var operationTypeExists = FindAllOperations().Any(o => o.Name == operation);
@@ -20,6 +21,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("ParentResource", true)]
         [TestCase("SingletonResource", true)]
+        [TestCase("SingletonResource2", true)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
@@ -28,6 +30,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("ParentResourceContainer", true)]
         [TestCase("SingletonResourceContainer", false)]
+        [TestCase("SingletonResource2Container", false)]
         public void ValidateContainers(string container, bool isExists)
         {
             var containerTypeExists = FindAllContainers().Any(o => o.Name == container);
