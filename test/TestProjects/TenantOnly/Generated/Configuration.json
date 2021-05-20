@@ -12,16 +12,11 @@
   "HeadAsBoolean": true,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {
     "Agreements": "Microsoft.Billing/billingAccounts/agreements"
   },
   "OperationGroupToResource": {
     "BillingAccounts": "BillingAccount",
     "Agreements": "Agreement"
-  },
-  "OperationGroupToParent": {},
-  "OperationGroupIsTuple": []
+  }
 }

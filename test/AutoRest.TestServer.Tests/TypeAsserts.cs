@@ -5,14 +5,74 @@ using System;
 using System.Linq;
 using System.Reflection;
 using NUnit.Framework;
+using static System.Reflection.BindingFlags;
 
 namespace AutoRest.TestServer.Tests
 {
     public static class TypeAsserts
     {
+        public static void HasNoType(Assembly assembly, string typeName)
+        {
+            foreach (var type in assembly.DefinedTypes)
+            {
+                if (type.Name == typeName)
+                {
+                    Assert.Fail($"Assembly \"{assembly.GetName().Name}\" isn't expected to define type \"{typeName}\".");
+                }
+            }
+        }
+
+        public static void HasNoType(Assembly assembly, string? ns, string typeName)
+        {
+            foreach (var type in assembly.DefinedTypes)
+            {
+                if (type.Name == typeName && type.Namespace == ns)
+                {
+                    Assert.Fail($"Assembly \"{assembly.GetName().Name}\" isn't expected to define type \"{ns}.{typeName}\".");
+                }
+            }
+        }
+
+        public static void TypeIsStatic(Type type)
+        {
+            if (type.IsAbstract && type.IsSealed && type.GetMembers(Public | NonPublic | Instance).All(m => m.DeclaringType == typeof(object)))
+            {
+                return;
+            }
+
+            Assert.Fail($"Type \"{type}\" is expected to be static.");
+        }
+
+        public static void TypeOnlyDeclaredThesePublicMethods(Type type, params string[] expectedMethodNames)
+        {
+            var publicMethodNames = type.GetMethods(Public | Static | Instance)
+                .Where(m => m.DeclaringType == type)
+                .Select(m => m.Name)
+                .ToList();
+
+            var missingMethods = string.Join(", ", expectedMethodNames.Except(publicMethodNames).Select(n => "\"" + n + "\"").OrderBy(s => s));
+            var extraMethods = string.Join(", ", publicMethodNames.Except(expectedMethodNames).Select(n => "\"" + n + "\"").OrderBy(s => s));
+            if (missingMethods.Length == 0)
+            {
+                if (extraMethods.Length == 0)
+                {
+                    return;
+                }
+
+                Assert.Fail($"Type \"{type}\" has public methods {extraMethods} that aren't expected.");
+            }
+
+            if (extraMethods.Length == 0)
+            {
+                Assert.Fail($"Type \"{type}\" doesn't have public methods {missingMethods}.");
+            }
+
+            Assert.Fail($"Type \"{type}\" doesn't have public methods {missingMethods} and has public methods {extraMethods} that aren't expected.");
+        }
+
         public static MethodInfo HasPublicInstanceMethod(Type type, string name)
         {
-            var methodInfo = type.GetMethod(name, BindingFlags.Instance | BindingFlags.Public);
+            var methodInfo = type.GetMethod(name, Instance | Public);
             Assert.NotNull(methodInfo);
             return methodInfo;
         }

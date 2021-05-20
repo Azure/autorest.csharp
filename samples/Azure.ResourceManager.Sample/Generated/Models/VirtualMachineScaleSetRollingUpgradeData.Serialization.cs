@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineScaleSetRollingUpgrade : IUtf8JsonSerializable
+    public partial class VirtualMachineScaleSetRollingUpgradeData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,11 +33,11 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineScaleSetRollingUpgrade DeserializeVirtualMachineScaleSetRollingUpgrade(JsonElement element)
+        internal static VirtualMachineScaleSetRollingUpgradeData DeserializeVirtualMachineScaleSetRollingUpgradeData(JsonElement element)
         {
             IDictionary<string, string> tags = default;
             LocationData location = default;
-            TenantResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<RollingUpgradePolicy> policy = default;
@@ -129,7 +129,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineScaleSetRollingUpgrade(id, name, type, location, tags, policy.Value, runningStatus.Value, progress.Value, error.Value);
+            return new VirtualMachineScaleSetRollingUpgradeData(id, name, type, location, tags, policy.Value, runningStatus.Value, progress.Value, error.Value);
         }
     }
 }

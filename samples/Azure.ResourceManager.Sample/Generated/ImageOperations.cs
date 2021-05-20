@@ -25,7 +25,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref="ImageOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal protected ImageOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal ImageOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
         }
 

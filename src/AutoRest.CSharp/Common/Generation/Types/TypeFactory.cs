@@ -123,20 +123,26 @@ namespace AutoRest.CSharp.Generation.Types
         }
 
         internal static bool IsDictionary(CSharpType type)
-        {
-            return type.IsFrameworkType &&
-                   (type.FrameworkType == typeof(IDictionary<,>) ||
-                   type.FrameworkType == typeof(IReadOnlyDictionary<,>));
-        }
+            => IsReadOnlyDictionary(type) || IsReadWriteDictionary(type);
+
+        internal static bool IsReadOnlyDictionary(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(IReadOnlyDictionary<,>);
+
+        internal static bool IsReadWriteDictionary(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(IDictionary<,>);
 
         internal static bool IsList(CSharpType type)
-        {
-            return type.IsFrameworkType &&
-                   (type.FrameworkType == typeof(IEnumerable<>) ||
-                   type.FrameworkType == typeof(IReadOnlyList<>) ||
-                   type.FrameworkType == typeof(IList<>) ||
-                   type.FrameworkType == typeof(ICollection<>));
-        }
+            => IsReadOnlyList(type) || IsReadWriteList(type);
+
+        internal static bool IsReadOnlyList(CSharpType type)
+            => type.IsFrameworkType &&
+               (type.FrameworkType == typeof(IEnumerable<>) ||
+               type.FrameworkType == typeof(IReadOnlyList<>));
+
+        internal static bool IsReadWriteList(CSharpType type)
+            => type.IsFrameworkType &&
+               (type.FrameworkType == typeof(IList<>) ||
+               type.FrameworkType == typeof(ICollection<>));
 
         private static Type? ToFrameworkType(AllSchemaTypes schemaType) => schemaType switch
         {

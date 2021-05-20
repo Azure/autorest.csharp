@@ -11,30 +11,29 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Management.Storage.Models;
-using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> Update encryption scope properties as specified in the request body. Update fails if the specified encryption scope does not already exist. </summary>
-    public partial class EncryptionScopesPatchOperation : Operation<EncryptionScope>
+    public partial class EncryptionScopesPatchOperation : Operation<EncryptionScopeData>
     {
-        private readonly OperationOrResponseInternals<EncryptionScope> _operation;
+        private readonly OperationOrResponseInternals<EncryptionScopeData> _operation;
 
         /// <summary> Initializes a new instance of EncryptionScopesPatchOperation for mocking. </summary>
         protected EncryptionScopesPatchOperation()
         {
         }
 
-        internal EncryptionScopesPatchOperation(ResourceOperationsBase operationsBase, Response<EncryptionScopeData> response)
+        internal EncryptionScopesPatchOperation(Response<EncryptionScopeData> response)
         {
-            _operation = new OperationOrResponseInternals<EncryptionScope>(Response.FromValue(new EncryptionScope(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals<EncryptionScopeData>(response);
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override EncryptionScope Value => _operation.Value;
+        public override EncryptionScopeData Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,9 +51,9 @@ namespace Azure.Management.Storage
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<EncryptionScope>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<EncryptionScopeData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<EncryptionScope>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<EncryptionScopeData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }

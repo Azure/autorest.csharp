@@ -189,8 +189,11 @@ operationGroups:
         description: ''
     protocol: !Protocols {}
 security: !Security 
-  authenticationRequired: false
-  schemes: []
+  authenticationRequired: true
+  schemes:
+    - !AzureKeySecurityScheme 
+      type: AzureKey
+      headerName: Fake-Subscription-Key
 language: !Languages 
   default:
     name: Accessibility

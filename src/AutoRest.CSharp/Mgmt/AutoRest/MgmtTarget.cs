@@ -5,6 +5,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Models.Types;
 

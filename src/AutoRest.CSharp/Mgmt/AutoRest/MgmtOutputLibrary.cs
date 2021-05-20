@@ -174,7 +174,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
-                if (!operationGroup.IsTupleResource(_context))
+                if (!operationGroup.IsTupleResource(_context)
+                    && !operationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
                 {
                     _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
                 }

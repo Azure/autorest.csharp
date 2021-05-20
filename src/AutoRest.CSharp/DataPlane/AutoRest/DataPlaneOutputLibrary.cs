@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CachedDictionary<Operation, LongRunningOperation> _operations;
         private CachedDictionary<Operation, DataPlaneResponseHeaderGroupType> _headerModels;
         private CachedDictionary<Schema, TypeProvider> _models;
+        private Lazy<ModelFactoryTypeProvider?> _modelFactory;
         private BuildContext<DataPlaneOutputLibrary> _context;
         private CodeModel _codeModel;
 
@@ -33,9 +34,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             _clients = new CachedDictionary<OperationGroup, DataPlaneClient>(EnsureClients);
             _operations = new CachedDictionary<Operation, LongRunningOperation>(EnsureLongRunningOperations);
             _headerModels = new CachedDictionary<Operation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
-            _models = new CachedDictionary<Schema, TypeProvider> (BuildModels);
+            _models = new CachedDictionary<Schema, TypeProvider>(BuildModels);
+            _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(context, Models));
         }
 
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactory.Value;
         public IEnumerable<DataPlaneClient> Clients => _clients.Values;
         public IEnumerable<LongRunningOperation> LongRunningOperations => _operations.Values;
         public IEnumerable<DataPlaneResponseHeaderGroupType> HeaderModels => _headerModels.Values;
@@ -71,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => (TypeProvider)new EnumType(sealedChoiceSchema, _context),
+            SealedChoiceSchema sealedChoiceSchema => new EnumType(sealedChoiceSchema, _context),
             ChoiceSchema choiceSchema => new EnumType(choiceSchema, _context),
             ObjectSchema objectSchema => new SchemaObjectType(objectSchema, _context),
             _ => throw new NotImplementedException()

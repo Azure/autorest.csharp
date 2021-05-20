@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Output of virtual machine capture operation. </summary>
-    public partial class VirtualMachineCaptureResult : SubResourceWritable
+    public partial class VirtualMachineCaptureResult : WritableSubResource
     {
         /// <summary> Initializes a new instance of VirtualMachineCaptureResult. </summary>
         public VirtualMachineCaptureResult()
