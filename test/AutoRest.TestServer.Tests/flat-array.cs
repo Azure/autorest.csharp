@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -14,8 +15,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class FlatArray : InProcTestBase
     {
-        [Test]
-        public async Task FlatArray_NullSerialized()
+        private async Task<JsonDocument> TestCore (Func<FlattenedParametersClient, Task> testProc)
         {
             var requestMemoryStream = new MemoryStream();
             using var testServer = new InProcTestServer(async content =>
@@ -23,9 +23,17 @@ namespace AutoRest.TestServer.Tests
                 await content.Request.Body.CopyToAsync(requestMemoryStream);
             });
 
-            var response = await new FlattenedParametersClient(ClientDiagnostics, HttpPipeline, testServer.Address).OperationAsync();
+            var client = new FlattenedParametersClient(ClientDiagnostics, HttpPipeline, testServer.Address);
 
-            var doc = JsonDocument.Parse(Encoding.UTF8.GetString(requestMemoryStream.ToArray()));
+            await testProc(client);
+
+            return JsonDocument.Parse(Encoding.UTF8.GetString(requestMemoryStream.ToArray()));
+        }
+
+        [Test]
+        public async Task FlatArray_NullSerialized()
+        {
+            var doc = await TestCore (async c => await c.OperationAsync ());
             JsonElement items = doc.RootElement.GetProperty("items");
             Assert.NotNull(items);
             Assert.AreEqual(JsonValueKind.Null, items.ValueKind);
@@ -34,15 +42,22 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public async Task FlatArray_EmptySerialized()
         {
-            var requestMemoryStream = new MemoryStream();
-            using var testServer = new InProcTestServer(async content =>
-            {
-                await content.Request.Body.CopyToAsync(requestMemoryStream);
-            });
+            var doc = await TestCore (async c => await c.OperationAsync (new string [] {}));
+            JsonElement items = doc.RootElement.GetProperty("items");
+            Assert.NotNull(items);
+            Assert.AreEqual(0, items.GetArrayLength());
+        }
 
-            var response = await new FlattenedParametersClient(ClientDiagnostics, HttpPipeline, testServer.Address).OperationAsync(new string [] {} );
+        [Test]
+        public void FlatArray_NullSerializedNotNullable()
+        {
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await TestCore (async c => await c.OperationNotNullAsync (null)));
+        }
 
-            var doc = JsonDocument.Parse(Encoding.UTF8.GetString(requestMemoryStream.ToArray()));
+        [Test]
+        public async Task FlatArray_EmptySerializedNotNullable()
+        {
+            var doc = await TestCore (async c => await c.OperationNotNullAsync (new string [] {}));
             JsonElement items = doc.RootElement.GetProperty("items");
             Assert.NotNull(items);
             Assert.AreEqual(0, items.GetArrayLength());

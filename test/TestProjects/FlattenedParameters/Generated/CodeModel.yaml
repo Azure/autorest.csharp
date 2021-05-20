@@ -21,8 +21,18 @@ schemas: !Schemas
           name: PatchContentSchemaItemsItem
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_2
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_4
+    - !ConstantSchema &ref_6
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -33,14 +43,14 @@ schemas: !Schemas
           description: Content Type 'application/json'
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_5
+    - !ObjectSchema &ref_7
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
-        - !Property &ref_7
-          schema: !ArraySchema &ref_2
+        - !Property &ref_9
+          schema: !ArraySchema &ref_3
             type: array
             apiVersions:
               - !ApiVersion 
@@ -68,10 +78,45 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
+    - !ObjectSchema &ref_11
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      properties:
+        - !Property &ref_13
+          schema: !ArraySchema &ref_4
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: 1.0.0
+            elementType: *ref_2
+            language: !Languages 
+              default:
+                name: ArrayOfString
+                description: Array of String
+            protocol: !Protocols {}
+          serializedName: items
+          language: !Languages 
+            default:
+              name: items
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
   arrays:
-    - *ref_2
+    - *ref_3
+    - *ref_4
 globalParameters:
-  - !Parameter &ref_3
+  - !Parameter &ref_5
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -96,12 +141,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_3
+          - *ref_5
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_4
+                schema: *ref_6
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -113,8 +158,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_6
-                schema: *ref_5
+              - !Parameter &ref_8
+                schema: *ref_7
                 flattened: true
                 implementation: Method
                 required: false
@@ -126,20 +171,20 @@ operationGroups:
                   http: !HttpParameter 
                     in: body
                     style: json
-              - !VirtualParameter &ref_8
-                schema: *ref_2
+              - !VirtualParameter &ref_10
+                schema: *ref_3
                 implementation: Method
                 nullable: true
-                originalParameter: *ref_6
+                originalParameter: *ref_8
                 pathToProperty: []
-                targetProperty: *ref_7
+                targetProperty: *ref_9
                 language: !Languages 
                   default:
                     name: items
                     description: ''
                 protocol: !Protocols {}
             signatureParameters:
-              - *ref_8
+              - *ref_10
             language: !Languages 
               default:
                 name: ''
@@ -166,6 +211,82 @@ operationGroups:
         language: !Languages 
           default:
             name: Operation
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_5
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_6
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_12
+                schema: *ref_11
+                flattened: true
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: body
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !VirtualParameter &ref_14
+                schema: *ref_4
+                implementation: Method
+                originalParameter: *ref_12
+                pathToProperty: []
+                targetProperty: *ref_13
+                language: !Languages 
+                  default:
+                    name: items
+                    description: ''
+                protocol: !Protocols {}
+            signatureParameters:
+              - *ref_14
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /OperationNotNull/
+                method: patch
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters: []
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Received correct format
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: OperationNotNull
             description: ''
         protocol: !Protocols {}
     language: !Languages 

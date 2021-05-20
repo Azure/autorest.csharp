@@ -70,5 +70,39 @@ namespace FlattenedParameters
                 throw;
             }
         }
+
+        /// <param name="items"> The ArrayOfString to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> OperationNotNullAsync(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.OperationNotNull");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationNotNullAsync(items, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="items"> The ArrayOfString to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response OperationNotNull(IEnumerable<string> items = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.OperationNotNull");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationNotNull(items, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
     }
 }
