@@ -43,6 +43,17 @@ namespace AutoRest.TestServer.Tests
             Assert.Fail($"Type \"{type}\" is expected to be static.");
         }
 
+
+        public static void TypeIsNotPublic(Type type)
+        {
+            if (!type.IsPublic)
+            {
+                return;
+            }
+
+            Assert.Fail($"Type \"{type}\" is expected not to be public.");
+        }
+
         public static void TypeOnlyDeclaredThesePublicMethods(Type type, params string[] expectedMethodNames)
         {
             var publicMethodNames = type.GetMethods(Public | Static | Instance)

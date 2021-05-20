@@ -10,7 +10,7 @@ using System;
 namespace TypeSchemaMapping.Models
 {
     /// <summary> Model factory for SchemaMapping read-only models. </summary>
-    public static partial class MainModelFactory
+    internal static partial class MainModelFactory
     {
 
         /// <summary> Initializes new instance of ModelWithGuidProperty class. </summary>
