@@ -46,7 +46,7 @@ namespace AutoRest.TestServer.Tests
 
         public static void TypeIsNotPublic(Type type)
         {
-            if (type.IsPublic)
+            if (!type.IsPublic)
             {
                 return;
             }
