@@ -167,9 +167,12 @@ namespace Azure.ResourceManager.Sample
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             ProximityPlacementGroupUpdate proximityPlacementGroupUpdate = new ProximityPlacementGroupUpdate();
-            foreach (var value in tags)
+            if (tags != null)
             {
-                proximityPlacementGroupUpdate.Tags.Add(value);
+                foreach (var value in tags)
+                {
+                    proximityPlacementGroupUpdate.Tags.Add(value);
+                }
             }
             var model = proximityPlacementGroupUpdate;
             var content = new Utf8JsonRequestContent();

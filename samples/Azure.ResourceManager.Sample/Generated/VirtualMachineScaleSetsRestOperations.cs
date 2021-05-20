@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -403,9 +404,12 @@ namespace Azure.ResourceManager.Sample
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             VirtualMachineScaleSetVMInstanceIDs virtualMachineScaleSetVMInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
-            foreach (var value in instanceIds)
+            if (instanceIds != null)
             {
-                virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                foreach (var value in instanceIds)
+                {
+                    virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                }
             }
             var model = virtualMachineScaleSetVMInstanceIDs;
             var content = new Utf8JsonRequestContent();
@@ -489,7 +493,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new VirtualMachineScaleSetVMInstanceRequiredIDs(instanceIds);
+            var model = new VirtualMachineScaleSetVMInstanceRequiredIDs(instanceIds.ToList());
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -964,9 +968,12 @@ namespace Azure.ResourceManager.Sample
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             VirtualMachineScaleSetVMInstanceIDs virtualMachineScaleSetVMInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
-            foreach (var value in instanceIds)
+            if (instanceIds != null)
             {
-                virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                foreach (var value in instanceIds)
+                {
+                    virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                }
             }
             var model = virtualMachineScaleSetVMInstanceIDs;
             var content = new Utf8JsonRequestContent();
@@ -1053,9 +1060,12 @@ namespace Azure.ResourceManager.Sample
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             VirtualMachineScaleSetVMInstanceIDs virtualMachineScaleSetVMInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
-            foreach (var value in instanceIds)
+            if (instanceIds != null)
             {
-                virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                foreach (var value in instanceIds)
+                {
+                    virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                }
             }
             var model = virtualMachineScaleSetVMInstanceIDs;
             var content = new Utf8JsonRequestContent();
@@ -1140,9 +1150,12 @@ namespace Azure.ResourceManager.Sample
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             VirtualMachineScaleSetVMInstanceIDs virtualMachineScaleSetVMInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
-            foreach (var value in instanceIds)
+            if (instanceIds != null)
             {
-                virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                foreach (var value in instanceIds)
+                {
+                    virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                }
             }
             var model = virtualMachineScaleSetVMInstanceIDs;
             var content = new Utf8JsonRequestContent();
@@ -1227,9 +1240,12 @@ namespace Azure.ResourceManager.Sample
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             VirtualMachineScaleSetVMInstanceIDs virtualMachineScaleSetVMInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
-            foreach (var value in instanceIds)
+            if (instanceIds != null)
             {
-                virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                foreach (var value in instanceIds)
+                {
+                    virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                }
             }
             var model = virtualMachineScaleSetVMInstanceIDs;
             var content = new Utf8JsonRequestContent();
@@ -1314,9 +1330,12 @@ namespace Azure.ResourceManager.Sample
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             VirtualMachineScaleSetVMInstanceIDs virtualMachineScaleSetVMInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
-            foreach (var value in instanceIds)
+            if (instanceIds != null)
             {
-                virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                foreach (var value in instanceIds)
+                {
+                    virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                }
             }
             var model = virtualMachineScaleSetVMInstanceIDs;
             var content = new Utf8JsonRequestContent();
@@ -1400,7 +1419,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            var model = new VirtualMachineScaleSetVMInstanceRequiredIDs(instanceIds);
+            var model = new VirtualMachineScaleSetVMInstanceRequiredIDs(instanceIds.ToList());
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(model);
             request.Content = content;
@@ -1494,9 +1513,12 @@ namespace Azure.ResourceManager.Sample
             {
                 TempDisk = tempDisk
             };
-            foreach (var value in instanceIds)
+            if (instanceIds != null)
             {
-                virtualMachineScaleSetReimageParameters.InstanceIds.Add(value);
+                foreach (var value in instanceIds)
+                {
+                    virtualMachineScaleSetReimageParameters.InstanceIds.Add(value);
+                }
             }
             var model = virtualMachineScaleSetReimageParameters;
             var content = new Utf8JsonRequestContent();
@@ -1583,9 +1605,12 @@ namespace Azure.ResourceManager.Sample
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             VirtualMachineScaleSetVMInstanceIDs virtualMachineScaleSetVMInstanceIDs = new VirtualMachineScaleSetVMInstanceIDs();
-            foreach (var value in instanceIds)
+            if (instanceIds != null)
             {
-                virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                foreach (var value in instanceIds)
+                {
+                    virtualMachineScaleSetVMInstanceIDs.InstanceIds.Add(value);
+                }
             }
             var model = virtualMachineScaleSetVMInstanceIDs;
             var content = new Utf8JsonRequestContent();

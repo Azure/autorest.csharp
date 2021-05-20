@@ -298,9 +298,12 @@ namespace Azure.ResourceManager.Sample
             {
                 PublicKey = publicKey
             };
-            foreach (var value in tags)
+            if (tags != null)
             {
-                sshPublicKeyUpdateResource.Tags.Add(value);
+                foreach (var value in tags)
+                {
+                    sshPublicKeyUpdateResource.Tags.Add(value);
+                }
             }
             var model = sshPublicKeyUpdateResource;
             var content = new Utf8JsonRequestContent();
