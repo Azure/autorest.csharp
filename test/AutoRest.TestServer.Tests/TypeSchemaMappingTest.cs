@@ -248,5 +248,11 @@ namespace AutoRest.TestServer.Tests
             var modelType = typeof(UnexposedNonExtensibleEnum);
             Assert.AreEqual(false, modelType.IsPublic);
         }
+
+        [Test]
+        public void ModelFactoryRenamed()
+        {
+            TypeAsserts.HasNoType(typeof(MainModelFactory).Assembly, "TypeSchemaMapping", "SchemaMappingModelFactory");
+        }
     }
 }
