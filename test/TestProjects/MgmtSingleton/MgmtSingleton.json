@@ -33,13 +33,44 @@
         }
     },
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/policies/default": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}/singletonResources/default": {
+            "get": {
+                "tags": [
+                    "SingletonResources"
+                ],
+                "operationId": "SingletonResources_GetDefault",
+                "description": "Singleton Test Example. See /providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default GET,PUT",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/SingletonResource"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/": {
             "get": {
                 "tags": [
                     "Policies"
                 ],
-                "operationId": "Policies_GetByBillingProfile",
-                "description": "Singleton Test Example",
+                "operationId": "ParentResources_List",
+                "description": "Singleton Test Parent Example.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -55,27 +86,48 @@
                     "200": {
                         "description": "OK. The request has succeeded.",
                         "schema": {
-                            "$ref": "#/definitions/Policy"
+                            "$ref": "#/definitions/ParentResourceListResult"
                         }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}": {
+            "get": {
+                "tags": [
+                    "Policies"
+                ],
+                "operationId": "ParentResources_Get",
+                "description": "Singleton Test Parent Example.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
                     },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
                         "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/ParentResource"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Policies"
+                    "ParentResources"
                 ],
-                "operationId": "Policies_Update",
-                "description": "Updates the singleton policies",
+                "operationId": "ParentResources_CreateOrUpdate",
                 "parameters": [
-                    {
-                        "$ref": "#/parameters/ApiVersionParameter"
-                    },
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
                     },
@@ -83,26 +135,25 @@
                         "$ref": "#/parameters/ResourceGroupNameParameter"
                     },
                     {
+                        "$ref": "#/parameters/ParentNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Policy"
-                        },
-                        "description": "Request parameters that are provided to the update policies operation."
+                            "$ref": "#/definitions/ParentResource"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK. The request has succeeded.",
+                        "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/Policy"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response describing why the operation failed.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
+                            "$ref": "#/definitions/ParentResource"
                         }
                     }
                 }
@@ -110,6 +161,53 @@
         }
     },
     "definitions": {
+        "SingletonResource": {
+            "description": "A singleton resource.",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "new": {
+                    "type": "string"
+                }
+            }
+        },
+        "ParentResource": {
+            "description": "A parent resource.",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/TrackedResource"
+                }
+            ],
+            "properties": {
+                "new": {
+                    "type": "string"
+                }
+            }
+        },
+        "ParentResourceListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ParentResource"
+                    },
+                    "description": "The list of parent resource"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page"
+                }
+            },
+            "required": [
+                "value"
+            ],
+            "description": "The List Availability Set operation response."
+        },
         "Resource": {
             "description": "The Resource model definition.",
             "properties": {
@@ -164,125 +262,15 @@
                     "$ref": "#/definitions/Resource"
                 }
             ]
-        },
-        "Policy": {
-            "description": "A singleton resource.",
-            "type": "object",
-            "allOf": [
-                {
-                    "$ref": "#/definitions/Resource"
-                }
-            ],
-            "properties": {
-                "properties": {
-                    "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/PolicyProperties",
-                    "title": "Policy properties"
-                }
-            }
-        },
-        "PolicyProperties": {
-            "description": "The properties of a policy.",
-            "properties": {
-                "marketplacePurchases": {
-                    "description": "The policy that controls whether Azure marketplace purchases are allowed for a billing profile.",
-                    "type": "string",
-                    "enum": [
-                        "AllAllowed",
-                        "OnlyFreeAllowed",
-                        "NotAllowed"
-                    ],
-                    "x-ms-enum": {
-                        "name": "MarketplacePurchasesPolicy",
-                        "modelAsString": true
-                    }
-                },
-                "reservationPurchases": {
-                    "description": "The policy that controls whether Azure reservation purchases are allowed for a billing profile.",
-                    "type": "string",
-                    "enum": [
-                        "Allowed",
-                        "NotAllowed"
-                    ],
-                    "x-ms-enum": {
-                        "name": "ReservationPurchasesPolicy",
-                        "modelAsString": true
-                    }
-                },
-                "viewCharges": {
-                    "description": "The policy that controls whether users with Azure RBAC access to a subscription can view its charges.",
-                    "type": "string",
-                    "enum": [
-                        "Allowed",
-                        "NotAllowed"
-                    ],
-                    "x-ms-enum": {
-                        "name": "ViewChargesPolicy",
-                        "modelAsString": true
-                    }
-                }
-            }
-        },
-        "ErrorResponse": {
-            "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
-            "type": "object",
-            "properties": {
-                "error": {
-                    "description": "The details of the error.",
-                    "$ref": "#/definitions/ErrorDetails"
-                }
-            }
-        },
-        "ErrorDetails": {
-            "description": "The details of the error.",
-            "properties": {
-                "code": {
-                    "description": "Error code.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "message": {
-                    "description": "Error message indicating why the operation failed.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "target": {
-                    "description": "The target of the particular error.",
-                    "type": "string",
-                    "readOnly": true
-                },
-                "details": {
-                    "description": "The sub details of the error.",
-                    "readOnly": true,
-                    "$ref": "#/definitions/ErrorSubDetails"
-                }
-            }
-        },
-        "ErrorSubDetails": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "code": {
-                        "description": "Error code.",
-                        "type": "string",
-                        "readOnly": true
-                    },
-                    "message": {
-                        "description": "Error message indicating why the operation failed.",
-                        "type": "string",
-                        "readOnly": true
-                    },
-                    "target": {
-                        "description": "The target of the particular error.",
-                        "type": "string",
-                        "readOnly": true
-                    }
-                }
-            }
         }
     },
     "parameters": {
+        "ParentNameParameter": {
+            "name": "parentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+        },
         "SubscriptionIdParameter": {
             "name": "subscriptionId",
             "in": "path",

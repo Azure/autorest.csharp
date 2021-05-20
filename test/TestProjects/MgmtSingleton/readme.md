@@ -9,5 +9,10 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/MgmtSingleton.json
 namespace: MgmtSingleton
-
+operation-group-to-resource-type:
+  SingletonResources: Microsoft.Billing/parentResources/singletonResources
+operation-group-to-parent:
+  SingletonResources: ParentResources
+operation-group-to-resource:
+  SingletonResources: SingletonResource
 ```
