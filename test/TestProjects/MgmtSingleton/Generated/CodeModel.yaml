@@ -676,7 +676,7 @@ operationGroups:
                   - '200'
         language: !Languages 
           default:
-            name: Put
+            name: CreateOrUpdate
             description: ''
         protocol: !Protocols {}
     language: !Languages 

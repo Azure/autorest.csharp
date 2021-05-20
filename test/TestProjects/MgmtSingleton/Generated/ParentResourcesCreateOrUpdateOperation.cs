@@ -14,16 +14,16 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtSingleton
 {
-    public partial class ParentResourcesPutOperation : Operation<ParentResource>
+    public partial class ParentResourcesCreateOrUpdateOperation : Operation<ParentResource>
     {
         private readonly OperationOrResponseInternals<ParentResource> _operation;
 
-        /// <summary> Initializes a new instance of ParentResourcesPutOperation for mocking. </summary>
-        protected ParentResourcesPutOperation()
+        /// <summary> Initializes a new instance of ParentResourcesCreateOrUpdateOperation for mocking. </summary>
+        protected ParentResourcesCreateOrUpdateOperation()
         {
         }
 
-        internal ParentResourcesPutOperation(ResourceOperationsBase operationsBase, Response<ParentResourceData> response)
+        internal ParentResourcesCreateOrUpdateOperation(ResourceOperationsBase operationsBase, Response<ParentResourceData> response)
         {
             _operation = new OperationOrResponseInternals<ParentResource>(Response.FromValue(new ParentResource(operationsBase, response.Value), response.GetRawResponse()));
         }

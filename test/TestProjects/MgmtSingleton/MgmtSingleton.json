@@ -67,7 +67,7 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/": {
             "get": {
                 "tags": [
-                    "Policies"
+                    "ParentResources"
                 ],
                 "operationId": "ParentResources_List",
                 "description": "Singleton Test Parent Example.",
@@ -95,7 +95,7 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Billing/parentResources/{parentName}": {
             "get": {
                 "tags": [
-                    "Policies"
+                    "ParentResources"
                 ],
                 "operationId": "ParentResources_Get",
                 "description": "Singleton Test Parent Example.",

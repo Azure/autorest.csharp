@@ -180,7 +180,7 @@ namespace MgmtSingleton
             }
         }
 
-        internal HttpMessage CreatePutRequest(ParentResourceData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(ParentResourceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -206,14 +206,14 @@ namespace MgmtSingleton
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ParentResourceData>> PutAsync(ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<ParentResourceData>> CreateOrUpdateAsync(ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(parameters);
+            using var message = CreateCreateOrUpdateRequest(parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -232,14 +232,14 @@ namespace MgmtSingleton
         /// <param name="parameters"> The ParentResource to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public Response<ParentResourceData> Put(ParentResourceData parameters, CancellationToken cancellationToken = default)
+        public Response<ParentResourceData> CreateOrUpdate(ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(parameters);
+            using var message = CreateCreateOrUpdateRequest(parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
