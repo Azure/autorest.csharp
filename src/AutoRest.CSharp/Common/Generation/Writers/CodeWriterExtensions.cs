@@ -324,9 +324,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 foreach (var propertyInitializer in collectionInitializers)
                 {
                     var valueVariable = new CodeWriterDeclaration("value");
-                    using (writer1.Scope($"foreach (var {valueVariable:D} in {propertyInitializer.Value})"))
+                    using (writer1.Scope($"if ({propertyInitializer.Value} != null)"))
                     {
-                        writer1.Append($"{codeWriterDeclaration}.{propertyInitializer.Property.Declaration.Name}.Add({valueVariable});");
+                        using (writer1.Scope($"foreach (var {valueVariable:D} in {propertyInitializer.Value})"))
+                        {
+                            writer1.Append($"{codeWriterDeclaration}.{propertyInitializer.Property.Declaration.Name}.Add({valueVariable});");
+                        }
                     }
                 }
             }
