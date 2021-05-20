@@ -97,9 +97,12 @@ namespace FlattenedParameters
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema = new PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema();
-            foreach (var value in items)
+            if (items != null)
             {
-                pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema.Items.Add(value);
+                foreach (var value in items)
+                {
+                    pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema.Items.Add(value);
+                }
             }
             var model = pathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema;
             var content = new Utf8JsonRequestContent();

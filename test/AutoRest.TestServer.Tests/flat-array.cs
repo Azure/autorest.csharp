@@ -49,18 +49,17 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void FlatArray_NullSerializedNotNullable()
+        public async Task FlatArray_NullSerializedNotNullable()
         {
-            Assert.ThrowsAsync<ArgumentNullException>(async () => await TestCore (async c => await c.OperationNotNullAsync (null)));
+            var doc = await TestCore (async c => await c.OperationNotNullAsync ());
+            Assert.IsFalse(doc.RootElement.TryGetProperty ("items", out JsonElement value));
         }
 
         [Test]
         public async Task FlatArray_EmptySerializedNotNullable()
         {
             var doc = await TestCore (async c => await c.OperationNotNullAsync (new string [] {}));
-            JsonElement items = doc.RootElement.GetProperty("items");
-            Assert.NotNull(items);
-            Assert.AreEqual(0, items.GetArrayLength());
+            Assert.IsFalse(doc.RootElement.TryGetProperty ("items", out JsonElement value));
         }
     }
 }
