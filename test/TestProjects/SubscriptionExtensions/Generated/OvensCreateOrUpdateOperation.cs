@@ -18,9 +18,9 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation. </summary>
-    public partial class OvensCreateOrUpdateOperation : Operation<Oven>, IOperationSource<OvenData>
+    public partial class OvensCreateOrUpdateOperation : Operation<Oven>, IOperationSource<Oven>
     {
-        private readonly OperationInternals<OvenData> _operation;
+        private readonly OperationInternals<Oven> _operation;
 
         private readonly ResourceOperationsBase _operationBase;
 
@@ -31,7 +31,7 @@ namespace SubscriptionExtensions
 
         internal OvensCreateOrUpdateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<OvenData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "OvensCreateOrUpdateOperation");
+            _operation = new OperationInternals<Oven>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "OvensCreateOrUpdateOperation");
             _operationBase = operationsBase;
         }
 
@@ -39,7 +39,7 @@ namespace SubscriptionExtensions
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override Oven Value => new Oven(_operationBase, _operation.Value);
+        public override Oven Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -57,23 +57,21 @@ namespace SubscriptionExtensions
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public async override ValueTask<Response<Oven>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(cancellationToken));
+        public override ValueTask<Response<Oven>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public async override ValueTask<Response<Oven>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken));
+        public override ValueTask<Response<Oven>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        private Response<Oven> MapResponseType(Response<OvenData> response) => Response.FromValue(new Oven(_operationBase, response.Value), response.GetRawResponse());
-
-        OvenData IOperationSource<OvenData>.CreateResult(Response response, CancellationToken cancellationToken)
+        Oven IOperationSource<Oven>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return OvenData.DeserializeOvenData(document.RootElement);
+            return new Oven(_operationBase, OvenData.DeserializeOvenData(document.RootElement));
         }
 
-        async ValueTask<OvenData> IOperationSource<OvenData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<Oven> IOperationSource<Oven>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return OvenData.DeserializeOvenData(document.RootElement);
+            return new Oven(_operationBase, OvenData.DeserializeOvenData(document.RootElement));
         }
     }
 }
