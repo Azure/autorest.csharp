@@ -11,11 +11,11 @@ info: !Info
   title: CognitiveServices.TextAnalytics
 schemas: !Schemas 
   booleans:
-    - !BooleanSchema &ref_98
+    - !BooleanSchema &ref_105
       type: boolean
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: Boolean
@@ -26,7 +26,7 @@ schemas: !Schemas
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
@@ -37,7 +37,7 @@ schemas: !Schemas
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
@@ -48,172 +48,172 @@ schemas: !Schemas
       type: number
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 64
       language: !Languages 
         default:
-          name: EntityScore
+          name: EntityConfidenceScore
           description: Confidence score between 0 and 1 of the extracted entity.
       protocol: !Protocols {}
-    - !NumberSchema &ref_13
+    - !NumberSchema &ref_16
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
           name: DocumentStatisticsCharactersCount
           description: Number of text elements recognized in the document.
       protocol: !Protocols {}
-    - !NumberSchema &ref_14
+    - !NumberSchema &ref_17
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
           name: DocumentStatisticsTransactionsCount
           description: Number of transactions for the document.
       protocol: !Protocols {}
-    - !NumberSchema &ref_25
+    - !NumberSchema &ref_28
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
           name: RequestStatisticsDocumentsCount
           description: Number of documents submitted in the request.
       protocol: !Protocols {}
-    - !NumberSchema &ref_26
+    - !NumberSchema &ref_29
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
           name: RequestStatisticsValidDocumentsCount
           description: Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.
       protocol: !Protocols {}
-    - !NumberSchema &ref_27
+    - !NumberSchema &ref_30
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
           name: RequestStatisticsErroneousDocumentsCount
           description: Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.
       protocol: !Protocols {}
-    - !NumberSchema &ref_28
+    - !NumberSchema &ref_31
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 64
       language: !Languages 
         default:
           name: RequestStatisticsTransactionsCount
           description: Number of transactions for the request.
       protocol: !Protocols {}
-    - !NumberSchema &ref_37
+    - !NumberSchema &ref_41
       type: number
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 64
       language: !Languages 
         default:
-          name: MatchScore
+          name: MatchConfidenceScore
           description: If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.
       protocol: !Protocols {}
-    - !NumberSchema &ref_39
+    - !NumberSchema &ref_43
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
           name: MatchOffset
           description: Start position (in Unicode characters) for the entity match text.
       protocol: !Protocols {}
-    - !NumberSchema &ref_40
+    - !NumberSchema &ref_44
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
           name: MatchLength
           description: Length (in Unicode characters) for the entity match text.
       protocol: !Protocols {}
-    - !NumberSchema &ref_60
+    - !NumberSchema &ref_64
       type: number
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 64
       language: !Languages 
         default:
-          name: DetectedLanguageScore
+          name: DetectedLanguageConfidenceScore
           description: A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.
       protocol: !Protocols {}
-    - !NumberSchema &ref_66
+    - !NumberSchema &ref_70
       type: number
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 64
       language: !Languages 
         default:
           name: SentimentConfidenceScorePerLabelPositive
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_67
+    - !NumberSchema &ref_71
       type: number
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 64
       language: !Languages 
         default:
           name: SentimentConfidenceScorePerLabelNeutral
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_68
+    - !NumberSchema &ref_72
       type: number
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 64
       language: !Languages 
         default:
           name: SentimentConfidenceScorePerLabelNegative
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_71
+    - !NumberSchema &ref_76
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
           name: SentenceSentimentOffset
           description: The sentence offset from the start of the document.
       protocol: !Protocols {}
-    - !NumberSchema &ref_72
+    - !NumberSchema &ref_77
       type: integer
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       precision: 32
       language: !Languages 
         default:
@@ -232,7 +232,7 @@ schemas: !Schemas
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: String
@@ -242,7 +242,7 @@ schemas: !Schemas
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: MultiLanguageInputId
@@ -252,7 +252,7 @@ schemas: !Schemas
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: MultiLanguageInputText
@@ -262,7 +262,7 @@ schemas: !Schemas
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: MultiLanguageInputLanguage
@@ -272,7 +272,7 @@ schemas: !Schemas
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: DocumentEntitiesId
@@ -282,7 +282,7 @@ schemas: !Schemas
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: EntityText
@@ -292,267 +292,287 @@ schemas: !Schemas
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: EntityType
+          name: EntityCategory
           description: Entity type, such as Person/Location/Org/SSN etc
       protocol: !Protocols {}
     - !StringSchema &ref_9
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: EntitySubtype
+          name: EntitySubcategory
           description: Entity sub type, such as Age/Year/TimeRange etc
+      protocol: !Protocols {}
+    - !StringSchema &ref_14
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: v3.0
+      language: !Languages 
+        default:
+          name: TextAnalyticsWarningMessage
+          description: Warning message.
       protocol: !Protocols {}
     - !StringSchema &ref_15
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: DocumentErrorId
-          description: Document Id.
-      protocol: !Protocols {}
-    - !StringSchema &ref_17
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: v3.0-preview.1
-      language: !Languages 
-        default:
-          name: TextAnalyticsErrorMessage
-          description: Error message.
+          name: TextAnalyticsWarningTargetRef
+          description: A JSON pointer reference indicating the target object.
       protocol: !Protocols {}
     - !StringSchema &ref_18
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: TextAnalyticsErrorTarget
-          description: Error target.
+          name: DocumentErrorId
+          description: Document Id.
       protocol: !Protocols {}
     - !StringSchema &ref_20
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
+      language: !Languages 
+        default:
+          name: TextAnalyticsErrorMessage
+          description: Error message.
+      protocol: !Protocols {}
+    - !StringSchema &ref_21
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: v3.0
+      language: !Languages 
+        default:
+          name: TextAnalyticsErrorTarget
+          description: Error target.
+      protocol: !Protocols {}
+    - !StringSchema &ref_23
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: v3.0
       language: !Languages 
         default:
           name: InnerErrorMessage
           description: Error message.
       protocol: !Protocols {}
-    - !StringSchema &ref_22
+    - !StringSchema &ref_25
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: InnerErrorTarget
           description: Error target.
       protocol: !Protocols {}
-    - !StringSchema &ref_29
+    - !StringSchema &ref_32
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: EntitiesResultModelVersion
           description: This field indicates which model is used for scoring.
       protocol: !Protocols {}
-    - !StringSchema &ref_35
+    - !StringSchema &ref_39
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: DocumentLinkedEntitiesId
           description: Unique, non-empty document identifier.
       protocol: !Protocols {}
-    - !StringSchema &ref_36
+    - !StringSchema &ref_40
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: LinkedEntityName
           description: Entity Linking formal name.
       protocol: !Protocols {}
-    - !StringSchema &ref_38
+    - !StringSchema &ref_42
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: MatchText
           description: Entity text as appears in the request.
       protocol: !Protocols {}
-    - !StringSchema &ref_41
+    - !StringSchema &ref_45
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: LinkedEntityLanguage
           description: Language used in the data source.
       protocol: !Protocols {}
-    - !StringSchema &ref_42
+    - !StringSchema &ref_46
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: LinkedEntityId
           description: Unique identifier of the recognized entity from the data source.
       protocol: !Protocols {}
-    - !StringSchema &ref_43
+    - !StringSchema &ref_47
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: LinkedEntityUrl
           description: URL for the entity's page from the data source.
       protocol: !Protocols {}
-    - !StringSchema &ref_44
+    - !StringSchema &ref_48
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: LinkedEntityDataSource
           description: Data source used to extract entity linking, such as Wiki/Bing etc.
       protocol: !Protocols {}
-    - !StringSchema &ref_45
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: v3.0-preview.1
-      language: !Languages 
-        default:
-          name: EntityLinkingResultModelVersion
-          description: This field indicates which model is used for scoring.
-      protocol: !Protocols {}
     - !StringSchema &ref_49
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: DocumentKeyPhrasesId
-          description: Unique, non-empty document identifier.
-      protocol: !Protocols {}
-    - !StringSchema &ref_50
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: v3.0-preview.1
-      language: !Languages 
-        default:
-          name: DocumentKeyPhrasesItem
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_51
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: v3.0-preview.1
-      language: !Languages 
-        default:
-          name: KeyPhraseResultModelVersion
+          name: EntityLinkingResultModelVersion
           description: This field indicates which model is used for scoring.
       protocol: !Protocols {}
     - !StringSchema &ref_53
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: LanguageInputId
+          name: DocumentKeyPhrasesId
           description: Unique, non-empty document identifier.
       protocol: !Protocols {}
     - !StringSchema &ref_54
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: LanguageInputText
+          name: DocumentKeyPhrasesItem
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_55
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: LanguageInputCountryHint
-          description: ''
+          name: KeyPhraseResultModelVersion
+          description: This field indicates which model is used for scoring.
       protocol: !Protocols {}
     - !StringSchema &ref_57
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: DocumentLanguageId
+          name: LanguageInputId
           description: Unique, non-empty document identifier.
       protocol: !Protocols {}
     - !StringSchema &ref_58
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: DetectedLanguageName
-          description: Long name of a detected language (e.g. English, French).
+          name: LanguageInputText
+          description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_59
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: DetectedLanguageIso6391Name
-          description: A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).
+          name: LanguageInputCountryHint
+          description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_61
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
+      language: !Languages 
+        default:
+          name: DocumentLanguageId
+          description: Unique, non-empty document identifier.
+      protocol: !Protocols {}
+    - !StringSchema &ref_62
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: v3.0
+      language: !Languages 
+        default:
+          name: DetectedLanguageName
+          description: Long name of a detected language (e.g. English, French).
+      protocol: !Protocols {}
+    - !StringSchema &ref_63
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: v3.0
+      language: !Languages 
+        default:
+          name: DetectedLanguageIso6391Name
+          description: A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).
+      protocol: !Protocols {}
+    - !StringSchema &ref_65
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: v3.0
       language: !Languages 
         default:
           name: LanguageResultModelVersion
           description: This field indicates which model is used for scoring.
       protocol: !Protocols {}
-    - !StringSchema &ref_64
+    - !StringSchema &ref_68
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: DocumentSentimentId
@@ -562,24 +582,48 @@ schemas: !Schemas
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
-          name: SentenceSentimentWarningsItem
-          description: ''
+          name: SentenceSentimentText
+          description: The sentence text.
       protocol: !Protocols {}
-    - !StringSchema &ref_74
+    - !StringSchema &ref_78
       type: string
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       language: !Languages 
         default:
           name: SentimentResponseModelVersion
           description: This field indicates which model is used for scoring.
       protocol: !Protocols {}
   sealedChoices:
-    - !SealedChoiceSchema &ref_16
+    - !SealedChoiceSchema &ref_13
+      choices:
+        - !ChoiceValue 
+          value: LongWordsInDocument
+          language:
+            default:
+              name: LongWordsInDocument
+              description: ''
+        - !ChoiceValue 
+          value: DocumentTruncated
+          language:
+            default:
+              name: DocumentTruncated
+              description: ''
+      type: sealed-choice
+      apiVersions:
+        - !ApiVersion 
+          version: v3.0
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: WarningCodeValue
+          description: Error code.
+      protocol: !Protocols {}
+    - !SealedChoiceSchema &ref_19
       choices:
         - !ChoiceValue 
           value: invalidRequest
@@ -608,14 +652,14 @@ schemas: !Schemas
       type: sealed-choice
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       choiceType: *ref_0
       language: !Languages 
         default:
           name: ErrorCodeValue
           description: Error code.
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_19
+    - !SealedChoiceSchema &ref_22
       choices:
         - !ChoiceValue 
           value: invalidParameterValue
@@ -674,14 +718,14 @@ schemas: !Schemas
       type: sealed-choice
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       choiceType: *ref_0
       language: !Languages 
         default:
           name: InnerErrorCodeValue
           description: Error code.
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_65
+    - !SealedChoiceSchema &ref_69
       choices:
         - !ChoiceValue 
           value: positive
@@ -710,14 +754,14 @@ schemas: !Schemas
       type: sealed-choice
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       choiceType: *ref_0
       language: !Languages 
         default:
           name: DocumentSentimentValue
           description: Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_69
+    - !SealedChoiceSchema &ref_74
       choices:
         - !ChoiceValue 
           value: positive
@@ -740,7 +784,7 @@ schemas: !Schemas
       type: sealed-choice
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       choiceType: *ref_0
       language: !Languages 
         default:
@@ -748,7 +792,7 @@ schemas: !Schemas
           description: The predicted Sentiment for the sentence.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_99
+    - !ConstantSchema &ref_106
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -758,7 +802,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_101
+    - !ConstantSchema &ref_108
       type: constant
       value: !ConstantValue 
         value: application/json, text/json
@@ -769,7 +813,7 @@ schemas: !Schemas
           description: 'Accept: application/json, text/json'
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_21
+    - !DictionarySchema &ref_24
       type: dictionary
       elementType: *ref_1
       language: !Languages 
@@ -778,23 +822,23 @@ schemas: !Schemas
           description: Error details.
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_100
+    - !ObjectSchema &ref_107
       type: object
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       properties:
         - !Property 
-          schema: !ArraySchema &ref_77
+          schema: !ArraySchema &ref_81
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
+                version: v3.0
             elementType: !ObjectSchema &ref_5
               type: object
               apiVersions:
                 - !ApiVersion 
-                  version: v3.0-preview.1
+                  version: v3.0
               properties:
                 - !Property 
                   schema: *ref_2
@@ -856,23 +900,23 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_5
-    - !ObjectSchema &ref_105
+    - !ObjectSchema &ref_112
       type: object
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       properties:
         - !Property 
-          schema: !ArraySchema &ref_79
+          schema: !ArraySchema &ref_84
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: !ObjectSchema &ref_30
+                version: v3.0
+            elementType: !ObjectSchema &ref_33
               type: object
               apiVersions:
                 - !ApiVersion 
-                  version: v3.0-preview.1
+                  version: v3.0
               properties:
                 - !Property 
                   schema: *ref_6
@@ -884,16 +928,16 @@ schemas: !Schemas
                       description: Unique, non-empty document identifier.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ArraySchema &ref_78
+                  schema: !ArraySchema &ref_82
                     type: array
                     apiVersions:
                       - !ApiVersion 
-                        version: v3.0-preview.1
-                    elementType: !ObjectSchema &ref_31
+                        version: v3.0
+                    elementType: !ObjectSchema &ref_34
                       type: object
                       apiVersions:
                         - !ApiVersion 
-                          version: v3.0-preview.1
+                          version: v3.0
                       properties:
                         - !Property 
                           schema: *ref_7
@@ -907,19 +951,19 @@ schemas: !Schemas
                         - !Property 
                           schema: *ref_8
                           required: true
-                          serializedName: type
+                          serializedName: category
                           language: !Languages 
                             default:
-                              name: type
+                              name: category
                               description: Entity type, such as Person/Location/Org/SSN etc
                           protocol: !Protocols {}
                         - !Property 
                           schema: *ref_9
                           required: false
-                          serializedName: subtype
+                          serializedName: subcategory
                           language: !Languages 
                             default:
-                              name: subtype
+                              name: subcategory
                               description: Entity sub type, such as Age/Year/TimeRange etc
                           protocol: !Protocols {}
                         - !Property 
@@ -943,10 +987,10 @@ schemas: !Schemas
                         - !Property 
                           schema: *ref_12
                           required: true
-                          serializedName: score
+                          serializedName: confidenceScore
                           language: !Languages 
                             default:
-                              name: score
+                              name: confidenceScore
                               description: Confidence score between 0 and 1 of the extracted entity.
                           protocol: !Protocols {}
                       serializationFormats:
@@ -972,14 +1016,75 @@ schemas: !Schemas
                       description: Recognized entities in the document.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_32
+                  schema: !ArraySchema &ref_83
+                    type: array
+                    apiVersions:
+                      - !ApiVersion 
+                        version: v3.0
+                    elementType: !ObjectSchema &ref_35
+                      type: object
+                      apiVersions:
+                        - !ApiVersion 
+                          version: v3.0
+                      properties:
+                        - !Property 
+                          schema: *ref_13
+                          required: true
+                          serializedName: code
+                          language: !Languages 
+                            default:
+                              name: code
+                              description: Error code.
+                          protocol: !Protocols {}
+                        - !Property 
+                          schema: *ref_14
+                          required: true
+                          serializedName: message
+                          language: !Languages 
+                            default:
+                              name: message
+                              description: Warning message.
+                          protocol: !Protocols {}
+                        - !Property 
+                          schema: *ref_15
+                          required: false
+                          serializedName: targetRef
+                          language: !Languages 
+                            default:
+                              name: targetRef
+                              description: A JSON pointer reference indicating the target object.
+                          protocol: !Protocols {}
+                      serializationFormats:
+                        - json
+                      usage:
+                        - output
+                      language: !Languages 
+                        default:
+                          name: TextAnalyticsWarning
+                          description: ''
+                          namespace: ''
+                      protocol: !Protocols {}
+                    language: !Languages 
+                      default:
+                        name: DocumentEntitiesWarnings
+                        description: Warnings encountered while processing document.
+                    protocol: !Protocols {}
+                  required: true
+                  serializedName: warnings
+                  language: !Languages 
+                    default:
+                      name: warnings
+                      description: Warnings encountered while processing document.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: !ObjectSchema &ref_36
                     type: object
                     apiVersions:
                       - !ApiVersion 
-                        version: v3.0-preview.1
+                        version: v3.0
                     properties:
                       - !Property 
-                        schema: *ref_13
+                        schema: *ref_16
                         required: true
                         serializedName: charactersCount
                         language: !Languages 
@@ -988,7 +1093,7 @@ schemas: !Schemas
                             description: Number of text elements recognized in the document.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_14
+                        schema: *ref_17
                         required: true
                         serializedName: transactionsCount
                         language: !Languages 
@@ -1036,19 +1141,19 @@ schemas: !Schemas
               description: Response by document
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_81
+          schema: !ArraySchema &ref_86
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: !ObjectSchema &ref_33
+                version: v3.0
+            elementType: !ObjectSchema &ref_37
               type: object
               apiVersions:
                 - !ApiVersion 
-                  version: v3.0-preview.1
+                  version: v3.0
               properties:
                 - !Property 
-                  schema: *ref_15
+                  schema: *ref_18
                   required: true
                   serializedName: id
                   language: !Languages 
@@ -1057,14 +1162,14 @@ schemas: !Schemas
                       description: Document Id.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_24
+                  schema: !ObjectSchema &ref_27
                     type: object
                     apiVersions:
                       - !ApiVersion 
-                        version: v3.0-preview.1
+                        version: v3.0
                     properties:
                       - !Property 
-                        schema: *ref_16
+                        schema: *ref_19
                         required: true
                         serializedName: code
                         language: !Languages 
@@ -1073,7 +1178,7 @@ schemas: !Schemas
                             description: Error code.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_17
+                        schema: *ref_20
                         required: true
                         serializedName: message
                         language: !Languages 
@@ -1082,7 +1187,7 @@ schemas: !Schemas
                             description: Error message.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_18
+                        schema: *ref_21
                         required: false
                         serializedName: target
                         language: !Languages 
@@ -1091,14 +1196,14 @@ schemas: !Schemas
                             description: Error target.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ObjectSchema &ref_23
+                        schema: !ObjectSchema &ref_26
                           type: object
                           apiVersions:
                             - !ApiVersion 
-                              version: v3.0-preview.1
+                              version: v3.0
                           properties:
                             - !Property 
-                              schema: *ref_19
+                              schema: *ref_22
                               required: true
                               serializedName: code
                               language: !Languages 
@@ -1107,7 +1212,7 @@ schemas: !Schemas
                                   description: Error code.
                               protocol: !Protocols {}
                             - !Property 
-                              schema: *ref_20
+                              schema: *ref_23
                               required: true
                               serializedName: message
                               language: !Languages 
@@ -1116,7 +1221,7 @@ schemas: !Schemas
                                   description: Error message.
                               protocol: !Protocols {}
                             - !Property 
-                              schema: *ref_21
+                              schema: *ref_24
                               required: false
                               serializedName: details
                               language: !Languages 
@@ -1125,7 +1230,7 @@ schemas: !Schemas
                                   description: Error details.
                               protocol: !Protocols {}
                             - !Property 
-                              schema: *ref_22
+                              schema: *ref_25
                               required: false
                               serializedName: target
                               language: !Languages 
@@ -1134,12 +1239,12 @@ schemas: !Schemas
                                   description: Error target.
                               protocol: !Protocols {}
                             - !Property 
-                              schema: *ref_23
+                              schema: *ref_26
                               required: false
-                              serializedName: innerError
+                              serializedName: innererror
                               language: !Languages 
                                 default:
-                                  name: innerError
+                                  name: innererror
                                   description: Inner error contains more specific information.
                               protocol: !Protocols {}
                           serializationFormats:
@@ -1154,19 +1259,19 @@ schemas: !Schemas
                               namespace: ''
                           protocol: !Protocols {}
                         required: false
-                        serializedName: innerError
+                        serializedName: innererror
                         language: !Languages 
                           default:
-                            name: innerError
+                            name: innererror
                             description: Inner error contains more specific information.
                         protocol: !Protocols {}
                       - !Property 
-                        schema: !ArraySchema &ref_80
+                        schema: !ArraySchema &ref_85
                           type: array
                           apiVersions:
                             - !ApiVersion 
-                              version: v3.0-preview.1
-                          elementType: *ref_24
+                              version: v3.0
+                          elementType: *ref_27
                           language: !Languages 
                             default:
                               name: TextAnalyticsErrorDetails
@@ -1182,8 +1287,8 @@ schemas: !Schemas
                     serializationFormats:
                       - json
                     usage:
-                      - exception
                       - output
+                      - exception
                     language: !Languages 
                       default:
                         name: TextAnalyticsError
@@ -1220,14 +1325,14 @@ schemas: !Schemas
               description: Errors by document id.
           protocol: !Protocols {}
         - !Property 
-          schema: !ObjectSchema &ref_34
+          schema: !ObjectSchema &ref_38
             type: object
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
+                version: v3.0
             properties:
               - !Property 
-                schema: *ref_25
+                schema: *ref_28
                 required: true
                 serializedName: documentsCount
                 language: !Languages 
@@ -1236,7 +1341,7 @@ schemas: !Schemas
                     description: Number of documents submitted in the request.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_26
+                schema: *ref_29
                 required: true
                 serializedName: validDocumentsCount
                 language: !Languages 
@@ -1245,7 +1350,7 @@ schemas: !Schemas
                     description: Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_27
+                schema: *ref_30
                 required: true
                 serializedName: erroneousDocumentsCount
                 language: !Languages 
@@ -1254,7 +1359,7 @@ schemas: !Schemas
                     description: Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_28
+                schema: *ref_31
                 required: true
                 serializedName: transactionsCount
                 language: !Languages 
@@ -1280,7 +1385,7 @@ schemas: !Schemas
               description: if showStats=true was specified in the request this field will contain information about the request payload.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_29
+          schema: *ref_32
           required: true
           serializedName: modelVersion
           language: !Languages 
@@ -1298,33 +1403,59 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_30
-    - *ref_31
-    - *ref_32
     - *ref_33
-    - *ref_24
-    - *ref_23
     - *ref_34
-    - !ObjectSchema &ref_112
+    - *ref_35
+    - *ref_36
+    - *ref_37
+    - *ref_27
+    - *ref_26
+    - *ref_38
+    - !ObjectSchema &ref_113
       type: object
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       properties:
         - !Property 
-          schema: !ArraySchema &ref_84
+          schema: *ref_27
+          required: true
+          serializedName: error
+          language: !Languages 
+            default:
+              name: error
+              description: Document Error.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      language: !Languages 
+        default:
+          name: ErrorResponse
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_117
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: v3.0
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_90
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: !ObjectSchema &ref_46
+                version: v3.0
+            elementType: !ObjectSchema &ref_50
               type: object
               apiVersions:
                 - !ApiVersion 
-                  version: v3.0-preview.1
+                  version: v3.0
               properties:
                 - !Property 
-                  schema: *ref_35
+                  schema: *ref_39
                   required: true
                   serializedName: id
                   language: !Languages 
@@ -1333,19 +1464,19 @@ schemas: !Schemas
                       description: Unique, non-empty document identifier.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ArraySchema &ref_83
+                  schema: !ArraySchema &ref_88
                     type: array
                     apiVersions:
                       - !ApiVersion 
-                        version: v3.0-preview.1
-                    elementType: !ObjectSchema &ref_47
+                        version: v3.0
+                    elementType: !ObjectSchema &ref_51
                       type: object
                       apiVersions:
                         - !ApiVersion 
-                          version: v3.0-preview.1
+                          version: v3.0
                       properties:
                         - !Property 
-                          schema: *ref_36
+                          schema: *ref_40
                           required: true
                           serializedName: name
                           language: !Languages 
@@ -1354,28 +1485,28 @@ schemas: !Schemas
                               description: Entity Linking formal name.
                           protocol: !Protocols {}
                         - !Property 
-                          schema: !ArraySchema &ref_82
+                          schema: !ArraySchema &ref_87
                             type: array
                             apiVersions:
                               - !ApiVersion 
-                                version: v3.0-preview.1
-                            elementType: !ObjectSchema &ref_48
+                                version: v3.0
+                            elementType: !ObjectSchema &ref_52
                               type: object
                               apiVersions:
                                 - !ApiVersion 
-                                  version: v3.0-preview.1
+                                  version: v3.0
                               properties:
                                 - !Property 
-                                  schema: *ref_37
+                                  schema: *ref_41
                                   required: true
-                                  serializedName: score
+                                  serializedName: confidenceScore
                                   language: !Languages 
                                     default:
-                                      name: score
+                                      name: confidenceScore
                                       description: If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.
                                   protocol: !Protocols {}
                                 - !Property 
-                                  schema: *ref_38
+                                  schema: *ref_42
                                   required: true
                                   serializedName: text
                                   language: !Languages 
@@ -1384,7 +1515,7 @@ schemas: !Schemas
                                       description: Entity text as appears in the request.
                                   protocol: !Protocols {}
                                 - !Property 
-                                  schema: *ref_39
+                                  schema: *ref_43
                                   required: true
                                   serializedName: offset
                                   language: !Languages 
@@ -1393,7 +1524,7 @@ schemas: !Schemas
                                       description: Start position (in Unicode characters) for the entity match text.
                                   protocol: !Protocols {}
                                 - !Property 
-                                  schema: *ref_40
+                                  schema: *ref_44
                                   required: true
                                   serializedName: length
                                   language: !Languages 
@@ -1424,7 +1555,7 @@ schemas: !Schemas
                               description: List of instances this entity appears in the text.
                           protocol: !Protocols {}
                         - !Property 
-                          schema: *ref_41
+                          schema: *ref_45
                           required: true
                           serializedName: language
                           language: !Languages 
@@ -1433,7 +1564,7 @@ schemas: !Schemas
                               description: Language used in the data source.
                           protocol: !Protocols {}
                         - !Property 
-                          schema: *ref_42
+                          schema: *ref_46
                           required: false
                           serializedName: id
                           language: !Languages 
@@ -1442,7 +1573,7 @@ schemas: !Schemas
                               description: Unique identifier of the recognized entity from the data source.
                           protocol: !Protocols {}
                         - !Property 
-                          schema: *ref_43
+                          schema: *ref_47
                           required: true
                           serializedName: url
                           language: !Languages 
@@ -1451,7 +1582,7 @@ schemas: !Schemas
                               description: URL for the entity's page from the data source.
                           protocol: !Protocols {}
                         - !Property 
-                          schema: *ref_44
+                          schema: *ref_48
                           required: true
                           serializedName: dataSource
                           language: !Languages 
@@ -1482,7 +1613,26 @@ schemas: !Schemas
                       description: Recognized well-known entities in the document.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_32
+                  schema: !ArraySchema &ref_89
+                    type: array
+                    apiVersions:
+                      - !ApiVersion 
+                        version: v3.0
+                    elementType: *ref_35
+                    language: !Languages 
+                      default:
+                        name: DocumentLinkedEntitiesWarnings
+                        description: Warnings encountered while processing document.
+                    protocol: !Protocols {}
+                  required: true
+                  serializedName: warnings
+                  language: !Languages 
+                    default:
+                      name: warnings
+                      description: Warnings encountered while processing document.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_36
                   required: false
                   serializedName: statistics
                   language: !Languages 
@@ -1513,12 +1663,12 @@ schemas: !Schemas
               description: Response by document
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_85
+          schema: !ArraySchema &ref_91
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: *ref_33
+                version: v3.0
+            elementType: *ref_37
             language: !Languages 
               default:
                 name: EntityLinkingResultErrors
@@ -1532,7 +1682,7 @@ schemas: !Schemas
               description: Errors by document id.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_34
+          schema: *ref_38
           required: false
           serializedName: statistics
           language: !Languages 
@@ -1541,7 +1691,7 @@ schemas: !Schemas
               description: if showStats=true was specified in the request this field will contain information about the request payload.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_45
+          schema: *ref_49
           required: true
           serializedName: modelVersion
           language: !Languages 
@@ -1559,29 +1709,29 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_46
-    - *ref_47
-    - *ref_48
-    - !ObjectSchema &ref_116
+    - *ref_50
+    - *ref_51
+    - *ref_52
+    - !ObjectSchema &ref_121
       type: object
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       properties:
         - !Property 
-          schema: !ArraySchema &ref_87
+          schema: !ArraySchema &ref_94
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: !ObjectSchema &ref_52
+                version: v3.0
+            elementType: !ObjectSchema &ref_56
               type: object
               apiVersions:
                 - !ApiVersion 
-                  version: v3.0-preview.1
+                  version: v3.0
               properties:
                 - !Property 
-                  schema: *ref_49
+                  schema: *ref_53
                   required: true
                   serializedName: id
                   language: !Languages 
@@ -1590,12 +1740,12 @@ schemas: !Schemas
                       description: Unique, non-empty document identifier.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ArraySchema &ref_86
+                  schema: !ArraySchema &ref_92
                     type: array
                     apiVersions:
                       - !ApiVersion 
-                        version: v3.0-preview.1
-                    elementType: *ref_50
+                        version: v3.0
+                    elementType: *ref_54
                     language: !Languages 
                       default:
                         name: DocumentKeyPhrases
@@ -1609,7 +1759,26 @@ schemas: !Schemas
                       description: A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_32
+                  schema: !ArraySchema &ref_93
+                    type: array
+                    apiVersions:
+                      - !ApiVersion 
+                        version: v3.0
+                    elementType: *ref_35
+                    language: !Languages 
+                      default:
+                        name: DocumentKeyPhrasesWarnings
+                        description: Warnings encountered while processing document.
+                    protocol: !Protocols {}
+                  required: true
+                  serializedName: warnings
+                  language: !Languages 
+                    default:
+                      name: warnings
+                      description: Warnings encountered while processing document.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_36
                   required: false
                   serializedName: statistics
                   language: !Languages 
@@ -1640,12 +1809,12 @@ schemas: !Schemas
               description: Response by document
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_88
+          schema: !ArraySchema &ref_95
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: *ref_33
+                version: v3.0
+            elementType: *ref_37
             language: !Languages 
               default:
                 name: KeyPhraseResultErrors
@@ -1659,7 +1828,7 @@ schemas: !Schemas
               description: Errors by document id.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_34
+          schema: *ref_38
           required: false
           serializedName: statistics
           language: !Languages 
@@ -1668,7 +1837,7 @@ schemas: !Schemas
               description: if showStats=true was specified in the request this field will contain information about the request payload.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_51
+          schema: *ref_55
           required: true
           serializedName: modelVersion
           language: !Languages 
@@ -1686,27 +1855,27 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_52
-    - !ObjectSchema &ref_117
+    - *ref_56
+    - !ObjectSchema &ref_122
       type: object
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       properties:
         - !Property 
-          schema: !ArraySchema &ref_89
+          schema: !ArraySchema &ref_96
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: !ObjectSchema &ref_56
+                version: v3.0
+            elementType: !ObjectSchema &ref_60
               type: object
               apiVersions:
                 - !ApiVersion 
-                  version: v3.0-preview.1
+                  version: v3.0
               properties:
                 - !Property 
-                  schema: *ref_53
+                  schema: *ref_57
                   required: true
                   serializedName: id
                   language: !Languages 
@@ -1715,7 +1884,7 @@ schemas: !Schemas
                       description: Unique, non-empty document identifier.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_54
+                  schema: *ref_58
                   required: true
                   serializedName: text
                   language: !Languages 
@@ -1724,7 +1893,7 @@ schemas: !Schemas
                       description: ''
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_55
+                  schema: *ref_59
                   required: false
                   serializedName: countryHint
                   language: !Languages 
@@ -1764,27 +1933,27 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_56
-    - !ObjectSchema &ref_121
+    - *ref_60
+    - !ObjectSchema &ref_126
       type: object
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       properties:
         - !Property 
-          schema: !ArraySchema &ref_91
+          schema: !ArraySchema &ref_98
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: !ObjectSchema &ref_62
+                version: v3.0
+            elementType: !ObjectSchema &ref_66
               type: object
               apiVersions:
                 - !ApiVersion 
-                  version: v3.0-preview.1
+                  version: v3.0
               properties:
                 - !Property 
-                  schema: *ref_57
+                  schema: *ref_61
                   required: true
                   serializedName: id
                   language: !Languages 
@@ -1793,68 +1962,77 @@ schemas: !Schemas
                       description: Unique, non-empty document identifier.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ArraySchema &ref_90
+                  schema: !ObjectSchema &ref_67
+                    type: object
+                    apiVersions:
+                      - !ApiVersion 
+                        version: v3.0
+                    properties:
+                      - !Property 
+                        schema: *ref_62
+                        required: true
+                        serializedName: name
+                        language: !Languages 
+                          default:
+                            name: name
+                            description: Long name of a detected language (e.g. English, French).
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_63
+                        required: true
+                        serializedName: iso6391Name
+                        language: !Languages 
+                          default:
+                            name: iso6391Name
+                            description: A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).
+                        protocol: !Protocols {}
+                      - !Property 
+                        schema: *ref_64
+                        required: true
+                        serializedName: confidenceScore
+                        language: !Languages 
+                          default:
+                            name: confidenceScore
+                            description: A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.
+                        protocol: !Protocols {}
+                    serializationFormats:
+                      - json
+                    usage:
+                      - output
+                    language: !Languages 
+                      default:
+                        name: DetectedLanguage
+                        description: ''
+                        namespace: ''
+                    protocol: !Protocols {}
+                  required: true
+                  serializedName: detectedLanguage
+                  language: !Languages 
+                    default:
+                      name: detectedLanguage
+                      description: Detected Language.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: !ArraySchema &ref_97
                     type: array
                     apiVersions:
                       - !ApiVersion 
-                        version: v3.0-preview.1
-                    elementType: !ObjectSchema &ref_63
-                      type: object
-                      apiVersions:
-                        - !ApiVersion 
-                          version: v3.0-preview.1
-                      properties:
-                        - !Property 
-                          schema: *ref_58
-                          required: true
-                          serializedName: name
-                          language: !Languages 
-                            default:
-                              name: name
-                              description: Long name of a detected language (e.g. English, French).
-                          protocol: !Protocols {}
-                        - !Property 
-                          schema: *ref_59
-                          required: true
-                          serializedName: iso6391Name
-                          language: !Languages 
-                            default:
-                              name: iso6391Name
-                              description: A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).
-                          protocol: !Protocols {}
-                        - !Property 
-                          schema: *ref_60
-                          required: true
-                          serializedName: score
-                          language: !Languages 
-                            default:
-                              name: score
-                              description: A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.
-                          protocol: !Protocols {}
-                      serializationFormats:
-                        - json
-                      usage:
-                        - output
-                      language: !Languages 
-                        default:
-                          name: DetectedLanguage
-                          description: ''
-                          namespace: ''
-                      protocol: !Protocols {}
+                        version: v3.0
+                    elementType: *ref_35
                     language: !Languages 
                       default:
-                        name: DocumentLanguageDetectedLanguages
-                        description: A list of extracted languages.
+                        name: DocumentLanguageWarnings
+                        description: Warnings encountered while processing document.
                     protocol: !Protocols {}
                   required: true
-                  serializedName: detectedLanguages
+                  serializedName: warnings
                   language: !Languages 
                     default:
-                      name: detectedLanguages
-                      description: A list of extracted languages.
+                      name: warnings
+                      description: Warnings encountered while processing document.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_32
+                  schema: *ref_36
                   required: false
                   serializedName: statistics
                   language: !Languages 
@@ -1885,12 +2063,12 @@ schemas: !Schemas
               description: Response by document
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_92
+          schema: !ArraySchema &ref_99
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: *ref_33
+                version: v3.0
+            elementType: *ref_37
             language: !Languages 
               default:
                 name: LanguageResultErrors
@@ -1904,7 +2082,7 @@ schemas: !Schemas
               description: Errors by document id.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_34
+          schema: *ref_38
           required: false
           serializedName: statistics
           language: !Languages 
@@ -1913,7 +2091,7 @@ schemas: !Schemas
               description: if showStats=true was specified in the request this field will contain information about the request payload.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_61
+          schema: *ref_65
           required: true
           serializedName: modelVersion
           language: !Languages 
@@ -1931,28 +2109,28 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_62
-    - *ref_63
-    - !ObjectSchema &ref_125
+    - *ref_66
+    - *ref_67
+    - !ObjectSchema &ref_130
       type: object
       apiVersions:
         - !ApiVersion 
-          version: v3.0-preview.1
+          version: v3.0
       properties:
         - !Property 
-          schema: !ArraySchema &ref_95
+          schema: !ArraySchema &ref_102
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: !ObjectSchema &ref_75
+                version: v3.0
+            elementType: !ObjectSchema &ref_79
               type: object
               apiVersions:
                 - !ApiVersion 
-                  version: v3.0-preview.1
+                  version: v3.0
               properties:
                 - !Property 
-                  schema: *ref_64
+                  schema: *ref_68
                   required: true
                   serializedName: id
                   language: !Languages 
@@ -1961,7 +2139,7 @@ schemas: !Schemas
                       description: Unique, non-empty document identifier.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_65
+                  schema: *ref_69
                   required: true
                   serializedName: sentiment
                   language: !Languages 
@@ -1970,7 +2148,7 @@ schemas: !Schemas
                       description: Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).
                   protocol: !Protocols {}
                 - !Property 
-                  schema: *ref_32
+                  schema: *ref_36
                   required: false
                   serializedName: statistics
                   language: !Languages 
@@ -1979,14 +2157,14 @@ schemas: !Schemas
                       description: if showStats=true was specified in the request this field will contain information about the document payload.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ObjectSchema &ref_70
+                  schema: !ObjectSchema &ref_75
                     type: object
                     apiVersions:
                       - !ApiVersion 
-                        version: v3.0-preview.1
+                        version: v3.0
                     properties:
                       - !Property 
-                        schema: *ref_66
+                        schema: *ref_70
                         required: true
                         serializedName: positive
                         language: !Languages 
@@ -1995,7 +2173,7 @@ schemas: !Schemas
                             description: ''
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_67
+                        schema: *ref_71
                         required: true
                         serializedName: neutral
                         language: !Languages 
@@ -2004,7 +2182,7 @@ schemas: !Schemas
                             description: ''
                         protocol: !Protocols {}
                       - !Property 
-                        schema: *ref_68
+                        schema: *ref_72
                         required: true
                         serializedName: negative
                         language: !Languages 
@@ -2023,26 +2201,35 @@ schemas: !Schemas
                         namespace: ''
                     protocol: !Protocols {}
                   required: true
-                  serializedName: documentScores
+                  serializedName: confidenceScores
                   language: !Languages 
                     default:
-                      name: documentScores
+                      name: confidenceScores
                       description: Document level sentiment confidence scores between 0 and 1 for each sentiment class.
                   protocol: !Protocols {}
                 - !Property 
-                  schema: !ArraySchema &ref_94
+                  schema: !ArraySchema &ref_100
                     type: array
                     apiVersions:
                       - !ApiVersion 
-                        version: v3.0-preview.1
-                    elementType: !ObjectSchema &ref_76
+                        version: v3.0
+                    elementType: !ObjectSchema &ref_80
                       type: object
                       apiVersions:
                         - !ApiVersion 
-                          version: v3.0-preview.1
+                          version: v3.0
                       properties:
                         - !Property 
-                          schema: *ref_69
+                          schema: *ref_73
+                          required: true
+                          serializedName: text
+                          language: !Languages 
+                            default:
+                              name: text
+                              description: The sentence text.
+                          protocol: !Protocols {}
+                        - !Property 
+                          schema: *ref_74
                           required: true
                           serializedName: sentiment
                           language: !Languages 
@@ -2051,16 +2238,16 @@ schemas: !Schemas
                               description: The predicted Sentiment for the sentence.
                           protocol: !Protocols {}
                         - !Property 
-                          schema: *ref_70
+                          schema: *ref_75
                           required: true
-                          serializedName: sentenceScores
+                          serializedName: confidenceScores
                           language: !Languages 
                             default:
-                              name: sentenceScores
+                              name: confidenceScores
                               description: The sentiment confidence score between 0 and 1 for the sentence for all classes.
                           protocol: !Protocols {}
                         - !Property 
-                          schema: *ref_71
+                          schema: *ref_76
                           required: true
                           serializedName: offset
                           language: !Languages 
@@ -2069,32 +2256,13 @@ schemas: !Schemas
                               description: The sentence offset from the start of the document.
                           protocol: !Protocols {}
                         - !Property 
-                          schema: *ref_72
+                          schema: *ref_77
                           required: true
                           serializedName: length
                           language: !Languages 
                             default:
                               name: length
                               description: The length of the sentence by Unicode standard.
-                          protocol: !Protocols {}
-                        - !Property 
-                          schema: !ArraySchema &ref_93
-                            type: array
-                            apiVersions:
-                              - !ApiVersion 
-                                version: v3.0-preview.1
-                            elementType: *ref_73
-                            language: !Languages 
-                              default:
-                                name: SentenceSentimentWarnings
-                                description: The warnings generated for the sentence.
-                            protocol: !Protocols {}
-                          required: false
-                          serializedName: warnings
-                          language: !Languages 
-                            default:
-                              name: warnings
-                              description: The warnings generated for the sentence.
                           protocol: !Protocols {}
                       serializationFormats:
                         - json
@@ -2117,6 +2285,25 @@ schemas: !Schemas
                     default:
                       name: sentences
                       description: Sentence level sentiment analysis.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: !ArraySchema &ref_101
+                    type: array
+                    apiVersions:
+                      - !ApiVersion 
+                        version: v3.0
+                    elementType: *ref_35
+                    language: !Languages 
+                      default:
+                        name: DocumentSentimentWarnings
+                        description: Warnings encountered while processing document.
+                    protocol: !Protocols {}
+                  required: true
+                  serializedName: warnings
+                  language: !Languages 
+                    default:
+                      name: warnings
+                      description: Warnings encountered while processing document.
                   protocol: !Protocols {}
               serializationFormats:
                 - json
@@ -2141,12 +2328,12 @@ schemas: !Schemas
               description: Sentiment analysis per document.
           protocol: !Protocols {}
         - !Property 
-          schema: !ArraySchema &ref_96
+          schema: !ArraySchema &ref_103
             type: array
             apiVersions:
               - !ApiVersion 
-                version: v3.0-preview.1
-            elementType: *ref_33
+                version: v3.0
+            elementType: *ref_37
             language: !Languages 
               default:
                 name: SentimentResponseErrors
@@ -2160,7 +2347,7 @@ schemas: !Schemas
               description: Errors by document id.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_34
+          schema: *ref_38
           required: false
           serializedName: statistics
           language: !Languages 
@@ -2169,7 +2356,7 @@ schemas: !Schemas
               description: if showStats=true was specified in the request this field will contain information about the request payload.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_74
+          schema: *ref_78
           required: true
           serializedName: modelVersion
           language: !Languages 
@@ -2187,14 +2374,10 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_75
-    - *ref_70
-    - *ref_76
-  arrays:
-    - *ref_77
-    - *ref_78
     - *ref_79
+    - *ref_75
     - *ref_80
+  arrays:
     - *ref_81
     - *ref_82
     - *ref_83
@@ -2211,8 +2394,15 @@ schemas: !Schemas
     - *ref_94
     - *ref_95
     - *ref_96
+    - *ref_97
+    - *ref_98
+    - *ref_99
+    - *ref_100
+    - *ref_101
+    - *ref_102
+    - *ref_103
 globalParameters:
-  - !Parameter &ref_97
+  - !Parameter &ref_104
     schema: *ref_0
     implementation: Client
     required: true
@@ -2238,10 +2428,10 @@ operationGroups:
       - !Operation 
         apiVersions:
           - !ApiVersion 
-            version: v3.0-preview.1
+            version: v3.0
         parameters:
-          - *ref_97
-          - !Parameter &ref_103
+          - *ref_104
+          - !Parameter &ref_110
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2252,8 +2442,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_104
-            schema: *ref_98
+          - !Parameter &ref_111
+            schema: *ref_105
             implementation: Method
             language: !Languages 
               default:
@@ -2267,7 +2457,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_99
+                schema: *ref_106
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2279,8 +2469,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_102
-                schema: *ref_100
+              - !Parameter &ref_109
+                schema: *ref_107
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2292,7 +2482,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_101
+                schema: *ref_108
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2305,7 +2495,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_102
+              - *ref_109
             language: !Languages 
               default:
                 name: ''
@@ -2318,13 +2508,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                   - text/json
-                uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+                uri: '{Endpoint}/text/analytics/v3.0'
         signatureParameters:
-          - *ref_103
-          - *ref_104
+          - *ref_110
+          - *ref_111
         responses:
           - !SchemaResponse 
-            schema: *ref_105
+            schema: *ref_112
             language: !Languages 
               default:
                 name: ''
@@ -2339,7 +2529,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_24
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -2374,40 +2564,43 @@ operationGroups:
                   body:
                     documents:
                       - entities:
-                          - type: Location
+                          - category: Location
+                            confidenceScore: 0.8
                             length: 7
                             offset: 26
-                            score: 0.8062429428100586
                             text: Seattle
-                          - type: DateTime
+                          - category: DateTime
+                            confidenceScore: 0.8
                             length: 9
                             offset: 34
-                            score: 0.8
-                            subtype: DateRange
+                            subcategory: DateRange
                             text: last week
                         id: '1'
+                        warnings: []
                       - entities:
-                          - type: Organization
+                          - category: Organization
+                            confidenceScore: 0.99
                             length: 9
                             offset: 10
-                            score: 0.9998359680175781
                             text: Microsoft
                         id: '2'
+                        warnings: []
                       - entities:
-                          - type: Organization
+                          - category: Organization
+                            confidenceScore: 0.75
                             length: 12
                             offset: 10
-                            score: 0.7599651217460632
                             text: Space Needle
-                          - type: Quantity
+                          - category: Quantity
+                            confidenceScore: 0.8
                             length: 1
                             offset: 23
-                            score: 0.8
-                            subtype: Number
+                            subcategory: Number
                             text: '2'
                         id: '3'
+                        warnings: []
                     errors: []
-                    modelVersion: '2019-10-01'
+                    modelVersion: '2020-04-01'
                   headers: {}
         language: !Languages 
           default:
@@ -2420,10 +2613,10 @@ operationGroups:
       - !Operation 
         apiVersions:
           - !ApiVersion 
-            version: v3.0-preview.1
+            version: v3.0
         parameters:
-          - *ref_97
-          - !Parameter &ref_107
+          - *ref_104
+          - !Parameter &ref_115
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2434,181 +2627,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_108
-            schema: *ref_98
-            implementation: Method
-            language: !Languages 
-              default:
-                name: showStats
-                description: (Optional) if set to true, response will contain input and document level statistics.
-                serializedName: showStats
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_99
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_106
-                schema: *ref_100
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: input
-                    description: Collection of documents to analyze.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_101
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_106
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /entities/recognition/pii
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                uri: '{Endpoint}/text/analytics/v3.0-preview.1'
-        signatureParameters:
-          - *ref_107
-          - *ref_108
-        responses:
-          - !SchemaResponse 
+          - !Parameter &ref_116
             schema: *ref_105
-            language: !Languages 
-              default:
-                name: ''
-                description: A successful call results in a list of entities containing personal information returned for each valid document
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !SchemaResponse 
-            schema: *ref_24
-            language: !Languages 
-              default:
-                name: ''
-                description: Error Response
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                  - text/json
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-examples:
-            Successful Entity PII request:
-              parameters:
-                Endpoint: '{Endpoint}'
-                Ocp-Apim-Subscription-Key: '{API key}'
-                input:
-                  documents:
-                    - id: '0'
-                      text: Microsoft employee with ssn 859-98-0987 is using our awesome API's.
-                      language: en
-                    - id: '1'
-                      text: Your ABA number - 111000025 - is the first 9 digits in the lower left hand corner of your personal check.
-                      language: en
-                    - id: '2'
-                      text: Is 998.214.865-68 your Brazilian CPF number?
-                      language: en
-              responses:
-                '200':
-                  body:
-                    documents:
-                      - entities:
-                          - type: U.S. Social Security Number (SSN)
-                            length: 11
-                            offset: 28
-                            score: 0.65
-                            subtype: ''
-                            text: 859-98-0987
-                        id: '0'
-                      - entities:
-                          - type: ABA Routing Number
-                            length: 9
-                            offset: 18
-                            score: 0.75
-                            subtype: ''
-                            text: '111000025'
-                        id: '1'
-                      - entities:
-                          - type: Brazil CPF Number
-                            length: 14
-                            offset: 3
-                            score: 0.85
-                            subtype: ''
-                            text: 998.214.865-68
-                        id: '2'
-                    errors: []
-                    modelVersion: '2019-10-01'
-                  headers: {}
-        language: !Languages 
-          default:
-            name: EntitiesRecognitionPii
-            description: >
-              The API returns a list of entities with personal information (\"SSN\", \"Bank Account\" etc) in the document. For the list of supported entity types, check <a href="https://aka.ms/tanerpii">Supported Entity Types in Text
-              Analytics API</a>. See the <a href="https://aka.ms/talangs">Supported languages in Text Analytics API</a> for the list of enabled languages.
-            summary: Entities containing personal information
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: v3.0-preview.1
-        parameters:
-          - *ref_97
-          - !Parameter &ref_110
-            schema: *ref_1
-            implementation: Method
-            language: !Languages 
-              default:
-                name: modelVersion
-                description: '(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. '
-                serializedName: model-version
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-          - !Parameter &ref_111
-            schema: *ref_98
             implementation: Method
             language: !Languages 
               default:
@@ -2622,7 +2642,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_99
+                schema: *ref_106
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2634,8 +2654,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_109
-                schema: *ref_100
+              - !Parameter &ref_114
+                schema: *ref_107
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2647,7 +2667,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_101
+                schema: *ref_108
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2660,7 +2680,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_109
+              - *ref_114
             language: !Languages 
               default:
                 name: ''
@@ -2673,13 +2693,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                   - text/json
-                uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+                uri: '{Endpoint}/text/analytics/v3.0'
         signatureParameters:
-          - *ref_110
-          - *ref_111
+          - *ref_115
+          - *ref_116
         responses:
           - !SchemaResponse 
-            schema: *ref_112
+            schema: *ref_117
             language: !Languages 
               default:
                 name: ''
@@ -2694,7 +2714,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_24
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -2733,39 +2753,42 @@ operationGroups:
                             dataSource: Wikipedia
                             id: Seattle
                             matches:
-                              - length: 7
+                              - confidenceScore: 0.15
+                                length: 7
                                 offset: 26
-                                score: 0.15046201222847677
                                 text: Seattle
                             url: https://en.wikipedia.org/wiki/Seattle
                             language: en
                         id: '1'
+                        warnings: []
                       - entities:
                           - name: Microsoft
                             dataSource: Wikipedia
                             id: Microsoft
                             matches:
-                              - length: 9
+                              - confidenceScore: 0.18
+                                length: 9
                                 offset: 10
-                                score: 0.1869365971673207
                                 text: Microsoft
                             url: https://en.wikipedia.org/wiki/Microsoft
                             language: en
                         id: '2'
+                        warnings: []
                       - entities:
                           - name: Space Needle
                             dataSource: Wikipedia
                             id: Space Needle
                             matches:
-                              - length: 12
+                              - confidenceScore: 0.15
+                                length: 12
                                 offset: 10
-                                score: 0.155903620065595
                                 text: Space Needle
                             url: https://en.wikipedia.org/wiki/Space_Needle
                             language: en
                         id: '3'
+                        warnings: []
                     errors: []
-                    modelVersion: '2019-10-01'
+                    modelVersion: '2020-04-01'
                   headers: {}
         language: !Languages 
           default:
@@ -2776,10 +2799,10 @@ operationGroups:
       - !Operation 
         apiVersions:
           - !ApiVersion 
-            version: v3.0-preview.1
+            version: v3.0
         parameters:
-          - *ref_97
-          - !Parameter &ref_114
+          - *ref_104
+          - !Parameter &ref_119
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2790,8 +2813,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_115
-            schema: *ref_98
+          - !Parameter &ref_120
+            schema: *ref_105
             implementation: Method
             language: !Languages 
               default:
@@ -2805,7 +2828,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_99
+                schema: *ref_106
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2817,8 +2840,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_113
-                schema: *ref_100
+              - !Parameter &ref_118
+                schema: *ref_107
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2830,7 +2853,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_101
+                schema: *ref_108
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2843,7 +2866,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_113
+              - *ref_118
             language: !Languages 
               default:
                 name: ''
@@ -2856,13 +2879,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                   - text/json
-                uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+                uri: '{Endpoint}/text/analytics/v3.0'
         signatureParameters:
-          - *ref_114
-          - *ref_115
+          - *ref_119
+          - *ref_120
         responses:
           - !SchemaResponse 
-            schema: *ref_116
+            schema: *ref_121
             language: !Languages 
               default:
                 name: ''
@@ -2877,7 +2900,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_24
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -2915,16 +2938,19 @@ operationGroups:
                         keyPhrases:
                           - world
                           - input text
+                        warnings: []
                       - id: '2'
                         keyPhrases:
                           - monde
+                        warnings: []
                       - id: '3'
                         keyPhrases:
                           - carretera
                           - tráfico
                           - día
+                        warnings: []
                     errors: []
-                    modelVersion: '2019-10-01'
+                    modelVersion: '2020-04-01'
                   headers: {}
         language: !Languages 
           default:
@@ -2935,10 +2961,10 @@ operationGroups:
       - !Operation 
         apiVersions:
           - !ApiVersion 
-            version: v3.0-preview.1
+            version: v3.0
         parameters:
-          - *ref_97
-          - !Parameter &ref_119
+          - *ref_104
+          - !Parameter &ref_124
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2949,8 +2975,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_120
-            schema: *ref_98
+          - !Parameter &ref_125
+            schema: *ref_105
             implementation: Method
             language: !Languages 
               default:
@@ -2964,7 +2990,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_99
+                schema: *ref_106
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -2976,8 +3002,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_118
-                schema: *ref_117
+              - !Parameter &ref_123
+                schema: *ref_122
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -2989,7 +3015,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_101
+                schema: *ref_108
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3002,7 +3028,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_118
+              - *ref_123
             language: !Languages 
               default:
                 name: ''
@@ -3015,13 +3041,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                   - text/json
-                uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+                uri: '{Endpoint}/text/analytics/v3.0'
         signatureParameters:
-          - *ref_119
-          - *ref_120
+          - *ref_124
+          - *ref_125
         responses:
           - !SchemaResponse 
-            schema: *ref_121
+            schema: *ref_126
             language: !Languages 
               default:
                 name: ''
@@ -3036,7 +3062,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_24
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -3068,23 +3094,26 @@ operationGroups:
                 '200':
                   body:
                     documents:
-                      - detectedLanguages:
-                          - name: English
-                            iso6391Name: en
-                            score: 1
+                      - detectedLanguage:
+                          name: English
+                          confidenceScore: 1
+                          iso6391Name: en
                         id: '1'
-                      - detectedLanguages:
-                          - name: French
-                            iso6391Name: fr
-                            score: 1
+                        warnings: []
+                      - detectedLanguage:
+                          name: French
+                          confidenceScore: 1
+                          iso6391Name: fr
                         id: '2'
-                      - detectedLanguages:
-                          - name: Spanish
-                            iso6391Name: es
-                            score: 1
+                        warnings: []
+                      - detectedLanguage:
+                          name: Spanish
+                          confidenceScore: 1
+                          iso6391Name: es
                         id: '3'
+                        warnings: []
                     errors: []
-                    modelVersion: '2019-10-01'
+                    modelVersion: '2020-04-01'
                   headers: {}
         language: !Languages 
           default:
@@ -3097,10 +3126,10 @@ operationGroups:
       - !Operation 
         apiVersions:
           - !ApiVersion 
-            version: v3.0-preview.1
+            version: v3.0
         parameters:
-          - *ref_97
-          - !Parameter &ref_123
+          - *ref_104
+          - !Parameter &ref_128
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -3111,8 +3140,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_124
-            schema: *ref_98
+          - !Parameter &ref_129
+            schema: *ref_105
             implementation: Method
             language: !Languages 
               default:
@@ -3126,7 +3155,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_99
+                schema: *ref_106
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -3138,8 +3167,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_122
-                schema: *ref_100
+              - !Parameter &ref_127
+                schema: *ref_107
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -3151,7 +3180,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_101
+                schema: *ref_108
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -3164,7 +3193,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_122
+              - *ref_127
             language: !Languages 
               default:
                 name: ''
@@ -3177,13 +3206,13 @@ operationGroups:
                 mediaTypes:
                   - application/json
                   - text/json
-                uri: '{Endpoint}/text/analytics/v3.0-preview.1'
+                uri: '{Endpoint}/text/analytics/v3.0'
         signatureParameters:
-          - *ref_123
-          - *ref_124
+          - *ref_128
+          - *ref_129
         responses:
           - !SchemaResponse 
-            schema: *ref_125
+            schema: *ref_130
             language: !Languages 
               default:
                 name: ''
@@ -3198,7 +3227,7 @@ operationGroups:
                   - '200'
         exceptions:
           - !SchemaResponse 
-            schema: *ref_24
+            schema: *ref_113
             language: !Languages 
               default:
                 name: ''
@@ -3232,64 +3261,72 @@ operationGroups:
                 '200':
                   body:
                     documents:
-                      - documentScores:
-                          negative: 0.000517153472174
-                          neutral: 0.0009635657188483
-                          positive: 0.998519241809845
+                      - confidenceScores:
+                          negative: 0.01
+                          neutral: 0.01
+                          positive: 0.98
                         id: '1'
                         sentences:
-                          - length: 12
+                          - confidenceScores:
+                              negative: 0.02
+                              neutral: 0.91
+                              positive: 0.07
+                            length: 12
                             offset: 0
-                            sentenceScores:
-                              negative: 0.0166865326464176
-                              neutral: 0.9124033451080322
-                              positive: 0.070910170674324
                             sentiment: neutral
-                          - length: 36
+                            text: Hello world.
+                          - confidenceScores:
+                              negative: 0.01
+                              neutral: 0.01
+                              positive: 0.98
+                            length: 36
                             offset: 13
-                            sentenceScores:
-                              negative: 0.000517153472174
-                              neutral: 0.0009635657188483
-                              positive: 0.998519241809845
                             sentiment: positive
+                            text: This is some input text that I love.
                         sentiment: positive
-                      - documentScores:
-                          negative: 0.0010774657130241
-                          neutral: 0.0034653299953789
-                          positive: 0.9954571723937988
+                        warnings: []
+                      - confidenceScores:
+                          negative: 0.01
+                          neutral: 0.01
+                          positive: 0.98
                         id: '2'
                         sentences:
-                          - length: 30
+                          - confidenceScores:
+                              negative: 0.03
+                              neutral: 0.93
+                              positive: 0.04
+                            length: 30
                             offset: 0
-                            sentenceScores:
-                              negative: 0.0113849258050323
-                              neutral: 0.9387012720108032
-                              positive: 0.0499138832092285
                             sentiment: neutral
-                          - length: 13
+                            text: It's incredibly sunny outside!
+                          - confidenceScores:
+                              negative: 0.01
+                              neutral: 0.01
+                              positive: 0.98
+                            length: 13
                             offset: 31
-                            sentenceScores:
-                              negative: 0.0010774657130241
-                              neutral: 0.0034653299953789
-                              positive: 0.9954571723937988
                             sentiment: positive
+                            text: I'm so happy.
                         sentiment: positive
-                      - documentScores:
-                          negative: 0.0015906029148027
-                          neutral: 0.0018965365597978
-                          positive: 0.9965128302574158
+                        warnings: []
+                      - confidenceScores:
+                          negative: 0.01
+                          neutral: 0.01
+                          positive: 0.98
                         id: '3'
                         sentences:
-                          - length: 52
+                          - confidenceScores:
+                              negative: 0.01
+                              neutral: 0.01
+                              positive: 0.98
+                            length: 52
                             offset: 0
-                            sentenceScores:
-                              negative: 0.0015906029148027
-                              neutral: 0.0018965365597978
-                              positive: 0.9965128302574158
                             sentiment: positive
+                            text: Pike place market is my favorite Seattle attraction.
                         sentiment: positive
+                        warnings: []
                     errors: []
-                    modelVersion: '2019-10-01'
+                    modelVersion: '2020-04-01'
                   headers: {}
         language: !Languages 
           default:
