@@ -1949,16 +1949,6 @@ schemas: !Schemas
           description: ''
           header: Location
       protocol: !Protocols {}
-    - !StringSchema &ref_455
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2021-04-01'
-      language: !Languages 
-        default:
-          name: ComputeNodesInformationNextLink
-          description: The continuation token.
-      protocol: !Protocols {}
     - !StringSchema &ref_447
       type: string
       apiVersions:
@@ -2002,6 +1992,16 @@ schemas: !Schemas
         default:
           name: AmlComputeNodeInformationRunId
           description: ID of the Experiment running on the node, if any else null.
+      protocol: !Protocols {}
+    - !StringSchema &ref_453
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-04-01'
+      language: !Languages 
+        default:
+          name: AmlComputeNodesInformationNextLink
+          description: The continuation token.
       protocol: !Protocols {}
     - !StringSchema &ref_457
       type: string
@@ -3421,16 +3421,6 @@ schemas: !Schemas
         default:
           name: ServicePrincipalCredentialsClientSecret
           description: Client secret
-      protocol: !Protocols {}
-    - !StringSchema 
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2021-04-01'
-      language: !Languages 
-        default:
-          name: AmlComputeNodesInformationNextLink
-          description: The continuation token.
       protocol: !Protocols {}
     - !StringSchema &ref_466
       type: string
@@ -12433,7 +12423,7 @@ schemas: !Schemas
           version: '2021-04-01'
       children: !Relations 
         all:
-          - !ObjectSchema &ref_453
+          - !ObjectSchema &ref_454
             type: object
             apiVersions:
               - !ApiVersion 
@@ -12535,6 +12525,15 @@ schemas: !Schemas
                     name: nodes
                     description: The collection of returned AmlCompute nodes details.
                 protocol: !Protocols {}
+              - !Property 
+                schema: *ref_453
+                readOnly: true
+                serializedName: nextLink
+                language: !Languages 
+                  default:
+                    name: nextLink
+                    description: The continuation token.
+                protocol: !Protocols {}
             serializationFormats:
               - json
             usage:
@@ -12548,13 +12547,13 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_453
+          - *ref_454
       discriminator: !Discriminator 
         all:
-          AmlCompute: *ref_453
+          AmlCompute: *ref_454
         immediate:
-          AmlCompute: *ref_453
-        property: !Property &ref_454
+          AmlCompute: *ref_454
+        property: !Property &ref_455
           schema: *ref_169
           isDiscriminator: true
           required: true
@@ -12565,17 +12564,7 @@ schemas: !Schemas
               description: The type of compute
           protocol: !Protocols {}
       properties:
-        - *ref_454
-        - !Property 
-          schema: *ref_455
-          readOnly: true
-          required: false
-          serializedName: nextLink
-          language: !Languages 
-            default:
-              name: nextLink
-              description: The continuation token.
-          protocol: !Protocols {}
+        - *ref_455
       serializationFormats:
         - json
       usage:
@@ -12586,7 +12575,7 @@ schemas: !Schemas
           description: Compute nodes information related to a Machine Learning compute. Might differ for every type of compute.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_453
+    - *ref_454
     - *ref_456
     - !ObjectSchema &ref_677
       type: object
@@ -14916,70 +14905,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Get Workspace:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: workspace-1234
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: testworkspace
-              responses:
-                '200':
-                  body:
-                    name: testworkspace
-                    type: Microsoft.MachineLearningServices/workspaces
-                    id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace
-                    identity:
-                      type: SystemAssigned,UserAssigned
-                      principalId: 00000000-1111-2222-3333-444444444444
-                      tenantId: 00000000-1111-2222-3333-444444444444
-                      userAssignedIdentities:
-                        /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai:
-                          clientId: 00000000-1111-2222-3333-444444444444
-                          principalId: 00000000-1111-2222-3333-444444444444
-                          tenantId: 00000000-1111-2222-3333-444444444444
-                    location: eastus2euap
-                    properties:
-                      description: test description
-                      allowPublicAccessWhenBehindVnet: false
-                      applicationInsights: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights
-                      containerRegistry: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry
-                      discoveryUrl: http://example.com
-                      encryption:
-                        identity:
-                          userAssignedIdentity: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai
-                        keyVaultProperties:
-                          identityClientId: ''
-                          keyIdentifier: https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb
-                          keyVaultArmId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                        status: Enabled
-                      friendlyName: HelloName
-                      hbiWorkspace: false
-                      imageBuildCompute: testcompute
-                      keyVault: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                      privateEndpointConnections:
-                        - name: testprivatelinkconnection
-                          type: Microsoft.MachineLearningServices/workspaces/privateEndpointConnections
-                          id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/privateEndpointConnections/testprivatelinkconnection
-                          properties:
-                            privateEndpoint:
-                              id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.Network/privateEndpoints/petest01
-                            privateLinkServiceConnectionState:
-                              description: Auto-Approved
-                              actionsRequired: None
-                              status: Approved
-                            provisioningState: Succeeded
-                      privateLinkCount: 0
-                      serviceProvisionedResourceGroup: testworkspace_0000111122223333
-                      sharedPrivateLinkResources:
-                        - name: testcosmosdbresource
-                          properties:
-                            groupId: Sql
-                            privateLinkResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.DocumentDB/databaseAccounts/testcosmosdbresource/privateLinkResources/Sql
-                            requestMessage: Please approve
-                            status: Approved
-                      storageAccount: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount
         language: !Languages 
           default:
             name: Get
@@ -15126,124 +15051,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Create Workspace:
-              parameters:
-                api-version: '2021-04-01'
-                parameters:
-                  identity:
-                    type: SystemAssigned,UserAssigned
-                    userAssignedIdentities:
-                      /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai: {}
-                  location: eastus2euap
-                  properties:
-                    description: test description
-                    applicationInsights: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights
-                    containerRegistry: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry
-                    encryption:
-                      identity:
-                        userAssignedIdentity: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai
-                      keyVaultProperties:
-                        identityClientId: ''
-                        keyIdentifier: https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb
-                        keyVaultArmId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                      status: Enabled
-                    friendlyName: HelloName
-                    hbiWorkspace: false
-                    keyVault: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                    sharedPrivateLinkResources:
-                      - name: testdbresource
-                        properties:
-                          groupId: Sql
-                          privateLinkResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.DocumentDB/databaseAccounts/testdbresource/privateLinkResources/Sql
-                          requestMessage: Please approve
-                          status: Approved
-                    storageAccount: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount
-                resourceGroupName: workspace-1234
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: testworkspace
-              responses:
-                '200':
-                  body:
-                    name: testworkspace
-                    type: Microsoft.MachineLearningServices/workspaces
-                    id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace
-                    identity:
-                      type: SystemAssigned,UserAssigned
-                      principalId: 00000000-1111-2222-3333-444444444444
-                      tenantId: 00000000-1111-2222-3333-444444444444
-                      userAssignedIdentities:
-                        /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai:
-                          clientId: 00000000-1111-2222-3333-444444444444
-                          principalId: 00000000-1111-2222-3333-444444444444
-                          tenantId: 00000000-1111-2222-3333-444444444444
-                    location: eastus2euap
-                    properties:
-                      description: test description
-                      allowPublicAccessWhenBehindVnet: false
-                      applicationInsights: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights
-                      containerRegistry: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry
-                      discoveryUrl: http://example.com
-                      encryption:
-                        identity:
-                          userAssignedIdentity: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai
-                        keyVaultProperties:
-                          identityClientId: ''
-                          keyIdentifier: https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb
-                          keyVaultArmId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                        status: Enabled
-                      friendlyName: HelloName
-                      hbiWorkspace: false
-                      keyVault: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                      sharedPrivateLinkResources:
-                        - name: testdbresource
-                          properties:
-                            groupId: Sql
-                            privateLinkResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.DocumentDB/databaseAccounts/testdbresource/privateLinkResources/Sql
-                            requestMessage: Please approve
-                            status: Approved
-                      storageAccount: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount
-                '201':
-                  body:
-                    name: testworkspace
-                    type: Microsoft.MachineLearningServices/workspaces
-                    id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace
-                    identity:
-                      type: SystemAssigned,UserAssigned
-                      principalId: 00000000-1111-2222-3333-444444444444
-                      tenantId: 00000000-1111-2222-3333-444444444444
-                      userAssignedIdentities:
-                        /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai:
-                          clientId: 00000000-1111-2222-3333-444444444444
-                          principalId: 00000000-1111-2222-3333-444444444444
-                          tenantId: 00000000-1111-2222-3333-444444444444
-                    location: eastus2euap
-                    properties:
-                      description: test description
-                      allowPublicAccessWhenBehindVnet: false
-                      applicationInsights: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights
-                      containerRegistry: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry
-                      discoveryUrl: http://example.com
-                      encryption:
-                        identity:
-                          userAssignedIdentity: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuai
-                        keyVaultProperties:
-                          identityClientId: ''
-                          keyIdentifier: https://testkv.vault.azure.net/keys/testkey/aabbccddee112233445566778899aabb
-                          keyVaultArmId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                        status: Enabled
-                      friendlyName: HelloName
-                      hbiWorkspace: false
-                      keyVault: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                      sharedPrivateLinkResources:
-                        - name: testdbresource
-                          properties:
-                            groupId: Sql
-                            privateLinkResourceId: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.DocumentDB/databaseAccounts/testdbresource/privateLinkResources/Sql
-                            requestMessage: Please approve
-                            status: Approved
-                      storageAccount: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount
-                '202': {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -15354,17 +15161,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Delete Workspace:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: workspace-1234
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: testworkspace
-              responses:
-                '200': {}
-                '202': {}
-                '204': {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -15489,37 +15285,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Update Workspace:
-              parameters:
-                api-version: '2021-04-01'
-                parameters:
-                  properties:
-                    description: new description
-                    friendlyName: New friendly name
-                resourceGroupName: workspace-1234
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: testworkspace
-              responses:
-                '200':
-                  body:
-                    name: testworkspace
-                    type: Microsoft.MachineLearningServices/workspaces
-                    id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace
-                    identity:
-                      type: SystemAssigned
-                      principalId: 00000000-1111-2222-3333-444444444444
-                      tenantId: 00000000-1111-2222-3333-444444444444
-                    location: eastus2euap
-                    properties:
-                      description: new description
-                      applicationInsights: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights
-                      containerRegistry: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry
-                      discoveryUrl: http://example.com
-                      friendlyName: New friendly name
-                      keyVault: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                      storageAccount: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount
         language: !Languages 
           default:
             name: Update
@@ -15614,41 +15379,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Get Workspaces by Resource Group:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: workspace-1234
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-              responses:
-                '200':
-                  body:
-                    nextLink: nextLink
-                    value:
-                      - name: testworkspace
-                        type: Microsoft.MachineLearningServices/workspaces
-                        id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace
-                        location: eastus2euap
-                        properties:
-                          description: test description
-                          applicationInsights: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights
-                          containerRegistry: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry
-                          discoveryUrl: http://example.com
-                          friendlyName: HelloName
-                          keyVault: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                          storageAccount: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount
-                      - name: testworkspace1
-                        type: Microsoft.MachineLearningServices/workspaces
-                        id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace1
-                        location: eastus2euap
-                        properties:
-                          description: test description
-                          applicationInsights: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights
-                          containerRegistry: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistryNew
-                          discoveryUrl: http://example.com
-                          friendlyName: HelloName 1
-                          keyVault: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkvNew
-                          storageAccount: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccountOld
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -15747,31 +15477,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            List Workspace Keys:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: testrg123
-                subscriptionId: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    appInsightsInstrumentationKey: null
-                    containerRegistryCredentials:
-                      location: null
-                      passwords:
-                        - name: password
-                          value: <value>
-                        - name: password2
-                          value: 0KARRQoQHSUq1yViPWg7YFernOS=Ic/t
-                      username: testdemoworkjmjmeykp
-                    notebookAccessKeys:
-                      primaryAccessKey: null
-                      secondaryAccessKey: null
-                    userStorageKey: null
-                    userStorageResourceId: /subscriptions/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee/resourceGroups/ragargeastus2euap/providers/Microsoft.Storage/storageAccounts/testdemoworkazashomr
         language: !Languages 
           default:
             name: ListKeys
@@ -15872,16 +15577,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Resync Workspace Keys:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: testrg123
-                subscriptionId: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-                workspaceName: workspaces123
-              responses:
-                '200': {}
-                '202': {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -15964,40 +15659,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Get Workspaces by subscription:
-              parameters:
-                api-version: '2021-04-01'
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-              responses:
-                '200':
-                  body:
-                    nextLink: nextLink
-                    value:
-                      - name: testworkspace
-                        type: Microsoft.MachineLearningServices/workspaces
-                        id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace
-                        location: eastus2euap
-                        properties:
-                          description: test description
-                          applicationInsights: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights
-                          containerRegistry: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistry
-                          discoveryUrl: http://example.com
-                          friendlyName: HelloName
-                          keyVault: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkv
-                          storageAccount: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccount
-                      - name: testworkspace
-                        type: Microsoft.MachineLearningServices/workspaces
-                        id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-5678/providers/Microsoft.MachineLearningServices/workspaces/testworkspace
-                        location: eastus2euap
-                        properties:
-                          description: test description
-                          applicationInsights: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/microsoft.insights/components/testinsights
-                          containerRegistry: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.ContainerRegistry/registries/testRegistryNew
-                          discoveryUrl: http://example.com
-                          friendlyName: HelloName
-                          keyVault: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/workspace-1234/providers/Microsoft.KeyVault/vaults/testkvNew
-                          storageAccount: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/accountcrud-1234/providers/Microsoft.Storage/storageAccounts/testStorageAccountOld
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -16096,23 +15757,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            List Workspace Keys:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: workspace-1234
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: testworkspace
-              responses:
-                '200':
-                  body:
-                    expiresIn: 28800
-                    hostName: Host product name
-                    notebookResourceId: '94350843095843059'
-                    publicDns: resource.notebooks.azure.net
-                    scope: aznb_identity
-                    tokenType: Bearer
         language: !Languages 
           default:
             name: ListNotebookAccessToken
@@ -16216,23 +15860,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List Workspace features:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: myResourceGroup
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-                workspaceName: testworkspace
-              responses:
-                '200':
-                  body:
-                    value:
-                      - description: Create, edit or delete AutoML experiments in the SDK
-                        displayName: Create edit experiments UI
-                        id: automatedml_createeditexperimentsui
-                      - description: Upgrade workspace from Basic to enterprise from the UI
-                        displayName: Upgrade workspace UI
-                        id: workspace_upgradeworkspaceui
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -16313,303 +15940,6 @@ operationGroups:
                 statusCodes:
                   - '200'
         extensions:
-          x-ms-examples:
-            List Usages:
-              parameters:
-                api-version: '2021-04-01'
-                location: eastus
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name:
-                          localizedValue: Clusters
-                          value: Clusters
-                        type: Microsoft.MachineLearningServices/totalCores/usages
-                        currentValue: 7
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages
-                        limit: 100
-                        unit: Count
-                      - name:
-                          localizedValue: Total Cluster Dedicated Regional vCPUs
-                          value: Total Cluster Dedicated Regional vCPUs
-                        type: Microsoft.MachineLearningServices/dedicatedCores/usages
-                        currentValue: 14
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard D Family Cluster Dedicated vCPUs
-                          value: Standard D Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_D_Family_Cluster_Dedicated_vCPUs
-                        limit: 48
-                        unit: Count
-                      - name:
-                          localizedValue: Standard DSv2 Family Cluster Dedicated vCPUs
-                          value: Standard DSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 2
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard DSv2 Family Cluster Dedicated vCPUs
-                          value: Standard DSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/usages
-                        currentValue: 2
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/usages/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard DSv2 Family Cluster Dedicated vCPUs
-                          value: Standard DSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/computes/usages
-                        currentValue: 2
-                        id: >-
-                          /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/computes/demo_cluster1_dsv2/usages/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard DSv2 Family Cluster Dedicated vCPUs
-                          value: Standard DSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/computes/usages
-                        currentValue: 0
-                        id: >-
-                          /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/computes/demo_cluster2_dsv2/usages/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard Dv2 Family Cluster Dedicated vCPUs
-                          value: Standard Dv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_Dv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard FSv2 Family Cluster Dedicated vCPUs
-                          value: Standard FSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_FSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster Dedicated vCPUs
-                          value: Standard NC Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 12
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_NC_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster Dedicated vCPUs
-                          value: Standard NC Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspace/usages
-                        currentValue: 6
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/usages/Standard_NC_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster Dedicated vCPUs
-                          value: Standard NC Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspace/computes/usages
-                        currentValue: 6
-                        id: >-
-                          /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/computes/demo_cluster1_nc/usages/Standard_NC_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster Dedicated vCPUs
-                          value: Standard NC Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/usages
-                        currentValue: 6
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/usages/Standard_NC_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster Dedicated vCPUs
-                          value: Standard NC Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/computes/usages
-                        currentValue: 6
-                        id: >-
-                          /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/computes/demo_cluser1_nc/usages/Standard_NC_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv2 Family Cluster Dedicated vCPUs
-                          value: Standard NCv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_NCv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv3 Family Cluster Dedicated vCPUs
-                          value: Standard NCv3 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_NCv3_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard ND Family Cluster Dedicated vCPUs
-                          value: Standard ND Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_ND_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NDv2 Family Cluster Dedicated vCPUs
-                          value: Standard NDv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_NDv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NV Family Cluster Dedicated vCPUs
-                          value: Standard NV Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_NV_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Total Cluster LowPriority Regional vCPUs
-                          value: Total Cluster LowPriority Regional vCPUs
-                        type: Microsoft.MachineLearningServices/lowPriorityCores/usages
-                        currentValue: 18
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages
-                        limit: 50
-                        unit: Count
-                      - name:
-                          localizedValue: Standard D Family Cluster LowPriority vCPUs
-                          value: Standard D Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_D_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard DSv2 Family Cluster LowPriority vCPUs
-                          value: Standard DSv2 Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_DSv2_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard Dv2 Family Cluster LowPriority vCPUs
-                          value: Standard Dv2 Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_Dv2_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard FSv2 Family Cluster LowPriority vCPUs
-                          value: Standard FSv2 Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_FSv2_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster LowPriority vCPUs
-                          value: Standard NC Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 18
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_NC_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster LowPriority vCPUs
-                          value: Standard NC Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/workspace/usages
-                        currentValue: 6
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/usages/Standard_NC_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster LowPriority vCPUs
-                          value: Standard NC Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/workspace/computes/usages
-                        currentValue: 6
-                        id: >-
-                          /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/computes/demo_cluster1_lowPriority_nc/usages/Standard_NC_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster LowPriority vCPUs
-                          value: Standard NC Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/workspace/usages
-                        currentValue: 12
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/usages/Standard_NC_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster LowPriority vCPUs
-                          value: Standard NC Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/workspace/computes/usages
-                        currentValue: 6
-                        id: >-
-                          /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/computes/demo_cluster2_lowPriority_nc/usages/Standard_NC_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster LowPriority vCPUs
-                          value: Standard NC Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/workspace/computes/usages
-                        currentValue: 6
-                        id: >-
-                          /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/computes/demo_cluster3_lowPriority_nc/usages/Standard_NC_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv2 Family Cluster LowPriority vCPUs
-                          value: Standard NCv2 Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_NCv2_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv3 Family Cluster LowPriority vCPUs
-                          value: Standard NCv3 Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_NCv3_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard ND Family Cluster LowPriority vCPUs
-                          value: Standard ND Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_ND_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NDv2 Family Cluster LowPriority vCPUs
-                          value: Standard NDv2 Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_NDv2_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NV Family Cluster LowPriority vCPUs
-                          value: Standard NV Family Cluster LowPriority vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/usages
-                        currentValue: 0
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/usages/Standard_NV_Family_Cluster_LowPriority_vCPUs
-                        limit: -1
-                        unit: Count
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -16689,242 +16019,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-        extensions:
-          x-ms-examples:
-            List VM Sizes:
-              parameters:
-                api-version: '2021-04-01'
-                location: eastus
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-              responses:
-                '200':
-                  body:
-                    amlCompute:
-                      - name: Standard_D1_v2
-                        estimatedVMPrices:
-                          billingCurrency: USD
-                          unitOfMeasure: OneHour
-                          values:
-                            - osType: Windows
-                              retailPrice: 0.05
-                              vmTier: LowPriority
-                            - osType: Windows
-                              retailPrice: 0.12
-                              vmTier: Standard
-                            - osType: Linux
-                              retailPrice: 0.01
-                              vmTier: LowPriority
-                            - osType: Linux
-                              retailPrice: 0.06
-                              vmTier: Standard
-                        family: standardDv2Family
-                        gpus: 0
-                        lowPriorityCapable: true
-                        maxResourceVolumeMB: 51200
-                        memoryGB: 3.5
-                        osVhdSizeMB: 1047552
-                        premiumIO: false
-                        vCPUs: 1
-                      - name: Standard_D2_v2
-                        estimatedVMPrices:
-                          billingCurrency: USD
-                          unitOfMeasure: OneHour
-                          values:
-                            - osType: Windows
-                              retailPrice: 0.09
-                              vmTier: LowPriority
-                            - osType: Windows
-                              retailPrice: 0.23
-                              vmTier: Standard
-                            - osType: Linux
-                              retailPrice: 0.11
-                              vmTier: Standard
-                            - osType: Linux
-                              retailPrice: 0.02
-                              vmTier: LowPriority
-                        family: standardDv2Family
-                        gpus: 0
-                        lowPriorityCapable: true
-                        maxResourceVolumeMB: 102400
-                        memoryGB: 7
-                        osVhdSizeMB: 1047552
-                        premiumIO: false
-                        vCPUs: 2
-                      - name: Standard_D11_v2
-                        estimatedVMPrices:
-                          billingCurrency: USD
-                          unitOfMeasure: OneHour
-                          values:
-                            - osType: Linux
-                              retailPrice: 0.15
-                              vmTier: Standard
-                            - osType: Windows
-                              retailPrice: 0.1
-                              vmTier: LowPriority
-                            - osType: Linux
-                              retailPrice: 0.03
-                              vmTier: LowPriority
-                            - osType: Windows
-                              retailPrice: 0.24
-                              vmTier: Standard
-                        family: standardDv2Family
-                        gpus: 0
-                        lowPriorityCapable: true
-                        maxResourceVolumeMB: 102400
-                        memoryGB: 14
-                        osVhdSizeMB: 1047552
-                        premiumIO: false
-                        vCPUs: 2
-                      - name: Standard_DS1_v2
-                        estimatedVMPrices:
-                          billingCurrency: USD
-                          unitOfMeasure: OneHour
-                          values:
-                            - osType: Windows
-                              retailPrice: 0.05
-                              vmTier: LowPriority
-                            - osType: Windows
-                              retailPrice: 0.12
-                              vmTier: Standard
-                            - osType: Linux
-                              retailPrice: 0.01
-                              vmTier: LowPriority
-                            - osType: Linux
-                              retailPrice: 0.06
-                              vmTier: Standard
-                        family: standardDSv2Family
-                        gpus: 0
-                        lowPriorityCapable: true
-                        maxResourceVolumeMB: 7168
-                        memoryGB: 3.5
-                        osVhdSizeMB: 1047552
-                        premiumIO: true
-                        vCPUs: 1
-                      - name: Standard_F2s_v2
-                        estimatedVMPrices:
-                          billingCurrency: USD
-                          unitOfMeasure: OneHour
-                          values:
-                            - osType: Linux
-                              retailPrice: 0.02
-                              vmTier: LowPriority
-                            - osType: Linux
-                              retailPrice: 0.08
-                              vmTier: Standard
-                            - osType: Windows
-                              retailPrice: 0.06
-                              vmTier: LowPriority
-                            - osType: Windows
-                              retailPrice: 0.16
-                              vmTier: Standard
-                        family: standardFSv2Family
-                        gpus: 0
-                        lowPriorityCapable: true
-                        maxResourceVolumeMB: 16384
-                        memoryGB: 4
-                        osVhdSizeMB: 1047552
-                        premiumIO: true
-                        vCPUs: 2
-                      - name: Standard_M32-8ms
-                        estimatedVMPrices:
-                          billingCurrency: USD
-                          unitOfMeasure: OneHour
-                          values:
-                            - osType: Windows
-                              retailPrice: 8.43
-                              vmTier: Standard
-                            - osType: Linux
-                              retailPrice: 1.23
-                              vmTier: LowPriority
-                            - osType: Windows
-                              retailPrice: 3.37
-                              vmTier: LowPriority
-                            - osType: Linux
-                              retailPrice: 6.15
-                              vmTier: Standard
-                        family: standardMSFamily
-                        gpus: 0
-                        lowPriorityCapable: true
-                        maxResourceVolumeMB: 1024000
-                        memoryGB: 875
-                        osVhdSizeMB: 1047552
-                        premiumIO: true
-                        vCPUs: 32
-                      - name: Standard_NC6
-                        estimatedVMPrices:
-                          billingCurrency: USD
-                          unitOfMeasure: OneHour
-                          values:
-                            - osType: Linux
-                              retailPrice: 0.18
-                              vmTier: LowPriority
-                            - osType: Windows
-                              retailPrice: 0.43
-                              vmTier: LowPriority
-                            - osType: Linux
-                              retailPrice: 0.9
-                              vmTier: Standard
-                            - osType: Windows
-                              retailPrice: 1.08
-                              vmTier: Standard
-                        family: standardNCFamily
-                        gpus: 1
-                        lowPriorityCapable: true
-                        maxResourceVolumeMB: 389120
-                        memoryGB: 56
-                        osVhdSizeMB: 1047552
-                        premiumIO: false
-                        vCPUs: 6
-                      - name: Standard_NV6
-                        estimatedVMPrices:
-                          billingCurrency: USD
-                          unitOfMeasure: OneHour
-                          values:
-                            - osType: Windows
-                              retailPrice: 1.28
-                              vmTier: Standard
-                            - osType: Windows
-                              retailPrice: 0.51
-                              vmTier: LowPriority
-                            - osType: Linux
-                              retailPrice: 0.22
-                              vmTier: LowPriority
-                            - osType: Linux
-                              retailPrice: 1.09
-                              vmTier: Standard
-                        family: standardNVFamily
-                        gpus: 1
-                        lowPriorityCapable: true
-                        maxResourceVolumeMB: 389120
-                        memoryGB: 56
-                        osVhdSizeMB: 1047552
-                        premiumIO: false
-                        vCPUs: 6
-                      - name: Standard_ND6s
-                        estimatedVMPrices:
-                          billingCurrency: USD
-                          unitOfMeasure: OneHour
-                          values:
-                            - osType: Linux
-                              retailPrice: 2.07
-                              vmTier: Standard
-                            - osType: Linux
-                              retailPrice: 0.36
-                              vmTier: LowPriority
-                            - osType: Windows
-                              retailPrice: 0.87
-                              vmTier: LowPriority
-                            - osType: Windows
-                              retailPrice: 2.49
-                              vmTier: Standard
-                        family: standardNDSFamily
-                        gpus: 1
-                        lowPriorityCapable: true
-                        maxResourceVolumeMB: 344064
-                        memoryGB: 112
-                        osVhdSizeMB: 1047552
-                        premiumIO: true
-                        vCPUs: 6
         language: !Languages 
           default:
             name: List
@@ -17067,37 +16161,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            update quotas:
-              parameters:
-                api-version: '2021-04-01'
-                location: eastus
-                parameters:
-                  value:
-                    - type: Microsoft.MachineLearningServices/workspaces/quotas
-                      id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                      limit: 100
-                      unit: Count
-                    - type: Microsoft.MachineLearningServices/workspaces/quotas
-                      id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                      limit: 200
-                      unit: Count
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    value:
-                      - type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 100
-                        status: Success
-                        unit: Count
-                      - type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 200
-                        status: Success
-                        unit: Count
         language: !Languages 
           default:
             name: Update
@@ -17180,296 +16243,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List workspace quotas by VMFamily:
-              parameters:
-                api-version: '2021-04-01'
-                location: eastus
-                subscriptionId: 00000000-0000-0000-0000-000000000000
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name:
-                          localizedValue: Standard D Family Cluster Dedicated vCPUs
-                          value: Standard D Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/quotas/Standard_D_Family_Cluster_Dedicated_vCPUs
-                        limit: 48
-                        unit: Count
-                      - name:
-                          localizedValue: Standard D Family Cluster Dedicated vCPUs
-                          value: Standard D Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_D_Family_Cluster_Dedicated_vCPUs
-                        limit: 12
-                        unit: Count
-                      - name:
-                          localizedValue: Standard D Family Cluster Dedicated vCPUs
-                          value: Standard D Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_D_Family_Cluster_Dedicated_vCPUs
-                        limit: 12
-                        unit: Count
-                      - name:
-                          localizedValue: Standard D Family Cluster Dedicated vCPUs
-                          value: Standard D Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace3/quotas/Standard_D_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard DSv2 Family Cluster Dedicated vCPUs
-                          value: Standard DSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/quota
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/quotas/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard DSv2 Family Cluster Dedicated vCPUs
-                          value: Standard DSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard DSv2 Family Cluster Dedicated vCPUs
-                          value: Standard DSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 12
-                        unit: Count
-                      - name:
-                          localizedValue: Standard DSv2 Family Cluster Dedicated vCPUs
-                          value: Standard DSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace3/quotas/Standard_DSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 12
-                        unit: Count
-                      - name:
-                          localizedValue: Standard Dv2 Family Cluster Dedicated vCPUs
-                          value: Standard Dv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/quotas/Standard_Dv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard Dv2 Family Cluster Dedicated vCPUs
-                          value: Standard Dv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_Dv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard Dv2 Family Cluster Dedicated vCPUs
-                          value: Standard Dv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_Dv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard Dv2 Family Cluster Dedicated vCPUs
-                          value: Standard Dv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace3/quotas/Standard_Dv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard FSv2 Family Cluster Dedicated vCPUs
-                          value: Standard FSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/quotas/Standard_FSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard FSv2 Family Cluster Dedicated vCPUs
-                          value: Standard FSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_FSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard FSv2 Family Cluster Dedicated vCPUs
-                          value: Standard FSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_FSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard FSv2 Family Cluster Dedicated vCPUs
-                          value: Standard FSv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace3/quotas/Standard_FSv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 12
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster Dedicated vCPUs
-                          value: Standard NC Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/quotas/Standard_NC_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster Dedicated vCPUs
-                          value: Standard NC Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_NC_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster Dedicated vCPUs
-                          value: Standard NC Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_NC_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NC Family Cluster Dedicated vCPUs
-                          value: Standard NC Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace3/quotas/Standard_NC_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv2 Family Cluster Dedicated vCPUs
-                          value: Standard NCv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/quotas/Standard_NCv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv2 Family Cluster Dedicated vCPUs
-                          value: Standard NCv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_NCv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv2 Family Cluster Dedicated vCPUs
-                          value: Standard NCv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_NCv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv2 Family Cluster Dedicated vCPUs
-                          value: Standard NCv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace3/quotas/Standard_NCv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv3 Family Cluster Dedicated vCPUs
-                          value: Standard NCv3 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/quotas/Standard_NCv3_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv3 Family Cluster Dedicated vCPUs
-                          value: Standard NCv3 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_NCv3_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv3 Family Cluster Dedicated vCPUs
-                          value: Standard NCv3 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_NCv3_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NCv3 Family Cluster Dedicated vCPUs
-                          value: Standard NCv3 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace3/quotas/Standard_NCv3_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard ND Family Cluster Dedicated vCPUs
-                          value: Standard ND Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/quotas/Standard_ND_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard ND Family Cluster Dedicated vCPUs
-                          value: Standard ND Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_ND_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard ND Family Cluster Dedicated vCPUs
-                          value: Standard ND Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_ND_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard ND Family Cluster Dedicated vCPUs
-                          value: Standard ND Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace3/quotas/Standard_ND_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NDv2 Family Cluster Dedicated vCPUs
-                          value: Standard NDv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/quotas/Standard_NDv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NDv2 Family Cluster Dedicated vCPUs
-                          value: Standard NDv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_NDv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NDv2 Family Cluster Dedicated vCPUs
-                          value: Standard NDv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_NDv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NDv2 Family Cluster Dedicated vCPUs
-                          value: Standard NDv2 Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace3/quotas/Standard_NDv2_Family_Cluster_Dedicated_vCPUs
-                        limit: 0
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NV Family Cluster Dedicated vCPUs
-                          value: Standard NV Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/vmFamily/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/quotas/Standard_NV_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NV Family Cluster Dedicated vCPUs
-                          value: Standard NV Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace1/quotas/Standard_NV_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NV Family Cluster Dedicated vCPUs
-                          value: Standard NV Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace2/quotas/Standard_NV_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
-                      - name:
-                          localizedValue: Standard NV Family Cluster Dedicated vCPUs
-                          value: Standard NV Family Cluster Dedicated vCPUs
-                        type: Microsoft.MachineLearningServices/workspaces/quotas
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.MachineLearningServices/workspaces/demo_workspace3/quotas/Standard_NV_Family_Cluster_Dedicated_vCPUs
-                        limit: 24
-                        unit: Count
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -17591,40 +16364,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Get Computes:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    nextLink: nextLink
-                    value:
-                      - name: compute123
-                        type: Microsoft.MachineLearningServices/workspaces/computes
-                        id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                        location: eastus
-                        properties:
-                          description: some compute
-                          computeType: AKS
-                          createdOn: '2021-04-01T22:00:00.0000000+00:00'
-                          modifiedOn: '2021-04-01T22:00:00.0000000+00:00'
-                          provisioningState: Succeeded
-                          resourceId: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2
-                      - name: compute1234
-                        type: Microsoft.MachineLearningServices/workspaces/computes
-                        id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute1234
-                        location: eastus
-                        properties:
-                          description: some compute
-                          computeType: AKS
-                          createdOn: '2021-04-01T22:00:00.0000000+00:00'
-                          modifiedOn: '2021-04-01T22:00:00.0000000+00:00'
-                          provisioningState: Succeeded
-                          resourceId: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute1234-56826-c9b00420020b2
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -17736,119 +16475,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Get a AKS Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      description: some compute
-                      computeType: AKS
-                      createdOn: '2021-04-01T22:00:00.0000000+00:00'
-                      modifiedOn: '2021-04-01T22:00:00.0000000+00:00'
-                      provisioningState: Succeeded
-                      resourceId: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2
-            Get a AML Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus2
-                    properties:
-                      description: some compute
-                      computeType: AmlCompute
-                      createdOn: '2021-04-01T22:00:00.0000000+00:00'
-                      modifiedOn: '2021-04-01T22:00:00.0000000+00:00'
-                      properties:
-                        allocationState: Resizing
-                        allocationStateTransitionTime: '2017-09-27T22:28:08.998Z'
-                        currentNodeCount: 0
-                        enableNodePublicIp: true
-                        errors: null
-                        isolatedNetwork: false
-                        nodeStateCounts:
-                          idleNodeCount: 0
-                          leavingNodeCount: 0
-                          preemptedNodeCount: 0
-                          preparingNodeCount: 0
-                          runningNodeCount: 0
-                          unusableNodeCount: 0
-                        osType: Windows
-                        remoteLoginPortPublicAccess: Enabled
-                        scaleSettings:
-                          maxNodeCount: 1
-                          minNodeCount: 0
-                          nodeIdleTimeBeforeScaleDown: PT5M
-                        subnet: test-subnet-resource-id
-                        targetNodeCount: 1
-                        virtualMachineImage: null
-                        vmPriority: Dedicated
-                        vmSize: STANDARD_NC6
-                      provisioningState: Succeeded
-            Get an ComputeInstance:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus2
-                    properties:
-                      description: some compute
-                      computeType: ComputeInstance
-                      createdOn: '2021-04-01T22:00:00.0000000+00:00'
-                      modifiedOn: '2021-04-01T22:00:00.0000000+00:00'
-                      properties:
-                        applicationSharingPolicy: Shared
-                        applications:
-                          - displayName: Jupyter
-                            endpointUri: https://compute123.eastus2.azureml.net/jupyter
-                        computeInstanceAuthorizationType: personal
-                        connectivityEndpoints:
-                          privateIpAddress: 10.0.0.1
-                          publicIpAddress: 10.0.0.1
-                        createdBy:
-                          userId: 00000000-0000-0000-0000-000000000000
-                          userName: foobar@microsoft.com
-                          userOrgId: 00000000-0000-0000-0000-000000000000
-                        errors: null
-                        personalComputeInstanceSettings:
-                          assignedUser:
-                            objectId: 00000000-0000-0000-0000-000000000000
-                            tenantId: 00000000-0000-0000-0000-000000000000
-                        sshSettings:
-                          adminUserName: azureuser
-                          sshPort: 22
-                          sshPublicAccess: Enabled
-                        state: Running
-                        subnet: test-subnet-resource-id
-                        vmSize: STANDARD_NC6
-                      provisioningState: Succeeded
         language: !Languages 
           default:
             name: Get
@@ -18007,273 +16633,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Create AKS Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                parameters:
-                  location: eastus
-                  properties:
-                    computeType: AKS
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      computeType: AKS
-                      provisioningState: Creating
-                '201':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      computeType: AKS
-                      provisioningState: Creating
-                  headers:
-                    Azure-AsyncOperation: https://management.azure.com/subscriptions/...pathToOperationStatus...
-            Create a AML Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                parameters:
-                  location: eastus
-                  properties:
-                    computeType: AmlCompute
-                    properties:
-                      enableNodePublicIp: true
-                      isolatedNetwork: false
-                      osType: Windows
-                      remoteLoginPortPublicAccess: NotSpecified
-                      scaleSettings:
-                        maxNodeCount: 1
-                        minNodeCount: 0
-                        nodeIdleTimeBeforeScaleDown: PT5M
-                      virtualMachineImage:
-                        id: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myImageGallery/images/myImageDefinition/versions/0.0.1
-                      vmPriority: Dedicated
-                      vmSize: STANDARD_NC6
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      computeType: AmlCompute
-                      provisioningState: Creating
-                '201':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      computeType: AmlCompute
-                      provisioningState: Creating
-                  headers:
-                    Azure-AsyncOperation: https://management.azure.com/subscriptions/...pathToOperationStatus...
-            Create a DataFactory Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                parameters:
-                  location: eastus
-                  properties:
-                    computeType: DataFactory
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      computeType: DataFactory
-                      provisioningState: Creating
-                '201':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      computeType: DataFactory
-                      provisioningState: Creating
-                  headers:
-                    Azure-AsyncOperation: https://management.azure.com/subscriptions/...pathToOperationStatus...
-            Create an ComputeInstance Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                parameters:
-                  location: eastus
-                  properties:
-                    computeType: ComputeInstance
-                    properties:
-                      applicationSharingPolicy: Personal
-                      computeInstanceAuthorizationType: personal
-                      personalComputeInstanceSettings:
-                        assignedUser:
-                          objectId: 00000000-0000-0000-0000-000000000000
-                          tenantId: 00000000-0000-0000-0000-000000000000
-                      sshSettings:
-                        sshPublicAccess: Disabled
-                      subnet: test-subnet-resource-id
-                      vmSize: STANDARD_NC6
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      computeType: ComputeInstance
-                      provisioningState: Creating
-                '201':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      computeType: ComputeInstance
-                      provisioningState: Creating
-                  headers:
-                    Azure-AsyncOperation: https://management.azure.com/subscriptions/...pathToOperationStatus...
-            Create an ComputeInstance Compute with minimal inputs:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                parameters:
-                  location: eastus
-                  properties:
-                    computeType: ComputeInstance
-                    properties:
-                      vmSize: STANDARD_NC6
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      computeType: ComputeInstance
-                      provisioningState: Creating
-                '201':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      computeType: ComputeInstance
-                      provisioningState: Creating
-                  headers:
-                    Azure-AsyncOperation: https://management.azure.com/subscriptions/...pathToOperationStatus...
-            Update a AKS Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                parameters:
-                  location: eastus
-                  properties:
-                    description: some compute
-                    computeType: AKS
-                    properties:
-                      agentCount: 4
-                    resourceId: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      description: some compute
-                      computeType: AKS
-                      provisioningState: Updating
-                      resourceId: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2
-                '201':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus
-                    properties:
-                      description: some compute
-                      computeType: AKS
-                      provisioningState: Updating
-                      resourceId: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2
-                  headers:
-                    Azure-AsyncOperation: https://management.azure.com/subscriptions/...pathToOperationStatus...
-            Update a AML Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                parameters:
-                  location: eastus
-                  properties:
-                    description: some compute
-                    computeType: AmlCompute
-                    properties:
-                      scaleSettings:
-                        maxNodeCount: 4
-                        minNodeCount: 4
-                        nodeIdleTimeBeforeScaleDown: PT5M
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus2
-                    properties:
-                      description: some compute
-                      computeType: AmlCompute
-                      provisioningState: Updating
-                '201':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus2
-                    properties:
-                      description: some compute
-                      computeType: AmlCompute
-                      provisioningState: Updating
-                  headers:
-                    Azure-AsyncOperation: https://management.azure.com/subscriptions/...pathToOperationStatus...
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -18424,33 +16783,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Update a AmlCompute Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                parameters:
-                  properties:
-                    scaleSettings:
-                      maxNodeCount: 4
-                      minNodeCount: 4
-                      nodeIdleTimeBeforeScaleDown: PT5M
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: compute123
-                    type: Microsoft.MachineLearningServices/workspaces/computes
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123
-                    location: eastus2
-                    properties:
-                      description: some compute
-                      computeType: AmlCompute
-                      provisioningState: Updating
-                  headers:
-                    Azure-AsyncOperation: https://management.azure.com/subscriptions/...pathToOperationStatus...
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -18593,21 +16925,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Delete Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                underlyingResourceAction: Delete
-                workspaceName: workspaces123
-              responses:
-                '200': {}
-                '202':
-                  headers:
-                    Azure-AsyncOperation: https://management.azure.com/subscriptions/...pathToOperationStatus...
-                    Location: https://management.azure.com/subscriptions/...pathToOperationResult...
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -18690,7 +17007,7 @@ operationGroups:
           - *ref_723
         responses:
           - !SchemaResponse 
-            schema: *ref_453
+            schema: *ref_454
             language: !Languages 
               default:
                 name: ''
@@ -18717,31 +17034,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Get compute nodes information for a compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    computeType: AmlCompute
-                    nextLink: nextLink
-                    nodes:
-                      - nodeId: tvm-3601533753_1-20170719t162906z
-                        nodeState: running
-                        port: 50000
-                        privateIpAddress: 13.84.190.124
-                        publicIpAddress: 13.84.190.134
-                        runId: 2f378a44-38f2-443a-9f0d-9909d0b47890
-                      - nodeId: tvm-3601533753_2-20170719t162906z
-                        nodeState: idle
-                        port: 50001
-                        privateIpAddress: 13.84.190.124
-                        publicIpAddress: 13.84.190.134
           x-ms-pageable:
             itemName: nodes
             nextLinkName: nextLink
@@ -18855,22 +17147,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            List AKS Compute Keys:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    adminKubeConfig: admin kube config...
-                    computeType: AKS
-                    imagePullSecretName: the image pull secret name
-                    userKubeConfig: user kube config...
         language: !Languages 
           default:
             name: ListKeys
@@ -18975,16 +17251,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Start ComputeInstance Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '202': {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -19090,16 +17356,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Stop ComputeInstance Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '202': {}
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -19204,17 +17460,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Restart ComputeInstance Compute:
-              parameters:
-                api-version: '2021-04-01'
-                computeName: compute123
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: Restart
@@ -19292,71 +17537,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            List Skus:
-              parameters:
-                api-version: '2021-04-01'
-                subscriptionId: '{subscription-id}'
-              responses:
-                '200':
-                  body:
-                    nextLink: null
-                    value:
-                      - name: Basic
-                        capabilities:
-                          - name: automatedml_readhyperdrivesdk
-                            value: |-
-                              {
-                                "id": "automatedml_ readhyperdrivesdk",
-                                "name": "Read hyperdrive SDK",
-                                "description": "Read only access to Hyperdrive in the SDK"
-                              }
-                          - name: workspace_upgradeworkspacesdk
-                            value: |-
-                              {
-                                "id": "workspace_upgradeworkspacesdk",
-                                "name": "Upgrade workspace SDK",
-                                "description": "Upgrade workspace from Basic to enterprise from the SDK"
-                              }
-                        locationInfo:
-                          - location: westus
-                            zones:
-                              - westus-AZ02
-                              - westus-AZ01
-                        locations:
-                          - westus
-                        resourceType: workspaces
-                        restrictions: []
-                        tier: Basic
-                      - name: Enterprise
-                        capabilities:
-                          - name: automatedml_createeditexperimentssdk
-                            value: |-
-                              {
-                                "id": "automatedml_createeditexperimentssdk",
-                                "name": "Create edit experiments SDK",
-                                "description": "Create, edit or delete AutoML experiments in the SDK"
-                              }
-                        locationInfo:
-                          - location: westus
-                            zoneDetails:
-                              - name:
-                                  - westus-AZ01
-                                capabilities:
-                                  - name: automatedml_createeditexperimentssdk
-                                    value: |-
-                                      {
-                                        "id": "automatedml_createeditexperimentssdk",
-                                        "name": "Create edit experiments SDK",
-                                        "description": "Create, edit or delete AutoML experiments in the SDK"
-                                      }
-                            zones:
-                              - westus-AZ01
-                        locations:
-                          - westus
-                        resourceType: workspaces
-                        restrictions: []
-                        tier: Enterprise
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -19476,30 +17656,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            WorkspaceGetPrivateEndpointConnection:
-              parameters:
-                api-version: '2021-04-01'
-                monitor: 'true'
-                privateEndpointConnectionName: '{privateEndpointConnectionName}'
-                resourceGroupName: rg-1234
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: testworkspace
-              responses:
-                '200':
-                  body:
-                    name: '{privateEndpointConnectionName}'
-                    type: Microsoft.MachineLearningServices/workspaces/privateEndpointConnections
-                    id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/privateEndpointConnections/{privateEndpointConnectionName}
-                    properties:
-                      privateEndpoint:
-                        id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.Network/privateEndpoints/petest01
-                      privateLinkServiceConnectionState:
-                        description: Auto-Approved
-                        actionsRequired: None
-                        status: Approved
-                      provisioningState: Succeeded
         language: !Languages 
           default:
             name: Get
@@ -19636,35 +17792,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            WorkspacePutPrivateEndpointConnection:
-              parameters:
-                api-version: '2021-04-01'
-                monitor: 'true'
-                privateEndpointConnectionName: '{privateEndpointConnectionName}'
-                properties:
-                  properties:
-                    privateLinkServiceConnectionState:
-                      description: Auto-Approved
-                      status: Approved
-                resourceGroupName: rg-1234
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: testworkspace
-              responses:
-                '200':
-                  body:
-                    name: '{privateEndpointConnectionName}'
-                    type: Microsoft.MachineLearningServices/workspaces/privateEndpointConnections
-                    id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/privateEndpointConnections/{privateEndpointConnectionName}
-                    properties:
-                      privateEndpoint:
-                        id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.Network/privateEndpoints/petest01
-                      privateLinkServiceConnectionState:
-                        description: Auto-Approved
-                        actionsRequired: None
-                        status: Approved
-                      provisioningState: Succeeded
         language: !Languages 
           default:
             name: Put
@@ -19777,19 +17904,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            WorkspaceDeletePrivateEndpointConnection:
-              parameters:
-                api-version: '2021-04-01'
-                monitor: 'true'
-                privateEndpointConnectionName: '{privateEndpointConnectionName}'
-                resourceGroupName: rg-1234
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: testworkspace
-              responses:
-                '200': {}
-                '204': {}
         language: !Languages 
           default:
             name: Delete
@@ -19878,26 +17992,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
-        extensions:
-          x-ms-examples:
-            WorkspaceListPrivateLinkResources:
-              parameters:
-                api-version: '2021-04-01'
-                monitor: 'true'
-                resourceGroupName: rg-1234
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: testworkspace
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name: amlworkspace
-                        type: Microsoft.Storage/workspaces/privateLinkResources
-                        id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg-1234/providers/Microsoft.MachineLearningServices/workspaces/testworkspace/privateLinkResources/amlworkspace
-                        properties:
-                          groupId: amlworkspace
-                          requiredMembers:
-                            - default
         language: !Languages 
           default:
             name: ListByWorkspace
@@ -20111,220 +18205,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Get Services:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: testrg123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    nextLink: nextLink
-                    value:
-                      - name: service123
-                        type: Microsoft.MachineLearningServices/workspaces/services
-                        id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/services/service123
-                        properties:
-                          description: null
-                          aadAuthEnabled: false
-                          appInsightsEnabled: true
-                          authEnabled: true
-                          autoScaler:
-                            autoscaleEnabled: false
-                            maxReplicas: null
-                            minReplicas: null
-                            refreshPeriodInSeconds: null
-                            targetUtilization: null
-                          computeName: my-aks-compute
-                          computeType: AKS
-                          containerResourceRequirements:
-                            cpu: 0.1
-                            fpga: null
-                            gpu: null
-                            memoryInGB: 0.5
-                          dataCollection:
-                            eventHubEnabled: false
-                            storageEnabled: false
-                          environmentImageRequest:
-                            assets:
-                              - id: null
-                                mimeType: application/x-python
-                                unpack: false
-                                url: aml://artifact/LocalUpload/200518T200218a1a8c0af/score.py
-                            driverProgram: score.py
-                            environment:
-                              name: AzureML-Scikit-learn-0.20.3
-                              docker:
-                                baseDockerfile: null
-                                baseImage: mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04
-                                baseImageRegistry:
-                                  address: null
-                              environmentVariables:
-                                EXAMPLE_ENV_VAR: EXAMPLE_VALUE
-                              inferencingStackVersion: null
-                              python:
-                                baseCondaEnvironment: null
-                                condaDependencies:
-                                  name: azureml_ae1acbe6e1e6aabbad900b53c491a17c
-                                  channels:
-                                    - conda-forge
-                                  dependencies:
-                                    - python=3.6.2
-                                    - pip:
-                                        - azureml-core==1.0.69
-                                        - azureml-defaults==1.0.69
-                                        - azureml-telemetry==1.0.69
-                                        - azureml-train-restclients-hyperdrive==1.0.69
-                                        - azureml-train-core==1.0.69
-                                        - scikit-learn==0.20.3
-                                        - scipy==1.2.1
-                                        - numpy==1.16.2
-                                        - joblib==0.13.2
-                                interpreterPath: python
-                                userManagedDependencies: false
-                              spark:
-                                packages: []
-                                precachePackages: true
-                                repositories: []
-                              version: '3'
-                            modelIds:
-                              - sklearn_regression_model1.pkl:2
-                          kvTags: {}
-                          livenessProbeRequirements:
-                            failureThreshold: 3
-                            initialDelaySeconds: 310
-                            periodSeconds: 5
-                            successThreshold: 1
-                            timeoutSeconds: 120
-                          maxConcurrentRequestsPerContainer: 1
-                          maxQueueWaitMs: 500
-                          modelConfigMap:
-                            accountContext:
-                              accountName: workspaces123
-                              resourceGroupName: testrg123
-                              subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                              workspaceId: 57b243e8-3d24-4427-90e0-8dc47f41c387
-                            models:
-                              sklearn_regression_model1.pkl:
-                                id: sklearn_regression_model1.pkl:2
-                                internalId: 3ab27a5b0d0e48d99f18a5195cc258bc
-                                version: 2
-                            modelsInfo:
-                              sklearn_regression_model1.pkl:
-                                '2':
-                                  dataCollectorStoragePath: /modeldata/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/testrg123/workspaces123/service123/sklearn_regression_model1.pkl/2/
-                                  id: sklearn_regression_model1.pkl:2
-                                  internalId: 3ab27a5b0d0e48d99f18a5195cc258bc
-                                  version: 2
-                          namespace: azureml-workspaces123
-                          numReplicas: 1
-                          properties:
-                            hasHttps: 'False'
-                            hasInferenceSchema: 'False'
-                          scoringTimeoutMs: null
-                          scoringUri: http://192.168.1.5:80/api/v1/service/service123/score
-                          state: Healthy
-                          swaggerUri: http://192.168.1.5/api/v1/service/service123/swagger.json
-                        systemData:
-                          createdAt: '2020-02-03T01:01:01.1075056Z'
-                          createdBy: string
-                          createdByType: Application
-                          lastModifiedAt: '2020-02-04T02:03:01.1974346Z'
-                          lastModifiedBy: string
-                          lastModifiedByType: Application
-                      - name: service456
-                        type: Microsoft.MachineLearningServices/workspaces/services
-                        id: subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/services/service456
-                        properties:
-                          description: null
-                          appInsightsEnabled: true
-                          authEnabled: true
-                          cname: null
-                          computeType: ACI
-                          containerResourceRequirements:
-                            cpu: 0.1
-                            fpga: null
-                            gpu: null
-                            memoryInGB: 0.5
-                          dataCollection:
-                            eventHubEnabled: false
-                            storageEnabled: false
-                          environmentImageRequest:
-                            assets:
-                              - id: null
-                                mimeType: application/x-python
-                                unpack: false
-                                url: aml://artifact/LocalUpload/200518T200218a1a8c0af/score.py
-                            driverProgram: score.py
-                            environment:
-                              name: AzureML-Scikit-learn-0.20.3
-                              docker:
-                                baseDockerfile: null
-                                baseImage: mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04
-                                baseImageRegistry:
-                                  address: null
-                              environmentVariables:
-                                EXAMPLE_ENV_VAR: EXAMPLE_VALUE
-                              inferencingStackVersion: null
-                              python:
-                                baseCondaEnvironment: null
-                                condaDependencies:
-                                  name: azureml_ae1acbe6e1e6aabbad900b53c491a17c
-                                  channels:
-                                    - conda-forge
-                                  dependencies:
-                                    - python=3.6.2
-                                    - pip:
-                                        - azureml-core==1.0.69
-                                        - azureml-defaults==1.0.69
-                                        - azureml-telemetry==1.0.69
-                                        - azureml-train-restclients-hyperdrive==1.0.69
-                                        - azureml-train-core==1.0.69
-                                        - scikit-learn==0.20.3
-                                        - scipy==1.2.1
-                                        - numpy==1.16.2
-                                        - joblib==0.13.2
-                                interpreterPath: python
-                                userManagedDependencies: false
-                              spark:
-                                packages: []
-                                precachePackages: true
-                                repositories: []
-                              version: '3'
-                            modelIds:
-                              - sklearn_regression_model1.pkl:2
-                          kvTags: {}
-                          location: eastus2
-                          modelConfigMap:
-                            accountContext:
-                              accountName: workspaces123
-                              resourceGroupName: testrg123
-                              subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                              workspaceId: 57b243e8-3d24-4427-90e0-8dc47f41c387
-                            models:
-                              sklearn_regression_model1.pkl:
-                                id: sklearn_regression_model1.pkl:2
-                                internalId: 3ab27a5b0d0e48d99f18a5195cc258bc
-                                version: 2
-                            modelsInfo:
-                              sklearn_regression_model1.pkl:
-                                '2':
-                                  dataCollectorStoragePath: /modeldata/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/testrg123/workspaces123/service123/sklearn_regression_model1.pkl/2/
-                                  id: sklearn_regression_model1.pkl:2
-                                  internalId: 3ab27a5b0d0e48d99f18a5195cc258bc
-                                  version: 2
-                          properties:
-                            hasHttps: 'False'
-                            hasInferenceSchema: 'False'
-                          publicFqdn: ddde8e29-3e3a-42d2-980d-8fb7e005ab81.eastus2.azurecontainer.io
-                          publicIp: 52.177.232.98
-                          scoringUri: http://ddde8e29-3e3a-42d2-980d-8fb7e005ab81.eastus2.azurecontainer.io/score
-                          sslCertificate: ''
-                          sslEnabled: false
-                          sslKey: ''
-                          state: Healthy
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -20448,129 +18328,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Get Service:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: testrg123
-                serviceName: service123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: service123
-                    type: Microsoft.MachineLearningServices/workspaces/services
-                    id: /subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/services/service123
-                    properties:
-                      description: null
-                      aadAuthEnabled: false
-                      appInsightsEnabled: true
-                      authEnabled: true
-                      autoScaler:
-                        autoscaleEnabled: false
-                        maxReplicas: null
-                        minReplicas: null
-                        refreshPeriodInSeconds: null
-                        targetUtilization: null
-                      computeName: my-aks-compute
-                      computeType: AKS
-                      containerResourceRequirements:
-                        cpu: 0.1
-                        fpga: null
-                        gpu: null
-                        memoryInGB: 0.5
-                      dataCollection:
-                        eventHubEnabled: false
-                        storageEnabled: false
-                      environmentImageRequest:
-                        assets:
-                          - id: null
-                            mimeType: application/x-python
-                            unpack: false
-                            url: aml://artifact/LocalUpload/200518T200218a1a8c0af/score.py
-                        driverProgram: score.py
-                        environment:
-                          name: AzureML-Scikit-learn-0.20.3
-                          docker:
-                            baseDockerfile: null
-                            baseImage: mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04
-                            baseImageRegistry:
-                              address: null
-                          environmentVariables:
-                            EXAMPLE_ENV_VAR: EXAMPLE_VALUE
-                          inferencingStackVersion: null
-                          python:
-                            baseCondaEnvironment: null
-                            condaDependencies:
-                              name: azureml_ae1acbe6e1e6aabbad900b53c491a17c
-                              channels:
-                                - conda-forge
-                              dependencies:
-                                - python=3.6.2
-                                - pip:
-                                    - azureml-core==1.0.69
-                                    - azureml-defaults==1.0.69
-                                    - azureml-telemetry==1.0.69
-                                    - azureml-train-restclients-hyperdrive==1.0.69
-                                    - azureml-train-core==1.0.69
-                                    - scikit-learn==0.20.3
-                                    - scipy==1.2.1
-                                    - numpy==1.16.2
-                                    - joblib==0.13.2
-                            interpreterPath: python
-                            userManagedDependencies: false
-                          spark:
-                            packages: []
-                            precachePackages: true
-                            repositories: []
-                          version: '3'
-                        modelIds:
-                          - sklearn_regression_model1.pkl:2
-                      kvTags: {}
-                      livenessProbeRequirements:
-                        failureThreshold: 3
-                        initialDelaySeconds: 310
-                        periodSeconds: 5
-                        successThreshold: 1
-                        timeoutSeconds: 120
-                      maxConcurrentRequestsPerContainer: 1
-                      maxQueueWaitMs: 500
-                      modelConfigMap:
-                        accountContext:
-                          accountName: workspaces123
-                          resourceGroupName: testrg123
-                          subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                          workspaceId: 57b243e8-3d24-4427-90e0-8dc47f41c387
-                        models:
-                          sklearn_regression_model1.pkl:
-                            id: sklearn_regression_model1.pkl:2
-                            internalId: 3ab27a5b0d0e48d99f18a5195cc258bc
-                            version: 2
-                        modelsInfo:
-                          sklearn_regression_model1.pkl:
-                            '2':
-                              dataCollectorStoragePath: /modeldata/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/testrg123/workspaces123/service123/sklearn_regression_model1.pkl/2/
-                              id: sklearn_regression_model1.pkl:2
-                              internalId: 3ab27a5b0d0e48d99f18a5195cc258bc
-                              version: 2
-                      namespace: azureml-workspaces123
-                      numReplicas: 1
-                      properties:
-                        hasHttps: 'False'
-                        hasInferenceSchema: 'False'
-                      scoringTimeoutMs: null
-                      scoringUri: http://192.168.1.5:80/api/v1/service/service123/score
-                      state: Healthy
-                      swaggerUri: http://192.168.1.5/api/v1/service/service123/swagger.json
-                    systemData:
-                      createdAt: '2020-02-03T01:01:01.1075056Z'
-                      createdBy: string
-                      createdByType: Application
-                      lastModifiedAt: '2020-02-04T02:03:01.1974346Z'
-                      lastModifiedBy: string
-                      lastModifiedByType: Application
         language: !Languages 
           default:
             name: Get
@@ -20683,18 +18440,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            Delete Service:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: testrg123
-                serviceName: service123
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200': {}
-                '204': {}
         language: !Languages 
           default:
             name: Delete
@@ -20849,175 +18594,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Create Or Update service:
-              parameters:
-                api-version: '2021-04-01'
-                properties:
-                  appInsightsEnabled: true
-                  authEnabled: true
-                  computeType: ACI
-                  containerResourceRequirements:
-                    cpu: 1
-                    memoryInGB: 1
-                  environmentImageRequest:
-                    assets:
-                      - id: null
-                        mimeType: application/x-python
-                        unpack: false
-                        url: aml://storage/azureml/score.py
-                    driverProgram: score.py
-                    environment:
-                      name: AzureML-Scikit-learn-0.20.3
-                      docker:
-                        baseDockerfile: null
-                        baseImage: mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04
-                        baseImageRegistry:
-                          address: null
-                          password: null
-                          username: null
-                      environmentVariables:
-                        EXAMPLE_ENV_VAR: EXAMPLE_VALUE
-                      inferencingStackVersion: null
-                      python:
-                        baseCondaEnvironment: null
-                        condaDependencies:
-                          name: azureml_ae1acbe6e1e6aabbad900b53c491a17c
-                          channels:
-                            - conda-forge
-                          dependencies:
-                            - python=3.6.2
-                            - pip:
-                                - azureml-core==1.0.69
-                                - azureml-defaults==1.0.69
-                                - azureml-telemetry==1.0.69
-                                - azureml-train-restclients-hyperdrive==1.0.69
-                                - azureml-train-core==1.0.69
-                                - scikit-learn==0.20.3
-                                - scipy==1.2.1
-                                - numpy==1.16.2
-                                - joblib==0.13.2
-                        interpreterPath: python
-                        userManagedDependencies: false
-                      spark:
-                        packages: []
-                        precachePackages: true
-                        repositories: []
-                      version: '3'
-                    models:
-                      - name: sklearn_regression_model.pkl
-                        mimeType: application/x-python
-                        url: aml://storage/azureml/sklearn_regression_model.pkl
-                  location: eastus2
-                resourceGroupName: testrg123
-                serviceName: service456
-                subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    name: service456
-                    type: Microsoft.MachineLearningServices/workspaces/services
-                    id: subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/services/service456
-                    properties:
-                      description: null
-                      appInsightsEnabled: true
-                      authEnabled: true
-                      cname: null
-                      computeType: ACI
-                      containerResourceRequirements:
-                        cpu: 0.1
-                        fpga: null
-                        gpu: null
-                        memoryInGB: 0.5
-                      dataCollection:
-                        eventHubEnabled: false
-                        storageEnabled: false
-                      environmentImageRequest:
-                        assets:
-                          - id: null
-                            mimeType: application/x-python
-                            unpack: false
-                            url: aml://artifact/LocalUpload/200518T200218a1a8c0af/score.py
-                        driverProgram: score.py
-                        environment:
-                          name: AzureML-Scikit-learn-0.20.3
-                          docker:
-                            baseDockerfile: null
-                            baseImage: mcr.microsoft.com/azureml/base:openmpi3.1.2-ubuntu16.04
-                            baseImageRegistry:
-                              address: null
-                          environmentVariables:
-                            EXAMPLE_ENV_VAR: EXAMPLE_VALUE
-                          inferencingStackVersion: null
-                          python:
-                            baseCondaEnvironment: null
-                            condaDependencies:
-                              name: azureml_ae1acbe6e1e6aabbad900b53c491a17c
-                              channels:
-                                - conda-forge
-                              dependencies:
-                                - python=3.6.2
-                                - pip:
-                                    - azureml-core==1.0.69
-                                    - azureml-defaults==1.0.69
-                                    - azureml-telemetry==1.0.69
-                                    - azureml-train-restclients-hyperdrive==1.0.69
-                                    - azureml-train-core==1.0.69
-                                    - scikit-learn==0.20.3
-                                    - scipy==1.2.1
-                                    - numpy==1.16.2
-                                    - joblib==0.13.2
-                            interpreterPath: python
-                            userManagedDependencies: false
-                          spark:
-                            packages: []
-                            precachePackages: true
-                            repositories: []
-                          version: '3'
-                        modelIds:
-                          - sklearn_regression_model1.pkl:2
-                      kvTags: {}
-                      location: eastus2
-                      modelConfigMap:
-                        accountContext:
-                          accountName: workspaces123
-                          resourceGroupName: testrg123
-                          subscriptionId: 34adfa4f-cedf-4dc0-ba29-b6d1a69ab345
-                          workspaceId: 57b243e8-3d24-4427-90e0-8dc47f41c387
-                        models:
-                          sklearn_regression_model1.pkl:
-                            id: sklearn_regression_model1.pkl:2
-                            internalId: 3ab27a5b0d0e48d99f18a5195cc258bc
-                            version: 2
-                        modelsInfo:
-                          sklearn_regression_model1.pkl:
-                            '2':
-                              dataCollectorStoragePath: /modeldata/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/testrg123/workspaces123/service123/sklearn_regression_model1.pkl/2/
-                              id: sklearn_regression_model1.pkl:2
-                              internalId: 3ab27a5b0d0e48d99f18a5195cc258bc
-                              version: 2
-                      properties:
-                        hasHttps: 'False'
-                        hasInferenceSchema: 'False'
-                      publicFqdn: ddde8e29-3e3a-42d2-980d-8fb7e005ab81.eastus2.azurecontainer.io
-                      publicIp: 52.177.232.98
-                      scoringUri: http://ddde8e29-3e3a-42d2-980d-8fb7e005ab81.eastus2.azurecontainer.io/score
-                      sslCertificate: ''
-                      sslEnabled: false
-                      sslKey: ''
-                      state: Transitioning
-                    systemData:
-                      createdAt: '2020-02-03T01:01:01.1075056Z'
-                      createdBy: string
-                      createdByType: Application
-                      lastModifiedAt: '2020-02-04T02:03:01.1974346Z'
-                      lastModifiedBy: string
-                      lastModifiedByType: Application
-                '201':
-                  description: The request was accepted.
-                  headers:
-                    Azure-AsyncOperation: https://management.azure.com/subscriptions/...pathToOperationStatus...
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -21131,22 +18707,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            Prepare Notebook:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: testrg123
-                subscriptionId: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    fqdn: testnotebook.notebooks.azure.com
-                    notebookPreparationError:
-                      errorMessage: general error
-                      statusCode: 500
-                    resourceId: aabbccddee112233445566778899
-                '202': {}
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: location
@@ -21244,19 +18804,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            List Workspace Keys:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: testrg123
-                subscriptionId: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    primaryAccessKey: null
-                    secondaryAccessKey: null
         language: !Languages 
           default:
             name: ListKeys
@@ -21359,18 +18906,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            List Workspace Keys:
-              parameters:
-                api-version: '2021-04-01'
-                resourceGroupName: testrg123
-                subscriptionId: aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee
-                workspaceName: workspaces123
-              responses:
-                '200':
-                  body:
-                    userStorageKey: null
         language: !Languages 
           default:
             name: ListKeys
@@ -21500,35 +19035,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            ListWorkspaceConnections:
-              parameters:
-                api-version: '2021-04-01'
-                category: ACR
-                resourceGroupName: resourceGroup-1
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                target: www.facebook.com
-                workspaceName: workspace-1
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name: connection-1
-                        type: Microsoft.MachineLearningServices/workspaces/connections
-                        id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/workspace-1/linkedWorkspaces/connection-1
-                        properties:
-                          authType: PAT
-                          category: ACR
-                          target: www.facebook.com
-                          value: secrets
-                      - name: connection-2
-                        type: Microsoft.MachineLearningServices/workspaces/connections
-                        id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/workspace-1/linkedWorkspaces/connection-2
-                        properties:
-                          authType: PAT
-                          category: ACR
-                          target: www.facebook.com
-                          value: secrets
           x-ms-pageable:
             nextLinkName: null
         language: !Languages 
@@ -21669,33 +19175,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            CreateWorkspaceConnection:
-              parameters:
-                api-version: '2021-04-01'
-                connectionName: connection-1
-                parameters:
-                  name: connection-1
-                  properties:
-                    authType: PAT
-                    category: ACR
-                    target: www.facebook.com
-                    value: secrets
-                resourceGroupName: resourceGroup-1
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: workspace-1
-              responses:
-                '200':
-                  body:
-                    name: connection-1
-                    type: Microsoft.MachineLearningServices/workspaces/connections
-                    id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/workspace-1/connections/connection-1
-                    properties:
-                      authType: PAT
-                      category: ACR
-                      target: www.facebook.com
-                      value: secrets
         language: !Languages 
           default:
             name: Create
@@ -21803,26 +19282,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            GetWorkspaceConnection:
-              parameters:
-                api-version: '2021-04-01'
-                connectionName: connection-1
-                resourceGroupName: resourceGroup-1
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: workspace-1
-              responses:
-                '200':
-                  body:
-                    name: connection-1
-                    type: Microsoft.MachineLearningServices/workspaces/connections
-                    id: /subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/workspace-1/connections/connection-1
-                    properties:
-                      authType: PAT
-                      category: ACR
-                      target: www.facebook.com
-                      value: secrets
         language: !Languages 
           default:
             name: Get
@@ -21935,18 +19394,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            DeleteWorkspaceConnection:
-              parameters:
-                api-version: '2021-04-01'
-                connectionName: connection-1
-                resourceGroupName: resourceGroup-1
-                subscriptionId: 00000000-1111-2222-3333-444444444444
-                workspaceName: workspace-1
-              responses:
-                '200': {}
-                '204': {}
         language: !Languages 
           default:
             name: Delete
