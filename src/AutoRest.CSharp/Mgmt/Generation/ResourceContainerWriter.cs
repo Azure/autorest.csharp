@@ -403,7 +403,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <returns>Is the input type string or an Enum that is modeled as string.</returns>
         private bool IsStringLike(CSharp.Generation.Types.CSharpType type)
         {
-            return type.Equals(typeof(string)) || type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string));
+            if (type.IsFrameworkType)
+            {
+                return type.Equals(typeof(string));
+            }
+            else
+            {
+                return type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string));
+            };
         }
 
         private void WriteContainerProperties()
