@@ -12,29 +12,33 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager.Core;
 
 namespace TenantOnly
 {
     /// <summary> Updates the properties of a billing account. Currently, displayName and address can be updated. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement. </summary>
-    public partial class BillingAccountsUpdateOperation : Operation<BillingAccountData>, IOperationSource<BillingAccountData>
+    public partial class BillingAccountsUpdateOperation : Operation<BillingAccount>, IOperationSource<BillingAccount>
     {
-        private readonly OperationInternals<BillingAccountData> _operation;
+        private readonly OperationInternals<BillingAccount> _operation;
+
+        private readonly ResourceOperationsBase _operationBase;
 
         /// <summary> Initializes a new instance of BillingAccountsUpdateOperation for mocking. </summary>
         protected BillingAccountsUpdateOperation()
         {
         }
 
-        internal BillingAccountsUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal BillingAccountsUpdateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<BillingAccountData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "BillingAccountsUpdateOperation");
+            _operation = new OperationInternals<BillingAccount>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.AzureAsyncOperation, "BillingAccountsUpdateOperation");
+            _operationBase = operationsBase;
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override BillingAccountData Value => _operation.Value;
+        public override BillingAccount Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,21 +56,21 @@ namespace TenantOnly
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<BillingAccountData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<BillingAccount>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<BillingAccountData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<BillingAccount>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        BillingAccountData IOperationSource<BillingAccountData>.CreateResult(Response response, CancellationToken cancellationToken)
+        BillingAccount IOperationSource<BillingAccount>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return BillingAccountData.DeserializeBillingAccountData(document.RootElement);
+            return new BillingAccount(_operationBase, BillingAccountData.DeserializeBillingAccountData(document.RootElement));
         }
 
-        async ValueTask<BillingAccountData> IOperationSource<BillingAccountData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<BillingAccount> IOperationSource<BillingAccount>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return BillingAccountData.DeserializeBillingAccountData(document.RootElement);
+            return new BillingAccount(_operationBase, BillingAccountData.DeserializeBillingAccountData(document.RootElement));
         }
     }
 }
