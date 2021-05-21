@@ -12,29 +12,33 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager.Core;
 
 namespace MgmtParent
 {
     /// <summary> Update an dedicated host . </summary>
-    public partial class DedicatedHostsUpdateOperation : Operation<DedicatedHostData>, IOperationSource<DedicatedHostData>
+    public partial class DedicatedHostsUpdateOperation : Operation<DedicatedHost>, IOperationSource<DedicatedHost>
     {
-        private readonly OperationInternals<DedicatedHostData> _operation;
+        private readonly OperationInternals<DedicatedHost> _operation;
+
+        private readonly ResourceOperationsBase _operationBase;
 
         /// <summary> Initializes a new instance of DedicatedHostsUpdateOperation for mocking. </summary>
         protected DedicatedHostsUpdateOperation()
         {
         }
 
-        internal DedicatedHostsUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal DedicatedHostsUpdateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<DedicatedHostData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DedicatedHostsUpdateOperation");
+            _operation = new OperationInternals<DedicatedHost>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "DedicatedHostsUpdateOperation");
+            _operationBase = operationsBase;
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override DedicatedHostData Value => _operation.Value;
+        public override DedicatedHost Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,21 +56,21 @@ namespace MgmtParent
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<DedicatedHostData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<DedicatedHost>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<DedicatedHostData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<DedicatedHost>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        DedicatedHostData IOperationSource<DedicatedHostData>.CreateResult(Response response, CancellationToken cancellationToken)
+        DedicatedHost IOperationSource<DedicatedHost>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return DedicatedHostData.DeserializeDedicatedHostData(document.RootElement);
+            return new DedicatedHost(_operationBase, DedicatedHostData.DeserializeDedicatedHostData(document.RootElement));
         }
 
-        async ValueTask<DedicatedHostData> IOperationSource<DedicatedHostData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<DedicatedHost> IOperationSource<DedicatedHost>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return DedicatedHostData.DeserializeDedicatedHostData(document.RootElement);
+            return new DedicatedHost(_operationBase, DedicatedHostData.DeserializeDedicatedHostData(document.RootElement));
         }
     }
 }
