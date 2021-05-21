@@ -133,6 +133,7 @@ $projectNames =
     'Azure.AI.FormRecognizer',
     'Azure.Storage.Tables',
     'Azure.ResourceManager.Sample',
+    'Azure.ResourceManager.MachineLearning',
     'Azure.Management.Storage',
     'Azure.Network.Management.Interface',
     'Azure.AI.DocumentTranslation'
@@ -201,16 +202,16 @@ if (!$noBuild)
 
 $keys = $swaggerDefinitions.Keys | Sort-Object;
 if (![string]::IsNullOrWhiteSpace($filter))
-{ 
+{
     Write-Host "Using filter: $filter"
     if ($continue)
     {
-        $keys = $keys.Where({$_ -match $filter},'SkipUntil') 
+        $keys = $keys.Where({$_ -match $filter},'SkipUntil')
         Write-Host "Continuing with $keys"
     }
     else
     {
-        $keys = $keys.Where({$_ -match $filter}) 
+        $keys = $keys.Where({$_ -match $filter})
     }
 }
 
