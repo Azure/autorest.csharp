@@ -2,10 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Diagnostics;
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -20,8 +22,21 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             Debug.Assert(!operation.IsLongRunning);
 
-            ResultType = context.Library.GetArmResource(operationGroup).Type;
-            ResultDataType = context.Library.GetResourceData(operationGroup).Type;
+            var response = GetOperationResponse(operation);
+
+            Schema? responseSchema = response.ResponseSchema;
+
+            if (responseSchema != null)
+            {
+                ResultType = TypeFactory.GetOutputType(context.TypeFactory.CreateType(responseSchema, false));
+            }
+
+            if (LongRunningOperationHelper.ShouldWrapResultType(context, operationGroup, operation, ResultType))
+            {
+                ResultType = context.Library.GetArmResource(operationGroup).Type;
+                ResultDataType = context.Library.GetResourceData(operationGroup).Type;
+            }
+
             DefaultName = lroInfo.ClientPrefix + operation.CSharpName() + "Operation";
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
@@ -44,5 +59,20 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultName { get; }
 
         protected override string DefaultAccessibility { get; }
+
+        private ServiceResponse GetOperationResponse(Input.Operation operation)
+        {
+            foreach (var operationResponse in operation.Responses)
+            {
+                if (operationResponse.Protocol.Http is HttpResponse operationHttpResponse)
+                {
+                    return operationResponse;
+                }
+            }
+
+            return operation.Responses.First();
+        }
+
+        public CSharpType? WrapperType { get; protected set; }
     }
 }

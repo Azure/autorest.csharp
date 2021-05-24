@@ -43,60 +43,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
         {
-            if (OperationGroupToResourceType.Count > 0)
-            {
-                writer.WriteStartObject(nameof(OperationGroupToResourceType));
-                foreach (var keyval in OperationGroupToResourceType)
-                {
-                    writer.WriteString(keyval.Key, keyval.Value);
-                }
-
-                writer.WriteEndObject();
-            }
-
-            if (OperationGroupToResource.Count > 0)
-            {
-                writer.WriteStartObject(nameof(OperationGroupToResource));
-                foreach (var keyval in OperationGroupToResource)
-                {
-                    writer.WriteString(keyval.Key, keyval.Value);
-                }
-
-                writer.WriteEndObject();
-            }
-
-            if (OperationGroupToParent.Count > 0)
-            {
-                writer.WriteStartObject(nameof(OperationGroupToParent));
-                foreach (var keyval in OperationGroupToParent)
-                {
-                    writer.WriteString(keyval.Key, keyval.Value);
-                }
-
-                writer.WriteEndObject();
-            }
-
-            if (SingletonResource.Length > 0)
-            {
-                writer.WriteStartArray(nameof(SingletonResource));
-                foreach (var r in SingletonResource)
-                {
-                    writer.WriteStringValue(r);
-                }
-
-                writer.WriteEndArray();
-            }
-
-            if (OperationGroupIsTuple.Length > 0)
-            {
-                writer.WriteStartArray(nameof(OperationGroupIsTuple));
-                foreach (var tuple in OperationGroupIsTuple)
-                {
-                    writer.WriteStringValue(tuple);
-                }
-
-                writer.WriteEndArray();
-            }
+            WriteNonEmptySettings(writer, nameof(OperationGroupToResourceType), OperationGroupToResourceType);
+            WriteNonEmptySettings(writer, nameof(OperationGroupToResource), OperationGroupToResource);
+            WriteNonEmptySettings(writer, nameof(OperationGroupToParent), OperationGroupToParent);
+            WriteNonEmptySettings(writer, nameof(SingletonResource), SingletonResource);
+            WriteNonEmptySettings(writer, nameof(OperationGroupIsTuple), OperationGroupIsTuple);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
@@ -126,6 +77,40 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static bool IsValidJsonElement(JsonElement? element)
         {
             return element?.ValueKind != JsonValueKind.Null && element?.ValueKind != JsonValueKind.Undefined;
+        }
+
+        private static void WriteNonEmptySettings(
+            Utf8JsonWriter writer,
+            string settingName,
+            IReadOnlyDictionary<string, string> settings)
+        {
+            if (settings.Count > 0)
+            {
+                writer.WriteStartObject(settingName);
+                foreach (var keyval in settings)
+                {
+                    writer.WriteString(keyval.Key, keyval.Value);
+                }
+
+                writer.WriteEndObject();
+            }
+        }
+
+        private static void WriteNonEmptySettings(
+            Utf8JsonWriter writer,
+            string settingName,
+            string[] settings)
+        {
+            if (settings.Length > 0)
+            {
+                writer.WriteStartArray(settingName);
+                foreach (var s in settings)
+                {
+                    writer.WriteStringValue(s);
+                }
+
+                writer.WriteEndArray();
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.MachineLearning
 {
     /// <summary> An Azure Machine Learning Model. </summary>
-    public partial class Model : SubResourceWritable
+    public partial class Model : WritableSubResource
     {
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="name"> The Model name. </param>

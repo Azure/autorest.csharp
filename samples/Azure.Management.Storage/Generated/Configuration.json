@@ -12,9 +12,6 @@
   "HeadAsBoolean": true,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {
     "Operations": "Microsoft.Storage/operations",
     "Skus": "Microsoft.Storage/skus",

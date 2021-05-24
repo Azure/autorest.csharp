@@ -10,37 +10,29 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Management.Storage.Models;
-using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
-    public partial class PrivateEndpointConnectionsDeleteOperation : Operation<PrivateEndpointConnection>
+    public partial class PrivateEndpointConnectionsDeleteOperation : Operation
     {
-        private readonly OperationOrResponseInternals<PrivateEndpointConnection> _operation;
+        private readonly OperationOrResponseInternals _operation;
 
         /// <summary> Initializes a new instance of PrivateEndpointConnectionsDeleteOperation for mocking. </summary>
         protected PrivateEndpointConnectionsDeleteOperation()
         {
         }
 
-        internal PrivateEndpointConnectionsDeleteOperation(ResourceOperationsBase operationsBase, Response<PrivateEndpointConnectionData> response)
+        internal PrivateEndpointConnectionsDeleteOperation(Response response)
         {
-            _operation = new OperationOrResponseInternals<PrivateEndpointConnection>(Response.FromValue(new PrivateEndpointConnection(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals(response);
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override PrivateEndpointConnection Value => _operation.Value;
-
-        /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
-
-        /// <inheritdoc />
-        public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
         public override Response GetRawResponse() => _operation.GetRawResponse();
@@ -52,9 +44,9 @@ namespace Azure.Management.Storage
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<PrivateEndpointConnection>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<PrivateEndpointConnection>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
     }
 }

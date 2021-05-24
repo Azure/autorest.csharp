@@ -84,7 +84,7 @@ if (!($Exclude -contains "TestServer"))
     }
 }
 
-$llcArgs = "--low-level-client=true --credential-types=AzureKeyCredential --credential-header-name=Fake-Subscription-Key"
+$llcArgs = "--low-level-client=true --security=AzureKey --security-header-name=Fake-Subscription-Key"
 
 $testServerLowLevelDirectory = Join-Path $repoRoot 'test' 'TestServerProjectsLowLevel'
 $testNamesLowLevel =

@@ -174,6 +174,5 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
         }
-
     }
 }

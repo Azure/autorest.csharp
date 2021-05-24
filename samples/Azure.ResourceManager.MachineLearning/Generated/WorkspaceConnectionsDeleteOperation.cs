@@ -10,36 +10,29 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.MachineLearning
 {
     /// <summary> Delete a workspace connection. </summary>
-    public partial class WorkspaceConnectionsDeleteOperation : Operation<WorkspaceConnection>
+    public partial class WorkspaceConnectionsDeleteOperation : Azure.Operation
     {
-        private readonly OperationOrResponseInternals<WorkspaceConnection> _operation;
+        private readonly OperationOrResponseInternals _operation;
 
         /// <summary> Initializes a new instance of WorkspaceConnectionsDeleteOperation for mocking. </summary>
         protected WorkspaceConnectionsDeleteOperation()
         {
         }
 
-        internal WorkspaceConnectionsDeleteOperation(ResourceOperationsBase operationsBase, Response<WorkspaceConnectionData> response)
+        internal WorkspaceConnectionsDeleteOperation(Response response)
         {
-            _operation = new OperationOrResponseInternals<WorkspaceConnection>(Response.FromValue(new WorkspaceConnection(operationsBase, response.Value), response.GetRawResponse()));
+            _operation = new OperationOrResponseInternals(response);
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override WorkspaceConnection Value => _operation.Value;
-
-        /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
-
-        /// <inheritdoc />
-        public override bool HasValue => _operation.HasValue;
 
         /// <inheritdoc />
         public override Response GetRawResponse() => _operation.GetRawResponse();
@@ -51,9 +44,9 @@ namespace Azure.ResourceManager.MachineLearning
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<WorkspaceConnection>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<WorkspaceConnection>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response> WaitForCompletionResponseAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionResponseAsync(pollingInterval, cancellationToken);
     }
 }

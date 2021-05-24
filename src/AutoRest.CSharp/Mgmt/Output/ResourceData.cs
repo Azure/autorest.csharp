@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 .Select(t => t.Inherits!)
                 .Any(csharpType =>
                     csharpType.Namespace == "Azure.ResourceManager.Core"
-                        && (csharpType.Name == nameof(Resource) || csharpType.Name == "TrackedResource" || csharpType.Name == nameof(SubResource) || csharpType.Name == nameof(SubResourceWritable)));
+                        && (csharpType.Name == nameof(Resource) || csharpType.Name == "TrackedResource" || csharpType.Name == nameof(SubResource) || csharpType.Name == nameof(WritableSubResource)));
         }
     }
 }

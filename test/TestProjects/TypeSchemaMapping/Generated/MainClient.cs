@@ -174,6 +174,102 @@ namespace CustomNamespace
             }
         }
 
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<ModelWithInternalModel>> OperationWithInternalModelAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationWithInternalModel");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationWithInternalModelAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ModelWithInternalModel> OperationWithInternalModel(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationWithInternalModel");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationWithInternalModel(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<ModelWithAbstractModel>> OperationWithAbstractModelAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationWithAbstractModel");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationWithAbstractModelAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ModelWithAbstractModel> OperationWithAbstractModel(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationWithAbstractModel");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationWithAbstractModel(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<ModelWithListOfInternalModel>> OperationWithListOfInternalModelAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationWithListOfInternalModel");
+            scope.Start();
+            try
+            {
+                return await RestClient.OperationWithListOfInternalModelAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ModelWithListOfInternalModel> OperationWithListOfInternalModel(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("MainClient.OperationWithListOfInternalModel");
+            scope.Start();
+            try
+            {
+                return RestClient.OperationWithListOfInternalModel(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <param name="body"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<MainOperation> StartOperationAsync(CustomizedModel body = null, CancellationToken cancellationToken = default)

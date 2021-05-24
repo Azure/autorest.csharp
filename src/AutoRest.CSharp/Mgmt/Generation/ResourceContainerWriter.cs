@@ -349,7 +349,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (!method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase))
             {
                 var lastString = parameterMapping.LastOrDefault(parameter => IsStringLike(parameter.Parameter.Type) && IsMandatory(parameter.Parameter));
-                if (lastString.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+                if (lastString?.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
                 {
                     lastString.IsPassThru = true;
                     parentNameStack.Pop();

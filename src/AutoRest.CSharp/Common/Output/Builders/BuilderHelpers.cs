@@ -91,11 +91,12 @@ namespace AutoRest.CSharp.Output.Builders
                 return new TypeDeclarationOptions(existingType.Name,
                     existingType.ContainingNamespace.ToDisplayString(),
                     SyntaxFacts.GetText(existingType.DeclaredAccessibility),
+                    existingType.IsAbstract,
                     existingTypeOverrides
                 );
             }
 
-            return new TypeDeclarationOptions(defaultName,defaultNamespace, defaultAccessibility, false);
+            return new TypeDeclarationOptions(defaultName,defaultNamespace, defaultAccessibility, false, false);
         }
 
         public static MemberDeclarationOptions CreateMemberDeclaration(string defaultName, CSharpType defaultType, string defaultAccessibility, ISymbol? existingMember, TypeFactory typeFactory)

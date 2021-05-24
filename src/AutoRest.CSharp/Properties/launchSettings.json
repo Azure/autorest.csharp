@@ -176,6 +176,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExtensionClientName\\Generated"
     },
+    "FlattenedParameters": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FlattenedParameters\\Generated"
+    },
     "head": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\head\\Generated"
@@ -223,6 +227,10 @@
     "MgmtParent": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtParent\\Generated"
+    },
+    "MgmtSingleton": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSingleton\\Generated"
     },
     "model-flattening": {
       "commandName": "Project",

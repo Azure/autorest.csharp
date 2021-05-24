@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.MachineLearning
 {
     /// <summary> The properties for Quota update or retrieval. </summary>
-    public partial class QuotaBaseProperties : SubResourceWritable
+    public partial class QuotaBaseProperties : WritableSubResource
     {
         /// <summary> Initializes a new instance of QuotaBaseProperties. </summary>
         public QuotaBaseProperties()

@@ -12,9 +12,6 @@
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {
     "Operations": "Microsoft.MachineLearningServices/operations",
     "WorkspaceFeatures": "Microsoft.MachineLearningServices/workspaces/features",

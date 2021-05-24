@@ -70,9 +70,12 @@ namespace Azure.ResourceManager.MachineLearning
             {
                 Location = quotaUpdateParametersLocation
             };
-            foreach (var value0 in value)
+            if (value != null)
             {
-                quotaUpdateParameters.Value.Add(value0);
+                foreach (var value0 in value)
+                {
+                    quotaUpdateParameters.Value.Add(value0);
+                }
             }
             var model = quotaUpdateParameters;
             var content = new Utf8JsonRequestContent();

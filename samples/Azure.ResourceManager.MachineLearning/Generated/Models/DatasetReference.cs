@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.MachineLearning
 {
     /// <summary> The dataset reference object. </summary>
-    public partial class DatasetReference : SubResourceWritable
+    public partial class DatasetReference : WritableSubResource
     {
         /// <summary> Initializes a new instance of DatasetReference. </summary>
         public DatasetReference()

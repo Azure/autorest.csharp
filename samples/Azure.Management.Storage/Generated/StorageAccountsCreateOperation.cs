@@ -18,9 +18,9 @@ using Azure.ResourceManager.Core;
 namespace Azure.Management.Storage
 {
     /// <summary> Asynchronously creates a new storage account with the specified parameters. If an account is already created and a subsequent create request is issued with different properties, the account properties will be updated. If an account is already created and a subsequent create or update request is issued with the exact same set of properties, the request will succeed. </summary>
-    public partial class StorageAccountsCreateOperation : Operation<StorageAccount>, IOperationSource<StorageAccountData>
+    public partial class StorageAccountsCreateOperation : Operation<StorageAccount>, IOperationSource<StorageAccount>
     {
-        private readonly OperationInternals<StorageAccountData> _operation;
+        private readonly OperationInternals<StorageAccount> _operation;
 
         private readonly ResourceOperationsBase _operationBase;
 
@@ -31,7 +31,7 @@ namespace Azure.Management.Storage
 
         internal StorageAccountsCreateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<StorageAccountData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "StorageAccountsCreateOperation");
+            _operation = new OperationInternals<StorageAccount>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "StorageAccountsCreateOperation");
             _operationBase = operationsBase;
         }
 
@@ -39,7 +39,7 @@ namespace Azure.Management.Storage
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override StorageAccount Value => new StorageAccount(_operationBase, _operation.Value);
+        public override StorageAccount Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -57,23 +57,21 @@ namespace Azure.Management.Storage
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public async override ValueTask<Response<StorageAccount>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(cancellationToken));
+        public override ValueTask<Response<StorageAccount>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public async override ValueTask<Response<StorageAccount>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken));
+        public override ValueTask<Response<StorageAccount>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        private Response<StorageAccount> MapResponseType(Response<StorageAccountData> response) => Response.FromValue(new StorageAccount(_operationBase, response.Value), response.GetRawResponse());
-
-        StorageAccountData IOperationSource<StorageAccountData>.CreateResult(Response response, CancellationToken cancellationToken)
+        StorageAccount IOperationSource<StorageAccount>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return StorageAccountData.DeserializeStorageAccountData(document.RootElement);
+            return new StorageAccount(_operationBase, StorageAccountData.DeserializeStorageAccountData(document.RootElement));
         }
 
-        async ValueTask<StorageAccountData> IOperationSource<StorageAccountData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<StorageAccount> IOperationSource<StorageAccount>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return StorageAccountData.DeserializeStorageAccountData(document.RootElement);
+            return new StorageAccount(_operationBase, StorageAccountData.DeserializeStorageAccountData(document.RootElement));
         }
     }
 }

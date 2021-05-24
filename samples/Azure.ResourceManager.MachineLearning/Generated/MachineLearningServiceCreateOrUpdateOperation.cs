@@ -17,9 +17,9 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.MachineLearning
 {
     /// <summary> Creates or updates service. This call will update a service if it exists. This is a nonrecoverable operation. If your intent is to create a new service, do a GET first to verify that it does not exist yet. </summary>
-    public partial class MachineLearningServiceCreateOrUpdateOperation : Operation<ServiceResource>, IOperationSource<ServiceResourceData>
+    public partial class MachineLearningServiceCreateOrUpdateOperation : Operation<ServiceResource>, IOperationSource<ServiceResource>
     {
-        private readonly OperationInternals<ServiceResourceData> _operation;
+        private readonly OperationInternals<ServiceResource> _operation;
 
         private readonly ResourceOperationsBase _operationBase;
 
@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.MachineLearning
 
         internal MachineLearningServiceCreateOrUpdateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<ServiceResourceData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "MachineLearningServiceCreateOrUpdateOperation");
+            _operation = new OperationInternals<ServiceResource>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "MachineLearningServiceCreateOrUpdateOperation");
             _operationBase = operationsBase;
         }
 
@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.MachineLearning
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override ServiceResource Value => new ServiceResource(_operationBase, _operation.Value);
+        public override ServiceResource Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -56,23 +56,21 @@ namespace Azure.ResourceManager.MachineLearning
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public async override ValueTask<Response<ServiceResource>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(cancellationToken));
+        public override ValueTask<Response<ServiceResource>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public async override ValueTask<Response<ServiceResource>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken));
+        public override ValueTask<Response<ServiceResource>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        private Response<ServiceResource> MapResponseType(Response<ServiceResourceData> response) => Response.FromValue(new ServiceResource(_operationBase, response.Value), response.GetRawResponse());
-
-        ServiceResourceData IOperationSource<ServiceResourceData>.CreateResult(Response response, CancellationToken cancellationToken)
+        ServiceResource IOperationSource<ServiceResource>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return ServiceResourceData.DeserializeServiceResourceData(document.RootElement);
+            return new ServiceResource(_operationBase, ServiceResourceData.DeserializeServiceResourceData(document.RootElement));
         }
 
-        async ValueTask<ServiceResourceData> IOperationSource<ServiceResourceData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<ServiceResource> IOperationSource<ServiceResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return ServiceResourceData.DeserializeServiceResourceData(document.RootElement);
+            return new ServiceResource(_operationBase, ServiceResourceData.DeserializeServiceResourceData(document.RootElement));
         }
     }
 }

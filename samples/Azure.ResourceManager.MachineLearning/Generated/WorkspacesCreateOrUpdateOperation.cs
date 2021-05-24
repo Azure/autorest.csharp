@@ -17,9 +17,9 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.MachineLearning
 {
     /// <summary> Creates or updates a workspace with the specified parameters. </summary>
-    public partial class WorkspacesCreateOrUpdateOperation : Operation<Workspace>, IOperationSource<WorkspaceData>
+    public partial class WorkspacesCreateOrUpdateOperation : Operation<Workspace>, IOperationSource<Workspace>
     {
-        private readonly OperationInternals<WorkspaceData> _operation;
+        private readonly OperationInternals<Workspace> _operation;
 
         private readonly ResourceOperationsBase _operationBase;
 
@@ -30,7 +30,7 @@ namespace Azure.ResourceManager.MachineLearning
 
         internal WorkspacesCreateOrUpdateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<WorkspaceData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "WorkspacesCreateOrUpdateOperation");
+            _operation = new OperationInternals<Workspace>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "WorkspacesCreateOrUpdateOperation");
             _operationBase = operationsBase;
         }
 
@@ -38,7 +38,7 @@ namespace Azure.ResourceManager.MachineLearning
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override Workspace Value => new Workspace(_operationBase, _operation.Value);
+        public override Workspace Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -56,23 +56,21 @@ namespace Azure.ResourceManager.MachineLearning
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public async override ValueTask<Response<Workspace>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(cancellationToken));
+        public override ValueTask<Response<Workspace>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public async override ValueTask<Response<Workspace>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => MapResponseType(await _operation.WaitForCompletionAsync(pollingInterval, cancellationToken));
+        public override ValueTask<Response<Workspace>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        private Response<Workspace> MapResponseType(Response<WorkspaceData> response) => Response.FromValue(new Workspace(_operationBase, response.Value), response.GetRawResponse());
-
-        WorkspaceData IOperationSource<WorkspaceData>.CreateResult(Response response, CancellationToken cancellationToken)
+        Workspace IOperationSource<Workspace>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return WorkspaceData.DeserializeWorkspaceData(document.RootElement);
+            return new Workspace(_operationBase, WorkspaceData.DeserializeWorkspaceData(document.RootElement));
         }
 
-        async ValueTask<WorkspaceData> IOperationSource<WorkspaceData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<Workspace> IOperationSource<Workspace>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return WorkspaceData.DeserializeWorkspaceData(document.RootElement);
+            return new Workspace(_operationBase, WorkspaceData.DeserializeWorkspaceData(document.RootElement));
         }
     }
 }

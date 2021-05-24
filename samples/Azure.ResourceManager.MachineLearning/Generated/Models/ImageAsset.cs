@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.MachineLearning
 {
     /// <summary> An Image asset. </summary>
-    public partial class ImageAsset : SubResourceWritable
+    public partial class ImageAsset : WritableSubResource
     {
         /// <summary> Initializes a new instance of ImageAsset. </summary>
         public ImageAsset()

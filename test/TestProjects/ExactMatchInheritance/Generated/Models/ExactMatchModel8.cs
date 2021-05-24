@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace ExactMatchInheritance
 {
     /// <summary> The ExactMatchModel8. </summary>
-    public partial class ExactMatchModel8 : SubResourceWritable
+    public partial class ExactMatchModel8 : WritableSubResource
     {
         /// <summary> Initializes a new instance of ExactMatchModel8. </summary>
         public ExactMatchModel8()
