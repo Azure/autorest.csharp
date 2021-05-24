@@ -10,29 +10,30 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace MgmtSingleton
 {
     /// <summary> Update an SingletonResources3. </summary>
-    public partial class SingletonResources3UpdateOperation : Operation<SingletonResource3Data>
+    public partial class SingletonResources3UpdateOperation : Operation<SingletonResource3>
     {
-        private readonly OperationOrResponseInternals<SingletonResource3Data> _operation;
+        private readonly OperationOrResponseInternals<SingletonResource3> _operation;
 
         /// <summary> Initializes a new instance of SingletonResources3UpdateOperation for mocking. </summary>
         protected SingletonResources3UpdateOperation()
         {
         }
 
-        internal SingletonResources3UpdateOperation(Response<SingletonResource3Data> response)
+        internal SingletonResources3UpdateOperation(ResourceOperationsBase operationsBase, Response<SingletonResource3Data> response)
         {
-            _operation = new OperationOrResponseInternals<SingletonResource3Data>(response);
+            _operation = new OperationOrResponseInternals<SingletonResource3>(Response.FromValue(new SingletonResource3(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override SingletonResource3Data Value => _operation.Value;
+        public override SingletonResource3 Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -50,9 +51,9 @@ namespace MgmtSingleton
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<SingletonResource3Data>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<SingletonResource3>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<SingletonResource3Data>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<SingletonResource3>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }
