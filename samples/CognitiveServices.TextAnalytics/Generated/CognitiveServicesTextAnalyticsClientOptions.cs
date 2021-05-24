@@ -13,13 +13,13 @@ namespace CognitiveServices.TextAnalytics
     /// <summary> Client options for CognitiveServicesTextAnalyticsClient. </summary>
     public partial class CognitiveServicesTextAnalyticsClientOptions : ClientOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.Vv3_0_preview_1;
+        private const ServiceVersion LatestVersion = ServiceVersion.Vv3_0;
 
         /// <summary> The version of the service to use. </summary>
         public enum ServiceVersion
         {
-            /// <summary> Service version "v3.0-preview.1". </summary>
-            Vv3_0_preview_1 = 1,
+            /// <summary> Service version "v3.0". </summary>
+            Vv3_0 = 1,
         }
 
         internal string Version { get; }
@@ -29,7 +29,7 @@ namespace CognitiveServices.TextAnalytics
         {
             Version = version switch
             {
-                ServiceVersion.Vv3_0_preview_1 => "v3.0-preview.1",
+                ServiceVersion.Vv3_0 => "v3.0",
                 _ => throw new NotSupportedException()
             };
         }

@@ -18,8 +18,9 @@ namespace CognitiveServices.TextAnalytics.Models
             string id = default;
             DocumentSentimentValue sentiment = default;
             Optional<DocumentStatistics> statistics = default;
-            SentimentConfidenceScorePerLabel documentScores = default;
+            SentimentConfidenceScorePerLabel confidenceScores = default;
             IReadOnlyList<SentenceSentiment> sentences = default;
+            IReadOnlyList<TextAnalyticsWarning> warnings = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"))
@@ -42,9 +43,9 @@ namespace CognitiveServices.TextAnalytics.Models
                     statistics = DocumentStatistics.DeserializeDocumentStatistics(property.Value);
                     continue;
                 }
-                if (property.NameEquals("documentScores"))
+                if (property.NameEquals("confidenceScores"))
                 {
-                    documentScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
+                    confidenceScores = SentimentConfidenceScorePerLabel.DeserializeSentimentConfidenceScorePerLabel(property.Value);
                     continue;
                 }
                 if (property.NameEquals("sentences"))
@@ -57,8 +58,18 @@ namespace CognitiveServices.TextAnalytics.Models
                     sentences = array;
                     continue;
                 }
+                if (property.NameEquals("warnings"))
+                {
+                    List<TextAnalyticsWarning> array = new List<TextAnalyticsWarning>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(TextAnalyticsWarning.DeserializeTextAnalyticsWarning(item));
+                    }
+                    warnings = array;
+                    continue;
+                }
             }
-            return new DocumentSentiment(id, sentiment, statistics.Value, documentScores, sentences);
+            return new DocumentSentiment(id, sentiment, statistics.Value, confidenceScores, sentences, warnings);
         }
     }
 }

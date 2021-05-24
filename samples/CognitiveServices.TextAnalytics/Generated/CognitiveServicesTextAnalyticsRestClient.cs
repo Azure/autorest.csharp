@@ -46,7 +46,7 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
-            uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
+            uri.AppendRaw("/text/analytics/v3.0", false);
             uri.AppendPath("/entities/recognition/general", false);
             if (modelVersion != null)
             {
@@ -123,96 +123,6 @@ namespace CognitiveServices.TextAnalytics
             }
         }
 
-        internal HttpMessage CreateEntitiesRecognitionPiiRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.AppendRaw(endpoint, false);
-            uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
-            uri.AppendPath("/entities/recognition/pii", false);
-            if (modelVersion != null)
-            {
-                uri.AppendQuery("model-version", modelVersion, true);
-            }
-            if (showStats != null)
-            {
-                uri.AppendQuery("showStats", showStats.Value, true);
-            }
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json, text/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(input);
-            request.Content = content;
-            return message;
-        }
-
-        /// <summary>
-        /// The API returns a list of entities with personal information (\&quot;SSN\&quot;, \&quot;Bank Account\&quot; etc) in the document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/tanerpii&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.
-        /// .
-        /// </summary>
-        /// <param name="input"> Collection of documents to analyze. </param>
-        /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
-        /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public async Task<Response<EntitiesResult>> EntitiesRecognitionPiiAsync(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
-        {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            using var message = CreateEntitiesRecognitionPiiRequest(input, modelVersion, showStats);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        EntitiesResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary>
-        /// The API returns a list of entities with personal information (\&quot;SSN\&quot;, \&quot;Bank Account\&quot; etc) in the document. For the list of supported entity types, check &lt;a href=&quot;https://aka.ms/tanerpii&quot;&gt;Supported Entity Types in Text Analytics API&lt;/a&gt;. See the &lt;a href=&quot;https://aka.ms/talangs&quot;&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.
-        /// .
-        /// </summary>
-        /// <param name="input"> Collection of documents to analyze. </param>
-        /// <param name="modelVersion"> (Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. </param>
-        /// <param name="showStats"> (Optional) if set to true, response will contain input and document level statistics. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
-        public Response<EntitiesResult> EntitiesRecognitionPii(MultiLanguageBatchInput input, string modelVersion = null, bool? showStats = null, CancellationToken cancellationToken = default)
-        {
-            if (input == null)
-            {
-                throw new ArgumentNullException(nameof(input));
-            }
-
-            using var message = CreateEntitiesRecognitionPiiRequest(input, modelVersion, showStats);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        EntitiesResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = EntitiesResult.DeserializeEntitiesResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
-
         internal HttpMessage CreateEntitiesLinkingRequest(MultiLanguageBatchInput input, string modelVersion, bool? showStats)
         {
             var message = _pipeline.CreateMessage();
@@ -220,7 +130,7 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
-            uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
+            uri.AppendRaw("/text/analytics/v3.0", false);
             uri.AppendPath("/entities/linking", false);
             if (modelVersion != null)
             {
@@ -304,7 +214,7 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
-            uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
+            uri.AppendRaw("/text/analytics/v3.0", false);
             uri.AppendPath("/keyPhrases", false);
             if (modelVersion != null)
             {
@@ -388,7 +298,7 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
-            uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
+            uri.AppendRaw("/text/analytics/v3.0", false);
             uri.AppendPath("/languages", false);
             if (modelVersion != null)
             {
@@ -472,7 +382,7 @@ namespace CognitiveServices.TextAnalytics
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(endpoint, false);
-            uri.AppendRaw("/text/analytics/v3.0-preview.1", false);
+            uri.AppendRaw("/text/analytics/v3.0", false);
             uri.AppendPath("/sentiment", false);
             if (modelVersion != null)
             {
