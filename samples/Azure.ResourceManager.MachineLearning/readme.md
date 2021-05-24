@@ -25,15 +25,17 @@ operation-group-to-resource-type:
   StorageAccount: NonResourceMicrosoft.MachineLearningServices/workspaces/listStorageAccountKeys
 operation-group-to-resource:
   Operations: NonResource
-  WorkspaceFeatures: ListAmlUserFeatureResult
+  WorkspaceFeatures: AmlUserFeature # no PUT
   Usages: NonResource
   VirtualMachineSizes: NonResource
   Quotas: NonResource
-  Workspace: SkuListResult
-  PrivateLinkResources: PrivateLinkResourceListResult
+  Workspace: WorkspaceSku # no PUT
+  PrivateLinkResources: PrivateLinkResource # no PUT
   Notebooks: NonResource
   StorageAccount: NonResource
   MachineLearningCompute: ComputeResource
+  MachineLearningService: ServiceResource # PUT req/res mismatch
+  WorkspaceConnections: WorkspaceConnection # PUT req/res mismatch
 operation-group-to-parent:
   Usages: Locations
   VirtualMachineSizes: Locations

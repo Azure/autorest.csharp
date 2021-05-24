@@ -28,15 +28,17 @@
   },
   "OperationGroupToResource": {
     "Operations": "NonResource",
-    "WorkspaceFeatures": "ListAmlUserFeatureResult",
+    "WorkspaceFeatures": "AmlUserFeature",
     "Usages": "NonResource",
     "VirtualMachineSizes": "NonResource",
     "Quotas": "NonResource",
-    "Workspace": "SkuListResult",
-    "PrivateLinkResources": "PrivateLinkResourceListResult",
+    "Workspace": "WorkspaceSku",
+    "PrivateLinkResources": "PrivateLinkResource",
     "Notebooks": "NonResource",
     "StorageAccount": "NonResource",
-    "MachineLearningCompute": "ComputeResource"
+    "MachineLearningCompute": "ComputeResource",
+    "MachineLearningService": "ServiceResource",
+    "WorkspaceConnections": "WorkspaceConnection"
   },
   "OperationGroupToParent": {
     "Usages": "Locations",
