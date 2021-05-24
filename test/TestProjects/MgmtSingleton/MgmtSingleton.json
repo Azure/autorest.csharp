@@ -685,6 +685,130 @@
                     }
                 }
             }
+        },
+        "/providers/Microsoft.Billing/singletonResources4/default": {
+            "get": {
+                "tags": [
+                    "SingletonResources4"
+                ],
+                "operationId": "SingletonResources4_GetDefault",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/SingletonResource4"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "SingletonResources4"
+                ],
+                "operationId": "SingletonResources4_CreateOrUpdate",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SingletonResource4"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SingletonResource4"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "SingletonResources4"
+                ],
+                "operationId": "SingletonResources4_PostTest",
+                "description": "The operation to do POST request.",
+                "parameters": [
+                    {
+                        "name": "postParameter",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "default": false
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "202": {
+                        "description": "Accepted"
+                    }
+                },
+                "x-ms-long-running-operation": true
+            },
+            "patch": {
+                "tags": [
+                    "SingletonResources4"
+                ],
+                "operationId": "SingletonResources4_Update",
+                "description": "Update an SingletonResources4.",
+                "parameters": [
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SingletonResource4"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SingletonResource4"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "SingletonResources4"
+                ],
+                "operationId": "SingletonResources4_Delete",
+                "description": "Delete an SingletonResources4.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -717,6 +841,20 @@
             }
         },
         "SingletonResource3": {
+            "description": "A singleton resource.",
+            "type": "object",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
+            "properties": {
+                "new": {
+                    "type": "string"
+                }
+            }
+        },
+        "SingletonResource4": {
             "description": "A singleton resource.",
             "type": "object",
             "allOf": [

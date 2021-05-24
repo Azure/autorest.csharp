@@ -132,5 +132,355 @@ namespace MgmtSingleton
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
+
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string parentName, SingletonResource2Data parameters)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Put;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Billing/parentResources/", false);
+            uri.AppendPath(parentName, true);
+            uri.AppendPath("/singletonResources2", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(parameters);
+            request.Content = content;
+            return message;
+        }
+
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parameters"> The SingletonResource2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<SingletonResource2Data>> CreateOrUpdateAsync(string resourceGroupName, string parentName, SingletonResource2Data parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, parentName, parameters);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        SingletonResource2Data value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = SingletonResource2Data.DeserializeSingletonResource2Data(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parameters"> The SingletonResource2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<SingletonResource2Data> CreateOrUpdate(string resourceGroupName, string parentName, SingletonResource2Data parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, parentName, parameters);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        SingletonResource2Data value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = SingletonResource2Data.DeserializeSingletonResource2Data(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreatePostTestRequest(string resourceGroupName, string parentName, bool? postParameter)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Billing/parentResources/", false);
+            uri.AppendPath(parentName, true);
+            uri.AppendPath("/singletonResources2", false);
+            if (postParameter != null)
+            {
+                uri.AppendQuery("postParameter", postParameter.Value, true);
+            }
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> The operation to do POST request. </summary>
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="postParameter"> The Boolean to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
+        public async Task<Response> PostTestAsync(string resourceGroupName, string parentName, bool? postParameter = null, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var message = CreatePostTestRequest(resourceGroupName, parentName, postParameter);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> The operation to do POST request. </summary>
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="postParameter"> The Boolean to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
+        public Response PostTest(string resourceGroupName, string parentName, bool? postParameter = null, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var message = CreatePostTestRequest(resourceGroupName, parentName, postParameter);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 202:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string parentName, SingletonResource2Data parameters)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Patch;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Billing/parentResources/", false);
+            uri.AppendPath(parentName, true);
+            uri.AppendPath("/singletonResources2", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(parameters);
+            request.Content = content;
+            return message;
+        }
+
+        /// <summary> Update an SingletonResources2. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parameters"> The SingletonResource2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<SingletonResource2Data>> UpdateAsync(string resourceGroupName, string parentName, SingletonResource2Data parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var message = CreateUpdateRequest(resourceGroupName, parentName, parameters);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        SingletonResource2Data value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = SingletonResource2Data.DeserializeSingletonResource2Data(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Update an SingletonResources2. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="parameters"> The SingletonResource2 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="parentName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<SingletonResource2Data> Update(string resourceGroupName, string parentName, SingletonResource2Data parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var message = CreateUpdateRequest(resourceGroupName, parentName, parameters);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        SingletonResource2Data value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = SingletonResource2Data.DeserializeSingletonResource2Data(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateDeleteRequest(string resourceGroupName, string parentName)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Delete;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Billing/parentResources/", false);
+            uri.AppendPath(parentName, true);
+            uri.AppendPath("/singletonResources2", false);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            return message;
+        }
+
+        /// <summary> Delete an SingletonResources2. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
+        public async Task<Response> DeleteAsync(string resourceGroupName, string parentName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var message = CreateDeleteRequest(resourceGroupName, parentName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 204:
+                    return message.Response;
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Delete an SingletonResources2. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="parentName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="parentName"/> is null. </exception>
+        public Response Delete(string resourceGroupName, string parentName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (parentName == null)
+            {
+                throw new ArgumentNullException(nameof(parentName));
+            }
+
+            using var message = CreateDeleteRequest(resourceGroupName, parentName);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                case 204:
+                    return message.Response;
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
     }
 }
