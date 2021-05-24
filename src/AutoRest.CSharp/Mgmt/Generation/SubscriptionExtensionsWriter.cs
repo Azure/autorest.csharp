@@ -221,9 +221,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceOperation.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceOperation.Type.Name}\" /> object.");
-            using (writer.Scope($"public {resourceOperation.Type} Get{StringExtensions.Pluralization(resourceOperation.Type.Name)}()"))
+            using (writer.Scope($"public static {resourceOperation.Type} Get{StringExtensions.Pluralization(resourceOperation.Type.Name)}(this {typeof(SubscriptionOperations)} subscriptionOperations)"))
             {
-                writer.Line($"return new {resourceOperation.Type.Name}(this);");
+                writer.Line($"return new {resourceOperation.Type.Name}(subscriptionOperations);");
             }
             writer.LineRaw("#endregion");
             writer.Line();

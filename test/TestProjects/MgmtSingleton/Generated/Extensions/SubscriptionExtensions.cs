@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.ResourceManager.Core;
+
 namespace MgmtSingleton
 {
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
@@ -13,9 +15,9 @@ namespace MgmtSingleton
         #region Get SingletonResource3Operationes operation
         /// <summary> Gets an object representing a SingletonResource3Operations along with the instance operations that can be performed on it. </summary>
         /// <returns> Returns a <see cref="SingletonResource3Operations" /> object. </returns>
-        public SingletonResource3Operations GetSingletonResource3Operationes()
+        public static SingletonResource3Operations GetSingletonResource3Operationes(this SubscriptionOperations subscriptionOperations)
         {
-            return new SingletonResource3Operations(this);
+            return new SingletonResource3Operations(subscriptionOperations);
         }
         #endregion
     }
