@@ -1031,13 +1031,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var pathParamsLength = GetPathParameters(clientMethod).Length;
             if (pathParamsLength > 0)
             {
-                if (pathParamsLength > 1)
+                var isTenantParent = IsTenantParent(operationGroup, context);
+                if (pathParamsLength > 1 && !isTenantParent)
                 {
                     paramNameList.Add("Id.Name");
                     pathParamsLength--;
                 }
+
                 BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context);
 
+                if (!isTenantParent)
                 paramNameList.Reverse();
             }
 
@@ -1047,9 +1050,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         // This method builds the path parameters names
         private void BuildPathParameterNames(List<string> paramNames, int paramLength, string name, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
         {
-            var config = context.Configuration.MgmtConfiguration;
-            var resourceType = operationGroup.ResourceType(config);
-
             if (IsTerminalState(operationGroup, context) && paramLength == 1)
             {
                 paramNames.Add(GetParentValue(operationGroup, context));
@@ -1075,6 +1075,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 else
                     BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context);
             }
+        }
+
+        private bool IsTenantParent(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            while (!IsTerminalState(operationGroup, context))
+            {
+                var operationGroupTest = ParentOperationGroup(operationGroup, context);
+                if (operationGroupTest != null)
+                    operationGroup = operationGroupTest;
+            }
+
+            return TenantDetection.IsTenantResource(operationGroup, context.Configuration.MgmtConfiguration);
         }
 
         private static OperationGroup? ParentOperationGroup(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
@@ -1111,7 +1123,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 case ResourceTypeBuilder.Subscriptions:
                     return "Id.SubscriptionId";
                 case ResourceTypeBuilder.Locations:
-                    return "Id.Tenant";
+                    return "Id.Location";
                 case ResourceTypeBuilder.Tenant:
                     return "Id.Name";
                 default:

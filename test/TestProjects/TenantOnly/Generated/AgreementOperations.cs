@@ -47,7 +47,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetAsync(Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -64,7 +64,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.Name, Id.Name, null, cancellationToken);
+                var response = RestClient.Get(Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -83,7 +83,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await RestClient.GetAsync(Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -102,7 +102,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.Name, Id.Name, expand, cancellationToken);
+                var response = RestClient.Get(Id.Parent.Name, Id.Name, expand, cancellationToken);
                 return Response.FromValue(new Agreement(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

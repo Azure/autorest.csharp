@@ -18,14 +18,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_valueCache.TryGetValue(operationGroup, out result))
                 return result;
 
-            if (config.OperationGroupIsExtension.Contains(operationGroup.Key))
-            {
-                result = true;
-            }
-            else
-            {
-                result = IsExtension(operationGroup, config);
-            }
+            result = config.OperationGroupIsExtension.Contains(operationGroup.Key) || IsExtension(operationGroup, config);
+
             _valueCache.TryAdd(operationGroup, result);
             return result;
         }
