@@ -223,9 +223,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
 
                 // write update method
-                WriteAddTagMethod(writer, resource, updateMethod, context);
-                WriteSetTagsMethod(writer, resource, updateMethod, context);
-                WriteRemoveTagMethod(writer, resource, updateMethod, context);
+                WriteAddTagMethod(writer, resourceOperation, updateMethod, context);
+                WriteSetTagsMethod(writer, resourceOperation, updateMethod, context);
+                WriteRemoveTagMethod(writer, resourceOperation, updateMethod, context);
                 clientMethodsList.Add(updateMethod);
             }
 
@@ -374,20 +374,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteAddTagMethod(CodeWriter writer, Resource resource, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        private void WriteAddTagMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteAddTag(writer, resource, clientMethod, context, true);
-            WriteAddTag(writer, resource, clientMethod, context, false);
+            WriteAddTag(writer, resourceOperation, clientMethod, context, true);
+            WriteAddTag(writer, resourceOperation, clientMethod, context, false);
 
-            WriteStartAddTag(writer, resource, clientMethod, context, true);
-            WriteStartAddTag(writer, resource, clientMethod, context, false);
+            WriteStartAddTag(writer, resourceOperation, clientMethod, context, true);
+            WriteStartAddTag(writer, resourceOperation, clientMethod, context, false);
         }
 
-        private void WriteAddTag(CodeWriter writer, Resource resource, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteAddTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
 
+            var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
@@ -395,8 +396,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Append($"public {asyncText} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
-                var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{CreateMethodName("AddTag", async)}", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.AddTag", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var operation = new CodeWriterDeclaration("operation");
@@ -427,7 +427,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteStartAddTag(CodeWriter writer, Resource resource, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteStartAddTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             Debug.Assert(clientMethod.Operation != null);
             writer.Line();
@@ -448,8 +448,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
 
                 writer.Line();
-                var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
-                Diagnostic diagnostic = new Diagnostic($"{ resourceOperation.Type.Name}.{CreateMethodName("StartAddTag", async)}", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{ resourceOperation.Type.Name}.StartAddTag", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var updateParameterType = GetNonPathParameters(clientMethod).FirstOrDefault().Type;
@@ -475,20 +474,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteSetTagsMethod(CodeWriter writer, Resource resource, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        private void WriteSetTagsMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteSetTags(writer, resource, clientMethod, context, true);
-            WriteSetTags(writer, resource, clientMethod, context, false);
+            WriteSetTags(writer, resourceOperation, clientMethod, context, true);
+            WriteSetTags(writer, resourceOperation, clientMethod, context, false);
 
-            WriteStartSetTags(writer, resource, clientMethod, context, true);
-            WriteStartSetTags(writer, resource, clientMethod, context, false);
+            WriteStartSetTags(writer, resourceOperation, clientMethod, context, true);
+            WriteStartSetTags(writer, resourceOperation, clientMethod, context, false);
         }
 
-        private void WriteSetTags(CodeWriter writer, Resource resource, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteSetTags(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
 
+            var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
@@ -496,8 +496,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Append($"public {asyncText} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
-                var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{CreateMethodName("SetTags", async)}", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.SetTags", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var operation = new CodeWriterDeclaration("operation");
@@ -528,7 +527,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteStartSetTags(CodeWriter writer, Resource resource, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteStartSetTags(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             Debug.Assert(clientMethod.Operation != null);
             writer.Line();
@@ -549,8 +548,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 writer.Line();
 
-                var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{CreateMethodName("StartSetTags", async)}", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.StartSetTags", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var updateParameterType = GetNonPathParameters(clientMethod).FirstOrDefault().Type;
@@ -573,20 +571,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteRemoveTagMethod(CodeWriter writer, Resource resource, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
+        private void WriteRemoveTagMethod(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context)
         {
-            WriteRemoveTag(writer, resource, clientMethod, context, true);
-            WriteRemoveTag(writer, resource, clientMethod, context, false);
+            WriteRemoveTag(writer, resourceOperation, clientMethod, context, true);
+            WriteRemoveTag(writer, resourceOperation, clientMethod, context, false);
 
-            WriteStartRemoveTag(writer, resource, clientMethod, context, true);
-            WriteStartRemoveTag(writer, resource, clientMethod, context, false);
+            WriteStartRemoveTag(writer, resourceOperation, clientMethod, context, true);
+            WriteStartRemoveTag(writer, resourceOperation, clientMethod, context, false);
         }
 
-        private void WriteRemoveTag(CodeWriter writer, Resource resource, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteRemoveTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
             writer.WriteXmlDocumentationInheritDoc();
 
+            var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
@@ -594,8 +593,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Append($"public {asyncText} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
-                var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{CreateMethodName("RemoveTag", async)}", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.RemoveTag", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var operation = new CodeWriterDeclaration("operation");
@@ -626,7 +624,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteStartRemoveTag(CodeWriter writer, Resource resource, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteStartRemoveTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             Debug.Assert(clientMethod.Operation != null);
             writer.Line();
@@ -647,8 +645,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 writer.Line();
 
-                var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{CreateMethodName("StartRemoveTag", async)}", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.StartRemoveTag", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var updateParameterType = GetNonPathParameters(clientMethod).FirstOrDefault().Type;
@@ -698,7 +695,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var parameters = pathParamNames.ToList();
             parameters.Add("patchable");
-            WriteStartLROResponse(writer, clientMethod, resourceOperation, context, response, parameters.ToArray());
+            WriteStartLROResponse(writer, clientMethod, context, response, parameters.ToArray());
         }
 
         private void WriteLRO(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
@@ -744,7 +741,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.WriteParameterNullChecks(nonPathParameters);
 
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{CreateMethodName($"Start{clientMethod.Name}", async)}", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{clientMethod.Name}", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var operation = new CodeWriterDeclaration("operation");
@@ -819,7 +816,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.WriteParameterNullChecks(nonPathParameters);
 
-                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.{CreateMethodName($"Start{clientMethod.Name}", async)}", Array.Empty<DiagnosticAttribute>());
+                Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.Start{clientMethod.Name}", Array.Empty<DiagnosticAttribute>());
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     var response = new CodeWriterDeclaration("response");
@@ -842,13 +839,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                     writer.Line($";");
 
-                    WriteStartLROResponse(writer, clientMethod, resourceOperation, context, response, parameterNames);
+                    WriteStartLROResponse(writer, clientMethod, context, response, parameterNames);
                 });
                 writer.Line();
             }
         }
 
-        private void WriteStartLROResponse(CodeWriter writer, RestClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, string[] parameterNames)
+        private void WriteStartLROResponse(CodeWriter writer, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, CodeWriterDeclaration response, string[] parameterNames)
         {
             Debug.Assert(clientMethod.Operation != null);
 
@@ -1041,7 +1038,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context);
 
                 if (!isTenantParent)
-                paramNameList.Reverse();
+                    paramNameList.Reverse();
             }
 
             return paramNameList.ToArray();

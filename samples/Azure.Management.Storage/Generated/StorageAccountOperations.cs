@@ -133,7 +133,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.Delete");
             scope.Start();
             try
             {
@@ -151,7 +151,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.Delete");
             scope.Start();
             try
             {
@@ -169,7 +169,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDelete");
             scope.Start();
             try
             {
@@ -204,7 +204,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         public async Task<Response<StorageAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.AddTag");
             scope.Start();
             try
             {
@@ -243,7 +243,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -290,7 +290,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         public async Task<Response<StorageAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.SetTags");
             scope.Start();
             try
             {
@@ -329,7 +329,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -372,7 +372,7 @@ namespace Azure.Management.Storage
         /// <inheritdoc />
         public async Task<Response<StorageAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -411,7 +411,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRemoveTag");
             scope.Start();
             try
             {
@@ -718,7 +718,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> FailoverAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailoverAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.Failover");
             scope.Start();
             try
             {
@@ -736,7 +736,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Failover(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailover");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.Failover");
             scope.Start();
             try
             {
@@ -754,7 +754,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartFailoverAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailoverAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailover");
             scope.Start();
             try
             {
@@ -797,7 +797,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRestoreBlobRangesAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RestoreBlobRanges");
             scope.Start();
             try
             {
@@ -822,7 +822,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRestoreBlobRanges");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RestoreBlobRanges");
             scope.Start();
             try
             {
@@ -847,7 +847,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRestoreBlobRangesAsync");
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRestoreBlobRanges");
             scope.Start();
             try
             {

@@ -93,7 +93,7 @@ namespace ResourceIdentifierChooser
         /// <inheritdoc />
         public async Task<Response<SubscriptionLevelResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.AddTag");
             scope.Start();
             try
             {
@@ -132,7 +132,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -181,7 +181,7 @@ namespace ResourceIdentifierChooser
         /// <inheritdoc />
         public async Task<Response<SubscriptionLevelResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.SetTags");
             scope.Start();
             try
             {
@@ -220,7 +220,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -265,7 +265,7 @@ namespace ResourceIdentifierChooser
         /// <inheritdoc />
         public async Task<Response<SubscriptionLevelResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -304,7 +304,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceOperations.StartRemoveTag");
             scope.Start();
             try
             {

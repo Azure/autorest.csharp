@@ -94,7 +94,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.Delete");
             scope.Start();
             try
             {
@@ -112,7 +112,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.Delete");
             scope.Start();
             try
             {
@@ -130,7 +130,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.StartDelete");
             scope.Start();
             try
             {

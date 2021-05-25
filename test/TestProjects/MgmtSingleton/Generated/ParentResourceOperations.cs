@@ -93,7 +93,7 @@ namespace MgmtSingleton
         /// <inheritdoc />
         public async Task<Response<ParentResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.AddTag");
             scope.Start();
             try
             {
@@ -132,7 +132,7 @@ namespace MgmtSingleton
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -181,7 +181,7 @@ namespace MgmtSingleton
         /// <inheritdoc />
         public async Task<Response<ParentResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.SetTags");
             scope.Start();
             try
             {
@@ -220,7 +220,7 @@ namespace MgmtSingleton
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -265,7 +265,7 @@ namespace MgmtSingleton
         /// <inheritdoc />
         public async Task<Response<ParentResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -304,7 +304,7 @@ namespace MgmtSingleton
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.StartRemoveTag");
             scope.Start();
             try
             {

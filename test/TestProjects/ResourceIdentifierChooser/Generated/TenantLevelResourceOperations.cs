@@ -94,7 +94,7 @@ namespace ResourceIdentifierChooser
         /// <inheritdoc />
         public async Task<Response<TenantLevelResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.AddTag");
             scope.Start();
             try
             {
@@ -133,7 +133,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -182,7 +182,7 @@ namespace ResourceIdentifierChooser
         /// <inheritdoc />
         public async Task<Response<TenantLevelResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.SetTags");
             scope.Start();
             try
             {
@@ -221,7 +221,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -266,7 +266,7 @@ namespace ResourceIdentifierChooser
         /// <inheritdoc />
         public async Task<Response<TenantLevelResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -305,7 +305,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceOperations.StartRemoveTag");
             scope.Start();
             try
             {

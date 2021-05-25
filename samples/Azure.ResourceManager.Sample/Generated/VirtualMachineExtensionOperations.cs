@@ -132,7 +132,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Delete");
             scope.Start();
             try
             {
@@ -150,7 +150,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.Delete");
             scope.Start();
             try
             {
@@ -168,7 +168,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartDelete");
             scope.Start();
             try
             {
@@ -203,7 +203,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<VirtualMachineExtension>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.AddTag");
             scope.Start();
             try
             {
@@ -242,7 +242,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -289,7 +289,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<VirtualMachineExtension>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.SetTags");
             scope.Start();
             try
             {
@@ -328,7 +328,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -371,7 +371,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<VirtualMachineExtension>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -410,7 +410,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.StartRemoveTag");
             scope.Start();
             try
             {

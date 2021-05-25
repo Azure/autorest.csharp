@@ -93,7 +93,7 @@ namespace SupersetInheritance
         /// <inheritdoc />
         public async Task<Response<SupersetModel4>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.AddTag");
             scope.Start();
             try
             {
@@ -132,7 +132,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.StartAddTag");
             scope.Start();
             try
             {
@@ -181,7 +181,7 @@ namespace SupersetInheritance
         /// <inheritdoc />
         public async Task<Response<SupersetModel4>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.SetTags");
             scope.Start();
             try
             {
@@ -220,7 +220,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.StartSetTags");
             scope.Start();
             try
             {
@@ -265,7 +265,7 @@ namespace SupersetInheritance
         /// <inheritdoc />
         public async Task<Response<SupersetModel4>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.RemoveTag");
             scope.Start();
             try
             {
@@ -304,7 +304,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.StartRemoveTag");
             scope.Start();
             try
             {

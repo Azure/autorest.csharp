@@ -93,7 +93,7 @@ namespace ExactMatchInheritance
         /// <inheritdoc />
         public async Task<Response<ExactMatchModel5>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.AddTag");
             scope.Start();
             try
             {
@@ -132,7 +132,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.StartAddTag");
             scope.Start();
             try
             {
@@ -181,7 +181,7 @@ namespace ExactMatchInheritance
         /// <inheritdoc />
         public async Task<Response<ExactMatchModel5>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.SetTags");
             scope.Start();
             try
             {
@@ -220,7 +220,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.StartSetTags");
             scope.Start();
             try
             {
@@ -265,7 +265,7 @@ namespace ExactMatchInheritance
         /// <inheritdoc />
         public async Task<Response<ExactMatchModel5>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.RemoveTag");
             scope.Start();
             try
             {
@@ -304,7 +304,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel5Operations.StartRemoveTag");
             scope.Start();
             try
             {

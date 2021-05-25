@@ -132,7 +132,7 @@ namespace TenantOnly
         /// <inheritdoc />
         public async Task<Response<BillingAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.AddTag");
             scope.Start();
             try
             {
@@ -171,7 +171,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -220,7 +220,7 @@ namespace TenantOnly
         /// <inheritdoc />
         public async Task<Response<BillingAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.SetTags");
             scope.Start();
             try
             {
@@ -259,7 +259,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -304,7 +304,7 @@ namespace TenantOnly
         /// <inheritdoc />
         public async Task<Response<BillingAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -343,7 +343,7 @@ namespace TenantOnly
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountOperations.StartRemoveTag");
             scope.Start();
             try
             {

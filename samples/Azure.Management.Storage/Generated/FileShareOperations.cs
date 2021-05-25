@@ -95,7 +95,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileShareOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileShareOperations.Delete");
             scope.Start();
             try
             {
@@ -113,7 +113,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileShareOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("FileShareOperations.Delete");
             scope.Start();
             try
             {
@@ -131,7 +131,7 @@ namespace Azure.Management.Storage
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("FileShareOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("FileShareOperations.StartDelete");
             scope.Start();
             try
             {

@@ -93,7 +93,7 @@ namespace ResourceIdentifierChooser
         /// <inheritdoc />
         public async Task<Response<ResourceGroupResource>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.AddTag");
             scope.Start();
             try
             {
@@ -132,7 +132,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -181,7 +181,7 @@ namespace ResourceIdentifierChooser
         /// <inheritdoc />
         public async Task<Response<ResourceGroupResource>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.SetTags");
             scope.Start();
             try
             {
@@ -220,7 +220,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -265,7 +265,7 @@ namespace ResourceIdentifierChooser
         /// <inheritdoc />
         public async Task<Response<ResourceGroupResource>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -304,7 +304,7 @@ namespace ResourceIdentifierChooser
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceOperations.StartRemoveTag");
             scope.Start();
             try
             {

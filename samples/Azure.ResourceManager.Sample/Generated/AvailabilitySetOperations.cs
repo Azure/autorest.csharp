@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.Delete");
             scope.Start();
             try
             {
@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.Delete");
             scope.Start();
             try
             {
@@ -130,7 +130,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartDelete");
             scope.Start();
             try
             {
@@ -165,7 +165,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<AvailabilitySet>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.AddTag");
             scope.Start();
             try
             {
@@ -204,7 +204,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -251,7 +251,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<AvailabilitySet>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.SetTags");
             scope.Start();
             try
             {
@@ -290,7 +290,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -333,7 +333,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<AvailabilitySet>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -372,7 +372,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartRemoveTag");
             scope.Start();
             try
             {

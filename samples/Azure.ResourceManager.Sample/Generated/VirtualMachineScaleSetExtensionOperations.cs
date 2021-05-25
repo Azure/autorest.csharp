@@ -133,7 +133,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.Delete");
             scope.Start();
             try
             {
@@ -151,7 +151,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.Delete");
             scope.Start();
             try
             {
@@ -169,7 +169,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.StartDelete");
             scope.Start();
             try
             {
@@ -212,7 +212,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(extensionParameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.StartUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.Update");
             scope.Start();
             try
             {
@@ -237,7 +237,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(extensionParameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.StartUpdate");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.Update");
             scope.Start();
             try
             {
@@ -262,7 +262,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(extensionParameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.StartUpdateAsync");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineScaleSetExtensionOperations.StartUpdate");
             scope.Start();
             try
             {

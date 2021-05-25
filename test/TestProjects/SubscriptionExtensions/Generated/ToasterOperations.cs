@@ -94,7 +94,7 @@ namespace SubscriptionExtensions
         /// <inheritdoc />
         public async Task<Response<Toaster>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.AddTag");
             scope.Start();
             try
             {
@@ -133,7 +133,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -182,7 +182,7 @@ namespace SubscriptionExtensions
         /// <inheritdoc />
         public async Task<Response<Toaster>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.SetTags");
             scope.Start();
             try
             {
@@ -221,7 +221,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -266,7 +266,7 @@ namespace SubscriptionExtensions
         /// <inheritdoc />
         public async Task<Response<Toaster>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -305,7 +305,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ToasterOperations.StartRemoveTag");
             scope.Start();
             try
             {

@@ -132,7 +132,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageOperations.Delete");
             scope.Start();
             try
             {
@@ -150,7 +150,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("ImageOperations.Delete");
             scope.Start();
             try
             {
@@ -168,7 +168,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartDelete");
             scope.Start();
             try
             {
@@ -203,7 +203,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<Image>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageOperations.AddTag");
             scope.Start();
             try
             {
@@ -242,7 +242,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -289,7 +289,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<Image>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageOperations.SetTags");
             scope.Start();
             try
             {
@@ -328,7 +328,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -371,7 +371,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<Image>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ImageOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -410,7 +410,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("ImageOperations.StartRemoveTag");
             scope.Start();
             try
             {

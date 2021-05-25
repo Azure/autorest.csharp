@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.Delete");
             scope.Start();
             try
             {
@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.Delete");
             scope.Start();
             try
             {
@@ -130,7 +130,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartDelete");
             scope.Start();
             try
             {
@@ -165,7 +165,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<SshPublicKey>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.AddTag");
             scope.Start();
             try
             {
@@ -204,7 +204,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -251,7 +251,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<SshPublicKey>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.SetTags");
             scope.Start();
             try
             {
@@ -290,7 +290,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -333,7 +333,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<SshPublicKey>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -372,7 +372,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("SshPublicKeyOperations.StartRemoveTag");
             scope.Start();
             try
             {

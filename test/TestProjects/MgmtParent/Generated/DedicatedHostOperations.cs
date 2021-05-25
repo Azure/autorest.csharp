@@ -94,7 +94,7 @@ namespace MgmtParent
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.Delete");
             scope.Start();
             try
             {
@@ -112,7 +112,7 @@ namespace MgmtParent
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.Delete");
             scope.Start();
             try
             {
@@ -130,7 +130,7 @@ namespace MgmtParent
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartDelete");
             scope.Start();
             try
             {
@@ -165,7 +165,7 @@ namespace MgmtParent
         /// <inheritdoc />
         public async Task<Response<DedicatedHost>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.AddTag");
             scope.Start();
             try
             {
@@ -204,7 +204,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -251,7 +251,7 @@ namespace MgmtParent
         /// <inheritdoc />
         public async Task<Response<DedicatedHost>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.SetTags");
             scope.Start();
             try
             {
@@ -290,7 +290,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -333,7 +333,7 @@ namespace MgmtParent
         /// <inheritdoc />
         public async Task<Response<DedicatedHost>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -372,7 +372,7 @@ namespace MgmtParent
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostOperations.StartRemoveTag");
             scope.Start();
             try
             {

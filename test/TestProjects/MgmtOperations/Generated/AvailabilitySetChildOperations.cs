@@ -94,7 +94,7 @@ namespace MgmtOperations
         /// <inheritdoc />
         public async Task<Response<AvailabilitySetChild>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.AddTag");
             scope.Start();
             try
             {
@@ -133,7 +133,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -182,7 +182,7 @@ namespace MgmtOperations
         /// <inheritdoc />
         public async Task<Response<AvailabilitySetChild>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.SetTags");
             scope.Start();
             try
             {
@@ -221,7 +221,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -266,7 +266,7 @@ namespace MgmtOperations
         /// <inheritdoc />
         public async Task<Response<AvailabilitySetChild>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -305,7 +305,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildOperations.StartRemoveTag");
             scope.Start();
             try
             {

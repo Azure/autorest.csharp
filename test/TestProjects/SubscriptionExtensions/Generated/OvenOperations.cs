@@ -94,7 +94,7 @@ namespace SubscriptionExtensions
         /// <inheritdoc />
         public async Task<Response<Oven>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.AddTag");
             scope.Start();
             try
             {
@@ -133,7 +133,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -182,7 +182,7 @@ namespace SubscriptionExtensions
         /// <inheritdoc />
         public async Task<Response<Oven>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.SetTags");
             scope.Start();
             try
             {
@@ -221,7 +221,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -266,7 +266,7 @@ namespace SubscriptionExtensions
         /// <inheritdoc />
         public async Task<Response<Oven>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("OvenOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -305,7 +305,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartRemoveTag");
             scope.Start();
             try
             {

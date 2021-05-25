@@ -94,7 +94,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.Delete");
             scope.Start();
             try
             {
@@ -112,7 +112,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartDelete");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.Delete");
             scope.Start();
             try
             {
@@ -130,7 +130,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartDeleteAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartDelete");
             scope.Start();
             try
             {
@@ -165,7 +165,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<DedicatedHostGroup>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.AddTag");
             scope.Start();
             try
             {
@@ -204,7 +204,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -251,7 +251,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<DedicatedHostGroup>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.SetTags");
             scope.Start();
             try
             {
@@ -290,7 +290,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -333,7 +333,7 @@ namespace Azure.ResourceManager.Sample
         /// <inheritdoc />
         public async Task<Response<DedicatedHostGroup>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -372,7 +372,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("DedicatedHostGroupOperations.StartRemoveTag");
             scope.Start();
             try
             {

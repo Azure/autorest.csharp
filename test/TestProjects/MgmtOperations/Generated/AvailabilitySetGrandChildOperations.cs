@@ -94,7 +94,7 @@ namespace MgmtOperations
         /// <inheritdoc />
         public async Task<Response<AvailabilitySetGrandChild>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.AddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.AddTag");
             scope.Start();
             try
             {
@@ -133,7 +133,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.StartAddTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.StartAddTag");
             scope.Start();
             try
             {
@@ -182,7 +182,7 @@ namespace MgmtOperations
         /// <inheritdoc />
         public async Task<Response<AvailabilitySetGrandChild>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.SetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.SetTags");
             scope.Start();
             try
             {
@@ -221,7 +221,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.StartSetTagsAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.StartSetTags");
             scope.Start();
             try
             {
@@ -266,7 +266,7 @@ namespace MgmtOperations
         /// <inheritdoc />
         public async Task<Response<AvailabilitySetGrandChild>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.RemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -305,7 +305,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.StartRemoveTagAsync");
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetGrandChildOperations.StartRemoveTag");
             scope.Start();
             try
             {
