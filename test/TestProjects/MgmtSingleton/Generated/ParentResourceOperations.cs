@@ -61,6 +61,15 @@ namespace MgmtSingleton
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
         }
 
+        #region Get SingletonResourceOperationss operation
+        /// <summary> Gets an object representing a SingletonResourceOperations along with the instance operations that can be performed on it. </summary>
+        /// <returns> Returns a <see cref="SingletonResourceOperations" /> object. </returns>
+        public SingletonResourceOperations GetSingletonResourceOperationss()
+        {
+            return new SingletonResourceOperations(this);
+        }
+        #endregion
+
         #region Get SingletonResource2Operationss operation
         /// <summary> Gets an object representing a SingletonResource2Operations along with the instance operations that can be performed on it. </summary>
         /// <returns> Returns a <see cref="SingletonResource2Operations" /> object. </returns>

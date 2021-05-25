@@ -13,7 +13,7 @@ operation-group-to-resource-type:
   SingletonResources: Microsoft.Billing/parentResources/singletonResources
   SingletonResources2: Microsoft.Billing/parentResources/singletonResources2
 operation-group-to-parent:
-  SingletonResources: ParentResources
+  SingletonResources: Microsoft.Billing/parentResources
 operation-group-to-resource:
   SingletonResources: SingletonResource
   SingletonResources2: SingletonResource2
