@@ -6,10 +6,7 @@
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
   ],
-  "AzureArm": false,
-  "PublicClients": true,
-  "ModelNamespace": true,
-  "HeadAsBoolean": false,
-  "SkipCSProjPackageReference": true,
-  "LowLevelClient": true
+  "public-clients": true,
+  "skip-csproj-packagereference": true,
+  "low-level-client": true
 }
