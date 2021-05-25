@@ -134,7 +134,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateSetServicePropertiesRequest(string resourceGroupName, string accountName, CorsRules cors, DeleteRetentionPolicy shareDeleteRetentionPolicy)
+        internal HttpMessage CreateSetServicePropertiesRequest(string resourceGroupName, string accountName, FileServiceData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -153,13 +153,8 @@ namespace Azure.Management.Storage
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new FileServiceData()
-            {
-                Cors = cors,
-                ShareDeleteRetentionPolicy = shareDeleteRetentionPolicy
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
             return message;
         }
@@ -167,11 +162,10 @@ namespace Azure.Management.Storage
         /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
-        /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
+        /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<FileServiceData>> SetServicePropertiesAsync(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<FileServiceData>> SetServicePropertiesAsync(string resourceGroupName, string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -181,8 +175,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreateSetServicePropertiesRequest(resourceGroupName, accountName, cors, shareDeleteRetentionPolicy);
+            using var message = CreateSetServicePropertiesRequest(resourceGroupName, accountName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -201,11 +199,10 @@ namespace Azure.Management.Storage
         /// <summary> Sets the properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </summary>
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="cors"> Specifies CORS rules for the File service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the File service. </param>
-        /// <param name="shareDeleteRetentionPolicy"> The file service properties for share soft delete. </param>
+        /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<FileServiceData> SetServiceProperties(string resourceGroupName, string accountName, CorsRules cors = null, DeleteRetentionPolicy shareDeleteRetentionPolicy = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<FileServiceData> SetServiceProperties(string resourceGroupName, string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -215,8 +212,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreateSetServicePropertiesRequest(resourceGroupName, accountName, cors, shareDeleteRetentionPolicy);
+            using var message = CreateSetServicePropertiesRequest(resourceGroupName, accountName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

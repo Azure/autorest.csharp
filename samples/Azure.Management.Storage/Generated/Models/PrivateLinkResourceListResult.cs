@@ -16,17 +16,17 @@ namespace Azure.Management.Storage.Models
         /// <summary> Initializes a new instance of PrivateLinkResourceListResult. </summary>
         internal PrivateLinkResourceListResult()
         {
-            Value = new ChangeTrackingList<PrivateLinkResourceData>();
+            Value = new ChangeTrackingList<PrivateLinkResource>();
         }
 
         /// <summary> Initializes a new instance of PrivateLinkResourceListResult. </summary>
         /// <param name="value"> Array of private link resources. </param>
-        internal PrivateLinkResourceListResult(IReadOnlyList<PrivateLinkResourceData> value)
+        internal PrivateLinkResourceListResult(IReadOnlyList<PrivateLinkResource> value)
         {
             Value = value;
         }
 
         /// <summary> Array of private link resources. </summary>
-        public IReadOnlyList<PrivateLinkResourceData> Value { get; }
+        public IReadOnlyList<PrivateLinkResource> Value { get; }
     }
 }

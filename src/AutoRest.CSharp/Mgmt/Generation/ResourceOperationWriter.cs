@@ -329,7 +329,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                                 }
                                 else
                                 {
-                                    // initialize with null and set the default later
                                     writer.Append($"null, ");
                                 }
                             }

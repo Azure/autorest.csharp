@@ -10,7 +10,7 @@ using System;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The deleted share to be restored. </summary>
-    internal partial class DeletedShare
+    public partial class DeletedShare
     {
         /// <summary> Initializes a new instance of DeletedShare. </summary>
         /// <param name="deletedShareName"> Required. Identify the name of the deleted share that will be restored. </param>

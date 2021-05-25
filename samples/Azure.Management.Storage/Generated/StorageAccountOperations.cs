@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core.Pipeline;
+using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -17,6 +19,10 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific StorageAccount. </summary>
     public partial class StorageAccountOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, StorageAccount>
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
+        internal StorageAccountsRestOperations RestClient { get; }
+
         /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class for mocking. </summary>
         protected StorageAccountOperations()
         {
@@ -27,21 +33,92 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected internal StorageAccountOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = Pipeline;
+            RestClient = new StorageAccountsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override Response<StorageAccount> Get(CancellationToken cancellationToken = default)
+        public async override Task<Response<StorageAccount>> GetAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.GetProperties");
+            scope.Start();
+            try
+            {
+                var response = await RestClient.GetPropertiesAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
-        public override Task<Response<StorageAccount>> GetAsync(CancellationToken cancellationToken = default)
+        public override Response<StorageAccount> Get(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.GetProperties");
+            scope.Start();
+            try
+            {
+                var response = RestClient.GetProperties(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
+        /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<StorageAccount>> GetAsync(StorageAccountExpand? expand, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.GetProperties");
+            scope.Start();
+            try
+            {
+                var response = await RestClient.GetPropertiesAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Returns the properties for the specified storage account including but not limited to name, SKU name, location, and account status. The ListKeys operation should be used to retrieve storage keys. </summary>
+        /// <param name="expand"> May be used to expand the properties within account&apos;s properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<StorageAccount> Get(StorageAccountExpand? expand, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.GetProperties");
+            scope.Start();
+            try
+            {
+                var response = RestClient.GetProperties(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Lists all available geo-locations. </summary>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        {
+            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Lists all available geo-locations. </summary>
@@ -49,16 +126,764 @@ namespace Azure.Management.Storage
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
-            return ListAvailableLocations(ResourceType);
+            return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of location that may take multiple service requests to iterate over. </returns>
-        /// <exception cref="InvalidOperationException"> The default subscription id is null. </exception>
-        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        /// <summary> Deletes a storage account in Microsoft Azure. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDeleteAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes a storage account in Microsoft Azure. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response Delete(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDelete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes a storage account in Microsoft Azure. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDeleteAsync");
+            scope.Start();
+            try
+            {
+                var response = await RestClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return new StorageAccountsDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes a storage account in Microsoft Azure. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation StartDelete(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = RestClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return new StorageAccountsDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task<Response<StorageAccount>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.AddTagAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartAddTagAsync(key, value, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public Response<StorageAccount> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.AddTag");
+            scope.Start();
+            try
+            {
+                var operation = StartAddTag(key, value, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task<StorageAccountsUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartAddTagAsync");
+            scope.Start();
+            try
+            {
+                var resource = GetResource();
+                var patchable = new StorageAccountUpdateParameters();
+                patchable.Tags.ReplaceWith(resource.Data.Tags);
+                patchable.Tags[key] = value;
+                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new StorageAccountsUpdateOperation(this, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public StorageAccountsUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartAddTag");
+            scope.Start();
+            try
+            {
+                var resource = GetResource();
+                var patchable = new StorageAccountUpdateParameters();
+                patchable.Tags.ReplaceWith(resource.Data.Tags);
+                patchable.Tags[key] = value;
+                var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                return new StorageAccountsUpdateOperation(this, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task<Response<StorageAccount>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.SetTagsAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartSetTagsAsync(tags, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public Response<StorageAccount> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.SetTags");
+            scope.Start();
+            try
+            {
+                var operation = StartSetTags(tags, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task<StorageAccountsUpdateOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartSetTagsAsync");
+            scope.Start();
+            try
+            {
+                var patchable = new StorageAccountUpdateParameters();
+                patchable.Tags.ReplaceWith(tags);
+                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new StorageAccountsUpdateOperation(this, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public StorageAccountsUpdateOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartSetTags");
+            scope.Start();
+            try
+            {
+                var patchable = new StorageAccountUpdateParameters();
+                patchable.Tags.ReplaceWith(tags);
+                var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                return new StorageAccountsUpdateOperation(this, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task<Response<StorageAccount>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RemoveTagAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartRemoveTagAsync(key, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public Response<StorageAccount> RemoveTag(string key, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RemoveTag");
+            scope.Start();
+            try
+            {
+                var operation = StartRemoveTag(key, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task<StorageAccountsUpdateOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRemoveTagAsync");
+            scope.Start();
+            try
+            {
+                var resource = GetResource();
+                var patchable = new StorageAccountUpdateParameters();
+                patchable.Tags.ReplaceWith(resource.Data.Tags);
+                patchable.Tags.Remove(key);
+                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new StorageAccountsUpdateOperation(this, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        public StorageAccountsUpdateOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRemoveTag");
+            scope.Start();
+            try
+            {
+                var resource = GetResource();
+                var patchable = new StorageAccountUpdateParameters();
+                patchable.Tags.ReplaceWith(resource.Data.Tags);
+                patchable.Tags.Remove(key);
+                var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                return new StorageAccountsUpdateOperation(this, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+        /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
+        public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityAsync(StorageAccountCheckNameAvailabilityParameters accountName, CancellationToken cancellationToken = default)
+        {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.CheckNameAvailability");
+            scope.Start();
+            try
+            {
+                return await RestClient.CheckNameAvailabilityAsync(accountName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Checks that the storage account name is valid and is not already in use. </summary>
+        /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
+        public virtual Response<CheckNameAvailabilityResult> CheckNameAvailability(StorageAccountCheckNameAvailabilityParameters accountName, CancellationToken cancellationToken = default)
+        {
+            if (accountName == null)
+            {
+                throw new ArgumentNullException(nameof(accountName));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.CheckNameAvailability");
+            scope.Start();
+            try
+            {
+                return RestClient.CheckNameAvailability(accountName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<StorageAccountListKeysResult>> ListKeysAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListKeys");
+            scope.Start();
+            try
+            {
+                return await RestClient.ListKeysAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<StorageAccountListKeysResult> ListKeys(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListKeys");
+            scope.Start();
+            try
+            {
+                return RestClient.ListKeys(Id.ResourceGroupName, Id.Name, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Regenerates one of the access keys or Kerberos keys for the specified storage account. </summary>
+        /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="regenerateKey"/> is null. </exception>
+        public virtual async Task<Response<StorageAccountListKeysResult>> RegenerateKeyAsync(StorageAccountRegenerateKeyParameters regenerateKey, CancellationToken cancellationToken = default)
+        {
+            if (regenerateKey == null)
+            {
+                throw new ArgumentNullException(nameof(regenerateKey));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RegenerateKey");
+            scope.Start();
+            try
+            {
+                return await RestClient.RegenerateKeyAsync(Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Regenerates one of the access keys or Kerberos keys for the specified storage account. </summary>
+        /// <param name="regenerateKey"> Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="regenerateKey"/> is null. </exception>
+        public virtual Response<StorageAccountListKeysResult> RegenerateKey(StorageAccountRegenerateKeyParameters regenerateKey, CancellationToken cancellationToken = default)
+        {
+            if (regenerateKey == null)
+            {
+                throw new ArgumentNullException(nameof(regenerateKey));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RegenerateKey");
+            scope.Start();
+            try
+            {
+                return RestClient.RegenerateKey(Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List SAS credentials of a storage account. </summary>
+        /// <param name="parameters"> The parameters to provide to list SAS credentials for the storage account. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual async Task<Response<ListAccountSasResponse>> ListAccountSASAsync(AccountSasParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListAccountSAS");
+            scope.Start();
+            try
+            {
+                return await RestClient.ListAccountSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List SAS credentials of a storage account. </summary>
+        /// <param name="parameters"> The parameters to provide to list SAS credentials for the storage account. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<ListAccountSasResponse> ListAccountSAS(AccountSasParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListAccountSAS");
+            scope.Start();
+            try
+            {
+                return RestClient.ListAccountSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List service SAS credentials of a specific resource. </summary>
+        /// <param name="parameters"> The parameters to provide to list service SAS credentials. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual async Task<Response<ListServiceSasResponse>> ListServiceSASAsync(ServiceSasParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListServiceSAS");
+            scope.Start();
+            try
+            {
+                return await RestClient.ListServiceSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List service SAS credentials of a specific resource. </summary>
+        /// <param name="parameters"> The parameters to provide to list service SAS credentials. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<ListServiceSasResponse> ListServiceSAS(ServiceSasParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListServiceSAS");
+            scope.Start();
+            try
+            {
+                return RestClient.ListServiceSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Revoke user delegation keys. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> RevokeUserDelegationKeysAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RevokeUserDelegationKeys");
+            scope.Start();
+            try
+            {
+                return await RestClient.RevokeUserDelegationKeysAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Revoke user delegation keys. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response RevokeUserDelegationKeys(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.RevokeUserDelegationKeys");
+            scope.Start();
+            try
+            {
+                return RestClient.RevokeUserDelegationKeys(Id.ResourceGroupName, Id.Name, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> FailoverAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailoverAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartFailoverAsync(cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response Failover(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailover");
+            scope.Start();
+            try
+            {
+                var operation = StartFailover(cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Operation> StartFailoverAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailoverAsync");
+            scope.Start();
+            try
+            {
+                var response = await RestClient.FailoverAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return new StorageAccountsFailoverOperation(_clientDiagnostics, _pipeline, RestClient.CreateFailoverRequest(Id.ResourceGroupName, Id.Name).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation StartFailover(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartFailover");
+            scope.Start();
+            try
+            {
+                var response = RestClient.Failover(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return new StorageAccountsFailoverOperation(_clientDiagnostics, _pipeline, RestClient.CreateFailoverRequest(Id.ResourceGroupName, Id.Name).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Restore blobs in the specified blob ranges. </summary>
+        /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<BlobRestoreStatus>> RestoreBlobRangesAsync(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRestoreBlobRangesAsync");
+            scope.Start();
+            try
+            {
+                var operation = await StartRestoreBlobRangesAsync(parameters, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Restore blobs in the specified blob ranges. </summary>
+        /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public Response<BlobRestoreStatus> RestoreBlobRanges(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRestoreBlobRanges");
+            scope.Start();
+            try
+            {
+                var operation = StartRestoreBlobRanges(parameters, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Restore blobs in the specified blob ranges. </summary>
+        /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public async Task<StorageAccountsRestoreBlobRangesOperation> StartRestoreBlobRangesAsync(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRestoreBlobRangesAsync");
+            scope.Start();
+            try
+            {
+                var response = await RestClient.RestoreBlobRangesAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, _pipeline, RestClient.CreateRestoreBlobRangesRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Restore blobs in the specified blob ranges. </summary>
+        /// <param name="parameters"> The parameters to provide for restore blob ranges. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public StorageAccountsRestoreBlobRangesOperation StartRestoreBlobRanges(BlobRestoreParameters parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.StartRestoreBlobRanges");
+            scope.Start();
+            try
+            {
+                var response = RestClient.RestoreBlobRanges(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, _pipeline, RestClient.CreateRestoreBlobRangesRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets a list of BlobService in the StorageAccount. </summary>
@@ -101,27 +926,6 @@ namespace Azure.Management.Storage
         public PrivateEndpointConnectionContainer GetPrivateEndpointConnections()
         {
             return new PrivateEndpointConnectionContainer(this);
-        }
-
-        /// <summary> Gets a list of PrivateLinkResource in the StorageAccount. </summary>
-        /// <returns> An object representing collection of PrivateLinkResources and their operations over a StorageAccount. </returns>
-        public PrivateLinkResourceContainer GetPrivateLinkResources()
-        {
-            return new PrivateLinkResourceContainer(this);
-        }
-
-        /// <summary> Gets a list of ObjectReplicationPolicy in the StorageAccount. </summary>
-        /// <returns> An object representing collection of ObjectReplicationPoliies and their operations over a StorageAccount. </returns>
-        public ObjectReplicationPolicyContainer GetObjectReplicationPoliies()
-        {
-            return new ObjectReplicationPolicyContainer(this);
-        }
-
-        /// <summary> Gets a list of EncryptionScope in the StorageAccount. </summary>
-        /// <returns> An object representing collection of EncryptionScopes and their operations over a StorageAccount. </returns>
-        public EncryptionScopeContainer GetEncryptionScopes()
-        {
-            return new EncryptionScopeContainer(this);
         }
     }
 }
