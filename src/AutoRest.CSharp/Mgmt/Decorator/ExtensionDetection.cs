@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System.Collections.Concurrent;
+using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
 
@@ -17,7 +18,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (_valueCache.TryGetValue(operationGroup, out result))
                 return result;
 
-            result = IsExtension(operationGroup, config);
+            if (config.OperationGroupIsExtension.Contains(operationGroup.Key))
+            {
+                result = true;
+            }
+            else
+            {
+                result = IsExtension(operationGroup, config);
+            }
             _valueCache.TryAdd(operationGroup, result);
             return result;
         }

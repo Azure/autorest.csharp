@@ -40,5 +40,8 @@
   "OperationGroupIsTuple": [
     "VirtualMachineImages",
     "VirtualMachineExtensionImages"
+  ],
+  "OperationGroupIsExtension": [
+    "VirtualMachineScaleSetVMExtensions"
   ]
 }

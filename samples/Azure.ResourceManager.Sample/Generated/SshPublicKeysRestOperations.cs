@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -277,7 +276,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string sshPublicKeyName, IDictionary<string, string> tags, string publicKey)
+        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string sshPublicKeyName, SshPublicKeyUpdateResource parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -294,20 +293,8 @@ namespace Azure.ResourceManager.Sample
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            SshPublicKeyUpdateResource sshPublicKeyUpdateResource = new SshPublicKeyUpdateResource()
-            {
-                PublicKey = publicKey
-            };
-            if (tags != null)
-            {
-                foreach (var value in tags)
-                {
-                    sshPublicKeyUpdateResource.Tags.Add(value);
-                }
-            }
-            var model = sshPublicKeyUpdateResource;
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
             return message;
         }
@@ -315,11 +302,10 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Updates a new SSH public key resource. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="tags"> Resource tags. </param>
-        /// <param name="publicKey"> SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format. </param>
+        /// <param name="parameters"> Parameters supplied to update the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        public async Task<Response<SshPublicKeyData>> UpdateAsync(string resourceGroupName, string sshPublicKeyName, IDictionary<string, string> tags = null, string publicKey = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="sshPublicKeyName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<SshPublicKeyData>> UpdateAsync(string resourceGroupName, string sshPublicKeyName, SshPublicKeyUpdateResource parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -329,8 +315,12 @@ namespace Azure.ResourceManager.Sample
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreateUpdateRequest(resourceGroupName, sshPublicKeyName, tags, publicKey);
+            using var message = CreateUpdateRequest(resourceGroupName, sshPublicKeyName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -349,11 +339,10 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Updates a new SSH public key resource. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="tags"> Resource tags. </param>
-        /// <param name="publicKey"> SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format. </param>
+        /// <param name="parameters"> Parameters supplied to update the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        public Response<SshPublicKeyData> Update(string resourceGroupName, string sshPublicKeyName, IDictionary<string, string> tags = null, string publicKey = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="sshPublicKeyName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<SshPublicKeyData> Update(string resourceGroupName, string sshPublicKeyName, SshPublicKeyUpdateResource parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -363,8 +352,12 @@ namespace Azure.ResourceManager.Sample
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreateUpdateRequest(resourceGroupName, sshPublicKeyName, tags, publicKey);
+            using var message = CreateUpdateRequest(resourceGroupName, sshPublicKeyName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

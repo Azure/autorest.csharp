@@ -150,7 +150,7 @@ namespace MgmtParent
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string hostGroupName, string hostName, string updator)
+        internal HttpMessage CreateUpdateRequest(string resourceGroupName, string hostGroupName, string hostName, DedicatedHostUpdate parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -169,12 +169,8 @@ namespace MgmtParent
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new DedicatedHostUpdate()
-            {
-                Updator = updator
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(parameters);
             request.Content = content;
             return message;
         }
@@ -183,10 +179,10 @@ namespace MgmtParent
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="hostName"> The name of the dedicated host . </param>
-        /// <param name="updator"> specifies the updator. </param>
+        /// <param name="parameters"> Parameters supplied to the Update Dedicated Host operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="hostName"/> is null. </exception>
-        public async Task<Response> UpdateAsync(string resourceGroupName, string hostGroupName, string hostName, string updator = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, <paramref name="hostName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response> UpdateAsync(string resourceGroupName, string hostGroupName, string hostName, DedicatedHostUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -200,8 +196,12 @@ namespace MgmtParent
             {
                 throw new ArgumentNullException(nameof(hostName));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreateUpdateRequest(resourceGroupName, hostGroupName, hostName, updator);
+            using var message = CreateUpdateRequest(resourceGroupName, hostGroupName, hostName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -216,10 +216,10 @@ namespace MgmtParent
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="hostName"> The name of the dedicated host . </param>
-        /// <param name="updator"> specifies the updator. </param>
+        /// <param name="parameters"> Parameters supplied to the Update Dedicated Host operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, or <paramref name="hostName"/> is null. </exception>
-        public Response Update(string resourceGroupName, string hostGroupName, string hostName, string updator = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="hostGroupName"/>, <paramref name="hostName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response Update(string resourceGroupName, string hostGroupName, string hostName, DedicatedHostUpdate parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -233,8 +233,12 @@ namespace MgmtParent
             {
                 throw new ArgumentNullException(nameof(hostName));
             }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
-            using var message = CreateUpdateRequest(resourceGroupName, hostGroupName, hostName, updator);
+            using var message = CreateUpdateRequest(resourceGroupName, hostGroupName, hostName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

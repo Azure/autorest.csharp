@@ -1462,7 +1462,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        internal HttpMessage CreateReimageRequest(string resourceGroupName, string vmName, bool? tempDisk)
+        internal HttpMessage CreateReimageRequest(string resourceGroupName, string vmName, VirtualMachineReimageParameters parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1478,24 +1478,23 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/reimage", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
-            request.Headers.Add("Content-Type", "application/json");
-            var model = new VirtualMachineReimageParameters()
+            if (parameters != null)
             {
-                TempDisk = tempDisk
-            };
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
-            request.Content = content;
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(parameters);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Reimages the virtual machine which has an ephemeral OS disk back to its initial state. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="tempDisk"> Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk. </param>
+        /// <param name="parameters"> Parameters supplied to the Reimage Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
-        public async Task<Response> ReimageAsync(string resourceGroupName, string vmName, bool? tempDisk = null, CancellationToken cancellationToken = default)
+        public async Task<Response> ReimageAsync(string resourceGroupName, string vmName, VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1506,7 +1505,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var message = CreateReimageRequest(resourceGroupName, vmName, tempDisk);
+            using var message = CreateReimageRequest(resourceGroupName, vmName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1521,10 +1520,10 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Reimages the virtual machine which has an ephemeral OS disk back to its initial state. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="tempDisk"> Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk. </param>
+        /// <param name="parameters"> Parameters supplied to the Reimage Virtual Machine operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="vmName"/> is null. </exception>
-        public Response Reimage(string resourceGroupName, string vmName, bool? tempDisk = null, CancellationToken cancellationToken = default)
+        public Response Reimage(string resourceGroupName, string vmName, VirtualMachineReimageParameters parameters = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1535,7 +1534,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(vmName));
             }
 
-            using var message = CreateReimageRequest(resourceGroupName, vmName, tempDisk);
+            using var message = CreateReimageRequest(resourceGroupName, vmName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
