@@ -565,5 +565,12 @@ namespace MgmtOperations
                 throw;
             }
         }
+
+        /// <summary> Gets a list of AvailabilitySetChild in the AvailabilitySet. </summary>
+        /// <returns> An object representing collection of AvailabilitySetChilds and their operations over a AvailabilitySet. </returns>
+        public AvailabilitySetChildContainer GetAvailabilitySetChilds()
+        {
+            return new AvailabilitySetChildContainer(this);
+        }
     }
 }
