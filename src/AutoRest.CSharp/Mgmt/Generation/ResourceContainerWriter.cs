@@ -481,57 +481,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListVariants()
         {
-            //WriteList(async: false);
-            //WriteList(async: true);
             WriteListAsGenericResource(async: false);
             WriteListAsGenericResource(async: true);
         }
-
-        //private void WriteList(bool async)
-        //{
-        //    // if we find a proper *list* method that supports *paging*,
-        //    // we should generate paging logic (PageableHelpers.CreateEnumerable)
-        //    // else we just call ListAsGenericResource to get the list then call Get on every resource
-        //    PagingMethod list = FindListPagingMethod();
-
-        //    var methodName = CreateMethodName("List", async);
-        //    _writer.Line();
-        //    _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type.Name}\" /> for this resource group.");
-        //    _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-        //    _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-        //    string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{_resource.Type.Name}\" /> that may take multiple service requests to iterate over.";
-        //    _writer.WriteXmlDocumentation("returns", returnText);
-        //    var returnType = async
-        //        ? new CSharpType(typeof(AsyncPageable<>), _resource.Type)
-        //        : new CSharpType(typeof(Pageable<>), _resource.Type);
-        //    var asyncText = async ? "Async" : string.Empty;
-        //    using (_writer.Scope($"public {returnType} {methodName}(int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
-        //    {
-        //        if (list != null)
-        //        {
-        //            WriteContainerPagingOperation(list, async);
-        //        }
-        //        else
-        //        {
-        //            _writer.Line($"var results = ListAsGenericResource{asyncText}(null, top, cancellationToken);");
-        //            _writer.Append($"return new PhWrapping{asyncText}Pageable<GenericResource, {_resource.Type}>(");
-        //            _writer.Line($"results, genericResource => new {_resourceOperation.Type}(genericResource, genericResource.Id as {_resourceOperation.ResourceIdentifierType}).Get().Value);");
-        //        }
-        //    }
-
-        //    _writer.Line();
-        //    _writer.WriteXmlDocumentationSummary($"Filters the list of <see cref=\"{_resource.Type.Name}\" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group.");
-        //    _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
-        //    _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-        //    _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
-        //    _writer.WriteXmlDocumentation("returns", returnText);
-        //    using (_writer.Scope($"public {returnType} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
-        //    {
-        //        _writer.Line($"var results = ListAsGenericResource{asyncText}(null, top, cancellationToken);");
-        //        _writer.Append($"return new PhWrapping{asyncText}Pageable<GenericResource, {_resource.Type}>(");
-        //        _writer.Line($"results, genericResource => new {_resourceOperation.Type}(genericResource, genericResource.Id as {_resourceOperation.ResourceIdentifierType}).Get().Value);");
-        //    }
-        //}
 
         private PagingMethod FindListPagingMethod()
         {
