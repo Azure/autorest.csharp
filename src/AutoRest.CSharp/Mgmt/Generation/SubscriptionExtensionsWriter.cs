@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
@@ -36,10 +37,18 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions))
                         {
-                            writer.Line($"#region {resource.Type.Name}");
-                            var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
-                            WriteGetResourceContainerMethod(writer, resourceContainer);
-                            writer.LineRaw("#endregion");
+                            if (resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
+                            {
+                                var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
+                                WriteChildSingletonGetOperationMethods(writer, resourceOperation);
+                            }
+                            else
+                            {
+                                writer.Line($"#region {resource.Type.Name}");
+                                var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
+                                WriteGetResourceContainerMethod(writer, resourceContainer);
+                                writer.LineRaw("#endregion");
+                            }
                         }
                         else
                         {
@@ -205,6 +214,20 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"{filters}.SubstringFilter = filter;");
                 writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("ListAtContext", async)}(subscription, {filters}, top, cancellationToken);");
             }
+        }
+
+        private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation resourceOperation)
+        {
+            writer.Line($"#region Get {StringExtensions.Pluralization(resourceOperation.Type.Name)} operation");
+
+            writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceOperation.Type.Name} along with the instance operations that can be performed on it.");
+            writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceOperation.Type.Name}\" /> object.");
+            using (writer.Scope($"public static {resourceOperation.Type} Get{StringExtensions.Pluralization(resourceOperation.Type.Name)}(this {typeof(SubscriptionOperations)} subscriptionOperations)"))
+            {
+                writer.Line($"return new {resourceOperation.Type.Name}(subscriptionOperations);");
+            }
+            writer.LineRaw("#endregion");
+            writer.Line();
         }
     }
 }

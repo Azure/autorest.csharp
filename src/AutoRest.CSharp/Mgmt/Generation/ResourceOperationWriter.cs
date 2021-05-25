@@ -25,6 +25,7 @@ using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 using System.Text.RegularExpressions;
 using Azure;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -258,8 +259,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         return;
                     writer.Line();
                     writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName} in the {resourceOperation.ResourceName}.");
-                    writer.WriteXmlDocumentationReturns($"An object representing collection of {Pluralization(container.ResourceName)} and their operations over a {resourceOperation.ResourceName}.");
-                    using (writer.Scope($"public {container.Type} Get{Pluralization(container.ResourceName)}()"))
+                    writer.WriteXmlDocumentationReturns($"An object representing collection of {StringExtensions.Pluralization(container.ResourceName)} and their operations over a {resourceOperation.ResourceName}.");
+                    using (writer.Scope($"public {container.Type} Get{StringExtensions.Pluralization(container.ResourceName)}()"))
                     {
                         writer.Line($"return new {container.Type}(this);");
                     }
@@ -1117,24 +1118,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     throw new Exception($"{operationGroup.Key} parent is not valid: {parentResourceType}.");
             }
         }
-
-        internal static string Pluralization(string single)
-        {
-            if (new Regex("([^aeiou])y$").IsMatch(single))
-            {
-                single = Regex.Replace(single, "([^aeiou])y$", "ie");
-            }
-            else if (new Regex("fe?$").IsMatch(single))
-            {
-                single = Regex.Replace(single, "fe?$", "ve");
-            }
-            else if (new Regex("([^aeiou]o|[sxz]|[cs]h)$").IsMatch(single))
-            {
-                single = Regex.Replace(single, "([^aeiou]o|[sxz]|[cs]h)$", "e");
-            }
-            return single + "s";
-        }
-
 
         private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation currentOperation, BuildContext<MgmtOutputLibrary> context)
         {
