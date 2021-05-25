@@ -8,7 +8,7 @@
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> The VMScaleSetConvertToSinglePlacementGroupInput. </summary>
-    internal partial class VMScaleSetConvertToSinglePlacementGroupInput
+    public partial class VMScaleSetConvertToSinglePlacementGroupInput
     {
         /// <summary> Initializes a new instance of VMScaleSetConvertToSinglePlacementGroupInput. </summary>
         public VMScaleSetConvertToSinglePlacementGroupInput()

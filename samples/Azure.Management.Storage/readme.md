@@ -11,7 +11,6 @@ input-file:
   - https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/file.json
   - https://github.com/Azure/azure-rest-api-specs/blob/e606243e5297312781dd7dbfd7ab76d2329cc088/specification/storage/resource-manager/Microsoft.Storage/stable/2019-06-01/storage.json
 namespace: Azure.Management.Storage
-payload-flattening-threshold: 2
 
 modelerfour:
   lenient-model-deduplication: true
@@ -25,13 +24,13 @@ operation-group-to-resource:
    Operations: NonResource
    Skus: NonResource
    Usages: NonResource
-   PrivateLinkResources: PrivateLinkResource
+   PrivateLinkResources: NonResource
    StorageAccounts: StorageAccount
 operation-group-to-parent:
     BlobContainers: Microsoft.Storage/storageAccounts
     FileShares: Microsoft.Storage/storageAccounts
     Usages: subscriptions
-    StorageAccounts: any
+    StorageAccounts: resourceGroups
 directive:
   - rename-model:
       from: Operation

@@ -13,6 +13,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public MgmtConfiguration(
             string[] operationGroupIsTuple,
+            string[] operationGroupIsExtension,
             string[] singletonResource,
             JsonElement? operationGroupToResourceType = default,
             JsonElement? operationGroupToResource = default,
@@ -23,6 +24,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             OperationGroupToParent = !IsValidJsonElement(operationGroupToParent) ? new Dictionary<string, string>() : JsonSerializer.Deserialize<Dictionary<string, string>>(operationGroupToParent.ToString());
             SingletonResource = singletonResource;
             OperationGroupIsTuple = operationGroupIsTuple;
+            OperationGroupIsExtension = operationGroupIsExtension;
         }
 
         public IReadOnlyDictionary<string, string> OperationGroupToResourceType { get; }
@@ -30,11 +32,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public IReadOnlyDictionary<string, string> OperationGroupToParent { get; }
         public string[] SingletonResource { get; }
         public string[] OperationGroupIsTuple { get; }
+        public string[] OperationGroupIsExtension { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
         {
             return new MgmtConfiguration(
                 autoRest.GetValue<string[]?>("operation-group-is-tuple").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                autoRest.GetValue<string[]?>("operation-group-is-extension").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<string[]?>("singleton-resource").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource-type").GetAwaiter().GetResult(),
                 autoRest.GetValue<JsonElement?>("operation-group-to-resource").GetAwaiter().GetResult(),
@@ -48,11 +52,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             WriteNonEmptySettings(writer, nameof(OperationGroupToParent), OperationGroupToParent);
             WriteNonEmptySettings(writer, nameof(SingletonResource), SingletonResource);
             WriteNonEmptySettings(writer, nameof(OperationGroupIsTuple), OperationGroupIsTuple);
+            WriteNonEmptySettings(writer, nameof(OperationGroupIsExtension), OperationGroupIsExtension);
         }
 
         internal static MgmtConfiguration LoadConfiguration(JsonElement root)
         {
             root.TryGetProperty(nameof(OperationGroupIsTuple), out var operationGroupIsTuple);
+            root.TryGetProperty(nameof(OperationGroupIsExtension), out var operationGroupIsExtension);
             root.TryGetProperty(nameof(SingletonResource), out var singletonResource);
             root.TryGetProperty(nameof(OperationGroupToResourceType), out var operationGroupToResourceType);
             root.TryGetProperty(nameof(OperationGroupToResource), out var operationGroupToResource);
@@ -62,12 +68,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 ? operationGroupIsTuple.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : new string[0];
 
+            var operationGroupIsExtensionList = operationGroupIsExtension.ValueKind == JsonValueKind.Array
+                ? operationGroupIsExtension.EnumerateArray().Select(t => t.ToString()).ToArray()
+                : new string[0];
+
             var singletonList = singletonResource.ValueKind == JsonValueKind.Array
                 ? singletonResource.EnumerateArray().Select(t => t.ToString()).ToArray()
                 : new string[0];
 
             return new MgmtConfiguration(
                 operationGroupIsTupleList,
+                operationGroupIsExtensionList,
                 singletonList,
                 operationGroupToResourceType,
                 operationGroupToResource,
