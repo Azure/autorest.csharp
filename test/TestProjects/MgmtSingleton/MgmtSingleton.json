@@ -547,12 +547,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/singletonResources3/default": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default": {
             "get": {
                 "tags": [
-                    "SingletonResources3"
+                    "SubscriptionParentSingleton"
                 ],
-                "operationId": "SingletonResources3_GetDefault",
+                "operationId": "SubscriptionParentSingleton_GetDefault",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -565,16 +565,16 @@
                     "200": {
                         "description": "OK. The request has succeeded.",
                         "schema": {
-                            "$ref": "#/definitions/SingletonResource3"
+                            "$ref": "#/definitions/SubscriptionParentSingleton"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "SingletonResources3"
+                    "SubscriptionParentSingleton"
                 ],
-                "operationId": "SingletonResources3_CreateOrUpdate",
+                "operationId": "SubscriptionParentSingleton_CreateOrUpdate",
                 "parameters": [
                     {
                         "$ref": "#/parameters/SubscriptionIdParameter"
@@ -587,7 +587,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/SingletonResource3"
+                            "$ref": "#/definitions/SubscriptionParentSingleton"
                         }
                     }
                 ],
@@ -595,16 +595,16 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SingletonResource3"
+                            "$ref": "#/definitions/SubscriptionParentSingleton"
                         }
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "SingletonResources3"
+                    "SubscriptionParentSingleton"
                 ],
-                "operationId": "SingletonResources3_PostTest",
+                "operationId": "SubscriptionParentSingleton_PostTest",
                 "description": "The operation to do POST request.",
                 "parameters": [
                     {
@@ -633,17 +633,17 @@
             },
             "patch": {
                 "tags": [
-                    "SingletonResources3"
+                    "SubscriptionParentSingleton"
                 ],
-                "operationId": "SingletonResources3_Update",
-                "description": "Update an SingletonResources3.",
+                "operationId": "SubscriptionParentSingleton_Update",
+                "description": "Update an SubscriptionParentSingleton.",
                 "parameters": [
                     {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/SingletonResource3"
+                            "$ref": "#/definitions/SubscriptionParentSingleton"
                         }
                     },
                     {
@@ -657,17 +657,17 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SingletonResource3"
+                            "$ref": "#/definitions/SubscriptionParentSingleton"
                         }
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "SingletonResources3"
+                    "SubscriptionParentSingleton"
                 ],
-                "operationId": "SingletonResources3_Delete",
-                "description": "Delete an SingletonResources3.",
+                "operationId": "SubscriptionParentSingleton_Delete",
+                "description": "Delete a SubscriptionParentSingleton.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -686,12 +686,12 @@
                 }
             }
         },
-        "/providers/Microsoft.Billing/singletonResources4/default": {
+        "/providers/Microsoft.Billing/TenantParentSingleton/default": {
             "get": {
                 "tags": [
-                    "SingletonResources4"
+                    "TenantParentSingleton"
                 ],
-                "operationId": "SingletonResources4_GetDefault",
+                "operationId": "TenantParentSingleton_GetDefault",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -701,16 +701,16 @@
                     "200": {
                         "description": "OK. The request has succeeded.",
                         "schema": {
-                            "$ref": "#/definitions/SingletonResource4"
+                            "$ref": "#/definitions/TenantParentSingleton"
                         }
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "SingletonResources4"
+                    "TenantParentSingleton"
                 ],
-                "operationId": "SingletonResources4_CreateOrUpdate",
+                "operationId": "TenantParentSingleton_CreateOrUpdate",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -720,7 +720,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/SingletonResource4"
+                            "$ref": "#/definitions/TenantParentSingleton"
                         }
                     }
                 ],
@@ -728,16 +728,16 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SingletonResource4"
+                            "$ref": "#/definitions/TenantParentSingleton"
                         }
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "SingletonResources4"
+                    "TenantParentSingleton"
                 ],
-                "operationId": "SingletonResources4_PostTest",
+                "operationId": "TenantParentSingleton_PostTest",
                 "description": "The operation to do POST request.",
                 "parameters": [
                     {
@@ -763,17 +763,17 @@
             },
             "patch": {
                 "tags": [
-                    "SingletonResources4"
+                    "TenantParentSingleton"
                 ],
-                "operationId": "SingletonResources4_Update",
-                "description": "Update an SingletonResources4.",
+                "operationId": "TenantParentSingleton_Update",
+                "description": "Update an TenantParentSingleton.",
                 "parameters": [
                     {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/SingletonResource4"
+                            "$ref": "#/definitions/TenantParentSingleton"
                         }
                     },
                     {
@@ -784,17 +784,17 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/SingletonResource4"
+                            "$ref": "#/definitions/TenantParentSingleton"
                         }
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "SingletonResources4"
+                    "TenantParentSingleton"
                 ],
-                "operationId": "SingletonResources4_Delete",
-                "description": "Delete an SingletonResources4.",
+                "operationId": "TenantParentSingleton_Delete",
+                "description": "Delete an TenantParentSingleton.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -840,7 +840,7 @@
                 }
             }
         },
-        "SingletonResource3": {
+        "SubscriptionParentSingleton": {
             "description": "A singleton resource.",
             "type": "object",
             "allOf": [
@@ -854,7 +854,7 @@
                 }
             }
         },
-        "SingletonResource4": {
+        "TenantParentSingleton": {
             "description": "A singleton resource.",
             "type": "object",
             "allOf": [

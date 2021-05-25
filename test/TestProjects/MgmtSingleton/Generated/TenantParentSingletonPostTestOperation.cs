@@ -15,18 +15,18 @@ using Azure.Core.Pipeline;
 namespace MgmtSingleton
 {
     /// <summary> The operation to do POST request. </summary>
-    public partial class SingletonResources3PostTestOperation : Operation
+    public partial class TenantParentSingletonPostTestOperation : Operation
     {
         private readonly OperationInternals _operation;
 
-        /// <summary> Initializes a new instance of SingletonResources3PostTestOperation for mocking. </summary>
-        protected SingletonResources3PostTestOperation()
+        /// <summary> Initializes a new instance of TenantParentSingletonPostTestOperation for mocking. </summary>
+        protected TenantParentSingletonPostTestOperation()
         {
         }
 
-        internal SingletonResources3PostTestOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal TenantParentSingletonPostTestOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "SingletonResources3PostTestOperation");
+            _operation = new OperationInternals(clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "TenantParentSingletonPostTestOperation");
         }
 
         /// <inheritdoc />

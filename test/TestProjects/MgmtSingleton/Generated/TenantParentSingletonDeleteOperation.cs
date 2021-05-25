@@ -13,17 +13,17 @@ using Azure.Core;
 
 namespace MgmtSingleton
 {
-    /// <summary> Delete an SingletonResources3. </summary>
-    public partial class SingletonResources3DeleteOperation : Operation
+    /// <summary> Delete an TenantParentSingleton. </summary>
+    public partial class TenantParentSingletonDeleteOperation : Operation
     {
         private readonly OperationOrResponseInternals _operation;
 
-        /// <summary> Initializes a new instance of SingletonResources3DeleteOperation for mocking. </summary>
-        protected SingletonResources3DeleteOperation()
+        /// <summary> Initializes a new instance of TenantParentSingletonDeleteOperation for mocking. </summary>
+        protected TenantParentSingletonDeleteOperation()
         {
         }
 
-        internal SingletonResources3DeleteOperation(Response response)
+        internal TenantParentSingletonDeleteOperation(Response response)
         {
             _operation = new OperationOrResponseInternals(response);
         }

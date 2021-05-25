@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtSingleton
 {
-    public partial class SingletonResource4Data : IUtf8JsonSerializable
+    public partial class TenantParentSingletonData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -24,7 +24,7 @@ namespace MgmtSingleton
             writer.WriteEndObject();
         }
 
-        internal static SingletonResource4Data DeserializeSingletonResource4Data(JsonElement element)
+        internal static TenantParentSingletonData DeserializeTenantParentSingletonData(JsonElement element)
         {
             Optional<string> @new = default;
             TenantResourceIdentifier id = default;
@@ -53,7 +53,7 @@ namespace MgmtSingleton
                     continue;
                 }
             }
-            return new SingletonResource4Data(id, name, type, @new.Value);
+            return new TenantParentSingletonData(id, name, type, @new.Value);
         }
     }
 }

@@ -15,27 +15,34 @@ using Azure.Core.Pipeline;
 
 namespace MgmtSingleton
 {
-    internal partial class SingletonResources4RestOperations
+    internal partial class SubscriptionParentSingletonRestOperations
     {
+        private string subscriptionId;
         private Uri endpoint;
         private string apiVersion;
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of SingletonResources4RestOperations. </summary>
+        /// <summary> Initializes a new instance of SubscriptionParentSingletonRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public SingletonResources4RestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "2020-06-01")
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
+        public SubscriptionParentSingletonRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
             endpoint ??= new Uri("https://management.azure.com");
             if (apiVersion == null)
             {
                 throw new ArgumentNullException(nameof(apiVersion));
             }
 
+            this.subscriptionId = subscriptionId;
             this.endpoint = endpoint;
             this.apiVersion = apiVersion;
             _clientDiagnostics = clientDiagnostics;
@@ -49,7 +56,9 @@ namespace MgmtSingleton
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
-            uri.AppendPath("/providers/Microsoft.Billing/singletonResources4/default", false);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Billing/SubscriptionParentSingleton/default", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -57,7 +66,7 @@ namespace MgmtSingleton
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response<SingletonResource4Data>> GetDefaultAsync(CancellationToken cancellationToken = default)
+        public async Task<Response<SubscriptionParentSingletonData>> GetDefaultAsync(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDefaultRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
@@ -65,9 +74,9 @@ namespace MgmtSingleton
             {
                 case 200:
                     {
-                        SingletonResource4Data value = default;
+                        SubscriptionParentSingletonData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SingletonResource4Data.DeserializeSingletonResource4Data(document.RootElement);
+                        value = SubscriptionParentSingletonData.DeserializeSubscriptionParentSingletonData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -76,7 +85,7 @@ namespace MgmtSingleton
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response<SingletonResource4Data> GetDefault(CancellationToken cancellationToken = default)
+        public Response<SubscriptionParentSingletonData> GetDefault(CancellationToken cancellationToken = default)
         {
             using var message = CreateGetDefaultRequest();
             _pipeline.Send(message, cancellationToken);
@@ -84,9 +93,9 @@ namespace MgmtSingleton
             {
                 case 200:
                     {
-                        SingletonResource4Data value = default;
+                        SubscriptionParentSingletonData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SingletonResource4Data.DeserializeSingletonResource4Data(document.RootElement);
+                        value = SubscriptionParentSingletonData.DeserializeSubscriptionParentSingletonData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -94,14 +103,16 @@ namespace MgmtSingleton
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(SingletonResource4Data parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(SubscriptionParentSingletonData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
-            uri.AppendPath("/providers/Microsoft.Billing/singletonResources4/default", false);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Billing/SubscriptionParentSingleton/default", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -112,10 +123,10 @@ namespace MgmtSingleton
             return message;
         }
 
-        /// <param name="parameters"> The SingletonResource4 to use. </param>
+        /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SingletonResource4Data>> CreateOrUpdateAsync(SingletonResource4Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SubscriptionParentSingletonData>> CreateOrUpdateAsync(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -128,9 +139,9 @@ namespace MgmtSingleton
             {
                 case 200:
                     {
-                        SingletonResource4Data value = default;
+                        SubscriptionParentSingletonData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SingletonResource4Data.DeserializeSingletonResource4Data(document.RootElement);
+                        value = SubscriptionParentSingletonData.DeserializeSubscriptionParentSingletonData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -138,10 +149,10 @@ namespace MgmtSingleton
             }
         }
 
-        /// <param name="parameters"> The SingletonResource4 to use. </param>
+        /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public Response<SingletonResource4Data> CreateOrUpdate(SingletonResource4Data parameters, CancellationToken cancellationToken = default)
+        public Response<SubscriptionParentSingletonData> CreateOrUpdate(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -154,9 +165,9 @@ namespace MgmtSingleton
             {
                 case 200:
                     {
-                        SingletonResource4Data value = default;
+                        SubscriptionParentSingletonData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SingletonResource4Data.DeserializeSingletonResource4Data(document.RootElement);
+                        value = SubscriptionParentSingletonData.DeserializeSubscriptionParentSingletonData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -171,7 +182,9 @@ namespace MgmtSingleton
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
-            uri.AppendPath("/providers/Microsoft.Billing/singletonResources4/default", false);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Billing/SubscriptionParentSingleton/default", false);
             if (postParameter != null)
             {
                 uri.AppendQuery("postParameter", postParameter.Value, true);
@@ -215,14 +228,16 @@ namespace MgmtSingleton
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(SingletonResource4Data parameters)
+        internal HttpMessage CreateUpdateRequest(SubscriptionParentSingletonData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
-            uri.AppendPath("/providers/Microsoft.Billing/singletonResources4/default", false);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Billing/SubscriptionParentSingleton/default", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -233,11 +248,11 @@ namespace MgmtSingleton
             return message;
         }
 
-        /// <summary> Update an SingletonResources4. </summary>
-        /// <param name="parameters"> The SingletonResource4 to use. </param>
+        /// <summary> Update an SubscriptionParentSingleton. </summary>
+        /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<SingletonResource4Data>> UpdateAsync(SingletonResource4Data parameters, CancellationToken cancellationToken = default)
+        public async Task<Response<SubscriptionParentSingletonData>> UpdateAsync(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -250,9 +265,9 @@ namespace MgmtSingleton
             {
                 case 200:
                     {
-                        SingletonResource4Data value = default;
+                        SubscriptionParentSingletonData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = SingletonResource4Data.DeserializeSingletonResource4Data(document.RootElement);
+                        value = SubscriptionParentSingletonData.DeserializeSubscriptionParentSingletonData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -260,11 +275,11 @@ namespace MgmtSingleton
             }
         }
 
-        /// <summary> Update an SingletonResources4. </summary>
-        /// <param name="parameters"> The SingletonResource4 to use. </param>
+        /// <summary> Update an SubscriptionParentSingleton. </summary>
+        /// <param name="parameters"> The SubscriptionParentSingleton to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public Response<SingletonResource4Data> Update(SingletonResource4Data parameters, CancellationToken cancellationToken = default)
+        public Response<SubscriptionParentSingletonData> Update(SubscriptionParentSingletonData parameters, CancellationToken cancellationToken = default)
         {
             if (parameters == null)
             {
@@ -277,9 +292,9 @@ namespace MgmtSingleton
             {
                 case 200:
                     {
-                        SingletonResource4Data value = default;
+                        SubscriptionParentSingletonData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = SingletonResource4Data.DeserializeSingletonResource4Data(document.RootElement);
+                        value = SubscriptionParentSingletonData.DeserializeSubscriptionParentSingletonData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -294,13 +309,15 @@ namespace MgmtSingleton
             request.Method = RequestMethod.Delete;
             var uri = new RawRequestUriBuilder();
             uri.Reset(endpoint);
-            uri.AppendPath("/providers/Microsoft.Billing/singletonResources4/default", false);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Billing/SubscriptionParentSingleton/default", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             return message;
         }
 
-        /// <summary> Delete an SingletonResources4. </summary>
+        /// <summary> Delete a SubscriptionParentSingleton. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
@@ -316,7 +333,7 @@ namespace MgmtSingleton
             }
         }
 
-        /// <summary> Delete an SingletonResources4. </summary>
+        /// <summary> Delete a SubscriptionParentSingleton. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response Delete(CancellationToken cancellationToken = default)
         {

@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtSingleton
 {
-    public partial class SingletonResource3Data : IUtf8JsonSerializable
+    public partial class SubscriptionParentSingletonData : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -24,7 +24,7 @@ namespace MgmtSingleton
             writer.WriteEndObject();
         }
 
-        internal static SingletonResource3Data DeserializeSingletonResource3Data(JsonElement element)
+        internal static SubscriptionParentSingletonData DeserializeSubscriptionParentSingletonData(JsonElement element)
         {
             Optional<string> @new = default;
             SubscriptionResourceIdentifier id = default;
@@ -53,7 +53,7 @@ namespace MgmtSingleton
                     continue;
                 }
             }
-            return new SingletonResource3Data(id, name, type, @new.Value);
+            return new SubscriptionParentSingletonData(id, name, type, @new.Value);
         }
     }
 }

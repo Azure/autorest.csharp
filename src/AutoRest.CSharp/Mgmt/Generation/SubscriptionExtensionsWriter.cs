@@ -35,19 +35,20 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (var resource in resources)
                     {
-                        if (!resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration)&&
-                            ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions))
+                        if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions))
                         {
-                            writer.Line($"#region {resource.Type.Name}");
-                            var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
-                            WriteGetResourceContainerMethod(writer, resourceContainer);
-                            writer.LineRaw("#endregion");
-                        }
-                        else if (resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration) &&
-                            ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions))
-                        {
-                            var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
-                            WriteChildSingletonGetOperationMethods(writer, resourceOperation);
+                            if (resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
+                            {
+                                var resourceOperation = context.Library.GetResourceOperation(resource.OperationGroup);
+                                WriteChildSingletonGetOperationMethods(writer, resourceOperation);
+                            }
+                            else
+                            {
+                                writer.Line($"#region {resource.Type.Name}");
+                                var resourceContainer = context.Library.GetResourceContainer(resource.OperationGroup);
+                                WriteGetResourceContainerMethod(writer, resourceContainer);
+                                writer.LineRaw("#endregion");
+                            }
                         }
                         else
                         {

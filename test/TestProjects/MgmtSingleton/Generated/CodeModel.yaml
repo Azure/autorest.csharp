@@ -123,7 +123,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SingletonResource3New
+          name: SubscriptionParentSingletonNew
           description: ''
       protocol: !Protocols {}
     - !StringSchema &ref_11
@@ -133,7 +133,7 @@ schemas: !Schemas
           version: '2020-06-01'
       language: !Languages 
         default:
-          name: SingletonResource4New
+          name: TenantParentSingletonNew
           description: ''
       protocol: !Protocols {}
   constants:
@@ -348,7 +348,7 @@ schemas: !Schemas
               - input
             language: !Languages 
               default:
-                name: SingletonResource3
+                name: SubscriptionParentSingleton
                 description: A singleton resource.
                 namespace: ''
             protocol: !Protocols {}
@@ -378,7 +378,7 @@ schemas: !Schemas
               - input
             language: !Languages 
               default:
-                name: SingletonResource4
+                name: TenantParentSingleton
                 description: A singleton resource.
                 namespace: ''
             protocol: !Protocols {}
@@ -1711,7 +1711,7 @@ operationGroups:
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: SingletonResources3
+    $key: SubscriptionParentSingleton
     operations:
       - !Operation 
         apiVersions:
@@ -1744,7 +1744,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/singletonResources3/default
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -1824,7 +1824,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/singletonResources3/default
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -1877,7 +1877,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/singletonResources3/default
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -1965,7 +1965,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/singletonResources3/default
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -1989,7 +1989,7 @@ operationGroups:
         language: !Languages 
           default:
             name: Update
-            description: Update an SingletonResources3.
+            description: Update an SubscriptionParentSingleton.
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -2007,7 +2007,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/singletonResources3/default
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Billing/SubscriptionParentSingleton/default
                 method: delete
                 uri: '{$host}'
         signatureParameters: []
@@ -2033,15 +2033,15 @@ operationGroups:
         language: !Languages 
           default:
             name: Delete
-            description: Delete an SingletonResources3.
+            description: Delete a SubscriptionParentSingleton.
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: SingletonResources3
+        name: SubscriptionParentSingleton
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: SingletonResources4
+    $key: TenantParentSingleton
     operations:
       - !Operation 
         apiVersions:
@@ -2073,7 +2073,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /providers/Microsoft.Billing/singletonResources4/default
+                path: /providers/Microsoft.Billing/TenantParentSingleton/default
                 method: get
                 uri: '{$host}'
         signatureParameters: []
@@ -2152,7 +2152,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /providers/Microsoft.Billing/singletonResources4/default
+                path: /providers/Microsoft.Billing/TenantParentSingleton/default
                 method: put
                 knownMediaType: json
                 mediaTypes:
@@ -2204,7 +2204,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /providers/Microsoft.Billing/singletonResources4/default
+                path: /providers/Microsoft.Billing/TenantParentSingleton/default
                 method: post
                 uri: '{$host}'
         signatureParameters:
@@ -2291,7 +2291,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /providers/Microsoft.Billing/singletonResources4/default
+                path: /providers/Microsoft.Billing/TenantParentSingleton/default
                 method: patch
                 knownMediaType: json
                 mediaTypes:
@@ -2315,7 +2315,7 @@ operationGroups:
         language: !Languages 
           default:
             name: Update
-            description: Update an SingletonResources4.
+            description: Update an TenantParentSingleton.
         protocol: !Protocols {}
       - !Operation 
         apiVersions:
@@ -2332,7 +2332,7 @@ operationGroups:
                 description: ''
             protocol: !Protocols 
               http: !HttpRequest 
-                path: /providers/Microsoft.Billing/singletonResources4/default
+                path: /providers/Microsoft.Billing/TenantParentSingleton/default
                 method: delete
                 uri: '{$host}'
         signatureParameters: []
@@ -2358,11 +2358,11 @@ operationGroups:
         language: !Languages 
           default:
             name: Delete
-            description: Delete an SingletonResources4.
+            description: Delete an TenantParentSingleton.
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: SingletonResources4
+        name: TenantParentSingleton
         description: ''
     protocol: !Protocols {}
 security: !Security 
