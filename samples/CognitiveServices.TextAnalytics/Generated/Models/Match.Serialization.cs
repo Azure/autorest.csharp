@@ -14,15 +14,15 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static Match DeserializeMatch(JsonElement element)
         {
-            double score = default;
+            double confidenceScore = default;
             string text = default;
             int offset = default;
             int length = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("score"))
+                if (property.NameEquals("confidenceScore"))
                 {
-                    score = property.Value.GetDouble();
+                    confidenceScore = property.Value.GetDouble();
                     continue;
                 }
                 if (property.NameEquals("text"))
@@ -41,7 +41,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new Match(score, text, offset, length);
+            return new Match(confidenceScore, text, offset, length);
         }
     }
 }

@@ -35,6 +35,7 @@ namespace AutoRest.CSharp.Generation.Types
             IsNullable = isNullable;
             Arguments = arguments;
             IsValueType = type.IsValueType;
+            IsPublic = type.IsPublic && arguments.All(t => t.IsPublic);
         }
 
         public CSharpType(TypeProvider implementation, string ns, string name, bool isValueType = false, bool isNullable = false, CSharpType[]? arguments = default)
@@ -46,11 +47,15 @@ namespace AutoRest.CSharp.Generation.Types
             Namespace = ns;
             if (arguments != null)
                 Arguments = arguments;
+
+            IsPublic = implementation.Declaration.Accessibility == "public"
+                && Arguments.All(t => t.IsPublic);
         }
 
         public string Namespace { get; }
         public string Name { get; }
         public bool IsValueType { get; }
+        public bool IsPublic { get; }
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
         public bool IsFrameworkType => _type != null;
         public Type FrameworkType => _type ?? throw new InvalidOperationException("Not a framework type");

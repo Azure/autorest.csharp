@@ -18,7 +18,7 @@ namespace CognitiveServices.TextAnalytics.Models
             ErrorCodeValue code = default;
             string message = default;
             Optional<string> target = default;
-            Optional<InnerError> innerError = default;
+            Optional<InnerError> innererror = default;
             Optional<IReadOnlyList<TextAnalyticsError>> details = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -37,14 +37,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     target = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("innerError"))
+                if (property.NameEquals("innererror"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    innerError = InnerError.DeserializeInnerError(property.Value);
+                    innererror = InnerError.DeserializeInnerError(property.Value);
                     continue;
                 }
                 if (property.NameEquals("details"))
@@ -63,7 +63,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new TextAnalyticsError(code, message, target.Value, innerError.Value, Optional.ToList(details));
+            return new TextAnalyticsError(code, message, target.Value, innererror.Value, Optional.ToList(details));
         }
     }
 }

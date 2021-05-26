@@ -8,7 +8,7 @@
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged. </summary>
-    internal partial class VirtualMachineReimageParameters
+    public partial class VirtualMachineReimageParameters
     {
         /// <summary> Initializes a new instance of VirtualMachineReimageParameters. </summary>
         public VirtualMachineReimageParameters()

@@ -50,7 +50,7 @@ namespace SubscriptionExtensions
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string availabilitySetName, ToasterData parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string availabilitySetName, ToasterData parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -72,16 +72,16 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Create or update an availability set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ToasterData>> CreateOrUpdateAsync(string resourceGroupName, string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<ToasterData>> CreateOrUpdateAsync(string subscriptionId, string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
+            if (subscriptionId == null)
             {
-                throw new ArgumentNullException(nameof(resourceGroupName));
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (availabilitySetName == null)
             {
@@ -92,7 +92,7 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, availabilitySetName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, availabilitySetName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -109,16 +109,16 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Create or update an availability set. </summary>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="parameters"> Parameters supplied to the Create Availability Set operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ToasterData> CreateOrUpdate(string resourceGroupName, string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="availabilitySetName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<ToasterData> CreateOrUpdate(string subscriptionId, string availabilitySetName, ToasterData parameters, CancellationToken cancellationToken = default)
         {
-            if (resourceGroupName == null)
+            if (subscriptionId == null)
             {
-                throw new ArgumentNullException(nameof(resourceGroupName));
+                throw new ArgumentNullException(nameof(subscriptionId));
             }
             if (availabilitySetName == null)
             {
@@ -129,7 +129,86 @@ namespace SubscriptionExtensions
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, availabilitySetName, parameters);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, availabilitySetName, parameters);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ToasterData value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = ToasterData.DeserializeToasterData(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateGetRequest(string subscriptionId, string availabilitySetName)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
+            uri.AppendPath(availabilitySetName, true);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="availabilitySetName"/> is null. </exception>
+        public async Task<Response<ToasterData>> GetAsync(string subscriptionId, string availabilitySetName, CancellationToken cancellationToken = default)
+        {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
+            using var message = CreateGetRequest(subscriptionId, availabilitySetName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ToasterData value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = ToasterData.DeserializeToasterData(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="subscriptionId"> The String to use. </param>
+        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="availabilitySetName"/> is null. </exception>
+        public Response<ToasterData> Get(string subscriptionId, string availabilitySetName, CancellationToken cancellationToken = default)
+        {
+            if (subscriptionId == null)
+            {
+                throw new ArgumentNullException(nameof(subscriptionId));
+            }
+            if (availabilitySetName == null)
+            {
+                throw new ArgumentNullException(nameof(availabilitySetName));
+            }
+
+            using var message = CreateGetRequest(subscriptionId, availabilitySetName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

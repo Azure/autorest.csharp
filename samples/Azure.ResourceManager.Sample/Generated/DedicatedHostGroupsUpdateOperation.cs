@@ -10,29 +10,30 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Update an dedicated host group. </summary>
-    public partial class DedicatedHostGroupsUpdateOperation : Operation<DedicatedHostGroupData>
+    public partial class DedicatedHostGroupsUpdateOperation : Operation<DedicatedHostGroup>
     {
-        private readonly OperationOrResponseInternals<DedicatedHostGroupData> _operation;
+        private readonly OperationOrResponseInternals<DedicatedHostGroup> _operation;
 
         /// <summary> Initializes a new instance of DedicatedHostGroupsUpdateOperation for mocking. </summary>
         protected DedicatedHostGroupsUpdateOperation()
         {
         }
 
-        internal DedicatedHostGroupsUpdateOperation(Response<DedicatedHostGroupData> response)
+        internal DedicatedHostGroupsUpdateOperation(ResourceOperationsBase operationsBase, Response<DedicatedHostGroupData> response)
         {
-            _operation = new OperationOrResponseInternals<DedicatedHostGroupData>(response);
+            _operation = new OperationOrResponseInternals<DedicatedHostGroup>(Response.FromValue(new DedicatedHostGroup(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override DedicatedHostGroupData Value => _operation.Value;
+        public override DedicatedHostGroup Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -50,9 +51,9 @@ namespace Azure.ResourceManager.Sample
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<DedicatedHostGroupData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<DedicatedHostGroup>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<DedicatedHostGroupData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<DedicatedHostGroup>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }

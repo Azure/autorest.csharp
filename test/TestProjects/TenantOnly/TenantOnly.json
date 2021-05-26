@@ -31,6 +31,9 @@
                         "$ref": "#/parameters/apiVersionParameter"
                     },
                     {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
                         "$ref": "#/parameters/billingAccountNameParameter"
                     },
                     {
@@ -56,7 +59,7 @@
                     }
                 }
             },
-            "patch": {
+            "put": {
                 "tags": [
                     "BillingAccounts"
                 ],
@@ -125,6 +128,9 @@
                 "parameters": [
                     {
                         "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
                     },
                     {
                         "$ref": "#/parameters/billingAccountNameParameter"

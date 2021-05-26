@@ -17,6 +17,7 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             string id = default;
             IReadOnlyList<LinkedEntity> entities = default;
+            IReadOnlyList<TextAnalyticsWarning> warnings = default;
             Optional<DocumentStatistics> statistics = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -35,6 +36,16 @@ namespace CognitiveServices.TextAnalytics.Models
                     entities = array;
                     continue;
                 }
+                if (property.NameEquals("warnings"))
+                {
+                    List<TextAnalyticsWarning> array = new List<TextAnalyticsWarning>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(TextAnalyticsWarning.DeserializeTextAnalyticsWarning(item));
+                    }
+                    warnings = array;
+                    continue;
+                }
                 if (property.NameEquals("statistics"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -46,7 +57,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new DocumentLinkedEntities(id, entities, statistics.Value);
+            return new DocumentLinkedEntities(id, entities, warnings, statistics.Value);
         }
     }
 }

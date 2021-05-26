@@ -12,9 +12,6 @@
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {
     "Operations": "Microsoft.Compute/operations",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension",
@@ -43,5 +40,8 @@
   "OperationGroupIsTuple": [
     "VirtualMachineImages",
     "VirtualMachineExtensionImages"
+  ],
+  "OperationGroupIsExtension": [
+    "VirtualMachineScaleSetVMExtensions"
   ]
 }

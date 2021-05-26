@@ -11,12 +11,5 @@
   "ModelNamespace": true,
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
-  "LowLevelClient": true,
-  "CredentialTypes": [
-    "TokenCredential"
-  ],
-  "CredentialScopes": [
-    "https://test.azure.com/.default"
-  ],
-  "CredentialHeaderName": "Your-Subscription-Key"
+  "LowLevelClient": true
 }

@@ -508,6 +508,15 @@ namespace AutoRest.CSharp.Generation.Writers
             return null;
         }
 
+        public void RemoveTrailingCharacter()
+        {
+            int? lastCharIndex = FindLastNonWhitespaceCharacterIndex();
+            if (lastCharIndex.HasValue)
+            {
+                _position = lastCharIndex.Value;
+            }
+        }
+
         public void RemoveTrailingComma()
         {
             int? lastCharIndex = FindLastNonWhitespaceCharacterIndex();
