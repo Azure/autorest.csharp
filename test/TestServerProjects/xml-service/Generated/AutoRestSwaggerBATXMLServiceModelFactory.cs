@@ -11,7 +11,7 @@ using xml_service.Models;
 
 namespace xml_service
 {
-    /// <summary> Model factory for AutoRestSwaggerBATXMLService read-only models. </summary>
+    /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestSwaggerBATXMLServiceModelFactory
     {
         /// <summary> Initializes new instance of ListContainersResponse class. </summary>

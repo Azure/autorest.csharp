@@ -10,7 +10,7 @@ using Azure.Network.Management.Interface.Models;
 
 namespace Azure.Network.Management.Interface
 {
-    /// <summary> Model factory for AzureNetworkManagementInterface read-only models. </summary>
+    /// <summary> Model factory for read-only models. </summary>
     public static partial class AzureNetworkManagementInterfaceModelFactory
     {
         /// <summary> Initializes new instance of Resource class. </summary>

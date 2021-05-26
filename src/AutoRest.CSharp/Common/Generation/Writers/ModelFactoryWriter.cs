@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Namespace(modelFactoryType.Type.Namespace))
             {
-                writer.WriteXmlDocumentationSummary($"Model factory for {modelFactoryType.DefaultClientName} read-only models.");
+                writer.WriteXmlDocumentationSummary($"Model factory for read-only models.");
                 using (writer.Scope($"{modelFactoryType.Declaration.Accessibility} static partial class {modelFactoryType.Type.Name}"))
                 {
                     foreach (var model in modelFactoryType.Models)

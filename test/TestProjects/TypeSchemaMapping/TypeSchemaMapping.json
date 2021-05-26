@@ -474,6 +474,26 @@
             },
             "x-csharp-usage": "model,input,output",
             "x-csharp-formats": "json"
+        },
+        "ModelToBeSkipped": {
+            "type": "object",
+            "properties": {
+                "ModelProperty": {
+                    "type": "string"
+                }
+            }
+        },
+        "EnumToBeSkipped": {
+            "type": "string",
+            "enum": [
+                "1",
+                "2",
+                "3"
+            ],
+            "x-ms-enum": {
+                "name": "EnumToBeSkipped",
+                "modelAsString": false
+            }
         }
     }
 }

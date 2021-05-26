@@ -9,7 +9,7 @@ using ModelWithConverterUsage.Models;
 
 namespace ModelWithConverterUsage
 {
-    /// <summary> Model factory for ModelWithConverterUsage read-only models. </summary>
+    /// <summary> Model factory for read-only models. </summary>
     public static partial class ModelWithConverterUsageModelFactory
     {
         /// <summary> Initializes new instance of OutputModel class. </summary>

@@ -9,7 +9,7 @@ using paging.Models;
 
 namespace paging
 {
-    /// <summary> Model factory for AutoRestPagingTestService read-only models. </summary>
+    /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestPagingTestServiceModelFactory
     {
         /// <summary> Initializes new instance of Product class. </summary>
