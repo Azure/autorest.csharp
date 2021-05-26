@@ -5,9 +5,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -23,6 +21,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var armResourceWriter = new ResourceWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
+            var armClientExtensionsWriter = new ArmClientExtensionsWriter();
             var mgmtLongRunningOperationWriter = new MgmtLongRunningOperationWriter();
 
             foreach (var model in context.Library.Models)
@@ -109,6 +108,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var resources = context.Library.ArmResource;
             subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context, resources);
             project.AddGeneratedFile($"Extensions/SubscriptionExtensions.cs", subscriptionExtensionsCodeWriter.ToString());
+
+            var armClientExtensionsCodeWriter = new CodeWriter();
+            armClientExtensionsWriter.WriteExtension(armClientExtensionsCodeWriter, context);
+            project.AddGeneratedFile($"Extensions/ArmClientExtensions.cs", armClientExtensionsCodeWriter.ToString());
 
             if (context.Library.RestApiOperationGroup != null)
             {

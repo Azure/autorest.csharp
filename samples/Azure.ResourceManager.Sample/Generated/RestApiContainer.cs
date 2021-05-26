@@ -5,6 +5,11 @@
 
 #nullable disable
 
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
@@ -25,7 +30,7 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of RestApiContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal RestApiContainer(ResourceOperationsBase parent) : base(parent)
+        internal RestApiContainer(ClientContext parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
@@ -33,5 +38,51 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Gets the valid resource type for this object. </summary>
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
+
+        /// <summary> Gets a list of compute operations. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="RestApi" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<RestApi> List(CancellationToken cancellationToken = default)
+        {
+            Page<RestApi> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("RestApi.List");
+                scope.Start();
+                try
+                {
+                    var response = _restClient.List(cancellationToken: cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+        }
+
+        /// <summary> Gets a list of compute operations. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="RestApi" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<RestApi> ListAsync(CancellationToken cancellationToken = default)
+        {
+            async Task<Page<RestApi>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = _clientDiagnostics.CreateScope("RestApi.List");
+                scope.Start();
+                try
+                {
+                    var response = await _restClient.ListAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+        }
     }
 }

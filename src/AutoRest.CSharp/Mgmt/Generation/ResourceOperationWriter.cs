@@ -2,10 +2,9 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
@@ -20,12 +19,11 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using System.Text.RegularExpressions;
-using Azure;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -975,38 +973,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             writer.Line();
-        }
-
-        private Parameter[] GetNonPathParameters(RestClientMethod clientMethod)
-        {
-            var pathParameters = GetPathParameters(clientMethod);
-
-            List<Parameter> nonPathParameters = new List<Parameter>();
-            foreach (Parameter parameter in clientMethod.Parameters)
-            {
-                if (!pathParameters.Contains(parameter))
-                {
-                    nonPathParameters.Add(parameter);
-                }
-            }
-
-            return nonPathParameters.ToArray();
-        }
-
-        private Parameter[] GetPathParameters(RestClientMethod clientMethod)
-        {
-            var pathParameters = clientMethod.Request.PathSegments.Where(m => m.Value.IsConstant == false && m.IsRaw == false);
-            List<Parameter> pathParametersList = new List<Parameter>();
-            foreach (var parameter in clientMethod.Parameters)
-            {
-                if (pathParameters.Any(p => p.Value.Reference.Type.Name == parameter.Type.Name &&
-                p.Value.Reference.Name == parameter.Name))
-                {
-                    pathParametersList.Add(parameter);
-                }
-            }
-
-            return pathParametersList.ToArray();
         }
 
         // This method returns an array of path and non-path parameters name

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -115,6 +116,38 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                 writer.Line($"{scopeVariable}.Failed(e);");
                 writer.Line($"throw;");
             }
+        }
+
+        protected Parameter[] GetNonPathParameters(RestClientMethod clientMethod)
+        {
+            var pathParameters = GetPathParameters(clientMethod);
+
+            List<Parameter> nonPathParameters = new List<Parameter>();
+            foreach (Parameter parameter in clientMethod.Parameters)
+            {
+                if (!pathParameters.Contains(parameter))
+                {
+                    nonPathParameters.Add(parameter);
+                }
+            }
+
+            return nonPathParameters.ToArray();
+        }
+
+        protected Parameter[] GetPathParameters(RestClientMethod clientMethod)
+        {
+            var pathParameters = clientMethod.Request.PathSegments.Where(m => m.Value.IsConstant == false && m.IsRaw == false);
+            List<Parameter> pathParametersList = new List<Parameter>();
+            foreach (var parameter in clientMethod.Parameters)
+            {
+                if (pathParameters.Any(p => p.Value.Reference.Type.Name == parameter.Type.Name &&
+                p.Value.Reference.Name == parameter.Name))
+                {
+                    pathParametersList.Add(parameter);
+                }
+            }
+
+            return pathParametersList.ToArray();
         }
     }
 }
