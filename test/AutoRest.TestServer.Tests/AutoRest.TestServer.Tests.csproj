@@ -25,9 +25,6 @@
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
     <Compile Include="../TestProjects/**/*.cs" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
-    <Compile Remove="..\TestProjects\TypeSchemaMapping\Generated\Models\EnumToBeSkipped.cs" />
-    <Compile Remove="..\TestProjects\TypeSchemaMapping\Generated\Models\EnumToBeSkipped.Serialization.cs" />
-    <Compile Remove="..\TestProjects\TypeSchemaMapping\Generated\Models\ModelToBeSkipped.cs" />
     <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs">
       <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs</Link>
     </Compile>

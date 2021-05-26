@@ -23,9 +23,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static string SharedFolder = "shared";
         public static string GeneratedFolder = "Generated";
 
-        private static readonly SymbolDisplayFormat _fullyQualifiedNameFormat
-            = new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
-
         private static readonly string[] SharedFolders = { SharedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
         private static Task<Project>? _cachedProject;
@@ -63,7 +60,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Debug.Assert(compilation != null);
 
             var suppressedTypeNames = GetSuppressedTypeNames(compilation);
-            List<Task<Document?>> documents = new List<Task<Document?>>();
+            List<Task<Document>> documents = new List<Task<Document>>();
             foreach (Document document in _project.Documents)
             {
                 // Skip writing shared files or originals
@@ -78,26 +75,18 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var task in documents)
             {
                 var processed = await task;
-                if (processed != null)
-                {
-                    var text = await processed.GetSyntaxTreeAsync();
-                    yield return (processed.Name, text!.ToString());
-                }
+                var text = await processed.GetSyntaxTreeAsync();
+                yield return (processed.Name, text!.ToString());
             }
         }
 
-        private async Task<Document?> ProcessDocument(Compilation compilation, Document document, ImmutableHashSet<string> suppressedTypeNames)
+        private async Task<Document> ProcessDocument(Compilation compilation, Document document, ImmutableHashSet<string> suppressedTypeNames)
         {
             var syntaxTree = await document.GetSyntaxTreeAsync();
             if (syntaxTree != null)
             {
                 var semanticModel = compilation.GetSemanticModel(syntaxTree);
-                if (ContainsSuppressedType(syntaxTree, semanticModel, suppressedTypeNames))
-                {
-                    return null;
-                }
-
-                var rewriter = new MemberRemoverRewriter(_project, semanticModel);
+                var rewriter = new MemberRemoverRewriter(_project, semanticModel, suppressedTypeNames);
                 document = document.WithSyntaxRoot(rewriter.Visit(await syntaxTree.GetRootAsync()));
             }
 
@@ -114,39 +103,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 .Select(a => a.ConstructorArguments[0].Value)
                 .OfType<string>()
                 .ToImmutableHashSet();
-        }
-
-        private static bool ContainsSuppressedType(SyntaxTree syntaxTree, SemanticModel semanticModel, ImmutableHashSet<string> suppressedTypeNames)
-        {
-            if (suppressedTypeNames.IsEmpty)
-            {
-                return false;
-            }
-
-            var typeDeclarationSyntax = syntaxTree.GetRoot().DescendantNodes()
-                .OfType<BaseTypeDeclarationSyntax>()
-                .FirstOrDefault();
-
-            if (typeDeclarationSyntax == null)
-            {
-                return false;
-            }
-
-            var typeSymbol = semanticModel.GetDeclaredSymbol(typeDeclarationSyntax);
-            while (typeSymbol != null)
-            {
-                var fullName = typeSymbol.ToDisplayString(_fullyQualifiedNameFormat);
-                if (suppressedTypeNames.Contains(typeSymbol.Name) || suppressedTypeNames.Contains(fullName))
-                {
-                    return true;
-                }
-
-                typeSymbol = SymbolEqualityComparer.Default.Equals(typeSymbol.BaseType?.ContainingAssembly, typeSymbol.ContainingAssembly)
-                    ? typeSymbol.BaseType
-                    : null;
-            }
-
-            return false;
         }
 
         public static async Task<GeneratedCodeWorkspace> Create(string projectDirectory, string outputDirectory, string[] sharedSourceFolders)
