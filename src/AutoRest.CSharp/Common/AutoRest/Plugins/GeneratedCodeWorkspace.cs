@@ -3,13 +3,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
 
@@ -20,15 +23,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static string SharedFolder = "shared";
         public static string GeneratedFolder = "Generated";
 
+        private static readonly SymbolDisplayFormat _fullyQualifiedNameFormat
+            = new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+
         private static readonly string[] SharedFolders = { SharedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
-
-        private Project _project;
         private static Task<Project>? _cachedProject;
 
-        private GeneratedCodeWorkspace(Project generatedCodeProject)
+        private readonly ImmutableHashSet<string> _suppressedTypeNames;
+        private Project _project;
+
+        private GeneratedCodeWorkspace(Project generatedCodeProject, ImmutableHashSet<string> suppressedTypeNames)
         {
             _project = generatedCodeProject;
+            _suppressedTypeNames = suppressedTypeNames;
         }
 
         /// <summary>
@@ -43,7 +51,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public void AddGeneratedFile(string name, string text)
         {
             var document = _project.AddDocument(name, text, GeneratedFolders);
-            var root = document.GetSyntaxRootAsync().Result;
+            var root = document.GetSyntaxRootAsync().GetAwaiter().GetResult();
             Debug.Assert(root != null);
 
             root = root.WithAdditionalAnnotations(Simplifier.Annotation);
@@ -53,7 +61,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
         {
-            List<Task<Document>> documents = new List<Task<Document>>();
+            var compilation = await _project.GetCompilationAsync();
+            if (compilation == null)
+            {
+                yield break;
+            }
+
+            List<Task<Document?>> documents = new List<Task<Document?>>();
             foreach (Document document in _project.Documents)
             {
                 // Skip writing shared files or originals
@@ -62,33 +76,66 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     continue;
                 }
 
-                documents.Add(Task.Run(() => ProcessDocument(document)));
+                documents.Add(Task.Run(() => ProcessDocument(compilation, document)));
             }
 
             foreach (var task in documents)
             {
                 var processed = await task;
-                var text = await processed.GetSyntaxTreeAsync();
-
-                yield return (processed.Name, text!.ToString());
+                if (processed != null)
+                {
+                    var text = await processed.GetSyntaxTreeAsync();
+                    yield return (processed.Name, text!.ToString());
+                }
             }
         }
 
-        private async Task<Document> ProcessDocument(Document document)
+        private async Task<Document?> ProcessDocument(Compilation compilation, Document document)
         {
-            var compilation = await document.Project.GetCompilationAsync();
-            Debug.Assert(compilation != null);
-
             var syntaxTree = await document.GetSyntaxTreeAsync();
             if (syntaxTree != null)
             {
-                var rewriter = new MemberRemoverRewriter(_project, compilation.GetSemanticModel(syntaxTree));
+                var semanticModel = compilation.GetSemanticModel(syntaxTree);
+                if (ContainsSuppressedType(syntaxTree, semanticModel))
+                {
+                    return null;
+                }
+
+                var rewriter = new MemberRemoverRewriter(_project, semanticModel);
                 document = document.WithSyntaxRoot(rewriter.Visit(await syntaxTree.GetRootAsync()));
             }
 
             document = await Simplifier.ReduceAsync(document);
             document = await Formatter.FormatAsync(document);
             return document;
+        }
+
+        private bool ContainsSuppressedType(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        {
+            var typeDeclarationSyntax = syntaxTree.GetRoot().DescendantNodes()
+                .OfType<BaseTypeDeclarationSyntax>()
+                .FirstOrDefault();
+
+            if (typeDeclarationSyntax == null)
+            {
+                return false;
+            }
+
+            var typeSymbol = semanticModel.GetDeclaredSymbol(typeDeclarationSyntax);
+            while (typeSymbol != null)
+            {
+                var fullName = typeSymbol.ToDisplayString(_fullyQualifiedNameFormat);
+                if (_suppressedTypeNames.Contains(typeSymbol.Name) || _suppressedTypeNames.Contains(fullName))
+                {
+                    return true;
+                }
+
+                typeSymbol = SymbolEqualityComparer.Default.Equals(typeSymbol.BaseType?.ContainingAssembly, typeSymbol.ContainingAssembly)
+                    ? typeSymbol.BaseType
+                    : null;
+            }
+
+            return false;
         }
 
         public static async Task<GeneratedCodeWorkspace> Create(string projectDirectory, string outputDirectory, string[] sharedSourceFolders)
@@ -120,7 +167,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
             }
 
-            return new GeneratedCodeWorkspace(generatedCodeProject);
+            var compilation = (await generatedCodeProject.GetCompilationAsync())!;
+            var suppressTypeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSuppressTypeAttribute).FullName!)!;
+            var suppressedTypeNames = compilation.Assembly.GetAttributes()
+                .Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, suppressTypeAttribute))
+                .Select(a => a.ConstructorArguments[0].Value)
+                .OfType<string>()
+                .ToImmutableHashSet();
+
+            return new GeneratedCodeWorkspace(generatedCodeProject, suppressedTypeNames);
         }
 
         private static Project CreateGeneratedCodeProject()

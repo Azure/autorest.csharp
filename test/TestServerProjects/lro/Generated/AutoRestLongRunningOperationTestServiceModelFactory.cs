@@ -10,7 +10,7 @@ using lro.Models;
 
 namespace lro
 {
-    /// <summary> Model factory for AutoRestLongRunningOperationTestService read-only models. </summary>
+    /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestLongRunningOperationTestServiceModelFactory
     {
         /// <summary> Initializes new instance of Resource class. </summary>

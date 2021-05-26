@@ -15,20 +15,9 @@ namespace AutoRest.TestServer.Tests
         {
             foreach (var type in assembly.DefinedTypes)
             {
-                if (type.Name == typeName)
+                if (type.Name == typeName || $"{type.Namespace}.{type.Name}" == typeName)
                 {
                     Assert.Fail($"Assembly \"{assembly.GetName().Name}\" isn't expected to define type \"{typeName}\".");
-                }
-            }
-        }
-
-        public static void HasNoType(Assembly assembly, string? ns, string typeName)
-        {
-            foreach (var type in assembly.DefinedTypes)
-            {
-                if (type.Name == typeName && type.Namespace == ns)
-                {
-                    Assert.Fail($"Assembly \"{assembly.GetName().Name}\" isn't expected to define type \"{ns}.{typeName}\".");
                 }
             }
         }

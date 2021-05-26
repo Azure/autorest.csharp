@@ -11,7 +11,7 @@ using Azure.AI.FormRecognizer.Models;
 
 namespace Azure.AI.FormRecognizer
 {
-    /// <summary> Model factory for AzureAIFormRecognizer read-only models. </summary>
+    /// <summary> Model factory for read-only models. </summary>
     public static partial class AzureAIFormRecognizerModelFactory
     {
         /// <summary> Initializes new instance of ErrorInformation class. </summary>

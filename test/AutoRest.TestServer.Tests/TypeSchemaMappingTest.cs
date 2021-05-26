@@ -251,13 +251,21 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelFactoryIsRenamed()
         {
-            TypeAsserts.HasNoType(typeof(MainModelFactory).Assembly, "TypeSchemaMapping", "SchemaMappingModelFactory");
+            TypeAsserts.HasNoType(typeof(MainModelFactory).Assembly, "TypeSchemaMapping.SchemaMappingModelFactory");
         }
 
         [Test]
         public void ModelFactoryIsInternal()
         {
             TypeAsserts.TypeIsNotPublic(typeof(MainModelFactory));
+        }
+
+        [Test]
+        public void TypesAreSkipped()
+        {
+            TypeAsserts.HasNoType(typeof(CustomizedModel).Assembly, "ModelToBeSkipped");
+            TypeAsserts.HasNoType(typeof(CustomizedModel).Assembly, "EnumToBeSkipped");
+            TypeAsserts.HasNoType(typeof(CustomizedModel).Assembly, "EnumToBeSkippedExtensions");
         }
     }
 }
