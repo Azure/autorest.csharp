@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "internal", memberMapping?.ExistingMember, _typeFactory),
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", memberMapping?.ExistingMember, _typeFactory),
                     string.Empty,
                     true,
                     null
