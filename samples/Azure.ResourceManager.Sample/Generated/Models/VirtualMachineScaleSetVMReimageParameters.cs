@@ -8,7 +8,7 @@
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Describes a Virtual Machine Scale Set VM Reimage Parameters. </summary>
-    internal partial class VirtualMachineScaleSetVMReimageParameters : VirtualMachineReimageParameters
+    public partial class VirtualMachineScaleSetVMReimageParameters : VirtualMachineReimageParameters
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMReimageParameters. </summary>
         public VirtualMachineScaleSetVMReimageParameters()

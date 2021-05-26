@@ -34,8 +34,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// </summary>
     internal class ResourceContainerWriter : ClientWriter
     {
-        private const string ClientDiagnosticsField = "_clientDiagnostics";
-        private const string PipelineField = "_pipeline";
         private const string RestClientField = "_restClient";
         private const string _parentProperty = "Parent";
         private CodeWriter _writer;
@@ -349,7 +347,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (!method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase))
             {
                 var lastString = parameterMapping.LastOrDefault(parameter => IsStringLike(parameter.Parameter.Type) && IsMandatory(parameter.Parameter));
-                if (lastString.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+                if (lastString?.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
                 {
                     lastString.IsPassThru = true;
                     parentNameStack.Pop();
@@ -647,7 +645,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             _writer.Line($"// Builders.");
-            _writer.LineRaw($"// public ArmBuilder<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}> Construct() {{ }}");
+            _writer.LineRaw($"// public ArmBuilder<{_resourceContainer.ResourceIdentifierType.Name}, {_resource.Type.Name}, {_resourceData.Type.Name}> Construct() {{ }}");
         }
     }
 }

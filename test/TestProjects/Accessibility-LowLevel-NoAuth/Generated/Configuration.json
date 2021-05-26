@@ -11,12 +11,5 @@
   "ModelNamespace": true,
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
-  "LowLevelClient": true,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
-  "OperationGroupToResourceType": {},
-  "OperationGroupToResource": {},
-  "OperationGroupToParent": {},
-  "OperationGroupIsTuple": []
+  "LowLevelClient": true
 }

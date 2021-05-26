@@ -12,9 +12,6 @@
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {
     "Operations": "Microsoft.Compute/operations",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension",
@@ -30,17 +27,21 @@
     "VirtualMachineImages": "VirtualMachineImage",
     "Usage": "NonResource",
     "VirtualMachineSizes": "NonResource",
-    "VirtualMachineScaleSetRollingUpgrades": "NonResource",
+    "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
     "LogAnalytics": "NonResource"
   },
   "OperationGroupToParent": {
     "LogAnalytics": "subscriptions",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
     "VirtualMachineImages": "Microsoft.Compute/locations",
-    "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets"
+    "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets",
+    "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets"
   },
   "OperationGroupIsTuple": [
     "VirtualMachineImages",
     "VirtualMachineExtensionImages"
+  ],
+  "OperationGroupIsExtension": [
+    "VirtualMachineScaleSetVMExtensions"
   ]
 }

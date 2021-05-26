@@ -15,11 +15,11 @@ namespace CognitiveServices.TextAnalytics.Models
         internal static Entity DeserializeEntity(JsonElement element)
         {
             string text = default;
-            string type = default;
-            Optional<string> subtype = default;
+            string category = default;
+            Optional<string> subcategory = default;
             int offset = default;
             int length = default;
-            double score = default;
+            double confidenceScore = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("text"))
@@ -27,14 +27,14 @@ namespace CognitiveServices.TextAnalytics.Models
                     text = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("category"))
                 {
-                    type = property.Value.GetString();
+                    category = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("subtype"))
+                if (property.NameEquals("subcategory"))
                 {
-                    subtype = property.Value.GetString();
+                    subcategory = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("offset"))
@@ -47,13 +47,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     length = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("score"))
+                if (property.NameEquals("confidenceScore"))
                 {
-                    score = property.Value.GetDouble();
+                    confidenceScore = property.Value.GetDouble();
                     continue;
                 }
             }
-            return new Entity(text, type, subtype.Value, offset, length, score);
+            return new Entity(text, category, subcategory.Value, offset, length, confidenceScore);
         }
     }
 }

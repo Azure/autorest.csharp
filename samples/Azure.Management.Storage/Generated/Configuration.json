@@ -12,9 +12,6 @@
   "HeadAsBoolean": true,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {
     "Operations": "Microsoft.Storage/operations",
     "Skus": "Microsoft.Storage/skus",
@@ -25,14 +22,13 @@
     "Operations": "NonResource",
     "Skus": "NonResource",
     "Usages": "NonResource",
-    "PrivateLinkResources": "PrivateLinkResource",
+    "PrivateLinkResources": "NonResource",
     "StorageAccounts": "StorageAccount"
   },
   "OperationGroupToParent": {
     "BlobContainers": "Microsoft.Storage/storageAccounts",
     "FileShares": "Microsoft.Storage/storageAccounts",
     "Usages": "subscriptions",
-    "StorageAccounts": "any"
-  },
-  "OperationGroupIsTuple": []
+    "StorageAccounts": "resourceGroups"
+  }
 }

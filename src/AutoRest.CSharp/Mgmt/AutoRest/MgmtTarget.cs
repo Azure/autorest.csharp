@@ -5,6 +5,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -18,7 +19,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var modelWriter = new ModelWriter();
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
-            var resourceOperationWriter = new ResourceOperationWriter();
             var armResourceWriter = new ResourceWriter();
             var resourceGroupExtensionsWriter = new ResourceGroupExtensionsWriter();
             var subscriptionExtensionsWriter = new SubscriptionExtensionsWriter();
@@ -49,6 +49,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var resourceOperation in context.Library.ResourceOperations)
             {
                 var codeWriter = new CodeWriter();
+                var resourceOperationWriter = new ResourceOperationWriter();
                 resourceOperationWriter.WriteClient(codeWriter, resourceOperation, context);
 
                 project.AddGeneratedFile($"{resourceOperation.Type.Name}.cs", codeWriter.ToString());

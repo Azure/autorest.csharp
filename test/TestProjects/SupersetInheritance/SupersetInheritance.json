@@ -75,6 +75,40 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "SupersetModel1s"
+                ],
+                "operationId": "SupersetModel1s_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "supersetModel1sName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel1"
+                        }
+                    }
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel2s/{supersetModel2sName}": {
@@ -103,6 +137,40 @@
                         "schema": {
                             "$ref": "#/definitions/SupersetModel2"
                         }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel2"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "SupersetModel2s"
+                ],
+                "operationId": "SupersetModel2s_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "supersetModel2sName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -163,6 +231,40 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "SupersetModel3s"
+                ],
+                "operationId": "SupersetModel3s_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "supersetModel3sName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel3"
+                        }
+                    }
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/supersetModel4s/{supersetModel4sName}": {
@@ -191,6 +293,40 @@
                         "schema": {
                             "$ref": "#/definitions/SupersetModel4"
                         }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SupersetModel4"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "SupersetModel4s"
+                ],
+                "operationId": "SupersetModel4s_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "supersetModel4sName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"

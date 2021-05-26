@@ -27,6 +27,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return mgmtOperation.WrapperType != null ? new CSharpType(typeof(Operation<>), mgmtOperation.WrapperType) : base.GetBaseType(operation);
         }
 
+        protected override CSharpType? GetInterfaceType(LongRunningOperation operation)
+        {
+            MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
+            return mgmtOperation.WrapperType != null ? new CSharpType(typeof(IOperationSource<>), mgmtOperation.WrapperType) : base.GetInterfaceType(operation);
+        }
+
+        protected override CSharpType GetHelperType(LongRunningOperation operation)
+        {
+            MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
+            return mgmtOperation.WrapperType != null ? new CSharpType(typeof(OperationInternals<>), mgmtOperation.WrapperType) : base.GetHelperType(operation);
+        }
+
         protected override CSharpType GetValueTaskType(LongRunningOperation operation)
         {
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
@@ -91,8 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (mgmtOperation.WrapperType != null)
             {
                 writer.WriteXmlDocumentationInheritDoc();
-                // convert from [Resource]Data to [Resource]
-                writer.Line($"public override {mgmtOperation.WrapperType} Value => new {mgmtOperation.WrapperType}({_operationBaseField}, _operation.Value);");
+                writer.Line($"public override {mgmtOperation.WrapperType} Value => _operation.Value;");
                 writer.Line();
             }
             else
@@ -101,32 +112,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override void WriteWaitForCompletionVariants(CodeWriter writer, LongRunningOperation operation)
+        protected override void WriteCreateResult(CodeWriter writer, LongRunningOperation operation, string responseVariable, PagingResponseInfo? pagingResponse, CSharpType? interfaceType)
         {
             MgmtLongRunningOperation mgmtOperation = AsMgmtOperation(operation);
 
             if (mgmtOperation.WrapperType != null)
             {
-                var valueTaskType = GetValueTaskType(mgmtOperation);
-                var waitForCompletionType = new CSharpType(typeof(ValueTask<>), valueTaskType);
-                var waitForCompleteMethodName = mgmtOperation.ResultType != null ? "WaitForCompletionAsync" : "WaitForCompletionResponseAsync";
+                Action<CodeWriter, CodeWriterDelegate> valueCallback = (w, v) => w.Line($"return new {mgmtOperation.WrapperType}({_operationBaseField}, {v});");
 
-                const string mapperName = "MapResponseType";
-
-                writer.WriteXmlDocumentationInheritDoc();
-                writer.Line($"public async override {waitForCompletionType} {waitForCompleteMethodName}({typeof(CancellationToken)} cancellationToken = default) => {mapperName}(await _operation.{waitForCompleteMethodName}(cancellationToken));");
+                using (writer.Scope($"{mgmtOperation.WrapperType} {interfaceType}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+                {
+                    WriteCreateResultImpl(false, writer, operation, responseVariable, pagingResponse, valueCallback);
+                }
                 writer.Line();
 
-                writer.WriteXmlDocumentationInheritDoc();
-                writer.Line($"public async override {waitForCompletionType} {waitForCompleteMethodName}({typeof(TimeSpan)} pollingInterval, {typeof(CancellationToken)} cancellationToken = default) => {mapperName}(await _operation.{waitForCompleteMethodName}(pollingInterval, cancellationToken));");
-                writer.Line();
-
-                // helper function to convert Response<[Resource]Data> to Response<[Resource]>
-                writer.Line($"private {typeof(Response)}<{mgmtOperation.WrapperType}> {mapperName}({typeof(Response)}<{mgmtOperation.ResultType}> response) => {typeof(Response)}.FromValue(new {mgmtOperation.WrapperType}({_operationBaseField}, response.Value), response.GetRawResponse());");
+                using (writer.Scope($"async {new CSharpType(typeof(ValueTask<>), mgmtOperation.WrapperType)} {interfaceType}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
+                {
+                    WriteCreateResultImpl(true, writer, operation, responseVariable, pagingResponse, valueCallback);
+                }
             }
             else
             {
-                base.WriteWaitForCompletionVariants(writer, operation);
+                base.WriteCreateResult(writer, operation, responseVariable, pagingResponse, interfaceType);
             }
         }
 

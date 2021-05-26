@@ -325,5 +325,158 @@ namespace TypeSchemaMapping
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
+
+        internal HttpMessage CreateOperationWithInternalModelRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/OperationWithInternalModel", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<ModelWithInternalModel>> OperationWithInternalModelAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateOperationWithInternalModelRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelWithInternalModel value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = ModelWithInternalModel.DeserializeModelWithInternalModel(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<ModelWithInternalModel> OperationWithInternalModel(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateOperationWithInternalModelRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelWithInternalModel value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = ModelWithInternalModel.DeserializeModelWithInternalModel(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateOperationWithAbstractModelRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/OperationWithAbstractModel", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<ModelWithAbstractModel>> OperationWithAbstractModelAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateOperationWithAbstractModelRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelWithAbstractModel value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = ModelWithAbstractModel.DeserializeModelWithAbstractModel(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<ModelWithAbstractModel> OperationWithAbstractModel(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateOperationWithAbstractModelRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelWithAbstractModel value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = ModelWithAbstractModel.DeserializeModelWithAbstractModel(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
+
+        internal HttpMessage CreateOperationWithListOfInternalModelRequest()
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/OperationWithListOfInternalModel", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response<ModelWithListOfInternalModel>> OperationWithListOfInternalModelAsync(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateOperationWithListOfInternalModelRequest();
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelWithListOfInternalModel value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = ModelWithListOfInternalModel.DeserializeModelWithListOfInternalModel(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response<ModelWithListOfInternalModel> OperationWithListOfInternalModel(CancellationToken cancellationToken = default)
+        {
+            using var message = CreateOperationWithListOfInternalModelRequest();
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelWithListOfInternalModel value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = ModelWithListOfInternalModel.DeserializeModelWithListOfInternalModel(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
     }
 }

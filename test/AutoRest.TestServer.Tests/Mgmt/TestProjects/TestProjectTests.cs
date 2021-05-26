@@ -9,6 +9,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
 using Azure.ResourceManager.Core;
 using NUnit.Framework;
@@ -44,7 +45,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllOperations())
             {
-                Assert.AreEqual(typeof(ResourceOperationsBase), type.BaseType.BaseType);
+                var expectedBaseOperationsType = IsSingletonOperation(type.BaseType.BaseType)
+                    ? typeof(SingletonOperationsBase)
+                    : typeof(ResourceOperationsBase);
+                Assert.AreEqual(expectedBaseOperationsType, type.BaseType.BaseType);
             }
         }
 
@@ -54,6 +58,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var type in FindAllOperations())
             {
+                if (IsSingletonOperation(type.BaseType.BaseType))
+                {
+                    continue;
+                }
+
                 var method = type.GetMethod(methodName);
                 Assert.NotNull(method, $"{type.Name} does not implement the method.");
             }
@@ -126,10 +135,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type t in allTypes)
             {
-                if (t.Name.Contains("Container") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (t.Name.EndsWith("Operations") && !t.Name.Contains("Tests")
+                    && !t.Name.Contains("RestOperations") && t.Namespace == _projectName)
                 {
                     // Only [Resource] types names for the specified test project are going to be tested.
-                    var resourceName = t.Name.Replace("Container", "");
+                    var resourceName = t.Name.Substring(0, t.Name.Length - 10);
                     yield return resourceName;
                 }
             }
@@ -170,6 +180,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     yield return t;
                 }
             }
+        }
+
+        private bool IsSingletonOperation(Type type)
+        {
+            return type == typeof(SingletonOperationsBase);
         }
 
         private Type FindSubscriptionExtensions()
@@ -334,7 +349,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     ResourceType containerType = GetContainerValidResourceType(container);
                     if (containerType.Equals(operationType))
                     {
-                        var method = operation.GetMethod($"Get{ResourceOperationWriter.Pluralization(container.Name.Remove(container.Name.LastIndexOf("Container")))}");
+                        var method = operation.GetMethod($"Get{StringExtensions.Pluralization(container.Name.Remove(container.Name.LastIndexOf("Container")))}");
                         Assert.NotNull(method);
                         Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(container.Namespace+"."+container.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);

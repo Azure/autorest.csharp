@@ -143,5 +143,86 @@ namespace ResourceIdentifierChooser
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
+
+        internal HttpMessage CreateGetRequest(string resourceGroupName, string modelDatasName)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Network/ModelDatas/", false);
+            uri.AppendPath(modelDatasName, true);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="modelDatasName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="modelDatasName"/> is null. </exception>
+        public async Task<Response<ModelDataData>> GetAsync(string resourceGroupName, string modelDatasName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (modelDatasName == null)
+            {
+                throw new ArgumentNullException(nameof(modelDatasName));
+            }
+
+            using var message = CreateGetRequest(resourceGroupName, modelDatasName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelDataData value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = ModelDataData.DeserializeModelDataData(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="modelDatasName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="modelDatasName"/> is null. </exception>
+        public Response<ModelDataData> Get(string resourceGroupName, string modelDatasName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (modelDatasName == null)
+            {
+                throw new ArgumentNullException(nameof(modelDatasName));
+            }
+
+            using var message = CreateGetRequest(resourceGroupName, modelDatasName);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ModelDataData value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = ModelDataData.DeserializeModelDataData(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
     }
 }

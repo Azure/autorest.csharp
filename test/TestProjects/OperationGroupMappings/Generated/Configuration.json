@@ -12,9 +12,6 @@
   "HeadAsBoolean": true,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
   "OperationGroupToResourceType": {
     "AvailabilitySets": "Microsoft.Compute/availabilitySets",
     "Operations": "Microsoft.Compute/operations",
@@ -27,6 +24,5 @@
   },
   "OperationGroupToParent": {
     "Usage": "subscriptions"
-  },
-  "OperationGroupIsTuple": []
+  }
 }

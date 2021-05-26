@@ -12,29 +12,33 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> The operation to update a virtual machine. </summary>
-    public partial class VirtualMachinesUpdateOperation : Operation<VirtualMachineData>, IOperationSource<VirtualMachineData>
+    public partial class VirtualMachinesUpdateOperation : Operation<VirtualMachine>, IOperationSource<VirtualMachine>
     {
-        private readonly OperationInternals<VirtualMachineData> _operation;
+        private readonly OperationInternals<VirtualMachine> _operation;
+
+        private readonly ResourceOperationsBase _operationBase;
 
         /// <summary> Initializes a new instance of VirtualMachinesUpdateOperation for mocking. </summary>
         protected VirtualMachinesUpdateOperation()
         {
         }
 
-        internal VirtualMachinesUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
+        internal VirtualMachinesUpdateOperation(ResourceOperationsBase operationsBase, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
-            _operation = new OperationInternals<VirtualMachineData>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachinesUpdateOperation");
+            _operation = new OperationInternals<VirtualMachine>(this, clientDiagnostics, pipeline, request, response, OperationFinalStateVia.Location, "VirtualMachinesUpdateOperation");
+            _operationBase = operationsBase;
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override VirtualMachineData Value => _operation.Value;
+        public override VirtualMachine Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -52,21 +56,21 @@ namespace Azure.ResourceManager.Sample
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<VirtualMachineData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<VirtualMachine>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<VirtualMachineData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<VirtualMachine>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
 
-        VirtualMachineData IOperationSource<VirtualMachineData>.CreateResult(Response response, CancellationToken cancellationToken)
+        VirtualMachine IOperationSource<VirtualMachine>.CreateResult(Response response, CancellationToken cancellationToken)
         {
             using var document = JsonDocument.Parse(response.ContentStream);
-            return VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
+            return new VirtualMachine(_operationBase, VirtualMachineData.DeserializeVirtualMachineData(document.RootElement));
         }
 
-        async ValueTask<VirtualMachineData> IOperationSource<VirtualMachineData>.CreateResultAsync(Response response, CancellationToken cancellationToken)
+        async ValueTask<VirtualMachine> IOperationSource<VirtualMachine>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-            return VirtualMachineData.DeserializeVirtualMachineData(document.RootElement);
+            return new VirtualMachine(_operationBase, VirtualMachineData.DeserializeVirtualMachineData(document.RootElement));
         }
     }
 }

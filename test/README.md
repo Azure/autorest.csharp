@@ -37,8 +37,6 @@ Autorest first takes a pass at processing the swagger input files, and then hand
 
 Example: Many APIs have paging, where a request will only return the first 100, and you have to ask for additional "pages" of 100 one at a time
 
-Today that pipeline lives in a [separate repository]( https://github.com/Azure/autorest.modelerfour/) but very likely to end up in [autorest proper]( https://github.com/Azure/autorest) long term.
-
 The c# autorest plugin/generator has three major components: 
 
 - A model layer that builds up a representation of the desired output based upon the YAML IR 

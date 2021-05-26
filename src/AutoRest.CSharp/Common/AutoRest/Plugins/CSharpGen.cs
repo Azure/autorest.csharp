@@ -32,6 +32,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     {
         public async Task<GeneratedCodeWorkspace> ExecuteAsync(Task<CodeModel> codeModelTask, Configuration configuration)
         {
+            ValidateConfiguration (configuration);
+
             Directory.CreateDirectory(configuration.OutputFolder);
             var projectDirectory = Path.Combine(configuration.OutputFolder, Configuration.ProjectRelativeDirectory);
             var project = await GeneratedCodeWorkspace.Create(projectDirectory, configuration.OutputFolder, configuration.SharedSourceFolders);
@@ -54,6 +56,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return project;
         }
 
+        private static void ValidateConfiguration (Configuration configuration)
+        {
+            if (configuration.LowLevelClient && configuration.AzureArm)
+            {
+                throw new Exception("Enabling both 'low-level-client' and 'azure-arm' at the same time is not supported.");
+            }
+        }
+
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
             string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
@@ -69,13 +79,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 codeModelYaml = await autoRest.ReadFile(codeModelFileName);
                 return CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
             });
-
-            if (configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase) &&
-                configuration.CredentialScopes.Length < 1)
-            {
-                await autoRest.Fatal("You are using TokenCredential without passing in any credential-scopes.");
-                return false;
-            }
 
             if (!Path.IsPathRooted(configuration.OutputFolder))
             {

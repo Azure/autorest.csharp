@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -548,7 +547,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateSetLegalHoldRequest(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags)
+        internal HttpMessage CreateSetLegalHoldRequest(string resourceGroupName, string accountName, string containerName, LegalHold legalHold)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -568,9 +567,8 @@ namespace Azure.Management.Storage
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new LegalHold(tags);
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(legalHold);
             request.Content = content;
             return message;
         }
@@ -579,10 +577,10 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="tags"> Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP. </param>
+        /// <param name="legalHold"> The LegalHold property that will be set to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="tags"/> is null. </exception>
-        public async Task<Response<LegalHold>> SetLegalHoldAsync(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="legalHold"/> is null. </exception>
+        public async Task<Response<LegalHold>> SetLegalHoldAsync(string resourceGroupName, string accountName, string containerName, LegalHold legalHold, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -596,12 +594,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(containerName));
             }
-            if (tags == null)
+            if (legalHold == null)
             {
-                throw new ArgumentNullException(nameof(tags));
+                throw new ArgumentNullException(nameof(legalHold));
             }
 
-            using var message = CreateSetLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
+            using var message = CreateSetLegalHoldRequest(resourceGroupName, accountName, containerName, legalHold);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -621,10 +619,10 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="tags"> Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP. </param>
+        /// <param name="legalHold"> The LegalHold property that will be set to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="tags"/> is null. </exception>
-        public Response<LegalHold> SetLegalHold(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="legalHold"/> is null. </exception>
+        public Response<LegalHold> SetLegalHold(string resourceGroupName, string accountName, string containerName, LegalHold legalHold, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -638,12 +636,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(containerName));
             }
-            if (tags == null)
+            if (legalHold == null)
             {
-                throw new ArgumentNullException(nameof(tags));
+                throw new ArgumentNullException(nameof(legalHold));
             }
 
-            using var message = CreateSetLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
+            using var message = CreateSetLegalHoldRequest(resourceGroupName, accountName, containerName, legalHold);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -659,7 +657,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateClearLegalHoldRequest(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags)
+        internal HttpMessage CreateClearLegalHoldRequest(string resourceGroupName, string accountName, string containerName, LegalHold legalHold)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -679,9 +677,8 @@ namespace Azure.Management.Storage
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new LegalHold(tags);
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(legalHold);
             request.Content = content;
             return message;
         }
@@ -690,10 +687,10 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="tags"> Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP. </param>
+        /// <param name="legalHold"> The LegalHold property that will be clear from a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="tags"/> is null. </exception>
-        public async Task<Response<LegalHold>> ClearLegalHoldAsync(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="legalHold"/> is null. </exception>
+        public async Task<Response<LegalHold>> ClearLegalHoldAsync(string resourceGroupName, string accountName, string containerName, LegalHold legalHold, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -707,12 +704,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(containerName));
             }
-            if (tags == null)
+            if (legalHold == null)
             {
-                throw new ArgumentNullException(nameof(tags));
+                throw new ArgumentNullException(nameof(legalHold));
             }
 
-            using var message = CreateClearLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
+            using var message = CreateClearLegalHoldRequest(resourceGroupName, accountName, containerName, legalHold);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -732,10 +729,10 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="tags"> Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP. </param>
+        /// <param name="legalHold"> The LegalHold property that will be clear from a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="tags"/> is null. </exception>
-        public Response<LegalHold> ClearLegalHold(string resourceGroupName, string accountName, string containerName, IEnumerable<string> tags, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="legalHold"/> is null. </exception>
+        public Response<LegalHold> ClearLegalHold(string resourceGroupName, string accountName, string containerName, LegalHold legalHold, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -749,12 +746,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(containerName));
             }
-            if (tags == null)
+            if (legalHold == null)
             {
-                throw new ArgumentNullException(nameof(tags));
+                throw new ArgumentNullException(nameof(legalHold));
             }
 
-            using var message = CreateClearLegalHoldRequest(resourceGroupName, accountName, containerName, tags);
+            using var message = CreateClearLegalHoldRequest(resourceGroupName, accountName, containerName, legalHold);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -770,7 +767,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateImmutabilityPolicyRequest(string resourceGroupName, string accountName, string containerName, string ifMatch, int? immutabilityPeriodSinceCreationInDays, bool? allowProtectedAppendWrites)
+        internal HttpMessage CreateCreateOrUpdateImmutabilityPolicyRequest(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -794,15 +791,13 @@ namespace Azure.Management.Storage
                 request.Headers.Add("If-Match", ifMatch);
             }
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var model = new ImmutabilityPolicy()
+            if (parameters != null)
             {
-                ImmutabilityPeriodSinceCreationInDays = immutabilityPeriodSinceCreationInDays,
-                AllowProtectedAppendWrites = allowProtectedAppendWrites
-            };
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
-            request.Content = content;
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(parameters);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -811,11 +806,10 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
-        /// <param name="allowProtectedAppendWrites"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. </param>
+        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="containerName"/> is null. </exception>
-        public async Task<Response<ImmutabilityPolicy>> CreateOrUpdateImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch = null, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ImmutabilityPolicy>> CreateOrUpdateImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch = null, ImmutabilityPolicy parameters = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -830,7 +824,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
+            using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -851,11 +845,10 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
-        /// <param name="allowProtectedAppendWrites"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. </param>
+        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be created or updated to a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="containerName"/> is null. </exception>
-        public Response<ImmutabilityPolicy> CreateOrUpdateImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch = null, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicy> CreateOrUpdateImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch = null, ImmutabilityPolicy parameters = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -870,7 +863,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(containerName));
             }
 
-            using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
+            using var message = CreateCreateOrUpdateImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -1204,7 +1197,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateExtendImmutabilityPolicyRequest(string resourceGroupName, string accountName, string containerName, string ifMatch, int? immutabilityPeriodSinceCreationInDays, bool? allowProtectedAppendWrites)
+        internal HttpMessage CreateExtendImmutabilityPolicyRequest(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -1224,15 +1217,13 @@ namespace Azure.Management.Storage
             request.Uri = uri;
             request.Headers.Add("If-Match", ifMatch);
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var model = new ImmutabilityPolicy()
+            if (parameters != null)
             {
-                ImmutabilityPeriodSinceCreationInDays = immutabilityPeriodSinceCreationInDays,
-                AllowProtectedAppendWrites = allowProtectedAppendWrites
-            };
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
-            request.Content = content;
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteObjectValue(parameters);
+                request.Content = content;
+            }
             return message;
         }
 
@@ -1241,11 +1232,10 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
-        /// <param name="allowProtectedAppendWrites"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. </param>
+        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be extended for a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="ifMatch"/> is null. </exception>
-        public async Task<Response<ImmutabilityPolicy>> ExtendImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
+        public async Task<Response<ImmutabilityPolicy>> ExtendImmutabilityPolicyAsync(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1264,7 +1254,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var message = CreateExtendImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
+            using var message = CreateExtendImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -1285,11 +1275,10 @@ namespace Azure.Management.Storage
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="containerName"> The name of the blob container within the specified storage account. Blob container names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
         /// <param name="ifMatch"> The entity state (ETag) version of the immutability policy to update. A value of &quot;*&quot; can be used to apply the operation only if the immutability policy already exists. If omitted, this operation will always be applied. </param>
-        /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
-        /// <param name="allowProtectedAppendWrites"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. </param>
+        /// <param name="parameters"> The ImmutabilityPolicy Properties that will be extended for a blob container. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="containerName"/>, or <paramref name="ifMatch"/> is null. </exception>
-        public Response<ImmutabilityPolicy> ExtendImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, int? immutabilityPeriodSinceCreationInDays = null, bool? allowProtectedAppendWrites = null, CancellationToken cancellationToken = default)
+        public Response<ImmutabilityPolicy> ExtendImmutabilityPolicy(string resourceGroupName, string accountName, string containerName, string ifMatch, ImmutabilityPolicy parameters = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -1308,7 +1297,7 @@ namespace Azure.Management.Storage
                 throw new ArgumentNullException(nameof(ifMatch));
             }
 
-            using var message = CreateExtendImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, immutabilityPeriodSinceCreationInDays, allowProtectedAppendWrites);
+            using var message = CreateExtendImmutabilityPolicyRequest(resourceGroupName, accountName, containerName, ifMatch, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -60,21 +60,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     writer.WriteBoolean(nameof(Configuration.HeadAsBoolean), configuration.HeadAsBoolean);
                     writer.WriteBoolean(nameof(Configuration.SkipCSProjPackageReference), configuration.SkipCSProjPackageReference);
                     writer.WriteBoolean(nameof(Configuration.LowLevelClient), configuration.LowLevelClient);
-                    writer.WriteStartArray(nameof(Configuration.CredentialTypes));
-                    foreach (var credentialTypes in configuration.CredentialTypes)
-                    {
-                        writer.WriteStringValue(credentialTypes);
-                    }
-                    writer.WriteEndArray();
-
-                    writer.WriteStartArray(nameof(Configuration.CredentialScopes));
-                    foreach (var credentialTypes in configuration.CredentialScopes)
-                    {
-                        writer.WriteStringValue(credentialTypes);
-                    }
-                    writer.WriteEndArray();
-
-                    writer.WriteString(nameof(Configuration.CredentialHeaderName), configuration.CredentialHeaderName);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -95,22 +80,10 @@ namespace AutoRest.CSharp.AutoRest.Communication
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
             var sharedSourceFolders = new List<string>();
-            var credentialTypes = new List<string>();
-            var credentialScopes = new List<string>();
 
             foreach (var sharedSourceFolder in root.GetProperty(nameof(Configuration.SharedSourceFolders)).EnumerateArray())
             {
                 sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
-            }
-
-            foreach (var credentialType in root.GetProperty(nameof(Configuration.CredentialTypes)).EnumerateArray())
-            {
-                credentialTypes.Add(credentialType.ToString());
-            }
-
-            foreach (var credentialScope in root.GetProperty(nameof(Configuration.CredentialScopes)).EnumerateArray())
-            {
-                credentialScopes.Add(credentialScope.ToString());
             }
 
             return new Configuration(
@@ -124,9 +97,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.ModelNamespace)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean(),
                 root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean(),
-                credentialTypes.ToArray(),
-                credentialScopes.ToArray(),
-                root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString(),
                 root.GetProperty(nameof(Configuration.LowLevelClient)).GetBoolean(),
                 MgmtConfiguration.LoadConfiguration(root)
             );

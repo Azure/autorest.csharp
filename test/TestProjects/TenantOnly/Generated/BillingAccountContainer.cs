@@ -36,7 +36,7 @@ namespace TenantOnly
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private BillingAccountsRestOperations _restClient => new BillingAccountsRestOperations(_clientDiagnostics, _pipeline);
+        private BillingAccountsRestOperations _restClient => new BillingAccountsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -45,6 +45,121 @@ namespace TenantOnly
         protected override ResourceType ValidResourceType => ResourceIdentifier.RootResourceIdentifier.ResourceType;
 
         // Container level operations.
+
+        /// <summary> The operation to create or update a BillingAccount. Please note some properties can be set only during creation. </summary>
+        /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public Response<BillingAccount> CreateOrUpdate(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (billingAccountName == null)
+                {
+                    throw new ArgumentNullException(nameof(billingAccountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                return StartCreateOrUpdate(billingAccountName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to create or update a BillingAccount. Please note some properties can be set only during creation. </summary>
+        /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async Task<Response<BillingAccount>> CreateOrUpdateAsync(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (billingAccountName == null)
+                {
+                    throw new ArgumentNullException(nameof(billingAccountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var operation = await StartCreateOrUpdateAsync(billingAccountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to create or update a BillingAccount. Please note some properties can be set only during creation. </summary>
+        /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public BillingAccountsUpdateOperation StartCreateOrUpdate(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (billingAccountName == null)
+                {
+                    throw new ArgumentNullException(nameof(billingAccountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.Update(billingAccountName, parameters, cancellationToken: cancellationToken);
+                return new BillingAccountsUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateUpdateRequest(billingAccountName, parameters).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to create or update a BillingAccount. Please note some properties can be set only during creation. </summary>
+        /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="parameters"> Request parameters that are provided to the update billing account operation. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async Task<BillingAccountsUpdateOperation> StartCreateOrUpdateAsync(string billingAccountName, BillingAccountData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (billingAccountName == null)
+                {
+                    throw new ArgumentNullException(nameof(billingAccountName));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.UpdateAsync(billingAccountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return new BillingAccountsUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateUpdateRequest(billingAccountName, parameters).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
 
         /// <inheritdoc />
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>

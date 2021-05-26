@@ -19,7 +19,7 @@ using SubscriptionExtensions.Models;
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing collection of Oven and their operations over a ResourceGroup. </summary>
-    public partial class OvenContainer : ContainerBase<ResourceGroupResourceIdentifier>
+    public partial class OvenContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, Oven, OvenData>
     {
         /// <summary> Initializes a new instance of the <see cref="OvenContainer"/> class for mocking. </summary>
         protected OvenContainer()
@@ -155,6 +155,54 @@ namespace SubscriptionExtensions
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new OvensCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override Response<Oven> Get(string vmName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.Get");
+            scope.Start();
+            try
+            {
+                if (vmName == null)
+                {
+                    throw new ArgumentNullException(nameof(vmName));
+                }
+
+                var response = _restClient.Get(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken);
+                return Response.FromValue(new Oven(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="vmName"> The name of the virtual machine. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<Response<Oven>> GetAsync(string vmName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("OvenContainer.Get");
+            scope.Start();
+            try
+            {
+                if (vmName == null)
+                {
+                    throw new ArgumentNullException(nameof(vmName));
+                }
+
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, vmName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new Oven(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

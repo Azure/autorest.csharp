@@ -12,13 +12,7 @@
   "HeadAsBoolean": false,
   "SkipCSProjPackageReference": true,
   "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
-  "OperationGroupToResourceType": {},
   "OperationGroupToResource": {
     "SshPublicKeys": "NonResource"
-  },
-  "OperationGroupToParent": {},
-  "OperationGroupIsTuple": []
+  }
 }

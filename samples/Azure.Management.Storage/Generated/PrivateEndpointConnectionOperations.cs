@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -17,6 +18,10 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific PrivateEndpointConnection. </summary>
     public partial class PrivateEndpointConnectionOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, PrivateEndpointConnection>
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
+        internal PrivateEndpointConnectionsRestOperations RestClient { get; }
+
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionOperations"/> class for mocking. </summary>
         protected PrivateEndpointConnectionOperations()
         {
@@ -25,23 +30,56 @@ namespace Azure.Management.Storage
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal protected PrivateEndpointConnectionOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal PrivateEndpointConnectionOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = Pipeline;
+            RestClient = new PrivateEndpointConnectionsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/privateEndpointConnections";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override Response<PrivateEndpointConnection> Get(CancellationToken cancellationToken = default)
+        public async override Task<Response<PrivateEndpointConnection>> GetAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.Get");
+            scope.Start();
+            try
+            {
+                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new PrivateEndpointConnection(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
-        public override Task<Response<PrivateEndpointConnection>> GetAsync(CancellationToken cancellationToken = default)
+        public override Response<PrivateEndpointConnection> Get(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.Get");
+            scope.Start();
+            try
+            {
+                var response = RestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new PrivateEndpointConnection(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Lists all available geo-locations. </summary>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        {
+            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Lists all available geo-locations. </summary>
@@ -49,16 +87,79 @@ namespace Azure.Management.Storage
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
-            return ListAvailableLocations(ResourceType);
+            return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of location that may take multiple service requests to iterate over. </returns>
-        /// <exception cref="InvalidOperationException"> The default subscription id is null. </exception>
-        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
         {
-            return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.Delete");
+            scope.Start();
+            try
+            {
+                var operation = await StartDeleteAsync(cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Response Delete(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.Delete");
+            scope.Start();
+            try
+            {
+                var operation = StartDelete(cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = await RestClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return new PrivateEndpointConnectionsDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Deletes the specified private endpoint connection associated with the storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public Operation StartDelete(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("PrivateEndpointConnectionOperations.StartDelete");
+            scope.Start();
+            try
+            {
+                var response = RestClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                return new PrivateEndpointConnectionsDeleteOperation(response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

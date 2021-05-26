@@ -19,7 +19,7 @@ namespace CognitiveServices.TextAnalytics.Models
             string message = default;
             Optional<IReadOnlyDictionary<string, string>> details = default;
             Optional<string> target = default;
-            Optional<InnerError> innerError = default;
+            Optional<InnerError> innererror = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"))
@@ -52,18 +52,18 @@ namespace CognitiveServices.TextAnalytics.Models
                     target = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("innerError"))
+                if (property.NameEquals("innererror"))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    innerError = DeserializeInnerError(property.Value);
+                    innererror = DeserializeInnerError(property.Value);
                     continue;
                 }
             }
-            return new InnerError(code, message, Optional.ToDictionary(details), target.Value, innerError.Value);
+            return new InnerError(code, message, Optional.ToDictionary(details), target.Value, innererror.Value);
         }
     }
 }

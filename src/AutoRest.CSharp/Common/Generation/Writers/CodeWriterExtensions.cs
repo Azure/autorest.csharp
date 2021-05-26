@@ -31,22 +31,26 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool includeDefaultValue = true)
+        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool enforceDefaultValue = false)
         {
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
-            if (includeDefaultValue &&
-                clientParameter.DefaultValue != null)
+            if (clientParameter.DefaultValue != null)
             {
                 if (TypeFactory.CanBeInitializedInline(clientParameter.Type, clientParameter.DefaultValue))
                 {
                     writer.Append($" = ");
-                    CodeWriterExtensions.WriteConstant(writer, clientParameter.DefaultValue.Value);
+                    writer.WriteConstant(clientParameter.DefaultValue.Value);
                 }
                 else
                 {
                     // initialize with null and set the default later
                     writer.Append($" = null");
                 }
+            }
+            else if (enforceDefaultValue)
+            {
+                // initialize with default
+                writer.Append($" = default");
             }
 
             writer.AppendRaw(",");
@@ -320,9 +324,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 foreach (var propertyInitializer in collectionInitializers)
                 {
                     var valueVariable = new CodeWriterDeclaration("value");
-                    using (writer1.Scope($"foreach (var {valueVariable:D} in {propertyInitializer.Value})"))
+                    using (writer1.Scope($"if ({propertyInitializer.Value} != null)"))
                     {
-                        writer1.Append($"{codeWriterDeclaration}.{propertyInitializer.Property.Declaration.Name}.Add({valueVariable});");
+                        using (writer1.Scope($"foreach (var {valueVariable:D} in {propertyInitializer.Value})"))
+                        {
+                            writer1.Append($"{codeWriterDeclaration}.{propertyInitializer.Property.Declaration.Name}.Add({valueVariable});");
+                        }
                     }
                 }
             }

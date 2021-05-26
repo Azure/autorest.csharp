@@ -15,9 +15,9 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DetectedLanguage. </summary>
         /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
         /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
-        /// <param name="score"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
+        /// <param name="confidenceScore"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="iso6391Name"/> is null. </exception>
-        internal DetectedLanguage(string name, string iso6391Name, double score)
+        internal DetectedLanguage(string name, string iso6391Name, double confidenceScore)
         {
             if (name == null)
             {
@@ -30,7 +30,7 @@ namespace CognitiveServices.TextAnalytics.Models
 
             Name = name;
             Iso6391Name = iso6391Name;
-            Score = score;
+            ConfidenceScore = confidenceScore;
         }
 
         /// <summary> Long name of a detected language (e.g. English, French). </summary>
@@ -38,6 +38,6 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </summary>
         public string Iso6391Name { get; }
         /// <summary> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </summary>
-        public double Score { get; }
+        public double ConfidenceScore { get; }
     }
 }

@@ -11,29 +11,30 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Management.Storage.Models;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> Updates share properties as specified in request body. Properties not mentioned in the request will not be changed. Update fails if the specified share does not already exist. </summary>
-    public partial class FileSharesUpdateOperation : Operation<FileShareData>
+    public partial class FileSharesUpdateOperation : Operation<FileShare>
     {
-        private readonly OperationOrResponseInternals<FileShareData> _operation;
+        private readonly OperationOrResponseInternals<FileShare> _operation;
 
         /// <summary> Initializes a new instance of FileSharesUpdateOperation for mocking. </summary>
         protected FileSharesUpdateOperation()
         {
         }
 
-        internal FileSharesUpdateOperation(Response<FileShareData> response)
+        internal FileSharesUpdateOperation(ResourceOperationsBase operationsBase, Response<FileShareData> response)
         {
-            _operation = new OperationOrResponseInternals<FileShareData>(response);
+            _operation = new OperationOrResponseInternals<FileShare>(Response.FromValue(new FileShare(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override FileShareData Value => _operation.Value;
+        public override FileShare Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -51,9 +52,9 @@ namespace Azure.Management.Storage
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<FileShareData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<FileShare>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<FileShareData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<FileShare>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }

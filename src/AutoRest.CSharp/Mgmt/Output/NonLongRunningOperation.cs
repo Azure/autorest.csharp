@@ -7,6 +7,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
@@ -44,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             Description = BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description);
             DefaultAccessibility = lroInfo.Accessibility;
 
-            if (ShouldWrapResultType(context, operationGroup, operation))
+            if (LongRunningOperationHelper.ShouldWrapResultType(context, operationGroup, operation, ResultType))
             {
                 WrapperType = context.Library.GetArmResource(operationGroup).Type;
             }
@@ -65,23 +66,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             return operation.Responses.First();
-        }
-
-        private bool ShouldWrapResultType(BuildContext<MgmtOutputLibrary> context, OperationGroup operationGroup, Input.Operation operation)
-        {
-            if (ResultType != null
-                && operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest
-                && httpRequest.Method == HttpMethod.Put)
-            {
-                // need to check result type is [Resource]Data because
-                // some PUT operation returns differently and we don't want to wrap that with [Resource]
-                var resourceDataType = context.Library.GetResourceData(operationGroup).Type;
-                if (ResultType.Name.Equals(resourceDataType.Name))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

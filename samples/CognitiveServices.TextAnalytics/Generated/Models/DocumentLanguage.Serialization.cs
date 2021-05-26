@@ -16,7 +16,8 @@ namespace CognitiveServices.TextAnalytics.Models
         internal static DocumentLanguage DeserializeDocumentLanguage(JsonElement element)
         {
             string id = default;
-            IReadOnlyList<DetectedLanguage> detectedLanguages = default;
+            DetectedLanguage detectedLanguage = default;
+            IReadOnlyList<TextAnalyticsWarning> warnings = default;
             Optional<DocumentStatistics> statistics = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -25,14 +26,19 @@ namespace CognitiveServices.TextAnalytics.Models
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("detectedLanguages"))
+                if (property.NameEquals("detectedLanguage"))
                 {
-                    List<DetectedLanguage> array = new List<DetectedLanguage>();
+                    detectedLanguage = DetectedLanguage.DeserializeDetectedLanguage(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("warnings"))
+                {
+                    List<TextAnalyticsWarning> array = new List<TextAnalyticsWarning>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(DetectedLanguage.DeserializeDetectedLanguage(item));
+                        array.Add(TextAnalyticsWarning.DeserializeTextAnalyticsWarning(item));
                     }
-                    detectedLanguages = array;
+                    warnings = array;
                     continue;
                 }
                 if (property.NameEquals("statistics"))
@@ -46,7 +52,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     continue;
                 }
             }
-            return new DocumentLanguage(id, detectedLanguages, statistics.Value);
+            return new DocumentLanguage(id, detectedLanguage, warnings, statistics.Value);
         }
     }
 }

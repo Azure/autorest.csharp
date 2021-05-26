@@ -10,16 +10,35 @@ using Azure.Core;
 
 namespace MgmtParent
 {
-    internal partial class AvailabilitySetUpdate : IUtf8JsonSerializable
+    public partial class AvailabilitySetUpdate : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Updator))
+            if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName("updator");
-                writer.WriteStringValue(Updator);
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PlatformUpdateDomainCount))
+            {
+                writer.WritePropertyName("platformUpdateDomainCount");
+                writer.WriteNumberValue(PlatformUpdateDomainCount.Value);
+            }
+            if (Optional.IsDefined(PlatformFaultDomainCount))
+            {
+                writer.WritePropertyName("platformFaultDomainCount");
+                writer.WriteNumberValue(PlatformFaultDomainCount.Value);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
     }

@@ -137,7 +137,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicyData properties)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -156,12 +156,8 @@ namespace Azure.Management.Storage
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new ManagementPolicyData()
-            {
-                Policy = policy
-            };
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(properties);
             request.Content = content;
             return message;
         }
@@ -170,10 +166,10 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
-        /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
+        /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public async Task<Response<ManagementPolicyData>> CreateOrUpdateAsync(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="properties"/> is null. </exception>
+        public async Task<Response<ManagementPolicyData>> CreateOrUpdateAsync(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -183,8 +179,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, accountName, managementPolicyName, policy);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, accountName, managementPolicyName, properties);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -204,10 +204,10 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
-        /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
+        /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="accountName"/> is null. </exception>
-        public Response<ManagementPolicyData> CreateOrUpdate(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicySchema policy = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, or <paramref name="properties"/> is null. </exception>
+        public Response<ManagementPolicyData> CreateOrUpdate(string resourceGroupName, string accountName, ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -217,8 +217,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(accountName));
             }
+            if (properties == null)
+            {
+                throw new ArgumentNullException(nameof(properties));
+            }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, accountName, managementPolicyName, policy);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, accountName, managementPolicyName, properties);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

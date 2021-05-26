@@ -11,29 +11,30 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Management.Storage.Models;
+using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
     /// <summary> Updates container properties as specified in request body. Properties not mentioned in the request will be unchanged. Update fails if the specified container doesn&apos;t already exist. </summary>
-    public partial class BlobContainersUpdateOperation : Operation<BlobContainerData>
+    public partial class BlobContainersUpdateOperation : Operation<BlobContainer>
     {
-        private readonly OperationOrResponseInternals<BlobContainerData> _operation;
+        private readonly OperationOrResponseInternals<BlobContainer> _operation;
 
         /// <summary> Initializes a new instance of BlobContainersUpdateOperation for mocking. </summary>
         protected BlobContainersUpdateOperation()
         {
         }
 
-        internal BlobContainersUpdateOperation(Response<BlobContainerData> response)
+        internal BlobContainersUpdateOperation(ResourceOperationsBase operationsBase, Response<BlobContainerData> response)
         {
-            _operation = new OperationOrResponseInternals<BlobContainerData>(response);
+            _operation = new OperationOrResponseInternals<BlobContainer>(Response.FromValue(new BlobContainer(operationsBase, response.Value), response.GetRawResponse()));
         }
 
         /// <inheritdoc />
         public override string Id => _operation.Id;
 
         /// <inheritdoc />
-        public override BlobContainerData Value => _operation.Value;
+        public override BlobContainer Value => _operation.Value;
 
         /// <inheritdoc />
         public override bool HasCompleted => _operation.HasCompleted;
@@ -51,9 +52,9 @@ namespace Azure.Management.Storage
         public override ValueTask<Response> UpdateStatusAsync(CancellationToken cancellationToken = default) => _operation.UpdateStatusAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<BlobContainerData>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
+        public override ValueTask<Response<BlobContainer>> WaitForCompletionAsync(CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(cancellationToken);
 
         /// <inheritdoc />
-        public override ValueTask<Response<BlobContainerData>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
+        public override ValueTask<Response<BlobContainer>> WaitForCompletionAsync(TimeSpan pollingInterval, CancellationToken cancellationToken = default) => _operation.WaitForCompletionAsync(pollingInterval, cancellationToken);
     }
 }
