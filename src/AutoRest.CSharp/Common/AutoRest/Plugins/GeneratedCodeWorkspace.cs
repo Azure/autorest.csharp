@@ -30,13 +30,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
         private static Task<Project>? _cachedProject;
 
-        private readonly ImmutableHashSet<string> _suppressedTypeNames;
         private Project _project;
 
-        private GeneratedCodeWorkspace(Project generatedCodeProject, ImmutableHashSet<string> suppressedTypeNames)
+        private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
             _project = generatedCodeProject;
-            _suppressedTypeNames = suppressedTypeNames;
         }
 
         /// <summary>
@@ -62,11 +60,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
         {
             var compilation = await _project.GetCompilationAsync();
-            if (compilation == null)
-            {
-                yield break;
-            }
+            Debug.Assert(compilation != null);
 
+            var suppressedTypeNames = GetSuppressedTypeNames(compilation);
             List<Task<Document?>> documents = new List<Task<Document?>>();
             foreach (Document document in _project.Documents)
             {
@@ -76,7 +72,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     continue;
                 }
 
-                documents.Add(Task.Run(() => ProcessDocument(compilation, document)));
+                documents.Add(Task.Run(() => ProcessDocument(compilation, document, suppressedTypeNames)));
             }
 
             foreach (var task in documents)
@@ -90,13 +86,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
-        private async Task<Document?> ProcessDocument(Compilation compilation, Document document)
+        private async Task<Document?> ProcessDocument(Compilation compilation, Document document, ImmutableHashSet<string> suppressedTypeNames)
         {
             var syntaxTree = await document.GetSyntaxTreeAsync();
             if (syntaxTree != null)
             {
                 var semanticModel = compilation.GetSemanticModel(syntaxTree);
-                if (ContainsSuppressedType(syntaxTree, semanticModel))
+                if (ContainsSuppressedType(syntaxTree, semanticModel, suppressedTypeNames))
                 {
                     return null;
                 }
@@ -110,8 +106,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return document;
         }
 
-        private bool ContainsSuppressedType(SyntaxTree syntaxTree, SemanticModel semanticModel)
+        private static ImmutableHashSet<string> GetSuppressedTypeNames(Compilation compilation)
         {
+            var suppressTypeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSuppressTypeAttribute).FullName!)!;
+            return compilation.Assembly.GetAttributes()
+                .Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, suppressTypeAttribute))
+                .Select(a => a.ConstructorArguments[0].Value)
+                .OfType<string>()
+                .ToImmutableHashSet();
+        }
+
+        private static bool ContainsSuppressedType(SyntaxTree syntaxTree, SemanticModel semanticModel, ImmutableHashSet<string> suppressedTypeNames)
+        {
+            if (suppressedTypeNames.IsEmpty)
+            {
+                return false;
+            }
+
             var typeDeclarationSyntax = syntaxTree.GetRoot().DescendantNodes()
                 .OfType<BaseTypeDeclarationSyntax>()
                 .FirstOrDefault();
@@ -125,7 +136,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             while (typeSymbol != null)
             {
                 var fullName = typeSymbol.ToDisplayString(_fullyQualifiedNameFormat);
-                if (_suppressedTypeNames.Contains(typeSymbol.Name) || _suppressedTypeNames.Contains(fullName))
+                if (suppressedTypeNames.Contains(typeSymbol.Name) || suppressedTypeNames.Contains(fullName))
                 {
                     return true;
                 }
@@ -167,15 +178,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 }
             }
 
-            var compilation = (await generatedCodeProject.GetCompilationAsync())!;
-            var suppressTypeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSuppressTypeAttribute).FullName!)!;
-            var suppressedTypeNames = compilation.Assembly.GetAttributes()
-                .Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, suppressTypeAttribute))
-                .Select(a => a.ConstructorArguments[0].Value)
-                .OfType<string>()
-                .ToImmutableHashSet();
-
-            return new GeneratedCodeWorkspace(generatedCodeProject, suppressedTypeNames);
+            return new GeneratedCodeWorkspace(generatedCodeProject);
         }
 
         private static Project CreateGeneratedCodeProject()
