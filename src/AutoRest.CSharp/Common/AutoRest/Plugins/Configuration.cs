@@ -49,23 +49,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult(),
                 autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
                 GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
-                Get(autoRest, "save-inputs"),
-                Get(autoRest, "azure-arm"),
-                Get(autoRest, "public-clients"),
-                Get(autoRest, "model-namespace"),
-                Get(autoRest, "head-as-boolean"),
-                Get(autoRest, "skip-csproj-packagereference"),
-                Get(autoRest, "low-level-client"),
+                GetOptionValue(autoRest, "save-inputs"),
+                GetOptionValue(autoRest, "azure-arm"),
+                GetOptionValue(autoRest, "public-clients"),
+                GetOptionValue(autoRest, "model-namespace"),
+                GetOptionValue(autoRest, "head-as-boolean"),
+                GetOptionValue(autoRest, "skip-csproj-packagereference"),
+                GetOptionValue(autoRest, "low-level-client"),
                 MgmtConfiguration.GetConfiguration(autoRest)
             );
         }
 
-        private static bool Get (IPluginCommunication autoRest, string option)
+        private static bool GetOptionValue(IPluginCommunication autoRest, string option)
         {
-            return autoRest.GetValue<bool?>(option).GetAwaiter().GetResult() ?? GetDefault(option)!.Value;
+            return autoRest.GetValue<bool?>(option).GetAwaiter().GetResult() ?? GetDefaultOptionValue(option)!.Value;
         }
 
-        public static bool? GetDefault (string option)
+        public static bool? GetDefaultOptionValue(string option)
         {
             switch (option)
             {

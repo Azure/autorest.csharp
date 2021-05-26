@@ -36,9 +36,9 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
-        private static void WriteIfNotDefault (Utf8JsonWriter writer, string option, bool value)
+        private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, bool value)
         {
-            var defaultValue = Configuration.GetDefault (option);
+            var defaultValue = Configuration.GetDefaultOptionValue (option);
             if (!defaultValue.HasValue || defaultValue.Value != value)
             {
                 writer.WriteBoolean(option, value);
@@ -84,15 +84,15 @@ namespace AutoRest.CSharp.AutoRest.Communication
             return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder);
         }
 
-        private static bool ReadOrDefault (JsonElement root, string option)
+        private static bool ReadOption(JsonElement root, string option)
         {
-            if (root.TryGetProperty (option, out JsonElement value))
+            if (root.TryGetProperty(option, out JsonElement value))
             {
-                return value.GetBoolean ();
+                return value.GetBoolean();
             }
             else
             {
-                return Configuration.GetDefault (option)!.Value;
+                return Configuration.GetDefaultOptionValue(option)!.Value;
             }
         }
 
@@ -113,12 +113,12 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
-                ReadOrDefault(root, "azure-arm"),
-                ReadOrDefault(root, "public-clients"),
-                ReadOrDefault(root, "model-namespace"),
-                ReadOrDefault(root, "head-as-boolean"),
-                ReadOrDefault(root, "skip-csproj-packagereference"),
-                ReadOrDefault(root, "low-level-client"),
+                ReadOption(root, "azure-arm"),
+                ReadOption(root, "public-clients"),
+                ReadOption(root, "model-namespace"),
+                ReadOption(root, "head-as-boolean"),
+                ReadOption(root, "skip-csproj-packagereference"),
+                ReadOption(root, "low-level-client"),
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }
