@@ -65,7 +65,7 @@ namespace TenantOnly
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(billingAccountName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
+                return StartCreateOrUpdate(billingAccountName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@ namespace TenantOnly
                 }
 
                 var operation = await StartCreateOrUpdateAsync(billingAccountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {

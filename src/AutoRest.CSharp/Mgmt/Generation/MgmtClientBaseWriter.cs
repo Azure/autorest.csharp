@@ -15,8 +15,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal abstract class MgmtClientBaseWriter : ClientWriter
     {
-        protected const string ClientDiagnosticsField = "_clientDiagnostics";
-        protected const string PipelineField = "_pipeline";
         protected const string RestClientField = "_restClient";
 
         protected MgmtRestClient? _restClient;
