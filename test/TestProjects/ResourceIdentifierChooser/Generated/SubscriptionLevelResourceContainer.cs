@@ -161,6 +161,26 @@ namespace ResourceIdentifierChooser
             }
         }
 
+        /// <summary> Filters the list of <see cref="SubscriptionLevelResource" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="SubscriptionLevelResource" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<SubscriptionLevelResource> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, SubscriptionLevelResource>(results, genericResource => new SubscriptionLevelResourceOperations(genericResource, genericResource.Id as SubscriptionResourceIdentifier).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="SubscriptionLevelResource" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="SubscriptionLevelResource" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<SubscriptionLevelResource> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, SubscriptionLevelResource>(results, genericResource => new SubscriptionLevelResourceOperations(genericResource, genericResource.Id as SubscriptionResourceIdentifier).Get().Value);
+        }
+
         /// <summary> Filters the list of SubscriptionLevelResource for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
