@@ -20,7 +20,6 @@ namespace Azure.Management.Storage
     public partial class FileShareOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, FileShare>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
         internal FileSharesRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="FileShareOperations"/> class for mocking. </summary>
@@ -34,8 +33,7 @@ namespace Azure.Management.Storage
         protected internal FileShareOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = Pipeline;
-            RestClient = new FileSharesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
+            RestClient = new FileSharesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/fileServices/default/shares";

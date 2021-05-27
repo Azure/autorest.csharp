@@ -19,7 +19,6 @@ namespace ResourceIdentifierChooser
     public partial class TenantLevelResourceOperations : ResourceOperationsBase<TenantResourceIdentifier, TenantLevelResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
         internal TenantLevelResourcesRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="TenantLevelResourceOperations"/> class for mocking. </summary>
@@ -33,9 +32,8 @@ namespace ResourceIdentifierChooser
         protected internal TenantLevelResourceOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = Pipeline;
             Id.TryGetSubscriptionId(out var subscriptionId);
-            RestClient = new TenantLevelResourcesRestOperations(_clientDiagnostics, _pipeline, subscriptionId, BaseUri);
+            RestClient = new TenantLevelResourcesRestOperations(_clientDiagnostics, Pipeline, subscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/TenantLevelResources";

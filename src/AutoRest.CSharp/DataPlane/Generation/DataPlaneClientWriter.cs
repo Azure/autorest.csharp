@@ -25,8 +25,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class DataPlaneClientWriter : ClientWriter
     {
-        protected const string PipelineField = "_" + PipelineVariable;
-
         public void WriteClient(CodeWriter writer, DataPlaneClient client, BuildContext context)
         {
             var cs = client.Type;
@@ -36,7 +34,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationSummary(client.Description);
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
-                    WriteClientFields(writer, client.RestClient);
+                    WriteClientFields(writer, client.RestClient, true);
                     WriteClientCtors(writer, client, context);
 
                     foreach (var clientMethod in client.Methods)

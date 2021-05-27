@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     if (!isSingleton)
                     {
-                        WriteClientFields(writer, resourceOperation.RestClient);
+                        WriteClientFields(writer, resourceOperation.RestClient, false);
                     }
                     WriteClientCtors(writer, resourceOperation, isSingleton);
                     WriteClientProperties(writer, resourceOperation, context.Configuration.MgmtConfiguration);

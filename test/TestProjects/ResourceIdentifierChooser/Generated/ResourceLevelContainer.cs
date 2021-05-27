@@ -9,7 +9,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Core.Resources;
@@ -29,14 +28,12 @@ namespace ResourceIdentifierChooser
         internal ResourceLevelContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private ResourceLevelsRestOperations _restClient => new ResourceLevelsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private ResourceLevelsRestOperations _restClient => new ResourceLevelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -49,7 +46,7 @@ namespace ResourceIdentifierChooser
         /// <summary> The operation to create or update a ResourceLevel. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="parameters"> The ResourceLevel to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public Response<ResourceLevel> CreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.CreateOrUpdate");
@@ -77,7 +74,7 @@ namespace ResourceIdentifierChooser
         /// <summary> The operation to create or update a ResourceLevel. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="parameters"> The ResourceLevel to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async Task<Response<ResourceLevel>> CreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.CreateOrUpdate");
@@ -106,7 +103,7 @@ namespace ResourceIdentifierChooser
         /// <summary> The operation to create or update a ResourceLevel. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="parameters"> The ResourceLevel to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public ResourceLevelsPutOperation StartCreateOrUpdate(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartCreateOrUpdate");
@@ -135,7 +132,7 @@ namespace ResourceIdentifierChooser
         /// <summary> The operation to create or update a ResourceLevel. Please note some properties can be set only during creation. </summary>
         /// <param name="resourceLevelsName"> The String to use. </param>
         /// <param name="parameters"> The ResourceLevel to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async Task<ResourceLevelsPutOperation> StartCreateOrUpdateAsync(string resourceLevelsName, ResourceLevelData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.StartCreateOrUpdate");
@@ -163,7 +160,7 @@ namespace ResourceIdentifierChooser
 
         /// <inheritdoc />
         /// <param name="resourceLevelsName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public override Response<ResourceLevel> Get(string resourceLevelsName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.Get");
@@ -187,7 +184,7 @@ namespace ResourceIdentifierChooser
 
         /// <inheritdoc />
         /// <param name="resourceLevelsName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async override Task<Response<ResourceLevel>> GetAsync(string resourceLevelsName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceLevelContainer.Get");
@@ -209,52 +206,10 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <summary> Filters the list of <see cref="ResourceLevel" /> for this resource group. </summary>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="ResourceLevel" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<ResourceLevel> List(int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
-        }
-
-        /// <summary> Filters the list of <see cref="ResourceLevel" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="ResourceLevel" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<ResourceLevel> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
-        }
-
-        /// <summary> Filters the list of <see cref="ResourceLevel" /> for this resource group. </summary>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="ResourceLevel" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<ResourceLevel> ListAsync(int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
-        }
-
-        /// <summary> Filters the list of <see cref="ResourceLevel" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="ResourceLevel" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<ResourceLevel> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, ResourceLevel>(results, genericResource => new ResourceLevelOperations(genericResource, genericResource.Id as ResourceIdentifier).Get().Value);
-        }
-
         /// <summary> Filters the list of ResourceLevel for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
@@ -276,7 +231,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Filters the list of ResourceLevel for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {

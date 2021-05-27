@@ -30,10 +30,9 @@ namespace SubscriptionExtensions
         #endregion
 
         #region Oven
-        private static OvensRestOperations GetOvensRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, string subscriptionId, Uri endpoint = null)
+        private static OvensRestOperations GetOvensRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            var httpPipeline = ManagementPipelineBuilder.Build(credential, endpoint, clientOptions);
-            return new OvensRestOperations(clientDiagnostics, httpPipeline, subscriptionId, endpoint);
+            return new OvensRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the Ovens for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -42,10 +41,10 @@ namespace SubscriptionExtensions
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static AsyncPageable<Oven> ListOvenAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListAllAsync(clientDiagnostics, restOperations);
                 return new PhWrappingAsyncPageable<OvenData, Oven>(
                 result,
@@ -100,10 +99,10 @@ namespace SubscriptionExtensions
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static Pageable<Oven> ListOven(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListAll(clientDiagnostics, restOperations);
                 return new PhWrappingPageable<OvenData, Oven>(
                 result,

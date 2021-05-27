@@ -19,7 +19,6 @@ namespace Azure.Management.Storage
     public partial class BlobServiceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, BlobService>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
         internal BlobServicesRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="BlobServiceOperations"/> class for mocking. </summary>
@@ -33,8 +32,7 @@ namespace Azure.Management.Storage
         protected internal BlobServiceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = Pipeline;
-            RestClient = new BlobServicesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
+            RestClient = new BlobServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices";

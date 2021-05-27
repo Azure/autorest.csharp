@@ -6,8 +6,12 @@
     <Nullable>annotations</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <IncludeManagementSharedCode>true</IncludeManagementSharedCode>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210518.3" />
+    <PackageReference Include="Azure.ResourceManager.Core" Version="1.0.0-alpha.20210526.3" />
   </ItemGroup>
 
   <ItemGroup>

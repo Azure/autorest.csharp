@@ -31,14 +31,12 @@ namespace Azure.Management.Storage
         internal BlobServiceContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private BlobServicesRestOperations _restClient => new BlobServicesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private BlobServicesRestOperations _restClient => new BlobServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -51,7 +49,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a BlobService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public Response<BlobService> CreateOrUpdate(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.CreateOrUpdate");
@@ -79,7 +77,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a BlobService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async Task<Response<BlobService>> CreateOrUpdateAsync(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.CreateOrUpdate");
@@ -108,7 +106,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a BlobService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public BlobServicesSetServicePropertiesOperation StartCreateOrUpdate(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.StartCreateOrUpdate");
@@ -137,7 +135,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a BlobService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of a storage account’s Blob service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async Task<BlobServicesSetServicePropertiesOperation> StartCreateOrUpdateAsync(string accountName, BlobServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.StartCreateOrUpdate");
@@ -165,7 +163,7 @@ namespace Azure.Management.Storage
 
         /// <inheritdoc />
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public override Response<BlobService> Get(string accountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.Get");
@@ -189,7 +187,7 @@ namespace Azure.Management.Storage
 
         /// <inheritdoc />
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async override Task<Response<BlobService>> GetAsync(string accountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.Get");
@@ -211,11 +209,10 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Filters the list of <see cref="BlobService" /> for this resource group. </summary>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BlobService" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<BlobService> List(int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<BlobService> List(CancellationToken cancellationToken = default)
         {
             Page<BlobService> FirstPageFunc(int? pageSizeHint)
             {
@@ -235,22 +232,10 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Filters the list of <see cref="BlobService" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="BlobService" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<BlobService> List(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, BlobService>(results, genericResource => new BlobServiceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
-        }
-
-        /// <summary> Filters the list of <see cref="BlobService" /> for this resource group. </summary>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <summary> List blob services of storage account. It returns a collection of one object named default. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BlobService" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<BlobService> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<BlobService> ListAsync(CancellationToken cancellationToken = default)
         {
             async Task<Page<BlobService>> FirstPageFunc(int? pageSizeHint)
             {
@@ -270,21 +255,10 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
-        /// <summary> Filters the list of <see cref="BlobService" /> for this resource group. Makes an additional network call to retrieve the full data model for each resource group. </summary>
-        /// <param name="nameFilter"> The filter used in this operation. </param>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="BlobService" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<BlobService> ListAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, BlobService>(results, genericResource => new BlobServiceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
-        }
-
         /// <summary> Filters the list of BlobService for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
@@ -306,7 +280,7 @@ namespace Azure.Management.Storage
         /// <summary> Filters the list of BlobService for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {

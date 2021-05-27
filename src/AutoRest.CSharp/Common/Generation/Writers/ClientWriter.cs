@@ -24,12 +24,15 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         protected const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
         protected const string PipelineVariable = "pipeline";
         protected const string PipelineProperty = "Pipeline";
+        protected const string PipelineField = "_" + PipelineVariable;
 
         protected string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        protected void WriteClientFields(CodeWriter writer, RestClient client)
+        protected void WriteClientFields(CodeWriter writer, RestClient client, bool writePipelineField)
         {
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
+            if (writePipelineField)
+                writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
             writer.Append($"internal {client.Type} RestClient").LineRaw(" { get; }");
         }
 
