@@ -10,7 +10,7 @@ using additionalProperties.Models;
 
 namespace additionalProperties
 {
-    /// <summary> Model factory for AdditionalProperties read-only models. </summary>
+    /// <summary> Model factory for read-only models. </summary>
     public static partial class AdditionalPropertiesModelFactory
     {
         /// <summary> Initializes new instance of PetAPTrue class. </summary>

@@ -267,7 +267,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(parameter =>
             {
-                if (IsStringLike(parameter.Parameter.Type))
+                if (parameter.Parameter.Type.IsStringLike())
                 {
                     // for string-like parameters, we shall write them as string as base class
                     return new Parameter(

@@ -10,7 +10,7 @@ using body_complex.Models;
 
 namespace body_complex
 {
-    /// <summary> Model factory for AutoRestComplexTestService read-only models. </summary>
+    /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestComplexTestServiceModelFactory
     {
         /// <summary> Initializes new instance of DotFish class. </summary>
