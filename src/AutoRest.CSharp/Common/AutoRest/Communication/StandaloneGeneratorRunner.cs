@@ -36,6 +36,15 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
+        private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, bool value)
+        {
+            var defaultValue = Configuration.GetDefaultOptionValue (option);
+            if (!defaultValue.HasValue || defaultValue.Value != value)
+            {
+                writer.WriteBoolean(option, value);
+            }
+        }
+
         internal static string SaveConfiguration(Configuration configuration)
         {
             using (var memoryStream = new MemoryStream())
@@ -54,12 +63,12 @@ namespace AutoRest.CSharp.AutoRest.Communication
                         writer.WriteStringValue(NormalizePath(configuration, sharedSourceFolder));
                     }
                     writer.WriteEndArray();
-                    writer.WriteBoolean(nameof(Configuration.AzureArm), configuration.AzureArm);
-                    writer.WriteBoolean(nameof(Configuration.PublicClients), configuration.PublicClients);
-                    writer.WriteBoolean(nameof(Configuration.ModelNamespace), configuration.ModelNamespace);
-                    writer.WriteBoolean(nameof(Configuration.HeadAsBoolean), configuration.HeadAsBoolean);
-                    writer.WriteBoolean(nameof(Configuration.SkipCSProjPackageReference), configuration.SkipCSProjPackageReference);
-                    writer.WriteBoolean(nameof(Configuration.LowLevelClient), configuration.LowLevelClient);
+                    WriteIfNotDefault(writer, "azure-arm", configuration.AzureArm);
+                    WriteIfNotDefault(writer, "public-clients", configuration.PublicClients);
+                    WriteIfNotDefault(writer, "model-namespace", configuration.ModelNamespace);
+                    WriteIfNotDefault(writer, "head-as-boolean", configuration.HeadAsBoolean);
+                    WriteIfNotDefault(writer, "skip-csproj-packagereference", configuration.SkipCSProjPackageReference);
+                    WriteIfNotDefault(writer, "low-level-client", configuration.LowLevelClient);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -73,6 +82,18 @@ namespace AutoRest.CSharp.AutoRest.Communication
         private static string NormalizePath(Configuration configuration, string sharedSourceFolder)
         {
             return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder);
+        }
+
+        private static bool ReadOption(JsonElement root, string option)
+        {
+            if (root.TryGetProperty(option, out JsonElement value))
+            {
+                return value.GetBoolean();
+            }
+            else
+            {
+                return Configuration.GetDefaultOptionValue(option)!.Value;
+            }
         }
 
         internal static Configuration LoadConfiguration(string basePath, string json)
@@ -92,12 +113,12 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
-                root.GetProperty(nameof(Configuration.AzureArm)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.ModelNamespace)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.LowLevelClient)).GetBoolean(),
+                ReadOption(root, "azure-arm"),
+                ReadOption(root, "public-clients"),
+                ReadOption(root, "model-namespace"),
+                ReadOption(root, "head-as-boolean"),
+                ReadOption(root, "skip-csproj-packagereference"),
+                ReadOption(root, "low-level-client"),
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }

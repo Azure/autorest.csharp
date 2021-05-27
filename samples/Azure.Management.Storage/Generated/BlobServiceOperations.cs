@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -17,6 +18,10 @@ namespace Azure.Management.Storage
     /// <summary> A class representing the operations that can be performed over a specific BlobService. </summary>
     public partial class BlobServiceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, BlobService>
     {
+        private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
+        internal BlobServicesRestOperations RestClient { get; }
+
         /// <summary> Initializes a new instance of the <see cref="BlobServiceOperations"/> class for mocking. </summary>
         protected BlobServiceOperations()
         {
@@ -27,21 +32,54 @@ namespace Azure.Management.Storage
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         protected internal BlobServiceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = Pipeline;
+            RestClient = new BlobServicesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/blobServices";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override Response<BlobService> Get(CancellationToken cancellationToken = default)
+        public async override Task<Response<BlobService>> GetAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            using var scope = _clientDiagnostics.CreateScope("BlobServiceOperations.GetServiceProperties");
+            scope.Start();
+            try
+            {
+                var response = await RestClient.GetServicePropertiesAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new BlobService(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
-        public override Task<Response<BlobService>> GetAsync(CancellationToken cancellationToken = default)
+        public override Response<BlobService> Get(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            using var scope = _clientDiagnostics.CreateScope("BlobServiceOperations.GetServiceProperties");
+            scope.Start();
+            try
+            {
+                var response = RestClient.GetServiceProperties(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new BlobService(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Lists all available geo-locations. </summary>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        {
+            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Lists all available geo-locations. </summary>
@@ -49,16 +87,7 @@ namespace Azure.Management.Storage
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
-            return ListAvailableLocations(ResourceType);
-        }
-
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of location that may take multiple service requests to iterate over. </returns>
-        /// <exception cref="InvalidOperationException"> The default subscription id is null. </exception>
-        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
-        {
-            return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
+            return ListAvailableLocations(ResourceType, cancellationToken);
         }
     }
 }

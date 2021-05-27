@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace ResourceIdentifierChooser
 {
     /// <summary> A class representing collection of ModelData and their operations over a ResourceGroup. </summary>
-    public partial class ModelDataContainer : ContainerBase<ResourceGroupResourceIdentifier>
+    public partial class ModelDataContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ModelData, ModelDataData>
     {
         /// <summary> Initializes a new instance of the <see cref="ModelDataContainer"/> class for mocking. </summary>
         protected ModelDataContainer()
@@ -153,6 +153,54 @@ namespace ResourceIdentifierChooser
 
                 var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, modelDatasName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new ModelDatasPutOperation(Parent, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="modelDatasName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override Response<ModelData> Get(string modelDatasName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.Get");
+            scope.Start();
+            try
+            {
+                if (modelDatasName == null)
+                {
+                    throw new ArgumentNullException(nameof(modelDatasName));
+                }
+
+                var response = _restClient.Get(Id.ResourceGroupName, modelDatasName, cancellationToken: cancellationToken);
+                return Response.FromValue(new ModelData(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="modelDatasName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<Response<ModelData>> GetAsync(string modelDatasName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ModelDataContainer.Get");
+            scope.Start();
+            try
+            {
+                if (modelDatasName == null)
+                {
+                    throw new ArgumentNullException(nameof(modelDatasName));
+                }
+
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, modelDatasName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new ModelData(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

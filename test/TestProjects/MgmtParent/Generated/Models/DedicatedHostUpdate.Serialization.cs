@@ -10,16 +10,35 @@ using Azure.Core;
 
 namespace MgmtParent
 {
-    internal partial class DedicatedHostUpdate : IUtf8JsonSerializable
+    public partial class DedicatedHostUpdate : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Updator))
+            if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName("updator");
-                writer.WriteStringValue(Updator);
+                writer.WritePropertyName("tags");
+                writer.WriteStartObject();
+                foreach (var item in Tags)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteStringValue(item.Value);
+                }
+                writer.WriteEndObject();
             }
+            writer.WritePropertyName("properties");
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PlatformFaultDomain))
+            {
+                writer.WritePropertyName("platformFaultDomain");
+                writer.WriteNumberValue(PlatformFaultDomain.Value);
+            }
+            if (Optional.IsDefined(AutoReplaceOnFailure))
+            {
+                writer.WritePropertyName("autoReplaceOnFailure");
+                writer.WriteBooleanValue(AutoReplaceOnFailure.Value);
+            }
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
     }

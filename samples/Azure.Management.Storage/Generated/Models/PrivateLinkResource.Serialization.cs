@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage.Models
 {
-    public partial class PrivateLinkResourceData : IUtf8JsonSerializable
+    public partial class PrivateLinkResource : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -33,9 +33,9 @@ namespace Azure.Management.Storage.Models
             writer.WriteEndObject();
         }
 
-        internal static PrivateLinkResourceData DeserializePrivateLinkResourceData(JsonElement element)
+        internal static PrivateLinkResource DeserializePrivateLinkResource(JsonElement element)
         {
-            ResourceGroupResourceIdentifier id = default;
+            TenantResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> groupId = default;
@@ -106,7 +106,7 @@ namespace Azure.Management.Storage.Models
                     continue;
                 }
             }
-            return new PrivateLinkResourceData(id, name, type, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
+            return new PrivateLinkResource(id, name, type, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames));
         }
     }
 }

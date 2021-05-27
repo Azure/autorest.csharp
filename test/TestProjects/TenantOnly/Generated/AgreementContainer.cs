@@ -36,7 +36,7 @@ namespace TenantOnly
         private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private AgreementsRestOperations _restClient => new AgreementsRestOperations(_clientDiagnostics, _pipeline);
+        private AgreementsRestOperations _restClient => new AgreementsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;

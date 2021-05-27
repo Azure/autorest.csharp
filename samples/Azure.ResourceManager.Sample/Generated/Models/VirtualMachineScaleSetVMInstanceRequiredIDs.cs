@@ -12,7 +12,7 @@ using System.Linq;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Specifies a list of virtual machine instance IDs from the VM scale set. </summary>
-    internal partial class VirtualMachineScaleSetVMInstanceRequiredIDs
+    public partial class VirtualMachineScaleSetVMInstanceRequiredIDs
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceRequiredIDs. </summary>
         /// <param name="instanceIds"> The virtual machine scale set instance ids. </param>

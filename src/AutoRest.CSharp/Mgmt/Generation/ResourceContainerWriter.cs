@@ -16,10 +16,10 @@ using Azure.ResourceManager.Core;
 using Azure.Core.Pipeline;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using System.Diagnostics;
+using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -34,8 +34,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// </summary>
     internal class ResourceContainerWriter : ClientWriter
     {
-        private const string ClientDiagnosticsField = "_clientDiagnostics";
-        private const string PipelineField = "_pipeline";
         private const string RestClientField = "_restClient";
         private const string _parentProperty = "Parent";
         private CodeWriter _writer;
@@ -322,7 +320,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     continue;
                 }
-                else if (IsStringLike(parameter.Type) && IsMandatory(parameter))
+                else if (parameter.Type.IsStringLike() && IsMandatory(parameter))
                 {
                     passThru = false;
                     if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
@@ -348,7 +346,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // 2. ignoring optional parameters such as `expand`
             if (!method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase))
             {
-                var lastString = parameterMapping.LastOrDefault(parameter => IsStringLike(parameter.Parameter.Type) && IsMandatory(parameter.Parameter));
+                var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.IsStringLike() && IsMandatory(parameter.Parameter));
                 if (lastString?.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
                 {
                     lastString.IsPassThru = true;
@@ -396,16 +394,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        /// <summary>
-        /// Is the input type string or an Enum that is modeled as string.
-        /// </summary>
-        /// <param name="type">Type to check.</param>
-        /// <returns>Is the input type string or an Enum that is modeled as string.</returns>
-        private bool IsStringLike(CSharp.Generation.Types.CSharpType type)
-        {
-            return type.Equals(typeof(string)) || type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string));
-        }
-
         private void WriteContainerProperties()
         {
             var resourceType = _resourceContainer.GetValidResourceValue();
@@ -434,7 +422,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             IEnumerable<Parameter> passThruParameters = parameterMapping.Where(p => p.IsPassThru).Select(parameter =>
             {
-                if (IsStringLike(parameter.Parameter.Type))
+                if (parameter.Parameter.Type.IsStringLike())
                 {
                     // for string-like parameters, we shall write them as string as base class
                     return new Parameter(
@@ -634,7 +622,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line();
             _writer.Line($"// Builders.");
-            _writer.LineRaw($"// public ArmBuilder<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}> Construct() {{ }}");
+            _writer.LineRaw($"// public ArmBuilder<{_resourceContainer.ResourceIdentifierType.Name}, {_resource.Type.Name}, {_resourceData.Type.Name}> Construct() {{ }}");
         }
     }
 }

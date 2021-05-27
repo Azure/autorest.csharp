@@ -10,7 +10,7 @@ using model_flattening.Models;
 
 namespace model_flattening
 {
-    /// <summary> Model factory for AutoRestResourceFlatteningTestService read-only models. </summary>
+    /// <summary> Model factory for read-only models. </summary>
     public static partial class AutoRestResourceFlatteningTestServiceModelFactory
     {
         /// <summary> Initializes new instance of Resource class. </summary>

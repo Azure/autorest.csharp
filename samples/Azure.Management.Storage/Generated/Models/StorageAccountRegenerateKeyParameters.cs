@@ -10,7 +10,7 @@ using System;
 namespace Azure.Management.Storage.Models
 {
     /// <summary> The parameters used to regenerate the storage account key. </summary>
-    internal partial class StorageAccountRegenerateKeyParameters
+    public partial class StorageAccountRegenerateKeyParameters
     {
         /// <summary> Initializes a new instance of StorageAccountRegenerateKeyParameters. </summary>
         /// <param name="keyName"> The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2. </param>

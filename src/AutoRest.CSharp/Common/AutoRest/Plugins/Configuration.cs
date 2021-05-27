@@ -49,15 +49,43 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 autoRest.GetValue<string?>("namespace").GetAwaiter().GetResult(),
                 autoRest.GetValue<string?>("library-name").GetAwaiter().GetResult(),
                 GetRequiredOption<string[]>(autoRest, "shared-source-folders").Select(TrimFileSuffix).ToArray(),
-                autoRest.GetValue<bool?>("save-inputs").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("azure-arm").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("public-clients").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("model-namespace").GetAwaiter().GetResult() ?? true,
-                autoRest.GetValue<bool?>("head-as-boolean").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("skip-csproj-packagereference").GetAwaiter().GetResult() ?? false,
-                autoRest.GetValue<bool?>("low-level-client").GetAwaiter().GetResult() ?? false,
+                GetOptionValue(autoRest, "save-inputs"),
+                GetOptionValue(autoRest, "azure-arm"),
+                GetOptionValue(autoRest, "public-clients"),
+                GetOptionValue(autoRest, "model-namespace"),
+                GetOptionValue(autoRest, "head-as-boolean"),
+                GetOptionValue(autoRest, "skip-csproj-packagereference"),
+                GetOptionValue(autoRest, "low-level-client"),
                 MgmtConfiguration.GetConfiguration(autoRest)
             );
+        }
+
+        private static bool GetOptionValue(IPluginCommunication autoRest, string option)
+        {
+            return autoRest.GetValue<bool?>(option).GetAwaiter().GetResult() ?? GetDefaultOptionValue(option)!.Value;
+        }
+
+        public static bool? GetDefaultOptionValue(string option)
+        {
+            switch (option)
+            {
+                case "save-inputs":
+                    return false;
+                case "azure-arm":
+                    return false;
+                case "public-clients":
+                    return false;
+                case "model-namespace":
+                    return true;
+                case "head-as-boolean":
+                    return false;
+                case "skip-csproj-packagereference":
+                    return false;
+                case "low-level-client":
+                    return false;
+                default:
+                    return null;
+            }
         }
 
         private static T GetRequiredOption<T>(IPluginCommunication autoRest, string name)

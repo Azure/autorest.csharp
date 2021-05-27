@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace ResourceIdentifierChooser
 {
     /// <summary> A class representing collection of ResourceGroupResource and their operations over a ResourceGroup. </summary>
-    public partial class ResourceGroupResourceContainer : ContainerBase<ResourceGroupResourceIdentifier>
+    public partial class ResourceGroupResourceContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ResourceGroupResource, ResourceGroupResourceData>
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceContainer"/> class for mocking. </summary>
         protected ResourceGroupResourceContainer()
@@ -153,6 +153,54 @@ namespace ResourceIdentifierChooser
 
                 var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, resourceGroupResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new ResourceGroupResourcesPutOperation(Parent, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="resourceGroupResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override Response<ResourceGroupResource> Get(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.Get");
+            scope.Start();
+            try
+            {
+                if (resourceGroupResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceGroupResourcesName));
+                }
+
+                var response = _restClient.Get(Id.ResourceGroupName, resourceGroupResourcesName, cancellationToken: cancellationToken);
+                return Response.FromValue(new ResourceGroupResource(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="resourceGroupResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<Response<ResourceGroupResource>> GetAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.Get");
+            scope.Start();
+            try
+            {
+                if (resourceGroupResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(resourceGroupResourcesName));
+                }
+
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, resourceGroupResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new ResourceGroupResource(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

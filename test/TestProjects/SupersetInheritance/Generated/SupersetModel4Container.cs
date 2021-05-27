@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace SupersetInheritance
 {
     /// <summary> A class representing collection of SupersetModel4 and their operations over a ResourceGroup. </summary>
-    public partial class SupersetModel4Container : ContainerBase<ResourceGroupResourceIdentifier>
+    public partial class SupersetModel4Container : ResourceContainerBase<ResourceGroupResourceIdentifier, SupersetModel4, SupersetModel4Data>
     {
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Container"/> class for mocking. </summary>
         protected SupersetModel4Container()
@@ -153,6 +153,54 @@ namespace SupersetInheritance
 
                 var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, supersetModel4SName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new SupersetModel4SPutOperation(Parent, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="supersetModel4SName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override Response<SupersetModel4> Get(string supersetModel4SName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.Get");
+            scope.Start();
+            try
+            {
+                if (supersetModel4SName == null)
+                {
+                    throw new ArgumentNullException(nameof(supersetModel4SName));
+                }
+
+                var response = _restClient.Get(Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken);
+                return Response.FromValue(new SupersetModel4(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="supersetModel4SName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<Response<SupersetModel4>> GetAsync(string supersetModel4SName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SupersetModel4Container.Get");
+            scope.Start();
+            try
+            {
+                if (supersetModel4SName == null)
+                {
+                    throw new ArgumentNullException(nameof(supersetModel4SName));
+                }
+
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, supersetModel4SName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SupersetModel4(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

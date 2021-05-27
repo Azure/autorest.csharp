@@ -5,6 +5,10 @@ using System.Text.Json;
 using Azure.Core;
 using NamespaceForEnums;
 
+[assembly:CodeGenSuppressType("ModelToBeSkipped")]
+[assembly:CodeGenSuppressType("EnumToBeSkipped")]
+[assembly:CodeGenSuppressType("EnumToBeSkippedExtensions")]
+
 namespace CustomNamespace
 {
     [CodeGenModel("Model")]

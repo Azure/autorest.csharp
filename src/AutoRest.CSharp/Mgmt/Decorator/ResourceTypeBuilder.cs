@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string Subscriptions = "subscriptions";
         public const string ResourceGroups = "resourceGroups";
         public const string Tenant = "tenant";
+        public const string Locations = "locations";
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
         public static string ResourceType(this OperationGroup operationsGroup, MgmtConfiguration config)

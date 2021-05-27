@@ -8,7 +8,7 @@
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> The input for OrchestrationServiceState. </summary>
-    internal partial class OrchestrationServiceStateInput
+    public partial class OrchestrationServiceStateInput
     {
         /// <summary> Initializes a new instance of OrchestrationServiceStateInput. </summary>
         /// <param name="serviceName"> The name of the service. </param>

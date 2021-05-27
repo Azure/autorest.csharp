@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace ResourceIdentifierChooser
 {
     /// <summary> A class representing collection of SubscriptionLevelResource and their operations over a Subscription. </summary>
-    public partial class SubscriptionLevelResourceContainer : ContainerBase<SubscriptionResourceIdentifier>
+    public partial class SubscriptionLevelResourceContainer : ResourceContainerBase<SubscriptionResourceIdentifier, SubscriptionLevelResource, SubscriptionLevelResourceData>
     {
         /// <summary> Initializes a new instance of the <see cref="SubscriptionLevelResourceContainer"/> class for mocking. </summary>
         protected SubscriptionLevelResourceContainer()
@@ -122,7 +122,7 @@ namespace ResourceIdentifierChooser
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var originalResponse = _restClient.Put(Id.ResourceGroupName, subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken);
+                var originalResponse = _restClient.Put(Id.Name, subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken);
                 return new SubscriptionLevelResourcesPutOperation(Parent, originalResponse);
             }
             catch (Exception e)
@@ -151,8 +151,56 @@ namespace ResourceIdentifierChooser
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                var originalResponse = await _restClient.PutAsync(Id.ResourceGroupName, subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var originalResponse = await _restClient.PutAsync(Id.Name, subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return new SubscriptionLevelResourcesPutOperation(Parent, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public override Response<SubscriptionLevelResource> Get(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.Get");
+            scope.Start();
+            try
+            {
+                if (subscriptionLevelResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
+                }
+
+                var response = _restClient.Get(Id.Name, subscriptionLevelResourcesName, cancellationToken: cancellationToken);
+                return Response.FromValue(new SubscriptionLevelResource(Parent, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <inheritdoc />
+        /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        public async override Task<Response<SubscriptionLevelResource>> GetAsync(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.Get");
+            scope.Start();
+            try
+            {
+                if (subscriptionLevelResourcesName == null)
+                {
+                    throw new ArgumentNullException(nameof(subscriptionLevelResourcesName));
+                }
+
+                var response = await _restClient.GetAsync(Id.Name, subscriptionLevelResourcesName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new SubscriptionLevelResource(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

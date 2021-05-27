@@ -6,12 +6,10 @@
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
   ],
-  "AzureArm": true,
-  "PublicClients": true,
-  "ModelNamespace": true,
-  "HeadAsBoolean": true,
-  "SkipCSProjPackageReference": true,
-  "LowLevelClient": false,
+  "azure-arm": true,
+  "public-clients": true,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
     "Operations": "Microsoft.Storage/operations",
     "Skus": "Microsoft.Storage/skus",
@@ -22,13 +20,13 @@
     "Operations": "NonResource",
     "Skus": "NonResource",
     "Usages": "NonResource",
-    "PrivateLinkResources": "PrivateLinkResource",
+    "PrivateLinkResources": "NonResource",
     "StorageAccounts": "StorageAccount"
   },
   "OperationGroupToParent": {
     "BlobContainers": "Microsoft.Storage/storageAccounts",
     "FileShares": "Microsoft.Storage/storageAccounts",
     "Usages": "subscriptions",
-    "StorageAccounts": "any"
+    "StorageAccounts": "resourceGroups"
   }
 }
