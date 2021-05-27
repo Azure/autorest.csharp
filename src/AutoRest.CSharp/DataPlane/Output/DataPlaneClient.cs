@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models
         public string ClientShortName { get; }
         public string Description => BuilderHelpers.EscapeXmlDescription(ClientBuilder.CreateDescription(_operationGroup, ClientBuilder.GetClientPrefix(Declaration.Name, _context)));
         public DataPlaneRestClient RestClient => _restClient ??= _context.Library.FindRestClient(_operationGroup);
-        public ClientMethod[] Methods => _methods ??= BuildMethods().ToArray();
+        public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(_operationGroup, RestClient, Declaration).ToArray();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(_operationGroup, RestClient, Declaration).ToArray();
 
@@ -66,30 +66,6 @@ namespace AutoRest.CSharp.Output.Models
                             new Diagnostic($"{Declaration.Name}.Start{name}")
                         );
                     }
-                }
-            }
-        }
-
-        private IEnumerable<ClientMethod> BuildMethods()
-        {
-            foreach (var operation in _operationGroup.Operations)
-            {
-                if (operation.IsLongRunning || operation.Language.Default.Paging != null)
-                {
-                    continue;
-                }
-
-                foreach (var request in operation.Requests)
-                {
-                    var name = operation.CSharpName();
-                    RestClientMethod startMethod = RestClient.GetOperationMethod(request);
-
-                    yield return new ClientMethod(
-                        name,
-                        startMethod,
-                        BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
-                        new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
-                        operation.Accessibility ?? "public");
                 }
             }
         }

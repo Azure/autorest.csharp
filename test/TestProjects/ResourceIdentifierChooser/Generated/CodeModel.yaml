@@ -494,7 +494,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_10
-    - !ObjectSchema &ref_43
+    - !ObjectSchema &ref_45
       type: object
       apiVersions:
         - !ApiVersion 
@@ -562,7 +562,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_47
+    - !ObjectSchema &ref_49
       type: object
       apiVersions:
         - !ApiVersion 
@@ -865,6 +865,86 @@ operationGroups:
             name: Put
             description: ''
         protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_35
+          - !Parameter &ref_43
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_44
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupResourcesName
+                description: ''
+                serializedName: ResourceGroupResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_36
+          - *ref_37
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/ResourceGroupResources/{ResourceGroupResourcesName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_43
+          - *ref_44
+        responses:
+          - !SchemaResponse 
+            schema: *ref_10
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
     language: !Languages 
       default:
         name: ResourceGroupResources
@@ -879,19 +959,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_35
-          - !Parameter &ref_45
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: ''
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_46
+          - !Parameter &ref_47
             schema: *ref_1
             implementation: Method
             required: true
@@ -921,8 +989,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_44
-                schema: *ref_43
+              - !Parameter &ref_46
+                schema: *ref_45
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -947,7 +1015,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_44
+              - *ref_46
             language: !Languages 
               default:
                 name: ''
@@ -961,11 +1029,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_45
-          - *ref_46
+          - *ref_47
         responses:
           - !SchemaResponse 
-            schema: *ref_43
+            schema: *ref_45
             language: !Languages 
               default:
                 name: ''
@@ -982,6 +1049,73 @@ operationGroups:
             name: Put
             description: ''
         protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_35
+          - !Parameter &ref_48
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: tenantLevelResourcesName
+                description: ''
+                serializedName: TenantLevelResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_36
+          - *ref_37
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Compute/TenantLevelResources/{TenantLevelResourcesName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_48
+        responses:
+          - !SchemaResponse 
+            schema: *ref_45
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
     language: !Languages 
       default:
         name: TenantLevelResources
@@ -996,19 +1130,19 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_35
-          - !Parameter &ref_49
+          - !Parameter &ref_51
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
+                name: subscriptionId
                 description: ''
-                serializedName: resourceGroupName
+                serializedName: subscriptionId
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_50
+          - !Parameter &ref_52
             schema: *ref_1
             implementation: Method
             required: true
@@ -1038,8 +1172,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_48
-                schema: *ref_47
+              - !Parameter &ref_50
+                schema: *ref_49
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1064,7 +1198,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_48
+              - *ref_50
             language: !Languages 
               default:
                 name: ''
@@ -1078,11 +1212,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_49
-          - *ref_50
+          - *ref_51
+          - *ref_52
         responses:
           - !SchemaResponse 
-            schema: *ref_47
+            schema: *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -1099,6 +1233,86 @@ operationGroups:
             name: Put
             description: ''
         protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_35
+          - !Parameter &ref_53
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subscriptionId
+                description: ''
+                serializedName: subscriptionId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_54
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subscriptionLevelResourcesName
+                description: ''
+                serializedName: SubscriptionLevelResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_36
+          - *ref_37
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/SubscriptionLevelResources/{SubscriptionLevelResourcesName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_53
+          - *ref_54
+        responses:
+          - !SchemaResponse 
+            schema: *ref_49
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
     language: !Languages 
       default:
         name: SubscriptionLevelResources
@@ -1113,7 +1327,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_35
-          - !Parameter &ref_52
+          - !Parameter &ref_56
             schema: *ref_1
             implementation: Method
             required: true
@@ -1125,7 +1339,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_53
+          - !Parameter &ref_57
             schema: *ref_1
             implementation: Method
             required: true
@@ -1155,7 +1369,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_51
+              - !Parameter &ref_55
                 schema: *ref_30
                 implementation: Method
                 required: true
@@ -1181,7 +1395,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_51
+              - *ref_55
             language: !Languages 
               default:
                 name: ''
@@ -1195,8 +1409,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_52
-          - *ref_53
+          - *ref_56
+          - *ref_57
         responses:
           - !SchemaResponse 
             schema: *ref_30
@@ -1216,6 +1430,86 @@ operationGroups:
             name: Put
             description: ''
         protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_35
+          - !Parameter &ref_58
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_59
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceLevelsName
+                description: ''
+                serializedName: ResourceLevelsName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_36
+          - *ref_37
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ResourceLevels/{ResourceLevelsName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_58
+          - *ref_59
+        responses:
+          - !SchemaResponse 
+            schema: *ref_30
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
     language: !Languages 
       default:
         name: ResourceLevels
@@ -1230,7 +1524,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_35
-          - !Parameter &ref_55
+          - !Parameter &ref_61
             schema: *ref_1
             implementation: Method
             required: true
@@ -1242,7 +1536,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_56
+          - !Parameter &ref_62
             schema: *ref_1
             implementation: Method
             required: true
@@ -1272,7 +1566,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_54
+              - !Parameter &ref_60
                 schema: *ref_7
                 implementation: Method
                 required: true
@@ -1298,7 +1592,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_54
+              - *ref_60
             language: !Languages 
               default:
                 name: ''
@@ -1312,8 +1606,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_55
-          - *ref_56
+          - *ref_61
+          - *ref_62
         responses:
           - !SchemaResponse 
             schema: *ref_7
@@ -1331,6 +1625,86 @@ operationGroups:
         language: !Languages 
           default:
             name: Put
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_35
+          - !Parameter &ref_63
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_64
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: modelDatasName
+                description: ''
+                serializedName: ModelDatasName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_36
+          - *ref_37
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_39
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ModelDatas/{ModelDatasName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_63
+          - *ref_64
+        responses:
+          - !SchemaResponse 
+            schema: *ref_7
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
             description: ''
         protocol: !Protocols {}
     language: !Languages 

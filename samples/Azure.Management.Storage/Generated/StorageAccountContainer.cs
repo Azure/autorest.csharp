@@ -18,7 +18,7 @@ using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing collection of StorageAccount and their operations over a Parent. </summary>
+    /// <summary> A class representing collection of StorageAccount and their operations over a ResourceGroup. </summary>
     public partial class StorageAccountContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, StorageAccount, StorageAccountData>
     {
         /// <summary> Initializes a new instance of the <see cref="StorageAccountContainer"/> class for mocking. </summary>
@@ -44,7 +44,7 @@ namespace Azure.Management.Storage
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <summary> Gets the valid resource type for this object. </summary>
-        protected override ResourceType ValidResourceType => "any";
+        protected override ResourceType ValidResourceType => ResourceGroupOperations.ResourceType;
 
         // Container level operations.
 

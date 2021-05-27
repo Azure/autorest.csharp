@@ -237,5 +237,22 @@ namespace AutoRest.CSharp.Utilities
             }
         }
 
+
+        public static string Pluralization(string single)
+        {
+            if (new Regex("([^aeiou])y$").IsMatch(single))
+            {
+                single = Regex.Replace(single, "([^aeiou])y$", "ie");
+            }
+            else if (new Regex("fe?$").IsMatch(single))
+            {
+                single = Regex.Replace(single, "fe?$", "ve");
+            }
+            else if (new Regex("([^aeiou]o|[sxz]|[cs]h)$").IsMatch(single))
+            {
+                single = Regex.Replace(single, "([^aeiou]o|[sxz]|[cs]h)$", "e");
+            }
+            return single + "s";
+        }
     }
 }

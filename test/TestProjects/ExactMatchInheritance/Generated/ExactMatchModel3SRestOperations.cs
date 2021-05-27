@@ -143,5 +143,86 @@ namespace ExactMatchInheritance
                     throw _clientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
+
+        internal HttpMessage CreateGetRequest(string resourceGroupName, string exactMatchModel3SName)
+        {
+            var message = _pipeline.CreateMessage();
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(endpoint);
+            uri.AppendPath("/subscriptions/", false);
+            uri.AppendPath(subscriptionId, true);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/exactMatchModel3s/", false);
+            uri.AppendPath(exactMatchModel3SName, true);
+            uri.AppendQuery("api-version", apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="exactMatchModel3SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel3SName"/> is null. </exception>
+        public async Task<Response<ExactMatchModel3Data>> GetAsync(string resourceGroupName, string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (exactMatchModel3SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel3SName));
+            }
+
+            using var message = CreateGetRequest(resourceGroupName, exactMatchModel3SName);
+            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ExactMatchModel3Data value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = ExactMatchModel3Data.DeserializeExactMatchModel3Data(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw await _clientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="exactMatchModel3SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="exactMatchModel3SName"/> is null. </exception>
+        public Response<ExactMatchModel3Data> Get(string resourceGroupName, string exactMatchModel3SName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (exactMatchModel3SName == null)
+            {
+                throw new ArgumentNullException(nameof(exactMatchModel3SName));
+            }
+
+            using var message = CreateGetRequest(resourceGroupName, exactMatchModel3SName);
+            _pipeline.Send(message, cancellationToken);
+            switch (message.Response.Status)
+            {
+                case 200:
+                    {
+                        ExactMatchModel3Data value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = ExactMatchModel3Data.DeserializeExactMatchModel3Data(document.RootElement);
+                        return Response.FromValue(value, message.Response);
+                    }
+                default:
+                    throw _clientDiagnostics.CreateRequestFailedException(message.Response);
+            }
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationSummary(client.Description);
                 using (writer.Scope($"{client.Declaration.Accessibility} partial class {cs.Name}"))
                 {
-                    WriteClientFields(writer, client);
+                    WriteClientFields(writer, client.RestClient);
                     WriteClientCtors(writer, client, context);
 
                     foreach (var clientMethod in client.Methods)
@@ -125,20 +125,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string CreateStartOperationName(string name, bool async) => $"Start{name}{(async ? "Async" : string.Empty)}";
 
-        private const string ClientDiagnosticsVariable = "clientDiagnostics";
-        private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
-        private const string PipelineVariable = "pipeline";
-        private const string PipelineField = "_" + PipelineVariable;
         private const string EndpointVariable = "endpoint";
         private const string CredentialVariable = "credential";
         private const string OptionsVariable = "options";
-
-        private void WriteClientFields(CodeWriter writer, DataPlaneClient client)
-        {
-            writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-            writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-            writer.Append($"internal {client.RestClient.Type} RestClient").LineRaw(" { get; }");
-        }
 
         private void WriteClientCtors(CodeWriter writer, DataPlaneClient client, BuildContext context)
         {

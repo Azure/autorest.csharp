@@ -43,11 +43,10 @@
         "description": "Create or update an availability set.",
         "parameters": [
           {
-            "name": "resourceGroupName",
+            "name": "subscriptionId",
             "in": "path",
             "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "type": "string"
           },
           {
             "name": "availabilitySetName",
@@ -64,6 +63,41 @@
                 "$ref": "#/definitions/Toaster"
             },
             "description": "Parameters supplied to the Create Availability Set operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Toaster"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Toasters"
+        ],
+        "operationId": "Toasters_Get",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "availabilitySetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the availability set."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -135,6 +169,42 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "Ovens"
+        ],
+        "operationId": "Ovens_Get",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Oven"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines": {

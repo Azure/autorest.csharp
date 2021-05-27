@@ -11,7 +11,7 @@ using Azure.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Specifies a list of virtual machine instance IDs from the VM scale set. </summary>
-    internal partial class VirtualMachineScaleSetVMInstanceIDs
+    public partial class VirtualMachineScaleSetVMInstanceIDs
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceIDs. </summary>
         public VirtualMachineScaleSetVMInstanceIDs()

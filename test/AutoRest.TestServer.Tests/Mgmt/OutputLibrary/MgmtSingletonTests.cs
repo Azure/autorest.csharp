@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var context = result.Context;
             foreach (var og in model.OperationGroups)
             {
-                if (og.Key.StartsWith("SingletonResources"))
+                if (og.Key.StartsWith("SingletonResources") || og.Key.EndsWith("Singleton"))
                     Assert.IsTrue(og.IsSingletonResource(context.Configuration.MgmtConfiguration));
                 else
                     Assert.IsFalse(og.IsSingletonResource(context.Configuration.MgmtConfiguration));

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
@@ -14,45 +15,71 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 #pragma warning disable RS1024
     internal class MemberRemoverRewriter : CSharpSyntaxRewriter
     {
+        private static readonly SymbolDisplayFormat _fullyQualifiedNameFormat
+            = new SymbolDisplayFormat(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+
         private readonly Project _project;
         private readonly SemanticModel _semanticModel;
+        private readonly ImmutableHashSet<string> _suppressedTypeNames;
         private readonly Dictionary<INamedTypeSymbol, List<Supression>> _suppressionCache;
         private readonly INamedTypeSymbol _suppressAttribute;
 
-        public MemberRemoverRewriter(Project project, SemanticModel semanticModel)
+        public MemberRemoverRewriter(Project project, SemanticModel semanticModel, ImmutableHashSet<string> suppressedTypeNames)
         {
             _project = project;
             _semanticModel = semanticModel;
+            _suppressedTypeNames = suppressedTypeNames;
             _suppressionCache = new Dictionary<INamedTypeSymbol, List<Supression>>();
             _suppressAttribute = semanticModel.Compilation.GetTypeByMetadataName(typeof(CodeGenSuppressAttribute).FullName!)!;
         }
+
+        public override SyntaxNode? VisitCompilationUnit(CompilationUnitSyntax node)
+        {
+            var visitedNode = base.VisitCompilationUnit(node);
+            return visitedNode is CompilationUnitSyntax cu && !cu.Members.Any() ? SyntaxFactory.CompilationUnit() : visitedNode;
+        }
+
+        public override SyntaxNode? VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
+        {
+            var visitedNode = base.VisitNamespaceDeclaration(node);
+            return visitedNode is NamespaceDeclarationSyntax ns && !ns.Members.Any() ? null : visitedNode;
+        }
+
+        public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
+            => IsSuppressedType(node) ? null : base.VisitClassDeclaration(node);
+
+        public override SyntaxNode? VisitStructDeclaration(StructDeclarationSyntax node)
+            => IsSuppressedType(node) ? null : base.VisitStructDeclaration(node);
+
+        public override SyntaxNode? VisitEnumDeclaration(EnumDeclarationSyntax node)
+            => IsSuppressedType(node) ? null : base.VisitEnumDeclaration(node);
 
         public override SyntaxNode? VisitConstructorDeclaration(ConstructorDeclarationSyntax node)
         {
             var symbol = _semanticModel.GetDeclaredSymbol(node);
 
-            return ShouldRemove(symbol) ? null : base.VisitConstructorDeclaration(node);
+            return ShouldRemoveMember(symbol) ? null : base.VisitConstructorDeclaration(node);
         }
 
         public override SyntaxNode? VisitPropertyDeclaration(PropertyDeclarationSyntax node)
         {
             var symbol = _semanticModel.GetDeclaredSymbol(node);
 
-            return ShouldRemove(symbol) ? null : base.VisitPropertyDeclaration(node);
+            return ShouldRemoveMember(symbol) ? null : base.VisitPropertyDeclaration(node);
         }
 
         public override SyntaxNode? VisitMethodDeclaration(MethodDeclarationSyntax node)
         {
             var symbol = _semanticModel.GetDeclaredSymbol(node);
 
-            return ShouldRemove(symbol) ? null : base.VisitMethodDeclaration(node);
+            return ShouldRemoveMember(symbol) ? null : base.VisitMethodDeclaration(node);
         }
 
         public override SyntaxNode? VisitFieldDeclaration(FieldDeclarationSyntax node)
         {
             var symbol = _semanticModel.GetDeclaredSymbol(node);
 
-            return ShouldRemove(symbol) ? null : base.VisitFieldDeclaration(node);
+            return ShouldRemoveMember(symbol) ? null : base.VisitFieldDeclaration(node);
         }
 
         private List<Supression>? GetSupressions(INamedTypeSymbol namedTypeSymbol)
@@ -80,7 +107,31 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return suppressions;
         }
 
-        private bool ShouldRemove(ISymbol? symbol)
+        private bool IsSuppressedType(BaseTypeDeclarationSyntax typeSyntax)
+        {
+            if (_suppressedTypeNames.IsEmpty)
+            {
+                return false;
+            }
+
+            var typeSymbol = _semanticModel.GetDeclaredSymbol(typeSyntax);
+            while (typeSymbol != null)
+            {
+                var fullName = typeSymbol.ToDisplayString(_fullyQualifiedNameFormat);
+                if (_suppressedTypeNames.Contains(typeSymbol.Name) || _suppressedTypeNames.Contains(fullName))
+                {
+                    return true;
+                }
+
+                typeSymbol = SymbolEqualityComparer.Default.Equals(typeSymbol.BaseType?.ContainingAssembly, typeSymbol.ContainingAssembly)
+                    ? typeSymbol.BaseType
+                    : null;
+            }
+
+            return false;
+        }
+
+        private bool ShouldRemoveMember(ISymbol? symbol)
         {
             if (symbol != null)
             {

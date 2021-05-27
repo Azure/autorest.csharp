@@ -316,7 +316,7 @@ schemas: !Schemas
           description: The Oven.
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_31
+    - !ObjectSchema &ref_35
       type: object
       apiVersions:
         - !ApiVersion 
@@ -422,9 +422,9 @@ operationGroups:
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
+                name: subscriptionId
+                description: ''
+                serializedName: subscriptionId
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
@@ -519,6 +519,86 @@ operationGroups:
             name: CreateOrUpdate
             description: Create or update an availability set.
         protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_18
+          - !Parameter &ref_27
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subscriptionId
+                description: ''
+                serializedName: subscriptionId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_28
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: availabilitySetName
+                description: The name of the availability set.
+                serializedName: availabilitySetName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_19
+          - *ref_20
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_27
+          - *ref_28
+        responses:
+          - !SchemaResponse 
+            schema: *ref_22
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
     language: !Languages 
       default:
         name: Toasters
@@ -533,7 +613,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_18
-          - !Parameter &ref_28
+          - !Parameter &ref_30
             schema: *ref_1
             implementation: Method
             required: true
@@ -545,7 +625,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_29
+          - !Parameter &ref_31
             schema: *ref_1
             implementation: Method
             required: true
@@ -575,7 +655,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_27
+              - !Parameter &ref_29
                 schema: *ref_14
                 implementation: Method
                 required: true
@@ -601,7 +681,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_27
+              - *ref_29
             language: !Languages 
               default:
                 name: ''
@@ -615,8 +695,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_28
-          - *ref_29
+          - *ref_30
+          - *ref_31
         responses:
           - !SchemaResponse 
             schema: *ref_14
@@ -657,9 +737,89 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_18
+          - !Parameter &ref_32
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_33
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: vmName
+                description: The name of the virtual machine.
+                serializedName: vmName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
           - *ref_19
           - *ref_20
-          - !Parameter &ref_30
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_23
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_32
+          - *ref_33
+        responses:
+          - !SchemaResponse 
+            schema: *ref_14
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_18
+          - *ref_19
+          - *ref_20
+          - !Parameter &ref_34
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -697,10 +857,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_30
+          - *ref_34
         responses:
           - !SchemaResponse 
-            schema: *ref_31
+            schema: *ref_35
             language: !Languages 
               default:
                 name: ''
