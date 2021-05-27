@@ -36,7 +36,7 @@ namespace Accessibility_LowLevel_NoAuth
 
             options ??= new AccessibilityClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() });
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }
