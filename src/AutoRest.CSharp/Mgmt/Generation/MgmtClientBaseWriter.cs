@@ -31,16 +31,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             writer.Line();
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-            writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
 
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
             // subscriptionId might not always be needed. For example `RestOperations` does not have it.
             var subIdIfNeeded = restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-            writer.Line($"private {restClient.Type} {RestClientField} => new {restClient.Type}({ClientDiagnosticsField}, {PipelineField}{subIdIfNeeded});");
+            writer.Line($"private {restClient.Type} {RestClientField} => new {restClient.Type}({ClientDiagnosticsField}, {PipelineProperty}{subIdIfNeeded});");
+            writer.Line();
         }
 
-        protected void WriteContainerCtors(CodeWriter writer, string typeOfThis, string contextArgumentType)
+        protected void WriteContainerCtors(CodeWriter writer, string typeOfThis, string contextArgumentType, string parentArguments)
         {
             // write protected default constructor
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class for mocking.");
@@ -50,13 +50,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // write "parent resource" constructor
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {typeOfThis} class.");
-            var parentArgument = "parent";
-            writer.WriteXmlDocumentationParameter(parentArgument, "The resource representing the parent resource.");
-            using (writer.Scope($"internal {typeOfThis}({contextArgumentType} {parentArgument}) : base({parentArgument})"))
+            writer.WriteXmlDocumentationParameter("parent", "The resource representing the parent resource.");
+            using (writer.Scope($"internal {typeOfThis}({contextArgumentType} parent) : base({parentArguments})"))
             {
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                // todo: after a shared pipeline field is implemented in the base class, replace this with that
-                writer.Line($"{PipelineField} = {typeof(ManagementPipelineBuilder)}.Build(Credential, BaseUri, ClientOptions);");
             }
         }
 

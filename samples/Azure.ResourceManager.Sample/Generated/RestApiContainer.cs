@@ -19,10 +19,10 @@ namespace Azure.ResourceManager.Sample
     public partial class RestApiContainer : ContainerBase
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private RestOperations _restClient => new RestOperations(_clientDiagnostics, _pipeline);
+        private RestOperations _restClient => new RestOperations(_clientDiagnostics, Pipeline);
+
         /// <summary> Initializes a new instance of the <see cref="RestApiContainer"/> class for mocking. </summary>
         protected RestApiContainer()
         {
@@ -30,10 +30,9 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Initializes a new instance of RestApiContainer class. </summary>
         /// <param name="parent"> The resource representing the parent resource. </param>
-        internal RestApiContainer(ClientContext parent) : base(parent)
+        internal RestApiContainer(ClientContext parent) : base(parent.ClientOptions, parent.Credential, parent.BaseUri, parent.Pipeline)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
         /// <summary> Gets the valid resource type for this object. </summary>

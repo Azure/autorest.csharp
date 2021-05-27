@@ -134,14 +134,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (!isSingleton)
                 {
                     writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                    writer.Line($"{PipelineField} = Pipeline;");
                     var subscriptionValue = "Id.SubscriptionId";
                     if (resourceOperation.ResourceIdentifierType == typeof(TenantResourceIdentifier))
                     {
                         subscriptionValue = "subscriptionId";
                         writer.Line($"Id.TryGetSubscriptionId(out var subscriptionId);");
                     }
-                    writer.Line($"this.RestClient = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineField}, {subscriptionValue}, BaseUri);");
+                    writer.Line($"this.RestClient = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}, BaseUri);");
                 }
             }
         }
@@ -861,7 +860,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     writer.Append($"this, ");
                 }
-                writer.Append($"{ClientDiagnosticsField}, {PipelineField}, RestClient.{RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
+                writer.Append($"{ClientDiagnosticsField}, {PipelineProperty}, RestClient.{RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
                 foreach (string paramNames in parameterNames)
                 {
                     writer.Append($"{paramNames:I}, ");

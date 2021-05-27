@@ -25,6 +25,8 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class DataPlaneClientWriter : ClientWriter
     {
+        protected const string PipelineField = "_" + PipelineVariable;
+
         public void WriteClient(CodeWriter writer, DataPlaneClient client, BuildContext context)
         {
             var cs = client.Type;

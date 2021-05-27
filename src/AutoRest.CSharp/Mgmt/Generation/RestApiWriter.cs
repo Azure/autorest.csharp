@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 using (writer.Scope($"public partial class RestApiContainer : {baseClass}"))
                 {
                     WriteFields(writer, _restClient);
-                    WriteContainerCtors(writer, "RestApiContainer", "ClientContext");
+                    WriteContainerCtors(writer, "RestApiContainer", "ClientContext", "parent.ClientOptions, parent.Credential, parent.BaseUri, parent.Pipeline");
                     WriteContainerProperties(writer, "ResourceIdentifier.RootResourceIdentifier.ResourceType");
                     var operationType = context.Library.FindTypeByName("RestApi");
                     if (operationType != null)
