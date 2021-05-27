@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -198,16 +198,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         /// <summary>
-        /// Is the input type string or an Enum that is modeled as string.
-        /// </summary>
-        /// <param name="type">Type to check.</param>
-        /// <returns>Is the input type string or an Enum that is modeled as string.</returns>
-        protected bool IsStringLike(CSharp.Generation.Types.CSharpType type)
-        {
-            return type.Equals(typeof(string)) || type.Implementation is EnumType enumType && enumType.BaseType.Equals(typeof(string));
-        }
-
-        /// <summary>
         /// Builds the mapping between resource operations in Container class and that in RestOperations class.
         /// For example `DedicatedHostRestClient.CreateOrUpdate()`
         /// | resourceGroupName      | hostGroupName    | hostName | parameters |
@@ -233,7 +223,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     continue;
                 }
-                else if (IsStringLike(parameter.Type) && IsMandatory(parameter))
+                else if (parameter.Type.IsStringLike() && IsMandatory(parameter))
                 {
                     passThru = false;
                     if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
@@ -259,7 +249,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // 2. ignoring optional parameters such as `expand`
             if (!method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase))
             {
-                var lastString = parameterMapping.LastOrDefault(parameter => IsStringLike(parameter.Parameter.Type) && IsMandatory(parameter.Parameter));
+                var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.IsStringLike() && IsMandatory(parameter.Parameter));
                 if (lastString?.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
                 {
                     lastString.IsPassThru = true;
