@@ -47,8 +47,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
+            RestApiOperationGroup = GetRestApiOperationGroup();
             DecorateOperationGroup();
         }
+
+        public OperationGroup? RestApiOperationGroup { get; }
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
 
@@ -143,6 +146,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _restClients;
+        }
+
+        private OperationGroup? GetRestApiOperationGroup()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                if (operationGroup.Key == "Operations")
+                    return operationGroup;
+            }
+
+            return null;
         }
 
         private Dictionary<OperationGroup, ResourceOperation> EnsureResourceOperations()

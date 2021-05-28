@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,14 +23,16 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         protected const string ClientDiagnosticsVariable = "clientDiagnostics";
         protected const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
         protected const string PipelineVariable = "pipeline";
+        protected const string PipelineProperty = "Pipeline";
         protected const string PipelineField = "_" + PipelineVariable;
 
         protected string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
-        protected void WriteClientFields(CodeWriter writer, RestClient client)
+        protected void WriteClientFields(CodeWriter writer, RestClient client, bool writePipelineField)
         {
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-            writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
+            if (writePipelineField)
+                writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
             writer.Append($"internal {client.Type} RestClient").LineRaw(" { get; }");
         }
 
@@ -115,6 +118,38 @@ namespace AutoRest.CSharp.Common.Generation.Writers
                 writer.Line($"{scopeVariable}.Failed(e);");
                 writer.Line($"throw;");
             }
+        }
+
+        protected Parameter[] GetNonPathParameters(RestClientMethod clientMethod)
+        {
+            var pathParameters = GetPathParameters(clientMethod);
+
+            List<Parameter> nonPathParameters = new List<Parameter>();
+            foreach (Parameter parameter in clientMethod.Parameters)
+            {
+                if (!pathParameters.Contains(parameter))
+                {
+                    nonPathParameters.Add(parameter);
+                }
+            }
+
+            return nonPathParameters.ToArray();
+        }
+
+        protected Parameter[] GetPathParameters(RestClientMethod clientMethod)
+        {
+            var pathParameters = clientMethod.Request.PathSegments.Where(m => m.Value.IsConstant == false && m.IsRaw == false);
+            List<Parameter> pathParametersList = new List<Parameter>();
+            foreach (var parameter in clientMethod.Parameters)
+            {
+                if (pathParameters.Any(p => p.Value.Reference.Type.Name == parameter.Type.Name &&
+                p.Value.Reference.Name == parameter.Name))
+                {
+                    pathParametersList.Add(parameter);
+                }
+            }
+
+            return pathParametersList.ToArray();
         }
     }
 }

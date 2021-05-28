@@ -20,10 +20,9 @@ namespace Azure.ResourceManager.Sample
     public static partial class SubscriptionExtensions
     {
         #region AvailabilitySet
-        private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, string subscriptionId, Uri endpoint = null)
+        private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            var httpPipeline = ManagementPipelineBuilder.Build(credential, endpoint, clientOptions);
-            return new AvailabilitySetsRestOperations(clientDiagnostics, httpPipeline, subscriptionId, endpoint);
+            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -32,10 +31,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
                 return new PhWrappingAsyncPageable<AvailabilitySetData, AvailabilitySet>(
                 result,
@@ -90,10 +89,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListBySubscription(clientDiagnostics, restOperations);
                 return new PhWrappingPageable<AvailabilitySetData, AvailabilitySet>(
                 result,
@@ -170,10 +169,9 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region ProximityPlacementGroup
-        private static ProximityPlacementGroupsRestOperations GetProximityPlacementGroupsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, string subscriptionId, Uri endpoint = null)
+        private static ProximityPlacementGroupsRestOperations GetProximityPlacementGroupsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            var httpPipeline = ManagementPipelineBuilder.Build(credential, endpoint, clientOptions);
-            return new ProximityPlacementGroupsRestOperations(clientDiagnostics, httpPipeline, subscriptionId, endpoint);
+            return new ProximityPlacementGroupsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the ProximityPlacementGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -182,10 +180,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static AsyncPageable<ProximityPlacementGroup> ListProximityPlacementGroupAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
                 return new PhWrappingAsyncPageable<ProximityPlacementGroupData, ProximityPlacementGroup>(
                 result,
@@ -239,10 +237,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static Pageable<ProximityPlacementGroup> ListProximityPlacementGroup(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListBySubscription(clientDiagnostics, restOperations);
                 return new PhWrappingPageable<ProximityPlacementGroupData, ProximityPlacementGroup>(
                 result,
@@ -318,10 +316,9 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region DedicatedHostGroup
-        private static DedicatedHostGroupsRestOperations GetDedicatedHostGroupsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, string subscriptionId, Uri endpoint = null)
+        private static DedicatedHostGroupsRestOperations GetDedicatedHostGroupsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            var httpPipeline = ManagementPipelineBuilder.Build(credential, endpoint, clientOptions);
-            return new DedicatedHostGroupsRestOperations(clientDiagnostics, httpPipeline, subscriptionId, endpoint);
+            return new DedicatedHostGroupsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the DedicatedHostGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -330,10 +327,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static AsyncPageable<DedicatedHostGroup> ListDedicatedHostGroupAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
                 return new PhWrappingAsyncPageable<DedicatedHostGroupData, DedicatedHostGroup>(
                 result,
@@ -387,10 +384,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static Pageable<DedicatedHostGroup> ListDedicatedHostGroup(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListBySubscription(clientDiagnostics, restOperations);
                 return new PhWrappingPageable<DedicatedHostGroupData, DedicatedHostGroup>(
                 result,
@@ -466,10 +463,9 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region SshPublicKey
-        private static SshPublicKeysRestOperations GetSshPublicKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, string subscriptionId, Uri endpoint = null)
+        private static SshPublicKeysRestOperations GetSshPublicKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            var httpPipeline = ManagementPipelineBuilder.Build(credential, endpoint, clientOptions);
-            return new SshPublicKeysRestOperations(clientDiagnostics, httpPipeline, subscriptionId, endpoint);
+            return new SshPublicKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the SshPublicKeys for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -478,10 +474,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static AsyncPageable<SshPublicKey> ListSshPublicKeyAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
                 return new PhWrappingAsyncPageable<SshPublicKeyData, SshPublicKey>(
                 result,
@@ -535,10 +531,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static Pageable<SshPublicKey> ListSshPublicKey(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListBySubscription(clientDiagnostics, restOperations);
                 return new PhWrappingPageable<SshPublicKeyData, SshPublicKey>(
                 result,
@@ -614,10 +610,9 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region VirtualMachine
-        private static VirtualMachinesRestOperations GetVirtualMachinesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, string subscriptionId, Uri endpoint = null)
+        private static VirtualMachinesRestOperations GetVirtualMachinesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            var httpPipeline = ManagementPipelineBuilder.Build(credential, endpoint, clientOptions);
-            return new VirtualMachinesRestOperations(clientDiagnostics, httpPipeline, subscriptionId, endpoint);
+            return new VirtualMachinesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the VirtualMachines for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -626,10 +621,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static AsyncPageable<VirtualMachine> ListVirtualMachineAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListAllAsync(clientDiagnostics, restOperations);
                 return new PhWrappingAsyncPageable<VirtualMachineData, VirtualMachine>(
                 result,
@@ -684,10 +679,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static Pageable<VirtualMachine> ListVirtualMachine(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListAll(clientDiagnostics, restOperations);
                 return new PhWrappingPageable<VirtualMachineData, VirtualMachine>(
                 result,
@@ -764,10 +759,9 @@ namespace Azure.ResourceManager.Sample
         #endregion
 
         #region VirtualMachineScaleSet
-        private static VirtualMachineScaleSetsRestOperations GetVirtualMachineScaleSetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, string subscriptionId, Uri endpoint = null)
+        private static VirtualMachineScaleSetsRestOperations GetVirtualMachineScaleSetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            var httpPipeline = ManagementPipelineBuilder.Build(credential, endpoint, clientOptions);
-            return new VirtualMachineScaleSetsRestOperations(clientDiagnostics, httpPipeline, subscriptionId, endpoint);
+            return new VirtualMachineScaleSetsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the VirtualMachineScaleSets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -776,10 +770,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static AsyncPageable<VirtualMachineScaleSet> ListVirtualMachineScaleSetAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListAllAsync(clientDiagnostics, restOperations);
                 return new PhWrappingAsyncPageable<VirtualMachineScaleSetData, VirtualMachineScaleSet>(
                 result,
@@ -833,10 +827,10 @@ namespace Azure.ResourceManager.Sample
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static Pageable<VirtualMachineScaleSet> ListVirtualMachineScaleSet(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListAll(clientDiagnostics, restOperations);
                 return new PhWrappingPageable<VirtualMachineScaleSetData, VirtualMachineScaleSet>(
                 result,

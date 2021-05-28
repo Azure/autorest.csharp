@@ -20,7 +20,6 @@ namespace SubscriptionExtensions
     public partial class ToasterOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, Toaster>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
         internal ToastersRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ToasterOperations"/> class for mocking. </summary>
@@ -34,8 +33,7 @@ namespace SubscriptionExtensions
         protected internal ToasterOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = Pipeline;
-            RestClient = new ToastersRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
+            RestClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
