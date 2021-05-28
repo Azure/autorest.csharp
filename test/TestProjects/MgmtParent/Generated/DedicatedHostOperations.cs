@@ -19,6 +19,7 @@ namespace MgmtParent
     public partial class DedicatedHostOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, DedicatedHost>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal DedicatedHostsRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace MgmtParent
         protected internal DedicatedHostOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new DedicatedHostsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/hostGroups/hosts";
@@ -133,7 +135,7 @@ namespace MgmtParent
             try
             {
                 var response = await RestClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostsDeleteOperation(_clientDiagnostics, Pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                return new DedicatedHostsDeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -151,7 +153,7 @@ namespace MgmtParent
             try
             {
                 var response = RestClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return new DedicatedHostsDeleteOperation(_clientDiagnostics, Pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                return new DedicatedHostsDeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -211,7 +213,7 @@ namespace MgmtParent
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -237,7 +239,7 @@ namespace MgmtParent
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = RestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -295,7 +297,7 @@ namespace MgmtParent
                 var patchable = new DedicatedHostUpdate();
                 patchable.Tags.ReplaceWith(tags);
                 var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -319,7 +321,7 @@ namespace MgmtParent
                 var patchable = new DedicatedHostUpdate();
                 patchable.Tags.ReplaceWith(tags);
                 var response = RestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -379,7 +381,7 @@ namespace MgmtParent
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -405,7 +407,7 @@ namespace MgmtParent
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = RestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {

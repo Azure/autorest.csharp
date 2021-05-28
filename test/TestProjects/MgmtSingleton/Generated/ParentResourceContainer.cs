@@ -9,6 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Core.Resources;
@@ -28,12 +29,14 @@ namespace MgmtSingleton
         internal ParentResourceContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private ParentResourcesRestOperations _restClient => new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private ParentResourcesRestOperations _restClient => new ParentResourcesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -46,7 +49,7 @@ namespace MgmtSingleton
         /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public Response<ParentResource> CreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CreateOrUpdate");
@@ -62,7 +65,7 @@ namespace MgmtSingleton
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(parentName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                return StartCreateOrUpdate(parentName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -74,7 +77,7 @@ namespace MgmtSingleton
         /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<Response<ParentResource>> CreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.CreateOrUpdate");
@@ -91,7 +94,7 @@ namespace MgmtSingleton
                 }
 
                 var operation = await StartCreateOrUpdateAsync(parentName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -103,7 +106,7 @@ namespace MgmtSingleton
         /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public ParentResourcesCreateOrUpdateOperation StartCreateOrUpdate(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.StartCreateOrUpdate");
@@ -132,7 +135,7 @@ namespace MgmtSingleton
         /// <summary> The operation to create or update a ParentResource. Please note some properties can be set only during creation. </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="parameters"> The ParentResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ParentResourcesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string parentName, ParentResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.StartCreateOrUpdate");
@@ -160,7 +163,7 @@ namespace MgmtSingleton
 
         /// <inheritdoc />
         /// <param name="parentName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override Response<ParentResource> Get(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.Get");
@@ -184,7 +187,7 @@ namespace MgmtSingleton
 
         /// <inheritdoc />
         /// <param name="parentName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<Response<ParentResource>> GetAsync(string parentName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.Get");
@@ -206,10 +209,30 @@ namespace MgmtSingleton
             }
         }
 
+        /// <summary> Filters the list of <see cref="ParentResource" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="ParentResource" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<ParentResource> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, ParentResource>(results, genericResource => new ParentResourceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="ParentResource" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="ParentResource" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<ParentResource> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, ParentResource>(results, genericResource => new ParentResourceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
+        }
+
         /// <summary> Filters the list of ParentResource for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
@@ -231,7 +254,7 @@ namespace MgmtSingleton
         /// <summary> Filters the list of ParentResource for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {

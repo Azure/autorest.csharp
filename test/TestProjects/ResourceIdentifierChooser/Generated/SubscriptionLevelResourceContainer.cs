@@ -9,6 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Core.Resources;
@@ -28,12 +29,14 @@ namespace ResourceIdentifierChooser
         internal SubscriptionLevelResourceContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private SubscriptionLevelResourcesRestOperations _restClient => new SubscriptionLevelResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private SubscriptionLevelResourcesRestOperations _restClient => new SubscriptionLevelResourcesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -46,7 +49,7 @@ namespace ResourceIdentifierChooser
         /// <summary> The operation to create or update a SubscriptionLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public Response<SubscriptionLevelResource> CreateOrUpdate(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.CreateOrUpdate");
@@ -62,7 +65,7 @@ namespace ResourceIdentifierChooser
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                return StartCreateOrUpdate(subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -74,7 +77,7 @@ namespace ResourceIdentifierChooser
         /// <summary> The operation to create or update a SubscriptionLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<Response<SubscriptionLevelResource>> CreateOrUpdateAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.CreateOrUpdate");
@@ -91,7 +94,7 @@ namespace ResourceIdentifierChooser
                 }
 
                 var operation = await StartCreateOrUpdateAsync(subscriptionLevelResourcesName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -103,7 +106,7 @@ namespace ResourceIdentifierChooser
         /// <summary> The operation to create or update a SubscriptionLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public SubscriptionLevelResourcesPutOperation StartCreateOrUpdate(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartCreateOrUpdate");
@@ -132,7 +135,7 @@ namespace ResourceIdentifierChooser
         /// <summary> The operation to create or update a SubscriptionLevelResource. Please note some properties can be set only during creation. </summary>
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
         /// <param name="parameters"> The SubscriptionLevelResource to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<SubscriptionLevelResourcesPutOperation> StartCreateOrUpdateAsync(string subscriptionLevelResourcesName, SubscriptionLevelResourceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.StartCreateOrUpdate");
@@ -160,7 +163,7 @@ namespace ResourceIdentifierChooser
 
         /// <inheritdoc />
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override Response<SubscriptionLevelResource> Get(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.Get");
@@ -184,7 +187,7 @@ namespace ResourceIdentifierChooser
 
         /// <inheritdoc />
         /// <param name="subscriptionLevelResourcesName"> The String to use. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<Response<SubscriptionLevelResource>> GetAsync(string subscriptionLevelResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubscriptionLevelResourceContainer.Get");
@@ -206,10 +209,30 @@ namespace ResourceIdentifierChooser
             }
         }
 
+        /// <summary> Filters the list of <see cref="SubscriptionLevelResource" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="SubscriptionLevelResource" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<SubscriptionLevelResource> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, SubscriptionLevelResource>(results, genericResource => new SubscriptionLevelResourceOperations(genericResource, genericResource.Id as SubscriptionResourceIdentifier).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="SubscriptionLevelResource" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="SubscriptionLevelResource" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<SubscriptionLevelResource> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, SubscriptionLevelResource>(results, genericResource => new SubscriptionLevelResourceOperations(genericResource, genericResource.Id as SubscriptionResourceIdentifier).Get().Value);
+        }
+
         /// <summary> Filters the list of SubscriptionLevelResource for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
@@ -231,7 +254,7 @@ namespace ResourceIdentifierChooser
         /// <summary> Filters the list of SubscriptionLevelResource for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {

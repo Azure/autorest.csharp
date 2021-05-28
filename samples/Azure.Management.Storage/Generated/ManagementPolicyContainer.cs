@@ -9,6 +9,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
@@ -29,12 +30,14 @@ namespace Azure.Management.Storage
         internal ManagementPolicyContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private ManagementPoliciesRestOperations _restClient => new ManagementPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private ManagementPoliciesRestOperations _restClient => new ManagementPoliciesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -47,7 +50,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a ManagementPolicy. Please note some properties can be set only during creation. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public Response<ManagementPolicy> CreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CreateOrUpdate");
@@ -59,7 +62,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(properties));
                 }
 
-                return StartCreateOrUpdate(managementPolicyName, properties, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+                return StartCreateOrUpdate(managementPolicyName, properties, cancellationToken: cancellationToken).WaitForCompletion();
             }
             catch (Exception e)
             {
@@ -71,7 +74,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a ManagementPolicy. Please note some properties can be set only during creation. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<Response<ManagementPolicy>> CreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.CreateOrUpdate");
@@ -84,7 +87,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(managementPolicyName, properties, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -96,7 +99,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a ManagementPolicy. Please note some properties can be set only during creation. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public ManagementPoliciesCreateOrUpdateOperation StartCreateOrUpdate(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartCreateOrUpdate");
@@ -121,7 +124,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a ManagementPolicy. Please note some properties can be set only during creation. </summary>
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
         /// <param name="properties"> The ManagementPolicy set to a storage account. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async Task<ManagementPoliciesCreateOrUpdateOperation> StartCreateOrUpdateAsync(ManagementPolicyName managementPolicyName, ManagementPolicyData properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.StartCreateOrUpdate");
@@ -145,7 +148,7 @@ namespace Azure.Management.Storage
 
         /// <inheritdoc />
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public override Response<ManagementPolicy> Get(string managementPolicyName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.Get");
@@ -169,7 +172,7 @@ namespace Azure.Management.Storage
 
         /// <inheritdoc />
         /// <param name="managementPolicyName"> The name of the Storage Account Management Policy. It should always be &apos;default&apos;. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         public async override Task<Response<ManagementPolicy>> GetAsync(string managementPolicyName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ManagementPolicyContainer.Get");
@@ -191,10 +194,30 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// <summary> Filters the list of <see cref="ManagementPolicy" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of <see cref="ManagementPolicy" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<ManagementPolicy> List(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResource(null, top, cancellationToken);
+            return new PhWrappingPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
+        }
+
+        /// <summary> Filters the list of <see cref="ManagementPolicy" /> for this resource group. </summary>
+        /// <param name="top"> The number of results to return. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <returns> An async collection of <see cref="ManagementPolicy" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<ManagementPolicy> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        {
+            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
+            return new PhWrappingAsyncPageable<GenericResource, ManagementPolicy>(results, genericResource => new ManagementPolicyOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
+        }
+
         /// <summary> Filters the list of ManagementPolicy for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
@@ -216,7 +239,7 @@ namespace Azure.Management.Storage
         /// <summary> Filters the list of ManagementPolicy for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {

@@ -20,6 +20,7 @@ namespace SubscriptionExtensions
     public partial class OvenOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Oven>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal OvensRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class for mocking. </summary>
@@ -33,7 +34,8 @@ namespace SubscriptionExtensions
         protected internal OvenOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new OvensRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new OvensRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines";
@@ -141,7 +143,7 @@ namespace SubscriptionExtensions
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -168,7 +170,7 @@ namespace SubscriptionExtensions
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -227,7 +229,7 @@ namespace SubscriptionExtensions
                 var patchable = new OvenData(locationData);
                 patchable.Tags.ReplaceWith(tags);
                 var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -252,7 +254,7 @@ namespace SubscriptionExtensions
                 var patchable = new OvenData(locationData);
                 patchable.Tags.ReplaceWith(tags);
                 var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -313,7 +315,7 @@ namespace SubscriptionExtensions
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -340,7 +342,7 @@ namespace SubscriptionExtensions
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {

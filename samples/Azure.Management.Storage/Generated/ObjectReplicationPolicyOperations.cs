@@ -19,6 +19,7 @@ namespace Azure.Management.Storage
     public partial class ObjectReplicationPolicyOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ObjectReplicationPolicy>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ObjectReplicationPoliciesRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ObjectReplicationPolicyOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace Azure.Management.Storage
         protected internal ObjectReplicationPolicyOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new ObjectReplicationPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new ObjectReplicationPoliciesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/objectReplicationPolicies";

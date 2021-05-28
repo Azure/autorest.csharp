@@ -20,6 +20,7 @@ namespace MgmtOperations
     public partial class AvailabilitySetOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AvailabilitySet>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal AvailabilitySetsRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetOperations"/> class for mocking. </summary>
@@ -33,7 +34,8 @@ namespace MgmtOperations
         protected internal AvailabilitySetOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new AvailabilitySetsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
@@ -530,7 +532,7 @@ namespace MgmtOperations
             try
             {
                 var response = await RestClient.TestLROMethodAsync(Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsTestLROMethodOperation(_clientDiagnostics, Pipeline, RestClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
+                return new AvailabilitySetsTestLROMethodOperation(_clientDiagnostics, _pipeline, RestClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -555,7 +557,7 @@ namespace MgmtOperations
             try
             {
                 var response = RestClient.TestLROMethod(Id.ResourceGroupName, parameters, cancellationToken);
-                return new AvailabilitySetsTestLROMethodOperation(_clientDiagnostics, Pipeline, RestClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
+                return new AvailabilitySetsTestLROMethodOperation(_clientDiagnostics, _pipeline, RestClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
             }
             catch (Exception e)
             {

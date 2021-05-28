@@ -19,6 +19,7 @@ namespace TenantOnly
     public partial class AgreementOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Agreement>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal AgreementsRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="AgreementOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace TenantOnly
         protected internal AgreementOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new AgreementsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new AgreementsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Billing/billingAccounts/agreements";

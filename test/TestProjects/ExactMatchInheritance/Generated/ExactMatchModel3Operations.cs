@@ -19,6 +19,7 @@ namespace ExactMatchInheritance
     public partial class ExactMatchModel3Operations : ResourceOperationsBase<ResourceIdentifier, ExactMatchModel3>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ExactMatchModel3SRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel3Operations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace ExactMatchInheritance
         protected internal ExactMatchModel3Operations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new ExactMatchModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new ExactMatchModel3SRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/exactMatchModel3s";

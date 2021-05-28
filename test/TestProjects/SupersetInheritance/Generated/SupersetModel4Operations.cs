@@ -19,6 +19,7 @@ namespace SupersetInheritance
     public partial class SupersetModel4Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SupersetModel4>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal SupersetModel4SRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="SupersetModel4Operations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace SupersetInheritance
         protected internal SupersetModel4Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new SupersetModel4SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new SupersetModel4SRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/supersetModel4s";

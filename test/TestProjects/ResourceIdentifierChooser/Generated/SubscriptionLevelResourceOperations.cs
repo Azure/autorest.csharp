@@ -19,6 +19,7 @@ namespace ResourceIdentifierChooser
     public partial class SubscriptionLevelResourceOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, SubscriptionLevelResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal SubscriptionLevelResourcesRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="SubscriptionLevelResourceOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace ResourceIdentifierChooser
         protected internal SubscriptionLevelResourceOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new SubscriptionLevelResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new SubscriptionLevelResourcesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/SubscriptionLevelResources";

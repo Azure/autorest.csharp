@@ -19,6 +19,7 @@ namespace Azure.ResourceManager.Sample
     public partial class VirtualMachineOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachine>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal VirtualMachinesRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace Azure.ResourceManager.Sample
         protected internal VirtualMachineOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new VirtualMachinesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new VirtualMachinesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines";
@@ -136,7 +138,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.DeleteAsync(Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesDeleteOperation(_clientDiagnostics, Pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, forceDeletion).Request, response);
+                return new VirtualMachinesDeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, forceDeletion).Request, response);
             }
             catch (Exception e)
             {
@@ -155,7 +157,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.Delete(Id.ResourceGroupName, Id.Name, forceDeletion, cancellationToken);
-                return new VirtualMachinesDeleteOperation(_clientDiagnostics, Pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, forceDeletion).Request, response);
+                return new VirtualMachinesDeleteOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Name, forceDeletion).Request, response);
             }
             catch (Exception e)
             {
@@ -215,7 +217,7 @@ namespace Azure.ResourceManager.Sample
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -241,7 +243,7 @@ namespace Azure.ResourceManager.Sample
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -299,7 +301,7 @@ namespace Azure.ResourceManager.Sample
                 var patchable = new VirtualMachineUpdate();
                 patchable.Tags.ReplaceWith(tags);
                 var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -323,7 +325,7 @@ namespace Azure.ResourceManager.Sample
                 var patchable = new VirtualMachineUpdate();
                 patchable.Tags.ReplaceWith(tags);
                 var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -383,7 +385,7 @@ namespace Azure.ResourceManager.Sample
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -409,7 +411,7 @@ namespace Azure.ResourceManager.Sample
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+                return new VirtualMachinesUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -621,7 +623,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.CaptureAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesCaptureOperation(_clientDiagnostics, Pipeline, RestClient.CreateCaptureRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                return new VirtualMachinesCaptureOperation(_clientDiagnostics, _pipeline, RestClient.CreateCaptureRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -646,7 +648,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.Capture(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return new VirtualMachinesCaptureOperation(_clientDiagnostics, Pipeline, RestClient.CreateCaptureRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                return new VirtualMachinesCaptureOperation(_clientDiagnostics, _pipeline, RestClient.CreateCaptureRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -700,7 +702,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.ConvertToManagedDisksAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesConvertToManagedDisksOperation(_clientDiagnostics, Pipeline, RestClient.CreateConvertToManagedDisksRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesConvertToManagedDisksOperation(_clientDiagnostics, _pipeline, RestClient.CreateConvertToManagedDisksRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -718,7 +720,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.ConvertToManagedDisks(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new VirtualMachinesConvertToManagedDisksOperation(_clientDiagnostics, Pipeline, RestClient.CreateConvertToManagedDisksRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesConvertToManagedDisksOperation(_clientDiagnostics, _pipeline, RestClient.CreateConvertToManagedDisksRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -772,7 +774,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.DeallocateAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesDeallocateOperation(_clientDiagnostics, Pipeline, RestClient.CreateDeallocateRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesDeallocateOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeallocateRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -790,7 +792,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.Deallocate(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new VirtualMachinesDeallocateOperation(_clientDiagnostics, Pipeline, RestClient.CreateDeallocateRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesDeallocateOperation(_clientDiagnostics, _pipeline, RestClient.CreateDeallocateRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -847,7 +849,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.PowerOffAsync(Id.ResourceGroupName, Id.Name, skipShutdown, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesPowerOffOperation(_clientDiagnostics, Pipeline, RestClient.CreatePowerOffRequest(Id.ResourceGroupName, Id.Name, skipShutdown).Request, response);
+                return new VirtualMachinesPowerOffOperation(_clientDiagnostics, _pipeline, RestClient.CreatePowerOffRequest(Id.ResourceGroupName, Id.Name, skipShutdown).Request, response);
             }
             catch (Exception e)
             {
@@ -866,7 +868,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.PowerOff(Id.ResourceGroupName, Id.Name, skipShutdown, cancellationToken);
-                return new VirtualMachinesPowerOffOperation(_clientDiagnostics, Pipeline, RestClient.CreatePowerOffRequest(Id.ResourceGroupName, Id.Name, skipShutdown).Request, response);
+                return new VirtualMachinesPowerOffOperation(_clientDiagnostics, _pipeline, RestClient.CreatePowerOffRequest(Id.ResourceGroupName, Id.Name, skipShutdown).Request, response);
             }
             catch (Exception e)
             {
@@ -920,7 +922,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.ReapplyAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesReapplyOperation(_clientDiagnostics, Pipeline, RestClient.CreateReapplyRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesReapplyOperation(_clientDiagnostics, _pipeline, RestClient.CreateReapplyRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -938,7 +940,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.Reapply(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new VirtualMachinesReapplyOperation(_clientDiagnostics, Pipeline, RestClient.CreateReapplyRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesReapplyOperation(_clientDiagnostics, _pipeline, RestClient.CreateReapplyRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -992,7 +994,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.RestartAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesRestartOperation(_clientDiagnostics, Pipeline, RestClient.CreateRestartRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesRestartOperation(_clientDiagnostics, _pipeline, RestClient.CreateRestartRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -1010,7 +1012,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.Restart(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new VirtualMachinesRestartOperation(_clientDiagnostics, Pipeline, RestClient.CreateRestartRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesRestartOperation(_clientDiagnostics, _pipeline, RestClient.CreateRestartRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -1064,7 +1066,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.StartAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesStartOperation(_clientDiagnostics, Pipeline, RestClient.CreateStartRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesStartOperation(_clientDiagnostics, _pipeline, RestClient.CreateStartRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -1082,7 +1084,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.Start(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new VirtualMachinesStartOperation(_clientDiagnostics, Pipeline, RestClient.CreateStartRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesStartOperation(_clientDiagnostics, _pipeline, RestClient.CreateStartRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -1136,7 +1138,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.RedeployAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesRedeployOperation(_clientDiagnostics, Pipeline, RestClient.CreateRedeployRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesRedeployOperation(_clientDiagnostics, _pipeline, RestClient.CreateRedeployRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -1154,7 +1156,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.Redeploy(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new VirtualMachinesRedeployOperation(_clientDiagnostics, Pipeline, RestClient.CreateRedeployRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesRedeployOperation(_clientDiagnostics, _pipeline, RestClient.CreateRedeployRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -1211,7 +1213,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.ReimageAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesReimageOperation(_clientDiagnostics, Pipeline, RestClient.CreateReimageRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                return new VirtualMachinesReimageOperation(_clientDiagnostics, _pipeline, RestClient.CreateReimageRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -1230,7 +1232,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.Reimage(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return new VirtualMachinesReimageOperation(_clientDiagnostics, Pipeline, RestClient.CreateReimageRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                return new VirtualMachinesReimageOperation(_clientDiagnostics, _pipeline, RestClient.CreateReimageRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -1284,7 +1286,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.PerformMaintenanceAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesPerformMaintenanceOperation(_clientDiagnostics, Pipeline, RestClient.CreatePerformMaintenanceRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesPerformMaintenanceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePerformMaintenanceRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -1302,7 +1304,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.PerformMaintenance(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new VirtualMachinesPerformMaintenanceOperation(_clientDiagnostics, Pipeline, RestClient.CreatePerformMaintenanceRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesPerformMaintenanceOperation(_clientDiagnostics, _pipeline, RestClient.CreatePerformMaintenanceRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -1356,7 +1358,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await RestClient.AssessPatchesAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachinesAssessPatchesOperation(_clientDiagnostics, Pipeline, RestClient.CreateAssessPatchesRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesAssessPatchesOperation(_clientDiagnostics, _pipeline, RestClient.CreateAssessPatchesRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -1374,7 +1376,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = RestClient.AssessPatches(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new VirtualMachinesAssessPatchesOperation(_clientDiagnostics, Pipeline, RestClient.CreateAssessPatchesRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new VirtualMachinesAssessPatchesOperation(_clientDiagnostics, _pipeline, RestClient.CreateAssessPatchesRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {

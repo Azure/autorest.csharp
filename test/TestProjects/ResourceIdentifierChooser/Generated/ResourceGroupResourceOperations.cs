@@ -19,6 +19,7 @@ namespace ResourceIdentifierChooser
     public partial class ResourceGroupResourceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ResourceGroupResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ResourceGroupResourcesRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace ResourceIdentifierChooser
         protected internal ResourceGroupResourceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new ResourceGroupResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new ResourceGroupResourcesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/ResourceGroupResources";

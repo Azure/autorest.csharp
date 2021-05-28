@@ -19,6 +19,7 @@ namespace Azure.Management.Storage
     public partial class PrivateEndpointConnectionOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, PrivateEndpointConnection>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal PrivateEndpointConnectionsRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="PrivateEndpointConnectionOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace Azure.Management.Storage
         protected internal PrivateEndpointConnectionOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new PrivateEndpointConnectionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new PrivateEndpointConnectionsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/privateEndpointConnections";

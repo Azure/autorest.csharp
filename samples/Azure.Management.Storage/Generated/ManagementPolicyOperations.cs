@@ -19,6 +19,7 @@ namespace Azure.Management.Storage
     public partial class ManagementPolicyOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ManagementPolicy>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ManagementPoliciesRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ManagementPolicyOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace Azure.Management.Storage
         protected internal ManagementPolicyOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new ManagementPoliciesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new ManagementPoliciesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/managementPolicies";

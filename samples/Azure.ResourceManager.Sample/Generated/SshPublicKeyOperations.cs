@@ -19,6 +19,7 @@ namespace Azure.ResourceManager.Sample
     public partial class SshPublicKeyOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SshPublicKey>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal SshPublicKeysRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="SshPublicKeyOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace Azure.ResourceManager.Sample
         protected internal SshPublicKeyOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new SshPublicKeysRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new SshPublicKeysRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/sshPublicKeys";

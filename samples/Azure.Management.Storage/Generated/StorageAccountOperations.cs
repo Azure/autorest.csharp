@@ -20,6 +20,7 @@ namespace Azure.Management.Storage
     public partial class StorageAccountOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, StorageAccount>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal StorageAccountsRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class for mocking. </summary>
@@ -33,7 +34,8 @@ namespace Azure.Management.Storage
         protected internal StorageAccountOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new StorageAccountsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
@@ -757,7 +759,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await RestClient.FailoverAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new StorageAccountsFailoverOperation(_clientDiagnostics, Pipeline, RestClient.CreateFailoverRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new StorageAccountsFailoverOperation(_clientDiagnostics, _pipeline, RestClient.CreateFailoverRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -775,7 +777,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = RestClient.Failover(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new StorageAccountsFailoverOperation(_clientDiagnostics, Pipeline, RestClient.CreateFailoverRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                return new StorageAccountsFailoverOperation(_clientDiagnostics, _pipeline, RestClient.CreateFailoverRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -850,7 +852,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await RestClient.RestoreBlobRangesAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, Pipeline, RestClient.CreateRestoreBlobRangesRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, _pipeline, RestClient.CreateRestoreBlobRangesRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -875,7 +877,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = RestClient.RestoreBlobRanges(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, Pipeline, RestClient.CreateRestoreBlobRangesRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, _pipeline, RestClient.CreateRestoreBlobRangesRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {

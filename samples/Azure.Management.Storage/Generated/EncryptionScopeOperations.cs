@@ -20,6 +20,7 @@ namespace Azure.Management.Storage
     public partial class EncryptionScopeOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, EncryptionScope>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal EncryptionScopesRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="EncryptionScopeOperations"/> class for mocking. </summary>
@@ -33,7 +34,8 @@ namespace Azure.Management.Storage
         protected internal EncryptionScopeOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new EncryptionScopesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new EncryptionScopesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/encryptionScopes";

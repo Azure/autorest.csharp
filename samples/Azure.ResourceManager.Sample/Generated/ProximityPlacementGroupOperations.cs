@@ -19,6 +19,7 @@ namespace Azure.ResourceManager.Sample
     public partial class ProximityPlacementGroupOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ProximityPlacementGroup>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ProximityPlacementGroupsRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ProximityPlacementGroupOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace Azure.ResourceManager.Sample
         protected internal ProximityPlacementGroupOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new ProximityPlacementGroupsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new ProximityPlacementGroupsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/proximityPlacementGroups";

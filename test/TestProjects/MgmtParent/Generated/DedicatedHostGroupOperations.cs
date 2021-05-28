@@ -19,6 +19,7 @@ namespace MgmtParent
     public partial class DedicatedHostGroupOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, DedicatedHostGroup>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal DedicatedHostGroupsRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostGroupOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace MgmtParent
         protected internal DedicatedHostGroupOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new DedicatedHostGroupsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/hostGroups";

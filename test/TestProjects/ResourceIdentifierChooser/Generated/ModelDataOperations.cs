@@ -19,6 +19,7 @@ namespace ResourceIdentifierChooser
     public partial class ModelDataOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ModelData>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal ModelDatasRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ModelDataOperations"/> class for mocking. </summary>
@@ -32,7 +33,8 @@ namespace ResourceIdentifierChooser
         protected internal ModelDataOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new ModelDatasRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _pipeline = Pipeline;
+            RestClient = new ModelDatasRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Network/ModelDatas";

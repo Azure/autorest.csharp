@@ -19,6 +19,7 @@ namespace TenantOnly
     public partial class BillingAccountOperations : ResourceOperationsBase<TenantResourceIdentifier, BillingAccount>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
+        private readonly HttpPipeline _pipeline;
         internal BillingAccountsRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class for mocking. </summary>
@@ -32,8 +33,9 @@ namespace TenantOnly
         protected internal BillingAccountOperations(ResourceOperationsBase options, TenantResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            _pipeline = Pipeline;
             Id.TryGetSubscriptionId(out var subscriptionId);
-            RestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, subscriptionId, BaseUri);
+            RestClient = new BillingAccountsRestOperations(_clientDiagnostics, _pipeline, subscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Billing/billingAccounts";
@@ -179,7 +181,7 @@ namespace TenantOnly
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = await RestClient.UpdateAsync(Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -206,7 +208,7 @@ namespace TenantOnly
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
                 var response = RestClient.Update(Id.Name, patchable, cancellationToken);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -265,7 +267,7 @@ namespace TenantOnly
                 var patchable = new BillingAccountData(locationData);
                 patchable.Tags.ReplaceWith(tags);
                 var response = await RestClient.UpdateAsync(Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -290,7 +292,7 @@ namespace TenantOnly
                 var patchable = new BillingAccountData(locationData);
                 patchable.Tags.ReplaceWith(tags);
                 var response = RestClient.Update(Id.Name, patchable, cancellationToken);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -351,7 +353,7 @@ namespace TenantOnly
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = await RestClient.UpdateAsync(Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -378,7 +380,7 @@ namespace TenantOnly
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
                 var response = RestClient.Update(Id.Name, patchable, cancellationToken);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, _pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
