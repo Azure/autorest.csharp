@@ -13,6 +13,7 @@
     <IncludeAzureCoreSharedCode Condition="'$(IncludeAzureCoreSharedCode)' == ''">true</IncludeAzureCoreSharedCode>
     <AzureCoreSharedCodeDirectory Condition="'$(AzureCoreSharedCodeDirectory)' == ''">$(MSBuildThisFileDirectory)../content/Azure.Core.Shared/</AzureCoreSharedCodeDirectory>
     <AutoRestSharedCodeDirectory>$(MSBuildThisFileDirectory)../content/Generator.Shared/</AutoRestSharedCodeDirectory>
+    <ManagementSharedCodeDirectory>$(MSBuildThisFileDirectory)../content/Management.Shared/</ManagementSharedCodeDirectory>
 
     <_GenerateCode Condition="'$(AutoRestInput)' != ''">true</_GenerateCode>
   </PropertyGroup>
@@ -40,6 +41,10 @@
   <ItemGroup Condition="'$(_GenerateCode)' == 'true' OR '$(IncludeGeneratorSharedCode)' == 'true'">
     <Compile Include="$(AzureCoreSharedCodeDirectory)/**/*.cs" Condition="'$(IncludeAzureCoreSharedCode)' == 'true'" Link="Shared/Core/%(RecursiveDir)/%(Filename)%(Extension)" />
     <Compile Include="$(AutoRestSharedCodeDirectory)/**/*.cs" Link="Shared/AutoRest/%(RecursiveDir)/%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IncludeManagementSharedCode)' == 'true'">
+    <Compile Include="$(ManagementSharedCodeDirectory)/**/*.cs" Link="Shared/Management/%(RecursiveDir)/%(Filename)%(Extension)" />
   </ItemGroup>
 
 </Project>

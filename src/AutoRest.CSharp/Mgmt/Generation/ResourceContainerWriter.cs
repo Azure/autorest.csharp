@@ -3,23 +3,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure.Core;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.Output;
-using Azure.ResourceManager.Core.Resources;
 using Azure;
+using Azure.Core;
 using Azure.ResourceManager.Core;
-using Azure.Core.Pipeline;
-using System.Threading.Tasks;
-using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using System.Diagnostics;
-using AutoRest.CSharp.Mgmt.Decorator;
+using Azure.ResourceManager.Core.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -32,14 +30,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// and the following builder methods:
     /// 1. Construct
     /// </summary>
-    internal class ResourceContainerWriter : ClientWriter
+    internal class ResourceContainerWriter : MgmtClientBaseWriter
     {
-        private const string RestClientField = "_restClient";
         private const string _parentProperty = "Parent";
         private CodeWriter _writer;
         private ResourceContainer _resourceContainer;
         private ResourceData _resourceData;
-        private MgmtRestClient _restClient;
         private Resource _resource;
         private ResourceOperation _resourceOperation;
         private MgmtOutputLibrary _library;
@@ -68,52 +64,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteXmlDocumentationSummary(_resourceContainer.Description);
                 string baseClass = FindRestClientMethodByPrefix("Get", out _)
                     ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
-                    : $"ContainerBase<{_resourceContainer.ResourceIdentifierType}>";
+                    : $"ContainerBase";
                 using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : {baseClass}"))
                 {
-                    WriteContainerCtors();
-                    WriteFields();
+                    WriteContainerCtors(_writer, _resourceContainer.Type.Name, "ResourceOperationsBase", "parent");
+                    WriteFields(_writer, _restClient!);
                     WriteIdProperty();
-                    WriteContainerProperties();
+                    WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
                     WriteResourceOperations();
                     WriteBuilders();
                 }
             }
-        }
-
-        private void WriteContainerCtors()
-        {
-            string typeOfThis = _resourceContainer.Type.Name;
-
-            // write protected default constructor
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref=\"{typeOfThis}\"/> class for mocking.");
-            using (_writer.Scope($"protected {typeOfThis}()"))
-            { }
-
-            // write "parent resource" constructor
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Initializes a new instance of {typeOfThis} class.");
-            var parentArgument = "parent";
-            _writer.WriteXmlDocumentationParameter(parentArgument, "The resource representing the parent resource.");
-            using (_writer.Scope($"internal {typeOfThis}({typeof(ResourceOperationsBase)} {parentArgument}) : base({parentArgument})"))
-            {
-                _writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}(ClientOptions);");
-                // todo: after a shared pipeline field is implemented in the base class, replace this with that
-                _writer.Line($"{PipelineField} = {typeof(ManagementPipelineBuilder)}.Build(Credential, BaseUri, ClientOptions);");
-            }
-        }
-
-        private void WriteFields()
-        {
-            _writer.Line();
-            _writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
-            _writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Represents the REST operations.");
-            // subscriptionId might not always be needed. For example `RestOperations` does not have it.
-            var subIdIfNeeded = _restClient.Parameters.FirstOrDefault()?.Name == "subscriptionId" ? ", Id.SubscriptionId" : "";
-            _writer.Line($"private {_restClient.Type} {RestClientField} => new {_restClient.Type}({ClientDiagnosticsField}, {PipelineField}{subIdIfNeeded});");
         }
 
         private void WriteIdProperty()
@@ -146,13 +107,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private bool FindRestClientMethodByHttpMethod(RequestMethod httpMethod, out RestClientMethod restMethod)
         {
-            restMethod = _restClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(httpMethod));
+            restMethod = _restClient!.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(httpMethod));
             return restMethod != null;
         }
 
         private bool FindRestClientMethodByPrefix(string prefix, out RestClientMethod restMethod)
         {
-            restMethod = _restClient.Methods.FirstOrDefault(method => method.Name.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
+            restMethod = _restClient!.Methods.FirstOrDefault(method => method.Name.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
             return restMethod != null;
         }
 
@@ -171,7 +132,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.AppendRaw($"{parameter.Name}, ");
                 }
-                _writer.Line($"cancellationToken: cancellationToken).WaitForCompletion();");
+                _writer.Line($"cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);");
             });
 
             _writer.Line();
@@ -184,7 +145,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.AppendRaw($"{parameter.Name}, ");
                 }
                 _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
-                _writer.Line($"return await operation.WaitForCompletionAsync().ConfigureAwait(false);");
+                _writer.Line($"return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);");
             });
 
             var isLongRunning = restClientMethod.Operation.IsLongRunning;
@@ -206,7 +167,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (isLongRunning)
                 {
                     _writer.Append($"return new {lroObjectType}(");
-                    _writer.Append($"{_parentProperty}, {ClientDiagnosticsField}, {PipelineField}, {RestClientField}.Create{restClientMethod.Name}Request(");
+                    _writer.Append($"{_parentProperty}, {ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.Create{restClientMethod.Name}Request(");
                     foreach (var parameter in parameterMapping)
                     {
                         _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
@@ -238,7 +199,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (isLongRunning)
                 {
                     _writer.Append($"return new {lroObjectType}(");
-                    _writer.Append($"{_parentProperty}, {ClientDiagnosticsField}, {PipelineField}, {RestClientField}.Create{restClientMethod.Name}Request(");
+                    _writer.Append($"{_parentProperty}, {ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.Create{restClientMethod.Name}Request(");
                     foreach (var parameter in parameterMapping)
                     {
                         _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
@@ -278,7 +239,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             const string cancellationTokenParameter = "cancellationToken";
-            _writer.WriteXmlDocumentationParameter(cancellationTokenParameter, @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""P:System.Threading.CancellationToken.None"" />.");
+            _writer.WriteXmlDocumentationParameter(cancellationTokenParameter, @"A token to allow the caller to cancel the call to the service. The default value is <see cref=""CancellationToken.None"" />.");
 
             _writer.Append($"public {(isAsync ? "async " : string.Empty)}{(isOverride ? "override " : string.Empty)}{returnType} {CreateMethodName(syncMethodName, isAsync)}(");
             foreach (var parameter in parameters)
@@ -292,121 +253,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteParameterNullChecks(parameters.ToList());
                 inner(_writer);
             });
-        }
-
-        /// <summary>
-        /// Builds the mapping between resource operations in Container class and that in RestOperations class.
-        /// For example `DedicatedHostRestClient.CreateOrUpdate()`
-        /// | resourceGroupName      | hostGroupName    | hostName | parameters |
-        /// | ---------------------- | ---------------- | -------- | ---------- |
-        /// | "Id.ResourceGroupName" | "Id.Parent.Name" | hostName | parameters |
-        /// </summary>
-        /// <param name="method">Represents a method in RestOperations class.</param>
-        private IEnumerable<ParameterMapping> BuildParameterMapping(RestClientMethod method)
-        {
-            var parameterMapping = new List<ParameterMapping>();
-            var dotParent = string.Empty;
-            var parentNameStack = new Stack<string>();
-
-            // loop through parameters of REST client method, map the leading string-like parameters to
-            // Id.ResourceGroupName, Id.Name, Id.Parent.Name...
-            // special case: type is enum and you can convert string to it (model-as-string), we should handle it as string
-            // special case 2: in paging scenarios, `nextLink` needs to be handled specially, so here we just ignore it
-            foreach (var parameter in method.Parameters)
-            {
-                bool passThru = true;
-                string valueExpression = string.Empty;
-                if (string.Equals(parameter.Name, "nextLink", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    continue;
-                }
-                else if (parameter.Type.IsStringLike() && IsMandatory(parameter))
-                {
-                    passThru = false;
-                    if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        valueExpression = "Id.ResourceGroupName";
-                    }
-                    else
-                    {
-                        // container.Id is the ID of parent resource, so the first name should just be `Id.Name`
-                        parentNameStack.Push($"Id{dotParent}.Name");
-                        dotParent += ".Parent";
-                    }
-                }
-                else
-                {
-                    passThru = true;
-                }
-                parameterMapping.Add(new ParameterMapping(parameter, passThru, valueExpression));
-            }
-
-            // if the method needs resource name (typically all non-list methods), we should make it pass-thru
-            // 1. make last string-like parameter (typically the resource name) pass-through from container method
-            // 2. ignoring optional parameters such as `expand`
-            if (!method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.IsStringLike() && IsMandatory(parameter.Parameter));
-                if (lastString?.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    lastString.IsPassThru = true;
-                    parentNameStack.Pop();
-                }
-            }
-
-            // set the arguments for name parameters reversely: Id.Parent.Name, Id.Parent.Parent.Name, ...
-            foreach (var parameter in parameterMapping)
-            {
-                if (IsMandatory(parameter.Parameter) && !parameter.IsPassThru && string.IsNullOrEmpty(parameter.ValueExpression))
-                {
-                    parameter.ValueExpression = parentNameStack.Pop();
-                }
-            }
-
-            return parameterMapping;
-        }
-
-        private bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
-
-        /// <summary>
-        /// Represents how a parameter of rest operation is mapped to a parameter of a container method or an expression.
-        /// </summary>
-        private class ParameterMapping
-        {
-            /// <summary>
-            /// The parameter object in <see cref="RestClientMethod"/>.
-            /// </summary>
-            public Parameter Parameter;
-            /// <summary>
-            /// Should the parameter be passed through from the method in container class?
-            /// </summary>
-            public bool IsPassThru;
-            /// <summary>
-            /// if not pass-through, this is the value to pass in <see cref="RestClientMethod"/>.
-            /// </summary>
-            public string ValueExpression;
-
-            public ParameterMapping(Parameter parameter, bool isPassThru, string valueExpression)
-            {
-                Parameter = parameter;
-                IsPassThru = isPassThru;
-                ValueExpression = valueExpression;
-            }
-        }
-
-        private void WriteContainerProperties()
-        {
-            var resourceType = _resourceContainer.GetValidResourceValue();
-
-            // TODO: Remove this if condition after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5800
-            if (!resourceType.Contains(".ResourceType"))
-            {
-                resourceType = $"\"{resourceType}\"";
-            }
-
-            _writer.Line();
-            _writer.WriteXmlDocumentationSummary($"Gets the valid resource type for this object");
-            _writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => {resourceType};");
         }
 
         private void WriteGetVariants(RestClientMethod method)
@@ -469,8 +315,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListVariants()
         {
-            WriteList(async: false);
-            WriteList(async: true);
+            //.Select(value => new {resourceType}({_parentProperty}, value)
+            var pagingMethod = FindListPagingMethod();
+            if (pagingMethod != null)
+            {
+                WriteList(_writer, false, _resource.Type, pagingMethod, $".Select(value => new {_resource.Type.Name}({_parentProperty}, value))");
+                WriteList(_writer, true, _resource.Type, pagingMethod, $".Select(value => new {_resource.Type.Name}({_parentProperty}, value))");
+            }
             WriteListAsGenericResource(async: false);
             WriteListAsGenericResource(async: true);
         }
@@ -509,70 +360,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
             private PagingMethod FindListPagingMethod()
+            _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
+            _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
+            _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
+            _writer.WriteXmlDocumentation("returns", returnText);
+            using (_writer.Scope($"public {returnType} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
+            {
+                _writer.Line($"var results = ListAsGenericResource{asyncText}(null, top, cancellationToken);");
+                _writer.Append($"return new PhWrapping{asyncText}Pageable<GenericResource, {_resource.Type}>(");
+                _writer.Line($"results, genericResource => new {_resourceOperation.Type}(genericResource, genericResource.Id as {_resourceOperation.ResourceIdentifierType}).Get().Value);");
+            }
+        }
+
+        private PagingMethod FindListPagingMethod()
         {
             return _resourceContainer.PagingMethods.FirstOrDefault(m => m.Name.Equals("ListByResourceGroup", StringComparison.InvariantCultureIgnoreCase))
                 ?? _resourceContainer.PagingMethods.FirstOrDefault(m => m.Name.Equals("List", StringComparison.InvariantCultureIgnoreCase))
                 ?? _resourceContainer.PagingMethods.FirstOrDefault(m => m.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase));
-        }
-
-        /// <summary>
-        /// Write paging method using `PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunction)` pattern.
-        /// </summary>
-        /// <param name="pagingMethod">Paging method that contains rest methods.</param>
-        /// <param name="async">Should the method be written sync or async.</param>
-        private void WriteContainerPagingOperation(PagingMethod pagingMethod, bool async)
-        {
-            var parameters = pagingMethod.Method.Parameters;
-
-            var pagedResourceType = new CSharpType(typeof(Page<>), _resource.Type);
-            var returnType = async ? new CSharpType(typeof(Task<>), pagedResourceType) : pagedResourceType;
-
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
-
-            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-            var asyncText = async ? "async" : string.Empty;
-            var awaitText = async ? "await" : string.Empty;
-            var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-            using (_writer.Scope($"{asyncText} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
-            {
-                // no null-checks because all are optional
-                WriteDiagnosticScope(_writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
-                {
-                    writer.Append($"var response = {awaitText} {RestClientField}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
-                    foreach (var parameter in BuildParameterMapping(pagingMethod.Method).Where(p => IsMandatory(p.Parameter)))
-                    {
-                        writer.Append($"{parameter.ValueExpression}, ");
-                    }
-
-                    writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
-
-                    this._writer.UseNamespace("System.Linq");
-                    // need the Select() for converting XXXResourceData to XXXResource
-                    writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}.Select(value => new {_resource.Type}({_parentProperty}, value)), {continuationTokenText}, response.GetRawResponse());");
-                });
-            }
-
-            var nextPageFunctionName = "null";
-            if (pagingMethod.NextPageMethod != null)
-            {
-                nextPageFunctionName = "NextPageFunc";
-                var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
-                using (_writer.Scope($"{asyncText} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
-                {
-                    WriteDiagnosticScope(_writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
-                    {
-                        writer.Append($"var response = {awaitText} {RestClientField}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
-                        foreach (var parameter in BuildParameterMapping(pagingMethod.NextPageMethod).Where(p => IsMandatory(p.Parameter)))
-                        {
-                            writer.Append($"{parameter.ValueExpression}, ");
-                        }
-                        writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
-                        writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}.Select(value => new {_resource.Type}({_parentProperty}, value)), {continuationTokenText}, response.GetRawResponse());");
-                    });
-                }
-            }
-            _writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
         private void WriteListAsGenericResource(bool async)
@@ -583,7 +387,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
+            _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
             _writer.WriteXmlDocumentation("returns", $"{(async ? "An async" : "A")} collection of resource that may take multiple service requests to iterate over.");
             CSharpType returnType = new CSharpType(async ? typeof(AsyncPageable<>) : typeof(Pageable<>), typeof(GenericResource));
             using (_writer.Scope($"public {returnType} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
@@ -605,7 +409,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.WriteXmlDocumentationSummary($"Filters the list of {_resource.Type.Name} for this resource group represented as generic resources.");
             _writer.WriteXmlDocumentationParameter("nameFilter", "The filter used in this operation.");
             _writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
-            _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P:System.Threading.CancellationToken.None\" />.");
+            _writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
             _writer.WriteXmlDocumentation("returns", $"An async collection of resource that may take multiple service requests to iterate over.");
             using (_writer.Scope($"public {typeof(AsyncPageable<GenericResource>)} {methodName}(string nameFilter, int? top = null, {typeof(CancellationToken)} cancellationToken = default)"))
             {

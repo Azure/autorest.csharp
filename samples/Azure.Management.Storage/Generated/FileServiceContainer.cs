@@ -9,7 +9,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
@@ -30,14 +29,12 @@ namespace Azure.Management.Storage
         internal FileServiceContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private FileServicesRestOperations _restClient => new FileServicesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private FileServicesRestOperations _restClient => new FileServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -50,7 +47,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public Response<FileService> CreateOrUpdate(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
@@ -66,7 +63,7 @@ namespace Azure.Management.Storage
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
+                return StartCreateOrUpdate(accountName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -78,7 +75,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async Task<Response<FileService>> CreateOrUpdateAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.CreateOrUpdate");
@@ -95,7 +92,7 @@ namespace Azure.Management.Storage
                 }
 
                 var operation = await StartCreateOrUpdateAsync(accountName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -107,7 +104,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public FileServicesSetServicePropertiesOperation StartCreateOrUpdate(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
@@ -136,7 +133,7 @@ namespace Azure.Management.Storage
         /// <summary> The operation to create or update a FileService. Please note some properties can be set only during creation. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="parameters"> The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async Task<FileServicesSetServicePropertiesOperation> StartCreateOrUpdateAsync(string accountName, FileServiceData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.StartCreateOrUpdate");
@@ -164,7 +161,7 @@ namespace Azure.Management.Storage
 
         /// <inheritdoc />
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public override Response<FileService> Get(string accountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.Get");
@@ -188,7 +185,7 @@ namespace Azure.Management.Storage
 
         /// <inheritdoc />
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async override Task<Response<FileService>> GetAsync(string accountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.Get");
@@ -210,30 +207,10 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <summary> Filters the list of <see cref="FileService" /> for this resource group. </summary>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of <see cref="FileService" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<FileService> List(int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResource(null, top, cancellationToken);
-            return new PhWrappingPageable<GenericResource, FileService>(results, genericResource => new FileServiceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
-        }
-
-        /// <summary> Filters the list of <see cref="FileService" /> for this resource group. </summary>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of <see cref="FileService" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<FileService> ListAsync(int? top = null, CancellationToken cancellationToken = default)
-        {
-            var results = ListAsGenericResourceAsync(null, top, cancellationToken);
-            return new PhWrappingAsyncPageable<GenericResource, FileService>(results, genericResource => new FileServiceOperations(genericResource, genericResource.Id as ResourceGroupResourceIdentifier).Get().Value);
-        }
-
         /// <summary> Filters the list of FileService for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
@@ -255,7 +232,7 @@ namespace Azure.Management.Storage
         /// <summary> Filters the list of FileService for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {

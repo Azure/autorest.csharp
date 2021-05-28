@@ -31,14 +31,12 @@ namespace SubscriptionExtensions
         internal OvenContainer(ResourceOperationsBase parent) : base(parent)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = ManagementPipelineBuilder.Build(Credential, BaseUri, ClientOptions);
         }
 
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
 
         /// <summary> Represents the REST operations. </summary>
-        private OvensRestOperations _restClient => new OvensRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId);
+        private OvensRestOperations _restClient => new OvensRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
@@ -51,7 +49,7 @@ namespace SubscriptionExtensions
         /// <summary> The operation to create or update a Oven. Please note some properties can be set only during creation. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public Response<Oven> CreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.CreateOrUpdate");
@@ -67,7 +65,7 @@ namespace SubscriptionExtensions
                     throw new ArgumentNullException(nameof(parameters));
                 }
 
-                return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion();
+                return StartCreateOrUpdate(vmName, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
             }
             catch (Exception e)
             {
@@ -79,7 +77,7 @@ namespace SubscriptionExtensions
         /// <summary> The operation to create or update a Oven. Please note some properties can be set only during creation. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async Task<Response<Oven>> CreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.CreateOrUpdate");
@@ -96,7 +94,7 @@ namespace SubscriptionExtensions
                 }
 
                 var operation = await StartCreateOrUpdateAsync(vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionAsync().ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -108,7 +106,7 @@ namespace SubscriptionExtensions
         /// <summary> The operation to create or update a Oven. Please note some properties can be set only during creation. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public OvensCreateOrUpdateOperation StartCreateOrUpdate(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.StartCreateOrUpdate");
@@ -125,7 +123,7 @@ namespace SubscriptionExtensions
                 }
 
                 var originalResponse = _restClient.CreateOrUpdate(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken);
-                return new OvensCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, originalResponse);
+                return new OvensCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -137,7 +135,7 @@ namespace SubscriptionExtensions
         /// <summary> The operation to create or update a Oven. Please note some properties can be set only during creation. </summary>
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="parameters"> Parameters supplied to the Create Virtual Machine operation. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async Task<OvensCreateOrUpdateOperation> StartCreateOrUpdateAsync(string vmName, OvenData parameters, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.StartCreateOrUpdate");
@@ -154,7 +152,7 @@ namespace SubscriptionExtensions
                 }
 
                 var originalResponse = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, vmName, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
-                return new OvensCreateOrUpdateOperation(Parent, _clientDiagnostics, _pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, originalResponse);
+                return new OvensCreateOrUpdateOperation(Parent, _clientDiagnostics, Pipeline, _restClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, vmName, parameters).Request, originalResponse);
             }
             catch (Exception e)
             {
@@ -165,7 +163,7 @@ namespace SubscriptionExtensions
 
         /// <inheritdoc />
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public override Response<Oven> Get(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.Get");
@@ -189,7 +187,7 @@ namespace SubscriptionExtensions
 
         /// <inheritdoc />
         /// <param name="vmName"> The name of the virtual machine. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         public async override Task<Response<Oven>> GetAsync(string vmName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("OvenContainer.Get");
@@ -211,11 +209,11 @@ namespace SubscriptionExtensions
             }
         }
 
-        /// <summary> Filters the list of <see cref="Oven" /> for this resource group. </summary>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="Oven" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<Oven> List(int? top = null, CancellationToken cancellationToken = default)
+        public Pageable<Oven> List(string statusOnly = null, CancellationToken cancellationToken = default)
         {
             Page<Oven> FirstPageFunc(int? pageSizeHint)
             {
@@ -250,11 +248,11 @@ namespace SubscriptionExtensions
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of <see cref="Oven" /> for this resource group. </summary>
-        /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
+        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="Oven" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<Oven> ListAsync(int? top = null, CancellationToken cancellationToken = default)
+        public AsyncPageable<Oven> ListAsync(string statusOnly = null, CancellationToken cancellationToken = default)
         {
             async Task<Page<Oven>> FirstPageFunc(int? pageSizeHint)
             {
@@ -292,7 +290,7 @@ namespace SubscriptionExtensions
         /// <summary> Filters the list of Oven for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of resource that may take multiple service requests to iterate over. </returns>
         public Pageable<GenericResource> ListAsGenericResource(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {
@@ -314,7 +312,7 @@ namespace SubscriptionExtensions
         /// <summary> Filters the list of Oven for this resource group represented as generic resources. </summary>
         /// <param name="nameFilter"> The filter used in this operation. </param>
         /// <param name="top"> The number of results to return. </param>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P:System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> An async collection of resource that may take multiple service requests to iterate over. </returns>
         public AsyncPageable<GenericResource> ListAsGenericResourceAsync(string nameFilter, int? top = null, CancellationToken cancellationToken = default)
         {

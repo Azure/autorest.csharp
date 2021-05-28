@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteGetResourceRestOperations(CodeWriter writer, ResourceOperation resourceOperation)
         {
-            writer.Append($"private static {resourceOperation.RestClient.Type} Get{resourceOperation.RestClient.Type.Name}({typeof(ClientDiagnostics)} clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, ");
+            writer.Append($"private static {resourceOperation.RestClient.Type} Get{resourceOperation.RestClient.Type.Name}({typeof(ClientDiagnostics)} clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, ");
             // TODO: Use https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783 rest client parameters
             foreach (Parameter parameter in resourceOperation.RestClient.Parameters)
             {
@@ -112,9 +112,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                var httpPipeline = new CodeWriterDeclaration("httpPipeline");
-                writer.Line($"var {httpPipeline:D} = {typeof(Azure.Core.ManagementPipelineBuilder)}.Build(credential, endpoint, clientOptions);");
-                writer.Append($"return new {resourceOperation.RestClient.Type}(clientDiagnostics, httpPipeline, ");
+                writer.Append($"return new {resourceOperation.RestClient.Type}(clientDiagnostics, pipeline, ");
                 foreach (var parameter in resourceOperation.RestClient.Parameters)
                 {
                     if (parameter.IsApiVersionParameter)
@@ -173,7 +171,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodName = $"List{resource.Type.Name}";
             using (writer.Scope($"public static {responseType} {CreateMethodName(methodName, async)}(this {typeof(SubscriptionOperations)} subscription, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                writer.Append($"return subscription.ListResources((baseUri, credential, options) =>");
+                writer.Append($"return subscription.ListResources((baseUri, credential, options, pipeline) =>");
                 using (writer.Scope())
                 {
                     var clientDiagnostics = new CodeWriterDeclaration("clientDiagnostics");
@@ -182,7 +180,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     writer.Line($"var {clientDiagnostics:D} = new {typeof(ClientDiagnostics)}(options);");
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
-                    writer.Line($"var {restOperations:D} = Get{resourceOperation.RestClient.Type.Name}(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);");
+                    writer.Line($"var {restOperations:D} = Get{resourceOperation.RestClient.Type.Name}(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);");
                     writer.Line($"var {result:D} = {CreateMethodName(pagingMethod.Name, async)}({clientDiagnostics}, {restOperations});");
 
                     CSharpType[] arguments = { pagingMethod.PagingResponse.ItemType, resource.Type };

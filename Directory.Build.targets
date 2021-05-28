@@ -8,7 +8,15 @@
       <Visible>false</Visible>
     </AdditionalFiles>
   </ItemGroup>
-  
+
+  <ItemGroup Condition="!$(MSBuildProjectName.StartsWith('AutoRest.'))">
+    <Compile Include="$(MSBuildThisFileDirectory)/src/assets/Azure.Core.Shared/**/*.cs" Link="Shared/Core/%(RecursiveDir)/%(Filename)%(Extension)" />
+    <Compile Include="$(MSBuildThisFileDirectory)/src/assets/Generator.Shared/**/*.cs" Link="Shared/AutoRest/%(RecursiveDir)/%(Filename)%(Extension)" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(IncludeManagementSharedCode)' == 'true'">
+    <Compile Include="$(MSBuildThisFileDirectory)/src/assets/Management.Shared/**/*.cs" Link="Shared/Management/%(RecursiveDir)/%(Filename)%(Extension)" />
+  </ItemGroup>
+
   <PropertyGroup>
     <NoWarn>$(NoWarn);NU5105</NoWarn>
   </PropertyGroup>

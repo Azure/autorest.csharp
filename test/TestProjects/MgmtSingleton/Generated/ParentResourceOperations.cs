@@ -19,7 +19,6 @@ namespace MgmtSingleton
     public partial class ParentResourceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ParentResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
         internal ParentResourcesRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ParentResourceOperations"/> class for mocking. </summary>
@@ -33,8 +32,7 @@ namespace MgmtSingleton
         protected internal ParentResourceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = Pipeline;
-            RestClient = new ParentResourcesRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
+            RestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Billing/parentResources";
