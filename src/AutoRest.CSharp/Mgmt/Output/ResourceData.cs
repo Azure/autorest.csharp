@@ -32,7 +32,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Tells if a [Resource]Data is a resource by checking if it inherits any of:
         /// Resource, TrackedResource, SubResource, or SubResourceWritable.
         /// </summary>
-        /// <param name="resourceData"></param>
         /// <returns></returns>
         internal bool IsResource()
         {

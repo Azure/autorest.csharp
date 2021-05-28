@@ -110,8 +110,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <summary>
         /// Write paging method using `PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunction)` pattern.
         /// </summary>
+        /// <param name="writer">The code writer to use.</param>
         /// <param name="pagingMethod">Paging method that contains rest methods.</param>
         /// <param name="async">Should the method be written sync or async.</param>
+        /// <param name="resourceType">The reource type that is being written.</param>
+        /// <param name="converter">Optional convertor for modifying the result of the rest client call.</param>
         private void WriteContainerPagingOperation(CodeWriter writer, PagingMethod pagingMethod, bool async, CSharpType resourceType, FormattableString converter)
         {
             var parameters = pagingMethod.Method.Parameters;
