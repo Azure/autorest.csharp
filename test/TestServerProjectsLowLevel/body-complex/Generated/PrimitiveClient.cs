@@ -45,7 +45,7 @@ namespace body_complex_LowLevel
             _clientDiagnostics = new ClientDiagnostics(options);
             _keyCredential = credential;
             var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }

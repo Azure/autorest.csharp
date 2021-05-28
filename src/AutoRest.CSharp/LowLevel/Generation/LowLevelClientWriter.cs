@@ -206,7 +206,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
         private const string PipelineField = "Pipeline";
-        private const string KeyCredentialVariable = "credential";
+        private const string CredentialVariable = "credential";
         private const string OptionsVariable = "options";
         private const string APIVersionField = "apiVersion";
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
@@ -319,25 +319,30 @@ namespace AutoRest.CSharp.Generation.Writers
                 var authPolicy = new CodeWriterDeclaration("authPolicy");
                 if (securityScheme is AzureKeySecurityScheme)
                 {
-                    writer.Line($"{KeyAuthField} = {KeyCredentialVariable};");
+                    writer.Line($"{KeyAuthField} = {CredentialVariable};");
                     writer.Line($"var {authPolicy:D} = new {typeof(AzureKeyCredentialPolicy)}({KeyAuthField}, {AuthorizationHeaderConstant});");
                 }
                 else if (securityScheme is AADTokenSecurityScheme)
                 {
-                    writer.Line($"{TokenAuthField} = {KeyCredentialVariable};");
+                    writer.Line($"{TokenAuthField} = {CredentialVariable};");
                     writer.Line($"var {authPolicy:D} = new {typeof(BearerTokenAuthenticationPolicy)}({TokenAuthField}, {ScopesConstant});");
                 }
-                var policies = new CodeWriterDeclaration("policies");
 
                 writer.Append($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new HttpPipelinePolicy[] ");
                 writer.AppendRaw("{");
-                if (securityScheme is not NoAuthSecurity)
-                {
-                    writer.Append($" {authPolicy:I}, ");
-                }
                 writer.Append($" new {typeof(LowLevelCallbackPolicy)}() ");
-
-                writer.LineRaw("});");
+                writer.AppendRaw("}, ");
+                if (securityScheme is NoAuthSecurity)
+                {
+                    writer.AppendRaw("Array.Empty<HttpPipelinePolicy>()");
+                }
+                else
+                {
+                    writer.AppendRaw("new HttpPipelinePolicy[] {");
+                    writer.Append($" {authPolicy:I} ");
+                    writer.AppendRaw("}");
+                }
+                writer.LineRaw(", new ResponseClassifier());");
 
                 foreach (Parameter clientParameter in client.Parameters)
                 {
