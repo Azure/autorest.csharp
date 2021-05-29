@@ -85,6 +85,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     RestClientMethod method = restClient.GetOperationMethod(serviceRequest);
                     RestClientMethod? nextPageMethod = restClient.GetNextOperationMethod(serviceRequest);
 
+                    if (method == nextPageMethod)
+                    {
+                        continue;
+                    }
+
                     if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
                     {
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
