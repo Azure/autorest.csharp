@@ -20,7 +20,6 @@ namespace MgmtOperations
     public partial class AvailabilitySetChildOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AvailabilitySetChild>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
         internal AvailabilitySetChildRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildOperations"/> class for mocking. </summary>
@@ -34,8 +33,7 @@ namespace MgmtOperations
         protected internal AvailabilitySetChildOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = Pipeline;
-            RestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
+            RestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets/availabilitySetChild";

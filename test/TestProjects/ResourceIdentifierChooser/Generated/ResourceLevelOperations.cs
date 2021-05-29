@@ -19,7 +19,6 @@ namespace ResourceIdentifierChooser
     public partial class ResourceLevelOperations : ResourceOperationsBase<ResourceIdentifier, ResourceLevel>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private readonly HttpPipeline _pipeline;
         internal ResourceLevelsRestOperations RestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceLevelOperations"/> class for mocking. </summary>
@@ -33,8 +32,7 @@ namespace ResourceIdentifierChooser
         protected internal ResourceLevelOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _pipeline = Pipeline;
-            RestClient = new ResourceLevelsRestOperations(_clientDiagnostics, _pipeline, Id.SubscriptionId, BaseUri);
+            RestClient = new ResourceLevelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Network/ResourceLevels";
