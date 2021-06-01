@@ -32,6 +32,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return new List<ProviderSegment>();
             }
             var offset = path.IndexOf(ProviderSegment.Providers);
+            if (offset == -1)
+            {
+                return new List<ProviderSegment>();
+            }
             ProviderSegment currentToken;
             var tokens = new List<ProviderSegment>();
             int pathLen = path.Length;
