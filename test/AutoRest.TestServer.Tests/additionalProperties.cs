@@ -51,9 +51,9 @@ namespace AutoRest.TestServer.Tests
                 },
             };
 
-            parameter["color"] = "red";
-            parameter["city"] = "Seattle";
-            parameter["food"] = "tikka masala";
+            parameter.MoreAdditionalProperties["color"] = "red";
+            parameter.MoreAdditionalProperties["city"] = "Seattle";
+            parameter.MoreAdditionalProperties["food"] = "tikka masala";
 
             var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPInPropertiesWithAPStringAsync(parameter);
 
@@ -65,9 +65,9 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(599f, value.AdditionalProperties["weight"]);
             Assert.AreEqual(11.5f, value.AdditionalProperties["footsize"]);
 
-            Assert.AreEqual("red", value["color"]);
-            Assert.AreEqual("Seattle", value["city"]);
-            Assert.AreEqual("tikka masala", value["food"]);
+            Assert.AreEqual("red", value.MoreAdditionalProperties["color"]);
+            Assert.AreEqual("Seattle", value.MoreAdditionalProperties["city"]);
+            Assert.AreEqual("tikka masala", value.MoreAdditionalProperties["food"]);
         });
 
         [Test]
@@ -79,8 +79,8 @@ namespace AutoRest.TestServer.Tests
                 Friendly = true,
             };
 
-            catAPTrue["birthdate"] = DateTimeOffset.Parse("2017-12-13T02:29:51Z");
-            catAPTrue["complexProperty"] = new Dictionary<string, object>()
+            catAPTrue.AdditionalProperties["birthdate"] = DateTimeOffset.Parse("2017-12-13T02:29:51Z");
+            catAPTrue.AdditionalProperties["complexProperty"] = new Dictionary<string, object>()
             {
                 {"color", "Red"}
             };
@@ -92,8 +92,8 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Lisa", value.Name);
             Assert.AreEqual(true, value.Status);
             Assert.AreEqual(true, value.Friendly);
-            Assert.AreEqual("2017-12-13T02:29:51Z", value["birthdate"]);
-            Assert.AreEqual("Red", ((Dictionary<string, object>)value["complexProperty"])["color"]);
+            Assert.AreEqual("2017-12-13T02:29:51Z", value.AdditionalProperties["birthdate"]);
+            Assert.AreEqual("Red", ((Dictionary<string, object>)value.AdditionalProperties["complexProperty"])["color"]);
         });
 
         [Test]
@@ -104,8 +104,8 @@ namespace AutoRest.TestServer.Tests
                 Name = "Puppy",
             };
 
-            catAPTrue["birthdate"] = DateTimeOffset.Parse("2017-12-13T02:29:51Z");
-            catAPTrue["complexProperty"] = new Dictionary<string, object>()
+            catAPTrue.AdditionalProperties["birthdate"] = DateTimeOffset.Parse("2017-12-13T02:29:51Z");
+            catAPTrue.AdditionalProperties["complexProperty"] = new Dictionary<string, object>()
             {
                 {"color", "Red"}
             };
@@ -116,8 +116,8 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(1, value.Id);
             Assert.AreEqual("Puppy", value.Name);
             Assert.AreEqual(true, value.Status);
-            Assert.AreEqual("2017-12-13T02:29:51Z", value["birthdate"]);
-            Assert.AreEqual("Red", ((Dictionary<string, object>)value["complexProperty"])["color"]);
+            Assert.AreEqual("2017-12-13T02:29:51Z", value.AdditionalProperties["birthdate"]);
+            Assert.AreEqual("Red", ((Dictionary<string, object>)value.AdditionalProperties["complexProperty"])["color"]);
         });
 
         [Test]
@@ -128,8 +128,8 @@ namespace AutoRest.TestServer.Tests
                 Name = "Puppy",
             };
 
-            petAPObject["birthdate"] = DateTimeOffset.Parse("2017-12-13T02:29:51Z");
-            petAPObject["complexProperty"] = new Dictionary<string, object>()
+            petAPObject.AdditionalProperties["birthdate"] = DateTimeOffset.Parse("2017-12-13T02:29:51Z");
+            petAPObject.AdditionalProperties["complexProperty"] = new Dictionary<string, object>()
             {
                 {"color", "Red"}
             };
@@ -138,11 +138,11 @@ namespace AutoRest.TestServer.Tests
             {
                 Name = "Hira"
             };
-            outerAPObject["siblings"] = new object[]
+            outerAPObject.AdditionalProperties["siblings"] = new object[]
             {
                 petAPObject
             };
-            outerAPObject["picture"] = new byte[] { 255, 255, 255, 255, 254 };
+            outerAPObject.AdditionalProperties["picture"] = new byte[] { 255, 255, 255, 255, 254 };
 
             var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPObjectAsync(outerAPObject);
 
@@ -152,7 +152,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("Hira", value.Name);
             Assert.AreEqual(true, value.Status);
 
-            var siblings = (IEnumerable<object>)value["siblings"];
+            var siblings = (IEnumerable<object>)value.AdditionalProperties["siblings"];
             var sibling = (IDictionary<string, object>)siblings.Single();
 
             Assert.AreEqual(1, sibling["id"]);
@@ -169,18 +169,18 @@ namespace AutoRest.TestServer.Tests
                 Name = "Tommy"
             };
 
-            petAPObject["weight"] = "10 kg";
-            petAPObject["color"] = "red";
-            petAPObject["city"] = "Bombay";
+            petAPObject.AdditionalProperties["weight"] = "10 kg";
+            petAPObject.AdditionalProperties["color"] = "red";
+            petAPObject.AdditionalProperties["city"] = "Bombay";
 
             var response = await new PetsClient(ClientDiagnostics, pipeline, host).CreateAPStringAsync(petAPObject);
             var value = response.Value;
             Assert.AreEqual(3, value.Id);
             Assert.AreEqual("Tommy", value.Name);
             Assert.AreEqual(true, value.Status);
-            Assert.AreEqual("red", value["color"]);
-            Assert.AreEqual("10 kg", value["weight"]);
-            Assert.AreEqual("Bombay", value["city"]);
+            Assert.AreEqual("red", value.AdditionalProperties["color"]);
+            Assert.AreEqual("10 kg", value.AdditionalProperties["weight"]);
+            Assert.AreEqual("Bombay", value.AdditionalProperties["city"]);
         });
 
         [Test]
