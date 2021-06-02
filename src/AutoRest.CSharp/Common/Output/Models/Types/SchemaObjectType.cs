@@ -522,7 +522,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
+        public virtual ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
             {
