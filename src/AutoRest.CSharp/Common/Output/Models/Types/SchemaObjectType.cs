@@ -75,6 +75,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                     return _additionalPropertiesProperty;
                 }
 
+                // We use a $ prefix here as AdditionalProperties comes from a swagger concept
+                // and not a swagger model/operation name to disambiguate from a possible property with
+                // the same name.
                 SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
