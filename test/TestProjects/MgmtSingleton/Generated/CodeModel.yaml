@@ -294,6 +294,11 @@ schemas: !Schemas
                 schema: *ref_8
                 required: false
                 serializedName: tags
+                extensions:
+                  x-ms-mutability:
+                    - read
+                    - create
+                    - update
                 language: !Languages 
                   default:
                     name: tags
@@ -303,6 +308,10 @@ schemas: !Schemas
                 schema: *ref_9
                 required: true
                 serializedName: location
+                extensions:
+                  x-ms-mutability:
+                    - read
+                    - create
                 language: !Languages 
                   default:
                     name: location
