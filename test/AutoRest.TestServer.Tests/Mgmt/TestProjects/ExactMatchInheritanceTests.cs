@@ -28,6 +28,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(object), typeof(ExactMatchModel9))]
         [TestCase(typeof(object), typeof(ExactMatchModel7))]
         [TestCase(typeof(object), typeof(ExactMatchModel11))]
+        [TestCase(typeof(object), typeof(AzureResourceFlattenModelData))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
             Assert.AreEqual(expectedBaseType, generatedClass.BaseType);
@@ -48,6 +49,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ExactMatchModel9), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel10), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel11), new string[] { }, new Type[] { })]
+        [TestCase(typeof(AzureResourceFlattenModelData), new string[] { "location" }, new Type[] { typeof(LocationData) })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }
 }

@@ -41,5 +41,15 @@ namespace ExactMatchInheritance
             return new ExactMatchModel5Container(resourceGroup);
         }
         #endregion
+
+        #region AzureResourceFlattenModels
+        /// <summary> Gets an object representing a AzureResourceFlattenModelContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="AzureResourceFlattenModelContainer" /> object. </returns>
+        public static AzureResourceFlattenModelContainer GetAzureResourceFlattenModels(this ResourceGroupOperations resourceGroup)
+        {
+            return new AzureResourceFlattenModelContainer(resourceGroup);
+        }
+        #endregion
     }
 }

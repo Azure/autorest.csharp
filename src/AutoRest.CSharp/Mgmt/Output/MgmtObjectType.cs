@@ -112,5 +112,15 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return operationGroup;
         }
+
+        public override ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
+        {
+            if (_isResourceType)
+            {
+                return base.GetPropertyBySerializedName(property.SerializedName, includeParents);
+            }
+
+            return base.GetPropertyForSchemaProperty(property, includeParents);
+        }
     }
 }

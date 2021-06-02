@@ -357,6 +357,85 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel/{azureResourceFlattenModelsName}": {
+            "put": {
+                "tags": [
+                    "AzureResourceFlattenModels"
+                ],
+                "operationId": "AzureResourceFlattenModels_Put",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "azureResourceFlattenModelsName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "AzureResourceFlattenModels"
+                ],
+                "operationId": "AzureResourceFlattenModels_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "azureResourceFlattenModelsName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -517,6 +596,26 @@
                 "type": {
                     "readOnly": true,
                     "type": "string"
+                }
+            }
+        },
+        "AzureResourceFlattenModel": {
+            "type": "object",
+            "description": "This model is x-ms-azure-resource and has flatten properties",
+            "x-ms-azure-resource": true,
+            "properties": {
+                "new": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "location": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/ExactMatchModel11",
+                    "description": "Nested properties"
                 }
             }
         }

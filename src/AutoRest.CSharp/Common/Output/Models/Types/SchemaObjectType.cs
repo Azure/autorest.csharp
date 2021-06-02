@@ -522,7 +522,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
+        public virtual ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
             {
@@ -554,7 +554,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return objectProperty;
         }
 
-        private bool TryGetPropertyForSchemaProperty(Func<ObjectTypeProperty, bool> propertySelector, [NotNullWhen(true)] out ObjectTypeProperty? objectProperty, bool includeParents = false)
+        protected bool TryGetPropertyForSchemaProperty(Func<ObjectTypeProperty, bool> propertySelector, [NotNullWhen(true)] out ObjectTypeProperty? objectProperty, bool includeParents = false)
         {
             objectProperty = null;
 
