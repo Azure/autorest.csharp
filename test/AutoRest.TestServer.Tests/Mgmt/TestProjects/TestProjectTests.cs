@@ -6,9 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using AutoRest.TestServer.Tests.Mgmt.OutputLibrary;
 using Azure.ResourceManager.Core;
@@ -54,7 +52,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("ListAvailableLocations")]
         [TestCase("ListAvailableLocationsAsync")]
-        public void ValidateMethodExists(string methodName)
+        public void ValidateListAvailableLocationsMethodExists(string methodName)
         {
             foreach (var type in FindAllOperations())
             {
@@ -66,6 +64,107 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var method = type.GetMethod(methodName);
                 Assert.NotNull(method, $"{type.Name} does not implement the method.");
             }
+        }
+
+        [TestCase("Get")]
+        [TestCase("GetAsync")]
+        public void ValidateGetMethodExists(string methodName)
+        {
+            foreach (var type in FindAllOperations())
+            {
+                if (IsSingletonOperation(type.BaseType.BaseType))
+                {
+                    continue;
+                }
+
+                MethodInfo[] methods = type.GetMethods();
+                var getMethods = methods.Where(m => m.Name == methodName);
+                Assert.NotNull(getMethods, $"{type.Name} does not implement the {methodName} method.");
+            }
+        }
+
+        [TestCase("AddTag")]
+        [TestCase("AddTagAsync")]
+        [TestCase("StartAddTag")]
+        [TestCase("StartAddTagAsync")]
+        public void ValidateAddTagMethod(string methodName)
+        {
+            foreach (var type in FindAllOperations())
+            {
+                var resourceData = GetResourceDataByOperations(type);
+                if (!IsInheritFromTrackedResource(resourceData))
+                {
+                    continue;
+                }
+
+                var method = type.GetMethod(methodName);
+                Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
+
+                Assert.AreEqual(3, method.GetParameters().Length);
+                var param1 = TypeAsserts.HasParameter(method, "key");
+                Assert.AreEqual(typeof(string), param1.ParameterType);
+                var param2 = TypeAsserts.HasParameter(method, "value");
+                Assert.AreEqual(typeof(string), param2.ParameterType);
+                var param3 = TypeAsserts.HasParameter(method, "cancellationToken");
+                Assert.AreEqual(typeof(CancellationToken), param3.ParameterType);
+            }
+        }
+
+        [TestCase("SetTags")]
+        [TestCase("SetTagsAsync")]
+        [TestCase("StartSetTags")]
+        [TestCase("StartSetTagsAsync")]
+        public void ValidateSetTagsMethod(string methodName)
+        {
+            foreach (var type in FindAllOperations())
+            {
+                var resourceData = GetResourceDataByOperations(type);
+                if (!IsInheritFromTrackedResource(resourceData))
+                {
+                    continue;
+                }
+
+                var method = type.GetMethod(methodName);
+                Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
+
+                Assert.AreEqual(2, method.GetParameters().Length);
+                var param1 = TypeAsserts.HasParameter(method, "tags");
+                Assert.AreEqual(typeof(IDictionary<string, string>), param1.ParameterType);
+                var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
+                Assert.AreEqual(typeof(CancellationToken), param2.ParameterType);
+            }
+        }
+
+        [TestCase("RemoveTag")]
+        [TestCase("RemoveTagAsync")]
+        [TestCase("StartRemoveTag")]
+        [TestCase("StartRemoveTagAsync")]
+        public void ValidateRemoveTagMethod(string methodName)
+        {
+            foreach (var type in FindAllOperations())
+            {
+                var resourceData = GetResourceDataByOperations(type);
+                if (!IsInheritFromTrackedResource(resourceData))
+                {
+                    continue;
+                }
+
+                var method = type.GetMethod(methodName);
+                Assert.NotNull(method, $"{type.Name} does not implement the {methodName} method.");
+
+                Assert.AreEqual(2, method.GetParameters().Length);
+                var param1 = TypeAsserts.HasParameter(method, "key");
+                Assert.AreEqual(typeof(string), param1.ParameterType);
+                var param2 = TypeAsserts.HasParameter(method, "cancellationToken");
+                Assert.AreEqual(typeof(CancellationToken), param2.ParameterType);
+            }
+        }
+
+        private Type GetResourceDataByOperations(Type resourceOperations)
+        {
+            var resourceName = resourceOperations.Name.Remove(resourceOperations.Name.LastIndexOf("Operations"));
+            var resourceData = Assembly.GetExecutingAssembly().GetType($"{_projectName}.Models.{resourceName}Data");
+            return resourceData != null ? resourceData : Assembly.GetExecutingAssembly().GetType($"{_projectName}.{resourceName}Data");
         }
 
         [Test]
@@ -106,7 +205,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             foreach (Type t in allTypes)
             {
-                if (t.Name.Contains("Operations") && !t.Name.Contains("RestOperations") && !t.Name.Contains("Tests") && t.Namespace == _projectName)
+                if (t.Name.Contains("Operations") && !t.Name.Contains("RestOperations") && !t.Name.Contains("Test") && t.Namespace == _projectName)
                 {
                     // Only [Resource]Operations types for the specified test project are going to be tested.
                     yield return t;
@@ -187,6 +286,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             return type == typeof(SingletonOperationsBase);
         }
 
+        private bool IsInheritFromTrackedResource(Type type)
+        {
+            return type.BaseType.Name == typeof(TrackedResource<>).Name;
+        }
+
         private Type FindSubscriptionExtensions()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
@@ -228,13 +332,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        private Type GetResourceRestOperationsType(string resourceName)
+        private Type GetResourceRestOperationsType(Type containerType)
         {
-            // TODO: After the container class implemented, remove the hard coded rest operation class name and use this code to get the rest operation property from the container class.
-            // var containerObj = Activator.CreateInstance(containerType, true);
-            // var restOperationsType = containerObj.GetType().GetProperty("RestOperations", BindingFlags.NonPublic | BindingFlags.Instance).PropertyType;
-            // return FindAllRestOperations().Where(t => t.Name == "{restOperationsType.Name}").Single();
-            return FindAllRestOperations().Where(t => Regex.IsMatch(t.Name, $"{resourceName}\\S?RestOperations")).Single();
+            var containerObj = Activator.CreateInstance(containerType, true);
+            return containerObj.GetType().GetProperty("_restClient", BindingFlags.NonPublic | BindingFlags.Instance).PropertyType;
         }
 
         [Test]
@@ -253,11 +354,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
                 ResourceType resourceType = GetContainerValidResourceType(type);
 
-                // TODO: Remove this if condition after the container class implementation is done to get the rest operation property
-                if (_projectName == "ResourceRename")
-                    return;
-
-                var restOperation = GetResourceRestOperationsType(resourceName);
+                var restOperation = GetResourceRestOperationsType(type);
                 var listAllMethod = restOperation.GetMethod("ListAll");
                 var listBySubscriptionMethod = restOperation.GetMethod("ListBySubscription");
 
@@ -299,11 +396,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var resourceName = type.Name.Remove(type.Name.LastIndexOf("Container"));
                 ResourceType resourceType = GetContainerValidResourceType(type);
 
-                // TODO: Remove this if condition after the container class implementation is done to get the rest operation property
-                if (_projectName == "ResourceRename")
-                    return;
-
-                var restOperation = GetResourceRestOperationsType(resourceName);
+                var restOperation = GetResourceRestOperationsType(type);
                 var listAllMethod = restOperation.GetMethod("ListAll");
                 var listBySubscriptionMethod = restOperation.GetMethod("ListBySubscription");
 
