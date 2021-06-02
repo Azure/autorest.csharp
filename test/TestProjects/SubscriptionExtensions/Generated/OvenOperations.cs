@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using SubscriptionExtensions.Models;
 
 namespace SubscriptionExtensions
 {

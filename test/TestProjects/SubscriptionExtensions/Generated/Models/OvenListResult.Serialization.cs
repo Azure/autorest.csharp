@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace SubscriptionExtensions
+namespace SubscriptionExtensions.Models
 {
     internal partial class OvenListResult
     {

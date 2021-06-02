@@ -163,8 +163,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private Type GetResourceDataByOperations(Type resourceOperations)
         {
             var resourceName = resourceOperations.Name.Remove(resourceOperations.Name.LastIndexOf("Operations"));
-            var resourceDataName = $"{_projectName}.{resourceName}Data";
-            return Assembly.GetExecutingAssembly().GetType(resourceDataName);
+            var resourceData = Assembly.GetExecutingAssembly().GetType($"{_projectName}.Models.{resourceName}Data");
+            return resourceData != null ? resourceData : Assembly.GetExecutingAssembly().GetType($"{_projectName}.{resourceName}Data");
         }
 
         [Test]

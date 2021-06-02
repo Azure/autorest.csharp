@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Threading;
-using MgmtOperations;
+using MgmtOperations.Models;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects

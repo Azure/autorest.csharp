@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace MgmtOperations
+namespace MgmtOperations.Models
 {
     /// <summary> The TestAvailabilitySet. </summary>
     public partial class TestAvailabilitySet

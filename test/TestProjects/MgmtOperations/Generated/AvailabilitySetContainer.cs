@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Core.Resources;
+using MgmtOperations.Models;
 
 namespace MgmtOperations
 {

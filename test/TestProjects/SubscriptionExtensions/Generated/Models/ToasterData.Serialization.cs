@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Core;
 
-namespace SubscriptionExtensions
+namespace SubscriptionExtensions.Models
 {
     public partial class ToasterData : IUtf8JsonSerializable
     {

@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.ResourceManager.Core;
 
-namespace SubscriptionExtensions
+namespace SubscriptionExtensions.Models
 {
     /// <summary> A class representing the Toaster data model. </summary>
     public partial class ToasterData : TrackedResource<SubscriptionResourceIdentifier>

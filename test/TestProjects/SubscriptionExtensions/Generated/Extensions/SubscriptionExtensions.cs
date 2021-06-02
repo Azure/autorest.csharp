@@ -13,6 +13,7 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Core.Resources;
+using SubscriptionExtensions.Models;
 
 namespace SubscriptionExtensions
 {
