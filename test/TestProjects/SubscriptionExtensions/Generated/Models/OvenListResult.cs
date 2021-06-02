@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SubscriptionExtensions.Models
+namespace SubscriptionExtensions
 {
     /// <summary> The List Virtual Machine operation response. </summary>
     internal partial class OvenListResult

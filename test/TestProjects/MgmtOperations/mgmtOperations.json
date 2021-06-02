@@ -191,6 +191,13 @@
                         "description": "The name of the availability set."
                     },
                     {
+                        "name": "$expand",
+                        "description": "May be used to expand the participants.",
+                        "in": "query",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {

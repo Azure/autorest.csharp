@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         protected RestClientBuilder Builder;
-        protected OperationGroup OperationGroup { get; }
+        internal OperationGroup OperationGroup { get; }
         protected string RestClientSuffix { get; }
         public Parameter[] Parameters { get; }
         public string Description { get; }

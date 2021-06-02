@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.ResourceManager.Core;
 
-namespace SubscriptionExtensions.Models
+namespace SubscriptionExtensions
 {
     /// <summary> A class representing the Oven data model. </summary>
     public partial class OvenData : TrackedResource<ResourceGroupResourceIdentifier>

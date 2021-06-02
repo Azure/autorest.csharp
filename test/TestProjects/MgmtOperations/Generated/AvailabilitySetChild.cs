@@ -8,7 +8,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
-using MgmtOperations.Models;
 
 namespace MgmtOperations
 {

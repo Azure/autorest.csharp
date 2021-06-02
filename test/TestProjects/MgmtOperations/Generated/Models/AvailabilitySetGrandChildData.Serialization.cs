@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Core;
 
-namespace MgmtOperations.Models
+namespace MgmtOperations
 {
     public partial class AvailabilitySetGrandChildData : IUtf8JsonSerializable
     {

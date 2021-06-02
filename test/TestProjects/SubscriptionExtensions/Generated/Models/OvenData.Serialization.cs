@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure.Core;
 using Azure.ResourceManager.Core;
 
-namespace SubscriptionExtensions.Models
+namespace SubscriptionExtensions
 {
     public partial class OvenData : IUtf8JsonSerializable
     {

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Core;
 
-namespace MgmtOperations.Models
+namespace MgmtOperations
 {
     /// <summary> The Resource model definition. </summary>
     public partial class Resource : Resource<ResourceGroupResourceIdentifier>

@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.ResourceManager.Core;
 
-namespace MgmtOperations.Models
+namespace MgmtOperations
 {
     /// <summary> A class representing the AvailabilitySet data model. </summary>
     public partial class AvailabilitySetData : TrackedResource<ResourceGroupResourceIdentifier>

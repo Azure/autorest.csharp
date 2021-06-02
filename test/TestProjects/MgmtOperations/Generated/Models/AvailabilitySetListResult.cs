@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MgmtOperations.Models
+namespace MgmtOperations
 {
     /// <summary> The List Availability Set operation response. </summary>
     public partial class AvailabilitySetListResult

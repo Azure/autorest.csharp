@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using MgmtOperations.Models;
 
 namespace MgmtOperations
 {
@@ -318,7 +317,7 @@ namespace MgmtOperations
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string availabilitySetName)
+        internal HttpMessage CreateGetRequest(string resourceGroupName, string availabilitySetName, string expand)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -331,6 +330,10 @@ namespace MgmtOperations
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
             uri.AppendPath(availabilitySetName, true);
+            if (expand != null)
+            {
+                uri.AppendQuery("$expand", expand, true);
+            }
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -340,9 +343,10 @@ namespace MgmtOperations
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public async Task<Response<AvailabilitySetData>> GetAsync(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailabilitySetData>> GetAsync(string resourceGroupName, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -353,7 +357,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, availabilitySetName);
+            using var message = CreateGetRequest(resourceGroupName, availabilitySetName, expand);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -372,9 +376,10 @@ namespace MgmtOperations
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public Response<AvailabilitySetData> Get(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        public Response<AvailabilitySetData> Get(string resourceGroupName, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -385,7 +390,7 @@ namespace MgmtOperations
                 throw new ArgumentNullException(nameof(availabilitySetName));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, availabilitySetName);
+            using var message = CreateGetRequest(resourceGroupName, availabilitySetName, expand);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

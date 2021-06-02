@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace MgmtOperations.Models
+namespace MgmtOperations
 {
     public partial class AvailabilitySetListResult
     {
