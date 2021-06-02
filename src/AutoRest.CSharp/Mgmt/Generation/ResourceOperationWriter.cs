@@ -383,7 +383,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteAddTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
+            writer.WriteXmlDocumentationSummary("Add a tag to the current resource.");
+            writer.WriteXmlDocumentationParameter("key", "The key for the tag.");
+            writer.WriteXmlDocumentationParameter("value", "The value for the tag.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns("The updated resource with the tag added.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
@@ -428,7 +432,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             Debug.Assert(clientMethod.Operation != null);
             writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
+            writer.WriteXmlDocumentationSummary("Add a tag to the current resource.");
+            writer.WriteXmlDocumentationParameter("key", "The key for the tag.");
+            writer.WriteXmlDocumentationParameter("value", "The value for the tag.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns("The updated resource with the tag added.");
+            writer.WriteXmlDocumentation("remarks", "<see href=\"https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning\">Details on long running operation object.</see>");
 
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
                 ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
@@ -483,7 +492,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteSetTags(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
+            writer.WriteXmlDocumentationSummary("Replace the tags on the resource with the given set.");
+            writer.WriteXmlDocumentationParameter("tags", "The set of tags to use as replacement.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns("The updated resource with the tags replaced.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
@@ -528,7 +540,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             Debug.Assert(clientMethod.Operation != null);
             writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
+            writer.WriteXmlDocumentationSummary("Replace the tags on the resource with the given set.");
+            writer.WriteXmlDocumentationParameter("tags", "The set of tags to use as replacement.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns("The updated resource with the tags replaced.");
+            writer.WriteXmlDocumentation("remarks", "<see href=\"https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning\">Details on long running operation object.</see>");
 
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
                 ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
@@ -580,7 +596,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteRemoveTag(CodeWriter writer, ResourceOperation resourceOperation, RestClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
+            writer.WriteXmlDocumentationSummary("Removes a tag by key from the resource.");
+            writer.WriteXmlDocumentationParameter("key", "The key of the tag to remove.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns("The updated resource with the tag removed.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
             CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
@@ -625,7 +644,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             Debug.Assert(clientMethod.Operation != null);
             writer.Line();
-            writer.WriteXmlDocumentationInheritDoc();
+            writer.WriteXmlDocumentationSummary("Removes a tag by key from the resource.");
+            writer.WriteXmlDocumentationParameter("key", "The key of the tag to remove.");
+            writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"CancellationToken.None\" />.");
+            writer.WriteXmlDocumentationReturns("The updated resource with the tag removed.");
+            writer.WriteXmlDocumentation("remarks", "<see href=\"https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning\">Details on long running operation object.</see>");
 
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
                 ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
