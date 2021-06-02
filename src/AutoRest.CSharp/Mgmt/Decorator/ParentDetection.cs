@@ -84,6 +84,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static ProviderSegment? GetFullProvider(List<ProviderSegment> providerSegments)
         {
+            if (providerSegments.Count == 0)
+            {
+                return null;
+            }
             return providerSegments.Last().IsFullProvider ? providerSegments.Last() : null;
         }
 

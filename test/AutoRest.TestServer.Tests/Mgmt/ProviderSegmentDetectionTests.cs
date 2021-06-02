@@ -68,5 +68,13 @@ namespace AutoRest.TestServer.Tests.Mgmt
             Assert.AreEqual(string.Empty, segments[1].TokenValue);
             Assert.IsFalse(segments[1].IsFullProvider);
         }
+
+        [Test]
+        public void ValidateNoProvider()
+        {
+            string path = "/{linkId}";
+            var segments = ProviderSegmentDetection.GetProviderSegments(path);
+            Assert.AreEqual(0, segments.Count);
+        }
     }
 }
