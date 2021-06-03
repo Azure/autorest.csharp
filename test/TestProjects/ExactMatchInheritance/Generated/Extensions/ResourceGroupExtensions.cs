@@ -42,13 +42,43 @@ namespace ExactMatchInheritance
         }
         #endregion
 
-        #region AzureResourceFlattenModels
-        /// <summary> Gets an object representing a AzureResourceFlattenModelContainer along with the instance operations that can be performed on it. </summary>
+        #region AzureResourceFlattenModel1s
+        /// <summary> Gets an object representing a AzureResourceFlattenModel1Container along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
-        /// <returns> Returns a <see cref="AzureResourceFlattenModelContainer" /> object. </returns>
-        public static AzureResourceFlattenModelContainer GetAzureResourceFlattenModels(this ResourceGroupOperations resourceGroup)
+        /// <returns> Returns a <see cref="AzureResourceFlattenModel1Container" /> object. </returns>
+        public static AzureResourceFlattenModel1Container GetAzureResourceFlattenModel1s(this ResourceGroupOperations resourceGroup)
         {
-            return new AzureResourceFlattenModelContainer(resourceGroup);
+            return new AzureResourceFlattenModel1Container(resourceGroup);
+        }
+        #endregion
+
+        #region AzureResourceFlattenModel2s
+        /// <summary> Gets an object representing a AzureResourceFlattenModel2Container along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="AzureResourceFlattenModel2Container" /> object. </returns>
+        public static AzureResourceFlattenModel2Container GetAzureResourceFlattenModel2s(this ResourceGroupOperations resourceGroup)
+        {
+            return new AzureResourceFlattenModel2Container(resourceGroup);
+        }
+        #endregion
+
+        #region AzureResourceFlattenModel3s
+        /// <summary> Gets an object representing a AzureResourceFlattenModel3Container along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="AzureResourceFlattenModel3Container" /> object. </returns>
+        public static AzureResourceFlattenModel3Container GetAzureResourceFlattenModel3s(this ResourceGroupOperations resourceGroup)
+        {
+            return new AzureResourceFlattenModel3Container(resourceGroup);
+        }
+        #endregion
+
+        #region AzureResourceFlattenModel4s
+        /// <summary> Gets an object representing a AzureResourceFlattenModel4Container along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="AzureResourceFlattenModel4Container" /> object. </returns>
+        public static AzureResourceFlattenModel4Container GetAzureResourceFlattenModel4s(this ResourceGroupOperations resourceGroup)
+        {
+            return new AzureResourceFlattenModel4Container(resourceGroup);
         }
         #endregion
     }

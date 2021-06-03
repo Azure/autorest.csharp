@@ -15,7 +15,7 @@ using Azure.Core.Pipeline;
 
 namespace ExactMatchInheritance
 {
-    internal partial class AzureResourceFlattenModelsRestOperations
+    internal partial class AzureResourceFlattenModel1SRestOperations
     {
         private string subscriptionId;
         private Uri endpoint;
@@ -23,14 +23,14 @@ namespace ExactMatchInheritance
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModelsRestOperations. </summary>
+        /// <summary> Initializes a new instance of AzureResourceFlattenModel1SRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> The String to use. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public AzureResourceFlattenModelsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        public AzureResourceFlattenModel1SRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
             if (subscriptionId == null)
             {
@@ -49,7 +49,7 @@ namespace ExactMatchInheritance
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreatePutRequest(string resourceGroupName, string azureResourceFlattenModelsName, AzureResourceFlattenModelData parameters)
+        internal HttpMessage CreatePutRequest(string resourceGroupName, string name, AzureResourceFlattenModel1Data parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -60,8 +60,8 @@ namespace ExactMatchInheritance
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/azureResourceFlattenModel/", false);
-            uri.AppendPath(azureResourceFlattenModelsName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/azureResourceFlattenModel1/", false);
+            uri.AppendPath(name, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -73,34 +73,34 @@ namespace ExactMatchInheritance
         }
 
         /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="azureResourceFlattenModelsName"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel to use. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="parameters"> The AzureResourceFlattenModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="azureResourceFlattenModelsName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<AzureResourceFlattenModelData>> PutAsync(string resourceGroupName, string azureResourceFlattenModelsName, AzureResourceFlattenModelData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<AzureResourceFlattenModel1Data>> PutAsync(string resourceGroupName, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (azureResourceFlattenModelsName == null)
+            if (name == null)
             {
-                throw new ArgumentNullException(nameof(azureResourceFlattenModelsName));
+                throw new ArgumentNullException(nameof(name));
             }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, azureResourceFlattenModelsName, parameters);
+            using var message = CreatePutRequest(resourceGroupName, name, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        AzureResourceFlattenModelData value = default;
+                        AzureResourceFlattenModel1Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AzureResourceFlattenModelData.DeserializeAzureResourceFlattenModelData(document.RootElement);
+                        value = AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -109,34 +109,34 @@ namespace ExactMatchInheritance
         }
 
         /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="azureResourceFlattenModelsName"> The String to use. </param>
-        /// <param name="parameters"> The AzureResourceFlattenModel to use. </param>
+        /// <param name="name"> The String to use. </param>
+        /// <param name="parameters"> The AzureResourceFlattenModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="azureResourceFlattenModelsName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<AzureResourceFlattenModelData> Put(string resourceGroupName, string azureResourceFlattenModelsName, AzureResourceFlattenModelData parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="name"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<AzureResourceFlattenModel1Data> Put(string resourceGroupName, string name, AzureResourceFlattenModel1Data parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (azureResourceFlattenModelsName == null)
+            if (name == null)
             {
-                throw new ArgumentNullException(nameof(azureResourceFlattenModelsName));
+                throw new ArgumentNullException(nameof(name));
             }
             if (parameters == null)
             {
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreatePutRequest(resourceGroupName, azureResourceFlattenModelsName, parameters);
+            using var message = CreatePutRequest(resourceGroupName, name, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        AzureResourceFlattenModelData value = default;
+                        AzureResourceFlattenModel1Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AzureResourceFlattenModelData.DeserializeAzureResourceFlattenModelData(document.RootElement);
+                        value = AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -144,7 +144,7 @@ namespace ExactMatchInheritance
             }
         }
 
-        internal HttpMessage CreateGetRequest(string resourceGroupName, string azureResourceFlattenModelsName)
+        internal HttpMessage CreateGetRequest(string resourceGroupName, string name)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -155,8 +155,8 @@ namespace ExactMatchInheritance
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/azureResourceFlattenModel/", false);
-            uri.AppendPath(azureResourceFlattenModelsName, true);
+            uri.AppendPath("/providers/Microsoft.Compute/azureResourceFlattenModel1/", false);
+            uri.AppendPath(name, true);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -164,29 +164,29 @@ namespace ExactMatchInheritance
         }
 
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="azureResourceFlattenModelsName"> The String to use. </param>
+        /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="azureResourceFlattenModelsName"/> is null. </exception>
-        public async Task<Response<AzureResourceFlattenModelData>> GetAsync(string resourceGroupName, string azureResourceFlattenModelsName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
+        public async Task<Response<AzureResourceFlattenModel1Data>> GetAsync(string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (azureResourceFlattenModelsName == null)
+            if (name == null)
             {
-                throw new ArgumentNullException(nameof(azureResourceFlattenModelsName));
+                throw new ArgumentNullException(nameof(name));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, azureResourceFlattenModelsName);
+            using var message = CreateGetRequest(resourceGroupName, name);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        AzureResourceFlattenModelData value = default;
+                        AzureResourceFlattenModel1Data value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = AzureResourceFlattenModelData.DeserializeAzureResourceFlattenModelData(document.RootElement);
+                        value = AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -195,29 +195,29 @@ namespace ExactMatchInheritance
         }
 
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="azureResourceFlattenModelsName"> The String to use. </param>
+        /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="azureResourceFlattenModelsName"/> is null. </exception>
-        public Response<AzureResourceFlattenModelData> Get(string resourceGroupName, string azureResourceFlattenModelsName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="name"/> is null. </exception>
+        public Response<AzureResourceFlattenModel1Data> Get(string resourceGroupName, string name, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (azureResourceFlattenModelsName == null)
+            if (name == null)
             {
-                throw new ArgumentNullException(nameof(azureResourceFlattenModelsName));
+                throw new ArgumentNullException(nameof(name));
             }
 
-            using var message = CreateGetRequest(resourceGroupName, azureResourceFlattenModelsName);
+            using var message = CreateGetRequest(resourceGroupName, name);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        AzureResourceFlattenModelData value = default;
+                        AzureResourceFlattenModel1Data value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = AzureResourceFlattenModelData.DeserializeAzureResourceFlattenModelData(document.RootElement);
+                        value = AzureResourceFlattenModel1Data.DeserializeAzureResourceFlattenModel1Data(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

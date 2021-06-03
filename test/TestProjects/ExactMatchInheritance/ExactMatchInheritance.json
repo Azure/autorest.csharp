@@ -358,12 +358,12 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel/{azureResourceFlattenModelsName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1/{name}": {
             "put": {
                 "tags": [
-                    "AzureResourceFlattenModels"
+                    "AzureResourceFlattenModel1s"
                 ],
-                "operationId": "AzureResourceFlattenModels_Put",
+                "operationId": "AzureResourceFlattenModel1s_Put",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -372,7 +372,7 @@
                         "type": "string"
                     },
                     {
-                        "name": "azureResourceFlattenModelsName",
+                        "name": "name",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -382,7 +382,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/AzureResourceFlattenModel"
+                            "$ref": "#/definitions/AzureResourceFlattenModel1"
                         }
                     },
                     {
@@ -396,16 +396,16 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AzureResourceFlattenModel"
+                            "$ref": "#/definitions/AzureResourceFlattenModel1"
                         }
                     }
                 }
             },
             "get": {
                 "tags": [
-                    "AzureResourceFlattenModels"
+                    "AzureResourceFlattenModel1s"
                 ],
-                "operationId": "AzureResourceFlattenModels_Get",
+                "operationId": "AzureResourceFlattenModel1s_Get",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -415,7 +415,7 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "azureResourceFlattenModelsName",
+                        "name": "name",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -431,7 +431,244 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AzureResourceFlattenModel"
+                            "$ref": "#/definitions/AzureResourceFlattenModel1"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2/{name}": {
+            "put": {
+                "tags": [
+                    "AzureResourceFlattenModel2s"
+                ],
+                "operationId": "AzureResourceFlattenModel2s_Put",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel2"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel2"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "AzureResourceFlattenModel2s"
+                ],
+                "operationId": "AzureResourceFlattenModel2s_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel2"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3/{name}": {
+            "put": {
+                "tags": [
+                    "AzureResourceFlattenModel3s"
+                ],
+                "operationId": "AzureResourceFlattenModel3s_Put",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel3"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel3"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "AzureResourceFlattenModel3s"
+                ],
+                "operationId": "AzureResourceFlattenModel3s_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel3"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4/{name}": {
+            "put": {
+                "tags": [
+                    "AzureResourceFlattenModel4s"
+                ],
+                "operationId": "AzureResourceFlattenModel4s_Put",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel4"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel4"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "AzureResourceFlattenModel4s"
+                ],
+                "operationId": "AzureResourceFlattenModel4s_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AzureResourceFlattenModel4"
                         }
                     }
                 }
@@ -599,23 +836,113 @@
                 }
             }
         },
-        "AzureResourceFlattenModel": {
+        "CustomModel1": {
             "type": "object",
-            "description": "This model is x-ms-azure-resource and has flatten properties",
+            "description": "Pure custom model, e.g. no predefined properties.",
+            "properties": {
+                "foo": {
+                    "type": "string"
+                }
+            }
+        },
+        "AzureResourceFlattenModel1": {
+            "type": "object",
+            "description": "This model is x-ms-azure-resource, has flatten properties, and it contains all reference type properties.",
             "x-ms-azure-resource": true,
             "properties": {
-                "new": {
+                "id": {
                     "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "description": "Resource ID."
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource name."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Resource type."
                 },
                 "location": {
-                    "readOnly": true,
-                    "type": "string"
+                    "type": "string",
+                    "description": "Resource location."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags."
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ExactMatchModel11",
+                    "$ref": "#/definitions/CustomModel1",
                     "description": "Nested properties"
+                },
+                "new": {
+                    "type": "integer",
+                    "description": "New property"
+                }
+            }
+        },
+        "AzureResourceFlattenModel2": {
+            "type": "object",
+            "description": "This model is x-ms-azure-resource, has flatten properties, and reference type properties are split in flatten properties and its own properties.",
+            "x-ms-azure-resource": true,
+            "properties": {
+                "location": {
+                    "type": "string",
+                    "description": "Resource location."
+                },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Resource tags."
+                },
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/ExactMatchModel9",
+                    "description": "Nested properties"
+                },
+                "new": {
+                    "type": "integer",
+                    "description": "New property"
+                }
+            }
+        },
+        "AzureResourceFlattenModel3": {
+            "type": "object",
+            "description": "This model is x-ms-azure-resource, has flatten properties, and all reference type properties are in flatten properties.",
+            "x-ms-azure-resource": true,
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/ExactMatchModel10",
+                    "description": "Nested properties"
+                },
+                "new": {
+                    "type": "integer",
+                    "description": "New property"
+                }
+            }
+        },
+        "AzureResourceFlattenModel4": {
+            "type": "object",
+            "description": "This model is x-ms-azure-resource, has flatten properties, and WITHOUT enough reference type properties.",
+            "x-ms-azure-resource": true,
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "$ref": "#/definitions/ExactMatchModel9",
+                    "description": "Nested properties"
+                },
+                "new": {
+                    "type": "integer",
+                    "description": "New property"
                 }
             }
         }

@@ -15,38 +15,38 @@ using Azure.ResourceManager.Core;
 
 namespace ExactMatchInheritance
 {
-    /// <summary> A class representing the operations that can be performed over a specific AzureResourceFlattenModel. </summary>
-    public partial class AzureResourceFlattenModelOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AzureResourceFlattenModel>
+    /// <summary> A class representing the operations that can be performed over a specific AzureResourceFlattenModel2. </summary>
+    public partial class AzureResourceFlattenModel2Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AzureResourceFlattenModel2>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal AzureResourceFlattenModelsRestOperations RestClient { get; }
+        internal AzureResourceFlattenModel2SRestOperations RestClient { get; }
 
-        /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModelOperations"/> class for mocking. </summary>
-        protected AzureResourceFlattenModelOperations()
+        /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel2Operations"/> class for mocking. </summary>
+        protected AzureResourceFlattenModel2Operations()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModelOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="AzureResourceFlattenModel2Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal AzureResourceFlattenModelOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal AzureResourceFlattenModel2Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new AzureResourceFlattenModelsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            RestClient = new AzureResourceFlattenModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/azureResourceFlattenModel";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/azureResourceFlattenModel2";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public async override Task<Response<AzureResourceFlattenModel>> GetAsync(CancellationToken cancellationToken = default)
+        public async override Task<Response<AzureResourceFlattenModel2>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModelOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Operations.Get");
             scope.Start();
             try
             {
                 var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AzureResourceFlattenModel(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -56,14 +56,14 @@ namespace ExactMatchInheritance
         }
 
         /// <inheritdoc />
-        public override Response<AzureResourceFlattenModel> Get(CancellationToken cancellationToken = default)
+        public override Response<AzureResourceFlattenModel2> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModelOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel2Operations.Get");
             scope.Start();
             try
             {
                 var response = RestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new AzureResourceFlattenModel(this, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AzureResourceFlattenModel2(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

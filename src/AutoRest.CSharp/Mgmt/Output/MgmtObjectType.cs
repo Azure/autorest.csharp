@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {
-            if (_isResourceType)
+            if (Inherits?.Implementation is SystemObjectType)
             {
                 return base.GetPropertyBySerializedName(property.SerializedName, includeParents);
             }

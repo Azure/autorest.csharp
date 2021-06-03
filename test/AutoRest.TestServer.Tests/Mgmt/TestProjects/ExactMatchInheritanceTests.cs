@@ -28,7 +28,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(object), typeof(ExactMatchModel9))]
         [TestCase(typeof(object), typeof(ExactMatchModel7))]
         [TestCase(typeof(object), typeof(ExactMatchModel11))]
-        [TestCase(typeof(object), typeof(AzureResourceFlattenModelData))]
+        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel1Data))]
+        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel2Data))]
+        [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel3Data))]
+        [TestCase(typeof(object), typeof(AzureResourceFlattenModel4Data))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
             Assert.AreEqual(expectedBaseType, generatedClass.BaseType);
@@ -49,7 +52,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(ExactMatchModel9), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel10), new string[] { }, new Type[] { })]
         [TestCase(typeof(ExactMatchModel11), new string[] { }, new Type[] { })]
-        [TestCase(typeof(AzureResourceFlattenModelData), new string[] { "location" }, new Type[] { typeof(LocationData) })]
+        [TestCase(typeof(AzureResourceFlattenModel1Data), new string[] { "location", "foo", "new" }, new Type[] { typeof(LocationData), typeof(string), typeof(int) })]
+        [TestCase(typeof(AzureResourceFlattenModel2Data), new string[] { "location", "new" }, new Type[] { typeof(LocationData), typeof(int) })]
+        [TestCase(typeof(AzureResourceFlattenModel3Data), new string[] { "location", "new" }, new Type[] { typeof(LocationData), typeof(int) })]
+        [TestCase(typeof(AzureResourceFlattenModel4Data), new string[] { "id", "name", "type", "new" }, new Type[] { typeof(string), typeof(string), typeof(string), typeof(int) })]
         public void ValidateCtor(Type model, string[] paramNames, Type[] paramTypes) => ValidatePublicCtor(model, paramNames, paramTypes);
     }
 }
