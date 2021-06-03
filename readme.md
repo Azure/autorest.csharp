@@ -1062,7 +1062,7 @@ As with most customization, you can define a partial class for Models and extend
 
 **Generated code before (Generated/Models/Model.cs):**
 
-``` C#
+```csharp
 namespace Azure.Service.Models
 {
     public partial class Model { }
@@ -1071,11 +1071,11 @@ namespace Azure.Service.Models
 
 **Add customized model (Model.cs)**
 
-```
+```csharp
 namespace Azure.Service.Models
 {
     public partial class Model {
-        public Model (int x) : Model ()
+        public Model (int x) : base ()
         {
         }
     }
