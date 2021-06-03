@@ -1019,8 +1019,8 @@ directive:
 internal virtual Response Operation(string body = null, CancellationToken cancellationToken = default)
 internal virtual async Task<Response> OperationAsync(string body = null, CancellationToken cancellationToken = default)
 ```
-    
-### Exclude models from namespace   
+
+### Exclude models from namespace
 
 <details>
 
