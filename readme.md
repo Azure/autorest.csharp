@@ -1075,7 +1075,7 @@ namespace Azure.Service.Models
 namespace Azure.Service.Models
 {
     public partial class Model {
-        public Model (int x) : base ()
+        public Model(int x)
         {
         }
     }
