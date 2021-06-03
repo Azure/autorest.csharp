@@ -14,9 +14,9 @@ namespace Azure.Core
 {
     internal static class ManagementPipelineBuilder
     {
-        public static HttpPipeline Build(TokenCredential credential, Uri endpoint, ClientOptions options)
+        public static HttpPipeline Build(TokenCredential credential, Uri endpoint, ClientOptions options, string? scope = default)
         {
-            return HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, $"{endpoint}/.default"));
+            return HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scope is null ? $"{endpoint}/.default" : scope));
         }
     }
 }
