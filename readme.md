@@ -35,7 +35,7 @@ ___
     - [Change model namespace or accessibility in bulk](#change-model-namespace-or-accessibility-in-bulk)
     - [Change operation accessibility in bulk](#change-operation-accessibility-in-bulk)
     - [Exclude models from namespace](#exclude-models-from-namespace)
-    - [Extending a model with additional constructors](#extend-model-ctor)
+    - [Extending a model with additional constructors](#extending-a-model-with-additional-constructors)
 
 <!-- /TOC -->
 
