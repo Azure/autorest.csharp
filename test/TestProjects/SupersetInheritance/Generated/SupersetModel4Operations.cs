@@ -88,7 +88,11 @@ namespace SupersetInheritance
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <inheritdoc />
+        /// <summary> Add a tag to the current resource. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag added. </returns>
         public async Task<Response<SupersetModel4>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.AddTag");
@@ -105,7 +109,11 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Add a tag to the current resource. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag added. </returns>
         public Response<SupersetModel4> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.AddTag");
@@ -122,7 +130,12 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Add a tag to the current resource. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag added. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
         public async Task<SupersetModel4SPutOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
@@ -149,7 +162,12 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Add a tag to the current resource. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag added. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
         public SupersetModel4SPutOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
@@ -176,7 +194,10 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tags replaced. </returns>
         public async Task<Response<SupersetModel4>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.SetTags");
@@ -193,7 +214,10 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tags replaced. </returns>
         public Response<SupersetModel4> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.SetTags");
@@ -210,7 +234,11 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tags replaced. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
         public async Task<SupersetModel4SPutOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
@@ -235,7 +263,11 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tags replaced. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
         public SupersetModel4SPutOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
@@ -260,7 +292,10 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <param name="key"> The key of the tag to remove. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag removed. </returns>
         public async Task<Response<SupersetModel4>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.RemoveTag");
@@ -277,7 +312,10 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <param name="key"> The key of the tag to remove. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag removed. </returns>
         public Response<SupersetModel4> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel4Operations.RemoveTag");
@@ -294,7 +332,11 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <param name="key"> The key of the tag to remove. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag removed. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
         public async Task<SupersetModel4SPutOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
@@ -321,7 +363,11 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <param name="key"> The key of the tag to remove. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag removed. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
         public SupersetModel4SPutOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
