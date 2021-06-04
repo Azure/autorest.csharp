@@ -26,7 +26,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20210602.1
+      ref: refs/tags/azure-sdk-build-tools_20210603.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -108,7 +108,7 @@ stages:
           name: SmokeTest_S_Z
           filter: "^[s-z]"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-    - template: pipelines/stages/net-release-blobfeed.yml@azure-sdk-build-tools  
+    - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools  
       parameters:
         ShouldTag: false
         ShouldSign: false
