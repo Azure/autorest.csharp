@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models
             return requestMethods;
         }
 
-        protected virtual Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()
+        protected Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()
         {
             var requestsWithoutNextLinkOperation = new List<(ServiceRequest, Operation)>();
             var nextPageRequests = new HashSet<ServiceRequest>();

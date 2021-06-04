@@ -40,47 +40,5 @@ namespace AutoRest.CSharp.Output.Models
 
             return requestMethods;
         }
-
-        protected override Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()
-        {
-            var requestsWithoutNextLinkOperation = new List<(ServiceRequest, Operation)>();
-            var nextPageRequests = new HashSet<ServiceRequest>();
-            var nextPageMethods = new Dictionary<ServiceRequest, RestClientMethod>();
-
-            foreach (var operation in OperationGroup.Operations)
-            {
-                var paging = operation.Language.Default.Paging;
-                if (paging == null)
-                {
-                    continue;
-                }
-
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    if (paging.NextLinkOperation != null)
-                    {
-                        var nextPageRequest = paging.NextLinkOperation.Requests.Single();
-                        var nextMethod = GetOperationMethod(nextPageRequest);
-                        nextPageRequests.Add(nextPageRequest);
-                        nextPageMethods.Add(serviceRequest, nextMethod);
-                    }
-                    else if (paging.NextLinkName != null)
-                    {
-                        requestsWithoutNextLinkOperation.Add((serviceRequest, operation));
-                    }
-                }
-            }
-
-            foreach (var (serviceRequest, operation) in requestsWithoutNextLinkOperation)
-            {
-                var nextMethod = nextPageRequests.Contains(serviceRequest)
-                    ? GetOperationMethod(serviceRequest)
-                    : BuildNextPageMethod(GetOperationMethod(serviceRequest), operation);
-
-                nextPageMethods.Add(serviceRequest, nextMethod);
-            }
-
-            return nextPageMethods;
-        }
     }
 }
