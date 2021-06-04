@@ -16,38 +16,48 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         /// <summary> Initializes a new instance of DocumentLanguage. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
-        /// <param name="detectedLanguages"> A list of extracted languages. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="detectedLanguages"/> is null. </exception>
-        internal DocumentLanguage(string id, IEnumerable<DetectedLanguage> detectedLanguages)
+        /// <param name="detectedLanguage"> Detected Language. </param>
+        /// <param name="warnings"> Warnings encountered while processing document. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="detectedLanguage"/>, or <paramref name="warnings"/> is null. </exception>
+        internal DocumentLanguage(string id, DetectedLanguage detectedLanguage, IEnumerable<TextAnalyticsWarning> warnings)
         {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
             }
-            if (detectedLanguages == null)
+            if (detectedLanguage == null)
             {
-                throw new ArgumentNullException(nameof(detectedLanguages));
+                throw new ArgumentNullException(nameof(detectedLanguage));
+            }
+            if (warnings == null)
+            {
+                throw new ArgumentNullException(nameof(warnings));
             }
 
             Id = id;
-            DetectedLanguages = detectedLanguages.ToList();
+            DetectedLanguage = detectedLanguage;
+            Warnings = warnings.ToList();
         }
 
         /// <summary> Initializes a new instance of DocumentLanguage. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
-        /// <param name="detectedLanguages"> A list of extracted languages. </param>
+        /// <param name="detectedLanguage"> Detected Language. </param>
+        /// <param name="warnings"> Warnings encountered while processing document. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
-        internal DocumentLanguage(string id, IReadOnlyList<DetectedLanguage> detectedLanguages, DocumentStatistics statistics)
+        internal DocumentLanguage(string id, DetectedLanguage detectedLanguage, IReadOnlyList<TextAnalyticsWarning> warnings, DocumentStatistics statistics)
         {
             Id = id;
-            DetectedLanguages = detectedLanguages;
+            DetectedLanguage = detectedLanguage;
+            Warnings = warnings;
             Statistics = statistics;
         }
 
         /// <summary> Unique, non-empty document identifier. </summary>
         public string Id { get; }
-        /// <summary> A list of extracted languages. </summary>
-        public IReadOnlyList<DetectedLanguage> DetectedLanguages { get; }
+        /// <summary> Detected Language. </summary>
+        public DetectedLanguage DetectedLanguage { get; }
+        /// <summary> Warnings encountered while processing document. </summary>
+        public IReadOnlyList<TextAnalyticsWarning> Warnings { get; }
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
         public DocumentStatistics Statistics { get; }
     }

@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public const string Subscriptions = "subscriptions";
         public const string ResourceGroups = "resourceGroups";
         public const string Tenant = "tenant";
+        public const string Locations = "locations";
         private static ConcurrentDictionary<OperationGroup, string> _valueCache = new ConcurrentDictionary<OperationGroup, string>();
 
         public static string ResourceType(this OperationGroup operationsGroup, MgmtConfiguration config)
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             var method = GetBestMethod(operationsGroup);
             if (method == null)
             {
-                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key} 
+                throw new ArgumentException($@"Could not set ResourceType for operations group {operationsGroup.Key}
                                             Please try setting this value for this operations in the readme.md for this swagger in the operation-group-mapping section");
             }
             var indexOfProvider = method.Path.IndexOf(ProviderSegment.Providers);

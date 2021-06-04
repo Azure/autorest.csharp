@@ -17,8 +17,9 @@ namespace CognitiveServices.TextAnalytics.Models
         /// <summary> Initializes a new instance of DocumentEntities. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized entities in the document. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="entities"/> is null. </exception>
-        internal DocumentEntities(string id, IEnumerable<Entity> entities)
+        /// <param name="warnings"> Warnings encountered while processing document. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="entities"/>, or <paramref name="warnings"/> is null. </exception>
+        internal DocumentEntities(string id, IEnumerable<Entity> entities, IEnumerable<TextAnalyticsWarning> warnings)
         {
             if (id == null)
             {
@@ -28,19 +29,26 @@ namespace CognitiveServices.TextAnalytics.Models
             {
                 throw new ArgumentNullException(nameof(entities));
             }
+            if (warnings == null)
+            {
+                throw new ArgumentNullException(nameof(warnings));
+            }
 
             Id = id;
             Entities = entities.ToList();
+            Warnings = warnings.ToList();
         }
 
         /// <summary> Initializes a new instance of DocumentEntities. </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="entities"> Recognized entities in the document. </param>
+        /// <param name="warnings"> Warnings encountered while processing document. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
-        internal DocumentEntities(string id, IReadOnlyList<Entity> entities, DocumentStatistics statistics)
+        internal DocumentEntities(string id, IReadOnlyList<Entity> entities, IReadOnlyList<TextAnalyticsWarning> warnings, DocumentStatistics statistics)
         {
             Id = id;
             Entities = entities;
+            Warnings = warnings;
             Statistics = statistics;
         }
 
@@ -48,6 +56,8 @@ namespace CognitiveServices.TextAnalytics.Models
         public string Id { get; }
         /// <summary> Recognized entities in the document. </summary>
         public IReadOnlyList<Entity> Entities { get; }
+        /// <summary> Warnings encountered while processing document. </summary>
+        public IReadOnlyList<TextAnalyticsWarning> Warnings { get; }
         /// <summary> if showStats=true was specified in the request this field will contain information about the document payload. </summary>
         public DocumentStatistics Statistics { get; }
     }

@@ -6,15 +6,10 @@
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
   ],
-  "AzureArm": true,
-  "PublicClients": true,
-  "ModelNamespace": false,
-  "HeadAsBoolean": false,
-  "SkipCSProjPackageReference": true,
-  "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
+  "azure-arm": true,
+  "public-clients": true,
+  "model-namespace": false,
+  "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension"
   },
@@ -23,5 +18,8 @@
   },
   "OperationGroupToParent": {
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers"
-  }
+  },
+  "OperationGroupIsTuple": [
+    "VirtualMachineExtensionImages"
+  ]
 }

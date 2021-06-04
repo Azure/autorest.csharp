@@ -25,6 +25,8 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WritePropertyName("properties");
             writer.WriteStartObject();
             if (Optional.IsDefined(PublicKey))
@@ -94,7 +96,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new SshPublicKeyData(id, name, type, tags, location, publicKey.Value);
+            return new SshPublicKeyData(id, name, type, location, tags, publicKey.Value);
         }
     }
 }

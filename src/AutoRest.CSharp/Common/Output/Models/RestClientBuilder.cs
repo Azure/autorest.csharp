@@ -89,7 +89,8 @@ namespace AutoRest.CSharp.Output.Models
                 responses,
                 responseHeaderModel,
                 operation.Extensions?.BufferResponse ?? true,
-                accessibility: accessibility
+                accessibility: accessibility,
+                operation
             );
         }
 
@@ -619,19 +620,22 @@ namespace AutoRest.CSharp.Output.Models
             return optionalParameters;
         }
 
-        public static IReadOnlyCollection<Parameter> GetConstructorParameters(Parameter[] parameters, CSharpType credentialType, bool includeAPIVersion = false)
+        public static IReadOnlyCollection<Parameter> GetConstructorParameters(Parameter[] parameters, CSharpType? credentialType, bool includeAPIVersion = false)
         {
             List<Parameter> constructorParameters = new List<Parameter>();
 
             constructorParameters.AddRange(GetRequiredParameters(parameters));
 
-            var credentialParam = new Parameter(
-                "credential",
-                "A credential used to authenticate to an Azure Service.",
-                credentialType,
-                null,
-                true);
-            constructorParameters.Add(credentialParam);
+            if (credentialType != null)
+            {
+                var credentialParam = new Parameter(
+                    "credential",
+                    "A credential used to authenticate to an Azure Service.",
+                    credentialType!,
+                    null,
+                    true);
+                constructorParameters.Add(credentialParam);
+            }
 
             constructorParameters.AddRange(GetOptionalParameters(parameters, includeAPIVersion));
 

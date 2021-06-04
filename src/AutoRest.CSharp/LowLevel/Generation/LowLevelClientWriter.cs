@@ -13,6 +13,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -169,7 +170,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteStatusCodeSwitch(CodeWriter writer, RestClientMethod clientMethod, bool async)
         {
-             using (writer.Scope($"switch (message.Response.Status)"))
+            using (writer.Scope($"switch (message.Response.Status)"))
             {
                 foreach (var response in clientMethod.Responses)
                 {
@@ -205,16 +206,15 @@ namespace AutoRest.CSharp.Generation.Writers
         private string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
         private const string PipelineField = "Pipeline";
-        private const string KeyCredentialVariable = "credential";
+        private const string CredentialVariable = "credential";
         private const string OptionsVariable = "options";
         private const string APIVersionField = "apiVersion";
         private const string AuthorizationHeaderConstant = "AuthorizationHeader";
         private const string ScopesConstant = "AuthorizationScopes";
         private const string ClientDiagnosticsVariable = "clientDiagnostics";
         private const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
-
-        private bool HasKeyAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("AzureKeyCredential", StringComparer.OrdinalIgnoreCase);
-        private bool HasTokenAuth (BuildContext context) => context.Configuration.CredentialTypes.Contains("TokenCredential", StringComparer.OrdinalIgnoreCase);
+        private const string KeyAuthField = "_keyCredential";
+        private const string TokenAuthField = "_tokenCredential";
 
         private void WriteClientFields(CodeWriter writer, LowLevelRestClient client, BuildContext context)
         {
@@ -222,20 +222,26 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"public virtual {typeof(HttpPipeline)} {PipelineField}");
             writer.AppendRaw("{ get; }\n");
 
-            if (HasKeyAuth (context))
+            foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
             {
-                writer.Line($"private const string {AuthorizationHeaderConstant} = {context.Configuration.CredentialHeaderName:L};");
-            }
-            if (HasTokenAuth (context))
-            {
-                writer.Append($"private readonly string[] {ScopesConstant} = ");
-                writer.Append($"{{ ");
-                foreach (var credentialScope in context.Configuration.CredentialScopes)
+                switch (scheme)
                 {
-                    writer.Append($"{credentialScope:L}, ");
+                    case AzureKeySecurityScheme azureKeySecurityScheme:
+                        writer.Line($"private const string {AuthorizationHeaderConstant} = {azureKeySecurityScheme.HeaderName:L};");
+                        writer.Line($"private readonly {typeof(AzureKeyCredential)}? {KeyAuthField};");
+                        break;
+                    case AADTokenSecurityScheme aadTokenSecurityScheme:
+                        writer.Append($"private readonly string[] {ScopesConstant} = ");
+                        writer.Append($"{{ ");
+                        foreach (var credentialScope in aadTokenSecurityScheme.Scopes)
+                        {
+                            writer.Append($"{credentialScope:L}, ");
+                        }
+                        writer.RemoveTrailingComma();
+                        writer.Line($"}};");
+                        writer.Line($"private readonly {typeof(TokenCredential)}? {TokenAuthField};");
+                        break;
                 }
-                writer.RemoveTrailingComma();
-                writer.Line($"}};");
             }
 
             foreach (Parameter clientParameter in client.Parameters)
@@ -253,20 +259,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             WriteEmptyConstructor(writer, client);
 
-            bool hasKeyAuth = HasKeyAuth (context);
-            bool hasTokenAuth = HasTokenAuth (context);
-            if (!hasKeyAuth && !hasTokenAuth)
+            foreach (var scheme in context.CodeModel.Security.GetSchemesOrAnonymous())
             {
-                throw new InvalidOperationException ("Has neither Key or Token credential-types?");
-            }
-
-            if (hasKeyAuth)
-            {
-                WriteConstructor(writer, client, true, context);
-            }
-            if (hasTokenAuth)
-            {
-                WriteConstructor(writer, client, false, context);
+                WriteConstructor(writer, client, scheme, context);
             }
         }
 
@@ -279,9 +274,24 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WriteConstructor (CodeWriter writer, LowLevelRestClient client, bool keyCredential, BuildContext context)
+        private CSharpType? GetCredentialType (SecurityScheme scheme)
         {
-            var ctorParams = client.GetConstructorParameters(keyCredential ? typeof(AzureKeyCredential) : typeof(TokenCredential));
+            switch (scheme)
+            {
+                case AzureKeySecurityScheme azureKeySecurityScheme:
+                    return typeof(AzureKeyCredential);
+                case AADTokenSecurityScheme aadTokenSecurityScheme:
+                    return typeof(TokenCredential);
+                case NoAuthSecurity noAuthSecurityScheme:
+                    return null;
+                default:
+                    throw new NotImplementedException ($"Unknown security scheme: {scheme.GetType()}");
+            }
+        }
+
+        private void WriteConstructor (CodeWriter writer, LowLevelRestClient client, SecurityScheme securityScheme, BuildContext context)
+        {
+            var ctorParams = client.GetConstructorParameters(GetCredentialType (securityScheme));
 
             writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
             foreach (Parameter parameter in ctorParams)
@@ -306,24 +316,33 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"{OptionsVariable} ??= new {clientOptionsName}ClientOptions();");
                 writer.Line($"{ClientDiagnosticsField} = new {typeof(ClientDiagnostics)}({OptionsVariable});");
 
-
                 var authPolicy = new CodeWriterDeclaration("authPolicy");
-                if (keyCredential)
+                if (securityScheme is AzureKeySecurityScheme)
                 {
-                    writer.Line($"var {authPolicy:D} = new {typeof(AzureKeyCredentialPolicy)}({KeyCredentialVariable}, {AuthorizationHeaderConstant});");
+                    writer.Line($"{KeyAuthField} = {CredentialVariable};");
+                    writer.Line($"var {authPolicy:D} = new {typeof(AzureKeyCredentialPolicy)}({KeyAuthField}, {AuthorizationHeaderConstant});");
                 }
-                else
+                else if (securityScheme is AADTokenSecurityScheme)
                 {
-                    writer.Line($"var {authPolicy:D} = new {typeof(BearerTokenAuthenticationPolicy)}({KeyCredentialVariable}, {ScopesConstant});");
+                    writer.Line($"{TokenAuthField} = {CredentialVariable};");
+                    writer.Line($"var {authPolicy:D} = new {typeof(BearerTokenAuthenticationPolicy)}({TokenAuthField}, {ScopesConstant});");
                 }
-                var policies = new CodeWriterDeclaration("policies");
 
                 writer.Append($"{PipelineField} = {typeof(HttpPipelineBuilder)}.Build({OptionsVariable}, new HttpPipelinePolicy[] ");
                 writer.AppendRaw("{");
-                writer.Append($" {authPolicy:I}, ");
                 writer.Append($" new {typeof(LowLevelCallbackPolicy)}() ");
-
-                writer.LineRaw("});");
+                writer.AppendRaw("}, ");
+                if (securityScheme is NoAuthSecurity)
+                {
+                    writer.AppendRaw("Array.Empty<HttpPipelinePolicy>()");
+                }
+                else
+                {
+                    writer.AppendRaw("new HttpPipelinePolicy[] {");
+                    writer.Append($" {authPolicy:I} ");
+                    writer.AppendRaw("}");
+                }
+                writer.LineRaw(", new ResponseClassifier());");
 
                 foreach (Parameter clientParameter in client.Parameters)
                 {

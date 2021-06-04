@@ -23,7 +23,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string ContainerSuffixValue = "Container";
         private const string DataSuffixValue = "Data";
         private string _prefix;
+        private Type? _resourceIdentifierType;
         private BuildContext<MgmtOutputLibrary> _context;
+        private ClientMethod[]? _methods;
         private PagingMethod[]? _pagingMethods;
 
         internal OperationGroup OperationGroup { get; }
@@ -35,7 +37,16 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
             OperationGroup = operationGroup;
             _prefix = operationGroup.Resource(context.Configuration.MgmtConfiguration);
-            DefaultName = _prefix + SuffixValue;
+            var isExtension = operationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration);
+            string midValue = "";
+            if (isExtension)
+            {
+                var parent = operationGroup.ParentResourceType(context.Configuration.MgmtConfiguration);
+                var parentArr = parent.Split('/');
+                midValue = parentArr[parentArr.Length - 1];
+                midValue = FirstCharToUpper(midValue);
+            }
+            DefaultName = _prefix + midValue + SuffixValue;
         }
 
         public string ResourceName => OperationGroup.Resource(_context.Configuration.MgmtConfiguration);
@@ -48,9 +59,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public string Description => BuilderHelpers.EscapeXmlDescription(CreateDescription(OperationGroup, _prefix));
 
-        public MgmtRestClient RestClient => _restClient ??= _context.Library.FindRestClient(OperationGroup);
+        public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
-        public string ResourceIdentifierType => OperationGroup.GetResourceIdentifierType(_context.Library.GetResourceData(OperationGroup), _context.Configuration.MgmtConfiguration, false).Name;
+        public Type ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(
+            _context.Library.GetResourceData(OperationGroup),
+            _context.Configuration.MgmtConfiguration, false);
+
+        public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
 
@@ -61,5 +76,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                 $"A class representing the operations that can be performed over a specific {clientPrefix}." :
                 BuilderHelpers.EscapeXmlDescription(operationGroup.Language.Default.Description);
         }
+
+        private static string FirstCharToUpper(string input) =>
+        input switch
+        {
+            null => throw new ArgumentNullException(nameof(input)),
+            "" => throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input)),
+            _ => input.First().ToString().ToUpper() + input.Substring(1)
+        };
     }
 }

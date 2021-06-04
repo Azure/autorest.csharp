@@ -550,7 +550,7 @@ namespace Azure.Management.Storage
             }
         }
 
-        internal HttpMessage CreateRestoreRequest(string resourceGroupName, string accountName, string shareName, string deletedShareName, string deletedShareVersion)
+        internal HttpMessage CreateRestoreRequest(string resourceGroupName, string accountName, string shareName, DeletedShare deletedShare)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -570,9 +570,8 @@ namespace Azure.Management.Storage
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            var model = new DeletedShare(deletedShareName, deletedShareVersion);
             var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(model);
+            content.JsonWriter.WriteObjectValue(deletedShare);
             request.Content = content;
             return message;
         }
@@ -581,11 +580,10 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="deletedShareName"> Required. Identify the name of the deleted share that will be restored. </param>
-        /// <param name="deletedShareVersion"> Required. Identify the version of the deleted share that will be restored. </param>
+        /// <param name="deletedShare"> The DeletedShare to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="shareName"/>, <paramref name="deletedShareName"/>, or <paramref name="deletedShareVersion"/> is null. </exception>
-        public async Task<Response> RestoreAsync(string resourceGroupName, string accountName, string shareName, string deletedShareName, string deletedShareVersion, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="shareName"/>, or <paramref name="deletedShare"/> is null. </exception>
+        public async Task<Response> RestoreAsync(string resourceGroupName, string accountName, string shareName, DeletedShare deletedShare, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -599,16 +597,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(shareName));
             }
-            if (deletedShareName == null)
+            if (deletedShare == null)
             {
-                throw new ArgumentNullException(nameof(deletedShareName));
-            }
-            if (deletedShareVersion == null)
-            {
-                throw new ArgumentNullException(nameof(deletedShareVersion));
+                throw new ArgumentNullException(nameof(deletedShare));
             }
 
-            using var message = CreateRestoreRequest(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion);
+            using var message = CreateRestoreRequest(resourceGroupName, accountName, shareName, deletedShare);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -623,11 +617,10 @@ namespace Azure.Management.Storage
         /// <param name="resourceGroupName"> The name of the resource group within the user&apos;s subscription. The name is case insensitive. </param>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="shareName"> The name of the file share within the specified storage account. File share names must be between 3 and 63 characters in length and use numbers, lower-case letters and dash (-) only. Every dash (-) character must be immediately preceded and followed by a letter or number. </param>
-        /// <param name="deletedShareName"> Required. Identify the name of the deleted share that will be restored. </param>
-        /// <param name="deletedShareVersion"> Required. Identify the version of the deleted share that will be restored. </param>
+        /// <param name="deletedShare"> The DeletedShare to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="shareName"/>, <paramref name="deletedShareName"/>, or <paramref name="deletedShareVersion"/> is null. </exception>
-        public Response Restore(string resourceGroupName, string accountName, string shareName, string deletedShareName, string deletedShareVersion, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="accountName"/>, <paramref name="shareName"/>, or <paramref name="deletedShare"/> is null. </exception>
+        public Response Restore(string resourceGroupName, string accountName, string shareName, DeletedShare deletedShare, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -641,16 +634,12 @@ namespace Azure.Management.Storage
             {
                 throw new ArgumentNullException(nameof(shareName));
             }
-            if (deletedShareName == null)
+            if (deletedShare == null)
             {
-                throw new ArgumentNullException(nameof(deletedShareName));
-            }
-            if (deletedShareVersion == null)
-            {
-                throw new ArgumentNullException(nameof(deletedShareVersion));
+                throw new ArgumentNullException(nameof(deletedShare));
             }
 
-            using var message = CreateRestoreRequest(resourceGroupName, accountName, shareName, deletedShareName, deletedShareVersion);
+            using var message = CreateRestoreRequest(resourceGroupName, accountName, shareName, deletedShare);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

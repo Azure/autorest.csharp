@@ -12,6 +12,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.AutoRest
@@ -32,6 +33,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, List<OperationGroup>> _operationGroups;
         private Dictionary<string, TypeProvider> _nameToTypeProvider;
         private IEnumerable<Schema> _allSchemas;
+        private Dictionary<Operation, MgmtLongRunningOperation>? _longRunningOperations;
+        private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
@@ -44,8 +47,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
                 .Concat(_codeModel.Schemas.Groups);
+            RestApiOperationGroup = GetRestApiOperationGroup();
             DecorateOperationGroup();
         }
+
+        public OperationGroup? RestApiOperationGroup { get; }
 
         public IEnumerable<Resource> ArmResource => EnsureArmResource().Values;
 
@@ -56,6 +62,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
+
+        public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
+
+        public IEnumerable<NonLongRunningOperation> NonLongRunningOperations => EnsureNonLongRunningOperations().Values;
 
         private static HashSet<string> ResourceTypes = new HashSet<string>
         {
@@ -81,7 +91,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             List<OperationGroup>? operationGroups;
             OperationGroup opGroup;
             if (_operationGroups.TryGetValue(schemaName, out operationGroups))
-                opGroup =  operationGroups.FirstOrDefault();
+                opGroup = operationGroups.FirstOrDefault();
             else
                 return null;
 
@@ -90,6 +100,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
 
+        /// <summary>
+        /// Looks up a <see cref="Resource" /> object by <see cref="OperationGroup" />.
+        /// </summary>
+        /// <param name="operationGroup">OperationGroup object.</param>
+        /// <returns>The <see cref="Resource" /> object associated with the operation group.</returns>
+        public Resource GetArmResource(OperationGroup operationGroup) => EnsureArmResource()[operationGroup];
+
+        /// <summary>
+        /// Looks up a <see cref="RestClient" /> object by <see cref="OperationGroup" />.
+        /// </summary>
+        /// <param name="operationGroup">OperationGroup object.</param>
+        /// <returns>The <see cref="RestClient" /> object associated with the operation group.</returns>
+        public MgmtRestClient GetRestClient(OperationGroup operationGroup) => EnsureRestClients()[operationGroup];
+
         public OperationGroup? GetOperationGroupBySchema(Schema schema)
         {
             List<OperationGroup>? operationGroups;
@@ -97,6 +121,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 return operationGroups.FirstOrDefault();
             return null;
         }
+
+        internal LongRunningOperation GetLongRunningOperation(Operation op) => EnsureLongRunningOperations()[op];
+
+        internal NonLongRunningOperation GetNonLongRunningOperation(Operation op) => EnsureNonLongRunningOperations()[op];
 
         internal MgmtObjectType? GetMgmtObjectFromModelName(string name)
         {
@@ -120,6 +148,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return _restClients;
         }
 
+        private OperationGroup? GetRestApiOperationGroup()
+        {
+            foreach (var operationGroup in _codeModel.OperationGroups)
+            {
+                if (operationGroup.Key == "Operations")
+                    return operationGroup;
+            }
+
+            return null;
+        }
+
         private Dictionary<OperationGroup, ResourceOperation> EnsureResourceOperations()
         {
             if (_resourceOperations != null)
@@ -130,7 +169,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _resourceOperations = new Dictionary<OperationGroup, ResourceOperation>();
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
-                _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
+                if (!operationGroup.IsTupleResource(_context))
+                {
+                    _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
+                }
             }
 
             return _resourceOperations;
@@ -146,7 +188,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
-                _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
+                if (!operationGroup.IsTupleResource(_context)
+                    && !operationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
+                {
+                    _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
+                }
             }
 
             return _resourceContainers;
@@ -198,7 +244,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_armResource.ContainsKey(operation))
+                        if (!_armResource.ContainsKey(operation) && !operation.IsTupleResource(_context))
                         {
                             _armResource.Add(operation, new Resource(operation, _context));
                         }
@@ -207,6 +253,78 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return _armResource;
+        }
+
+        private Dictionary<Operation, MgmtLongRunningOperation> EnsureLongRunningOperations()
+        {
+            if (_longRunningOperations != null)
+            {
+                return _longRunningOperations;
+            }
+
+            _longRunningOperations = new Dictionary<Operation, MgmtLongRunningOperation>();
+
+            if (_context.Configuration.PublicClients)
+            {
+                foreach (var operationGroup in _codeModel.OperationGroups)
+                {
+                    foreach (var operation in operationGroup.Operations)
+                    {
+                        if (operation.IsLongRunning)
+                        {
+                            _longRunningOperations.Add(
+                                operation,
+                                new MgmtLongRunningOperation(
+                                    operationGroup,
+                                    operation,
+                                    _context,
+                                    FindLongRunningOperationInfo(operationGroup, operation)));
+                        }
+                    }
+                }
+            }
+            return _longRunningOperations;
+        }
+
+        private Dictionary<Operation, NonLongRunningOperation> EnsureNonLongRunningOperations()
+        {
+            if (_nonLongRunningOperations != null)
+            {
+                return _nonLongRunningOperations;
+            }
+
+            _nonLongRunningOperations = new Dictionary<Operation, NonLongRunningOperation>();
+            var desiredHttpMethods = new HttpMethod[] { HttpMethod.Put, HttpMethod.Delete, HttpMethod.Patch };
+
+            if (_context.Configuration.PublicClients)
+            {
+                foreach (var operationGroup in _codeModel.OperationGroups)
+                {
+                    // if non-resource, we won't be able to get the info for LRO
+                    if (operationGroup.IsResource(_mgmtConfiguration))
+                    {
+                        foreach (var operation in operationGroup.Operations)
+                        {
+                            if (!operation.IsLongRunning
+                                && operation.Requests.FirstOrDefault().Protocol.Http is HttpRequest httpRequest
+                                && desiredHttpMethods.Contains(httpRequest.Method))
+                            {
+                                _nonLongRunningOperations.Add(
+                                    operation,
+                                    new NonLongRunningOperation(
+                                        operationGroup,
+                                        operation,
+                                        _context,
+                                        FindLongRunningOperationInfo(operationGroup, operation)
+                                    )
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+
+            return _nonLongRunningOperations;
         }
 
         public override CSharpType FindTypeForSchema(Schema schema)
@@ -229,7 +347,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public LongRunningOperationInfo FindLongRunningOperationInfo(OperationGroup operationGroup, Operation operation)
         {
-            var mgmtRestClient = FindRestClient(operationGroup);
+            var mgmtRestClient = GetRestClient(operationGroup);
 
             Debug.Assert(mgmtRestClient != null, "Unexpected. Unable find matching rest client.");
 
@@ -289,11 +407,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ObjectSchema objectSchema => new MgmtObjectType(objectSchema, _context, true),
             _ => throw new NotImplementedException()
         };
-
-        public MgmtRestClient FindRestClient(OperationGroup operationGroup)
-        {
-            return EnsureRestClients()[operationGroup];
-        }
 
         private void DecorateOperationGroup()
         {

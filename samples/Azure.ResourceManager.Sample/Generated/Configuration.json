@@ -6,15 +6,10 @@
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
   ],
-  "AzureArm": true,
-  "PublicClients": true,
-  "ModelNamespace": false,
-  "HeadAsBoolean": false,
-  "SkipCSProjPackageReference": true,
-  "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
+  "azure-arm": true,
+  "public-clients": true,
+  "model-namespace": false,
+  "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
     "Operations": "Microsoft.Compute/operations",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers/vmextension",
@@ -37,6 +32,14 @@
     "LogAnalytics": "subscriptions",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
     "VirtualMachineImages": "Microsoft.Compute/locations",
-    "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets"
-  }
+    "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets",
+    "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets"
+  },
+  "OperationGroupIsTuple": [
+    "VirtualMachineImages",
+    "VirtualMachineExtensionImages"
+  ],
+  "OperationGroupIsExtension": [
+    "VirtualMachineScaleSetVMExtensions"
+  ]
 }

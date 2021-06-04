@@ -75,6 +75,40 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "ResourceGroupResources"
+                ],
+                "operationId": "ResourceGroupResources_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ResourceGroupResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceGroupResource"
+                        }
+                    }
+                }
             }
         },
         "/providers/Microsoft.Compute/TenantLevelResources/{TenantLevelResourcesName}": {
@@ -84,12 +118,6 @@
                 ],
                 "operationId": "TenantLevelResources_Put",
                 "parameters": [
-                    {
-                        "name": "resourceGroupName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
-                    },
                     {
                         "name": "TenantLevelResourcesName",
                         "in": "path",
@@ -119,6 +147,34 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "TenantLevelResources"
+                ],
+                "operationId": "TenantLevelResources_Get",
+                "parameters": [
+                    {
+                        "name": "TenantLevelResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/TenantLevelResource"
+                        }
+                    }
+                }
             }
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/SubscriptionLevelResources/{SubscriptionLevelResourcesName}": {
@@ -129,7 +185,7 @@
                 "operationId": "SubscriptionLevelResources_Put",
                 "parameters": [
                     {
-                        "name": "resourceGroupName",
+                        "name": "subscriptionId",
                         "in": "path",
                         "required": true,
                         "type": "string"
@@ -147,6 +203,40 @@
                         "schema": {
                             "$ref": "#/definitions/SubscriptionLevelResource"
                         }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SubscriptionLevelResource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "SubscriptionLevelResources"
+                ],
+                "operationId": "SubscriptionLevelResources_Get",
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "SubscriptionLevelResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -207,6 +297,40 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "ResourceLevels"
+                ],
+                "operationId": "ResourceLevels_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ResourceLevelsName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResourceLevel"
+                        }
+                    }
+                }
             }
         },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ModelDatas/{ModelDatasName}": {
@@ -251,6 +375,40 @@
                         }
                     }
                 }
+            },
+            "get": {
+                "tags": [
+                    "ModelDatas"
+                ],
+                "operationId": "ModelDatas_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ModelDatasName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelData"
+                        }
+                    }
+                }
             }
         }
     },
@@ -259,12 +417,15 @@
             "type": "object",
             "properties": {
                 "id": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "name": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "type": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "location": {
@@ -285,12 +446,15 @@
             "type": "object",
             "properties": {
                 "id": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "name": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "type": {
+                    "readOnly": true,
                     "type": "string"
                 },
                 "location": {

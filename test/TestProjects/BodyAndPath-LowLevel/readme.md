@@ -6,6 +6,6 @@
 require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/BodyAndPath-LowLevel.json
 low-level-client: true
-credential-types: AzureKeyCredential
-credential-header-name: Fake-Subscription-Key
+security: AzureKey
+security-header-name: Fake-Subscription-Key
 ```

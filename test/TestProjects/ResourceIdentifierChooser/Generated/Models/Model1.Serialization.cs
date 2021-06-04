@@ -35,6 +35,8 @@ namespace ResourceIdentifierChooser
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
@@ -90,7 +92,7 @@ namespace ResourceIdentifierChooser
                     continue;
                 }
             }
-            return new Model1(id, name, type, tags, location, mango.Value, strawberry.Value);
+            return new Model1(id, name, type, location, tags, mango.Value, strawberry.Value);
         }
     }
 }

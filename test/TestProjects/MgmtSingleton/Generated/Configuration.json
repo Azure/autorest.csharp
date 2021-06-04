@@ -1,0 +1,28 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "MgmtSingleton",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  ],
+  "azure-arm": true,
+  "public-clients": true,
+  "model-namespace": false,
+  "head-as-boolean": true,
+  "skip-csproj-packagereference": true,
+  "OperationGroupToResourceType": {
+    "SingletonResources": "Microsoft.Billing/parentResources/singletonResources",
+    "SingletonResources2": "Microsoft.Billing/parentResources/singletonResources2"
+  },
+  "OperationGroupToResource": {
+    "SingletonResources": "SingletonResource",
+    "SingletonResources2": "SingletonResource2"
+  },
+  "OperationGroupToParent": {
+    "SingletonResources": "Microsoft.Billing/parentResources"
+  },
+  "SingletonResource": [
+    "SingletonResource2"
+  ]
+}

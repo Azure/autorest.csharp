@@ -20,10 +20,9 @@ namespace MgmtParent
     public static partial class SubscriptionExtensions
     {
         #region AvailabilitySet
-        private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, string subscriptionId, Uri endpoint = null)
+        private static AvailabilitySetsRestOperations GetAvailabilitySetsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            var httpPipeline = ManagementPipelineBuilder.Build(credential, endpoint, clientOptions);
-            return new AvailabilitySetsRestOperations(clientDiagnostics, httpPipeline, subscriptionId, endpoint);
+            return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
         /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -32,10 +31,10 @@ namespace MgmtParent
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
                 return new PhWrappingAsyncPageable<AvailabilitySetData, AvailabilitySet>(
                 result,
@@ -90,10 +89,10 @@ namespace MgmtParent
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options) =>
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, subscription.Id.SubscriptionId, baseUri);
+                var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 var result = ListBySubscription(clientDiagnostics, restOperations);
                 return new PhWrappingPageable<AvailabilitySetData, AvailabilitySet>(
                 result,

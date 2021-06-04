@@ -46,6 +46,30 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return name;
         }
 
+        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
+        {
+            foreach (var operation in operationGroup.Operations)
+            {
+                if (operation.IsLongRunning || operation.Language.Default.Paging != null)
+                {
+                    continue;
+                }
+
+                foreach (var request in operation.Requests)
+                {
+                    var name = operation.CSharpName();
+                    RestClientMethod startMethod = restClient.GetOperationMethod(request);
+
+                    yield return new ClientMethod(
+                        name,
+                        startMethod,
+                        BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                        new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
+                        operation.Accessibility ?? "public");
+                }
+            }
+        }
+
         public static IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
         {
             foreach (var operation in operationGroup.Operations)

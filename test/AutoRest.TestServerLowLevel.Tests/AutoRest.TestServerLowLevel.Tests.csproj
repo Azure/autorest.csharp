@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.15.0" />
-    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.13" />
+    <PackageReference Include="Azure.Core" Version="1.14.0" />
+    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.12" />
     <PackageReference Include="Azure.Identity" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
     <PackageReference Include="nunit" Version="3.12.0" />

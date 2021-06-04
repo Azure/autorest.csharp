@@ -9,38 +9,76 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
+using SubscriptionExtensions.Models;
 
 namespace SubscriptionExtensions
 {
     /// <summary> A class representing the operations that can be performed over a specific Oven. </summary>
     public partial class OvenOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, Oven>
     {
-        /// <summary> Initializes a new instance of OvenOperations for mocking. </summary>
+        private readonly ClientDiagnostics _clientDiagnostics;
+        internal OvensRestOperations RestClient { get; }
+
+        /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class for mocking. </summary>
         protected OvenOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of <see cref = "OvenOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OvenOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected OvenOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal OvenOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
+            _clientDiagnostics = new ClientDiagnostics(ClientOptions);
+            RestClient = new OvensRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public override ArmResponse<Oven> Get(CancellationToken cancellationToken = default)
+        public async override Task<Response<Oven>> GetAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.Get");
+            scope.Start();
+            try
+            {
+                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <inheritdoc />
-        public override Task<ArmResponse<Oven>> GetAsync(CancellationToken cancellationToken = default)
+        public override Response<Oven> Get(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.Get");
+            scope.Start();
+            try
+            {
+                var response = RestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return Response.FromValue(new Oven(this, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Lists all available geo-locations. </summary>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        {
+            return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Lists all available geo-locations. </summary>
@@ -48,16 +86,313 @@ namespace SubscriptionExtensions
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
-            return ListAvailableLocations(ResourceType);
+            return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> An async collection of location that may take multiple service requests to iterate over. </returns>
-        /// <exception cref="InvalidOperationException"> The default subscription id is null. </exception>
-        public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
+        /// <summary> Add a tag to the current resource. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag added. </returns>
+        public async Task<Response<Oven>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            return await ListAvailableLocationsAsync(ResourceType, cancellationToken);
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.AddTag");
+            scope.Start();
+            try
+            {
+                var operation = await StartAddTagAsync(key, value, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Add a tag to the current resource. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag added. </returns>
+        public Response<Oven> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.AddTag");
+            scope.Start();
+            try
+            {
+                var operation = StartAddTag(key, value, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Add a tag to the current resource. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag added. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
+        public async Task<OvensCreateOrUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartAddTag");
+            scope.Start();
+            try
+            {
+                var resource = GetResource();
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new OvenData(locationData);
+                patchable.Tags.ReplaceWith(resource.Data.Tags);
+                patchable.Tags[key] = value;
+                var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Add a tag to the current resource. </summary>
+        /// <param name="key"> The key for the tag. </param>
+        /// <param name="value"> The value for the tag. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag added. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
+        public OvensCreateOrUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartAddTag");
+            scope.Start();
+            try
+            {
+                var resource = GetResource();
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new OvenData(locationData);
+                patchable.Tags.ReplaceWith(resource.Data.Tags);
+                patchable.Tags[key] = value;
+                var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tags replaced. </returns>
+        public async Task<Response<Oven>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.SetTags");
+            scope.Start();
+            try
+            {
+                var operation = await StartSetTagsAsync(tags, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tags replaced. </returns>
+        public Response<Oven> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.SetTags");
+            scope.Start();
+            try
+            {
+                var operation = StartSetTags(tags, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tags replaced. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
+        public async Task<OvensCreateOrUpdateOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartSetTags");
+            scope.Start();
+            try
+            {
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new OvenData(locationData);
+                patchable.Tags.ReplaceWith(tags);
+                var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Replace the tags on the resource with the given set. </summary>
+        /// <param name="tags"> The set of tags to use as replacement. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tags replaced. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
+        public OvensCreateOrUpdateOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        {
+            if (tags == null)
+            {
+                throw new ArgumentNullException(nameof(tags));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartSetTags");
+            scope.Start();
+            try
+            {
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new OvenData(locationData);
+                patchable.Tags.ReplaceWith(tags);
+                var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <param name="key"> The key of the tag to remove. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag removed. </returns>
+        public async Task<Response<Oven>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.RemoveTag");
+            scope.Start();
+            try
+            {
+                var operation = await StartRemoveTagAsync(key, cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <param name="key"> The key of the tag to remove. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag removed. </returns>
+        public Response<Oven> RemoveTag(string key, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.RemoveTag");
+            scope.Start();
+            try
+            {
+                var operation = StartRemoveTag(key, cancellationToken);
+                return operation.WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <param name="key"> The key of the tag to remove. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag removed. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
+        public async Task<OvensCreateOrUpdateOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartRemoveTag");
+            scope.Start();
+            try
+            {
+                var resource = GetResource();
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new OvenData(locationData);
+                patchable.Tags.ReplaceWith(resource.Data.Tags);
+                patchable.Tags.Remove(key);
+                var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Removes a tag by key from the resource. </summary>
+        /// <param name="key"> The key of the tag to remove. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> The updated resource with the tag removed. </returns>
+        /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
+        public OvensCreateOrUpdateOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
+        {
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("OvenOperations.StartRemoveTag");
+            scope.Start();
+            try
+            {
+                var resource = GetResource();
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new OvenData(locationData);
+                patchable.Tags.ReplaceWith(resource.Data.Tags);
+                patchable.Tags.Remove(key);
+                var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                return new OvensCreateOrUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateCreateOrUpdateRequest(Id.ResourceGroupName, Id.Name, patchable).Request, response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

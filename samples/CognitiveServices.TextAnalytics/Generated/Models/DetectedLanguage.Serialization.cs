@@ -16,7 +16,7 @@ namespace CognitiveServices.TextAnalytics.Models
         {
             string name = default;
             string iso6391Name = default;
-            double score = default;
+            double confidenceScore = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -29,13 +29,13 @@ namespace CognitiveServices.TextAnalytics.Models
                     iso6391Name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("score"))
+                if (property.NameEquals("confidenceScore"))
                 {
-                    score = property.Value.GetDouble();
+                    confidenceScore = property.Value.GetDouble();
                     continue;
                 }
             }
-            return new DetectedLanguage(name, iso6391Name, score);
+            return new DetectedLanguage(name, iso6391Name, confidenceScore);
         }
     }
 }

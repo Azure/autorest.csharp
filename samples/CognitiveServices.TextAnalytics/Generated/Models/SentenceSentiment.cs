@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
@@ -15,49 +13,39 @@ namespace CognitiveServices.TextAnalytics.Models
     public partial class SentenceSentiment
     {
         /// <summary> Initializes a new instance of SentenceSentiment. </summary>
+        /// <param name="text"> The sentence text. </param>
         /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
-        /// <param name="sentenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
+        /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
         /// <param name="offset"> The sentence offset from the start of the document. </param>
         /// <param name="length"> The length of the sentence by Unicode standard. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="sentenceScores"/> is null. </exception>
-        internal SentenceSentiment(SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel sentenceScores, int offset, int length)
+        /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="confidenceScores"/> is null. </exception>
+        internal SentenceSentiment(string text, SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel confidenceScores, int offset, int length)
         {
-            if (sentenceScores == null)
+            if (text == null)
             {
-                throw new ArgumentNullException(nameof(sentenceScores));
+                throw new ArgumentNullException(nameof(text));
+            }
+            if (confidenceScores == null)
+            {
+                throw new ArgumentNullException(nameof(confidenceScores));
             }
 
+            Text = text;
             Sentiment = sentiment;
-            SentenceScores = sentenceScores;
+            ConfidenceScores = confidenceScores;
             Offset = offset;
             Length = length;
-            Warnings = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of SentenceSentiment. </summary>
-        /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
-        /// <param name="sentenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
-        /// <param name="offset"> The sentence offset from the start of the document. </param>
-        /// <param name="length"> The length of the sentence by Unicode standard. </param>
-        /// <param name="warnings"> The warnings generated for the sentence. </param>
-        internal SentenceSentiment(SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel sentenceScores, int offset, int length, IReadOnlyList<string> warnings)
-        {
-            Sentiment = sentiment;
-            SentenceScores = sentenceScores;
-            Offset = offset;
-            Length = length;
-            Warnings = warnings;
-        }
-
+        /// <summary> The sentence text. </summary>
+        public string Text { get; }
         /// <summary> The predicted Sentiment for the sentence. </summary>
         public SentenceSentimentValue Sentiment { get; }
         /// <summary> The sentiment confidence score between 0 and 1 for the sentence for all classes. </summary>
-        public SentimentConfidenceScorePerLabel SentenceScores { get; }
+        public SentimentConfidenceScorePerLabel ConfidenceScores { get; }
         /// <summary> The sentence offset from the start of the document. </summary>
         public int Offset { get; }
         /// <summary> The length of the sentence by Unicode standard. </summary>
         public int Length { get; }
-        /// <summary> The warnings generated for the sentence. </summary>
-        public IReadOnlyList<string> Warnings { get; }
     }
 }

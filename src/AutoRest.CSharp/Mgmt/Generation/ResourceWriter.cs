@@ -8,6 +8,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using Azure.ResourceManager.Core;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Mgmt.Decorator;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -28,7 +29,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.WriteXmlDocumentationSummary($"Initializes a new instance of the <see cref = \"{cs.Name}\"/> class.");
                     writer.WriteXmlDocumentationParameter("options", "The client parameters to use in these operations.");
                     writer.WriteXmlDocumentationParameter("resource", "The resource that is the target of operations.");
-                    using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resourceDataObject.Type} resource) : base(options, resource.Id)"))
+                    // inherits the default constructor when it is not a resource
+                    var resourceData = context.Library.GetResourceData(resource.OperationGroup);
+                    var baseConstructor = resourceData.IsResource() ? $" : base(options, resource.Id)" : string.Empty;
+                    if (!string.IsNullOrEmpty(baseConstructor) && resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
+                    {
+                        baseConstructor = " : base(options)";
+                    }
+
+                    using (writer.Scope($"internal {cs.Name}({typeof(ResourceOperationsBase)} options, {resourceDataObject.Type} resource){baseConstructor}"))
                     {
                         writer.LineRaw("Data = resource;");
                     }
@@ -40,20 +49,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.Append($"{{ get; private set; }}");
                     writer.Line();
 
-                    // protected override GetResource
-                    writer.Line();
-                    writer.WriteXmlDocumentationInheritDoc();
-                    using (writer.Scope($"protected override {cs.Name} GetResource({typeof(CancellationToken)} cancellation = default)"))
+                    // Only write GetResource if it is NOT singleton.
+                    if (!resource.OperationGroup.IsSingletonResource(context.Configuration.MgmtConfiguration))
                     {
-                        writer.LineRaw("return this;");
-                    }
+                        // protected override GetResource
+                        writer.Line();
+                        writer.WriteXmlDocumentationInheritDoc();
+                        using (writer.Scope(
+                            $"protected override {cs.Name} GetResource({typeof(CancellationToken)} cancellation = default)")
+                        )
+                        {
+                            writer.LineRaw("return this;");
+                        }
 
-                    // protected override GetResourceAsync
-                    writer.Line();
-                    writer.WriteXmlDocumentationInheritDoc();
-                    using (writer.Scope($"protected override {typeof(Task)}<{cs.Name}> GetResourceAsync({typeof(CancellationToken)} cancellation = default)"))
-                    {
-                        writer.Line($"return {typeof(Task)}.FromResult(this);");
+                        // protected override GetResourceAsync
+                        writer.Line();
+                        writer.WriteXmlDocumentationInheritDoc();
+                        using (writer.Scope(
+                            $"protected override {typeof(Task)}<{cs.Name}> GetResourceAsync({typeof(CancellationToken)} cancellation = default)")
+                        )
+                        {
+                            writer.Line($"return {typeof(Task)}.FromResult(this);");
+                        }
                     }
                 }
             }

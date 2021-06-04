@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Responses;
@@ -22,6 +23,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var restClientWriter = new RestClientWriter();
             var serializeWriter = new SerializationWriter();
             var headerModelModelWriter = new DataPlaneResponseHeaderGroupWriter();
+            var longRunningOperationWriter = new LongRunningOperationWriter();
 
             foreach (var model in context.Library.Models)
             {
@@ -34,6 +36,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var name = model.Type.Name;
                 project.AddGeneratedFile($"Models/{name}.cs", codeWriter.ToString());
                 project.AddGeneratedFile($"Models/{name}.Serialization.cs", serializerCodeWriter.ToString());
+            }
+
+            var modelFactoryType = context.Library.ModelFactory;
+            if (modelFactoryType != default)
+            {
+                var codeWriter = new CodeWriter();
+                ModelFactoryWriter.WriteModelFactory(codeWriter, modelFactoryType);
+                project.AddGeneratedFile($"{modelFactoryType.Type.Name}.cs", codeWriter.ToString());
             }
 
             foreach (var client in context.Library.RestClients)
@@ -52,7 +62,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{responseHeaderModel.Type.Name}.cs", headerModelCodeWriter.ToString());
             }
 
-            if (configuration.PublicClients && context.Library.Clients.Count() > 0)
+            if (configuration.PublicClients && context.Library.Clients.Any())
             {
                 var codeWriter = new CodeWriter();
                 ClientOptionsWriter.WriteClientOptions(codeWriter, context);
@@ -72,7 +82,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var operation in context.Library.LongRunningOperations)
             {
                 var codeWriter = new CodeWriter();
-                LongRunningOperationWriter.Write(codeWriter, operation);
+                longRunningOperationWriter.Write(codeWriter, operation);
 
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }

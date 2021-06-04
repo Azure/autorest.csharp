@@ -6,18 +6,11 @@
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
   ],
-  "AzureArm": true,
-  "PublicClients": true,
-  "ModelNamespace": false,
-  "HeadAsBoolean": false,
-  "SkipCSProjPackageReference": true,
-  "LowLevelClient": false,
-  "CredentialTypes": [],
-  "CredentialScopes": [],
-  "CredentialHeaderName": "api-key",
-  "OperationGroupToResourceType": {},
+  "azure-arm": true,
+  "public-clients": true,
+  "model-namespace": false,
+  "skip-csproj-packagereference": true,
   "OperationGroupToResource": {
     "SshPublicKeys": "NonResource"
-  },
-  "OperationGroupToParent": {}
+  }
 }

@@ -315,6 +315,7 @@ schemas: !Schemas
       properties:
         - !Property 
           schema: *ref_5
+          readOnly: true
           serializedName: id
           language: !Languages 
             default:
@@ -323,6 +324,7 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_6
+          readOnly: true
           serializedName: name
           language: !Languages 
             default:
@@ -331,6 +333,7 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_7
+          readOnly: true
           serializedName: type
           language: !Languages 
             default:
@@ -632,6 +635,7 @@ schemas: !Schemas
             properties:
               - !Property 
                 schema: *ref_30
+                readOnly: true
                 serializedName: id
                 language: !Languages 
                   default:
@@ -671,6 +675,7 @@ schemas: !Schemas
       properties:
         - !Property 
           schema: *ref_33
+          readOnly: true
           serializedName: name
           language: !Languages 
             default:
@@ -679,6 +684,7 @@ schemas: !Schemas
           protocol: !Protocols {}
         - !Property 
           schema: *ref_34
+          readOnly: true
           serializedName: type
           language: !Languages 
             default:
@@ -855,6 +861,86 @@ operationGroups:
             name: Put
             description: ''
         protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_36
+          - !Parameter &ref_44
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_45
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: exactMatchModel1SName
+                description: ''
+                serializedName: exactMatchModel1sName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_37
+          - *ref_38
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel1s/{exactMatchModel1sName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_44
+          - *ref_45
+        responses:
+          - !SchemaResponse 
+            schema: *ref_4
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
     language: !Languages 
       default:
         name: ExactMatchModel1S
@@ -869,7 +955,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_36
-          - !Parameter &ref_45
+          - !Parameter &ref_47
             schema: *ref_1
             implementation: Method
             required: true
@@ -881,7 +967,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_46
+          - !Parameter &ref_48
             schema: *ref_1
             implementation: Method
             required: true
@@ -911,7 +997,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_44
+              - !Parameter &ref_46
                 schema: *ref_10
                 implementation: Method
                 required: true
@@ -937,7 +1023,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_44
+              - *ref_46
             language: !Languages 
               default:
                 name: ''
@@ -951,8 +1037,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_45
-          - *ref_46
+          - *ref_47
+          - *ref_48
         responses:
           - !SchemaResponse 
             schema: *ref_10
@@ -986,7 +1072,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_36
-          - !Parameter &ref_48
+          - !Parameter &ref_50
             schema: *ref_1
             implementation: Method
             required: true
@@ -998,7 +1084,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_49
+          - !Parameter &ref_51
             schema: *ref_1
             implementation: Method
             required: true
@@ -1028,7 +1114,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_47
+              - !Parameter &ref_49
                 schema: *ref_16
                 implementation: Method
                 required: true
@@ -1054,7 +1140,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_47
+              - *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -1068,8 +1154,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_48
-          - *ref_49
+          - *ref_50
+          - *ref_51
         responses:
           - !SchemaResponse 
             schema: *ref_16
@@ -1089,6 +1175,86 @@ operationGroups:
             name: Put
             description: ''
         protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_36
+          - !Parameter &ref_52
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_53
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: exactMatchModel3SName
+                description: ''
+                serializedName: exactMatchModel3sName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_37
+          - *ref_38
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel3s/{exactMatchModel3sName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_52
+          - *ref_53
+        responses:
+          - !SchemaResponse 
+            schema: *ref_16
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
     language: !Languages 
       default:
         name: ExactMatchModel3S
@@ -1103,7 +1269,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_36
-          - !Parameter &ref_51
+          - !Parameter &ref_55
             schema: *ref_1
             implementation: Method
             required: true
@@ -1115,7 +1281,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_52
+          - !Parameter &ref_56
             schema: *ref_1
             implementation: Method
             required: true
@@ -1145,7 +1311,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_50
+              - !Parameter &ref_54
                 schema: *ref_22
                 implementation: Method
                 required: true
@@ -1171,7 +1337,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_50
+              - *ref_54
             language: !Languages 
               default:
                 name: ''
@@ -1185,8 +1351,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_51
-          - *ref_52
+          - *ref_55
+          - *ref_56
         responses:
           - !SchemaResponse 
             schema: *ref_22
@@ -1220,7 +1386,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_36
-          - !Parameter &ref_54
+          - !Parameter &ref_58
             schema: *ref_1
             implementation: Method
             required: true
@@ -1232,7 +1398,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_55
+          - !Parameter &ref_59
             schema: *ref_1
             implementation: Method
             required: true
@@ -1262,7 +1428,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_53
+              - !Parameter &ref_57
                 schema: *ref_29
                 implementation: Method
                 required: true
@@ -1288,7 +1454,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_53
+              - *ref_57
             language: !Languages 
               default:
                 name: ''
@@ -1302,8 +1468,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_54
-          - *ref_55
+          - *ref_58
+          - *ref_59
         responses:
           - !SchemaResponse 
             schema: *ref_29
@@ -1321,6 +1487,86 @@ operationGroups:
         language: !Languages 
           default:
             name: Put
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_36
+          - !Parameter &ref_60
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_61
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: exactMatchModel5SName
+                description: ''
+                serializedName: exactMatchModel5sName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_37
+          - *ref_38
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/exactMatchModel5s/{exactMatchModel5sName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_60
+          - *ref_61
+        responses:
+          - !SchemaResponse 
+            schema: *ref_29
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
             description: ''
         protocol: !Protocols {}
     language: !Languages 

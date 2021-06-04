@@ -19,6 +19,7 @@ namespace body_string_LowLevel
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline { get; }
         private const string AuthorizationHeader = "Fake-Subscription-Key";
+        private readonly AzureKeyCredential _keyCredential;
         private Uri endpoint;
         private readonly string apiVersion;
         private readonly ClientDiagnostics _clientDiagnostics;
@@ -42,8 +43,9 @@ namespace body_string_LowLevel
 
             options ??= new AutoRestSwaggerBATServiceClientOptions();
             _clientDiagnostics = new ClientDiagnostics(options);
-            var authPolicy = new AzureKeyCredentialPolicy(credential, AuthorizationHeader);
-            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { authPolicy, new LowLevelCallbackPolicy() });
+            _keyCredential = credential;
+            var authPolicy = new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader);
+            Pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { new LowLevelCallbackPolicy() }, new HttpPipelinePolicy[] { authPolicy }, new ResponseClassifier());
             this.endpoint = endpoint;
             apiVersion = options.Version;
         }

@@ -30,6 +30,8 @@ namespace ExactMatchInheritance
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("location");
+            writer.WriteStringValue(Location);
             writer.WriteEndObject();
         }
 
@@ -79,7 +81,7 @@ namespace ExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel5Data(id, name, type, tags, location, @new.Value);
+            return new ExactMatchModel5Data(id, name, type, location, tags, @new.Value);
         }
     }
 }

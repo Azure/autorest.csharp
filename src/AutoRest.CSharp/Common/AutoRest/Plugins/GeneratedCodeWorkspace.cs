@@ -3,13 +3,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Simplification;
 
@@ -22,9 +25,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static readonly string[] SharedFolders = { SharedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
+        private static Task<Project>? _cachedProject;
 
         private Project _project;
-        private static Task<Project>? _cachedProject;
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
@@ -43,7 +46,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public void AddGeneratedFile(string name, string text)
         {
             var document = _project.AddDocument(name, text, GeneratedFolders);
-            var root = document.GetSyntaxRootAsync().Result;
+            var root = document.GetSyntaxRootAsync().GetAwaiter().GetResult();
             Debug.Assert(root != null);
 
             root = root.WithAdditionalAnnotations(Simplifier.Annotation);
@@ -53,6 +56,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
         {
+            var compilation = await _project.GetCompilationAsync();
+            Debug.Assert(compilation != null);
+
+            var suppressedTypeNames = GetSuppressedTypeNames(compilation);
             List<Task<Document>> documents = new List<Task<Document>>();
             foreach (Document document in _project.Documents)
             {
@@ -62,33 +69,40 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     continue;
                 }
 
-                documents.Add(Task.Run(() => ProcessDocument(document)));
+                documents.Add(Task.Run(() => ProcessDocument(compilation, document, suppressedTypeNames)));
             }
 
             foreach (var task in documents)
             {
                 var processed = await task;
                 var text = await processed.GetSyntaxTreeAsync();
-
                 yield return (processed.Name, text!.ToString());
             }
         }
 
-        private async Task<Document> ProcessDocument(Document document)
+        private async Task<Document> ProcessDocument(Compilation compilation, Document document, ImmutableHashSet<string> suppressedTypeNames)
         {
-            var compilation = await document.Project.GetCompilationAsync();
-            Debug.Assert(compilation != null);
-
             var syntaxTree = await document.GetSyntaxTreeAsync();
             if (syntaxTree != null)
             {
-                var rewriter = new MemberRemoverRewriter(_project, compilation.GetSemanticModel(syntaxTree));
+                var semanticModel = compilation.GetSemanticModel(syntaxTree);
+                var rewriter = new MemberRemoverRewriter(_project, semanticModel, suppressedTypeNames);
                 document = document.WithSyntaxRoot(rewriter.Visit(await syntaxTree.GetRootAsync()));
             }
 
             document = await Simplifier.ReduceAsync(document);
             document = await Formatter.FormatAsync(document);
             return document;
+        }
+
+        private static ImmutableHashSet<string> GetSuppressedTypeNames(Compilation compilation)
+        {
+            var suppressTypeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSuppressTypeAttribute).FullName!)!;
+            return compilation.Assembly.GetAttributes()
+                .Where(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, suppressTypeAttribute))
+                .Select(a => a.ConstructorArguments[0].Value)
+                .OfType<string>()
+                .ToImmutableHashSet();
         }
 
         public static async Task<GeneratedCodeWorkspace> Create(string projectDirectory, string outputDirectory, string[] sharedSourceFolders)

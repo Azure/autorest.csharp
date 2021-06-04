@@ -36,6 +36,15 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
         }
 
+        private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, bool value)
+        {
+            var defaultValue = Configuration.GetDefaultOptionValue (option);
+            if (!defaultValue.HasValue || defaultValue.Value != value)
+            {
+                writer.WriteBoolean(option, value);
+            }
+        }
+
         internal static string SaveConfiguration(Configuration configuration)
         {
             using (var memoryStream = new MemoryStream())
@@ -54,27 +63,12 @@ namespace AutoRest.CSharp.AutoRest.Communication
                         writer.WriteStringValue(NormalizePath(configuration, sharedSourceFolder));
                     }
                     writer.WriteEndArray();
-                    writer.WriteBoolean(nameof(Configuration.AzureArm), configuration.AzureArm);
-                    writer.WriteBoolean(nameof(Configuration.PublicClients), configuration.PublicClients);
-                    writer.WriteBoolean(nameof(Configuration.ModelNamespace), configuration.ModelNamespace);
-                    writer.WriteBoolean(nameof(Configuration.HeadAsBoolean), configuration.HeadAsBoolean);
-                    writer.WriteBoolean(nameof(Configuration.SkipCSProjPackageReference), configuration.SkipCSProjPackageReference);
-                    writer.WriteBoolean(nameof(Configuration.LowLevelClient), configuration.LowLevelClient);
-                    writer.WriteStartArray(nameof(Configuration.CredentialTypes));
-                    foreach (var credentialTypes in configuration.CredentialTypes)
-                    {
-                        writer.WriteStringValue(credentialTypes);
-                    }
-                    writer.WriteEndArray();
-
-                    writer.WriteStartArray(nameof(Configuration.CredentialScopes));
-                    foreach (var credentialTypes in configuration.CredentialScopes)
-                    {
-                        writer.WriteStringValue(credentialTypes);
-                    }
-                    writer.WriteEndArray();
-
-                    writer.WriteString(nameof(Configuration.CredentialHeaderName), configuration.CredentialHeaderName);
+                    WriteIfNotDefault(writer, "azure-arm", configuration.AzureArm);
+                    WriteIfNotDefault(writer, "public-clients", configuration.PublicClients);
+                    WriteIfNotDefault(writer, "model-namespace", configuration.ModelNamespace);
+                    WriteIfNotDefault(writer, "head-as-boolean", configuration.HeadAsBoolean);
+                    WriteIfNotDefault(writer, "skip-csproj-packagereference", configuration.SkipCSProjPackageReference);
+                    WriteIfNotDefault(writer, "low-level-client", configuration.LowLevelClient);
 
                     configuration.MgmtConfiguration.SaveConfiguration(writer);
 
@@ -90,27 +84,27 @@ namespace AutoRest.CSharp.AutoRest.Communication
             return Path.GetRelativePath(configuration.OutputFolder, sharedSourceFolder);
         }
 
+        private static bool ReadOption(JsonElement root, string option)
+        {
+            if (root.TryGetProperty(option, out JsonElement value))
+            {
+                return value.GetBoolean();
+            }
+            else
+            {
+                return Configuration.GetDefaultOptionValue(option)!.Value;
+            }
+        }
+
         internal static Configuration LoadConfiguration(string basePath, string json)
         {
             JsonDocument document = JsonDocument.Parse(json);
             var root = document.RootElement;
             var sharedSourceFolders = new List<string>();
-            var credentialTypes = new List<string>();
-            var credentialScopes = new List<string>();
 
             foreach (var sharedSourceFolder in root.GetProperty(nameof(Configuration.SharedSourceFolders)).EnumerateArray())
             {
                 sharedSourceFolders.Add(Path.Combine(basePath, sharedSourceFolder.GetString()));
-            }
-
-            foreach (var credentialType in root.GetProperty(nameof(Configuration.CredentialTypes)).EnumerateArray())
-            {
-                credentialTypes.Add(credentialType.ToString());
-            }
-
-            foreach (var credentialScope in root.GetProperty(nameof(Configuration.CredentialScopes)).EnumerateArray())
-            {
-                credentialScopes.Add(credentialScope.ToString());
             }
 
             return new Configuration(
@@ -119,15 +113,12 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
-                root.GetProperty(nameof(Configuration.AzureArm)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.PublicClients)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.ModelNamespace)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.HeadAsBoolean)).GetBoolean(),
-                root.GetProperty(nameof(Configuration.SkipCSProjPackageReference)).GetBoolean(),
-                credentialTypes.ToArray(),
-                credentialScopes.ToArray(),
-                root.GetProperty(nameof(Configuration.CredentialHeaderName)).GetString(),
-                root.GetProperty(nameof(Configuration.LowLevelClient)).GetBoolean(),
+                ReadOption(root, "azure-arm"),
+                ReadOption(root, "public-clients"),
+                ReadOption(root, "model-namespace"),
+                ReadOption(root, "head-as-boolean"),
+                ReadOption(root, "skip-csproj-packagereference"),
+                ReadOption(root, "low-level-client"),
                 MgmtConfiguration.LoadConfiguration(root)
             );
         }

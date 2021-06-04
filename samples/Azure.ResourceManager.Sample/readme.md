@@ -10,7 +10,6 @@ namespace: Azure.ResourceManager.Sample
 model-namespace: false
 public-clients: false
 head-as-boolean: false
-payload-flattening-threshold: 2
 operation-group-to-resource-type:
    Operations: Microsoft.Compute/operations
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers/vmextension
@@ -32,6 +31,9 @@ operation-group-to-parent:
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
    VirtualMachineImages: Microsoft.Compute/locations
    VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
+   VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets
+operation-group-is-tuple: VirtualMachineImages;VirtualMachineExtensionImages
+operation-group-is-extension: VirtualMachineScaleSetVMExtensions
 modelerfour:
   lenient-model-deduplication: true
 directive:
