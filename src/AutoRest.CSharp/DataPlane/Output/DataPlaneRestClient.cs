@@ -20,16 +20,12 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class DataPlaneRestClient : RestClient
     {
-        private CachedDictionary<ServiceRequest, RestClientMethod> _requestMethods;
-        private CachedDictionary<ServiceRequest, RestClientMethod> _nextPageMethods;
         private BuildContext<DataPlaneOutputLibrary> _context;
 
         public DataPlaneRestClient(OperationGroup operationGroup, BuildContext<DataPlaneOutputLibrary> context)
             : base(operationGroup, context, context.Library.FindClient(operationGroup)?.Declaration?.Name)
         {
             _context = context;
-            _requestMethods = new CachedDictionary<ServiceRequest, RestClientMethod> (EnsureNormalMethods);
-            _nextPageMethods = new CachedDictionary<ServiceRequest, RestClientMethod> (EnsureGetNextPageMethods);
         }
 
         protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
@@ -52,50 +48,6 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             return requestMethods;
-        }
-
-        protected override Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()
-        {
-            var nextPageMethods = new Dictionary<ServiceRequest, RestClientMethod>();
-            foreach (var operation in OperationGroup.Operations)
-            {
-                var paging = operation.Language.Default.Paging;
-                if (paging == null)
-                {
-                    continue;
-                }
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    RestClientMethod? nextMethod = null;
-                    if (paging.NextLinkOperation != null)
-                    {
-                        nextMethod = GetOperationMethod(paging.NextLinkOperation.Requests.Single());
-                    }
-                    else if (paging.NextLinkName != null)
-                    {
-                        var method = GetOperationMethod(serviceRequest);
-                        nextMethod = BuildNextPageMethod(method, operation);
-                    }
-
-                    if (nextMethod != null)
-                    {
-                        nextPageMethods.Add(serviceRequest, nextMethod);
-                    }
-                }
-            }
-
-            return nextPageMethods;
-        }
-
-        public override RestClientMethod? GetNextOperationMethod(ServiceRequest request)
-        {
-            _nextPageMethods.TryGetValue(request, out RestClientMethod? value);
-            return value;
-        }
-
-        public override RestClientMethod GetOperationMethod(ServiceRequest request)
-        {
-            return _requestMethods[request];
         }
     }
 }
