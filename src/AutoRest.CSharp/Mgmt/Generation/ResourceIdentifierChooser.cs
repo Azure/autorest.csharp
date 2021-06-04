@@ -16,14 +16,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal static class ResourceIdentifierChooser
     {
-        internal static Type GetResourceIdentifierType(this OperationGroup operation, MgmtObjectType mgmtObjectType, MgmtConfiguration config, bool skipResourceIdentifier)
+        internal static Type GetResourceIdentifierType(this OperationGroup operation, MgmtObjectType mgmtObjectType, MgmtConfiguration config)
         {
             if (operation.ParentResourceType(config) == ResourceTypeBuilder.Subscriptions)
                 return typeof(SubscriptionResourceIdentifier);
             else if (operation.IsTenantResource(config))
                 return typeof(TenantResourceIdentifier);
-            else if (!skipResourceIdentifier && (IsSubclassOf(GetObjectTypeBase(mgmtObjectType), typeof(SubResource)) || IsSubclassOf(GetObjectTypeBase(mgmtObjectType), typeof(WritableSubResource))))
-                return typeof(ResourceIdentifier);
             else
                 return typeof(ResourceGroupResourceIdentifier);
         }
@@ -31,18 +29,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private static ObjectType? GetObjectTypeBase(ObjectType obj)
         {
             return obj.Inherits != null ? obj.Inherits.Implementation as ObjectType : null;
-        }
-
-        private static bool IsSubclassOf(ObjectType? obj, Type type)
-        {
-            if (obj == null)
-                return false;
-
-            if (obj.Declaration.Name == type.Name)
-                return true;
-
-            var baseObj = GetObjectTypeBase(obj);
-            return IsSubclassOf(baseObj, type);
         }
     }
 }
