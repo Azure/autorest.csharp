@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
-            ListOnlyOperationGroups = new Dictionary<OperationGroup, List<OperationGroup>>();
+            ListOnlyOperationGroups = new Dictionary<string, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <summary>
         /// A mapping of parent operation group to child operation groups that are list only.
         /// </summary>
-        public Dictionary<OperationGroup, List<OperationGroup>> ListOnlyOperationGroups { get; private set; }
+        public Dictionary<string, List<OperationGroup>> ListOnlyOperationGroups { get; private set; }
 
         private static HashSet<string> ResourceTypes = new HashSet<string>
         {
@@ -177,7 +177,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 if (!operationGroup.IsTupleResource(_context))
                 {
-                    var listOnlyChildOperationGroups = _context.Library.ListOnlyOperationGroups.GetValueOrDefault(operationGroup);
+                    var listOnlyChildOperationGroups = _context.Library.ListOnlyOperationGroups.GetValueOrDefault(operationGroup.Key);
                     _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context, listOnlyChildOperationGroups));
                 }
             }
@@ -432,7 +432,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     AddOperationGroupToListOnlyResourceMap(operationGroup);
                 }
-                else
+                else if (operationGroup.IsResource(_mgmtConfiguration))
                 {
                     AddOperationGroupToResourceMap(operationGroup);
                 }
@@ -444,18 +444,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationGroup.Key, out var parent))
             {
-                if (!_operationGroups.ContainsKey(parent))
+                if (ListOnlyOperationGroups.ContainsKey(parent))
                 {
-                    throw new Exception($"Could not find parent operation group {parent}");
-                }
-                var parentOperationGroup = _operationGroups[parent].FirstOrDefault();
-                if (ListOnlyOperationGroups.ContainsKey(parentOperationGroup))
-                {
-                    ListOnlyOperationGroups[parentOperationGroup].Add(operationGroup);
+                    ListOnlyOperationGroups[parent].Add(operationGroup);
                 }
                 else
                 {
-                    ListOnlyOperationGroups[parentOperationGroup] = new List<OperationGroup>() { operationGroup };
+                    ListOnlyOperationGroups[parent] = new List<OperationGroup>() { operationGroup };
                 }
             }
             else

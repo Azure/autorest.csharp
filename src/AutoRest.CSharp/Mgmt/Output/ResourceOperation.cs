@@ -73,20 +73,22 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private ClientMethod[] EnsureMethods()
         {
+            var ownMethods = ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration);
             var siblingMethods = _siblingOperationGroups?.Select(siblingOperationGroup => ClientBuilder.BuildMethods(siblingOperationGroup, RestClient, Declaration))
                 .SelectMany(l => l);
             // TODO -- do we need to ensure we have unique name here?
-            return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).Concat(siblingMethods).ToArray();
+            return siblingMethods == null ? ownMethods.ToArray() : ownMethods.Concat(siblingMethods).ToArray();
         }
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= EnsurePagingMethods();
 
         private PagingMethod[] EnsurePagingMethods()
         {
+            var ownMethods = ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration);
             var siblingPagingMethod = _siblingOperationGroups?.Select(siblingOperationGroup => ClientBuilder.BuildPagingMethods(siblingOperationGroup, RestClient, Declaration))
                 .SelectMany(l => l);
             // TODO -- do we need to ensure we have unique name here?
-            return ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).Concat(siblingPagingMethod).ToArray();
+            return siblingPagingMethod == null ? ownMethods.ToArray() : ownMethods.Concat(siblingPagingMethod).ToArray();
         }
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)

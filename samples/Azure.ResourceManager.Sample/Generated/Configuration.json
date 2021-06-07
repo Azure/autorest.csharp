@@ -23,13 +23,14 @@
     "Operations": "NonResource",
     "VirtualMachineExtensionImages": "VirtualMachineExtensionImage",
     "VirtualMachineImages": "VirtualMachineImage",
-    "Usage": "NonResource",
-    "VirtualMachineSizes": "NonResource",
     "VirtualMachineScaleSetRollingUpgrades": "VirtualMachineScaleSetRollingUpgrade",
     "LogAnalytics": "NonResource"
   },
   "OperationGroupToParent": {
+    "Operations": "tenant",
     "LogAnalytics": "subscriptions",
+    "Usage": "subscriptions",
+    "VirtualMachineSizes": "subscriptions",
     "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
     "VirtualMachineImages": "Microsoft.Compute/locations",
     "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets",

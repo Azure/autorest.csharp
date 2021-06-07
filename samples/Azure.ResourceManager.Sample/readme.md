@@ -22,12 +22,15 @@ operation-group-to-resource:
    Operations: NonResource
    VirtualMachineExtensionImages: VirtualMachineExtensionImage
    VirtualMachineImages: VirtualMachineImage
-   Usage: NonResource
-   VirtualMachineSizes: NonResource
+#    Usage: NonResource
+#    VirtualMachineSizes: NonResource
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
    LogAnalytics: NonResource
 operation-group-to-parent:
+   Operations: tenant
    LogAnalytics: subscriptions
+   Usage: subscriptions
+   VirtualMachineSizes: subscriptions
    VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
    VirtualMachineImages: Microsoft.Compute/locations
    VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
