@@ -2577,6 +2577,8 @@ schemas: !Schemas
           schema: *ref_80
           required: true
           serializedName: targetResourceId
+          extensions:
+            x-ms-azure-resource: true
           language: !Languages 
             default:
               name: targetResourceId

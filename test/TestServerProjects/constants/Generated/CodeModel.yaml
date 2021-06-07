@@ -681,6 +681,8 @@ schemas: !Schemas
           schema: *ref_2
           clientDefaultValue: value1
           serializedName: parameter
+          extensions:
+            x-ms-client-default: value1
           language: !Languages 
             default:
               name: parameter
@@ -722,6 +724,8 @@ schemas: !Schemas
           schema: *ref_4
           clientDefaultValue: value1
           serializedName: parameter
+          extensions:
+            x-ms-client-default: value1
           language: !Languages 
             default:
               name: parameter
@@ -765,6 +769,8 @@ schemas: !Schemas
           clientDefaultValue: value1
           required: true
           serializedName: parameter
+          extensions:
+            x-ms-client-default: value1
           language: !Languages 
             default:
               name: parameter
@@ -808,6 +814,8 @@ schemas: !Schemas
           clientDefaultValue: value1
           required: true
           serializedName: parameter
+          extensions:
+            x-ms-client-default: value1
           language: !Languages 
             default:
               name: parameter
@@ -849,6 +857,8 @@ schemas: !Schemas
           schema: *ref_10
           clientDefaultValue: value1
           serializedName: parameter
+          extensions:
+            x-ms-client-default: value1
           language: !Languages 
             default:
               name: parameter
@@ -890,6 +900,8 @@ schemas: !Schemas
           schema: *ref_12
           clientDefaultValue: value1
           serializedName: parameter
+          extensions:
+            x-ms-client-default: value1
           language: !Languages 
             default:
               name: parameter
@@ -933,6 +945,8 @@ schemas: !Schemas
           clientDefaultValue: value1
           required: true
           serializedName: parameter
+          extensions:
+            x-ms-client-default: value1
           language: !Languages 
             default:
               name: parameter
@@ -976,6 +990,8 @@ schemas: !Schemas
           clientDefaultValue: value1
           required: true
           serializedName: parameter
+          extensions:
+            x-ms-client-default: value1
           language: !Languages 
             default:
               name: parameter

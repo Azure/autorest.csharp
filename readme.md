@@ -35,6 +35,7 @@ ___
     - [Change model namespace or accessibility in bulk](#change-model-namespace-or-accessibility-in-bulk)
     - [Change operation accessibility in bulk](#change-operation-accessibility-in-bulk)
     - [Exclude models from namespace](#exclude-models-from-namespace)
+    - [Extending a model with additional constructors](#extending-a-model-with-additional-constructors)
 
 <!-- /TOC -->
 
@@ -1018,6 +1019,8 @@ directive:
 internal virtual Response Operation(string body = null, CancellationToken cancellationToken = default)
 internal virtual async Task<Response> OperationAsync(string body = null, CancellationToken cancellationToken = default)
 ```
+    
+</details>
 
 ### Exclude models from namespace
 
@@ -1049,13 +1052,44 @@ input-file: "swagger-document"
 }
 ```
 </details>
+    
+    
+### Extending a model with additional constructors    
+    
+<details>
+    
+As with most customization, you can define a partial class for Models and extend them with methods and constructors.
+
+**Generated code before (Generated/Models/Model.cs):**
+
+```csharp
+namespace Azure.Service.Models
+{
+    public partial class Model { }
+}
+```
+
+**Add customized model (Model.cs)**
+
+```csharp
+namespace Azure.Service.Models
+{
+    public partial class Model {
+        public Model(int x)
+        {
+        }
+    }
+}
+```
+
+</details>
 
 <details>
  <summary>Repository-specific pipeline configuration</summary>
 
 ```yaml
 # autorest-core version
-version: 3.4.1
+version: 3.4.5
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/
 clear-output-folder: true
