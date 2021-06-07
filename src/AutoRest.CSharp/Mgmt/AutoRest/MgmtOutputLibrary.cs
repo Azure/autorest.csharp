@@ -60,6 +60,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values;
 
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
+        // public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
@@ -171,6 +172,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 if (!operationGroup.IsTupleResource(_context))
                 {
+                    // find all child operations groups pass to constructor
                     _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
                 }
             }
@@ -421,10 +423,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
-                if (operationsGroup.IsResource(_mgmtConfiguration))
+                if (operationsGroup.IsListOnlyChildResource(_mgmtConfiguration))
+                {
+                    AddOperationGroupToListOnlyResourceMap(operationsGroup);
+                }
+                else
+                {
                     AddOperationGroupToResourceMap(operationsGroup);
+                }
             }
             ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
+        }
+
+        private void AddOperationGroupToListOnlyResourceMap(OperationGroup operationsGroup)
+        {
+            if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationsGroup.Key, out var parent))
+            {
+                // todo:
+                _listonlyOperationGroups.Add(parent, operationsGroup);
+            }
         }
 
         private void AddOperationGroupToResourceMap(OperationGroup operationsGroup)

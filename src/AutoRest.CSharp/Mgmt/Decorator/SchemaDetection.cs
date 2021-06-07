@@ -59,7 +59,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static bool IsResource(this OperationGroup og, MgmtConfiguration config)
         {
-            return !og.Resource(config).Equals(KeywordToSkipGeneration);
+            return !(config.OperationGroupToResource.ContainsKey(og.Key) &&
+            config.OperationGroupToResource[og.Key].Equals(KeywordToSkipGeneration));
         }
 
         private const string KeywordToSkipGeneration = "NonResource";
