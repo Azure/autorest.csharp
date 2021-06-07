@@ -17,7 +17,7 @@ namespace ExactMatchInheritance
         /// <summary> Initializes a new instance of the <see cref = "AzureResourceFlattenModel2"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="resource"> The resource that is the target of operations. </param>
-        internal AzureResourceFlattenModel2(ResourceOperationsBase options, AzureResourceFlattenModel2Data resource)
+        internal AzureResourceFlattenModel2(ResourceOperationsBase options, AzureResourceFlattenModel2Data resource) : base(options, resource.Id)
         {
             Data = resource;
         }

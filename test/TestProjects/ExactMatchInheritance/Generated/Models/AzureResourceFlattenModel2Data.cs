@@ -6,44 +6,32 @@
 #nullable disable
 
 using System.Collections.Generic;
-using Azure.Core;
+using Azure.ResourceManager.Core;
 
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing the AzureResourceFlattenModel2 data model. </summary>
-    public partial class AzureResourceFlattenModel2Data
+    public partial class AzureResourceFlattenModel2Data : TrackedResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel2Data. </summary>
-        public AzureResourceFlattenModel2Data()
+        /// <param name="location"> The location. </param>
+        public AzureResourceFlattenModel2Data(LocationData location) : base(location)
         {
-            Tags = new ChangeTrackingDictionary<string, string>();
         }
 
         /// <summary> Initializes a new instance of AzureResourceFlattenModel2Data. </summary>
-        /// <param name="location"> Resource location. </param>
-        /// <param name="tags"> Resource tags. </param>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
         /// <param name="new"> New property. </param>
-        /// <param name="id"> . </param>
-        /// <param name="name"> . </param>
-        /// <param name="type"> . </param>
-        internal AzureResourceFlattenModel2Data(string location, IDictionary<string, string> tags, int? @new, int? id, string name, string type)
+        internal AzureResourceFlattenModel2Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, int? @new) : base(id, name, type, location, tags)
         {
-            Location = location;
-            Tags = tags;
             New = @new;
-            Id = id;
-            Name = name;
-            Type = type;
         }
 
-        /// <summary> Resource location. </summary>
-        public string Location { get; set; }
-        /// <summary> Resource tags. </summary>
-        public IDictionary<string, string> Tags { get; }
         /// <summary> New property. </summary>
         public int? New { get; set; }
-        public int? Id { get; set; }
-        public string Name { get; set; }
-        public string Type { get; set; }
     }
 }

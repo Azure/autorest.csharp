@@ -842,6 +842,10 @@
             "properties": {
                 "foo": {
                     "type": "string"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "ID in CustomModel1"
                 }
             }
         },
@@ -905,7 +909,7 @@
                 },
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/ExactMatchModel9",
+                    "$ref": "#/definitions/ExactMatchModel6",
                     "description": "Nested properties"
                 },
                 "new": {

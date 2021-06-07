@@ -39,6 +39,11 @@ namespace ExactMatchInheritance
                 writer.WritePropertyName("foo");
                 writer.WriteStringValue(Foo);
             }
+            if (Optional.IsDefined(IdPropertiesId))
+            {
+                writer.WritePropertyName("id");
+                writer.WriteStringValue(IdPropertiesId);
+            }
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
@@ -52,6 +57,7 @@ namespace ExactMatchInheritance
             string name = default;
             ResourceType type = default;
             Optional<string> foo = default;
+            Optional<string> id0 = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"))
@@ -108,11 +114,16 @@ namespace ExactMatchInheritance
                             foo = property0.Value.GetString();
                             continue;
                         }
+                        if (property0.NameEquals("id"))
+                        {
+                            id0 = property0.Value.GetString();
+                            continue;
+                        }
                     }
                     continue;
                 }
             }
-            return new AzureResourceFlattenModel1Data(id, name, type, location, tags, Optional.ToNullable(@new), foo.Value);
+            return new AzureResourceFlattenModel1Data(id, name, type, location, tags, Optional.ToNullable(@new), foo.Value, id0.Value);
         }
     }
 }

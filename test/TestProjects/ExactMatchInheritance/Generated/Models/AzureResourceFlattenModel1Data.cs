@@ -27,14 +27,18 @@ namespace ExactMatchInheritance
         /// <param name="tags"> The tags. </param>
         /// <param name="new"> New property. </param>
         /// <param name="foo"> . </param>
-        internal AzureResourceFlattenModel1Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, int? @new, string foo) : base(id, name, type, location, tags)
+        /// <param name="idPropertiesId"> ID in CustomModel1. </param>
+        internal AzureResourceFlattenModel1Data(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, int? @new, string foo, string idPropertiesId) : base(id, name, type, location, tags)
         {
             New = @new;
             Foo = foo;
+            IdPropertiesId = idPropertiesId;
         }
 
         /// <summary> New property. </summary>
         public int? New { get; set; }
         public string Foo { get; set; }
+        /// <summary> ID in CustomModel1. </summary>
+        public string IdPropertiesId { get; set; }
     }
 }
