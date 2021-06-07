@@ -100,6 +100,23 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 project.AddGeneratedFile($"{operation.Type.Name}.cs", codeWriter.ToString());
             }
 
+            foreach (var tupleResourceOperation in context.Library.TupleResourceOperations)
+            {
+                var codeWriter = new CodeWriter();
+                var resourceOperationWriter = new TupleResourceOperationWriter();
+                resourceOperationWriter.WriteClient(codeWriter, tupleResourceOperation, context);
+
+                project.AddGeneratedFile($"{tupleResourceOperation.Type.Name}.cs", codeWriter.ToString());
+            }
+
+            foreach (var tupleResourceContainer in context.Library.ResourceContainers)
+            {
+                var codeWriter = new CodeWriter();
+                new TupleResourceContainerWriter(codeWriter, tupleResourceContainer, context.Library).WriteContainer();
+
+                project.AddGeneratedFile($"{tupleResourceContainer.Type.Name}.cs", codeWriter.ToString());
+            }
+
             var extensionsWriter = new CodeWriter();
             resourceGroupExtensionsWriter.WriteExtension(context, extensionsWriter);
             project.AddGeneratedFile("Extensions/ResourceGroupExtensions.cs", extensionsWriter.ToString());

@@ -29,6 +29,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceOperationWriter : ClientWriter
     {
+        protected virtual Type BaseClass => typeof(ResourceOperationsBase);
+
         private bool _inheritResourceOperationsBase = false;
         private bool _isITaggableResource = false;
         private bool _isDeletableResource = false;
@@ -205,7 +207,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     updateMethods = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Put);
                 }
 
-                RestClientMethod updateMethod;
+                RestClientMethod? updateMethod = null;
                 if (updateMethods != null && updateMethods.Count() == 1)
                 {
                     updateMethod = updateMethods.FirstOrDefault();
@@ -216,14 +218,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else
                 {
-                    throw new Exception($"Please update the swagger for {resource.Type.Name} to add the update operation.");
+                    if (!resourceOperation.OperationGroup.IsTupleResource(context))
+                        throw new Exception($"Please update the swagger for {resource.Type.Name} to add the update operation.");
                 }
 
-                // write update method
-                WriteAddTagMethod(writer, resourceOperation, updateMethod, context);
-                WriteSetTagsMethod(writer, resourceOperation, updateMethod, context);
-                WriteRemoveTagMethod(writer, resourceOperation, updateMethod, context);
-                clientMethodsList.Add(updateMethod);
+                if (updateMethod != null)
+                {
+                    // write update method
+                    WriteAddTagMethod(writer, resourceOperation, updateMethod, context);
+                    WriteSetTagsMethod(writer, resourceOperation, updateMethod, context);
+                    WriteRemoveTagMethod(writer, resourceOperation, updateMethod, context);
+                    clientMethodsList.Add(updateMethod);
+                }
             }
 
             // write rest of the methods

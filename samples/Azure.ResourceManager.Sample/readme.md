@@ -28,8 +28,8 @@ operation-group-to-resource:
    LogAnalytics: NonResource
 operation-group-to-parent:
    LogAnalytics: subscriptions
-   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
-   VirtualMachineImages: Microsoft.Compute/locations
+   VirtualMachineExtensionImages: subscriptions
+   VirtualMachineImages: subscriptions
    VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets
 operation-group-is-tuple: VirtualMachineImages;VirtualMachineExtensionImages
