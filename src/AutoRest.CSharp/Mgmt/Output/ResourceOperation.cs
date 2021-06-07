@@ -30,6 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private PagingMethod[]? _pagingMethods;
 
         private IEnumerable<OperationGroup>? _siblingOperationGroups;
+        private IDictionary<OperationGroup, ClientMethod[]>? _childMethods;
 
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
@@ -69,27 +70,67 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context.Library.GetResourceData(OperationGroup),
             _context.Configuration.MgmtConfiguration, false);
 
-        public ClientMethod[] Methods => _methods ??= EnsureMethods();
+        public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
 
-        private ClientMethod[] EnsureMethods()
+        public IDictionary<OperationGroup, ClientMethod[]> ChildMethods => _childMethods ??= EnsureChildMethods();
+
+        private IDictionary<OperationGroup, ClientMethod[]> EnsureChildMethods()
         {
-            var ownMethods = ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration);
-            var siblingMethods = _siblingOperationGroups?.Select(siblingOperationGroup => ClientBuilder.BuildMethods(siblingOperationGroup, RestClient, Declaration))
-                .SelectMany(l => l);
-            // TODO -- do we need to ensure we have unique name here?
-            return siblingMethods == null ? ownMethods.ToArray() : ownMethods.Concat(siblingMethods).ToArray();
+            var result = new Dictionary<OperationGroup, ClientMethod[]>();
+            if (_siblingOperationGroups != null)
+            {
+                foreach (var operationGroup in _siblingOperationGroups)
+                {
+                    var methods = BuildMethods(operationGroup, _context.Library.GetRestClient(operationGroup), Declaration).ToArray();
+                    if (methods.Length > 0)
+                    {
+                        result[operationGroup] = methods;
+                    }
+                }
+            }
+            return result;
         }
 
-        public PagingMethod[] PagingMethods => _pagingMethods ??= EnsurePagingMethods();
-
-        private PagingMethod[] EnsurePagingMethods()
+        // todo: BuildMethods is not very much different from ClientBuilder.BuildMethods
+        // the only difference is that it overwrites the name of the method to always be "List{operationGroup.Key}
+        private IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
         {
-            var ownMethods = ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration);
-            var siblingPagingMethod = _siblingOperationGroups?.Select(siblingOperationGroup => ClientBuilder.BuildPagingMethods(siblingOperationGroup, RestClient, Declaration))
-                .SelectMany(l => l);
-            // TODO -- do we need to ensure we have unique name here?
-            return siblingPagingMethod == null ? ownMethods.ToArray() : ownMethods.Concat(siblingPagingMethod).ToArray();
+            foreach (var operation in operationGroup.Operations)
+            {
+                if (operation.IsLongRunning || operation.Language.Default.Paging != null)
+                {
+                    continue;
+                }
+
+                foreach (var request in operation.Requests)
+                {
+                    var name = $"List{operationGroup.Key}";
+                    RestClientMethod startMethod = restClient.GetOperationMethod(request);
+
+                    yield return new ClientMethod(
+                        name,
+                        startMethod,
+                        BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
+                        new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
+                        operation.Accessibility ?? "public");
+                }
+            }
         }
+
+        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
+
+        // todo: collect list-only child methods that support paging
+        // and emit them in operation writer
+        //public IDictionary<OperationGroup, IEnumerable<PagingMethod>> ChildPagingMethods;
+
+        //private PagingMethod[] EnsurePagingMethods()
+        //{
+        //    var ownMethods = ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration);
+        //    var siblingPagingMethod = _siblingOperationGroups?.Select(siblingOperationGroup => ClientBuilder.BuildPagingMethods(siblingOperationGroup, _context.Library.GetRestClient(siblingOperationGroup), Declaration))
+        //        .SelectMany(l => l);
+        //    // TODO -- do we need to ensure we have unique name here?
+        //    return siblingPagingMethod == null ? ownMethods.ToArray() : ownMethods.Concat(siblingPagingMethod).ToArray();
+        //}
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

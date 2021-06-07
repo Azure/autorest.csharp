@@ -81,6 +81,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (!isSingleton)
                     {
                         WriteClientFields(writer, resourceOperation.RestClient, false);
+                        WriteChildRestClients(writer, resourceOperation, context);
                     }
                     WriteClientCtors(writer, resourceOperation, isSingleton);
                     WriteClientProperties(writer, resourceOperation, context.Configuration.MgmtConfiguration);
@@ -97,6 +98,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
         }
+
+        private void WriteChildRestClients(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
+        {
+            foreach (var operationGroup in resourceOperation.ChildMethods.Keys)
+            {
+                writer.Append($"internal {context.Library.GetRestClient(operationGroup).Type} {GetRestClientName(operationGroup)}").LineRaw(" { get; }");
+            }
+        }
+
         private RestClientMethod? GetMethod(ResourceOperation resourceOperation, ResourceData resourceData)
         {
             var getMethods = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Get);
@@ -236,6 +246,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
 
+            // write child (list-only) methods
+            foreach (var pair in resourceOperation.ChildMethods)
+            {
+                var restClientName = GetRestClientName(pair.Key);
+                foreach (var clientMethod in pair.Value)
+                {
+                    WriteClientMethod(writer, clientMethod, resourceOperation, context, true, restClientName);
+                    WriteClientMethod(writer, clientMethod, resourceOperation, context, false, restClientName);
+                }
+            }
+
             // write rest of the LRO methods
             foreach (var clientMethod in resourceOperation.RestClient.Methods)
             {
@@ -263,6 +284,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                 }
             }
+        }
+
+        private string GetRestClientName(OperationGroup operationGroup)
+        {
+            return $"{operationGroup.Key}RestClient";
         }
 
         private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async)
@@ -929,7 +955,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return mgmtOperation;
         }
 
-        private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async)
+        private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async, string restClientName = "RestClient")
         {
             CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
             CSharpType responseType = bodyType != null ?
@@ -971,7 +997,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
 
                     var parameterNames = GetParametersName(clientMethod.RestClientMethod, resourceOperation.OperationGroup, context);
-                    writer.Append($"RestClient.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
+                    writer.Append($"{restClientName}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
                     foreach (var parameter in parameterNames)
                     {
                         writer.Append($"{parameter:I}, ");
