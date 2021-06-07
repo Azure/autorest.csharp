@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -27,16 +28,18 @@ namespace AutoRest.CSharp.Mgmt.Output
         private BuildContext<MgmtOutputLibrary> _context;
         private ClientMethod[]? _methods;
         private PagingMethod[]? _pagingMethods;
-        private ClientMethod[]? _childMethods;
+
+        private List<OperationGroup>? _siblingOperationGroups;
 
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
 
-        public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, List<OperationGroup> child = null)
+        public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, List<OperationGroup>? siblingOperationGroups = null)
             : base(context)
         {
             _context = context;
             OperationGroup = operationGroup;
+            _siblingOperationGroups = siblingOperationGroups;
             _prefix = operationGroup.Resource(context.Configuration.MgmtConfiguration);
             var isExtension = operationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration);
             string midValue = "";
@@ -70,18 +73,21 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private ClientMethod[] EnsureMethods()
         {
-            _childOperationGroups.foreach (OperationGroup =>
-            {
-                OperationGroup.methods.foreach (method =>
-                {
-
-                })
-            })
-                return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
-            // todo: add child methods
+            var siblingMethods = _siblingOperationGroups?.Select(siblingOperationGroup => ClientBuilder.BuildMethods(siblingOperationGroup, RestClient, Declaration))
+                .SelectMany(l => l);
+            // TODO -- do we need to ensure we have unique name here?
+            return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).Concat(siblingMethods).ToArray();
         }
 
-        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
+        public PagingMethod[] PagingMethods => _pagingMethods ??= EnsurePagingMethods();
+
+        private PagingMethod[] EnsurePagingMethods()
+        {
+            var siblingPagingMethod = _siblingOperationGroups?.Select(siblingOperationGroup => ClientBuilder.BuildPagingMethods(siblingOperationGroup, RestClient, Declaration))
+                .SelectMany(l => l);
+            // TODO -- do we need to ensure we have unique name here?
+            return ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).Concat(siblingPagingMethod).ToArray();
+        }
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
