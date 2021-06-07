@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -32,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
 
-        public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, List<OperationGroup> child = null)
+        public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, IEnumerable<OperationGroup>? child = null)
             : base(context)
         {
             _context = context;
@@ -66,20 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context.Library.GetResourceData(OperationGroup),
             _context.Configuration.MgmtConfiguration, false);
 
-        public ClientMethod[] Methods => _methods ??= EnsureMethods();
-
-        private ClientMethod[] EnsureMethods()
-        {
-            _childOperationGroups.foreach (OperationGroup =>
-            {
-                OperationGroup.methods.foreach (method =>
-                {
-
-                })
-            })
-                return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
-            // todo: add child methods
-        }
+        public ClientMethod[] Methods => _methods!;
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
 

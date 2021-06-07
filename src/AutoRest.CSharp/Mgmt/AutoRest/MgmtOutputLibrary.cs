@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
+            ListOnlyOperationGroups = new Dictionary<OperationGroup, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
@@ -60,13 +61,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values;
 
         public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
-        // public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
 
         public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
 
         public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
         public IEnumerable<NonLongRunningOperation> NonLongRunningOperations => EnsureNonLongRunningOperations().Values;
+
+        /// <summary>
+        /// A mapping of parent operation group to child operation groups that are list only.
+        /// </summary>
+        public Dictionary<OperationGroup, List<OperationGroup>> ListOnlyOperationGroups { get; private set; }
 
         private static HashSet<string> ResourceTypes = new HashSet<string>
         {
@@ -172,8 +177,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 if (!operationGroup.IsTupleResource(_context))
                 {
-                    // find all child operations groups pass to constructor
-                    _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
+                    var listOnlyChildOperationGroups = _context.Library.ListOnlyOperationGroups.GetValueOrDefault(operationGroup);
+                    _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context, listOnlyChildOperationGroups));
                 }
             }
 
@@ -412,35 +417,50 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private void DecorateOperationGroup()
         {
-            foreach (var operationsGroup in _codeModel.OperationGroups)
+            foreach (var operationGroup in _codeModel.OperationGroups)
             {
-                ResourceTypes.Add(operationsGroup.ResourceType(_mgmtConfiguration));
+                ResourceTypes.Add(operationGroup.ResourceType(_mgmtConfiguration));
 
                 // TODO better support for extension resources
                 string? parent;
-                if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationsGroup.Key, out parent))
+                if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationGroup.Key, out parent))
                 {
                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
-                if (operationsGroup.IsListOnlyChildResource(_mgmtConfiguration))
+                if (operationGroup.IsListOnlyChildResource(_mgmtConfiguration))
                 {
-                    AddOperationGroupToListOnlyResourceMap(operationsGroup);
+                    AddOperationGroupToListOnlyResourceMap(operationGroup);
                 }
                 else
                 {
-                    AddOperationGroupToResourceMap(operationsGroup);
+                    AddOperationGroupToResourceMap(operationGroup);
                 }
             }
             ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }
 
-        private void AddOperationGroupToListOnlyResourceMap(OperationGroup operationsGroup)
+        private void AddOperationGroupToListOnlyResourceMap(OperationGroup operationGroup)
         {
-            if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationsGroup.Key, out var parent))
+            if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationGroup.Key, out var parent))
             {
-                // todo:
-                _listonlyOperationGroups.Add(parent, operationsGroup);
+                if (!_operationGroups.ContainsKey(parent))
+                {
+                    throw new Exception($"Could not find parent operation group {parent}");
+                }
+                var parentOperationGroup = _operationGroups[parent].FirstOrDefault();
+                if (ListOnlyOperationGroups.ContainsKey(parentOperationGroup))
+                {
+                    ListOnlyOperationGroups[parentOperationGroup].Add(operationGroup);
+                }
+                else
+                {
+                    ListOnlyOperationGroups[parentOperationGroup] = new List<OperationGroup>() { operationGroup };
+                }
+            }
+            else
+            {
+                throw new Exception($"Operation group to parent mapping is not defined for {operationGroup.Key}");
             }
         }
 
