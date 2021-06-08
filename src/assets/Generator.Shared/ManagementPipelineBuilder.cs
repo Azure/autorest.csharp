@@ -18,5 +18,10 @@ namespace Azure.Core
         {
             return HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, $"{endpoint}/.default"));
         }
+
+        public static HttpPipeline Build(TokenCredential credential, string scope, ClientOptions options)
+        {
+            return HttpPipelineBuilder.Build(options, new BearerTokenAuthenticationPolicy(credential, scope));
+        }
     }
 }
