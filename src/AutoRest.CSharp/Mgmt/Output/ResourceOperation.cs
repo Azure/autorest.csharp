@@ -97,26 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         // the only difference is that it overwrites the name of the method to always be "List{operationGroup.Key}
         private IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
         {
-            foreach (var operation in operationGroup.Operations)
-            {
-                if (operation.IsLongRunning || operation.Language.Default.Paging != null)
-                {
-                    continue;
-                }
-
-                foreach (var request in operation.Requests)
-                {
-                    var name = $"List{operationGroup.Key}";
-                    RestClientMethod startMethod = restClient.GetOperationMethod(request);
-
-                    yield return new ClientMethod(
-                        name,
-                        startMethod,
-                        BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
-                        new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
-                        operation.Accessibility ?? "public");
-                }
-            }
+            return ClientBuilder.BuildMethods(operationGroup, restClient, Declaration, (operationGroup, operation, restMethod) => $"List{operationGroup.Key}");
         }
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();

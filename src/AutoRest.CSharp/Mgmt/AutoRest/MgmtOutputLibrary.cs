@@ -165,6 +165,16 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return null;
         }
 
+        public IEnumerable<MgmtExtensionOperation> GetMgmtExtensionOperations(string parent)
+        {
+            if (ListOnlyOperationGroups.TryGetValue(parent, out var operationGroups))
+            {
+                return operationGroups.Select(operationGroup => new MgmtExtensionOperation(operationGroup, _context));
+            }
+
+            return Enumerable.Empty<MgmtExtensionOperation>();
+        }
+
         private Dictionary<OperationGroup, ResourceOperation> EnsureResourceOperations()
         {
             if (_resourceOperations != null)
