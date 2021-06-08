@@ -58,6 +58,30 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 treeNodes.Reverse();
                 output.AddRange(treeNodes);
             }
+            return PromoteGenericType(output);
+        }
+
+        private static List<System.Type> PromoteGenericType(List<System.Type> output)
+        {
+            for(int i =0; i< output.Capacity; i++)
+            {
+                if (output[i].IsGenericType)
+                {
+                    // since we need to ensure the base generic type is before
+                    // any other inheritors we just need to search behind
+                    for(int j =i-1; j > -1; j--)
+                    {
+                        if(output[j].IsGenericType == false 
+                            && output[j].BaseType == output[i])
+                        {
+                           
+                            System.Type temp = output[j];
+                            output[j] = output[i];
+                            output[i] = temp;
+                        }
+                    }
+                }
+            }
             return output;
         }
 
@@ -125,7 +149,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var newParentType = operationGroup == null || !parentType.IsGenericType
                 ? parentType
-                : parentType.GetGenericTypeDefinition().MakeGenericType(operationGroup.GetResourceIdentifierType(originalType, originalType.Context.Configuration.MgmtConfiguration, true));
+                : parentType.GetGenericTypeDefinition().MakeGenericType(operationGroup.GetResourceIdentifierType(originalType, originalType.Context.Configuration.MgmtConfiguration));
             return CSharpType.FromSystemType(originalType.Context, newParentType);
         }
 

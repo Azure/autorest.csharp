@@ -171,7 +171,8 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodName = $"List{resource.Type.Name}";
             using (writer.Scope($"public static {responseType} {CreateMethodName(methodName, async)}(this {typeof(SubscriptionOperations)} subscription, {typeof(CancellationToken)} cancellationToken = default)"))
             {
-                writer.Append($"return subscription.ListResources((baseUri, credential, options, pipeline) =>");
+                var stringReplace = async?"Async":string.Empty;
+                writer.Append($"return subscription.ListResources{stringReplace}((baseUri, credential, options, pipeline) =>");
                 using (writer.Scope())
                 {
                     var clientDiagnostics = new CodeWriterDeclaration("clientDiagnostics");
