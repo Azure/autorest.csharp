@@ -27,7 +27,7 @@ using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class ResourceOperationWriter : ClientWriter
+    internal class ResourceOperationWriter : MgmtClientBaseWriter
     {
         private bool _inheritResourceOperationsBase = false;
         private bool _isITaggableResource = false;
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         WriteClientFields(writer, resourceOperation.RestClient, false);
                         WriteChildRestClients(writer, resourceOperation, context);
                     }
-                    WriteClientCtors(writer, resourceOperation, isSingleton);
+                    WriteClientCtors(writer, resourceOperation, context, isSingleton);
                     WriteClientProperties(writer, resourceOperation, context.Configuration.MgmtConfiguration);
                     // TODO Write singleton operations
                     if (!isSingleton)
@@ -101,10 +101,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteChildRestClients(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            foreach (var operationGroup in resourceOperation.ChildMethods.Keys)
+            foreach (var operationGroup in resourceOperation.ChildMethods.Keys.Union(resourceOperation.ChildPagingMethods.Keys))
             {
                 writer.Append($"internal {context.Library.GetRestClient(operationGroup).Type} {GetRestClientName(operationGroup)}").LineRaw(" { get; }");
             }
+        }
+
+        private IEnumerable<OperationGroup> GetChildOperationGroups(ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
+        {
+            return resourceOperation.ChildMethods.Keys.Union(resourceOperation.ChildPagingMethods.Keys);
         }
 
         private RestClientMethod? GetMethod(ResourceOperation resourceOperation, ResourceData resourceData)
@@ -119,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return getMethod;
         }
 
-        private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation, bool isSingleton = false)
+        private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool isSingleton = false)
         {
             var typeOfThis = resourceOperation.Type.Name;
             var constructorIdParam = isSingleton ? "" : $", {resourceOperation.ResourceIdentifierType} id";
@@ -151,6 +156,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Line($"Id.TryGetSubscriptionId(out var subscriptionId);");
                     }
                     writer.Line($"this.RestClient = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}, BaseUri);");
+                    foreach (var operationGroup in GetChildOperationGroups(resourceOperation, context))
+                    {
+                        writer.Line($"{GetRestClientName(operationGroup)} = new {context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}, BaseUri);");
+                    }
                 }
             }
         }
@@ -256,6 +265,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteClientMethod(writer, clientMethod, resourceOperation, context, false, restClientName);
                 }
             }
+            foreach (var pair in resourceOperation.ChildPagingMethods)
+            {
+                foreach (var pagingMethod in pair.Value)
+                {
+                    WriteChildPagingMethod(writer, pair.Key, false, pagingMethod);
+                    WriteChildPagingMethod(writer, pair.Key, true, pagingMethod);
+                }
+            }
 
             // write rest of the LRO methods
             foreach (var clientMethod in resourceOperation.RestClient.Methods)
@@ -284,6 +301,98 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                 }
             }
+        }
+
+        private void WriteChildPagingMethod(CodeWriter writer, OperationGroup operationGroup, bool async, PagingMethod pagingMethod)
+        {
+            writer.Line();
+            Parameter[] nonPathParameters = GetNonPathParameters(pagingMethod.Method);
+
+            writer.WriteXmlDocumentationSummary(pagingMethod.Method.Description);
+            foreach (var param in nonPathParameters)
+            {
+                writer.WriteXmlDocumentationParameter(param);
+            }
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+
+            CSharpType itemType = pagingMethod.PagingResponse.ItemType;
+            string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.";
+            writer.WriteXmlDocumentation("returns", returnText);
+
+            var returnType = async
+                ? new CSharpType(typeof(AsyncPageable<>), itemType)
+                : new CSharpType(typeof(Pageable<>), itemType);
+            var asyncText = async ? "Async" : string.Empty;
+
+            var methodName = CreateMethodName(pagingMethod.Name, async);
+            writer.Append($"public {returnType} {methodName}(");
+            foreach (var param in nonPathParameters)
+            {
+                writer.WriteParameter(param);
+            }
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            using (writer.Scope())
+            {
+                WritePagingMethodImplementation(writer, operationGroup, pagingMethod, async, itemType);
+            }
+        }
+
+        private void WritePagingMethodImplementation(CodeWriter writer, OperationGroup operationGroup, PagingMethod pagingMethod, bool async, CSharpType itemType)
+        {
+            var parameters = pagingMethod.Method.Parameters;
+            var restClientName = GetRestClientName(operationGroup);
+
+            var pagedResourceType = new CSharpType(typeof(Page<>), itemType);
+            var returnType = async ? new CSharpType(typeof(Task<>), pagedResourceType) : pagedResourceType;
+
+            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
+            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
+
+            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
+            var asyncText = async ? "async" : string.Empty;
+            var awaitText = async ? "await" : string.Empty;
+            var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
+            using (writer.Scope($"{asyncText} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
+            {
+                // no null-checks because all are optional
+                WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                {
+                    writer.Append($"var response = {awaitText} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                    foreach (var parameter in BuildParameterMapping(pagingMethod.Method).Where(p => IsMandatory(p.Parameter)))
+                    {
+                        writer.Append($"{parameter.ValueExpression}, ");
+                    }
+
+                    writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
+
+                    writer.UseNamespace("System.Linq");
+                    writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
+                    writer.Line($", {continuationTokenText}, response.GetRawResponse());");
+                });
+            }
+
+            var nextPageFunctionName = "null";
+            if (pagingMethod.NextPageMethod != null)
+            {
+                nextPageFunctionName = "NextPageFunc";
+                var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
+                using (writer.Scope($"{asyncText} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
+                {
+                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                    {
+                        writer.Append($"var response = {awaitText} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
+                        foreach (var parameter in BuildParameterMapping(pagingMethod.NextPageMethod).Where(p => IsMandatory(p.Parameter)))
+                        {
+                            writer.Append($"{parameter.ValueExpression}, ");
+                        }
+                        writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
+                        writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
+                        writer.Line($", {continuationTokenText}, response.GetRawResponse());");
+                    });
+                }
+            }
+            writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
         private string GetRestClientName(OperationGroup operationGroup)

@@ -13,6 +13,7 @@ using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
@@ -31,6 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private IEnumerable<OperationGroup>? _siblingOperationGroups;
         private IDictionary<OperationGroup, ClientMethod[]>? _childMethods;
+        private IDictionary<OperationGroup, PagingMethod[]>? _childPagingMethods;
 
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
@@ -119,18 +121,55 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
 
-        // todo: collect list-only child methods that support paging
-        // and emit them in operation writer
-        //public IDictionary<OperationGroup, IEnumerable<PagingMethod>> ChildPagingMethods;
+        public IDictionary<OperationGroup, PagingMethod[]> ChildPagingMethods => _childPagingMethods ??= EnsureChildPagingMethods();
 
-        //private PagingMethod[] EnsurePagingMethods()
-        //{
-        //    var ownMethods = ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration);
-        //    var siblingPagingMethod = _siblingOperationGroups?.Select(siblingOperationGroup => ClientBuilder.BuildPagingMethods(siblingOperationGroup, _context.Library.GetRestClient(siblingOperationGroup), Declaration))
-        //        .SelectMany(l => l);
-        //    // TODO -- do we need to ensure we have unique name here?
-        //    return siblingPagingMethod == null ? ownMethods.ToArray() : ownMethods.Concat(siblingPagingMethod).ToArray();
-        //}
+        private IDictionary<OperationGroup, PagingMethod[]> EnsureChildPagingMethods()
+        {
+            var result = new Dictionary<OperationGroup, PagingMethod[]>();
+            if (_siblingOperationGroups != null)
+            {
+                foreach (var operationGroup in _siblingOperationGroups)
+                {
+                    var methods = BuildPagingMethods(operationGroup, _context.Library.GetRestClient(operationGroup), Declaration).ToArray();
+                    if (methods.Length > 0)
+                    {
+                        result[operationGroup] = methods;
+                    }
+                }
+            }
+            return result;
+        }
+
+        // same as BuildMethods
+        private IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
+        {
+            foreach (var operation in operationGroup.Operations)
+            {
+                Paging? paging = operation.Language.Default.Paging;
+                if (paging == null || operation.IsLongRunning)
+                {
+                    continue;
+                }
+
+                foreach (var serviceRequest in operation.Requests)
+                {
+                    RestClientMethod method = restClient.GetOperationMethod(serviceRequest);
+                    RestClientMethod? nextPageMethod = restClient.GetNextOperationMethod(serviceRequest);
+
+                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
+                    {
+                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
+                    }
+
+                    yield return new PagingMethod(
+                        method,
+                        nextPageMethod,
+                        $"List{operationGroup.Key}",
+                        new Diagnostic($"{Declaration.Name}.{method.Name}"),
+                        new PagingResponseInfo(paging, objectResponseBody.Type));
+                }
+            }
+        }
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {
