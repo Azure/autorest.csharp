@@ -178,7 +178,7 @@ namespace PageNextLink
                 scope.Start();
                 try
                 {
-                    var response = await RestClient.NextFragmentNextPageAsync(nextLink, apiVersion, tenant, cancellationToken).ConfigureAwait(false);
+                    var response = await RestClient.NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -232,7 +232,7 @@ namespace PageNextLink
                 scope.Start();
                 try
                 {
-                    var response = RestClient.NextFragmentNextPage(nextLink, apiVersion, tenant, cancellationToken);
+                    var response = RestClient.NextFragment(apiVersion, tenant, nextLink, cancellationToken);
                     return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

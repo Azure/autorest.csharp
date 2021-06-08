@@ -251,7 +251,7 @@ namespace custom_baseUrl_paging
                 scope.Start();
                 try
                 {
-                    var response = await RestClient.GetPagesPartialUrlOperationNextNextPageAsync(nextLink, accountName, cancellationToken).ConfigureAwait(false);
+                    var response = await RestClient.GetPagesPartialUrlOperationNextAsync(accountName, nextLink, cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -300,7 +300,7 @@ namespace custom_baseUrl_paging
                 scope.Start();
                 try
                 {
-                    var response = RestClient.GetPagesPartialUrlOperationNextNextPage(nextLink, accountName, cancellationToken);
+                    var response = RestClient.GetPagesPartialUrlOperationNext(accountName, nextLink, cancellationToken);
                     return Page.FromValues(response.Value.Values, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
