@@ -57,11 +57,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
                 foreach (var request in operation.Requests)
                 {
-                    var name = operation.CSharpName();
                     RestClientMethod startMethod = restClient.GetOperationMethod(request);
+                    var name = nameOverrider?.Invoke(operationGroup, operation, startMethod) ?? operation.CSharpName();
 
                     yield return new ClientMethod(
-                        nameOverrider?.Invoke(operationGroup, operation, startMethod) ?? name,
+                        name,
                         startMethod,
                         BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                         new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),

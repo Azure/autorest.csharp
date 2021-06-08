@@ -142,11 +142,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
 
+                    string name = $"List{operationGroup.Key}";
                     yield return new PagingMethod(
                         method,
                         nextPageMethod,
-                        $"List{operationGroup.Key}",
-                        new Diagnostic($"{Declaration.Name}.{method.Name}"),
+                        name,
+                        new Diagnostic($"{Declaration.Name}.{name}"),
                         new PagingResponseInfo(paging, objectResponseBody.Type));
                 }
             }
