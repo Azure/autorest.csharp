@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return name;
         }
 
-        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
+        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration, Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = null)
         {
             foreach (var operation in operationGroup.Operations)
             {
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     RestClientMethod startMethod = restClient.GetOperationMethod(request);
 
                     yield return new ClientMethod(
-                        name,
+                        nameOverrider?.Invoke(operationGroup, operation, startMethod) ?? name,
                         startMethod,
                         BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
                         new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
