@@ -14,50 +14,6 @@ schemas: !Schemas
           name: ExactMatchModel9Id
           description: ''
       protocol: !Protocols {}
-    - !NumberSchema &ref_40
-      type: integer
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      precision: 32
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel1New
-          description: New property
-      protocol: !Protocols {}
-    - !NumberSchema &ref_45
-      type: integer
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      precision: 32
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel2New
-          description: New property
-      protocol: !Protocols {}
-    - !NumberSchema &ref_46
-      type: integer
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      precision: 32
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel3New
-          description: New property
-      protocol: !Protocols {}
-    - !NumberSchema &ref_47
-      type: integer
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      precision: 32
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel4New
-          description: New property
-      protocol: !Protocols {}
   strings:
     - !StringSchema &ref_0
       type: string
@@ -276,78 +232,8 @@ schemas: !Schemas
           name: ExactMatchModel5New
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_35
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel1Id
-          description: Resource ID.
-      protocol: !Protocols {}
-    - !StringSchema &ref_36
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel1Name
-          description: Resource name.
-      protocol: !Protocols {}
-    - !StringSchema &ref_37
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel1Type
-          description: Resource type.
-      protocol: !Protocols {}
-    - !StringSchema &ref_38
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel1Location
-          description: Resource location.
-      protocol: !Protocols {}
-    - !StringSchema &ref_41
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: CustomModel1Foo
-          description: ''
-      protocol: !Protocols {}
-    - !StringSchema &ref_42
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: CustomModel1Id
-          description: ID in CustomModel1
-      protocol: !Protocols {}
-    - !StringSchema &ref_43
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel2Location
-          description: Resource location.
-      protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_48
+    - !ConstantSchema &ref_35
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -357,7 +243,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_52
+    - !ConstantSchema &ref_39
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -367,7 +253,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_53
+    - !ConstantSchema &ref_40
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -385,22 +271,6 @@ schemas: !Schemas
         default:
           name: ExactMatchModel10Tags
           description: Dictionary of <string>
-      protocol: !Protocols {}
-    - !DictionarySchema &ref_39
-      type: dictionary
-      elementType: *ref_1
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel1Tags
-          description: Resource tags.
-      protocol: !Protocols {}
-    - !DictionarySchema &ref_44
-      type: dictionary
-      elementType: *ref_1
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel2Tags
-          description: Resource tags.
       protocol: !Protocols {}
   objects:
     - !ObjectSchema &ref_2
@@ -475,8 +345,6 @@ schemas: !Schemas
       usage:
         - input
         - output
-      extensions:
-        x-ms-flattened: true
       language: !Languages 
         default:
           name: ExactMatchModel6
@@ -705,8 +573,6 @@ schemas: !Schemas
       usage:
         - input
         - output
-      extensions:
-        x-ms-flattened: true
       language: !Languages 
         default:
           name: ExactMatchModel9
@@ -797,8 +663,6 @@ schemas: !Schemas
             usage:
               - input
               - output
-            extensions:
-              x-ms-flattened: true
             language: !Languages 
               default:
                 name: ExactMatchModel10
@@ -840,324 +704,8 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_26
     - *ref_29
-    - !ObjectSchema &ref_75
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      properties:
-        - !Property 
-          schema: *ref_35
-          readOnly: true
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: Resource ID.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_36
-          readOnly: true
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: Resource name.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_37
-          readOnly: true
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: Resource type.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_38
-          serializedName: location
-          language: !Languages 
-            default:
-              name: location
-              description: Resource location.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_39
-          serializedName: tags
-          language: !Languages 
-            default:
-              name: tags
-              description: Resource tags.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_40
-          serializedName: new
-          language: !Languages 
-            default:
-              name: new
-              description: New property
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_41
-          flattenedNames:
-            - properties
-            - foo
-          serializedName: foo
-          language: !Languages 
-            default:
-              name: foo
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_42
-          flattenedNames:
-            - properties
-            - id
-          serializedName: id
-          language: !Languages 
-            default:
-              name: idPropertiesId
-              description: ID in CustomModel1
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-        - output
-      extensions:
-        x-ms-azure-resource: true
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel1
-          description: This model is x-ms-azure-resource, has flatten properties, and it contains all reference type properties.
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_81
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      properties:
-        - !Property 
-          schema: *ref_43
-          serializedName: location
-          language: !Languages 
-            default:
-              name: location
-              description: Resource location.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_44
-          serializedName: tags
-          language: !Languages 
-            default:
-              name: tags
-              description: Resource tags.
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_45
-          serializedName: new
-          language: !Languages 
-            default:
-              name: new
-              description: New property
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_5
-          flattenedNames:
-            - properties
-            - id
-          readOnly: true
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_6
-          flattenedNames:
-            - properties
-            - name
-          readOnly: true
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_7
-          flattenedNames:
-            - properties
-            - type
-          readOnly: true
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: ''
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-        - output
-      extensions:
-        x-ms-azure-resource: true
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel2
-          description: This model is x-ms-azure-resource, has flatten properties, and reference type properties are split in flatten properties and its own properties.
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_87
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      properties:
-        - !Property 
-          schema: *ref_46
-          serializedName: new
-          language: !Languages 
-            default:
-              name: new
-              description: New property
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_33
-          flattenedNames:
-            - properties
-            - name
-          readOnly: true
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_34
-          flattenedNames:
-            - properties
-            - type
-          readOnly: true
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_30
-          flattenedNames:
-            - properties
-            - id
-          readOnly: true
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_31
-          flattenedNames:
-            - properties
-            - location
-          serializedName: location
-          language: !Languages 
-            default:
-              name: location
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_32
-          flattenedNames:
-            - properties
-            - tags
-          serializedName: tags
-          language: !Languages 
-            default:
-              name: tags
-              description: Dictionary of <string>
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-        - output
-      extensions:
-        x-ms-azure-resource: true
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel3
-          description: This model is x-ms-azure-resource, has flatten properties, and all reference type properties are in flatten properties.
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_93
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      properties:
-        - !Property 
-          schema: *ref_47
-          serializedName: new
-          language: !Languages 
-            default:
-              name: new
-              description: New property
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_23
-          flattenedNames:
-            - properties
-            - id
-          serializedName: id
-          language: !Languages 
-            default:
-              name: id
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_24
-          flattenedNames:
-            - properties
-            - name
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-        - !Property 
-          schema: *ref_25
-          flattenedNames:
-            - properties
-            - type
-          serializedName: type
-          language: !Languages 
-            default:
-              name: type
-              description: ''
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-        - output
-      extensions:
-        x-ms-azure-resource: true
-      language: !Languages 
-        default:
-          name: AzureResourceFlattenModel4
-          description: This model is x-ms-azure-resource, has flatten properties, and WITHOUT enough reference type properties.
-          namespace: ''
-      protocol: !Protocols {}
 globalParameters:
-  - !Parameter &ref_51
+  - !Parameter &ref_38
     schema: *ref_1
     implementation: Client
     required: true
@@ -1171,7 +719,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_49
+  - !Parameter &ref_36
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -1187,8 +735,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_50
-    schema: *ref_48
+  - !Parameter &ref_37
+    schema: *ref_35
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -1209,8 +757,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_49
-          - !Parameter &ref_55
+          - *ref_36
+          - !Parameter &ref_42
             schema: *ref_1
             implementation: Method
             required: true
@@ -1222,7 +770,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_56
+          - !Parameter &ref_43
             schema: *ref_1
             implementation: Method
             required: true
@@ -1234,13 +782,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_50
-          - *ref_51
+          - *ref_37
+          - *ref_38
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_52
+                schema: *ref_39
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1252,7 +800,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_54
+              - !Parameter &ref_41
                 schema: *ref_4
                 implementation: Method
                 required: true
@@ -1265,7 +813,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_53
+                schema: *ref_40
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1278,7 +826,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_54
+              - *ref_41
             language: !Languages 
               default:
                 name: ''
@@ -1292,8 +840,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_55
-          - *ref_56
+          - *ref_42
+          - *ref_43
         responses:
           - !SchemaResponse 
             schema: *ref_4
@@ -1318,8 +866,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_49
-          - !Parameter &ref_57
+          - *ref_36
+          - !Parameter &ref_44
             schema: *ref_1
             implementation: Method
             required: true
@@ -1331,7 +879,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_58
+          - !Parameter &ref_45
             schema: *ref_1
             implementation: Method
             required: true
@@ -1343,13 +891,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_50
-          - *ref_51
+          - *ref_37
+          - *ref_38
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_53
+                schema: *ref_40
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1372,8 +920,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_57
-          - *ref_58
+          - *ref_44
+          - *ref_45
         responses:
           - !SchemaResponse 
             schema: *ref_4
@@ -1406,8 +954,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_49
-          - !Parameter &ref_60
+          - *ref_36
+          - !Parameter &ref_47
             schema: *ref_1
             implementation: Method
             required: true
@@ -1419,7 +967,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_61
+          - !Parameter &ref_48
             schema: *ref_1
             implementation: Method
             required: true
@@ -1431,13 +979,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_50
-          - *ref_51
+          - *ref_37
+          - *ref_38
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_52
+                schema: *ref_39
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1449,7 +997,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_59
+              - !Parameter &ref_46
                 schema: *ref_10
                 implementation: Method
                 required: true
@@ -1462,7 +1010,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_53
+                schema: *ref_40
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1475,7 +1023,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_59
+              - *ref_46
             language: !Languages 
               default:
                 name: ''
@@ -1489,8 +1037,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_60
-          - *ref_61
+          - *ref_47
+          - *ref_48
         responses:
           - !SchemaResponse 
             schema: *ref_10
@@ -1523,8 +1071,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_49
-          - !Parameter &ref_63
+          - *ref_36
+          - !Parameter &ref_50
             schema: *ref_1
             implementation: Method
             required: true
@@ -1536,7 +1084,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_64
+          - !Parameter &ref_51
             schema: *ref_1
             implementation: Method
             required: true
@@ -1548,13 +1096,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_50
-          - *ref_51
+          - *ref_37
+          - *ref_38
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_52
+                schema: *ref_39
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1566,7 +1114,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_62
+              - !Parameter &ref_49
                 schema: *ref_16
                 implementation: Method
                 required: true
@@ -1579,7 +1127,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_53
+                schema: *ref_40
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1592,7 +1140,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_62
+              - *ref_49
             language: !Languages 
               default:
                 name: ''
@@ -1606,8 +1154,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_63
-          - *ref_64
+          - *ref_50
+          - *ref_51
         responses:
           - !SchemaResponse 
             schema: *ref_16
@@ -1632,8 +1180,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_49
-          - !Parameter &ref_65
+          - *ref_36
+          - !Parameter &ref_52
             schema: *ref_1
             implementation: Method
             required: true
@@ -1645,7 +1193,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_66
+          - !Parameter &ref_53
             schema: *ref_1
             implementation: Method
             required: true
@@ -1657,13 +1205,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_50
-          - *ref_51
+          - *ref_37
+          - *ref_38
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_53
+                schema: *ref_40
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1686,8 +1234,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_65
-          - *ref_66
+          - *ref_52
+          - *ref_53
         responses:
           - !SchemaResponse 
             schema: *ref_16
@@ -1720,8 +1268,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_49
-          - !Parameter &ref_68
+          - *ref_36
+          - !Parameter &ref_55
             schema: *ref_1
             implementation: Method
             required: true
@@ -1733,7 +1281,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_69
+          - !Parameter &ref_56
             schema: *ref_1
             implementation: Method
             required: true
@@ -1745,13 +1293,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_50
-          - *ref_51
+          - *ref_37
+          - *ref_38
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_52
+                schema: *ref_39
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1763,7 +1311,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_67
+              - !Parameter &ref_54
                 schema: *ref_22
                 implementation: Method
                 required: true
@@ -1776,7 +1324,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_53
+                schema: *ref_40
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1789,7 +1337,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_67
+              - *ref_54
             language: !Languages 
               default:
                 name: ''
@@ -1803,8 +1351,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_68
-          - *ref_69
+          - *ref_55
+          - *ref_56
         responses:
           - !SchemaResponse 
             schema: *ref_22
@@ -1837,8 +1385,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_49
-          - !Parameter &ref_71
+          - *ref_36
+          - !Parameter &ref_58
             schema: *ref_1
             implementation: Method
             required: true
@@ -1850,7 +1398,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_72
+          - !Parameter &ref_59
             schema: *ref_1
             implementation: Method
             required: true
@@ -1862,13 +1410,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_50
-          - *ref_51
+          - *ref_37
+          - *ref_38
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_52
+                schema: *ref_39
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1880,7 +1428,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_70
+              - !Parameter &ref_57
                 schema: *ref_29
                 implementation: Method
                 required: true
@@ -1893,7 +1441,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_53
+                schema: *ref_40
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1906,7 +1454,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_70
+              - *ref_57
             language: !Languages 
               default:
                 name: ''
@@ -1920,8 +1468,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_71
-          - *ref_72
+          - *ref_58
+          - *ref_59
         responses:
           - !SchemaResponse 
             schema: *ref_29
@@ -1946,8 +1494,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_49
-          - !Parameter &ref_73
+          - *ref_36
+          - !Parameter &ref_60
             schema: *ref_1
             implementation: Method
             required: true
@@ -1959,7 +1507,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_74
+          - !Parameter &ref_61
             schema: *ref_1
             implementation: Method
             required: true
@@ -1971,13 +1519,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_50
-          - *ref_51
+          - *ref_37
+          - *ref_38
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_53
+                schema: *ref_40
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2000,8 +1548,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_73
-          - *ref_74
+          - *ref_60
+          - *ref_61
         responses:
           - !SchemaResponse 
             schema: *ref_29
@@ -2024,794 +1572,6 @@ operationGroups:
     language: !Languages 
       default:
         name: ExactMatchModel5S
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: AzureResourceFlattenModel1s
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_49
-          - !Parameter &ref_77
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: ''
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_78
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: name
-                description: ''
-                serializedName: name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_50
-          - *ref_51
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_52
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_76
-                schema: *ref_75
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_53
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_76
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1/{name}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_77
-          - *ref_78
-        responses:
-          - !SchemaResponse 
-            schema: *ref_75
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Put
-            description: ''
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_49
-          - !Parameter &ref_79
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_80
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: name
-                description: ''
-                serializedName: name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_50
-          - *ref_51
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_53
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel1/{name}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_79
-          - *ref_80
-        responses:
-          - !SchemaResponse 
-            schema: *ref_75
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: ''
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: AzureResourceFlattenModel1S
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: AzureResourceFlattenModel2s
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_49
-          - !Parameter &ref_83
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: ''
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_84
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: name
-                description: ''
-                serializedName: name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_50
-          - *ref_51
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_52
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_82
-                schema: *ref_81
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_53
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_82
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2/{name}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_83
-          - *ref_84
-        responses:
-          - !SchemaResponse 
-            schema: *ref_81
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Put
-            description: ''
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_49
-          - !Parameter &ref_85
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_86
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: name
-                description: ''
-                serializedName: name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_50
-          - *ref_51
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_53
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel2/{name}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_85
-          - *ref_86
-        responses:
-          - !SchemaResponse 
-            schema: *ref_81
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: ''
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: AzureResourceFlattenModel2S
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: AzureResourceFlattenModel3s
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_49
-          - !Parameter &ref_89
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: ''
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_90
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: name
-                description: ''
-                serializedName: name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_50
-          - *ref_51
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_52
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_88
-                schema: *ref_87
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_53
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_88
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3/{name}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_89
-          - *ref_90
-        responses:
-          - !SchemaResponse 
-            schema: *ref_87
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Put
-            description: ''
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_49
-          - !Parameter &ref_91
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_92
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: name
-                description: ''
-                serializedName: name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_50
-          - *ref_51
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_53
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel3/{name}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_91
-          - *ref_92
-        responses:
-          - !SchemaResponse 
-            schema: *ref_87
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: ''
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: AzureResourceFlattenModel3S
-        description: ''
-    protocol: !Protocols {}
-  - !OperationGroup 
-    $key: AzureResourceFlattenModel4s
-    operations:
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_49
-          - !Parameter &ref_95
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: ''
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_96
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: name
-                description: ''
-                serializedName: name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_50
-          - *ref_51
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_52
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_94
-                schema: *ref_93
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: ''
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_53
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_94
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4/{name}
-                method: put
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_95
-          - *ref_96
-        responses:
-          - !SchemaResponse 
-            schema: *ref_93
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Put
-            description: ''
-        protocol: !Protocols {}
-      - !Operation 
-        apiVersions:
-          - !ApiVersion 
-            version: '2020-06-01'
-        parameters:
-          - *ref_49
-          - !Parameter &ref_97
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: resourceGroupName
-                description: The name of the resource group.
-                serializedName: resourceGroupName
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - !Parameter &ref_98
-            schema: *ref_1
-            implementation: Method
-            required: true
-            language: !Languages 
-              default:
-                name: name
-                description: ''
-                serializedName: name
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: path
-          - *ref_50
-          - *ref_51
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_53
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/azureResourceFlattenModel4/{name}
-                method: get
-                uri: '{$host}'
-        signatureParameters:
-          - *ref_97
-          - *ref_98
-        responses:
-          - !SchemaResponse 
-            schema: *ref_93
-            language: !Languages 
-              default:
-                name: ''
-                description: OK
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: Get
-            description: ''
-        protocol: !Protocols {}
-    language: !Languages 
-      default:
-        name: AzureResourceFlattenModel4S
         description: ''
     protocol: !Protocols {}
 security: !Security 
