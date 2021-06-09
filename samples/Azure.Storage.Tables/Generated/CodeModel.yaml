@@ -1086,19 +1086,19 @@ schemas: !Schemas
   dictionaries:
     - !DictionarySchema &ref_20
       type: dictionary
-      elementType: !AnyObjectSchema &ref_1
-        type: any-object
+      elementType: !AnySchema &ref_1
+        type: any
         language: !Languages 
           default:
-            name: AnyObject
-            description: Any object
+            name: any
+            description: Anything
         protocol: !Protocols {}
       language: !Languages 
         default:
           name: TableEntityProperties
           description: The other properties of the table entity
       protocol: !Protocols {}
-  anyObjects:
+  any:
     - *ref_1
   dateTimes:
     - !DateTimeSchema &ref_64

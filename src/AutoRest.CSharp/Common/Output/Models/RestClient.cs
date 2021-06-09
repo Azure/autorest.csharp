@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Output.Models
             return requestMethods;
         }
 
-        protected virtual Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()
+        protected Dictionary<ServiceRequest, RestClientMethod> EnsureGetNextPageMethods()
         {
             var nextPageMethods = new Dictionary<ServiceRequest, RestClientMethod>();
             foreach (var operation in OperationGroup.Operations)
@@ -177,13 +177,13 @@ namespace AutoRest.CSharp.Output.Models
                 operation);
         }
 
-        public virtual RestClientMethod? GetNextOperationMethod(ServiceRequest request)
+        public RestClientMethod? GetNextOperationMethod(ServiceRequest request)
         {
             _nextPageMethods.TryGetValue(request, out RestClientMethod? value);
             return value;
         }
 
-        public virtual RestClientMethod GetOperationMethod(ServiceRequest request)
+        public RestClientMethod GetOperationMethod(ServiceRequest request)
         {
             return _requestMethods[request];
         }
