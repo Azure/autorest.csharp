@@ -607,16 +607,16 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(5, goblin.Jawsize);
             Assert.AreEqual("pinkish-gray", goblin.Color.ToString());
 
-            Assert.AreEqual(1, value["additionalProperty1"]);
-            Assert.AreEqual(false, value["additionalProperty2"]);
-            Assert.AreEqual("hello", value["additionalProperty3"]);
+            Assert.AreEqual(1, value.AdditionalProperties["additionalProperty1"]);
+            Assert.AreEqual(false, value.AdditionalProperties["additionalProperty2"]);
+            Assert.AreEqual("hello", value.AdditionalProperties["additionalProperty3"]);
             Assert.AreEqual(new Dictionary<string, object>()
             {
                 {"a", 1},
                 {"b", 2 }
-            }, value["additionalProperty4"]);
+            }, value.AdditionalProperties["additionalProperty4"]);
 
-            Assert.AreEqual(new object[] { 1, 3 }, value["additionalProperty5"]);
+            Assert.AreEqual(new object[] { 1, 3 }, value.AdditionalProperties["additionalProperty5"]);
         });
 
         [Test]
@@ -649,11 +649,11 @@ namespace AutoRest.TestServer.Tests
                     }
                 }
             };
-            value["additionalProperty1"] = 1;
-            value["additionalProperty2"] = false;
-            value["additionalProperty3"] = "hello";
-            value["additionalProperty4"] = new Dictionary<string, object>() {{"a", 1}, {"b", 2}};
-            value["additionalProperty5"] = new object[] {1, 3};
+            value.AdditionalProperties["additionalProperty1"] = 1;
+            value.AdditionalProperties["additionalProperty2"] = false;
+            value.AdditionalProperties["additionalProperty3"] = "hello";
+            value.AdditionalProperties["additionalProperty4"] = new Dictionary<string, object>() {{"a", 1}, {"b", 2}};
+            value.AdditionalProperties["additionalProperty5"] = new object[] {1, 3};
 
             return await new PolymorphismClient(ClientDiagnostics, pipeline, host).PutComplicatedAsync( value);
         });

@@ -5,14 +5,13 @@
 
 #nullable disable
 
-using System.Collections;
 using System.Collections.Generic;
 using Azure.Core;
 
 namespace AdditionalPropertiesEx.Models
 {
     /// <summary> The InputAdditionalPropertiesModel. </summary>
-    public partial class InputAdditionalPropertiesModel : IDictionary<string, object>
+    public partial class InputAdditionalPropertiesModel
     {
         /// <summary> Initializes a new instance of InputAdditionalPropertiesModel. </summary>
         /// <param name="id"> . </param>
@@ -23,42 +22,6 @@ namespace AdditionalPropertiesEx.Models
         }
 
         public int Id { get; }
-        internal IDictionary<string, object> AdditionalProperties { get; }
-        /// <inheritdoc />
-        public IEnumerator<KeyValuePair<string, object>> GetEnumerator() => AdditionalProperties.GetEnumerator();
-        /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator() => AdditionalProperties.GetEnumerator();
-        /// <inheritdoc />
-        public bool TryGetValue(string key, out object value) => AdditionalProperties.TryGetValue(key, out value);
-        /// <inheritdoc />
-        public bool ContainsKey(string key) => AdditionalProperties.ContainsKey(key);
-        /// <inheritdoc />
-        public ICollection<string> Keys => AdditionalProperties.Keys;
-        /// <inheritdoc />
-        public ICollection<object> Values => AdditionalProperties.Values;
-        /// <inheritdoc cref="ICollection{T}.Count"/>
-        int ICollection<KeyValuePair<string, object>>.Count => AdditionalProperties.Count;
-        /// <inheritdoc />
-        public void Add(string key, object value) => AdditionalProperties.Add(key, value);
-        /// <inheritdoc />
-        public bool Remove(string key) => AdditionalProperties.Remove(key);
-        /// <inheritdoc cref="ICollection{T}.IsReadOnly"/>
-        bool ICollection<KeyValuePair<string, object>>.IsReadOnly => AdditionalProperties.IsReadOnly;
-        /// <inheritdoc cref="ICollection{T}.Add"/>
-        void ICollection<KeyValuePair<string, object>>.Add(KeyValuePair<string, object> value) => AdditionalProperties.Add(value);
-        /// <inheritdoc cref="ICollection{T}.Remove"/>
-        bool ICollection<KeyValuePair<string, object>>.Remove(KeyValuePair<string, object> value) => AdditionalProperties.Remove(value);
-        /// <inheritdoc cref="ICollection{T}.Contains"/>
-        bool ICollection<KeyValuePair<string, object>>.Contains(KeyValuePair<string, object> value) => AdditionalProperties.Contains(value);
-        /// <inheritdoc cref="ICollection{T}.CopyTo"/>
-        void ICollection<KeyValuePair<string, object>>.CopyTo(KeyValuePair<string, object>[] destination, int offset) => AdditionalProperties.CopyTo(destination, offset);
-        /// <inheritdoc cref="ICollection{T}.Clear"/>
-        void ICollection<KeyValuePair<string, object>>.Clear() => AdditionalProperties.Clear();
-        /// <inheritdoc />
-        public object this[string key]
-        {
-            get => AdditionalProperties[key];
-            set => AdditionalProperties[key] = value;
-        }
+        public IDictionary<string, object> AdditionalProperties { get; }
     }
 }
