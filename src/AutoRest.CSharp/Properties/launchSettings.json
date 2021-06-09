@@ -160,6 +160,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl-paging\\Generated"
     },
+    "ExactMatchFlattenInheritance": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExactMatchFlattenInheritance\\Generated"
+    },
     "ExactMatchInheritance": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ExactMatchInheritance\\Generated"
