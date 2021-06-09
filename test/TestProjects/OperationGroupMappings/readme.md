@@ -16,7 +16,6 @@ operation-group-to-resource-type:
 operation-group-to-resource:
    Operations: RestApi
    AvailabilitySets: AvailabilitySet
-   Usage: NonResource
 operation-group-to-parent:
    Usage: subscriptions
 directive:

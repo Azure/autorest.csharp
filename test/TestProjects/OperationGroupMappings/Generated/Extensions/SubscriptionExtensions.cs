@@ -24,13 +24,36 @@ namespace OperationGroupMappings
             return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
+        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for which resource usage is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static AsyncPageable<Usage> ListUsageAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetUsageRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var result = ListUsageAsync(clientDiagnostics, restOperations, location, cancellationToken);
+                return result;
+            }
+            );
+        }
+
         /// <summary> Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static AsyncPageable<Usage> ListAsync(ClientDiagnostics clientDiagnostics, UsageRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static AsyncPageable<Usage> ListUsageAsync(ClientDiagnostics clientDiagnostics, UsageRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -70,13 +93,36 @@ namespace OperationGroupMappings
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for which resource usage is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static Pageable<Usage> ListUsage(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetUsageRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var result = ListUsage(clientDiagnostics, restOperations, location, cancellationToken);
+                return result;
+            }
+            );
+        }
+
         /// <summary> Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static Pageable<Usage> List(ClientDiagnostics clientDiagnostics, UsageRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static Pageable<Usage> ListUsage(ClientDiagnostics clientDiagnostics, UsageRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {

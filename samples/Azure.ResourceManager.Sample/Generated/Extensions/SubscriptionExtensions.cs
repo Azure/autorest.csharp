@@ -27,15 +27,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
+                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations, expand, cancellationToken);
                 return new PhWrappingAsyncPageable<AvailabilitySetData, AvailabilitySet>(
                 result,
                 s => new AvailabilitySet(subscription, s));
@@ -85,15 +86,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscription(clientDiagnostics, restOperations);
+                var result = ListBySubscription(clientDiagnostics, restOperations, expand, cancellationToken);
                 return new PhWrappingPageable<AvailabilitySetData, AvailabilitySet>(
                 result,
                 s => new AvailabilitySet(subscription, s));
@@ -184,7 +186,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
+                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations, cancellationToken);
                 return new PhWrappingAsyncPageable<ProximityPlacementGroupData, ProximityPlacementGroup>(
                 result,
                 s => new ProximityPlacementGroup(subscription, s));
@@ -241,7 +243,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscription(clientDiagnostics, restOperations);
+                var result = ListBySubscription(clientDiagnostics, restOperations, cancellationToken);
                 return new PhWrappingPageable<ProximityPlacementGroupData, ProximityPlacementGroup>(
                 result,
                 s => new ProximityPlacementGroup(subscription, s));
@@ -331,7 +333,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
+                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations, cancellationToken);
                 return new PhWrappingAsyncPageable<DedicatedHostGroupData, DedicatedHostGroup>(
                 result,
                 s => new DedicatedHostGroup(subscription, s));
@@ -388,7 +390,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscription(clientDiagnostics, restOperations);
+                var result = ListBySubscription(clientDiagnostics, restOperations, cancellationToken);
                 return new PhWrappingPageable<DedicatedHostGroupData, DedicatedHostGroup>(
                 result,
                 s => new DedicatedHostGroup(subscription, s));
@@ -478,7 +480,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
+                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations, cancellationToken);
                 return new PhWrappingAsyncPageable<SshPublicKeyData, SshPublicKey>(
                 result,
                 s => new SshPublicKey(subscription, s));
@@ -535,7 +537,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscription(clientDiagnostics, restOperations);
+                var result = ListBySubscription(clientDiagnostics, restOperations, cancellationToken);
                 return new PhWrappingPageable<SshPublicKeyData, SshPublicKey>(
                 result,
                 s => new SshPublicKey(subscription, s));
@@ -617,15 +619,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists the VirtualMachines for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static AsyncPageable<VirtualMachine> ListVirtualMachineAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<VirtualMachine> ListVirtualMachineAsync(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListAllAsync(clientDiagnostics, restOperations);
+                var result = ListAllAsync(clientDiagnostics, restOperations, statusOnly, cancellationToken);
                 return new PhWrappingAsyncPageable<VirtualMachineData, VirtualMachine>(
                 result,
                 s => new VirtualMachine(subscription, s));
@@ -675,15 +678,16 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists the VirtualMachines for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static Pageable<VirtualMachine> ListVirtualMachine(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Pageable<VirtualMachine> ListVirtualMachine(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListAll(clientDiagnostics, restOperations);
+                var result = ListAll(clientDiagnostics, restOperations, statusOnly, cancellationToken);
                 return new PhWrappingPageable<VirtualMachineData, VirtualMachine>(
                 result,
                 s => new VirtualMachine(subscription, s));
@@ -774,7 +778,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListAllAsync(clientDiagnostics, restOperations);
+                var result = ListAllAsync(clientDiagnostics, restOperations, cancellationToken);
                 return new PhWrappingAsyncPageable<VirtualMachineScaleSetData, VirtualMachineScaleSet>(
                 result,
                 s => new VirtualMachineScaleSet(subscription, s));
@@ -831,7 +835,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListAll(clientDiagnostics, restOperations);
+                var result = ListAll(clientDiagnostics, restOperations, cancellationToken);
                 return new PhWrappingPageable<VirtualMachineScaleSetData, VirtualMachineScaleSet>(
                 result,
                 s => new VirtualMachineScaleSet(subscription, s));
@@ -911,13 +915,36 @@ namespace Azure.ResourceManager.Sample
             return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
+        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for which resource usage is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static AsyncPageable<Usage> ListUsageAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetUsageRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var result = ListUsageAsync(clientDiagnostics, restOperations, location, cancellationToken);
+                return result;
+            }
+            );
+        }
+
         /// <summary> Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static AsyncPageable<Usage> ListAsync(ClientDiagnostics clientDiagnostics, UsageRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static AsyncPageable<Usage> ListUsageAsync(ClientDiagnostics clientDiagnostics, UsageRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -957,13 +984,36 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
+        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for which resource usage is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static Pageable<Usage> ListUsage(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetUsageRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var result = ListUsage(clientDiagnostics, restOperations, location, cancellationToken);
+                return result;
+            }
+            );
+        }
+
         /// <summary> Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static Pageable<Usage> List(ClientDiagnostics clientDiagnostics, UsageRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static Pageable<Usage> ListUsage(ClientDiagnostics clientDiagnostics, UsageRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1010,13 +1060,36 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachineSizesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
+        /// <summary> Lists the VirtualMachineSizes for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static AsyncPageable<VirtualMachineSize> ListVirtualMachineSizeAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineSizesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var result = ListVirtualMachineSizesAsync(clientDiagnostics, restOperations, location, cancellationToken);
+                return result;
+            }
+            );
+        }
+
         /// <summary> This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list). </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static AsyncPageable<VirtualMachineSize> ListAsync(ClientDiagnostics clientDiagnostics, VirtualMachineSizesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static AsyncPageable<VirtualMachineSize> ListVirtualMachineSizesAsync(ClientDiagnostics clientDiagnostics, VirtualMachineSizesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1041,13 +1114,36 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
+        /// <summary> Lists the VirtualMachineSizes for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static Pageable<VirtualMachineSize> ListVirtualMachineSize(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineSizesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var result = ListVirtualMachineSizes(clientDiagnostics, restOperations, location, cancellationToken);
+                return result;
+            }
+            );
+        }
+
         /// <summary> This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list). </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static Pageable<VirtualMachineSize> List(ClientDiagnostics clientDiagnostics, VirtualMachineSizesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static Pageable<VirtualMachineSize> ListVirtualMachineSizes(ClientDiagnostics clientDiagnostics, VirtualMachineSizesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {

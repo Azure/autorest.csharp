@@ -37,15 +37,16 @@ namespace SubscriptionExtensions
 
         /// <summary> Lists the Ovens for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static AsyncPageable<Oven> ListOvenAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Oven> ListOvenAsync(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListAllAsync(clientDiagnostics, restOperations);
+                var result = ListAllAsync(clientDiagnostics, restOperations, statusOnly, cancellationToken);
                 return new PhWrappingAsyncPageable<OvenData, Oven>(
                 result,
                 s => new Oven(subscription, s));
@@ -95,15 +96,16 @@ namespace SubscriptionExtensions
 
         /// <summary> Lists the Ovens for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static Pageable<Oven> ListOven(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Pageable<Oven> ListOven(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListAll(clientDiagnostics, restOperations);
+                var result = ListAll(clientDiagnostics, restOperations, statusOnly, cancellationToken);
                 return new PhWrappingPageable<OvenData, Oven>(
                 result,
                 s => new Oven(subscription, s));

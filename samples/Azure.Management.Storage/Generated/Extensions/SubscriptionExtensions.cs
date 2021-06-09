@@ -25,11 +25,27 @@ namespace Azure.Management.Storage
             return new SkusRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
+        /// <summary> Lists the SkuInformations for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        public static AsyncPageable<SkuInformation> ListSkuInformationAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        {
+            return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var result = ListSkusAsync(clientDiagnostics, restOperations, cancellationToken);
+                return result;
+            }
+            );
+        }
+
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<SkuInformation> ListAsync(ClientDiagnostics clientDiagnostics, SkusRestOperations restOperations, CancellationToken cancellationToken = default)
+        private static AsyncPageable<SkuInformation> ListSkusAsync(ClientDiagnostics clientDiagnostics, SkusRestOperations restOperations, CancellationToken cancellationToken = default)
         {
             async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
             {
@@ -49,11 +65,27 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
+        /// <summary> Lists the SkuInformations for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        public static Pageable<SkuInformation> ListSkuInformation(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        {
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var result = ListSkus(clientDiagnostics, restOperations, cancellationToken);
+                return result;
+            }
+            );
+        }
+
         /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<SkuInformation> List(ClientDiagnostics clientDiagnostics, SkusRestOperations restOperations, CancellationToken cancellationToken = default)
+        private static Pageable<SkuInformation> ListSkus(ClientDiagnostics clientDiagnostics, SkusRestOperations restOperations, CancellationToken cancellationToken = default)
         {
             Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
             {
@@ -80,13 +112,36 @@ namespace Azure.Management.Storage
             return new UsagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
+        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the Azure Storage resource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static AsyncPageable<Usage> ListUsageAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var result = ListByLocationUsagesAsync(clientDiagnostics, restOperations, location, cancellationToken);
+                return result;
+            }
+            );
+        }
+
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static AsyncPageable<Usage> ListByLocationAsync(ClientDiagnostics clientDiagnostics, UsagesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static AsyncPageable<Usage> ListByLocationUsagesAsync(ClientDiagnostics clientDiagnostics, UsagesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -111,13 +166,36 @@ namespace Azure.Management.Storage
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
+        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location of the Azure Storage resource. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static Pageable<Usage> ListUsage(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.ListResources((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                var result = ListByLocationUsages(clientDiagnostics, restOperations, location, cancellationToken);
+                return result;
+            }
+            );
+        }
+
         /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static Pageable<Usage> ListByLocation(ClientDiagnostics clientDiagnostics, UsagesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static Pageable<Usage> ListByLocationUsages(ClientDiagnostics clientDiagnostics, UsagesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {

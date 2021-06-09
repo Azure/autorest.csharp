@@ -27,15 +27,16 @@ namespace MgmtParent
 
         /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
+                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations, expand, cancellationToken);
                 return new PhWrappingAsyncPageable<AvailabilitySetData, AvailabilitySet>(
                 result,
                 s => new AvailabilitySet(subscription, s));
@@ -85,15 +86,16 @@ namespace MgmtParent
 
         /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.ListResources((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscription(clientDiagnostics, restOperations);
+                var result = ListBySubscription(clientDiagnostics, restOperations, expand, cancellationToken);
                 return new PhWrappingPageable<AvailabilitySetData, AvailabilitySet>(
                 result,
                 s => new AvailabilitySet(subscription, s));
