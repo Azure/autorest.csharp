@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using AutoRest.CSharp.Common.Generation.Writers;
@@ -94,10 +95,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            //WriteListMethod(writer, mgmtExtensionOperation.Type, mgmtExtensionOperation.RestClient, pagingMethod, true);
+                            WriteListMethod(writer, mgmtExtensionOperation.Type, mgmtExtensionOperation.RestClient, pagingMethod, true, false);
                             WritePagingOperation(writer, pagingMethod, mgmtExtensionOperation.RestClient, true);
 
-                            //WriteListMethod(writer, mgmtExtensionOperation.Type, mgmtExtensionOperation.RestClient, pagingMethod, false);
+                            WriteListMethod(writer, mgmtExtensionOperation.Type, mgmtExtensionOperation.RestClient, pagingMethod, false, false);
                             WritePagingOperation(writer, pagingMethod, mgmtExtensionOperation.RestClient, false);
                         }
 
@@ -183,17 +184,37 @@ namespace AutoRest.CSharp.Generation.Writers
             WritePagingOperationDefinition(writer, pagingMethod, async, "restOperations", "clientDiagnostics");
         }
 
-        private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, bool async)
+        private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, bool async, bool isResource = true)
         {
             writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name}s for this {typeof(SubscriptionOperations)}.");
             writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
+
+            var parameters = pagingMethod.Method.Parameters;
+            foreach (var parameter in parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             writer.WriteXmlDocumentation("return", $"A collection of resource operations that may take multiple service requests to iterate over.");
+            writer.WriteXmlDocumentationRequiredParametersException(parameters);
 
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
             var methodName = $"List{pageType.Name}";
-            using (writer.Scope($"public static {responseType} {CreateMethodName(methodName, async)}(this {typeof(SubscriptionOperations)} subscription, {typeof(CancellationToken)} cancellationToken = default)"))
+
+            writer.Append($"public static {responseType} {CreateMethodName(methodName, async)}(this {typeof(SubscriptionOperations)} subscription, ");
+
+            foreach (var parameter in parameters)
             {
+                writer.WriteParameter(parameter);
+            }
+
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            using (writer.Scope())
+            {
+                writer.WriteParameterNullChecks(parameters);
+
                 writer.Append($"return subscription.{CreateMethodName("ListResources", async)}((baseUri, credential, options, pipeline) =>");
                 using (writer.Scope())
                 {
@@ -204,14 +225,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"var {clientDiagnostics:D} = new {typeof(ClientDiagnostics)}(options);");
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
                     writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);");
-                    writer.Line($"var {result:D} = {CreateMethodName(pagingMethod.Name, async)}({clientDiagnostics}, {restOperations});");
+                    writer.Line($"var {result:D} = {CreateMethodName(pagingMethod.Name, async)}({clientDiagnostics}, {restOperations}, {string.Join(", ", parameters.Select(p => p.Name))}, cancellationToken);");
 
-                    CSharpType[] arguments = { pagingMethod.PagingResponse.ItemType, pageType };
-                    // TODO: make the following configurable according it is resource or not resource
-                    CSharpType returnType = async ? new CSharpType(typeof(PhWrappingAsyncPageable<,>), arguments) : new CSharpType(typeof(PhWrappingPageable<,>), arguments);
-                    writer.Line($"return new {returnType}(");
-                    writer.Line($"{result},");
-                    writer.Line($"s => new {pageType}(subscription, s));");
+                    if (isResource)
+                    {
+                        CSharpType[] arguments = { pagingMethod.PagingResponse.ItemType, pageType };
+                        // TODO: make the following configurable according it is resource or not resource
+                        CSharpType returnType = async ? new CSharpType(typeof(PhWrappingAsyncPageable<,>), arguments) : new CSharpType(typeof(PhWrappingPageable<,>), arguments);
+                        writer.Line($"return new {returnType}(");
+                        writer.Line($"{result},");
+                        writer.Line($"s => new {pageType}(subscription, s));");
+                    } else
+                    {
+                        writer.Line($"return {result};");
+                    }
                 }
                 writer.Append($");");
             }
