@@ -95,10 +95,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            WriteListMethod(writer, mgmtExtensionOperation.Type, mgmtExtensionOperation.RestClient, pagingMethod, true, false);
+                            WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, true, false);
                             WritePagingOperation(writer, pagingMethod, mgmtExtensionOperation.RestClient, true);
 
-                            WriteListMethod(writer, mgmtExtensionOperation.Type, mgmtExtensionOperation.RestClient, pagingMethod, false, false);
+                            WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, false, false);
                             WritePagingOperation(writer, pagingMethod, mgmtExtensionOperation.RestClient, false);
                         }
 
@@ -225,7 +225,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"var {clientDiagnostics:D} = new {typeof(ClientDiagnostics)}(options);");
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
                     writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);");
-                    writer.Line($"var {result:D} = {CreateMethodName(pagingMethod.Name, async)}({clientDiagnostics}, {restOperations}, {string.Join(", ", parameters.Select(p => p.Name))}, cancellationToken);");
+                    writer.Line($"var {result:D} = {CreateMethodName(pagingMethod.Name, async)}({clientDiagnostics}, {restOperations}, {string.Join("", parameters.Select(p => $"{p.Name}, "))}cancellationToken);");
 
                     if (isResource)
                     {

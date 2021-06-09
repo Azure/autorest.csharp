@@ -30,9 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
             OperationGroup = operationGroup;
 
-            // TODO -- this is only a temporary solution, when an operation was added here, it usually does not belong to any "Resource"
-            // We will need a way to identify the name of this
-            DefaultName = operationGroup.Resource(context.Configuration.MgmtConfiguration);
+            DefaultName = operationGroup.Key;
         }
 
         protected override string DefaultName { get; }
