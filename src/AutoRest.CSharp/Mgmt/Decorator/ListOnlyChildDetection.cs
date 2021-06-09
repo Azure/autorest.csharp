@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
@@ -21,6 +22,13 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <returns></returns>
         public static bool IsListOnlyChildResource(this OperationGroup operationGroup, MgmtConfiguration config)
         {
+            return TryGetListInstanceSchema(operationGroup, out var _);
+        }
+
+        public static bool TryGetListInstanceSchema(this OperationGroup operationGroup, [MaybeNullWhen(false)] out Schema schema)
+        {
+            schema = null;
+
             // if operation count is not 1, does not meet the ListOnlyChild criteria. Return false
             if (operationGroup.Operations.Count != 1)
             {
@@ -29,21 +37,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             var operation = operationGroup.Operations.First();
 
-            // Check to see if the only operation is GET && return result is array type
             if (!operation.IsLongRunning
                 && operation.Requests.FirstOrDefault()?.Protocol.Http is HttpRequest httpRequest
                 && httpRequest.Method == HttpMethod.Get)
             {
                 // Check 200 return schema
-                var successResponse = operation.Responses
-                    .FirstOrDefault(r => r.HttpResponse.StatusCodes.Contains(StatusCodes._200));
-                ObjectSchema? schema = successResponse?.ResponseSchema as ObjectSchema;
+                var successResponse = operation.Responses.FirstOrDefault(r => r.HttpResponse.StatusCodes.Contains(StatusCodes._200));
+                var responseSchema = successResponse?.ResponseSchema as ObjectSchema;
 
                 // TODO -- change p.SerializedName == ArrayValuePropertyName so that we could check the list only operations by x-ms-client-name
-                if (schema != null && schema.Properties.Any(p => p.Schema is ArraySchema && p.SerializedName == ArrayValuePropertyName))
-                {
-                    return true;
-                }
+                var arraySchema = responseSchema?.Properties
+                    ?.FirstOrDefault(p => p.Schema is ArraySchema && p.SerializedName == ArrayValuePropertyName)?.Schema as ArraySchema;
+
+                schema = arraySchema?.ElementType;
+                return schema != null;
             }
 
             return false;

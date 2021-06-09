@@ -30,7 +30,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
             OperationGroup = operationGroup;
 
-            DefaultName = operationGroup.Key;
+            if (operationGroup.TryGetListInstanceSchema(out var schema))
+                DefaultName = schema.Name;
+            else
+                DefaultName = operationGroup.Key;
         }
 
         protected override string DefaultName { get; }
