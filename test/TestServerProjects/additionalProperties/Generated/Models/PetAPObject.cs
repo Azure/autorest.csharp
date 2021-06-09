@@ -25,7 +25,7 @@ namespace additionalProperties.Models
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         internal PetAPObject(int id, string name, bool? status, IDictionary<string, object> additionalProperties)
         {
             Id = id;
@@ -37,6 +37,7 @@ namespace additionalProperties.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public bool? Status { get; }
+        /// <summary> Additional Properties. </summary>
         public IDictionary<string, object> AdditionalProperties { get; }
     }
 }

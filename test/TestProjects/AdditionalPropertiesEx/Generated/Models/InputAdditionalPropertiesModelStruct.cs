@@ -15,7 +15,7 @@ namespace AdditionalPropertiesEx.Models
     {
         /// <summary> Initializes a new instance of InputAdditionalPropertiesModelStruct. </summary>
         /// <param name="id"> . </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>
         public InputAdditionalPropertiesModelStruct(int id, IDictionary<string, object> additionalProperties)
         {
@@ -29,6 +29,7 @@ namespace AdditionalPropertiesEx.Models
         }
 
         public int Id { get; }
+        /// <summary> Additional Properties. </summary>
         public IDictionary<string, object> AdditionalProperties { get; }
     }
 }

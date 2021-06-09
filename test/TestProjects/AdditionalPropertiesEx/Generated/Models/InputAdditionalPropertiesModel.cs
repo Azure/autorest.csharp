@@ -22,6 +22,7 @@ namespace AdditionalPropertiesEx.Models
         }
 
         public int Id { get; }
+        /// <summary> Additional Properties. </summary>
         public IDictionary<string, object> AdditionalProperties { get; }
     }
 }

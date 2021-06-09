@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", memberMapping?.ExistingMember, _typeFactory),
-                    string.Empty,
+                    "Additional Properties",
                     true,
                     null
                     );

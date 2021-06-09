@@ -21,7 +21,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of FacetResult. </summary>
         /// <param name="count"> The approximate count of documents falling within the bucket described by this facet. </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         internal FacetResult(long? count, IReadOnlyDictionary<string, object> additionalProperties)
         {
             Count = count;
@@ -30,6 +30,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> The approximate count of documents falling within the bucket described by this facet. </summary>
         public long? Count { get; }
+        /// <summary> Additional Properties. </summary>
         public IReadOnlyDictionary<string, object> AdditionalProperties { get; }
     }
 }

@@ -30,7 +30,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> Initializes a new instance of SuggestResult. </summary>
         /// <param name="text"> The text of the suggestion result. </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         internal SuggestResult(string text, IReadOnlyDictionary<string, object> additionalProperties)
         {
             Text = text;
@@ -39,6 +39,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> The text of the suggestion result. </summary>
         public string Text { get; }
+        /// <summary> Additional Properties. </summary>
         public IReadOnlyDictionary<string, object> AdditionalProperties { get; }
     }
 }

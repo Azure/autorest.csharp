@@ -29,7 +29,7 @@ namespace body_complex.Models
         /// <param name="location"> . </param>
         /// <param name="iswild"> . </param>
         /// <param name="collegeDegree"> . </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         internal SmartSalmon(string fishtype, string species, float length, IList<Fish> siblings, string location, bool? iswild, string collegeDegree, IDictionary<string, object> additionalProperties) : base(fishtype, species, length, siblings, location, iswild)
         {
             CollegeDegree = collegeDegree;
@@ -38,6 +38,7 @@ namespace body_complex.Models
         }
 
         public string CollegeDegree { get; set; }
+        /// <summary> Additional Properties. </summary>
         public IDictionary<string, object> AdditionalProperties { get; }
     }
 }
