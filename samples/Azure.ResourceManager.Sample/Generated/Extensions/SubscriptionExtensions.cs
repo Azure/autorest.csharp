@@ -904,5 +904,174 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContext(subscription, filters, top, cancellationToken);
         }
         #endregion
+
+        #region Usage
+        private static UsageRestOperations GetUsageRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        /// <summary> Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="restOperations"> Resource client operations. </param>
+        /// <param name="location"> The location for which resource usage is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        private static AsyncPageable<Usage> ListAsync(ClientDiagnostics clientDiagnostics, UsageRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.ListAsync(location, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.ListNextPageAsync(nextLink, location, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        /// <summary> Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription. </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="restOperations"> Resource client operations. </param>
+        /// <param name="location"> The location for which resource usage is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        private static Pageable<Usage> List(ClientDiagnostics clientDiagnostics, UsageRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            Page<Usage> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.List(location, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
+            {
+                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.ListNextPage(nextLink, location, cancellationToken);
+                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+        }
+
+        #endregion
+        #region VirtualMachineSizes
+        private static VirtualMachineSizesRestOperations GetVirtualMachineSizesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new VirtualMachineSizesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        /// <summary> This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list). </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="restOperations"> Resource client operations. </param>
+        /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        private static AsyncPageable<VirtualMachineSize> ListAsync(ClientDiagnostics clientDiagnostics, VirtualMachineSizesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            async Task<Page<VirtualMachineSize>> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = clientDiagnostics.CreateScope("VirtualMachineSizes.List");
+                scope.Start();
+                try
+                {
+                    var response = await restOperations.ListAsync(location, cancellationToken).ConfigureAwait(false);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+        }
+
+        /// <summary> This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/en-us/rest/api/compute/resourceskus/list). </summary>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="restOperations"> Resource client operations. </param>
+        /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        private static Pageable<VirtualMachineSize> List(ClientDiagnostics clientDiagnostics, VirtualMachineSizesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            Page<VirtualMachineSize> FirstPageFunc(int? pageSizeHint)
+            {
+                using var scope = clientDiagnostics.CreateScope("VirtualMachineSizes.List");
+                scope.Start();
+                try
+                {
+                    var response = restOperations.List(location, cancellationToken);
+                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+        }
+
+        #endregion
     }
 }

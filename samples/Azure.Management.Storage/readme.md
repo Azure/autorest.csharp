@@ -16,21 +16,21 @@ modelerfour:
   lenient-model-deduplication: true
 
 operation-group-to-resource-type:
-   Operations: Microsoft.Storage/operations
-   Skus: Microsoft.Storage/skus
-   Usages: Microsoft.Storage/locations/usages
-   PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
+  Operations: Microsoft.Storage/operations
+  Skus: Microsoft.Storage/skus
+  Usages: Microsoft.Storage/locations/usages
+  PrivateLinkResources: Microsoft.Storage/storageAccounts/privateLinkResources
 operation-group-to-resource:
-   Operations: NonResource
-   Skus: NonResource
-   Usages: NonResource
-   PrivateLinkResources: NonResource
-   StorageAccounts: StorageAccount
+  Operations: NonResource
+  StorageAccounts: StorageAccount
 operation-group-to-parent:
-    BlobContainers: Microsoft.Storage/storageAccounts
-    FileShares: Microsoft.Storage/storageAccounts
-    Usages: subscriptions
-    StorageAccounts: resourceGroups
+  Operations: tenant
+  Skus: subscriptions
+  BlobContainers: Microsoft.Storage/storageAccounts
+  FileShares: Microsoft.Storage/storageAccounts
+  Usages: subscriptions
+  StorageAccounts: resourceGroups
+  PrivateLinkResources: StorageAccounts
 directive:
   - rename-model:
       from: Operation

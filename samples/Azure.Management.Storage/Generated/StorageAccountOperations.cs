@@ -21,6 +21,7 @@ namespace Azure.Management.Storage
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         internal StorageAccountsRestOperations RestClient { get; }
+        internal PrivateLinkResourcesRestOperations PrivateLinkResourcesRestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class for mocking. </summary>
         protected StorageAccountOperations()
@@ -34,6 +35,7 @@ namespace Azure.Management.Storage
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             RestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            PrivateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
@@ -758,6 +760,40 @@ namespace Azure.Management.Storage
             }
         }
 
+        /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<PrivateLinkResourceListResult>> ListPrivateLinkResourcesAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListPrivateLinkResources");
+            scope.Start();
+            try
+            {
+                return await PrivateLinkResourcesRestClient.ListByStorageAccountAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<PrivateLinkResourceListResult> ListPrivateLinkResources(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListPrivateLinkResources");
+            scope.Start();
+            try
+            {
+                return PrivateLinkResourcesRestClient.ListByStorageAccount(Id.ResourceGroupName, Id.Name, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Failover request can be triggered for a storage account in case of availability issues. The failover occurs from the storage account&apos;s primary cluster to secondary cluster for RA-GRS accounts. The secondary cluster will become primary after failover. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> FailoverAsync(CancellationToken cancellationToken = default)
@@ -970,6 +1006,20 @@ namespace Azure.Management.Storage
         public PrivateEndpointConnectionContainer GetPrivateEndpointConnections()
         {
             return new PrivateEndpointConnectionContainer(this);
+        }
+
+        /// <summary> Gets a list of ObjectReplicationPolicy in the StorageAccount. </summary>
+        /// <returns> An object representing collection of ObjectReplicationPoliies and their operations over a StorageAccount. </returns>
+        public ObjectReplicationPolicyContainer GetObjectReplicationPoliies()
+        {
+            return new ObjectReplicationPolicyContainer(this);
+        }
+
+        /// <summary> Gets a list of EncryptionScope in the StorageAccount. </summary>
+        /// <returns> An object representing collection of EncryptionScopes and their operations over a StorageAccount. </returns>
+        public EncryptionScopeContainer GetEncryptionScopes()
+        {
+            return new EncryptionScopeContainer(this);
         }
     }
 }
