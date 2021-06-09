@@ -63,18 +63,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static List<System.Type> PromoteGenericType(List<System.Type> output)
         {
-            for(int i =0; i< output.Capacity; i++)
+            for (int i = 0; i < output.Count; i++)
             {
                 if (output[i].IsGenericType)
                 {
                     // since we need to ensure the base generic type is before
                     // any other inheritors we just need to search behind
-                    for(int j =i-1; j > -1; j--)
+                    for (int j = i - 1; j > -1; j--)
                     {
-                        if(output[j].IsGenericType == false 
+                        if (output[j].IsGenericType == false
                             && output[j].BaseType == output[i])
                         {
-                           
+
                             System.Type temp = output[j];
                             output[j] = output[i];
                             output[i] = temp;
