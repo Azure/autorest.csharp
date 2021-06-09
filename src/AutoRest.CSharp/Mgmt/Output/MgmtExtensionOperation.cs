@@ -8,6 +8,8 @@ using System.Text;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
@@ -28,7 +30,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
             OperationGroup = operationGroup;
 
-            DefaultName = operationGroup.Key;
+            // TODO -- this is only a temporary solution, when an operation was added here, it usually does not belong to any "Resource"
+            // We will need a way to identify the name of this
+            DefaultName = operationGroup.Resource(context.Configuration.MgmtConfiguration);
         }
 
         protected override string DefaultName { get; }
@@ -37,8 +41,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
-        public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
+        public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration, (_, operation, _) => $"{operation.CSharpName()}{DefaultName}").ToArray();
 
-        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
+        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration, (_, operation, _) => $"{operation.CSharpName()}{DefaultName}").ToArray();
     }
 }

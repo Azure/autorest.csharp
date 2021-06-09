@@ -46,7 +46,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return name;
         }
 
-        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration, Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = null)
+        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration,
+            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
         {
             foreach (var operation in operationGroup.Operations)
             {
@@ -70,7 +71,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        public static IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
+        public static IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration,
+            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
         {
             foreach (var operation in operationGroup.Operations)
             {
@@ -93,7 +95,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     yield return new PagingMethod(
                         method,
                         nextPageMethod,
-                        method.Name,
+                        nameOverrider?.Invoke(operationGroup, operation, method) ?? method.Name,
                         new Diagnostic($"{Declaration.Name}.{method.Name}"),
                         new PagingResponseInfo(paging, objectResponseBody.Type));
                 }
