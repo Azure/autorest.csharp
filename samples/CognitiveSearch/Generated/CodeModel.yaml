@@ -18402,31 +18402,6 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
-          x-ms-examples:
-            SearchServiceListDataSources:
-              parameters:
-                $select: '*'
-                api-version: 2019-05-06-Preview
-                endpoint: https://myservice.search.windows.net
-              responses:
-                '200':
-                  body:
-                    value:
-                      - name: mydocdbdatasource
-                        type: cosmosdb
-                        description: My Cosmos DB data source.
-                        container:
-                          name: myDocDbCollectionId
-                          query: SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts
-                        credentials:
-                          connectionString: null
-                        dataChangeDetectionPolicy:
-                          '@odata.type': '#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy'
-                          highWaterMarkColumnName: _ts
-                        dataDeletionDetectionPolicy:
-                          '@odata.type': '#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy'
-                          softDeleteColumnName: isDeleted
-                          softDeleteMarkerValue: 'true'
           x-ms-request-id: request-id
         language: !Languages 
           default:
