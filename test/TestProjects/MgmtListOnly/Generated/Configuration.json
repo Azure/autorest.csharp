@@ -12,10 +12,12 @@
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
     "AvailabilitySetChild": "Microsoft.Compute/availabilitySets/availabilitySetChild",
-    "AvailabilitySetFeatures": "Microsoft.Compute/availabilitySetsFeatures"
+    "AvailabilitySetFeatures": "Microsoft.Compute/availabilitySetsFeatures",
+    "AvailabilitySetsNonPageableFeatures": "Microsoft.Compute/availabilitySetsNonPageableFeatures"
   },
   "OperationGroupToParent": {
     "AvailabilitySetChild": "AvailabilitySets",
-    "AvailabilitySetFeatures": "subscriptions"
+    "AvailabilitySetFeatures": "subscriptions",
+    "AvailabilitySetsNonPageableFeatures": "subscriptions"
   }
 }

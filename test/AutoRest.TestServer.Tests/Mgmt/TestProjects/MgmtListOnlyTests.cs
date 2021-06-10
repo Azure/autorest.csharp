@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("ListAvailabilitySetFeatureAsync", true)]
         public void ValidateExtraMethodInExtensionClasses(string methodName, bool isExists)
         {
-            var subscriptionExtension = GetSubscriptionExtensions();
+            var subscriptionExtension = FindSubscriptionExtensions();
             Assert.NotNull(subscriptionExtension);
             Assert.AreEqual(isExists, subscriptionExtension.GetMethod(methodName) != null, $"Could not find SubscriptionExtensions.{methodName}. Found: {string.Join(", ", subscriptionExtension.GetMethods().Select(m => m.Name))}");
         }

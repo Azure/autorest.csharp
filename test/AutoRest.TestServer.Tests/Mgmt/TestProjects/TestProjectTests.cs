@@ -175,7 +175,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 return;
             }
 
-            Type resourceExtensions = GetResourceGroupExtensions();
+            Type resourceExtensions = FindResourceGroupExtensions();
             Assert.NotNull(resourceExtensions);
 
             foreach (var type in FindAllContainers())
@@ -198,16 +198,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        public Type GetResourceGroupExtensions()
+        public Type FindResourceGroupExtensions()
         {
             return Assembly.GetExecutingAssembly().GetTypes()
                 .FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
         }
 
-        public Type GetSubscriptionExtensions()
+        public Type FindSubscriptionExtensions()
         {
-            return Assembly.GetExecutingAssembly().GetTypes()
-                .FirstOrDefault(t => t.Name == "SubscriptionExtensions" && t.Namespace == _projectName);
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            return allTypes.FirstOrDefault(t => t.Name == "SubscriptionExtensions" && !t.Name.Contains("Tests") && t.Namespace == _projectName);
         }
 
         public IEnumerable<Type> FindAllOperations()
@@ -302,12 +302,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             return type.BaseType.Name == typeof(TrackedResource<>).Name;
         }
 
-        private Type FindSubscriptionExtensions()
-        {
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
-            return allTypes.FirstOrDefault(t => t.Name == "SubscriptionExtensions" && !t.Name.Contains("Tests") && t.Namespace == _projectName);
-        }
-
         private ResourceType GetContainerValidResourceType(Type containerType)
         {
             var containerObj = Activator.CreateInstance(containerType, true);
@@ -374,6 +368,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var listMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listMethodInfo);
+                    // This looks weird, some list functions have extra optional parameters (top, statusOnly, etc), therefore we cannot say we have 2 parameters for all list functions.
                     Assert.AreEqual(2, listMethodInfo.GetParameters().Length);
                     var listParam1 = TypeAsserts.HasParameter(listMethodInfo, "subscription");
                     Assert.AreEqual(typeof(SubscriptionOperations), listParam1.ParameterType);
