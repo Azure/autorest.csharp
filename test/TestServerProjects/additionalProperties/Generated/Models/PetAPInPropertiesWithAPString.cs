@@ -37,7 +37,7 @@ namespace additionalProperties.Models
         /// <param name="status"> . </param>
         /// <param name="odataLocation"> . </param>
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
-        /// <param name="moreAdditionalProperties"> . </param>
+        /// <param name="moreAdditionalProperties"> Additional Properties. </param>
         internal PetAPInPropertiesWithAPString(int id, string name, bool? status, string odataLocation, IDictionary<string, float> additionalProperties, IDictionary<string, string> moreAdditionalProperties)
         {
             Id = id;

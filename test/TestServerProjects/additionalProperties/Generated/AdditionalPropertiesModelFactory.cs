@@ -17,7 +17,7 @@ namespace additionalProperties
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPTrue"/> instance for mocking. </returns>
         public static PetAPTrue PetAPTrue(int id = default, string name = default, bool? status = default, IDictionary<string, object> additionalProperties = default)
         {
@@ -29,7 +29,7 @@ namespace additionalProperties
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPObject"/> instance for mocking. </returns>
         public static PetAPObject PetAPObject(int id = default, string name = default, bool? status = default, IDictionary<string, object> additionalProperties = default)
         {
@@ -41,7 +41,7 @@ namespace additionalProperties
         /// <param name="id"> . </param>
         /// <param name="name"> . </param>
         /// <param name="status"> . </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPString"/> instance for mocking. </returns>
         public static PetAPString PetAPString(int id = default, string name = default, bool? status = default, IDictionary<string, string> additionalProperties = default)
         {
@@ -67,7 +67,7 @@ namespace additionalProperties
         /// <param name="status"> . </param>
         /// <param name="odataLocation"> . </param>
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
-        /// <param name="moreAdditionalProperties"> . </param>
+        /// <param name="moreAdditionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.PetAPInPropertiesWithAPString"/> instance for mocking. </returns>
         public static PetAPInPropertiesWithAPString PetAPInPropertiesWithAPString(int id = default, string name = default, bool? status = default, string odataLocation = default, IDictionary<string, float> additionalProperties = default, IDictionary<string, string> moreAdditionalProperties = default)
         {

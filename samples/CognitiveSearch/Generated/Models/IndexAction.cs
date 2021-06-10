@@ -21,6 +21,7 @@ namespace CognitiveSearch.Models
 
         /// <summary> The operation to perform on a document in an indexing batch. </summary>
         public IndexActionType? ActionType { get; set; }
+        /// <summary> Additional Properties. </summary>
         public IDictionary<string, object> AdditionalProperties { get; }
     }
 }
