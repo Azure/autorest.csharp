@@ -20,5 +20,23 @@ namespace ResourceIdentifierChooser
             return new SubscriptionLevelResourceContainer(subscription);
         }
         #endregion
+
+        #region SubResResource
+        /// <summary> Gets an object representing a SubResResourceContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        public static SubResResourceContainer GetSubResResourceContainer(this SubscriptionOperations subscription)
+        {
+            return new SubResResourceContainer(subscription);
+        }
+        #endregion
+
+        #region WritableSubResResource
+        /// <summary> Gets an object representing a WritableSubResResourceContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        public static WritableSubResResourceContainer GetWritableSubResResourceContainer(this SubscriptionOperations subscription)
+        {
+            return new WritableSubResResourceContainer(subscription);
+        }
+        #endregion
     }
 }
