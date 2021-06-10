@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace ResourceIdentifierChooser
 {
     /// <summary> A class representing the ResourceLevel data model. </summary>
-    public partial class ResourceLevelData : WritableSubResource
+    public partial class ResourceLevelData : WritableSubResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ResourceLevelData. </summary>
         public ResourceLevelData()

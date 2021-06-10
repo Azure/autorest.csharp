@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Response from generation of an SSH key pair. </summary>
-    public partial class SshPublicKeyGenerateKeyPairResult : Core.SubResource
+    public partial class SshPublicKeyGenerateKeyPairResult : SubResource<ResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SshPublicKeyGenerateKeyPairResult. </summary>
         /// <param name="privateKey"> Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret. </param>

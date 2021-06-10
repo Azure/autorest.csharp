@@ -12,7 +12,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(SubscriptionLevelResource), typeof(SubscriptionResourceIdentifier))]
         [TestCase(typeof(TenantLevelResource), typeof(TenantResourceIdentifier))]
         [TestCase(typeof(ResourceGroupResource), typeof(ResourceGroupResourceIdentifier))]
-        [TestCase(typeof(ResourceLevel), typeof(ResourceIdentifier))]
+        [TestCase(typeof(ResourceLevel), typeof(ResourceGroupResourceIdentifier))]
         [TestCase(typeof(ModelData), typeof(ResourceGroupResourceIdentifier))]
         public void TestResourceIdentifierChooser(Type dataType, Type expectedIdType)
         {
