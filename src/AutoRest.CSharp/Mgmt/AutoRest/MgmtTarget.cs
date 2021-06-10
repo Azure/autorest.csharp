@@ -102,12 +102,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             var extensionsWriter = new CodeWriter();
-            resourceGroupExtensionsWriter.WriteExtension(context, extensionsWriter);
+            resourceGroupExtensionsWriter.WriteExtension(extensionsWriter, context);
             project.AddGeneratedFile("Extensions/ResourceGroupExtensions.cs", extensionsWriter.ToString());
 
             var subscriptionExtensionsCodeWriter = new CodeWriter();
-            var resources = context.Library.ArmResource;
-            subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context, resources);
+            subscriptionExtensionsWriter.WriteExtension(subscriptionExtensionsCodeWriter, context);
             project.AddGeneratedFile($"Extensions/SubscriptionExtensions.cs", subscriptionExtensionsCodeWriter.ToString());
 
             var armClientExtensionsCodeWriter = new CodeWriter();

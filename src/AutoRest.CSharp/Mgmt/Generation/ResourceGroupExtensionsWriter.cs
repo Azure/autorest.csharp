@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Generation.Writers
         protected string Accessibility = "public";
         protected string Type = "ResourceGroupExtensions";
 
-        public void WriteExtension(BuildContext<MgmtOutputLibrary> context, CodeWriter writer)
+        public void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
         {
             using (writer.Namespace(context.DefaultNamespace))
             {

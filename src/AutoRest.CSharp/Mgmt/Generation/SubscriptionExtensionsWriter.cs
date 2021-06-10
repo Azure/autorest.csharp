@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class SubscriptionExtensionsWriter : ClientWriter
     {
-        public void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context, IEnumerable<Resource> resources)
+        public void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
         {
             var @namespace = context.DefaultNamespace;
             using (writer.Namespace(@namespace))
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteXmlDocumentationSummary("Extension methods for convenient access on SubscriptionOperations in a client");
                 using (writer.Scope($"public static partial class SubscriptionExtensions"))
                 {
-                    foreach (var resource in resources)
+                    foreach (var resource in context.Library.ArmResource)
                     {
                         if (ParentDetection.ParentResourceType(resource.OperationGroup, context.Configuration.MgmtConfiguration).Equals(ResourceTypeBuilder.Subscriptions))
                         {
