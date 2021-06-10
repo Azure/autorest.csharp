@@ -1054,7 +1054,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         #endregion
-        #region VirtualMachineSizes
+        #region VirtualMachineSize
         private static VirtualMachineSizesRestOperations GetVirtualMachineSizesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new VirtualMachineSizesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -1077,7 +1077,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineSizesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListVirtualMachineSizesAsync(clientDiagnostics, restOperations, location, cancellationToken);
+                var result = ListVirtualMachineSizeAsync(clientDiagnostics, restOperations, location, cancellationToken);
                 return result;
             }
             );
@@ -1089,7 +1089,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static AsyncPageable<VirtualMachineSize> ListVirtualMachineSizesAsync(ClientDiagnostics clientDiagnostics, VirtualMachineSizesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static AsyncPageable<VirtualMachineSize> ListVirtualMachineSizeAsync(ClientDiagnostics clientDiagnostics, VirtualMachineSizesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1098,7 +1098,7 @@ namespace Azure.ResourceManager.Sample
 
             async Task<Page<VirtualMachineSize>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineSizes.List");
+                using var scope = clientDiagnostics.CreateScope("VirtualMachineSize.List");
                 scope.Start();
                 try
                 {
@@ -1131,7 +1131,7 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineSizesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListVirtualMachineSizes(clientDiagnostics, restOperations, location, cancellationToken);
+                var result = ListVirtualMachineSize(clientDiagnostics, restOperations, location, cancellationToken);
                 return result;
             }
             );
@@ -1143,7 +1143,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static Pageable<VirtualMachineSize> ListVirtualMachineSizes(ClientDiagnostics clientDiagnostics, VirtualMachineSizesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static Pageable<VirtualMachineSize> ListVirtualMachineSize(ClientDiagnostics clientDiagnostics, VirtualMachineSizesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -1152,7 +1152,7 @@ namespace Azure.ResourceManager.Sample
 
             Page<VirtualMachineSize> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineSizes.List");
+                using var scope = clientDiagnostics.CreateScope("VirtualMachineSize.List");
                 scope.Start();
                 try
                 {

@@ -175,8 +175,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 return;
             }
 
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
-            Type resourceExtensions = allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
+            Type resourceExtensions = GetResourceGroupExtensions();
             Assert.NotNull(resourceExtensions);
 
             foreach (var type in FindAllContainers())
@@ -197,6 +196,18 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     Assert.IsNull(getContainerMethod);
                 }
             }
+        }
+
+        public Type GetResourceGroupExtensions()
+        {
+            return Assembly.GetExecutingAssembly().GetTypes()
+                .FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
+        }
+
+        public Type GetSubscriptionExtensions()
+        {
+            return Assembly.GetExecutingAssembly().GetTypes()
+                .FirstOrDefault(t => t.Name == "SubscriptionExtensions" && t.Namespace == _projectName);
         }
 
         public IEnumerable<Type> FindAllOperations()

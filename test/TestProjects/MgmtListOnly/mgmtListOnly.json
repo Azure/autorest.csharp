@@ -336,6 +336,34 @@
                 },
                 "x-ms-long-running-operation": true
             }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySetsFeatures": {
+            "get": {
+                "tags": [
+                    "AvailabilitySetFeatures"
+                ],
+                "operationId": "AvailabilitySetFeatures_TestFeaturesMethod",
+                "description": "Lists all availability sets features in subscription.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AvailabilitySetFeatureListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
         }
     },
     "definitions": {
@@ -455,6 +483,31 @@
                 "value"
             ],
             "description": "The List Availability Set operation response."
+        },
+        "AvailabilitySetFeatureListResult": {
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AvailabilitySetFeature"
+                    },
+                    "description": "The list of availability sets"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+                }
+            },
+            "description": "The List Availability Set Feature operation response."
+        },
+        "AvailabilitySetFeature": {
+            "properties": {
+                "foo": {
+                    "type": "string",
+                    "description": "specifies the bar"
+                }
+            },
+            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
         },
         "UpdateResource": {
             "description": "The Update Resource model definition.",

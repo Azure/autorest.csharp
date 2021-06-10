@@ -11,9 +11,11 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
-    "AvailabilitySetChild": "Microsoft.Compute/availabilitySets/availabilitySetChild"
+    "AvailabilitySetChild": "Microsoft.Compute/availabilitySets/availabilitySetChild",
+    "AvailabilitySetFeatures": "Microsoft.Compute/availabilitySetsFeatures"
   },
   "OperationGroupToParent": {
-    "AvailabilitySetChild": "AvailabilitySets"
+    "AvailabilitySetChild": "AvailabilitySets",
+    "AvailabilitySetFeatures": "subscriptions"
   }
 }

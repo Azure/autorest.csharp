@@ -19,7 +19,7 @@ namespace Azure.Management.Storage
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region Skus
+        #region SkuInformation
         private static SkusRestOperations GetSkusRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new SkusRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -35,7 +35,7 @@ namespace Azure.Management.Storage
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListSkusAsync(clientDiagnostics, restOperations, cancellationToken);
+                var result = ListSkuInformationAsync(clientDiagnostics, restOperations, cancellationToken);
                 return result;
             }
             );
@@ -45,11 +45,11 @@ namespace Azure.Management.Storage
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<SkuInformation> ListSkusAsync(ClientDiagnostics clientDiagnostics, SkusRestOperations restOperations, CancellationToken cancellationToken = default)
+        private static AsyncPageable<SkuInformation> ListSkuInformationAsync(ClientDiagnostics clientDiagnostics, SkusRestOperations restOperations, CancellationToken cancellationToken = default)
         {
             async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Skus.List");
+                using var scope = clientDiagnostics.CreateScope("SkuInformation.List");
                 scope.Start();
                 try
                 {
@@ -75,7 +75,7 @@ namespace Azure.Management.Storage
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListSkus(clientDiagnostics, restOperations, cancellationToken);
+                var result = ListSkuInformation(clientDiagnostics, restOperations, cancellationToken);
                 return result;
             }
             );
@@ -85,11 +85,11 @@ namespace Azure.Management.Storage
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<SkuInformation> ListSkus(ClientDiagnostics clientDiagnostics, SkusRestOperations restOperations, CancellationToken cancellationToken = default)
+        private static Pageable<SkuInformation> ListSkuInformation(ClientDiagnostics clientDiagnostics, SkusRestOperations restOperations, CancellationToken cancellationToken = default)
         {
             Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Skus.List");
+                using var scope = clientDiagnostics.CreateScope("SkuInformation.List");
                 scope.Start();
                 try
                 {
@@ -106,7 +106,7 @@ namespace Azure.Management.Storage
         }
 
         #endregion
-        #region Usages
+        #region Usage
         private static UsagesRestOperations GetUsagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new UsagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -129,7 +129,7 @@ namespace Azure.Management.Storage
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListByLocationUsagesAsync(clientDiagnostics, restOperations, location, cancellationToken);
+                var result = ListByLocationUsageAsync(clientDiagnostics, restOperations, location, cancellationToken);
                 return result;
             }
             );
@@ -141,7 +141,7 @@ namespace Azure.Management.Storage
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static AsyncPageable<Usage> ListByLocationUsagesAsync(ClientDiagnostics clientDiagnostics, UsagesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static AsyncPageable<Usage> ListByLocationUsageAsync(ClientDiagnostics clientDiagnostics, UsagesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -150,7 +150,7 @@ namespace Azure.Management.Storage
 
             async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usages.ListByLocation");
+                using var scope = clientDiagnostics.CreateScope("Usage.ListByLocation");
                 scope.Start();
                 try
                 {
@@ -183,7 +183,7 @@ namespace Azure.Management.Storage
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListByLocationUsages(clientDiagnostics, restOperations, location, cancellationToken);
+                var result = ListByLocationUsage(clientDiagnostics, restOperations, location, cancellationToken);
                 return result;
             }
             );
@@ -195,7 +195,7 @@ namespace Azure.Management.Storage
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static Pageable<Usage> ListByLocationUsages(ClientDiagnostics clientDiagnostics, UsagesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
+        private static Pageable<Usage> ListByLocationUsage(ClientDiagnostics clientDiagnostics, UsagesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -204,7 +204,7 @@ namespace Azure.Management.Storage
 
             Page<Usage> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usages.ListByLocation");
+                using var scope = clientDiagnostics.CreateScope("Usage.ListByLocation");
                 scope.Start();
                 try
                 {

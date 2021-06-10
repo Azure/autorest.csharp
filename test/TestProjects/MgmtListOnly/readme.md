@@ -9,6 +9,8 @@ input-file: $(this-folder)/mgmtListOnly.json
 namespace: MgmtListOnly
 operation-group-to-resource-type:
     AvailabilitySetChild: Microsoft.Compute/availabilitySets/availabilitySetChild
+    AvailabilitySetFeatures: Microsoft.Compute/availabilitySetsFeatures
 operation-group-to-parent:
     AvailabilitySetChild: AvailabilitySets
+    AvailabilitySetFeatures: subscriptions
 ```
