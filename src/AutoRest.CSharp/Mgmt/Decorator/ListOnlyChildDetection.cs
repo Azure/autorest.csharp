@@ -46,10 +46,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var responseSchema = successResponse?.ResponseSchema as ObjectSchema;
 
                 // TODO -- change p.SerializedName == ArrayValuePropertyName so that we could check the list only operations by x-ms-client-name
-                var arraySchema = responseSchema?.Properties
-                    ?.FirstOrDefault(p => p.Schema is ArraySchema && p.SerializedName == ArrayValuePropertyName)?.Schema as ArraySchema;
+                var arraySchemas = responseSchema?.Properties?.Where(p => p.Schema is ArraySchema)
+                    ?.Select(p => p.Schema as ArraySchema);
+                if (arraySchemas?.Count() != 1)
+                {
+                    return false;
+                }
 
-                schema = arraySchema?.ElementType;
+                schema = arraySchemas?.FirstOrDefault()?.ElementType;
                 return schema != null;
             }
 

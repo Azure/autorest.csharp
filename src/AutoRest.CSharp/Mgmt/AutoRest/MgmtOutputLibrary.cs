@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
-            ListOnlyOperationGroups = new Dictionary<string, List<OperationGroup>>();
+            NonResourceOperationGroups = new Dictionary<string, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// <summary>
         /// A mapping of parent operation group to child operation groups that are list only.
         /// </summary>
-        public Dictionary<string, List<OperationGroup>> ListOnlyOperationGroups { get; private set; }
+        public Dictionary<string, List<OperationGroup>> NonResourceOperationGroups { get; private set; }
 
         private static HashSet<string> ResourceTypes = new HashSet<string>
         {
@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<MgmtExtensionOperation> GetMgmtExtensionOperations(string parent)
         {
-            if (ListOnlyOperationGroups.TryGetValue(parent, out var operationGroups))
+            if (NonResourceOperationGroups.TryGetValue(parent, out var operationGroups))
             {
                 return operationGroups.Select(operationGroup => new MgmtExtensionOperation(operationGroup, _context));
             }
@@ -187,7 +187,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             {
                 if (!operationGroup.IsTupleResource(_context))
                 {
-                    var listOnlyChildOperationGroups = _context.Library.ListOnlyOperationGroups.GetValueOrDefault(operationGroup.Key);
+                    var listOnlyChildOperationGroups = _context.Library.NonResourceOperationGroups.GetValueOrDefault(operationGroup.Key);
                     _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context, listOnlyChildOperationGroups));
                 }
             }
@@ -438,11 +438,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
-                if (operationGroup.IsListOnlyChildResource(_mgmtConfiguration))
+                if (operationGroup.IsListOnlyChildResource(_mgmtConfiguration) || !operationGroup.IsResource(_mgmtConfiguration))
                 {
-                    AddOperationGroupToListOnlyResourceMap(operationGroup);
+                    AddOperationGroupToNonResourceMap(operationGroup);
                 }
-                else if (operationGroup.IsResource(_mgmtConfiguration))
+                else
                 {
                     AddOperationGroupToResourceMap(operationGroup);
                 }
@@ -450,17 +450,17 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }
 
-        private void AddOperationGroupToListOnlyResourceMap(OperationGroup operationGroup)
+        private void AddOperationGroupToNonResourceMap(OperationGroup operationGroup)
         {
             if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationGroup.Key, out var parent))
             {
-                if (ListOnlyOperationGroups.ContainsKey(parent))
+                if (NonResourceOperationGroups.ContainsKey(parent))
                 {
-                    ListOnlyOperationGroups[parent].Add(operationGroup);
+                    NonResourceOperationGroups[parent].Add(operationGroup);
                 }
                 else
                 {
-                    ListOnlyOperationGroups[parent] = new List<OperationGroup>() { operationGroup };
+                    NonResourceOperationGroups[parent] = new List<OperationGroup>() { operationGroup };
                 }
             }
             else
