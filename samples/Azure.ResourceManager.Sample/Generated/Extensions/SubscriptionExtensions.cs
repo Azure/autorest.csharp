@@ -1169,5 +1169,12 @@ namespace Azure.ResourceManager.Sample
         }
 
         #endregion
+        #region LogAnalytics
+        private static LogAnalyticsRestOperations GetLogAnalyticsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new LogAnalyticsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        #endregion
     }
 }

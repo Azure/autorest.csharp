@@ -12,5 +12,8 @@
   "skip-csproj-packagereference": true,
   "OperationGroupToResource": {
     "SshPublicKeys": "NonResource"
+  },
+  "OperationGroupToParent": {
+    "SshPublicKeys": "resourceGroups"
   }
 }
