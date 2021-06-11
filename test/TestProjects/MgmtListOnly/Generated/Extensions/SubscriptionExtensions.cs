@@ -28,10 +28,10 @@ namespace MgmtListOnly
         /// <summary> Lists the AvailabilitySetFeatures for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySetFeature> ListAvailabilitySetFeatureAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -83,10 +83,10 @@ namespace MgmtListOnly
         /// <summary> Lists the AvailabilitySetFeatures for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySetFeature> ListAvailabilitySetFeature(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options, pipeline) =>
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -142,84 +142,72 @@ namespace MgmtListOnly
             return new AvailabilitySetsNonPageableFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the AvailabilitySetNonPageableFeatures for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists all availability sets features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static AsyncPageable<AvailabilitySetNonPageableFeature> ListAvailabilitySetNonPageableFeatureAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        /// <returns> placeholder. </returns>
+        public static Task<Response<AvailabilitySetNonPageableFeatureListResult>> TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResourcesAsync((baseUri, credential, options, pipeline) =>
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(clientDiagnostics, restOperations, cancellationToken);
-                return result;
+                return TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(clientDiagnostics, restOperations, cancellationToken);
             }
             );
         }
 
         /// <summary> Lists all availability sets features in subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<AvailabilitySetNonPageableFeature> TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(ClientDiagnostics clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
+        private static async Task<Response<AvailabilitySetNonPageableFeatureListResult>> TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(ClientDiagnostics _clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
         {
-            async Task<Page<AvailabilitySetNonPageableFeature>> FirstPageFunc(int? pageSizeHint)
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetNonPageableFeature.TestFeaturesMethodAvailabilitySetNonPageableFeature");
+            scope.Start();
+            try
             {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetNonPageableFeature.TestFeaturesMethodAvailabilitySetNonPageableFeature");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.TestFeaturesMethodAsync(cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return await restOperations.TestFeaturesMethodAsync(cancellationToken).ConfigureAwait(false);
             }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
-        /// <summary> Lists the AvailabilitySetNonPageableFeatures for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists all availability sets features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static Pageable<AvailabilitySetNonPageableFeature> ListAvailabilitySetNonPageableFeature(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        /// <returns> placeholder. </returns>
+        public static Response<AvailabilitySetNonPageableFeatureListResult> TestFeaturesMethodAvailabilitySetNonPageableFeature(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options, pipeline) =>
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = TestFeaturesMethodAvailabilitySetNonPageableFeature(clientDiagnostics, restOperations, cancellationToken);
-                return result;
+                return TestFeaturesMethodAvailabilitySetNonPageableFeature(clientDiagnostics, restOperations, cancellationToken);
             }
             );
         }
 
         /// <summary> Lists all availability sets features in subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<AvailabilitySetNonPageableFeature> TestFeaturesMethodAvailabilitySetNonPageableFeature(ClientDiagnostics clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
+        private static Response<AvailabilitySetNonPageableFeatureListResult> TestFeaturesMethodAvailabilitySetNonPageableFeature(ClientDiagnostics _clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
         {
-            Page<AvailabilitySetNonPageableFeature> FirstPageFunc(int? pageSizeHint)
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetNonPageableFeature.TestFeaturesMethodAvailabilitySetNonPageableFeature");
+            scope.Start();
+            try
             {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetNonPageableFeature.TestFeaturesMethodAvailabilitySetNonPageableFeature");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.TestFeaturesMethod(cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
+                return restOperations.TestFeaturesMethod(cancellationToken);
             }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         #endregion

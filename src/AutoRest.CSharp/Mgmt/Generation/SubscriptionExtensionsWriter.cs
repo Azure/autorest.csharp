@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
@@ -71,10 +72,10 @@ namespace AutoRest.CSharp.Generation.Writers
                                 WriteGetRestOperations(writer, resourceOperation.RestClient);
 
                                 WriteListMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, true);
-                                WritePagingOperation(writer, pagingMethod, resourceOperation.RestClient, true);
+                                WritePagingOperation(writer, resourceOperation.RestClient, pagingMethod, true);
 
                                 WriteListMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, false);
-                                WritePagingOperation(writer, pagingMethod, resourceOperation.RestClient, false);
+                                WritePagingOperation(writer, resourceOperation.RestClient, pagingMethod, false);
 
                                 WriteListResourceByNameMethod(writer, resourceOperation, true);
                                 WriteListResourceByNameMethod(writer, resourceOperation, false);
@@ -96,10 +97,18 @@ namespace AutoRest.CSharp.Generation.Writers
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
                             WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, true, false);
-                            WritePagingOperation(writer, pagingMethod, mgmtExtensionOperation.RestClient, true);
+                            WritePagingOperation(writer, mgmtExtensionOperation.RestClient, pagingMethod, true);
 
                             WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, false, false);
-                            WritePagingOperation(writer, pagingMethod, mgmtExtensionOperation.RestClient, false);
+                            WritePagingOperation(writer, mgmtExtensionOperation.RestClient, pagingMethod, false);
+                        }
+
+                        foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
+                        {
+                            WriteClientMethod(writer, mgmtExtensionOperation.RestClient, clientMethod, true);
+                            WriteClientOperation(writer, mgmtExtensionOperation.RestClient, clientMethod, true);
+                            WriteClientMethod(writer, mgmtExtensionOperation.RestClient, clientMethod, false);
+                            WriteClientOperation(writer, mgmtExtensionOperation.RestClient, clientMethod, false);
                         }
 
                         writer.LineRaw("#endregion");
@@ -152,7 +161,126 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WritePagingOperation(CodeWriter writer, PagingMethod pagingMethod, MgmtRestClient RestClient, bool async)
+        private void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
+        {
+            var parameters = clientMethod.RestClientMethod.Parameters;
+            var responseType = ResponseType(clientMethod, async);
+
+            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+            writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
+            foreach (var parameter in parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter);
+            }
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationReturns("placeholder"); // TODO - find what information to fill here
+            writer.WriteXmlDocumentationRequiredParametersException(parameters);
+
+            var asyncTest = async ? "async" : string.Empty;
+
+            // write signature of this function
+            writer.Append($"public static {responseType} {CreateMethodName(clientMethod.Name, async)}(this {typeof(SubscriptionOperations)} subscription, ");
+            foreach (var parameter in parameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            using (writer.Scope())
+            {
+                writer.WriteParameterNullChecks(parameters);
+
+                writer.Append($"return subscription.UseClientContext((baseUri, credential, options, pipeline) =>");
+                using (writer.Scope())
+                {
+                    var clientDiagnostics = new CodeWriterDeclaration("clientDiagnostics");
+                    var restOperations = new CodeWriterDeclaration("restOperations");
+
+                    writer.Line($"var {clientDiagnostics:D} = new {typeof(ClientDiagnostics)}(options);");
+                    // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
+                    writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);");
+                    writer.Line($"return {CreateMethodName(clientMethod.Name, async)}({clientDiagnostics}, {restOperations}, {string.Join("", parameters.Select(p => $"{p.Name}, "))}cancellationToken);");
+                }
+                writer.Append($");");
+            }
+
+            writer.Line();
+        }
+
+        private CSharpType ResponseType(ClientMethod clientMethod, bool async)
+        {
+            var bodyType = clientMethod.RestClientMethod.ReturnType;
+            var responseType = bodyType != null ? new CSharpType(typeof(Response<>), bodyType) : typeof(Response);
+            return async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+        }
+
+        private void WriteClientOperation(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
+        {
+            var bodyType = clientMethod.RestClientMethod.ReturnType;
+            var responseType = ResponseType(clientMethod, async);
+
+            var parameters = clientMethod.RestClientMethod.Parameters;
+
+            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+            writer.WriteXmlDocumentationParameter("_clientDiagnostics", "The handler for diagnostic messaging in the client.");
+            writer.WriteXmlDocumentationParameter("restOperations", "Resource client operations.");
+            foreach (var parameter in parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter);
+            }
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationRequiredParametersException(parameters);
+
+            var asyncText = async ? "async" : string.Empty;
+
+            // write the function declaration
+            writer.Append($"private static {asyncText} {responseType} {CreateMethodName(clientMethod.Name, async)}({typeof(ClientDiagnostics)} _clientDiagnostics, {restClient.Type} restOperations,");
+
+            foreach (var parameter in parameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            using (writer.Scope())
+            {
+                writer.WriteParameterNullChecks(parameters);
+                WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                {
+                    writer.Append($"return (");
+                    if (async)
+                    {
+                        writer.Append($"await ");
+                    }
+
+                    var parameterNames = parameters.Select(p => p.Name);
+                    writer.Append($"{"restOperations"}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
+                    foreach (var parameter in parameterNames)
+                    {
+                        writer.Append($"{parameter:I}, ");
+                    }
+                    writer.Append($"cancellationToken)");
+
+                    if (async)
+                    {
+                        writer.Append($".ConfigureAwait(false)");
+                    }
+
+                    writer.Append($")");
+
+                    if (bodyType == null && clientMethod.RestClientMethod.HeaderModel != null)
+                    {
+                        writer.Append($".GetRawResponse()");
+                    }
+
+                    writer.Line($";");
+                });
+            }
+
+            writer.Line();
+        }
+
+        private void WritePagingOperation(CodeWriter writer, MgmtRestClient restClient, PagingMethod pagingMethod, bool async)
         {
             // Paging method signature
             var pageType = pagingMethod.PagingResponse.ItemType;
@@ -163,17 +291,17 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationParameter("clientDiagnostics", "The handler for diagnostic messaging in the client.");
             writer.WriteXmlDocumentationParameter("restOperations", "Resource client operations.");
 
-            foreach (Parameter parameter in parameters)
+            foreach (var parameter in parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter);
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
 
-            writer.Append($"private static {responseType} {CreateMethodName(pagingMethod.Name, async)}({typeof(ClientDiagnostics)} clientDiagnostics, {RestClient.Type} restOperations,");
+            writer.Append($"private static {responseType} {CreateMethodName(pagingMethod.Name, async)}({typeof(ClientDiagnostics)} clientDiagnostics, {restClient.Type} restOperations,");
 
-            foreach (Parameter parameter in parameters)
+            foreach (var parameter in parameters)
             {
                 writer.WriteParameter(parameter);
             }
@@ -192,11 +320,11 @@ namespace AutoRest.CSharp.Generation.Writers
             var parameters = pagingMethod.Method.Parameters;
             foreach (var parameter in parameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter);
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-            writer.WriteXmlDocumentation("return", $"A collection of resource operations that may take multiple service requests to iterate over.");
+            writer.WriteXmlDocumentationReturns($"A collection of resource operations that may take multiple service requests to iterate over.");
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
 
             CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
@@ -235,7 +363,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Line($"return new {returnType}(");
                         writer.Line($"{result},");
                         writer.Line($"s => new {pageType}(subscription, s));");
-                    } else
+                    }
+                    else
                     {
                         writer.Line($"return {result};");
                     }

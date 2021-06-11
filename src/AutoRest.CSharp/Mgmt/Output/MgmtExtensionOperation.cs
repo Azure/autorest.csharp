@@ -20,7 +20,8 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class MgmtExtensionOperation : TypeProvider
     {
         private BuildContext<MgmtOutputLibrary> _context;
-        private PagingMethod[]? _pagingMethods;
+        private IEnumerable<ClientMethod>? _clientMethods;
+        private IEnumerable<PagingMethod>? _pagingMethods;
 
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
@@ -42,40 +43,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
-        public PagingMethod[] PagingMethods => _pagingMethods ??= EnsurePagingMethods();
+        public IEnumerable<ClientMethod> ClientMethods => _clientMethods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration, (_, operation, _) => $"{operation.CSharpName()}{DefaultName}");
 
-        private PagingMethod[] EnsurePagingMethods()
-        {
-            var pagingMethods = ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration, (_, operation, _) => $"{operation.CSharpName()}{DefaultName}");
-            var convertedPagingMethods = ConvertToPaging(OperationGroup, RestClient, Declaration, (_, operation, _) => $"{operation.CSharpName()}{DefaultName}");
-            return pagingMethods.Concat(convertedPagingMethods).ToArray();
-        }
-
-        private IEnumerable<PagingMethod> ConvertToPaging(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions declaration,
-            Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
-        {
-            var clientMethods = ClientBuilder.BuildMethods(operationGroup, restClient, declaration, nameOverrider);
-            foreach (var clientMethod in clientMethods)
-            {
-                var method = clientMethod.RestClientMethod;
-                if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
-                {
-                    throw new InvalidOperationException($"Method {method.Name} has to have a return value");
-                }
-
-                var paging = new Paging()
-                {
-                    // we currently only convert the non-paging list with the return model of { "value": { "type": "array" }}
-                    ItemName = "value"
-                };
-                yield return new PagingMethod(
-                    clientMethod.RestClientMethod,
-                    null,
-                    clientMethod.Name,
-                    clientMethod.Diagnostics,
-                    new PagingResponseInfo(paging, objectResponseBody.Type)
-                );
-            }
-        }
+        public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration, (_, operation, _) => $"{operation.CSharpName()}{DefaultName}");
     }
 }
