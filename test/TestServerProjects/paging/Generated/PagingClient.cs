@@ -1268,7 +1268,7 @@ namespace paging
                 scope.Start();
                 try
                 {
-                    var response = await RestClient.NextFragmentNextPageAsync(nextLink, apiVersion, tenant, cancellationToken).ConfigureAwait(false);
+                    var response = await RestClient.NextFragmentAsync(apiVersion, tenant, nextLink, cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1322,7 +1322,7 @@ namespace paging
                 scope.Start();
                 try
                 {
-                    var response = RestClient.NextFragmentNextPage(nextLink, apiVersion, tenant, cancellationToken);
+                    var response = RestClient.NextFragment(apiVersion, tenant, nextLink, cancellationToken);
                     return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1371,7 +1371,7 @@ namespace paging
                 scope.Start();
                 try
                 {
-                    var response = await RestClient.NextFragmentWithGroupingNextPageAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
+                    var response = await RestClient.NextFragmentWithGroupingAsync(nextLink, customParameterGroup, cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -1420,7 +1420,7 @@ namespace paging
                 scope.Start();
                 try
                 {
-                    var response = RestClient.NextFragmentWithGroupingNextPage(nextLink, customParameterGroup, cancellationToken);
+                    var response = RestClient.NextFragmentWithGrouping(nextLink, customParameterGroup, cancellationToken);
                     return Page.FromValues(response.Value.Values, response.Value.OdataNextLink, response.GetRawResponse());
                 }
                 catch (Exception e)

@@ -215,7 +215,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteParameterNullChecks(parameters);
 
-                writer.Append($"return subscription.{CreateMethodName("ListResources", async)}((baseUri, credential, options, pipeline) =>");
+                writer.Append($"return subscription.UseClientContext((baseUri, credential, options, pipeline) =>");
                 using (writer.Scope())
                 {
                     var clientDiagnostics = new CodeWriterDeclaration("clientDiagnostics");

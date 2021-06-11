@@ -31,7 +31,7 @@ namespace CognitiveSearch
 
         /// <summary> Initializes new instance of FacetResult class. </summary>
         /// <param name="count"> The approximate count of documents falling within the bucket described by this facet. </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.FacetResult"/> instance for mocking. </returns>
         public static FacetResult FacetResult(long? count = default, IReadOnlyDictionary<string, object> additionalProperties = default)
         {
@@ -42,7 +42,7 @@ namespace CognitiveSearch
         /// <summary> Initializes new instance of SearchResult class. </summary>
         /// <param name="score"> The relevance score of the document compared to other documents returned by the query. </param>
         /// <param name="highlights"> Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query. </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.SearchResult"/> instance for mocking. </returns>
         public static SearchResult SearchResult(double score = default, IReadOnlyDictionary<string, IList<string>> highlights = default, IReadOnlyDictionary<string, object> additionalProperties = default)
         {
@@ -63,7 +63,7 @@ namespace CognitiveSearch
 
         /// <summary> Initializes new instance of SuggestResult class. </summary>
         /// <param name="text"> The text of the suggestion result. </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.SuggestResult"/> instance for mocking. </returns>
         public static SuggestResult SuggestResult(string text = default, IReadOnlyDictionary<string, object> additionalProperties = default)
         {
