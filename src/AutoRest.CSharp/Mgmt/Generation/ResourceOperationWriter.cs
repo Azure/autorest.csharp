@@ -319,10 +319,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.";
             writer.WriteXmlDocumentation("returns", returnText);
 
-            var returnType = async
-                ? new CSharpType(typeof(AsyncPageable<>), itemType)
-                : new CSharpType(typeof(Pageable<>), itemType);
-            var asyncText = async ? "Async" : string.Empty;
+            var returnType = itemType.WrapPageable(async);
 
             var methodName = CreateMethodName(pagingMethod.Name, async);
             writer.Append($"public {returnType} {methodName}(");
@@ -350,15 +347,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
 
             var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-            var asyncText = async ? "async" : string.Empty;
-            var awaitText = async ? "await" : string.Empty;
             var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-            using (writer.Scope($"{asyncText} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
+            using (writer.Scope($"{AsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
                 // no null-checks because all are optional
                 WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
                 {
-                    writer.Append($"var response = {awaitText} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                    writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
                     foreach (var parameter in BuildParameterMapping(pagingMethod.Method).Where(p => IsMandatory(p.Parameter)))
                     {
                         writer.Append($"{parameter.ValueExpression}, ");
@@ -377,11 +372,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 nextPageFunctionName = "NextPageFunc";
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
-                using (writer.Scope($"{asyncText} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
+                using (writer.Scope($"{AsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
                     WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
                     {
-                        writer.Append($"var response = {awaitText} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
+                        writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
                         foreach (var parameter in BuildParameterMapping(pagingMethod.NextPageMethod).Where(p => IsMandatory(p.Parameter)))
                         {
                             writer.Append($"{parameter.ValueExpression}, ");
@@ -392,7 +387,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     });
                 }
             }
-            writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
+            writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
         private string GetRestClientName(OperationGroup operationGroup)
@@ -419,9 +414,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             CSharpType responseType = new CSharpType(typeof(Azure.Response<>), resource.Type);
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
-            var asyncText = async ? "async" : string.Empty;
-            var overrideText = isInheritedMethod ? "override" : string.Empty;
-            writer.Append($"public {asyncText} {overrideText} {responseType} {CreateMethodName("Get", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod)} {responseType} {CreateMethodName("Get", async)}(");
 
             if (!isInheritedMethod)
             {
@@ -493,11 +486,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             CSharpType responseType = new CSharpType(typeof(IEnumerable<LocationData>));
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
-            var asyncText = async ? "async" : string.Empty;
-            var awaitText = async ? "await" : string.Empty;
-            using (writer.Scope($"public {asyncText} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
+            using (writer.Scope($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
-                writer.Append($"return {awaitText} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
+                writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
                 if (async)
                 {
                     writer.Append($".ConfigureAwait(false)");
@@ -528,8 +519,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public {asyncText} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.AddTag", Array.Empty<DiagnosticAttribute>());
@@ -579,8 +569,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
             CSharpType responseType = async ? new CSharpType(typeof(Task<>), lroObjectType) : lroObjectType;
 
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public {asyncText} {responseType} {CreateMethodName("StartAddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default) ");
+            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("StartAddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default) ");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (key == null)"))
@@ -636,8 +625,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public {asyncText} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.SetTags", Array.Empty<DiagnosticAttribute>());
@@ -686,8 +674,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
             CSharpType responseType = async ? new CSharpType(typeof(Task<>), lroObjectType) : lroObjectType;
 
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public {asyncText} {responseType} {CreateMethodName("StartSetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("StartSetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (tags == null)"))
@@ -740,8 +727,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public {asyncText} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 Diagnostic diagnostic = new Diagnostic($"{resourceOperation.Type.Name}.RemoveTag", Array.Empty<DiagnosticAttribute>());
@@ -790,8 +776,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
             CSharpType responseType = async ? new CSharpType(typeof(Task<>), lroObjectType) : lroObjectType;
 
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public {asyncText} {responseType} {CreateMethodName("StartRemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
+            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("StartRemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
             {
                 using (writer.Scope($"if (key == null)"))
@@ -883,9 +868,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 typeof(Response);
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
-            var asyncText = async ? "async" : string.Empty;
-
-            writer.Append($"public {asyncText} {responseType} {CreateMethodName(clientMethod.Name, async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}(");
             foreach (Parameter parameter in nonPathParameters)
             {
                 writer.WriteParameter(parameter);
@@ -960,8 +943,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 lroObjectType : typeof(Azure.Operation);
             responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
 
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"public {asyncText} {responseType} {CreateMethodName($"Start{clientMethod.Name}", async)}(");
+            writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName($"Start{clientMethod.Name}", async)}(");
             foreach (Parameter parameter in nonPathParameters)
             {
                 writer.WriteParameter(parameter);
@@ -1084,9 +1066,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
 
-            var methodName = CreateMethodName(clientMethod.Name, async);
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"{clientMethod.Accessibility} virtual {asyncText} {responseType} {methodName}(");
+            writer.Append($"{clientMethod.Accessibility} virtual {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}(");
 
             foreach (Parameter parameter in nonPathParameters)
             {

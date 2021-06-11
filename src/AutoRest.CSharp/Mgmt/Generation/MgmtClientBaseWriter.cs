@@ -89,10 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{resourceType.Name}\" /> that may take multiple service requests to iterate over.";
             writer.WriteXmlDocumentation("returns", returnText);
 
-            var returnType = async
-                ? new CSharpType(typeof(AsyncPageable<>), resourceType)
-                : new CSharpType(typeof(Pageable<>), resourceType);
-            var asyncText = async ? "Async" : string.Empty;
+            var returnType = resourceType.WrapPageable(async);
 
             writer.Append($"public {returnType} {methodName}(");
             foreach (var param in nonPathParameters)
@@ -105,6 +102,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 WriteContainerPagingOperation(writer, listMethod, async, resourceType, converter);
             }
+        }
+
+        protected internal string AsyncKeyword(bool async)
+        {
+            return async ? "async" : string.Empty;
+        }
+
+        protected internal string AwaitKeyword(bool async)
+        {
+            return async ? "await" : string.Empty;
+        }
+
+        protected internal string OverrideKeyword(bool isInheritedMethod)
+        {
+            return isInheritedMethod ? "override" : string.Empty;
         }
 
         /// <summary>
@@ -126,15 +138,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
 
             var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-            var asyncText = async ? "async" : string.Empty;
-            var awaitText = async ? "await" : string.Empty;
             var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-            using (writer.Scope($"{asyncText} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
+            using (writer.Scope($"{AsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
                 // no null-checks because all are optional
                 WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
                 {
-                    writer.Append($"var response = {awaitText} {RestClientField}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                    writer.Append($"var response = {AwaitKeyword(async)} {RestClientField}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
                     foreach (var parameter in BuildParameterMapping(pagingMethod.Method).Where(p => IsMandatory(p.Parameter)))
                     {
                         writer.Append($"{parameter.ValueExpression}, ");
@@ -155,11 +165,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 nextPageFunctionName = "NextPageFunc";
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
-                using (writer.Scope($"{asyncText} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
+                using (writer.Scope($"{AsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
                     WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
                     {
-                        writer.Append($"var response = {awaitText} {RestClientField}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
+                        writer.Append($"var response = {AwaitKeyword(async)} {RestClientField}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
                         foreach (var parameter in BuildParameterMapping(pagingMethod.NextPageMethod).Where(p => IsMandatory(p.Parameter)))
                         {
                             writer.Append($"{parameter.ValueExpression}, ");
@@ -171,7 +181,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     });
                 }
             }
-            writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
+            writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
         /// <summary>

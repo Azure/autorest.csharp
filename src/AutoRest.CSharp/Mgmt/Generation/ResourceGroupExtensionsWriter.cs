@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -14,15 +15,15 @@ using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
-namespace AutoRest.CSharp.Generation.Writers
+namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class ResourceGroupExtensionsWriter
+    internal class ResourceGroupExtensionsWriter : MgmtExtensionWriter
     {
         protected string Description = "A class to add extension methods to ResourceGroup.";
         protected string Accessibility = "public";
         protected string Type = "ResourceGroupExtensions";
 
-        public void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
+        public override void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context)
         {
             using (writer.Namespace(context.DefaultNamespace))
             {

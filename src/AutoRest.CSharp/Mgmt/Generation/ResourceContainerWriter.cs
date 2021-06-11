@@ -350,8 +350,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"var filters = new {typeof(ResourceFilterCollection)}({_resource.Type}.ResourceType);");
                     _writer.Line($"filters.SubstringFilter = nameFilter;");
-                    string asyncText = async ? "Async" : string.Empty;
-                    _writer.Line($"return {typeof(ResourceListOperations)}.ListAtContext{asyncText}({_parentProperty} as {typeof(ResourceGroupOperations)}, filters, top, cancellationToken);");
+                    _writer.Line($"return {typeof(ResourceListOperations)}.{CreateMethodName("ListAtContext", async)}({_parentProperty} as {typeof(ResourceGroupOperations)}, filters, top, cancellationToken);");
                 });
             }
         }
