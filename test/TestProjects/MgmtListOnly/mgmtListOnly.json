@@ -251,6 +251,88 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/responseNotCalledValue": {
+            "get": {
+                "tags": [
+                    "ResponseNotCalledValue"
+                ],
+                "operationId": "ResponseNotCalledValue_List",
+                "description": "Retrieves information about an availability set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "availabilitySetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the availability set."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseNotCalledValueListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "itemName": "notValue",
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/responseNotCalledValueNoPage": {
+            "get": {
+                "tags": [
+                    "ResponseNotCalledValueNoPage"
+                ],
+                "operationId": "ResponseNotCalledValueNoPage_List",
+                "description": "Retrieves information about an availability set.",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the resource group."
+                    },
+                    {
+                        "name": "availabilitySetName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The name of the availability set."
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ResponseNotCalledValueListNoPageResult"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets": {
             "get": {
                 "tags": [
@@ -389,6 +471,31 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/listApiKeys": {
+            "post": {
+                "tags": [
+                    "ApiKeys"
+                ],
+                "operationId": "ApiKeys_List",
+                "description": "List API keys",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ApiKeysListResult"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -470,6 +577,40 @@
                 }
             },
             "description": "The instance view of a resource."
+        },
+        "ResponseNotCalledValueListResult": {
+            "properties": {
+                "notValue": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AvailabilitySetChild"
+                    },
+                    "description": "The list of availability sets child"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URI to fetch the next page of AvailabilitySetsChild. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+                }
+            },
+            "required": [
+                "notValue"
+            ],
+            "description": "The List Availability Set Child operation response."
+        },
+        "ResponseNotCalledValueListNoPageResult": {
+            "properties": {
+                "notValue": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AvailabilitySetChild"
+                    },
+                    "description": "The list of availability sets child"
+                }
+            },
+            "required": [
+                "notValue"
+            ],
+            "description": "The List Availability Set Child operation response."
         },
         "AvailabilitySetChildListResult": {
             "properties": {
@@ -564,6 +705,27 @@
                         "type": "string"
                     },
                     "description": "Resource tags"
+                }
+            }
+        },
+        "ApiKeysListResult": {
+            "description": "Result of listing API keys.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ApiKey"
+                    },
+                    "description": "keys"
+                }
+            }
+        },
+        "ApiKey": {
+            "description": "API key.",
+            "properties": {
+                "foo": {
+                    "type": "string",
+                    "description": "specifies the bar"
                 }
             }
         },

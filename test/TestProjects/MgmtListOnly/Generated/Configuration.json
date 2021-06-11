@@ -12,12 +12,21 @@
   "skip-csproj-packagereference": true,
   "OperationGroupToResourceType": {
     "AvailabilitySetChild": "Microsoft.Compute/availabilitySets/availabilitySetChild",
+    "ResponseNotCalledValue": "Microsoft.Compute/availabilitySets/responseNotCalledValue",
+    "ResponseNotCalledValueNoPage": "Microsoft.Compute/availabilitySets/responseNotCalledValueNoPage",
     "AvailabilitySetFeatures": "Microsoft.Compute/availabilitySetsFeatures",
-    "AvailabilitySetsNonPageableFeatures": "Microsoft.Compute/availabilitySetsNonPageableFeatures"
+    "AvailabilitySetsNonPageableFeatures": "Microsoft.Compute/availabilitySetsNonPageableFeatures",
+    "ApiKeys": "Microsoft.Compute/apiKeys"
+  },
+  "OperationGroupToResource": {
+    "ApiKeys": "NonResource"
   },
   "OperationGroupToParent": {
     "AvailabilitySetChild": "AvailabilitySets",
+    "ResponseNotCalledValue": "AvailabilitySets",
+    "ResponseNotCalledValueNoPage": "AvailabilitySets",
     "AvailabilitySetFeatures": "subscriptions",
-    "AvailabilitySetsNonPageableFeatures": "subscriptions"
+    "AvailabilitySetsNonPageableFeatures": "subscriptions",
+    "ApiKeys": "subscriptions"
   }
 }

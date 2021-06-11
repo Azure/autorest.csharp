@@ -211,5 +211,80 @@ namespace MgmtListOnly
         }
 
         #endregion
+        #region ApiKeys
+        private static ApiKeysRestOperations GetApiKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new ApiKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        /// <summary> List API keys. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> placeholder. </returns>
+        public static Task<Response<ApiKeysListResult>> ListApiKeysAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        {
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetApiKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                return ListApiKeysAsync(clientDiagnostics, restOperations, cancellationToken);
+            }
+            );
+        }
+
+        /// <summary> List API keys. </summary>
+        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="restOperations"> Resource client operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        private static async Task<Response<ApiKeysListResult>> ListApiKeysAsync(ClientDiagnostics _clientDiagnostics, ApiKeysRestOperations restOperations, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ApiKeys.ListApiKeys");
+            scope.Start();
+            try
+            {
+                return await restOperations.ListAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> List API keys. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> placeholder. </returns>
+        public static Response<ApiKeysListResult> ListApiKeys(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        {
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetApiKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                return ListApiKeys(clientDiagnostics, restOperations, cancellationToken);
+            }
+            );
+        }
+
+        /// <summary> List API keys. </summary>
+        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="restOperations"> Resource client operations. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        private static Response<ApiKeysListResult> ListApiKeys(ClientDiagnostics _clientDiagnostics, ApiKeysRestOperations restOperations, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("ApiKeys.ListApiKeys");
+            scope.Start();
+            try
+            {
+                return restOperations.List(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        #endregion
     }
 }
