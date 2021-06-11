@@ -27,7 +27,7 @@ namespace SupersetFlattenInheritance
         internal static SubResourceModel1Data DeserializeSubResourceModel1Data(JsonElement element)
         {
             Optional<string> foo = default;
-            ResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"))

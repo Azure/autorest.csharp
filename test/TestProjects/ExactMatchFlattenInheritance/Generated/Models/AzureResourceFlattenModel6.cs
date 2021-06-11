@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> This model is x-ms-azure-resource, and is exactly a SubResource type. </summary>
-    public partial class AzureResourceFlattenModel6 : SubResource
+    public partial class AzureResourceFlattenModel6 : SubResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel6. </summary>
         internal AzureResourceFlattenModel6()
