@@ -158,7 +158,7 @@ namespace SubscriptionExtensions
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListOvenByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(OvenOperations.ResourceType);
@@ -171,7 +171,7 @@ namespace SubscriptionExtensions
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListOvenByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(OvenOperations.ResourceType);

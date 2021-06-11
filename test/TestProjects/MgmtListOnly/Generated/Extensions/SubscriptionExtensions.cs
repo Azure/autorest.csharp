@@ -136,6 +136,7 @@ namespace MgmtListOnly
         }
 
         #endregion
+
         #region AvailabilitySetNonPageableFeature
         private static AvailabilitySetsNonPageableFeaturesRestOperations GetAvailabilitySetsNonPageableFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
@@ -158,12 +159,12 @@ namespace MgmtListOnly
         }
 
         /// <summary> Lists all availability sets features in subscription. </summary>
-        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static async Task<Response<AvailabilitySetNonPageableFeatureListResult>> TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(ClientDiagnostics _clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
+        private static async Task<Response<AvailabilitySetNonPageableFeatureListResult>> TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(ClientDiagnostics clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetNonPageableFeature.TestFeaturesMethodAvailabilitySetNonPageableFeature");
+            using var scope = clientDiagnostics.CreateScope("AvailabilitySetNonPageableFeature.TestFeaturesMethodAvailabilitySetNonPageableFeature");
             scope.Start();
             try
             {
@@ -192,12 +193,12 @@ namespace MgmtListOnly
         }
 
         /// <summary> Lists all availability sets features in subscription. </summary>
-        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Response<AvailabilitySetNonPageableFeatureListResult> TestFeaturesMethodAvailabilitySetNonPageableFeature(ClientDiagnostics _clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
+        private static Response<AvailabilitySetNonPageableFeatureListResult> TestFeaturesMethodAvailabilitySetNonPageableFeature(ClientDiagnostics clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetNonPageableFeature.TestFeaturesMethodAvailabilitySetNonPageableFeature");
+            using var scope = clientDiagnostics.CreateScope("AvailabilitySetNonPageableFeature.TestFeaturesMethodAvailabilitySetNonPageableFeature");
             scope.Start();
             try
             {
@@ -211,6 +212,7 @@ namespace MgmtListOnly
         }
 
         #endregion
+
         #region ApiKeys
         private static ApiKeysRestOperations GetApiKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
@@ -233,12 +235,12 @@ namespace MgmtListOnly
         }
 
         /// <summary> List API keys. </summary>
-        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static async Task<Response<ApiKeysListResult>> ListApiKeysAsync(ClientDiagnostics _clientDiagnostics, ApiKeysRestOperations restOperations, CancellationToken cancellationToken = default)
+        private static async Task<Response<ApiKeysListResult>> ListApiKeysAsync(ClientDiagnostics clientDiagnostics, ApiKeysRestOperations restOperations, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ApiKeys.ListApiKeys");
+            using var scope = clientDiagnostics.CreateScope("ApiKeys.ListApiKeys");
             scope.Start();
             try
             {
@@ -267,12 +269,12 @@ namespace MgmtListOnly
         }
 
         /// <summary> List API keys. </summary>
-        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Response<ApiKeysListResult> ListApiKeys(ClientDiagnostics _clientDiagnostics, ApiKeysRestOperations restOperations, CancellationToken cancellationToken = default)
+        private static Response<ApiKeysListResult> ListApiKeys(ClientDiagnostics clientDiagnostics, ApiKeysRestOperations restOperations, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("ApiKeys.ListApiKeys");
+            using var scope = clientDiagnostics.CreateScope("ApiKeys.ListApiKeys");
             scope.Start();
             try
             {

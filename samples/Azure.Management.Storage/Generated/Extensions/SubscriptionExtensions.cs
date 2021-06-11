@@ -106,6 +106,7 @@ namespace Azure.Management.Storage
         }
 
         #endregion
+
         #region Usage
         private static UsagesRestOperations GetUsagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {

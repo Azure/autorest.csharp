@@ -148,7 +148,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListAvailabilitySetByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(AvailabilitySetOperations.ResourceType);
@@ -161,7 +161,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListAvailabilitySetByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(AvailabilitySetOperations.ResourceType);
@@ -295,7 +295,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListProximityPlacementGroupByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ProximityPlacementGroupOperations.ResourceType);
@@ -308,7 +308,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListProximityPlacementGroupByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ProximityPlacementGroupOperations.ResourceType);
@@ -442,7 +442,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListDedicatedHostGroupByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(DedicatedHostGroupOperations.ResourceType);
@@ -455,7 +455,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListDedicatedHostGroupByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(DedicatedHostGroupOperations.ResourceType);
@@ -589,7 +589,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListSshPublicKeyByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(SshPublicKeyOperations.ResourceType);
@@ -602,7 +602,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListSshPublicKeyByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(SshPublicKeyOperations.ResourceType);
@@ -740,7 +740,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListVirtualMachineByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(VirtualMachineOperations.ResourceType);
@@ -753,7 +753,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListVirtualMachineByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(VirtualMachineOperations.ResourceType);
@@ -887,7 +887,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListVirtualMachineScaleSetByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(VirtualMachineScaleSetOperations.ResourceType);
@@ -900,7 +900,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListVirtualMachineScaleSetByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(VirtualMachineScaleSetOperations.ResourceType);
@@ -1054,6 +1054,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         #endregion
+
         #region VirtualMachineSize
         private static VirtualMachineSizesRestOperations GetVirtualMachineSizesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
@@ -1169,6 +1170,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         #endregion
+
         #region LogAnalytics
         private static LogAnalyticsRestOperations GetLogAnalyticsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {

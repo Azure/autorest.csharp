@@ -29,8 +29,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> placeholder. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <returns> placeholder. </returns>
         public static Task<Response<ExactMatchModel2>> PutExactMatchModel2sAsync(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
@@ -55,14 +55,14 @@ namespace ExactMatchInheritance
             );
         }
 
-        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        private static async Task<Response<ExactMatchModel2>> PutExactMatchModel2sAsync(ClientDiagnostics _clientDiagnostics, ExactMatchModel2SRestOperations restOperations, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        private static async Task<Response<ExactMatchModel2>> PutExactMatchModel2sAsync(ClientDiagnostics clientDiagnostics, ExactMatchModel2SRestOperations restOperations, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -77,7 +77,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel2s.PutExactMatchModel2s");
+            using var scope = clientDiagnostics.CreateScope("ExactMatchModel2s.PutExactMatchModel2s");
             scope.Start();
             try
             {
@@ -95,8 +95,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> placeholder. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <returns> placeholder. </returns>
         public static Response<ExactMatchModel2> PutExactMatchModel2s(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
@@ -121,14 +121,14 @@ namespace ExactMatchInheritance
             );
         }
 
-        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        private static Response<ExactMatchModel2> PutExactMatchModel2s(ClientDiagnostics _clientDiagnostics, ExactMatchModel2SRestOperations restOperations, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
+        private static Response<ExactMatchModel2> PutExactMatchModel2s(ClientDiagnostics clientDiagnostics, ExactMatchModel2SRestOperations restOperations, string resourceGroupName, string exactMatchModel2SName, ExactMatchModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -143,7 +143,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel2s.PutExactMatchModel2s");
+            using var scope = clientDiagnostics.CreateScope("ExactMatchModel2s.PutExactMatchModel2s");
             scope.Start();
             try
             {
@@ -157,6 +157,7 @@ namespace ExactMatchInheritance
         }
 
         #endregion
+
         #region ExactMatchModel4s
         private static ExactMatchModel4SRestOperations GetExactMatchModel4SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
@@ -168,8 +169,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> placeholder. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <returns> placeholder. </returns>
         public static Task<Response<ExactMatchModel4>> PutExactMatchModel4sAsync(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
@@ -194,14 +195,14 @@ namespace ExactMatchInheritance
             );
         }
 
-        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/>, or <paramref name="parameters"/> is null. </exception>
-        private static async Task<Response<ExactMatchModel4>> PutExactMatchModel4sAsync(ClientDiagnostics _clientDiagnostics, ExactMatchModel4SRestOperations restOperations, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        private static async Task<Response<ExactMatchModel4>> PutExactMatchModel4sAsync(ClientDiagnostics clientDiagnostics, ExactMatchModel4SRestOperations restOperations, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -216,7 +217,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel4s.PutExactMatchModel4s");
+            using var scope = clientDiagnostics.CreateScope("ExactMatchModel4s.PutExactMatchModel4s");
             scope.Start();
             try
             {
@@ -234,8 +235,8 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> placeholder. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/>, or <paramref name="parameters"/> is null. </exception>
+        /// <returns> placeholder. </returns>
         public static Response<ExactMatchModel4> PutExactMatchModel4s(this SubscriptionOperations subscription, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
@@ -260,14 +261,14 @@ namespace ExactMatchInheritance
             );
         }
 
-        /// <param name="_clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="restOperations"> Resource client operations. </param>
         /// <param name="resourceGroupName"> The String to use. </param>
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="parameters"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="exactMatchModel4SName"/>, or <paramref name="parameters"/> is null. </exception>
-        private static Response<ExactMatchModel4> PutExactMatchModel4s(ClientDiagnostics _clientDiagnostics, ExactMatchModel4SRestOperations restOperations, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
+        private static Response<ExactMatchModel4> PutExactMatchModel4s(ClientDiagnostics clientDiagnostics, ExactMatchModel4SRestOperations restOperations, string resourceGroupName, string exactMatchModel4SName, ExactMatchModel4 parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
@@ -282,7 +283,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("ExactMatchModel4s.PutExactMatchModel4s");
+            using var scope = clientDiagnostics.CreateScope("ExactMatchModel4s.PutExactMatchModel4s");
             scope.Start();
             try
             {

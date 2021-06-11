@@ -148,7 +148,7 @@ namespace MgmtParent
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListAvailabilitySetByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(AvailabilitySetOperations.ResourceType);
@@ -161,7 +161,7 @@ namespace MgmtParent
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListAvailabilitySetByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(AvailabilitySetOperations.ResourceType);

@@ -5,6 +5,12 @@
 
 #nullable disable
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
+using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
 namespace SupersetFlattenInheritance
@@ -110,6 +116,238 @@ namespace SupersetFlattenInheritance
         {
             return new TrackedResourceModel2Container(resourceGroup);
         }
+        #endregion
+
+        #region NonResourceModel1s
+        private static NonResourceModel1SRestOperations GetNonResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="nonResourceModel1SName"> The String to use. </param>
+        /// <param name="parameters"> The NonResourceModel1 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Task<Response<NonResourceModel1>> PutNonResourceModel1sAsync(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        {
+            if (nonResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                return PutNonResourceModel1sAsync(clientDiagnostics, restOperations, resourceGroup.Id.Name, nonResourceModel1SName, parameters, cancellationToken);
+            }
+            );
+        }
+
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="restOperations"> Resource client operations. </param>
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="nonResourceModel1SName"> The String to use. </param>
+        /// <param name="parameters"> The NonResourceModel1 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="nonResourceModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
+        private static async Task<Response<NonResourceModel1>> PutNonResourceModel1sAsync(ClientDiagnostics clientDiagnostics, NonResourceModel1SRestOperations restOperations, string resourceGroupName, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (nonResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("NonResourceModel1s.PutNonResourceModel1s");
+            scope.Start();
+            try
+            {
+                return await restOperations.PutAsync(resourceGroupName, nonResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="nonResourceModel1SName"> The String to use. </param>
+        /// <param name="parameters"> The NonResourceModel1 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Response<NonResourceModel1> PutNonResourceModel1s(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        {
+            if (nonResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                return PutNonResourceModel1s(clientDiagnostics, restOperations, resourceGroup.Id.Name, nonResourceModel1SName, parameters, cancellationToken);
+            }
+            );
+        }
+
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="restOperations"> Resource client operations. </param>
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="nonResourceModel1SName"> The String to use. </param>
+        /// <param name="parameters"> The NonResourceModel1 to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="nonResourceModel1SName"/>, or <paramref name="parameters"/> is null. </exception>
+        private static Response<NonResourceModel1> PutNonResourceModel1s(ClientDiagnostics clientDiagnostics, NonResourceModel1SRestOperations restOperations, string resourceGroupName, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (nonResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+            }
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("NonResourceModel1s.PutNonResourceModel1s");
+            scope.Start();
+            try
+            {
+                return restOperations.Put(resourceGroupName, nonResourceModel1SName, parameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="nonResourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Task<Response<NonResourceModel1>> GetNonResourceModel1sAsync(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            if (nonResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                return GetNonResourceModel1sAsync(clientDiagnostics, restOperations, resourceGroup.Id.Name, nonResourceModel1SName, cancellationToken);
+            }
+            );
+        }
+
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="restOperations"> Resource client operations. </param>
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="nonResourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="nonResourceModel1SName"/> is null. </exception>
+        private static async Task<Response<NonResourceModel1>> GetNonResourceModel1sAsync(ClientDiagnostics clientDiagnostics, NonResourceModel1SRestOperations restOperations, string resourceGroupName, string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (nonResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("NonResourceModel1s.GetNonResourceModel1s");
+            scope.Start();
+            try
+            {
+                return await restOperations.GetAsync(resourceGroupName, nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <param name="nonResourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Response<NonResourceModel1> GetNonResourceModel1s(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            if (nonResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+            }
+
+            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
+                return GetNonResourceModel1s(clientDiagnostics, restOperations, resourceGroup.Id.Name, nonResourceModel1SName, cancellationToken);
+            }
+            );
+        }
+
+        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
+        /// <param name="restOperations"> Resource client operations. </param>
+        /// <param name="resourceGroupName"> The String to use. </param>
+        /// <param name="nonResourceModel1SName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="nonResourceModel1SName"/> is null. </exception>
+        private static Response<NonResourceModel1> GetNonResourceModel1s(ClientDiagnostics clientDiagnostics, NonResourceModel1SRestOperations restOperations, string resourceGroupName, string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        {
+            if (resourceGroupName == null)
+            {
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (nonResourceModel1SName == null)
+            {
+                throw new ArgumentNullException(nameof(nonResourceModel1SName));
+            }
+
+            using var scope = clientDiagnostics.CreateScope("NonResourceModel1s.GetNonResourceModel1s");
+            scope.Start();
+            try
+            {
+                return restOperations.Get(resourceGroupName, nonResourceModel1SName, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         #endregion
     }
 }
