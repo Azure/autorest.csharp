@@ -15,7 +15,7 @@ namespace AdditionalPropertiesEx
     {
         /// <summary> Initializes new instance of OutputAdditionalPropertiesModel class. </summary>
         /// <param name="id"> . </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModel"/> instance for mocking. </returns>
         public static OutputAdditionalPropertiesModel OutputAdditionalPropertiesModel(int id = default, IReadOnlyDictionary<string, string> additionalProperties = default)
         {
@@ -25,7 +25,7 @@ namespace AdditionalPropertiesEx
 
         /// <summary> Initializes new instance of OutputAdditionalPropertiesModelStruct structure. </summary>
         /// <param name="id"> . </param>
-        /// <param name="additionalProperties"> . </param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
         /// <returns> A new <see cref="Models.OutputAdditionalPropertiesModelStruct"/> instance for mocking. </returns>
         public static OutputAdditionalPropertiesModelStruct OutputAdditionalPropertiesModelStruct(int id = default, IReadOnlyDictionary<string, string> additionalProperties = default)
         {

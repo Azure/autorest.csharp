@@ -41,7 +41,7 @@ namespace SubscriptionExtensions
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static AsyncPageable<Oven> ListOvenAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options, pipeline) =>
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -99,7 +99,7 @@ namespace SubscriptionExtensions
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
         public static Pageable<Oven> ListOven(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.ListResources((baseUri, credential, options, pipeline) =>
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);

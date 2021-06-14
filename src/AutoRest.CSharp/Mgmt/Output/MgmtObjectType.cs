@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
@@ -111,6 +112,20 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             return operationGroup;
+        }
+
+        public override ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
+        {
+            if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
+            {
+                if (Inherits?.Implementation is SystemObjectType)
+                {
+                    return GetPropertyBySerializedName(property.SerializedName, includeParents);
+                }
+                throw new InvalidOperationException($"Unable to find object property for schema property {property.SerializedName} in schema {DefaultName}");
+            }
+
+            return objectProperty;
         }
     }
 }

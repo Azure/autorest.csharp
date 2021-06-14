@@ -75,11 +75,14 @@ namespace AutoRest.CSharp.Output.Models.Types
                     return _additionalPropertiesProperty;
                 }
 
+                // We use a $ prefix here as AdditionalProperties comes from a swagger concept
+                // and not a swagger model/operation name to disambiguate from a possible property with
+                // the same name.
                 SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
-                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "internal", memberMapping?.ExistingMember, _typeFactory),
-                    string.Empty,
+                    BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", memberMapping?.ExistingMember, _typeFactory),
+                    "Additional Properties",
                     true,
                     null
                     );
@@ -522,7 +525,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        public ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
+        public virtual ObjectTypeProperty GetPropertyForSchemaProperty(Property property, bool includeParents = false)
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty == property, out ObjectTypeProperty? objectProperty, includeParents))
             {
@@ -554,7 +557,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return objectProperty;
         }
 
-        private bool TryGetPropertyForSchemaProperty(Func<ObjectTypeProperty, bool> propertySelector, [NotNullWhen(true)] out ObjectTypeProperty? objectProperty, bool includeParents = false)
+        protected bool TryGetPropertyForSchemaProperty(Func<ObjectTypeProperty, bool> propertySelector, [NotNullWhen(true)] out ObjectTypeProperty? objectProperty, bool includeParents = false)
         {
             objectProperty = null;
 
