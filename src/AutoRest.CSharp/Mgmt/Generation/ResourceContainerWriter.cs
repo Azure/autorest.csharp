@@ -14,6 +14,7 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Core;
@@ -38,18 +39,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private ResourceData _resourceData;
         private Resource _resource;
         private ResourceOperation _resourceOperation;
-        private MgmtOutputLibrary _library;
+        private BuildContext<MgmtOutputLibrary> _context;
 
-        public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, MgmtOutputLibrary library)
+        public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = writer;
             _resourceContainer = resourceContainer;
             var operationGroup = resourceContainer.OperationGroup;
-            _resourceData = library.GetResourceData(operationGroup);
-            _restClient = library.GetRestClient(operationGroup);
-            _resource = library.GetArmResource(operationGroup);
-            _resourceOperation = library.GetResourceOperation(operationGroup);
-            _library = library;
+            _resourceData = context.Library.GetResourceData(operationGroup);
+            _restClient = context.Library.GetRestClient(operationGroup);
+            _resource = context.Library.GetArmResource(operationGroup);
+            _resourceOperation = context.Library.GetResourceOperation(operationGroup);
+            _context = context;
         }
 
         public void WriteContainer()
@@ -62,9 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (_writer.Namespace(@namespace))
             {
                 _writer.WriteXmlDocumentationSummary(_resourceContainer.Description);
-                string baseClass = FindRestClientMethodByPrefix("Get", out _)
-                    ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
-                    : $"ContainerBase";
+                string baseClass = GetBaseType();
                 using (_writer.Scope($"{_resourceContainer.Declaration.Accessibility} partial class {cs.Name:D} : {baseClass}"))
                 {
                     WriteContainerCtors(_writer, _resourceContainer.Type.Name, "ResourceOperationsBase", "parent");
@@ -72,9 +71,26 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteIdProperty();
                     WriteContainerProperties(_writer, _resourceContainer.GetValidResourceValue());
                     WriteResourceOperations();
+                    WriteRemainingMethods();
                     WriteBuilders();
                 }
             }
+        }
+
+        private void WriteRemainingMethods()
+        {
+            foreach (var clientMethod in _resourceContainer.RemainingMethods)
+            {
+                WriteClientMethod(_writer, clientMethod, _resourceContainer.OperationGroup, _context, true);
+                WriteClientMethod(_writer, clientMethod, _resourceContainer.OperationGroup, _context, false);
+            }
+        }
+
+        protected virtual string GetBaseType()
+        {
+            return _resourceContainer.GetMethod != null
+                ? $"ResourceContainerBase<{_resourceContainer.ResourceIdentifierType}, {_resource.Type.Name}, {_resourceData.Type.Name}>"
+                : $"ContainerBase";
         }
 
         private void WriteIdProperty()
@@ -89,32 +105,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             _writer.LineRaw($"// Container level operations.");
 
-            // To generate resource operations, we need to find out the correct REST client methods to call.
-            // We must look for CreateOrUpdate by HTTP method because it may be named differently from `CreateOrUpdate`.
-            if (FindRestClientMethodByHttpMethod(RequestMethod.Put, out var restClientMethod))
+            if (_resourceContainer.PutMethod != null)
             {
-                WriteCreateOrUpdateVariants(restClientMethod);
+                WriteCreateOrUpdateVariants(_resourceContainer.PutMethod);
             }
 
-            // We must look for Get by method name because HTTP GET may map to >1 methods (get/list)
-            if (FindRestClientMethodByPrefix("Get", out restClientMethod))
+            if (_resourceContainer.GetMethod != null)
             {
-                WriteGetVariants(restClientMethod);
+                WriteGetVariants(_resourceContainer.GetMethod.RestClientMethod);
             }
 
             WriteListVariants();
-        }
-
-        private bool FindRestClientMethodByHttpMethod(RequestMethod httpMethod, out RestClientMethod restMethod)
-        {
-            restMethod = _restClient!.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(httpMethod));
-            return restMethod != null;
-        }
-
-        private bool FindRestClientMethodByPrefix(string prefix, out RestClientMethod restMethod)
-        {
-            restMethod = _restClient!.Methods.FirstOrDefault(method => method.Name.StartsWith(prefix, StringComparison.InvariantCultureIgnoreCase));
-            return restMethod != null;
         }
 
         private void WriteCreateOrUpdateVariants(RestClientMethod restClientMethod)
@@ -150,8 +151,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             var isLongRunning = restClientMethod.Operation.IsLongRunning;
             CSharpType lroObjectType = isLongRunning
-                ? _library.GetLongRunningOperation(restClientMethod.Operation).Type
-                : _library.GetNonLongRunningOperation(restClientMethod.Operation).Type;
+                ? _context.Library.GetLongRunningOperation(restClientMethod.Operation).Type
+                : _context.Library.GetNonLongRunningOperation(restClientMethod.Operation).Type;
 
             _writer.Line();
             _writer.WriteXmlDocumentationSummary($"The operation to create or update a {_resource.Type.Name}. Please note some properties can be set only during creation.");
@@ -297,7 +298,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 _writer.Line($"cancellationToken: cancellationToken);");
                 _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({_parentProperty}, response.Value), response.GetRawResponse());");
-            }, isOverride: true);
+            }, isOverride: GetBaseType() != "ContainerBase");
 
             _writer.Line();
             WriteContainerMethodScope(true, $"{typeof(Task)}<{typeof(Response)}<{_resource.Type.Name}>>", "Get", passThruParameters, writer =>
@@ -310,27 +311,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
                 _writer.Line($"return {typeof(Response)}.FromValue(new {_resource.Type}({_parentProperty}, response.Value), response.GetRawResponse());");
-            }, isOverride: true);
+            }, isOverride: GetBaseType() != "ContainerBase");
         }
 
         private void WriteListVariants()
         {
-            //.Select(value => new {resourceType}({_parentProperty}, value)
-            var pagingMethod = FindListPagingMethod();
-            if (pagingMethod != null)
+            if (_resourceContainer.ListMethod != null)
             {
-                WriteList(_writer, false, _resource.Type, pagingMethod, $".Select(value => new {_resource.Type.Name}({_parentProperty}, value))");
-                WriteList(_writer, true, _resource.Type, pagingMethod, $".Select(value => new {_resource.Type.Name}({_parentProperty}, value))");
+                WriteList(_writer, false, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}({_parentProperty}, value))");
+                WriteList(_writer, true, _resource.Type, _resourceContainer.ListMethod, $".Select(value => new {_resource.Type.Name}({_parentProperty}, value))");
             }
+
             WriteListAsGenericResource(async: false);
             WriteListAsGenericResource(async: true);
-        }
-
-        private PagingMethod FindListPagingMethod()
-        {
-            return _resourceContainer.PagingMethods.FirstOrDefault(m => m.Name.Equals("ListByResourceGroup", StringComparison.InvariantCultureIgnoreCase))
-                ?? _resourceContainer.PagingMethods.FirstOrDefault(m => m.Name.Equals("List", StringComparison.InvariantCultureIgnoreCase))
-                ?? _resourceContainer.PagingMethods.FirstOrDefault(m => m.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase));
         }
 
         private void WriteListAsGenericResource(bool async)

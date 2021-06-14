@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample
     public partial class DedicatedHostOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, DedicatedHost>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal DedicatedHostsRestOperations RestClient { get; }
+        private DedicatedHostsRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="DedicatedHostOperations"/> class for mocking. </summary>
         protected DedicatedHostOperations()
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample
         protected internal DedicatedHostOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new DedicatedHostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/hostGroups/hosts";
@@ -45,7 +45,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new DedicatedHost(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -73,7 +73,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
@@ -81,7 +81,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
@@ -132,8 +132,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await RestClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostsDeleteOperation(_clientDiagnostics, Pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return new DedicatedHostsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -150,8 +150,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = RestClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return new DedicatedHostsDeleteOperation(_clientDiagnostics, Pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                return new DedicatedHostsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -223,8 +223,8 @@ namespace Azure.ResourceManager.Sample
                 var patchable = new DedicatedHostUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -254,8 +254,8 @@ namespace Azure.ResourceManager.Sample
                 var patchable = new DedicatedHostUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -322,8 +322,8 @@ namespace Azure.ResourceManager.Sample
             {
                 var patchable = new DedicatedHostUpdate();
                 patchable.Tags.ReplaceWith(tags);
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -350,8 +350,8 @@ namespace Azure.ResourceManager.Sample
             {
                 var patchable = new DedicatedHostUpdate();
                 patchable.Tags.ReplaceWith(tags);
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -420,8 +420,8 @@ namespace Azure.ResourceManager.Sample
                 var patchable = new DedicatedHostUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -450,8 +450,8 @@ namespace Azure.ResourceManager.Sample
                 var patchable = new DedicatedHostUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                return new DedicatedHostsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {

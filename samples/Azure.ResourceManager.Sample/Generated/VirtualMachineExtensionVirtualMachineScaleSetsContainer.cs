@@ -249,6 +249,41 @@ namespace Azure.ResourceManager.Sample
                 throw;
             }
         }
+        /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<VirtualMachineExtensionsListResult>> ListAsync(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsContainer.List");
+            scope.Start();
+            try
+            {
+                return await _restClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<VirtualMachineExtensionsListResult> List(string expand = null, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsContainer.List");
+            scope.Start();
+            try
+            {
+                return _restClient.List(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
 
         // Builders.
         // public ArmBuilder<ResourceGroupResourceIdentifier, VirtualMachineExtension, VirtualMachineExtensionData> Construct() { }

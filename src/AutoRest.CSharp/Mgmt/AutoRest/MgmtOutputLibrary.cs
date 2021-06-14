@@ -93,9 +93,25 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
-        public ResourceOperation GetResourceOperation(OperationGroup operationGroup) => EnsureResourceOperations()[ResourceType.Default][operationGroup];
+        public ResourceOperation GetResourceOperation(OperationGroup operationGroup)
+        {
+            ResourceOperation? result;
+            if (!EnsureResourceOperations()[ResourceType.Default].TryGetValue(operationGroup, out result))
+            {
+                result = EnsureResourceOperations()[ResourceType.Tuple][operationGroup];
+            }
+            return result;
+        }
 
-        public ResourceContainer GetResourceContainer(OperationGroup operationGroup) => EnsureResourceContainers()[ResourceType.Default][operationGroup];
+        public ResourceContainer GetResourceContainer(OperationGroup operationGroup)
+        {
+            ResourceContainer? result;
+            if (!EnsureResourceContainers()[ResourceType.Default].TryGetValue(operationGroup, out result))
+            {
+                result = EnsureResourceContainers()[ResourceType.Tuple][operationGroup];
+            }
+            return result;
+        }
 
         internal ResourceData? GetResourceDataFromSchema(string schemaName)
         {

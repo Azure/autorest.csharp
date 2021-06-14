@@ -27,6 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private BuildContext<MgmtOutputLibrary> _context;
         private ClientMethod[]? _methods;
         private PagingMethod[]? _pagingMethods;
+        private ClientMethod? _getMethod;
 
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
@@ -65,9 +66,16 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context.Library.GetResourceData(OperationGroup),
             _context.Configuration.MgmtConfiguration, false);
 
-        public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
+        public ClientMethod[] Methods => _methods ??= GetMethodsInScope();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
+
+        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name == "Get");
+
+        protected virtual ClientMethod[] GetMethodsInScope()
+        {
+            return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
+        }
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

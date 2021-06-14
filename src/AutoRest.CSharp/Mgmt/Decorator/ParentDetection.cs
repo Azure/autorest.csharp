@@ -120,6 +120,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             foreach (var operationsGroup in operationGroups)
             {
+                if (!operationsGroup.IsResource(config))
+                    continue;
+
                 if (operationsGroup.ParentResourceType(config) != null && !ResourceTypes.Contains(operationsGroup.ParentResourceType(config)))
                 {
                     throw new ArgumentException($"Could not set parent for operations group {operationsGroup.Key} with parent {operationsGroup.ParentResourceType(config)}. key Please add to readme.md");

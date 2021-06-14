@@ -19,7 +19,7 @@ namespace Azure.ResourceManager.Sample
     public partial class VirtualMachineExtensionOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachineExtension>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal VirtualMachineExtensionsRestOperations RestClient { get; }
+        private VirtualMachineExtensionsRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionOperations"/> class for mocking. </summary>
         protected VirtualMachineExtensionOperations()
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample
         protected internal VirtualMachineExtensionOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new VirtualMachineExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new VirtualMachineExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachines/extensions";
@@ -45,7 +45,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtension(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -62,7 +62,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, null, cancellationToken);
                 return Response.FromValue(new VirtualMachineExtension(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -81,7 +81,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtension(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -100,7 +100,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
                 return Response.FromValue(new VirtualMachineExtension(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -111,7 +111,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
@@ -119,7 +119,7 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
@@ -170,8 +170,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await RestClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachineExtensionsDeleteOperation(_clientDiagnostics, Pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -188,8 +188,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = RestClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
-                return new VirtualMachineExtensionsDeleteOperation(_clientDiagnostics, Pipeline, RestClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                return new VirtualMachineExtensionsDeleteOperation(_clientDiagnostics, Pipeline, _restClient.CreateDeleteRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -261,8 +261,8 @@ namespace Azure.ResourceManager.Sample
                 var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -292,8 +292,8 @@ namespace Azure.ResourceManager.Sample
                 var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -360,8 +360,8 @@ namespace Azure.ResourceManager.Sample
             {
                 var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(tags);
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -388,8 +388,8 @@ namespace Azure.ResourceManager.Sample
             {
                 var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(tags);
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -458,8 +458,8 @@ namespace Azure.ResourceManager.Sample
                 var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -488,43 +488,8 @@ namespace Azure.ResourceManager.Sample
                 var patchable = new VirtualMachineExtensionUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
-                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> The operation to get all extensions of a Virtual Machine. </summary>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<VirtualMachineExtensionsListResult>> ListAsync(string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.List");
-            scope.Start();
-            try
-            {
-                return await RestClient.ListAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> The operation to get all extensions of a Virtual Machine. </summary>
-        /// <param name="expand"> The expand expression to apply on the operation. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<VirtualMachineExtensionsListResult> List(string expand = null, CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionOperations.List");
-            scope.Start();
-            try
-            {
-                return RestClient.List(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                return new VirtualMachineExtensionsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {

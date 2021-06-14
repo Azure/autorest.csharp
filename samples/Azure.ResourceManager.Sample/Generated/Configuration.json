@@ -30,8 +30,8 @@
   },
   "OperationGroupToParent": {
     "LogAnalytics": "subscriptions",
-    "VirtualMachineExtensionImages": "Microsoft.Compute/locations/publishers",
-    "VirtualMachineImages": "Microsoft.Compute/locations",
+    "VirtualMachineExtensionImages": "subscriptions",
+    "VirtualMachineImages": "subscriptions",
     "VirtualMachineScaleSetVMExtensions": "Microsoft.Compute/virtualMachineScaleSets",
     "VirtualMachineScaleSetRollingUpgrades": "Microsoft.Compute/virtualMachineScaleSets"
   },
