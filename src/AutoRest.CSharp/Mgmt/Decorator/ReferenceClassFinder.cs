@@ -68,6 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static List<Type> PromoteGenericType(List<Type> output)
         {
+            bool swapped = false;
             for (int i = 0; i < output.Count; i++)
             {
                 if (output[i].IsGenericType)
@@ -83,10 +84,14 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             System.Type temp = output[j];
                             output[j] = output[i];
                             output[i] = temp;
+                            swapped = true;
                         }
                     }
                 }
             }
+            if (swapped)
+                return PromoteGenericType(output);
+
             return output;
         }
 
@@ -132,7 +137,15 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         else
                         {
                             if (baseType != typeof(object))
-                                rootHash.Add(baseType, new List<Node>() { node });
+                            {
+                                List<Node>? list;
+                                if (!rootHash.TryGetValue(baseType, out list))
+                                {
+                                    list = new List<Node>();
+                                    rootHash.Add(baseType, list);
+                                }
+                                list.Add(node);
+                            }
                         }
                         rootNodes.Add(node);
                     }

@@ -19,22 +19,18 @@ namespace AutoRest.TestServer.Tests.Mgmt
         [ReferenceType(typeof(int))]
         private class F<T> { }
         private class G : F<int> { }
+        private class H : F<int> { }
 
-        private static IList<Type> TestReferenceTypes => new List<Type>()
+        private static object[] TestReferenceTypes =
         {
-            typeof(A),
-            typeof(B),
-            typeof(C),
-            typeof(E),
-            typeof(D),
-            typeof(G),
-            typeof(F<>)
+            new Type[] { typeof(A), typeof(B), typeof(C), typeof(E), typeof(D), typeof(G), typeof(F<>) },
+            new Type[] { typeof(A), typeof(B), typeof(C), typeof(E), typeof(D), typeof(G), typeof(H), typeof(F<>) }
         };
 
-        [Test]
-        public void ValidateRootNodes()
+        [TestCaseSource(nameof(TestReferenceTypes))]
+        public void ValidateRootNodes(params Type[] referenceTypes)
         {
-            var rootNodes = ReferenceClassFinder.GetRootNodes(ReferenceClassFinder.ConvertGenericType(TestReferenceTypes));
+            var rootNodes = ReferenceClassFinder.GetRootNodes(ReferenceClassFinder.ConvertGenericType(new List<Type>(referenceTypes)));
             HashSet<Type> rootTypes = new HashSet<Type>();
             foreach (var node in rootNodes)
             {
@@ -46,10 +42,10 @@ namespace AutoRest.TestServer.Tests.Mgmt
             Assert.IsTrue(rootTypes.Contains(typeof(F<int>)), "Did not find type F<int> in the root list");
         }
 
-        [Test]
-        public void ValidateGenericOrder()
+        [TestCaseSource(nameof(TestReferenceTypes))]
+        public void ValidateGenericOrder(params Type[] referenceTypes)
         {
-            var orderedList = ReferenceClassFinder.GetOrderedList(TestReferenceTypes);
+            var orderedList = ReferenceClassFinder.GetOrderedList(new List<Type>(referenceTypes));
             bool foundGeneric = false;
             bool foundNonGeneric = false;
             foreach (var type in orderedList)
