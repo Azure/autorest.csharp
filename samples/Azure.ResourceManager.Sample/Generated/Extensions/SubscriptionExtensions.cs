@@ -609,24 +609,6 @@ namespace Azure.ResourceManager.Sample
         }
         #endregion
 
-        #region VirtualMachineExtensionImage
-        /// <summary> Gets an object representing a VirtualMachineExtensionImageContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
-        public static VirtualMachineExtensionImageContainer GetVirtualMachineExtensionImageContainer(this SubscriptionOperations subscription)
-        {
-            return new VirtualMachineExtensionImageContainer(subscription);
-        }
-        #endregion
-
-        #region VirtualMachineImage
-        /// <summary> Gets an object representing a VirtualMachineImageContainer along with the instance operations that can be performed on it. </summary>
-        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
-        public static VirtualMachineImageContainer GetVirtualMachineImageContainer(this SubscriptionOperations subscription)
-        {
-            return new VirtualMachineImageContainer(subscription);
-        }
-        #endregion
-
         #region VirtualMachine
         private static VirtualMachinesRestOperations GetVirtualMachinesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {

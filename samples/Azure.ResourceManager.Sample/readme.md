@@ -20,8 +20,8 @@ operation-group-to-resource-type:
    LogAnalytics: Microsoft.Compute/locations/logAnalytics
 operation-group-to-resource:
    Operations: NonResource
-   VirtualMachineExtensionImages: VirtualMachineExtensionImage
-   VirtualMachineImages: VirtualMachineImage
+   VirtualMachineExtensionImages: NonResource
+   VirtualMachineImages: NonResource
    Usage: NonResource
    VirtualMachineSizes: NonResource
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
