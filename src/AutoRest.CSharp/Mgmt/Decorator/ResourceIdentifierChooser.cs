@@ -12,7 +12,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.ResourceManager.Core;
 
-namespace AutoRest.CSharp.Mgmt.Generation
+namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class ResourceIdentifierChooser
     {
