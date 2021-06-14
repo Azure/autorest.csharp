@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific SubResourceModel1. </summary>
-    public partial class SubResourceModel1Operations : ResourceOperationsBase<ResourceIdentifier, SubResourceModel1>
+    public partial class SubResourceModel1Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SubResourceModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         internal SubResourceModel1SRestOperations RestClient { get; }
@@ -29,7 +29,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="SubResourceModel1Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal SubResourceModel1Operations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal SubResourceModel1Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             RestClient = new SubResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -37,7 +37,6 @@ namespace SupersetFlattenInheritance
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/subResourceModel1s";
         protected override ResourceType ValidResourceType => ResourceType;
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <inheritdoc />
         public async override Task<Response<SubResourceModel1>> GetAsync(CancellationToken cancellationToken = default)

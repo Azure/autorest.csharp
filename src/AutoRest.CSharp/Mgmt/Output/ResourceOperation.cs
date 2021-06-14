@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public Type ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(
             ResourceData,
-            _context.Configuration.MgmtConfiguration, false);
+            _context.Configuration.MgmtConfiguration);
 
         public ClientMethod[] Methods => _methods ??= GetMethodsInScope();
 

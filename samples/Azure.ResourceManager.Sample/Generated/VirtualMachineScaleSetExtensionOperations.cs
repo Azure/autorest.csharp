@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the operations that can be performed over a specific VirtualMachineScaleSetExtension. </summary>
-    public partial class VirtualMachineScaleSetExtensionOperations : ResourceOperationsBase<ResourceIdentifier, VirtualMachineScaleSetExtension>
+    public partial class VirtualMachineScaleSetExtensionOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, VirtualMachineScaleSetExtension>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private VirtualMachineScaleSetExtensionsRestOperations _restClient { get; }
@@ -29,7 +29,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineScaleSetExtensionOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal VirtualMachineScaleSetExtensionOperations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineScaleSetExtensionOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new VirtualMachineScaleSetExtensionsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -37,7 +37,6 @@ namespace Azure.ResourceManager.Sample
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/virtualMachineScaleSets/extensions";
         protected override ResourceType ValidResourceType => ResourceType;
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <inheritdoc />
         public async override Task<Response<VirtualMachineScaleSetExtension>> GetAsync(CancellationToken cancellationToken = default)

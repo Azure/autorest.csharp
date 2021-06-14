@@ -35,7 +35,7 @@ namespace ResourceIdentifierChooser
         internal static ResourceLevelData DeserializeResourceLevelData(JsonElement element)
         {
             Optional<IList<string>> zones = default;
-            ResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("zones"))

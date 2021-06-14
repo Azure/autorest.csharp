@@ -22,8 +22,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(TrackedResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel3Data))]
         [TestCase(typeof(object), typeof(AzureResourceFlattenModel4Data))]
         [TestCase(typeof(Resource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel5Data))]
-        [TestCase(typeof(SubResource), typeof(AzureResourceFlattenModel6))]
-        [TestCase(typeof(WritableSubResource), typeof(AzureResourceFlattenModel7))]
+        [TestCase(typeof(SubResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel6))]
+        [TestCase(typeof(WritableSubResource<ResourceGroupResourceIdentifier>), typeof(AzureResourceFlattenModel7))]
         public void ValidateInheritanceType(Type expectedBaseType, Type generatedClass)
         {
             Assert.AreEqual(expectedBaseType, generatedClass.BaseType);

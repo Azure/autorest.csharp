@@ -255,6 +255,462 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/SubResResources/{SubResResourcesName}": {
+            "put": {
+                "tags": [
+                    "SubResResources"
+                ],
+                "operationId": "SubResResources_Put",
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "SubResResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SubResResource"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SubResResource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "SubResResources"
+                ],
+                "operationId": "SubResResources_Get",
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "SubResResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SubResResource"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/WritableSubResResources/{WritableSubResResourcesName}": {
+            "put": {
+                "tags": [
+                    "WritableSubResResources"
+                ],
+                "operationId": "WritableSubResResources_Put",
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "WritableSubResResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/WritableSubResResource"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/WritableSubResResource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "WritableSubResResources"
+                ],
+                "operationId": "WritableSubResResources_Get",
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "WritableSubResResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/WritableSubResResource"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Compute/SubRes2Resources/{SubRes2ResourcesName}": {
+            "put": {
+                "tags": [
+                    "SubRes2Resources"
+                ],
+                "operationId": "SubRes2Resources_Put",
+                "parameters": [
+                    {
+                        "name": "SubRes2ResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SubRes2Resource"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SubRes2Resource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "SubRes2Resources"
+                ],
+                "operationId": "SubRes2Resources_Get",
+                "parameters": [
+                    {
+                        "name": "SubRes2ResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SubRes2Resource"
+                        }
+                    }
+                }
+            }
+        },
+        "/providers/Microsoft.Compute/WritableSubRes2Resources/{WritableSubRes2ResourcesName}": {
+            "put": {
+                "tags": [
+                    "WritableSubRes2Resources"
+                ],
+                "operationId": "WritableSubRes2Resources_Put",
+                "parameters": [
+                    {
+                        "name": "WritableSubRes2ResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/WritableSubRes2Resource"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/WritableSubRes2Resource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "WritableSubRes2Resources"
+                ],
+                "operationId": "WritableSubRes2Resources_Get",
+                "parameters": [
+                    {
+                        "name": "WritableSubRes2ResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/WritableSubRes2Resource"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/SubRes3Resources/{SubRes3ResourcesName}": {
+            "put": {
+                "tags": [
+                    "SubRes3Resources"
+                ],
+                "operationId": "SubRes3Resources_Put",
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "SubRes3ResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SubRes3Resource"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SubRes3Resource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "SubRes3Resources"
+                ],
+                "operationId": "SubRes3Resources_Get",
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "SubRes3ResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SubRes3Resource"
+                        }
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/WritableSubRes3Resources/{WritableSubRes3ResourcesName}": {
+            "put": {
+                "tags": [
+                    "WritableSubRes3Resources"
+                ],
+                "operationId": "WritableSubRes3Resources_Put",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "WritableSubRes3ResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/WritableSubRes3Resource"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/WritableSubRes3Resource"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "WritableSubRes3Resources"
+                ],
+                "operationId": "WritableSubRes3Resources_Get",
+                "parameters": [
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "WritableSubRes3ResourcesName",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/WritableSubRes3Resource"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ResourceLevels/{ResourceLevelsName}": {
             "put": {
                 "tags": [
@@ -351,7 +807,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string"
-                    },                    
+                    },
                     {
                         "name": "parameters",
                         "in": "body",
@@ -441,6 +897,93 @@
                     "type": "string"
                 }
             }
+        },
+        "SubResResource": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "new": {
+                    "type": "string"
+                }
+            }
+        },
+        "WritableSubResResource": {
+            "properties": {
+                "zones": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The resource identifier."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SubResource"
+                }
+            ],
+            "description": "Describes a ResourceIdentifier."
+        },
+        "SubRes2Resource": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "new": {
+                    "type": "string"
+                }
+            }
+        },
+        "WritableSubRes2Resource": {
+            "properties": {
+                "zones": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The resource identifier."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SubResource"
+                }
+            ],
+            "description": "Describes a ResourceIdentifier."
+        },
+        "SubRes3Resource": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string"
+                },
+                "new": {
+                    "type": "string"
+                }
+            }
+        },
+        "WritableSubRes3Resource": {
+            "properties": {
+                "zones": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The resource identifier."
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/SubResource"
+                }
+            ],
+            "description": "Describes a ResourceIdentifier."
         },
         "TenantLevelResource": {
             "type": "object",

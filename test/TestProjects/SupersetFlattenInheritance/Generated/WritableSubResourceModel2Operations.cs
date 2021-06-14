@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific WritableSubResourceModel2. </summary>
-    public partial class WritableSubResourceModel2Operations : ResourceOperationsBase<ResourceIdentifier, WritableSubResourceModel2>
+    public partial class WritableSubResourceModel2Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, WritableSubResourceModel2>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         internal WritableSubResourceModel2SRestOperations RestClient { get; }
@@ -29,7 +29,7 @@ namespace SupersetFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="WritableSubResourceModel2Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal WritableSubResourceModel2Operations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal WritableSubResourceModel2Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             RestClient = new WritableSubResourceModel2SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -37,7 +37,6 @@ namespace SupersetFlattenInheritance
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/writableSubResourceModel2s";
         protected override ResourceType ValidResourceType => ResourceType;
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <inheritdoc />
         public async override Task<Response<WritableSubResourceModel2>> GetAsync(CancellationToken cancellationToken = default)

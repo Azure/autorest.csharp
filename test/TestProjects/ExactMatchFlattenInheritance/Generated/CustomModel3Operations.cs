@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing the operations that can be performed over a specific CustomModel3. </summary>
-    public partial class CustomModel3Operations : ResourceOperationsBase<ResourceIdentifier, CustomModel3>
+    public partial class CustomModel3Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, CustomModel3>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         internal CustomModel3SRestOperations RestClient { get; }
@@ -29,7 +29,7 @@ namespace ExactMatchFlattenInheritance
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Operations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal CustomModel3Operations(ResourceOperationsBase options, ResourceIdentifier id) : base(options, id)
+        protected internal CustomModel3Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             RestClient = new CustomModel3SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -37,7 +37,6 @@ namespace ExactMatchFlattenInheritance
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/customModel3";
         protected override ResourceType ValidResourceType => ResourceType;
-        public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
 
         /// <inheritdoc />
         public async override Task<Response<CustomModel3>> GetAsync(CancellationToken cancellationToken = default)

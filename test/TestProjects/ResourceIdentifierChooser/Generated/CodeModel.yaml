@@ -170,7 +170,27 @@ schemas: !Schemas
           name: SubscriptionLevelResourceNew
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_31
+    - !StringSchema &ref_28
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SubResResourceId
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_29
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SubResResourceNew
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_39
       type: string
       apiVersions:
         - !ApiVersion 
@@ -180,7 +200,77 @@ schemas: !Schemas
           name: SubResourceId
           description: Resource ID.
       protocol: !Protocols {}
-    - !StringSchema &ref_29
+    - !StringSchema &ref_31
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WritableSubResResourceZonesItem
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_40
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SubRes2ResourceId
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_41
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SubRes2ResourceNew
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_32
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WritableSubRes2ResourceZonesItem
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_42
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SubRes3ResourceId
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_43
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: SubRes3ResourceNew
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_33
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: WritableSubRes3ResourceZonesItem
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_34
       type: string
       apiVersions:
         - !ApiVersion 
@@ -221,7 +311,7 @@ schemas: !Schemas
           description: Fruit.
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_34
+    - !ConstantSchema &ref_49
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -231,7 +321,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_38
+    - !ConstantSchema &ref_53
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -241,7 +331,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_39
+    - !ConstantSchema &ref_54
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -296,7 +386,7 @@ schemas: !Schemas
                 - *ref_2
             properties:
               - !Property 
-                schema: !ArraySchema &ref_32
+                schema: !ArraySchema &ref_44
                   type: array
                   apiVersions:
                     - !ApiVersion 
@@ -494,7 +584,7 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
     - *ref_10
-    - !ObjectSchema &ref_45
+    - !ObjectSchema &ref_60
       type: object
       apiVersions:
         - !ApiVersion 
@@ -562,7 +652,7 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_49
+    - !ObjectSchema &ref_64
       type: object
       apiVersions:
         - !ApiVersion 
@@ -630,31 +720,185 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_28
+    - !ObjectSchema &ref_70
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_28
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_29
+          serializedName: new
+          language: !Languages 
+            default:
+              name: new
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !Languages 
+        default:
+          name: SubResResource
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_30
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       children: !Relations 
         all:
-          - !ObjectSchema &ref_30
+          - !ObjectSchema &ref_35
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             parents: !Relations 
               all:
-                - *ref_28
+                - *ref_30
               immediate:
-                - *ref_28
+                - *ref_30
             properties:
               - !Property 
-                schema: !ArraySchema &ref_33
+                schema: !ArraySchema &ref_45
                   type: array
                   apiVersions:
                     - !ApiVersion 
                       version: '2020-06-01'
-                  elementType: *ref_29
+                  elementType: *ref_31
+                  language: !Languages 
+                    default:
+                      name: WritableSubResResourceZones
+                      description: The resource identifier.
+                  protocol: !Protocols {}
+                serializedName: zones
+                language: !Languages 
+                  default:
+                    name: zones
+                    description: The resource identifier.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: WritableSubResResource
+                description: Describes a ResourceIdentifier.
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_36
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_30
+              immediate:
+                - *ref_30
+            properties:
+              - !Property 
+                schema: !ArraySchema &ref_46
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  elementType: *ref_32
+                  language: !Languages 
+                    default:
+                      name: WritableSubRes2ResourceZones
+                      description: The resource identifier.
+                  protocol: !Protocols {}
+                serializedName: zones
+                language: !Languages 
+                  default:
+                    name: zones
+                    description: The resource identifier.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: WritableSubRes2Resource
+                description: Describes a ResourceIdentifier.
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_37
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_30
+              immediate:
+                - *ref_30
+            properties:
+              - !Property 
+                schema: !ArraySchema &ref_47
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  elementType: *ref_33
+                  language: !Languages 
+                    default:
+                      name: WritableSubRes3ResourceZones
+                      description: The resource identifier.
+                  protocol: !Protocols {}
+                serializedName: zones
+                language: !Languages 
+                  default:
+                    name: zones
+                    description: The resource identifier.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - input
+              - output
+            language: !Languages 
+              default:
+                name: WritableSubRes3Resource
+                description: Describes a ResourceIdentifier.
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_38
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2020-06-01'
+            parents: !Relations 
+              all:
+                - *ref_30
+              immediate:
+                - *ref_30
+            properties:
+              - !Property 
+                schema: !ArraySchema &ref_48
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2020-06-01'
+                  elementType: *ref_34
                   language: !Languages 
                     default:
                       name: ResourceLevelZones
@@ -678,10 +922,13 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_30
+          - *ref_35
+          - *ref_36
+          - *ref_37
+          - *ref_38
       properties:
         - !Property 
-          schema: *ref_31
+          schema: *ref_39
           serializedName: id
           language: !Languages 
             default:
@@ -701,15 +948,89 @@ schemas: !Schemas
           description: Reference to another subresource.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_30
+    - *ref_35
+    - !ObjectSchema &ref_81
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_40
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_41
+          serializedName: new
+          language: !Languages 
+            default:
+              name: new
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !Languages 
+        default:
+          name: SubRes2Resource
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_36
+    - !ObjectSchema &ref_88
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      properties:
+        - !Property 
+          schema: *ref_42
+          readOnly: true
+          serializedName: id
+          language: !Languages 
+            default:
+              name: id
+              description: ''
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_43
+          serializedName: new
+          language: !Languages 
+            default:
+              name: new
+              description: ''
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+        - output
+      language: !Languages 
+        default:
+          name: SubRes3Resource
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_37
+    - *ref_38
     - *ref_5
     - *ref_4
     - *ref_7
   arrays:
-    - *ref_32
-    - *ref_33
+    - *ref_44
+    - *ref_45
+    - *ref_46
+    - *ref_47
+    - *ref_48
 globalParameters:
-  - !Parameter &ref_37
+  - !Parameter &ref_52
     schema: *ref_1
     implementation: Client
     required: true
@@ -723,7 +1044,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_35
+  - !Parameter &ref_50
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -739,8 +1060,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_36
-    schema: *ref_34
+  - !Parameter &ref_51
+    schema: *ref_49
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -761,8 +1082,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_35
-          - !Parameter &ref_41
+          - *ref_50
+          - !Parameter &ref_56
             schema: *ref_1
             implementation: Method
             required: true
@@ -774,7 +1095,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_42
+          - !Parameter &ref_57
             schema: *ref_1
             implementation: Method
             required: true
@@ -786,13 +1107,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_36
-          - *ref_37
+          - *ref_51
+          - *ref_52
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_53
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -804,7 +1125,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_40
+              - !Parameter &ref_55
                 schema: *ref_10
                 implementation: Method
                 required: true
@@ -817,7 +1138,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -830,7 +1151,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_40
+              - *ref_55
             language: !Languages 
               default:
                 name: ''
@@ -844,8 +1165,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_41
-          - *ref_42
+          - *ref_56
+          - *ref_57
         responses:
           - !SchemaResponse 
             schema: *ref_10
@@ -870,8 +1191,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_35
-          - !Parameter &ref_43
+          - *ref_50
+          - !Parameter &ref_58
             schema: *ref_1
             implementation: Method
             required: true
@@ -883,7 +1204,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_44
+          - !Parameter &ref_59
             schema: *ref_1
             implementation: Method
             required: true
@@ -895,13 +1216,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_36
-          - *ref_37
+          - *ref_51
+          - *ref_52
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -924,8 +1245,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_43
-          - *ref_44
+          - *ref_58
+          - *ref_59
         responses:
           - !SchemaResponse 
             schema: *ref_10
@@ -958,8 +1279,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_35
-          - !Parameter &ref_47
+          - *ref_50
+          - !Parameter &ref_62
             schema: *ref_1
             implementation: Method
             required: true
@@ -971,13 +1292,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_36
-          - *ref_37
+          - *ref_51
+          - *ref_52
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_53
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -989,8 +1310,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_46
-                schema: *ref_45
+              - !Parameter &ref_61
+                schema: *ref_60
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1002,7 +1323,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1015,7 +1336,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_46
+              - *ref_61
             language: !Languages 
               default:
                 name: ''
@@ -1029,10 +1350,10 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_47
+          - *ref_62
         responses:
           - !SchemaResponse 
-            schema: *ref_45
+            schema: *ref_60
             language: !Languages 
               default:
                 name: ''
@@ -1054,8 +1375,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_35
-          - !Parameter &ref_48
+          - *ref_50
+          - !Parameter &ref_63
             schema: *ref_1
             implementation: Method
             required: true
@@ -1067,13 +1388,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_36
-          - *ref_37
+          - *ref_51
+          - *ref_52
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1096,10 +1417,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_48
+          - *ref_63
         responses:
           - !SchemaResponse 
-            schema: *ref_45
+            schema: *ref_60
             language: !Languages 
               default:
                 name: ''
@@ -1129,8 +1450,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_35
-          - !Parameter &ref_51
+          - *ref_50
+          - !Parameter &ref_66
             schema: *ref_1
             implementation: Method
             required: true
@@ -1142,7 +1463,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_52
+          - !Parameter &ref_67
             schema: *ref_1
             implementation: Method
             required: true
@@ -1154,13 +1475,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_36
-          - *ref_37
+          - *ref_51
+          - *ref_52
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_53
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1172,8 +1493,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_50
-                schema: *ref_49
+              - !Parameter &ref_65
+                schema: *ref_64
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1185,7 +1506,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1198,7 +1519,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_50
+              - *ref_65
             language: !Languages 
               default:
                 name: ''
@@ -1212,11 +1533,11 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_51
-          - *ref_52
+          - *ref_66
+          - *ref_67
         responses:
           - !SchemaResponse 
-            schema: *ref_49
+            schema: *ref_64
             language: !Languages 
               default:
                 name: ''
@@ -1238,8 +1559,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_35
-          - !Parameter &ref_53
+          - *ref_50
+          - !Parameter &ref_68
             schema: *ref_1
             implementation: Method
             required: true
@@ -1251,7 +1572,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_54
+          - !Parameter &ref_69
             schema: *ref_1
             implementation: Method
             required: true
@@ -1263,13 +1584,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_36
-          - *ref_37
+          - *ref_51
+          - *ref_52
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1292,11 +1613,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_53
-          - *ref_54
+          - *ref_68
+          - *ref_69
         responses:
           - !SchemaResponse 
-            schema: *ref_49
+            schema: *ref_64
             language: !Languages 
               default:
                 name: ''
@@ -1319,45 +1640,45 @@ operationGroups:
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: ResourceLevels
+    $key: SubResResources
     operations:
       - !Operation 
         apiVersions:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_35
-          - !Parameter &ref_56
+          - *ref_50
+          - !Parameter &ref_72
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: resourceGroupName
+                name: subscriptionId
                 description: ''
-                serializedName: resourceGroupName
+                serializedName: subscriptionId
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_57
+          - !Parameter &ref_73
             schema: *ref_1
             implementation: Method
             required: true
             language: !Languages 
               default:
-                name: resourceLevelsName
+                name: subResResourcesName
                 description: ''
-                serializedName: ResourceLevelsName
+                serializedName: SubResResourcesName
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_36
-          - *ref_37
+          - *ref_51
+          - *ref_52
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_53
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1369,8 +1690,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_55
-                schema: *ref_30
+              - !Parameter &ref_71
+                schema: *ref_70
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -1382,7 +1703,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1395,25 +1716,25 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_55
+              - *ref_71
             language: !Languages 
               default:
                 name: ''
                 description: ''
             protocol: !Protocols 
               http: !HttpWithBodyRequest 
-                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ResourceLevels/{ResourceLevelsName}
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/SubResResources/{SubResResourcesName}
                 method: put
                 knownMediaType: json
                 mediaTypes:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_56
-          - *ref_57
+          - *ref_72
+          - *ref_73
         responses:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_70
             language: !Languages 
               default:
                 name: ''
@@ -1435,8 +1756,647 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_35
-          - !Parameter &ref_58
+          - *ref_50
+          - !Parameter &ref_74
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subscriptionId
+                description: ''
+                serializedName: subscriptionId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_75
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subResResourcesName
+                description: ''
+                serializedName: SubResResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/SubResResources/{SubResResourcesName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_74
+          - *ref_75
+        responses:
+          - !SchemaResponse 
+            schema: *ref_70
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: SubResResources
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: WritableSubResResources
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_77
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subscriptionId
+                description: ''
+                serializedName: subscriptionId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_78
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: writableSubResResourcesName
+                description: ''
+                serializedName: WritableSubResResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_53
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_76
+                schema: *ref_35
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_76
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/WritableSubResResources/{WritableSubResResourcesName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_77
+          - *ref_78
+        responses:
+          - !SchemaResponse 
+            schema: *ref_35
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_79
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subscriptionId
+                description: ''
+                serializedName: subscriptionId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_80
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: writableSubResResourcesName
+                description: ''
+                serializedName: WritableSubResResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/WritableSubResResources/{WritableSubResResourcesName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_79
+          - *ref_80
+        responses:
+          - !SchemaResponse 
+            schema: *ref_35
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: WritableSubResResources
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: SubRes2Resources
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_83
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subRes2ResourcesName
+                description: ''
+                serializedName: SubRes2ResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_53
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_82
+                schema: *ref_81
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_82
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /providers/Microsoft.Compute/SubRes2Resources/{SubRes2ResourcesName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_83
+        responses:
+          - !SchemaResponse 
+            schema: *ref_81
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_84
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subRes2ResourcesName
+                description: ''
+                serializedName: SubRes2ResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Compute/SubRes2Resources/{SubRes2ResourcesName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_84
+        responses:
+          - !SchemaResponse 
+            schema: *ref_81
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: SubRes2Resources
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: WritableSubRes2Resources
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_86
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: writableSubRes2ResourcesName
+                description: ''
+                serializedName: WritableSubRes2ResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_53
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_85
+                schema: *ref_36
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_85
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /providers/Microsoft.Compute/WritableSubRes2Resources/{WritableSubRes2ResourcesName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_86
+        responses:
+          - !SchemaResponse 
+            schema: *ref_36
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_87
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: writableSubRes2ResourcesName
+                description: ''
+                serializedName: WritableSubRes2ResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /providers/Microsoft.Compute/WritableSubRes2Resources/{WritableSubRes2ResourcesName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_87
+        responses:
+          - !SchemaResponse 
+            schema: *ref_36
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: WritableSubRes2Resources
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: SubRes3Resources
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_90
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subscriptionId
+                description: ''
+                serializedName: subscriptionId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_91
             schema: *ref_1
             implementation: Method
             required: true
@@ -1448,7 +2408,415 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_59
+          - !Parameter &ref_92
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subRes3ResourcesName
+                description: ''
+                serializedName: SubRes3ResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_53
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_89
+                schema: *ref_88
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_89
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/SubRes3Resources/{SubRes3ResourcesName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_90
+          - *ref_91
+          - *ref_92
+        responses:
+          - !SchemaResponse 
+            schema: *ref_88
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_93
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subscriptionId
+                description: ''
+                serializedName: subscriptionId
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_94
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_95
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: subRes3ResourcesName
+                description: ''
+                serializedName: SubRes3ResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/SubRes3Resources/{SubRes3ResourcesName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_93
+          - *ref_94
+          - *ref_95
+        responses:
+          - !SchemaResponse 
+            schema: *ref_88
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: SubRes3Resources
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: WritableSubRes3Resources
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_97
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_98
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: writableSubRes3ResourcesName
+                description: ''
+                serializedName: WritableSubRes3ResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_53
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_96
+                schema: *ref_37
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_96
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/WritableSubRes3Resources/{WritableSubRes3ResourcesName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_97
+          - *ref_98
+        responses:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_99
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_100
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: writableSubRes3ResourcesName
+                description: ''
+                serializedName: WritableSubRes3ResourcesName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters: []
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/WritableSubRes3Resources/{WritableSubRes3ResourcesName}
+                method: get
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_99
+          - *ref_100
+        responses:
+          - !SchemaResponse 
+            schema: *ref_37
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Get
+            description: ''
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: WritableSubRes3Resources
+        description: ''
+    protocol: !Protocols {}
+  - !OperationGroup 
+    $key: ResourceLevels
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_102
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_103
             schema: *ref_1
             implementation: Method
             required: true
@@ -1460,13 +2828,122 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_36
-          - *ref_37
+          - *ref_51
+          - *ref_52
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_53
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_101
+                schema: *ref_38
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: ''
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_54
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_101
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ResourceLevels/{ResourceLevelsName}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_102
+          - *ref_103
+        responses:
+          - !SchemaResponse 
+            schema: *ref_38
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: Put
+            description: ''
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_50
+          - !Parameter &ref_104
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: ''
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_105
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceLevelsName
+                description: ''
+                serializedName: ResourceLevelsName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_51
+          - *ref_52
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1489,11 +2966,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_58
-          - *ref_59
+          - *ref_104
+          - *ref_105
         responses:
           - !SchemaResponse 
-            schema: *ref_30
+            schema: *ref_38
             language: !Languages 
               default:
                 name: ''
@@ -1523,8 +3000,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_35
-          - !Parameter &ref_61
+          - *ref_50
+          - !Parameter &ref_107
             schema: *ref_1
             implementation: Method
             required: true
@@ -1536,7 +3013,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_62
+          - !Parameter &ref_108
             schema: *ref_1
             implementation: Method
             required: true
@@ -1548,13 +3025,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_36
-          - *ref_37
+          - *ref_51
+          - *ref_52
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_38
+                schema: *ref_53
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -1566,7 +3043,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_60
+              - !Parameter &ref_106
                 schema: *ref_7
                 implementation: Method
                 required: true
@@ -1579,7 +3056,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1592,7 +3069,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_60
+              - *ref_106
             language: !Languages 
               default:
                 name: ''
@@ -1606,8 +3083,8 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         signatureParameters:
-          - *ref_61
-          - *ref_62
+          - *ref_107
+          - *ref_108
         responses:
           - !SchemaResponse 
             schema: *ref_7
@@ -1632,8 +3109,8 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_35
-          - !Parameter &ref_63
+          - *ref_50
+          - !Parameter &ref_109
             schema: *ref_1
             implementation: Method
             required: true
@@ -1645,7 +3122,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_64
+          - !Parameter &ref_110
             schema: *ref_1
             implementation: Method
             required: true
@@ -1657,13 +3134,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_36
-          - *ref_37
+          - *ref_51
+          - *ref_52
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_39
+                schema: *ref_54
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1686,8 +3163,8 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_63
-          - *ref_64
+          - *ref_109
+          - *ref_110
         responses:
           - !SchemaResponse 
             schema: *ref_7
