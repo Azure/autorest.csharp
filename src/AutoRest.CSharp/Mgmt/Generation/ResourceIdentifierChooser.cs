@@ -25,10 +25,5 @@ namespace AutoRest.CSharp.Mgmt.Generation
             else
                 return typeof(ResourceGroupResourceIdentifier);
         }
-
-        private static ObjectType? GetObjectTypeBase(ObjectType obj)
-        {
-            return obj.Inherits != null ? obj.Inherits.Implementation as ObjectType : null;
-        }
     }
 }
