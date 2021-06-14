@@ -5,125 +5,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class InheritanceChooser
     {
-        public static IList<System.Type> ReferenceClassCollection = GetOrderedList();
-
-        private static IList<System.Type> GetReferenceClassCollection()
-        {
-            var assembly = Assembly.GetAssembly(typeof(ArmClient));
-            if (assembly == null)
-            {
-                return new List<System.Type>();
-            }
-            return assembly.GetTypes().Where(t => t.GetCustomAttributes(false).Where(a => a.GetType() == typeof(ReferenceTypeAttribute)).Count() > 0).ToList();
-        }
-
-        private static List<System.Type> GetOrderedList()
-        {
-            var referenceClasses = ConvertGenericType(GetReferenceClassCollection());
-            var trees = GetTrees(referenceClasses);
-            var output = new List<System.Type>();
-            foreach (var root in trees)
-            {
-                var treeNodes = new List<System.Type>();
-                Queue<Node> queue = new Queue<Node>();
-                queue.Enqueue(root);
-                while (queue.Count != 0)
-                {
-                    Node tempNode = queue.Dequeue();
-                    treeNodes.Add(tempNode.type);
-                    List<Node> tempChilren = tempNode.children;
-                    if (tempChilren != null)
-                    {
-                        int childNum = tempChilren.Count;
-                        while (childNum > 0)
-                        {
-                            queue.Enqueue(tempChilren[childNum - 1]);
-                            childNum--;
-                        }
-                    }
-                }
-                treeNodes.Reverse();
-                output.AddRange(treeNodes);
-            }
-            return PromoteGenericType(output);
-        }
-
-        private static List<System.Type> PromoteGenericType(List<System.Type> output)
-        {
-            for (int i = 0; i < output.Count; i++)
-            {
-                if (output[i].IsGenericType)
-                {
-                    // since we need to ensure the base generic type is before
-                    // any other inheritors we just need to search behind
-                    for (int j = i - 1; j > -1; j--)
-                    {
-                        if (output[j].IsGenericType == false
-                            && output[j].BaseType == output[i])
-                        {
-
-                            System.Type temp = output[j];
-                            output[j] = output[i];
-                            output[i] = temp;
-                        }
-                    }
-                }
-            }
-            return output;
-        }
-
-        private static IList<System.Type> ConvertGenericType(IList<System.Type> referenceClassCollection)
-        {
-            for (int i = 0; i < referenceClassCollection.Count; i++)
-            {
-                if (referenceClassCollection[i].IsGenericType)
-                {
-                    var attributeObj = referenceClassCollection[i].GetCustomAttributes().First() as ReferenceTypeAttribute;
-                    referenceClassCollection[i] = referenceClassCollection[i].MakeGenericType(attributeObj!.GenericType);
-                }
-            }
-            return referenceClassCollection;
-        }
-
-        private static List<Node> GetTrees(IList<System.Type> referenceClassCollection)
-        {
-            List<Node> trees = new List<Node>();
-            var added = new Dictionary<System.Type, Node>();
-            foreach (System.Type reference in referenceClassCollection)
-            {
-                if (!added.ContainsKey(reference))
-                {
-                    Node node = new Node(reference);
-                    if (reference.BaseType != null && added.ContainsKey(reference.BaseType))
-                    {
-                        added[reference.BaseType].children.Add(node);
-                    }
-                    else
-                    {
-                        trees.Add(node);
-                    }
-                    added.Add(reference, node);
-                }
-            }
-            return trees;
-        }
-
         public static CSharpType? GetExactMatch(OperationGroup? operationGroup, MgmtObjectType childType, ObjectTypeProperty[] properties)
         {
-            foreach (System.Type parentType in ReferenceClassCollection)
+            foreach (System.Type parentType in ReferenceClassFinder.ReferenceClassCollection)
             {
                 if (IsEqual(parentType, properties))
                 {
@@ -135,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         public static CSharpType? GetSupersetMatch(OperationGroup? operationGroup, MgmtObjectType originalType, ObjectTypeProperty[] properties)
         {
-            foreach (System.Type parentType in ReferenceClassCollection)
+            foreach (System.Type parentType in ReferenceClassFinder.ReferenceClassCollection)
             {
                 if (IsSuperset(parentType, properties))
                 {
@@ -243,17 +137,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
 
             return parentProperties.Count == matchCount;
-        }
-
-        private class Node
-        {
-            public System.Type type;
-            public List<Node> children;
-            public Node(System.Type type)
-            {
-                this.type = type;
-                this.children = new List<Node>();
-            }
         }
     }
 }
