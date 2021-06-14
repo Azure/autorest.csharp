@@ -22,6 +22,26 @@ namespace ResourceIdentifierChooser
         }
         #endregion
 
+        #region SubRes3Resources
+        /// <summary> Gets an object representing a SubRes3ResourceContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="SubRes3ResourceContainer" /> object. </returns>
+        public static SubRes3ResourceContainer GetSubRes3Resources(this ResourceGroupOperations resourceGroup)
+        {
+            return new SubRes3ResourceContainer(resourceGroup);
+        }
+        #endregion
+
+        #region WritableSubRes3Resources
+        /// <summary> Gets an object representing a WritableSubRes3ResourceContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
+        /// <returns> Returns a <see cref="WritableSubRes3ResourceContainer" /> object. </returns>
+        public static WritableSubRes3ResourceContainer GetWritableSubRes3Resources(this ResourceGroupOperations resourceGroup)
+        {
+            return new WritableSubRes3ResourceContainer(resourceGroup);
+        }
+        #endregion
+
         #region ResourceLevels
         /// <summary> Gets an object representing a ResourceLevelContainer along with the instance operations that can be performed on it. </summary>
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>

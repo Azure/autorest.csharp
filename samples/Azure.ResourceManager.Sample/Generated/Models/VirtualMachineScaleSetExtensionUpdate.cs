@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Describes a Virtual Machine Scale Set Extension. </summary>
-    public partial class VirtualMachineScaleSetExtensionUpdate : Core.SubResource
+    public partial class VirtualMachineScaleSetExtensionUpdate : SubResource<ResourceIdentifier>
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionUpdate. </summary>
         public VirtualMachineScaleSetExtensionUpdate()

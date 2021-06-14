@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> SubResource type has the following read-only properties. </summary>
-    internal partial class SubResourceModel : SubResource
+    internal partial class SubResourceModel : SubResource<ResourceIdentifier>
     {
         /// <summary> Initializes a new instance of SubResourceModel. </summary>
         internal SubResourceModel()

@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> Describes a network interface reference. </summary>
-    public partial class NetworkInterfaceReference : WritableSubResource
+    public partial class NetworkInterfaceReference : WritableSubResource<ResourceIdentifier>
     {
         /// <summary> Initializes a new instance of NetworkInterfaceReference. </summary>
         public NetworkInterfaceReference()

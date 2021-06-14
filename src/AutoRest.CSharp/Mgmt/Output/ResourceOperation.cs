@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public Type ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(
             _context.Library.GetResourceData(OperationGroup),
-            _context.Configuration.MgmtConfiguration, false);
+            _context.Configuration.MgmtConfiguration);
 
         public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
 

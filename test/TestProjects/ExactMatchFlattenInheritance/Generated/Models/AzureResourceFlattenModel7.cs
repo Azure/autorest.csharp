@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> This model is x-ms-azure-resource, and is exactly a WritableSubResource type. </summary>
-    public partial class AzureResourceFlattenModel7 : WritableSubResource
+    public partial class AzureResourceFlattenModel7 : WritableSubResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel7. </summary>
         public AzureResourceFlattenModel7()

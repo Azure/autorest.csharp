@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of WritableSubResourceModel1 and their operations over a ResourceGroup. </summary>
-    public partial class WritableSubResourceModel1Container : ResourceContainerBase<ResourceIdentifier, WritableSubResourceModel1, WritableSubResourceModel1Data>
+    public partial class WritableSubResourceModel1Container : ResourceContainerBase<ResourceGroupResourceIdentifier, WritableSubResourceModel1, WritableSubResourceModel1Data>
     {
         /// <summary> Initializes a new instance of the <see cref="WritableSubResourceModel1Container"/> class for mocking. </summary>
         protected WritableSubResourceModel1Container()
@@ -251,6 +251,6 @@ namespace SupersetFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, WritableSubResourceModel1, WritableSubResourceModel1Data> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, WritableSubResourceModel1, WritableSubResourceModel1Data> Construct() { }
     }
 }

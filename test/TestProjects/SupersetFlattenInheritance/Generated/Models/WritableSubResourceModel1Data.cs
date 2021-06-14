@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing the WritableSubResourceModel1 data model. </summary>
-    public partial class WritableSubResourceModel1Data : WritableSubResource
+    public partial class WritableSubResourceModel1Data : WritableSubResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of WritableSubResourceModel1Data. </summary>
         public WritableSubResourceModel1Data()
