@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _context = context;
         }
 
-        public IEnumerable<RestClientMethod> RemainingMethods => RestClient.Methods.Where(m => m != PutMethod && m != ListMethod?.Method);
+        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != PutMethod && m.RestClientMethod != ListMethod?.Method);
 
         public RestClientMethod? PutMethod => _putMethod ??= GetPutMethod();
 

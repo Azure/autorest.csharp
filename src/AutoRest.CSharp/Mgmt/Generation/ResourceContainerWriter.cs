@@ -79,10 +79,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteRemainingMethods()
         {
-            foreach (var clientMethod in _resourceContainer.RemainingMethods)
+            foreach (var restMethod in _resourceContainer.RemainingMethods)
             {
-                WriteClientMethod(_writer, clientMethod, _resourceContainer.OperationGroup, _context, true);
-                WriteClientMethod(_writer, clientMethod, _resourceContainer.OperationGroup, _context, false);
+                WriteClientMethod(_writer, restMethod.RestClientMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);
+                WriteClientMethod(_writer, restMethod.RestClientMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, false);
             }
         }
 

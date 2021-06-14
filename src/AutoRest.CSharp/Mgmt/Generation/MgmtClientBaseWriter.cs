@@ -283,9 +283,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
 
-        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async)
+        protected void WriteClientMethod(CodeWriter writer, RestClientMethod clientMethod, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async)
         {
-            CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
+            CSharpType? bodyType = clientMethod.ReturnType;
             CSharpType responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
 
-            Parameter[] nonPathParameters = GetNonPathParameters(clientMethod.RestClientMethod);
+            Parameter[] nonPathParameters = GetNonPathParameters(clientMethod);
             foreach (Parameter parameter in nonPathParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
@@ -316,7 +316,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope())
             {
                 writer.WriteParameterNullChecks(nonPathParameters);
-                WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
                     writer.Append($"return (");
                     if (async)
@@ -324,8 +324,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Append($"await ");
                     }
 
-                    var parameterNames = GetParametersName(clientMethod.RestClientMethod, operationGroup, context);
-                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
+                    var parameterNames = GetParametersName(clientMethod, operationGroup, context);
+                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}(");
                     foreach (var parameter in parameterNames)
                     {
                         writer.Append($"{parameter:I}, ");
@@ -339,7 +339,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     writer.Append($")");
 
-                    if (bodyType == null && clientMethod.RestClientMethod.HeaderModel != null)
+                    if (bodyType == null && clientMethod.HeaderModel != null)
                     {
                         writer.Append($".GetRawResponse()");
                     }

@@ -50,9 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var resourceData = context.Library.GetResourceData(operationGroup);
                 writer.Append($"{resourceOperation.Declaration.Accessibility} partial class {cs.Name}: ");
 
-                RestClientMethod? getMethod = GetMethod(resourceOperation, resourceData);
-
-                if (getMethod != null)
+                if (resourceOperation.GetMethod != null)
                 {
                     _inheritResourceOperationsBase = true;
                     CSharpType[] arguments = { resourceOperation.ResourceIdentifierType, resource.Type };
@@ -98,17 +96,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
                 }
             }
-        }
-        private RestClientMethod? GetMethod(ResourceOperation resourceOperation, ResourceData resourceData)
-        {
-            var getMethods = resourceOperation.RestClient.Methods.Where(m => m.Request.HttpMethod == RequestMethod.Get);
-            var getMethodWithResourceDataResponse = getMethods.Where(m => m.Responses[0].ResponseBody?.Type.Name == resourceData.Type.Name);
-            RestClientMethod? getMethod = null;
-            if (getMethodWithResourceDataResponse != null && getMethodWithResourceDataResponse.Count() > 0)
-            {
-                getMethod = getMethodWithResourceDataResponse.First();
-            }
-            return getMethod;
         }
 
         private void WriteClientCtors(CodeWriter writer, ResourceOperation resourceOperation, bool isSingleton = false)
@@ -166,22 +153,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var clientMethodsList = new List<RestClientMethod>();
 
             writer.Line();
-            RestClientMethod? method = GetMethod(resourceOperation, resourceData);
-            if (_inheritResourceOperationsBase && method != null)
+            if (_inheritResourceOperationsBase && resourceOperation.GetMethod != null)
             {
-                ClientMethod getMethod = resourceOperation.Methods.Where(m => m.RestClientMethod == method).FirstOrDefault();
                 // write inherited get method
-                WriteGetMethod(writer, getMethod, resource, context, true, true);
-                WriteGetMethod(writer, getMethod, resource, context, true, false);
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, true);
+                WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, true, false);
 
-                var nonPathParameters = GetNonPathParameters(getMethod.RestClientMethod);
+                var nonPathParameters = GetNonPathParameters(resourceOperation.GetMethod.RestClientMethod);
                 if (nonPathParameters.Length > 0)
                 {
                     // write get method
-                    WriteGetMethod(writer, getMethod, resource, context, false, true);
-                    WriteGetMethod(writer, getMethod, resource, context, false, false);
+                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, true);
+                    WriteGetMethod(writer, resourceOperation.GetMethod, resource, context, false, false);
                 }
-                clientMethodsList.Add(getMethod.RestClientMethod);
+                clientMethodsList.Add(resourceOperation.GetMethod.RestClientMethod);
 
                 WriteListAvailableLocationsMethod(writer, true);
                 WriteListAvailableLocationsMethod(writer, false);
@@ -239,8 +224,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     clientMethod.RestClientMethod.Request.HttpMethod != RequestMethod.Put &&
                     !clientMethod.Name.StartsWith("List"))
                 {
-                    WriteClientMethod(writer, clientMethod, resourceOperation.OperationGroup, context, true);
-                    WriteClientMethod(writer, clientMethod, resourceOperation.OperationGroup, context, false);
+                    WriteClientMethod(writer, clientMethod.RestClientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true);
+                    WriteClientMethod(writer, clientMethod.RestClientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false);
                 }
             }
 
