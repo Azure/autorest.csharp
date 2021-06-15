@@ -50,17 +50,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var resourceData = context.Library.GetResourceData(operationGroup);
                 writer.Append($"{resourceOperation.Declaration.Accessibility} partial class {cs.Name}: ");
 
-                if (resourceOperation.GetMethod != null)
-                {
-                    _inheritResourceOperationsBase = true;
-                    CSharpType[] arguments = { resourceOperation.ResourceIdentifierType, resource.Type };
-                    CSharpType type = new CSharpType(baseClass, arguments);
-                    writer.Append($"{type}, ");
-                }
-                else
-                {
+                _inheritResourceOperationsBase = resourceOperation.GetMethod != null;
+                CSharpType[] arguments = { resourceOperation.ResourceIdentifierType, resource.Type };
+                CSharpType type = new CSharpType(baseClass, arguments);
+                writer.Append($"{type}, ");
+
+                if (resourceOperation.GetMethod == null && baseClass == typeof(ResourceOperationsBase))
                     throw new Exception($"Get operation is missing for {resource.Type.Name} resource.");
-                }
 
                 CSharpType inheritType = new CSharpType(typeof(TrackedResource<>), resourceOperation.ResourceIdentifierType);
                 if (resourceData.Inherits != null && resourceData.Inherits.Name == inheritType.Name)
@@ -89,7 +85,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         WriteClientMethods(writer, resourceOperation, resource, resourceData, context);
                     }
-
                     else
                     {
                         WriteChildSingletonGetOperationMethods(writer, resourceOperation, context);
@@ -138,14 +133,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             writer.Line();
             writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{resourceOperation.OperationGroup.ResourceType(config)}\";");
-            if (_inheritResourceOperationsBase)
-            {
-                writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
-                if (resourceOperation.ResourceIdentifierType == typeof(ResourceIdentifier))
-                {
-                    writer.Line($"public new {typeof(ResourceGroupResourceIdentifier)} Id => base.Id as {typeof(ResourceGroupResourceIdentifier)};");
-                }
-            }
+            writer.Line($"protected override {typeof(ResourceType)} ValidResourceType => ResourceType;");
         }
 
         private void WriteClientMethods(CodeWriter writer, ResourceOperation resourceOperation, Resource resource, ResourceData resourceData, BuildContext<MgmtOutputLibrary> context)

@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<Schema> _allSchemas;
         private Dictionary<Operation, MgmtLongRunningOperation>? _longRunningOperations;
         private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
+        private Dictionary<string, OperationGroup> _nonResourceOperationGroupMapping;
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
@@ -50,6 +51,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
+            _nonResourceOperationGroupMapping = new Dictionary<string, OperationGroup>();
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
@@ -92,6 +94,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         internal Dictionary<Schema, TypeProvider> SchemaMap => _models ??= BuildModels();
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
+
+        public OperationGroup? GetOperationGroupForNonResource(string modelName)
+        {
+            OperationGroup? result = null;
+            _nonResourceOperationGroupMapping.TryGetValue(modelName, out result);
+            return result;
+        }
 
         public ResourceOperation GetResourceOperation(OperationGroup operationGroup)
         {
@@ -451,9 +460,27 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     ResourceTypes.Add(parent);
                 }
                 if (operationsGroup.IsResource(_mgmtConfiguration))
+                {
                     AddOperationGroupToResourceMap(operationsGroup);
+                }
+                else
+                {
+                    AddNonResourceOperationGroupMapping(operationsGroup);
+                }
             }
             ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
+        }
+
+        private void AddNonResourceOperationGroupMapping(OperationGroup operationsGroup)
+        {
+            foreach (var operation in operationsGroup.Operations.Where(o=>o.Language.Default.Name == "Get"))
+            {
+                var responseSchema = operation.Responses.First().ResponseSchema;
+                if (responseSchema != null)
+                {
+                    _nonResourceOperationGroupMapping[responseSchema.Name] = operationsGroup;
+                }
+            }
         }
 
         private void AddOperationGroupToResourceMap(OperationGroup operationsGroup)

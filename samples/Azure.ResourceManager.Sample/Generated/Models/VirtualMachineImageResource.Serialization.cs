@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample
             string name = default;
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
-            ResourceGroupResourceIdentifier id = default;
+            SubscriptionResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
