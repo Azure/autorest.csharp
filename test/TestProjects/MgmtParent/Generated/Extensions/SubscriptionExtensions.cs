@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -27,118 +28,94 @@ namespace MgmtParent
 
         /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
-                return new PhWrappingAsyncPageable<AvailabilitySetData, AvailabilitySet>(
-                result,
-                s => new AvailabilitySet(subscription, s));
+                async Task<Page<AvailabilitySet>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListBySubscriptionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<AvailabilitySet>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all availability sets in a subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<AvailabilitySetData> ListBySubscriptionAsync(ClientDiagnostics clientDiagnostics, AvailabilitySetsRestOperations restOperations, string expand = null, CancellationToken cancellationToken = default)
-        {
-            async Task<Page<AvailabilitySetData>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListBySubscriptionAsync(expand, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<AvailabilitySetData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, expand, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscription(clientDiagnostics, restOperations);
-                return new PhWrappingPageable<AvailabilitySetData, AvailabilitySet>(
-                result,
-                s => new AvailabilitySet(subscription, s));
+                Page<AvailabilitySet> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListBySubscription(cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<AvailabilitySet> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListBySubscriptionNextPage(nextLink, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all availability sets in a subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<AvailabilitySetData> ListBySubscription(ClientDiagnostics clientDiagnostics, AvailabilitySetsRestOperations restOperations, string expand = null, CancellationToken cancellationToken = default)
-        {
-            Page<AvailabilitySetData> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListBySubscription(expand, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<AvailabilitySetData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListBySubscriptionNextPage(nextLink, expand, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Filters the list of AvailabilitySets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>

@@ -36,64 +36,6 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             writer.Append($"internal {client.Type} RestClient").LineRaw(" { get; }");
         }
 
-        protected void WritePagingOperationDefinition(CodeWriter writer, PagingMethod pagingMethod, bool async, string restClientParam, string clientDiagnosticsParam)
-        {
-            // Paging method definition
-            var pageType = pagingMethod.PagingResponse.ItemType;
-            var parameters = pagingMethod.Method.Parameters;
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(parameters);
-
-                var pageWrappedType = new CSharpType(typeof(Page<>), pageType);
-                var funcType = async ? new CSharpType(typeof(Task<>), pageWrappedType) : pageWrappedType;
-
-                var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-                var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
-
-                var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-                var asyncText = async ? "async" : string.Empty;
-                var awaitText = async ? "await" : string.Empty;
-                var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-                using (writer.Scope($"{asyncText} {funcType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
-                {
-                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsParam, writer =>
-                    {
-                        writer.Append($"var response = {awaitText} {restClientParam}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
-                        foreach (Parameter parameter in parameters)
-                        {
-                            writer.Append($"{parameter.Name}, ");
-                        }
-
-                        writer.Line($"cancellationToken){configureAwaitText};");
-                        writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}, {continuationTokenText}, response.GetRawResponse());");
-                    });
-                }
-
-                var nextPageFunctionName = "null";
-                if (pagingMethod.NextPageMethod != null)
-                {
-                    nextPageFunctionName = "NextPageFunc";
-                    var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
-                    using (writer.Scope($"{asyncText} {funcType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
-                    {
-                        WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsParam, writer =>
-                        {
-                            writer.Append($"var response = {awaitText} {restClientParam}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(");
-                            foreach (Parameter parameter in nextPageParameters)
-                            {
-                                writer.Append($"{parameter.Name}, ");
-                            }
-                            writer.Line($"cancellationToken){configureAwaitText};");
-                            writer.Line($"return {typeof(Page)}.FromValues(response.Value.{itemName}, {continuationTokenText}, response.GetRawResponse());");
-                        });
-                    }
-                }
-                writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
-            }
-            writer.Line();
-        }
-
         protected void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, string clientDiagnosticsParam, CodeWriterDelegate inner)
         {
             var scopeVariable = new CodeWriterDeclaration("scope");
