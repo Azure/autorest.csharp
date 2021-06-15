@@ -32,14 +32,14 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         /// <returns> placeholder. </returns>
-        public static Task<Response<SshPublicKeyInfo>> CreateSshPublicKeysAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<SshPublicKeyInfo>> CreateSshPublicKeysAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -144,14 +144,14 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         /// <returns> placeholder. </returns>
-        public static Task<Response> DeleteSshPublicKeysAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static async Task<Response> DeleteSshPublicKeysAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -250,14 +250,14 @@ namespace ResourceRename
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         /// <returns> placeholder. </returns>
-        public static Task<Response<SshPublicKeyInfo>> GetSshPublicKeysAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SshPublicKeyInfo>> GetSshPublicKeysAsync(this ResourceGroupOperations resourceGroup, string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
             if (sshPublicKeyName == null)
             {
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);

@@ -130,7 +130,7 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <returns> placeholder. </returns>
-        public static Task<Response<NonResourceModel1>> PutNonResourceModel1sAsync(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<NonResourceModel1>> PutNonResourceModel1sAsync(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
             {
@@ -141,7 +141,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -251,14 +251,14 @@ namespace SupersetFlattenInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
         /// <returns> placeholder. </returns>
-        public static Task<Response<NonResourceModel1>> GetNonResourceModel1sAsync(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<NonResourceModel1>> GetNonResourceModel1sAsync(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
             {
                 throw new ArgumentNullException(nameof(nonResourceModel1SName));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
