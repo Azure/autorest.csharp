@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -27,118 +28,94 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
-                return new PhWrappingAsyncPageable<AvailabilitySetData, AvailabilitySet>(
-                result,
-                s => new AvailabilitySet(subscription, s));
+                async Task<Page<AvailabilitySet>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListBySubscriptionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<AvailabilitySet>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all availability sets in a subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<AvailabilitySetData> ListBySubscriptionAsync(ClientDiagnostics clientDiagnostics, AvailabilitySetsRestOperations restOperations, string expand = null, CancellationToken cancellationToken = default)
-        {
-            async Task<Page<AvailabilitySetData>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListBySubscriptionAsync(expand, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<AvailabilitySetData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, expand, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscription(clientDiagnostics, restOperations);
-                return new PhWrappingPageable<AvailabilitySetData, AvailabilitySet>(
-                result,
-                s => new AvailabilitySet(subscription, s));
+                Page<AvailabilitySet> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListBySubscription(cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<AvailabilitySet> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListBySubscriptionNextPage(nextLink, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all availability sets in a subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<AvailabilitySetData> ListBySubscription(ClientDiagnostics clientDiagnostics, AvailabilitySetsRestOperations restOperations, string expand = null, CancellationToken cancellationToken = default)
-        {
-            Page<AvailabilitySetData> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListBySubscription(expand, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<AvailabilitySetData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListBySubscriptionNextPage(nextLink, expand, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Filters the list of AvailabilitySets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
@@ -184,51 +161,39 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
-                return new PhWrappingAsyncPageable<ProximityPlacementGroupData, ProximityPlacementGroup>(
-                result,
-                s => new ProximityPlacementGroup(subscription, s));
+                async Task<Page<ProximityPlacementGroup>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListBySubscriptionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<ProximityPlacementGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all proximity placement groups in a subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<ProximityPlacementGroupData> ListBySubscriptionAsync(ClientDiagnostics clientDiagnostics, ProximityPlacementGroupsRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            async Task<Page<ProximityPlacementGroupData>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListBySubscriptionAsync(cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<ProximityPlacementGroupData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Lists the ProximityPlacementGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -241,51 +206,39 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscription(clientDiagnostics, restOperations);
-                return new PhWrappingPageable<ProximityPlacementGroupData, ProximityPlacementGroup>(
-                result,
-                s => new ProximityPlacementGroup(subscription, s));
+                Page<ProximityPlacementGroup> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListBySubscription(cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<ProximityPlacementGroup> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListBySubscriptionNextPage(nextLink, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new ProximityPlacementGroup(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all proximity placement groups in a subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<ProximityPlacementGroupData> ListBySubscription(ClientDiagnostics clientDiagnostics, ProximityPlacementGroupsRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            Page<ProximityPlacementGroupData> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListBySubscription(cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<ProximityPlacementGroupData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListBySubscriptionNextPage(nextLink, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Filters the list of ProximityPlacementGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
@@ -331,51 +284,39 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
-                return new PhWrappingAsyncPageable<DedicatedHostGroupData, DedicatedHostGroup>(
-                result,
-                s => new DedicatedHostGroup(subscription, s));
+                async Task<Page<DedicatedHostGroup>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListBySubscriptionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<DedicatedHostGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<DedicatedHostGroupData> ListBySubscriptionAsync(ClientDiagnostics clientDiagnostics, DedicatedHostGroupsRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            async Task<Page<DedicatedHostGroupData>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListBySubscriptionAsync(cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<DedicatedHostGroupData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Lists the DedicatedHostGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -388,51 +329,39 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscription(clientDiagnostics, restOperations);
-                return new PhWrappingPageable<DedicatedHostGroupData, DedicatedHostGroup>(
-                result,
-                s => new DedicatedHostGroup(subscription, s));
+                Page<DedicatedHostGroup> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListBySubscription(cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<DedicatedHostGroup> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListBySubscriptionNextPage(nextLink, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new DedicatedHostGroup(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all of the dedicated host groups in the subscription. Use the nextLink property in the response to get the next page of dedicated host groups. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<DedicatedHostGroupData> ListBySubscription(ClientDiagnostics clientDiagnostics, DedicatedHostGroupsRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            Page<DedicatedHostGroupData> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListBySubscription(cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<DedicatedHostGroupData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListBySubscriptionNextPage(nextLink, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Filters the list of DedicatedHostGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
@@ -478,51 +407,39 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscriptionAsync(clientDiagnostics, restOperations);
-                return new PhWrappingAsyncPageable<SshPublicKeyData, SshPublicKey>(
-                result,
-                s => new SshPublicKey(subscription, s));
+                async Task<Page<SshPublicKey>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListBySubscriptionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<SshPublicKey>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<SshPublicKeyData> ListBySubscriptionAsync(ClientDiagnostics clientDiagnostics, SshPublicKeysRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            async Task<Page<SshPublicKeyData>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListBySubscriptionAsync(cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<SshPublicKeyData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListBySubscriptionNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Lists the SshPublicKeys for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -535,51 +452,39 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListBySubscription(clientDiagnostics, restOperations);
-                return new PhWrappingPageable<SshPublicKeyData, SshPublicKey>(
-                result,
-                s => new SshPublicKey(subscription, s));
+                Page<SshPublicKey> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListBySubscription(cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<SshPublicKey> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListBySubscriptionNextPage(nextLink, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new SshPublicKey(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<SshPublicKeyData> ListBySubscription(ClientDiagnostics clientDiagnostics, SshPublicKeysRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            Page<SshPublicKeyData> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListBySubscription(cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<SshPublicKeyData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListBySubscriptionNextPage(nextLink, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Filters the list of SshPublicKeys for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
@@ -617,118 +522,94 @@ namespace Azure.ResourceManager.Sample
 
         /// <summary> Lists the VirtualMachines for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static AsyncPageable<VirtualMachine> ListVirtualMachineAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<VirtualMachine> ListVirtualMachineAsync(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListAllAsync(clientDiagnostics, restOperations);
-                return new PhWrappingAsyncPageable<VirtualMachineData, VirtualMachine>(
-                result,
-                s => new VirtualMachine(subscription, s));
+                async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAllAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<VirtualMachine>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAllNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<VirtualMachineData> ListAllAsync(ClientDiagnostics clientDiagnostics, VirtualMachinesRestOperations restOperations, string statusOnly = null, CancellationToken cancellationToken = default)
-        {
-            async Task<Page<VirtualMachineData>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListAllAsync(statusOnly, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<VirtualMachineData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListAllNextPageAsync(nextLink, statusOnly, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Lists the VirtualMachines for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
-        public static Pageable<VirtualMachine> ListVirtualMachine(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Pageable<VirtualMachine> ListVirtualMachine(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListAll(clientDiagnostics, restOperations);
-                return new PhWrappingPageable<VirtualMachineData, VirtualMachine>(
-                result,
-                s => new VirtualMachine(subscription, s));
+                Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListAll(cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<VirtualMachine> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListAllNextPage(nextLink, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<VirtualMachineData> ListAll(ClientDiagnostics clientDiagnostics, VirtualMachinesRestOperations restOperations, string statusOnly = null, CancellationToken cancellationToken = default)
-        {
-            Page<VirtualMachineData> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListAll(statusOnly, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<VirtualMachineData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListAllNextPage(nextLink, statusOnly, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Filters the list of VirtualMachines for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
@@ -774,51 +655,39 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListAllAsync(clientDiagnostics, restOperations);
-                return new PhWrappingAsyncPageable<VirtualMachineScaleSetData, VirtualMachineScaleSet>(
-                result,
-                s => new VirtualMachineScaleSet(subscription, s));
+                async Task<Page<VirtualMachineScaleSet>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAllAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<VirtualMachineScaleSet>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAllNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<VirtualMachineScaleSetData> ListAllAsync(ClientDiagnostics clientDiagnostics, VirtualMachineScaleSetsRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            async Task<Page<VirtualMachineScaleSetData>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListAllAsync(cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            async Task<Page<VirtualMachineScaleSetData>> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListAllNextPageAsync(nextLink, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Lists the VirtualMachineScaleSets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -831,51 +700,39 @@ namespace Azure.ResourceManager.Sample
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListAll(clientDiagnostics, restOperations);
-                return new PhWrappingPageable<VirtualMachineScaleSetData, VirtualMachineScaleSet>(
-                result,
-                s => new VirtualMachineScaleSet(subscription, s));
+                Page<VirtualMachineScaleSet> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListAll(cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<VirtualMachineScaleSet> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListAllNextPage(nextLink, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value.Select(value => new VirtualMachineScaleSet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
             }
             );
-        }
-
-        /// <summary> Gets a list of all VM Scale Sets in the subscription, regardless of the associated resource group. Use nextLink property in the response to get the next page of VM Scale Sets. Do this till nextLink is null to fetch all the VM Scale Sets. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<VirtualMachineScaleSetData> ListAll(ClientDiagnostics clientDiagnostics, VirtualMachineScaleSetsRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            Page<VirtualMachineScaleSetData> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListAll(cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            Page<VirtualMachineScaleSetData> NextPageFunc(string nextLink, int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListAllNextPage(nextLink, cancellationToken);
-                    return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
         /// <summary> Filters the list of VirtualMachineScaleSets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
