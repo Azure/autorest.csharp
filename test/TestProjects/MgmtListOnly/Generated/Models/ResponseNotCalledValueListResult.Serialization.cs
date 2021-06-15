@@ -15,16 +15,16 @@ namespace MgmtListOnly.Models
     {
         internal static ResponseNotCalledValueListResult DeserializeResponseNotCalledValueListResult(JsonElement element)
         {
-            IReadOnlyList<AvailabilitySetChild> notValue = default;
+            IReadOnlyList<ResponseNotCalledValue> notValue = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("notValue"))
                 {
-                    List<AvailabilitySetChild> array = new List<AvailabilitySetChild>();
+                    List<ResponseNotCalledValue> array = new List<ResponseNotCalledValue>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AvailabilitySetChild.DeserializeAvailabilitySetChild(item));
+                        array.Add(ResponseNotCalledValue.DeserializeResponseNotCalledValue(item));
                     }
                     notValue = array;
                     continue;

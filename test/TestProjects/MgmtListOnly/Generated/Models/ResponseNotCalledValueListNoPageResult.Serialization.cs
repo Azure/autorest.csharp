@@ -15,15 +15,15 @@ namespace MgmtListOnly.Models
     {
         internal static ResponseNotCalledValueListNoPageResult DeserializeResponseNotCalledValueListNoPageResult(JsonElement element)
         {
-            IReadOnlyList<AvailabilitySetChild> notValue = default;
+            IReadOnlyList<ResponseNotCalledValueListNoPage> notValue = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("notValue"))
                 {
-                    List<AvailabilitySetChild> array = new List<AvailabilitySetChild>();
+                    List<ResponseNotCalledValueListNoPage> array = new List<ResponseNotCalledValueListNoPage>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(AvailabilitySetChild.DeserializeAvailabilitySetChild(item));
+                        array.Add(ResponseNotCalledValueListNoPage.DeserializeResponseNotCalledValueListNoPage(item));
                     }
                     notValue = array;
                     continue;

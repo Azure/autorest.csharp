@@ -17,7 +17,7 @@ namespace MgmtListOnly.Models
         /// <summary> Initializes a new instance of ResponseNotCalledValueListResult. </summary>
         /// <param name="notValue"> The list of availability sets child. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notValue"/> is null. </exception>
-        internal ResponseNotCalledValueListResult(IEnumerable<AvailabilitySetChild> notValue)
+        internal ResponseNotCalledValueListResult(IEnumerable<ResponseNotCalledValue> notValue)
         {
             if (notValue == null)
             {
@@ -30,14 +30,14 @@ namespace MgmtListOnly.Models
         /// <summary> Initializes a new instance of ResponseNotCalledValueListResult. </summary>
         /// <param name="notValue"> The list of availability sets child. </param>
         /// <param name="nextLink"> The URI to fetch the next page of AvailabilitySetsChild. Call ListNext() with this URI to fetch the next page of AvailabilitySets. </param>
-        internal ResponseNotCalledValueListResult(IReadOnlyList<AvailabilitySetChild> notValue, string nextLink)
+        internal ResponseNotCalledValueListResult(IReadOnlyList<ResponseNotCalledValue> notValue, string nextLink)
         {
             NotValue = notValue;
             NextLink = nextLink;
         }
 
         /// <summary> The list of availability sets child. </summary>
-        public IReadOnlyList<AvailabilitySetChild> NotValue { get; }
+        public IReadOnlyList<ResponseNotCalledValue> NotValue { get; }
         /// <summary> The URI to fetch the next page of AvailabilitySetsChild. Call ListNext() with this URI to fetch the next page of AvailabilitySets. </summary>
         public string NextLink { get; }
     }

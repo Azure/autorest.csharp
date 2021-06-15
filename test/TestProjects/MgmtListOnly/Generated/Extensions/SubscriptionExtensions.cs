@@ -19,7 +19,7 @@ namespace MgmtListOnly
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region AvailabilitySetFeature
+        #region SubscriptionExtensions
         private static AvailabilitySetFeaturesRestOperations GetAvailabilitySetFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new AvailabilitySetFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -49,7 +49,7 @@ namespace MgmtListOnly
         {
             async Task<Page<AvailabilitySetFeature>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetFeature.TestFeaturesMethod");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethod");
                 scope.Start();
                 try
                 {
@@ -64,7 +64,7 @@ namespace MgmtListOnly
             }
             async Task<Page<AvailabilitySetFeature>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetFeature.TestFeaturesMethod");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethod");
                 scope.Start();
                 try
                 {
@@ -104,7 +104,7 @@ namespace MgmtListOnly
         {
             Page<AvailabilitySetFeature> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetFeature.TestFeaturesMethod");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethod");
                 scope.Start();
                 try
                 {
@@ -119,7 +119,7 @@ namespace MgmtListOnly
             }
             Page<AvailabilitySetFeature> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("AvailabilitySetFeature.TestFeaturesMethod");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethod");
                 scope.Start();
                 try
                 {
@@ -137,7 +137,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region AvailabilitySetNonPageableFeature
+        #region SubscriptionExtensions
         private static AvailabilitySetsNonPageableFeaturesRestOperations GetAvailabilitySetsNonPageableFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new AvailabilitySetsNonPageableFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -164,7 +164,7 @@ namespace MgmtListOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         private static async Task<Response<AvailabilitySetNonPageableFeatureListResult>> TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(ClientDiagnostics clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AvailabilitySetNonPageableFeature.TestFeaturesMethodAvailabilitySetNonPageableFeature");
+            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetNonPageableFeature");
             scope.Start();
             try
             {
@@ -198,7 +198,7 @@ namespace MgmtListOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         private static Response<AvailabilitySetNonPageableFeatureListResult> TestFeaturesMethodAvailabilitySetNonPageableFeature(ClientDiagnostics clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("AvailabilitySetNonPageableFeature.TestFeaturesMethodAvailabilitySetNonPageableFeature");
+            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetNonPageableFeature");
             scope.Start();
             try
             {
@@ -213,7 +213,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region ApiKeys
+        #region SubscriptionExtensions
         private static ApiKeysRestOperations GetApiKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ApiKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -240,7 +240,7 @@ namespace MgmtListOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         private static async Task<Response<ApiKeysListResult>> ListApiKeysAsync(ClientDiagnostics clientDiagnostics, ApiKeysRestOperations restOperations, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ApiKeys.ListApiKeys");
+            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListApiKeys");
             scope.Start();
             try
             {
@@ -274,7 +274,7 @@ namespace MgmtListOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         private static Response<ApiKeysListResult> ListApiKeys(ClientDiagnostics clientDiagnostics, ApiKeysRestOperations restOperations, CancellationToken cancellationToken = default)
         {
-            using var scope = clientDiagnostics.CreateScope("ApiKeys.ListApiKeys");
+            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListApiKeys");
             scope.Start();
             try
             {

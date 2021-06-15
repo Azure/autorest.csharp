@@ -16,10 +16,12 @@
     "ResponseNotCalledValueNoPage": "Microsoft.Compute/availabilitySets/responseNotCalledValueNoPage",
     "AvailabilitySetFeatures": "Microsoft.Compute/availabilitySetsFeatures",
     "AvailabilitySetsNonPageableFeatures": "Microsoft.Compute/availabilitySetsNonPageableFeatures",
-    "ApiKeys": "Microsoft.Compute/apiKeys"
+    "ApiKeys": "Microsoft.Compute/apiKeys",
+    "ChildWithPosts": "Microsoft.Compute/availabilitySets/childWithPost"
   },
   "OperationGroupToResource": {
-    "ApiKeys": "NonResource"
+    "ApiKeys": "NonResource",
+    "ChildWithPosts": "NonResource"
   },
   "OperationGroupToParent": {
     "AvailabilitySetChild": "AvailabilitySets",
@@ -27,6 +29,7 @@
     "ResponseNotCalledValueNoPage": "AvailabilitySets",
     "AvailabilitySetFeatures": "subscriptions",
     "AvailabilitySetsNonPageableFeatures": "subscriptions",
-    "ApiKeys": "subscriptions"
+    "ApiKeys": "subscriptions",
+    "ChildWithPosts": "AvailabilitySets"
   }
 }

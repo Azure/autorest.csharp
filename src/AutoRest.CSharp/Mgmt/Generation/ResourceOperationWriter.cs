@@ -32,6 +32,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private bool _inheritResourceOperationsBase = false;
         private bool _isITaggableResource = false;
         private bool _isDeletableResource = false;
+
         public void WriteClient(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
             var config = context.Configuration.MgmtConfiguration;
@@ -101,15 +102,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteChildRestClients(CodeWriter writer, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
         {
-            foreach (var operationGroup in resourceOperation.ChildMethods.Keys.Union(resourceOperation.ChildPagingMethods.Keys))
+            foreach (var operationGroup in resourceOperation.ChildOperations.Keys)
             {
                 writer.Append($"internal {context.Library.GetRestClient(operationGroup).Type} {GetRestClientName(operationGroup)}").LineRaw(" { get; }");
             }
-        }
-
-        private IEnumerable<OperationGroup> GetChildOperationGroups(ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context)
-        {
-            return resourceOperation.ChildMethods.Keys.Union(resourceOperation.ChildPagingMethods.Keys);
         }
 
         private RestClientMethod? GetMethod(ResourceOperation resourceOperation, ResourceData resourceData)
@@ -156,7 +152,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Line($"Id.TryGetSubscriptionId(out var subscriptionId);");
                     }
                     writer.Line($"this.RestClient = new {resourceOperation.RestClient.Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}, BaseUri);");
-                    foreach (var operationGroup in GetChildOperationGroups(resourceOperation, context))
+                    foreach (var operationGroup in resourceOperation.ChildOperations.Keys)
                     {
                         writer.Line($"{GetRestClientName(operationGroup)} = new {context.Library.GetRestClient(operationGroup).Type}({ClientDiagnosticsField}, {PipelineProperty}, {subscriptionValue}, BaseUri);");
                     }
@@ -256,18 +252,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             // write child (list-only) methods
-            foreach (var pair in resourceOperation.ChildMethods)
+            foreach (var pair in resourceOperation.ChildOperations)
             {
                 var restClientName = GetRestClientName(pair.Key);
-                foreach (var clientMethod in pair.Value)
+                foreach (var clientMethod in pair.Value.ClientMethods)
                 {
                     WriteClientMethod(writer, clientMethod, resourceOperation, context, true, restClientName);
                     WriteClientMethod(writer, clientMethod, resourceOperation, context, false, restClientName);
                 }
-            }
-            foreach (var pair in resourceOperation.ChildPagingMethods)
-            {
-                foreach (var pagingMethod in pair.Value)
+                foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
                     WriteChildPagingMethod(writer, pair.Key, false, pagingMethod);
                     WriteChildPagingMethod(writer, pair.Key, true, pagingMethod);

@@ -14,8 +14,10 @@ operation-group-to-resource-type:
     AvailabilitySetFeatures: Microsoft.Compute/availabilitySetsFeatures
     AvailabilitySetsNonPageableFeatures: Microsoft.Compute/availabilitySetsNonPageableFeatures
     ApiKeys: Microsoft.Compute/apiKeys
+    ChildWithPosts: Microsoft.Compute/availabilitySets/childWithPost
 operation-group-to-resource:
     ApiKeys: NonResource
+    ChildWithPosts: NonResource
 operation-group-to-parent:
     AvailabilitySetChild: AvailabilitySets
     ResponseNotCalledValue: AvailabilitySets
@@ -23,4 +25,5 @@ operation-group-to-parent:
     AvailabilitySetFeatures: subscriptions
     AvailabilitySetsNonPageableFeatures: subscriptions
     ApiKeys: subscriptions
+    ChildWithPosts: AvailabilitySets
 ```

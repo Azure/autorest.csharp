@@ -13,6 +13,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         // list-only + parent is not resource -> extra method on [armclient/sub/rg]Extensions
 
         [TestCase("AvailabilitySetOperations", "ListAvailabilitySetChild", true)]
+        [TestCase("AvailabilitySetOperations", "CreateOrUpdateChildWithPost", true)]
         public void ValidateExtraMethodInParentOperations(string operation, string methodName, bool exist)
         {
             var parentOperations = FindAllOperations().First(o => o.Name == operation);

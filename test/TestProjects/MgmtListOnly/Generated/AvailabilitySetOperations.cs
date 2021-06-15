@@ -23,9 +23,10 @@ namespace MgmtListOnly
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         internal AvailabilitySetsRestOperations RestClient { get; }
-        internal ResponseNotCalledValueNoPageRestOperations ResponseNotCalledValueNoPageRestClient { get; }
         internal AvailabilitySetChildRestOperations AvailabilitySetChildRestClient { get; }
+        internal ChildWithPostsRestOperations ChildWithPostsRestClient { get; }
         internal ResponseNotCalledValueRestOperations ResponseNotCalledValueRestClient { get; }
+        internal ResponseNotCalledValueNoPageRestOperations ResponseNotCalledValueNoPageRestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetOperations"/> class for mocking. </summary>
         protected AvailabilitySetOperations()
@@ -39,9 +40,10 @@ namespace MgmtListOnly
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             RestClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-            ResponseNotCalledValueNoPageRestClient = new ResponseNotCalledValueNoPageRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
             AvailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            ChildWithPostsRestClient = new ChildWithPostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
             ResponseNotCalledValueRestClient = new ResponseNotCalledValueRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            ResponseNotCalledValueNoPageRestClient = new ResponseNotCalledValueNoPageRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
@@ -558,46 +560,12 @@ namespace MgmtListOnly
 
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ResponseNotCalledValueListNoPageResult>> ListResponseNotCalledValueNoPageAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValueNoPage");
-            scope.Start();
-            try
-            {
-                return await ResponseNotCalledValueNoPageRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an availability set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ResponseNotCalledValueListNoPageResult> ListResponseNotCalledValueNoPage(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValueNoPage");
-            scope.Start();
-            try
-            {
-                return ResponseNotCalledValueNoPageRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Retrieves information about an availability set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="AvailabilitySetChild" /> that may take multiple service requests to iterate over. </returns>
         public Pageable<AvailabilitySetChild> ListAvailabilitySetChild(CancellationToken cancellationToken = default)
         {
             Page<AvailabilitySetChild> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySetChild");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
                 scope.Start();
                 try
                 {
@@ -612,7 +580,7 @@ namespace MgmtListOnly
             }
             Page<AvailabilitySetChild> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySetChild");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
                 scope.Start();
                 try
                 {
@@ -635,7 +603,7 @@ namespace MgmtListOnly
         {
             async Task<Page<AvailabilitySetChild>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySetChild");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
                 scope.Start();
                 try
                 {
@@ -650,7 +618,7 @@ namespace MgmtListOnly
             }
             async Task<Page<AvailabilitySetChild>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySetChild");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
                 scope.Start();
                 try
                 {
@@ -665,15 +633,62 @@ namespace MgmtListOnly
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
         }
+        /// <summary> Create or update a child with POST. </summary>
+        /// <param name="parameters"> Parameters supplied to the Create child with POST operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual async Task<Response<ChildWithPost>> CreateOrUpdateChildWithPostsAsync(ChildWithPost parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.CreateOrUpdateChildWithPosts");
+            scope.Start();
+            try
+            {
+                return await ChildWithPostsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Create or update a child with POST. </summary>
+        /// <param name="parameters"> Parameters supplied to the Create child with POST operation. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Response<ChildWithPost> CreateOrUpdateChildWithPosts(ChildWithPost parameters, CancellationToken cancellationToken = default)
+        {
+            if (parameters == null)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.CreateOrUpdateChildWithPosts");
+            scope.Start();
+            try
+            {
+                return ChildWithPostsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
 
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="AvailabilitySetChild" /> that may take multiple service requests to iterate over. </returns>
-        public Pageable<AvailabilitySetChild> ListResponseNotCalledValue(CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="ResponseNotCalledValue" /> that may take multiple service requests to iterate over. </returns>
+        public Pageable<ResponseNotCalledValue> ListResponseNotCalledValue(CancellationToken cancellationToken = default)
         {
-            Page<AvailabilitySetChild> FirstPageFunc(int? pageSizeHint)
+            Page<ResponseNotCalledValue> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValue");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
                 scope.Start();
                 try
                 {
@@ -686,9 +701,9 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            Page<AvailabilitySetChild> NextPageFunc(string nextLink, int? pageSizeHint)
+            Page<ResponseNotCalledValue> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValue");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
                 scope.Start();
                 try
                 {
@@ -706,12 +721,12 @@ namespace MgmtListOnly
 
         /// <summary> Retrieves information about an availability set. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="AvailabilitySetChild" /> that may take multiple service requests to iterate over. </returns>
-        public AsyncPageable<AvailabilitySetChild> ListResponseNotCalledValueAsync(CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="ResponseNotCalledValue" /> that may take multiple service requests to iterate over. </returns>
+        public AsyncPageable<ResponseNotCalledValue> ListResponseNotCalledValueAsync(CancellationToken cancellationToken = default)
         {
-            async Task<Page<AvailabilitySetChild>> FirstPageFunc(int? pageSizeHint)
+            async Task<Page<ResponseNotCalledValue>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValue");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
                 scope.Start();
                 try
                 {
@@ -724,9 +739,9 @@ namespace MgmtListOnly
                     throw;
                 }
             }
-            async Task<Page<AvailabilitySetChild>> NextPageFunc(string nextLink, int? pageSizeHint)
+            async Task<Page<ResponseNotCalledValue>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValue");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
                 scope.Start();
                 try
                 {
@@ -740,6 +755,39 @@ namespace MgmtListOnly
                 }
             }
             return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+        }
+        /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<ResponseNotCalledValueListNoPageResult>> ListResponseNotCalledValueListNoPageAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValueListNoPage");
+            scope.Start();
+            try
+            {
+                return await ResponseNotCalledValueNoPageRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Retrieves information about an availability set. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<ResponseNotCalledValueListNoPageResult> ListResponseNotCalledValueListNoPage(CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValueListNoPage");
+            scope.Start();
+            try
+            {
+                return ResponseNotCalledValueNoPageRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Update an availability set. </summary>

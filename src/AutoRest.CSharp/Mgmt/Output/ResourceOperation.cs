@@ -31,8 +31,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private PagingMethod[]? _pagingMethods;
 
         private IEnumerable<OperationGroup>? _siblingOperationGroups;
-        private IDictionary<OperationGroup, ClientMethod[]>? _childMethods;
-        private IDictionary<OperationGroup, PagingMethod[]>? _childPagingMethods;
+        private IDictionary<OperationGroup, MgmtExtensionOperation>? _childOperations; //todo rename
 
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
@@ -74,20 +73,16 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
 
-        public IDictionary<OperationGroup, ClientMethod[]> ChildMethods => _childMethods ??= EnsureChildMethods();
+        public IDictionary<OperationGroup, MgmtExtensionOperation> ChildOperations => _childOperations ??= EnsureChildOperations();
 
-        private IDictionary<OperationGroup, ClientMethod[]> EnsureChildMethods()
+        private IDictionary<OperationGroup, MgmtExtensionOperation> EnsureChildOperations()
         {
-            var result = new Dictionary<OperationGroup, ClientMethod[]>();
+            var result = new Dictionary<OperationGroup, MgmtExtensionOperation>();
             if (_siblingOperationGroups != null)
             {
                 foreach (var operationGroup in _siblingOperationGroups)
                 {
-                    var methods = BuildMethods(operationGroup, _context.Library.GetRestClient(operationGroup), Declaration).ToArray();
-                    if (methods.Length > 0)
-                    {
-                        result[operationGroup] = methods;
-                    }
+                    result[operationGroup] = new MgmtExtensionOperation(operationGroup, _context, DefaultName);
                 }
             }
             return result;
@@ -101,8 +96,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
-
-        public IDictionary<OperationGroup, PagingMethod[]> ChildPagingMethods => _childPagingMethods ??= EnsureChildPagingMethods();
 
         private IDictionary<OperationGroup, PagingMethod[]> EnsureChildPagingMethods()
         {

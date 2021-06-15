@@ -169,7 +169,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         {
             if (NonResourceOperationGroups.TryGetValue(parent, out var operationGroups))
             {
-                return operationGroups.Select(operationGroup => new MgmtExtensionOperation(operationGroup, _context));
+                return operationGroups.Select(operationGroup => new MgmtExtensionOperation(operationGroup, _context, ResourceTypeBuilder.TypeToExtensionName[parent] ));
             }
 
             return Enumerable.Empty<MgmtExtensionOperation>();
