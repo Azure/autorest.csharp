@@ -20,11 +20,11 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             {
                 Assert.IsNotNull(operations.ParentResourceType(context.Configuration.MgmtConfiguration));
                 if (operations.Key.Equals("VirtualMachineExtensionImages"))
-                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/locations/publishers"));
+                    Assert.AreEqual("subscriptions", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
                 else if (operations.Key.Equals("AvailabilitySets"))
-                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("resourceGroups"));
+                    Assert.AreEqual("resourceGroups", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
                 else if (operations.Key.Equals("DedicatedHosts"))
-                    Assert.IsTrue(operations.ParentResourceType(context.Configuration.MgmtConfiguration).Equals("Microsoft.Compute/hostGroups"));
+                    Assert.AreEqual("Microsoft.Compute/hostGroups", operations.ParentResourceType(context.Configuration.MgmtConfiguration));
             }
         }
     }

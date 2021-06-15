@@ -45,6 +45,181 @@ namespace MgmtParent
 
         // Container level operations.
 
+        /// <summary> The operation to create or update a VirtualMachineExtensionImage. Please note some properties can be set only during creation. </summary>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public Response<VirtualMachineExtensionImage> CreateOrUpdate(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (location == null)
+                {
+                    throw new ArgumentNullException(nameof(location));
+                }
+                if (publisherName == null)
+                {
+                    throw new ArgumentNullException(nameof(publisherName));
+                }
+                if (type == null)
+                {
+                    throw new ArgumentNullException(nameof(type));
+                }
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                return StartCreateOrUpdate(location, publisherName, type, version, parameters, cancellationToken: cancellationToken).WaitForCompletion(cancellationToken);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to create or update a VirtualMachineExtensionImage. Please note some properties can be set only during creation. </summary>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async Task<Response<VirtualMachineExtensionImage>> CreateOrUpdateAsync(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.CreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (location == null)
+                {
+                    throw new ArgumentNullException(nameof(location));
+                }
+                if (publisherName == null)
+                {
+                    throw new ArgumentNullException(nameof(publisherName));
+                }
+                if (type == null)
+                {
+                    throw new ArgumentNullException(nameof(type));
+                }
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var operation = await StartCreateOrUpdateAsync(location, publisherName, type, version, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to create or update a VirtualMachineExtensionImage. Please note some properties can be set only during creation. </summary>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public VirtualMachineExtensionImagesCreateOrUpdateOperation StartCreateOrUpdate(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (location == null)
+                {
+                    throw new ArgumentNullException(nameof(location));
+                }
+                if (publisherName == null)
+                {
+                    throw new ArgumentNullException(nameof(publisherName));
+                }
+                if (type == null)
+                {
+                    throw new ArgumentNullException(nameof(type));
+                }
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = _restClient.CreateOrUpdate(location, publisherName, type, version, parameters, cancellationToken: cancellationToken);
+                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(Parent, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> The operation to create or update a VirtualMachineExtensionImage. Please note some properties can be set only during creation. </summary>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="parameters"> Parameters supplied to the Create VirtualMachineExtensionImage. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        public async Task<VirtualMachineExtensionImagesCreateOrUpdateOperation> StartCreateOrUpdateAsync(string location, string publisherName, string type, string version, VirtualMachineExtensionImageData parameters, CancellationToken cancellationToken = default)
+        {
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageContainer.StartCreateOrUpdate");
+            scope.Start();
+            try
+            {
+                if (location == null)
+                {
+                    throw new ArgumentNullException(nameof(location));
+                }
+                if (publisherName == null)
+                {
+                    throw new ArgumentNullException(nameof(publisherName));
+                }
+                if (type == null)
+                {
+                    throw new ArgumentNullException(nameof(type));
+                }
+                if (version == null)
+                {
+                    throw new ArgumentNullException(nameof(version));
+                }
+                if (parameters == null)
+                {
+                    throw new ArgumentNullException(nameof(parameters));
+                }
+
+                var originalResponse = await _restClient.CreateOrUpdateAsync(location, publisherName, type, version, parameters, cancellationToken: cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(Parent, originalResponse);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="type"> The String to use. </param>

@@ -53,15 +53,13 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             var context = result.Context;
 
             var count = context.Library.ResourceSchemaMap.Count;
-            var tupleOperationGroupsList = result.Context.Configuration.MgmtConfiguration.OperationGroupIsTuple;
-            var resourceCount = count - tupleOperationGroupsList.Count();
             var singletonCount = context.CodeModel.OperationGroups.Count(
                 c => c.IsSingletonResource(result.Context.Configuration.MgmtConfiguration));
 
-            Assert.AreEqual(resourceCount, context.Library.ResourceOperations.Count());
-            Assert.AreEqual(resourceCount - singletonCount, context.Library.ResourceContainers.Count());
-            Assert.AreEqual(resourceCount, context.Library.ArmResource.Count());
-            Assert.AreEqual(count, context.Library.ResourceData.Count());
+            Assert.AreEqual(count, context.Library.ResourceOperations.Count() + context.Library.TupleResourceOperations.Count(), "Did not find the expected resourceOperations count");
+            Assert.AreEqual(count - singletonCount, context.Library.ResourceContainers.Count() + context.Library.TupleResourceContainers.Count(), "Did not find the expected resourceContainers count");
+            Assert.AreEqual(count, context.Library.ArmResource.Count(), "Did not find the expected resource count");
+            Assert.AreEqual(count, context.Library.ResourceData.Count(), "Did not find the expected resourceData count");
         }
 
         [Test]
