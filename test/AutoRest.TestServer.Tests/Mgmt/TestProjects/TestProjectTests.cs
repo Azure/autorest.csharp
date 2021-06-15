@@ -368,8 +368,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var listMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listMethodInfo);
-                    // This looks weird, some list functions have extra optional parameters (top, statusOnly, etc), therefore we cannot say we have 2 parameters for all list functions.
-                    Assert.GreaterOrEqual(2, listMethodInfo.GetParameters().Length);
+                    Assert.GreaterOrEqual(listMethodInfo.GetParameters().Length, 2);
                     var listParam1 = TypeAsserts.HasParameter(listMethodInfo, "subscription");
                     Assert.AreEqual(typeof(SubscriptionOperations), listParam1.ParameterType);
                     var listParam2 = TypeAsserts.HasParameter(listMethodInfo, "cancellationToken");
@@ -377,7 +376,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
                     var listAsyncMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}Async", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listAsyncMethodInfo);
-                    Assert.GreaterOrEqual(2, listAsyncMethodInfo.GetParameters().Length);
+                    Assert.GreaterOrEqual(listAsyncMethodInfo.GetParameters().Length, 2);
                     var listAsyncParam1 = TypeAsserts.HasParameter(listAsyncMethodInfo, "subscription");
                     Assert.AreEqual(typeof(SubscriptionOperations), listAsyncParam1.ParameterType);
                     var listAsyncParam2 = TypeAsserts.HasParameter(listAsyncMethodInfo, "cancellationToken");
