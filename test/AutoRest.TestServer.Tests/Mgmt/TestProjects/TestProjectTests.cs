@@ -363,7 +363,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var listMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listMethodInfo);
-                    Assert.AreEqual(2, listMethodInfo.GetParameters().Length);
+                    Assert.True(listMethodInfo.GetParameters().Length >= 2);
                     var listParam1 = TypeAsserts.HasParameter(listMethodInfo, "subscription");
                     Assert.AreEqual(typeof(SubscriptionOperations), listParam1.ParameterType);
                     var listParam2 = TypeAsserts.HasParameter(listMethodInfo, "cancellationToken");
@@ -371,7 +371,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
                     var listAsyncMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}Async", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listAsyncMethodInfo);
-                    Assert.AreEqual(2, listAsyncMethodInfo.GetParameters().Length);
+                    Assert.True(listMethodInfo.GetParameters().Length >= 2);
                     var listAsyncParam1 = TypeAsserts.HasParameter(listAsyncMethodInfo, "subscription");
                     Assert.AreEqual(typeof(SubscriptionOperations), listAsyncParam1.ParameterType);
                     var listAsyncParam2 = TypeAsserts.HasParameter(listAsyncMethodInfo, "cancellationToken");

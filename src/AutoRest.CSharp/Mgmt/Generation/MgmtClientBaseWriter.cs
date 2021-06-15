@@ -113,7 +113,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WriteContainerPagingOperation(writer, listMethod, async, resourceType, converter);
+                WritePagingOperationBody(writer, listMethod, async, resourceType, RestClientField, ClientDiagnosticsField, converter);
             }
         }
 
@@ -125,7 +125,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="async">Should the method be written sync or async.</param>
         /// <param name="resourceType">The reource type that is being written.</param>
         /// <param name="converter">Optional convertor for modifying the result of the rest client call.</param>
-        private void WriteContainerPagingOperation(CodeWriter writer, PagingMethod pagingMethod, bool async, CSharpType resourceType, FormattableString converter)
+        protected void WritePagingOperationBody(CodeWriter writer, PagingMethod pagingMethod, bool async, CSharpType resourceType, string restClientName, string clientDiagnosticsName, FormattableString converter)
         {
             var parameters = pagingMethod.Method.Parameters;
 
@@ -142,14 +142,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"{asyncText} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
                 // no null-checks because all are optional
-                WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsName, writer =>
                 {
-                    writer.Append($"var response = {awaitText} {RestClientField}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                    writer.Append($"var response = {awaitText} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
                     foreach (var parameter in BuildParameterMapping(pagingMethod.Method).Where(p => IsMandatory(p.Parameter)))
                     {
                         writer.Append($"{parameter.ValueExpression}, ");
                     }
-
                     writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
 
                     writer.UseNamespace("System.Linq");
@@ -167,17 +166,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                 using (writer.Scope($"{asyncText} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
-                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsName, writer =>
                     {
-                        writer.Append($"var response = {awaitText} {RestClientField}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
+                        writer.Append($"var response = {awaitText} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
                         foreach (var parameter in BuildParameterMapping(pagingMethod.NextPageMethod).Where(p => IsMandatory(p.Parameter)))
                         {
                             writer.Append($"{parameter.ValueExpression}, ");
                         }
                         writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
-                    writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
-                    writer.Append($"{converter}");
-                    writer.Line($", {continuationTokenText}, response.GetRawResponse());");
+                        writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
+                        writer.Append($"{converter}");
+                        writer.Line($", {continuationTokenText}, response.GetRawResponse());");
                     });
                 }
             }
