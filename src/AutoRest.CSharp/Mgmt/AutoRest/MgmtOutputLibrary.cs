@@ -438,7 +438,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     // If overriden, add parent to known types list (trusting user input)
                     ResourceTypes.Add(parent);
                 }
-                if (operationGroup.IsListOnlyChildResource(_mgmtConfiguration) || !operationGroup.IsResource(_mgmtConfiguration))
+                if (operationGroup.IsListOnly(_mgmtConfiguration) || !operationGroup.IsResource(_mgmtConfiguration))
                 {
                     AddOperationGroupToNonResourceMap(operationGroup);
                 }

@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationReturns("placeholder"); // TODO -- determine what to put here
 
             // write the signature of this function
-            writer.Append($"public static {responseType} {CreateMethodName(clientMethod.Name, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            writer.Append($"public static {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in methodParameters)
             {
                 writer.WriteParameter(parameter);
@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
                     writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
 
-                    writer.Append($"return {CreateMethodName(clientMethod.Name, async)}({clientDiagnostics}, {restOperations}, ");
+                    writer.Append($"return {AwaitKeyword(async)} {CreateMethodName(clientMethod.Name, async)}({clientDiagnostics}, {restOperations}, ");
                     foreach (var parameterName in omittedParameterInvocations)
                     {
                         writer.Append($"{parameterName}, ");
