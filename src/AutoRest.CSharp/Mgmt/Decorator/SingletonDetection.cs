@@ -38,8 +38,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
             }
 
-            // If no match found, double check if operation group's resource has been set to singleton in config
-            return config.SingletonResource.Contains(operationGroup.Resource(config));
+            // if no match found, we get the resource schema name first and see if the operation group's resource has been set to singleton in config
+            if (operationGroup.TryGetResourceName(config, out var resourceName))
+                return config.SingletonResource.Contains(resourceName);
+
+            return false;
         }
     }
 }

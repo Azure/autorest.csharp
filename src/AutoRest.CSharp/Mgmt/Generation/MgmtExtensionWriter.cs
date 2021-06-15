@@ -75,7 +75,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationReturns("placeholder"); // TODO -- determine what to put here
 
             // write the signature of this function
-            writer.Append($"public static {responseType} {CreateMethodName(clientMethod.Name, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            writer.Append($"public static {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in methodParameters)
             {
                 writer.WriteParameter(parameter);
@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.WriteParameterNullChecks(methodParameters.ToArray());
 
-                writer.Append($"return {ExtensionOperationVariableName}.UseClientContext((baseUri, credential, options, pipeline) =>");
+                writer.Append($"return {AwaitKeyword(async)} {ExtensionOperationVariableName}.UseClientContext((baseUri, credential, options, pipeline) =>");
                 using (writer.Scope())
                 {
                     var clientDiagnostics = new CodeWriterDeclaration("clientDiagnostics");

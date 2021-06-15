@@ -50,7 +50,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <returns> placeholder. </returns>
-        public static Task<Response<SupersetModel2>> PutSupersetModel2sAsync(this ResourceGroupOperations resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<SupersetModel2>> PutSupersetModel2sAsync(this ResourceGroupOperations resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
             {
@@ -61,7 +61,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -171,14 +171,14 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         /// <returns> placeholder. </returns>
-        public static Task<Response<SupersetModel2>> GetSupersetModel2sAsync(this ResourceGroupOperations resourceGroup, string supersetModel2SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SupersetModel2>> GetSupersetModel2sAsync(this ResourceGroupOperations resourceGroup, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
             {
                 throw new ArgumentNullException(nameof(supersetModel2SName));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -282,7 +282,7 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
         /// <returns> placeholder. </returns>
-        public static Task<Response<SupersetModel3>> PutSupersetModel3sAsync(this ResourceGroupOperations resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
+        public static async Task<Response<SupersetModel3>> PutSupersetModel3sAsync(this ResourceGroupOperations resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
             {
@@ -293,7 +293,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -403,14 +403,14 @@ namespace SupersetInheritance
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         /// <returns> placeholder. </returns>
-        public static Task<Response<SupersetModel3>> GetSupersetModel3sAsync(this ResourceGroupOperations resourceGroup, string supersetModel3SName, CancellationToken cancellationToken = default)
+        public static async Task<Response<SupersetModel3>> GetSupersetModel3sAsync(this ResourceGroupOperations resourceGroup, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
             {
                 throw new ArgumentNullException(nameof(supersetModel3SName));
             }
 
-            return resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);

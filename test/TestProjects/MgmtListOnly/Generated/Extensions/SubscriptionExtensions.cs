@@ -147,9 +147,9 @@ namespace MgmtListOnly
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> placeholder. </returns>
-        public static Task<Response<AvailabilitySetNonPageableFeatureListResult>> TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static async Task<Response<AvailabilitySetNonPageableFeatureListResult>> TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetAvailabilitySetsNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -223,9 +223,9 @@ namespace MgmtListOnly
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> placeholder. </returns>
-        public static Task<Response<ApiKeysListResult>> ListApiKeysAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static async Task<Response<ApiKeysListResult>> ListApiKeysAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetApiKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
