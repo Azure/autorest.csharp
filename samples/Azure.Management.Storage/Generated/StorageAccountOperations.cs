@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -20,7 +21,7 @@ namespace Azure.Management.Storage
     public partial class StorageAccountOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, StorageAccount>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal StorageAccountsRestOperations RestClient { get; }
+        private StorageAccountsRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class for mocking. </summary>
         protected StorageAccountOperations()
@@ -33,7 +34,7 @@ namespace Azure.Management.Storage
         protected internal StorageAccountOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
@@ -46,7 +47,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await RestClient.GetPropertiesAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -63,7 +64,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = RestClient.GetProperties(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var response = _restClient.GetProperties(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -82,7 +83,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await RestClient.GetPropertiesAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetPropertiesAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -101,7 +102,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = RestClient.GetProperties(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _restClient.GetProperties(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 return Response.FromValue(new StorageAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -112,7 +113,7 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
@@ -120,7 +121,7 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
@@ -171,7 +172,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await RestClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return new StorageAccountsDeleteOperation(response);
             }
             catch (Exception e)
@@ -189,7 +190,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = RestClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return new StorageAccountsDeleteOperation(response);
             }
             catch (Exception e)
@@ -262,7 +263,7 @@ namespace Azure.Management.Storage
                 var patchable = new StorageAccountUpdateParameters();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new StorageAccountsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -293,7 +294,7 @@ namespace Azure.Management.Storage
                 var patchable = new StorageAccountUpdateParameters();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new StorageAccountsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -361,7 +362,7 @@ namespace Azure.Management.Storage
             {
                 var patchable = new StorageAccountUpdateParameters();
                 patchable.Tags.ReplaceWith(tags);
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new StorageAccountsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -389,7 +390,7 @@ namespace Azure.Management.Storage
             {
                 var patchable = new StorageAccountUpdateParameters();
                 patchable.Tags.ReplaceWith(tags);
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new StorageAccountsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -459,7 +460,7 @@ namespace Azure.Management.Storage
                 var patchable = new StorageAccountUpdateParameters();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new StorageAccountsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -489,7 +490,7 @@ namespace Azure.Management.Storage
                 var patchable = new StorageAccountUpdateParameters();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new StorageAccountsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -513,7 +514,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return await RestClient.CheckNameAvailabilityAsync(accountName, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CheckNameAvailabilityAsync(accountName, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -537,41 +539,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return RestClient.CheckNameAvailability(accountName, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<StorageAccountListKeysResult>> ListKeysAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListKeys");
-            scope.Start();
-            try
-            {
-                return await RestClient.ListKeysAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<StorageAccountListKeysResult> ListKeys(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListKeys");
-            scope.Start();
-            try
-            {
-                return RestClient.ListKeys(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.CheckNameAvailability(accountName, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {
@@ -595,7 +564,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return await RestClient.RegenerateKeyAsync(Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.RegenerateKeyAsync(Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -619,103 +589,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return RestClient.RegenerateKey(Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List SAS credentials of a storage account. </summary>
-        /// <param name="parameters"> The parameters to provide to list SAS credentials for the storage account. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<ListAccountSasResponse>> ListAccountSASAsync(AccountSasParameters parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListAccountSAS");
-            scope.Start();
-            try
-            {
-                return await RestClient.ListAccountSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List SAS credentials of a storage account. </summary>
-        /// <param name="parameters"> The parameters to provide to list SAS credentials for the storage account. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<ListAccountSasResponse> ListAccountSAS(AccountSasParameters parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListAccountSAS");
-            scope.Start();
-            try
-            {
-                return RestClient.ListAccountSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List service SAS credentials of a specific resource. </summary>
-        /// <param name="parameters"> The parameters to provide to list service SAS credentials. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual async Task<Response<ListServiceSasResponse>> ListServiceSASAsync(ServiceSasParameters parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListServiceSAS");
-            scope.Start();
-            try
-            {
-                return await RestClient.ListServiceSASAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List service SAS credentials of a specific resource. </summary>
-        /// <param name="parameters"> The parameters to provide to list service SAS credentials. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
-        public virtual Response<ListServiceSasResponse> ListServiceSAS(ServiceSasParameters parameters, CancellationToken cancellationToken = default)
-        {
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListServiceSAS");
-            scope.Start();
-            try
-            {
-                return RestClient.ListServiceSAS(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _restClient.RegenerateKey(Id.ResourceGroupName, Id.Name, regenerateKey, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {
@@ -732,7 +607,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return await RestClient.RevokeUserDelegationKeysAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.RevokeUserDelegationKeysAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -749,7 +625,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return RestClient.RevokeUserDelegationKeys(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.RevokeUserDelegationKeys(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {
@@ -802,8 +679,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await RestClient.FailoverAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new StorageAccountsFailoverOperation(_clientDiagnostics, Pipeline, RestClient.CreateFailoverRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = await _restClient.FailoverAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return new StorageAccountsFailoverOperation(_clientDiagnostics, Pipeline, _restClient.CreateFailoverRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -820,8 +697,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = RestClient.Failover(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new StorageAccountsFailoverOperation(_clientDiagnostics, Pipeline, RestClient.CreateFailoverRequest(Id.ResourceGroupName, Id.Name).Request, response);
+                var response = _restClient.Failover(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return new StorageAccountsFailoverOperation(_clientDiagnostics, Pipeline, _restClient.CreateFailoverRequest(Id.ResourceGroupName, Id.Name).Request, response);
             }
             catch (Exception e)
             {
@@ -895,8 +772,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await RestClient.RestoreBlobRangesAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
-                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, Pipeline, RestClient.CreateRestoreBlobRangesRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var response = await _restClient.RestoreBlobRangesAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, Pipeline, _restClient.CreateRestoreBlobRangesRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -920,8 +797,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = RestClient.RestoreBlobRanges(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
-                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, Pipeline, RestClient.CreateRestoreBlobRangesRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
+                var response = _restClient.RestoreBlobRanges(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                return new StorageAccountsRestoreBlobRangesOperation(_clientDiagnostics, Pipeline, _restClient.CreateRestoreBlobRangesRequest(Id.ResourceGroupName, Id.Name, parameters).Request, response);
             }
             catch (Exception e)
             {

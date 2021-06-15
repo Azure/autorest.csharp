@@ -167,5 +167,14 @@ namespace MgmtParent
             return ResourceListOperations.ListAtContext(subscription, filters, top, cancellationToken);
         }
         #endregion
+
+        #region VirtualMachineExtensionImage
+        /// <summary> Gets an object representing a VirtualMachineExtensionImageContainer along with the instance operations that can be performed on it. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        public static VirtualMachineExtensionImageContainer GetVirtualMachineExtensionImageContainer(this SubscriptionOperations subscription)
+        {
+            return new VirtualMachineExtensionImageContainer(subscription);
+        }
+        #endregion
     }
 }

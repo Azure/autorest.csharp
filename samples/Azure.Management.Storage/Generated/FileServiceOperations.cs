@@ -7,11 +7,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
-using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
@@ -20,7 +20,7 @@ namespace Azure.Management.Storage
     public partial class FileServiceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, FileService>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal FileServicesRestOperations RestClient { get; }
+        private FileServicesRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="FileServiceOperations"/> class for mocking. </summary>
         protected FileServiceOperations()
@@ -33,7 +33,7 @@ namespace Azure.Management.Storage
         protected internal FileServiceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new FileServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new FileServicesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts/fileServices";
@@ -46,7 +46,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = await RestClient.GetServicePropertiesAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetServicePropertiesAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new FileService(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -63,7 +63,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                var response = RestClient.GetServiceProperties(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.GetServiceProperties(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new FileService(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -74,7 +74,7 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
@@ -82,44 +82,11 @@ namespace Azure.Management.Storage
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
-        }
-        /// <summary> List all file services in storage accounts. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<FileServiceItems>> ListAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FileServiceOperations.List");
-            scope.Start();
-            try
-            {
-                return await RestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List all file services in storage accounts. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<FileServiceItems> List(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("FileServiceOperations.List");
-            scope.Start();
-            try
-            {
-                return RestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
     }
 }

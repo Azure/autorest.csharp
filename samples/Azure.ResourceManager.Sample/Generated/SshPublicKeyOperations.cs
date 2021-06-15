@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -467,7 +468,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                return await _restClient.GenerateKeyPairAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GenerateKeyPairAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -484,7 +486,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                return _restClient.GenerateKeyPair(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.GenerateKeyPair(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {

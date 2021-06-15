@@ -27,6 +27,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal abstract class MgmtClientBaseWriter : ClientWriter
     {
         protected MgmtRestClient? _restClient;
+        protected override string RestClientField => "_" + RestClientVariable;
+        protected override string RestClientAccessibility => "private";
+        protected virtual string ContextProperty => "";
+
+        protected void WriteUsings(CodeWriter writer)
+        {
+            writer.UseNamespace(typeof(Task).Namespace!);
+            writer.UseNamespace("System.Linq");
+        }
 
         protected void WriteFields(CodeWriter writer, RestClient restClient)
         {
@@ -285,7 +294,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteClientMethod(CodeWriter writer, RestClientMethod clientMethod, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async)
         {
-            CSharpType? bodyType = clientMethod.ReturnType;
+            CSharpType? bodyType = GetBodyTypeForList(clientMethod.ReturnType, operationGroup, context);
+            bool isResourceList = bodyType != clientMethod.ReturnType;
             CSharpType responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
@@ -318,7 +328,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.WriteParameterNullChecks(nonPathParameters);
                 WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
                 {
-                    writer.Append($"return (");
+                    writer.Append($"var response = ");
                     if (async)
                     {
                         writer.Append($"await ");
@@ -337,7 +347,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Append($".ConfigureAwait(false)");
                     }
 
-                    writer.Append($")");
+                    writer.Line($";");
+
+                    if (isResourceList)
+                    {
+                        writer.Append($"return Response.FromValue(response.Value.Value.Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)), response.GetRawResponse())");
+                    }
+                    else
+                    {
+                        writer.Append($"return response");
+                    }
 
                     if (bodyType == null && clientMethod.HeaderModel != null)
                     {
@@ -349,6 +368,45 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             writer.Line();
+        }
+
+        private CSharpType? GetBodyTypeForList(CSharpType? returnType, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (returnType == null)
+                return null;
+
+            var result = returnType;
+
+            var resourceData = context.Library.GetResourceData(operationGroup);
+
+            if (resourceData != null && !returnType.IsFrameworkType && returnType.Implementation is SchemaObjectType schemaObject)
+            {
+                var valueProperty = schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
+                    AreTypesEqual(p.Declaration.Type, new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)));
+                if (valueProperty != null)
+                {
+                    return new CSharpType(typeof(IEnumerable<>), context.Library.GetArmResource(operationGroup).Type);
+                }
+            }
+
+            return result;
+        }
+
+        private bool AreTypesEqual(CSharpType left, CSharpType right)
+        {
+            if (left.Name != right.Name)
+                return false;
+
+            if (left.Arguments.Length != right.Arguments.Length)
+                return false;
+
+            for (int i = 0; i < left.Arguments.Length; i++)
+            {
+                if (left.Arguments[i].Name != right.Arguments[i].Name)
+                    return false;
+            }
+
+            return true;
         }
 
         // This method returns an array of path and non-path parameters name

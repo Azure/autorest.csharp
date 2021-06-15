@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -467,7 +468,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                return await _restClient.GetInstanceViewAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetInstanceViewAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -484,7 +486,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                return _restClient.GetInstanceView(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.GetInstanceView(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {
@@ -502,7 +505,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                return await _restClient.ForceRecoveryServiceFabricPlatformUpdateDomainWalkAsync(Id.ResourceGroupName, Id.Name, platformUpdateDomain, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.ForceRecoveryServiceFabricPlatformUpdateDomainWalkAsync(Id.ResourceGroupName, Id.Name, platformUpdateDomain, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -520,7 +524,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                return _restClient.ForceRecoveryServiceFabricPlatformUpdateDomainWalk(Id.ResourceGroupName, Id.Name, platformUpdateDomain, cancellationToken);
+                var response = _restClient.ForceRecoveryServiceFabricPlatformUpdateDomainWalk(Id.ResourceGroupName, Id.Name, platformUpdateDomain, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {
@@ -544,7 +549,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                return await _restClient.ConvertToSinglePlacementGroupAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.ConvertToSinglePlacementGroupAsync(Id.ResourceGroupName, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -568,7 +574,8 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                return _restClient.ConvertToSinglePlacementGroup(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                var response = _restClient.ConvertToSinglePlacementGroup(Id.ResourceGroupName, Id.Name, parameters, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {

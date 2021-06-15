@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -19,7 +20,7 @@ namespace TenantOnly
     public partial class BillingAccountOperations : ResourceOperationsBase<TenantResourceIdentifier, BillingAccount>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal BillingAccountsRestOperations RestClient { get; }
+        private BillingAccountsRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="BillingAccountOperations"/> class for mocking. </summary>
         protected BillingAccountOperations()
@@ -33,7 +34,7 @@ namespace TenantOnly
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             Id.TryGetSubscriptionId(out var subscriptionId);
-            RestClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, subscriptionId, BaseUri);
+            _restClient = new BillingAccountsRestOperations(_clientDiagnostics, Pipeline, subscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Billing/billingAccounts";
@@ -46,7 +47,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -63,7 +64,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.Name, null, cancellationToken);
+                var response = _restClient.Get(Id.Name, null, cancellationToken);
                 return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -82,7 +83,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -101,7 +102,7 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.Name, expand, cancellationToken);
+                var response = _restClient.Get(Id.Name, expand, cancellationToken);
                 return Response.FromValue(new BillingAccount(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -112,7 +113,7 @@ namespace TenantOnly
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
@@ -120,7 +121,7 @@ namespace TenantOnly
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
@@ -191,8 +192,8 @@ namespace TenantOnly
                 var patchable = new BillingAccountData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await RestClient.UpdateAsync(Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                var response = await _restClient.UpdateAsync(Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -223,8 +224,8 @@ namespace TenantOnly
                 var patchable = new BillingAccountData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = RestClient.Update(Id.Name, patchable, cancellationToken);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                var response = _restClient.Update(Id.Name, patchable, cancellationToken);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -292,8 +293,8 @@ namespace TenantOnly
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new BillingAccountData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = await RestClient.UpdateAsync(Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                var response = await _restClient.UpdateAsync(Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -321,8 +322,8 @@ namespace TenantOnly
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new BillingAccountData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = RestClient.Update(Id.Name, patchable, cancellationToken);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                var response = _restClient.Update(Id.Name, patchable, cancellationToken);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -392,8 +393,8 @@ namespace TenantOnly
                 var patchable = new BillingAccountData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await RestClient.UpdateAsync(Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                var response = await _restClient.UpdateAsync(Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {
@@ -423,8 +424,8 @@ namespace TenantOnly
                 var patchable = new BillingAccountData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = RestClient.Update(Id.Name, patchable, cancellationToken);
-                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, RestClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
+                var response = _restClient.Update(Id.Name, patchable, cancellationToken);
+                return new BillingAccountsUpdateOperation(this, _clientDiagnostics, Pipeline, _restClient.CreateUpdateRequest(Id.Name, patchable).Request, response);
             }
             catch (Exception e)
             {

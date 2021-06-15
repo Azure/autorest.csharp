@@ -14,40 +14,40 @@ using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
-namespace SupersetFlattenInheritance
+namespace MgmtParent
 {
-    /// <summary> A class representing the operations that can be performed over a specific SubResourceModel1. </summary>
-    public partial class SubResourceModel1Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, SubResourceModel1>
+    /// <summary> A class representing the operations that can be performed over a specific VirtualMachineExtensionImage. </summary>
+    public partial class VirtualMachineExtensionImageOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, VirtualMachineExtensionImage>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private SubResourceModel1SRestOperations _restClient { get; }
+        private VirtualMachineExtensionImagesRestOperations _restClient { get; }
 
-        /// <summary> Initializes a new instance of the <see cref="SubResourceModel1Operations"/> class for mocking. </summary>
-        protected SubResourceModel1Operations()
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageOperations"/> class for mocking. </summary>
+        protected VirtualMachineExtensionImageOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="SubResourceModel1Operations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal SubResourceModel1Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineExtensionImageOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new SubResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/subResourceModel1s";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/vmextension";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public async override Task<Response<SubResourceModel1>> GetAsync(CancellationToken cancellationToken = default)
+        public async override Task<Response<VirtualMachineExtensionImage>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubResourceModel1Operations.Get");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new SubResourceModel1(this, response.Value), response.GetRawResponse());
+                var response = await _restClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -57,14 +57,14 @@ namespace SupersetFlattenInheritance
         }
 
         /// <inheritdoc />
-        public override Response<SubResourceModel1> Get(CancellationToken cancellationToken = default)
+        public override Response<VirtualMachineExtensionImage> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("SubResourceModel1Operations.Get");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.Get");
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new SubResourceModel1(this, response.Value), response.GetRawResponse());
+                var response = _restClient.Get(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {

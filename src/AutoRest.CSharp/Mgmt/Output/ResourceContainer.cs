@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public PagingMethod? ListMethod => _listMethod ??= FindListPagingMethod();
 
-        public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetResourceOperation(OperationGroup).Methods.FirstOrDefault(m => m.Name == "Get");
+        public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetMethod;
 
         private PagingMethod? FindListPagingMethod()
         {

@@ -31,6 +31,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         protected virtual Type BaseClass => typeof(ResourceOperationsBase);
 
+        protected override string ContextProperty => "this";
+
         private bool _inheritResourceOperationsBase = false;
         private bool _isITaggableResource = false;
         private bool _isDeletableResource = false;
@@ -41,6 +43,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var @namespace = cs.Namespace;
             var isSingleton = resourceOperation.OperationGroup.IsSingletonResource(config);
             var baseClass = isSingleton ? typeof(SingletonOperationsBase) : typeof(ResourceOperationsBase);
+
+            WriteUsings(writer);
+
             using (writer.Namespace(@namespace))
             {
                 writer.WriteXmlDocumentationSummary(resourceOperation.Description);

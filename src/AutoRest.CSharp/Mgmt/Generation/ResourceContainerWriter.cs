@@ -41,6 +41,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private ResourceOperation _resourceOperation;
         private BuildContext<MgmtOutputLibrary> _context;
 
+        protected override string ContextProperty => "Parent";
+
         public ResourceContainerWriter(CodeWriter writer, ResourceContainer resourceContainer, BuildContext<MgmtOutputLibrary> context)
         {
             _writer = writer;
@@ -55,8 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         public void WriteContainer()
         {
-            _writer.UseNamespace(typeof(Task).Namespace!); // Explicitly adding `System.Threading.Tasks` because
-                                                           // at build time I don't have the type information inside Task<>
+            WriteUsings(_writer);
 
             var cs = _resourceContainer.Type;
             var @namespace = cs.Namespace;
@@ -79,6 +80,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteRemainingMethods()
         {
+            _writer.Line();
             foreach (var restMethod in _resourceContainer.RemainingMethods)
             {
                 WriteClientMethod(_writer, restMethod.RestClientMethod, _resourceContainer.GetDiagnostic(restMethod.RestClientMethod), _resourceContainer.OperationGroup, _context, true);

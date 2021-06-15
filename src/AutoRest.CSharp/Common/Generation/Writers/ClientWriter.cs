@@ -24,10 +24,13 @@ namespace AutoRest.CSharp.Common.Generation.Writers
         protected const string ClientDiagnosticsVariable = "clientDiagnostics";
         protected const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
         protected const string RestClientVariable = "restClient";
-        protected const string RestClientField = "_" + RestClientVariable;
         protected const string PipelineVariable = "pipeline";
         protected const string PipelineProperty = "Pipeline";
         protected const string PipelineField = "_" + PipelineVariable;
+
+        protected virtual string RestClientAccessibility => "internal";
+
+        protected virtual string RestClientField => "RestClient";
 
         protected string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
@@ -36,7 +39,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
             if (writePipelineField)
                 writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-            writer.Append($"private {client.Type} {RestClientField}").LineRaw(" { get; }");
+            writer.Append($"{RestClientAccessibility} {client.Type} {RestClientField}").LineRaw(" { get; }");
         }
 
         protected void WritePagingOperationDefinition(CodeWriter writer, PagingMethod pagingMethod, bool async, string restClientParam, string clientDiagnosticsParam)
