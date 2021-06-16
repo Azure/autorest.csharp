@@ -19,7 +19,7 @@ namespace MgmtListOnly
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region SubscriptionExtensions
+        #region AvailabilitySetFeature
         private static AvailabilitySetFeaturesRestOperations GetAvailabilitySetFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new AvailabilitySetFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -137,7 +137,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region SubscriptionExtensions
+        #region AvailabilitySetNonPageableFeature
         private static AvailabilitySetsNonPageableFeaturesRestOperations GetAvailabilitySetsNonPageableFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new AvailabilitySetsNonPageableFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -213,7 +213,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region SubscriptionExtensions
+        #region ApiKeys
         private static ApiKeysRestOperations GetApiKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ApiKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);

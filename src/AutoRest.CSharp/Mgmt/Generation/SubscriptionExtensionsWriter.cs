@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     foreach (var mgmtExtensionOperation in mgmtExtensionOperations)
                     {
-                        writer.Line($"#region {mgmtExtensionOperation.Type.Name}");
+                        writer.Line($"#region {mgmtExtensionOperation.SchemaName}");
                         WriteGetRestOperations(writer, mgmtExtensionOperation.RestClient);
 
                         // despite that we should only have one method, but we still using an IEnumerable
@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteListResourceByNameMethod(CodeWriter writer, ResourceOperation resourceOperation, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.ResourceName}s for a {typeof(SubscriptionOperations)} represented as generic resources.");
+            writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.Type.Name.ToPlural()} for a {typeof(SubscriptionOperations)} represented as generic resources.");
             writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationParameter("filter", "The string to filter the list.");
             writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
@@ -175,11 +175,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation resourceOperation)
         {
-            writer.Line($"#region Get {StringExtensions.Pluralization(resourceOperation.Type.Name)} operation");
+            writer.Line($"#region Get {resourceOperation.Type.Name.ToPlural()} operation");
 
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceOperation.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceOperation.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {resourceOperation.Type} Get{StringExtensions.Pluralization(resourceOperation.Type.Name)}(this {typeof(SubscriptionOperations)} subscriptionOperations)"))
+            using (writer.Scope($"public static {resourceOperation.Type} Get{resourceOperation.Type.Name.ToPlural()}(this {typeof(SubscriptionOperations)} subscriptionOperations)"))
             {
                 writer.Line($"return new {resourceOperation.Type.Name}(subscriptionOperations);");
             }

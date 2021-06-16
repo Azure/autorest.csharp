@@ -38,7 +38,7 @@ namespace SupersetInheritance
         }
         #endregion
 
-        #region SupersetModel2s
+        #region ResourceGroupExtensions
         private static SupersetModel2SRestOperations GetSupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new SupersetModel2SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -92,7 +92,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SupersetModel2s.PutSupersetModel2s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel2s");
             scope.Start();
             try
             {
@@ -153,7 +153,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SupersetModel2s.PutSupersetModel2s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel2s");
             scope.Start();
             try
             {
@@ -204,7 +204,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel2SName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SupersetModel2s.GetSupersetModel2s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel2s");
             scope.Start();
             try
             {
@@ -255,7 +255,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel2SName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SupersetModel2s.GetSupersetModel2s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel2s");
             scope.Start();
             try
             {
@@ -270,7 +270,7 @@ namespace SupersetInheritance
 
         #endregion
 
-        #region SupersetModel3s
+        #region ResourceGroupExtensions
         private static SupersetModel3SRestOperations GetSupersetModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new SupersetModel3SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -324,7 +324,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SupersetModel3s.PutSupersetModel3s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel3s");
             scope.Start();
             try
             {
@@ -385,7 +385,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SupersetModel3s.PutSupersetModel3s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel3s");
             scope.Start();
             try
             {
@@ -436,7 +436,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel3SName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SupersetModel3s.GetSupersetModel3s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel3s");
             scope.Start();
             try
             {
@@ -487,7 +487,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel3SName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SupersetModel3s.GetSupersetModel3s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel3s");
             scope.Start();
             try
             {

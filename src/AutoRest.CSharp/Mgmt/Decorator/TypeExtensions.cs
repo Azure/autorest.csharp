@@ -2,6 +2,7 @@
 // Licensed under the MIT License
 
 using System;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
@@ -35,6 +36,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static CSharpType WrapPageable(this Type type, bool async)
         {
             return async ? new CSharpType(typeof(AsyncPageable<>), type) : new CSharpType(typeof(Pageable<>), type);
+        }
+
+        public static CSharpType WrapAsync(this CSharpType type, bool async)
+        {
+            return async ? new CSharpType(typeof(Task<>), type) : type;
+        }
+
+        public static CSharpType WrapResponse(this CSharpType type)
+        {
+            return new CSharpType(typeof(Response<>), type);
+        }
+
+        public static CSharpType WrapResponseAsync(this CSharpType type, bool async)
+        {
+            var responseType = type.WrapResponse();
+            return async ? new CSharpType(typeof(Task<>), responseType) : responseType;
         }
     }
 }

@@ -447,7 +447,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     ResourceType containerType = GetContainerValidResourceType(container);
                     if (containerType.Equals(operationType))
                     {
-                        var method = operation.GetMethod($"Get{StringExtensions.Pluralization(container.Name.Remove(container.Name.LastIndexOf("Container")))}");
+                        var name = container.Name.Remove(container.Name.LastIndexOf("Container"));
+                        var method = operation.GetMethod($"Get{name.ToPlural()}");
                         Assert.NotNull(method);
                         Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(container.Namespace+"."+container.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);

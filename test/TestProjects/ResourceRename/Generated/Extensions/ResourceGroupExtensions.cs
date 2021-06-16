@@ -18,7 +18,7 @@ namespace ResourceRename
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region SshPublicKeys
+        #region ResourceGroupExtensions
         private static SshPublicKeysRestOperations GetSshPublicKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new SshPublicKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -68,7 +68,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SshPublicKeys.CreateSshPublicKeys");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateSshPublicKeys");
             scope.Start();
             try
             {
@@ -125,7 +125,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SshPublicKeys.CreateSshPublicKeys");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateSshPublicKeys");
             scope.Start();
             try
             {
@@ -178,7 +178,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SshPublicKeys.DeleteSshPublicKeys");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.DeleteSshPublicKeys");
             scope.Start();
             try
             {
@@ -231,7 +231,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SshPublicKeys.DeleteSshPublicKeys");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.DeleteSshPublicKeys");
             scope.Start();
             try
             {
@@ -284,7 +284,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SshPublicKeys.GetSshPublicKeys");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSshPublicKeys");
             scope.Start();
             try
             {
@@ -337,7 +337,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("SshPublicKeys.GetSshPublicKeys");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSshPublicKeys");
             scope.Start();
             try
             {

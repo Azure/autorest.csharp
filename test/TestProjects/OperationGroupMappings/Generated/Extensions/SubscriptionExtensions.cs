@@ -62,7 +62,7 @@ namespace OperationGroupMappings
 
             async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {
@@ -77,7 +77,7 @@ namespace OperationGroupMappings
             }
             async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {
@@ -131,7 +131,7 @@ namespace OperationGroupMappings
 
             Page<Usage> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {
@@ -146,7 +146,7 @@ namespace OperationGroupMappings
             }
             Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {

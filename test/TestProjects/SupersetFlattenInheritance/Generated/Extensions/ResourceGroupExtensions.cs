@@ -118,7 +118,7 @@ namespace SupersetFlattenInheritance
         }
         #endregion
 
-        #region NonResourceModel1s
+        #region ResourceGroupExtensions
         private static NonResourceModel1SRestOperations GetNonResourceModel1SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new NonResourceModel1SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -172,7 +172,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NonResourceModel1s.PutNonResourceModel1s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutNonResourceModel1s");
             scope.Start();
             try
             {
@@ -233,7 +233,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NonResourceModel1s.PutNonResourceModel1s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutNonResourceModel1s");
             scope.Start();
             try
             {
@@ -284,7 +284,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(nonResourceModel1SName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NonResourceModel1s.GetNonResourceModel1s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetNonResourceModel1s");
             scope.Start();
             try
             {
@@ -335,7 +335,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(nonResourceModel1SName));
             }
 
-            using var scope = clientDiagnostics.CreateScope("NonResourceModel1s.GetNonResourceModel1s");
+            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetNonResourceModel1s");
             scope.Start();
             try
             {

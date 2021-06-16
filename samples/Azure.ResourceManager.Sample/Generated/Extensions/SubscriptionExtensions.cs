@@ -143,7 +143,7 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of AvailabilitySets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of AvailabilitySetOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -156,7 +156,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of AvailabilitySets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of AvailabilitySetOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -290,7 +290,7 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of ProximityPlacementGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of ProximityPlacementGroupOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -303,7 +303,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of ProximityPlacementGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of ProximityPlacementGroupOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -437,7 +437,7 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of DedicatedHostGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of DedicatedHostGroupOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -450,7 +450,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of DedicatedHostGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of DedicatedHostGroupOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -584,7 +584,7 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of SshPublicKeys for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of SshPublicKeyOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -597,7 +597,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of SshPublicKeys for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of SshPublicKeyOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -735,7 +735,7 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of VirtualMachines for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachineOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -748,7 +748,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of VirtualMachines for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachineOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -882,7 +882,7 @@ namespace Azure.ResourceManager.Sample
             return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
         }
 
-        /// <summary> Filters the list of VirtualMachineScaleSets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachineScaleSetOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -895,7 +895,7 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of VirtualMachineScaleSets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachineScaleSetOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
@@ -953,7 +953,7 @@ namespace Azure.ResourceManager.Sample
 
             async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {
@@ -968,7 +968,7 @@ namespace Azure.ResourceManager.Sample
             }
             async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {
@@ -1022,7 +1022,7 @@ namespace Azure.ResourceManager.Sample
 
             Page<Usage> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {
@@ -1037,7 +1037,7 @@ namespace Azure.ResourceManager.Sample
             }
             Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usage.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {
@@ -1099,7 +1099,7 @@ namespace Azure.ResourceManager.Sample
 
             async Task<Page<VirtualMachineSize>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineSize.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {
@@ -1153,7 +1153,7 @@ namespace Azure.ResourceManager.Sample
 
             Page<VirtualMachineSize> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("VirtualMachineSize.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {

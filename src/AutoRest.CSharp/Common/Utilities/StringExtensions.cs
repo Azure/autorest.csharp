@@ -238,7 +238,7 @@ namespace AutoRest.CSharp.Utilities
         }
 
 
-        public static string Pluralization(string single)
+        public static string ToPlural(this string single)
         {
             if (new Regex("([^aeiou])y$").IsMatch(single))
             {

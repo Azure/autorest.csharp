@@ -75,7 +75,7 @@ namespace MgmtOperations
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
@@ -83,7 +83,7 @@ namespace MgmtOperations
 
         /// <summary> Lists all available geo-locations. </summary>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
+        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
@@ -395,7 +395,7 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> Gets a list of AvailabilitySetGrandChild in the AvailabilitySetChild. </summary>
+        /// <summary> Gets a list of AvailabilitySetGrandChilds in the AvailabilitySetChild. </summary>
         /// <returns> An object representing collection of AvailabilitySetGrandChilds and their operations over a AvailabilitySetChild. </returns>
         public AvailabilitySetGrandChildContainer GetAvailabilitySetGrandChilds()
         {

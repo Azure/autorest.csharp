@@ -49,7 +49,7 @@ namespace Azure.Management.Storage
         {
             async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("SkuInformation.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {
@@ -89,7 +89,7 @@ namespace Azure.Management.Storage
         {
             Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("SkuInformation.List");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
                 scope.Start();
                 try
                 {
@@ -151,7 +151,7 @@ namespace Azure.Management.Storage
 
             async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usage.ListByLocation");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
                 scope.Start();
                 try
                 {
@@ -205,7 +205,7 @@ namespace Azure.Management.Storage
 
             Page<Usage> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = clientDiagnostics.CreateScope("Usage.ListByLocation");
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
                 scope.Start();
                 try
                 {

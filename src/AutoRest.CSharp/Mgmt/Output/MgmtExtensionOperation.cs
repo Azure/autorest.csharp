@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultName { get; }
 
-        protected string SchemaName { get; }
+        public string SchemaName { get; }
 
         protected override string DefaultAccessibility { get; } = "public";
 

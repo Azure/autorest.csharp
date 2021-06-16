@@ -91,7 +91,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         WriteClientMethods(writer, resourceOperation, resource, resourceData, context);
                     }
-
                     else
                     {
                         WriteChildSingletonGetOperationMethods(writer, resourceOperation, context);
@@ -251,7 +250,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
 
-            // write child (list-only) methods
+            // write child methods
             foreach (var pair in resourceOperation.ChildOperations)
             {
                 var restClientName = GetRestClientName(pair.Key);
@@ -286,9 +285,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (container == null)
                         return;
                     writer.Line();
-                    writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName} in the {resourceOperation.ResourceName}.");
-                    writer.WriteXmlDocumentationReturns($"An object representing collection of {StringExtensions.Pluralization(container.ResourceName)} and their operations over a {resourceOperation.ResourceName}.");
-                    using (writer.Scope($"public {container.Type} Get{StringExtensions.Pluralization(container.ResourceName)}()"))
+                    writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName.ToPlural()} in the {resourceOperation.ResourceName}.");
+                    writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {resourceOperation.ResourceName}.");
+                    using (writer.Scope($"public {container.Type} Get{container.ResourceName.ToPlural()}()"))
                     {
                         writer.Line($"return new {container.Type}(this);");
                     }
@@ -333,8 +332,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var parameters = pagingMethod.Method.Parameters;
             var restClientName = GetRestClientName(operationGroup);
 
-            var pagedResourceType = new CSharpType(typeof(Page<>), itemType);
-            var returnType = async ? new CSharpType(typeof(Task<>), pagedResourceType) : pagedResourceType;
+            var returnType = new CSharpType(typeof(Page<>), itemType).WrapAsync(async);
 
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
@@ -405,8 +403,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             }
-            CSharpType responseType = new CSharpType(typeof(Azure.Response<>), resource.Type);
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+            var responseType = resource.Type.WrapResponseAsync(async);
             writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod)} {responseType} {CreateMethodName("Get", async)}(");
 
             if (!isInheritedMethod)
@@ -475,10 +472,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
             writer.WriteXmlDocumentationSummary($"Lists all available geo-locations.");
             writer.WriteXmlDocumentationParameter("cancellationToken", "A token to allow the caller to cancel the call to the service. The default value is <see cref=\"P: System.Threading.CancellationToken.None\" />.");
-            writer.WriteXmlDocumentationReturns("A collection of location that may take multiple service requests to iterate over.");
+            writer.WriteXmlDocumentationReturns("A collection of locations that may take multiple service requests to iterate over.");
 
-            CSharpType responseType = new CSharpType(typeof(IEnumerable<LocationData>));
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+            var responseType = new CSharpType(typeof(IEnumerable<LocationData>)).WrapAsync(async);
+
             using (writer.Scope($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("ListAvailableLocations", async)}({typeof(CancellationToken)} cancellationToken = default)"))
             {
                 writer.Append($"return {AwaitKeyword(async)} {CreateMethodName("ListAvailableLocations", async)}(ResourceType, cancellationToken)");
@@ -509,8 +506,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationReturns("The updated resource with the tag added.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
-            CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+            var responseType = resource.Type.WrapResponseAsync(async);
 
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
@@ -665,7 +661,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
                 ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
-            CSharpType responseType = async ? new CSharpType(typeof(Task<>), lroObjectType) : lroObjectType;
+            var responseType = lroObjectType.WrapAsync(async);
 
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("StartSetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
@@ -717,8 +713,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationReturns("The updated resource with the tag removed.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
-            CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+            var responseType = resource.Type.WrapResponseAsync(async);
 
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())

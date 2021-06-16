@@ -77,7 +77,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExactMatchModel2s.PutExactMatchModel2s");
+            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel2s");
             scope.Start();
             try
             {
@@ -143,7 +143,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExactMatchModel2s.PutExactMatchModel2s");
+            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel2s");
             scope.Start();
             try
             {
@@ -217,7 +217,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExactMatchModel4s.PutExactMatchModel4s");
+            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel4s");
             scope.Start();
             try
             {
@@ -283,7 +283,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var scope = clientDiagnostics.CreateScope("ExactMatchModel4s.PutExactMatchModel4s");
+            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.PutExactMatchModel4s");
             scope.Start();
             try
             {

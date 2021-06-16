@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             var bodyType = clientMethod.BodyType();
             var responseType = bodyType != null ? new CSharpType(typeof(Response<>), bodyType) : typeof(Response);
-            return async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+            return responseType.WrapAsync(async);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static CSharpType ResponseType(this PagingMethod pagingMethod, bool async)
         {
             var pageType = pagingMethod.PagingResponse.ItemType;
-            return async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
+            return pageType.WrapPageable(async);
         }
     }
 }

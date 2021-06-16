@@ -116,7 +116,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 var successResponse = operation.Responses.FirstOrDefault(r => r.HttpResponse.StatusCodes.Contains(StatusCodes._200));
                 var responseSchema = successResponse?.ResponseSchema as ObjectSchema;
 
-                // TODO -- change p.SerializedName == ArrayValuePropertyName so that we could check the list only operations by x-ms-client-name
                 var arraySchemas = responseSchema?.Properties?.Where(p => p.Schema is ArraySchema)
                     ?.Select(p => p.Schema as ArraySchema);
                 if (arraySchemas?.Count() != 1)
