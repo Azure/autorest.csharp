@@ -145,10 +145,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsName, writer =>
                 {
                     writer.Append($"var response = {awaitText} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
-                    foreach (var parameter in BuildParameterMapping(pagingMethod.Method).Where(p => IsMandatory(p.Parameter)))
-                    {
-                        writer.Append($"{parameter.ValueExpression}, ");
-                    }
+                    BuildAndWriteParameters(writer, pagingMethod.Method);
                     writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
 
                     writer.UseNamespace("System.Linq");
@@ -169,10 +166,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsName, writer =>
                     {
                         writer.Append($"var response = {awaitText} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
-                        foreach (var parameter in BuildParameterMapping(pagingMethod.NextPageMethod).Where(p => IsMandatory(p.Parameter)))
-                        {
-                            writer.Append($"{parameter.ValueExpression}, ");
-                        }
+                        BuildAndWriteParameters(writer, pagingMethod.NextPageMethod);
                         writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
                         writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
                         writer.Append($"{converter}");
@@ -181,6 +175,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
             writer.Line($"return {typeof(PageableHelpers)}.Create{(async ? "Async" : string.Empty)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
+        }
+
+        private void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method)
+        {
+            foreach (var parameter in BuildParameterMapping(method))
+            {
+                if (parameter.IsPassThru)
+                {
+                    writer.Append($"{parameter.Parameter.Name}, ");
+                }
+                else
+                {
+                    writer.Append($"{parameter.ValueExpression}, ");
+                }
+            }
         }
 
         /// <summary>
@@ -210,11 +219,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         /// <summary>
-        /// Builds the mapping between resource operations in Container class and that in RestOperations class.
-        /// For example `DedicatedHostRestClient.CreateOrUpdate()`
-        /// | resourceGroupName      | hostGroupName    | hostName | parameters |
-        /// | ---------------------- | ---------------- | -------- | ---------- |
-        /// | "Id.ResourceGroupName" | "Id.Parent.Name" | hostName | parameters |
+        /// Builds the mapping between parameters of the rest client method and its caller.
+        /// Decides which parameters should pass through, which should be evaluated with what expressions.
+        /// For example `DedicatedHostRestClient.CreateOrUpdate()` <br/>
+        /// | resourceGroupName      | hostGroupName    | hostName | parameters | <br/>
+        /// | ---------------------- | ---------------- | -------- | ---------- | <br/>
+        /// | "Id.ResourceGroupName" | "Id.Parent.Name" | hostName | parameters | <br/>
         /// </summary>
         /// <param name="method">Represents a method in RestOperations class.</param>
         protected IEnumerable<ParameterMapping> BuildParameterMapping(RestClientMethod method)
@@ -258,9 +268,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
         {
-            // if the method needs resource name (typically all non-list methods), we should make it pass-thru
-            // 1. make last string-like parameter (typically the resource name) pass-through from container method
-            // 2. ignoring optional parameters such as `expand`
+            // if the method needs resource name (typically all non-list methods), we should make it pass-thru by
+            // making the last string-like mandatory parameter (typically the resource name) pass-through
             if (!method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase))
             {
                 var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.IsStringLike() && IsMandatory(parameter.Parameter));
