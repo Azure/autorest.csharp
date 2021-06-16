@@ -99,19 +99,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, true, false);
-                            WritePagingOperation(writer, mgmtExtensionOperation.RestClient, pagingMethod, true);
-
-                            WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, false, false);
-                            WritePagingOperation(writer, mgmtExtensionOperation.RestClient, pagingMethod, false);
+                            WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", true);
+                            WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", false);
                         }
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
                             WriteClientMethod(writer, mgmtExtensionOperation.RestClient, clientMethod, true);
-                            WriteClientOperation(writer, mgmtExtensionOperation.RestClient, clientMethod, true);
                             WriteClientMethod(writer, mgmtExtensionOperation.RestClient, clientMethod, false);
-                            WriteClientOperation(writer, mgmtExtensionOperation.RestClient, clientMethod, false);
                         }
 
                         writer.LineRaw("#endregion");
@@ -135,61 +130,33 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
         {
-            WriteClientMethod(
-                writer, restClient, clientMethod,
-                Enumerable.Empty<string>(),
-                clientMethod.RestClientMethod.Parameters,
-                async);
+            WriteClientMethod(writer, restClient, clientMethod, BuildParameterMapping(clientMethod.RestClientMethod), async);
         }
 
-        private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, bool async, bool needResourceWrapper)
+        private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)
         {
-            WriteListMethod(writer, pageType, restClient, pagingMethod,
-                new string[0],
-                pagingMethod.Method.Parameters,
-                async,
-                needResourceWrapper);
+            WriteListMethod(writer, pageType, restClient, pagingMethod, BuildParameterMapping(pagingMethod.Method), converter, async);
         }
 
-        private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)
+        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
-            Parameter[] nonPathParameters = GetNonPathParameters(pagingMethod.Method);
-            writer.WriteXmlDocumentationSummary($"Lists the {resource.Type.Name}s for this {typeof(SubscriptionOperations)}.");
-            writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
-            foreach (var param in nonPathParameters)
-            {
-                writer.WriteXmlDocumentationParameter(param);
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-            writer.WriteXmlDocumentation("return", $"A collection of resource operations that may take multiple service requests to iterate over.");
+            return true;
+        }
 
-            var pageType = resource.Type;
-            CSharpType responseType = async ? new CSharpType(typeof(AsyncPageable<>), pageType) : new CSharpType(typeof(Pageable<>), pageType);
-            var methodName = $"List{resource.Type.Name}";
-            writer.Append($"public static {responseType} {CreateMethodName(methodName, async)}(this {typeof(SubscriptionOperations)} subscription, ");
-            foreach (var param in nonPathParameters)
+        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        {
+            // we do not need anything about the Id.Name or Id.Parent.Name in this extension, because everything is static in this class, we do not even have a property called `Id`
+            foreach (var mapping in parameterMapping)
             {
-                writer.WriteParameter(param);
+                mapping.ValueExpression = mapping.Parameter.Name;
             }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-            using (writer.Scope())
-            {
-                writer.Append($"return subscription.UseClientContext((baseUri, credential, options, pipeline) =>");
-                using (writer.Scope())
-                {
-                    var clientDiagnostics = new CodeWriterDeclaration("clientDiagnostics");
-                    var restOperations = new CodeWriterDeclaration("restOperations");
-                    var result = new CodeWriterDeclaration("result");
+        }
 
-                    writer.Line($"var {clientDiagnostics:D} = new {typeof(ClientDiagnostics)}(options);");
-                    // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
-                    writer.Line($"var {restOperations:D} = Get{resourceOperation.RestClient.Type.Name}(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);");
-
-                    WritePagingOperationBody(writer, pagingMethod, async, resource.Type, restOperations.ActualName, clientDiagnostics.ActualName, $".Select(value => new {resource.Type.Name}(subscription, value))");
-                }
-                writer.Append($");");
-            }
-            writer.Line();
+        protected void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)
+        {
+            var nonPathParameters = GetNonPathParameters(pagingMethod.Method).Select(p => new ParameterMapping(p, false, p.Name));
+            WriteListMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod,
+                nonPathParameters, $".Select(value => new {resource.Type.Name}(subscription, value))", async);
         }
 
         private void WriteListResourceByNameMethod(CodeWriter writer, ResourceOperation resourceOperation, bool async)

@@ -17,7 +17,9 @@
     "AvailabilitySetFeatures": "Microsoft.Compute/availabilitySetsFeatures",
     "AvailabilitySetsNonPageableFeatures": "Microsoft.Compute/availabilitySetsNonPageableFeatures",
     "ApiKeys": "Microsoft.Compute/apiKeys",
-    "ChildWithPosts": "Microsoft.Compute/availabilitySets/childWithPost"
+    "ChildWithPosts": "Microsoft.Compute/availabilitySets/childWithPost",
+    "Usages": "Microsoft.Compute/locations/usages",
+    "NonPageableUsages": "Microsoft.Compute/locations/nonPageableUsages"
   },
   "OperationGroupToResource": {
     "ApiKeys": "NonResource",
@@ -30,6 +32,8 @@
     "AvailabilitySetFeatures": "subscriptions",
     "AvailabilitySetsNonPageableFeatures": "subscriptions",
     "ApiKeys": "subscriptions",
-    "ChildWithPosts": "AvailabilitySets"
+    "ChildWithPosts": "AvailabilitySets",
+    "Usages": "subscriptions",
+    "NonPageableUsages": "subscriptions"
   }
 }

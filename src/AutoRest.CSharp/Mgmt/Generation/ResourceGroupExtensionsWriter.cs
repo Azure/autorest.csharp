@@ -61,25 +61,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     foreach (var mgmtExtensionOperation in mgmtExtensionOperations)
                     {
-                        writer.Line($"#region {mgmtExtensionOperation.Type.Name}");
+                        writer.Line($"#region {mgmtExtensionOperation.SchemaName}");
                         WriteGetRestOperations(writer, mgmtExtensionOperation.RestClient);
 
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            WriteListMethod(writer, mgmtExtensionOperation.RestClient, pagingMethod, true, false);
-                            WritePagingOperation(writer, mgmtExtensionOperation.RestClient, pagingMethod, true);
+                            WriteListMethod(writer, mgmtExtensionOperation.RestClient, pagingMethod, true);
 
-                            WriteListMethod(writer, mgmtExtensionOperation.RestClient, pagingMethod, false, false);
-                            WritePagingOperation(writer, mgmtExtensionOperation.RestClient, pagingMethod, false);
+                            WriteListMethod(writer, mgmtExtensionOperation.RestClient, pagingMethod, false);
                         }
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
                             WriteClientMethod(writer, mgmtExtensionOperation.RestClient, clientMethod, true);
-                            WriteClientOperation(writer, mgmtExtensionOperation.RestClient, clientMethod, true);
                             WriteClientMethod(writer, mgmtExtensionOperation.RestClient, clientMethod, false);
-                            WriteClientOperation(writer, mgmtExtensionOperation.RestClient, clientMethod, false);
                         }
 
                         writer.LineRaw("#endregion");
@@ -104,23 +100,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
         {
             WriteClientMethod(writer, restClient, clientMethod,
-                // we populate a invocation of getting resource group name from this ResourceGroupOperation
-                new[] { $"{ExtensionOperationVariableName}.Id.Name" },
                 // skip the first parameter, aka the resource group name parameter
                 // this client method has a parent of resource group (otherwise we cannot be here), therefore its first parameter must be resource group
-                clientMethod.RestClientMethod.Parameters.Skip(1),
+                clientMethod.RestClientMethod.Parameters.Skip(1).Select(p => new ParameterMapping(p, false, p.Name)),
                 async);
         }
-        private void WriteListMethod(CodeWriter writer, MgmtRestClient restClient, PagingMethod pagingMethod, bool async, bool needResourceWrapper)
+        private void WriteListMethod(CodeWriter writer, MgmtRestClient restClient, PagingMethod pagingMethod, bool async)
         {
             WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, restClient, pagingMethod,
-                // we populate a invocation of getting resource group name from this ResourceGroupOperation
-                new[] { $"{ExtensionOperationVariableName}.Id.Name" },
                 // skip the first parameter, aka the resource group name parameter
                 // this client method has a parent of resource group (otherwise we cannot be here), therefore its first parameter must be resource group
-                pagingMethod.Method.Parameters.Skip(1),
-                async,
-                needResourceWrapper);
+                pagingMethod.Method.Parameters.Skip(1).Select(p => new ParameterMapping(p, false, p.Name)),
+                $"",
+                async);
         }
     }
 }

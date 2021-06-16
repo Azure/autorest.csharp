@@ -31,6 +31,7 @@ operation-group-to-parent:
   Usages: subscriptions
   StorageAccounts: resourceGroups
   PrivateLinkResources: StorageAccounts
+operation-group-to-tuple: Usages
 directive:
   - rename-model:
       from: Operation

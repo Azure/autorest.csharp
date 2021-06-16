@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySet> ListAvailabilitySetAsync(this SubscriptionOperations subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -43,7 +44,7 @@ namespace Azure.ResourceManager.Sample
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListBySubscriptionAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListBySubscriptionAsync(expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -76,7 +77,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySet> ListAvailabilitySet(this SubscriptionOperations subscription, string expand = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -89,7 +90,7 @@ namespace Azure.ResourceManager.Sample
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListBySubscription(cancellationToken: cancellationToken);
+                        var response = restOperations.ListBySubscription(expand, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new AvailabilitySet(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -118,12 +119,12 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of AvailabilitySets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of AvailabilitySetOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListAvailabilitySetByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(AvailabilitySetOperations.ResourceType);
@@ -131,12 +132,12 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of AvailabilitySets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of AvailabilitySetOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListAvailabilitySetByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(AvailabilitySetOperations.ResourceType);
@@ -154,7 +155,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists the ProximityPlacementGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ProximityPlacementGroup> ListProximityPlacementGroupAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -199,7 +200,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists the ProximityPlacementGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<ProximityPlacementGroup> ListProximityPlacementGroup(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -241,12 +242,12 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of ProximityPlacementGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of ProximityPlacementGroupOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListProximityPlacementGroupByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ProximityPlacementGroupOperations.ResourceType);
@@ -254,12 +255,12 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of ProximityPlacementGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of ProximityPlacementGroupOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListProximityPlacementGroupByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(ProximityPlacementGroupOperations.ResourceType);
@@ -277,7 +278,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists the DedicatedHostGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<DedicatedHostGroup> ListDedicatedHostGroupAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -322,7 +323,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists the DedicatedHostGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<DedicatedHostGroup> ListDedicatedHostGroup(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -364,12 +365,12 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of DedicatedHostGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of DedicatedHostGroupOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListDedicatedHostGroupByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(DedicatedHostGroupOperations.ResourceType);
@@ -377,12 +378,12 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of DedicatedHostGroups for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of DedicatedHostGroupOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListDedicatedHostGroupByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(DedicatedHostGroupOperations.ResourceType);
@@ -400,7 +401,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists the SshPublicKeys for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SshPublicKey> ListSshPublicKeyAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -445,7 +446,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists the SshPublicKeys for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<SshPublicKey> ListSshPublicKey(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -487,12 +488,12 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of SshPublicKeys for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of SshPublicKeyOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListSshPublicKeyByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(SshPublicKeyOperations.ResourceType);
@@ -500,12 +501,12 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of SshPublicKeys for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of SshPublicKeyOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListSshPublicKeyByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(SshPublicKeyOperations.ResourceType);
@@ -524,7 +525,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachine> ListVirtualMachineAsync(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -537,7 +538,7 @@ namespace Azure.ResourceManager.Sample
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListAllAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListAllAsync(statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -570,7 +571,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachine> ListVirtualMachine(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -583,7 +584,7 @@ namespace Azure.ResourceManager.Sample
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListAll(cancellationToken: cancellationToken);
+                        var response = restOperations.ListAll(statusOnly, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value.Select(value => new VirtualMachine(subscription, value)), response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -612,12 +613,12 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of VirtualMachines for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachineOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListVirtualMachineByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(VirtualMachineOperations.ResourceType);
@@ -625,12 +626,12 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of VirtualMachines for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachineOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListVirtualMachineByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(VirtualMachineOperations.ResourceType);
@@ -648,7 +649,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists the VirtualMachineScaleSets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineScaleSet> ListVirtualMachineScaleSetAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -693,7 +694,7 @@ namespace Azure.ResourceManager.Sample
         /// <summary> Lists the VirtualMachineScaleSets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineScaleSet> ListVirtualMachineScaleSet(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -735,12 +736,12 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Filters the list of VirtualMachineScaleSets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachineScaleSetOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<GenericResource> ListVirtualMachineScaleSetByNameAsync(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(VirtualMachineScaleSetOperations.ResourceType);
@@ -748,18 +749,920 @@ namespace Azure.ResourceManager.Sample
             return ResourceListOperations.ListAtContextAsync(subscription, filters, top, cancellationToken);
         }
 
-        /// <summary> Filters the list of VirtualMachineScaleSets for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
+        /// <summary> Filters the list of VirtualMachineScaleSetOperationes for a Azure.ResourceManager.Core.SubscriptionOperations represented as generic resources. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="filter"> The string to filter the list. </param>
         /// <param name="top"> The number of results to return. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <return> A collection of resource operations that may take multiple service requests to iterate over. </return>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         public static Pageable<GenericResource> ListVirtualMachineScaleSetByName(this SubscriptionOperations subscription, string filter, int? top, CancellationToken cancellationToken = default)
         {
             ResourceFilterCollection filters = new(VirtualMachineScaleSetOperations.ResourceType);
             filters.SubstringFilter = filter;
             return ResourceListOperations.ListAtContext(subscription, filters, top, cancellationToken);
         }
+        #endregion
+
+        #region VirtualMachineExtensionImages
+        private static VirtualMachineExtensionImagesRestOperations GetVirtualMachineExtensionImagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new VirtualMachineExtensionImagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        /// <summary> Gets a virtual machine extension image. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, or <paramref name="version"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static async Task<Response<VirtualMachineExtensionImage>> GetVirtualMachineExtensionImagesAsync(this SubscriptionOperations subscription, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+
+            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineExtensionImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.GetAsync(location, publisherName, type, version, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a virtual machine extension image. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="version"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, or <paramref name="version"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Response<VirtualMachineExtensionImage> GetVirtualMachineExtensionImages(this SubscriptionOperations subscription, string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineExtensionImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.Get(location, publisherName, type, version, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of virtual machine extension image types. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static async Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> ListTypesVirtualMachineExtensionImagesAsync(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+
+            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListTypesVirtualMachineExtensionImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListTypesAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of virtual machine extension image types. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Response<IReadOnlyList<VirtualMachineExtensionImage>> ListTypesVirtualMachineExtensionImages(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListTypesVirtualMachineExtensionImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListTypes(location, publisherName, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of virtual machine extension image versions. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static async Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> ListVersionsVirtualMachineExtensionImagesAsync(this SubscriptionOperations subscription, string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVersionsVirtualMachineExtensionImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListVersionsAsync(location, publisherName, type, filter, top, orderby, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of virtual machine extension image versions. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> The String to use. </param>
+        /// <param name="type"> The String to use. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Response<IReadOnlyList<VirtualMachineExtensionImage>> ListVersionsVirtualMachineExtensionImages(this SubscriptionOperations subscription, string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (type == null)
+            {
+                throw new ArgumentNullException(nameof(type));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVersionsVirtualMachineExtensionImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListVersions(location, publisherName, type, filter, top, orderby, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        #endregion
+
+        #region VirtualMachineImages
+        private static VirtualMachineImagesRestOperations GetVirtualMachineImagesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new VirtualMachineImagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        /// <summary> Gets a virtual machine image. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> A valid image publisher. </param>
+        /// <param name="offer"> A valid image publisher offer. </param>
+        /// <param name="skus"> A valid image SKU. </param>
+        /// <param name="version"> A valid image SKU version. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static async Task<Response<VirtualMachineImage>> GetVirtualMachineImagesAsync(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (offer == null)
+            {
+                throw new ArgumentNullException(nameof(offer));
+            }
+            if (skus == null)
+            {
+                throw new ArgumentNullException(nameof(skus));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+
+            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.GetAsync(location, publisherName, offer, skus, version, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a virtual machine image. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> A valid image publisher. </param>
+        /// <param name="offer"> A valid image publisher offer. </param>
+        /// <param name="skus"> A valid image SKU. </param>
+        /// <param name="version"> A valid image SKU version. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/>, or <paramref name="version"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Response<VirtualMachineImage> GetVirtualMachineImages(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (offer == null)
+            {
+                throw new ArgumentNullException(nameof(offer));
+            }
+            if (skus == null)
+            {
+                throw new ArgumentNullException(nameof(skus));
+            }
+            if (version == null)
+            {
+                throw new ArgumentNullException(nameof(version));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.GetVirtualMachineImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.Get(location, publisherName, offer, skus, version, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> A valid image publisher. </param>
+        /// <param name="offer"> A valid image publisher offer. </param>
+        /// <param name="skus"> A valid image SKU. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListVirtualMachineImagesAsync(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (offer == null)
+            {
+                throw new ArgumentNullException(nameof(offer));
+            }
+            if (skus == null)
+            {
+                throw new ArgumentNullException(nameof(skus));
+            }
+
+            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListAsync(location, publisherName, offer, skus, expand, top, orderby, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> A valid image publisher. </param>
+        /// <param name="offer"> A valid image publisher offer. </param>
+        /// <param name="skus"> A valid image SKU. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="offer"/>, or <paramref name="skus"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListVirtualMachineImages(this SubscriptionOperations subscription, string location, string publisherName, string offer, string skus, string expand = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (offer == null)
+            {
+                throw new ArgumentNullException(nameof(offer));
+            }
+            if (skus == null)
+            {
+                throw new ArgumentNullException(nameof(skus));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.List(location, publisherName, offer, skus, expand, top, orderby, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of virtual machine image offers for the specified location and publisher. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> A valid image publisher. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListOffersVirtualMachineImagesAsync(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+
+            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOffersVirtualMachineImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListOffersAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of virtual machine image offers for the specified location and publisher. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> A valid image publisher. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListOffersVirtualMachineImages(this SubscriptionOperations subscription, string location, string publisherName, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOffersVirtualMachineImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListOffers(location, publisherName, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of virtual machine image publishers for the specified Azure location. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListPublishersVirtualMachineImagesAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListPublishersVirtualMachineImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListPublishersAsync(location, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of virtual machine image publishers for the specified Azure location. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListPublishersVirtualMachineImages(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListPublishersVirtualMachineImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListPublishers(location, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of virtual machine image SKUs for the specified location, publisher, and offer. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> A valid image publisher. </param>
+        /// <param name="offer"> A valid image publisher offer. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static async Task<Response<IReadOnlyList<VirtualMachineImageResource>>> ListSkusVirtualMachineImagesAsync(this SubscriptionOperations subscription, string location, string publisherName, string offer, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (offer == null)
+            {
+                throw new ArgumentNullException(nameof(offer));
+            }
+
+            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSkusVirtualMachineImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListSkusAsync(location, publisherName, offer, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        /// <summary> Gets a list of virtual machine image SKUs for the specified location, publisher, and offer. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The name of a supported Azure region. </param>
+        /// <param name="publisherName"> A valid image publisher. </param>
+        /// <param name="offer"> A valid image publisher offer. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="offer"/> is null. </exception>
+        /// <returns> placeholder. </returns>
+        public static Response<IReadOnlyList<VirtualMachineImageResource>> ListSkusVirtualMachineImages(this SubscriptionOperations subscription, string location, string publisherName, string offer, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+            if (publisherName == null)
+            {
+                throw new ArgumentNullException(nameof(publisherName));
+            }
+            if (offer == null)
+            {
+                throw new ArgumentNullException(nameof(offer));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSkusVirtualMachineImages");
+                scope.Start();
+                try
+                {
+                    return restOperations.ListSkus(location, publisherName, offer, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
+            }
+            );
+        }
+
+        #endregion
+
+        #region Usage
+        private static UsageRestOperations GetUsageRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for which resource usage is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static AsyncPageable<Usage> ListUsageAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetUsageRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(location, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListNextPageAsync(nextLink, location, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location for which resource usage is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static Pageable<Usage> ListUsage(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetUsageRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                Page<Usage> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(location, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListNextPage(nextLink, location, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, NextPageFunc);
+            }
+            );
+        }
+
+        #endregion
+
+        #region VirtualMachineSize
+        private static VirtualMachineSizesRestOperations GetVirtualMachineSizesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new VirtualMachineSizesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
+        /// <summary> Lists the VirtualMachineSizes for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static AsyncPageable<VirtualMachineSize> ListVirtualMachineSizeAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineSizesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                async Task<Page<VirtualMachineSize>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(location, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
+            }
+            );
+        }
+
+        /// <summary> Lists the VirtualMachineSizes for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
+        /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
+        public static Pageable<VirtualMachineSize> ListVirtualMachineSize(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        {
+            if (location == null)
+            {
+                throw new ArgumentNullException(nameof(location));
+            }
+
+            return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            {
+                var clientDiagnostics = new ClientDiagnostics(options);
+                var restOperations = GetVirtualMachineSizesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                Page<VirtualMachineSize> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(location, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
+            }
+            );
+        }
+
+        #endregion
+
+        #region LogAnalytics
+        private static LogAnalyticsRestOperations GetLogAnalyticsRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        {
+            return new LogAnalyticsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+        }
+
         #endregion
     }
 }

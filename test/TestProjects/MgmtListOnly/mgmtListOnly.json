@@ -551,12 +551,105 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages": {
+            "get": {
+                "tags": [
+                    "Usages"
+                ],
+                "operationId": "Usages_List",
+                "description": "List Usages",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "type": "string",
+                        "description": "The location",
+                        "required": true
+                    },
+                    {
+                        "name": "expand",
+                        "type": "string",
+                        "in": "query",
+                        "description": "The expand",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UsagesListResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/nonPageableUsages": {
+            "get": {
+                "tags": [
+                    "NonPageableUsages"
+                ],
+                "operationId": "NonPageableUsages_List",
+                "description": "List Usages",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "type": "string",
+                        "description": "The location",
+                        "required": true
+                    },
+                    {
+                        "name": "expand",
+                        "type": "string",
+                        "in": "query",
+                        "description": "The expand",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UsagesNonPageableListResult"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "Grandson": {
+            "properties": {
+                "fuckfuck": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/AvailabilitySet"
+                }
+            ]
+        },
         "AvailabilitySet": {
             "properties": {
-                "bar": {
+                "fuck": {
                     "type": "string",
                     "description": "specifies the bar"
                 }
@@ -818,6 +911,54 @@
                 "foo": {
                     "type": "string",
                     "description": "specifies the bar"
+                }
+            }
+        },
+        "UsagesListResult": {
+            "description": "The result of list usages",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Usage"
+                    },
+                    "description": "Usage"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URL for getting next page result"
+                }
+            }
+        },
+        "Usage": {
+            "properties": {
+                "foobar": {
+                    "type": "string",
+                    "description": "specifies foobar"
+                }
+            }
+        },
+        "UsagesNonPageableListResult": {
+            "description": "The result of list usages",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/NonPageableUsage"
+                    },
+                    "description": "Usage"
+                },
+                "nextLink": {
+                    "type": "string",
+                    "description": "The URL for getting next page result"
+                }
+            }
+        },
+        "NonPageableUsage": {
+            "properties": {
+                "foobarNonPageable": {
+                    "type": "string",
+                    "description": "specifies foobar"
                 }
             }
         },

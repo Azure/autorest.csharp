@@ -25,13 +25,13 @@ namespace MgmtListOnly.Models
         /// <param name="type"> The type. </param>
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
-        /// <param name="bar"> specifies the bar. </param>
-        internal AvailabilitySetData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
+        /// <param name="fuck"> specifies the bar. </param>
+        internal AvailabilitySetData(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string fuck) : base(id, name, type, location, tags)
         {
-            Bar = bar;
+            Fuck = fuck;
         }
 
         /// <summary> specifies the bar. </summary>
-        public string Bar { get; set; }
+        public string Fuck { get; set; }
     }
 }

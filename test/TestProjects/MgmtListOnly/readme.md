@@ -15,6 +15,8 @@ operation-group-to-resource-type:
     AvailabilitySetsNonPageableFeatures: Microsoft.Compute/availabilitySetsNonPageableFeatures
     ApiKeys: Microsoft.Compute/apiKeys
     ChildWithPosts: Microsoft.Compute/availabilitySets/childWithPost
+    Usages: Microsoft.Compute/locations/usages
+    NonPageableUsages: Microsoft.Compute/locations/nonPageableUsages
 operation-group-to-resource:
     ApiKeys: NonResource
     ChildWithPosts: NonResource
@@ -26,4 +28,6 @@ operation-group-to-parent:
     AvailabilitySetsNonPageableFeatures: subscriptions
     ApiKeys: subscriptions
     ChildWithPosts: AvailabilitySets
+    Usages: subscriptions
+    NonPageableUsages: subscriptions
 ```

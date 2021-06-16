@@ -22,7 +22,7 @@ namespace MgmtListOnly
     public partial class AvailabilitySetOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AvailabilitySet>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal AvailabilitySetsRestOperations RestClient { get; }
+        private AvailabilitySetsRestOperations _restClient { get; }
         internal AvailabilitySetChildRestOperations AvailabilitySetChildRestClient { get; }
         internal ChildWithPostsRestOperations ChildWithPostsRestClient { get; }
         internal ResponseNotCalledValueRestOperations ResponseNotCalledValueRestClient { get; }
@@ -39,7 +39,7 @@ namespace MgmtListOnly
         protected internal AvailabilitySetOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
             AvailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
             ChildWithPostsRestClient = new ChildWithPostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
             ResponseNotCalledValueRestClient = new ResponseNotCalledValueRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
@@ -56,7 +56,7 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -73,7 +73,7 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, null, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -92,7 +92,7 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -111,7 +111,7 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -122,7 +122,7 @@ namespace MgmtListOnly
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
@@ -130,7 +130,7 @@ namespace MgmtListOnly
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
@@ -181,7 +181,7 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                var response = await RestClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return new AvailabilitySetsDeleteOperation(response);
             }
             catch (Exception e)
@@ -199,7 +199,7 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                var response = RestClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return new AvailabilitySetsDeleteOperation(response);
             }
             catch (Exception e)
@@ -272,7 +272,7 @@ namespace MgmtListOnly
                 var patchable = new AvailabilitySetUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new AvailabilitySetsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -303,7 +303,7 @@ namespace MgmtListOnly
                 var patchable = new AvailabilitySetUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new AvailabilitySetsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -371,7 +371,7 @@ namespace MgmtListOnly
             {
                 var patchable = new AvailabilitySetUpdate();
                 patchable.Tags.ReplaceWith(tags);
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new AvailabilitySetsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -399,7 +399,7 @@ namespace MgmtListOnly
             {
                 var patchable = new AvailabilitySetUpdate();
                 patchable.Tags.ReplaceWith(tags);
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new AvailabilitySetsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -469,7 +469,7 @@ namespace MgmtListOnly
                 var patchable = new AvailabilitySetUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await RestClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new AvailabilitySetsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -499,7 +499,7 @@ namespace MgmtListOnly
                 var patchable = new AvailabilitySetUpdate();
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = RestClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new AvailabilitySetsUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -513,7 +513,7 @@ namespace MgmtListOnly
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual async Task<Response<AvailabilitySetListResult>> TestMethodAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IEnumerable<AvailabilitySet>>> TestMethodAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
@@ -524,7 +524,8 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                return await RestClient.TestMethodAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.TestMethodAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -538,7 +539,7 @@ namespace MgmtListOnly
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<AvailabilitySetListResult> TestMethod(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual Response<IEnumerable<AvailabilitySet>> TestMethod(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
@@ -549,7 +550,8 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                return RestClient.TestMethod(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
+                var response = _restClient.TestMethod(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
+                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -855,8 +857,8 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                var response = await RestClient.TestLROMethodAsync(Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsTestLROMethodOperation(_clientDiagnostics, Pipeline, RestClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
+                var response = await _restClient.TestLROMethodAsync(Id.ResourceGroupName, parameters, cancellationToken).ConfigureAwait(false);
+                return new AvailabilitySetsTestLROMethodOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
             }
             catch (Exception e)
             {
@@ -880,8 +882,8 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                var response = RestClient.TestLROMethod(Id.ResourceGroupName, parameters, cancellationToken);
-                return new AvailabilitySetsTestLROMethodOperation(_clientDiagnostics, Pipeline, RestClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
+                var response = _restClient.TestLROMethod(Id.ResourceGroupName, parameters, cancellationToken);
+                return new AvailabilitySetsTestLROMethodOperation(_clientDiagnostics, Pipeline, _restClient.CreateTestLROMethodRequest(Id.ResourceGroupName, parameters).Request, response);
             }
             catch (Exception e)
             {

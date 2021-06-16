@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -35,34 +36,24 @@ namespace Azure.Management.Storage
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListSkuInformationAsync(clientDiagnostics, restOperations, cancellationToken);
-                return result;
+                async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
             );
-        }
-
-        /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static AsyncPageable<SkuInformation> ListSkuInformationAsync(ClientDiagnostics clientDiagnostics, SkusRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListAsync(cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Lists the SkuInformations for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -75,34 +66,24 @@ namespace Azure.Management.Storage
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListSkuInformation(clientDiagnostics, restOperations, cancellationToken);
-                return result;
+                Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.List(cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
-        }
-
-        /// <summary> Lists the available SKUs supported by Microsoft.Storage for given subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Pageable<SkuInformation> ListSkuInformation(ClientDiagnostics clientDiagnostics, SkusRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.List(cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         #endregion
@@ -130,41 +111,24 @@ namespace Azure.Management.Storage
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListByLocationUsageAsync(clientDiagnostics, restOperations, location, cancellationToken);
-                return result;
+                async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
+                    scope.Start();
+                    try
+                    {
+                        var response = await restOperations.ListByLocationAsync(location, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
             }
             );
-        }
-
-        /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="location"> The location of the Azure Storage resource. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static AsyncPageable<Usage> ListByLocationUsageAsync(ClientDiagnostics clientDiagnostics, UsagesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
-                scope.Start();
-                try
-                {
-                    var response = await restOperations.ListByLocationAsync(location, cancellationToken).ConfigureAwait(false);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateAsyncEnumerable(FirstPageFunc, null);
         }
 
         /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
@@ -184,41 +148,24 @@ namespace Azure.Management.Storage
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                var result = ListByLocationUsage(clientDiagnostics, restOperations, location, cancellationToken);
-                return result;
+                Page<Usage> FirstPageFunc(int? pageSizeHint)
+                {
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
+                    scope.Start();
+                    try
+                    {
+                        var response = restOperations.ListByLocation(location, cancellationToken: cancellationToken);
+                        return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
+                    }
+                    catch (Exception e)
+                    {
+                        scope.Failed(e);
+                        throw;
+                    }
+                }
+                return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
             }
             );
-        }
-
-        /// <summary> Gets the current usage count and the limit for the resources of the location under the subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="location"> The location of the Azure Storage resource. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static Pageable<Usage> ListByLocationUsage(ClientDiagnostics clientDiagnostics, UsagesRestOperations restOperations, string location, CancellationToken cancellationToken = default)
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            Page<Usage> FirstPageFunc(int? pageSizeHint)
-            {
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
-                scope.Start();
-                try
-                {
-                    var response = restOperations.ListByLocation(location, cancellationToken);
-                    return Page.FromValues(response.Value.Value, null, response.GetRawResponse());
-                }
-                catch (Exception e)
-                {
-                    scope.Failed(e);
-                    throw;
-                }
-            }
-            return PageableHelpers.CreateEnumerable(FirstPageFunc, null);
         }
 
         #endregion

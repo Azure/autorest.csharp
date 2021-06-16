@@ -110,7 +110,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, listMethod, async, resourceType, RestClientField, ClientDiagnosticsField, converter);
+                WritePagingOperationBody(writer, listMethod, async, resourceType, RestClientField, ClientDiagnosticsField,
+                    BuildParameterMapping(listMethod.Method).Where(p => IsMandatory(p.Parameter)), converter);
             }
         }
 
@@ -137,12 +138,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="async">Should the method be written sync or async.</param>
         /// <param name="resourceType">The reource type that is being written.</param>
         /// <param name="converter">Optional convertor for modifying the result of the rest client call.</param>
-        protected void WritePagingOperationBody(CodeWriter writer, PagingMethod pagingMethod, bool async, CSharpType resourceType, string restClientName, string clientDiagnosticsName, FormattableString converter)
+        protected void WritePagingOperationBody(CodeWriter writer, PagingMethod pagingMethod, bool async, CSharpType resourceType, string restClientName, string clientDiagnosticsName,
+            IEnumerable<ParameterMapping> parameterMapping, FormattableString converter)
         {
             var parameters = pagingMethod.Method.Parameters;
 
-            var pagedResourceType = new CSharpType(typeof(Page<>), resourceType);
-            var returnType = async ? new CSharpType(typeof(Task<>), pagedResourceType) : pagedResourceType;
+            var returnType = new CSharpType(typeof(Page<>), resourceType).WrapAsync(async);
 
             var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
             var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
@@ -155,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsName, writer =>
                 {
                     writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
-                    foreach (var parameter in BuildParameterMapping(pagingMethod.Method).Where(p => IsMandatory(p.Parameter)))
+                    foreach (var parameter in parameterMapping)
                     {
                         writer.Append($"{parameter.ValueExpression}, ");
                     }

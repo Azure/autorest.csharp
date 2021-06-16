@@ -291,7 +291,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             return type.BaseType.Name == typeof(TrackedResource<>).Name;
         }
 
-        private Type FindSubscriptionExtensions()
+        protected Type FindSubscriptionExtensions()
         {
             Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
             return allTypes.FirstOrDefault(t => t.Name == "SubscriptionExtensions" && !t.Name.Contains("Tests") && t.Namespace == _projectName);
@@ -442,7 +442,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     ResourceType containerType = GetContainerValidResourceType(container);
                     if (containerType.Equals(operationType))
                     {
-                        var method = operation.GetMethod($"Get{StringExtensions.Pluralization(container.Name.Remove(container.Name.LastIndexOf("Container")))}");
+                        var name = container.Name.Remove(container.Name.LastIndexOf("Container"));
+                        var method = operation.GetMethod($"Get{name.ToPlural()}");
                         Assert.NotNull(method);
                         Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(container.Namespace+"."+container.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);

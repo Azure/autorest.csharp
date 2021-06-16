@@ -12,11 +12,16 @@ using Azure.ResourceManager.Core;
 
 namespace MgmtListOnly.Models
 {
-    public partial class AvailabilitySetData : IUtf8JsonSerializable
+    public partial class Grandson : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            if (Optional.IsDefined(Fuckfuck))
+            {
+                writer.WritePropertyName("fuckfuck");
+                writer.WriteStringValue(Fuckfuck);
+            }
             if (Optional.IsDefined(Fuck))
             {
                 writer.WritePropertyName("fuck");
@@ -35,8 +40,9 @@ namespace MgmtListOnly.Models
             writer.WriteEndObject();
         }
 
-        internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element)
+        internal static Grandson DeserializeGrandson(JsonElement element)
         {
+            Optional<string> fuckfuck = default;
             Optional<string> fuck = default;
             IDictionary<string, string> tags = default;
             LocationData location = default;
@@ -45,6 +51,11 @@ namespace MgmtListOnly.Models
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("fuckfuck"))
+                {
+                    fuckfuck = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("fuck"))
                 {
                     fuck = property.Value.GetString();
@@ -81,7 +92,7 @@ namespace MgmtListOnly.Models
                     continue;
                 }
             }
-            return new AvailabilitySetData(id, name, type, location, tags, fuck.Value);
+            return new Grandson(id, name, type, location, tags, fuck.Value, fuckfuck.Value);
         }
     }
 }
