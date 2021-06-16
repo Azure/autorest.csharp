@@ -168,6 +168,20 @@
                     }
                 }
             }
+        },
+        "/OperationWithPublicModelWithInternalProperty": {
+            "post": {
+                "operationId": "OperationWithPublicModelWithInternalProperty",
+                "description": "",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/PublicModelWithInternalProperty"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -222,6 +236,14 @@
                     "type": "array",
                     "items": { "$ref": "#/definitions/InternalModel" },
                     "readOnly": true
+                }
+            }
+        },
+        "PublicModelWithInternalProperty": {
+            "type": "object",
+            "properties": {
+                "StringProperty": {
+                    "type": "string"
                 }
             }
         },
