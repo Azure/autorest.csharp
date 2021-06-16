@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType[] Arguments { get; } = Array.Empty<CSharpType>();
         public bool IsFrameworkType => _type != null;
         public Type FrameworkType => _type ?? throw new InvalidOperationException("Not a framework type");
-        public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException("Not implemented type");
+        public TypeProvider Implementation => _implementation ?? throw new InvalidOperationException($"Not implemented type: '{Namespace}.{Name}'");
         public bool IsNullable { get; }
 
         protected bool Equals(CSharpType other)

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace ExactMatchInheritance
 {
     /// <summary> A class representing collection of ExactMatchModel3 and their operations over a ResourceGroup. </summary>
-    public partial class ExactMatchModel3Container : ResourceContainerBase<ResourceIdentifier, ExactMatchModel3, ExactMatchModel3Data>
+    public partial class ExactMatchModel3Container : ResourceContainerBase<ResourceGroupResourceIdentifier, ExactMatchModel3, ExactMatchModel3Data>
     {
         /// <summary> Initializes a new instance of the <see cref="ExactMatchModel3Container"/> class for mocking. </summary>
         protected ExactMatchModel3Container()
@@ -251,6 +252,6 @@ namespace ExactMatchInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, ExactMatchModel3, ExactMatchModel3Data> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, ExactMatchModel3, ExactMatchModel3Data> Construct() { }
     }
 }

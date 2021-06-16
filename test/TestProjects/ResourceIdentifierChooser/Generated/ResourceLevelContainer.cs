@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace ResourceIdentifierChooser
 {
     /// <summary> A class representing collection of ResourceLevel and their operations over a ResourceGroup. </summary>
-    public partial class ResourceLevelContainer : ResourceContainerBase<ResourceIdentifier, ResourceLevel, ResourceLevelData>
+    public partial class ResourceLevelContainer : ResourceContainerBase<ResourceGroupResourceIdentifier, ResourceLevel, ResourceLevelData>
     {
         /// <summary> Initializes a new instance of the <see cref="ResourceLevelContainer"/> class for mocking. </summary>
         protected ResourceLevelContainer()
@@ -251,6 +252,6 @@ namespace ResourceIdentifierChooser
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, ResourceLevel, ResourceLevelData> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, ResourceLevel, ResourceLevelData> Construct() { }
     }
 }

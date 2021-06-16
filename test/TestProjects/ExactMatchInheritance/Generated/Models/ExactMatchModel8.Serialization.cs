@@ -35,7 +35,7 @@ namespace ExactMatchInheritance
         {
             Optional<string> name = default;
             Optional<string> nEW = default;
-            ResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))

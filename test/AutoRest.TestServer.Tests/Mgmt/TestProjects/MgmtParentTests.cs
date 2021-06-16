@@ -11,7 +11,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("AvailabilitySetOperations", true)]
         [TestCase("DedicatedHostGroupOperations", true)]
         [TestCase("DedicatedHostOperations", true)]
-        [TestCase("VirtualMachineExtensionImageOperations", false)]
+        [TestCase("VirtualMachineExtensionImageOperations", true)]
         public void ValidateOperations(string operation, bool isExists)
         {
             var operationTypeExists = FindAllOperations().Any(o => o.Name == operation);
@@ -21,7 +21,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("AvailabilitySet", true)]
         [TestCase("DedicatedHostGroup", true)]
         [TestCase("DedicatedHost", true)]
-        [TestCase("VirtualMachineExtensionImage", false)]
+        [TestCase("VirtualMachineExtensionImage", true)]
         public void ValidateResources(string resource, bool isExists)
         {
             var resourceTypeExists = FindAllResources().Any(o => o.Name == resource);
@@ -31,7 +31,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase("AvailabilitySetContainer", true)]
         [TestCase("DedicatedHostGroupContainer", true)]
         [TestCase("DedicatedHostContainer", true)]
-        [TestCase("VirtualMachineExtensionImageContainer", false)]
+        [TestCase("VirtualMachineExtensionImageContainer", true)]
         public void ValidateContainers(string container, bool isExists)
         {
             var containerTypeExists = FindAllContainers().Any(o => o.Name == container);

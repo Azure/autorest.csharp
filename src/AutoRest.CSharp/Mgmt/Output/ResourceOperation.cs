@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private BuildContext<MgmtOutputLibrary> _context;
         private ClientMethod[]? _methods;
         private PagingMethod[]? _pagingMethods;
+        private ClientMethod? _getMethod;
 
         private IEnumerable<OperationGroup>? _siblingOperationGroups;
         private IDictionary<OperationGroup, MgmtExtensionOperation>? _childOperations; //todo rename
@@ -67,11 +68,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
-        public Type ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(
-            _context.Library.GetResourceData(OperationGroup),
-            _context.Configuration.MgmtConfiguration, false);
+        public ResourceData ResourceData => _context.Library.GetResourceData(OperationGroup);
 
-        public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
+        public Type ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(
+            ResourceData,
+            _context.Configuration.MgmtConfiguration);
+
+        public ClientMethod[] Methods => _methods ??= GetMethodsInScope();
 
         public IDictionary<OperationGroup, MgmtExtensionOperation> ChildOperations => _childOperations ??= EnsureChildOperations();
 
@@ -88,62 +91,18 @@ namespace AutoRest.CSharp.Mgmt.Output
             return result;
         }
 
-        // todo: BuildMethods is not very much different from ClientBuilder.BuildMethods
-        // the only difference is that it overwrites the name of the method to always be "List{operationGroup.Key}
-        private IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
-        {
-            return ClientBuilder.BuildMethods(operationGroup, restClient, Declaration, (operationGroup, operation, restMethod) => $"List{operationGroup.Key}");
-        }
-
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
 
-        private IDictionary<OperationGroup, PagingMethod[]> EnsureChildPagingMethods()
+        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
+
+        protected virtual ClientMethod[] GetMethodsInScope()
         {
-            var result = new Dictionary<OperationGroup, PagingMethod[]>();
-            if (_siblingOperationGroups != null)
-            {
-                foreach (var operationGroup in _siblingOperationGroups)
-                {
-                    var methods = BuildPagingMethods(operationGroup, _context.Library.GetRestClient(operationGroup), Declaration).ToArray();
-                    if (methods.Length > 0)
-                    {
-                        result[operationGroup] = methods;
-                    }
-                }
-            }
-            return result;
+            return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
         }
 
-        // same as BuildMethods
-        private IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
+        public Diagnostic GetDiagnostic(RestClientMethod method)
         {
-            foreach (var operation in operationGroup.Operations)
-            {
-                Paging? paging = operation.Language.Default.Paging;
-                if (paging == null || operation.IsLongRunning)
-                {
-                    continue;
-                }
-
-                foreach (var serviceRequest in operation.Requests)
-                {
-                    RestClientMethod method = restClient.GetOperationMethod(serviceRequest);
-                    RestClientMethod? nextPageMethod = restClient.GetNextOperationMethod(serviceRequest);
-
-                    if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
-                    {
-                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
-                    }
-
-                    string name = $"List{operationGroup.Key}";
-                    yield return new PagingMethod(
-                        method,
-                        nextPageMethod,
-                        name,
-                        new Diagnostic($"{Declaration.Name}.{name}"),
-                        new PagingResponseInfo(paging, objectResponseBody.Type));
-                }
-            }
+            return new Diagnostic($"{Declaration.Name}.{method.Name}", Array.Empty<DiagnosticAttribute>());
         }
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)

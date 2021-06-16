@@ -23,7 +23,7 @@ namespace MgmtSingleton
         {
             Optional<string> name = default;
             Optional<string> type = default;
-            ResourceIdentifier id = default;
+            ResourceGroupResourceIdentifier id = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))

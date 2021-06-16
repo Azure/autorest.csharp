@@ -12,8 +12,14 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [TestCase(typeof(SubscriptionLevelResource), typeof(SubscriptionResourceIdentifier))]
         [TestCase(typeof(TenantLevelResource), typeof(TenantResourceIdentifier))]
         [TestCase(typeof(ResourceGroupResource), typeof(ResourceGroupResourceIdentifier))]
-        [TestCase(typeof(ResourceLevel), typeof(ResourceIdentifier))]
+        [TestCase(typeof(ResourceLevel), typeof(ResourceGroupResourceIdentifier))]
         [TestCase(typeof(ModelData), typeof(ResourceGroupResourceIdentifier))]
+        [TestCase(typeof(SubResResource), typeof(SubscriptionResourceIdentifier))]
+        [TestCase(typeof(SubRes2Resource), typeof(TenantResourceIdentifier))]
+        [TestCase(typeof(SubRes3Resource), typeof(ResourceGroupResourceIdentifier))]
+        [TestCase(typeof(WritableSubResResource), typeof(SubscriptionResourceIdentifier))]
+        [TestCase(typeof(WritableSubRes2Resource), typeof(TenantResourceIdentifier))]
+        [TestCase(typeof(WritableSubRes3Resource), typeof(ResourceGroupResourceIdentifier))]
         public void TestResourceIdentifierChooser(Type dataType, Type expectedIdType)
         {
             Assert.AreEqual(dataType.BaseType.BaseType.GenericTypeArguments[0], expectedIdType);

@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
@@ -23,9 +26,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal abstract class MgmtClientBaseWriter : ClientWriter
     {
-        protected const string RestClientField = "_restClient";
-
         protected MgmtRestClient? _restClient;
+        protected override string RestClientField => "_" + RestClientVariable;
+        protected override string RestClientAccessibility => "private";
+        protected virtual string ContextProperty => "";
+
+        protected void WriteUsings(CodeWriter writer)
+        {
+            writer.UseNamespace(typeof(Task).Namespace!);
+            writer.UseNamespace("System.Linq");
+        }
 
         protected void WriteFields(CodeWriter writer, RestClient restClient)
         {
@@ -100,7 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WriteContainerPagingOperation(writer, listMethod, async, resourceType, converter);
+                WritePagingOperationBody(writer, listMethod, async, resourceType, RestClientField, ClientDiagnosticsField, converter);
             }
         }
 
@@ -127,7 +137,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="async">Should the method be written sync or async.</param>
         /// <param name="resourceType">The reource type that is being written.</param>
         /// <param name="converter">Optional convertor for modifying the result of the rest client call.</param>
-        private void WriteContainerPagingOperation(CodeWriter writer, PagingMethod pagingMethod, bool async, CSharpType resourceType, FormattableString converter)
+        protected void WritePagingOperationBody(CodeWriter writer, PagingMethod pagingMethod, bool async, CSharpType resourceType, string restClientName, string clientDiagnosticsName, FormattableString converter)
         {
             var parameters = pagingMethod.Method.Parameters;
 
@@ -142,14 +152,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"{AsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
                 // no null-checks because all are optional
-                WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsName, writer =>
                 {
-                    writer.Append($"var response = {AwaitKeyword(async)} {RestClientField}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
+                    writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
                     foreach (var parameter in BuildParameterMapping(pagingMethod.Method).Where(p => IsMandatory(p.Parameter)))
                     {
                         writer.Append($"{parameter.ValueExpression}, ");
                     }
-
                     writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
 
                     writer.UseNamespace("System.Linq");
@@ -167,17 +176,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
                 using (writer.Scope($"{AsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
                 {
-                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
+                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsName, writer =>
                     {
-                        writer.Append($"var response = {AwaitKeyword(async)} {RestClientField}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
+                        writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
                         foreach (var parameter in BuildParameterMapping(pagingMethod.NextPageMethod).Where(p => IsMandatory(p.Parameter)))
                         {
                             writer.Append($"{parameter.ValueExpression}, ");
                         }
                         writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
-                    writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
-                    writer.Append($"{converter}");
-                    writer.Line($", {continuationTokenText}, response.GetRawResponse());");
+                        writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
+                        writer.Append($"{converter}");
+                        writer.Line($", {continuationTokenText}, response.GetRawResponse());");
                     });
                 }
             }
@@ -238,37 +247,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 else if (parameter.Type.IsStringLike() && IsMandatory(parameter))
                 {
-                    passThru = false;
-                    if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        valueExpression = "Id.ResourceGroupName";
-                    }
-                    else
-                    {
-                        // container.Id is the ID of parent resource, so the first name should just be `Id.Name`
-                        parentNameStack.Push($"Id{dotParent}.Name");
-                        dotParent += ".Parent";
-                    }
-                }
-                else
-                {
-                    passThru = true;
+                    passThru = ShouldPassThrough(ref dotParent, parentNameStack, parameter, ref valueExpression);
                 }
                 parameterMapping.Add(new ParameterMapping(parameter, passThru, valueExpression));
             }
 
-            // if the method needs resource name (typically all non-list methods), we should make it pass-thru
-            // 1. make last string-like parameter (typically the resource name) pass-through from container method
-            // 2. ignoring optional parameters such as `expand`
-            if (!method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase))
-            {
-                var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.IsStringLike() && IsMandatory(parameter.Parameter));
-                if (lastString?.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
-                {
-                    lastString.IsPassThru = true;
-                    parentNameStack.Pop();
-                }
-            }
+            MakeResourceNameParamPassThrough(method, parameterMapping, parentNameStack);
 
             // set the arguments for name parameters reversely: Id.Parent.Name, Id.Parent.Parent.Name, ...
             foreach (var parameter in parameterMapping)
@@ -282,6 +266,275 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return parameterMapping;
         }
 
+        protected virtual void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        {
+            // if the method needs resource name (typically all non-list methods), we should make it pass-thru
+            // 1. make last string-like parameter (typically the resource name) pass-through from container method
+            // 2. ignoring optional parameters such as `expand`
+            if (!method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var lastString = parameterMapping.LastOrDefault(parameter => parameter.Parameter.Type.IsStringLike() && IsMandatory(parameter.Parameter));
+                if (lastString?.Parameter != null && !lastString.Parameter.Name.Equals("resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    lastString.IsPassThru = true;
+                    parentNameStack.Pop();
+                }
+            }
+        }
+
+        protected virtual bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
+        {
+            bool passThru = false;
+            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+            {
+                valueExpression = "Id.ResourceGroupName";
+            }
+            else
+            {
+                // container.Id is the ID of parent resource, so the first name should just be `Id.Name`
+                parentNameStack.Push($"Id{dotParent}.Name");
+                dotParent += ".Parent";
+            }
+
+            return passThru;
+        }
+
         protected bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
+
+        protected void WriteClientMethod(CodeWriter writer, RestClientMethod clientMethod, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async)
+        {
+            CSharpType? bodyType = GetBodyTypeForList(clientMethod.ReturnType, operationGroup, context);
+            bool isResourceList = bodyType != clientMethod.ReturnType;
+            CSharpType responseType = bodyType != null ?
+                new CSharpType(typeof(Response<>), bodyType) :
+                typeof(Response);
+
+            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+
+            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+
+            Parameter[] nonPathParameters = GetNonPathParameters(clientMethod);
+            foreach (Parameter parameter in nonPathParameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+
+            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
+            writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
+
+            var methodName = CreateMethodName(clientMethod.Name, async);
+            var asyncText = async ? "async" : string.Empty;
+            writer.Append($"{clientMethod.Accessibility} virtual {asyncText} {responseType} {methodName}(");
+
+            foreach (Parameter parameter in nonPathParameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
+
+            using (writer.Scope())
+            {
+                writer.WriteParameterNullChecks(nonPathParameters);
+                WriteDiagnosticScope(writer, diagnostic, ClientDiagnosticsField, writer =>
+                {
+                    writer.Append($"var response = ");
+                    if (async)
+                    {
+                        writer.Append($"await ");
+                    }
+
+                    var parameterNames = GetParametersName(clientMethod, operationGroup, context);
+                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}(");
+                    foreach (var parameter in parameterNames)
+                    {
+                        writer.Append($"{parameter:I}, ");
+                    }
+                    writer.Append($"cancellationToken)");
+
+                    if (async)
+                    {
+                        writer.Append($".ConfigureAwait(false)");
+                    }
+
+                    writer.Line($";");
+
+                    if (isResourceList)
+                    {
+                        writer.Append($"return Response.FromValue(response.Value.Value.Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)), response.GetRawResponse())");
+                    }
+                    else
+                    {
+                        writer.Append($"return response");
+                    }
+
+                    if (bodyType == null && clientMethod.HeaderModel != null)
+                    {
+                        writer.Append($".GetRawResponse()");
+                    }
+
+                    writer.Line($";");
+                });
+            }
+
+            writer.Line();
+        }
+
+        private CSharpType? GetBodyTypeForList(CSharpType? returnType, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (returnType == null)
+                return null;
+
+            var result = returnType;
+
+            var resourceData = context.Library.GetResourceData(operationGroup);
+
+            if (resourceData != null && !returnType.IsFrameworkType && returnType.Implementation is SchemaObjectType schemaObject)
+            {
+                var valueProperty = schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
+                    AreTypesEqual(p.Declaration.Type, new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)));
+                if (valueProperty != null)
+                {
+                    return new CSharpType(typeof(IEnumerable<>), context.Library.GetArmResource(operationGroup).Type);
+                }
+            }
+
+            return result;
+        }
+
+        private bool AreTypesEqual(CSharpType left, CSharpType right)
+        {
+            if (left.Name != right.Name)
+                return false;
+
+            if (left.Arguments.Length != right.Arguments.Length)
+                return false;
+
+            for (int i = 0; i < left.Arguments.Length; i++)
+            {
+                if (left.Arguments[i].Name != right.Arguments[i].Name)
+                    return false;
+            }
+
+            return true;
+        }
+
+        // This method returns an array of path and non-path parameters name
+        protected string[] GetParametersName(RestClientMethod clientMethod, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            var paramNames = GetPathParametersName(clientMethod, operationGroup, context).ToList();
+            var nonPathParams = GetNonPathParameters(clientMethod);
+            foreach (Parameter parameter in nonPathParams)
+            {
+                paramNames.Add(parameter.Name);
+            }
+
+            return paramNames.ToArray();
+        }
+
+        protected string[] GetPathParametersName(RestClientMethod clientMethod, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            List<string> paramNameList = new List<string>();
+            var pathParamsLength = GetPathParameters(clientMethod).Length;
+            if (pathParamsLength > 0)
+            {
+                var isTenantParent = IsTenantParent(operationGroup, context);
+                if (pathParamsLength > 1 && !isTenantParent)
+                {
+                    paramNameList.Add("Id.Name");
+                    pathParamsLength--;
+                }
+
+                BuildPathParameterNames(paramNameList, pathParamsLength, "Id", operationGroup, context);
+
+                if (!isTenantParent)
+                    paramNameList.Reverse();
+            }
+
+            return paramNameList.ToArray();
+        }
+
+        private bool IsTenantParent(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            while (!IsTerminalState(operationGroup, context))
+            {
+                var operationGroupTest = ParentOperationGroup(operationGroup, context);
+                if (operationGroupTest != null)
+                    operationGroup = operationGroupTest;
+            }
+
+            return TenantDetection.IsTenantResource(operationGroup, context.Configuration.MgmtConfiguration);
+        }
+
+        private static bool IsTerminalState(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            return ParentOperationGroup(operationGroup, context) == null;
+        }
+
+        private static OperationGroup? ParentOperationGroup(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            var config = context.Configuration.MgmtConfiguration;
+            var parentResourceType = operationGroup.ParentResourceType(config);
+            OperationGroup? parentOperationGroup = null;
+
+            foreach (var opGroup in context.CodeModel.OperationGroups)
+            {
+                if (opGroup.ResourceType(context.Configuration.MgmtConfiguration).Equals(parentResourceType))
+                {
+                    parentOperationGroup = opGroup;
+                    break;
+                }
+            }
+
+            return parentOperationGroup;
+        }
+
+        // This method builds the path parameters names
+        private void BuildPathParameterNames(List<string> paramNames, int paramLength, string name, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            if (IsTerminalState(operationGroup, context) && paramLength == 1)
+            {
+                paramNames.Add(GetParentValue(operationGroup, context));
+                paramLength--;
+            }
+            else if (paramLength == 1)
+            {
+                var parentOperationGroup = ParentOperationGroup(operationGroup, context);
+                if (parentOperationGroup != null)
+                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context);
+                else
+                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context);
+            }
+            else
+            {
+                name = $"{name}.Parent";
+                paramNames.Add($"{name}.Name");
+                paramLength--;
+
+                var parentOperationGroup = ParentOperationGroup(operationGroup, context);
+                if (parentOperationGroup != null)
+                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context);
+                else
+                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context);
+            }
+        }
+
+        public string GetParentValue(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            var parentResourceType = operationGroup.ParentResourceType(context.Configuration.MgmtConfiguration);
+
+            switch (parentResourceType)
+            {
+                case ResourceTypeBuilder.ResourceGroups:
+                    return "Id.ResourceGroupName";
+                case ResourceTypeBuilder.Subscriptions:
+                    return "Id.SubscriptionId";
+                case ResourceTypeBuilder.Locations:
+                    return "Id.Location";
+                case ResourceTypeBuilder.Tenant:
+                    return "Id.Name";
+                default:
+                    throw new Exception($"{operationGroup.Key} parent is not valid: {parentResourceType}.");
+            }
+        }
     }
 }

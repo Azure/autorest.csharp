@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -20,7 +21,7 @@ namespace MgmtOperations
     public partial class AvailabilitySetChildOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AvailabilitySetChild>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal AvailabilitySetChildRestOperations RestClient { get; }
+        private AvailabilitySetChildRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetChildOperations"/> class for mocking. </summary>
         protected AvailabilitySetChildOperations()
@@ -33,7 +34,7 @@ namespace MgmtOperations
         protected internal AvailabilitySetChildOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets/availabilitySetChild";
@@ -46,7 +47,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new AvailabilitySetChild(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -63,7 +64,7 @@ namespace MgmtOperations
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new AvailabilitySetChild(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -74,16 +75,16 @@ namespace MgmtOperations
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
@@ -153,7 +154,7 @@ namespace MgmtOperations
                 var patchable = new AvailabilitySetChildData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new AvailabilitySetChildCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -185,7 +186,7 @@ namespace MgmtOperations
                 var patchable = new AvailabilitySetChildData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
                 return new AvailabilitySetChildCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -254,7 +255,7 @@ namespace MgmtOperations
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new AvailabilitySetChildData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new AvailabilitySetChildCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -283,7 +284,7 @@ namespace MgmtOperations
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new AvailabilitySetChildData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
                 return new AvailabilitySetChildCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -354,7 +355,7 @@ namespace MgmtOperations
                 var patchable = new AvailabilitySetChildData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new AvailabilitySetChildCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -385,7 +386,7 @@ namespace MgmtOperations
                 var patchable = new AvailabilitySetChildData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, patchable, cancellationToken);
                 return new AvailabilitySetChildCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -395,7 +396,7 @@ namespace MgmtOperations
             }
         }
 
-        /// <summary> Gets a list of AvailabilitySetGrandChilds in the AvailabilitySetChild. </summary>
+        /// <summary> Gets a list of AvailabilitySetGrandChild in the AvailabilitySetChild. </summary>
         /// <returns> An object representing collection of AvailabilitySetGrandChilds and their operations over a AvailabilitySetChild. </returns>
         public AvailabilitySetGrandChildContainer GetAvailabilitySetGrandChilds()
         {

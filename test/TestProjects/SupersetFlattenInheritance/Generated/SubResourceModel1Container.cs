@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace SupersetFlattenInheritance
 {
     /// <summary> A class representing collection of SubResourceModel1 and their operations over a ResourceGroup. </summary>
-    public partial class SubResourceModel1Container : ResourceContainerBase<ResourceIdentifier, SubResourceModel1, SubResourceModel1Data>
+    public partial class SubResourceModel1Container : ResourceContainerBase<ResourceGroupResourceIdentifier, SubResourceModel1, SubResourceModel1Data>
     {
         /// <summary> Initializes a new instance of the <see cref="SubResourceModel1Container"/> class for mocking. </summary>
         protected SubResourceModel1Container()
@@ -251,6 +252,6 @@ namespace SupersetFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, SubResourceModel1, SubResourceModel1Data> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, SubResourceModel1, SubResourceModel1Data> Construct() { }
     }
 }

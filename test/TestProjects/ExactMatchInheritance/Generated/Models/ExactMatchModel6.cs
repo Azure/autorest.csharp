@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace ExactMatchInheritance
 {
     /// <summary> The ExactMatchModel6. </summary>
-    public partial class ExactMatchModel6 : SubResource
+    public partial class ExactMatchModel6 : SubResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ExactMatchModel6. </summary>
         public ExactMatchModel6()

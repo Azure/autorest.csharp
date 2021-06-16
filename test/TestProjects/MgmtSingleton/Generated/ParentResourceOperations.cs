@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -19,7 +20,7 @@ namespace MgmtSingleton
     public partial class ParentResourceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ParentResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal ParentResourcesRestOperations RestClient { get; }
+        private ParentResourcesRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ParentResourceOperations"/> class for mocking. </summary>
         protected ParentResourceOperations()
@@ -32,7 +33,7 @@ namespace MgmtSingleton
         protected internal ParentResourceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new ParentResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Billing/parentResources";
@@ -45,7 +46,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -62,7 +63,7 @@ namespace MgmtSingleton
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ParentResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -73,16 +74,16 @@ namespace MgmtSingleton
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
@@ -152,7 +153,7 @@ namespace MgmtSingleton
                 var patchable = new ParentResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new ParentResourcesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -184,7 +185,7 @@ namespace MgmtSingleton
                 var patchable = new ParentResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new ParentResourcesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -253,7 +254,7 @@ namespace MgmtSingleton
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new ParentResourceData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new ParentResourcesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -282,7 +283,7 @@ namespace MgmtSingleton
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new ParentResourceData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new ParentResourcesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -353,7 +354,7 @@ namespace MgmtSingleton
                 var patchable = new ParentResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await RestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new ParentResourcesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -384,41 +385,8 @@ namespace MgmtSingleton
                 var patchable = new ParentResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = RestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new ParentResourcesCreateOrUpdateOperation(this, response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-        /// <summary> Singleton Test Parent Example. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<ParentResourceListResult>> ListAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.List");
-            scope.Start();
-            try
-            {
-                return await RestClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Singleton Test Parent Example. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<ParentResourceListResult> List(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("ParentResourceOperations.List");
-            scope.Start();
-            try
-            {
-                return RestClient.List(Id.ResourceGroupName, cancellationToken);
             }
             catch (Exception e)
             {

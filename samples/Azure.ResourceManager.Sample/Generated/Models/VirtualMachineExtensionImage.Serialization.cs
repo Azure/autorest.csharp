@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    public partial class VirtualMachineExtensionImageData : IUtf8JsonSerializable
+    public partial class VirtualMachineExtensionImage : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -58,11 +58,11 @@ namespace Azure.ResourceManager.Sample
             writer.WriteEndObject();
         }
 
-        internal static VirtualMachineExtensionImageData DeserializeVirtualMachineExtensionImageData(JsonElement element)
+        internal static VirtualMachineExtensionImage DeserializeVirtualMachineExtensionImage(JsonElement element)
         {
             IDictionary<string, string> tags = default;
             LocationData location = default;
-            ResourceGroupResourceIdentifier id = default;
+            TenantResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
             Optional<string> operatingSystem = default;
@@ -150,7 +150,7 @@ namespace Azure.ResourceManager.Sample
                     continue;
                 }
             }
-            return new VirtualMachineExtensionImageData(id, name, type, location, tags, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions));
+            return new VirtualMachineExtensionImage(id, name, type, location, tags, operatingSystem.Value, computeRole.Value, handlerSchema.Value, Optional.ToNullable(vmScaleSetEnabled), Optional.ToNullable(supportsMultipleExtensions));
         }
     }
 }

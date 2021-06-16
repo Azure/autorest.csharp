@@ -67,7 +67,7 @@ schemas: !Schemas
           name: DedicatedHostPropertiesPlatformFaultDomain
           description: Fault domain of the dedicated host within a dedicated host group.
       protocol: !Protocols {}
-    - !NumberSchema &ref_90
+    - !NumberSchema &ref_95
       type: integer
       apiVersions:
         - !ApiVersion 
@@ -817,7 +817,7 @@ schemas: !Schemas
     - *ref_33
     - *ref_34
     - *ref_35
-    - !ArraySchema &ref_89
+    - !ArraySchema &ref_94
       type: array
       apiVersions:
         - !ApiVersion 
@@ -828,7 +828,7 @@ schemas: !Schemas
           name: ArrayOfVirtualMachineExtensionImage
           description: Array of VirtualMachineExtensionImage
       protocol: !Protocols {}
-    - !ArraySchema &ref_97
+    - !ArraySchema &ref_102
       type: array
       apiVersions:
         - !ApiVersion 
@@ -2470,7 +2470,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_37
-          - !Parameter &ref_87
+          - !Parameter &ref_88
             schema: *ref_1
             implementation: Method
             required: true
@@ -2482,7 +2482,142 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_88
+          - !Parameter &ref_89
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: publisherName
+                description: ''
+                serializedName: publisherName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_90
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: type
+                description: ''
+                serializedName: type
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_91
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: version
+                description: ''
+                serializedName: version
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_38
+          - *ref_39
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_40
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_87
+                schema: *ref_10
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: parameters
+                    description: Parameters supplied to the Create VirtualMachineExtensionImage.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_41
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+            signatureParameters:
+              - *ref_87
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}
+                method: put
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_88
+          - *ref_89
+          - *ref_90
+          - *ref_91
+        responses:
+          - !SchemaResponse 
+            schema: *ref_10
+            language: !Languages 
+              default:
+                name: ''
+                description: OK
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: CreateOrUpdate
+            description: Gets a virtual machine extension image.
+        protocol: !Protocols {}
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2020-06-01'
+        parameters:
+          - *ref_37
+          - !Parameter &ref_92
+            schema: *ref_1
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: location
+                description: The name of a supported Azure region.
+                serializedName: location
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_93
             schema: *ref_1
             implementation: Method
             required: true
@@ -2523,11 +2658,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_87
-          - *ref_88
+          - *ref_92
+          - *ref_93
         responses:
           - !SchemaResponse 
-            schema: *ref_89
+            schema: *ref_94
             language: !Languages 
               default:
                 name: ''
@@ -2550,7 +2685,7 @@ operationGroups:
             version: '2020-06-01'
         parameters:
           - *ref_37
-          - !Parameter &ref_91
+          - !Parameter &ref_96
             schema: *ref_1
             implementation: Method
             required: true
@@ -2562,7 +2697,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_92
+          - !Parameter &ref_97
             schema: *ref_1
             implementation: Method
             required: true
@@ -2574,7 +2709,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_93
+          - !Parameter &ref_98
             schema: *ref_1
             implementation: Method
             required: true
@@ -2586,7 +2721,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_94
+          - !Parameter &ref_99
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2597,8 +2732,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_95
-            schema: *ref_90
+          - !Parameter &ref_100
+            schema: *ref_95
             implementation: Method
             language: !Languages 
               default:
@@ -2608,7 +2743,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_96
+          - !Parameter &ref_101
             schema: *ref_1
             implementation: Method
             language: !Languages 
@@ -2648,15 +2783,15 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_91
-          - *ref_92
-          - *ref_93
-          - *ref_94
-          - *ref_95
           - *ref_96
+          - *ref_97
+          - *ref_98
+          - *ref_99
+          - *ref_100
+          - *ref_101
         responses:
           - !SchemaResponse 
-            schema: *ref_97
+            schema: *ref_102
             language: !Languages 
               default:
                 name: ''

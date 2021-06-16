@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> The parameters of a managed disk. </summary>
-    public partial class ManagedDiskParameters : WritableSubResource
+    public partial class ManagedDiskParameters : WritableSubResource<ResourceIdentifier>
     {
         /// <summary> Initializes a new instance of ManagedDiskParameters. </summary>
         public ManagedDiskParameters()

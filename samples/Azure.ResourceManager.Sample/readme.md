@@ -20,17 +20,16 @@ operation-group-to-resource-type:
    LogAnalytics: Microsoft.Compute/locations/logAnalytics
 operation-group-to-resource:
    Operations: NonResource
-   VirtualMachineExtensionImages: VirtualMachineExtensionImage
-   VirtualMachineImages: VirtualMachineImage
+   VirtualMachineExtensionImages: NonResource
+   VirtualMachineImages: NonResource
+   Usage: NonResource
+   VirtualMachineSizes: NonResource
    VirtualMachineScaleSetRollingUpgrades: VirtualMachineScaleSetRollingUpgrade
    LogAnalytics: NonResource
 operation-group-to-parent:
-   Operations: tenant
    LogAnalytics: subscriptions
-   Usage: subscriptions
-   VirtualMachineSizes: subscriptions
-   VirtualMachineExtensionImages: Microsoft.Compute/locations/publishers
-   VirtualMachineImages: Microsoft.Compute/locations
+   VirtualMachineExtensionImages: subscriptions
+   VirtualMachineImages: subscriptions
    VirtualMachineScaleSetVMExtensions: Microsoft.Compute/virtualMachineScaleSets
    VirtualMachineScaleSetRollingUpgrades: Microsoft.Compute/virtualMachineScaleSets
 operation-group-is-tuple: VirtualMachineImages;VirtualMachineExtensionImages

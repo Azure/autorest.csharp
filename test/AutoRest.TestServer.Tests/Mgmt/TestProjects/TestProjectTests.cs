@@ -175,7 +175,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 return;
             }
 
-            Type resourceExtensions = FindResourceGroupExtensions();
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            Type resourceExtensions = allTypes.FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
             Assert.NotNull(resourceExtensions);
 
             foreach (var type in FindAllContainers())
@@ -196,18 +197,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     Assert.IsNull(getContainerMethod);
                 }
             }
-        }
-
-        public Type FindResourceGroupExtensions()
-        {
-            return Assembly.GetExecutingAssembly().GetTypes()
-                .FirstOrDefault(t => t.Name == "ResourceGroupExtensions" && t.Namespace == _projectName);
-        }
-
-        public Type FindSubscriptionExtensions()
-        {
-            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
-            return allTypes.FirstOrDefault(t => t.Name == "SubscriptionExtensions" && !t.Name.Contains("Tests") && t.Namespace == _projectName);
         }
 
         public IEnumerable<Type> FindAllOperations()
@@ -302,6 +291,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             return type.BaseType.Name == typeof(TrackedResource<>).Name;
         }
 
+        private Type FindSubscriptionExtensions()
+        {
+            Type[] allTypes = Assembly.GetExecutingAssembly().GetTypes();
+            return allTypes.FirstOrDefault(t => t.Name == "SubscriptionExtensions" && !t.Name.Contains("Tests") && t.Namespace == _projectName);
+        }
+
         private ResourceType GetContainerValidResourceType(Type containerType)
         {
             var containerObj = Activator.CreateInstance(containerType, true);
@@ -368,7 +363,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var listMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listMethodInfo);
-                    Assert.GreaterOrEqual(listMethodInfo.GetParameters().Length, 2);
+                    Assert.True(listMethodInfo.GetParameters().Length >= 2);
                     var listParam1 = TypeAsserts.HasParameter(listMethodInfo, "subscription");
                     Assert.AreEqual(typeof(SubscriptionOperations), listParam1.ParameterType);
                     var listParam2 = TypeAsserts.HasParameter(listMethodInfo, "cancellationToken");
@@ -376,7 +371,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
                     var listAsyncMethodInfo = subscriptionExtension.GetMethod($"List{resourceName}Async", BindingFlags.Static | BindingFlags.Public);
                     Assert.NotNull(listAsyncMethodInfo);
-                    Assert.GreaterOrEqual(listAsyncMethodInfo.GetParameters().Length, 2);
+                    Assert.True(listMethodInfo.GetParameters().Length >= 2);
                     var listAsyncParam1 = TypeAsserts.HasParameter(listAsyncMethodInfo, "subscription");
                     Assert.AreEqual(typeof(SubscriptionOperations), listAsyncParam1.ParameterType);
                     var listAsyncParam2 = TypeAsserts.HasParameter(listAsyncMethodInfo, "cancellationToken");
@@ -447,8 +442,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                     ResourceType containerType = GetContainerValidResourceType(container);
                     if (containerType.Equals(operationType))
                     {
-                        var name = container.Name.Remove(container.Name.LastIndexOf("Container"));
-                        var method = operation.GetMethod($"Get{name.ToPlural()}");
+                        var method = operation.GetMethod($"Get{StringExtensions.Pluralization(container.Name.Remove(container.Name.LastIndexOf("Container")))}");
                         Assert.NotNull(method);
                         Assert.IsTrue(method.ReturnParameter.ToString().Trim().Equals(container.Namespace+"."+container.Name));
                         Assert.IsTrue(method.GetParameters().Count() == 0);

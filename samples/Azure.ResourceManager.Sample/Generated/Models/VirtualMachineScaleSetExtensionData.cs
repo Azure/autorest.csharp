@@ -12,7 +12,7 @@ using Azure.ResourceManager.Core;
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing the VirtualMachineScaleSetExtension data model. </summary>
-    public partial class VirtualMachineScaleSetExtensionData : Core.SubResource
+    public partial class VirtualMachineScaleSetExtensionData : SubResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>
         public VirtualMachineScaleSetExtensionData()

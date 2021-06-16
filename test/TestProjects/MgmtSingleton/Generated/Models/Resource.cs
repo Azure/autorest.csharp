@@ -10,7 +10,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtSingleton
 {
     /// <summary> The Resource model definition. </summary>
-    public partial class Resource : SubResource
+    public partial class Resource : SubResource<ResourceGroupResourceIdentifier>
     {
         /// <summary> Initializes a new instance of Resource. </summary>
         public Resource()

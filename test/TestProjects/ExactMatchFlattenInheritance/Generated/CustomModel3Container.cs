@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +17,7 @@ using Azure.ResourceManager.Core.Resources;
 namespace ExactMatchFlattenInheritance
 {
     /// <summary> A class representing collection of CustomModel3 and their operations over a ResourceGroup. </summary>
-    public partial class CustomModel3Container : ResourceContainerBase<ResourceIdentifier, CustomModel3, CustomModel3Data>
+    public partial class CustomModel3Container : ResourceContainerBase<ResourceGroupResourceIdentifier, CustomModel3, CustomModel3Data>
     {
         /// <summary> Initializes a new instance of the <see cref="CustomModel3Container"/> class for mocking. </summary>
         protected CustomModel3Container()
@@ -251,6 +252,6 @@ namespace ExactMatchFlattenInheritance
         }
 
         // Builders.
-        // public ArmBuilder<ResourceIdentifier, CustomModel3, CustomModel3Data> Construct() { }
+        // public ArmBuilder<ResourceGroupResourceIdentifier, CustomModel3, CustomModel3Data> Construct() { }
     }
 }

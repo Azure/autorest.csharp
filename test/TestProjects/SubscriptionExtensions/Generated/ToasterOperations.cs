@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -20,7 +21,7 @@ namespace SubscriptionExtensions
     public partial class ToasterOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, Toaster>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal ToastersRestOperations RestClient { get; }
+        private ToastersRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ToasterOperations"/> class for mocking. </summary>
         protected ToasterOperations()
@@ -33,7 +34,7 @@ namespace SubscriptionExtensions
         protected internal ToasterOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new ToastersRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
@@ -46,7 +47,7 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -63,7 +64,7 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new Toaster(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -74,16 +75,16 @@ namespace SubscriptionExtensions
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
             return await ListAvailableLocationsAsync(ResourceType, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
-        /// <returns> A collection of locations that may take multiple service requests to iterate over. </returns>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
+        /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
             return ListAvailableLocations(ResourceType, cancellationToken);
@@ -153,7 +154,7 @@ namespace SubscriptionExtensions
                 var patchable = new ToasterData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new ToastersCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -185,7 +186,7 @@ namespace SubscriptionExtensions
                 var patchable = new ToasterData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = RestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, patchable, cancellationToken);
                 return new ToastersCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -254,7 +255,7 @@ namespace SubscriptionExtensions
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new ToasterData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = await RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new ToastersCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -283,7 +284,7 @@ namespace SubscriptionExtensions
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new ToasterData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = RestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, patchable, cancellationToken);
                 return new ToastersCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -354,7 +355,7 @@ namespace SubscriptionExtensions
                 var patchable = new ToasterData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await RestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new ToastersCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -385,7 +386,7 @@ namespace SubscriptionExtensions
                 var patchable = new ToasterData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = RestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, patchable, cancellationToken);
                 return new ToastersCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)

@@ -100,6 +100,10 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
                 else
                 {
+                    operationGroup = _context.Library.GetOperationGroupForNonResource(child.Name);
+                    if (operationGroup != null)
+                        return operationGroup;
+
                     // child is Model not Data
                     MgmtObjectType? mgmtObject = _context.Library.GetMgmtObjectFromModelName(child.Name);
                     if (mgmtObject != null)
@@ -107,6 +111,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operationGroup = mgmtObject.GetOperationGroupFromChildren();
                         if (operationGroup != null)
                             return operationGroup;
+
                     }
                 }
             }
