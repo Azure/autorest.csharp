@@ -221,7 +221,7 @@ namespace SubscriptionExtensions
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListAll(cancellationToken: cancellationToken);
+                    var response = _restClient.ListAll(statusOnly, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -236,7 +236,7 @@ namespace SubscriptionExtensions
                 scope.Start();
                 try
                 {
-                    var response = _restClient.ListAllNextPage(nextLink, cancellationToken: cancellationToken);
+                    var response = _restClient.ListAllNextPage(nextLink, statusOnly, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -260,7 +260,7 @@ namespace SubscriptionExtensions
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAllAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAllAsync(statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -275,7 +275,7 @@ namespace SubscriptionExtensions
                 scope.Start();
                 try
                 {
-                    var response = await _restClient.ListAllNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _restClient.ListAllNextPageAsync(nextLink, statusOnly, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value.Select(value => new Oven(Parent, value)), response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
