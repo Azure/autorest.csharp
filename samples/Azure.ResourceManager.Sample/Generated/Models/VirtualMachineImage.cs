@@ -11,14 +11,14 @@ using Azure.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the VirtualMachineImage data model. </summary>
-    public partial class VirtualMachineImageData : VirtualMachineImageResource
+    /// <summary> Describes a Virtual Machine Image. </summary>
+    public partial class VirtualMachineImage : VirtualMachineImageResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineImageData. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineImage. </summary>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="location"> The supported Azure location of the resource. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="location"/> is null. </exception>
-        public VirtualMachineImageData(string name, string location) : base(name, location)
+        public VirtualMachineImage(string name, string location) : base(name, location)
         {
             if (name == null)
             {
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample
             DataDiskImages = new ChangeTrackingList<DataDiskImage>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineImageData. </summary>
+        /// <summary> Initializes a new instance of VirtualMachineImage. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="location"> The supported Azure location of the resource. </param>
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="automaticOSUpgradeProperties"> Describes automatic OS upgrade properties on the image. </param>
         /// <param name="hyperVGeneration"> Specifies the HyperVGeneration Type. </param>
         /// <param name="disallowed"> Specifies disallowed configuration for the VirtualMachine created from the image. </param>
-        internal VirtualMachineImageData(string id, string name, string location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGenerationTypes? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, name, location, tags)
+        internal VirtualMachineImage(string id, string name, string location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGenerationTypes? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, name, location, tags)
         {
             Plan = plan;
             OsDiskImage = osDiskImage;

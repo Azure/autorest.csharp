@@ -14,40 +14,40 @@ using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
-namespace Azure.ResourceManager.Sample
+namespace MgmtParent
 {
-    /// <summary> A class representing the operations that can be performed over a specific AvailabilitySet. </summary>
-    public partial class AvailabilitySetOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, AvailabilitySet>
+    /// <summary> A class representing the operations that can be performed over a specific VirtualMachineExtensionImage. </summary>
+    public partial class VirtualMachineExtensionImageOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, VirtualMachineExtensionImage>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        private AvailabilitySetsRestOperations _restClient { get; }
+        private VirtualMachineExtensionImagesRestOperations _restClient { get; }
 
-        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetOperations"/> class for mocking. </summary>
-        protected AvailabilitySetOperations()
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageOperations"/> class for mocking. </summary>
+        protected VirtualMachineExtensionImageOperations()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="AvailabilitySetOperations"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageOperations"/> class. </summary>
         /// <param name="options"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        protected internal AvailabilitySetOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
+        protected internal VirtualMachineExtensionImageOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            _restClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new VirtualMachineExtensionImagesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
-        public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
+        public static readonly ResourceType ResourceType = "Microsoft.Compute/locations/publishers/vmextension";
         protected override ResourceType ValidResourceType => ResourceType;
 
         /// <inheritdoc />
-        public async override Task<Response<AvailabilitySet>> GetAsync(CancellationToken cancellationToken = default)
+        public async override Task<Response<VirtualMachineExtensionImage>> GetAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.Get");
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
+                var response = await _restClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -57,14 +57,14 @@ namespace Azure.ResourceManager.Sample
         }
 
         /// <inheritdoc />
-        public override Response<AvailabilitySet> Get(CancellationToken cancellationToken = default)
+        public override Response<VirtualMachineExtensionImage> Get(CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.Get");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.Get");
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(new AvailabilitySet(this, response.Value), response.GetRawResponse());
+                var response = _restClient.Get(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -89,86 +89,14 @@ namespace Azure.ResourceManager.Sample
             return ListAvailableLocations(ResourceType, cancellationToken);
         }
 
-        /// <summary> Delete an availability set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> DeleteAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.Delete");
-            scope.Start();
-            try
-            {
-                var operation = await StartDeleteAsync(cancellationToken).ConfigureAwait(false);
-                return await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Delete an availability set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.Delete");
-            scope.Start();
-            try
-            {
-                var operation = StartDelete(cancellationToken);
-                return operation.WaitForCompletion(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Delete an availability set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Operation> StartDeleteAsync(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartDelete");
-            scope.Start();
-            try
-            {
-                var response = await _restClient.DeleteAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsDeleteOperation(response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Delete an availability set. </summary>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Operation StartDelete(CancellationToken cancellationToken = default)
-        {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartDelete");
-            scope.Start();
-            try
-            {
-                var response = _restClient.Delete(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return new AvailabilitySetsDeleteOperation(response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         /// <summary> Add a tag to the current resource. </summary>
         /// <param name="key"> The key for the tag. </param>
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public async Task<Response<AvailabilitySet>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionImage>> AddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.AddTag");
             scope.Start();
             try
             {
@@ -187,9 +115,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="value"> The value for the tag. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
-        public Response<AvailabilitySet> AddTag(string key, string value, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionImage> AddTag(string key, string value, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.AddTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.AddTag");
             scope.Start();
             try
             {
@@ -209,23 +137,24 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<AvailabilitySetsUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachineExtensionImagesCreateOrUpdateOperation> StartAddTagAsync(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartAddTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.StartAddTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new AvailabilitySetUpdate();
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsUpdateOperation(this, response);
+                var response = await _restClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
             {
@@ -240,23 +169,24 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag added. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public AvailabilitySetsUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
+        public VirtualMachineExtensionImagesCreateOrUpdateOperation StartAddTag(string key, string value, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartAddTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.StartAddTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new AvailabilitySetUpdate();
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new AvailabilitySetsUpdateOperation(this, response);
+                var response = _restClient.CreateOrUpdate(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
             {
@@ -269,9 +199,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public async Task<Response<AvailabilitySet>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionImage>> SetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.SetTags");
             scope.Start();
             try
             {
@@ -289,9 +219,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="tags"> The set of tags to use as replacement. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
-        public Response<AvailabilitySet> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionImage> SetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.SetTags");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.SetTags");
             scope.Start();
             try
             {
@@ -310,21 +240,22 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<AvailabilitySetsUpdateOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachineExtensionImagesCreateOrUpdateOperation> StartSetTagsAsync(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartSetTags");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.StartSetTags");
             scope.Start();
             try
             {
-                var patchable = new AvailabilitySetUpdate();
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsUpdateOperation(this, response);
+                var response = await _restClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
             {
@@ -338,21 +269,22 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tags replaced. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public AvailabilitySetsUpdateOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
+        public VirtualMachineExtensionImagesCreateOrUpdateOperation StartSetTags(IDictionary<string, string> tags, CancellationToken cancellationToken = default)
         {
             if (tags == null)
             {
                 throw new ArgumentNullException(nameof(tags));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartSetTags");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.StartSetTags");
             scope.Start();
             try
             {
-                var patchable = new AvailabilitySetUpdate();
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new AvailabilitySetsUpdateOperation(this, response);
+                var response = _restClient.CreateOrUpdate(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
             {
@@ -365,9 +297,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public async Task<Response<AvailabilitySet>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionImage>> RemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -385,9 +317,9 @@ namespace Azure.ResourceManager.Sample
         /// <param name="key"> The key of the tag to remove. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
-        public Response<AvailabilitySet> RemoveTag(string key, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionImage> RemoveTag(string key, CancellationToken cancellationToken = default)
         {
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.RemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.RemoveTag");
             scope.Start();
             try
             {
@@ -406,23 +338,24 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public async Task<AvailabilitySetsUpdateOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
+        public async Task<VirtualMachineExtensionImagesCreateOrUpdateOperation> StartRemoveTagAsync(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartRemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.StartRemoveTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new AvailabilitySetUpdate();
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await _restClient.UpdateAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
-                return new AvailabilitySetsUpdateOperation(this, response);
+                var response = await _restClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
             {
@@ -436,23 +369,24 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> The updated resource with the tag removed. </returns>
         /// <remarks> <see href="https://azure.github.io/azure-sdk/dotnet_introduction.html#dotnet-longrunning">Details on long running operation object.</see>. </remarks>
-        public AvailabilitySetsUpdateOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
+        public VirtualMachineExtensionImagesCreateOrUpdateOperation StartRemoveTag(string key, CancellationToken cancellationToken = default)
         {
             if (key == null)
             {
                 throw new ArgumentNullException(nameof(key));
             }
 
-            using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.StartRemoveTag");
+            using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionImageOperations.StartRemoveTag");
             scope.Start();
             try
             {
                 var resource = GetResource();
-                var patchable = new AvailabilitySetUpdate();
+                Id.TryGetLocation(out LocationData locationData);
+                var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = _restClient.Update(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
-                return new AvailabilitySetsUpdateOperation(this, response);
+                var response = _restClient.CreateOrUpdate(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
             {

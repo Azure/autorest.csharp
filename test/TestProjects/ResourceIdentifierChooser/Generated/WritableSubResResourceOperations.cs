@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -19,7 +20,7 @@ namespace ResourceIdentifierChooser
     public partial class WritableSubResResourceOperations : ResourceOperationsBase<SubscriptionResourceIdentifier, WritableSubResResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal WritableSubResResourcesRestOperations RestClient { get; }
+        private WritableSubResResourcesRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="WritableSubResResourceOperations"/> class for mocking. </summary>
         protected WritableSubResResourceOperations()
@@ -32,7 +33,7 @@ namespace ResourceIdentifierChooser
         protected internal WritableSubResResourceOperations(ResourceOperationsBase options, SubscriptionResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new WritableSubResResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new WritableSubResResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/WritableSubResResources";
@@ -45,7 +46,7 @@ namespace ResourceIdentifierChooser
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new WritableSubResResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -62,7 +63,7 @@ namespace ResourceIdentifierChooser
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 return Response.FromValue(new WritableSubResResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -73,7 +74,7 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
@@ -81,7 +82,7 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {

@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -22,9 +23,14 @@ namespace AutoRest.CSharp.Common.Generation.Writers
     {
         protected const string ClientDiagnosticsVariable = "clientDiagnostics";
         protected const string ClientDiagnosticsField = "_" + ClientDiagnosticsVariable;
+        protected const string RestClientVariable = "restClient";
         protected const string PipelineVariable = "pipeline";
         protected const string PipelineProperty = "Pipeline";
         protected const string PipelineField = "_" + PipelineVariable;
+
+        protected virtual string RestClientAccessibility => "internal";
+
+        protected virtual string RestClientField => "RestClient";
 
         protected string CreateMethodName(string name, bool async) => $"{name}{(async ? "Async" : string.Empty)}";
 
@@ -33,7 +39,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField};");
             if (writePipelineField)
                 writer.Line($"private readonly {typeof(HttpPipeline)} {PipelineField};");
-            writer.Append($"internal {client.Type} RestClient").LineRaw(" { get; }");
+            writer.Append($"{RestClientAccessibility} {client.Type} {RestClientField}").LineRaw(" { get; }");
         }
 
         protected void WriteDiagnosticScope(CodeWriter writer, Diagnostic diagnostic, string clientDiagnosticsParam, CodeWriterDelegate inner)

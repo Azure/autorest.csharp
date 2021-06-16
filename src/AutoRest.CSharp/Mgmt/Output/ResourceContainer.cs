@@ -2,13 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Text;
+using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.ResourceManager.Core;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -23,13 +26,54 @@ namespace AutoRest.CSharp.Mgmt.Output
         private const string SubscriptionCommentName = "Subscription";
         private const string TenantCommentName = "Tenant";
 
+        private RestClientMethod? _putMethod;
+        private PagingMethod? _listMethod;
+        private ClientMethod? _getMethod;
+
         public ResourceContainer(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
             : base(operationGroup, context)
         {
             _context = context;
         }
 
+        public IEnumerable<ClientMethod> RemainingMethods => Methods.Where(m => m.RestClientMethod != PutMethod && m.RestClientMethod != ListMethod?.Method);
+
+        public RestClientMethod? PutMethod => _putMethod ??= GetPutMethod();
+
+        public PagingMethod? ListMethod => _listMethod ??= FindListPagingMethod();
+
+        public override ClientMethod? GetMethod => _getMethod ??= _context.Library.GetResourceOperation(OperationGroup).GetMethod;
+
+        private PagingMethod? FindListPagingMethod()
+        {
+            return PagingMethods.FirstOrDefault(m => m.Name.Equals("ListByResourceGroup", StringComparison.InvariantCultureIgnoreCase))
+                ?? PagingMethods.FirstOrDefault(m => m.Name.Equals("List", StringComparison.InvariantCultureIgnoreCase))
+                ?? PagingMethods.FirstOrDefault(m => m.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        private RestClientMethod? GetPutMethod()
+        {
+            return RestClient.Methods.FirstOrDefault(m => m.Request.HttpMethod.Equals(RequestMethod.Put));
+        }
+
         protected override string SuffixValue => _suffixValue;
+
+        protected override ClientMethod[] GetMethodsInScope()
+        {
+            var resultList = new List<ClientMethod>();
+            foreach (var method in base.GetMethodsInScope())
+            {
+                if (method.Name.StartsWith("List") ||
+                    IsPutMethod(method))
+                    resultList.Add(method);
+            }
+            return resultList.ToArray();
+        }
+
+        private bool IsPutMethod(ClientMethod method)
+        {
+            return method.RestClientMethod.Request.HttpMethod.Equals(RequestMethod.Put);
+        }
 
         protected override string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

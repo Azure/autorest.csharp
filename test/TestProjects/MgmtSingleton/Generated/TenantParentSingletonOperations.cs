@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System.Linq;
+using System.Threading.Tasks;
 using Azure.ResourceManager.Core;
 
 namespace MgmtSingleton

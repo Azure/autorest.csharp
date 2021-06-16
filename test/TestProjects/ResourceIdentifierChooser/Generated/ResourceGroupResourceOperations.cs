@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -19,7 +20,7 @@ namespace ResourceIdentifierChooser
     public partial class ResourceGroupResourceOperations : ResourceOperationsBase<ResourceGroupResourceIdentifier, ResourceGroupResource>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal ResourceGroupResourcesRestOperations RestClient { get; }
+        private ResourceGroupResourcesRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="ResourceGroupResourceOperations"/> class for mocking. </summary>
         protected ResourceGroupResourceOperations()
@@ -32,7 +33,7 @@ namespace ResourceIdentifierChooser
         protected internal ResourceGroupResourceOperations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new ResourceGroupResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new ResourceGroupResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/ResourceGroupResources";
@@ -45,7 +46,7 @@ namespace ResourceIdentifierChooser
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new ResourceGroupResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -62,7 +63,7 @@ namespace ResourceIdentifierChooser
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new ResourceGroupResource(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -73,7 +74,7 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
@@ -81,7 +82,7 @@ namespace ResourceIdentifierChooser
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {
@@ -152,7 +153,7 @@ namespace ResourceIdentifierChooser
                 var patchable = new ResourceGroupResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await RestClient.PutAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new ResourceGroupResourcesPutOperation(this, response);
             }
             catch (Exception e)
@@ -184,7 +185,7 @@ namespace ResourceIdentifierChooser
                 var patchable = new ResourceGroupResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = RestClient.Put(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Put(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new ResourceGroupResourcesPutOperation(this, response);
             }
             catch (Exception e)
@@ -253,7 +254,7 @@ namespace ResourceIdentifierChooser
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new ResourceGroupResourceData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = await RestClient.PutAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new ResourceGroupResourcesPutOperation(this, response);
             }
             catch (Exception e)
@@ -282,7 +283,7 @@ namespace ResourceIdentifierChooser
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new ResourceGroupResourceData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = RestClient.Put(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Put(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new ResourceGroupResourcesPutOperation(this, response);
             }
             catch (Exception e)
@@ -353,7 +354,7 @@ namespace ResourceIdentifierChooser
                 var patchable = new ResourceGroupResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await RestClient.PutAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.PutAsync(Id.ResourceGroupName, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new ResourceGroupResourcesPutOperation(this, response);
             }
             catch (Exception e)
@@ -384,7 +385,7 @@ namespace ResourceIdentifierChooser
                 var patchable = new ResourceGroupResourceData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = RestClient.Put(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
+                var response = _restClient.Put(Id.ResourceGroupName, Id.Name, patchable, cancellationToken);
                 return new ResourceGroupResourcesPutOperation(this, response);
             }
             catch (Exception e)

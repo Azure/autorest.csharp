@@ -27,6 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private BuildContext<MgmtOutputLibrary> _context;
         private ClientMethod[]? _methods;
         private PagingMethod[]? _pagingMethods;
+        private ClientMethod? _getMethod;
 
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
@@ -61,13 +62,27 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
+        public ResourceData ResourceData => _context.Library.GetResourceData(OperationGroup);
+
         public Type ResourceIdentifierType => _resourceIdentifierType ??= OperationGroup.GetResourceIdentifierType(
-            _context.Library.GetResourceData(OperationGroup),
+            ResourceData,
             _context.Configuration.MgmtConfiguration);
 
-        public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
+        public ClientMethod[] Methods => _methods ??= GetMethodsInScope();
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
+
+        public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
+
+        protected virtual ClientMethod[] GetMethodsInScope()
+        {
+            return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
+        }
+
+        public Diagnostic GetDiagnostic(RestClientMethod method)
+        {
+            return new Diagnostic($"{Declaration.Name}.{method.Name}", Array.Empty<DiagnosticAttribute>());
+        }
 
         protected virtual string CreateDescription(OperationGroup operationGroup, string clientPrefix)
         {

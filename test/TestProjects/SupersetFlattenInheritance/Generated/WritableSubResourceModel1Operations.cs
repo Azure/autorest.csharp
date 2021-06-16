@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -19,7 +20,7 @@ namespace SupersetFlattenInheritance
     public partial class WritableSubResourceModel1Operations : ResourceOperationsBase<ResourceGroupResourceIdentifier, WritableSubResourceModel1>
     {
         private readonly ClientDiagnostics _clientDiagnostics;
-        internal WritableSubResourceModel1SRestOperations RestClient { get; }
+        private WritableSubResourceModel1SRestOperations _restClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="WritableSubResourceModel1Operations"/> class for mocking. </summary>
         protected WritableSubResourceModel1Operations()
@@ -32,7 +33,7 @@ namespace SupersetFlattenInheritance
         protected internal WritableSubResourceModel1Operations(ResourceOperationsBase options, ResourceGroupResourceIdentifier id) : base(options, id)
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
-            RestClient = new WritableSubResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _restClient = new WritableSubResourceModel1SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/writableSubResourceModel1s";
@@ -45,7 +46,7 @@ namespace SupersetFlattenInheritance
             scope.Start();
             try
             {
-                var response = await RestClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new WritableSubResourceModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -62,7 +63,7 @@ namespace SupersetFlattenInheritance
             scope.Start();
             try
             {
-                var response = RestClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, cancellationToken);
                 return Response.FromValue(new WritableSubResourceModel1(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -73,7 +74,7 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public async Task<IEnumerable<LocationData>> ListAvailableLocationsAsync(CancellationToken cancellationToken = default)
         {
@@ -81,7 +82,7 @@ namespace SupersetFlattenInheritance
         }
 
         /// <summary> Lists all available geo-locations. </summary>
-        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="P: System.Threading.CancellationToken.None" />. </param>
+        /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
         /// <returns> A collection of location that may take multiple service requests to iterate over. </returns>
         public IEnumerable<LocationData> ListAvailableLocations(CancellationToken cancellationToken = default)
         {

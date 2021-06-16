@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return name;
         }
 
-        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration)
+        public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions declaration)
         {
             foreach (var operation in operationGroup.Operations)
             {
@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         name,
                         startMethod,
                         BuilderHelpers.EscapeXmlDescription(operation.Language.Default.Description),
-                        new Diagnostic($"{Declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
+                        new Diagnostic($"{declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
                         operation.Accessibility ?? "public");
                 }
             }

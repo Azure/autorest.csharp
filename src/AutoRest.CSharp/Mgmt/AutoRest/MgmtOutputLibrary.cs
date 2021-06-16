@@ -19,13 +19,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 {
     internal class MgmtOutputLibrary : OutputLibrary
     {
+        private enum ResourceType
+        {
+            Default,
+            Tuple
+        }
+
         private BuildContext<MgmtOutputLibrary> _context;
         private CodeModel _codeModel;
         private MgmtConfiguration _mgmtConfiguration;
 
         private Dictionary<OperationGroup, MgmtRestClient>? _restClients;
-        private Dictionary<OperationGroup, ResourceOperation>? _resourceOperations;
-        private Dictionary<OperationGroup, ResourceContainer>? _resourceContainers;
+
+        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceOperation>>? _resourceOperations;
+        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>>? _resourceContainers;
         private Dictionary<OperationGroup, ResourceData>? _resourceData;
         private Dictionary<OperationGroup, Resource>? _armResource;
 
@@ -35,6 +42,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private IEnumerable<Schema> _allSchemas;
         private Dictionary<Operation, MgmtLongRunningOperation>? _longRunningOperations;
         private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
+        private Dictionary<string, OperationGroup> _nonResourceOperationGroupMapping;
 
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
@@ -43,6 +51,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
+            _nonResourceOperationGroupMapping = new Dictionary<string, OperationGroup>();
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
                 .Concat(_codeModel.Schemas.SealedChoices)
                 .Concat(_codeModel.Schemas.Objects)
@@ -59,9 +68,13 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<MgmtRestClient> RestClients => EnsureRestClients().Values;
 
-        public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations().Values;
+        public IEnumerable<ResourceOperation> ResourceOperations => EnsureResourceOperations()[ResourceType.Default].Values;
 
-        public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers().Values;
+        public IEnumerable<ResourceOperation> TupleResourceOperations => EnsureResourceOperations()[ResourceType.Tuple].Values;
+
+        public IEnumerable<ResourceContainer> ResourceContainers => EnsureResourceContainers()[ResourceType.Default].Values;
+
+        public IEnumerable<ResourceContainer> TupleResourceContainers => EnsureResourceContainers()[ResourceType.Tuple].Values;
 
         public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
@@ -82,9 +95,32 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public IEnumerable<TypeProvider> Models => SchemaMap.Values;
 
-        public ResourceOperation GetResourceOperation(OperationGroup operationGroup) => EnsureResourceOperations()[operationGroup];
+        public OperationGroup? GetOperationGroupForNonResource(string modelName)
+        {
+            OperationGroup? result = null;
+            _nonResourceOperationGroupMapping.TryGetValue(modelName, out result);
+            return result;
+        }
 
-        public ResourceContainer GetResourceContainer(OperationGroup operationGroup) => EnsureResourceContainers()[operationGroup];
+        public ResourceOperation GetResourceOperation(OperationGroup operationGroup)
+        {
+            ResourceOperation? result;
+            if (!EnsureResourceOperations()[ResourceType.Default].TryGetValue(operationGroup, out result))
+            {
+                result = EnsureResourceOperations()[ResourceType.Tuple][operationGroup];
+            }
+            return result;
+        }
+
+        public ResourceContainer GetResourceContainer(OperationGroup operationGroup)
+        {
+            ResourceContainer? result;
+            if (!EnsureResourceContainers()[ResourceType.Default].TryGetValue(operationGroup, out result))
+            {
+                result = EnsureResourceContainers()[ResourceType.Tuple][operationGroup];
+            }
+            return result;
+        }
 
         internal ResourceData? GetResourceDataFromSchema(string schemaName)
         {
@@ -159,39 +195,41 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return null;
         }
 
-        private Dictionary<OperationGroup, ResourceOperation> EnsureResourceOperations()
+        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceOperation>> EnsureResourceOperations()
         {
             if (_resourceOperations != null)
             {
                 return _resourceOperations;
             }
 
-            _resourceOperations = new Dictionary<OperationGroup, ResourceOperation>();
+            _resourceOperations = new Dictionary<ResourceType, Dictionary<OperationGroup, ResourceOperation>>();
+            _resourceOperations.Add(ResourceType.Default, new Dictionary<OperationGroup, ResourceOperation>());
+            _resourceOperations.Add(ResourceType.Tuple, new Dictionary<OperationGroup, ResourceOperation>());
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
-                if (!operationGroup.IsTupleResource(_context))
-                {
-                    _resourceOperations.Add(operationGroup, new ResourceOperation(operationGroup, _context));
-                }
+                var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
+                _resourceOperations[resourceType].Add(operationGroup, new ResourceOperation(operationGroup, _context));
             }
 
             return _resourceOperations;
         }
 
-        private Dictionary<OperationGroup, ResourceContainer> EnsureResourceContainers()
+        private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>> EnsureResourceContainers()
         {
             if (_resourceContainers != null)
             {
                 return _resourceContainers;
             }
 
-            _resourceContainers = new Dictionary<OperationGroup, ResourceContainer>();
+            _resourceContainers = new Dictionary<ResourceType, Dictionary<OperationGroup, ResourceContainer>>();
+            _resourceContainers.Add(ResourceType.Default, new Dictionary<OperationGroup, ResourceContainer>());
+            _resourceContainers.Add(ResourceType.Tuple, new Dictionary<OperationGroup, ResourceContainer>());
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
-                if (!operationGroup.IsTupleResource(_context)
-                    && !operationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
+                if (!operationGroup.IsSingletonResource(_context.Configuration.MgmtConfiguration))
                 {
-                    _resourceContainers.Add(operationGroup, new ResourceContainer(operationGroup, _context));
+                    var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
+                    _resourceContainers[resourceType].Add(operationGroup, new ResourceContainer(operationGroup, _context));
                 }
             }
 
@@ -244,7 +282,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 {
                     foreach (var operation in operations)
                     {
-                        if (!_armResource.ContainsKey(operation) && !operation.IsTupleResource(_context))
+                        if (!_armResource.ContainsKey(operation))
                         {
                             _armResource.Add(operation, new Resource(operation, _context));
                         }
@@ -422,9 +460,27 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     ResourceTypes.Add(parent);
                 }
                 if (operationsGroup.IsResource(_mgmtConfiguration))
+                {
                     AddOperationGroupToResourceMap(operationsGroup);
+                }
+                else
+                {
+                    AddNonResourceOperationGroupMapping(operationsGroup);
+                }
             }
             ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
+        }
+
+        private void AddNonResourceOperationGroupMapping(OperationGroup operationsGroup)
+        {
+            foreach (var operation in operationsGroup.Operations.Where(o=>o.Language.Default.Name == "Get"))
+            {
+                var responseSchema = operation.Responses.First().ResponseSchema;
+                if (responseSchema != null)
+                {
+                    _nonResourceOperationGroupMapping[responseSchema.Name] = operationsGroup;
+                }
+            }
         }
 
         private void AddOperationGroupToResourceMap(OperationGroup operationsGroup)
