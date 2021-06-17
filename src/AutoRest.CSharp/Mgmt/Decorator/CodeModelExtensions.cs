@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             foreach (var operationGroup in codeModel.OperationGroups)
             {
-                if (!operationGroup.IsResource(config) && !operationGroup.IsListOnly(config))
+                if (!IsResource(operationGroup, config))
                     yield return operationGroup;
             }
         }
