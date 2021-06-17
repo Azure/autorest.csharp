@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Input;
@@ -11,27 +12,10 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class CodeModelExtensions
     {
-        public static IEnumerable<OperationGroup> GetResourceOperationGroups(this CodeModel codeModel, MgmtConfiguration config)
-        {
-            foreach (var operationGroup in codeModel.OperationGroups)
-            {
-                if (IsResource(operationGroup, config))
-                    yield return operationGroup;
-            }
-        }
+        public static IEnumerable<OperationGroup> GetResourceOperationGroups(this CodeModel codeModel, MgmtConfiguration config) =>
+            codeModel.OperationGroups.Where(og => og.IsResource(config));
 
-        public static IEnumerable<OperationGroup> GetNonResourceOperationGroups(this CodeModel codeModel, MgmtConfiguration config)
-        {
-            foreach (var operationGroup in codeModel.OperationGroups)
-            {
-                if (!IsResource(operationGroup, config))
-                    yield return operationGroup;
-            }
-        }
-
-        private static bool IsResource(OperationGroup operationGroup, MgmtConfiguration config)
-        {
-            return operationGroup.IsResource(config) && !operationGroup.IsListOnly(config);
-        }
+        public static IEnumerable<OperationGroup> GetNonResourceOperationGroups(this CodeModel codeModel, MgmtConfiguration config) =>
+            codeModel.OperationGroups.Where(og => !og.IsResource(config));
     }
 }

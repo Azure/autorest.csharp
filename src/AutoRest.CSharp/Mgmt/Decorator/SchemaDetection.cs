@@ -142,16 +142,16 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         }
 
         /// <summary>
-        /// Indicates if the given operation group should skip generation or not.
-        /// If the operation group is marked as "SKIP" in configuration, will return false indicating the corresponding container, data... classes should not be generated.
+        /// Returns true if the operation group is a resource; false otherwise (list-only ...).
+        /// If the operation group is marked by <see cref="KeywordToSkipGeneration"/> in configuration, will return false.
         /// </summary>
         /// <param name="og">Operation group.</param>
         /// <param name="config">Management plane configuration.</param>
-        /// <returns></returns>
         public static bool IsResource(this OperationGroup og, MgmtConfiguration config)
         {
             return !(config.OperationGroupToResource.ContainsKey(og.Key) &&
-            config.OperationGroupToResource[og.Key].Equals(KeywordToSkipGeneration));
+                config.OperationGroupToResource[og.Key].Equals(KeywordToSkipGeneration)) &&
+                !og.IsListOnly(config);
         }
 
         private const string KeywordToSkipGeneration = "NonResource";
