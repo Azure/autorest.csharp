@@ -62,7 +62,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 writer.Append($"{type}, ");
 
                 if (resourceOperation.GetMethod == null && baseClass == typeof(ResourceOperationsBase))
-                    throw new Exception($"Get operation is missing for {resource.Type.Name} resource.");
+                    throw new Exception($"Get operation is missing for '{resource.Type.Name}' resource under operation group '{operationGroup.Key}'. " +
+                        "Check the swagger definition, and use 'operation-group-to-resource' directive to specify the correct resource if necessary.");
 
                 CSharpType inheritType = new CSharpType(typeof(TrackedResource<>), resourceOperation.ResourceIdentifierType);
                 if (resourceData.Inherits != null && resourceData.Inherits.Name == inheritType.Name)
