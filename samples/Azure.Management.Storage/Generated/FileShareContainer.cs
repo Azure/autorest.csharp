@@ -14,7 +14,6 @@ using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Management.Storage.Models;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.Management.Storage
 {

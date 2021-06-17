@@ -46,7 +46,7 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var response = await _restClient.GetAsync(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -63,7 +63,7 @@ namespace MgmtParent
             scope.Start();
             try
             {
-                var response = _restClient.Get(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
+                var response = _restClient.Get(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, cancellationToken);
                 return Response.FromValue(new VirtualMachineExtensionImage(this, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -153,7 +153,7 @@ namespace MgmtParent
                 var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = await _restClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -185,7 +185,7 @@ namespace MgmtParent
                 var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags[key] = value;
-                var response = _restClient.CreateOrUpdate(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
                 return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -254,7 +254,7 @@ namespace MgmtParent
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = await _restClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -283,7 +283,7 @@ namespace MgmtParent
                 Id.TryGetLocation(out LocationData locationData);
                 var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(tags);
-                var response = _restClient.CreateOrUpdate(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
                 return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -354,7 +354,7 @@ namespace MgmtParent
                 var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = await _restClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.CreateOrUpdateAsync(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken).ConfigureAwait(false);
                 return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)
@@ -385,7 +385,7 @@ namespace MgmtParent
                 var patchable = new VirtualMachineExtensionImageData(locationData);
                 patchable.Tags.ReplaceWith(resource.Data.Tags);
                 patchable.Tags.Remove(key);
-                var response = _restClient.CreateOrUpdate(Id.SubscriptionId, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
+                var response = _restClient.CreateOrUpdate(Id.Parent.Parent.Parent.Name, Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, patchable, cancellationToken);
                 return new VirtualMachineExtensionImagesCreateOrUpdateOperation(this, response);
             }
             catch (Exception e)

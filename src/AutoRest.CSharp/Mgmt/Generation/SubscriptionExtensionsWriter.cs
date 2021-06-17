@@ -20,7 +20,6 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace AutoRest.CSharp.Generation.Writers
 {

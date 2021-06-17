@@ -6,14 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace MgmtSingleton
 {
@@ -254,14 +252,14 @@ namespace MgmtSingleton
 
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IEnumerable<ParentResource>>> ListAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<ParentResourceListResult>> ListAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.List");
             scope.Start();
             try
             {
                 var response = await _restClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new ParentResource(Parent, data)), response.GetRawResponse());
+                return response;
             }
             catch (Exception e)
             {
@@ -272,14 +270,14 @@ namespace MgmtSingleton
 
         /// <summary> Singleton Test Parent Example. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IEnumerable<ParentResource>> List(CancellationToken cancellationToken = default)
+        public virtual Response<ParentResourceListResult> List(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ParentResourceContainer.List");
             scope.Start();
             try
             {
                 var response = _restClient.List(Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new ParentResource(Parent, data)), response.GetRawResponse());
+                return response;
             }
             catch (Exception e)
             {
