@@ -188,9 +188,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
-        private void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method)
+        private void WriteArguments(CodeWriter writer, RestClientMethod method, IEnumerable<ParameterMapping> mapping)
         {
-            foreach (var parameter in BuildParameterMapping(method))
+            foreach (var parameter in mapping)
             {
                 if (parameter.IsPassThru)
                 {
@@ -201,6 +201,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.Append($"{parameter.ValueExpression}, ");
                 }
             }
+        }
+
+        private void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method)
+        {
+            WriteArguments(writer, method, BuildParameterMapping(method));
         }
 
         /// <summary>
