@@ -130,39 +130,28 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
         {
-            WriteClientMethod(writer, restClient, clientMethod, BuildParameterMapping(clientMethod.RestClientMethod), async);
+            WriteClientMethod(writer, restClient, clientMethod,
+                clientMethod.RestClientMethod.Parameters, BuildParameterMapping(clientMethod.RestClientMethod), async);
         }
 
         private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)
         {
-            WriteListMethod(writer, pageType, restClient, pagingMethod, BuildParameterMapping(pagingMethod.Method), converter, async);
+            WriteListMethod(writer, pageType, restClient, pagingMethod,
+                pagingMethod.Method.Parameters, BuildParameterMapping(pagingMethod.Method), converter, async);
         }
 
-        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
+        private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)
         {
-            return true;
-        }
-
-        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
-        {
-            // we do not need anything about the Id.Name or Id.Parent.Name in this extension, because everything is static in this class, we do not even have a property called `Id`
-            foreach (var mapping in parameterMapping)
-            {
-                mapping.ValueExpression = mapping.Parameter.Name;
-            }
-        }
-
-        protected void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)
-        {
-            var nonPathParameters = GetNonPathParameters(pagingMethod.Method).Select(p => new ParameterMapping(p, false, p.Name));
-            WriteListMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod,
-                nonPathParameters, $".Select(value => new {resource.Type.Name}(subscription, value))", async);
+            var nonPathParameters = GetNonPathParameters(pagingMethod.Method);
+            WriteListMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, nonPathParameters,
+                nonPathParameters.Select(p => new ParameterMapping(p, false, p.Name)), // TODO -- make this make more sense
+                $".Select(value => new {resource.Type.Name}(subscription, value))", async);
         }
 
         private void WriteListResourceByNameMethod(CodeWriter writer, ResourceOperation resourceOperation, bool async)
         {
             writer.Line();
-            writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.Type.Name.ToPlural()} for a {typeof(SubscriptionOperations)} represented as generic resources.");
+            writer.WriteXmlDocumentationSummary($"Filters the list of {resourceOperation.ResourceName.ToPlural()} for a {typeof(SubscriptionOperations)} represented as generic resources.");
             writer.WriteXmlDocumentationParameter("subscription", $"The <see cref=\"{typeof(SubscriptionOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationParameter("filter", "The string to filter the list.");
             writer.WriteXmlDocumentationParameter("top", "The number of results to return.");
@@ -191,6 +180,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             writer.LineRaw("#endregion");
             writer.Line();
+        }
+
+        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
+        {
+            return true;
+        }
+
+        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        {
+            // we do not need anything about the Id.Name or Id.Parent.Name in this extension, because everything is static in this class, we do not even have a property called `Id`
+            foreach (var mapping in parameterMapping)
+            {
+                mapping.ValueExpression = mapping.Parameter.Name;
+            }
         }
     }
 }

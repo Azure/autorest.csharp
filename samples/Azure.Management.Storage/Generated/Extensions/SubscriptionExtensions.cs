@@ -38,7 +38,7 @@ namespace Azure.Management.Storage
                 var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<SkuInformation>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSkuInformation");
                     scope.Start();
                     try
                     {
@@ -68,7 +68,7 @@ namespace Azure.Management.Storage
                 var restOperations = GetSkusRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<SkuInformation> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSkuInformation");
                     scope.Start();
                     try
                     {
@@ -113,7 +113,7 @@ namespace Azure.Management.Storage
                 var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocationUsage");
                     scope.Start();
                     try
                     {
@@ -150,7 +150,7 @@ namespace Azure.Management.Storage
                 var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<Usage> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocation");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListByLocationUsage");
                     scope.Start();
                     try
                     {

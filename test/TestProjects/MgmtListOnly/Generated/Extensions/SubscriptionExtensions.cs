@@ -38,7 +38,7 @@ namespace MgmtListOnly
                 var restOperations = GetAvailabilitySetFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<AvailabilitySetFeature>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethod");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetFeature");
                     scope.Start();
                     try
                     {
@@ -53,7 +53,7 @@ namespace MgmtListOnly
                 }
                 async Task<Page<AvailabilitySetFeature>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethod");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetFeature");
                     scope.Start();
                     try
                     {
@@ -83,7 +83,7 @@ namespace MgmtListOnly
                 var restOperations = GetAvailabilitySetFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<AvailabilitySetFeature> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethod");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetFeature");
                     scope.Start();
                     try
                     {
@@ -98,7 +98,7 @@ namespace MgmtListOnly
                 }
                 Page<AvailabilitySetFeature> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethod");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetFeature");
                     scope.Start();
                     try
                     {
@@ -150,25 +150,6 @@ namespace MgmtListOnly
         }
 
         /// <summary> Lists all availability sets features in subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static async Task<Response<AvailabilitySetNonPageableFeatureListResult>> TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(ClientDiagnostics clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetNonPageableFeature");
-            scope.Start();
-            try
-            {
-                return await restOperations.TestFeaturesMethodAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> Lists all availability sets features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> placeholder. </returns>
@@ -191,25 +172,6 @@ namespace MgmtListOnly
                 }
             }
             );
-        }
-
-        /// <summary> Lists all availability sets features in subscription. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Response<AvailabilitySetNonPageableFeatureListResult> TestFeaturesMethodAvailabilitySetNonPageableFeature(ClientDiagnostics clientDiagnostics, AvailabilitySetsNonPageableFeaturesRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetNonPageableFeature");
-            scope.Start();
-            try
-            {
-                return restOperations.TestFeaturesMethod(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         #endregion
@@ -246,25 +208,6 @@ namespace MgmtListOnly
         }
 
         /// <summary> List API keys. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static async Task<Response<ApiKeysListResult>> ListApiKeysAsync(ClientDiagnostics clientDiagnostics, ApiKeysRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListApiKeys");
-            scope.Start();
-            try
-            {
-                return await restOperations.ListAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List API keys. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> placeholder. </returns>
@@ -287,25 +230,6 @@ namespace MgmtListOnly
                 }
             }
             );
-        }
-
-        /// <summary> List API keys. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        private static Response<ApiKeysListResult> ListApiKeys(ClientDiagnostics clientDiagnostics, ApiKeysRestOperations restOperations, CancellationToken cancellationToken = default)
-        {
-            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListApiKeys");
-            scope.Start();
-            try
-            {
-                return restOperations.List(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         #endregion
@@ -336,7 +260,7 @@ namespace MgmtListOnly
                 var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsage");
                     scope.Start();
                     try
                     {
@@ -351,11 +275,11 @@ namespace MgmtListOnly
                 }
                 async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsage");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.ListNextPageAsync(nextLink, location, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListNextPageAsync(nextLink, location, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -389,7 +313,7 @@ namespace MgmtListOnly
                 var restOperations = GetUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<Usage> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsage");
                     scope.Start();
                     try
                     {
@@ -404,11 +328,11 @@ namespace MgmtListOnly
                 }
                 Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.List");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsage");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.ListNextPage(nextLink, location, cancellationToken: cancellationToken);
+                        var response = restOperations.ListNextPage(nextLink, location, expand, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -464,33 +388,6 @@ namespace MgmtListOnly
         }
 
         /// <summary> List Usages. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="location"> The location. </param>
-        /// <param name="expand"> The expand. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static async Task<Response<UsagesNonPageableListResult>> ListNonPageableUsageAsync(ClientDiagnostics clientDiagnostics, NonPageableUsagesRestOperations restOperations, string location, string expand = null, CancellationToken cancellationToken = default)
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListNonPageableUsage");
-            scope.Start();
-            try
-            {
-                return await restOperations.ListAsync(location, expand, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
-        /// <summary> List Usages. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location. </param>
         /// <param name="expand"> The expand. </param>
@@ -521,33 +418,6 @@ namespace MgmtListOnly
                 }
             }
             );
-        }
-
-        /// <summary> List Usages. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="location"> The location. </param>
-        /// <param name="expand"> The expand. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        private static Response<UsagesNonPageableListResult> ListNonPageableUsage(ClientDiagnostics clientDiagnostics, NonPageableUsagesRestOperations restOperations, string location, string expand = null, CancellationToken cancellationToken = default)
-        {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListNonPageableUsage");
-            scope.Start();
-            try
-            {
-                return restOperations.List(location, expand, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         #endregion

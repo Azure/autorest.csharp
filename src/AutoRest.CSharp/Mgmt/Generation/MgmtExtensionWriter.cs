@@ -62,14 +62,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod,
-            IEnumerable<ParameterMapping> parameterMapping, bool async)
+            IEnumerable<Parameter> methodParameters, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
             var responseType = clientMethod.ResponseType(async);
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
 
-            var methodParameters = parameterMapping.Select(m => m.Parameter);
             foreach (var parameter in methodParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter);
@@ -104,12 +103,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     {
                         writer.Append($"return (");
 
-                        var parameterNames = methodParameters.Select(p => p.Name);
                         writer.Append($"{"restOperations"}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
-                        foreach (var parameter in parameterNames)
-                        {
-                            writer.Append($"{parameter:I}, ");
-                        }
+                        WriteArguments(writer, parameterMapping);
                         writer.Append($"cancellationToken)");
 
                         if (async)
@@ -134,12 +129,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod,
-            IEnumerable<ParameterMapping> parameterMapping, FormattableString converter, bool async)
+            IEnumerable<Parameter> methodParameters, IEnumerable<ParameterMapping> parameterMapping, FormattableString converter, bool async)
         {
             writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name.ToPlural()} for this {ExtensionOperationVariableType}.");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
 
-            var methodParameters = parameterMapping.Select(m => m.Parameter);
             foreach (var parameter in methodParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter);

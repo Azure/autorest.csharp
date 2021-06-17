@@ -92,11 +92,13 @@ namespace AutoRest.CSharp.Common.Output.Builders
                         throw new InvalidOperationException($"Method {method.Name} has to have a return value");
                     }
 
+                    var name = nameOverrider?.Invoke(operationGroup, operation, method) ?? method.Name;
+
                     yield return new PagingMethod(
                         method,
                         nextPageMethod,
-                        nameOverrider?.Invoke(operationGroup, operation, method) ?? method.Name,
-                        new Diagnostic($"{Declaration.Name}.{method.Name}"),
+                        name,
+                        new Diagnostic($"{Declaration.Name}.{name}"),
                         new PagingResponseInfo(paging, objectResponseBody.Type));
                 }
             }

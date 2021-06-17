@@ -18,7 +18,7 @@ namespace ResourceRename
     /// <summary> A class to add extension methods to ResourceGroup. </summary>
     public static partial class ResourceGroupExtensions
     {
-        #region ResourceGroupExtensions
+        #region SshPublicKeys
         private static SshPublicKeysRestOperations GetSshPublicKeysRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new SshPublicKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -43,42 +43,19 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return CreateSshPublicKeysAsync(clientDiagnostics, restOperations, resourceGroup.Id.Name, sshPublicKeyName, path, keyData, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateSshPublicKeys");
+                scope.Start();
+                try
+                {
+                    return restOperations.CreateAsync(resourceGroup.Id.Name, sshPublicKeyName, path, keyData, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <summary> Creates a new SSH public key resource. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="path"> Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys. </param>
-        /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        private static async Task<Response<SshPublicKeyInfo>> CreateSshPublicKeysAsync(ClientDiagnostics clientDiagnostics, SshPublicKeysRestOperations restOperations, string resourceGroupName, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateSshPublicKeys");
-            scope.Start();
-            try
-            {
-                return await restOperations.CreateAsync(resourceGroupName, sshPublicKeyName, path, keyData, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <summary> Creates a new SSH public key resource. </summary>
@@ -100,42 +77,19 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return CreateSshPublicKeys(clientDiagnostics, restOperations, resourceGroup.Id.Name, sshPublicKeyName, path, keyData, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateSshPublicKeys");
+                scope.Start();
+                try
+                {
+                    return restOperations.Create(resourceGroup.Id.Name, sshPublicKeyName, path, keyData, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <summary> Creates a new SSH public key resource. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="path"> Specifies the full path on the created VM where ssh public key is stored. If the file already exists, the specified key is appended to the file. Example: /home/user/.ssh/authorized_keys. </param>
-        /// <param name="keyData"> SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. &lt;br&gt;&lt;br&gt; For creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json). </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        private static Response<SshPublicKeyInfo> CreateSshPublicKeys(ClientDiagnostics clientDiagnostics, SshPublicKeysRestOperations restOperations, string resourceGroupName, string sshPublicKeyName, string path = null, string keyData = null, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.CreateSshPublicKeys");
-            scope.Start();
-            try
-            {
-                return restOperations.Create(resourceGroupName, sshPublicKeyName, path, keyData, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <summary> Delete an SSH public key. </summary>
@@ -155,40 +109,19 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return DeleteSshPublicKeysAsync(clientDiagnostics, restOperations, resourceGroup.Id.Name, sshPublicKeyName, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.DeleteSshPublicKeys");
+                scope.Start();
+                try
+                {
+                    return restOperations.DeleteAsync(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <summary> Delete an SSH public key. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        private static async Task<Response> DeleteSshPublicKeysAsync(ClientDiagnostics clientDiagnostics, SshPublicKeysRestOperations restOperations, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.DeleteSshPublicKeys");
-            scope.Start();
-            try
-            {
-                return await restOperations.DeleteAsync(resourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <summary> Delete an SSH public key. </summary>
@@ -208,40 +141,19 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return DeleteSshPublicKeys(clientDiagnostics, restOperations, resourceGroup.Id.Name, sshPublicKeyName, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.DeleteSshPublicKeys");
+                scope.Start();
+                try
+                {
+                    return restOperations.Delete(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <summary> Delete an SSH public key. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        private static Response DeleteSshPublicKeys(ClientDiagnostics clientDiagnostics, SshPublicKeysRestOperations restOperations, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.DeleteSshPublicKeys");
-            scope.Start();
-            try
-            {
-                return restOperations.Delete(resourceGroupName, sshPublicKeyName, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <summary> Retrieves information about an SSH public key. </summary>
@@ -261,40 +173,19 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return GetSshPublicKeysAsync(clientDiagnostics, restOperations, resourceGroup.Id.Name, sshPublicKeyName, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSshPublicKeys");
+                scope.Start();
+                try
+                {
+                    return restOperations.GetAsync(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <summary> Retrieves information about an SSH public key. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        private static async Task<Response<SshPublicKeyInfo>> GetSshPublicKeysAsync(ClientDiagnostics clientDiagnostics, SshPublicKeysRestOperations restOperations, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSshPublicKeys");
-            scope.Start();
-            try
-            {
-                return await restOperations.GetAsync(resourceGroupName, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <summary> Retrieves information about an SSH public key. </summary>
@@ -314,40 +205,19 @@ namespace ResourceRename
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return GetSshPublicKeys(clientDiagnostics, restOperations, resourceGroup.Id.Name, sshPublicKeyName, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSshPublicKeys");
+                scope.Start();
+                try
+                {
+                    return restOperations.Get(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <summary> Retrieves information about an SSH public key. </summary>
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="sshPublicKeyName"/> is null. </exception>
-        private static Response<SshPublicKeyInfo> GetSshPublicKeys(ClientDiagnostics clientDiagnostics, SshPublicKeysRestOperations restOperations, string resourceGroupName, string sshPublicKeyName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (sshPublicKeyName == null)
-            {
-                throw new ArgumentNullException(nameof(sshPublicKeyName));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSshPublicKeys");
-            scope.Start();
-            try
-            {
-                return restOperations.Get(resourceGroupName, sshPublicKeyName, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         #endregion

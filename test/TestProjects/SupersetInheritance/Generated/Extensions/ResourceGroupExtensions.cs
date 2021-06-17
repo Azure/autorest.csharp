@@ -38,7 +38,7 @@ namespace SupersetInheritance
         }
         #endregion
 
-        #region ResourceGroupExtensions
+        #region SupersetModel2s
         private static SupersetModel2SRestOperations GetSupersetModel2SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new SupersetModel2SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -65,44 +65,19 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return PutSupersetModel2sAsync(clientDiagnostics, restOperations, resourceGroup.Id.Name, supersetModel2SName, parameters, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel2s");
+                scope.Start();
+                try
+                {
+                    return restOperations.PutAsync(resourceGroup.Id.Name, supersetModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel2 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="supersetModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        private static async Task<Response<SupersetModel2>> PutSupersetModel2sAsync(ClientDiagnostics clientDiagnostics, SupersetModel2SRestOperations restOperations, string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (supersetModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel2SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel2s");
-            scope.Start();
-            try
-            {
-                return await restOperations.PutAsync(resourceGroupName, supersetModel2SName, parameters, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -126,44 +101,19 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return PutSupersetModel2s(clientDiagnostics, restOperations, resourceGroup.Id.Name, supersetModel2SName, parameters, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel2s");
+                scope.Start();
+                try
+                {
+                    return restOperations.Put(resourceGroup.Id.Name, supersetModel2SName, parameters, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel2SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel2 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="supersetModel2SName"/>, or <paramref name="parameters"/> is null. </exception>
-        private static Response<SupersetModel2> PutSupersetModel2s(ClientDiagnostics clientDiagnostics, SupersetModel2SRestOperations restOperations, string resourceGroupName, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (supersetModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel2SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel2s");
-            scope.Start();
-            try
-            {
-                return restOperations.Put(resourceGroupName, supersetModel2SName, parameters, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -182,39 +132,19 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return GetSupersetModel2sAsync(clientDiagnostics, restOperations, resourceGroup.Id.Name, supersetModel2SName, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel2s");
+                scope.Start();
+                try
+                {
+                    return restOperations.GetAsync(resourceGroup.Id.Name, supersetModel2SName, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel2SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="supersetModel2SName"/> is null. </exception>
-        private static async Task<Response<SupersetModel2>> GetSupersetModel2sAsync(ClientDiagnostics clientDiagnostics, SupersetModel2SRestOperations restOperations, string resourceGroupName, string supersetModel2SName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (supersetModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel2SName));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel2s");
-            scope.Start();
-            try
-            {
-                return await restOperations.GetAsync(resourceGroupName, supersetModel2SName, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -233,44 +163,24 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return GetSupersetModel2s(clientDiagnostics, restOperations, resourceGroup.Id.Name, supersetModel2SName, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel2s");
+                scope.Start();
+                try
+                {
+                    return restOperations.Get(resourceGroup.Id.Name, supersetModel2SName, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
         }
 
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel2SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="supersetModel2SName"/> is null. </exception>
-        private static Response<SupersetModel2> GetSupersetModel2s(ClientDiagnostics clientDiagnostics, SupersetModel2SRestOperations restOperations, string resourceGroupName, string supersetModel2SName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (supersetModel2SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel2SName));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel2s");
-            scope.Start();
-            try
-            {
-                return restOperations.Get(resourceGroupName, supersetModel2SName, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
-        }
-
         #endregion
 
-        #region ResourceGroupExtensions
+        #region SupersetModel3s
         private static SupersetModel3SRestOperations GetSupersetModel3SRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new SupersetModel3SRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -297,44 +207,19 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return PutSupersetModel3sAsync(clientDiagnostics, restOperations, resourceGroup.Id.Name, supersetModel3SName, parameters, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel3s");
+                scope.Start();
+                try
+                {
+                    return restOperations.PutAsync(resourceGroup.Id.Name, supersetModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel3 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="supersetModel3SName"/>, or <paramref name="parameters"/> is null. </exception>
-        private static async Task<Response<SupersetModel3>> PutSupersetModel3sAsync(ClientDiagnostics clientDiagnostics, SupersetModel3SRestOperations restOperations, string resourceGroupName, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (supersetModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel3SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel3s");
-            scope.Start();
-            try
-            {
-                return await restOperations.PutAsync(resourceGroupName, supersetModel3SName, parameters, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -358,44 +243,19 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return PutSupersetModel3s(clientDiagnostics, restOperations, resourceGroup.Id.Name, supersetModel3SName, parameters, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel3s");
+                scope.Start();
+                try
+                {
+                    return restOperations.Put(resourceGroup.Id.Name, supersetModel3SName, parameters, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="parameters"> The SupersetModel3 to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="supersetModel3SName"/>, or <paramref name="parameters"/> is null. </exception>
-        private static Response<SupersetModel3> PutSupersetModel3s(ClientDiagnostics clientDiagnostics, SupersetModel3SRestOperations restOperations, string resourceGroupName, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (supersetModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel3SName));
-            }
-            if (parameters == null)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.PutSupersetModel3s");
-            scope.Start();
-            try
-            {
-                return restOperations.Put(resourceGroupName, supersetModel3SName, parameters, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -414,39 +274,19 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return GetSupersetModel3sAsync(clientDiagnostics, restOperations, resourceGroup.Id.Name, supersetModel3SName, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel3s");
+                scope.Start();
+                try
+                {
+                    return restOperations.GetAsync(resourceGroup.Id.Name, supersetModel3SName, cancellationToken).ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="supersetModel3SName"/> is null. </exception>
-        private static async Task<Response<SupersetModel3>> GetSupersetModel3sAsync(ClientDiagnostics clientDiagnostics, SupersetModel3SRestOperations restOperations, string resourceGroupName, string supersetModel3SName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (supersetModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel3SName));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel3s");
-            scope.Start();
-            try
-            {
-                return await restOperations.GetAsync(resourceGroupName, supersetModel3SName, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         /// <param name="resourceGroup"> The <see cref="ResourceGroupOperations" /> instance the method will execute against. </param>
@@ -465,39 +305,19 @@ namespace SupersetInheritance
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                return GetSupersetModel3s(clientDiagnostics, restOperations, resourceGroup.Id.Name, supersetModel3SName, cancellationToken);
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel3s");
+                scope.Start();
+                try
+                {
+                    return restOperations.Get(resourceGroup.Id.Name, supersetModel3SName, cancellationToken);
+                }
+                catch (Exception e)
+                {
+                    scope.Failed(e);
+                    throw;
+                }
             }
             );
-        }
-
-        /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
-        /// <param name="restOperations"> Resource client operations. </param>
-        /// <param name="resourceGroupName"> The String to use. </param>
-        /// <param name="supersetModel3SName"> The String to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="supersetModel3SName"/> is null. </exception>
-        private static Response<SupersetModel3> GetSupersetModel3s(ClientDiagnostics clientDiagnostics, SupersetModel3SRestOperations restOperations, string resourceGroupName, string supersetModel3SName, CancellationToken cancellationToken = default)
-        {
-            if (resourceGroupName == null)
-            {
-                throw new ArgumentNullException(nameof(resourceGroupName));
-            }
-            if (supersetModel3SName == null)
-            {
-                throw new ArgumentNullException(nameof(supersetModel3SName));
-            }
-
-            using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.GetSupersetModel3s");
-            scope.Start();
-            try
-            {
-                return restOperations.Get(resourceGroupName, supersetModel3SName, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
         }
 
         #endregion

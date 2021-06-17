@@ -99,20 +99,49 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
         {
+            // every method goes here, will have their first path parameter (aka the first parameter) as the `resourceGroupName`
+            // in the resource group extension, we need different parameter lists between the parameter declaration part and the parameter invocation
+            // in the parameter declaration, we should not put the `resourceGroupName` in the method signature
+            // but in parameter invocation, we need to pass a value for `resourceGroupName`
+            // instead of `Id.ResourceGroupName` as in normal ResourceContainer or ResourceOperation, we need to pass `resourceGroup.Id.Name`
+            var methodParameters = clientMethod.RestClientMethod.Parameters.Skip(1);
             WriteClientMethod(writer, restClient, clientMethod,
                 // skip the first parameter, aka the resource group name parameter
-                // this client method has a parent of resource group (otherwise we cannot be here), therefore its first parameter must be resource group
-                clientMethod.RestClientMethod.Parameters.Skip(1).Select(p => new ParameterMapping(p, false, p.Name)),
+                clientMethod.RestClientMethod.Parameters.Skip(1),
+                BuildPolishedParameterMapping(clientMethod.RestClientMethod),
                 async);
         }
         private void WriteListMethod(CodeWriter writer, MgmtRestClient restClient, PagingMethod pagingMethod, bool async)
         {
             WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, restClient, pagingMethod,
                 // skip the first parameter, aka the resource group name parameter
-                // this client method has a parent of resource group (otherwise we cannot be here), therefore its first parameter must be resource group
-                pagingMethod.Method.Parameters.Skip(1).Select(p => new ParameterMapping(p, false, p.Name)),
+                pagingMethod.Method.Parameters.Skip(1),
+                BuildPolishedParameterMapping(pagingMethod.Method),
                 $"",
                 async);
+        }
+
+        private IEnumerable<ParameterMapping> BuildPolishedParameterMapping(RestClientMethod method)
+        {
+            var mapping = BuildParameterMapping(method);
+            var first = mapping.First();
+            first.IsPassThru = false;
+            first.ValueExpression = $"{ExtensionOperationVariableName}.Id.Name";
+            return mapping;
+        }
+
+        protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
+        {
+            return true;
+        }
+
+        protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
+        {
+            // we do not need anything about the Id.Name or Id.Parent.Name in this extension, because everything is static in this class, we do not even have a property called `Id`
+            foreach (var mapping in parameterMapping)
+            {
+                mapping.ValueExpression = mapping.Parameter.Name;
+            }
         }
     }
 }

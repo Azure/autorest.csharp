@@ -567,7 +567,7 @@ namespace MgmtListOnly
         {
             Page<AvailabilitySetChild> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySetChild");
                 scope.Start();
                 try
                 {
@@ -582,7 +582,7 @@ namespace MgmtListOnly
             }
             Page<AvailabilitySetChild> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySetChild");
                 scope.Start();
                 try
                 {
@@ -605,7 +605,7 @@ namespace MgmtListOnly
         {
             async Task<Page<AvailabilitySetChild>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySetChild");
                 scope.Start();
                 try
                 {
@@ -620,7 +620,7 @@ namespace MgmtListOnly
             }
             async Task<Page<AvailabilitySetChild>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySetChild");
                 scope.Start();
                 try
                 {
@@ -690,7 +690,7 @@ namespace MgmtListOnly
         {
             Page<ResponseNotCalledValue> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValue");
                 scope.Start();
                 try
                 {
@@ -705,7 +705,7 @@ namespace MgmtListOnly
             }
             Page<ResponseNotCalledValue> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValue");
                 scope.Start();
                 try
                 {
@@ -728,7 +728,7 @@ namespace MgmtListOnly
         {
             async Task<Page<ResponseNotCalledValue>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValue");
                 scope.Start();
                 try
                 {
@@ -743,7 +743,7 @@ namespace MgmtListOnly
             }
             async Task<Page<ResponseNotCalledValue>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.List");
+                using var scope = _clientDiagnostics.CreateScope("AvailabilitySetOperations.ListResponseNotCalledValue");
                 scope.Start();
                 try
                 {
