@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models
 
                         // The service request had some parameters for the body, so create a parameter for the body and inject it into the list of parameters,
                         // right before the first optional parameter.
-                        Parameter bodyParam = new Parameter("requestBody", "The request body", typeof(Azure.Core.RequestContent), null, true);
+                        Parameter bodyParam = new Parameter("content", "The content to send as the body of the request.", typeof(Azure.Core.RequestContent), null, true);
                         int firstOptionalParameterIndex = parameters.FindIndex(p => p.DefaultValue != null);
                         if (firstOptionalParameterIndex == -1)
                         {

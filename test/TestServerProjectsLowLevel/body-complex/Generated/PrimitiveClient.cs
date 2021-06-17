@@ -167,14 +167,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutIntAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutIntAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutIntRequest(requestBody, options);
+            HttpMessage message = CreatePutIntRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -230,14 +230,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutInt(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutInt(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutIntRequest(requestBody, options);
+            HttpMessage message = CreatePutIntRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -270,9 +270,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutInt"/> and <see cref="PutIntAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutIntRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutIntRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -283,7 +283,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
@@ -404,14 +404,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutLongAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutLongAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutLongRequest(requestBody, options);
+            HttpMessage message = CreatePutLongRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -467,14 +467,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutLong(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutLong(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutLongRequest(requestBody, options);
+            HttpMessage message = CreatePutLongRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -507,9 +507,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutLong"/> and <see cref="PutLongAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutLongRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutLongRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -520,7 +520,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
@@ -641,14 +641,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutFloatAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutFloatAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutFloatRequest(requestBody, options);
+            HttpMessage message = CreatePutFloatRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -704,14 +704,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutFloat(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutFloat(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutFloatRequest(requestBody, options);
+            HttpMessage message = CreatePutFloatRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -744,9 +744,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutFloat"/> and <see cref="PutFloatAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutFloatRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutFloatRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -757,7 +757,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
@@ -878,14 +878,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDoubleAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutDoubleAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutDoubleRequest(requestBody, options);
+            HttpMessage message = CreatePutDoubleRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -941,14 +941,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutDouble(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutDouble(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutDoubleRequest(requestBody, options);
+            HttpMessage message = CreatePutDoubleRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -981,9 +981,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutDouble"/> and <see cref="PutDoubleAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutDoubleRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutDoubleRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -994,7 +994,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
@@ -1115,14 +1115,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutBoolAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutBoolAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutBoolRequest(requestBody, options);
+            HttpMessage message = CreatePutBoolRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1178,14 +1178,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutBool(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutBool(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutBoolRequest(requestBody, options);
+            HttpMessage message = CreatePutBoolRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1218,9 +1218,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutBool"/> and <see cref="PutBoolAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutBoolRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutBoolRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1231,7 +1231,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
@@ -1358,14 +1358,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutStringAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutStringAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutStringRequest(requestBody, options);
+            HttpMessage message = CreatePutStringRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1427,14 +1427,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutString(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutString(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutStringRequest(requestBody, options);
+            HttpMessage message = CreatePutStringRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1467,9 +1467,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutString"/> and <see cref="PutStringAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutStringRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutStringRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1480,7 +1480,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
@@ -1601,14 +1601,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDateAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutDateAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutDateRequest(requestBody, options);
+            HttpMessage message = CreatePutDateRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1664,14 +1664,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutDate(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutDate(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutDateRequest(requestBody, options);
+            HttpMessage message = CreatePutDateRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1704,9 +1704,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutDate"/> and <see cref="PutDateAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutDateRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutDateRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1717,7 +1717,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
@@ -1838,14 +1838,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDateTimeAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutDateTimeAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutDateTimeRequest(requestBody, options);
+            HttpMessage message = CreatePutDateTimeRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1901,14 +1901,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutDateTime(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutDateTime(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutDateTimeRequest(requestBody, options);
+            HttpMessage message = CreatePutDateTimeRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -1941,9 +1941,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutDateTime"/> and <see cref="PutDateTimeAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutDateTimeRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutDateTimeRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1954,7 +1954,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
@@ -2075,14 +2075,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutDateTimeRfc1123Request(requestBody, options);
+            HttpMessage message = CreatePutDateTimeRfc1123Request(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2138,14 +2138,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutDateTimeRfc1123(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutDateTimeRfc1123(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutDateTimeRfc1123Request(requestBody, options);
+            HttpMessage message = CreatePutDateTimeRfc1123Request(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2178,9 +2178,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutDateTimeRfc1123"/> and <see cref="PutDateTimeRfc1123Async"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutDateTimeRfc1123Request(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutDateTimeRfc1123Request(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2191,7 +2191,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
@@ -2306,14 +2306,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutDurationAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutDurationAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutDurationRequest(requestBody, options);
+            HttpMessage message = CreatePutDurationRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2363,14 +2363,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutDuration(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutDuration(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutDurationRequest(requestBody, options);
+            HttpMessage message = CreatePutDurationRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2403,9 +2403,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutDuration"/> and <see cref="PutDurationAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutDurationRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutDurationRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2416,7 +2416,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
@@ -2531,14 +2531,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> PutByteAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> PutByteAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutByteRequest(requestBody, options);
+            HttpMessage message = CreatePutByteRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2588,14 +2588,14 @@ namespace body_complex_LowLevel
         ///   </item>
         /// </list>
         /// </remarks>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response PutByte(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response PutByte(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreatePutByteRequest(requestBody, options);
+            HttpMessage message = CreatePutByteRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -2628,9 +2628,9 @@ namespace body_complex_LowLevel
         }
 
         /// <summary> Create Request for <see cref="PutByte"/> and <see cref="PutByteAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreatePutByteRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreatePutByteRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2641,7 +2641,7 @@ namespace body_complex_LowLevel
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
     }
