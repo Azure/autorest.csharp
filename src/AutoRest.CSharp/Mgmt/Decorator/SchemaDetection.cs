@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (operationGroup.TryGetResourceName(config, out var name))
                 return name;
 
-            // otherwise we through exception to notify the user to modify their readme.md
+            // otherwise we throw exception to notify the user to modify their readme.md
             throw new Exception($"Resource schema not found! Please add the {operationGroup.Key} to its schema name mapping in the `operation-group-to-resource` section of readme.md.");
         }
 
