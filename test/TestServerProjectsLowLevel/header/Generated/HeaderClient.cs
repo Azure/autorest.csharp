@@ -52,23 +52,23 @@ namespace header_LowLevel
 
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamExistingKeyRequest(userAgent, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -92,23 +92,23 @@ namespace header_LowLevel
 
         /// <summary> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamExistingKey(string userAgent, RequestOptions requestOptions = null)
+        public virtual Response ParamExistingKey(string userAgent, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamExistingKeyRequest(userAgent, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamExistingKeyRequest(userAgent, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamExistingKey");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -132,8 +132,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ParamExistingKey"/> and <see cref="ParamExistingKeyAsync"/> operations. </summary>
         /// <param name="userAgent"> Send a post request with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamExistingKeyRequest(string userAgent, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamExistingKeyRequest(string userAgent, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -148,23 +148,23 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseExistingKeyAsync(RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseExistingKeyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseExistingKeyRequest(requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseExistingKeyRequest(options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -187,23 +187,23 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;User-Agent&quot;: &quot;overwrite&quot;. </summary>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseExistingKey(RequestOptions requestOptions = null)
+        public virtual Response ResponseExistingKey(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseExistingKeyRequest(requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseExistingKeyRequest(options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -226,8 +226,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Create Request for <see cref="ResponseExistingKey"/> and <see cref="ResponseExistingKeyAsync"/> operations. </summary>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseExistingKeyRequest(RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseExistingKeyRequest(RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -242,23 +242,23 @@ namespace header_LowLevel
 
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamProtectedKeyRequest(contentType, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -282,23 +282,23 @@ namespace header_LowLevel
 
         /// <summary> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamProtectedKey(string contentType, RequestOptions requestOptions = null)
+        public virtual Response ParamProtectedKey(string contentType, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamProtectedKeyRequest(contentType, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamProtectedKeyRequest(contentType, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamProtectedKey");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -322,8 +322,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ParamProtectedKey"/> and <see cref="ParamProtectedKeyAsync"/> operations. </summary>
         /// <param name="contentType"> Send a post request with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamProtectedKeyRequest(string contentType, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamProtectedKeyRequest(string contentType, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -337,23 +337,23 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseProtectedKeyAsync(RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseProtectedKeyAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseProtectedKeyRequest(requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseProtectedKeyRequest(options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -376,23 +376,23 @@ namespace header_LowLevel
         }
 
         /// <summary> Get a response with header value &quot;Content-Type&quot;: &quot;text/html&quot;. </summary>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseProtectedKey(RequestOptions requestOptions = null)
+        public virtual Response ResponseProtectedKey(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseProtectedKeyRequest(requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseProtectedKeyRequest(options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -415,8 +415,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Create Request for <see cref="ResponseProtectedKey"/> and <see cref="ResponseProtectedKeyAsync"/> operations. </summary>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseProtectedKeyRequest(RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseProtectedKeyRequest(RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -432,23 +432,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamIntegerRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -473,23 +473,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 1 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamInteger(string scenario, int value, RequestOptions requestOptions = null)
+        public virtual Response ParamInteger(string scenario, int value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamIntegerRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamIntegerRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamInteger");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -514,8 +514,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamInteger"/> and <see cref="ParamIntegerAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 1 or -2. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamIntegerRequest(string scenario, int value, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamIntegerRequest(string scenario, int value, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -532,23 +532,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseIntegerRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseIntegerRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -572,23 +572,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 1 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseInteger(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseInteger(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseIntegerRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseIntegerRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseInteger");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -612,8 +612,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseInteger"/> and <see cref="ResponseIntegerAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseIntegerRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseIntegerRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -630,23 +630,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamLongRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamLongRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -671,23 +671,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 105 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamLong(string scenario, long value, RequestOptions requestOptions = null)
+        public virtual Response ParamLong(string scenario, long value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamLongRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamLongRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamLong");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -712,8 +712,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamLong"/> and <see cref="ParamLongAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 105 or -2. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamLongRequest(string scenario, long value, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamLongRequest(string scenario, long value, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -730,23 +730,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseLongAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseLongAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseLongRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseLongRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -770,23 +770,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 105 or -2. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseLong(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseLong(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseLongRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseLongRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseLong");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -810,8 +810,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseLong"/> and <see cref="ResponseLongAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseLongRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseLongRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -828,23 +828,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamFloatRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamFloatRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -869,23 +869,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 0.07 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamFloat(string scenario, float value, RequestOptions requestOptions = null)
+        public virtual Response ParamFloat(string scenario, float value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamFloatRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamFloatRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamFloat");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -910,8 +910,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamFloat"/> and <see cref="ParamFloatAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 0.07 or -3.0. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamFloatRequest(string scenario, float value, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamFloatRequest(string scenario, float value, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -928,23 +928,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseFloatRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseFloatRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -968,23 +968,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 0.07 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseFloat(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseFloat(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseFloatRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseFloatRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseFloat");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1008,8 +1008,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseFloat"/> and <see cref="ResponseFloatAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseFloatRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseFloatRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1026,23 +1026,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamDoubleRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1067,23 +1067,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot;, &quot;value&quot;: 7e120 or &quot;scenario&quot;: &quot;negative&quot;, &quot;value&quot;: -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamDouble(string scenario, double value, RequestOptions requestOptions = null)
+        public virtual Response ParamDouble(string scenario, double value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamDoubleRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamDoubleRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDouble");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1108,8 +1108,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamDouble"/> and <see cref="ParamDoubleAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
         /// <param name="value"> Send a post request with header values 7e120 or -3.0. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamDoubleRequest(string scenario, double value, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamDoubleRequest(string scenario, double value, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1126,23 +1126,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseDoubleRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseDoubleRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1166,23 +1166,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: 7e120 or -3.0. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseDouble(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseDouble(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseDoubleRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseDoubleRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDouble");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1206,8 +1206,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseDouble"/> and <see cref="ResponseDoubleAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;positive&quot; or &quot;negative&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseDoubleRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseDoubleRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1224,23 +1224,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamBoolRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamBoolRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1265,23 +1265,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;true&quot;, &quot;value&quot;: true or &quot;scenario&quot;: &quot;false&quot;, &quot;value&quot;: false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamBool(string scenario, bool value, RequestOptions requestOptions = null)
+        public virtual Response ParamBool(string scenario, bool value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamBoolRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamBoolRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamBool");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1306,8 +1306,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamBool"/> and <see cref="ParamBoolAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
         /// <param name="value"> Send a post request with header values true or false. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamBoolRequest(string scenario, bool value, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamBoolRequest(string scenario, bool value, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1324,23 +1324,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseBoolRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseBoolRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1364,23 +1364,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header value &quot;value&quot;: true or false. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseBool(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseBool(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseBoolRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseBoolRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseBool");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1404,8 +1404,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseBool"/> and <see cref="ResponseBoolAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;true&quot; or &quot;false&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseBoolRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseBoolRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1422,23 +1422,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamStringRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamStringRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1463,23 +1463,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;The quick brown fox jumps over the lazy dog&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null or &quot;scenario&quot;: &quot;empty&quot;, &quot;value&quot;: &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamString(string scenario, string value = null, RequestOptions requestOptions = null)
+        public virtual Response ParamString(string scenario, string value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamStringRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamStringRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamString");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1504,8 +1504,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamString"/> and <see cref="ParamStringAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamStringRequest(string scenario, string value = null, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamStringRequest(string scenario, string value = null, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1525,23 +1525,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseStringAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseStringAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseStringRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseStringRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1565,23 +1565,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;The quick brown fox jumps over the lazy dog&quot; or null or &quot;&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseString(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseString(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseStringRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseStringRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseString");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1605,8 +1605,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseString"/> and <see cref="ResponseStringAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseStringRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseStringRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1623,23 +1623,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamDateRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamDateRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1664,23 +1664,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestOptions requestOptions = null)
+        public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamDateRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamDateRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDate");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1705,8 +1705,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamDate"/> and <see cref="ParamDateAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamDateRequest(string scenario, DateTimeOffset value, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1723,23 +1723,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseDateAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseDateAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseDateRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseDateRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1763,23 +1763,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;2010-01-01&quot; or &quot;0001-01-01&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseDate(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseDate(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseDateRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseDateRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDate");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1803,8 +1803,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseDate"/> and <see cref="ResponseDateAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseDateRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseDateRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1821,23 +1821,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1862,23 +1862,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;2010-01-01T12:34:56Z&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestOptions requestOptions = null)
+        public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamDatetimeRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetime");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1903,8 +1903,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamDatetime"/> and <see cref="ParamDatetimeAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamDatetimeRequest(string scenario, DateTimeOffset value, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -1921,23 +1921,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -1961,23 +1961,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;2010-01-01T12:34:56Z&quot; or &quot;0001-01-01T00:00:00Z&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseDatetime(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseDatetime(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseDatetimeRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetime");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2001,8 +2001,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseDatetime"/> and <see cref="ResponseDatetimeAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseDatetimeRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseDatetimeRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2019,23 +2019,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2060,23 +2060,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;scenario&quot;: &quot;min&quot;, &quot;value&quot;: &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestOptions requestOptions = null)
+        public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamDatetimeRfc1123Request(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDatetimeRfc1123");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2101,8 +2101,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamDatetimeRfc1123"/> and <see cref="ParamDatetimeRfc1123Async"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value = null, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamDatetimeRfc1123Request(string scenario, DateTimeOffset? value = null, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2122,23 +2122,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2162,23 +2162,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;Wed, 01 Jan 2010 12:34:56 GMT&quot; or &quot;Mon, 01 Jan 0001 00:00:00 GMT&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseDatetimeRfc1123(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseDatetimeRfc1123(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseDatetimeRfc1123Request(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDatetimeRfc1123");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2202,8 +2202,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseDatetimeRfc1123"/> and <see cref="ResponseDatetimeRfc1123Async"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;min&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseDatetimeRfc1123Request(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseDatetimeRfc1123Request(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2220,23 +2220,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamDurationRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamDurationRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2261,23 +2261,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamDuration(string scenario, TimeSpan value, RequestOptions requestOptions = null)
+        public virtual Response ParamDuration(string scenario, TimeSpan value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamDurationRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamDurationRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamDuration");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2302,8 +2302,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamDuration"/> and <see cref="ParamDurationAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;P123DT22H14M12.011S&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamDurationRequest(string scenario, TimeSpan value, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2320,23 +2320,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseDurationRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseDurationRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2360,23 +2360,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;P123DT22H14M12.011S&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseDuration(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseDuration(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseDurationRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseDurationRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseDuration");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2400,8 +2400,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseDuration"/> and <see cref="ResponseDurationAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseDurationRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseDurationRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2418,23 +2418,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamByteRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamByteRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2459,23 +2459,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamByte(string scenario, byte[] value, RequestOptions requestOptions = null)
+        public virtual Response ParamByte(string scenario, byte[] value, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamByteRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamByteRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamByte");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2500,8 +2500,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamByte"/> and <see cref="ParamByteAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
         /// <param name="value"> Send a post request with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamByteRequest(string scenario, byte[] value, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamByteRequest(string scenario, byte[] value, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2518,23 +2518,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseByteAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseByteAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseByteRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseByteRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2558,23 +2558,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;啊齄丂狛狜隣郎隣兀﨩&quot;. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseByte(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseByte(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseByteRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseByteRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseByte");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2598,8 +2598,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseByte"/> and <see cref="ResponseByteAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseByteRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseByteRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2616,23 +2616,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamEnumRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamEnumRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2657,23 +2657,23 @@ namespace header_LowLevel
         /// <summary> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot;, &quot;value&quot;: &quot;GREY&quot; or &quot;scenario&quot;: &quot;null&quot;, &quot;value&quot;: null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ParamEnum(string scenario, string value = null, RequestOptions requestOptions = null)
+        public virtual Response ParamEnum(string scenario, string value = null, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateParamEnumRequest(scenario, value, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateParamEnumRequest(scenario, value, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ParamEnum");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2698,8 +2698,8 @@ namespace header_LowLevel
         /// <summary> Create Request for <see cref="ParamEnum"/> and <see cref="ParamEnumAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
         /// <param name="value"> Send a post request with header values &apos;GREY&apos;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateParamEnumRequest(string scenario, string value = null, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateParamEnumRequest(string scenario, string value = null, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2719,23 +2719,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestOptions requestOptions = null)
+        public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseEnumRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseEnumRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2759,23 +2759,23 @@ namespace header_LowLevel
 
         /// <summary> Get a response with header values &quot;GREY&quot; or null. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response ResponseEnum(string scenario, RequestOptions requestOptions = null)
+        public virtual Response ResponseEnum(string scenario, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateResponseEnumRequest(scenario, requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateResponseEnumRequest(scenario, options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.ResponseEnum");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2799,8 +2799,8 @@ namespace header_LowLevel
 
         /// <summary> Create Request for <see cref="ResponseEnum"/> and <see cref="ResponseEnumAsync"/> operations. </summary>
         /// <param name="scenario"> Send a post request with header values &quot;scenario&quot;: &quot;valid&quot; or &quot;null&quot; or &quot;empty&quot;. </param>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateResponseEnumRequest(string scenario, RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateResponseEnumRequest(string scenario, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -2815,23 +2815,23 @@ namespace header_LowLevel
         }
 
         /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CustomRequestIdAsync(RequestOptions requestOptions = null)
+        public virtual async Task<Response> CustomRequestIdAsync(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateCustomRequestIdRequest(requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateCustomRequestIdRequest(options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
             {
-                await Pipeline.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                await Pipeline.SendAsync(message, options.CancellationToken).ConfigureAwait(false);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2854,23 +2854,23 @@ namespace header_LowLevel
         }
 
         /// <summary> Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
-        /// <param name="requestOptions"> The request options. </param>
+        /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response CustomRequestId(RequestOptions requestOptions = null)
+        public virtual Response CustomRequestId(RequestOptions options = null)
 #pragma warning restore AZC0002
         {
-            requestOptions ??= new RequestOptions();
-            HttpMessage message = CreateCustomRequestIdRequest(requestOptions);
-            if (requestOptions.PerCallPolicy != null)
+            options ??= new RequestOptions();
+            HttpMessage message = CreateCustomRequestIdRequest(options);
+            if (options.PerCallPolicy != null)
             {
-                message.SetProperty("RequestOptionsPerCallPolicyCallback", requestOptions.PerCallPolicy);
+                message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
             }
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
             scope.Start();
             try
             {
-                Pipeline.Send(message, requestOptions.CancellationToken);
-                if (requestOptions.StatusOption == ResponseStatusOption.Default)
+                Pipeline.Send(message, options.CancellationToken);
+                if (options.StatusOption == ResponseStatusOption.Default)
                 {
                     switch (message.Response.Status)
                     {
@@ -2893,8 +2893,8 @@ namespace header_LowLevel
         }
 
         /// <summary> Create Request for <see cref="CustomRequestId"/> and <see cref="CustomRequestIdAsync"/> operations. </summary>
-        /// <param name="requestOptions"> The request options. </param>
-        private HttpMessage CreateCustomRequestIdRequest(RequestOptions requestOptions = null)
+        /// <param name="options"> The request options. </param>
+        private HttpMessage CreateCustomRequestIdRequest(RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
