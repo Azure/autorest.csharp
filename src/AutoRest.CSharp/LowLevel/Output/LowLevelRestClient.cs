@@ -82,8 +82,8 @@ namespace AutoRest.CSharp.Output.Models
 
                     // Inject the RequestOptions
                     CSharpType requestType = new CSharpType (typeof(Azure.RequestOptions)).WithNullable(true);
-                    Parameter requestOptions = new Parameter ("requestOptions", "The request options", requestType, new Constant(null, requestType), true);
-                    parameters.Insert (parameters.Count, requestOptions);
+                    Parameter options = new Parameter ("options", "The request options", requestType, new Constant(null, requestType), true);
+                    parameters.Insert (parameters.Count, options);
 
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, method.Request.Headers, body);
                     Diagnostic diagnostic = new Diagnostic($"{Declaration.Name}.{method.Name}");
