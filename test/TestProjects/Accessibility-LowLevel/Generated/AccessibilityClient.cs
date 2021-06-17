@@ -50,14 +50,14 @@ namespace Accessibility_LowLevel
             apiVersion = options.Version;
         }
 
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> OperationAsync(RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> OperationAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationRequest(requestBody, options);
+            HttpMessage message = CreateOperationRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -89,14 +89,14 @@ namespace Accessibility_LowLevel
             }
         }
 
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Operation(RequestContent requestBody, RequestOptions options = null)
+        public virtual Response Operation(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationRequest(requestBody, options);
+            HttpMessage message = CreateOperationRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -129,9 +129,9 @@ namespace Accessibility_LowLevel
         }
 
         /// <summary> Create Request for <see cref="Operation"/> and <see cref="OperationAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOperationRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreateOperationRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -141,18 +141,18 @@ namespace Accessibility_LowLevel
             uri.AppendPath("/Operation/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
 
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        internal virtual async Task<Response> OperationInternalAsync(RequestContent requestBody, RequestOptions options = null)
+        internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationInternalRequest(requestBody, options);
+            HttpMessage message = CreateOperationInternalRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -184,14 +184,14 @@ namespace Accessibility_LowLevel
             }
         }
 
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        internal virtual Response OperationInternal(RequestContent requestBody, RequestOptions options = null)
+        internal virtual Response OperationInternal(RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateOperationInternalRequest(requestBody, options);
+            HttpMessage message = CreateOperationInternalRequest(content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -224,9 +224,9 @@ namespace Accessibility_LowLevel
         }
 
         /// <summary> Create Request for <see cref="OperationInternal"/> and <see cref="OperationInternalAsync"/> operations. </summary>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreateOperationInternalRequest(RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreateOperationInternalRequest(RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -236,7 +236,7 @@ namespace Accessibility_LowLevel
             uri.AppendPath("/OperationInternal/", false);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
     }

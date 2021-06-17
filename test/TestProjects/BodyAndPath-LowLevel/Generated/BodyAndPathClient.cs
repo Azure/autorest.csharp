@@ -52,14 +52,14 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> Resets products. </summary>
         /// <param name="itemName"> item name. </param>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual async Task<Response> CreateAsync(string itemName, RequestContent requestBody, RequestOptions options = null)
+        public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateRequest(itemName, requestBody, options);
+            HttpMessage message = CreateCreateRequest(itemName, content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -93,14 +93,14 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> Resets products. </summary>
         /// <param name="itemName"> item name. </param>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
 #pragma warning disable AZC0002
-        public virtual Response Create(string itemName, RequestContent requestBody, RequestOptions options = null)
+        public virtual Response Create(string itemName, RequestContent content, RequestOptions options = null)
 #pragma warning restore AZC0002
         {
             options ??= new RequestOptions();
-            HttpMessage message = CreateCreateRequest(itemName, requestBody, options);
+            HttpMessage message = CreateCreateRequest(itemName, content, options);
             if (options.PerCallPolicy != null)
             {
                 message.SetProperty("RequestOptionsPerCallPolicyCallback", options.PerCallPolicy);
@@ -134,9 +134,9 @@ namespace BodyAndPath_LowLevel
 
         /// <summary> Create Request for <see cref="Create"/> and <see cref="CreateAsync"/> operations. </summary>
         /// <param name="itemName"> item name. </param>
-        /// <param name="requestBody"> The request body. </param>
+        /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options. </param>
-        private HttpMessage CreateCreateRequest(string itemName, RequestContent requestBody, RequestOptions options = null)
+        private HttpMessage CreateCreateRequest(string itemName, RequestContent content, RequestOptions options = null)
         {
             var message = Pipeline.CreateMessage();
             var request = message.Request;
@@ -147,7 +147,7 @@ namespace BodyAndPath_LowLevel
             uri.AppendPath(itemName, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
-            request.Content = requestBody;
+            request.Content = content;
             return message;
         }
     }
