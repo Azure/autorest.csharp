@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Azure.Storage.Tables.Models;
 
 namespace Azure.Storage.Tables
@@ -18,10 +19,10 @@ namespace Azure.Storage.Tables
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of tables. </param>
         /// <returns> A new <see cref="Models.TableQueryResponse"/> instance for mocking. </returns>
-        public static TableQueryResponse TableQueryResponse(string odataMetadata = default, IReadOnlyList<TableResponseProperties> value = default)
+        public static TableQueryResponse TableQueryResponse(string odataMetadata = default, IEnumerable<TableResponseProperties> value = default)
         {
-            value ??= new List<TableResponseProperties>();
-            return new TableQueryResponse(odataMetadata, value);
+            var valueList = value?.ToList() ?? new List<TableResponseProperties>();
+            return new TableQueryResponse(odataMetadata, valueList);
         }
 
         /// <summary> Initializes new instance of TableResponseProperties class. </summary>
@@ -51,10 +52,10 @@ namespace Azure.Storage.Tables
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of table entities. </param>
         /// <returns> A new <see cref="Models.TableEntityQueryResponse"/> instance for mocking. </returns>
-        public static TableEntityQueryResponse TableEntityQueryResponse(string odataMetadata = default, IReadOnlyList<IDictionary<string, object>> value = default)
+        public static TableEntityQueryResponse TableEntityQueryResponse(string odataMetadata = default, IEnumerable<IDictionary<string, object>> value = default)
         {
-            value ??= new List<IDictionary<string, object>>();
-            return new TableEntityQueryResponse(odataMetadata, value);
+            var valueList = value?.ToList() ?? new List<IDictionary<string, object>>();
+            return new TableEntityQueryResponse(odataMetadata, valueList);
         }
 
         /// <summary> Initializes new instance of StorageServiceStats class. </summary>

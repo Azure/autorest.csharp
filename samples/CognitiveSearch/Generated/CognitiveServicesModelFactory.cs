@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CognitiveSearch.Models;
 
 namespace CognitiveSearch
@@ -22,11 +23,11 @@ namespace CognitiveSearch
         /// <param name="results"> The sequence of results returned by the query. </param>
         /// <param name="nextLink"> Continuation URL returned when Azure Cognitive Search can&apos;t return all the requested results in a single Search response. You can use this URL to formulate another GET or POST Search request to get the next part of the search response. Make sure to use the same verb (GET or POST) as the request that produced this response. </param>
         /// <returns> A new <see cref="Models.SearchDocumentsResult"/> instance for mocking. </returns>
-        public static SearchDocumentsResult SearchDocumentsResult(long? count = default, double? coverage = default, IReadOnlyDictionary<string, IList<FacetResult>> facets = default, SearchRequest nextPageParameters = default, IReadOnlyList<SearchResult> results = default, string nextLink = default)
+        public static SearchDocumentsResult SearchDocumentsResult(long? count = default, double? coverage = default, IReadOnlyDictionary<string, IList<FacetResult>> facets = default, SearchRequest nextPageParameters = default, IEnumerable<SearchResult> results = default, string nextLink = default)
         {
             facets ??= new Dictionary<string, IList<FacetResult>>();
-            results ??= new List<SearchResult>();
-            return new SearchDocumentsResult(count, coverage, facets, nextPageParameters, results, nextLink);
+            var resultsList = results?.ToList() ?? new List<SearchResult>();
+            return new SearchDocumentsResult(count, coverage, facets, nextPageParameters, resultsList, nextLink);
         }
 
         /// <summary> Initializes new instance of FacetResult class. </summary>
@@ -55,10 +56,10 @@ namespace CognitiveSearch
         /// <param name="results"> The sequence of results returned by the query. </param>
         /// <param name="coverage"> A value indicating the percentage of the index that was included in the query, or null if minimumCoverage was not set in the request. </param>
         /// <returns> A new <see cref="Models.SuggestDocumentsResult"/> instance for mocking. </returns>
-        public static SuggestDocumentsResult SuggestDocumentsResult(IReadOnlyList<SuggestResult> results = default, double? coverage = default)
+        public static SuggestDocumentsResult SuggestDocumentsResult(IEnumerable<SuggestResult> results = default, double? coverage = default)
         {
-            results ??= new List<SuggestResult>();
-            return new SuggestDocumentsResult(results, coverage);
+            var resultsList = results?.ToList() ?? new List<SuggestResult>();
+            return new SuggestDocumentsResult(resultsList, coverage);
         }
 
         /// <summary> Initializes new instance of SuggestResult class. </summary>
@@ -74,10 +75,10 @@ namespace CognitiveSearch
         /// <summary> Initializes new instance of IndexDocumentsResult class. </summary>
         /// <param name="results"> The list of status information for each document in the indexing request. </param>
         /// <returns> A new <see cref="Models.IndexDocumentsResult"/> instance for mocking. </returns>
-        public static IndexDocumentsResult IndexDocumentsResult(IReadOnlyList<IndexingResult> results = default)
+        public static IndexDocumentsResult IndexDocumentsResult(IEnumerable<IndexingResult> results = default)
         {
-            results ??= new List<IndexingResult>();
-            return new IndexDocumentsResult(results);
+            var resultsList = results?.ToList() ?? new List<IndexingResult>();
+            return new IndexDocumentsResult(resultsList);
         }
 
         /// <summary> Initializes new instance of IndexingResult class. </summary>
@@ -95,10 +96,10 @@ namespace CognitiveSearch
         /// <param name="coverage"> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </param>
         /// <param name="results"> The list of returned Autocompleted items. </param>
         /// <returns> A new <see cref="Models.AutocompleteResult"/> instance for mocking. </returns>
-        public static AutocompleteResult AutocompleteResult(double? coverage = default, IReadOnlyList<AutocompleteItem> results = default)
+        public static AutocompleteResult AutocompleteResult(double? coverage = default, IEnumerable<AutocompleteItem> results = default)
         {
-            results ??= new List<AutocompleteItem>();
-            return new AutocompleteResult(coverage, results);
+            var resultsList = results?.ToList() ?? new List<AutocompleteItem>();
+            return new AutocompleteResult(coverage, resultsList);
         }
 
         /// <summary> Initializes new instance of AutocompleteItem class. </summary>
@@ -113,19 +114,19 @@ namespace CognitiveSearch
         /// <summary> Initializes new instance of ListDataSourcesResult class. </summary>
         /// <param name="dataSources"> The datasources in the Search service. </param>
         /// <returns> A new <see cref="Models.ListDataSourcesResult"/> instance for mocking. </returns>
-        public static ListDataSourcesResult ListDataSourcesResult(IReadOnlyList<DataSource> dataSources = default)
+        public static ListDataSourcesResult ListDataSourcesResult(IEnumerable<DataSource> dataSources = default)
         {
-            dataSources ??= new List<DataSource>();
-            return new ListDataSourcesResult(dataSources);
+            var dataSourcesList = dataSources?.ToList() ?? new List<DataSource>();
+            return new ListDataSourcesResult(dataSourcesList);
         }
 
         /// <summary> Initializes new instance of ListIndexersResult class. </summary>
         /// <param name="indexers"> The indexers in the Search service. </param>
         /// <returns> A new <see cref="Models.ListIndexersResult"/> instance for mocking. </returns>
-        public static ListIndexersResult ListIndexersResult(IReadOnlyList<Indexer> indexers = default)
+        public static ListIndexersResult ListIndexersResult(IEnumerable<Indexer> indexers = default)
         {
-            indexers ??= new List<Indexer>();
-            return new ListIndexersResult(indexers);
+            var indexersList = indexers?.ToList() ?? new List<Indexer>();
+            return new ListIndexersResult(indexersList);
         }
 
         /// <summary> Initializes new instance of IndexerExecutionInfo class. </summary>
@@ -134,10 +135,10 @@ namespace CognitiveSearch
         /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
         /// <param name="limits"> The execution limits for the indexer. </param>
         /// <returns> A new <see cref="Models.IndexerExecutionInfo"/> instance for mocking. </returns>
-        public static IndexerExecutionInfo IndexerExecutionInfo(IndexerStatus status = default, IndexerExecutionResult lastResult = default, IReadOnlyList<IndexerExecutionResult> executionHistory = default, IndexerLimits limits = default)
+        public static IndexerExecutionInfo IndexerExecutionInfo(IndexerStatus status = default, IndexerExecutionResult lastResult = default, IEnumerable<IndexerExecutionResult> executionHistory = default, IndexerLimits limits = default)
         {
-            executionHistory ??= new List<IndexerExecutionResult>();
-            return new IndexerExecutionInfo(status, lastResult, executionHistory, limits);
+            var executionHistoryList = executionHistory?.ToList() ?? new List<IndexerExecutionResult>();
+            return new IndexerExecutionInfo(status, lastResult, executionHistoryList, limits);
         }
 
         /// <summary> Initializes new instance of IndexerExecutionResult class. </summary>
@@ -152,11 +153,11 @@ namespace CognitiveSearch
         /// <param name="initialTrackingState"> Change tracking state with which an indexer execution started. </param>
         /// <param name="finalTrackingState"> Change tracking state with which an indexer execution finished. </param>
         /// <returns> A new <see cref="Models.IndexerExecutionResult"/> instance for mocking. </returns>
-        public static IndexerExecutionResult IndexerExecutionResult(IndexerExecutionStatus status = default, string errorMessage = default, DateTimeOffset? startTime = default, DateTimeOffset? endTime = default, IReadOnlyList<ItemError> errors = default, IReadOnlyList<ItemWarning> warnings = default, int itemCount = default, int failedItemCount = default, string initialTrackingState = default, string finalTrackingState = default)
+        public static IndexerExecutionResult IndexerExecutionResult(IndexerExecutionStatus status = default, string errorMessage = default, DateTimeOffset? startTime = default, DateTimeOffset? endTime = default, IEnumerable<ItemError> errors = default, IEnumerable<ItemWarning> warnings = default, int itemCount = default, int failedItemCount = default, string initialTrackingState = default, string finalTrackingState = default)
         {
-            errors ??= new List<ItemError>();
-            warnings ??= new List<ItemWarning>();
-            return new IndexerExecutionResult(status, errorMessage, startTime, endTime, errors, warnings, itemCount, failedItemCount, initialTrackingState, finalTrackingState);
+            var errorsList = errors?.ToList() ?? new List<ItemError>();
+            var warningsList = warnings?.ToList() ?? new List<ItemWarning>();
+            return new IndexerExecutionResult(status, errorMessage, startTime, endTime, errorsList, warningsList, itemCount, failedItemCount, initialTrackingState, finalTrackingState);
         }
 
         /// <summary> Initializes new instance of ItemError class. </summary>
@@ -197,28 +198,28 @@ namespace CognitiveSearch
         /// <summary> Initializes new instance of ListSkillsetsResult class. </summary>
         /// <param name="skillsets"> The skillsets defined in the Search service. </param>
         /// <returns> A new <see cref="Models.ListSkillsetsResult"/> instance for mocking. </returns>
-        public static ListSkillsetsResult ListSkillsetsResult(IReadOnlyList<Skillset> skillsets = default)
+        public static ListSkillsetsResult ListSkillsetsResult(IEnumerable<Skillset> skillsets = default)
         {
-            skillsets ??= new List<Skillset>();
-            return new ListSkillsetsResult(skillsets);
+            var skillsetsList = skillsets?.ToList() ?? new List<Skillset>();
+            return new ListSkillsetsResult(skillsetsList);
         }
 
         /// <summary> Initializes new instance of ListSynonymMapsResult class. </summary>
         /// <param name="synonymMaps"> The synonym maps in the Search service. </param>
         /// <returns> A new <see cref="Models.ListSynonymMapsResult"/> instance for mocking. </returns>
-        public static ListSynonymMapsResult ListSynonymMapsResult(IReadOnlyList<SynonymMap> synonymMaps = default)
+        public static ListSynonymMapsResult ListSynonymMapsResult(IEnumerable<SynonymMap> synonymMaps = default)
         {
-            synonymMaps ??= new List<SynonymMap>();
-            return new ListSynonymMapsResult(synonymMaps);
+            var synonymMapsList = synonymMaps?.ToList() ?? new List<SynonymMap>();
+            return new ListSynonymMapsResult(synonymMapsList);
         }
 
         /// <summary> Initializes new instance of ListIndexesResult class. </summary>
         /// <param name="indexes"> The indexes in the Search service. </param>
         /// <returns> A new <see cref="Models.ListIndexesResult"/> instance for mocking. </returns>
-        public static ListIndexesResult ListIndexesResult(IReadOnlyList<Models.Index> indexes = default)
+        public static ListIndexesResult ListIndexesResult(IEnumerable<Models.Index> indexes = default)
         {
-            indexes ??= new List<Models.Index>();
-            return new ListIndexesResult(indexes);
+            var indexesList = indexes?.ToList() ?? new List<Models.Index>();
+            return new ListIndexesResult(indexesList);
         }
 
         /// <summary> Initializes new instance of GetIndexStatisticsResult class. </summary>
@@ -233,10 +234,10 @@ namespace CognitiveSearch
         /// <summary> Initializes new instance of AnalyzeResult class. </summary>
         /// <param name="tokens"> The list of tokens returned by the analyzer specified in the request. </param>
         /// <returns> A new <see cref="Models.AnalyzeResult"/> instance for mocking. </returns>
-        public static AnalyzeResult AnalyzeResult(IReadOnlyList<TokenInfo> tokens = default)
+        public static AnalyzeResult AnalyzeResult(IEnumerable<TokenInfo> tokens = default)
         {
-            tokens ??= new List<TokenInfo>();
-            return new AnalyzeResult(tokens);
+            var tokensList = tokens?.ToList() ?? new List<TokenInfo>();
+            return new AnalyzeResult(tokensList);
         }
 
         /// <summary> Initializes new instance of TokenInfo class. </summary>

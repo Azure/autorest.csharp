@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Linq;
 using Azure.Network.Management.Interface.Models;
 
 namespace Azure.Network.Management.Interface
@@ -47,13 +48,13 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGuid"> The resource GUID property of the network interface resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network interface resource. </param>
         /// <returns> A new <see cref="Models.NetworkInterface"/> instance for mocking. </returns>
-        public static NetworkInterface NetworkInterface(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, SubResource virtualMachine = default, NetworkSecurityGroup networkSecurityGroup = default, PrivateEndpoint privateEndpoint = default, IList<NetworkInterfaceIPConfiguration> ipConfigurations = default, IReadOnlyList<NetworkInterfaceTapConfiguration> tapConfigurations = default, NetworkInterfaceDnsSettings dnsSettings = default, string macAddress = default, bool? primary = default, bool? enableAcceleratedNetworking = default, bool? enableIPForwarding = default, IReadOnlyList<string> hostedWorkloads = default, string resourceGuid = default, ProvisioningState? provisioningState = default)
+        public static NetworkInterface NetworkInterface(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, SubResource virtualMachine = default, NetworkSecurityGroup networkSecurityGroup = default, PrivateEndpoint privateEndpoint = default, IEnumerable<NetworkInterfaceIPConfiguration> ipConfigurations = default, IEnumerable<NetworkInterfaceTapConfiguration> tapConfigurations = default, NetworkInterfaceDnsSettings dnsSettings = default, string macAddress = default, bool? primary = default, bool? enableAcceleratedNetworking = default, bool? enableIPForwarding = default, IEnumerable<string> hostedWorkloads = default, string resourceGuid = default, ProvisioningState? provisioningState = default)
         {
             tags ??= new Dictionary<string, string>();
-            ipConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
-            tapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
-            hostedWorkloads ??= new List<string>();
-            return new NetworkInterface(id, name, type, location, tags, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations, tapConfigurations, dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads, resourceGuid, provisioningState);
+            var ipConfigurationsList = ipConfigurations?.ToList() ?? new List<NetworkInterfaceIPConfiguration>();
+            var tapConfigurationsList = tapConfigurations?.ToList() ?? new List<NetworkInterfaceTapConfiguration>();
+            var hostedWorkloadsList = hostedWorkloads?.ToList() ?? new List<string>();
+            return new NetworkInterface(id, name, type, location, tags, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurationsList, tapConfigurationsList, dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloadsList, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes new instance of NetworkSecurityGroup class. </summary>
@@ -70,14 +71,14 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGuid"> The resource GUID property of the network security group resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network security group resource. </param>
         /// <returns> A new <see cref="Models.NetworkSecurityGroup"/> instance for mocking. </returns>
-        public static NetworkSecurityGroup NetworkSecurityGroup(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, IList<SecurityRule> securityRules = default, IReadOnlyList<SecurityRule> defaultSecurityRules = default, IReadOnlyList<NetworkInterface> networkInterfaces = default, IReadOnlyList<Subnet> subnets = default, string resourceGuid = default, ProvisioningState? provisioningState = default)
+        public static NetworkSecurityGroup NetworkSecurityGroup(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, IEnumerable<SecurityRule> securityRules = default, IEnumerable<SecurityRule> defaultSecurityRules = default, IEnumerable<NetworkInterface> networkInterfaces = default, IEnumerable<Subnet> subnets = default, string resourceGuid = default, ProvisioningState? provisioningState = default)
         {
             tags ??= new Dictionary<string, string>();
-            securityRules ??= new List<SecurityRule>();
-            defaultSecurityRules ??= new List<SecurityRule>();
-            networkInterfaces ??= new List<NetworkInterface>();
-            subnets ??= new List<Subnet>();
-            return new NetworkSecurityGroup(id, name, type, location, tags, etag, securityRules, defaultSecurityRules, networkInterfaces, subnets, resourceGuid, provisioningState);
+            var securityRulesList = securityRules?.ToList() ?? new List<SecurityRule>();
+            var defaultSecurityRulesList = defaultSecurityRules?.ToList() ?? new List<SecurityRule>();
+            var networkInterfacesList = networkInterfaces?.ToList() ?? new List<NetworkInterface>();
+            var subnetsList = subnets?.ToList() ?? new List<Subnet>();
+            return new NetworkSecurityGroup(id, name, type, location, tags, etag, securityRulesList, defaultSecurityRulesList, networkInterfacesList, subnetsList, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes new instance of SecurityRule class. </summary>
@@ -101,15 +102,15 @@ namespace Azure.Network.Management.Interface
         /// <param name="direction"> The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic. </param>
         /// <param name="provisioningState"> The provisioning state of the security rule resource. </param>
         /// <returns> A new <see cref="Models.SecurityRule"/> instance for mocking. </returns>
-        public static SecurityRule SecurityRule(string id = default, string name = default, string etag = default, string description = default, SecurityRuleProtocol? protocol = default, string sourcePortRange = default, string destinationPortRange = default, string sourceAddressPrefix = default, IList<string> sourceAddressPrefixes = default, IList<ApplicationSecurityGroup> sourceApplicationSecurityGroups = default, string destinationAddressPrefix = default, IList<string> destinationAddressPrefixes = default, IList<ApplicationSecurityGroup> destinationApplicationSecurityGroups = default, IList<string> sourcePortRanges = default, IList<string> destinationPortRanges = default, SecurityRuleAccess? access = default, int? priority = default, SecurityRuleDirection? direction = default, ProvisioningState? provisioningState = default)
+        public static SecurityRule SecurityRule(string id = default, string name = default, string etag = default, string description = default, SecurityRuleProtocol? protocol = default, string sourcePortRange = default, string destinationPortRange = default, string sourceAddressPrefix = default, IEnumerable<string> sourceAddressPrefixes = default, IEnumerable<ApplicationSecurityGroup> sourceApplicationSecurityGroups = default, string destinationAddressPrefix = default, IEnumerable<string> destinationAddressPrefixes = default, IEnumerable<ApplicationSecurityGroup> destinationApplicationSecurityGroups = default, IEnumerable<string> sourcePortRanges = default, IEnumerable<string> destinationPortRanges = default, SecurityRuleAccess? access = default, int? priority = default, SecurityRuleDirection? direction = default, ProvisioningState? provisioningState = default)
         {
-            sourceAddressPrefixes ??= new List<string>();
-            sourceApplicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
-            destinationAddressPrefixes ??= new List<string>();
-            destinationApplicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
-            sourcePortRanges ??= new List<string>();
-            destinationPortRanges ??= new List<string>();
-            return new SecurityRule(id, name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes, sourceApplicationSecurityGroups, destinationAddressPrefix, destinationAddressPrefixes, destinationApplicationSecurityGroups, sourcePortRanges, destinationPortRanges, access, priority, direction, provisioningState);
+            var sourceAddressPrefixesList = sourceAddressPrefixes?.ToList() ?? new List<string>();
+            var sourceApplicationSecurityGroupsList = sourceApplicationSecurityGroups?.ToList() ?? new List<ApplicationSecurityGroup>();
+            var destinationAddressPrefixesList = destinationAddressPrefixes?.ToList() ?? new List<string>();
+            var destinationApplicationSecurityGroupsList = destinationApplicationSecurityGroups?.ToList() ?? new List<ApplicationSecurityGroup>();
+            var sourcePortRangesList = sourcePortRanges?.ToList() ?? new List<string>();
+            var destinationPortRangesList = destinationPortRanges?.ToList() ?? new List<string>();
+            return new SecurityRule(id, name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixesList, sourceApplicationSecurityGroupsList, destinationAddressPrefix, destinationAddressPrefixesList, destinationApplicationSecurityGroupsList, sourcePortRangesList, destinationPortRangesList, access, priority, direction, provisioningState);
         }
 
         /// <summary> Initializes new instance of ApplicationSecurityGroup class. </summary>
@@ -150,18 +151,18 @@ namespace Azure.Network.Management.Interface
         /// <param name="privateEndpointNetworkPolicies"> Enable or Disable apply network policies on private end point in the subnet. </param>
         /// <param name="privateLinkServiceNetworkPolicies"> Enable or Disable apply network policies on private link service in the subnet. </param>
         /// <returns> A new <see cref="Models.Subnet"/> instance for mocking. </returns>
-        public static Subnet Subnet(string id = default, string name = default, string etag = default, string addressPrefix = default, IList<string> addressPrefixes = default, NetworkSecurityGroup networkSecurityGroup = default, RouteTable routeTable = default, SubResource natGateway = default, IList<ServiceEndpointPropertiesFormat> serviceEndpoints = default, IList<ServiceEndpointPolicy> serviceEndpointPolicies = default, IReadOnlyList<PrivateEndpoint> privateEndpoints = default, IReadOnlyList<IPConfiguration> ipConfigurations = default, IReadOnlyList<IPConfigurationProfile> ipConfigurationProfiles = default, IReadOnlyList<ResourceNavigationLink> resourceNavigationLinks = default, IReadOnlyList<ServiceAssociationLink> serviceAssociationLinks = default, IList<Delegation> delegations = default, string purpose = default, ProvisioningState? provisioningState = default, string privateEndpointNetworkPolicies = default, string privateLinkServiceNetworkPolicies = default)
+        public static Subnet Subnet(string id = default, string name = default, string etag = default, string addressPrefix = default, IEnumerable<string> addressPrefixes = default, NetworkSecurityGroup networkSecurityGroup = default, RouteTable routeTable = default, SubResource natGateway = default, IEnumerable<ServiceEndpointPropertiesFormat> serviceEndpoints = default, IEnumerable<ServiceEndpointPolicy> serviceEndpointPolicies = default, IEnumerable<PrivateEndpoint> privateEndpoints = default, IEnumerable<IPConfiguration> ipConfigurations = default, IEnumerable<IPConfigurationProfile> ipConfigurationProfiles = default, IEnumerable<ResourceNavigationLink> resourceNavigationLinks = default, IEnumerable<ServiceAssociationLink> serviceAssociationLinks = default, IEnumerable<Delegation> delegations = default, string purpose = default, ProvisioningState? provisioningState = default, string privateEndpointNetworkPolicies = default, string privateLinkServiceNetworkPolicies = default)
         {
-            addressPrefixes ??= new List<string>();
-            serviceEndpoints ??= new List<ServiceEndpointPropertiesFormat>();
-            serviceEndpointPolicies ??= new List<ServiceEndpointPolicy>();
-            privateEndpoints ??= new List<PrivateEndpoint>();
-            ipConfigurations ??= new List<IPConfiguration>();
-            ipConfigurationProfiles ??= new List<IPConfigurationProfile>();
-            resourceNavigationLinks ??= new List<ResourceNavigationLink>();
-            serviceAssociationLinks ??= new List<ServiceAssociationLink>();
-            delegations ??= new List<Delegation>();
-            return new Subnet(id, name, etag, addressPrefix, addressPrefixes, networkSecurityGroup, routeTable, natGateway, serviceEndpoints, serviceEndpointPolicies, privateEndpoints, ipConfigurations, ipConfigurationProfiles, resourceNavigationLinks, serviceAssociationLinks, delegations, purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies);
+            var addressPrefixesList = addressPrefixes?.ToList() ?? new List<string>();
+            var serviceEndpointsList = serviceEndpoints?.ToList() ?? new List<ServiceEndpointPropertiesFormat>();
+            var serviceEndpointPoliciesList = serviceEndpointPolicies?.ToList() ?? new List<ServiceEndpointPolicy>();
+            var privateEndpointsList = privateEndpoints?.ToList() ?? new List<PrivateEndpoint>();
+            var ipConfigurationsList = ipConfigurations?.ToList() ?? new List<IPConfiguration>();
+            var ipConfigurationProfilesList = ipConfigurationProfiles?.ToList() ?? new List<IPConfigurationProfile>();
+            var resourceNavigationLinksList = resourceNavigationLinks?.ToList() ?? new List<ResourceNavigationLink>();
+            var serviceAssociationLinksList = serviceAssociationLinks?.ToList() ?? new List<ServiceAssociationLink>();
+            var delegationsList = delegations?.ToList() ?? new List<Delegation>();
+            return new Subnet(id, name, etag, addressPrefix, addressPrefixesList, networkSecurityGroup, routeTable, natGateway, serviceEndpointsList, serviceEndpointPoliciesList, privateEndpointsList, ipConfigurationsList, ipConfigurationProfilesList, resourceNavigationLinksList, serviceAssociationLinksList, delegationsList, purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies);
         }
 
         /// <summary> Initializes new instance of RouteTable class. </summary>
@@ -176,12 +177,12 @@ namespace Azure.Network.Management.Interface
         /// <param name="disableBgpRoutePropagation"> Whether to disable the routes learned by BGP on that route table. True means disable. </param>
         /// <param name="provisioningState"> The provisioning state of the route table resource. </param>
         /// <returns> A new <see cref="Models.RouteTable"/> instance for mocking. </returns>
-        public static RouteTable RouteTable(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, IList<Route> routes = default, IReadOnlyList<Subnet> subnets = default, bool? disableBgpRoutePropagation = default, ProvisioningState? provisioningState = default)
+        public static RouteTable RouteTable(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, IEnumerable<Route> routes = default, IEnumerable<Subnet> subnets = default, bool? disableBgpRoutePropagation = default, ProvisioningState? provisioningState = default)
         {
             tags ??= new Dictionary<string, string>();
-            routes ??= new List<Route>();
-            subnets ??= new List<Subnet>();
-            return new RouteTable(id, name, type, location, tags, etag, routes, subnets, disableBgpRoutePropagation, provisioningState);
+            var routesList = routes?.ToList() ?? new List<Route>();
+            var subnetsList = subnets?.ToList() ?? new List<Subnet>();
+            return new RouteTable(id, name, type, location, tags, etag, routesList, subnetsList, disableBgpRoutePropagation, provisioningState);
         }
 
         /// <summary> Initializes new instance of Route class. </summary>
@@ -203,10 +204,10 @@ namespace Azure.Network.Management.Interface
         /// <param name="locations"> A list of locations. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint resource. </param>
         /// <returns> A new <see cref="Models.ServiceEndpointPropertiesFormat"/> instance for mocking. </returns>
-        public static ServiceEndpointPropertiesFormat ServiceEndpointPropertiesFormat(string service = default, IList<string> locations = default, ProvisioningState? provisioningState = default)
+        public static ServiceEndpointPropertiesFormat ServiceEndpointPropertiesFormat(string service = default, IEnumerable<string> locations = default, ProvisioningState? provisioningState = default)
         {
-            locations ??= new List<string>();
-            return new ServiceEndpointPropertiesFormat(service, locations, provisioningState);
+            var locationsList = locations?.ToList() ?? new List<string>();
+            return new ServiceEndpointPropertiesFormat(service, locationsList, provisioningState);
         }
 
         /// <summary> Initializes new instance of ServiceEndpointPolicy class. </summary>
@@ -221,12 +222,12 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGuid"> The resource GUID property of the service endpoint policy resource. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint policy resource. </param>
         /// <returns> A new <see cref="Models.ServiceEndpointPolicy"/> instance for mocking. </returns>
-        public static ServiceEndpointPolicy ServiceEndpointPolicy(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, IList<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions = default, IReadOnlyList<Subnet> subnets = default, string resourceGuid = default, ProvisioningState? provisioningState = default)
+        public static ServiceEndpointPolicy ServiceEndpointPolicy(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, IEnumerable<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions = default, IEnumerable<Subnet> subnets = default, string resourceGuid = default, ProvisioningState? provisioningState = default)
         {
             tags ??= new Dictionary<string, string>();
-            serviceEndpointPolicyDefinitions ??= new List<ServiceEndpointPolicyDefinition>();
-            subnets ??= new List<Subnet>();
-            return new ServiceEndpointPolicy(id, name, type, location, tags, etag, serviceEndpointPolicyDefinitions, subnets, resourceGuid, provisioningState);
+            var serviceEndpointPolicyDefinitionsList = serviceEndpointPolicyDefinitions?.ToList() ?? new List<ServiceEndpointPolicyDefinition>();
+            var subnetsList = subnets?.ToList() ?? new List<Subnet>();
+            return new ServiceEndpointPolicy(id, name, type, location, tags, etag, serviceEndpointPolicyDefinitionsList, subnetsList, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes new instance of ServiceEndpointPolicyDefinition class. </summary>
@@ -238,10 +239,10 @@ namespace Azure.Network.Management.Interface
         /// <param name="serviceResources"> A list of service resources. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint policy definition resource. </param>
         /// <returns> A new <see cref="Models.ServiceEndpointPolicyDefinition"/> instance for mocking. </returns>
-        public static ServiceEndpointPolicyDefinition ServiceEndpointPolicyDefinition(string id = default, string name = default, string etag = default, string description = default, string service = default, IList<string> serviceResources = default, ProvisioningState? provisioningState = default)
+        public static ServiceEndpointPolicyDefinition ServiceEndpointPolicyDefinition(string id = default, string name = default, string etag = default, string description = default, string service = default, IEnumerable<string> serviceResources = default, ProvisioningState? provisioningState = default)
         {
-            serviceResources ??= new List<string>();
-            return new ServiceEndpointPolicyDefinition(id, name, etag, description, service, serviceResources, provisioningState);
+            var serviceResourcesList = serviceResources?.ToList() ?? new List<string>();
+            return new ServiceEndpointPolicyDefinition(id, name, etag, description, service, serviceResourcesList, provisioningState);
         }
 
         /// <summary> Initializes new instance of PrivateEndpoint class. </summary>
@@ -257,13 +258,13 @@ namespace Azure.Network.Management.Interface
         /// <param name="privateLinkServiceConnections"> A grouping of information about the connection to the remote resource. </param>
         /// <param name="manualPrivateLinkServiceConnections"> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </param>
         /// <returns> A new <see cref="Models.PrivateEndpoint"/> instance for mocking. </returns>
-        public static PrivateEndpoint PrivateEndpoint(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, Subnet subnet = default, IReadOnlyList<NetworkInterface> networkInterfaces = default, ProvisioningState? provisioningState = default, IList<PrivateLinkServiceConnection> privateLinkServiceConnections = default, IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = default)
+        public static PrivateEndpoint PrivateEndpoint(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, Subnet subnet = default, IEnumerable<NetworkInterface> networkInterfaces = default, ProvisioningState? provisioningState = default, IEnumerable<PrivateLinkServiceConnection> privateLinkServiceConnections = default, IEnumerable<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections = default)
         {
             tags ??= new Dictionary<string, string>();
-            networkInterfaces ??= new List<NetworkInterface>();
-            privateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
-            manualPrivateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
-            return new PrivateEndpoint(id, name, type, location, tags, etag, subnet, networkInterfaces, provisioningState, privateLinkServiceConnections, manualPrivateLinkServiceConnections);
+            var networkInterfacesList = networkInterfaces?.ToList() ?? new List<NetworkInterface>();
+            var privateLinkServiceConnectionsList = privateLinkServiceConnections?.ToList() ?? new List<PrivateLinkServiceConnection>();
+            var manualPrivateLinkServiceConnectionsList = manualPrivateLinkServiceConnections?.ToList() ?? new List<PrivateLinkServiceConnection>();
+            return new PrivateEndpoint(id, name, type, location, tags, etag, subnet, networkInterfacesList, provisioningState, privateLinkServiceConnectionsList, manualPrivateLinkServiceConnectionsList);
         }
 
         /// <summary> Initializes new instance of PrivateLinkServiceConnection class. </summary>
@@ -277,10 +278,10 @@ namespace Azure.Network.Management.Interface
         /// <param name="requestMessage"> A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of read-only information about the state of the connection to the remote resource. </param>
         /// <returns> A new <see cref="Models.PrivateLinkServiceConnection"/> instance for mocking. </returns>
-        public static PrivateLinkServiceConnection PrivateLinkServiceConnection(string id = default, string name = default, string type = default, string etag = default, ProvisioningState? provisioningState = default, string privateLinkServiceId = default, IList<string> groupIds = default, string requestMessage = default, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = default)
+        public static PrivateLinkServiceConnection PrivateLinkServiceConnection(string id = default, string name = default, string type = default, string etag = default, ProvisioningState? provisioningState = default, string privateLinkServiceId = default, IEnumerable<string> groupIds = default, string requestMessage = default, PrivateLinkServiceConnectionState privateLinkServiceConnectionState = default)
         {
-            groupIds ??= new List<string>();
-            return new PrivateLinkServiceConnection(id, name, type, etag, provisioningState, privateLinkServiceId, groupIds, requestMessage, privateLinkServiceConnectionState);
+            var groupIdsList = groupIds?.ToList() ?? new List<string>();
+            return new PrivateLinkServiceConnection(id, name, type, etag, provisioningState, privateLinkServiceId, groupIdsList, requestMessage, privateLinkServiceConnectionState);
         }
 
         /// <summary> Initializes new instance of IPConfiguration class. </summary>
@@ -319,12 +320,12 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGuid"> The resource GUID property of the public IP address resource. </param>
         /// <param name="provisioningState"> The provisioning state of the public IP address resource. </param>
         /// <returns> A new <see cref="Models.PublicIPAddress"/> instance for mocking. </returns>
-        public static PublicIPAddress PublicIPAddress(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, PublicIPAddressSku sku = default, string etag = default, IList<string> zones = default, IPAllocationMethod? publicIPAllocationMethod = default, IPVersion? publicIPAddressVersion = default, IPConfiguration ipConfiguration = default, PublicIPAddressDnsSettings dnsSettings = default, DdosSettings ddosSettings = default, IList<IpTag> ipTags = default, string ipAddress = default, SubResource publicIPPrefix = default, int? idleTimeoutInMinutes = default, string resourceGuid = default, ProvisioningState? provisioningState = default)
+        public static PublicIPAddress PublicIPAddress(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, PublicIPAddressSku sku = default, string etag = default, IEnumerable<string> zones = default, IPAllocationMethod? publicIPAllocationMethod = default, IPVersion? publicIPAddressVersion = default, IPConfiguration ipConfiguration = default, PublicIPAddressDnsSettings dnsSettings = default, DdosSettings ddosSettings = default, IEnumerable<IpTag> ipTags = default, string ipAddress = default, SubResource publicIPPrefix = default, int? idleTimeoutInMinutes = default, string resourceGuid = default, ProvisioningState? provisioningState = default)
         {
             tags ??= new Dictionary<string, string>();
-            zones ??= new List<string>();
-            ipTags ??= new List<IpTag>();
-            return new PublicIPAddress(id, name, type, location, tags, sku, etag, zones, publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags, ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState);
+            var zonesList = zones?.ToList() ?? new List<string>();
+            var ipTagsList = ipTags?.ToList() ?? new List<IpTag>();
+            return new PublicIPAddress(id, name, type, location, tags, sku, etag, zonesList, publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTagsList, ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes new instance of IPConfigurationProfile class. </summary>
@@ -365,10 +366,10 @@ namespace Azure.Network.Management.Interface
         /// <param name="allowDelete"> If true, the resource can be deleted. </param>
         /// <param name="locations"> A list of locations. </param>
         /// <returns> A new <see cref="Models.ServiceAssociationLink"/> instance for mocking. </returns>
-        public static ServiceAssociationLink ServiceAssociationLink(string id = default, string name = default, string etag = default, string type = default, string linkedResourceType = default, string link = default, ProvisioningState? provisioningState = default, bool? allowDelete = default, IList<string> locations = default)
+        public static ServiceAssociationLink ServiceAssociationLink(string id = default, string name = default, string etag = default, string type = default, string linkedResourceType = default, string link = default, ProvisioningState? provisioningState = default, bool? allowDelete = default, IEnumerable<string> locations = default)
         {
-            locations ??= new List<string>();
-            return new ServiceAssociationLink(id, name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations);
+            var locationsList = locations?.ToList() ?? new List<string>();
+            return new ServiceAssociationLink(id, name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locationsList);
         }
 
         /// <summary> Initializes new instance of Delegation class. </summary>
@@ -379,10 +380,10 @@ namespace Azure.Network.Management.Interface
         /// <param name="actions"> The actions permitted to the service upon delegation. </param>
         /// <param name="provisioningState"> The provisioning state of the service delegation resource. </param>
         /// <returns> A new <see cref="Models.Delegation"/> instance for mocking. </returns>
-        public static Delegation Delegation(string id = default, string name = default, string etag = default, string serviceName = default, IReadOnlyList<string> actions = default, ProvisioningState? provisioningState = default)
+        public static Delegation Delegation(string id = default, string name = default, string etag = default, string serviceName = default, IEnumerable<string> actions = default, ProvisioningState? provisioningState = default)
         {
-            actions ??= new List<string>();
-            return new Delegation(id, name, etag, serviceName, actions, provisioningState);
+            var actionsList = actions?.ToList() ?? new List<string>();
+            return new Delegation(id, name, etag, serviceName, actionsList, provisioningState);
         }
 
         /// <summary> Initializes new instance of NetworkInterfaceIPConfiguration class. </summary>
@@ -403,14 +404,14 @@ namespace Azure.Network.Management.Interface
         /// <param name="provisioningState"> The provisioning state of the network interface IP configuration. </param>
         /// <param name="privateLinkConnectionProperties"> PrivateLinkConnection properties for the network interface. </param>
         /// <returns> A new <see cref="Models.NetworkInterfaceIPConfiguration"/> instance for mocking. </returns>
-        public static NetworkInterfaceIPConfiguration NetworkInterfaceIPConfiguration(string id = default, string name = default, string etag = default, IList<VirtualNetworkTap> virtualNetworkTaps = default, IList<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = default, IList<BackendAddressPool> loadBalancerBackendAddressPools = default, IList<InboundNatRule> loadBalancerInboundNatRules = default, string privateIPAddress = default, IPAllocationMethod? privateIPAllocationMethod = default, IPVersion? privateIPAddressVersion = default, Subnet subnet = default, bool? primary = default, PublicIPAddress publicIPAddress = default, IList<ApplicationSecurityGroup> applicationSecurityGroups = default, ProvisioningState? provisioningState = default, NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = default)
+        public static NetworkInterfaceIPConfiguration NetworkInterfaceIPConfiguration(string id = default, string name = default, string etag = default, IEnumerable<VirtualNetworkTap> virtualNetworkTaps = default, IEnumerable<ApplicationGatewayBackendAddressPool> applicationGatewayBackendAddressPools = default, IEnumerable<BackendAddressPool> loadBalancerBackendAddressPools = default, IEnumerable<InboundNatRule> loadBalancerInboundNatRules = default, string privateIPAddress = default, IPAllocationMethod? privateIPAllocationMethod = default, IPVersion? privateIPAddressVersion = default, Subnet subnet = default, bool? primary = default, PublicIPAddress publicIPAddress = default, IEnumerable<ApplicationSecurityGroup> applicationSecurityGroups = default, ProvisioningState? provisioningState = default, NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties privateLinkConnectionProperties = default)
         {
-            virtualNetworkTaps ??= new List<VirtualNetworkTap>();
-            applicationGatewayBackendAddressPools ??= new List<ApplicationGatewayBackendAddressPool>();
-            loadBalancerBackendAddressPools ??= new List<BackendAddressPool>();
-            loadBalancerInboundNatRules ??= new List<InboundNatRule>();
-            applicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
-            return new NetworkInterfaceIPConfiguration(id, name, etag, virtualNetworkTaps, applicationGatewayBackendAddressPools, loadBalancerBackendAddressPools, loadBalancerInboundNatRules, privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups, provisioningState, privateLinkConnectionProperties);
+            var virtualNetworkTapsList = virtualNetworkTaps?.ToList() ?? new List<VirtualNetworkTap>();
+            var applicationGatewayBackendAddressPoolsList = applicationGatewayBackendAddressPools?.ToList() ?? new List<ApplicationGatewayBackendAddressPool>();
+            var loadBalancerBackendAddressPoolsList = loadBalancerBackendAddressPools?.ToList() ?? new List<BackendAddressPool>();
+            var loadBalancerInboundNatRulesList = loadBalancerInboundNatRules?.ToList() ?? new List<InboundNatRule>();
+            var applicationSecurityGroupsList = applicationSecurityGroups?.ToList() ?? new List<ApplicationSecurityGroup>();
+            return new NetworkInterfaceIPConfiguration(id, name, etag, virtualNetworkTapsList, applicationGatewayBackendAddressPoolsList, loadBalancerBackendAddressPoolsList, loadBalancerInboundNatRulesList, privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroupsList, provisioningState, privateLinkConnectionProperties);
         }
 
         /// <summary> Initializes new instance of VirtualNetworkTap class. </summary>
@@ -427,11 +428,11 @@ namespace Azure.Network.Management.Interface
         /// <param name="destinationLoadBalancerFrontEndIPConfiguration"> The reference to the private IP address on the internal Load Balancer that will receive the tap. </param>
         /// <param name="destinationPort"> The VXLAN destination port that will receive the tapped traffic. </param>
         /// <returns> A new <see cref="Models.VirtualNetworkTap"/> instance for mocking. </returns>
-        public static VirtualNetworkTap VirtualNetworkTap(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, IReadOnlyList<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations = default, string resourceGuid = default, ProvisioningState? provisioningState = default, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration = default, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration = default, int? destinationPort = default)
+        public static VirtualNetworkTap VirtualNetworkTap(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, string etag = default, IEnumerable<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations = default, string resourceGuid = default, ProvisioningState? provisioningState = default, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration = default, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration = default, int? destinationPort = default)
         {
             tags ??= new Dictionary<string, string>();
-            networkInterfaceTapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
-            return new VirtualNetworkTap(id, name, type, location, tags, etag, networkInterfaceTapConfigurations, resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort);
+            var networkInterfaceTapConfigurationsList = networkInterfaceTapConfigurations?.ToList() ?? new List<NetworkInterfaceTapConfiguration>();
+            return new VirtualNetworkTap(id, name, type, location, tags, etag, networkInterfaceTapConfigurationsList, resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort);
         }
 
         /// <summary> Initializes new instance of NetworkInterfaceTapConfiguration class. </summary>
@@ -465,14 +466,14 @@ namespace Azure.Network.Management.Interface
         /// <param name="publicIPPrefix"> The reference to the Public IP Prefix resource. </param>
         /// <param name="provisioningState"> The provisioning state of the frontend IP configuration resource. </param>
         /// <returns> A new <see cref="Models.FrontendIPConfiguration"/> instance for mocking. </returns>
-        public static FrontendIPConfiguration FrontendIPConfiguration(string id = default, string name = default, string etag = default, string type = default, IList<string> zones = default, IReadOnlyList<SubResource> inboundNatRules = default, IReadOnlyList<SubResource> inboundNatPools = default, IReadOnlyList<SubResource> outboundRules = default, IReadOnlyList<SubResource> loadBalancingRules = default, string privateIPAddress = default, IPAllocationMethod? privateIPAllocationMethod = default, IPVersion? privateIPAddressVersion = default, Subnet subnet = default, PublicIPAddress publicIPAddress = default, SubResource publicIPPrefix = default, ProvisioningState? provisioningState = default)
+        public static FrontendIPConfiguration FrontendIPConfiguration(string id = default, string name = default, string etag = default, string type = default, IEnumerable<string> zones = default, IEnumerable<SubResource> inboundNatRules = default, IEnumerable<SubResource> inboundNatPools = default, IEnumerable<SubResource> outboundRules = default, IEnumerable<SubResource> loadBalancingRules = default, string privateIPAddress = default, IPAllocationMethod? privateIPAllocationMethod = default, IPVersion? privateIPAddressVersion = default, Subnet subnet = default, PublicIPAddress publicIPAddress = default, SubResource publicIPPrefix = default, ProvisioningState? provisioningState = default)
         {
-            zones ??= new List<string>();
-            inboundNatRules ??= new List<SubResource>();
-            inboundNatPools ??= new List<SubResource>();
-            outboundRules ??= new List<SubResource>();
-            loadBalancingRules ??= new List<SubResource>();
-            return new FrontendIPConfiguration(id, name, etag, type, zones, inboundNatRules, inboundNatPools, outboundRules, loadBalancingRules, privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState);
+            var zonesList = zones?.ToList() ?? new List<string>();
+            var inboundNatRulesList = inboundNatRules?.ToList() ?? new List<SubResource>();
+            var inboundNatPoolsList = inboundNatPools?.ToList() ?? new List<SubResource>();
+            var outboundRulesList = outboundRules?.ToList() ?? new List<SubResource>();
+            var loadBalancingRulesList = loadBalancingRules?.ToList() ?? new List<SubResource>();
+            return new FrontendIPConfiguration(id, name, etag, type, zonesList, inboundNatRulesList, inboundNatPoolsList, outboundRulesList, loadBalancingRulesList, privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState);
         }
 
         /// <summary> Initializes new instance of ApplicationGatewayBackendAddressPool class. </summary>
@@ -484,11 +485,11 @@ namespace Azure.Network.Management.Interface
         /// <param name="backendAddresses"> Backend addresses. </param>
         /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
         /// <returns> A new <see cref="Models.ApplicationGatewayBackendAddressPool"/> instance for mocking. </returns>
-        public static ApplicationGatewayBackendAddressPool ApplicationGatewayBackendAddressPool(string id = default, string name = default, string etag = default, string type = default, IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default, IList<ApplicationGatewayBackendAddress> backendAddresses = default, ProvisioningState? provisioningState = default)
+        public static ApplicationGatewayBackendAddressPool ApplicationGatewayBackendAddressPool(string id = default, string name = default, string etag = default, string type = default, IEnumerable<NetworkInterfaceIPConfiguration> backendIPConfigurations = default, IEnumerable<ApplicationGatewayBackendAddress> backendAddresses = default, ProvisioningState? provisioningState = default)
         {
-            backendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
-            backendAddresses ??= new List<ApplicationGatewayBackendAddress>();
-            return new ApplicationGatewayBackendAddressPool(id, name, etag, type, backendIPConfigurations, backendAddresses, provisioningState);
+            var backendIPConfigurationsList = backendIPConfigurations?.ToList() ?? new List<NetworkInterfaceIPConfiguration>();
+            var backendAddressesList = backendAddresses?.ToList() ?? new List<ApplicationGatewayBackendAddress>();
+            return new ApplicationGatewayBackendAddressPool(id, name, etag, type, backendIPConfigurationsList, backendAddressesList, provisioningState);
         }
 
         /// <summary> Initializes new instance of BackendAddressPool class. </summary>
@@ -502,12 +503,12 @@ namespace Azure.Network.Management.Interface
         /// <param name="outboundRules"> An array of references to outbound rules that use this backend address pool. </param>
         /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
         /// <returns> A new <see cref="Models.BackendAddressPool"/> instance for mocking. </returns>
-        public static BackendAddressPool BackendAddressPool(string id = default, string name = default, string etag = default, string type = default, IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations = default, IReadOnlyList<SubResource> loadBalancingRules = default, SubResource outboundRule = default, IReadOnlyList<SubResource> outboundRules = default, ProvisioningState? provisioningState = default)
+        public static BackendAddressPool BackendAddressPool(string id = default, string name = default, string etag = default, string type = default, IEnumerable<NetworkInterfaceIPConfiguration> backendIPConfigurations = default, IEnumerable<SubResource> loadBalancingRules = default, SubResource outboundRule = default, IEnumerable<SubResource> outboundRules = default, ProvisioningState? provisioningState = default)
         {
-            backendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
-            loadBalancingRules ??= new List<SubResource>();
-            outboundRules ??= new List<SubResource>();
-            return new BackendAddressPool(id, name, etag, type, backendIPConfigurations, loadBalancingRules, outboundRule, outboundRules, provisioningState);
+            var backendIPConfigurationsList = backendIPConfigurations?.ToList() ?? new List<NetworkInterfaceIPConfiguration>();
+            var loadBalancingRulesList = loadBalancingRules?.ToList() ?? new List<SubResource>();
+            var outboundRulesList = outboundRules?.ToList() ?? new List<SubResource>();
+            return new BackendAddressPool(id, name, etag, type, backendIPConfigurationsList, loadBalancingRulesList, outboundRule, outboundRulesList, provisioningState);
         }
 
         /// <summary> Initializes new instance of InboundNatRule class. </summary>
@@ -535,10 +536,10 @@ namespace Azure.Network.Management.Interface
         /// <param name="requiredMemberName"> The required member name for current private link connection. </param>
         /// <param name="fqdns"> List of FQDNs for current private link connection. </param>
         /// <returns> A new <see cref="Models.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties"/> instance for mocking. </returns>
-        public static NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(string groupId = default, string requiredMemberName = default, IReadOnlyList<string> fqdns = default)
+        public static NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(string groupId = default, string requiredMemberName = default, IEnumerable<string> fqdns = default)
         {
-            fqdns ??= new List<string>();
-            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns);
+            var fqdnsList = fqdns?.ToList() ?? new List<string>();
+            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdnsList);
         }
 
         /// <summary> Initializes new instance of NetworkInterfaceDnsSettings class. </summary>
@@ -548,21 +549,21 @@ namespace Azure.Network.Management.Interface
         /// <param name="internalFqdn"> Fully qualified DNS name supporting internal communications between VMs in the same virtual network. </param>
         /// <param name="internalDomainNameSuffix"> Even if internalDnsNameLabel is not specified, a DNS entry is created for the primary NIC of the VM. This DNS name can be constructed by concatenating the VM name with the value of internalDomainNameSuffix. </param>
         /// <returns> A new <see cref="Models.NetworkInterfaceDnsSettings"/> instance for mocking. </returns>
-        public static NetworkInterfaceDnsSettings NetworkInterfaceDnsSettings(IList<string> dnsServers = default, IReadOnlyList<string> appliedDnsServers = default, string internalDnsNameLabel = default, string internalFqdn = default, string internalDomainNameSuffix = default)
+        public static NetworkInterfaceDnsSettings NetworkInterfaceDnsSettings(IEnumerable<string> dnsServers = default, IEnumerable<string> appliedDnsServers = default, string internalDnsNameLabel = default, string internalFqdn = default, string internalDomainNameSuffix = default)
         {
-            dnsServers ??= new List<string>();
-            appliedDnsServers ??= new List<string>();
-            return new NetworkInterfaceDnsSettings(dnsServers, appliedDnsServers, internalDnsNameLabel, internalFqdn, internalDomainNameSuffix);
+            var dnsServersList = dnsServers?.ToList() ?? new List<string>();
+            var appliedDnsServersList = appliedDnsServers?.ToList() ?? new List<string>();
+            return new NetworkInterfaceDnsSettings(dnsServersList, appliedDnsServersList, internalDnsNameLabel, internalFqdn, internalDomainNameSuffix);
         }
 
         /// <summary> Initializes new instance of EffectiveRouteListResult class. </summary>
         /// <param name="value"> A list of effective routes. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <returns> A new <see cref="Models.EffectiveRouteListResult"/> instance for mocking. </returns>
-        public static EffectiveRouteListResult EffectiveRouteListResult(IReadOnlyList<EffectiveRoute> value = default, string nextLink = default)
+        public static EffectiveRouteListResult EffectiveRouteListResult(IEnumerable<EffectiveRoute> value = default, string nextLink = default)
         {
-            value ??= new List<EffectiveRoute>();
-            return new EffectiveRouteListResult(value, nextLink);
+            var valueList = value?.ToList() ?? new List<EffectiveRoute>();
+            return new EffectiveRouteListResult(valueList, nextLink);
         }
 
         /// <summary> Initializes new instance of EffectiveRoute class. </summary>
@@ -574,21 +575,21 @@ namespace Azure.Network.Management.Interface
         /// <param name="nextHopIpAddress"> The IP address of the next hop of the effective route. </param>
         /// <param name="nextHopType"> The type of Azure hop the packet should be sent to. </param>
         /// <returns> A new <see cref="Models.EffectiveRoute"/> instance for mocking. </returns>
-        public static EffectiveRoute EffectiveRoute(string name = default, bool? disableBgpRoutePropagation = default, EffectiveRouteSource? source = default, EffectiveRouteState? state = default, IReadOnlyList<string> addressPrefix = default, IReadOnlyList<string> nextHopIpAddress = default, RouteNextHopType? nextHopType = default)
+        public static EffectiveRoute EffectiveRoute(string name = default, bool? disableBgpRoutePropagation = default, EffectiveRouteSource? source = default, EffectiveRouteState? state = default, IEnumerable<string> addressPrefix = default, IEnumerable<string> nextHopIpAddress = default, RouteNextHopType? nextHopType = default)
         {
-            addressPrefix ??= new List<string>();
-            nextHopIpAddress ??= new List<string>();
-            return new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefix, nextHopIpAddress, nextHopType);
+            var addressPrefixList = addressPrefix?.ToList() ?? new List<string>();
+            var nextHopIpAddressList = nextHopIpAddress?.ToList() ?? new List<string>();
+            return new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefixList, nextHopIpAddressList, nextHopType);
         }
 
         /// <summary> Initializes new instance of EffectiveNetworkSecurityGroupListResult class. </summary>
         /// <param name="value"> A list of effective network security groups. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityGroupListResult"/> instance for mocking. </returns>
-        public static EffectiveNetworkSecurityGroupListResult EffectiveNetworkSecurityGroupListResult(IReadOnlyList<EffectiveNetworkSecurityGroup> value = default, string nextLink = default)
+        public static EffectiveNetworkSecurityGroupListResult EffectiveNetworkSecurityGroupListResult(IEnumerable<EffectiveNetworkSecurityGroup> value = default, string nextLink = default)
         {
-            value ??= new List<EffectiveNetworkSecurityGroup>();
-            return new EffectiveNetworkSecurityGroupListResult(value, nextLink);
+            var valueList = value?.ToList() ?? new List<EffectiveNetworkSecurityGroup>();
+            return new EffectiveNetworkSecurityGroupListResult(valueList, nextLink);
         }
 
         /// <summary> Initializes new instance of EffectiveNetworkSecurityGroup class. </summary>
@@ -597,10 +598,10 @@ namespace Azure.Network.Management.Interface
         /// <param name="effectiveSecurityRules"> A collection of effective security rules. </param>
         /// <param name="tagMap"> Mapping of tags to list of IP Addresses included within the tag. </param>
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityGroup"/> instance for mocking. </returns>
-        public static EffectiveNetworkSecurityGroup EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup = default, EffectiveNetworkSecurityGroupAssociation association = default, IReadOnlyList<EffectiveNetworkSecurityRule> effectiveSecurityRules = default, string tagMap = default)
+        public static EffectiveNetworkSecurityGroup EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup = default, EffectiveNetworkSecurityGroupAssociation association = default, IEnumerable<EffectiveNetworkSecurityRule> effectiveSecurityRules = default, string tagMap = default)
         {
-            effectiveSecurityRules ??= new List<EffectiveNetworkSecurityRule>();
-            return new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRules, tagMap);
+            var effectiveSecurityRulesList = effectiveSecurityRules?.ToList() ?? new List<EffectiveNetworkSecurityRule>();
+            return new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRulesList, tagMap);
         }
 
         /// <summary> Initializes new instance of EffectiveNetworkSecurityGroupAssociation class. </summary>
@@ -629,15 +630,15 @@ namespace Azure.Network.Management.Interface
         /// <param name="priority"> The priority of the rule. </param>
         /// <param name="direction"> The direction of the rule. </param>
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityRule"/> instance for mocking. </returns>
-        public static EffectiveNetworkSecurityRule EffectiveNetworkSecurityRule(string name = default, EffectiveSecurityRuleProtocol? protocol = default, string sourcePortRange = default, string destinationPortRange = default, IReadOnlyList<string> sourcePortRanges = default, IReadOnlyList<string> destinationPortRanges = default, string sourceAddressPrefix = default, string destinationAddressPrefix = default, IReadOnlyList<string> sourceAddressPrefixes = default, IReadOnlyList<string> destinationAddressPrefixes = default, IReadOnlyList<string> expandedSourceAddressPrefix = default, IReadOnlyList<string> expandedDestinationAddressPrefix = default, SecurityRuleAccess? access = default, int? priority = default, SecurityRuleDirection? direction = default)
+        public static EffectiveNetworkSecurityRule EffectiveNetworkSecurityRule(string name = default, EffectiveSecurityRuleProtocol? protocol = default, string sourcePortRange = default, string destinationPortRange = default, IEnumerable<string> sourcePortRanges = default, IEnumerable<string> destinationPortRanges = default, string sourceAddressPrefix = default, string destinationAddressPrefix = default, IEnumerable<string> sourceAddressPrefixes = default, IEnumerable<string> destinationAddressPrefixes = default, IEnumerable<string> expandedSourceAddressPrefix = default, IEnumerable<string> expandedDestinationAddressPrefix = default, SecurityRuleAccess? access = default, int? priority = default, SecurityRuleDirection? direction = default)
         {
-            sourcePortRanges ??= new List<string>();
-            destinationPortRanges ??= new List<string>();
-            sourceAddressPrefixes ??= new List<string>();
-            destinationAddressPrefixes ??= new List<string>();
-            expandedSourceAddressPrefix ??= new List<string>();
-            expandedDestinationAddressPrefix ??= new List<string>();
-            return new EffectiveNetworkSecurityRule(name, protocol, sourcePortRange, destinationPortRange, sourcePortRanges, destinationPortRanges, sourceAddressPrefix, destinationAddressPrefix, sourceAddressPrefixes, destinationAddressPrefixes, expandedSourceAddressPrefix, expandedDestinationAddressPrefix, access, priority, direction);
+            var sourcePortRangesList = sourcePortRanges?.ToList() ?? new List<string>();
+            var destinationPortRangesList = destinationPortRanges?.ToList() ?? new List<string>();
+            var sourceAddressPrefixesList = sourceAddressPrefixes?.ToList() ?? new List<string>();
+            var destinationAddressPrefixesList = destinationAddressPrefixes?.ToList() ?? new List<string>();
+            var expandedSourceAddressPrefixList = expandedSourceAddressPrefix?.ToList() ?? new List<string>();
+            var expandedDestinationAddressPrefixList = expandedDestinationAddressPrefix?.ToList() ?? new List<string>();
+            return new EffectiveNetworkSecurityRule(name, protocol, sourcePortRange, destinationPortRange, sourcePortRangesList, destinationPortRangesList, sourceAddressPrefix, destinationAddressPrefix, sourceAddressPrefixesList, destinationAddressPrefixesList, expandedSourceAddressPrefixList, expandedDestinationAddressPrefixList, access, priority, direction);
         }
 
         /// <summary> Initializes new instance of LoadBalancer class. </summary>
@@ -658,17 +659,17 @@ namespace Azure.Network.Management.Interface
         /// <param name="resourceGuid"> The resource GUID property of the load balancer resource. </param>
         /// <param name="provisioningState"> The provisioning state of the load balancer resource. </param>
         /// <returns> A new <see cref="Models.LoadBalancer"/> instance for mocking. </returns>
-        public static LoadBalancer LoadBalancer(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, LoadBalancerSku sku = default, string etag = default, IList<FrontendIPConfiguration> frontendIPConfigurations = default, IList<BackendAddressPool> backendAddressPools = default, IList<LoadBalancingRule> loadBalancingRules = default, IList<Probe> probes = default, IList<InboundNatRule> inboundNatRules = default, IList<InboundNatPool> inboundNatPools = default, IList<OutboundRule> outboundRules = default, string resourceGuid = default, ProvisioningState? provisioningState = default)
+        public static LoadBalancer LoadBalancer(string id = default, string name = default, string type = default, string location = default, IDictionary<string, string> tags = default, LoadBalancerSku sku = default, string etag = default, IEnumerable<FrontendIPConfiguration> frontendIPConfigurations = default, IEnumerable<BackendAddressPool> backendAddressPools = default, IEnumerable<LoadBalancingRule> loadBalancingRules = default, IEnumerable<Probe> probes = default, IEnumerable<InboundNatRule> inboundNatRules = default, IEnumerable<InboundNatPool> inboundNatPools = default, IEnumerable<OutboundRule> outboundRules = default, string resourceGuid = default, ProvisioningState? provisioningState = default)
         {
             tags ??= new Dictionary<string, string>();
-            frontendIPConfigurations ??= new List<FrontendIPConfiguration>();
-            backendAddressPools ??= new List<BackendAddressPool>();
-            loadBalancingRules ??= new List<LoadBalancingRule>();
-            probes ??= new List<Probe>();
-            inboundNatRules ??= new List<InboundNatRule>();
-            inboundNatPools ??= new List<InboundNatPool>();
-            outboundRules ??= new List<OutboundRule>();
-            return new LoadBalancer(id, name, type, location, tags, sku, etag, frontendIPConfigurations, backendAddressPools, loadBalancingRules, probes, inboundNatRules, inboundNatPools, outboundRules, resourceGuid, provisioningState);
+            var frontendIPConfigurationsList = frontendIPConfigurations?.ToList() ?? new List<FrontendIPConfiguration>();
+            var backendAddressPoolsList = backendAddressPools?.ToList() ?? new List<BackendAddressPool>();
+            var loadBalancingRulesList = loadBalancingRules?.ToList() ?? new List<LoadBalancingRule>();
+            var probesList = probes?.ToList() ?? new List<Probe>();
+            var inboundNatRulesList = inboundNatRules?.ToList() ?? new List<InboundNatRule>();
+            var inboundNatPoolsList = inboundNatPools?.ToList() ?? new List<InboundNatPool>();
+            var outboundRulesList = outboundRules?.ToList() ?? new List<OutboundRule>();
+            return new LoadBalancer(id, name, type, location, tags, sku, etag, frontendIPConfigurationsList, backendAddressPoolsList, loadBalancingRulesList, probesList, inboundNatRulesList, inboundNatPoolsList, outboundRulesList, resourceGuid, provisioningState);
         }
 
         /// <summary> Initializes new instance of LoadBalancingRule class. </summary>
@@ -707,10 +708,10 @@ namespace Azure.Network.Management.Interface
         /// <param name="requestPath"> The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value. </param>
         /// <param name="provisioningState"> The provisioning state of the probe resource. </param>
         /// <returns> A new <see cref="Models.Probe"/> instance for mocking. </returns>
-        public static Probe Probe(string id = default, string name = default, string etag = default, string type = default, IReadOnlyList<SubResource> loadBalancingRules = default, ProbeProtocol? protocol = default, int? port = default, int? intervalInSeconds = default, int? numberOfProbes = default, string requestPath = default, ProvisioningState? provisioningState = default)
+        public static Probe Probe(string id = default, string name = default, string etag = default, string type = default, IEnumerable<SubResource> loadBalancingRules = default, ProbeProtocol? protocol = default, int? port = default, int? intervalInSeconds = default, int? numberOfProbes = default, string requestPath = default, ProvisioningState? provisioningState = default)
         {
-            loadBalancingRules ??= new List<SubResource>();
-            return new Probe(id, name, etag, type, loadBalancingRules, protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState);
+            var loadBalancingRulesList = loadBalancingRules?.ToList() ?? new List<SubResource>();
+            return new Probe(id, name, etag, type, loadBalancingRulesList, protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState);
         }
 
         /// <summary> Initializes new instance of InboundNatPool class. </summary>
@@ -746,10 +747,10 @@ namespace Azure.Network.Management.Interface
         /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
         /// <param name="idleTimeoutInMinutes"> The timeout for the TCP idle connection. </param>
         /// <returns> A new <see cref="Models.OutboundRule"/> instance for mocking. </returns>
-        public static OutboundRule OutboundRule(string id = default, string name = default, string etag = default, string type = default, int? allocatedOutboundPorts = default, IList<SubResource> frontendIPConfigurations = default, SubResource backendAddressPool = default, ProvisioningState? provisioningState = default, LoadBalancerOutboundRuleProtocol? protocol = default, bool? enableTcpReset = default, int? idleTimeoutInMinutes = default)
+        public static OutboundRule OutboundRule(string id = default, string name = default, string etag = default, string type = default, int? allocatedOutboundPorts = default, IEnumerable<SubResource> frontendIPConfigurations = default, SubResource backendAddressPool = default, ProvisioningState? provisioningState = default, LoadBalancerOutboundRuleProtocol? protocol = default, bool? enableTcpReset = default, int? idleTimeoutInMinutes = default)
         {
-            frontendIPConfigurations ??= new List<SubResource>();
-            return new OutboundRule(id, name, etag, type, allocatedOutboundPorts, frontendIPConfigurations, backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes);
+            var frontendIPConfigurationsList = frontendIPConfigurations?.ToList() ?? new List<SubResource>();
+            return new OutboundRule(id, name, etag, type, allocatedOutboundPorts, frontendIPConfigurationsList, backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes);
         }
     }
 }

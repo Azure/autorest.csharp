@@ -31,9 +31,10 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool enforceDefaultValue = false)
+        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool enforceDefaultValue = false, bool parameterInPublicMethod = false)
         {
-            writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
+            var parameterType = parameterInPublicMethod ? TypeFactory.GetInputType(clientParameter.Type) : clientParameter.Type;
+            writer.Append($"{parameterType} {clientParameter.Name:D}");
             if (clientParameter.DefaultValue != null)
             {
                 if (TypeFactory.CanBeInitializedInline(clientParameter.Type, clientParameter.DefaultValue))

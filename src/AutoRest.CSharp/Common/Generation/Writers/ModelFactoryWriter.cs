@@ -1,7 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -38,32 +41,41 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"public static {objectType.Type} {objectType.Type.Name}(");
             foreach (var parameter in parameters)
             {
-                writer.WriteParameter(parameter, enforceDefaultValue: true);
+                writer.WriteParameter(parameter, enforceDefaultValue: true, parameterInPublicMethod: true);
             }
             writer.RemoveTrailingComma();
             writer.Append($")");
 
             using (writer.Scope())
             {
+                var ctorParameterNames = new List<string>();
                 foreach (var parameter in parameters)
                 {
+                    var ctorParameterName = parameter.Name;
                     if (parameter.DefaultValue != null && !TypeFactory.CanBeInitializedInline(parameter.Type, parameter.DefaultValue))
                     {
                         writer.Append($"{parameter.Name} ??= ");
                         writer.WriteConstant(parameter.DefaultValue.Value);
                         writer.Line($";");
                     }
-                    else if (TypeFactory.IsCollectionType(parameter.Type))
+                    else if (TypeFactory.IsDictionary(parameter.Type))
                     {
                         writer.Line($"{parameter.Name} ??= new {TypeFactory.GetImplementationType(parameter.Type)}();");
                     }
+                    else if (TypeFactory.IsList(parameter.Type))
+                    {
+                        ctorParameterName = $"{parameter.Name}List";
+                        writer.UseNamespace(typeof(System.Linq.Enumerable).Namespace!);
+                        writer.Line($"var {ctorParameterName} = {parameter.Name}?.ToList() ?? new {TypeFactory.GetImplementationType(parameter.Type)}();");
+                    }
+
+                    ctorParameterNames.Add(ctorParameterName);
                 }
 
                 writer.Append($"return new {objectType.Type}(");
-                foreach (var parameter in parameters)
+                foreach (var ctorParameterName in ctorParameterNames)
                 {
-                    writer.Identifier(parameter.Name);
-                    writer.AppendRaw(", ");
+                    writer.Identifier(ctorParameterName).AppendRaw(", ");
                 }
                 writer.RemoveTrailingComma();
                 writer.Append($");");

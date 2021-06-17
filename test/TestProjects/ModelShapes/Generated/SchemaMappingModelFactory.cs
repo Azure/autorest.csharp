@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Linq;
 using ModelShapes.Models;
 
 namespace ModelShapes
@@ -33,17 +34,17 @@ namespace ModelShapes
         /// <param name="requiredReadonlyInt"> . </param>
         /// <param name="nonRequiredReadonlyInt"> . </param>
         /// <returns> A new <see cref="Models.MixedModel"/> instance for mocking. </returns>
-        public static MixedModel MixedModel(string requiredString = default, int requiredInt = default, IList<string> requiredStringList = default, IList<int> requiredIntList = default, string nonRequiredString = default, int? nonRequiredInt = default, IList<string> nonRequiredStringList = default, IList<int> nonRequiredIntList = default, string requiredNullableString = default, int? requiredNullableInt = default, IList<string> requiredNullableStringList = default, IList<int> requiredNullableIntList = default, string nonRequiredNullableString = default, int? nonRequiredNullableInt = default, IList<string> nonRequiredNullableStringList = default, IList<int> nonRequiredNullableIntList = default, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = default)
+        public static MixedModel MixedModel(string requiredString = default, int requiredInt = default, IEnumerable<string> requiredStringList = default, IEnumerable<int> requiredIntList = default, string nonRequiredString = default, int? nonRequiredInt = default, IEnumerable<string> nonRequiredStringList = default, IEnumerable<int> nonRequiredIntList = default, string requiredNullableString = default, int? requiredNullableInt = default, IEnumerable<string> requiredNullableStringList = default, IEnumerable<int> requiredNullableIntList = default, string nonRequiredNullableString = default, int? nonRequiredNullableInt = default, IEnumerable<string> nonRequiredNullableStringList = default, IEnumerable<int> nonRequiredNullableIntList = default, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = default)
         {
-            requiredStringList ??= new List<string>();
-            requiredIntList ??= new List<int>();
-            nonRequiredStringList ??= new List<string>();
-            nonRequiredIntList ??= new List<int>();
-            requiredNullableStringList ??= new List<string>();
-            requiredNullableIntList ??= new List<int>();
-            nonRequiredNullableStringList ??= new List<string>();
-            nonRequiredNullableIntList ??= new List<int>();
-            return new MixedModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString, nonRequiredInt, nonRequiredStringList, nonRequiredIntList, requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList, nonRequiredNullableIntList, requiredReadonlyInt, nonRequiredReadonlyInt);
+            var requiredStringListList = requiredStringList?.ToList() ?? new List<string>();
+            var requiredIntListList = requiredIntList?.ToList() ?? new List<int>();
+            var nonRequiredStringListList = nonRequiredStringList?.ToList() ?? new List<string>();
+            var nonRequiredIntListList = nonRequiredIntList?.ToList() ?? new List<int>();
+            var requiredNullableStringListList = requiredNullableStringList?.ToList() ?? new List<string>();
+            var requiredNullableIntListList = requiredNullableIntList?.ToList() ?? new List<int>();
+            var nonRequiredNullableStringListList = nonRequiredNullableStringList?.ToList() ?? new List<string>();
+            var nonRequiredNullableIntListList = nonRequiredNullableIntList?.ToList() ?? new List<int>();
+            return new MixedModel(requiredString, requiredInt, requiredStringListList, requiredIntListList, nonRequiredString, nonRequiredInt, nonRequiredStringListList, nonRequiredIntListList, requiredNullableString, requiredNullableInt, requiredNullableStringListList, requiredNullableIntListList, nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringListList, nonRequiredNullableIntListList, requiredReadonlyInt, nonRequiredReadonlyInt);
         }
 
         /// <summary> Initializes new instance of OutputModel class. </summary>
@@ -66,27 +67,27 @@ namespace ModelShapes
         /// <param name="requiredReadonlyInt"> . </param>
         /// <param name="nonRequiredReadonlyInt"> . </param>
         /// <returns> A new <see cref="Models.OutputModel"/> instance for mocking. </returns>
-        public static OutputModel OutputModel(string requiredString = default, int requiredInt = default, IReadOnlyList<string> requiredStringList = default, IReadOnlyList<int> requiredIntList = default, string nonRequiredString = default, int? nonRequiredInt = default, IReadOnlyList<string> nonRequiredStringList = default, IReadOnlyList<int> nonRequiredIntList = default, string requiredNullableString = default, int? requiredNullableInt = default, IReadOnlyList<string> requiredNullableStringList = default, IReadOnlyList<int> requiredNullableIntList = default, string nonRequiredNullableString = default, int? nonRequiredNullableInt = default, IReadOnlyList<string> nonRequiredNullableStringList = default, IReadOnlyList<int> nonRequiredNullableIntList = default, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = default)
+        public static OutputModel OutputModel(string requiredString = default, int requiredInt = default, IEnumerable<string> requiredStringList = default, IEnumerable<int> requiredIntList = default, string nonRequiredString = default, int? nonRequiredInt = default, IEnumerable<string> nonRequiredStringList = default, IEnumerable<int> nonRequiredIntList = default, string requiredNullableString = default, int? requiredNullableInt = default, IEnumerable<string> requiredNullableStringList = default, IEnumerable<int> requiredNullableIntList = default, string nonRequiredNullableString = default, int? nonRequiredNullableInt = default, IEnumerable<string> nonRequiredNullableStringList = default, IEnumerable<int> nonRequiredNullableIntList = default, int requiredReadonlyInt = default, int? nonRequiredReadonlyInt = default)
         {
-            requiredStringList ??= new List<string>();
-            requiredIntList ??= new List<int>();
-            nonRequiredStringList ??= new List<string>();
-            nonRequiredIntList ??= new List<int>();
-            requiredNullableStringList ??= new List<string>();
-            requiredNullableIntList ??= new List<int>();
-            nonRequiredNullableStringList ??= new List<string>();
-            nonRequiredNullableIntList ??= new List<int>();
-            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString, nonRequiredInt, nonRequiredStringList, nonRequiredIntList, requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList, nonRequiredNullableIntList, requiredReadonlyInt, nonRequiredReadonlyInt);
+            var requiredStringListList = requiredStringList?.ToList() ?? new List<string>();
+            var requiredIntListList = requiredIntList?.ToList() ?? new List<int>();
+            var nonRequiredStringListList = nonRequiredStringList?.ToList() ?? new List<string>();
+            var nonRequiredIntListList = nonRequiredIntList?.ToList() ?? new List<int>();
+            var requiredNullableStringListList = requiredNullableStringList?.ToList() ?? new List<string>();
+            var requiredNullableIntListList = requiredNullableIntList?.ToList() ?? new List<int>();
+            var nonRequiredNullableStringListList = nonRequiredNullableStringList?.ToList() ?? new List<string>();
+            var nonRequiredNullableIntListList = nonRequiredNullableIntList?.ToList() ?? new List<int>();
+            return new OutputModel(requiredString, requiredInt, requiredStringListList, requiredIntListList, nonRequiredString, nonRequiredInt, nonRequiredStringListList, nonRequiredIntListList, requiredNullableString, requiredNullableInt, requiredNullableStringListList, requiredNullableIntListList, nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringListList, nonRequiredNullableIntListList, requiredReadonlyInt, nonRequiredReadonlyInt);
         }
 
         /// <summary> Initializes new instance of MixedModelWithReadonlyProperty class. </summary>
         /// <param name="readonlyProperty"> . </param>
         /// <param name="readonlyListProperty"> . </param>
         /// <returns> A new <see cref="Models.MixedModelWithReadonlyProperty"/> instance for mocking. </returns>
-        public static MixedModelWithReadonlyProperty MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty = default, IReadOnlyList<ReadonlyModel> readonlyListProperty = default)
+        public static MixedModelWithReadonlyProperty MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty = default, IEnumerable<ReadonlyModel> readonlyListProperty = default)
         {
-            readonlyListProperty ??= new List<ReadonlyModel>();
-            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty);
+            var readonlyListPropertyList = readonlyListProperty?.ToList() ?? new List<ReadonlyModel>();
+            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListPropertyList);
         }
 
         /// <summary> Initializes new instance of ReadonlyModel class. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.Linq;
 using body_complex.Models;
 
 namespace body_complex
@@ -28,11 +29,11 @@ namespace body_complex
         /// <param name="sampleFish"> . </param>
         /// <param name="fishes"> . </param>
         /// <returns> A new <see cref="Models.DotFishMarket"/> instance for mocking. </returns>
-        public static DotFishMarket DotFishMarket(DotSalmon sampleSalmon = default, IReadOnlyList<DotSalmon> salmons = default, DotFish sampleFish = default, IReadOnlyList<DotFish> fishes = default)
+        public static DotFishMarket DotFishMarket(DotSalmon sampleSalmon = default, IEnumerable<DotSalmon> salmons = default, DotFish sampleFish = default, IEnumerable<DotFish> fishes = default)
         {
-            salmons ??= new List<DotSalmon>();
-            fishes ??= new List<DotFish>();
-            return new DotFishMarket(sampleSalmon, salmons, sampleFish, fishes);
+            var salmonsList = salmons?.ToList() ?? new List<DotSalmon>();
+            var fishesList = fishes?.ToList() ?? new List<DotFish>();
+            return new DotFishMarket(sampleSalmon, salmonsList, sampleFish, fishesList);
         }
 
         /// <summary> Initializes new instance of DotSalmon class. </summary>

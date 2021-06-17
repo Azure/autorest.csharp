@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Azure.AI.FormRecognizer.Models;
 
 namespace Azure.AI.FormRecognizer
@@ -59,12 +60,12 @@ namespace Azure.AI.FormRecognizer
         /// <param name="averageModelAccuracy"> Average accuracy. </param>
         /// <param name="errors"> Errors returned during the training operation. </param>
         /// <returns> A new <see cref="Models.TrainResult"/> instance for mocking. </returns>
-        public static TrainResult TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments = default, IReadOnlyList<FormFieldsReport> fields = default, float? averageModelAccuracy = default, IReadOnlyList<ErrorInformation> errors = default)
+        public static TrainResult TrainResult(IEnumerable<TrainingDocumentInfo> trainingDocuments = default, IEnumerable<FormFieldsReport> fields = default, float? averageModelAccuracy = default, IEnumerable<ErrorInformation> errors = default)
         {
-            trainingDocuments ??= new List<TrainingDocumentInfo>();
-            fields ??= new List<FormFieldsReport>();
-            errors ??= new List<ErrorInformation>();
-            return new TrainResult(trainingDocuments, fields, averageModelAccuracy, errors);
+            var trainingDocumentsList = trainingDocuments?.ToList() ?? new List<TrainingDocumentInfo>();
+            var fieldsList = fields?.ToList() ?? new List<FormFieldsReport>();
+            var errorsList = errors?.ToList() ?? new List<ErrorInformation>();
+            return new TrainResult(trainingDocumentsList, fieldsList, averageModelAccuracy, errorsList);
         }
 
         /// <summary> Initializes new instance of TrainingDocumentInfo class. </summary>
@@ -73,10 +74,10 @@ namespace Azure.AI.FormRecognizer
         /// <param name="errors"> List of errors. </param>
         /// <param name="status"> Status of the training operation. </param>
         /// <returns> A new <see cref="Models.TrainingDocumentInfo"/> instance for mocking. </returns>
-        public static TrainingDocumentInfo TrainingDocumentInfo(string documentName = default, int pages = default, IReadOnlyList<ErrorInformation> errors = default, TrainStatus status = default)
+        public static TrainingDocumentInfo TrainingDocumentInfo(string documentName = default, int pages = default, IEnumerable<ErrorInformation> errors = default, TrainStatus status = default)
         {
-            errors ??= new List<ErrorInformation>();
-            return new TrainingDocumentInfo(documentName, pages, errors, status);
+            var errorsList = errors?.ToList() ?? new List<ErrorInformation>();
+            return new TrainingDocumentInfo(documentName, pages, errorsList, status);
         }
 
         /// <summary> Initializes new instance of FormFieldsReport class. </summary>
@@ -106,13 +107,13 @@ namespace Azure.AI.FormRecognizer
         /// <param name="documentResults"> Document-level information extracted from the input. </param>
         /// <param name="errors"> List of errors reported during the analyze operation. </param>
         /// <returns> A new <see cref="Models.AnalyzeResult"/> instance for mocking. </returns>
-        public static AnalyzeResult AnalyzeResult(string version = default, IReadOnlyList<ReadResult> readResults = default, IReadOnlyList<PageResult> pageResults = default, IReadOnlyList<DocumentResult> documentResults = default, IReadOnlyList<ErrorInformation> errors = default)
+        public static AnalyzeResult AnalyzeResult(string version = default, IEnumerable<ReadResult> readResults = default, IEnumerable<PageResult> pageResults = default, IEnumerable<DocumentResult> documentResults = default, IEnumerable<ErrorInformation> errors = default)
         {
-            readResults ??= new List<ReadResult>();
-            pageResults ??= new List<PageResult>();
-            documentResults ??= new List<DocumentResult>();
-            errors ??= new List<ErrorInformation>();
-            return new AnalyzeResult(version, readResults, pageResults, documentResults, errors);
+            var readResultsList = readResults?.ToList() ?? new List<ReadResult>();
+            var pageResultsList = pageResults?.ToList() ?? new List<PageResult>();
+            var documentResultsList = documentResults?.ToList() ?? new List<DocumentResult>();
+            var errorsList = errors?.ToList() ?? new List<ErrorInformation>();
+            return new AnalyzeResult(version, readResultsList, pageResultsList, documentResultsList, errorsList);
         }
 
         /// <summary> Initializes new instance of ReadResult class. </summary>
@@ -124,10 +125,10 @@ namespace Azure.AI.FormRecognizer
         /// <param name="language"> The detected language on the page overall. </param>
         /// <param name="lines"> When includeTextDetails is set to true, a list of recognized text lines. The maximum number of lines returned is 300 per page. The lines are sorted top to bottom, left to right, although in certain cases proximity is treated with higher priority. As the sorting order depends on the detected text, it may change across images and OCR version updates. Thus, business logic should be built upon the actual line location instead of order. </param>
         /// <returns> A new <see cref="Models.ReadResult"/> instance for mocking. </returns>
-        public static ReadResult ReadResult(int page = default, float angle = default, float width = default, float height = default, LengthUnit unit = default, Language? language = default, IReadOnlyList<TextLine> lines = default)
+        public static ReadResult ReadResult(int page = default, float angle = default, float width = default, float height = default, LengthUnit unit = default, Language? language = default, IEnumerable<TextLine> lines = default)
         {
-            lines ??= new List<TextLine>();
-            return new ReadResult(page, angle, width, height, unit, language, lines);
+            var linesList = lines?.ToList() ?? new List<TextLine>();
+            return new ReadResult(page, angle, width, height, unit, language, linesList);
         }
 
         /// <summary> Initializes new instance of TextLine class. </summary>
@@ -136,11 +137,11 @@ namespace Azure.AI.FormRecognizer
         /// <param name="language"> The detected language of this line, if different from the overall page language. </param>
         /// <param name="words"> List of words in the text line. </param>
         /// <returns> A new <see cref="Models.TextLine"/> instance for mocking. </returns>
-        public static TextLine TextLine(string text = default, IReadOnlyList<float> boundingBox = default, Language? language = default, IReadOnlyList<TextWord> words = default)
+        public static TextLine TextLine(string text = default, IEnumerable<float> boundingBox = default, Language? language = default, IEnumerable<TextWord> words = default)
         {
-            boundingBox ??= new List<float>();
-            words ??= new List<TextWord>();
-            return new TextLine(text, boundingBox, language, words);
+            var boundingBoxList = boundingBox?.ToList() ?? new List<float>();
+            var wordsList = words?.ToList() ?? new List<TextWord>();
+            return new TextLine(text, boundingBoxList, language, wordsList);
         }
 
         /// <summary> Initializes new instance of TextWord class. </summary>
@@ -148,10 +149,10 @@ namespace Azure.AI.FormRecognizer
         /// <param name="boundingBox"> Bounding box of an extracted word. </param>
         /// <param name="confidence"> Confidence value. </param>
         /// <returns> A new <see cref="Models.TextWord"/> instance for mocking. </returns>
-        public static TextWord TextWord(string text = default, IReadOnlyList<float> boundingBox = default, float? confidence = default)
+        public static TextWord TextWord(string text = default, IEnumerable<float> boundingBox = default, float? confidence = default)
         {
-            boundingBox ??= new List<float>();
-            return new TextWord(text, boundingBox, confidence);
+            var boundingBoxList = boundingBox?.ToList() ?? new List<float>();
+            return new TextWord(text, boundingBoxList, confidence);
         }
 
         /// <summary> Initializes new instance of PageResult class. </summary>
@@ -160,11 +161,11 @@ namespace Azure.AI.FormRecognizer
         /// <param name="keyValuePairs"> List of key-value pairs extracted from the page. </param>
         /// <param name="tables"> List of data tables extracted from the page. </param>
         /// <returns> A new <see cref="Models.PageResult"/> instance for mocking. </returns>
-        public static PageResult PageResult(int page = default, int? clusterId = default, IReadOnlyList<Models.KeyValuePair> keyValuePairs = default, IReadOnlyList<DataTable> tables = default)
+        public static PageResult PageResult(int page = default, int? clusterId = default, IEnumerable<Models.KeyValuePair> keyValuePairs = default, IEnumerable<DataTable> tables = default)
         {
-            keyValuePairs ??= new List<Models.KeyValuePair>();
-            tables ??= new List<DataTable>();
-            return new PageResult(page, clusterId, keyValuePairs, tables);
+            var keyValuePairsList = keyValuePairs?.ToList() ?? new List<Models.KeyValuePair>();
+            var tablesList = tables?.ToList() ?? new List<DataTable>();
+            return new PageResult(page, clusterId, keyValuePairsList, tablesList);
         }
 
         /// <summary> Initializes new instance of KeyValuePair class. </summary>
@@ -183,11 +184,11 @@ namespace Azure.AI.FormRecognizer
         /// <param name="boundingBox"> Bounding box of the key or value. </param>
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </param>
         /// <returns> A new <see cref="Models.KeyValueElement"/> instance for mocking. </returns>
-        public static KeyValueElement KeyValueElement(string text = default, IReadOnlyList<float> boundingBox = default, IReadOnlyList<string> elements = default)
+        public static KeyValueElement KeyValueElement(string text = default, IEnumerable<float> boundingBox = default, IEnumerable<string> elements = default)
         {
-            boundingBox ??= new List<float>();
-            elements ??= new List<string>();
-            return new KeyValueElement(text, boundingBox, elements);
+            var boundingBoxList = boundingBox?.ToList() ?? new List<float>();
+            var elementsList = elements?.ToList() ?? new List<string>();
+            return new KeyValueElement(text, boundingBoxList, elementsList);
         }
 
         /// <summary> Initializes new instance of DataTable class. </summary>
@@ -195,10 +196,10 @@ namespace Azure.AI.FormRecognizer
         /// <param name="columns"> Number of columns. </param>
         /// <param name="cells"> List of cells contained in the table. </param>
         /// <returns> A new <see cref="Models.DataTable"/> instance for mocking. </returns>
-        public static DataTable DataTable(int rows = default, int columns = default, IReadOnlyList<DataTableCell> cells = default)
+        public static DataTable DataTable(int rows = default, int columns = default, IEnumerable<DataTableCell> cells = default)
         {
-            cells ??= new List<DataTableCell>();
-            return new DataTable(rows, columns, cells);
+            var cellsList = cells?.ToList() ?? new List<DataTableCell>();
+            return new DataTable(rows, columns, cellsList);
         }
 
         /// <summary> Initializes new instance of DataTableCell class. </summary>
@@ -213,11 +214,11 @@ namespace Azure.AI.FormRecognizer
         /// <param name="isHeader"> Is the current cell a header cell?. </param>
         /// <param name="isFooter"> Is the current cell a footer cell?. </param>
         /// <returns> A new <see cref="Models.DataTableCell"/> instance for mocking. </returns>
-        public static DataTableCell DataTableCell(int rowIndex = default, int columnIndex = default, int? rowSpan = default, int? columnSpan = default, string text = default, IReadOnlyList<float> boundingBox = default, float confidence = default, IReadOnlyList<string> elements = default, bool? isHeader = default, bool? isFooter = default)
+        public static DataTableCell DataTableCell(int rowIndex = default, int columnIndex = default, int? rowSpan = default, int? columnSpan = default, string text = default, IEnumerable<float> boundingBox = default, float confidence = default, IEnumerable<string> elements = default, bool? isHeader = default, bool? isFooter = default)
         {
-            boundingBox ??= new List<float>();
-            elements ??= new List<string>();
-            return new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBox, confidence, elements, isHeader, isFooter);
+            var boundingBoxList = boundingBox?.ToList() ?? new List<float>();
+            var elementsList = elements?.ToList() ?? new List<string>();
+            return new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBoxList, confidence, elementsList, isHeader, isFooter);
         }
 
         /// <summary> Initializes new instance of DocumentResult class. </summary>
@@ -225,11 +226,11 @@ namespace Azure.AI.FormRecognizer
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
         /// <returns> A new <see cref="Models.DocumentResult"/> instance for mocking. </returns>
-        public static DocumentResult DocumentResult(string docType = default, IReadOnlyList<int> pageRange = default, IReadOnlyDictionary<string, FieldValue> fields = default)
+        public static DocumentResult DocumentResult(string docType = default, IEnumerable<int> pageRange = default, IReadOnlyDictionary<string, FieldValue> fields = default)
         {
-            pageRange ??= new List<int>();
+            var pageRangeList = pageRange?.ToList() ?? new List<int>();
             fields ??= new Dictionary<string, FieldValue>();
-            return new DocumentResult(docType, pageRange, fields);
+            return new DocumentResult(docType, pageRangeList, fields);
         }
 
         /// <summary> Initializes new instance of FieldValue class. </summary>
@@ -248,13 +249,13 @@ namespace Azure.AI.FormRecognizer
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this field. </param>
         /// <param name="page"> The 1-based page number in the input document. </param>
         /// <returns> A new <see cref="Models.FieldValue"/> instance for mocking. </returns>
-        public static FieldValue FieldValue(FieldValueType type = default, string valueString = default, DateTimeOffset? valueDate = default, TimeSpan? valueTime = default, string valuePhoneNumber = default, float? valueNumber = default, int? valueInteger = default, IReadOnlyList<FieldValue> valueArray = default, IReadOnlyDictionary<string, FieldValue> valueObject = default, string text = default, IReadOnlyList<float> boundingBox = default, float? confidence = default, IReadOnlyList<string> elements = default, int? page = default)
+        public static FieldValue FieldValue(FieldValueType type = default, string valueString = default, DateTimeOffset? valueDate = default, TimeSpan? valueTime = default, string valuePhoneNumber = default, float? valueNumber = default, int? valueInteger = default, IEnumerable<FieldValue> valueArray = default, IReadOnlyDictionary<string, FieldValue> valueObject = default, string text = default, IEnumerable<float> boundingBox = default, float? confidence = default, IEnumerable<string> elements = default, int? page = default)
         {
-            valueArray ??= new List<FieldValue>();
+            var valueArrayList = valueArray?.ToList() ?? new List<FieldValue>();
             valueObject ??= new Dictionary<string, FieldValue>();
-            boundingBox ??= new List<float>();
-            elements ??= new List<string>();
-            return new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArray, valueObject, text, boundingBox, confidence, elements, page);
+            var boundingBoxList = boundingBox?.ToList() ?? new List<float>();
+            var elementsList = elements?.ToList() ?? new List<string>();
+            return new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArrayList, valueObject, text, boundingBoxList, confidence, elementsList, page);
         }
 
         /// <summary> Initializes new instance of CopyOperationResult class. </summary>
@@ -272,10 +273,10 @@ namespace Azure.AI.FormRecognizer
         /// <param name="modelId"> Identifier of the target model. </param>
         /// <param name="errors"> Errors returned during the copy operation. </param>
         /// <returns> A new <see cref="Models.CopyResult"/> instance for mocking. </returns>
-        public static CopyResult CopyResult(Guid modelId = default, IReadOnlyList<ErrorInformation> errors = default)
+        public static CopyResult CopyResult(Guid modelId = default, IEnumerable<ErrorInformation> errors = default)
         {
-            errors ??= new List<ErrorInformation>();
-            return new CopyResult(modelId, errors);
+            var errorsList = errors?.ToList() ?? new List<ErrorInformation>();
+            return new CopyResult(modelId, errorsList);
         }
 
         /// <summary> Initializes new instance of Models class. </summary>
@@ -283,10 +284,10 @@ namespace Azure.AI.FormRecognizer
         /// <param name="modelList"> Collection of trained custom models. </param>
         /// <param name="nextLink"> Link to the next page of custom models. </param>
         /// <returns> A new <see cref="Models.Models"/> instance for mocking. </returns>
-        public static Models.Models Models(ModelsSummary summary = default, IReadOnlyList<ModelInfo> modelList = default, string nextLink = default)
+        public static Models.Models Models(ModelsSummary summary = default, IEnumerable<ModelInfo> modelList = default, string nextLink = default)
         {
-            modelList ??= new List<ModelInfo>();
-            return new Models.Models(summary, modelList, nextLink);
+            var modelListList = modelList?.ToList() ?? new List<ModelInfo>();
+            return new Models.Models(summary, modelListList, nextLink);
         }
 
         /// <summary> Initializes new instance of ModelsSummary class. </summary>

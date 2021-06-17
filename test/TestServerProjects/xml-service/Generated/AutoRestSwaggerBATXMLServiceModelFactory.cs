@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using xml_service.Models;
 
 namespace xml_service
@@ -22,10 +23,10 @@ namespace xml_service
         /// <param name="containers"> . </param>
         /// <param name="nextMarker"> . </param>
         /// <returns> A new <see cref="Models.ListContainersResponse"/> instance for mocking. </returns>
-        public static ListContainersResponse ListContainersResponse(string serviceEndpoint = default, string prefix = default, string marker = default, int maxResults = default, IReadOnlyList<Container> containers = default, string nextMarker = default)
+        public static ListContainersResponse ListContainersResponse(string serviceEndpoint = default, string prefix = default, string marker = default, int maxResults = default, IEnumerable<Container> containers = default, string nextMarker = default)
         {
-            containers ??= new List<Container>();
-            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containers, nextMarker);
+            var containersList = containers?.ToList() ?? new List<Container>();
+            return new ListContainersResponse(serviceEndpoint, prefix, marker, maxResults, containersList, nextMarker);
         }
 
         /// <summary> Initializes new instance of Container class. </summary>
@@ -71,11 +72,11 @@ namespace xml_service
         /// <param name="blobPrefix"> . </param>
         /// <param name="blob"> . </param>
         /// <returns> A new <see cref="Models.Blobs"/> instance for mocking. </returns>
-        public static Blobs Blobs(IReadOnlyList<BlobPrefix> blobPrefix = default, IReadOnlyList<Blob> blob = default)
+        public static Blobs Blobs(IEnumerable<BlobPrefix> blobPrefix = default, IEnumerable<Blob> blob = default)
         {
-            blobPrefix ??= new List<BlobPrefix>();
-            blob ??= new List<Blob>();
-            return new Blobs(blobPrefix, blob);
+            var blobPrefixList = blobPrefix?.ToList() ?? new List<BlobPrefix>();
+            var blobList = blob?.ToList() ?? new List<Blob>();
+            return new Blobs(blobPrefixList, blobList);
         }
 
         /// <summary> Initializes new instance of BlobPrefix class. </summary>
