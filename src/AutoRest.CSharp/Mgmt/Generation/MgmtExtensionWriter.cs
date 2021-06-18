@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod,
             IEnumerable<Parameter> methodParameters, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            var responseType = clientMethod.ResponseType(async);
+            var responseType = clientMethod.GetResponseType(async);
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
                     writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
 
-                    WriteDiagnosticScope(writer, clientMethod.Diagnostics, "clientDiagnostics", writer =>
+                    WriteDiagnosticScope(writer, clientMethod.Diagnostics, clientDiagnostics.ActualName, writer =>
                     {
                         writer.Append($"return (");
 
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                         writer.Append($")");
 
-                        if (clientMethod.BodyType() == null && clientMethod.RestClientMethod.HeaderModel != null)
+                        if (clientMethod.GetBodyType() == null && clientMethod.RestClientMethod.HeaderModel != null)
                         {
                             writer.Append($".GetRawResponse()");
                         }
@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod,
-            IEnumerable<Parameter> methodParameters, IEnumerable<ParameterMapping> parameterMapping, FormattableString converter, bool async)
+            IEnumerable<Parameter> methodParameters, FormattableString converter, bool async)
         {
             writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name.ToPlural()} for this {ExtensionOperationVariableType}.");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
@@ -166,74 +166,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
                     writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
 
-                    WritePagingOperationBody(writer, pagingMethod, async, pageType, restOperations.ActualName, clientDiagnostics.ActualName, parameterMapping, converter);
+                    WritePagingOperationBody(writer, pagingMethod, async, pageType, restOperations.ActualName, clientDiagnostics.ActualName, converter);
                 }
                 writer.Append($");");
             }
-            writer.Line();
-        }
-
-        protected void WriteClientOperation(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
-        {
-            var bodyType = clientMethod.BodyType();
-            var responseType = clientMethod.ResponseType(async);
-
-            var parameters = clientMethod.RestClientMethod.Parameters;
-
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
-            writer.WriteXmlDocumentationParameter("clientDiagnostics", "The handler for diagnostic messaging in the client.");
-            writer.WriteXmlDocumentationParameter("restOperations", "Resource client operations.");
-            foreach (var parameter in parameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter);
-            }
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-            writer.WriteXmlDocumentationRequiredParametersException(parameters);
-
-            // write the function declaration
-            writer.Append($"private static {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}({typeof(ClientDiagnostics)} clientDiagnostics, {restClient.Type} restOperations,");
-
-            foreach (var parameter in parameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(parameters);
-                WriteDiagnosticScope(writer, clientMethod.Diagnostics, "clientDiagnostics", writer =>
-                {
-                    writer.Append($"return (");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-
-                    var parameterNames = parameters.Select(p => p.Name);
-                    writer.Append($"{"restOperations"}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
-                    foreach (var parameter in parameterNames)
-                    {
-                        writer.Append($"{parameter:I}, ");
-                    }
-                    writer.Append($"cancellationToken)");
-
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-
-                    writer.Append($")");
-
-                    if (bodyType == null && clientMethod.RestClientMethod.HeaderModel != null)
-                    {
-                        writer.Append($".GetRawResponse()");
-                    }
-
-                    writer.Line($";");
-                });
-            }
-
             writer.Line();
         }
     }

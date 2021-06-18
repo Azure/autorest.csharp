@@ -44,13 +44,18 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<Operation, NonLongRunningOperation>? _nonLongRunningOperations;
         private Dictionary<string, OperationGroup> _nonResourceOperationGroupMapping;
 
+        /// <summary>
+        /// A mapping of parent operation group to child operation groups that are not resources.
+        /// </summary>
+        private Dictionary<string, List<OperationGroup>> _childNonResourceOperationGroups;
+
         public MgmtOutputLibrary(CodeModel codeModel, BuildContext<MgmtOutputLibrary> context) : base(codeModel, context)
         {
             _codeModel = codeModel;
             _context = context;
             _mgmtConfiguration = context.Configuration.MgmtConfiguration;
             _operationGroups = new Dictionary<string, List<OperationGroup>>();
-            NonResourceOperationGroups = new Dictionary<string, List<OperationGroup>>();
+            _childNonResourceOperationGroups = new Dictionary<string, List<OperationGroup>>();
             _nameToTypeProvider = new Dictionary<string, TypeProvider>();
             _nonResourceOperationGroupMapping = new Dictionary<string, OperationGroup>();
             _allSchemas = _codeModel.Schemas.Choices.Cast<Schema>()
@@ -80,11 +85,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<MgmtLongRunningOperation> LongRunningOperations => EnsureLongRunningOperations().Values;
 
         public IEnumerable<NonLongRunningOperation> NonLongRunningOperations => EnsureNonLongRunningOperations().Values;
-
-        /// <summary>
-        /// A mapping of parent operation group to child operation groups that are list only.
-        /// </summary>
-        public Dictionary<string, List<OperationGroup>> NonResourceOperationGroups { get; private set; }
 
         private static HashSet<string> ResourceTypes = new HashSet<string>
         {
@@ -201,14 +201,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return null;
         }
 
-        public IEnumerable<MgmtExtensionOperation> GetMgmtExtensionOperations(string parent)
+        public IEnumerable<MgmtNonResourceOperation> GetNonResourceOperations(string parent)
         {
-            if (NonResourceOperationGroups.TryGetValue(parent, out var operationGroups))
+            if (_childNonResourceOperationGroups.TryGetValue(parent, out var operationGroups))
             {
-                return operationGroups.Select(operationGroup => new MgmtExtensionOperation(operationGroup, _context, ResourceTypeBuilder.TypeToExtensionName[parent] ));
+                return operationGroups.Select(operationGroup => new MgmtNonResourceOperation(operationGroup, _context,
+                    ResourceTypeBuilder.TypeToExtensionName.GetValueOrDefault(parent) ?? parent));
             }
 
-            return Enumerable.Empty<MgmtExtensionOperation>();
+            return Enumerable.Empty<MgmtNonResourceOperation>();
         }
 
         private Dictionary<ResourceType, Dictionary<OperationGroup, ResourceOperation>> EnsureResourceOperations()
@@ -224,8 +225,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
                 var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
-                var listOnlyChildOperationGroups = _context.Library.NonResourceOperationGroups.GetValueOrDefault(operationGroup.Key);
-                _resourceOperations[resourceType].Add(operationGroup, new ResourceOperation(operationGroup, _context, listOnlyChildOperationGroups));
+                var childOperationGroups = _childNonResourceOperationGroups.GetValueOrDefault(operationGroup.Key);
+                _resourceOperations[resourceType].Add(operationGroup, new ResourceOperation(operationGroup, _context, childOperationGroups));
             }
 
             return _resourceOperations;
@@ -483,34 +484,28 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 else
                 {
                     AddNonResourceOperationGroupMapping(operationGroup);
-                    AddOperationGroupToNonResourceMap(operationGroup);
+                    AddToChildNonResourceOperationGroupMap(operationGroup);
                 }
             }
             ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }
 
-        private void AddOperationGroupToNonResourceMap(OperationGroup operationGroup) // todo: rename to differentiate with AddNonResourceOperationGroupMapping
+        private void AddToChildNonResourceOperationGroupMap(OperationGroup operationGroup) // todo: rename to differentiate with AddNonResourceOperationGroupMapping
         {
-            if (_mgmtConfiguration.OperationGroupToParent.TryGetValue(operationGroup.Key, out var parent))
+            var parent = operationGroup.ParentResourceType(_mgmtConfiguration);
+            if (_childNonResourceOperationGroups.ContainsKey(parent))
             {
-                if (NonResourceOperationGroups.ContainsKey(parent))
-                {
-                    NonResourceOperationGroups[parent].Add(operationGroup);
-                }
-                else
-                {
-                    NonResourceOperationGroups[parent] = new List<OperationGroup>() { operationGroup };
-                }
+                _childNonResourceOperationGroups[parent].Add(operationGroup);
             }
             else
             {
-                throw new Exception($"Operation group to parent mapping is not defined for {operationGroup.Key}");
+                _childNonResourceOperationGroups[parent] = new List<OperationGroup>() { operationGroup };
             }
         }
 
         private void AddNonResourceOperationGroupMapping(OperationGroup operationsGroup)
         {
-            foreach (var operation in operationsGroup.Operations.Where(o=>o.Language.Default.Name == "Get"))
+            foreach (var operation in operationsGroup.Operations.Where(o => o.Language.Default.Name == "Get"))
             {
                 var responseSchema = operation.Responses.First().ResponseSchema;
                 if (responseSchema != null)

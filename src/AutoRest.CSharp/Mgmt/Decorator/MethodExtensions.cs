@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         /// <param name="clientMethod">the ClientMethod</param>
         /// <returns>the body type of the ClientMethod</returns>
-        public static CSharpType? BodyType(this ClientMethod clientMethod)
+        public static CSharpType? GetBodyType(this ClientMethod clientMethod)
         {
             return clientMethod.RestClientMethod.ReturnType;
         }
@@ -30,9 +30,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="clientMethod">the ClientMethod</param>
         /// <param name="async">Is this method async?</param>
         /// <returns>the response type of the ClientMethod</returns>
-        public static CSharpType ResponseType(this ClientMethod clientMethod, bool async)
+        public static CSharpType GetResponseType(this ClientMethod clientMethod, bool async)
         {
-            var bodyType = clientMethod.BodyType();
+            var bodyType = clientMethod.GetBodyType();
             var responseType = bodyType != null ? new CSharpType(typeof(Response<>), bodyType) : typeof(Response);
             return responseType.WrapAsync(async);
         }
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="pagingMethod">the PagingMethod</param>
         /// <param name="async">Is this method async?</param>
         /// <returns>the response type of the PagingMethod</returns>
-        public static CSharpType ResponseType(this PagingMethod pagingMethod, bool async)
+        public static CSharpType GetResponseType(this PagingMethod pagingMethod, bool async)
         {
             var pageType = pagingMethod.PagingResponse.ItemType;
             return pageType.WrapPageable(async);

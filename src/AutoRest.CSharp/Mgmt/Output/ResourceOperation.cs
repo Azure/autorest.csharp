@@ -31,18 +31,16 @@ namespace AutoRest.CSharp.Mgmt.Output
         private PagingMethod[]? _pagingMethods;
         private ClientMethod? _getMethod;
 
-        private IEnumerable<OperationGroup>? _siblingOperationGroups;
-        private IDictionary<OperationGroup, MgmtExtensionOperation>? _childOperations; //todo rename
+        private IDictionary<OperationGroup, MgmtNonResourceOperation> _childOperations;
 
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
 
-        public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, IEnumerable<OperationGroup>? siblingOperationGroups = null)
-            : base(context)
+        public ResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context,
+            IEnumerable<OperationGroup>? nonResourceOperationGroups = null) : base(context)
         {
             _context = context;
             OperationGroup = operationGroup;
-            _siblingOperationGroups = siblingOperationGroups;
             _prefix = operationGroup.Resource(context.Configuration.MgmtConfiguration);
             var isExtension = operationGroup.IsExtensionResource(context.Configuration.MgmtConfiguration);
             string midValue = "";
@@ -54,6 +52,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 midValue = FirstCharToUpper(midValue);
             }
             DefaultName = _prefix + midValue + SuffixValue;
+            _childOperations = nonResourceOperationGroups?.ToDictionary(operationGroup => operationGroup,
+                operationGroup => new MgmtNonResourceOperation(operationGroup, context, DefaultName)) ?? new Dictionary<OperationGroup, MgmtNonResourceOperation>();
         }
 
         public string ResourceName => OperationGroup.Resource(_context.Configuration.MgmtConfiguration);
@@ -76,20 +76,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public ClientMethod[] Methods => _methods ??= GetMethodsInScope();
 
-        public IDictionary<OperationGroup, MgmtExtensionOperation> ChildOperations => _childOperations ??= EnsureChildOperations();
-
-        private IDictionary<OperationGroup, MgmtExtensionOperation> EnsureChildOperations()
-        {
-            var result = new Dictionary<OperationGroup, MgmtExtensionOperation>();
-            if (_siblingOperationGroups != null)
-            {
-                foreach (var operationGroup in _siblingOperationGroups)
-                {
-                    result[operationGroup] = new MgmtExtensionOperation(operationGroup, _context, DefaultName);
-                }
-            }
-            return result;
-        }
+        public IDictionary<OperationGroup, MgmtNonResourceOperation> ChildOperations => _childOperations;
 
         public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
 

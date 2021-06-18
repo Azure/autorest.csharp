@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
 
                     // write the standalone list operations with the parent of a subscription
-                    var mgmtExtensionOperations = context.Library.GetMgmtExtensionOperations(ResourceTypeBuilder.Subscriptions);
+                    var mgmtExtensionOperations = context.Library.GetNonResourceOperations(ResourceTypeBuilder.Subscriptions);
 
                     foreach (var mgmtExtensionOperation in mgmtExtensionOperations)
                     {
@@ -136,15 +136,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)
         {
-            WriteListMethod(writer, pageType, restClient, pagingMethod,
-                pagingMethod.Method.Parameters, BuildParameterMapping(pagingMethod.Method), converter, async);
+            WriteListMethod(writer, pageType, restClient, pagingMethod, pagingMethod.Method.Parameters, converter, async);
         }
 
         private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)
         {
             var nonPathParameters = GetNonPathParameters(pagingMethod.Method);
             WriteListMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, nonPathParameters,
-                nonPathParameters.Select(p => new ParameterMapping(p, false, p.Name)), // TODO -- make this make more sense
                 $".Select(value => new {resource.Type.Name}(subscription, value))", async);
         }
 

@@ -46,6 +46,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return name;
         }
 
+        /// <summary>
+        /// This function builds an enumerable of <see cref="ClientMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
+        /// </summary>
+        /// <param name="operationGroup">The OperationGroup to build methods from</param>
+        /// <param name="restClient">The corresponding RestClient to the operation group</param>
+        /// <param name="declaration">The type declaration options</param>
+        /// <param name="nameOverrider">A delegate used for overriding the name of output <see cref="ClientMethod"/></param>
+        /// <returns>An enumerable of <see cref="ClientMethod"/></returns>
         public static IEnumerable<ClientMethod> BuildMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions declaration,
             Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
         {
@@ -71,6 +79,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
+        /// <summary>
+        /// This function builds an enumerable of <see cref="PagingMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
+        /// </summary>
+        /// <param name="operationGroup">The OperationGroup to build methods from</param>
+        /// <param name="restClient">The corresponding RestClient to the operation group</param>
+        /// <param name="declaration">The type declaration options</param>
+        /// <param name="nameOverrider">A delegate used for overriding the name of output <see cref="ClientMethod"/></param>
+        /// <returns>An enumerable of <see cref="PagingMethod"/></returns>
         public static IEnumerable<PagingMethod> BuildPagingMethods(OperationGroup operationGroup, RestClient restClient, TypeDeclarationOptions Declaration,
             Func<OperationGroup, Operation, RestClientMethod, string>? nameOverrider = default)
         {

@@ -110,8 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, listMethod, async, resourceType, RestClientField, ClientDiagnosticsField,
-                    BuildParameterMapping(listMethod.Method).Where(p => IsMandatory(p.Parameter)), converter);
+                WritePagingOperationBody(writer, listMethod, async, resourceType, RestClientField, ClientDiagnosticsField, converter);
             }
         }
 
@@ -139,7 +138,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="resourceType">The reource type that is being written.</param>
         /// <param name="converter">Optional convertor for modifying the result of the rest client call.</param>
         protected void WritePagingOperationBody(CodeWriter writer, PagingMethod pagingMethod, bool async, CSharpType resourceType, string restClientName, string clientDiagnosticsName,
-            IEnumerable<ParameterMapping> parameterMapping, FormattableString converter)
+            FormattableString converter)
         {
             var parameters = pagingMethod.Method.Parameters;
 

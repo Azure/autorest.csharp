@@ -17,7 +17,7 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtExtensionOperation : TypeProvider
+    internal class MgmtNonResourceOperation : TypeProvider
     {
         private BuildContext<MgmtOutputLibrary> _context;
         private IEnumerable<ClientMethod>? _clientMethods;
@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         internal OperationGroup OperationGroup { get; }
         protected MgmtRestClient? _restClient;
 
-        public MgmtExtensionOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, string defaultName) : base(context)
+        public MgmtNonResourceOperation(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, string defaultName) : base(context)
         {
             _context = context;
             OperationGroup = operationGroup;

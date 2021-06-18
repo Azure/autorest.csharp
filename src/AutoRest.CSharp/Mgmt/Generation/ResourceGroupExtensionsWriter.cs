@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     }
 
                     // write the standalone list operations with the parent of a subscription
-                    var mgmtExtensionOperations = context.Library.GetMgmtExtensionOperations(ResourceTypeBuilder.ResourceGroups);
+                    var mgmtExtensionOperations = context.Library.GetNonResourceOperations(ResourceTypeBuilder.ResourceGroups);
 
                     foreach (var mgmtExtensionOperation in mgmtExtensionOperations)
                     {
@@ -116,7 +116,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, restClient, pagingMethod,
                 // skip the first parameter, aka the resource group name parameter
                 pagingMethod.Method.Parameters.Skip(1),
-                BuildPolishedParameterMapping(pagingMethod.Method),
                 $"",
                 async);
         }

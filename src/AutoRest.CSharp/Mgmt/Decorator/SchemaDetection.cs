@@ -149,9 +149,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// <param name="config">Management plane configuration.</param>
         public static bool IsResource(this OperationGroup og, MgmtConfiguration config)
         {
-            return !(config.OperationGroupToResource.ContainsKey(og.Key) &&
-                config.OperationGroupToResource[og.Key].Equals(KeywordToSkipGeneration)) &&
-                !og.IsListOnly(config);
+            var isNonResource = config.OperationGroupToResource.ContainsKey(og.Key)
+                && config.OperationGroupToResource[og.Key].Equals(KeywordToSkipGeneration);
+            return !isNonResource && !og.IsListOnly(config);
         }
 
         private const string KeywordToSkipGeneration = "NonResource";
