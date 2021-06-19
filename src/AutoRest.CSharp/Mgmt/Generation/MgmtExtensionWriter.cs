@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -61,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod,
+        protected void WriteExensionClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod,
             IEnumerable<Parameter> methodParameters, bool async)
         {
             var responseType = clientMethod.GetResponseType(async);
@@ -75,7 +74,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(methodParameters.ToArray());
-            writer.WriteXmlDocumentationReturns("placeholder"); // TODO -- determine what to put here
+            // writer.WriteXmlDocumentationReturns("placeholder"); // TODO -- determine what to put here
 
             // write the signature of this function
             writer.Append($"public static {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
@@ -128,7 +127,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod,
+        protected void WriteExtensionPagingMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod,
             IEnumerable<Parameter> methodParameters, FormattableString converter, bool async)
         {
             writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name.ToPlural()} for this {ExtensionOperationVariableType}.");

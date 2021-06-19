@@ -127,7 +127,6 @@ namespace MgmtListOnly
         /// <summary> Lists all availability sets features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<AvailabilitySetNonPageableFeatureListResult>> TestFeaturesMethodAvailabilitySetNonPageableFeatureAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -152,7 +151,6 @@ namespace MgmtListOnly
         /// <summary> Lists all availability sets features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> placeholder. </returns>
         public static Response<AvailabilitySetNonPageableFeatureListResult> TestFeaturesMethodAvailabilitySetNonPageableFeature(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -185,7 +183,6 @@ namespace MgmtListOnly
         /// <summary> List API keys. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<ApiKeysListResult>> ListApiKeysAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -210,7 +207,6 @@ namespace MgmtListOnly
         /// <summary> List API keys. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> placeholder. </returns>
         public static Response<ApiKeysListResult> ListApiKeys(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
@@ -360,7 +356,6 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<UsagesNonPageableListResult>> ListNonPageableUsageAsync(this SubscriptionOperations subscription, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -393,7 +388,6 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static Response<UsagesNonPageableListResult> ListNonPageableUsage(this SubscriptionOperations subscription, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)

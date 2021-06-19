@@ -4,12 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using AutoRest.CSharp.AutoRest.Plugins;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -17,7 +12,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
-using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -105,14 +99,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // but in parameter invocation, we need to pass a value for `resourceGroupName`
             // instead of `Id.ResourceGroupName` as in normal ResourceContainer or ResourceOperation, we need to pass `resourceGroup.Id.Name`
             var methodParameters = clientMethod.RestClientMethod.Parameters.Skip(1);
-            WriteClientMethod(writer, restClient, clientMethod,
+            WriteExensionClientMethod(writer, restClient, clientMethod,
                 // skip the first parameter, aka the resource group name parameter
                 clientMethod.RestClientMethod.Parameters.Skip(1),
                 async);
         }
         private void WriteListMethod(CodeWriter writer, MgmtRestClient restClient, PagingMethod pagingMethod, bool async)
         {
-            WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, restClient, pagingMethod,
+            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, restClient, pagingMethod,
                 // skip the first parameter, aka the resource group name parameter
                 pagingMethod.Method.Parameters.Skip(1),
                 $"", async);

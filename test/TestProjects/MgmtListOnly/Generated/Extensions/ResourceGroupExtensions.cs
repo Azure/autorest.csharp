@@ -156,7 +156,6 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<ResourceGroupNonPageableFeatureListResult>> ListResourceGroupNonPageableFeatureAsync(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -189,7 +188,6 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static Response<ResourceGroupNonPageableFeatureListResult> ListResourceGroupNonPageableFeature(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
@@ -231,7 +229,6 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<KeyPublishResult>> PublishKeysAsync(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
@@ -269,7 +266,6 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static Response<KeyPublishResult> PublishKeys(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
@@ -307,7 +303,6 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<PublishedKeyListResult>> ListPublishedKeysAsync(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
@@ -345,7 +340,6 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static Response<PublishedKeyListResult> ListPublishedKeys(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)

@@ -3,27 +3,17 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
-using Azure.Core;
-using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
 using Azure.ResourceManager.Core.Resources;
 
@@ -130,18 +120,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
         {
-            WriteClientMethod(writer, restClient, clientMethod, clientMethod.RestClientMethod.Parameters, async);
+            WriteExensionClientMethod(writer, restClient, clientMethod, clientMethod.RestClientMethod.Parameters, async);
         }
 
         private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)
         {
-            WriteListMethod(writer, pageType, restClient, pagingMethod, pagingMethod.Method.Parameters, converter, async);
+            WriteExtensionPagingMethod(writer, pageType, restClient, pagingMethod, pagingMethod.Method.Parameters, converter, async);
         }
 
         private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)
         {
             var nonPathParameters = GetNonPathParameters(pagingMethod.Method);
-            WriteListMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, nonPathParameters,
+            WriteExtensionPagingMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, nonPathParameters,
                 $".Select(value => new {resource.Type.Name}(subscription, value))", async);
         }
 

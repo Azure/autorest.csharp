@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
-using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -402,7 +401,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
                 writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             }
-            var responseType = resource.Type.WrapResponseAsync(async);
+            var responseType = resource.Type.WrapAsyncResponse(async);
             writer.Append($"public {AsyncKeyword(async)} {OverrideKeyword(isInheritedMethod)} {responseType} {CreateMethodName("Get", async)}(");
 
             if (!isInheritedMethod)
@@ -505,7 +504,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationReturns("The updated resource with the tag added.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
-            var responseType = resource.Type.WrapResponseAsync(async);
+            var responseType = resource.Type.WrapAsyncResponse(async);
 
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("AddTag", async)}(string key, string value, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
@@ -610,8 +609,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationReturns("The updated resource with the tags replaced.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
-            CSharpType responseType = new CSharpType(typeof(Response<>), resource.Type);
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+            var responseType = resource.Type.WrapAsyncResponse(async);
 
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("SetTags", async)}({typeof(IDictionary<string, string>)} tags, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
@@ -712,7 +710,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationReturns("The updated resource with the tag removed.");
 
             var resource = context.Library.GetArmResource(resourceOperation.OperationGroup);
-            var responseType = resource.Type.WrapResponseAsync(async);
+            var responseType = resource.Type.WrapAsyncResponse(async);
 
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("RemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
@@ -761,7 +759,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             CSharpType lroObjectType = clientMethod.Operation.IsLongRunning
                 ? context.Library.GetLongRunningOperation(clientMethod.Operation).Type
                 : context.Library.GetNonLongRunningOperation(clientMethod.Operation).Type;
-            CSharpType responseType = async ? new CSharpType(typeof(Task<>), lroObjectType) : lroObjectType;
+            CSharpType responseType = lroObjectType.WrapAsync(async);
 
             writer.Append($"public {AsyncKeyword(async)} {responseType} {CreateMethodName("StartRemoveTag", async)}(string key, {typeof(CancellationToken)} cancellationToken = default)");
             using (writer.Scope())
@@ -1097,36 +1095,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             writer.Line();
-        }
-
-        // This method builds the path parameters names
-        private void BuildPathParameterNames(List<string> paramNames, int paramLength, string name, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-        {
-            if (IsTerminalState(operationGroup, context) && paramLength == 1)
-            {
-                paramNames.Add(GetParentValue(operationGroup, context));
-                paramLength--;
-            }
-            else if (paramLength == 1)
-            {
-                var parentOperationGroup = ParentOperationGroup(operationGroup, context);
-                if (parentOperationGroup != null)
-                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context);
-                else
-                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context);
-            }
-            else
-            {
-                name = $"{name}.Parent";
-                paramNames.Add($"{name}.Name");
-                paramLength--;
-
-                var parentOperationGroup = ParentOperationGroup(operationGroup, context);
-                if (parentOperationGroup != null)
-                    BuildPathParameterNames(paramNames, paramLength, name, parentOperationGroup, context);
-                else
-                    BuildPathParameterNames(paramNames, paramLength, name, operationGroup, context);
-            }
         }
 
         private bool IsTenantParent(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)

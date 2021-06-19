@@ -49,7 +49,6 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<SupersetModel2>> PutSupersetModel2sAsync(this ResourceGroupOperations resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
@@ -85,7 +84,6 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="parameters"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static Response<SupersetModel2> PutSupersetModel2s(this ResourceGroupOperations resourceGroup, string supersetModel2SName, SupersetModel2 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
@@ -120,7 +118,6 @@ namespace SupersetInheritance
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<SupersetModel2>> GetSupersetModel2sAsync(this ResourceGroupOperations resourceGroup, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
@@ -151,7 +148,6 @@ namespace SupersetInheritance
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static Response<SupersetModel2> GetSupersetModel2s(this ResourceGroupOperations resourceGroup, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel2SName == null)
@@ -191,7 +187,6 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<SupersetModel3>> PutSupersetModel3sAsync(this ResourceGroupOperations resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
@@ -227,7 +222,6 @@ namespace SupersetInheritance
         /// <param name="parameters"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="parameters"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static Response<SupersetModel3> PutSupersetModel3s(this ResourceGroupOperations resourceGroup, string supersetModel3SName, SupersetModel3 parameters, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
@@ -262,7 +256,6 @@ namespace SupersetInheritance
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<SupersetModel3>> GetSupersetModel3sAsync(this ResourceGroupOperations resourceGroup, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)
@@ -293,7 +286,6 @@ namespace SupersetInheritance
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static Response<SupersetModel3> GetSupersetModel3s(this ResourceGroupOperations resourceGroup, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
             if (supersetModel3SName == null)

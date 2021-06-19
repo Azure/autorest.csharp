@@ -129,7 +129,6 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<NonResourceModel1>> PutNonResourceModel1sAsync(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
@@ -165,7 +164,6 @@ namespace SupersetFlattenInheritance
         /// <param name="parameters"> The NonResourceModel1 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> or <paramref name="parameters"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static Response<NonResourceModel1> PutNonResourceModel1s(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, NonResourceModel1 parameters, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
@@ -200,7 +198,6 @@ namespace SupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static async Task<Response<NonResourceModel1>> GetNonResourceModel1sAsync(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)
@@ -231,7 +228,6 @@ namespace SupersetFlattenInheritance
         /// <param name="nonResourceModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="nonResourceModel1SName"/> is null. </exception>
-        /// <returns> placeholder. </returns>
         public static Response<NonResourceModel1> GetNonResourceModel1s(this ResourceGroupOperations resourceGroup, string nonResourceModel1SName, CancellationToken cancellationToken = default)
         {
             if (nonResourceModel1SName == null)

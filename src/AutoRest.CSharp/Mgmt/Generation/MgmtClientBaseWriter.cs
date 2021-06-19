@@ -319,26 +319,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             CSharpType? bodyType = GetBodyTypeForList(clientMethod.ReturnType, operationGroup, context);
             bool isResourceList = bodyType != clientMethod.ReturnType;
-            CSharpType responseType = bodyType != null ?
+            var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
-
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
+            responseType = responseType.WrapAsync(async);
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
 
             Parameter[] nonPathParameters = GetNonPathParameters(clientMethod);
             foreach (Parameter parameter in nonPathParameters)
             {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+                writer.WriteXmlDocumentationParameter(parameter);
             }
 
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
 
             var methodName = CreateMethodName(clientMethod.Name, async);
-            var asyncText = async ? "async" : string.Empty;
-            writer.Append($"{clientMethod.Accessibility} virtual {asyncText} {responseType} {methodName}(");
+            writer.Append($"{clientMethod.Accessibility} virtual {AsyncKeyword(async)} {responseType} {methodName}(");
 
             foreach (Parameter parameter in nonPathParameters)
             {
@@ -359,6 +357,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     var parameterNames = GetParametersName(clientMethod, operationGroup, context);
                     writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}(");
+                    // TODO -- we need to change this to BuildAndWriteParameters(writer, clientMethod) to make it be able to handle more cases
+                    // but directly replace the following logic by this function is causing issues
                     foreach (var parameter in parameterNames)
                     {
                         writer.Append($"{parameter:I}, ");
