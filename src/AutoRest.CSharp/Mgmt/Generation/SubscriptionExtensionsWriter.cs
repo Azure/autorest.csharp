@@ -130,8 +130,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
         {
-            WriteClientMethod(writer, restClient, clientMethod,
-                clientMethod.RestClientMethod.Parameters, BuildParameterMapping(clientMethod.RestClientMethod), async);
+            WriteClientMethod(writer, restClient, clientMethod, clientMethod.RestClientMethod.Parameters, async);
         }
 
         private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)
@@ -187,11 +186,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
         {
-            // we do not need anything about the Id.Name or Id.Parent.Name in this extension, because everything is static in this class, we do not even have a property called `Id`
-            foreach (var mapping in parameterMapping)
-            {
-                mapping.ValueExpression = mapping.Parameter.Name;
-            }
+            // override to do nothing since we do not need anything from subscription.Id in the SubscriptionExtensions class
         }
     }
 }

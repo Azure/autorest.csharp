@@ -108,7 +108,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteClientMethod(writer, restClient, clientMethod,
                 // skip the first parameter, aka the resource group name parameter
                 clientMethod.RestClientMethod.Parameters.Skip(1),
-                BuildPolishedParameterMapping(clientMethod.RestClientMethod),
                 async);
         }
         private void WriteListMethod(CodeWriter writer, MgmtRestClient restClient, PagingMethod pagingMethod, bool async)
@@ -116,31 +115,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, restClient, pagingMethod,
                 // skip the first parameter, aka the resource group name parameter
                 pagingMethod.Method.Parameters.Skip(1),
-                $"",
-                async);
+                $"", async);
         }
 
         private IEnumerable<ParameterMapping> BuildPolishedParameterMapping(RestClientMethod method)
         {
-            var mapping = BuildParameterMapping(method);
+            var mapping = BuildParameterMapping(method).ToArray();
             var first = mapping.First();
             first.IsPassThru = false;
             first.ValueExpression = $"{ExtensionOperationVariableName}.Id.Name";
+            mapping[0] = first;
             return mapping;
         }
 
+        // we need to pass the first parameter as `resourceGroup.Id.Name` because we are in an extension class
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
+            if (string.Equals(parameter.Name, "resourceGroupName", StringComparison.InvariantCultureIgnoreCase))
+            {
+                valueExpression = $"{ExtensionOperationVariableName}.Id.Name";
+                return false;
+            }
+
             return true;
         }
 
         protected override void MakeResourceNameParamPassThrough(RestClientMethod method, List<ParameterMapping> parameterMapping, Stack<string> parentNameStack)
         {
-            // we do not need anything about the Id.Name or Id.Parent.Name in this extension, because everything is static in this class, we do not even have a property called `Id`
-            foreach (var mapping in parameterMapping)
-            {
-                mapping.ValueExpression = mapping.Parameter.Name;
-            }
+            // override to do nothing since we have passed the resourceGroupName in `ShouldPassThrough` function
         }
     }
 }

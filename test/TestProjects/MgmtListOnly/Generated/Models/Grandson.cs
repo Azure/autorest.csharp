@@ -25,13 +25,13 @@ namespace MgmtListOnly.Models
         /// <param name="type"> The type. </param>
         /// <param name="location"> The location. </param>
         /// <param name="tags"> The tags. </param>
-        /// <param name="fuck"> specifies the bar. </param>
-        /// <param name="fuckfuck"> . </param>
-        internal Grandson(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string fuck, string fuckfuck) : base(id, name, type, location, tags, fuck)
+        /// <param name="bar"> specifies the bar. </param>
+        /// <param name="foo"> . </param>
+        internal Grandson(ResourceGroupResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar, string foo) : base(id, name, type, location, tags, bar)
         {
-            Fuckfuck = fuckfuck;
+            Foo = foo;
         }
 
-        public string Fuckfuck { get; set; }
+        public string Foo { get; set; }
     }
 }

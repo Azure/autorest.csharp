@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method)
+        protected void BuildAndWriteParameters(CodeWriter writer, RestClientMethod method)
         {
             WriteArguments(writer, BuildParameterMapping(method));
         }

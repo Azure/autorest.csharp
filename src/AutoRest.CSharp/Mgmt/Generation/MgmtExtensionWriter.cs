@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         protected void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod,
-            IEnumerable<Parameter> methodParameters, IEnumerable<ParameterMapping> parameterMapping, bool async)
+            IEnumerable<Parameter> methodParameters, bool async)
         {
             var responseType = clientMethod.GetResponseType(async);
 
@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Append($"return (");
 
                         writer.Append($"{"restOperations"}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
-                        WriteArguments(writer, parameterMapping);
+                        BuildAndWriteParameters(writer, clientMethod.RestClientMethod);
                         writer.Append($"cancellationToken)");
 
                         if (async)

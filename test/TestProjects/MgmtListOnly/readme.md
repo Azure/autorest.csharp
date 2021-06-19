@@ -17,9 +17,13 @@ operation-group-to-resource-type:
     ChildWithPosts: Microsoft.Compute/availabilitySets/childWithPost
     Usages: Microsoft.Compute/locations/usages
     NonPageableUsages: Microsoft.Compute/locations/nonPageableUsages
+    ResourceGroupFeatures: Microsoft.Compute/locations/resourceGroupFeatures
+    ResourceGroupNonPageableFeatures: Microsoft.Compute/locations/resourceGroupNonPageableFeatures
+    Keys: Microsoft.Compute/publishers/versions/getKeys
 operation-group-to-resource:
     ApiKeys: NonResource
     ChildWithPosts: NonResource
+    Keys: NonResource
 operation-group-to-parent:
     AvailabilitySetChild: AvailabilitySets
     ResponseNotCalledValue: AvailabilitySets
@@ -30,4 +34,7 @@ operation-group-to-parent:
     ChildWithPosts: AvailabilitySets
     Usages: subscriptions
     NonPageableUsages: subscriptions
+    ResourceGroupFeatures: resourceGroups
+    ResourceGroupNonPageableFeatures: resourceGroups
+    Keys: resourceGroups
 ```

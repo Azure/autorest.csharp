@@ -17,10 +17,10 @@ namespace MgmtListOnly.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Fuck))
+            if (Optional.IsDefined(Bar))
             {
-                writer.WritePropertyName("fuck");
-                writer.WriteStringValue(Fuck);
+                writer.WritePropertyName("bar");
+                writer.WriteStringValue(Bar);
             }
             writer.WritePropertyName("tags");
             writer.WriteStartObject();
@@ -37,7 +37,7 @@ namespace MgmtListOnly.Models
 
         internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element)
         {
-            Optional<string> fuck = default;
+            Optional<string> bar = default;
             IDictionary<string, string> tags = default;
             LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
@@ -45,9 +45,9 @@ namespace MgmtListOnly.Models
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("fuck"))
+                if (property.NameEquals("bar"))
                 {
-                    fuck = property.Value.GetString();
+                    bar = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -81,7 +81,7 @@ namespace MgmtListOnly.Models
                     continue;
                 }
             }
-            return new AvailabilitySetData(id, name, type, location, tags, fuck.Value);
+            return new AvailabilitySetData(id, name, type, location, tags, bar.Value);
         }
     }
 }

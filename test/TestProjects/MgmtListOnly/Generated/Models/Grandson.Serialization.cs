@@ -17,15 +17,15 @@ namespace MgmtListOnly.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Fuckfuck))
+            if (Optional.IsDefined(Foo))
             {
-                writer.WritePropertyName("fuckfuck");
-                writer.WriteStringValue(Fuckfuck);
+                writer.WritePropertyName("foo");
+                writer.WriteStringValue(Foo);
             }
-            if (Optional.IsDefined(Fuck))
+            if (Optional.IsDefined(Bar))
             {
-                writer.WritePropertyName("fuck");
-                writer.WriteStringValue(Fuck);
+                writer.WritePropertyName("bar");
+                writer.WriteStringValue(Bar);
             }
             writer.WritePropertyName("tags");
             writer.WriteStartObject();
@@ -42,8 +42,8 @@ namespace MgmtListOnly.Models
 
         internal static Grandson DeserializeGrandson(JsonElement element)
         {
-            Optional<string> fuckfuck = default;
-            Optional<string> fuck = default;
+            Optional<string> foo = default;
+            Optional<string> bar = default;
             IDictionary<string, string> tags = default;
             LocationData location = default;
             ResourceGroupResourceIdentifier id = default;
@@ -51,14 +51,14 @@ namespace MgmtListOnly.Models
             ResourceType type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("fuckfuck"))
+                if (property.NameEquals("foo"))
                 {
-                    fuckfuck = property.Value.GetString();
+                    foo = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("fuck"))
+                if (property.NameEquals("bar"))
                 {
-                    fuck = property.Value.GetString();
+                    bar = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -92,7 +92,7 @@ namespace MgmtListOnly.Models
                     continue;
                 }
             }
-            return new Grandson(id, name, type, location, tags, fuck.Value, fuckfuck.Value);
+            return new Grandson(id, name, type, location, tags, bar.Value, foo.Value);
         }
     }
 }
