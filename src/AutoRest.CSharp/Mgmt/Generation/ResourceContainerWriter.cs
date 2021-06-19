@@ -161,21 +161,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteContainerMethodScope(false, $"{lroObjectType.Name}", "StartCreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var originalResponse = {RestClientField}.{restClientMethod.Name}(");
-                foreach (var parameter in parameterMapping)
-                {
-                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    _writer.AppendRaw(", ");
-                }
+                WriteArguments(writer, parameterMapping);
                 _writer.Line($"cancellationToken: cancellationToken);");
                 if (isLongRunning)
                 {
                     _writer.Append($"return new {lroObjectType}(");
                     _writer.Append($"{_parentProperty}, {ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.Create{restClientMethod.Name}Request(");
-                    foreach (var parameter in parameterMapping)
-                    {
-                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                        _writer.AppendRaw(", ");
-                    }
+                    WriteArguments(writer, parameterMapping);
                     _writer.RemoveTrailingComma();
                     _writer.Append($").Request,");
                     _writer.Line($"originalResponse);");
@@ -193,21 +185,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteContainerMethodScope(true, $"{typeof(Task)}<{lroObjectType.Name}>", "StartCreateOrUpdate", passThruParameters, writer =>
             {
                 _writer.Append($"var originalResponse = await {RestClientField}.{restClientMethod.Name}Async(");
-                foreach (var parameter in parameterMapping)
-                {
-                    _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                    _writer.AppendRaw(", ");
-                }
+                WriteArguments(writer, parameterMapping);
                 _writer.Line($"cancellationToken: cancellationToken).ConfigureAwait(false);");
                 if (isLongRunning)
                 {
                     _writer.Append($"return new {lroObjectType}(");
                     _writer.Append($"{_parentProperty}, {ClientDiagnosticsField}, {PipelineProperty}, {RestClientField}.Create{restClientMethod.Name}Request(");
-                    foreach (var parameter in parameterMapping)
-                    {
-                        _writer.AppendRaw(parameter.IsPassThru ? parameter.Parameter.Name : parameter.ValueExpression);
-                        _writer.AppendRaw(", ");
-                    }
+                    WriteArguments(writer, parameterMapping);
                     _writer.RemoveTrailingComma();
                     _writer.Append($").Request,");
                     _writer.Line($"originalResponse);");

@@ -12,6 +12,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -79,13 +80,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteGetContainers(CodeWriter writer, Mgmt.Output.Resource armResource, ResourceContainer container)
+        private void WriteGetContainers(CodeWriter writer, Resource armResource, ResourceContainer container)
         {
-            // TODO: Find a solution to convert from single to plural
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {container.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationParameter("resourceGroup", $"The <see cref=\"{typeof(ResourceGroupOperations)}\" /> instance the method will execute against.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{container.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name}s (this {typeof(ResourceGroupOperations)} resourceGroup)"))
+            using (writer.Scope($"public static {container.Type} Get{armResource.Type.Name.ToPlural()} (this {typeof(ResourceGroupOperations)} resourceGroup)"))
             {
                 writer.Line($"return new {container.Type.Name}(resourceGroup);");
             }
@@ -110,16 +110,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 // skip the first parameter, aka the resource group name parameter
                 pagingMethod.Method.Parameters.Skip(1),
                 $"", async);
-        }
-
-        private IEnumerable<ParameterMapping> BuildPolishedParameterMapping(RestClientMethod method)
-        {
-            var mapping = BuildParameterMapping(method).ToArray();
-            var first = mapping.First();
-            first.IsPassThru = false;
-            first.ValueExpression = $"{ExtensionOperationVariableName}.Id.Name";
-            mapping[0] = first;
-            return mapping;
         }
 
         // we need to pass the first parameter as `resourceGroup.Id.Name` because we are in an extension class
