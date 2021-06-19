@@ -115,7 +115,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope())
             {
-                writer.Line($"requestOptions ??= new {typeof(Azure.RequestOptions)}();");
+                writer.Line($"options ??= new {typeof(Azure.RequestOptions)}();");
 
                 writer.Append($"{typeof(Azure.Core.HttpMessage)} message = {RequestWriterHelpers.CreateRequestMethodName(clientMethod.Name)}(");
 
@@ -127,9 +127,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($");");
                 writer.Line();
 
-                using (writer.Scope($"if (requestOptions.PerCallPolicy != null)"))
+                using (writer.Scope($"if (options.PerCallPolicy != null)"))
                 {
-                    writer.Line($"message.SetProperty (\"RequestOptionsPerCallPolicyCallback\", requestOptions.PerCallPolicy);");
+                    writer.Line($"message.SetProperty (\"RequestOptionsPerCallPolicyCallback\", options.PerCallPolicy);");
                 }
 
                 var scopeVariable = new CodeWriterDeclaration("scope");
@@ -141,14 +141,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (async)
                     {
-                        writer.Line($"await {PipelineField:I}.SendAsync(message, requestOptions.CancellationToken).ConfigureAwait(false);");
+                        writer.Line($"await {PipelineField:I}.SendAsync(message, options.CancellationToken).ConfigureAwait(false);");
                     }
                     else
                     {
-                        writer.Line($"{PipelineField:I}.Send(message, requestOptions.CancellationToken);");
+                        writer.Line($"{PipelineField:I}.Send(message, options.CancellationToken);");
                     }
 
-                    using (writer.Scope($"if (requestOptions.StatusOption == ResponseStatusOption.Default)"))
+                    using (writer.Scope($"if (options.StatusOption == ResponseStatusOption.Default)"))
                     {
                         WriteStatusCodeSwitch(writer, clientMethod, async);
                     }

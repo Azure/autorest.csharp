@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models
 
                         // The service request had some parameters for the body, so create a parameter for the body and inject it into the list of parameters,
                         // right before the first optional parameter.
-                        Parameter bodyParam = new Parameter("requestBody", "The request body", typeof(Azure.Core.RequestContent), null, true);
+                        Parameter bodyParam = new Parameter("content", "The content to send as the body of the request.", typeof(Azure.Core.RequestContent), null, true);
                         int firstOptionalParameterIndex = parameters.FindIndex(p => p.DefaultValue != null);
                         if (firstOptionalParameterIndex == -1)
                         {
@@ -82,8 +82,8 @@ namespace AutoRest.CSharp.Output.Models
 
                     // Inject the RequestOptions
                     CSharpType requestType = new CSharpType (typeof(Azure.RequestOptions)).WithNullable(true);
-                    Parameter requestOptions = new Parameter ("requestOptions", "The request options", requestType, new Constant(null, requestType), true);
-                    parameters.Insert (parameters.Count, requestOptions);
+                    Parameter options = new Parameter ("options", "The request options", requestType, new Constant(null, requestType), true);
+                    parameters.Insert (parameters.Count, options);
 
                     Request request = new Request (method.Request.HttpMethod, method.Request.PathSegments, method.Request.Query, method.Request.Headers, body);
                     Diagnostic diagnostic = new Diagnostic($"{Declaration.Name}.{method.Name}");
