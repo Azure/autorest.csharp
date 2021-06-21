@@ -1,0 +1,581 @@
+!CodeModel 
+info: !Info 
+  description: >-
+    The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end
+    user and the Microsoft Azure Networks service.
+  title: none
+schemas: !Schemas 
+  strings:
+    - !StringSchema &ref_0
+      type: string
+      language: !Languages 
+        default:
+          name: String
+          description: simple string
+      protocol: !Protocols {}
+    - !StringSchema &ref_13
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      language: !Languages 
+        default:
+          name: String
+          description: ''
+      protocol: !Protocols {}
+    - !StringSchema &ref_1
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      language: !Languages 
+        default:
+          name: BastionShareableLinkBsl
+          description: The unique Bastion Shareable Link to the virtual machine.
+      protocol: !Protocols {}
+    - !StringSchema &ref_2
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      language: !Languages 
+        default:
+          name: BastionShareableLinkCreatedAt
+          description: The time when the link was created.
+      protocol: !Protocols {}
+    - !StringSchema &ref_3
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      language: !Languages 
+        default:
+          name: BastionShareableLinkMessage
+          description: Optional field indicating the warning or error message related to the vm in case of partial failure.
+      protocol: !Protocols {}
+    - !StringSchema &ref_5
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      language: !Languages 
+        default:
+          name: BastionShareableLinkListResultNextLink
+          description: The URL to get the next set of results.
+      protocol: !Protocols {}
+    - !StringSchema &ref_6
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      language: !Languages 
+        default:
+          name: CloudErrorBodyCode
+          description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+      protocol: !Protocols {}
+    - !StringSchema &ref_7
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      language: !Languages 
+        default:
+          name: CloudErrorBodyMessage
+          description: A message describing the error, intended to be suitable for display in a user interface.
+      protocol: !Protocols {}
+    - !StringSchema &ref_8
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      language: !Languages 
+        default:
+          name: CloudErrorBodyTarget
+          description: The target of the particular error. For example, the name of the property in error.
+      protocol: !Protocols {}
+  constants:
+    - !ConstantSchema &ref_14
+      type: constant
+      value: !ConstantValue 
+        value: '2021-02-01'
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApiVersion20210201
+          description: Api Version (2021-02-01)
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_18
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: ApplicationJson
+          description: Content Type 'application/json'
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_20
+      type: constant
+      value: !ConstantValue 
+        value: application/json
+      valueType: *ref_0
+      language: !Languages 
+        default:
+          name: Accept
+          description: 'Accept: application/json'
+      protocol: !Protocols {}
+  objects:
+    - !ObjectSchema &ref_19
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      properties:
+        - !Property &ref_22
+          schema: !ArraySchema &ref_10
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-02-01'
+            elementType: !ObjectSchema &ref_4
+              type: object
+              apiVersions:
+                - !ApiVersion 
+                  version: '2021-02-01'
+              properties:
+                - !Property 
+                  schema: *ref_1
+                  readOnly: true
+                  serializedName: bsl
+                  language: !Languages 
+                    default:
+                      name: bsl
+                      description: The unique Bastion Shareable Link to the virtual machine.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_2
+                  readOnly: true
+                  serializedName: createdAt
+                  language: !Languages 
+                    default:
+                      name: createdAt
+                      description: The time when the link was created.
+                  protocol: !Protocols {}
+                - !Property 
+                  schema: *ref_3
+                  readOnly: true
+                  serializedName: message
+                  language: !Languages 
+                    default:
+                      name: message
+                      description: Optional field indicating the warning or error message related to the vm in case of partial failure.
+                  protocol: !Protocols {}
+              serializationFormats:
+                - json
+              usage:
+                - input
+                - output
+              language: !Languages 
+                default:
+                  name: BastionShareableLink
+                  description: Bastion Shareable Link.
+                  namespace: ''
+              protocol: !Protocols {}
+            language: !Languages 
+              default:
+                name: BastionShareableLinkListRequestVms
+                description: List of VM references.
+            protocol: !Protocols {}
+          serializedName: vms
+          language: !Languages 
+            default:
+              name: vms
+              description: List of VM references.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - input
+      language: !Languages 
+        default:
+          name: BastionShareableLinkListRequest
+          description: Post request for all the Bastion Shareable Link endpoints.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_4
+    - !ObjectSchema &ref_26
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      properties:
+        - !Property 
+          schema: !ArraySchema &ref_11
+            type: array
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-02-01'
+            elementType: *ref_4
+            language: !Languages 
+              default:
+                name: BastionShareableLinkListResultValue
+                description: List of Bastion Shareable Links for the request.
+            protocol: !Protocols {}
+          serializedName: value
+          language: !Languages 
+            default:
+              name: value
+              description: List of Bastion Shareable Links for the request.
+          protocol: !Protocols {}
+        - !Property 
+          schema: *ref_5
+          serializedName: nextLink
+          language: !Languages 
+            default:
+              name: nextLink
+              description: The URL to get the next set of results.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - output
+      language: !Languages 
+        default:
+          name: BastionShareableLinkListResult
+          description: Response for all the Bastion Shareable Link endpoints.
+          namespace: ''
+      protocol: !Protocols {}
+    - !ObjectSchema &ref_27
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: '2021-02-01'
+      properties:
+        - !Property 
+          schema: !ObjectSchema &ref_9
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: '2021-02-01'
+            properties:
+              - !Property 
+                schema: *ref_6
+                serializedName: code
+                language: !Languages 
+                  default:
+                    name: code
+                    description: An identifier for the error. Codes are invariant and are intended to be consumed programmatically.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_7
+                serializedName: message
+                language: !Languages 
+                  default:
+                    name: message
+                    description: A message describing the error, intended to be suitable for display in a user interface.
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_8
+                serializedName: target
+                language: !Languages 
+                  default:
+                    name: target
+                    description: The target of the particular error. For example, the name of the property in error.
+                protocol: !Protocols {}
+              - !Property 
+                schema: !ArraySchema &ref_12
+                  type: array
+                  apiVersions:
+                    - !ApiVersion 
+                      version: '2021-02-01'
+                  elementType: *ref_9
+                  language: !Languages 
+                    default:
+                      name: CloudErrorBodyDetails
+                      description: A list of additional details about the error.
+                  protocol: !Protocols {}
+                serializedName: details
+                language: !Languages 
+                  default:
+                    name: details
+                    description: A list of additional details about the error.
+                protocol: !Protocols {}
+            serializationFormats:
+              - json
+            usage:
+              - exception
+            extensions:
+              x-ms-external: true
+            language: !Languages 
+              default:
+                name: CloudErrorBody
+                description: An error response from the service.
+                namespace: ''
+            protocol: !Protocols {}
+          serializedName: error
+          language: !Languages 
+            default:
+              name: error
+              description: Cloud error body.
+          protocol: !Protocols {}
+      serializationFormats:
+        - json
+      usage:
+        - exception
+      extensions:
+        x-ms-external: true
+      language: !Languages 
+        default:
+          name: CloudError
+          description: An error response from the service.
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_9
+  arrays:
+    - *ref_10
+    - *ref_11
+    - *ref_12
+globalParameters:
+  - !Parameter &ref_17
+    schema: *ref_13
+    implementation: Client
+    required: true
+    extensions:
+      x-ms-priority: 0
+    language: !Languages 
+      default:
+        name: SubscriptionId
+        description: The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+        serializedName: subscriptionId
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: path
+  - !Parameter &ref_15
+    schema: *ref_0
+    clientDefaultValue: https://management.azure.com
+    implementation: Client
+    origin: modelerfour:synthesized/host
+    required: true
+    extensions:
+      x-ms-skip-url-encoding: true
+    language: !Languages 
+      default:
+        name: $host
+        description: server parameter
+        serializedName: $host
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: uri
+  - !Parameter &ref_16
+    schema: *ref_14
+    implementation: Client
+    origin: modelerfour:synthesized/api-version
+    required: true
+    language: !Languages 
+      default:
+        name: apiVersion
+        description: Api Version
+        serializedName: api-version
+    protocol: !Protocols 
+      http: !HttpParameter 
+        in: query
+operationGroups:
+  - !OperationGroup 
+    $key: ''
+    operations:
+      - !Operation 
+        apiVersions:
+          - !ApiVersion 
+            version: '2021-02-01'
+        parameters:
+          - *ref_15
+          - !Parameter &ref_24
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: resourceGroupName
+                description: The name of the resource group.
+                serializedName: resourceGroupName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_25
+            schema: *ref_13
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: bastionHostName
+                description: The name of the Bastion Host.
+                serializedName: bastionHostName
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - *ref_16
+          - *ref_17
+        requests:
+          - !Request 
+            parameters:
+              - !Parameter 
+                schema: *ref_18
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_21
+                schema: *ref_19
+                flattened: true
+                implementation: Method
+                required: true
+                language: !Languages 
+                  default:
+                    name: bslRequest
+                    description: Post request for all the Bastion Shareable Link endpoints.
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+              - !Parameter 
+                schema: *ref_20
+                implementation: Method
+                origin: modelerfour:synthesized/accept
+                required: true
+                language: !Languages 
+                  default:
+                    name: accept
+                    description: Accept header
+                    serializedName: Accept
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !VirtualParameter &ref_23
+                schema: *ref_10
+                implementation: Method
+                originalParameter: *ref_21
+                pathToProperty: []
+                targetProperty: *ref_22
+                language: !Languages 
+                  default:
+                    name: vms
+                    description: List of VM references.
+                protocol: !Protocols {}
+            signatureParameters:
+              - *ref_23
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/createShareableLinks
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        signatureParameters:
+          - *ref_24
+          - *ref_25
+        responses:
+          - !SchemaResponse 
+            schema: *ref_26
+            language: !Languages 
+              default:
+                name: ''
+                description: Success. The operation returns a list of shareable links for the specified VMs, giving appropriate error messages as needed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - '200'
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Accepted and the operation will complete asynchronously.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '202'
+        exceptions:
+          - !SchemaResponse 
+            schema: *ref_27
+            language: !Languages 
+              default:
+                name: ''
+                description: Error response describing why the operation failed.
+            protocol: !Protocols 
+              http: !HttpResponse 
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                statusCodes:
+                  - default
+        extensions:
+          x-ms-examples:
+            Create Bastion Shareable Links for the request VMs:
+              parameters:
+                api-version: '2021-02-01'
+                bastionHostName: bastionhosttenant
+                bslRequest:
+                  vms:
+                    - vm:
+                        id: /subscriptions/subid/resourceGroups/rgx/providers/Microsoft.Compute/virtualMachines/vm1
+                    - vm:
+                        id: /subscriptions/subid/resourceGroups/rgx/providers/Microsoft.Compute/virtualMachines/vm2
+                resourceGroupName: rg1
+                subscriptionId: subid
+              responses:
+                '200':
+                  body:
+                    value:
+                      - bsl: http://bst-bastionhostid.bastion.com/api/shareable-url/tokenvm1
+                        createdAt: '2019-10-18T12:00:00.0000Z'
+                        vm:
+                          id: /subscriptions/subid/resourceGroups/rgx/providers/Microsoft.Compute/virtualMachines/vm1
+                      - bsl: http://bst-bastionhostid.bastion.com/api/shareable-url/tokenvm2
+                        createdAt: '2019-10-17T12:00:00.0000Z'
+                        vm:
+                          id: /subscriptions/subid/resourceGroups/rgx/providers/Microsoft.Compute/virtualMachines/vm2
+                '202': {}
+          x-ms-long-running-operation: true
+          x-ms-long-running-operation-options:
+            final-state-via: location
+          x-ms-pageable:
+            nextLinkName: nextLink
+        language: !Languages 
+          default:
+            name: PutBastionShareableLink
+            description: Creates a Bastion Shareable Links for all the VMs specified in the request.
+            paging:
+              nextLinkName: nextLink
+        protocol: !Protocols {}
+    language: !Languages 
+      default:
+        name: ''
+        description: ''
+    protocol: !Protocols {}
+security: !Security 
+  authenticationRequired: true
+  schemes:
+    - !AADTokenSecurityScheme 
+      type: AADToken
+      scopes:
+        - https://management.azure.com/.default
+language: !Languages 
+  default:
+    name: None
+    description: ''
+protocol: !Protocols 
+  http: !HttpModel {}
