@@ -22,7 +22,7 @@ namespace Azure.Management.Storage
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private StorageAccountsRestOperations _restClient { get; }
-        internal PrivateLinkResourcesRestOperations PrivateLinkResourcesRestClient { get; }
+        private PrivateLinkResourcesRestOperations _privateLinkResourcesRestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="StorageAccountOperations"/> class for mocking. </summary>
         protected StorageAccountOperations()
@@ -36,7 +36,7 @@ namespace Azure.Management.Storage
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new StorageAccountsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-            PrivateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _privateLinkResourcesRestClient = new PrivateLinkResourcesRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Storage/storageAccounts";
@@ -645,7 +645,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return await PrivateLinkResourcesRestClient.ListByStorageAccountAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return await _privateLinkResourcesRestClient.ListByStorageAccountAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -662,7 +662,7 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return PrivateLinkResourcesRestClient.ListByStorageAccount(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return _privateLinkResourcesRestClient.ListByStorageAccount(Id.ResourceGroupName, Id.Name, cancellationToken);
             }
             catch (Exception e)
             {

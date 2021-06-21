@@ -143,17 +143,24 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         /// <summary>
         /// Returns true if the operation group is a resource; false otherwise (list-only ...).
-        /// If the operation group is marked by <see cref="KeywordToSkipGeneration"/> in configuration, will return false.
+        /// If the operation group is marked by <see cref="NonResourceKeyword"/> in configuration, will return false.
         /// </summary>
         /// <param name="og">Operation group.</param>
         /// <param name="config">Management plane configuration.</param>
         public static bool IsResource(this OperationGroup og, MgmtConfiguration config)
         {
-            var isNonResource = config.OperationGroupToResource.ContainsKey(og.Key)
-                && config.OperationGroupToResource[og.Key].Equals(KeywordToSkipGeneration);
-            return !isNonResource && !og.IsListOnly(config);
+            return !og.IsNonResource(config) && !og.IsListOnly(config);
         }
 
-        private const string KeywordToSkipGeneration = "NonResource";
+        /// <summary>
+        /// Returns true if the operation group is marked by <see cref="NonResourceKeyword"/> in configuration.
+        /// </summary>
+        /// <param name="og">Operation group to test.</param>
+        /// <param name="config">Management plane configuration.</param>
+        public static bool IsNonResource(this OperationGroup og, MgmtConfiguration config) =>
+            config.OperationGroupToResource.ContainsKey(og.Key)
+                && config.OperationGroupToResource[og.Key].Equals(NonResourceKeyword);
+
+        private const string NonResourceKeyword = "NonResource";
     }
 }

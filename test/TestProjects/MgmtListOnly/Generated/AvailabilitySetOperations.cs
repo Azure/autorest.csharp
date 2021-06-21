@@ -23,10 +23,10 @@ namespace MgmtListOnly
     {
         private readonly ClientDiagnostics _clientDiagnostics;
         private AvailabilitySetsRestOperations _restClient { get; }
-        internal AvailabilitySetChildRestOperations AvailabilitySetChildRestClient { get; }
-        internal ChildWithPostsRestOperations ChildWithPostsRestClient { get; }
-        internal ResponseNotCalledValueRestOperations ResponseNotCalledValueRestClient { get; }
-        internal ResponseNotCalledValueNoPageRestOperations ResponseNotCalledValueNoPageRestClient { get; }
+        private AvailabilitySetChildRestOperations _availabilitySetChildRestClient { get; }
+        private ChildWithPostsRestOperations _childWithPostsRestClient { get; }
+        private ResponseNotCalledValueRestOperations _responseNotCalledValueRestClient { get; }
+        private ResponseNotCalledValueNoPageRestOperations _responseNotCalledValueNoPageRestClient { get; }
 
         /// <summary> Initializes a new instance of the <see cref="AvailabilitySetOperations"/> class for mocking. </summary>
         protected AvailabilitySetOperations()
@@ -40,10 +40,10 @@ namespace MgmtListOnly
         {
             _clientDiagnostics = new ClientDiagnostics(ClientOptions);
             _restClient = new AvailabilitySetsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-            AvailabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-            ChildWithPostsRestClient = new ChildWithPostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-            ResponseNotCalledValueRestClient = new ResponseNotCalledValueRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
-            ResponseNotCalledValueNoPageRestClient = new ResponseNotCalledValueNoPageRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _availabilitySetChildRestClient = new AvailabilitySetChildRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _childWithPostsRestClient = new ChildWithPostsRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _responseNotCalledValueRestClient = new ResponseNotCalledValueRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
+            _responseNotCalledValueNoPageRestClient = new ResponseNotCalledValueNoPageRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
         }
 
         public static readonly ResourceType ResourceType = "Microsoft.Compute/availabilitySets";
@@ -571,7 +571,7 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    var response = AvailabilitySetChildRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _availabilitySetChildRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -586,7 +586,7 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    var response = AvailabilitySetChildRestClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _availabilitySetChildRestClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -609,7 +609,7 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    var response = await AvailabilitySetChildRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _availabilitySetChildRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -624,7 +624,7 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    var response = await AvailabilitySetChildRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _availabilitySetChildRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -650,7 +650,7 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                return await ChildWithPostsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return await _childWithPostsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -674,7 +674,7 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                return ChildWithPostsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
+                return _childWithPostsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
             }
             catch (Exception e)
             {
@@ -694,7 +694,7 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    var response = ResponseNotCalledValueRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _responseNotCalledValueRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.NotValue, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -709,7 +709,7 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    var response = ResponseNotCalledValueRestClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
+                    var response = _responseNotCalledValueRestClient.ListNextPage(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken);
                     return Page.FromValues(response.Value.NotValue, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -732,7 +732,7 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    var response = await ResponseNotCalledValueRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _responseNotCalledValueRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.NotValue, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -747,7 +747,7 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    var response = await ResponseNotCalledValueRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
+                    var response = await _responseNotCalledValueRestClient.ListNextPageAsync(nextLink, Id.ResourceGroupName, Id.Name, cancellationToken: cancellationToken).ConfigureAwait(false);
                     return Page.FromValues(response.Value.NotValue, response.Value.NextLink, response.GetRawResponse());
                 }
                 catch (Exception e)
@@ -766,7 +766,7 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                return await ResponseNotCalledValueNoPageRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return await _responseNotCalledValueNoPageRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -783,7 +783,7 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                return ResponseNotCalledValueNoPageRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return _responseNotCalledValueNoPageRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
             }
             catch (Exception e)
             {

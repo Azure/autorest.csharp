@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             foreach (var operationGroup in resourceOperation.ChildOperations.Keys)
             {
-                writer.Append($"internal {context.Library.GetRestClient(operationGroup).Type} {GetRestClientName(operationGroup)}").LineRaw(" { get; }");
+                writer.Append($"private {context.Library.GetRestClient(operationGroup).Type} {GetRestClientName(operationGroup)}").LineRaw(" { get; }");
             }
         }
 
@@ -381,7 +381,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private string GetRestClientName(OperationGroup operationGroup)
         {
-            return $"{operationGroup.Key}RestClient";
+            return $"_{operationGroup.Key.ToVariableName()}RestClient";
         }
 
         private void WriteGetMethod(CodeWriter writer, ClientMethod clientMethod, Resource resource, BuildContext<MgmtOutputLibrary> context, bool isInheritedMethod, bool async)
