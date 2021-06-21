@@ -550,10 +550,21 @@ namespace AutoRest.CSharp.Output.Models
             {
                 defaultValue = Constant.Default(type);
             }
+
+            CSharpType parameterType = TypeFactory.GetInputType(type);
+
+            // ModelerFour synthesiszes a content type parameter for operations which consume different content types.
+            // When producing a low level client, model this parameter as an instance of Azure.Core.ContentType
+            // instead of just a "string".
+            if (_context.Configuration.LowLevelClient && requestParameter.Origin == "modelerfour:synthesized/content-type")
+            {
+                parameterType = new CSharpType(typeof(Azure.Core.ContentType));
+            }
+
             return new Parameter(
                 requestParameter.CSharpName(),
                 CreateDescription(requestParameter),
-                TypeFactory.GetInputType(type),
+                parameterType,
                 defaultValue,
                 isRequired,
                 requestParameter.Origin == "modelerfour:synthesized/api-version");

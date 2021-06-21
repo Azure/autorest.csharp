@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models
                     // parameter to be the last required parameter in the method signature (so any required path or query parameters
                     // will show up first.
 
-                    IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where (FilterServiceParamaters);
+                    IEnumerable<RequestParameter> requestParameters = serviceRequest.Parameters.Where(FilterServiceParamaters);
                     var accessibility = operation.Accessibility ?? "public";
                     RestClientMethod method = _builder.BuildMethod(operation, (HttpRequest)serviceRequest.Protocol.Http!, requestParameters, null, accessibility);
                     List<Parameter> parameters = method.Parameters.ToList();
@@ -70,14 +70,31 @@ namespace AutoRest.CSharp.Output.Models
                         // The service request had some parameters for the body, so create a parameter for the body and inject it into the list of parameters,
                         // right before the first optional parameter.
                         Parameter bodyParam = new Parameter("content", "The content to send as the body of the request.", typeof(Azure.Core.RequestContent), null, true);
-                        int firstOptionalParameterIndex = parameters.FindIndex(p => p.DefaultValue != null);
-                        if (firstOptionalParameterIndex == -1)
+                        int bodyIndex = parameters.FindIndex(p => p.DefaultValue != null);
+                        if (bodyIndex == -1)
                         {
-                            firstOptionalParameterIndex = parameters.Count;
+                            bodyIndex = parameters.Count;
                         }
-                        parameters.Insert(firstOptionalParameterIndex, bodyParam);
+                        parameters.Insert(bodyIndex, bodyParam);
                         body = new RequestContentRequestBody(bodyParam);
                         schemaDocumentation = GetSchemaDocumentationsForParameter(bodyParameter);
+
+                        // If there's a Content-Type parameter in the parameters list, move it to after the parameter for the body.
+                        int contentTypeParamIndex = parameters.FindIndex(p => p.Type.FrameworkType == typeof(Azure.Core.ContentType));
+                        if (contentTypeParamIndex >= 0)
+                        {
+                            Parameter contentTypeParameter = parameters[contentTypeParamIndex];
+                            parameters.RemoveAt(contentTypeParamIndex);
+
+                            // If the content-type paramter came before the the body, the removal of it above shifted the body parameter
+                            // closer to the start of the list.
+                            if (contentTypeParamIndex < bodyIndex)
+                            {
+                                bodyIndex--;
+                            }
+
+                            parameters.Insert(bodyIndex + 1, contentTypeParameter);
+                        }
                     }
 
                     // Inject the RequestOptions
@@ -190,7 +207,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private bool FilterServiceParamaters (RequestParameter p)
+        private bool FilterServiceParamaters(RequestParameter p)
         {
             switch (p.In)
             {
@@ -202,6 +219,11 @@ namespace AutoRest.CSharp.Output.Models
                 default:
                     return false;
             }
+        }
+
+        private bool IsSynthesizedContentTypeParameter(RequestParameter p)
+        {
+            return p.Origin == "modelerfour:synthesized/content-type";
         }
 
         public IReadOnlyCollection<Parameter> GetConstructorParameters(CSharpType? credentialType)
