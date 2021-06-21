@@ -67,12 +67,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Line($"/// Schema for <c>{schemaDoc.SchemaName}</c>:");
                     writer.LineRaw("/// <list type=\"table\">");
-                    writer.LineRaw("///   <listeader>");
+                    writer.LineRaw("///   <listheader>");
                     writer.LineRaw("///     <term>Name</term>");
                     writer.LineRaw("///     <term>Type</term>");
                     writer.LineRaw("///     <term>Required</term>");
                     writer.LineRaw("///     <term>Description</term>");
-                    writer.LineRaw("///   </listeader>");
+                    writer.LineRaw("///   </listheader>");
                     foreach (var row in schemaDoc.DocumentationRows)
                     {
                         writer.LineRaw("///   <item>");
