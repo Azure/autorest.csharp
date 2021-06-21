@@ -315,18 +315,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected bool IsMandatory(Parameter parameter) => parameter.DefaultValue is null;
 
-        protected void WriteClientMethod(CodeWriter writer, RestClientMethod clientMethod, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async)
+        protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async, string? restClientName = null)
         {
-            CSharpType? bodyType = GetBodyTypeForList(clientMethod.ReturnType, operationGroup, context);
-            bool isResourceList = bodyType != clientMethod.ReturnType;
+            RestClientMethod restClientMethod = clientMethod.RestClientMethod;
+            CSharpType? bodyType = GetBodyTypeForList(restClientMethod.ReturnType, operationGroup, context);
+            bool isResourceList = bodyType != restClientMethod.ReturnType;
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
                 typeof(Response);
             responseType = responseType.WrapAsync(async);
 
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
+            writer.WriteXmlDocumentationSummary(restClientMethod.Description);
 
-            Parameter[] nonPathParameters = GetNonPathParameters(clientMethod);
+            Parameter[] nonPathParameters = GetNonPathParameters(restClientMethod);
             foreach (Parameter parameter in nonPathParameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter);
@@ -335,8 +336,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
             writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
 
-            var methodName = CreateMethodName(clientMethod.Name, async);
-            writer.Append($"{clientMethod.Accessibility} virtual {AsyncKeyword(async)} {responseType} {methodName}(");
+            var methodName = CreateMethodName(clientMethod.Name, async); // note clientMethod.Name not restClientMethod.Name
+            writer.Append($"{restClientMethod.Accessibility} virtual {AsyncKeyword(async)} {responseType} {methodName}(");
 
             foreach (Parameter parameter in nonPathParameters)
             {
@@ -355,8 +356,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Append($"await ");
                     }
 
-                    var parameterNames = GetParametersName(clientMethod, operationGroup, context);
-                    writer.Append($"{RestClientField}.{CreateMethodName(clientMethod.Name, async)}(");
+                    var parameterNames = GetParametersName(restClientMethod, operationGroup, context);
+                    writer.Append($"{restClientName ?? RestClientField}.{CreateMethodName(restClientMethod.Name, async)}(");
                     // TODO -- we need to change this to BuildAndWriteParameters(writer, clientMethod) to make it be able to handle more cases
                     // but directly replace the following logic by this function is causing issues
                     foreach (var parameter in parameterNames)
@@ -381,7 +382,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.Append($"return response");
                     }
 
-                    if (bodyType == null && clientMethod.HeaderModel != null)
+                    if (bodyType == null && restClientMethod.HeaderModel != null)
                     {
                         writer.Append($".GetRawResponse()");
                     }

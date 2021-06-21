@@ -650,7 +650,8 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                return await _childWithPostsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                var response = await _childWithPostsRestClient.CreateOrUpdateAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -674,7 +675,8 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                return _childWithPostsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
+                var response = _childWithPostsRestClient.CreateOrUpdate(Id.ResourceGroupName, Id.Parent.Name, Id.Name, parameters, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {
@@ -766,7 +768,8 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                return await _responseNotCalledValueNoPagesRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _responseNotCalledValueNoPagesRestClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -783,7 +786,8 @@ namespace MgmtListOnly
             scope.Start();
             try
             {
-                return _responseNotCalledValueNoPagesRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _responseNotCalledValueNoPagesRestClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {

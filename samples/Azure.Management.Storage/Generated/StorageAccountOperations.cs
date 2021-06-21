@@ -645,7 +645,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return await _privateLinkResourcesRestClient.ListByStorageAccountAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _privateLinkResourcesRestClient.ListByStorageAccountAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
+                return response;
             }
             catch (Exception e)
             {
@@ -662,7 +663,8 @@ namespace Azure.Management.Storage
             scope.Start();
             try
             {
-                return _privateLinkResourcesRestClient.ListByStorageAccount(Id.ResourceGroupName, Id.Name, cancellationToken);
+                var response = _privateLinkResourcesRestClient.ListByStorageAccount(Id.ResourceGroupName, Id.Name, cancellationToken);
+                return response;
             }
             catch (Exception e)
             {

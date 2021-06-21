@@ -243,8 +243,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     clientMethod.RestClientMethod.Request.HttpMethod != RequestMethod.Put &&
                     !clientMethod.Name.StartsWith("List"))
                 {
-                    WriteClientMethod(writer, clientMethod.RestClientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true);
-                    WriteClientMethod(writer, clientMethod.RestClientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false);
                 }
             }
 
@@ -254,8 +254,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var restClientName = GetRestClientName(pair.Key);
                 foreach (var clientMethod in pair.Value.ClientMethods)
                 {
-                    WriteClientMethod(writer, clientMethod, resourceOperation, context, true, restClientName);
-                    WriteClientMethod(writer, clientMethod, resourceOperation, context, false, restClientName);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true, restClientName);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false, restClientName);
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
@@ -321,62 +321,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WritePagingMethodImplementation(writer, operationGroup, pagingMethod, async, itemType);
+                WritePagingOperationBody(writer, pagingMethod, async, itemType, GetRestClientName(operationGroup), ClientDiagnosticsField, $"");
             }
-        }
-
-        private void WritePagingMethodImplementation(CodeWriter writer, OperationGroup operationGroup, PagingMethod pagingMethod, bool async, CSharpType itemType)
-        {
-            var parameters = pagingMethod.Method.Parameters;
-            var restClientName = GetRestClientName(operationGroup);
-
-            var returnType = new CSharpType(typeof(Page<>), itemType).WrapAsync(async);
-
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkProperty?.Declaration.Name;
-            var itemName = pagingMethod.PagingResponse.ItemProperty.Declaration.Name;
-
-            var continuationTokenText = nextLinkName != null ? $"response.Value.{nextLinkName}" : "null";
-            var configureAwaitText = async ? ".ConfigureAwait(false)" : string.Empty;
-            using (writer.Scope($"{AsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
-            {
-                // no null-checks because all are optional
-                WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
-                {
-                    writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
-                    foreach (var parameter in BuildParameterMapping(pagingMethod.Method).Where(p => IsMandatory(p.Parameter)))
-                    {
-                        writer.Append($"{parameter.ValueExpression}, ");
-                    }
-
-                    writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
-
-                    writer.UseNamespace("System.Linq");
-                    writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
-                    writer.Line($", {continuationTokenText}, response.GetRawResponse());");
-                });
-            }
-
-            var nextPageFunctionName = "null";
-            if (pagingMethod.NextPageMethod != null)
-            {
-                nextPageFunctionName = "NextPageFunc";
-                var nextPageParameters = pagingMethod.NextPageMethod.Parameters;
-                using (writer.Scope($"{AsyncKeyword(async)} {returnType} {nextPageFunctionName}({typeof(string)} nextLink, {typeof(int?)} pageSizeHint)"))
-                {
-                    WriteDiagnosticScope(writer, pagingMethod.Diagnostics, ClientDiagnosticsField, writer =>
-                    {
-                        writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.NextPageMethod.Name, async)}(nextLink, ");
-                        foreach (var parameter in BuildParameterMapping(pagingMethod.NextPageMethod).Where(p => IsMandatory(p.Parameter)))
-                        {
-                            writer.Append($"{parameter.ValueExpression}, ");
-                        }
-                        writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
-                        writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
-                        writer.Line($", {continuationTokenText}, response.GetRawResponse());");
-                    });
-                }
-            }
-            writer.Line($"return {typeof(PageableHelpers)}.{CreateMethodName("Create", async)}Enumerable(FirstPageFunc, {nextPageFunctionName});");
         }
 
         private string GetRestClientName(OperationGroup operationGroup)
@@ -1029,107 +975,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var mgmtOperation = operation as MgmtLongRunningOperation;
             Debug.Assert(mgmtOperation != null);
             return mgmtOperation;
-        }
-
-        private void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, ResourceOperation resourceOperation, BuildContext<MgmtOutputLibrary> context, bool async, string restClientName = "RestClient")
-        {
-            CSharpType? bodyType = clientMethod.RestClientMethod.ReturnType;
-            CSharpType responseType = bodyType != null ?
-                new CSharpType(typeof(Response<>), bodyType) :
-                typeof(Response);
-
-            responseType = async ? new CSharpType(typeof(Task<>), responseType) : responseType;
-
-            writer.WriteXmlDocumentationSummary(clientMethod.Description);
-
-            Parameter[] nonPathParameters = GetNonPathParameters(clientMethod.RestClientMethod);
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-            }
-
-            writer.WriteXmlDocumentationParameter("cancellationToken", "The cancellation token to use.");
-            writer.WriteXmlDocumentationRequiredParametersException(nonPathParameters);
-
-            writer.Append($"{clientMethod.Accessibility} virtual {AsyncKeyword(async)} {responseType} {CreateMethodName(clientMethod.Name, async)}(");
-
-            foreach (Parameter parameter in nonPathParameters)
-            {
-                writer.WriteParameter(parameter);
-            }
-            writer.Line($"{typeof(CancellationToken)} cancellationToken = default)");
-
-            using (writer.Scope())
-            {
-                writer.WriteParameterNullChecks(nonPathParameters);
-                WriteDiagnosticScope(writer, clientMethod.Diagnostics, ClientDiagnosticsField, writer =>
-                {
-                    writer.Append($"return (");
-                    if (async)
-                    {
-                        writer.Append($"await ");
-                    }
-
-                    var parameterNames = GetParametersName(clientMethod.RestClientMethod, resourceOperation.OperationGroup, context);
-                    writer.Append($"{restClientName}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
-                    foreach (var parameter in parameterNames)
-                    {
-                        writer.Append($"{parameter:I}, ");
-                    }
-                    writer.Append($"cancellationToken)");
-
-                    if (async)
-                    {
-                        writer.Append($".ConfigureAwait(false)");
-                    }
-
-                    writer.Append($")");
-
-                    if (bodyType == null && clientMethod.RestClientMethod.HeaderModel != null)
-                    {
-                        writer.Append($".GetRawResponse()");
-                    }
-
-                    writer.Line($";");
-                });
-            }
-
-            writer.Line();
-        }
-
-        private bool IsTenantParent(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-        {
-            while (!IsTerminalState(operationGroup, context))
-            {
-                var operationGroupTest = ParentOperationGroup(operationGroup, context);
-                if (operationGroupTest != null)
-                    operationGroup = operationGroupTest;
-            }
-
-            return TenantDetection.IsTenantResource(operationGroup, context.Configuration.MgmtConfiguration);
-        }
-
-        private static OperationGroup? ParentOperationGroup(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-        {
-            var config = context.Configuration.MgmtConfiguration;
-            var parentResourceType = operationGroup.ParentResourceType(config);
-            OperationGroup? parentOperationGroup = null;
-
-            foreach (var opGroup in context.CodeModel.OperationGroups)
-            {
-                if (opGroup.ResourceType(context.Configuration.MgmtConfiguration).Equals(parentResourceType))
-                {
-                    parentOperationGroup = opGroup;
-                    break;
-                }
-            }
-
-            return parentOperationGroup;
-        }
-
-        private static bool IsTerminalState(OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
-        {
-            return ParentOperationGroup(operationGroup, context) == null;
         }
 
         private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation currentOperation, BuildContext<MgmtOutputLibrary> context)
