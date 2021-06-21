@@ -125,13 +125,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)
         {
-            WriteExtensionPagingMethod(writer, pageType, restClient, pagingMethod, pagingMethod.Method.Parameters, converter, async);
+            WriteExtensionPagingMethod(writer, pageType, restClient, pagingMethod, converter, async);
         }
 
         private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)
         {
-            var nonPathParameters = GetNonPathParameters(pagingMethod.Method);
-            WriteExtensionPagingMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod, nonPathParameters,
+            WriteExtensionPagingMethod(writer, resource.Type, resourceOperation.RestClient, pagingMethod,
                 $".Select(value => new {resource.Type.Name}(subscription, value))", async);
         }
 

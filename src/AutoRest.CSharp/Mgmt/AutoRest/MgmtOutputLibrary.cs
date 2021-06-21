@@ -490,7 +490,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ParentDetection.VerfiyParents(_codeModel.OperationGroups, ResourceTypes, _mgmtConfiguration);
         }
 
-        private void AddToChildNonResourceOperationGroupMap(OperationGroup operationGroup) // todo: rename to differentiate with AddNonResourceOperationGroupMapping
+        private void AddToChildNonResourceOperationGroupMap(OperationGroup operationGroup)
         {
             var parent = operationGroup.ParentResourceType(_mgmtConfiguration);
             if (_childNonResourceOperationGroups.ContainsKey(parent))

@@ -106,10 +106,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
         private void WriteListMethod(CodeWriter writer, MgmtRestClient restClient, PagingMethod pagingMethod, bool async)
         {
-            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, restClient, pagingMethod,
-                // skip the first parameter, aka the resource group name parameter
-                pagingMethod.Method.Parameters.Skip(1),
-                $"", async);
+            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, restClient, pagingMethod, $"", async);
         }
 
         // we need to pass the first parameter as `resourceGroup.Id.Name` because we are in an extension class
