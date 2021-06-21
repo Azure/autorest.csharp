@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
         {
-            WriteExensionClientMethod(writer, restClient, clientMethod, clientMethod.RestClientMethod.Parameters, async);
+            WriteExtensionClientMethod(writer, restClient, clientMethod, clientMethod.RestClientMethod.Parameters, async);
         }
 
         private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)

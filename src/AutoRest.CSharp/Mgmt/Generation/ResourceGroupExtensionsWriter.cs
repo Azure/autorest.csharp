@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             // but in parameter invocation, we need to pass a value for `resourceGroupName`
             // instead of `Id.ResourceGroupName` as in normal ResourceContainer or ResourceOperation, we need to pass `resourceGroup.Id.Name`
             var methodParameters = clientMethod.RestClientMethod.Parameters.Skip(1);
-            WriteExensionClientMethod(writer, restClient, clientMethod,
+            WriteExtensionClientMethod(writer, restClient, clientMethod,
                 // skip the first parameter, aka the resource group name parameter
                 clientMethod.RestClientMethod.Parameters.Skip(1),
                 async);

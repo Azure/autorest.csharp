@@ -30,7 +30,7 @@ namespace MgmtListOnly
         }
         #endregion
 
-        #region ResourceGroupFeature
+        #region ResourceGroupFeatures
         private static ResourceGroupFeaturesRestOperations GetResourceGroupFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ResourceGroupFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -43,7 +43,7 @@ namespace MgmtListOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static AsyncPageable<ResourceGroupFeature> ListResourceGroupFeatureAsync(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<ResourceGroupFeature> ListResourceGroupFeaturesAsync(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -56,7 +56,7 @@ namespace MgmtListOnly
                 var restOperations = GetResourceGroupFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 async Task<Page<ResourceGroupFeature>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupFeature");
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupFeatures");
                     scope.Start();
                     try
                     {
@@ -71,7 +71,7 @@ namespace MgmtListOnly
                 }
                 async Task<Page<ResourceGroupFeature>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupFeature");
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupFeatures");
                     scope.Start();
                     try
                     {
@@ -96,7 +96,7 @@ namespace MgmtListOnly
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Pageable<ResourceGroupFeature> ListResourceGroupFeature(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
+        public static Pageable<ResourceGroupFeature> ListResourceGroupFeatures(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -109,7 +109,7 @@ namespace MgmtListOnly
                 var restOperations = GetResourceGroupFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
                 Page<ResourceGroupFeature> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupFeature");
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupFeatures");
                     scope.Start();
                     try
                     {
@@ -124,7 +124,7 @@ namespace MgmtListOnly
                 }
                 Page<ResourceGroupFeature> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupFeature");
+                    using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupFeatures");
                     scope.Start();
                     try
                     {
@@ -144,7 +144,7 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region ResourceGroupNonPageableFeature
+        #region ResourceGroupNonPageableFeatures
         private static ResourceGroupNonPageableFeaturesRestOperations GetResourceGroupNonPageableFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new ResourceGroupNonPageableFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -156,7 +156,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static async Task<Response<ResourceGroupNonPageableFeatureListResult>> ListResourceGroupNonPageableFeatureAsync(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<ResourceGroupNonPageableFeatureListResult>> ListResourceGroupNonPageableFeaturesAsync(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -167,7 +167,7 @@ namespace MgmtListOnly
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetResourceGroupNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupNonPageableFeature");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupNonPageableFeatures");
                 scope.Start();
                 try
                 {
@@ -188,7 +188,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Response<ResourceGroupNonPageableFeatureListResult> ListResourceGroupNonPageableFeature(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<ResourceGroupNonPageableFeatureListResult> ListResourceGroupNonPageableFeatures(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -199,7 +199,7 @@ namespace MgmtListOnly
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetResourceGroupNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupNonPageableFeature");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListResourceGroupNonPageableFeatures");
                 scope.Start();
                 try
                 {
@@ -303,7 +303,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        public static async Task<Response<PublishedKeyListResult>> ListPublishedKeysAsync(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<PublishedKeyListResult>> ListKeysPublishedAsync(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
             {
@@ -318,7 +318,7 @@ namespace MgmtListOnly
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListPublishedKeys");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListKeysPublished");
                 scope.Start();
                 try
                 {
@@ -340,7 +340,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        public static Response<PublishedKeyListResult> ListPublishedKeys(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<PublishedKeyListResult> ListKeysPublished(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
             {
@@ -355,7 +355,7 @@ namespace MgmtListOnly
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListPublishedKeys");
+                using var scope = clientDiagnostics.CreateScope("ResourceGroupExtensions.ListKeysPublished");
                 scope.Start();
                 try
                 {

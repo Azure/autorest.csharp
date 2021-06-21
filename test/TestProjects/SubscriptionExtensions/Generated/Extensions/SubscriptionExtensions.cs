@@ -40,7 +40,7 @@ namespace SubscriptionExtensions
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<Oven> ListOvenAsync(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Oven> ListOvensAsync(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -86,7 +86,7 @@ namespace SubscriptionExtensions
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<Oven> ListOven(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
+        public static Pageable<Oven> ListOvens(this SubscriptionOperations subscription, string statusOnly = null, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {

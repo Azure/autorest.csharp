@@ -14,6 +14,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -33,7 +34,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultName = defaultName;
 
             if (operationGroup.TryGetListInstanceSchema(out var schema))
-                SchemaName = schema.Name;
+                SchemaName = schema.Name.ToPlural();
             else
                 SchemaName = operationGroup.Key;
         }
@@ -46,8 +47,18 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtRestClient RestClient => _restClient ??= _context.Library.GetRestClient(OperationGroup);
 
-        public IEnumerable<ClientMethod> ClientMethods => _clientMethods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration, (_, operation, _) => $"{operation.CSharpName()}{SchemaName}");
+        public IEnumerable<ClientMethod> ClientMethods => _clientMethods ??= ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration, OverrideMethodName);
 
-        public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration, (_, operation, _) => $"{operation.CSharpName()}{SchemaName}");
+        public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration, OverrideMethodName);
+
+        private string OverrideMethodName(OperationGroup operationGroup, Operation operation, RestClientMethod restClientMethod) {
+            var verb = operation.CSharpName();
+            const string list = "List";
+            if (verb.StartsWith(list, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return $"{list}{SchemaName}{verb.Substring(list.Length)}";
+            }
+            return $"{operation.CSharpName()}{SchemaName}";
+        }
     }
 }

@@ -2399,7 +2399,7 @@ operationGroups:
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: ResponseNotCalledValue
+    $key: ResponseNotCalledValues
     operations:
       - !Operation 
         apiVersions:
@@ -2490,11 +2490,11 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: ResponseNotCalledValue
+        name: ResponseNotCalledValues
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 
-    $key: ResponseNotCalledValueNoPage
+    $key: ResponseNotCalledValueNoPages
     operations:
       - !Operation 
         apiVersions:
@@ -2578,7 +2578,7 @@ operationGroups:
         protocol: !Protocols {}
     language: !Languages 
       default:
-        name: ResponseNotCalledValueNoPage
+        name: ResponseNotCalledValueNoPages
         description: ''
     protocol: !Protocols {}
   - !OperationGroup 

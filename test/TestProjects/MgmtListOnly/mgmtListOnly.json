@@ -309,9 +309,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/responseNotCalledValue": {
             "get": {
                 "tags": [
-                    "ResponseNotCalledValue"
+                    "ResponseNotCalledValues"
                 ],
-                "operationId": "ResponseNotCalledValue_List",
+                "operationId": "ResponseNotCalledValues_List",
                 "description": "Retrieves information about an availability set.",
                 "parameters": [
                     {
@@ -352,9 +352,9 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/responseNotCalledValueNoPage": {
             "get": {
                 "tags": [
-                    "ResponseNotCalledValueNoPage"
+                    "ResponseNotCalledValueNoPages"
                 ],
-                "operationId": "ResponseNotCalledValueNoPage_List",
+                "operationId": "ResponseNotCalledValueNoPages_List",
                 "description": "Retrieves information about an availability set.",
                 "parameters": [
                     {

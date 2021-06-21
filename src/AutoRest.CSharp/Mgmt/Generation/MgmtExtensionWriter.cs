@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteExensionClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod,
+        protected void WriteExtensionClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod,
             IEnumerable<Parameter> methodParameters, bool async)
         {
             var responseType = clientMethod.GetResponseType(async);
@@ -142,7 +142,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationRequiredParametersException(methodParameters.ToArray());
 
             var responseType = pageType.WrapPageable(async);
-            var methodName = $"List{pageType.Name}";
+            var methodName = $"List{pageType.Name.ToPlural()}";
 
             writer.Append($"public static {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in methodParameters)

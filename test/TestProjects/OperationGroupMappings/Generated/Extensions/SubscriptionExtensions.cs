@@ -19,7 +19,7 @@ namespace OperationGroupMappings
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region Usage
+        #region Usages
         private static UsageRestOperations GetUsageRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
             return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
@@ -31,7 +31,7 @@ namespace OperationGroupMappings
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static AsyncPageable<Usage> ListUsageAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static AsyncPageable<Usage> ListUsagesAsync(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -44,7 +44,7 @@ namespace OperationGroupMappings
                 var restOperations = GetUsageRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<Usage>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsage");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsages");
                     scope.Start();
                     try
                     {
@@ -59,7 +59,7 @@ namespace OperationGroupMappings
                 }
                 async Task<Page<Usage>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsage");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsages");
                     scope.Start();
                     try
                     {
@@ -83,7 +83,7 @@ namespace OperationGroupMappings
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Pageable<Usage> ListUsage(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
+        public static Pageable<Usage> ListUsages(this SubscriptionOperations subscription, string location, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -96,7 +96,7 @@ namespace OperationGroupMappings
                 var restOperations = GetUsageRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<Usage> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsage");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsages");
                     scope.Start();
                     try
                     {
@@ -111,7 +111,7 @@ namespace OperationGroupMappings
                 }
                 Page<Usage> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsage");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListUsages");
                     scope.Start();
                     try
                     {

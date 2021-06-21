@@ -12,15 +12,15 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         // list-only + parent is resource -> extra method on [Parent]Operations
         // list-only + parent is not resource -> extra method on [armclient/sub/rg]Extensions
 
-        [TestCase("AvailabilitySetOperations", "ListAvailabilitySetChild", true)]
-        [TestCase("AvailabilitySetOperations", "CreateOrUpdateChildWithPost", true)]
+        [TestCase("AvailabilitySetOperations", "ListAvailabilitySetChilds", true)]
+        [TestCase("AvailabilitySetOperations", "CreateOrUpdateChildWithPosts", true)]
         public void ValidateExtraMethodInParentOperations(string operation, string methodName, bool exist)
         {
             var parentOperations = FindAllOperations().First(o => o.Name == operation);
             Assert.AreEqual(exist, parentOperations.GetMethod(methodName) != null, $"Could not find {operation}.{methodName}. Found: {string.Join(", ", parentOperations.GetMethods().Select(m => m.Name))}");
         }
 
-        [TestCase("ListAvailabilitySetFeatureAsync", true)]
+        [TestCase("ListAvailabilitySetFeaturesAsync", true)]
         public void ValidateExtraMethodInExtensionClasses(string methodName, bool exist)
         {
             var subscriptionExtension = FindSubscriptionExtensions();
@@ -32,8 +32,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         /// When the response of a list contains an array attribute but it's not call "value",
         /// list-only child detection should also see it as list-only.
         /// </summary>
-        [TestCase("AvailabilitySetOperations", "ListResponseNotCalledValue", true)]
-        [TestCase("AvailabilitySetOperations", "ListResponseNotCalledValueNoPage", true)]
+        [TestCase("AvailabilitySetOperations", "ListResponseNotCalledValues", true)]
+        [TestCase("AvailabilitySetOperations", "ListResponseNotCalledValueListNoPages", true)]
         public void ValidateWhenPropertyNameIsNotValue(string operation, string methodName, bool exist)
         {
             ValidateExtraMethodInParentOperations(operation, methodName, exist);
