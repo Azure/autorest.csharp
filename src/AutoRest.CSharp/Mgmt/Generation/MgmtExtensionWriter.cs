@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -15,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
@@ -60,10 +62,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        protected void WriteExtensionClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod,
-            IEnumerable<Parameter> methodParameters, bool async)
+        protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, string restClientName)
         {
-            var responseType = clientMethod.GetResponseType(async);
+            var bodyType = GetBodyTypeForList(operationGroup, clientMethod.RestClientMethod, context);
+            bool isResourceList = bodyType != clientMethod.GetBodyType();
+            var responseType = bodyType != null ?
+                new CSharpType(typeof(Response<>), bodyType) :
+                typeof(Response);
+            responseType = responseType.WrapAsync(async);
+
+            var methodParameters = BuildParameterMapping(clientMethod.RestClientMethod).Where(m => m.IsPassThru).Select(m => m.Parameter);
 
             writer.WriteXmlDocumentationSummary(clientMethod.Description);
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
@@ -88,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.WriteParameterNullChecks(methodParameters.ToArray());
 
-                writer.Append($"return {AwaitKeyword(async)} {ExtensionOperationVariableName}.UseClientContext((baseUri, credential, options, pipeline) =>");
+                writer.Append($"return {AwaitKeyword(async)} {ExtensionOperationVariableName}.UseClientContext({AsyncKeyword(async)} (baseUri, credential, options, pipeline) =>");
                 using (writer.Scope())
                 {
                     var clientDiagnostics = new CodeWriterDeclaration("clientDiagnostics");
@@ -96,13 +104,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     writer.Line($"var {clientDiagnostics:D} = new {typeof(ClientDiagnostics)}(options);");
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
-                    writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
+                    writer.Line($"var {restOperations:D} = Get{restClientName}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
 
                     WriteDiagnosticScope(writer, clientMethod.Diagnostics, clientDiagnostics.ActualName, writer =>
                     {
-                        writer.Append($"return (");
+                        writer.Append($"var response = {AwaitKeyword(async)} ");
 
-                        writer.Append($"{"restOperations"}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
+                        writer.Append($"{restOperations}.{CreateMethodName(clientMethod.RestClientMethod.Name, async)}(");
                         BuildAndWriteParameters(writer, clientMethod.RestClientMethod);
                         writer.Append($"cancellationToken)");
 
@@ -111,11 +119,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             writer.Append($".ConfigureAwait(false)");
                         }
 
-                        writer.Append($")");
-
                         if (clientMethod.GetBodyType() == null && clientMethod.RestClientMethod.HeaderModel != null)
                         {
                             writer.Append($".GetRawResponse()");
+                        }
+
+                        writer.Line($";");
+
+                        if (isResourceList)
+                        {
+                            writer.Append($"return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse())");
+                        }
+                        else
+                        {
+                            writer.Append($"return response");
                         }
 
                         writer.Line($";");

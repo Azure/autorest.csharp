@@ -45,7 +45,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetExactMatchModel2SRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -53,7 +53,8 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.PutAsync(resourceGroupName, exactMatchModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.PutAsync(resourceGroupName, exactMatchModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -93,7 +94,8 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.Put(resourceGroupName, exactMatchModel2SName, parameters, cancellationToken);
+                    var response = restOperations.Put(resourceGroupName, exactMatchModel2SName, parameters, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -133,7 +135,7 @@ namespace ExactMatchInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetExactMatchModel4SRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -141,7 +143,8 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.PutAsync(resourceGroupName, exactMatchModel4SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.PutAsync(resourceGroupName, exactMatchModel4SName, parameters, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -181,7 +184,8 @@ namespace ExactMatchInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.Put(resourceGroupName, exactMatchModel4SName, parameters, cancellationToken);
+                    var response = restOperations.Put(resourceGroupName, exactMatchModel4SName, parameters, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Output.Models;
@@ -45,7 +46,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, OperationGroup> _nonResourceOperationGroupMapping;
 
         /// <summary>
-        /// A mapping of parent operation group to child operation groups that are not resources.
+        /// A mapping of parent resource type to child operation groups that are not resources.
         /// </summary>
         private Dictionary<string, List<OperationGroup>> _childNonResourceOperationGroups;
 
@@ -142,6 +143,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public ResourceData GetResourceData(OperationGroup operationGroup) => EnsureResourceData()[operationGroup];
 
+        public bool TryGetResourceData(OperationGroup operationGroup, [MaybeNullWhen(false)] out ResourceData resourceData)
+        {
+            return EnsureResourceData().TryGetValue(operationGroup, out resourceData);
+        }
+
         /// <summary>
         /// Looks up a <see cref="Resource" /> object by <see cref="OperationGroup" />.
         /// </summary>
@@ -225,7 +231,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             foreach (var operationGroup in _codeModel.GetResourceOperationGroups(_mgmtConfiguration))
             {
                 var resourceType = operationGroup.IsTupleResource(_context) ? ResourceType.Tuple : ResourceType.Default;
-                var childOperationGroups = _childNonResourceOperationGroups.GetValueOrDefault(operationGroup.Key);
+                var childOperationGroups = _childNonResourceOperationGroups.GetValueOrDefault(operationGroup.ResourceType(_mgmtConfiguration));
                 _resourceOperations[resourceType].Add(operationGroup, new ResourceOperation(operationGroup, _context, childOperationGroups));
             }
 

@@ -89,14 +89,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", true);
-                            WriteListMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", false);
+                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", true);
+                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", false);
                         }
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            WriteClientMethod(writer, mgmtExtensionOperation.RestClient, clientMethod, true);
-                            WriteClientMethod(writer, mgmtExtensionOperation.RestClient, clientMethod, false);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, context, true, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, context, false, mgmtExtensionOperation.RestClient.Type.Name);
                         }
 
                         writer.LineRaw("#endregion");
@@ -116,16 +116,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.Line($"return new {resourceContainer.Type}(subscription);");
             }
-        }
-
-        private void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
-        {
-            WriteExtensionClientMethod(writer, restClient, clientMethod, clientMethod.RestClientMethod.Parameters, async);
-        }
-
-        private void WriteListMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)
-        {
-            WriteExtensionPagingMethod(writer, pageType, restClient, pagingMethod, converter, async);
         }
 
         private void WriteListResourceMethod(CodeWriter writer, Resource resource, ResourceOperation resourceOperation, PagingMethod pagingMethod, bool async)

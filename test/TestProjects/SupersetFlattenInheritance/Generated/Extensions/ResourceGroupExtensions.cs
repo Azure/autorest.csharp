@@ -140,7 +140,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -148,7 +148,8 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.PutAsync(resourceGroup.Id.Name, nonResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, nonResourceModel1SName, parameters, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -183,7 +184,8 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.Put(resourceGroup.Id.Name, nonResourceModel1SName, parameters, cancellationToken);
+                    var response = restOperations.Put(resourceGroup.Id.Name, nonResourceModel1SName, parameters, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -205,7 +207,7 @@ namespace SupersetFlattenInheritance
                 throw new ArgumentNullException(nameof(nonResourceModel1SName));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetNonResourceModel1SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -213,7 +215,8 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.GetAsync(resourceGroup.Id.Name, nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -243,7 +246,8 @@ namespace SupersetFlattenInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.Get(resourceGroup.Id.Name, nonResourceModel1SName, cancellationToken);
+                    var response = restOperations.Get(resourceGroup.Id.Name, nonResourceModel1SName, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {

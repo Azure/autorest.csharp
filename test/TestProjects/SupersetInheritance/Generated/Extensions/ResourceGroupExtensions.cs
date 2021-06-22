@@ -60,7 +60,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -68,7 +68,8 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.PutAsync(resourceGroup.Id.Name, supersetModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, supersetModel2SName, parameters, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -103,7 +104,8 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.Put(resourceGroup.Id.Name, supersetModel2SName, parameters, cancellationToken);
+                    var response = restOperations.Put(resourceGroup.Id.Name, supersetModel2SName, parameters, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -125,7 +127,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel2SName));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel2SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -133,7 +135,8 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.GetAsync(resourceGroup.Id.Name, supersetModel2SName, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, supersetModel2SName, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -163,7 +166,8 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.Get(resourceGroup.Id.Name, supersetModel2SName, cancellationToken);
+                    var response = restOperations.Get(resourceGroup.Id.Name, supersetModel2SName, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -198,7 +202,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -206,7 +210,8 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.PutAsync(resourceGroup.Id.Name, supersetModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.PutAsync(resourceGroup.Id.Name, supersetModel3SName, parameters, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -241,7 +246,8 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.Put(resourceGroup.Id.Name, supersetModel3SName, parameters, cancellationToken);
+                    var response = restOperations.Put(resourceGroup.Id.Name, supersetModel3SName, parameters, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -263,7 +269,7 @@ namespace SupersetInheritance
                 throw new ArgumentNullException(nameof(supersetModel3SName));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSupersetModel3SRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -271,7 +277,8 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.GetAsync(resourceGroup.Id.Name, supersetModel3SName, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, supersetModel3SName, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -301,7 +308,8 @@ namespace SupersetInheritance
                 scope.Start();
                 try
                 {
-                    return restOperations.Get(resourceGroup.Id.Name, supersetModel3SName, cancellationToken);
+                    var response = restOperations.Get(resourceGroup.Id.Name, supersetModel3SName, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {

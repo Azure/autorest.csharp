@@ -38,7 +38,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -46,7 +46,8 @@ namespace ResourceRename
                 scope.Start();
                 try
                 {
-                    return restOperations.CreateAsync(resourceGroup.Id.Name, sshPublicKeyName, path, keyData, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.CreateAsync(resourceGroup.Id.Name, sshPublicKeyName, path, keyData, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -79,7 +80,8 @@ namespace ResourceRename
                 scope.Start();
                 try
                 {
-                    return restOperations.Create(resourceGroup.Id.Name, sshPublicKeyName, path, keyData, cancellationToken);
+                    var response = restOperations.Create(resourceGroup.Id.Name, sshPublicKeyName, path, keyData, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -102,7 +104,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -110,7 +112,8 @@ namespace ResourceRename
                 scope.Start();
                 try
                 {
-                    return restOperations.DeleteAsync(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.DeleteAsync(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -141,7 +144,8 @@ namespace ResourceRename
                 scope.Start();
                 try
                 {
-                    return restOperations.Delete(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken);
+                    var response = restOperations.Delete(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -164,7 +168,7 @@ namespace ResourceRename
                 throw new ArgumentNullException(nameof(sshPublicKeyName));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -172,7 +176,8 @@ namespace ResourceRename
                 scope.Start();
                 try
                 {
-                    return restOperations.GetAsync(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.GetAsync(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -203,7 +208,8 @@ namespace ResourceRename
                 scope.Start();
                 try
                 {
-                    return restOperations.Get(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken);
+                    var response = restOperations.Get(resourceGroup.Id.Name, sshPublicKeyName, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {

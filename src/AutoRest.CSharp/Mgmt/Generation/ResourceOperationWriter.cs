@@ -254,8 +254,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var restClientName = GetRestClientName(pair.Key);
                 foreach (var clientMethod in pair.Value.ClientMethods)
                 {
-                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, true, restClientName);
-                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, resourceOperation.OperationGroup, context, false, restClientName);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, pair.Key, context, true, restClientName);
+                    WriteClientMethod(writer, clientMethod, clientMethod.Diagnostics, pair.Key, context, false, restClientName);
                 }
                 foreach (var pagingMethod in pair.Value.PagingMethods)
                 {
@@ -279,9 +279,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (item.ParentResourceType(context.Configuration.MgmtConfiguration).Equals(resourceOperation.OperationGroup.ResourceType(context.Configuration.MgmtConfiguration))
                     && !item.IsSingletonResource(context.Configuration.MgmtConfiguration))
                 {
-                    var container = context.Library.ResourceContainers.FirstOrDefault(x => x.ResourceName.Equals(item.Resource(context.Configuration.MgmtConfiguration)));
+                    var container = context.Library.ResourceContainers.FirstOrDefault(x => item.TryGetResourceName(context.Configuration.MgmtConfiguration, out var name) && x.ResourceName.Equals(name));
                     if (container == null)
-                        return;
+                        continue;
                     writer.Line();
                     writer.WriteXmlDocumentationSummary($"Gets a list of {container.ResourceName.ToPlural()} in the {resourceOperation.ResourceName}.");
                     writer.WriteXmlDocumentationReturns($"An object representing collection of {container.ResourceName.ToPlural()} and their operations over a {resourceOperation.ResourceName}.");

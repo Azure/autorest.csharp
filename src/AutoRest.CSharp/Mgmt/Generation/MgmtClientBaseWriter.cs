@@ -318,7 +318,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async, string? restClientName = null)
         {
             RestClientMethod restClientMethod = clientMethod.RestClientMethod;
-            CSharpType? bodyType = GetBodyTypeForList(restClientMethod.ReturnType, operationGroup, context);
+            CSharpType? bodyType = GetBodyTypeForList(operationGroup, restClientMethod, context);
             bool isResourceList = bodyType != restClientMethod.ReturnType;
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
@@ -375,7 +375,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     if (isResourceList)
                     {
-                        writer.Append($"return Response.FromValue(response.Value.Value.Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)), response.GetRawResponse())");
+                        var converter = "";
+                        if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
+                        {
+                            converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data))";
+                        }
+                        else
+                        {
+                            converter = ".Select(p => p)";
+                        }
+                        writer.Append($"return Response.FromValue(response.Value.Value{converter}, response.GetRawResponse())");
                     }
                     else
                     {
@@ -394,29 +403,48 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        private CSharpType? GetBodyTypeForList(CSharpType? returnType, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        protected CSharpType? GetBodyTypeForList(OperationGroup operationGroup, RestClientMethod method, BuildContext<MgmtOutputLibrary> context)
         {
+            var returnType = method.ReturnType;
             if (returnType == null)
                 return null;
 
-            var result = returnType;
+            if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
+                return returnType;
 
-            var resourceData = context.Library.GetResourceData(operationGroup);
+            var schemaObject = (SchemaObjectType)returnType.Implementation;
+            var valueProperty = GetValueProperty(schemaObject);
 
-            if (resourceData != null && !returnType.IsFrameworkType && returnType.Implementation is SchemaObjectType schemaObject)
+            if (valueProperty == null) // The returnType does not have a value of array in it, therefore it cannot be a list
             {
-                var valueProperty = schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
-                    AreTypesEqual(p.Declaration.Type, new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)));
-                if (valueProperty != null)
+                return returnType;
+            }
+            var responseSchema = method.Operation?.Responses.FirstOrDefault()?.ResponseSchema;
+            if (responseSchema != null)
+            {
+                // first we try to get the resource data - this could be a resource
+                if (context.Library.TryGetResourceData(operationGroup, out var resourceData))
                 {
-                    return new CSharpType(typeof(IEnumerable<>), context.Library.GetArmResource(operationGroup).Type);
+                    if (AreTypesEqual(valueProperty.ValueType, new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
+                    {
+                        return new CSharpType(typeof(IEnumerable<>), context.Library.GetArmResource(operationGroup).Type);
+                    }
                 }
+
+                // otherwise this might not be a resource, but still a list
+                return new CSharpType(typeof(IEnumerable<>), valueProperty.Declaration.Type.Arguments);
             }
 
-            return result;
+            return returnType;
         }
 
-        private bool AreTypesEqual(CSharpType left, CSharpType right)
+        private ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject)
+        {
+            return schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
+                p.Declaration.Type.IsFrameworkType && p.Declaration.Type.FrameworkType == typeof(IReadOnlyList<>));
+        }
+
+        protected bool AreTypesEqual(CSharpType left, CSharpType right)
         {
             if (left.Name != right.Name)
                 return false;

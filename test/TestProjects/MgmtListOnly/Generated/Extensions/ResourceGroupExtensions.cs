@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -156,14 +157,14 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static async Task<Response<ResourceGroupNonPageableFeatureListResult>> ListResourceGroupNonPageableFeaturesAsync(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<IEnumerable<ResourceGroupNonPageableFeature>>> ListResourceGroupNonPageableFeaturesAsync(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetResourceGroupNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -171,7 +172,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.ListAsync(resourceGroup.Id.Name, location, expand, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListAsync(resourceGroup.Id.Name, location, expand, cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -188,7 +190,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Response<ResourceGroupNonPageableFeatureListResult> ListResourceGroupNonPageableFeatures(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<IEnumerable<ResourceGroupNonPageableFeature>> ListResourceGroupNonPageableFeatures(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -203,7 +205,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.List(resourceGroup.Id.Name, location, expand, cancellationToken);
+                    var response = restOperations.List(resourceGroup.Id.Name, location, expand, cancellationToken);
+                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -240,7 +243,7 @@ namespace MgmtListOnly
                 throw new ArgumentNullException(nameof(version));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -248,7 +251,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.PublishAsync(resourceGroup.Id.Name, publisher, version, expand, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.PublishAsync(resourceGroup.Id.Name, publisher, version, expand, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -285,7 +289,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.Publish(resourceGroup.Id.Name, publisher, version, expand, cancellationToken);
+                    var response = restOperations.Publish(resourceGroup.Id.Name, publisher, version, expand, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -303,7 +308,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        public static async Task<Response<PublishedKeyListResult>> ListKeysPublishedAsync(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<IEnumerable<PublishedKey>>> ListKeysPublishedAsync(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
             {
@@ -314,7 +319,7 @@ namespace MgmtListOnly
                 throw new ArgumentNullException(nameof(version));
             }
 
-            return await resourceGroup.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await resourceGroup.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetKeysRestOperations(clientDiagnostics, credential, options, pipeline, resourceGroup.Id.SubscriptionId, baseUri);
@@ -322,7 +327,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.ListPublishedAsync(resourceGroup.Id.Name, publisher, version, expand, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListPublishedAsync(resourceGroup.Id.Name, publisher, version, expand, cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -340,7 +346,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        public static Response<PublishedKeyListResult> ListKeysPublished(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<IEnumerable<PublishedKey>> ListKeysPublished(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
             {
@@ -359,7 +365,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.ListPublished(resourceGroup.Id.Name, publisher, version, expand, cancellationToken);
+                    var response = restOperations.ListPublished(resourceGroup.Id.Name, publisher, version, expand, cancellationToken);
+                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

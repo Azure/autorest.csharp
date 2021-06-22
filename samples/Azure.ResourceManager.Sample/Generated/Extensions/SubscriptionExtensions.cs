@@ -796,7 +796,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(version));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -804,7 +804,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.GetAsync(location, publisherName, type, version, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.GetAsync(location, publisherName, type, version, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -850,7 +851,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.Get(location, publisherName, type, version, cancellationToken);
+                    var response = restOperations.Get(location, publisherName, type, version, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -878,7 +880,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(publisherName));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -886,7 +888,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListTypesAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListTypesAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -922,7 +925,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListTypes(location, publisherName, cancellationToken);
+                    var response = restOperations.ListTypes(location, publisherName, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -958,7 +962,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(type));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineExtensionImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -966,7 +970,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListVersionsAsync(location, publisherName, type, filter, top, orderby, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListVersionsAsync(location, publisherName, type, filter, top, orderby, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1010,7 +1015,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListVersions(location, publisherName, type, filter, top, orderby, cancellationToken);
+                    var response = restOperations.ListVersions(location, publisherName, type, filter, top, orderby, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1061,7 +1067,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(version));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -1069,7 +1075,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.GetAsync(location, publisherName, offer, skus, version, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.GetAsync(location, publisherName, offer, skus, version, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1120,7 +1127,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.Get(location, publisherName, offer, skus, version, cancellationToken);
+                    var response = restOperations.Get(location, publisherName, offer, skus, version, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1161,7 +1169,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(skus));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -1169,7 +1177,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListAsync(location, publisherName, offer, skus, expand, top, orderby, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListAsync(location, publisherName, offer, skus, expand, top, orderby, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1218,7 +1227,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.List(location, publisherName, offer, skus, expand, top, orderby, cancellationToken);
+                    var response = restOperations.List(location, publisherName, offer, skus, expand, top, orderby, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1246,7 +1256,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(publisherName));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -1254,7 +1264,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListOffersAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListOffersAsync(location, publisherName, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1290,7 +1301,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListOffers(location, publisherName, cancellationToken);
+                    var response = restOperations.ListOffers(location, publisherName, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1313,7 +1325,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(location));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -1321,7 +1333,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListPublishersAsync(location, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListPublishersAsync(location, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1352,7 +1365,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListPublishers(location, cancellationToken);
+                    var response = restOperations.ListPublishers(location, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1385,7 +1399,7 @@ namespace Azure.ResourceManager.Sample
                 throw new ArgumentNullException(nameof(offer));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetVirtualMachineImagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -1393,7 +1407,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListSkusAsync(location, publisherName, offer, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListSkusAsync(location, publisherName, offer, cancellationToken).ConfigureAwait(false);
+                    return response;
                 }
                 catch (Exception e)
                 {
@@ -1434,7 +1449,8 @@ namespace Azure.ResourceManager.Sample
                 scope.Start();
                 try
                 {
-                    return restOperations.ListSkus(location, publisherName, offer, cancellationToken);
+                    var response = restOperations.ListSkus(location, publisherName, offer, cancellationToken);
+                    return response;
                 }
                 catch (Exception e)
                 {

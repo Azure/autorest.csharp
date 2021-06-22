@@ -25,13 +25,13 @@ operation-group-to-resource:
     ChildWithPosts: NonResource
     Keys: NonResource
 operation-group-to-parent:
-    FakeBars: Fakes
-    ResponseNotCalledValues: Fakes
-    ResponseNotCalledValueNoPages: Fakes
+    FakeBars: Microsoft.Fake/fakes
+    ResponseNotCalledValues: Microsoft.Fake/fakes
+    ResponseNotCalledValueNoPages: Microsoft.Fake/fakes
     FakeFeatures: subscriptions
     FakeNonPageableFeatures: subscriptions
     ApiKeys: subscriptions
-    ChildWithPosts: Fakes
+    ChildWithPosts: Microsoft.Fake/fakes
     Usages: subscriptions
     NonPageableUsages: subscriptions
     ResourceGroupFeatures: resourceGroups

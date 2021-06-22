@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
@@ -62,15 +63,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         // despite that we should only have one method, but we still using an IEnumerable
                         foreach (var pagingMethod in mgmtExtensionOperation.PagingMethods)
                         {
-                            WriteListMethod(writer, mgmtExtensionOperation.RestClient, pagingMethod, true);
-
-                            WriteListMethod(writer, mgmtExtensionOperation.RestClient, pagingMethod, false);
+                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", true);
+                            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, mgmtExtensionOperation.RestClient, pagingMethod, $"", false);
                         }
 
                         foreach (var clientMethod in mgmtExtensionOperation.ClientMethods)
                         {
-                            WriteClientMethod(writer, mgmtExtensionOperation.RestClient, clientMethod, true);
-                            WriteClientMethod(writer, mgmtExtensionOperation.RestClient, clientMethod, false);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, context, true, mgmtExtensionOperation.RestClient.Type.Name);
+                            WriteExtensionClientMethod(writer, mgmtExtensionOperation.OperationGroup, clientMethod, context, false, mgmtExtensionOperation.RestClient.Type.Name);
                         }
 
                         writer.LineRaw("#endregion");
@@ -89,24 +89,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 writer.Line($"return new {container.Type.Name}(resourceGroup);");
             }
-        }
-
-        private void WriteClientMethod(CodeWriter writer, MgmtRestClient restClient, ClientMethod clientMethod, bool async)
-        {
-            // every method goes here, will have their first path parameter (aka the first parameter) as the `resourceGroupName`
-            // in the resource group extension, we need different parameter lists between the parameter declaration part and the parameter invocation
-            // in the parameter declaration, we should not put the `resourceGroupName` in the method signature
-            // but in parameter invocation, we need to pass a value for `resourceGroupName`
-            // instead of `Id.ResourceGroupName` as in normal ResourceContainer or ResourceOperation, we need to pass `resourceGroup.Id.Name`
-            var methodParameters = clientMethod.RestClientMethod.Parameters.Skip(1);
-            WriteExtensionClientMethod(writer, restClient, clientMethod,
-                // skip the first parameter, aka the resource group name parameter
-                clientMethod.RestClientMethod.Parameters.Skip(1),
-                async);
-        }
-        private void WriteListMethod(CodeWriter writer, MgmtRestClient restClient, PagingMethod pagingMethod, bool async)
-        {
-            WriteExtensionPagingMethod(writer, pagingMethod.PagingResponse.ItemType, restClient, pagingMethod, $"", async);
         }
 
         // we need to pass the first parameter as `resourceGroup.Id.Name` because we are in an extension class

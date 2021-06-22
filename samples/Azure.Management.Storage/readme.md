@@ -30,7 +30,7 @@ operation-group-to-parent:
   FileShares: Microsoft.Storage/storageAccounts
   Usages: subscriptions
   StorageAccounts: resourceGroups
-  PrivateLinkResources: StorageAccounts
+  PrivateLinkResources: Microsoft.Storage/storageAccounts
 directive:
   - rename-model:
       from: Operation

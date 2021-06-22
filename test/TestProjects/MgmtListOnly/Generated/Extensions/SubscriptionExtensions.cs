@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -127,9 +128,9 @@ namespace MgmtListOnly
         /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<FakeNonPageableFeatureListResult>> ListFakeNonPageableFeaturesFeaturesMethodAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static async Task<Response<IEnumerable<FakeNonPageableFeature>>> ListFakeNonPageableFeaturesFeaturesMethodAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetFakeNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -137,7 +138,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.ListFeaturesMethodAsync(cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListFeaturesMethodAsync(cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -151,7 +153,7 @@ namespace MgmtListOnly
         /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<FakeNonPageableFeatureListResult> ListFakeNonPageableFeaturesFeaturesMethod(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Response<IEnumerable<FakeNonPageableFeature>> ListFakeNonPageableFeaturesFeaturesMethod(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -161,7 +163,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.ListFeaturesMethod(cancellationToken);
+                    var response = restOperations.ListFeaturesMethod(cancellationToken);
+                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -183,9 +186,9 @@ namespace MgmtListOnly
         /// <summary> List API keys. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<ApiKeysListResult>> ListApiKeysAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static async Task<Response<IEnumerable<ApiKey>>> ListApiKeysAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetApiKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -193,7 +196,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.ListAsync(cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListAsync(cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -207,7 +211,7 @@ namespace MgmtListOnly
         /// <summary> List API keys. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<ApiKeysListResult> ListApiKeys(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Response<IEnumerable<ApiKey>> ListApiKeys(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
@@ -217,7 +221,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.List(cancellationToken);
+                    var response = restOperations.List(cancellationToken);
+                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -356,14 +361,14 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static async Task<Response<UsagesNonPageableListResult>> ListNonPageableUsagesAsync(this SubscriptionOperations subscription, string location, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<IEnumerable<NonPageableUsage>>> ListNonPageableUsagesAsync(this SubscriptionOperations subscription, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
                 throw new ArgumentNullException(nameof(location));
             }
 
-            return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
+            return await subscription.UseClientContext(async (baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
                 var restOperations = GetNonPageableUsagesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
@@ -371,7 +376,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.ListAsync(location, expand, cancellationToken).ConfigureAwait(false);
+                    var response = await restOperations.ListAsync(location, expand, cancellationToken).ConfigureAwait(false);
+                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -388,7 +394,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Response<UsagesNonPageableListResult> ListNonPageableUsages(this SubscriptionOperations subscription, string location, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<IEnumerable<NonPageableUsage>> ListNonPageableUsages(this SubscriptionOperations subscription, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -403,7 +409,8 @@ namespace MgmtListOnly
                 scope.Start();
                 try
                 {
-                    return restOperations.List(location, expand, cancellationToken);
+                    var response = restOperations.List(location, expand, cancellationToken);
+                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
