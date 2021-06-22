@@ -158,10 +158,10 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<AzureResourceFlattenModel4> Get(string name, CancellationToken cancellationToken = default)
+        public Response<AzureResourceFlattenModel4> Get(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel4Container.Get");
             scope.Start();
@@ -182,10 +182,10 @@ namespace ExactMatchFlattenInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<AzureResourceFlattenModel4>> GetAsync(string name, CancellationToken cancellationToken = default)
+        public async Task<Response<AzureResourceFlattenModel4>> GetAsync(string name, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AzureResourceFlattenModel4Container.Get");
             scope.Start();

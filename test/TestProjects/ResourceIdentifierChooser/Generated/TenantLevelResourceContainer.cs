@@ -158,10 +158,10 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<TenantLevelResource> Get(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
+        public Response<TenantLevelResource> Get(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.Get");
             scope.Start();
@@ -182,10 +182,10 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="tenantLevelResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<TenantLevelResource>> GetAsync(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
+        public async Task<Response<TenantLevelResource>> GetAsync(string tenantLevelResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TenantLevelResourceContainer.Get");
             scope.Start();

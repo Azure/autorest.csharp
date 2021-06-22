@@ -158,10 +158,10 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<SupersetModel1> Get(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public Response<SupersetModel1> Get(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.Get");
             scope.Start();
@@ -182,10 +182,10 @@ namespace SupersetInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<SupersetModel1>> GetAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
+        public async Task<Response<SupersetModel1>> GetAsync(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SupersetModel1Container.Get");
             scope.Start();

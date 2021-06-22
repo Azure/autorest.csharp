@@ -159,10 +159,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<VirtualMachineExtension> Get(string vmExtensionName, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtension> Get(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.Get");
             scope.Start();
@@ -173,7 +174,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(vmExtensionName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, vmExtensionName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(new VirtualMachineExtension(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -183,10 +184,11 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="vmExtensionName"> The name of the virtual machine extension. </param>
+        /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<VirtualMachineExtension>> GetAsync(string vmExtensionName, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtension>> GetAsync(string vmExtensionName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionContainer.Get");
             scope.Start();
@@ -197,7 +199,7 @@ namespace Azure.ResourceManager.Sample
                     throw new ArgumentNullException(nameof(vmExtensionName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, vmExtensionName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, Id.Name, vmExtensionName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new VirtualMachineExtension(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

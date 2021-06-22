@@ -159,10 +159,10 @@ namespace MgmtOperations
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<AvailabilitySetChild> Get(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        public Response<AvailabilitySetChild> Get(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.Get");
             scope.Start();
@@ -183,10 +183,10 @@ namespace MgmtOperations
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="availabilitySetChildName"> The name of the availability set child. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<AvailabilitySetChild>> GetAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
+        public async Task<Response<AvailabilitySetChild>> GetAsync(string availabilitySetChildName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AvailabilitySetChildContainer.Get");
             scope.Start();

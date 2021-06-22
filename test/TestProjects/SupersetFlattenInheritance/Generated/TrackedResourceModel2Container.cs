@@ -158,10 +158,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<TrackedResourceModel2> Get(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        public Response<TrackedResourceModel2> Get(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.Get");
             scope.Start();
@@ -182,10 +182,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="trackedResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<TrackedResourceModel2>> GetAsync(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
+        public async Task<Response<TrackedResourceModel2>> GetAsync(string trackedResourceModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TrackedResourceModel2Container.Get");
             scope.Start();

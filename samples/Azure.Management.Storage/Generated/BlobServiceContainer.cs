@@ -160,10 +160,10 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<BlobService> Get(string accountName, CancellationToken cancellationToken = default)
+        public Response<BlobService> Get(string accountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.Get");
             scope.Start();
@@ -184,10 +184,10 @@ namespace Azure.Management.Storage
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<BlobService>> GetAsync(string accountName, CancellationToken cancellationToken = default)
+        public async Task<Response<BlobService>> GetAsync(string accountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BlobServiceContainer.Get");
             scope.Start();

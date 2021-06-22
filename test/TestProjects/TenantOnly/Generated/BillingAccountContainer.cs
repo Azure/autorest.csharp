@@ -158,10 +158,11 @@ namespace TenantOnly
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<BillingAccount> Get(string billingAccountName, CancellationToken cancellationToken = default)
+        public Response<BillingAccount> Get(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.Get");
             scope.Start();
@@ -172,7 +173,7 @@ namespace TenantOnly
                     throw new ArgumentNullException(nameof(billingAccountName));
                 }
 
-                var response = _restClient.Get(billingAccountName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(billingAccountName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(new BillingAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -182,10 +183,11 @@ namespace TenantOnly
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="billingAccountName"> The ID that uniquely identifies a billing account. </param>
+        /// <param name="expand"> May be used to expand the soldTo, invoice sections and billing profiles. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<BillingAccount>> GetAsync(string billingAccountName, CancellationToken cancellationToken = default)
+        public async Task<Response<BillingAccount>> GetAsync(string billingAccountName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("BillingAccountContainer.Get");
             scope.Start();
@@ -196,7 +198,7 @@ namespace TenantOnly
                     throw new ArgumentNullException(nameof(billingAccountName));
                 }
 
-                var response = await _restClient.GetAsync(billingAccountName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(billingAccountName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new BillingAccount(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
