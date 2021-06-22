@@ -61,7 +61,7 @@ namespace MgmtListOnly
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/publisher/", false);
+            uri.AppendPath("/providers/Microsoft.Fake/publisher/", false);
             uri.AppendPath(publisher, true);
             uri.AppendPath("/versions/", false);
             uri.AppendPath(version, true);
@@ -163,7 +163,7 @@ namespace MgmtListOnly
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/publisher/", false);
+            uri.AppendPath("/providers/Microsoft.Fake/publisher/", false);
             uri.AppendPath(publisher, true);
             uri.AppendPath("/versions/", false);
             uri.AppendPath(version, true);

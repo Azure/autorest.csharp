@@ -15,7 +15,7 @@ namespace MgmtListOnly.Models
     public partial class ResponseNotCalledValueListNoPageResult
     {
         /// <summary> Initializes a new instance of ResponseNotCalledValueListNoPageResult. </summary>
-        /// <param name="notValue"> The list of availability sets child. </param>
+        /// <param name="notValue"> The list of fakes child. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notValue"/> is null. </exception>
         internal ResponseNotCalledValueListNoPageResult(IEnumerable<ResponseNotCalledValueListNoPage> notValue)
         {
@@ -28,13 +28,13 @@ namespace MgmtListOnly.Models
         }
 
         /// <summary> Initializes a new instance of ResponseNotCalledValueListNoPageResult. </summary>
-        /// <param name="notValue"> The list of availability sets child. </param>
+        /// <param name="notValue"> The list of fakes child. </param>
         internal ResponseNotCalledValueListNoPageResult(IReadOnlyList<ResponseNotCalledValueListNoPage> notValue)
         {
             NotValue = notValue;
         }
 
-        /// <summary> The list of availability sets child. </summary>
+        /// <summary> The list of fakes child. </summary>
         public IReadOnlyList<ResponseNotCalledValueListNoPage> NotValue { get; }
     }
 }

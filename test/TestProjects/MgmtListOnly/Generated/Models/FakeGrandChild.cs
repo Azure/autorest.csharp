@@ -5,19 +5,28 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+using Azure.ResourceManager.Core;
+
 namespace MgmtListOnly.Models
 {
     /// <summary> Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake. </summary>
-    public partial class ChildWithPost
+    public partial class FakeGrandChild : TrackedResource<TenantResourceIdentifier>
     {
-        /// <summary> Initializes a new instance of ChildWithPost. </summary>
-        public ChildWithPost()
+        /// <summary> Initializes a new instance of FakeGrandChild. </summary>
+        /// <param name="location"> The location. </param>
+        public FakeGrandChild(LocationData location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of ChildWithPost. </summary>
+        /// <summary> Initializes a new instance of FakeGrandChild. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="type"> The type. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="tags"> The tags. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal ChildWithPost(string bar)
+        internal FakeGrandChild(TenantResourceIdentifier id, string name, ResourceType type, LocationData location, IDictionary<string, string> tags, string bar) : base(id, name, type, location, tags)
         {
             Bar = bar;
         }

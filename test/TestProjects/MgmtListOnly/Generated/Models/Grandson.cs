@@ -11,7 +11,7 @@ using Azure.ResourceManager.Core;
 namespace MgmtListOnly.Models
 {
     /// <summary> The Grandson. </summary>
-    public partial class Grandson : AvailabilitySetData
+    public partial class Grandson : FakeData
     {
         /// <summary> Initializes a new instance of Grandson. </summary>
         /// <param name="location"> The location. </param>

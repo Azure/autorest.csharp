@@ -20,29 +20,29 @@ namespace MgmtListOnly
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region AvailabilitySetFeatures
-        private static AvailabilitySetFeaturesRestOperations GetAvailabilitySetFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        #region FakeFeatures
+        private static FakeFeaturesRestOperations GetFakeFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new AvailabilitySetFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new FakeFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the AvailabilitySetFeatures for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the FakeFeatures for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<AvailabilitySetFeature> ListAvailabilitySetFeaturesAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static AsyncPageable<FakeFeature> ListFakeFeaturesAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAvailabilitySetFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                async Task<Page<AvailabilitySetFeature>> FirstPageFunc(int? pageSizeHint)
+                var restOperations = GetFakeFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                async Task<Page<FakeFeature>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetFeatures");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeaturesFeaturesMethod");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.TestFeaturesMethodAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListFeaturesMethodAsync(cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -51,13 +51,13 @@ namespace MgmtListOnly
                         throw;
                     }
                 }
-                async Task<Page<AvailabilitySetFeature>> NextPageFunc(string nextLink, int? pageSizeHint)
+                async Task<Page<FakeFeature>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetFeatures");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeaturesFeaturesMethod");
                     scope.Start();
                     try
                     {
-                        var response = await restOperations.TestFeaturesMethodNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        var response = await restOperations.ListFeaturesMethodNextPageAsync(nextLink, cancellationToken: cancellationToken).ConfigureAwait(false);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -71,23 +71,23 @@ namespace MgmtListOnly
             );
         }
 
-        /// <summary> Lists the AvailabilitySetFeatures for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the FakeFeatures for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
-        public static Pageable<AvailabilitySetFeature> ListAvailabilitySetFeatures(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Pageable<FakeFeature> ListFakeFeatures(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAvailabilitySetFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                Page<AvailabilitySetFeature> FirstPageFunc(int? pageSizeHint)
+                var restOperations = GetFakeFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                Page<FakeFeature> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetFeatures");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeaturesFeaturesMethod");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.TestFeaturesMethod(cancellationToken: cancellationToken);
+                        var response = restOperations.ListFeaturesMethod(cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -96,13 +96,13 @@ namespace MgmtListOnly
                         throw;
                     }
                 }
-                Page<AvailabilitySetFeature> NextPageFunc(string nextLink, int? pageSizeHint)
+                Page<FakeFeature> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetFeatures");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeFeaturesFeaturesMethod");
                     scope.Start();
                     try
                     {
-                        var response = restOperations.TestFeaturesMethodNextPage(nextLink, cancellationToken: cancellationToken);
+                        var response = restOperations.ListFeaturesMethodNextPage(nextLink, cancellationToken: cancellationToken);
                         return Page.FromValues(response.Value.Value, response.Value.NextLink, response.GetRawResponse());
                     }
                     catch (Exception e)
@@ -118,26 +118,26 @@ namespace MgmtListOnly
 
         #endregion
 
-        #region AvailabilitySetNonPageableFeatures
-        private static AvailabilitySetsNonPageableFeaturesRestOperations GetAvailabilitySetsNonPageableFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
+        #region FakeNonPageableFeatures
+        private static FakeNonPageableFeaturesRestOperations GetFakeNonPageableFeaturesRestOperations(ClientDiagnostics clientDiagnostics, TokenCredential credential, ArmClientOptions clientOptions, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null)
         {
-            return new AvailabilitySetsNonPageableFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
+            return new FakeNonPageableFeaturesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists all availability sets features in subscription. </summary>
+        /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static async Task<Response<AvailabilitySetNonPageableFeatureListResult>> TestFeaturesMethodAvailabilitySetNonPageableFeaturesAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static async Task<Response<FakeNonPageableFeatureListResult>> ListFakeNonPageableFeaturesFeaturesMethodAsync(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return await subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAvailabilitySetsNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetNonPageableFeatures");
+                var restOperations = GetFakeNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeNonPageableFeaturesFeaturesMethod");
                 scope.Start();
                 try
                 {
-                    return restOperations.TestFeaturesMethodAsync(cancellationToken).ConfigureAwait(false);
+                    return restOperations.ListFeaturesMethodAsync(cancellationToken).ConfigureAwait(false);
                 }
                 catch (Exception e)
                 {
@@ -148,20 +148,20 @@ namespace MgmtListOnly
             );
         }
 
-        /// <summary> Lists all availability sets features in subscription. </summary>
+        /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public static Response<AvailabilitySetNonPageableFeatureListResult> TestFeaturesMethodAvailabilitySetNonPageableFeatures(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
+        public static Response<FakeNonPageableFeatureListResult> ListFakeNonPageableFeaturesFeaturesMethod(this SubscriptionOperations subscription, CancellationToken cancellationToken = default)
         {
             return subscription.UseClientContext((baseUri, credential, options, pipeline) =>
             {
                 var clientDiagnostics = new ClientDiagnostics(options);
-                var restOperations = GetAvailabilitySetsNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
-                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.TestFeaturesMethodAvailabilitySetNonPageableFeatures");
+                var restOperations = GetFakeNonPageableFeaturesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
+                using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListFakeNonPageableFeaturesFeaturesMethod");
                 scope.Start();
                 try
                 {
-                    return restOperations.TestFeaturesMethod(cancellationToken);
+                    return restOperations.ListFeaturesMethod(cancellationToken);
                 }
                 catch (Exception e)
                 {

@@ -50,7 +50,7 @@ namespace MgmtListOnly
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string availabilitySetName, string childWithPostName, ChildWithPost parameters)
+        internal HttpMessage CreateCreateOrUpdateRequest(string resourceGroupName, string fakeName, string childWithPostName, ChildWithPost parameters)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -61,8 +61,8 @@ namespace MgmtListOnly
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
-            uri.AppendPath(availabilitySetName, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
             uri.AppendPath("/childWithPosts/", false);
             uri.AppendPath(childWithPostName, true);
             uri.AppendQuery("api-version", apiVersion, true);
@@ -77,20 +77,20 @@ namespace MgmtListOnly
 
         /// <summary> Create or update a child with POST. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="childWithPostName"> The name of the child with post. </param>
         /// <param name="parameters"> Parameters supplied to the Create child with POST operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="childWithPostName"/>, or <paramref name="parameters"/> is null. </exception>
-        public async Task<Response<ChildWithPost>> CreateOrUpdateAsync(string resourceGroupName, string availabilitySetName, string childWithPostName, ChildWithPost parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, <paramref name="childWithPostName"/>, or <paramref name="parameters"/> is null. </exception>
+        public async Task<Response<ChildWithPost>> CreateOrUpdateAsync(string resourceGroupName, string fakeName, string childWithPostName, ChildWithPost parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (availabilitySetName == null)
+            if (fakeName == null)
             {
-                throw new ArgumentNullException(nameof(availabilitySetName));
+                throw new ArgumentNullException(nameof(fakeName));
             }
             if (childWithPostName == null)
             {
@@ -101,7 +101,7 @@ namespace MgmtListOnly
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, availabilitySetName, childWithPostName, parameters);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, fakeName, childWithPostName, parameters);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -119,20 +119,20 @@ namespace MgmtListOnly
 
         /// <summary> Create or update a child with POST. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="childWithPostName"> The name of the child with post. </param>
         /// <param name="parameters"> Parameters supplied to the Create child with POST operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="availabilitySetName"/>, <paramref name="childWithPostName"/>, or <paramref name="parameters"/> is null. </exception>
-        public Response<ChildWithPost> CreateOrUpdate(string resourceGroupName, string availabilitySetName, string childWithPostName, ChildWithPost parameters, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="fakeName"/>, <paramref name="childWithPostName"/>, or <paramref name="parameters"/> is null. </exception>
+        public Response<ChildWithPost> CreateOrUpdate(string resourceGroupName, string fakeName, string childWithPostName, ChildWithPost parameters, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (availabilitySetName == null)
+            if (fakeName == null)
             {
-                throw new ArgumentNullException(nameof(availabilitySetName));
+                throw new ArgumentNullException(nameof(fakeName));
             }
             if (childWithPostName == null)
             {
@@ -143,7 +143,7 @@ namespace MgmtListOnly
                 throw new ArgumentNullException(nameof(parameters));
             }
 
-            using var message = CreateCreateOrUpdateRequest(resourceGroupName, availabilitySetName, childWithPostName, parameters);
+            using var message = CreateCreateOrUpdateRequest(resourceGroupName, fakeName, childWithPostName, parameters);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

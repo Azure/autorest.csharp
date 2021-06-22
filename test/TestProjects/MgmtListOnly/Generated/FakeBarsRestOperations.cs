@@ -16,7 +16,7 @@ using MgmtListOnly.Models;
 
 namespace MgmtListOnly
 {
-    internal partial class UsagesRestOperations
+    internal partial class FakeBarsRestOperations
     {
         private string subscriptionId;
         private Uri endpoint;
@@ -24,14 +24,14 @@ namespace MgmtListOnly
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of UsagesRestOperations. </summary>
+        /// <summary> Initializes a new instance of FakeBarsRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public UsagesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        public FakeBarsRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
             if (subscriptionId == null)
             {
@@ -50,7 +50,7 @@ namespace MgmtListOnly
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateListRequest(string location, string expand)
+        internal HttpMessage CreateListRequest(string resourceGroupName, string fakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -59,40 +59,42 @@ namespace MgmtListOnly
             uri.Reset(endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Fake/locations/", false);
-            uri.AppendPath(location, true);
-            uri.AppendPath("/usages", false);
+            uri.AppendPath("/resourceGroups/", false);
+            uri.AppendPath(resourceGroupName, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
+            uri.AppendPath("/fakeBars", false);
             uri.AppendQuery("api-version", apiVersion, true);
-            if (expand != null)
-            {
-                uri.AppendQuery("expand", expand, true);
-            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        /// <summary> List Usages. </summary>
-        /// <param name="location"> The location. </param>
-        /// <param name="expand"> The expand. </param>
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public async Task<Response<UsagesListResult>> ListAsync(string location, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response<FakeBarsListResult>> ListAsync(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
-            if (location == null)
+            if (resourceGroupName == null)
             {
-                throw new ArgumentNullException(nameof(location));
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateListRequest(location, expand);
+            using var message = CreateListRequest(resourceGroupName, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        UsagesListResult value = default;
+                        FakeBarsListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = UsagesListResult.DeserializeUsagesListResult(document.RootElement);
+                        value = FakeBarsListResult.DeserializeFakeBarsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -100,27 +102,31 @@ namespace MgmtListOnly
             }
         }
 
-        /// <summary> List Usages. </summary>
-        /// <param name="location"> The location. </param>
-        /// <param name="expand"> The expand. </param>
+        /// <summary> Retrieves information about an fake. </summary>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public Response<UsagesListResult> List(string location, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
+        public Response<FakeBarsListResult> List(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
-            if (location == null)
+            if (resourceGroupName == null)
             {
-                throw new ArgumentNullException(nameof(location));
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateListRequest(location, expand);
+            using var message = CreateListRequest(resourceGroupName, fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        UsagesListResult value = default;
+                        FakeBarsListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = UsagesListResult.DeserializeUsagesListResult(document.RootElement);
+                        value = FakeBarsListResult.DeserializeFakeBarsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -128,7 +134,7 @@ namespace MgmtListOnly
             }
         }
 
-        internal HttpMessage CreateListNextPageRequest(string nextLink, string location, string expand)
+        internal HttpMessage CreateListNextPageRequest(string nextLink, string resourceGroupName, string fakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -141,32 +147,36 @@ namespace MgmtListOnly
             return message;
         }
 
-        /// <summary> List Usages. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="location"> The location. </param>
-        /// <param name="expand"> The expand. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="location"/> is null. </exception>
-        public async Task<Response<UsagesListResult>> ListNextPageAsync(string nextLink, string location, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response<FakeBarsListResult>> ListNextPageAsync(string nextLink, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
-            if (location == null)
+            if (resourceGroupName == null)
             {
-                throw new ArgumentNullException(nameof(location));
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, location, expand);
+            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        UsagesListResult value = default;
+                        FakeBarsListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = UsagesListResult.DeserializeUsagesListResult(document.RootElement);
+                        value = FakeBarsListResult.DeserializeFakeBarsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -174,32 +184,36 @@ namespace MgmtListOnly
             }
         }
 
-        /// <summary> List Usages. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="nextLink"> The URL to the next page of results. </param>
-        /// <param name="location"> The location. </param>
-        /// <param name="expand"> The expand. </param>
+        /// <param name="resourceGroupName"> The name of the resource group. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/> or <paramref name="location"/> is null. </exception>
-        public Response<UsagesListResult> ListNextPage(string nextLink, string location, string expand = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="nextLink"/>, <paramref name="resourceGroupName"/>, or <paramref name="fakeName"/> is null. </exception>
+        public Response<FakeBarsListResult> ListNextPage(string nextLink, string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
             if (nextLink == null)
             {
                 throw new ArgumentNullException(nameof(nextLink));
             }
-            if (location == null)
+            if (resourceGroupName == null)
             {
-                throw new ArgumentNullException(nameof(location));
+                throw new ArgumentNullException(nameof(resourceGroupName));
+            }
+            if (fakeName == null)
+            {
+                throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateListNextPageRequest(nextLink, location, expand);
+            using var message = CreateListNextPageRequest(nextLink, resourceGroupName, fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        UsagesListResult value = default;
+                        FakeBarsListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = UsagesListResult.DeserializeUsagesListResult(document.RootElement);
+                        value = FakeBarsListResult.DeserializeFakeBarsListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

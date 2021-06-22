@@ -15,7 +15,7 @@ namespace MgmtListOnly.Models
     internal partial class ResponseNotCalledValueListResult
     {
         /// <summary> Initializes a new instance of ResponseNotCalledValueListResult. </summary>
-        /// <param name="notValue"> The list of availability sets child. </param>
+        /// <param name="notValue"> The list of fakes child. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notValue"/> is null. </exception>
         internal ResponseNotCalledValueListResult(IEnumerable<ResponseNotCalledValue> notValue)
         {
@@ -28,17 +28,17 @@ namespace MgmtListOnly.Models
         }
 
         /// <summary> Initializes a new instance of ResponseNotCalledValueListResult. </summary>
-        /// <param name="notValue"> The list of availability sets child. </param>
-        /// <param name="nextLink"> The URI to fetch the next page of AvailabilitySetsChild. Call ListNext() with this URI to fetch the next page of AvailabilitySets. </param>
+        /// <param name="notValue"> The list of fakes child. </param>
+        /// <param name="nextLink"> The URI to fetch the next page of FakesChild. Call ListNext() with this URI to fetch the next page of Fakes. </param>
         internal ResponseNotCalledValueListResult(IReadOnlyList<ResponseNotCalledValue> notValue, string nextLink)
         {
             NotValue = notValue;
             NextLink = nextLink;
         }
 
-        /// <summary> The list of availability sets child. </summary>
+        /// <summary> The list of fakes child. </summary>
         public IReadOnlyList<ResponseNotCalledValue> NotValue { get; }
-        /// <summary> The URI to fetch the next page of AvailabilitySetsChild. Call ListNext() with this URI to fetch the next page of AvailabilitySets. </summary>
+        /// <summary> The URI to fetch the next page of FakesChild. Call ListNext() with this URI to fetch the next page of Fakes. </summary>
         public string NextLink { get; }
     }
 }

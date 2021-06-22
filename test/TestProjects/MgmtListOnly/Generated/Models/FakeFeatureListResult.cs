@@ -10,26 +10,26 @@ using Azure.Core;
 
 namespace MgmtListOnly.Models
 {
-    /// <summary> The List Resource Group Feature operation response. </summary>
-    internal partial class ResourceGroupFeatureListResult
+    /// <summary> The List Availability Set Feature operation response. </summary>
+    internal partial class FakeFeatureListResult
     {
-        /// <summary> Initializes a new instance of ResourceGroupFeatureListResult. </summary>
-        internal ResourceGroupFeatureListResult()
+        /// <summary> Initializes a new instance of FakeFeatureListResult. </summary>
+        internal FakeFeatureListResult()
         {
-            Value = new ChangeTrackingList<ResourceGroupFeature>();
+            Value = new ChangeTrackingList<FakeFeature>();
         }
 
-        /// <summary> Initializes a new instance of ResourceGroupFeatureListResult. </summary>
+        /// <summary> Initializes a new instance of FakeFeatureListResult. </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <param name="nextLink"> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </param>
-        internal ResourceGroupFeatureListResult(IReadOnlyList<ResourceGroupFeature> value, string nextLink)
+        internal FakeFeatureListResult(IReadOnlyList<FakeFeature> value, string nextLink)
         {
             Value = value;
             NextLink = nextLink;
         }
 
         /// <summary> The list of fakes. </summary>
-        public IReadOnlyList<ResourceGroupFeature> Value { get; }
+        public IReadOnlyList<FakeFeature> Value { get; }
         /// <summary> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </summary>
         public string NextLink { get; }
     }

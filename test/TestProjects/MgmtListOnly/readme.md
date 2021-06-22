@@ -8,30 +8,30 @@ require: $(this-folder)/../../../readme.md
 input-file: $(this-folder)/mgmtListOnly.json
 namespace: MgmtListOnly
 operation-group-to-resource-type:
-    AvailabilitySetChild: Microsoft.Compute/availabilitySets/availabilitySetChild
-    ResponseNotCalledValues: Microsoft.Compute/availabilitySets/ResponseNotCalledValues
-    ResponseNotCalledValueNoPages: Microsoft.Compute/availabilitySets/responseNotCalledValueNoPages
-    AvailabilitySetFeatures: Microsoft.Compute/availabilitySetsFeatures
-    AvailabilitySetsNonPageableFeatures: Microsoft.Compute/availabilitySetsNonPageableFeatures
-    ApiKeys: Microsoft.Compute/apiKeys
-    ChildWithPosts: Microsoft.Compute/availabilitySets/childWithPost
-    Usages: Microsoft.Compute/locations/usages
-    NonPageableUsages: Microsoft.Compute/locations/nonPageableUsages
-    ResourceGroupFeatures: Microsoft.Compute/locations/resourceGroupFeatures
-    ResourceGroupNonPageableFeatures: Microsoft.Compute/locations/resourceGroupNonPageableFeatures
-    Keys: Microsoft.Compute/publishers/versions/getKeys
+    FakeBars: Microsoft.Fake/fakes/availabilitySetChild
+    ResponseNotCalledValues: Microsoft.Fake/fakes/ResponseNotCalledValues
+    ResponseNotCalledValueNoPages: Microsoft.Fake/fakes/responseNotCalledValueNoPages
+    FakeFeatures: Microsoft.Fake/fakesFeatures
+    FakeNonPageableFeatures: Microsoft.Fake/fakesNonPageableFeatures
+    ApiKeys: Microsoft.Fake/apiKeys
+    ChildWithPosts: Microsoft.Fake/fakes/childWithPost
+    Usages: Microsoft.Fake/locations/usages
+    NonPageableUsages: Microsoft.Fake/locations/nonPageableUsages
+    ResourceGroupFeatures: Microsoft.Fake/locations/resourceGroupFeatures
+    ResourceGroupNonPageableFeatures: Microsoft.Fake/locations/resourceGroupNonPageableFeatures
+    Keys: Microsoft.Fake/publishers/versions/getKeys
 operation-group-to-resource:
     ApiKeys: NonResource
     ChildWithPosts: NonResource
     Keys: NonResource
 operation-group-to-parent:
-    AvailabilitySetChild: AvailabilitySets
-    ResponseNotCalledValues: AvailabilitySets
-    ResponseNotCalledValueNoPages: AvailabilitySets
-    AvailabilitySetFeatures: subscriptions
-    AvailabilitySetsNonPageableFeatures: subscriptions
+    FakeBars: Fakes
+    ResponseNotCalledValues: Fakes
+    ResponseNotCalledValueNoPages: Fakes
+    FakeFeatures: subscriptions
+    FakeNonPageableFeatures: subscriptions
     ApiKeys: subscriptions
-    ChildWithPosts: AvailabilitySets
+    ChildWithPosts: Fakes
     Usages: subscriptions
     NonPageableUsages: subscriptions
     ResourceGroupFeatures: resourceGroups

@@ -34,13 +34,13 @@
         }
     },
     "paths": {
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}": {
             "put": {
                 "tags": [
-                    "AvailabilitySets"
+                    "Fakes"
                 ],
-                "operationId": "AvailabilitySets_CreateOrUpdate",
-                "description": "Create or update an availability set.",
+                "operationId": "Fakes_CreateOrUpdate",
+                "description": "Create or update an fake.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -50,18 +50,18 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "fakeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the availability set."
+                        "description": "The name of the fake."
                     },
                     {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/AvailabilitySet"
+                            "$ref": "#/definitions/Fake"
                         },
                         "description": "Parameters supplied to the Create Availability Set operation."
                     },
@@ -76,17 +76,17 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AvailabilitySet"
+                            "$ref": "#/definitions/Fake"
                         }
                     }
                 }
             },
             "patch": {
                 "tags": [
-                    "AvailabilitySets"
+                    "Fakes"
                 ],
-                "operationId": "AvailabilitySets_Update",
-                "description": "Update an availability set.",
+                "operationId": "Fakes_Update",
+                "description": "Update an fake.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -96,18 +96,18 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "fakeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the availability set."
+                        "description": "The name of the fake."
                     },
                     {
                         "name": "parameters",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/AvailabilitySetUpdate"
+                            "$ref": "#/definitions/FakeUpdate"
                         },
                         "description": "Parameters supplied to the Update Availability Set operation."
                     },
@@ -122,17 +122,17 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AvailabilitySet"
+                            "$ref": "#/definitions/Fake"
                         }
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "AvailabilitySets"
+                    "Fakes"
                 ],
-                "operationId": "AvailabilitySets_Delete",
-                "description": "Delete an availability set.",
+                "operationId": "Fakes_Delete",
+                "description": "Delete an fake.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -142,11 +142,11 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "fakeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the availability set."
+                        "description": "The name of the fake."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -166,10 +166,10 @@
             },
             "get": {
                 "tags": [
-                    "AvailabilitySets"
+                    "Fakes"
                 ],
-                "operationId": "AvailabilitySets_Get",
-                "description": "Retrieves information about an availability set.",
+                "operationId": "Fakes_Get",
+                "description": "Retrieves information about an fake.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -179,11 +179,11 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "fakeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the availability set."
+                        "description": "The name of the fake."
                     },
                     {
                         "name": "$expand",
@@ -203,19 +203,19 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AvailabilitySet"
+                            "$ref": "#/definitions/Fake"
                         }
                     }
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/availabilitySetChild": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/fakeBars": {
             "get": {
                 "tags": [
-                    "AvailabilitySetChild"
+                    "FakeBars"
                 ],
-                "operationId": "AvailabilitySetChild_List",
-                "description": "Retrieves information about an availability set.",
+                "operationId": "FakeBars_List",
+                "description": "Retrieves information about an fake.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -225,11 +225,11 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "fakeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the availability set."
+                        "description": "The name of the fake."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -242,7 +242,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AvailabilitySetChildListResult"
+                            "$ref": "#/definitions/FakeBarsListResult"
                         }
                     }
                 },
@@ -251,7 +251,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/childWithPosts/{childWithPostName}": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/childWithPosts/{childWithPostName}": {
             "post": {
                 "tags": [
                     "ChildWithPosts"
@@ -267,11 +267,11 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "fakeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the availability set."
+                        "description": "The name of the fake."
                     },
                     {
                         "name": "childWithPostName",
@@ -306,13 +306,13 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/responseNotCalledValue": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/responseNotCalledValue": {
             "get": {
                 "tags": [
                     "ResponseNotCalledValues"
                 ],
                 "operationId": "ResponseNotCalledValues_List",
-                "description": "Retrieves information about an availability set.",
+                "description": "Retrieves information about an fake.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -322,11 +322,11 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "fakeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the availability set."
+                        "description": "The name of the fake."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -349,13 +349,13 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}/responseNotCalledValueNoPage": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes/{fakeName}/responseNotCalledValueNoPage": {
             "get": {
                 "tags": [
                     "ResponseNotCalledValueNoPages"
                 ],
                 "operationId": "ResponseNotCalledValueNoPages_List",
-                "description": "Retrieves information about an availability set.",
+                "description": "Retrieves information about an fake.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -365,11 +365,11 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "availabilitySetName",
+                        "name": "fakeName",
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the availability set."
+                        "description": "The name of the fake."
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -388,13 +388,13 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/fakes": {
             "get": {
                 "tags": [
-                    "AvailabilitySets"
+                    "Fakes"
                 ],
-                "operationId": "AvailabilitySets_TestMethod",
-                "description": "Lists all availability sets in a resource group.",
+                "operationId": "Fakes_TestMethod",
+                "description": "Lists all fakes in a resource group.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -404,14 +404,14 @@
                         "description": "The name of the resource group."
                     },
                     {
-                        "name": "RequiredParam",
+                        "name": "requiredParam",
                         "in": "query",
                         "required": true,
                         "type": "string",
                         "description": "The expand expression to apply on the operation."
                     },
                     {
-                        "name": "OptionalParam",
+                        "name": "optionalParam",
                         "in": "query",
                         "required": false,
                         "type": "string",
@@ -428,17 +428,17 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AvailabilitySetListResult"
+                            "$ref": "#/definitions/FakeListResult"
                         }
                     }
                 }
             },
-            "patch": {
+            "post": {
                 "tags": [
-                    "AvailabilitySets"
+                    "Fakes"
                 ],
-                "operationId": "AvailabilitySets_TestLROMethod",
-                "description": "Update an availability set.",
+                "operationId": "Fakes_LROMethod",
+                "description": "Update an fake.",
                 "parameters": [
                     {
                         "name": "resourceGroupName",
@@ -452,7 +452,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/AvailabilitySetUpdate"
+                            "$ref": "#/definitions/FakePost"
                         },
                         "description": "Parameters supplied to the Update Availability Set operation."
                     },
@@ -467,20 +467,20 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/TestAvailabilitySet"
+                            "$ref": "#/definitions/FakePostResult"
                         }
                     }
                 },
                 "x-ms-long-running-operation": true
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySetsFeatures": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakesFeatures": {
             "get": {
                 "tags": [
-                    "AvailabilitySetFeatures"
+                    "FakeFeatures"
                 ],
-                "operationId": "AvailabilitySetFeatures_TestFeaturesMethod",
-                "description": "Lists all availability sets features in subscription.",
+                "operationId": "FakeFeatures_ListFeaturesMethod",
+                "description": "Lists all fakes features in subscription.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -493,7 +493,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AvailabilitySetFeatureListResult"
+                            "$ref": "#/definitions/FakeFeatureListResult"
                         }
                     }
                 },
@@ -502,13 +502,13 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/availabilitySetsNonPageableFeatures": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/fakesNonPageableFeatures": {
             "get": {
                 "tags": [
-                    "AvailabilitySetsNonPageableFeatures"
+                    "FakeNonPageableFeatures"
                 ],
-                "operationId": "AvailabilitySetsNonPageableFeatures_TestFeaturesMethod",
-                "description": "Lists all availability sets features in subscription.",
+                "operationId": "FakeNonPageableFeatures_ListFeaturesMethod",
+                "description": "Lists all fakes features in subscription.",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -521,7 +521,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/AvailabilitySetNonPageableFeatureListResult"
+                            "$ref": "#/definitions/FakeNonPageableFeatureListResult"
                         }
                     }
                 }
@@ -552,7 +552,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/usages": {
             "get": {
                 "tags": [
                     "Usages"
@@ -594,7 +594,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/nonPageableUsages": {
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonPageableUsages": {
             "get": {
                 "tags": [
                     "NonPageableUsages"
@@ -633,7 +633,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/resourceGroupFeatures": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/locations/{location}/resourceGroupFeatures": {
             "get": {
                 "tags": [
                     "ResourceGroupFeatures"
@@ -682,7 +682,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/resourceGroupNonPageableFeatures": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/locations/{location}/resourceGroupNonPageableFeatures": {
             "get": {
                 "tags": [
                     "ResourceGroupNonPageableFeatures"
@@ -728,7 +728,7 @@
                 }
             }
         },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/publisher/{publisher}/versions/{version}/getKeys": {
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/publisher/{publisher}/versions/{version}/getKeys": {
             "post": {
                 "tags": [
                     "Keys"
@@ -842,11 +842,11 @@
             },
             "allOf": [
                 {
-                    "$ref": "#/definitions/AvailabilitySet"
+                    "$ref": "#/definitions/Fake"
                 }
             ]
         },
-        "AvailabilitySet": {
+        "Fake": {
             "properties": {
                 "bar": {
                     "type": "string",
@@ -858,9 +858,9 @@
                     "$ref": "#/definitions/Resource"
                 }
             ],
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
-        "AvailabilitySetChild": {
+        "FakeBar": {
             "properties": {
                 "bar": {
                     "type": "string",
@@ -872,7 +872,7 @@
                     "$ref": "#/definitions/Resource"
                 }
             ],
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
         "ResponseNotCalledValue": {
             "properties": {
@@ -886,7 +886,7 @@
                     "$ref": "#/definitions/Resource"
                 }
             ],
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
         "ResponseNotCalledValueListNoPage": {
             "properties": {
@@ -900,7 +900,7 @@
                     "$ref": "#/definitions/Resource"
                 }
             ],
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
         "ChildWithPost": {
             "properties": {
@@ -909,9 +909,9 @@
                     "description": "specifies the bar"
                 }
             },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
-        "AvailabilitySetGrandChild": {
+        "FakeGrandChild": {
             "properties": {
                 "bar": {
                     "type": "string",
@@ -923,9 +923,9 @@
                     "$ref": "#/definitions/Resource"
                 }
             ],
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
-        "TestAvailabilitySet": {
+        "FakePostResult": {
             "properties": {
                 "bar": {
                     "type": "string",
@@ -933,11 +933,11 @@
                 }
             }
         },
-        "AvailabilitySetUpdate": {
+        "FakeUpdate": {
             "properties": {
                 "properties": {
                     "x-ms-client-flatten": true,
-                    "$ref": "#/definitions/AvailabilitySetProperties"
+                    "$ref": "#/definitions/FakeProperties"
                 }
             },
             "allOf": [
@@ -945,9 +945,23 @@
                     "$ref": "#/definitions/UpdateResource"
                 }
             ],
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Only tags may be updated."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated."
         },
-        "AvailabilitySetProperties": {
+        "FakePost": {
+            "properties": {
+                "zig": {
+                    "type": "string",
+                    "description": "Something Zig"
+                }
+            },
+            "allOf": [
+                {
+                    "$ref": "#/definitions/UpdateResource"
+                }
+            ],
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated."
+        },
+        "FakeProperties": {
             "properties": {
                 "platformUpdateDomainCount": {
                     "type": "integer",
@@ -969,11 +983,11 @@
                     "items": {
                         "$ref": "#/definitions/ResponseNotCalledValue"
                     },
-                    "description": "The list of availability sets child"
+                    "description": "The list of fakes child"
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "The URI to fetch the next page of AvailabilitySetsChild. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+                    "description": "The URI to fetch the next page of FakesChild. Call ListNext() with this URI to fetch the next page of Fakes."
                 }
             },
             "required": [
@@ -988,7 +1002,7 @@
                     "items": {
                         "$ref": "#/definitions/ResponseNotCalledValueListNoPage"
                     },
-                    "description": "The list of availability sets child"
+                    "description": "The list of fakes child"
                 }
             },
             "required": [
@@ -996,18 +1010,18 @@
             ],
             "description": "The List Availability Set Child operation response."
         },
-        "AvailabilitySetChildListResult": {
+        "FakeBarsListResult": {
             "properties": {
                 "value": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/AvailabilitySetChild"
+                        "$ref": "#/definitions/FakeBar"
                     },
-                    "description": "The list of availability sets child"
+                    "description": "The list of fakes child"
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "The URI to fetch the next page of AvailabilitySetsChild. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+                    "description": "The URI to fetch the next page of FakeBar. Call ListNext() with this URI to fetch the next page of FakeBars."
                 }
             },
             "required": [
@@ -1015,18 +1029,18 @@
             ],
             "description": "The List Availability Set Child operation response."
         },
-        "AvailabilitySetListResult": {
+        "FakeListResult": {
             "properties": {
                 "value": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/AvailabilitySet"
+                        "$ref": "#/definitions/Fake"
                     },
-                    "description": "The list of availability sets"
+                    "description": "The list of fakes"
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+                    "description": "The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes."
                 }
             },
             "required": [
@@ -1034,51 +1048,51 @@
             ],
             "description": "The List Availability Set operation response."
         },
-        "AvailabilitySetFeatureListResult": {
+        "FakeFeatureListResult": {
             "properties": {
                 "value": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/AvailabilitySetFeature"
+                        "$ref": "#/definitions/FakeFeature"
                     },
-                    "description": "The list of availability sets"
+                    "description": "The list of fakes"
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+                    "description": "The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes."
                 }
             },
             "description": "The List Availability Set Feature operation response."
         },
-        "AvailabilitySetNonPageableFeatureListResult": {
+        "FakeNonPageableFeatureListResult": {
             "properties": {
                 "value": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/AvailabilitySetNonPageableFeature"
+                        "$ref": "#/definitions/FakeNonPageableFeature"
                     },
-                    "description": "The list of availability sets"
+                    "description": "The list of fakes"
                 }
             },
             "description": "The List Availability Set Feature operation response."
         },
-        "AvailabilitySetFeature": {
+        "FakeFeature": {
             "properties": {
                 "foo": {
                     "type": "string",
                     "description": "specifies the bar"
                 }
             },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
-        "AvailabilitySetNonPageableFeature": {
+        "FakeNonPageableFeature": {
             "properties": {
                 "foo": {
                     "type": "string",
                     "description": "specifies the bar"
                 }
             },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
         "ResourceGroupFeatureListResult": {
             "properties": {
@@ -1087,11 +1101,11 @@
                     "items": {
                         "$ref": "#/definitions/ResourceGroupFeature"
                     },
-                    "description": "The list of availability sets"
+                    "description": "The list of fakes"
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+                    "description": "The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes."
                 }
             },
             "description": "The List Resource Group Feature operation response."
@@ -1103,7 +1117,7 @@
                     "description": "specifies the bar"
                 }
             },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
         "ResourceGroupNonPageableFeatureListResult": {
             "properties": {
@@ -1112,11 +1126,11 @@
                     "items": {
                         "$ref": "#/definitions/ResourceGroupNonPageableFeature"
                     },
-                    "description": "The list of availability sets"
+                    "description": "The list of fakes"
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+                    "description": "The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes."
                 }
             },
             "description": "The List Resource Group Feature operation response."
@@ -1128,7 +1142,7 @@
                     "description": "specifies the bar"
                 }
             },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
         "KeyPublishResult": {
             "properties": {
@@ -1146,11 +1160,11 @@
                     "items": {
                         "$ref": "#/definitions/PublishedKey"
                     },
-                    "description": "The list of availability sets"
+                    "description": "The list of fakes"
                 },
                 "nextLink": {
                     "type": "string",
-                    "description": "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
+                    "description": "The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes."
                 }
             },
             "description": "The List Resource Group Feature operation response."
@@ -1162,7 +1176,7 @@
                     "description": "specifies the bar"
                 }
             },
-            "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+            "description": "Specifies information about the fake that the virtual machine should be assigned to. Virtual machines specified in the same fake are allocated to different nodes to maximize availability. For more information about fakes, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to fake at creation time. An existing VM cannot be added to an fake."
         },
         "UpdateResource": {
             "description": "The Update Resource model definition.",

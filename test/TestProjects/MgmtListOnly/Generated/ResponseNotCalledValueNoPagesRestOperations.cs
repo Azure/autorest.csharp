@@ -50,7 +50,7 @@ namespace MgmtListOnly
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateListRequest(string resourceGroupName, string availabilitySetName)
+        internal HttpMessage CreateListRequest(string resourceGroupName, string fakeName)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -61,8 +61,8 @@ namespace MgmtListOnly
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/availabilitySets/", false);
-            uri.AppendPath(availabilitySetName, true);
+            uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
+            uri.AppendPath(fakeName, true);
             uri.AppendPath("/responseNotCalledValueNoPage", false);
             uri.AppendQuery("api-version", apiVersion, true);
             request.Uri = uri;
@@ -70,23 +70,23 @@ namespace MgmtListOnly
             return message;
         }
 
-        /// <summary> Retrieves information about an availability set. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public async Task<Response<ResponseNotCalledValueListNoPageResult>> ListAsync(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
+        public async Task<Response<ResponseNotCalledValueListNoPageResult>> ListAsync(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (availabilitySetName == null)
+            if (fakeName == null)
             {
-                throw new ArgumentNullException(nameof(availabilitySetName));
+                throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, availabilitySetName);
+            using var message = CreateListRequest(resourceGroupName, fakeName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -102,23 +102,23 @@ namespace MgmtListOnly
             }
         }
 
-        /// <summary> Retrieves information about an availability set. </summary>
+        /// <summary> Retrieves information about an fake. </summary>
         /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="availabilitySetName"> The name of the availability set. </param>
+        /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="availabilitySetName"/> is null. </exception>
-        public Response<ResponseNotCalledValueListNoPageResult> List(string resourceGroupName, string availabilitySetName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> or <paramref name="fakeName"/> is null. </exception>
+        public Response<ResponseNotCalledValueListNoPageResult> List(string resourceGroupName, string fakeName, CancellationToken cancellationToken = default)
         {
             if (resourceGroupName == null)
             {
                 throw new ArgumentNullException(nameof(resourceGroupName));
             }
-            if (availabilitySetName == null)
+            if (fakeName == null)
             {
-                throw new ArgumentNullException(nameof(availabilitySetName));
+                throw new ArgumentNullException(nameof(fakeName));
             }
 
-            using var message = CreateListRequest(resourceGroupName, availabilitySetName);
+            using var message = CreateListRequest(resourceGroupName, fakeName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

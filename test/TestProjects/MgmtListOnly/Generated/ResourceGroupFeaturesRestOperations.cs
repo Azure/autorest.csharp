@@ -61,7 +61,7 @@ namespace MgmtListOnly
             uri.AppendPath(subscriptionId, true);
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
-            uri.AppendPath("/providers/Microsoft.Compute/locations/", false);
+            uri.AppendPath("/providers/Microsoft.Fake/locations/", false);
             uri.AppendPath(location, true);
             uri.AppendPath("/resourceGroupFeatures", false);
             if (expand != null)

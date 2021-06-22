@@ -16,7 +16,7 @@ using MgmtListOnly.Models;
 
 namespace MgmtListOnly
 {
-    internal partial class NonPageableUsagesRestOperations
+    internal partial class FakeNonPageableFeaturesRestOperations
     {
         private string subscriptionId;
         private Uri endpoint;
@@ -24,14 +24,14 @@ namespace MgmtListOnly
         private ClientDiagnostics _clientDiagnostics;
         private HttpPipeline _pipeline;
 
-        /// <summary> Initializes a new instance of NonPageableUsagesRestOperations. </summary>
+        /// <summary> Initializes a new instance of FakeNonPageableFeaturesRestOperations. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
-        public NonPageableUsagesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
+        public FakeNonPageableFeaturesRestOperations(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string subscriptionId, Uri endpoint = null, string apiVersion = "2020-06-01")
         {
             if (subscriptionId == null)
             {
@@ -50,7 +50,7 @@ namespace MgmtListOnly
             _pipeline = pipeline;
         }
 
-        internal HttpMessage CreateListRequest(string location, string expand)
+        internal HttpMessage CreateListFeaturesMethodRequest()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -59,40 +59,26 @@ namespace MgmtListOnly
             uri.Reset(endpoint);
             uri.AppendPath("/subscriptions/", false);
             uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.Fake/locations/", false);
-            uri.AppendPath(location, true);
-            uri.AppendPath("/nonPageableUsages", false);
+            uri.AppendPath("/providers/Microsoft.Fake/fakesNonPageableFeatures", false);
             uri.AppendQuery("api-version", apiVersion, true);
-            if (expand != null)
-            {
-                uri.AppendQuery("expand", expand, true);
-            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
         }
 
-        /// <summary> List Usages. </summary>
-        /// <param name="location"> The location. </param>
-        /// <param name="expand"> The expand. </param>
+        /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public async Task<Response<UsagesNonPageableListResult>> ListAsync(string location, string expand = null, CancellationToken cancellationToken = default)
+        public async Task<Response<FakeNonPageableFeatureListResult>> ListFeaturesMethodAsync(CancellationToken cancellationToken = default)
         {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            using var message = CreateListRequest(location, expand);
+            using var message = CreateListFeaturesMethodRequest();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        UsagesNonPageableListResult value = default;
+                        FakeNonPageableFeatureListResult value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = UsagesNonPageableListResult.DeserializeUsagesNonPageableListResult(document.RootElement);
+                        value = FakeNonPageableFeatureListResult.DeserializeFakeNonPageableFeatureListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -100,27 +86,19 @@ namespace MgmtListOnly
             }
         }
 
-        /// <summary> List Usages. </summary>
-        /// <param name="location"> The location. </param>
-        /// <param name="expand"> The expand. </param>
+        /// <summary> Lists all fakes features in subscription. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public Response<UsagesNonPageableListResult> List(string location, string expand = null, CancellationToken cancellationToken = default)
+        public Response<FakeNonPageableFeatureListResult> ListFeaturesMethod(CancellationToken cancellationToken = default)
         {
-            if (location == null)
-            {
-                throw new ArgumentNullException(nameof(location));
-            }
-
-            using var message = CreateListRequest(location, expand);
+            using var message = CreateListFeaturesMethodRequest();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
                 case 200:
                     {
-                        UsagesNonPageableListResult value = default;
+                        FakeNonPageableFeatureListResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = UsagesNonPageableListResult.DeserializeUsagesNonPageableListResult(document.RootElement);
+                        value = FakeNonPageableFeatureListResult.DeserializeFakeNonPageableFeatureListResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
