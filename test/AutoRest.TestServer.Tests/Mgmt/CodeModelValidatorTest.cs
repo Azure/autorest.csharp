@@ -7,7 +7,7 @@ using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Utilities;
 using NUnit.Framework;
 
-namespace AutoRest.CSharp.Tests
+namespace AutoRest.TestServer.Tests.Mgmt
 {
     public class CodeModelValidatorTest
     {
@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Tests
         [Test]
         public void EmptyOperationGroupName()
         {
-            var model = loadModel("Mgmt/AutoRest/EmptyOperationGroupName.yaml");
+            var model = loadModel("Mgmt/EmptyOperationGroupName.yaml");
             try
             {
                 CodeModelValidator.Validate(model);
@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Tests
                 Assert.IsNotNull(e);
                 return;
             }
-            Assert.Fail("ErrorHelpers.ErrorException expected");
+            Assert.Fail("CodeModelValidationError expected");
         }
 
         private CodeModel loadModel(string filePath)
