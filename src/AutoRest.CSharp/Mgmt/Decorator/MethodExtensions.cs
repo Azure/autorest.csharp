@@ -3,17 +3,89 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class MethodExtensions
     {
+        /// <summary>
+        /// Returns the expected return type of the RestClientMethod.
+        /// If the RestClientMethod represents a List operation, it will return IEnumerable<Item> where Item is the element type
+        /// of the array
+        /// If the RestClientMethod is anything else, it will return its original return type.
+        /// </summary>
+        /// <param name="method">the <see cref="RestClientMethod"/></param>
+        /// <param name="operationGroup">the <see cref="OperationGroup"/> this RestClientMethod belongs</param>
+        /// <param name="context">the current building context</param>
+        /// <returns>the expected return type of this function</returns>
+        public static CSharpType? GetBodyTypeForList(this RestClientMethod method, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context)
+        {
+            var returnType = method.ReturnType;
+            if (returnType == null)
+                return null;
+
+            if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
+                return returnType;
+
+            var schemaObject = (SchemaObjectType)returnType.Implementation;
+            var valueProperty = GetValueProperty(schemaObject);
+
+            if (valueProperty == null) // The returnType does not have a value of array in it, therefore it cannot be a list
+            {
+                return returnType;
+            }
+            var responseSchema = method.Operation?.Responses.FirstOrDefault()?.ResponseSchema;
+            if (responseSchema != null)
+            {
+                // first we try to get the resource data - this could be a resource
+                if (context.Library.TryGetResourceData(operationGroup, out var resourceData))
+                {
+                    if (AreTypesEqual(valueProperty.ValueType, new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
+                    {
+                        return new CSharpType(typeof(IEnumerable<>), context.Library.GetArmResource(operationGroup).Type);
+                    }
+                }
+
+                // otherwise this might not be a resource, but still a list
+                return new CSharpType(typeof(IEnumerable<>), valueProperty.Declaration.Type.Arguments);
+            }
+
+            return returnType;
+        }
+
+        private static ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject)
+        {
+            return schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
+                p.Declaration.Type.IsFrameworkType && p.Declaration.Type.FrameworkType == typeof(IReadOnlyList<>));
+        }
+
+        private static bool AreTypesEqual(CSharpType left, CSharpType right)
+        {
+            if (left.Name != right.Name)
+                return false;
+
+            if (left.Arguments.Length != right.Arguments.Length)
+                return false;
+
+            for (int i = 0; i < left.Arguments.Length; i++)
+            {
+                if (left.Arguments[i].Name != right.Arguments[i].Name)
+                    return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Get the body type of a ClientMethod
         /// </summary>

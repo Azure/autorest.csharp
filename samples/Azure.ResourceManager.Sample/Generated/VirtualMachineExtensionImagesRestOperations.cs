@@ -80,7 +80,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, or <paramref name="version"/> is null. </exception>
-        public async Task<Response<VirtualMachineExtensionImage>> GetAsync(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        public async Task<Response<VirtualMachineExtensionImageData>> GetAsync(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -105,9 +105,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        VirtualMachineExtensionImage value = default;
+                        VirtualMachineExtensionImageData value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(document.RootElement);
+                        value = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -122,7 +122,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, <paramref name="type"/>, or <paramref name="version"/> is null. </exception>
-        public Response<VirtualMachineExtensionImage> Get(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
+        public Response<VirtualMachineExtensionImageData> Get(string location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -147,9 +147,9 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        VirtualMachineExtensionImage value = default;
+                        VirtualMachineExtensionImageData value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(document.RootElement);
+                        value = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:
@@ -182,7 +182,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> ListTypesAsync(string location, string publisherName, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> ListTypesAsync(string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -199,12 +199,12 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImage> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        List<VirtualMachineExtensionImage> array = new List<VirtualMachineExtensionImage>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -219,7 +219,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="publisherName"/> is null. </exception>
-        public Response<IReadOnlyList<VirtualMachineExtensionImage>> ListTypes(string location, string publisherName, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<VirtualMachineExtensionImageData>> ListTypes(string location, string publisherName, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -236,12 +236,12 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImage> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        List<VirtualMachineExtensionImage> array = new List<VirtualMachineExtensionImage>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -294,7 +294,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
-        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImage>>> ListVersionsAsync(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<VirtualMachineExtensionImageData>>> ListVersionsAsync(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -315,12 +315,12 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImage> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        List<VirtualMachineExtensionImage> array = new List<VirtualMachineExtensionImage>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -339,7 +339,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/>, <paramref name="publisherName"/>, or <paramref name="type"/> is null. </exception>
-        public Response<IReadOnlyList<VirtualMachineExtensionImage>> ListVersions(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<VirtualMachineExtensionImageData>> ListVersions(string location, string publisherName, string type, string filter = null, int? top = null, string orderby = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -360,12 +360,12 @@ namespace Azure.ResourceManager.Sample
             {
                 case 200:
                     {
-                        IReadOnlyList<VirtualMachineExtensionImage> value = default;
+                        IReadOnlyList<VirtualMachineExtensionImageData> value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        List<VirtualMachineExtensionImage> array = new List<VirtualMachineExtensionImage>();
+                        List<VirtualMachineExtensionImageData> array = new List<VirtualMachineExtensionImageData>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            array.Add(VirtualMachineExtensionImage.DeserializeVirtualMachineExtensionImage(item));
+                            array.Add(VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);

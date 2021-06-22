@@ -318,7 +318,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected void WriteClientMethod(CodeWriter writer, ClientMethod clientMethod, Diagnostic diagnostic, OperationGroup operationGroup, BuildContext<MgmtOutputLibrary> context, bool async, string? restClientName = null)
         {
             RestClientMethod restClientMethod = clientMethod.RestClientMethod;
-            CSharpType? bodyType = GetBodyTypeForList(operationGroup, restClientMethod, context);
+            CSharpType? bodyType = restClientMethod.GetBodyTypeForList(operationGroup, context);
             bool isResourceList = bodyType != restClientMethod.ReturnType;
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
@@ -401,64 +401,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             writer.Line();
-        }
-
-        protected CSharpType? GetBodyTypeForList(OperationGroup operationGroup, RestClientMethod method, BuildContext<MgmtOutputLibrary> context)
-        {
-            var returnType = method.ReturnType;
-            if (returnType == null)
-                return null;
-
-            if (returnType.IsFrameworkType || returnType.Implementation is not SchemaObjectType)
-                return returnType;
-
-            var schemaObject = (SchemaObjectType)returnType.Implementation;
-            var valueProperty = GetValueProperty(schemaObject);
-
-            if (valueProperty == null) // The returnType does not have a value of array in it, therefore it cannot be a list
-            {
-                return returnType;
-            }
-            var responseSchema = method.Operation?.Responses.FirstOrDefault()?.ResponseSchema;
-            if (responseSchema != null)
-            {
-                // first we try to get the resource data - this could be a resource
-                if (context.Library.TryGetResourceData(operationGroup, out var resourceData))
-                {
-                    if (AreTypesEqual(valueProperty.ValueType, new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
-                    {
-                        return new CSharpType(typeof(IEnumerable<>), context.Library.GetArmResource(operationGroup).Type);
-                    }
-                }
-
-                // otherwise this might not be a resource, but still a list
-                return new CSharpType(typeof(IEnumerable<>), valueProperty.Declaration.Type.Arguments);
-            }
-
-            return returnType;
-        }
-
-        private ObjectTypeProperty? GetValueProperty(SchemaObjectType schemaObject)
-        {
-            return schemaObject.Properties.FirstOrDefault(p => p.Declaration.Name == "Value" &&
-                p.Declaration.Type.IsFrameworkType && p.Declaration.Type.FrameworkType == typeof(IReadOnlyList<>));
-        }
-
-        protected bool AreTypesEqual(CSharpType left, CSharpType right)
-        {
-            if (left.Name != right.Name)
-                return false;
-
-            if (left.Arguments.Length != right.Arguments.Length)
-                return false;
-
-            for (int i = 0; i < left.Arguments.Length; i++)
-            {
-                if (left.Arguments[i].Name != right.Arguments[i].Name)
-                    return false;
-            }
-
-            return true;
         }
 
         // This method returns an array of path and non-path parameters name

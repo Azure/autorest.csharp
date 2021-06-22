@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using AutoRest.CSharp.Generation.Types;
@@ -13,7 +12,6 @@ using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
@@ -64,7 +62,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteExtensionClientMethod(CodeWriter writer, OperationGroup operationGroup, ClientMethod clientMethod, BuildContext<MgmtOutputLibrary> context, bool async, string restClientName)
         {
-            var bodyType = GetBodyTypeForList(operationGroup, clientMethod.RestClientMethod, context);
+            var bodyType = clientMethod.RestClientMethod.GetBodyTypeForList(operationGroup, context);
             bool isResourceList = bodyType != clientMethod.GetBodyType();
             var responseType = bodyType != null ?
                 new CSharpType(typeof(Response<>), bodyType) :
