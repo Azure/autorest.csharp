@@ -21,7 +21,7 @@ namespace Azure.Core
     /// </summary>
     internal class OperationInternals
     {
-        public static TimeSpan DefaultPollingInterval { get; } = TimeSpan.FromSeconds(1);
+        public static TimeSpan DefaultPollingInterval { get; private set; } = TimeSpan.FromSeconds(1);
 
         private static readonly string[] s_failureStates = { "failed", "canceled" };
         private static readonly string[] s_terminalStates = { "succeeded", "failed", "canceled" };
