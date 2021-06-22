@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace ResourceIdentifierChooser
 {
@@ -159,10 +158,10 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="writableSubRes2ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<WritableSubRes2Resource> Get(string writableSubRes2ResourcesName, CancellationToken cancellationToken = default)
+        public Response<WritableSubRes2Resource> Get(string writableSubRes2ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WritableSubRes2ResourceContainer.Get");
             scope.Start();
@@ -183,10 +182,10 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="writableSubRes2ResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<WritableSubRes2Resource>> GetAsync(string writableSubRes2ResourcesName, CancellationToken cancellationToken = default)
+        public async Task<Response<WritableSubRes2Resource>> GetAsync(string writableSubRes2ResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("WritableSubRes2ResourceContainer.Get");
             scope.Start();

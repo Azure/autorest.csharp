@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace SupersetFlattenInheritance
 {
@@ -159,10 +158,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<SubResourceModel2> Get(string subResourceModel2SName, CancellationToken cancellationToken = default)
+        public Response<SubResourceModel2> Get(string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel2Container.Get");
             scope.Start();
@@ -183,10 +182,10 @@ namespace SupersetFlattenInheritance
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="subResourceModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<SubResourceModel2>> GetAsync(string subResourceModel2SName, CancellationToken cancellationToken = default)
+        public async Task<Response<SubResourceModel2>> GetAsync(string subResourceModel2SName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SubResourceModel2Container.Get");
             scope.Start();

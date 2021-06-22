@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace ResourceIdentifierChooser
 {
@@ -159,10 +158,10 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<ResourceGroupResource> Get(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        public Response<ResourceGroupResource> Get(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.Get");
             scope.Start();
@@ -183,10 +182,10 @@ namespace ResourceIdentifierChooser
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="resourceGroupResourcesName"> The String to use. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<ResourceGroupResource>> GetAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
+        public async Task<Response<ResourceGroupResource>> GetAsync(string resourceGroupResourcesName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ResourceGroupResourceContainer.Get");
             scope.Start();

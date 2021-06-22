@@ -20,11 +20,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
         }
 
-        protected override string GetBaseType()
-        {
-            return "ContainerBase";
-        }
-
         protected override bool ShouldPassThrough(ref string dotParent, Stack<string> parentNameStack, Parameter parameter, ref string valueExpression)
         {
             return true;
