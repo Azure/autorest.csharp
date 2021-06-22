@@ -76,12 +76,12 @@ namespace Azure.AI.DocumentTranslation
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>inputs</term>
         ///     <term>BatchRequest[]</term>
@@ -91,12 +91,12 @@ namespace Azure.AI.DocumentTranslation
         /// </list>
         /// Schema for <c>BatchRequest</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>source</term>
         ///     <term>SourceInput</term>
@@ -118,12 +118,12 @@ namespace Azure.AI.DocumentTranslation
         /// </list>
         /// Schema for <c>SourceInput</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>sourceUrl</term>
         ///     <term>string</term>
@@ -155,12 +155,12 @@ namespace Azure.AI.DocumentTranslation
         /// </list>
         /// Schema for <c>DocumentFilter</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>prefix</term>
         ///     <term>string</term>
@@ -184,12 +184,12 @@ namespace Azure.AI.DocumentTranslation
         /// </list>
         /// Schema for <c>TargetInput</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>targetUrl</term>
         ///     <term>string</term>
@@ -223,12 +223,12 @@ namespace Azure.AI.DocumentTranslation
         /// </list>
         /// Schema for <c>Glossary</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>glossaryUrl</term>
         ///     <term>string</term>
@@ -324,12 +324,12 @@ namespace Azure.AI.DocumentTranslation
         /// <remarks>
         /// Schema for <c>Request Body</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>inputs</term>
         ///     <term>BatchRequest[]</term>
@@ -339,12 +339,12 @@ namespace Azure.AI.DocumentTranslation
         /// </list>
         /// Schema for <c>BatchRequest</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>source</term>
         ///     <term>SourceInput</term>
@@ -366,12 +366,12 @@ namespace Azure.AI.DocumentTranslation
         /// </list>
         /// Schema for <c>SourceInput</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>sourceUrl</term>
         ///     <term>string</term>
@@ -403,12 +403,12 @@ namespace Azure.AI.DocumentTranslation
         /// </list>
         /// Schema for <c>DocumentFilter</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>prefix</term>
         ///     <term>string</term>
@@ -432,12 +432,12 @@ namespace Azure.AI.DocumentTranslation
         /// </list>
         /// Schema for <c>TargetInput</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>targetUrl</term>
         ///     <term>string</term>
@@ -471,12 +471,12 @@ namespace Azure.AI.DocumentTranslation
         /// </list>
         /// Schema for <c>Glossary</c>:
         /// <list type="table">
-        ///   <listeader>
+        ///   <listheader>
         ///     <term>Name</term>
         ///     <term>Type</term>
         ///     <term>Required</term>
         ///     <term>Description</term>
-        ///   </listeader>
+        ///   </listheader>
         ///   <item>
         ///     <term>glossaryUrl</term>
         ///     <term>string</term>
