@@ -19,6 +19,7 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("person", "people")]
         [TestCase("sheep", "sheep")]
         [TestCase("people", "people", false)]
+        [TestCase("child", "children")]
         public void ValidatePluralize(string noun, string expected, bool inputIsKnownToBeSingle = true)
         {
             var plural = noun.ToPlural(inputIsKnownToBeSingle);
@@ -40,6 +41,7 @@ namespace AutoRest.CSharp.Utilities
         [TestCase("person", "person", false)]
         [TestCase("sheep", "sheep")]
         [TestCase("people", "person")]
+        [TestCase("children", "child")]
         public void ValidateSingularize(string noun, string expected, bool inputIsKnownToBePlural = true)
         {
             var plural = noun.ToSingular(inputIsKnownToBePlural);
