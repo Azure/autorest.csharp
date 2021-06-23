@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace TenantOnly
 {
@@ -44,10 +43,11 @@ namespace TenantOnly
 
         // Container level operations.
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<Agreement> Get(string agreementName, CancellationToken cancellationToken = default)
+        public Response<Agreement> Get(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AgreementContainer.Get");
             scope.Start();
@@ -58,7 +58,7 @@ namespace TenantOnly
                     throw new ArgumentNullException(nameof(agreementName));
                 }
 
-                var response = _restClient.Get(Id.Name, agreementName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.Name, agreementName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -68,10 +68,11 @@ namespace TenantOnly
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="agreementName"> The ID that uniquely identifies an agreement. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<Agreement>> GetAsync(string agreementName, CancellationToken cancellationToken = default)
+        public async Task<Response<Agreement>> GetAsync(string agreementName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AgreementContainer.Get");
             scope.Start();
@@ -82,7 +83,7 @@ namespace TenantOnly
                     throw new ArgumentNullException(nameof(agreementName));
                 }
 
-                var response = await _restClient.GetAsync(Id.Name, agreementName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.Name, agreementName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Agreement(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

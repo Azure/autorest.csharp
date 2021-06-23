@@ -45,7 +45,7 @@ stages:
           - script: |
               npm ci
             displayName: "Install packages"
-            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp   
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
             name: Package
             displayName: 'Package'
@@ -79,7 +79,7 @@ stages:
             inputs:
               ArtifactName: packages
           - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-            - pwsh: > 
+            - pwsh: >
                 ./eng/PublishRelease.ps1
                 -WorkingDirectory ./artifacts/bin/AutoRest.CSharp/Release/netcoreapp3.1/
                 -GitHubToken $(azuresdk-github-pat)
@@ -108,13 +108,13 @@ stages:
           name: SmokeTest_S_Z
           filter: "^[s-z]"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
-    - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools  
+    - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:
         ShouldTag: false
         ShouldSign: false
         ShouldPublishSymbols: false
     - stage: 'Update_azure_sdk_for_net'
-      dependsOn: 
+      dependsOn:
         - Build_and_Test
         - Release
       jobs:
@@ -133,7 +133,7 @@ stages:
               displayName: 'Update generator version in Azure SDK repo'
             - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
               parameters:
-                BaseBranchName: master
+                BaseBranchName: main
                 RepoName: azure-sdk-for-net
                 PRBranchName: auto-update-autorest
                 CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)

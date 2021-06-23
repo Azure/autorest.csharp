@@ -8,7 +8,7 @@ As the Azure SDK has multiple supported languages, Autorest uses plugins for eac
 
 During autorest execution, the plugin is passed a YAML intermediate representation (IR) of the API definition.
 
-[Example YAML IR](https://github.com/Azure/autorest.csharp/blob/feature/v3/test/TestProjects/AdditionalPropertiesEx/CodeModel.yaml)
+[Example YAML IR](https://github.com/Azure/autorest.csharp/blob/feature/v3/test/TestServerProjects/additionalProperties/Generated/CodeModel.yaml)
 
 The plugin is normally called via JSON RPC but there is a standalone mode that can process the intermediate yaml from disk.
 

@@ -231,7 +231,7 @@ namespace AutoRest.CSharp.Input
     {
         public override string ToString()
         {
-            return this.Key;
+            return $"OperationGroup(Key: {Key})";
         }
     }
 }
