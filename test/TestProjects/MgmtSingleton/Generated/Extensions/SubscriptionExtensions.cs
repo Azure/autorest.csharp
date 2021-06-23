@@ -12,10 +12,10 @@ namespace MgmtSingleton
     /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
     public static partial class SubscriptionExtensions
     {
-        #region Get SubscriptionParentSingletonOperationes operation
+        #region Get SubscriptionParentSingletonOperations operation
         /// <summary> Gets an object representing a SubscriptionParentSingletonOperations along with the instance operations that can be performed on it. </summary>
         /// <returns> Returns a <see cref="SubscriptionParentSingletonOperations" /> object. </returns>
-        public static SubscriptionParentSingletonOperations GetSubscriptionParentSingletonOperationes(this SubscriptionOperations subscriptionOperations)
+        public static SubscriptionParentSingletonOperations GetSubscriptionParentSingletonOperations(this SubscriptionOperations subscriptionOperations)
         {
             return new SubscriptionParentSingletonOperations(subscriptionOperations);
         }
