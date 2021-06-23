@@ -375,12 +375,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                     if (isResourceList)
                     {
-                        var converter = "";
                         if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
                         {
-                            converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data))";
+                            var converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)).ToArray()";
+                            writer.Append($"return Response.FromValue(({bodyType})response.Value.Value{converter}, response.GetRawResponse())");
                         }
-                        writer.Append($"return Response.FromValue(response.Value.Value{converter}, response.GetRawResponse())");
+                        else
+                        {
+                            writer.Append($"return Response.FromValue(response.Value.Value, response.GetRawResponse())");
+                        }
                     }
                     else
                     {

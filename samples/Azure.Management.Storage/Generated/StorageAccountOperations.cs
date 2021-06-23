@@ -639,14 +639,14 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IEnumerable<PrivateLinkResource>>> ListPrivateLinkResourcesByStorageAccountAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<PrivateLinkResource>>> ListPrivateLinkResourcesByStorageAccountAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListPrivateLinkResourcesByStorageAccount");
             scope.Start();
             try
             {
                 var response = await _privateLinkResourcesRestClient.ListByStorageAccountAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -657,14 +657,14 @@ namespace Azure.Management.Storage
 
         /// <summary> Gets the private link resources that need to be created for a storage account. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IEnumerable<PrivateLinkResource>> ListPrivateLinkResourcesByStorageAccount(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<PrivateLinkResource>> ListPrivateLinkResourcesByStorageAccount(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("StorageAccountOperations.ListPrivateLinkResourcesByStorageAccount");
             scope.Start();
             try
             {
                 var response = _privateLinkResourcesRestClient.ListByStorageAccount(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value, response.GetRawResponse());
             }
             catch (Exception e)
             {

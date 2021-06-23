@@ -256,14 +256,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IEnumerable<VirtualMachineExtension>>> ListAsync(string expand = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<VirtualMachineExtension>>> ListAsync(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsContainer.List");
             scope.Start();
             try
             {
                 var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new VirtualMachineExtension(Parent, data)), response.GetRawResponse());
+                return Response.FromValue((IReadOnlyList<VirtualMachineExtension>)response.Value.Value.Select(data => new VirtualMachineExtension(Parent, data)).ToArray(), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -275,14 +275,14 @@ namespace Azure.ResourceManager.Sample
         /// <summary> The operation to get all extensions of an instance in Virtual Machine Scaleset. </summary>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IEnumerable<VirtualMachineExtension>> List(string expand = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<VirtualMachineExtension>> List(string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("VirtualMachineExtensionVirtualMachineScaleSetsContainer.List");
             scope.Start();
             try
             {
                 var response = _restClient.List(Id.ResourceGroupName, Id.Parent.Name, Id.Name, expand, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new VirtualMachineExtension(Parent, data)), response.GetRawResponse());
+                return Response.FromValue((IReadOnlyList<VirtualMachineExtension>)response.Value.Value.Select(data => new VirtualMachineExtension(Parent, data)).ToArray(), response.GetRawResponse());
             }
             catch (Exception e)
             {

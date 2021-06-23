@@ -157,7 +157,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static async Task<Response<IEnumerable<ResourceGroupNonPageableFeature>>> ListResourceGroupNonPageableFeaturesAsync(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<ResourceGroupNonPageableFeature>>> ListResourceGroupNonPageableFeaturesAsync(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -173,7 +173,7 @@ namespace MgmtListOnly
                 try
                 {
                     var response = await restOperations.ListAsync(resourceGroup.Id.Name, location, expand, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
+                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -190,7 +190,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        public static Response<IEnumerable<ResourceGroupNonPageableFeature>> ListResourceGroupNonPageableFeatures(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<ResourceGroupNonPageableFeature>> ListResourceGroupNonPageableFeatures(this ResourceGroupOperations resourceGroup, string location, string expand = null, CancellationToken cancellationToken = default)
         {
             if (location == null)
             {
@@ -206,7 +206,7 @@ namespace MgmtListOnly
                 try
                 {
                     var response = restOperations.List(resourceGroup.Id.Name, location, expand, cancellationToken);
-                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
+                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -308,7 +308,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        public static async Task<Response<IEnumerable<PublishedKey>>> ListKeysPublishedAsync(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
+        public static async Task<Response<IReadOnlyList<PublishedKey>>> ListKeysPublishedAsync(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
             {
@@ -328,7 +328,7 @@ namespace MgmtListOnly
                 try
                 {
                     var response = await restOperations.ListPublishedAsync(resourceGroup.Id.Name, publisher, version, expand, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
+                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {
@@ -346,7 +346,7 @@ namespace MgmtListOnly
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="publisher"/> or <paramref name="version"/> is null. </exception>
-        public static Response<IEnumerable<PublishedKey>> ListKeysPublished(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
+        public static Response<IReadOnlyList<PublishedKey>> ListKeysPublished(this ResourceGroupOperations resourceGroup, string publisher, string version, string expand = null, CancellationToken cancellationToken = default)
         {
             if (publisher == null)
             {
@@ -366,7 +366,7 @@ namespace MgmtListOnly
                 try
                 {
                     var response = restOperations.ListPublished(resourceGroup.Id.Name, publisher, version, expand, cancellationToken);
-                    return Response.FromValue(response.Value.Value.Select(p => p), response.GetRawResponse());
+                    return Response.FromValue(response.Value.Value, response.GetRawResponse());
                 }
                 catch (Exception e)
                 {

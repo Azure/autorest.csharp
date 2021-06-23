@@ -254,14 +254,14 @@ namespace Azure.Management.Storage
 
         /// <summary> List all file services in storage accounts. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IEnumerable<FileService>>> ListAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<FileService>>> ListAsync(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.List");
             scope.Start();
             try
             {
                 var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new FileService(Parent, data)), response.GetRawResponse());
+                return Response.FromValue((IReadOnlyList<FileService>)response.Value.Value.Select(data => new FileService(Parent, data)).ToArray(), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -272,14 +272,14 @@ namespace Azure.Management.Storage
 
         /// <summary> List all file services in storage accounts. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IEnumerable<FileService>> List(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<FileService>> List(CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FileServiceContainer.List");
             scope.Start();
             try
             {
                 var response = _restClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new FileService(Parent, data)), response.GetRawResponse());
+                return Response.FromValue((IReadOnlyList<FileService>)response.Value.Value.Select(data => new FileService(Parent, data)).ToArray(), response.GetRawResponse());
             }
             catch (Exception e)
             {

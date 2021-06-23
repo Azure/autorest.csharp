@@ -504,7 +504,7 @@ namespace MgmtOperations
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual async Task<Response<IEnumerable<AvailabilitySet>>> TestMethodAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<AvailabilitySet>>> TestMethodAsync(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
@@ -516,7 +516,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _restClient.TestMethodAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)), response.GetRawResponse());
+                return Response.FromValue((IReadOnlyList<AvailabilitySet>)response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray(), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -530,7 +530,7 @@ namespace MgmtOperations
         /// <param name="optionalParam"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
-        public virtual Response<IEnumerable<AvailabilitySet>> TestMethod(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<AvailabilitySet>> TestMethod(string requiredParam, string optionalParam = null, CancellationToken cancellationToken = default)
         {
             if (requiredParam == null)
             {
@@ -542,7 +542,7 @@ namespace MgmtOperations
             try
             {
                 var response = _restClient.TestMethod(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
-                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)), response.GetRawResponse());
+                return Response.FromValue((IReadOnlyList<AvailabilitySet>)response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray(), response.GetRawResponse());
             }
             catch (Exception e)
             {
