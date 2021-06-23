@@ -238,11 +238,11 @@ namespace AutoRest.CSharp.Utilities
         }
 
 
-        public static string Pluralization(string single)
+        public static string ToPlural(this string single)
         {
             if (new Regex("([^aeiou])y$").IsMatch(single))
             {
-                single = Regex.Replace(single, "([^aeiou])y$", "ie");
+                single = Regex.Replace(single, "([^aeiou])y$", "$1ie");
             }
             else if (new Regex("fe?$").IsMatch(single))
             {
@@ -250,7 +250,7 @@ namespace AutoRest.CSharp.Utilities
             }
             else if (new Regex("([^aeiou]o|[sxz]|[cs]h)$").IsMatch(single))
             {
-                single = Regex.Replace(single, "([^aeiou]o|[sxz]|[cs]h)$", "e");
+                single = Regex.Replace(single, "([^aeiou]o|[sxz]|[cs]h)$", "$1e");
             }
             return single + "s";
         }

@@ -187,11 +187,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteChildSingletonGetOperationMethods(CodeWriter writer, ResourceOperation resourceOperation)
         {
-            writer.Line($"#region Get {StringExtensions.Pluralization(resourceOperation.Type.Name)} operation");
+            writer.Line($"#region Get {resourceOperation.Type.Name.ToPlural()} operation");
 
             writer.WriteXmlDocumentationSummary($"Gets an object representing a {resourceOperation.Type.Name} along with the instance operations that can be performed on it.");
             writer.WriteXmlDocumentationReturns($"Returns a <see cref=\"{resourceOperation.Type.Name}\" /> object.");
-            using (writer.Scope($"public static {resourceOperation.Type} Get{StringExtensions.Pluralization(resourceOperation.Type.Name)}(this {typeof(SubscriptionOperations)} subscriptionOperations)"))
+            using (writer.Scope($"public static {resourceOperation.Type} Get{resourceOperation.Type.Name.ToPlural()}(this {typeof(SubscriptionOperations)} subscriptionOperations)"))
             {
                 writer.Line($"return new {resourceOperation.Type.Name}(subscriptionOperations);");
             }
