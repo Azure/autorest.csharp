@@ -11,29 +11,19 @@ namespace AutoRest.TestServer.Tests.Mgmt
 {
     public class CodeModelValidatorTest
     {
-        [SetUp]
-        public void Setup()
-        {
-        }
-
         [Test]
         public void EmptyOperationGroupName()
         {
-            var model = loadModel("Mgmt/EmptyOperationGroupName.yaml");
-            try
+            var model = new CodeModel
             {
-                CodeModelValidator.Validate(model);
-            } catch (ErrorHelpers.ErrorException e)
-            {
-                Assert.IsNotNull(e);
-                return;
-            }
-            Assert.Fail("CodeModelValidationError expected");
-        }
+                OperationGroups = new System.Collections.ObjectModel.Collection<OperationGroup>
+                {
+                    // AutoRest will pass in operation group with empty name if `operationId` doesn't contain underscore
+                    new OperationGroup { Key = ""}
+                }
+            };
 
-        private CodeModel loadModel(string filePath)
-        {
-            return CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(filePath));
+            Assert.Throws<ErrorHelpers.ErrorException>(() => CodeModelValidator.Validate(model));
         }
     }
 }
