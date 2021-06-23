@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 using MgmtListOnly.Models;
 
 namespace MgmtListOnly
@@ -160,10 +159,11 @@ namespace MgmtListOnly
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public override Response<Fake> Get(string fakeName, CancellationToken cancellationToken = default)
+        public Response<Fake> Get(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.Get");
             scope.Start();
@@ -174,7 +174,7 @@ namespace MgmtListOnly
                     throw new ArgumentNullException(nameof(fakeName));
                 }
 
-                var response = _restClient.Get(Id.ResourceGroupName, fakeName, cancellationToken: cancellationToken);
+                var response = _restClient.Get(Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken);
                 return Response.FromValue(new Fake(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)
@@ -184,10 +184,11 @@ namespace MgmtListOnly
             }
         }
 
-        /// <inheritdoc />
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="fakeName"> The name of the fake. </param>
+        /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> A token to allow the caller to cancel the call to the service. The default value is <see cref="CancellationToken.None" />. </param>
-        public async override Task<Response<Fake>> GetAsync(string fakeName, CancellationToken cancellationToken = default)
+        public async Task<Response<Fake>> GetAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FakeContainer.Get");
             scope.Start();
@@ -198,7 +199,7 @@ namespace MgmtListOnly
                     throw new ArgumentNullException(nameof(fakeName));
                 }
 
-                var response = await _restClient.GetAsync(Id.ResourceGroupName, fakeName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.GetAsync(Id.ResourceGroupName, fakeName, expand, cancellationToken: cancellationToken).ConfigureAwait(false);
                 return Response.FromValue(new Fake(Parent, response.Value), response.GetRawResponse());
             }
             catch (Exception e)

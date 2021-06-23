@@ -376,7 +376,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     if (isResourceList)
                     {
                         var converter = "";
-                        if (isResourceListResultType(restClientMethod.ReturnType))
+                        if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
                         {
                             converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data))";
                         }
@@ -401,12 +401,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
 
             writer.Line();
-        }
-
-        // TODO make this extension method for CSharpType
-        private bool isResourceListResultType(CSharpType? type)
-        {
-            return type != null && !type.IsFrameworkType && type.Implementation is SchemaObjectType schemaObject;
         }
 
         // This method returns an array of path and non-path parameters name

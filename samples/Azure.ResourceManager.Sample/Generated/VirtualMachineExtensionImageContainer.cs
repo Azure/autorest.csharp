@@ -13,12 +13,11 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.Core;
-using Azure.ResourceManager.Core.Resources;
 
 namespace Azure.ResourceManager.Sample
 {
     /// <summary> A class representing collection of VirtualMachineExtensionImage and their operations over a Subscription. </summary>
-    public partial class VirtualMachineExtensionImageContainer : ContainerBase
+    public partial class VirtualMachineExtensionImageContainer : ResourceContainerBase<SubscriptionResourceIdentifier, VirtualMachineExtensionImage, VirtualMachineExtensionImageData>
     {
         /// <summary> Initializes a new instance of the <see cref="VirtualMachineExtensionImageContainer"/> class for mocking. </summary>
         protected VirtualMachineExtensionImageContainer()
@@ -45,6 +44,7 @@ namespace Azure.ResourceManager.Sample
 
         // Container level operations.
 
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="type"> The String to use. </param>
@@ -83,6 +83,7 @@ namespace Azure.ResourceManager.Sample
             }
         }
 
+        /// <summary> Gets details for this resource from the service. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
         /// <param name="type"> The String to use. </param>
@@ -173,7 +174,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.ListTypesAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.ListTypesAsync(Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -191,7 +192,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _restClient.ListTypes(Id.SubscriptionId, Id.Name, cancellationToken);
+                var response = _restClient.ListTypes(Id.Parent.Name, Id.Name, cancellationToken);
                 return response;
             }
             catch (Exception e)
@@ -212,7 +213,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = await _restClient.ListVersionsAsync(Id.SubscriptionId, Id.Parent.Name, Id.Name, filter, top, orderby, cancellationToken).ConfigureAwait(false);
+                var response = await _restClient.ListVersionsAsync(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, filter, top, orderby, cancellationToken).ConfigureAwait(false);
                 return response;
             }
             catch (Exception e)
@@ -233,7 +234,7 @@ namespace Azure.ResourceManager.Sample
             scope.Start();
             try
             {
-                var response = _restClient.ListVersions(Id.SubscriptionId, Id.Parent.Name, Id.Name, filter, top, orderby, cancellationToken);
+                var response = _restClient.ListVersions(Id.Parent.Parent.Name, Id.Parent.Name, Id.Name, filter, top, orderby, cancellationToken);
                 return response;
             }
             catch (Exception e)
