@@ -33,7 +33,7 @@ namespace ExactMatchFlattenInheritance
         private readonly ClientDiagnostics _clientDiagnostics;
 
         /// <summary> Represents the REST operations. </summary>
-        private AzureResourceFlattenModel5SRestOperations _restClient => new AzureResourceFlattenModel5SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId);
+        private AzureResourceFlattenModel5SRestOperations _restClient => new AzureResourceFlattenModel5SRestOperations(_clientDiagnostics, Pipeline, Id.SubscriptionId, BaseUri);
 
         /// <summary> Typed Resource Identifier for the container. </summary>
         public new ResourceGroupResourceIdentifier Id => base.Id as ResourceGroupResourceIdentifier;
