@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                         if (isResourceList)
                         {
-                            writer.Append($"return Response.FromValue(response.Value.Value, response.GetRawResponse())");
+                            writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value, response.GetRawResponse())");
                         }
                         else
                         {

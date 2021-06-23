@@ -378,11 +378,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         if (operationGroup.IsResource(context.Configuration.MgmtConfiguration))
                         {
                             var converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data)).ToArray()";
-                            writer.Append($"return Response.FromValue(({bodyType})response.Value.Value{converter}, response.GetRawResponse())");
+                            writer.Append($"return {typeof(Response)}.FromValue(({bodyType})response.Value.Value{converter}, response.GetRawResponse())");
                         }
                         else
                         {
-                            writer.Append($"return Response.FromValue(response.Value.Value, response.GetRawResponse())");
+                            writer.Append($"return {typeof(Response)}.FromValue(response.Value.Value, response.GetRawResponse())");
                         }
                     }
                     else
