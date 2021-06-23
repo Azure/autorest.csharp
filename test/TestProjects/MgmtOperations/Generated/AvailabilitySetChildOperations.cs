@@ -397,8 +397,8 @@ namespace MgmtOperations
         }
 
         /// <summary> Gets a list of AvailabilitySetGrandChild in the AvailabilitySetChild. </summary>
-        /// <returns> An object representing collection of AvailabilitySetGrandChilds and their operations over a AvailabilitySetChild. </returns>
-        public AvailabilitySetGrandChildContainer GetAvailabilitySetGrandChilds()
+        /// <returns> An object representing collection of AvailabilitySetGrandChildren and their operations over a AvailabilitySetChild. </returns>
+        public AvailabilitySetGrandChildContainer GetAvailabilitySetGrandChildren()
         {
             return new AvailabilitySetGrandChildContainer(this);
         }
