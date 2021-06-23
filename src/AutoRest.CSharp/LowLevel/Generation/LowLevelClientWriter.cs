@@ -188,8 +188,8 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"case int s when s >= {statusCode.Family * 100:L} && s < {statusCode.Family * 100 + 100:L}:");
                         }
                     }
+                    writer.Line($"return message.Response;");
                 }
-                writer.Line($"return message.Response;");
 
                 writer.Line($"default:");
                 if (async)
