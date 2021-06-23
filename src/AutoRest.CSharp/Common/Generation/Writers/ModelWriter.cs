@@ -87,38 +87,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var constructor in schema.Constructors)
             {
-                writer.WriteXmlDocumentationSummary($"Initializes a new instance of {schema.Declaration.Name}");
-                foreach (var parameter in constructor.Parameters)
+                using (writer.WriteMethodDeclaration(constructor.Signature))
                 {
-                    writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
-                }
-
-                writer.WriteXmlDocumentationRequiredParametersException(constructor.Parameters);
-
-                writer.Append($"{constructor.Declaration.Accessibility} {schema.Declaration.Name}(");
-                foreach (var parameter in constructor.Parameters)
-                {
-                    writer.WriteParameter(parameter);
-                }
-                writer.RemoveTrailingComma();
-                writer.Append($")");
-
-                if (constructor.BaseConstructor?.Parameters.Length > 0)
-                {
-                    writer.Append($": base(");
-                    foreach (var baseConstructorParameter in constructor.BaseConstructor.Parameters)
-                    {
-                        writer.Append($"{baseConstructorParameter.Name:I}, ");
-                    }
-                    writer.RemoveTrailingComma();
-                    writer.Append($")");
-                }
-
-                writer.Line();
-
-                using (writer.Scope())
-                {
-                    writer.WriteParameterNullChecks(constructor.Parameters);
+                    writer.WriteParameterNullChecks(constructor.Signature.Parameters);
 
                     foreach (var initializer in constructor.Initializers)
                     {

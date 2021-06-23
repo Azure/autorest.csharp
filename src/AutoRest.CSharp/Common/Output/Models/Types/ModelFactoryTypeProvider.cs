@@ -49,13 +49,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
-            if (model.SerializationConstructor.Parameters.Any(p => !p.Type.IsPublic))
+            if (model.SerializationConstructor.Signature.Parameters.Any(p => !p.Type.IsPublic))
             {
                 return false;
             }
 
             return model.Constructors
-                .Where(c => c.Declaration.Accessibility == "public")
+                .Where(c => c.Signature.Modifiers == "public")
                 .All(c => readOnlyProperties.Any(property => c.FindParameterByInitializedProperty(property) == default));
         }
     }

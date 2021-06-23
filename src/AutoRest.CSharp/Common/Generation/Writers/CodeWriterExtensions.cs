@@ -16,6 +16,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis.Options;
 using System.Diagnostics.CodeAnalysis;
+using AutoRest.CSharp.Output.Models;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -29,6 +30,39 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return writer;
+        }
+
+        public static CodeWriter.CodeWriterScope WriteMethodDeclaration(this CodeWriter writer, MethodSignature method)
+        {
+            writer.WriteXmlDocumentationSummary(method.Description);
+            foreach (var parameter in method.Parameters)
+            {
+                writer.WriteXmlDocumentationParameter(parameter.Name, parameter.Description);
+            }
+
+            writer.WriteXmlDocumentationRequiredParametersException(method.Parameters);
+
+            writer.Append($"{method.Modifiers} {method.Name}(");
+            foreach (var parameter in method.Parameters)
+            {
+                writer.WriteParameter(parameter);
+            }
+            writer.RemoveTrailingComma();
+            writer.Append($")");
+
+            if (method.BaseMethod?.Parameters.Length > 0)
+            {
+                writer.Append($": base(");
+                foreach (var parameter in method.BaseMethod.Parameters)
+                {
+                    writer.Append($"{parameter.Name:I}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.Append($")");
+            }
+
+            writer.Line();
+            return writer.Scope();
         }
 
         public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool enforceDefaultValue = false, bool parameterInPublicMethod = false)
@@ -236,32 +270,14 @@ namespace AutoRest.CSharp.Generation.Writers
             ObjectTypeConstructor constructor,
             IEnumerable<PropertyInitializer> initializers)
         {
-            PropertyInitializer? FindInitializerForParameter(ObjectTypeConstructor constructor, Parameter constructorParameter)
-            {
-                var property = constructor.FindPropertyInitializedByParameter(constructorParameter);
-                return initializers.SingleOrDefault(i => i.Property == property);
-            }
+            // Find longest satisfiable ctor
+            List<PropertyInitializer> selectedCtorInitializers = constructor.Signature.Parameters
+                .Select(constructor.FindPropertyInitializedByParameter)
+                .Select(property => initializers.SingleOrDefault(i => i.Property == property))
+                .ToList();
 
             // Checks if constructor parameters can be satisfied by the provided initializer list
-            List<PropertyInitializer>? TryGetParameters(ObjectTypeConstructor constructor)
-            {
-                List<PropertyInitializer> constructorInitializers = new List<PropertyInitializer>();
-                foreach (var constructorParameter in constructor.Parameters)
-                {
-                    var objectPropertyInitializer = FindInitializerForParameter(constructor, constructorParameter);
-                    if (objectPropertyInitializer == null)
-                        return null;
-
-                    constructorInitializers.Add(objectPropertyInitializer.Value);
-                }
-
-                return constructorInitializers;
-            }
-
-            // Find longest satisfiable ctor
-            List<PropertyInitializer>? selectedCtorInitializers = TryGetParameters(constructor);
-
-            Debug.Assert(selectedCtorInitializers != null);
+            Debug.Assert(!selectedCtorInitializers.Contains(default));
 
             // Find properties that would have to be initialized using a foreach loop
             var collectionInitializers = initializers

@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteFactoryMethodForSchemaObjectType(CodeWriter writer, SchemaObjectType objectType)
         {
-            var parameters = objectType.SerializationConstructor.Parameters;
+            var parameters = objectType.SerializationConstructor.Signature.Parameters;
             writer.WriteXmlDocumentationSummary($"Initializes new instance of {objectType.Type.Name} {(objectType.IsStruct ? "structure" : "class")}.");
             foreach (var parameter in parameters)
             {
