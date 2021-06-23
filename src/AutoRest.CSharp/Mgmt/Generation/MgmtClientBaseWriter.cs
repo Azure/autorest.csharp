@@ -380,10 +380,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         {
                             converter = $".Select(data => new {context.Library.GetArmResource(operationGroup).Declaration.Name}({ContextProperty}, data))";
                         }
-                        else
-                        {
-                            converter = ".Select(p => p)";
-                        }
                         writer.Append($"return Response.FromValue(response.Value.Value{converter}, response.GetRawResponse())");
                     }
                     else

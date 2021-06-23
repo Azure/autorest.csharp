@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         /// <summary>
         /// Returns the expected return type of the RestClientMethod.
-        /// If the RestClientMethod represents a List operation, it will return IEnumerable<Item> where Item is the element type
+        /// If the RestClientMethod represents a List operation, it will return IReadOnlyList<Item> where Item is the element type
         /// of the array
         /// If the RestClientMethod is anything else, it will return its original return type.
         /// </summary>
@@ -52,12 +52,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 {
                     if (AreTypesEqual(valueProperty.ValueType, new CSharpType(typeof(IReadOnlyList<>), resourceData.Type)))
                     {
-                        return new CSharpType(typeof(IEnumerable<>), context.Library.GetArmResource(operationGroup).Type);
+                        return new CSharpType(typeof(IReadOnlyList<>), context.Library.GetArmResource(operationGroup).Type);
                     }
                 }
 
                 // otherwise this might not be a resource, but still a list
-                return new CSharpType(typeof(IEnumerable<>), valueProperty.Declaration.Type.Arguments);
+                return new CSharpType(typeof(IReadOnlyList<>), valueProperty.Declaration.Type.Arguments);
             }
 
             return returnType;
