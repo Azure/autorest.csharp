@@ -873,7 +873,7 @@ namespace Azure.Management.Storage
             return new FileShareContainer(this);
         }
 
-        /// <summary> Gets a list of ManagementPolicy in the StorageAccount. </summary>
+        /// <summary> Gets a list of ManagementPolicies in the StorageAccount. </summary>
         /// <returns> An object representing collection of ManagementPolicies and their operations over a StorageAccount. </returns>
         public ManagementPolicyContainer GetManagementPolicies()
         {
@@ -887,9 +887,9 @@ namespace Azure.Management.Storage
             return new PrivateEndpointConnectionContainer(this);
         }
 
-        /// <summary> Gets a list of ObjectReplicationPoliies in the StorageAccount. </summary>
-        /// <returns> An object representing collection of ObjectReplicationPoliies and their operations over a StorageAccount. </returns>
-        public ObjectReplicationPolicyContainer GetObjectReplicationPoliies()
+        /// <summary> Gets a list of ObjectReplicationPolicies in the StorageAccount. </summary>
+        /// <returns> An object representing collection of ObjectReplicationPolicies and their operations over a StorageAccount. </returns>
+        public ObjectReplicationPolicyContainer GetObjectReplicationPolicies()
         {
             return new ObjectReplicationPolicyContainer(this);
         }
