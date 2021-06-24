@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.AutoRest.Plugins;
@@ -57,7 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         /// <summary>
         /// Indicates if the given operation group is a ListOnly operation group.
-        /// If the operation group is a ListOnly which corresponds to a NonResource, 
+        /// If the operation group is a ListOnly which corresponds to a NonResource,
         /// this function will return true indicating the corresponding container, data... classes should not be generated.
         /// </summary>
         /// <param name="operationGroup">Operation group.</param>
@@ -83,12 +84,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
                 var arraySchemas = responseSchema?.Properties?.Where(p => p.Schema is ArraySchema)
                     ?.Select(p => p.Schema as ArraySchema);
-                if (arraySchemas?.Count() != 1)
-                {
-                    return false;
-                }
-
-                return arraySchemas?.FirstOrDefault()?.ElementType != null;
+                return arraySchemas?.Count() == 1;
             }
 
             return false;

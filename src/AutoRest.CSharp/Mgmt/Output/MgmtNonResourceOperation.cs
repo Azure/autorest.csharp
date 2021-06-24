@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (isListFunction)
             {
                 schemaName = schemaName.ToPlural();
-            } 
+            }
             const string list = "List";
             if (verb.StartsWith(list, StringComparison.InvariantCultureIgnoreCase))
             {

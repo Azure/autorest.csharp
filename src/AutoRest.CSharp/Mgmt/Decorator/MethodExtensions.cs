@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 }
             }
 
-            // otherwise this might not be a resource, but still a list
+            // otherwise this must be a non-resource, but still a list
             return (new CSharpType(typeof(IReadOnlyList<>), valueProperty.Declaration.Type.Arguments), true);
         }
 
