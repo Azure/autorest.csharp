@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string SuffixValue => _suffixValue;
 
-        protected override ClientMethod[] GetMethodsInScope()
+        protected override IEnumerable<ClientMethod> GetMethodsInScope()
         {
             var resultList = new List<ClientMethod>();
             foreach (var method in base.GetMethodsInScope())
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     IsPutMethod(method))
                     resultList.Add(method);
             }
-            return resultList.ToArray();
+            return resultList;
         }
 
         private bool IsPutMethod(ClientMethod method)

@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -27,8 +28,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string _prefix;
         private Type? _resourceIdentifierType;
         private BuildContext<MgmtOutputLibrary> _context;
-        private ClientMethod[]? _methods;
-        private PagingMethod[]? _pagingMethods;
+        private IEnumerable<ClientMethod>? _methods;
+        private IEnumerable<PagingMethod>? _pagingMethods;
         private ClientMethod? _getMethod;
 
         private IDictionary<OperationGroup, MgmtNonResourceOperation> _childOperations;
@@ -74,17 +75,30 @@ namespace AutoRest.CSharp.Mgmt.Output
             ResourceData,
             _context.Configuration.MgmtConfiguration);
 
-        public ClientMethod[] Methods => _methods ??= GetMethodsInScope();
+        public IEnumerable<ClientMethod> Methods => _methods ??= GetMethodsInScope();
 
         public IDictionary<OperationGroup, MgmtNonResourceOperation> ChildOperations => _childOperations;
 
-        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration).ToArray();
+        public IEnumerable<PagingMethod> PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(OperationGroup, RestClient, Declaration, OverridePagingMethodName);
+
+        private string OverridePagingMethodName(OperationGroup operationGroup, Operation operation, RestClientMethod restClientMethod)
+        {
+            // override the name for ListBySubscription
+            if (restClientMethod.Name == "ListAll" || restClientMethod.Name == "ListBySubscription")
+            {
+                return $"List{ResourceName.ToPlural()}";
+            }
+
+            // TODO -- add other list function name override here
+
+            return restClientMethod.Name;
+        }
 
         public virtual ClientMethod? GetMethod => _getMethod ??= Methods.FirstOrDefault(m => m.Name.StartsWith("Get") && m.RestClientMethod.Responses[0].ResponseBody?.Type.Name == ResourceData.Type.Name);
 
-        protected virtual ClientMethod[] GetMethodsInScope()
+        protected virtual IEnumerable<ClientMethod> GetMethodsInScope()
         {
-            return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration).ToArray();
+            return ClientBuilder.BuildMethods(OperationGroup, RestClient, Declaration);
         }
 
         public Diagnostic GetDiagnostic(RestClientMethod method)

@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             OperationGroup = operationGroup;
             DefaultName = defaultName;
 
-            SchemaName = operationGroup.Key.ToSingular();
+            SchemaName = operationGroup.Key.ToSingular(false);
         }
 
         protected override string DefaultName { get; }

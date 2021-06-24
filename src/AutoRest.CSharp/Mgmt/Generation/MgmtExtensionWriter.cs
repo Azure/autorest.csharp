@@ -156,9 +156,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.WriteXmlDocumentationRequiredParametersException(methodParameters.ToArray());
 
             var responseType = pageType.WrapPageable(async);
-            var methodName = $"List{pageType.Name.ToPlural()}";
 
-            writer.Append($"public static {responseType} {CreateMethodName(methodName, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
+            writer.Append($"public static {responseType} {CreateMethodName(pagingMethod.Name, async)}(this {ExtensionOperationVariableType} {ExtensionOperationVariableName}, ");
             foreach (var parameter in methodParameters)
             {
                 writer.WriteParameter(parameter);

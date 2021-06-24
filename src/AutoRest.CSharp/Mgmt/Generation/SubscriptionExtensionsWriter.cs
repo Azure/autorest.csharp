@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                             PagingMethod? pagingMethod = default;
                             foreach (var method in resourceOperation.PagingMethods)
                             {
-                                if (method.Name == "ListAll" || method.Name == "ListBySubscription")
+                                if (method.Method.Name == "ListAll" || method.Method.Name == "ListBySubscription")
                                 {
                                     pagingMethod = method;
                                     break;
