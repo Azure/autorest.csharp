@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using Azure.ResourceManager.Core;
 
 namespace OperationGroupMappings
 {
-    /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
         #region Usage
@@ -25,7 +24,7 @@ namespace OperationGroupMappings
             return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -77,7 +76,7 @@ namespace OperationGroupMappings
             );
         }
 
-        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

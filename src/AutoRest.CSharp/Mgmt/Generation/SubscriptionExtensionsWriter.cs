@@ -18,6 +18,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class SubscriptionExtensionsWriter : MgmtExtensionWriter
     {
+        protected override string Description => "A class to add extension methods to Subscription.";
+        protected override string ExtensionClassType => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.Subscriptions];
         protected override string ExtensionOperationVariableName => "subscription";
 
         protected override Type ExtensionOperationVariableType => typeof(SubscriptionOperations);
@@ -27,8 +29,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var @namespace = context.DefaultNamespace;
             using (writer.Namespace(@namespace))
             {
-                writer.WriteXmlDocumentationSummary("Extension methods for convenient access on SubscriptionOperations in a client");
-                using (writer.Scope($"public static partial class SubscriptionExtensions"))
+                writer.WriteXmlDocumentationSummary(Description);
+                using (writer.Scope($"{Accessibility} static partial class {ExtensionClassType}"))
                 {
                     foreach (var resource in context.Library.ArmResource)
                     {

@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             CSharpType itemType = pagingMethod.PagingResponse.ItemType;
             string returnText = $"{(async ? "An async" : "A")} collection of <see cref=\"{itemType.Name}\" /> that may take multiple service requests to iterate over.";
-            writer.WriteXmlDocumentation("returns", returnText);
+            writer.WriteXmlDocumentationReturns(returnText);
 
             var returnType = itemType.WrapPageable(async);
 
@@ -321,7 +321,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, pagingMethod, async, itemType, GetRestClientName(operationGroup), ClientDiagnosticsField, $"");
+                WritePagingOperationBody(writer, pagingMethod, itemType, GetRestClientName(operationGroup), pagingMethod.Diagnostics,
+                    ClientDiagnosticsField, $"", async);
             }
         }
 

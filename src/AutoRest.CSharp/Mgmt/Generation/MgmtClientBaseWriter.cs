@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             using (writer.Scope())
             {
-                WritePagingOperationBody(writer, listMethod, async, resourceType, RestClientField, ClientDiagnosticsField, converter);
+                WritePagingOperationBody(writer, listMethod, resourceType, RestClientField, listMethod.Diagnostics, ClientDiagnosticsField, converter, async);
             }
         }
 
@@ -137,8 +137,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
         /// <param name="async">Should the method be written sync or async.</param>
         /// <param name="resourceType">The reource type that is being written.</param>
         /// <param name="converter">Optional convertor for modifying the result of the rest client call.</param>
-        protected void WritePagingOperationBody(CodeWriter writer, PagingMethod pagingMethod, bool async, CSharpType resourceType, string restClientName, string clientDiagnosticsName,
-            FormattableString converter)
+        protected void WritePagingOperationBody(CodeWriter writer, PagingMethod pagingMethod, CSharpType resourceType,
+            string restClientName, Diagnostic diagnostic, string clientDiagnosticsName, FormattableString converter, bool async)
         {
             var parameters = pagingMethod.Method.Parameters;
 
@@ -152,14 +152,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Scope($"{AsyncKeyword(async)} {returnType} FirstPageFunc({typeof(int?)} pageSizeHint)"))
             {
                 // no null-checks because all are optional
-                WriteDiagnosticScope(writer, pagingMethod.Diagnostics, clientDiagnosticsName, writer =>
+                WriteDiagnosticScope(writer, diagnostic, clientDiagnosticsName, writer =>
                 {
                     writer.Append($"var response = {AwaitKeyword(async)} {restClientName}.{CreateMethodName(pagingMethod.Method.Name, async)}(");
                     BuildAndWriteParameters(writer, pagingMethod.Method);
                     writer.Line($"cancellationToken: cancellationToken){configureAwaitText};");
 
-                    writer.UseNamespace("System.Linq");
                     // need the Select() for converting XXXResourceData to XXXResource
+                    if (!string.IsNullOrEmpty(converter.ToString()))
+                    {
+                        writer.UseNamespace("System.Linq");
+                    }
                     writer.Append($"return {typeof(Page)}.FromValues(response.Value.{itemName}");
                     writer.Append($"{converter}");
                     writer.Line($", {continuationTokenText}, response.GetRawResponse());");

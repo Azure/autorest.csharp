@@ -15,7 +15,7 @@ using Azure.ResourceManager.Core;
 
 namespace ExactMatchInheritance
 {
-    /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
         #region ExactMatchModel2

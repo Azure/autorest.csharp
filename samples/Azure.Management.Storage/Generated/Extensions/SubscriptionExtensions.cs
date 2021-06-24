@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -17,7 +16,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
         #region Sku
@@ -26,7 +25,7 @@ namespace Azure.Management.Storage
             return new SkusRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the SkuInformations for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the SkuInformations for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -56,7 +55,7 @@ namespace Azure.Management.Storage
             );
         }
 
-        /// <summary> Lists the SkuInformations for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the SkuInformations for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -94,7 +93,7 @@ namespace Azure.Management.Storage
             return new UsagesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -131,7 +130,7 @@ namespace Azure.Management.Storage
             );
         }
 
-        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location of the Azure Storage resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

@@ -17,9 +17,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceGroupExtensionsWriter : MgmtExtensionWriter
     {
-        protected string Description = "A class to add extension methods to ResourceGroup.";
-        protected string Accessibility = "public";
-        protected string Type = "ResourceGroupExtensions";
+        protected override string Description => "A class to add extension methods to ResourceGroup.";
+
+        protected override string ExtensionClassType => ResourceTypeBuilder.TypeToExtensionName[ResourceTypeBuilder.ResourceGroups];
 
         protected override string ExtensionOperationVariableName => "resourceGroup";
 
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.Namespace(context.DefaultNamespace))
             {
                 writer.WriteXmlDocumentationSummary(Description);
-                using (writer.Scope($"{Accessibility} static partial class {Type}"))
+                using (writer.Scope($"{Accessibility} static partial class {ExtensionClassType}"))
                 {
                     foreach (var resource in context.Library.ArmResource)
                     {

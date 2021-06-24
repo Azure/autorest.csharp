@@ -16,7 +16,7 @@ using Azure.ResourceManager.Core;
 
 namespace SubscriptionExtensions
 {
-    /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
         #region Toaster
@@ -34,7 +34,7 @@ namespace SubscriptionExtensions
             return new OvensRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the Ovens for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the Ovens for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -47,7 +47,7 @@ namespace SubscriptionExtensions
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<Oven>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
                     scope.Start();
                     try
                     {
@@ -80,7 +80,7 @@ namespace SubscriptionExtensions
             );
         }
 
-        /// <summary> Lists the Ovens for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the Ovens for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -93,7 +93,7 @@ namespace SubscriptionExtensions
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<Oven> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListOvens");
                     scope.Start();
                     try
                     {

@@ -25,6 +25,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         public abstract void WriteExtension(CodeWriter writer, BuildContext<MgmtOutputLibrary> context);
 
+        protected abstract string Description { get; }
+        protected virtual string Accessibility => "public";
+        protected abstract string ExtensionClassType { get; }
         protected abstract string ExtensionOperationVariableName { get; }
         protected abstract Type ExtensionOperationVariableType { get; }
 
@@ -143,7 +146,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected void WriteExtensionPagingMethod(CodeWriter writer, CSharpType pageType, MgmtRestClient restClient, PagingMethod pagingMethod, FormattableString converter, bool async)
         {
-            writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name.ToPlural()} for this {ExtensionOperationVariableType}.");
+            writer.WriteXmlDocumentationSummary($"Lists the {pageType.Name.ToPlural()} for this {ExtensionOperationVariableType.Name}.");
             writer.WriteXmlDocumentationParameter($"{ExtensionOperationVariableName}", $"The <see cref=\"{ExtensionOperationVariableType}\" /> instance the method will execute against.");
 
             var methodParameters = BuildParameterMapping(pagingMethod.Method).Where(m => m.IsPassThru).Select(m => m.Parameter);
@@ -178,7 +181,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     // TODO: Remove hard coded rest client parameters after https://dev.azure.com/azure-mgmt-ex/DotNET%20Management%20SDK/_workitems/edit/5783
                     writer.Line($"var {restOperations:D} = Get{restClient.Type.Name}(clientDiagnostics, credential, options, pipeline, {ExtensionOperationVariableName}.Id.SubscriptionId, baseUri);");
 
-                    WritePagingOperationBody(writer, pagingMethod, async, pageType, restOperations.ActualName, clientDiagnostics.ActualName, converter);
+                    WritePagingOperationBody(writer, pagingMethod, pageType, restOperations.ActualName,
+                        new Diagnostic($"{ExtensionClassType}.{pagingMethod.Name}"), clientDiagnostics.ActualName,
+                            converter, async);
                 }
                 writer.Append($");");
             }

@@ -17,7 +17,7 @@ using Azure.ResourceManager.Core;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> Extension methods for convenient access on SubscriptionOperations in a client. </summary>
+    /// <summary> A class to add extension methods to Subscription. </summary>
     public static partial class SubscriptionExtensions
     {
         #region AvailabilitySet
@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Sample
             return new AvailabilitySetsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the AvailabilitySets for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<AvailabilitySet>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the AvailabilitySets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the AvailabilitySets for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="expand"> The expand expression to apply to the operation. Allowed values are &apos;instanceView&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -85,7 +85,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<AvailabilitySet> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -151,7 +151,7 @@ namespace Azure.ResourceManager.Sample
             return new ProximityPlacementGroupsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the ProximityPlacementGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the ProximityPlacementGroups for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -163,7 +163,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<ProximityPlacementGroup>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListProximityPlacementGroups");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListProximityPlacementGroups");
                     scope.Start();
                     try
                     {
@@ -196,7 +196,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the ProximityPlacementGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the ProximityPlacementGroups for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -208,7 +208,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<ProximityPlacementGroup> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListProximityPlacementGroups");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListProximityPlacementGroups");
                     scope.Start();
                     try
                     {
@@ -274,7 +274,7 @@ namespace Azure.ResourceManager.Sample
             return new DedicatedHostGroupsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the DedicatedHostGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the DedicatedHostGroups for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -286,7 +286,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<DedicatedHostGroup>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListDedicatedHostGroups");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListDedicatedHostGroups");
                     scope.Start();
                     try
                     {
@@ -319,7 +319,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the DedicatedHostGroups for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the DedicatedHostGroups for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -331,7 +331,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<DedicatedHostGroup> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListDedicatedHostGroups");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListDedicatedHostGroups");
                     scope.Start();
                     try
                     {
@@ -397,7 +397,7 @@ namespace Azure.ResourceManager.Sample
             return new SshPublicKeysRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the SshPublicKeys for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the SshPublicKeys for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -409,7 +409,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<SshPublicKey>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListSshPublicKeys");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSshPublicKeys");
                     scope.Start();
                     try
                     {
@@ -442,7 +442,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the SshPublicKeys for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the SshPublicKeys for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -454,7 +454,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<SshPublicKey> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListSshPublicKeys");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListSshPublicKeys");
                     scope.Start();
                     try
                     {
@@ -529,7 +529,7 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachinesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the VirtualMachines for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachines for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -542,7 +542,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListVirtualMachines");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachines");
                     scope.Start();
                     try
                     {
@@ -575,7 +575,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the VirtualMachines for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachines for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="statusOnly"> statusOnly=true enables fetching run time status of all Virtual Machines in the subscription. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -588,7 +588,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListVirtualMachines");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachines");
                     scope.Start();
                     try
                     {
@@ -654,7 +654,7 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachineScaleSetsRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the VirtualMachineScaleSets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachineScaleSets for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -666,7 +666,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<VirtualMachineScaleSet>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListVirtualMachineScaleSets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineScaleSets");
                     scope.Start();
                     try
                     {
@@ -699,7 +699,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the VirtualMachineScaleSets for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachineScaleSets for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of resource operations that may take multiple service requests to iterate over. </returns>
@@ -711,7 +711,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<VirtualMachineScaleSet> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListVirtualMachineScaleSets");
+                    using var scope = clientDiagnostics.CreateScope("SubscriptionExtensions.ListVirtualMachineScaleSets");
                     scope.Start();
                     try
                     {
@@ -1211,7 +1211,7 @@ namespace Azure.ResourceManager.Sample
             return new UsageRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1263,7 +1263,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the Usages for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the Usages for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location for which resource usage is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1323,7 +1323,7 @@ namespace Azure.ResourceManager.Sample
             return new VirtualMachineSizesRestOperations(clientDiagnostics, pipeline, subscriptionId, endpoint);
         }
 
-        /// <summary> Lists the VirtualMachineSizes for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachineSizes for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1360,7 +1360,7 @@ namespace Azure.ResourceManager.Sample
             );
         }
 
-        /// <summary> Lists the VirtualMachineSizes for this Azure.ResourceManager.Core.SubscriptionOperations. </summary>
+        /// <summary> Lists the VirtualMachineSizes for this SubscriptionOperations. </summary>
         /// <param name="subscription"> The <see cref="SubscriptionOperations" /> instance the method will execute against. </param>
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

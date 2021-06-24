@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ArmClientExtensionsWriter
     {
-        protected string Description = "A class to add extension methods to ResourceGroup.";
+        protected string Description = "A class to add extension methods to ArmClient.";
         protected string Accessibility = "public";
         protected string Type = "ArmClientExtensions";
 
