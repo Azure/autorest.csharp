@@ -525,7 +525,7 @@ namespace MgmtListOnly
             try
             {
                 var response = await _restClient.TestMethodAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue((IReadOnlyList<Fake>)response.Value.Value.Select(data => new Fake(this, data)).ToArray(), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new Fake(this, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -551,7 +551,7 @@ namespace MgmtListOnly
             try
             {
                 var response = _restClient.TestMethod(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
-                return Response.FromValue((IReadOnlyList<Fake>)response.Value.Value.Select(data => new Fake(this, data)).ToArray(), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new Fake(this, data)).ToArray() as IReadOnlyList<Fake>, response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -260,7 +260,7 @@ namespace MgmtSingleton
             try
             {
                 var response = await _restClient.ListAsync(Id.ResourceGroupName, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue((IReadOnlyList<ParentResource>)response.Value.Value.Select(data => new ParentResource(Parent, data)).ToArray(), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new ParentResource(Parent, data)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -278,7 +278,7 @@ namespace MgmtSingleton
             try
             {
                 var response = _restClient.List(Id.ResourceGroupName, cancellationToken);
-                return Response.FromValue((IReadOnlyList<ParentResource>)response.Value.Value.Select(data => new ParentResource(Parent, data)).ToArray(), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new ParentResource(Parent, data)).ToArray() as IReadOnlyList<ParentResource>, response.GetRawResponse());
             }
             catch (Exception e)
             {

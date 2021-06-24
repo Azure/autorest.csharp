@@ -516,7 +516,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _restClient.TestMethodAsync(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue((IReadOnlyList<AvailabilitySet>)response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray(), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -542,7 +542,7 @@ namespace MgmtOperations
             try
             {
                 var response = _restClient.TestMethod(Id.ResourceGroupName, requiredParam, optionalParam, cancellationToken);
-                return Response.FromValue((IReadOnlyList<AvailabilitySet>)response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray(), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new AvailabilitySet(this, data)).ToArray() as IReadOnlyList<AvailabilitySet>, response.GetRawResponse());
             }
             catch (Exception e)
             {

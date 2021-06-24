@@ -261,7 +261,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue((IReadOnlyList<FileService>)response.Value.Value.Select(data => new FileService(Parent, data)).ToArray(), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new FileService(Parent, data)).ToArray() as IReadOnlyList<FileService>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -279,7 +279,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _restClient.List(Id.ResourceGroupName, Id.Name, cancellationToken);
-                return Response.FromValue((IReadOnlyList<FileService>)response.Value.Value.Select(data => new FileService(Parent, data)).ToArray(), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new FileService(Parent, data)).ToArray() as IReadOnlyList<FileService>, response.GetRawResponse());
             }
             catch (Exception e)
             {

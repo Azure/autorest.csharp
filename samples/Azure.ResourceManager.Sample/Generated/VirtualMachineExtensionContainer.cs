@@ -263,7 +263,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = await _restClient.ListAsync(Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue((IReadOnlyList<VirtualMachineExtension>)response.Value.Value.Select(data => new VirtualMachineExtension(Parent, data)).ToArray(), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new VirtualMachineExtension(Parent, data)).ToArray() as IReadOnlyList<VirtualMachineExtension>, response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -282,7 +282,7 @@ namespace Azure.ResourceManager.Sample
             try
             {
                 var response = _restClient.List(Id.ResourceGroupName, Id.Name, expand, cancellationToken);
-                return Response.FromValue((IReadOnlyList<VirtualMachineExtension>)response.Value.Value.Select(data => new VirtualMachineExtension(Parent, data)).ToArray(), response.GetRawResponse());
+                return Response.FromValue(response.Value.Value.Select(data => new VirtualMachineExtension(Parent, data)).ToArray() as IReadOnlyList<VirtualMachineExtension>, response.GetRawResponse());
             }
             catch (Exception e)
             {
