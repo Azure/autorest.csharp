@@ -39,7 +39,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<AvailabilitySet>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -54,7 +54,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<AvailabilitySet>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -85,7 +85,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetAvailabilitySetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<AvailabilitySet> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -100,7 +100,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<AvailabilitySet> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("AvailabilitySetOperations.ListAvailabilitySets");
                     scope.Start();
                     try
                     {
@@ -163,7 +163,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<ProximityPlacementGroup>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListProximityPlacementGroups");
                     scope.Start();
                     try
                     {
@@ -178,7 +178,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<ProximityPlacementGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListProximityPlacementGroups");
                     scope.Start();
                     try
                     {
@@ -208,7 +208,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetProximityPlacementGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<ProximityPlacementGroup> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListProximityPlacementGroups");
                     scope.Start();
                     try
                     {
@@ -223,7 +223,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<ProximityPlacementGroup> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("ProximityPlacementGroupOperations.ListProximityPlacementGroups");
                     scope.Start();
                     try
                     {
@@ -286,7 +286,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<DedicatedHostGroup>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListDedicatedHostGroups");
                     scope.Start();
                     try
                     {
@@ -301,7 +301,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<DedicatedHostGroup>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListDedicatedHostGroups");
                     scope.Start();
                     try
                     {
@@ -331,7 +331,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetDedicatedHostGroupsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<DedicatedHostGroup> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListDedicatedHostGroups");
                     scope.Start();
                     try
                     {
@@ -346,7 +346,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<DedicatedHostGroup> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("DedicatedHostGroupOperations.ListDedicatedHostGroups");
                     scope.Start();
                     try
                     {
@@ -409,7 +409,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<SshPublicKey>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListSshPublicKeys");
                     scope.Start();
                     try
                     {
@@ -424,7 +424,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<SshPublicKey>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListSshPublicKeys");
                     scope.Start();
                     try
                     {
@@ -454,7 +454,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetSshPublicKeysRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<SshPublicKey> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListSshPublicKeys");
                     scope.Start();
                     try
                     {
@@ -469,7 +469,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<SshPublicKey> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListBySubscription");
+                    using var scope = clientDiagnostics.CreateScope("SshPublicKeyOperations.ListSshPublicKeys");
                     scope.Start();
                     try
                     {
@@ -542,7 +542,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<VirtualMachine>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListVirtualMachines");
                     scope.Start();
                     try
                     {
@@ -557,7 +557,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<VirtualMachine>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListVirtualMachines");
                     scope.Start();
                     try
                     {
@@ -588,7 +588,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetVirtualMachinesRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<VirtualMachine> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListVirtualMachines");
                     scope.Start();
                     try
                     {
@@ -603,7 +603,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<VirtualMachine> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineOperations.ListVirtualMachines");
                     scope.Start();
                     try
                     {
@@ -666,7 +666,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<VirtualMachineScaleSet>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListVirtualMachineScaleSets");
                     scope.Start();
                     try
                     {
@@ -681,7 +681,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 async Task<Page<VirtualMachineScaleSet>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListVirtualMachineScaleSets");
                     scope.Start();
                     try
                     {
@@ -711,7 +711,7 @@ namespace Azure.ResourceManager.Sample
                 var restOperations = GetVirtualMachineScaleSetsRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<VirtualMachineScaleSet> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListVirtualMachineScaleSets");
                     scope.Start();
                     try
                     {
@@ -726,7 +726,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 Page<VirtualMachineScaleSet> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("VirtualMachineScaleSetOperations.ListVirtualMachineScaleSets");
                     scope.Start();
                     try
                     {

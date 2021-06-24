@@ -47,7 +47,7 @@ namespace SubscriptionExtensions
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 async Task<Page<Oven>> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
                     scope.Start();
                     try
                     {
@@ -62,7 +62,7 @@ namespace SubscriptionExtensions
                 }
                 async Task<Page<Oven>> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
                     scope.Start();
                     try
                     {
@@ -93,7 +93,7 @@ namespace SubscriptionExtensions
                 var restOperations = GetOvensRestOperations(clientDiagnostics, credential, options, pipeline, subscription.Id.SubscriptionId, baseUri);
                 Page<Oven> FirstPageFunc(int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
                     scope.Start();
                     try
                     {
@@ -108,7 +108,7 @@ namespace SubscriptionExtensions
                 }
                 Page<Oven> NextPageFunc(string nextLink, int? pageSizeHint)
                 {
-                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListAll");
+                    using var scope = clientDiagnostics.CreateScope("OvenOperations.ListOvens");
                     scope.Start();
                     try
                     {

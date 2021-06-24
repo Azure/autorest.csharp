@@ -46,9 +46,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private PagingMethod? FindListPagingMethod()
         {
-            return PagingMethods.FirstOrDefault(m => m.Name.Equals("ListByResourceGroup", StringComparison.InvariantCultureIgnoreCase))
-                ?? PagingMethods.FirstOrDefault(m => m.Name.Equals("List", StringComparison.InvariantCultureIgnoreCase))
-                ?? PagingMethods.FirstOrDefault(m => m.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase));
+            return PagingMethods.FirstOrDefault(m => m.Method.Name.Equals("ListByResourceGroup", StringComparison.InvariantCultureIgnoreCase))
+                ?? PagingMethods.FirstOrDefault(m => m.Method.Name.Equals("List", StringComparison.InvariantCultureIgnoreCase))
+                ?? PagingMethods.FirstOrDefault(m => m.Method.Name.StartsWith("List", StringComparison.InvariantCultureIgnoreCase));
         }
 
         private RestClientMethod? GetPutMethod()

@@ -216,7 +216,7 @@ namespace SubscriptionExtensions
         {
             Page<Oven> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListAll");
+                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListOvens");
                 scope.Start();
                 try
                 {
@@ -231,7 +231,7 @@ namespace SubscriptionExtensions
             }
             Page<Oven> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListAll");
+                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListOvens");
                 scope.Start();
                 try
                 {
@@ -255,7 +255,7 @@ namespace SubscriptionExtensions
         {
             async Task<Page<Oven>> FirstPageFunc(int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListAll");
+                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListOvens");
                 scope.Start();
                 try
                 {
@@ -270,7 +270,7 @@ namespace SubscriptionExtensions
             }
             async Task<Page<Oven>> NextPageFunc(string nextLink, int? pageSizeHint)
             {
-                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListAll");
+                using var scope = _clientDiagnostics.CreateScope("OvenContainer.ListOvens");
                 scope.Start();
                 try
                 {

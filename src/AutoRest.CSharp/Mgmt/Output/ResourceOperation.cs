@@ -89,8 +89,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return $"List{ResourceName.ToPlural()}";
             }
 
-            // TODO -- add other list function name override here
-
             return restClientMethod.Name;
         }
 
